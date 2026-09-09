@@ -424,6 +424,7 @@
         <option value="3">포스팅 완료</option>
       </select>
       <input class="searchbox" id="searchBox" placeholder="절 이름 검색" oninput="render()">
+      <button class="btn btn-primary" style="padding:7px 14px;font-size:12.5px;flex-shrink:0;" onclick="openCourseBuilder()">🧭 코스 만들기</button>
     </div>
   </div>
 
@@ -540,6 +541,17 @@
       <div id="allMap"></div>
       <div class="map-note" id="allMapNote"></div>
     </div>
+  </div>
+</div>
+
+<!-- ===================== COURSE BUILDER MODAL ===================== -->
+<div class="overlay" id="courseOverlay">
+  <div class="modal wide">
+    <div class="modal-head">
+      <div><h2 class="serif">내 코스 자동 정렬</h2><div class="sub" id="courseSub">지금 화면에 보이는 절들을 가까운 순서로 정렬해요</div></div>
+      <button class="close-x" onclick="closeCourseOverlay()">✕</button>
+    </div>
+    <div class="modal-body" id="courseBody"></div>
   </div>
 </div>
 
@@ -1045,6 +1057,18 @@ function computeStats(){
   };
 }
 
+function getFilteredList(){
+  const stageFilter = document.getElementById('stageFilter').value;
+  const search = document.getElementById('searchBox').value.trim().toLowerCase();
+  let list = Object.entries(destinations);
+  if(filterRegion !== "전체") list = list.filter(([id,d])=>d.region===filterRegion);
+  if(filterTag !== "all") list = list.filter(([id,d])=>d.tag===filterTag);
+  if(stageFilter !== "all") list = list.filter(([id,d])=>String(d.stage)===stageFilter);
+  if(search) list = list.filter(([id,d])=>(d.name||'').toLowerCase().includes(search));
+  list.sort((a,b)=>(a[1].createdAt||0)-(b[1].createdAt||0));
+  return list;
+}
+
 function render(){
   const stats = computeStats();
   document.getElementById('heroStats').innerHTML = `
@@ -1054,16 +1078,7 @@ function render(){
     <div class="stat"><div class="num serif">${stats.posted}</div><div class="lbl">포스팅 완료</div></div>
   `;
 
-  const stageFilter = document.getElementById('stageFilter').value;
-  const search = document.getElementById('searchBox').value.trim().toLowerCase();
-
-  let list = Object.entries(destinations);
-  if(filterRegion !== "전체") list = list.filter(([id,d])=>d.region===filterRegion);
-  if(filterTag !== "all") list = list.filter(([id,d])=>d.tag===filterTag);
-  if(stageFilter !== "all") list = list.filter(([id,d])=>String(d.stage)===stageFilter);
-  if(search) list = list.filter(([id,d])=>(d.name||'').toLowerCase().includes(search));
-
-  list.sort((a,b)=>(a[1].createdAt||0)-(b[1].createdAt||0));
+  const list = getFilteredList();
 
   const grid = document.getElementById('grid');
   const emptyNote = document.getElementById('emptyNote');
@@ -1465,6 +1480,114 @@ function openMapOverlay(){
 
 function closeMapOverlay(){
   document.getElementById('mapOverlay').classList.remove('show');
+}
+
+/* ============================================================
+   COURSE BUILDER (내 코스 자동 정렬)
+============================================================ */
+function haversineKm(lat1, lng1, lat2, lng2){
+  const R = 6371;
+  const dLat = (lat2-lat1) * Math.PI/180;
+  const dLng = (lng2-lng1) * Math.PI/180;
+  const a = Math.sin(dLat/2)**2 + Math.cos(lat1*Math.PI/180)*Math.cos(lat2*Math.PI/180)*Math.sin(dLng/2)**2;
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+}
+
+function kakaoRouteLink(from, to){
+  return `https://map.kakao.com/link/from/${encodeURIComponent(from.name)},${from.lat},${from.lng}/to/${encodeURIComponent(to.name)},${to.lat},${to.lng}`;
+}
+
+function openCourseBuilder(){
+  document.getElementById('courseOverlay').classList.add('show');
+  const body = document.getElementById('courseBody');
+  const list = getFilteredList();
+  if(list.length < 2){
+    body.innerHTML = '<div class="map-note" style="padding:0;">코스를 짜려면 지금 필터에 절이 2곳 이상 있어야 해요. 지역/태그 필터를 조정해보세요.</div>';
+    return;
+  }
+  body.innerHTML = '<div class="map-note" style="padding:0;">위치 확인 중...</div>';
+  ensureKakao(ready=>{
+    if(!ready){
+      body.innerHTML = '<div class="map-note" style="padding:0;">지도 기능이 준비돼야 코스를 짤 수 있어요.</div>';
+      return;
+    }
+    const places = new kakao.maps.services.Places();
+    let pending = list.length;
+    const items = [];
+
+    function resolveOne([id,d], cb){
+      if(d.lat && d.lng){ cb({id, ...d}); return; }
+      places.keywordSearch(d.name + ' ' + d.region, (data,status)=>{
+        if(status===kakao.maps.services.Status.OK && data[0]){
+          const lat=parseFloat(data[0].y), lng=parseFloat(data[0].x);
+          updateDestination(id, {lat,lng});
+          cb({id, ...d, lat, lng});
+        } else {
+          cb({id, ...d, lat:null, lng:null});
+        }
+      });
+    }
+
+    list.forEach(entry=>{
+      resolveOne(entry, item=>{
+        items.push(item);
+        pending--;
+        if(pending===0) buildCourse(items);
+      });
+    });
+  });
+}
+
+function buildCourse(items){
+  const located = items.filter(it=>it.lat && it.lng);
+  const skipped = items.length - located.length;
+  const body = document.getElementById('courseBody');
+  if(located.length < 2){
+    body.innerHTML = '<div class="map-note" style="padding:0;">위치를 찾은 절이 부족해서 코스를 못 짰어요. 각 절 상세화면을 한 번씩 열어보면 위치가 저장돼요.</div>';
+    return;
+  }
+  // 최근접 이웃 방식으로 방문 순서 정렬 (가장 북쪽/서쪽 절부터 시작)
+  const remaining = [...located];
+  remaining.sort((a,b)=> (b.lat - a.lat) || (a.lng - b.lng));
+  const ordered = [remaining.shift()];
+  while(remaining.length){
+    const last = ordered[ordered.length-1];
+    let bestIdx = 0, bestDist = Infinity;
+    remaining.forEach((it,i)=>{
+      const dist = haversineKm(last.lat,last.lng,it.lat,it.lng);
+      if(dist < bestDist){ bestDist = dist; bestIdx = i; }
+    });
+    ordered.push(remaining.splice(bestIdx,1)[0]);
+  }
+
+  let totalKm = 0;
+  const rows = ordered.map((it,i)=>{
+    let legHtml = '';
+    if(i < ordered.length-1){
+      const next = ordered[i+1];
+      const dist = haversineKm(it.lat,it.lng,next.lat,next.lng);
+      totalKm += dist;
+      legHtml = `<div style="padding:8px 0 8px 34px;">
+        <a href="${kakaoRouteLink(it,next)}" target="_blank" rel="noopener" class="maplink">🚗 다음 절까지 실제 길찾기 (직선거리 약 ${dist.toFixed(1)}km) ↗</a>
+      </div>`;
+    }
+    return `<div class="visitrow" style="border-left-color:var(--moss);">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span style="background:var(--stamp);color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;">${i+1}</span>
+          <div>
+            <div style="font-weight:700;font-family:'Song Myung','Noto Serif KR',serif;">${escapeHtml(it.name)}</div>
+            <div style="font-size:11px;color:var(--ink-soft);">${it.region}</div>
+          </div>
+        </div>
+      </div>${legHtml}`;
+  }).join('');
+
+  document.getElementById('courseSub').textContent = `총 ${ordered.length}곳 · 직선거리 합계 약 ${totalKm.toFixed(1)}km (참고용, 실제 도로거리는 길찾기로 확인)`;
+  body.innerHTML = rows + (skipped>0 ? `<div class="map-note" style="padding:10px 0 0;">${skipped}곳은 위치를 못 찾아서 코스에서 빠졌어요.</div>` : '');
+}
+
+function closeCourseOverlay(){
+  document.getElementById('courseOverlay').classList.remove('show');
 }
 
 /* ============================================================
