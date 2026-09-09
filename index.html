@@ -1265,13 +1265,24 @@ function setupDetailMap(d, id){
       renderPin(mapEl, d, d.lat, d.lng);
     } else {
       const places = new kakao.maps.services.Places();
+      const tryName = () => {
+        places.keywordSearch(d.name, (data2, status2)=>{
+          if(status2 === kakao.maps.services.Status.OK && data2[0]){
+            const lat = parseFloat(data2[0].y), lng = parseFloat(data2[0].x);
+            updateDestination(id, {lat, lng});
+            if(currentDetailId === id) renderPin(mapEl, d, lat, lng);
+          } else {
+            mapEl.innerHTML = '<div class="map-note" style="padding:0 14px;">이 장소의 위치를 자동으로 찾지 못했어요. 위 링크로 카카오맵에서 확인해주세요.</div>';
+          }
+        });
+      };
       places.keywordSearch(d.name + ' ' + d.region, (data, status)=>{
         if(status === kakao.maps.services.Status.OK && data[0]){
           const lat = parseFloat(data[0].y), lng = parseFloat(data[0].x);
           updateDestination(id, {lat, lng});
           if(currentDetailId === id) renderPin(mapEl, d, lat, lng);
         } else {
-          mapEl.innerHTML = '<div class="map-note" style="padding:0 14px;">이 장소의 위치를 자동으로 찾지 못했어요. 위 링크로 카카오맵에서 확인해주세요.</div>';
+          tryName();
         }
       });
     }
