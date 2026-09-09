@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<title>절로 · 나만의 사찰 순례 기록</title>
+<title>산사노트 · 나만의 사찰 순례 기록</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
@@ -340,7 +340,7 @@
 <div id="authScreen" style="display:none;">
   <div id="setupScreen">
     <div class="setup-card">
-      <h1 class="serif">절로</h1>
+      <h1 class="serif">산사노트</h1>
       <p class="lead">전국의 절을 기록하는 나만의 순례 노트. 유네스코 산사부터 조용한 숨은 고찰까지, 다녀온 절과 사진을 한곳에 모아보세요. 가입하면 어느 기기에서든 이어서 쓸 수 있어요.</p>
 
       <div class="chip-toggle" id="authTabs" style="margin-bottom:18px;">
@@ -370,8 +370,8 @@
     <div class="hero-inner">
       <div class="hero-top">
         <div>
-          <h1 class="serif">절로</h1>
-          <p>마음 가는 절로, 발길 닿는 절로. 유네스코 산사·조계종 총림부터 조용한 숨은 고찰까지 기록하는 사찰 순례 노트.</p>
+          <h1 class="serif">산사노트</h1>
+          <p>유네스코 산사·조계종 총림부터 조용한 숨은 고찰까지, 내가 다녀온 절과 사진을 기록하는 사찰 순례 노트.</p>
         </div>
         <div class="icon-row">
           <button class="iconbtn" title="순례 코스 불러오기" onclick="openPackOverlay()">📥</button>
@@ -575,30 +575,150 @@ const CHONGNIM_SEED = [
   {region:"경상", name:"범어사", tag:"숨은", desc:"금정총림, 금정산 자락의 도심 접근성 좋은 산사.", activity:"일주문~천왕문 숲길 산책"}
 ];
 
-const OTHER_SEED = [
-  {region:"강원", name:"낙산사", tag:"유명", desc:"동해 바다를 내려다보는 절, 홍련암과 해수관음상이 특히 유명.", activity:"의상대 일출 사진, 홍련암 파도소리 영상"},
-  {region:"강원", name:"월정사", tag:"유명", desc:"전나무숲길과 팔각구층석탑이 어우러진 오대산의 절.", activity:"전나무숲길 산책 영상, 새벽 안개 컷"},
-  {region:"강원", name:"신흥사", tag:"숨은", desc:"설악산 입구, 통일대불과 단풍 조망이 좋은 절.", activity:"통일대불 앞 사진, 설악산 단풍 배경"},
-  {region:"강원", name:"상원사", tag:"숨은", desc:"오대산 깊은 곳, 현존 최고(最古)의 동종이 있는 조용한 절.", activity:"새벽 산길 브이로그, 동종 소개 영상"},
-  {region:"충청", name:"관촉사", tag:"숨은", desc:"국내 최대 석조 미륵보살입상(은진미륵)이 있는 절.", activity:"거대 미륵불 앞 인물샷"},
-  {region:"전라", name:"화엄사", tag:"유명", desc:"지리산 자락, 봄 홍매화와 가을 단풍이 아름다운 절.", activity:"각황전 배경 인물샷, 홍매화 클로즈업"},
-  {region:"전라", name:"미황사", tag:"숨은", desc:"땅끝 두륜산 자락, 저녁노을이 아름답기로 유명한 절.", activity:"대웅보전 노을 실루엣 사진"},
-  {region:"전라", name:"금산사", tag:"숨은", desc:"모악산 자락, 국내 유일 3층 목조 미륵전이 있는 절.", activity:"미륵전 배경 사진, 모악산 둘레길"},
-  {region:"경상", name:"골굴사", tag:"숨은", desc:"절벽 위에 세워진 석굴 사찰, 선무도 시범으로도 알려짐.", activity:"절벽 배경 사진, 선무도 시연 영상"},
+// 동선을 고려한 지역별 순례 코스 — 같은 코스 안의 절들은 서로 가까워서 하루~며칠 안에 묶어서 돌기 좋아요.
+const GYEONGJU_SEED = [
   {region:"경상", name:"불국사", tag:"유명", desc:"석가탑·다보탑으로 유명한 신라 불교문화의 정수.", activity:"청운교·백운교 배경 사진"},
-  {region:"경상", name:"직지사", tag:"숨은", desc:"천불전의 천 개 불상으로 알려진 황악산 자락의 절.", activity:"천불전 소개 영상, 사명대사길 산책"},
+  {region:"경상", name:"석굴암", tag:"유명", desc:"불국사 뒷산 토함산 정상 부근, 본존불상이 유명한 석굴 사원.", activity:"동해 일출과 함께 찍는 사진"},
+  {region:"경상", name:"기림사", tag:"숨은", desc:"함월산 자락, 감은사지·문무대왕릉과 가까운 조용한 절.", activity:"오종수 약수 소개, 숲길 산책"},
+  {region:"경상", name:"감은사지", tag:"숨은", desc:"삼국시대 절터, 동해구 삼층석탑 두 기가 나란히 서 있는 유적.", activity:"일출 사진, 문무대왕릉과 묶어 도는 코스"},
+  {region:"경상", name:"분황사", tag:"숨은", desc:"모전석탑(벽돌 모양 석탑)으로 유명한 경주 시내의 절.", activity:"황룡사지와 함께 도는 도보 코스"},
+  {region:"경상", name:"골굴사", tag:"숨은", desc:"절벽 위에 세워진 석굴 사찰, 선무도 시범으로도 알려짐.", activity:"절벽 배경 사진, 선무도 시연 영상"}
+];
+
+const JIRISAN_SEED = [
+  {region:"전라", name:"화엄사", tag:"유명", desc:"지리산 자락, 봄 홍매화와 가을 단풍이 아름다운 절.", activity:"각황전 배경 인물샷, 홍매화 클로즈업"},
+  {region:"경상", name:"쌍계사", tag:"숨은", desc:"쌍계총림, 봄이면 십리벚꽃길로 유명한 지리산 자락 산사.", activity:"벚꽃길 드론샷, 계곡물 소리 브이로그"},
+  {region:"전라", name:"연곡사", tag:"숨은", desc:"부도(승탑)가 여러 기 모여 있는 지리산 자락의 고요한 절.", activity:"부도밭 배경 사진, 계곡 산책"},
+  {region:"경상", name:"벽송사", tag:"숨은", desc:"지리산 깊은 곳, 참선 도량으로 알려진 절.", activity:"고목 소나무와 함께 찍는 사진"},
+  {region:"전라", name:"실상사", tag:"숨은", desc:"지리산 자락 평지 사찰, 백장암 삼층석탑으로도 유명.", activity:"너른 들판 배경 사진"},
+  {region:"전라", name:"천은사", tag:"숨은", desc:"지리산 노고단 자락, 저수지에 비친 절 풍경으로 유명.", activity:"저수지 반영샷, 새벽 물안개 사진"}
+];
+
+const GANGWON_SEED = [
+  {region:"강원", name:"낙산사", tag:"유명", desc:"동해 바다를 내려다보는 절, 홍련암과 해수관음상이 특히 유명.", activity:"의상대 일출 사진, 홍련암 파도소리 영상"},
+  {region:"강원", name:"신흥사", tag:"숨은", desc:"설악산 입구, 통일대불과 단풍 조망이 좋은 절.", activity:"통일대불 앞 사진, 설악산 단풍 배경"},
+  {region:"강원", name:"백담사", tag:"유명", desc:"만해 한용운이 머물렀던 절, 계곡을 따라 쌓인 돌탑길로 유명.", activity:"돌탑길 산책 영상, 계곡 사진"},
+  {region:"강원", name:"월정사", tag:"유명", desc:"전나무숲길과 팔각구층석탑이 어우러진 오대산의 절.", activity:"전나무숲길 산책 영상, 새벽 안개 컷"},
+  {region:"강원", name:"상원사", tag:"숨은", desc:"오대산 깊은 곳, 현존 최고(最古)의 동종이 있는 조용한 절.", activity:"새벽 산길 브이로그, 동종 소개 영상"},
+  {region:"강원", name:"청평사", tag:"숨은", desc:"소양호 뱃길로 들어가는 춘천의 절, 구성폭포로도 유명.", activity:"배 타고 들어가는 여정 브이로그"},
+  {region:"강원", name:"건봉사", tag:"숨은", desc:"만해 한용운과 인연 깊은 절, 부처님 치아사리를 모심.", activity:"불이문 배경 사진"},
+  {region:"강원", name:"휴휴암", tag:"숨은", desc:"동해 바닷가 너럭바위 위에 자리한 기도처.", activity:"파도와 바위 배경 사진"},
+  {region:"강원", name:"법흥사", tag:"숨은", desc:"5대 적멸보궁 중 하나, 사자산 자락의 조용한 절.", activity:"적멸보궁 참배, 숲길 산책"},
+  {region:"강원", name:"정암사", tag:"숨은", desc:"5대 적멸보궁 중 하나, 수마노탑으로 유명한 절.", activity:"수마노탑 배경 사진"}
+];
+
+const SUDOKWON_SEED = [
   {region:"수도권", name:"봉은사", tag:"숨은", desc:"도심 한복판에 자리한 절, 야간 조명과 연등회가 볼거리.", activity:"야간 사찰 조명 사진, 도심 스카이라인 대비 컷"},
-  {region:"수도권", name:"신륵사", tag:"숨은", desc:"남한강 변에 자리해 강 전망이 좋은 절.", activity:"강변 일몰 사진, 유람선과 함께 찍는 컷"},
+  {region:"수도권", name:"조계사", tag:"유명", desc:"대한불교조계종 총본산, 서울 도심 한복판의 대표 절.", activity:"연등회 시즌 사진, 도심 야경과 함께"},
+  {region:"수도권", name:"화계사", tag:"숨은", desc:"북한산 자락, 도심에서 가까운 조용한 절.", activity:"숲길 산책 영상"},
+  {region:"수도권", name:"진관사", tag:"숨은", desc:"북한산 자락, 전통 사찰음식으로 알려진 절.", activity:"사찰음식 소개 영상"},
+  {region:"수도권", name:"도선사", tag:"숨은", desc:"북한산 정상부 가까이 자리한 기도 도량.", activity:"등산과 함께하는 참배 브이로그"},
   {region:"수도권", name:"용주사", tag:"숨은", desc:"정조가 아버지를 위해 세운 원찰, 효심 깃든 이야기가 있는 절.", activity:"천보루 배경 사진"},
   {region:"수도권", name:"전등사", tag:"숨은", desc:"삼랑성(정족산성) 안에 자리한 강화도의 오래된 절.", activity:"성곽길과 함께 찍는 사진"},
+  {region:"수도권", name:"신륵사", tag:"숨은", desc:"남한강 변에 자리해 강 전망이 좋은 절.", activity:"강변 일몰 사진, 유람선과 함께 찍는 컷"},
+  {region:"수도권", name:"보문사", tag:"숨은", desc:"강화 석모도, 낙조와 해수관음상이 유명한 절.", activity:"일몰 사진, 해수관음상 앞 인증샷"},
+  {region:"수도권", name:"자재암", tag:"숨은", desc:"동두천 소요산 자락, 계곡과 어우러진 절.", activity:"계곡 배경 사진"},
+  {region:"수도권", name:"용문사(양평)", tag:"숨은", desc:"천년 넘은 은행나무로 유명한 절.", activity:"거대 은행나무 배경 사진, 가을 단풍철 방문"},
+  {region:"수도권", name:"봉선사", tag:"숨은", desc:"세조와 인연 깊은 조계종 제25교구 본사.", activity:"연못과 큰법당 배경 사진"},
+  {region:"수도권", name:"보광사", tag:"숨은", desc:"영조가 어머니를 위해 중건한 원찰.", activity:"대웅보전 배경 사진"},
+  {region:"수도권", name:"칠장사", tag:"숨은", desc:"임꺽정 설화가 전해지는 안성의 절.", activity:"나한전 소개 영상"},
+  {region:"수도권", name:"회암사", tag:"숨은", desc:"조선 왕실과 인연 깊었던 절터, 지금은 사적으로 남은 회암사지가 유명.", activity:"절터 유적 산책, 회암사지박물관 함께 방문"}
+];
+
+const JEJU_SEED = [
   {region:"제주", name:"관음사", tag:"숨은", desc:"한라산 자락, 사계절 숲길이 아름다운 제주 대표 사찰.", activity:"숲길 산책 영상, 계곡 물소리 담은 브이로그"},
-  {region:"제주", name:"약천사", tag:"숨은", desc:"동양 최대 규모급 대적광전이 있는 서귀포의 절.", activity:"대적광전 앞 인물샷"}
+  {region:"제주", name:"약천사", tag:"숨은", desc:"동양 최대 규모급 대적광전이 있는 서귀포의 절.", activity:"대적광전 앞 인물샷"},
+  {region:"제주", name:"산방굴사", tag:"유명", desc:"산방산 절벽 동굴 안에 자리한 기도처, 바다 조망이 좋음.", activity:"동굴 안에서 본 바다 사진"},
+  {region:"제주", name:"법화사", tag:"숨은", desc:"고려시대부터 이어진 유서 깊은 서귀포의 절.", activity:"연못과 정원 배경 사진"},
+  {region:"제주", name:"원당사", tag:"숨은", desc:"제주 삼양동, 오층석탑으로 알려진 절.", activity:"석탑 배경 사진"},
+  {region:"제주", name:"존자암", tag:"숨은", desc:"한라산 자락 최초의 절터로 전해지는 곳.", activity:"한라산 둘레길과 묶어 방문"}
+];
+
+const CHUNGCHEONG_SEED = [
+  {region:"충청", name:"법주사", tag:"유명", desc:"속리산 자락, 국내 최대 규모의 미륵대불이 있는 절.", activity:"가을 단풍 배경 인물 사진"},
+  {region:"충청", name:"마곡사", tag:"숨은", desc:"태화산 자락, 봄이면 벚꽃이 절 마당을 뒤덮는 조용한 절.", activity:"벚꽃 시즌 드론샷, 태화천 반영 사진"},
+  {region:"충청", name:"수덕사", tag:"숨은", desc:"덕숭총림, 대웅전이 국내 목조건축의 걸작으로 꼽힘.", activity:"대웅전 배흘림기둥 사진, 덕숭산 산책"},
+  {region:"충청", name:"관촉사", tag:"숨은", desc:"국내 최대 석조 미륵보살입상(은진미륵)이 있는 절.", activity:"거대 미륵불 앞 인물샷"},
+  {region:"충청", name:"개심사", tag:"숨은", desc:"서산 상왕산 자락, 봄 청벚꽃(왕벚나무)으로 유명한 절.", activity:"봄꽃 시즌 사진, 연못 배경 컷"},
+  {region:"충청", name:"무량사", tag:"숨은", desc:"김시습이 말년을 보낸 절, 극락전이 국내에 몇 없는 2층 불전.", activity:"극락전 배경 사진"},
+  {region:"충청", name:"신원사", tag:"숨은", desc:"계룡산 자락, 중악단(산신 제단)으로 알려진 절.", activity:"중악단 소개 영상"},
+  {region:"충청", name:"각연사", tag:"숨은", desc:"충북 괴산, 비로자나불 좌상으로 알려진 조용한 절.", activity:"숲길 산책 영상"},
+  {region:"충청", name:"갑사", tag:"유명", desc:"계룡산 자락, 가을 단풍길로 유명한 절.", activity:"단풍길 산책 영상"},
+  {region:"충청", name:"동학사", tag:"숨은", desc:"계룡산 자락, 비구니 강원으로 유명하고 벚꽃길이 아름다움.", activity:"봄 벚꽃길 사진"},
+  {region:"충청", name:"구인사", tag:"유명", desc:"천태종 총본산, 산 전체를 두른 대규모 산중 사찰.", activity:"계단식 전각 파노라마 사진"},
+  {region:"충청", name:"문수사", tag:"숨은", desc:"서산 마애불로 알려진 가야산 자락의 절.", activity:"마애불 소개 영상"}
+];
+
+const JEONNAM_SEED = [
+  {region:"전라", name:"선암사", tag:"숨은", desc:"승선교 무지개다리와 매화로 유명한 조계산 자락의 절.", activity:"승선교 배경 사진, 봄 매화 클로즈업"},
+  {region:"전라", name:"대흥사", tag:"유명", desc:"두륜산 자락, 초의선사와 다도 문화로 알려진 절.", activity:"두륜산 숲길 산책, 차담 브이로그"},
+  {region:"전라", name:"백양사", tag:"숨은", desc:"고불총림, 가을 단풍이 특히 아름다운 절.", activity:"쌍계루 앞 단풍 반영샷"},
+  {region:"전라", name:"미황사", tag:"숨은", desc:"땅끝 두륜산 자락, 저녁노을이 아름답기로 유명한 절.", activity:"대웅보전 노을 실루엣 사진"},
+  {region:"전라", name:"도갑사", tag:"숨은", desc:"영암 월출산 자락, 국보 해탈문으로 알려진 절.", activity:"해탈문 배경 사진"},
+  {region:"전라", name:"불갑사", tag:"숨은", desc:"영광, 가을 꽃무릇(상사화) 군락으로 유명한 절.", activity:"꽃무릇 시즌 사진"},
+  {region:"전라", name:"향일암", tag:"유명", desc:"여수 바닷가 절벽 위, 일출 명소로 유명한 절.", activity:"일출 사진, 바위 사이 골목길 촬영"},
+  {region:"전라", name:"쌍봉사", tag:"숨은", desc:"화순, 철감선사탑으로 알려진 조용한 절.", activity:"삼층 목탑 형태 대웅전 사진"},
+  {region:"전라", name:"운주사", tag:"유명", desc:"화순, 천불천탑 전설이 깃든 독특한 형태의 절.", activity:"석불군 배경 사진"},
+  {region:"전라", name:"백련사", tag:"숨은", desc:"강진, 다산초당과 이어지는 동백숲길의 절.", activity:"동백숲길 산책 영상"},
+  {region:"전라", name:"무위사", tag:"숨은", desc:"강진, 국보 극락보전 벽화로 유명한 절.", activity:"극락보전 소개 영상"},
+  {region:"전라", name:"태안사", tag:"숨은", desc:"곡성, 능파각과 계곡이 아름다운 동리산 자락의 절.", activity:"능파각 배경 사진"},
+  {region:"전라", name:"흥국사(여수)", tag:"숨은", desc:"여수, 임진왜란 당시 승병 활동의 중심지였던 절.", activity:"대웅전 배경 사진"}
+];
+
+const JEONBUK_SEED = [
+  {region:"전라", name:"금산사", tag:"숨은", desc:"모악산 자락, 국내 유일 3층 목조 미륵전이 있는 절.", activity:"미륵전 배경 사진, 모악산 둘레길"},
+  {region:"전라", name:"내소사", tag:"유명", desc:"변산반도, 전나무숲길이 아름다운 절.", activity:"전나무숲길 산책 영상"},
+  {region:"전라", name:"개암사", tag:"숨은", desc:"부안, 울금바위 아래 자리한 조용한 절.", activity:"울금바위 배경 사진"},
+  {region:"전라", name:"선운사", tag:"유명", desc:"고창, 동백숲과 가을 꽃무릇으로 유명한 절.", activity:"동백숲길 산책, 꽃무릇 시즌 사진"},
+  {region:"전라", name:"화암사", tag:"숨은", desc:"완주, 국내 유일 하앙식 구조의 극락전(국보)으로 알려진 절.", activity:"극락전 소개 영상"},
+  {region:"전라", name:"완주 송광사", tag:"숨은", desc:"순천 송광사와 이름은 같지만 다른 절, 종남산 자락에 자리함.", activity:"대웅전 배경 사진"}
+];
+
+const GYEONGBUK_SEED = [
+  {region:"경상", name:"부석사", tag:"유명", desc:"무량수전 배흘림기둥과 소백산 능선 조망으로 유명한 절.", activity:"무량수전 앞 노을 사진, 안양루에서 본 능선 뷰"},
+  {region:"경상", name:"봉정사", tag:"숨은", desc:"현존하는 가장 오래된 목조건물 극락전이 있는 조용한 절.", activity:"극락전 배경 사진, 천등산 숲길 산책"},
+  {region:"경상", name:"직지사", tag:"숨은", desc:"천불전의 천 개 불상으로 알려진 황악산 자락의 절.", activity:"천불전 소개 영상, 사명대사길 산책"},
+  {region:"경상", name:"고운사", tag:"숨은", desc:"의성, 조계종 제16교구 본사로 숲길이 아름다운 절.", activity:"숲길 산책 영상"},
+  {region:"경상", name:"은해사", tag:"숨은", desc:"영천 팔공산 자락, 소나무숲길로 유명한 절.", activity:"소나무숲길 산책 영상"},
+  {region:"경상", name:"청량사", tag:"숨은", desc:"봉화, 청량산 기암절벽 사이에 자리한 절.", activity:"기암절벽 배경 사진"},
+  {region:"경상", name:"청암사", tag:"숨은", desc:"김천, 비구니 강원으로 유명한 조용한 절.", activity:"계곡 산책 영상"},
+  {region:"경상", name:"대승사", tag:"숨은", desc:"문경 사불산 자락의 고찰.", activity:"숲길 산책 영상"},
+  {region:"경상", name:"김룡사", tag:"숨은", desc:"문경 운달산 자락, 아름드리 숲길이 있는 절.", activity:"숲길 산책 영상"},
+  {region:"경상", name:"불영사", tag:"숨은", desc:"울진, 부처 형상의 바위 그림자가 비친다는 계곡가의 절.", activity:"계곡과 바위 그림자 사진"},
+  {region:"경상", name:"갓바위(선본사)", tag:"유명", desc:"경산 팔공산, 소원을 들어준다는 석조여래좌상으로 전국에서 참배객이 몰림.", activity:"일출 시간 참배, 계단길 브이로그"},
+  {region:"경상", name:"오어사", tag:"숨은", desc:"포항, 원효대사 설화가 깃든 저수지 옆 절.", activity:"저수지 반영샷"},
+  {region:"경상", name:"봉암사", tag:"숨은", desc:"문경, 평소엔 비공개이고 부처님오신날에만 개방하는 수도원.", activity:"개방일 방문 브이로그"},
+  {region:"경상", name:"용문사(예천)", tag:"숨은", desc:"예천 소백산 자락, 목조 대장전으로 알려진 절.", activity:"대장전 소개 영상"},
+  {region:"경상", name:"도리사", tag:"숨은", desc:"구미, 아도화상이 최초로 불교를 전한 곳으로 전해지는 절.", activity:"일출 명소로 사진"},
+  {region:"경상", name:"파계사", tag:"숨은", desc:"대구 팔공산 자락, 영조와 인연 깊은 절.", activity:"숲길 산책 영상"},
+  {region:"경상", name:"운문사", tag:"유명", desc:"청도, 국내 최대 규모 비구니 강원이자 소나무 진입로로 유명한 절.", activity:"소나무숲길 산책 영상"}
+];
+
+const GYEONGNAM_SEED = [
+  {region:"경상", name:"통도사", tag:"유명", desc:"영축총림이자 유네스코 산사. 불보 사찰로 참배객이 끊이지 않음.", activity:"소나무숲길 산책 영상"},
+  {region:"경상", name:"해인사", tag:"유명", desc:"팔만대장경을 보관한 해인총림. 가야산 단풍길이 아름다움.", activity:"장경판전 소개 영상, 단풍길 브이로그"},
+  {region:"경상", name:"표충사", tag:"숨은", desc:"밀양 재약산 자락, 사명대사 유물로 알려진 절.", activity:"숲길 산책 영상"},
+  {region:"경상", name:"옥천사", tag:"숨은", desc:"고성 연화산 자락, 계곡과 어우러진 조용한 절.", activity:"계곡 배경 사진"},
+  {region:"경상", name:"다솔사", tag:"숨은", desc:"사천, 차밭과 소나무숲으로 알려진 절.", activity:"차밭 배경 사진"},
+  {region:"경상", name:"보리암", tag:"유명", desc:"남해 금산, 3대 해수관음 성지 중 하나로 절경이 뛰어남.", activity:"일출 사진, 남해 바다 조망"},
+  {region:"경상", name:"대원사", tag:"숨은", desc:"산청 지리산 자락, 비구니 수행 도량으로 알려진 절.", activity:"계곡 산책 영상"},
+  {region:"경상", name:"관룡사", tag:"숨은", desc:"창녕, 용선대 석조여래좌상 전망이 유명한 절.", activity:"용선대에서 본 파노라마 사진"},
+  {region:"경상", name:"은하사", tag:"숨은", desc:"김해 신어산 자락, 고풍스러운 산사 분위기로 알려진 절.", activity:"고즈넉한 전각 사진"}
 ];
 
 const PACKS = [
   {key:"unesco", label:"유네스코 산사 7곳", data: UNESCO_SEED},
   {key:"chongnim", label:"조계종 8대 총림", data: CHONGNIM_SEED},
-  {key:"other", label:"그 외 가볼 만한 절", data: OTHER_SEED}
+  {key:"gyeongju", label:"경주 사찰 순례 코스", data: GYEONGJU_SEED},
+  {key:"jirisan", label:"지리산 자락 사찰 코스", data: JIRISAN_SEED},
+  {key:"gangwon", label:"강원 사찰 코스", data: GANGWON_SEED},
+  {key:"sudokwon", label:"수도권 사찰 코스", data: SUDOKWON_SEED},
+  {key:"jeju", label:"제주 사찰 코스", data: JEJU_SEED},
+  {key:"chungcheong", label:"충청 사찰 코스", data: CHUNGCHEONG_SEED},
+  {key:"jeonnam", label:"전남 사찰 코스", data: JEONNAM_SEED},
+  {key:"jeonbuk", label:"전북 사찰 코스", data: JEONBUK_SEED},
+  {key:"gyeongbuk", label:"경북 사찰 코스", data: GYEONGBUK_SEED},
+  {key:"gyeongnam", label:"경남 사찰 코스", data: GYEONGNAM_SEED}
 ];
 
 let db=null, auth=null, localMode=false;
