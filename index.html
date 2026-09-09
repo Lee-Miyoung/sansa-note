@@ -471,6 +471,7 @@
     </div>
     <div class="modal-body">
       <p style="font-size:13px;color:var(--ink-soft);" id="accountInfo">로그인 정보를 불러오는 중...</p>
+      <button class="btn btn-ghost btn-block" onclick="refreshDescriptions()" style="margin-bottom:10px;">저장된 절 설명 최신화</button>
       <button class="btn btn-ghost btn-block" onclick="doLogout()">로그아웃</button>
     </div>
   </div>
@@ -591,7 +592,8 @@ const GANGWON_SEED = [
   {region:"강원", name:"건봉사", tag:"숨은", desc:"남한 최북단 사찰. 한국전쟁 때 전소되어 폐사로 남았다가 일부 복원된 아픈 역사를 지님. 부처님 치아사리를 모심.", activity:"불이문 배경 사진, 복원된 전각 둘러보기"},
   {region:"강원", name:"휴휴암", tag:"숨은", desc:"동해 바닷가 너럭바위 위에 자리한 기도처. 파도가 바위를 스치는 풍경이 절경.", activity:"파도와 바위 배경 사진"},
   {region:"강원", name:"법흥사", tag:"숨은", desc:"국내 5대 적멸보궁 중 하나. 자장율사가 모셔온 부처님 진신사리를 사자산 자락에 봉안.", activity:"적멸보궁 참배, 숲길 산책"},
-  {region:"강원", name:"정암사", tag:"숨은", desc:"국보 수마노탑 아래 자리한 5대 적멸보궁 중 하나. 탑 안에 진신사리가 있어 법당 안에 불상을 두지 않음.", activity:"수마노탑 배경 사진, 적멸보궁 참배"}
+  {region:"강원", name:"정암사", tag:"숨은", desc:"국보 수마노탑 아래 자리한 5대 적멸보궁 중 하나. 탑 안에 진신사리가 있어 법당 안에 불상을 두지 않음.", activity:"수마노탑 배경 사진, 적멸보궁 참배"},
+  {region:"강원", name:"봉정암", tag:"숨은", desc:"해발 1,244m, 국내 5대 적멸보궁 중 가장 높은 곳에 자리한 절. 백담사에서 왕복 10시간 넘게 걸어야 닿을 수 있는 고행길로 유명.", activity:"구곡담 계곡길 트레킹, 오층석탑 앞 참배"}
 ];
 
 const SUDOKWON_SEED = [
@@ -894,6 +896,21 @@ function removeDestinationData(id){
   } else {
     destinationRef(id).remove();
   }
+}
+
+function refreshDescriptions(){
+  const master = {};
+  PACKS.forEach(p=> p.data.forEach(item=>{ master[item.name] = item; }));
+  let updated = 0;
+  Object.entries(destinations).forEach(([id,d])=>{
+    const src = master[d.name];
+    if(src && (src.desc !== d.desc || src.activity !== d.activity)){
+      updateDestination(id, {desc: src.desc, activity: src.activity});
+      updated++;
+    }
+  });
+  showToast(updated>0 ? `${updated}곳의 설명을 최신화했어요` : '이미 다 최신 상태예요');
+  closeSettings();
 }
 
 /* ============================================================
