@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<title>여행 발자국 · 국내 여행 콘텐츠 노트</title>
+<title>절로 · 나만의 사찰 순례 기록</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
@@ -14,16 +14,16 @@
 
 <style>
   :root{
-    --cover:#1f2e22;
-    --cover-deep:#141f18;
-    --paper:#eee4c8;
-    --paper-soft:#f5eeda;
-    --paper-line:#d9cca4;
-    --ink:#2a2416;
-    --ink-soft:#5b5237;
-    --stamp:#af4a2c;
-    --moss:#5b6b45;
-    --gold:#a97c34;
+    --cover:#3b2e22;
+    --cover-deep:#241a12;
+    --paper:#efe8d4;
+    --paper-soft:#f6f1e2;
+    --paper-line:#dcd0ae;
+    --ink:#2a2620;
+    --ink-soft:#5c5646;
+    --stamp:#c2793a;
+    --moss:#6f8f7a;
+    --gold:#8b6a3a;
     --shadow:0 10px 26px rgba(20,16,8,.14);
   }
   *{box-sizing:border-box;}
@@ -315,7 +315,7 @@
       <p class="lead">이 화면은 방문자에게는 보이면 안 돼요. 코드 상단의 FIREBASE_CONFIG / KAKAO_MAP_KEY 값을 채운 뒤 다시 올려주세요.</p>
       <div class="setup-steps">
         <b>1. 새 Firebase 프로젝트 만들기</b><br>
-        console.firebase.google.com → 프로젝트 추가 (이 여행 앱 전용, 기존 청인마루 프로젝트와 분리)<br><br>
+        console.firebase.google.com → 프로젝트 추가 (이 절 탐방 앱 전용, 기존 청인마루/여행 발자국 프로젝트와 분리 또는 재사용 선택)<br><br>
         <b>2. 로그인 방식 켜기</b><br>
         Build → Authentication → Sign-in method → <b>이메일/비밀번호</b>, <b>Google</b> 두 개 모두 사용 설정<br><br>
         <b>3. Realtime Database 만들기</b><br>
@@ -340,8 +340,8 @@
 <div id="authScreen" style="display:none;">
   <div id="setupScreen">
     <div class="setup-card">
-      <h1 class="serif">여행 발자국</h1>
-      <p class="lead">전국 유명지·숨은 명소·사찰을 기록하고 사진으로 남기는 여행 다이어리예요. 가입하면 어느 기기에서든 이어서 쓸 수 있어요.</p>
+      <h1 class="serif">절로</h1>
+      <p class="lead">전국의 절을 기록하는 나만의 순례 노트. 유네스코 산사부터 조용한 숨은 고찰까지, 다녀온 절과 사진을 한곳에 모아보세요. 가입하면 어느 기기에서든 이어서 쓸 수 있어요.</p>
 
       <div class="chip-toggle" id="authTabs" style="margin-bottom:18px;">
         <button class="active" data-tab="login" onclick="switchAuthTab('login')" style="flex:1;">로그인</button>
@@ -370,11 +370,11 @@
     <div class="hero-inner">
       <div class="hero-top">
         <div>
-          <h1 class="serif">여행 발자국</h1>
-          <p>블로그·인스타 콘텐츠를 위한 국내 여행지 기록장. 유명한 곳과 숨은 곳을 모아두고, 다녀온 곳과 아직 못 올린 사진을 한눈에 확인하세요.</p>
+          <h1 class="serif">절로</h1>
+          <p>마음 가는 절로, 발길 닿는 절로. 유네스코 산사·조계종 총림부터 조용한 숨은 고찰까지 기록하는 사찰 순례 노트.</p>
         </div>
         <div class="icon-row">
-          <button class="iconbtn" title="목록 불러오기" onclick="openPackOverlay()">📥</button>
+          <button class="iconbtn" title="순례 코스 불러오기" onclick="openPackOverlay()">📥</button>
           <button class="iconbtn" title="전체 지도" onclick="openMapOverlay()">🗺</button>
           <button class="iconbtn" title="설정" onclick="openSettings()">⚙</button>
           <button class="iconbtn" title="나가기" onclick="doLogout()">🚪</button>
@@ -383,10 +383,10 @@
       <div class="hero-stats" id="heroStats"></div>
     </div>
     <svg class="route-svg" viewBox="0 0 260 160" fill="none">
-      <path d="M10 140 C 60 120, 70 60, 120 70 S 190 130, 240 40" stroke="#cbd6b9" stroke-width="1.5" stroke-dasharray="4 6"/>
-      <circle cx="10" cy="140" r="4" fill="#af4a2c"/>
-      <circle cx="120" cy="70" r="4" fill="#eee4c8"/>
-      <circle cx="240" cy="40" r="4" fill="#a97c34"/>
+      <circle cx="205" cy="55" r="70" stroke="#8a9c8e" stroke-width="1.2" opacity=".55"/>
+      <circle cx="205" cy="55" r="46" stroke="#8a9c8e" stroke-width="1" opacity=".4"/>
+      <circle cx="205" cy="55" r="5" fill="#d98a3d" opacity=".85"/>
+      <circle cx="40" cy="130" r="3" fill="#efe8d4" opacity=".7"/>
     </svg>
   </header>
 
@@ -405,16 +405,16 @@
         <option value="all">단계 전체</option>
         <option value="0">가보고 싶다</option>
         <option value="1">다녀왔어요</option>
-        <option value="2">촬영 완료</option>
+        <option value="2">순례 기록 완료</option>
         <option value="3">포스팅 완료</option>
       </select>
-      <input class="searchbox" id="searchBox" placeholder="장소 검색" oninput="render()">
+      <input class="searchbox" id="searchBox" placeholder="절 이름 검색" oninput="render()">
     </div>
   </div>
 
   <main>
     <div class="grid" id="grid"></div>
-    <div class="empty-note" id="emptyNote" style="display:none;">해당하는 여행지가 없어요. 필터를 바꾸거나 오른쪽 아래 + 버튼으로 새 장소를 추가해보세요.</div>
+    <div class="empty-note" id="emptyNote" style="display:none;">해당하는 절이 없어요. 필터를 바꾸거나 오른쪽 아래 + 버튼으로 새 절을 추가해보세요.</div>
   </main>
 
   <button class="fab" onclick="openAddModal()">+</button>
@@ -442,13 +442,13 @@
       <a id="dMapLink" class="maplink" target="_blank" rel="noopener">카카오맵에서 크게 보기 ↗</a>
 
       <div class="section-label">할 일 / 콘텐츠 아이디어</div>
-      <textarea class="notes" id="dNotes" placeholder="예: 일출 시간 확인, 릴스용 세로 영상, 근처 맛집 태그..." onblur="saveNotes()"></textarea>
+      <textarea class="notes" id="dNotes" placeholder="예: 예불 시간 확인, 템플스테이 운영 여부, 단풍 절정 시기, 근처 사찰음식점 태그..." onblur="saveNotes()"></textarea>
 
       <div class="section-label">사진</div>
       <div class="photo-grid" id="dPhotos"></div>
       <input type="file" id="photoInput" accept="image/*" multiple style="display:none" onchange="uploadPhotos(event)">
 
-      <div class="danger-link" onclick="deleteDestination()">이 여행지 삭제</div>
+      <div class="danger-link" onclick="deleteDestination()">이 절 기록 삭제</div>
     </div>
   </div>
 </div>
@@ -457,11 +457,11 @@
 <div class="overlay" id="addOverlay">
   <div class="modal">
     <div class="modal-head">
-      <div><h2 class="serif">새 여행지 추가</h2></div>
+      <div><h2 class="serif">새 절 추가</h2></div>
       <button class="close-x" onclick="closeAdd()">✕</button>
     </div>
     <div class="modal-body">
-      <div class="field-row"><label>장소 이름</label><input id="nName" placeholder="예: 청산도 슬로길"></div>
+      <div class="field-row"><label>절 이름</label><input id="nName" placeholder="예: 미황사"></div>
       <div class="field-row"><label>지역</label>
         <select id="nRegion"></select>
       </div>
@@ -493,7 +493,7 @@
 <div class="overlay" id="packOverlay">
   <div class="modal">
     <div class="modal-head">
-      <div><h2 class="serif">목록 불러오기</h2><div class="sub">주제별 여행지 묶음을 한 번에 추가해요</div></div>
+      <div><h2 class="serif">순례 코스 불러오기</h2><div class="sub">주제별 순례 코스를 한 번에 추가해요</div></div>
       <button class="close-x" onclick="closePackOverlay()">✕</button>
     </div>
     <div class="modal-body" id="packList"></div>
@@ -504,7 +504,7 @@
 <div class="overlay" id="mapOverlay">
   <div class="modal wide">
     <div class="modal-head">
-      <div><h2 class="serif">전체 지도</h2><div class="sub">위치가 확인된 여행지만 표시돼요</div></div>
+      <div><h2 class="serif">전체 지도</h2><div class="sub">위치가 확인된 절만 표시돼요</div></div>
       <button class="close-x" onclick="closeMapOverlay()">✕</button>
     </div>
     <div class="modal-body">
@@ -552,53 +552,53 @@ function isFirebaseConfigured(){
    STATE & SEED DATA
 ============================================================ */
 const REGIONS = ["수도권","강원","충청","전라","경상","제주"];
-const STAGES = ["가보고 싶다","다녀왔어요","촬영 완료","포스팅 완료"];
+const STAGES = ["가보고 싶다","다녀왔어요","순례 기록 완료","포스팅 완료"];
 
-const SEED = [
-  {region:"수도권", name:"경복궁", tag:"유명", desc:"조선 왕조의 정궁. 근정전과 경회루가 특히 사진이 잘 나옴.", activity:"한복 대여해서 고궁 산책, 수문장 교대식 영상"},
-  {region:"수도권", name:"남산서울타워", tag:"유명", desc:"서울 야경을 한눈에 볼 수 있는 랜드마크.", activity:"노을~야경 타임랩스, 자물쇠 거리 스냅"},
-  {region:"수도권", name:"서촌 계단마을", tag:"숨은", desc:"통인시장 옆 골목, 낮은 지붕과 계단이 이어지는 동네.", activity:"골목 인물 스냅, 로컬 카페 투어"},
-  {region:"수도권", name:"강화 석모도 보문사", tag:"숨은", desc:"바다를 낀 절, 낙조가 유명한데 관광객은 적은 편.", activity:"일몰 사진, 해수관음상 앞 인증샷"},
-  {region:"강원", name:"강릉 안목해변 커피거리", tag:"유명", desc:"바다 보며 커피 마시는 강릉 대표 코스.", activity:"카페 창가 컷, 해변 산책 릴스"},
-  {region:"강원", name:"속초 울산바위", tag:"유명", desc:"설악산 대표 명물, 등반 코스로도 유명.", activity:"전망대에서 파노라마 사진"},
-  {region:"강원", name:"양양 죽도해변", tag:"숨은", desc:"서핑 성지로 뜨고 있는 동해안 해변.", activity:"서핑 체험 브이로그, 드론 항공샷"},
-  {region:"강원", name:"정선 병방치 스카이워크", tag:"숨은", desc:"강 굽이가 내려다보이는 스릴 넘치는 전망대.", activity:"짚와이어 영상, 강줄기 파노라마"},
-  {region:"충청", name:"대전 성심당", tag:"유명", desc:"전국구 빵지순례 코스, 튀김소보로가 대표.", activity:"매장 앞 대기줄 컷, 빵 언박싱"},
-  {region:"충청", name:"공주 공산성", tag:"유명", desc:"백제 왕성 터, 성곽길 산책 코스가 좋음.", activity:"성곽 야경, 금강 전망 사진"},
-  {region:"충청", name:"단양 만천하스카이워크", tag:"숨은", desc:"남한강 물돌이를 내려다보는 전망대.", activity:"모노레일 탑승 브이로그"},
-  {region:"충청", name:"태안 신두리 해안사구", tag:"숨은", desc:"국내 최대 해안사구, 사막 같은 풍경.", activity:"모래언덕 실루엣 사진, 노을 촬영"},
-  {region:"전라", name:"전주 한옥마을", tag:"유명", desc:"한옥 골목과 먹거리가 밀집한 대표 관광지.", activity:"한복 스냅, 골목 야경"},
-  {region:"전라", name:"여수 밤바다", tag:"유명", desc:"돌산대교와 오동도가 어우러진 야경 명소.", activity:"케이블카에서 야경 영상"},
-  {region:"전라", name:"고창 청보리밭·선운사", tag:"숨은", desc:"계절 따라 청보리~동백이 피는 조용한 코스.", activity:"보리밭 인물샷, 사찰 고즈넉한 컷"},
-  {region:"전라", name:"완도 청산도", tag:"숨은", desc:"슬로시티로 지정된 섬, 돌담길과 유채꽃이 유명.", activity:"슬로길 산책 브이로그"},
-  {region:"경상", name:"부산 감천문화마을", tag:"유명", desc:"알록달록한 계단식 마을, 사진 명소로 유명.", activity:"골목 포토스팟 투어"},
-  {region:"경상", name:"경주 동궁과 월지", tag:"유명", desc:"야경이 아름다운 신라시대 별궁 터.", activity:"연못에 비친 야경 사진"},
-  {region:"경상", name:"통영 동피랑마을", tag:"숨은", desc:"벽화마을로 알려졌지만 아직 한적한 골목이 많음.", activity:"벽화 배경 스냅, 강구안 뷰"},
-  {region:"경상", name:"청송 주산지", tag:"숨은", desc:"물 위 왕버들이 신비로운 저수지, 새벽 물안개 명당.", activity:"새벽 물안개 사진, 반영샷"},
-  {region:"제주", name:"성산일출봉", tag:"유명", desc:"제주 대표 일출 명소이자 유네스코 세계자연유산.", activity:"일출 타임랩스"},
-  {region:"제주", name:"협재해수욕장", tag:"유명", desc:"에메랄드빛 바다와 비양도 뷰가 좋은 해변.", activity:"드론 항공샷, 해질녘 실루엣"},
-  {region:"제주", name:"마라도", tag:"숨은", desc:"우리나라 최남단 섬, 짜장면과 등대가 명물.", activity:"등대 앞 인증샷, 섬 한바퀴 브이로그"},
-  {region:"제주", name:"동백동산 곶자왈", tag:"숨은", desc:"원시림 느낌의 곶자왈 습지, 조용히 걷기 좋음.", activity:"숲길 무드 영상, 습지 반영샷"}
+const UNESCO_SEED = [
+  {region:"경상", name:"통도사", tag:"유명", desc:"유네스코 세계유산 '산사, 한국의 산지승원' 중 하나. 불보 사찰로 금강계단에 부처님 진신사리를 모심.", activity:"소나무숲길 무풍한송로 산책, 금강계단 참배"},
+  {region:"경상", name:"부석사", tag:"유명", desc:"무량수전 배흘림기둥과 소백산 능선 조망으로 유명한 산사.", activity:"무량수전 앞 노을 사진, 안양루에서 본 능선 뷰"},
+  {region:"경상", name:"봉정사", tag:"숨은", desc:"현존하는 가장 오래된 목조건물 극락전이 있는 조용한 산사.", activity:"극락전 배경 사진, 천등산 숲길 산책"},
+  {region:"충청", name:"법주사", tag:"유명", desc:"속리산 자락, 국내 최대 규모의 미륵대불이 있는 산사.", activity:"가을 단풍 배경 인물 사진"},
+  {region:"충청", name:"마곡사", tag:"숨은", desc:"태화산 자락, 봄이면 벚꽃이 절 마당을 뒤덮는 조용한 산사.", activity:"벚꽃 시즌 드론샷, 태화천 반영 사진"},
+  {region:"전라", name:"선암사", tag:"숨은", desc:"승선교 무지개다리와 매화로 유명한 조계산 자락의 산사.", activity:"승선교 배경 사진, 봄 매화 클로즈업"},
+  {region:"전라", name:"대흥사", tag:"유명", desc:"두륜산 자락, 초의선사와 다도 문화로 알려진 산사.", activity:"두륜산 숲길 산책, 차담 브이로그"}
 ];
 
-const TEMPLE_SEED = [
+const CHONGNIM_SEED = [
+  {region:"경상", name:"해인사", tag:"유명", desc:"팔만대장경을 보관한 해인총림. 가야산 단풍길이 아름다움.", activity:"장경판전 소개 영상, 단풍길 브이로그"},
+  {region:"경상", name:"통도사", tag:"유명", desc:"영축총림이자 유네스코 산사. 불보 사찰로 참배객이 끊이지 않음.", activity:"소나무숲길 산책 영상"},
+  {region:"전라", name:"송광사", tag:"유명", desc:"조계총림, 승보 사찰로 스님 수행 도량으로 유명.", activity:"불일암 산책길, 새벽 예불 소리 녹음"},
+  {region:"충청", name:"수덕사", tag:"숨은", desc:"덕숭총림, 대웅전이 국내 목조건축의 걸작으로 꼽힘.", activity:"대웅전 배흘림기둥 사진, 덕숭산 산책"},
+  {region:"전라", name:"백양사", tag:"숨은", desc:"고불총림, 가을 단풍이 특히 아름다운 산사.", activity:"쌍계루 앞 단풍 반영샷"},
+  {region:"경상", name:"동화사", tag:"숨은", desc:"팔공총림, 팔공산 자락의 대형 석조 약사여래불로 유명.", activity:"통일약사여래대불 앞 사진"},
+  {region:"경상", name:"쌍계사", tag:"숨은", desc:"쌍계총림, 봄이면 십리벚꽃길로 유명한 지리산 자락 산사.", activity:"벚꽃길 드론샷, 계곡물 소리 브이로그"},
+  {region:"경상", name:"범어사", tag:"숨은", desc:"금정총림, 금정산 자락의 도심 접근성 좋은 산사.", activity:"일주문~천왕문 숲길 산책"}
+];
+
+const OTHER_SEED = [
   {region:"강원", name:"낙산사", tag:"유명", desc:"동해 바다를 내려다보는 절, 홍련암과 해수관음상이 특히 유명.", activity:"의상대 일출 사진, 홍련암 파도소리 영상"},
   {region:"강원", name:"월정사", tag:"유명", desc:"전나무숲길과 팔각구층석탑이 어우러진 오대산의 절.", activity:"전나무숲길 산책 영상, 새벽 안개 컷"},
-  {region:"충청", name:"법주사", tag:"유명", desc:"속리산 자락, 국내 최대 규모의 미륵대불이 있는 절.", activity:"가을 단풍 배경 인물 사진"},
-  {region:"충청", name:"마곡사", tag:"숨은", desc:"태화산 자락, 봄이면 벚꽃이 절 마당을 뒤덮는 조용한 절.", activity:"벚꽃 시즌 드론샷, 태화천 반영 사진"},
+  {region:"강원", name:"신흥사", tag:"숨은", desc:"설악산 입구, 통일대불과 단풍 조망이 좋은 절.", activity:"통일대불 앞 사진, 설악산 단풍 배경"},
+  {region:"강원", name:"상원사", tag:"숨은", desc:"오대산 깊은 곳, 현존 최고(最古)의 동종이 있는 조용한 절.", activity:"새벽 산길 브이로그, 동종 소개 영상"},
+  {region:"충청", name:"관촉사", tag:"숨은", desc:"국내 최대 석조 미륵보살입상(은진미륵)이 있는 절.", activity:"거대 미륵불 앞 인물샷"},
   {region:"전라", name:"화엄사", tag:"유명", desc:"지리산 자락, 봄 홍매화와 가을 단풍이 아름다운 절.", activity:"각황전 배경 인물샷, 홍매화 클로즈업"},
   {region:"전라", name:"미황사", tag:"숨은", desc:"땅끝 두륜산 자락, 저녁노을이 아름답기로 유명한 절.", activity:"대웅보전 노을 실루엣 사진"},
-  {region:"경상", name:"해인사", tag:"유명", desc:"팔만대장경을 보관한 절, 가야산 단풍길이 아름다움.", activity:"장경판전 소개 영상, 단풍길 브이로그"},
-  {region:"경상", name:"통도사", tag:"유명", desc:"국내 3대 사찰 중 하나, 소나무숲길 무풍한송로가 아름다움.", activity:"소나무숲길 산책 영상"},
+  {region:"전라", name:"금산사", tag:"숨은", desc:"모악산 자락, 국내 유일 3층 목조 미륵전이 있는 절.", activity:"미륵전 배경 사진, 모악산 둘레길"},
   {region:"경상", name:"골굴사", tag:"숨은", desc:"절벽 위에 세워진 석굴 사찰, 선무도 시범으로도 알려짐.", activity:"절벽 배경 사진, 선무도 시연 영상"},
+  {region:"경상", name:"불국사", tag:"유명", desc:"석가탑·다보탑으로 유명한 신라 불교문화의 정수.", activity:"청운교·백운교 배경 사진"},
+  {region:"경상", name:"직지사", tag:"숨은", desc:"천불전의 천 개 불상으로 알려진 황악산 자락의 절.", activity:"천불전 소개 영상, 사명대사길 산책"},
   {region:"수도권", name:"봉은사", tag:"숨은", desc:"도심 한복판에 자리한 절, 야간 조명과 연등회가 볼거리.", activity:"야간 사찰 조명 사진, 도심 스카이라인 대비 컷"},
   {region:"수도권", name:"신륵사", tag:"숨은", desc:"남한강 변에 자리해 강 전망이 좋은 절.", activity:"강변 일몰 사진, 유람선과 함께 찍는 컷"},
-  {region:"제주", name:"관음사", tag:"숨은", desc:"한라산 자락, 사계절 숲길이 아름다운 제주 대표 사찰.", activity:"숲길 산책 영상, 계곡 물소리 담은 브이로그"}
+  {region:"수도권", name:"용주사", tag:"숨은", desc:"정조가 아버지를 위해 세운 원찰, 효심 깃든 이야기가 있는 절.", activity:"천보루 배경 사진"},
+  {region:"수도권", name:"전등사", tag:"숨은", desc:"삼랑성(정족산성) 안에 자리한 강화도의 오래된 절.", activity:"성곽길과 함께 찍는 사진"},
+  {region:"제주", name:"관음사", tag:"숨은", desc:"한라산 자락, 사계절 숲길이 아름다운 제주 대표 사찰.", activity:"숲길 산책 영상, 계곡 물소리 담은 브이로그"},
+  {region:"제주", name:"약천사", tag:"숨은", desc:"동양 최대 규모급 대적광전이 있는 서귀포의 절.", activity:"대적광전 앞 인물샷"}
 ];
 
 const PACKS = [
-  {key:"basic", label:"전국 유명지 기본 목록", data: SEED},
-  {key:"temple", label:"경치 좋은 사찰 모음", data: TEMPLE_SEED}
+  {key:"unesco", label:"유네스코 산사 7곳", data: UNESCO_SEED},
+  {key:"chongnim", label:"조계종 8대 총림", data: CHONGNIM_SEED},
+  {key:"other", label:"그 외 가볼 만한 절", data: OTHER_SEED}
 ];
 
 let db=null, auth=null, localMode=false;
@@ -796,8 +796,8 @@ function maybeShowSeedBanner(){
   const wrap = document.getElementById('seedBannerWrap');
   if(Object.keys(destinations).length === 0){
     wrap.innerHTML = `<div class="seedbanner">
-      <span>아직 등록된 여행지가 없어요. 전국 유명지 기본 목록(24곳)을 바로 불러올까요?</span>
-      <button class="btn btn-primary" style="padding:8px 14px;font-size:12.5px;" onclick="loadPack('basic')">불러오기</button>
+      <span>아직 등록된 절이 없어요. 유네스코 산사 7곳을 바로 불러올까요?</span>
+      <button class="btn btn-primary" style="padding:8px 14px;font-size:12.5px;" onclick="loadPack('unesco')">불러오기</button>
     </div>`;
   } else {
     wrap.innerHTML = '';
@@ -885,7 +885,7 @@ function render(){
   document.getElementById('heroStats').innerHTML = `
     <div class="stat"><div class="num serif">${stats.total}</div><div class="lbl">등록한 곳</div></div>
     <div class="stat"><div class="num serif">${stats.visited}</div><div class="lbl">다녀온 곳</div></div>
-    <div class="stat"><div class="num serif">${stats.shot}</div><div class="lbl">촬영 완료</div></div>
+    <div class="stat"><div class="num serif">${stats.shot}</div><div class="lbl">순례 기록</div></div>
     <div class="stat"><div class="num serif">${stats.posted}</div><div class="lbl">포스팅 완료</div></div>
   `;
 
@@ -925,7 +925,7 @@ function renderCard(id, d){
   return `
   <div class="card" data-id="${id}">
     <div class="card-photo" style="${photo?`background-image:url('${photo}')`:''}">
-      ${photo?'':'<span class="ph-icon serif" style="font-size:26px;color:#7a6f4a;">✳</span>'}
+      ${photo?'':'<span class="ph-icon serif" style="font-size:28px;color:#8a7a52;">卍</span>'}
       <span class="tagbadge ${d.tag==='유명'?'famous':'hidden'}">${d.tag==='유명'?'유명':'숨은'}</span>
       <span class="stampcorner">${stageIdx>=3?'✓':(stageIdx+1)}</span>
     </div>
@@ -1082,7 +1082,7 @@ function closeAdd(){ document.getElementById('addOverlay').classList.remove('sho
 
 function addDestination(){
   const name = document.getElementById('nName').value.trim();
-  if(!name){ showToast('장소 이름을 입력해주세요'); return; }
+  if(!name){ showToast('절 이름을 입력해주세요'); return; }
   const id = newId();
   const data = {
     name,
@@ -1094,7 +1094,7 @@ function addDestination(){
   };
   writeDestination(id, data);
   closeAdd();
-  showToast('여행지를 추가했어요');
+  showToast('절을 추가했어요');
 }
 
 /* ============================================================
@@ -1205,7 +1205,7 @@ function openMapOverlay(){
       }
     });
     if(count>0) map.setBounds(bounds);
-    note.textContent = count>0 ? `${count}곳의 위치가 표시됐어요. 위치가 안 보이는 곳은 상세 화면을 한 번 열어보면 자동으로 찾아서 저장돼요.` : '아직 위치가 저장된 곳이 없어요. 각 여행지 상세 화면을 한 번씩 열어보면 자동으로 위치를 찾아요.';
+    note.textContent = count>0 ? `${count}곳의 위치가 표시됐어요. 위치가 안 보이는 곳은 상세 화면을 한 번 열어보면 자동으로 찾아서 저장돼요.` : '아직 위치가 저장된 곳이 없어요. 각 절의 상세 화면을 한 번씩 열어보면 자동으로 위치를 찾아요.';
   });
 }
 
