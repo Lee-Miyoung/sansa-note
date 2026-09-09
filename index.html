@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 <title>산사노트 · 나만의 사찰 순례 기록</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Song+Myung&family=Noto+Serif+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
 
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
@@ -14,16 +14,16 @@
 
 <style>
   :root{
-    --cover:#3b2e22;
-    --cover-deep:#241a12;
-    --paper:#efe8d4;
-    --paper-soft:#f6f1e2;
-    --paper-line:#dcd0ae;
-    --ink:#2a2620;
+    --cover:#151116;
+    --cover-deep:#0a0810;
+    --paper:#f2e9d8;
+    --paper-soft:#faf4e7;
+    --paper-line:#e0cfa8;
+    --ink:#211a14;
     --ink-soft:#5c5646;
-    --stamp:#c2793a;
-    --moss:#6f8f7a;
-    --gold:#8b6a3a;
+    --stamp:#c62828;
+    --moss:#0f6b5c;
+    --gold:#c9942f;
     --shadow:0 10px 26px rgba(20,16,8,.14);
   }
   *{box-sizing:border-box;}
@@ -34,7 +34,7 @@
     font-family:'Pretendard', -apple-system, sans-serif;
     -webkit-font-smoothing:antialiased;
   }
-  h1,h2,h3,.serif{font-family:'Noto Serif KR', serif;}
+  h1,h2,h3,.serif{font-family:'Song Myung', 'Noto Serif KR', serif;}
 
   /* ---------- Setup gate ---------- */
   #setupScreen{
@@ -292,8 +292,22 @@
     padding:12px 0;border-bottom:1px solid var(--paper-line);
   }
   .packrow:last-child{border-bottom:none;}
-  .packrow-title{font-size:14.5px;font-weight:700;font-family:'Noto Serif KR',serif;}
+  .packrow-title{font-size:14.5px;font-weight:700;font-family:'Song Myung','Noto Serif KR',serif;}
   .packrow-sub{font-size:12px;color:var(--ink-soft);margin-top:2px;}
+  .visitrow{
+    background:#fff;border-radius:10px;padding:10px 12px;margin-bottom:8px;
+    border-left:3px solid var(--stamp);
+  }
+  .visitrow .vdate{font-size:11px;font-weight:700;color:var(--stamp);}
+  .visitrow .vnote{font-size:13px;color:var(--ink);margin-top:3px;line-height:1.5;}
+  .visitcount-badge{
+    display:inline-block;background:var(--stamp);color:#fff;font-size:11px;font-weight:700;
+    padding:2px 9px;border-radius:999px;margin-left:6px;
+  }
+  .visit-flag{
+    position:absolute;top:8px;right:44px;background:rgba(0,0,0,.55);color:#fff;
+    font-size:10.5px;font-weight:700;padding:3px 8px;border-radius:999px;
+  }
   .seedbanner{
     max-width:1080px;margin:14px auto 0;background:#fff8e6;border:1px solid #e8d29a;
     border-radius:10px;padding:12px 16px;display:flex;justify-content:space-between;
@@ -427,6 +441,11 @@
       <div class="section-label">위치</div>
       <div id="dMap"></div>
       <a id="dMapLink" class="maplink" target="_blank" rel="noopener">카카오맵에서 크게 보기 ↗</a>
+
+      <div class="section-label">방문 기록 <span id="visitCountLabel"></span></div>
+      <div id="visitList"></div>
+      <textarea class="notes" id="visitNoteInput" placeholder="이번엔 어땠는지 소감을 남겨보세요 (날씨, 분위기, 다음엔 이렇게 해볼 것 등)"></textarea>
+      <button class="btn btn-primary" style="margin-top:8px;padding:9px 16px;font-size:13px;" onclick="addVisitRecord()">+ 방문 기록 추가</button>
 
       <div class="section-label">할 일 / 콘텐츠 아이디어</div>
       <textarea class="notes" id="dNotes" placeholder="예: 예불 시간 확인, 템플스테이 운영 여부, 단풍 절정 시기, 근처 사찰음식점 태그..." onblur="saveNotes()"></textarea>
@@ -1050,11 +1069,13 @@ function firstPhotoUrl(d){
 function renderCard(id, d){
   const photo = firstPhotoUrl(d);
   const stageIdx = d.stage||0;
+  const vc = visitCount(d);
   return `
   <div class="card" data-id="${id}">
     <div class="card-photo" style="${photo?`background-image:url('${photo}')`:''}">
       ${photo?'':'<span class="ph-icon serif" style="font-size:28px;color:#8a7a52;">卍</span>'}
       <span class="tagbadge ${d.tag==='유명'?'famous':'hidden'}">${d.tag==='유명'?'유명':'숨은'}</span>
+      ${vc>0 ? `<span class="visit-flag">${vc}회 방문</span>` : ''}
       <span class="stampcorner">${stageIdx>=3?'✓':(stageIdx+1)}</span>
     </div>
     <div class="card-body">
@@ -1083,6 +1104,8 @@ function openDetail(id){
   document.getElementById('dNotes').value = d.notes || '';
   renderStepper(d.stage||0);
   renderPhotos(d.photos||{});
+  renderVisits(d.visits||{});
+  document.getElementById('visitNoteInput').value = '';
   document.getElementById('dMapLink').href = 'https://map.kakao.com/link/search/' + encodeURIComponent(d.name + ' ' + d.region);
   setupDetailMap(d, id);
   document.getElementById('detailOverlay').classList.add('show');
@@ -1108,6 +1131,46 @@ function renderStepper(stage){
       renderStepper(i);
     };
   });
+}
+
+function renderVisits(visits){
+  const entries = Object.entries(visits||{}).sort((a,b)=>(b[1].ts||0)-(a[1].ts||0));
+  document.getElementById('visitCountLabel').innerHTML = entries.length>0 ? `<span class="visitcount-badge">${entries.length}번째 방문 중</span>` : '';
+  const wrap = document.getElementById('visitList');
+  if(entries.length===0){
+    wrap.innerHTML = '<div class="map-note" style="padding:0;">아직 방문 기록이 없어요. 다녀오신 뒤 소감을 남겨보세요.</div>';
+    return;
+  }
+  wrap.innerHTML = entries.map(([vid,v])=>{
+    const dt = new Date(v.ts||Date.now());
+    const dateStr = `${dt.getFullYear()}.${dt.getMonth()+1}.${dt.getDate()}`;
+    return `<div class="visitrow">
+      <div class="vdate">${dateStr}</div>
+      ${v.note ? `<div class="vnote">${escapeHtml(v.note)}</div>` : ''}
+    </div>`;
+  }).join('');
+}
+
+function addVisitRecord(){
+  if(!currentDetailId) return;
+  const id = currentDetailId;
+  const note = document.getElementById('visitNoteInput').value.trim();
+  const vid = newId();
+  const visits = Object.assign({}, destinations[id].visits || {});
+  visits[vid] = {ts: Date.now(), note};
+  const patch = {visits};
+  if((destinations[id].stage||0) < 1) patch.stage = 1;
+  updateDestination(id, patch);
+  destinations[id] = Object.assign({}, destinations[id], patch);
+  renderVisits(destinations[id].visits);
+  renderStepper(destinations[id].stage||0);
+  document.getElementById('visitNoteInput').value = '';
+  showToast('방문 기록을 남겼어요');
+  render();
+}
+
+function visitCount(d){
+  return d.visits ? Object.keys(d.visits).length : 0;
 }
 
 function saveNotes(){
