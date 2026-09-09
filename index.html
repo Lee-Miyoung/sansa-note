@@ -29,7 +29,9 @@
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
   body{
-    background:var(--paper);
+    background:
+      radial-gradient(rgba(33,26,20,.05) 1px, transparent 1.4px) 0 0/14px 14px,
+      var(--paper);
     color:var(--ink);
     font-family:'Pretendard', -apple-system, sans-serif;
     -webkit-font-smoothing:antialiased;
@@ -105,6 +107,16 @@
     position:relative;
     overflow:hidden;
   }
+  header.hero::before{
+    content:'卍';
+    position:absolute;
+    right:-40px;top:-60px;
+    font-size:340px;
+    font-family:'Song Myung',serif;
+    color:rgba(255,255,255,.045);
+    line-height:1;
+    pointer-events:none;
+  }
   .hero-inner{max-width:1080px;margin:0 auto;position:relative;z-index:1;}
   .hero-top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;}
   .hero-top h1{font-size:30px;margin:0 0 6px;letter-spacing:.2px;}
@@ -176,7 +188,9 @@
   .card-photo .ph-icon{opacity:.45;}
   .tagbadge{
     position:absolute;top:8px;left:8px;font-size:10.5px;font-weight:700;
-    padding:3px 9px;border-radius:999px;color:#fff;letter-spacing:.2px;
+    padding:3px 10px;border-radius:4px;color:#fff;letter-spacing:.2px;
+    border:1.5px solid rgba(255,255,255,.75);transform:rotate(-4deg);
+    font-family:'Song Myung','Noto Serif KR',serif;
   }
   .tagbadge.famous{background:var(--moss);}
   .tagbadge.hidden{background:var(--gold);}
@@ -438,6 +452,9 @@
       <div class="section-label">뭐 하러 가는 곳</div>
       <div class="desc-block" id="dDesc"></div>
 
+      <div class="section-label">이렇게 해보세요</div>
+      <div class="desc-block" id="dActivity"></div>
+
       <div class="section-label">위치</div>
       <div id="dMap"></div>
       <a id="dMapLink" class="maplink" target="_blank" rel="noopener">카카오맵에서 크게 보기 ↗</a>
@@ -500,12 +517,13 @@
 <div class="overlay" id="packOverlay">
   <div class="modal">
     <div class="modal-head">
-      <div><h2 class="serif">순례 코스 불러오기</h2><div class="sub">주제별 순례 코스를 한 번에 추가해요</div></div>
+      <div><h2 class="serif">순례 코스 불러오기</h2><div class="sub">버튼을 누르면 목록에 추가돼요. 상세 정보는 닫은 뒤 각 절 카드를 눌러서 보세요.</div></div>
       <button class="close-x" onclick="closePackOverlay()">✕</button>
     </div>
     <div class="modal-body" id="packList"></div>
   </div>
 </div>
+
 
 <!-- ===================== ALL-MAP MODAL ===================== -->
 <div class="overlay" id="mapOverlay">
@@ -1101,6 +1119,7 @@ function openDetail(id){
   document.getElementById('dName').textContent = d.name;
   document.getElementById('dTag').textContent = d.tag==='유명' ? '유명한 곳' : '숨은 곳';
   document.getElementById('dDesc').textContent = d.desc || '';
+  document.getElementById('dActivity').textContent = d.activity || '';
   document.getElementById('dNotes').value = d.notes || '';
   renderStepper(d.stage||0);
   renderPhotos(d.photos||{});
@@ -1390,24 +1409,57 @@ function openMapOverlay(){
     }
     const map = new kakao.maps.Map(el, {center: new kakao.maps.LatLng(36.2, 127.9), level:12});
     const bounds = new kakao.maps.LatLngBounds();
-    let count = 0;
+    const places = new kakao.maps.services.Places();
+    let plotted = 0, pending = 0, missing = 0;
+
+    function plot(id, d, lat, lng){
+      const pos = new kakao.maps.LatLng(lat, lng);
+      const marker = new kakao.maps.Marker({map, position:pos, image: markerImageFor(d.tag)});
+      const iw = new kakao.maps.InfoWindow({content:`<div style="padding:6px 10px;font-size:12px;">${escapeHtml(d.name)}</div>`});
+      kakao.maps.event.addListener(marker,'click',()=>{ closeMapOverlay(); openDetail(id); });
+      kakao.maps.event.addListener(marker,'mouseover',()=>iw.open(map,marker));
+      kakao.maps.event.addListener(marker,'mouseout',()=>iw.close());
+      bounds.extend(pos);
+      plotted++;
+      map.setBounds(bounds);
+      updateNote();
+    }
+    function updateNote(){
+      note.textContent = pending>0
+        ? `위치를 찾는 중이에요... (${plotted}곳 표시됨, ${pending}곳 확인 중)`
+        : `${plotted}곳의 위치가 표시됐어요.` + (missing>0 ? ` (${missing}곳은 자동으로 못 찾았어요, 상세화면 링크로 확인해주세요)` : '');
+    }
+
     Object.entries(destinations).forEach(([id,d])=>{
       if(d.lat && d.lng){
-        const pos = new kakao.maps.LatLng(d.lat, d.lng);
-        const marker = new kakao.maps.Marker({map, position:pos, image: markerImageFor(d.tag)});
-        const iw = new kakao.maps.InfoWindow({content:`<div style="padding:6px 10px;font-size:12px;">${escapeHtml(d.name)}</div>`});
-        kakao.maps.event.addListener(marker,'click',()=>{
-          closeMapOverlay();
-          openDetail(id);
+        plot(id, d, d.lat, d.lng);
+      } else {
+        pending++;
+        places.keywordSearch(d.name + ' ' + d.region, (data, status)=>{
+          if(status === kakao.maps.services.Status.OK && data[0]){
+            const lat = parseFloat(data[0].y), lng = parseFloat(data[0].x);
+            updateDestination(id, {lat, lng});
+            plot(id, d, lat, lng);
+          } else {
+            places.keywordSearch(d.name, (data2, status2)=>{
+              if(status2 === kakao.maps.services.Status.OK && data2[0]){
+                const lat = parseFloat(data2[0].y), lng = parseFloat(data2[0].x);
+                updateDestination(id, {lat, lng});
+                plot(id, d, lat, lng);
+              } else {
+                missing++;
+              }
+              pending--;
+              updateNote();
+            });
+            return;
+          }
+          pending--;
+          updateNote();
         });
-        kakao.maps.event.addListener(marker,'mouseover',()=>iw.open(map,marker));
-        kakao.maps.event.addListener(marker,'mouseout',()=>iw.close());
-        bounds.extend(pos);
-        count++;
       }
     });
-    if(count>0) map.setBounds(bounds);
-    note.textContent = count>0 ? `${count}곳의 위치가 표시됐어요. 위치가 안 보이는 곳은 상세 화면을 한 번 열어보면 자동으로 찾아서 저장돼요.` : '아직 위치가 저장된 곳이 없어요. 각 절의 상세 화면을 한 번씩 열어보면 자동으로 위치를 찾아요.';
+    updateNote();
   });
 }
 
