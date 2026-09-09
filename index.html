@@ -288,7 +288,7 @@
   .dot.hidden{background:var(--gold);}
   .modal.wide{max-width:760px;}
   .packrow{
-    display:flex;justify-content:space-between;align-items:center;gap:12px;
+    display:flex;justify-content:space-between;align-items:flex-start;gap:12px;
     padding:12px 0;border-bottom:1px solid var(--paper-line);
   }
   .packrow:last-child{border-bottom:none;}
@@ -593,7 +593,8 @@ const GANGWON_SEED = [
   {region:"강원", name:"휴휴암", tag:"숨은", desc:"동해 바닷가 너럭바위 위에 자리한 기도처. 파도가 바위를 스치는 풍경이 절경.", activity:"파도와 바위 배경 사진"},
   {region:"강원", name:"법흥사", tag:"숨은", desc:"국내 5대 적멸보궁 중 하나. 자장율사가 모셔온 부처님 진신사리를 사자산 자락에 봉안.", activity:"적멸보궁 참배, 숲길 산책"},
   {region:"강원", name:"정암사", tag:"숨은", desc:"국보 수마노탑 아래 자리한 5대 적멸보궁 중 하나. 탑 안에 진신사리가 있어 법당 안에 불상을 두지 않음.", activity:"수마노탑 배경 사진, 적멸보궁 참배"},
-  {region:"강원", name:"봉정암", tag:"숨은", desc:"해발 1,244m, 국내 5대 적멸보궁 중 가장 높은 곳에 자리한 절. 백담사에서 왕복 10시간 넘게 걸어야 닿을 수 있는 고행길로 유명.", activity:"구곡담 계곡길 트레킹, 오층석탑 앞 참배"}
+  {region:"강원", name:"봉정암", tag:"숨은", desc:"해발 1,244m, 국내 5대 적멸보궁 중 가장 높은 곳에 자리한 절. 백담사에서 왕복 10시간 넘게 걸어야 닿을 수 있는 고행길로 유명.", activity:"구곡담 계곡길 트레킹, 오층석탑 앞 참배"},
+  {region:"강원", name:"도피안사", tag:"숨은", desc:"철원, 국보 철조비로자나불좌상(865년 제작)이 있는 절. 원래 다른 절로 옮기려던 불상이 스스로 이 자리에 와 앉았다는 설화가 전해짐.", activity:"국보 철불 감상, 한탄강 협곡과 묶어 방문"}
 ];
 
 const SUDOKWON_SEED = [
@@ -692,22 +693,24 @@ const GYEONGNAM_SEED = [
   {region:"경상", name:"보리암", tag:"유명", desc:"낙산사 홍련암, 강화 보문사와 함께 국내 3대 관음성지로 꼽히는 절. 이성계가 기도 후 조선을 세웠다는 이야기가 전해짐.", activity:"일출 사진, 남해 바다 조망"},
   {region:"경상", name:"대원사", tag:"숨은", desc:"산청 지리산 자락, 비구니 수행 도량으로 알려진 절.", activity:"계곡 산책 영상"},
   {region:"경상", name:"관룡사", tag:"숨은", desc:"창녕, 용선대 석조여래좌상 전망이 유명한 절.", activity:"용선대에서 본 파노라마 사진"},
-  {region:"경상", name:"은하사", tag:"숨은", desc:"김해 신어산 자락, 가야 허왕후의 오빠 장유가 세웠다는 설화가 전해지는 고찰.", activity:"고즈넉한 전각 사진"}
+  {region:"경상", name:"은하사", tag:"숨은", desc:"김해 신어산 자락, 가야 허왕후의 오빠 장유가 세웠다는 설화가 전해지는 고찰.", activity:"고즈넉한 전각 사진"},
+  {region:"경상", name:"해동용궁사", tag:"유명", desc:"부산 기장, 산속이 아니라 바닷가 갯바위에 자리한 특이한 절. 1970년대 세워진 비교적 젊은 절이지만, 탁 트인 동해 풍경 덕에 부산에서 가장 인기 많은 절이 됨.", activity:"용문석굴·108계단 지나 해안절벽 배경 사진, 일출 명소로 방문"},
+  {region:"경상", name:"만어사", tag:"숨은", desc:"밀양 만어산 8부 능선, 두드리면 종소리가 난다는 돌무더기(경석)로 유명한 '밀양 3대 신비' 중 하나. 삼국유사에도 등장하는 유서 깊은 절.", activity:"종소리 나는 돌 두드려보기, 소원돌 들어보기"}
 ];
 
 const PACKS = [
-  {key:"unesco", label:"유네스코 산사 7곳", data: UNESCO_SEED},
-  {key:"chongnim", label:"조계종 8대 총림", data: CHONGNIM_SEED},
-  {key:"gyeongju", label:"경주 사찰 순례 코스", data: GYEONGJU_SEED},
-  {key:"jirisan", label:"지리산 자락 사찰 코스", data: JIRISAN_SEED},
-  {key:"gangwon", label:"강원 사찰 코스", data: GANGWON_SEED},
-  {key:"sudokwon", label:"수도권 사찰 코스", data: SUDOKWON_SEED},
-  {key:"jeju", label:"제주 사찰 코스", data: JEJU_SEED},
-  {key:"chungcheong", label:"충청 사찰 코스", data: CHUNGCHEONG_SEED},
-  {key:"jeonnam", label:"전남 사찰 코스", data: JEONNAM_SEED},
-  {key:"jeonbuk", label:"전북 사찰 코스", data: JEONBUK_SEED},
-  {key:"gyeongbuk", label:"경북 사찰 코스", data: GYEONGBUK_SEED},
-  {key:"gyeongnam", label:"경남 사찰 코스", data: GYEONGNAM_SEED}
+  {key:"unesco", label:"유네스코 산사 7곳", route:"전국에 흩어져 있어 한 번에 도는 코스는 아니고, 지역별로 나눠 방문하는 걸 추천해요.", data: UNESCO_SEED},
+  {key:"chongnim", label:"조계종 8대 총림", route:"역시 전국 각지 본사라 지역별 코스(경주/지리산/경남 등)와 겹쳐서 도는 게 효율적이에요.", data: CHONGNIM_SEED},
+  {key:"gyeongju", label:"경주 사찰 순례 코스", route:"경주 시내 반경 20km 안에 모여있어 자동차로 당일 코스 가능. 추천 순서: 불국사→석굴암(차로 15분)→기림사(30분)→감은사지(10분)→분황사(30분)→골굴사(15분)", data: GYEONGJU_SEED},
+  {key:"jirisan", label:"지리산 자락 사찰 코스", route:"지리산을 빙 둘러 흩어져 있어 전남·경남 넘나드는 1박2일 코스로 적당. 화엄사(구례)↔쌍계사(하동) 차로 40분, 실상사(남원)↔벽송사(함양) 차로 30분", data: JIRISAN_SEED},
+  {key:"gangwon", label:"강원 사찰 코스", route:"영동(동해안)과 영서(내륙)로 나뉘어요. 영동: 낙산사-신흥사-백담사(설악산권, 서로 30~40분). 영서: 월정사-상원사-봉정암(오대산~설악산 종주), 정암사-법흥사(정선~영월, 40분)", data: GANGWON_SEED},
+  {key:"sudokwon", label:"수도권 사찰 코스", route:"서울 도심(조계사-봉은사-화계사, 대중교통 가능)과 근교(전등사-보문사 강화, 용주사 화성, 신륵사 여주)로 나눠서 도는 걸 추천", data: SUDOKWON_SEED},
+  {key:"jeju", label:"제주 사찰 코스", route:"제주시권(관음사-원당사, 차로 20분)과 서귀포권(약천사-산방굴사-법화사, 서로 20~30분)으로 나눠서 도는 게 효율적", data: JEJU_SEED},
+  {key:"chungcheong", label:"충청 사찰 코스", route:"계룡산 3사(갑사-동학사-신원사, 서로 20~30분)와 속리산 법주사, 서산 개심사·문수사(30분)로 나눠서 방문", data: CHUNGCHEONG_SEED},
+  {key:"jeonnam", label:"전남 사찰 코스", route:"해남·강진권(대흥사-미황사-백련사-무위사, 서로 20~40분)과 화순권(운주사-쌍봉사, 30분)으로 나눠서 도는 걸 추천", data: JEONNAM_SEED},
+  {key:"jeonbuk", label:"전북 사찰 코스", route:"부안권(내소사-개암사, 차로 20분)과 김제·완주권(금산사-화암사-완주 송광사, 서로 30~40분)으로 구분", data: JEONBUK_SEED},
+  {key:"gyeongbuk", label:"경북 사찰 코스", route:"영주·안동권(부석사-봉정사, 40분), 문경권(대승사-김룡사-봉암사, 서로 20~30분), 대구권(갓바위-파계사-운문사, 40분~1시간)으로 나눠서", data: GYEONGBUK_SEED},
+  {key:"gyeongnam", label:"경남 사찰 코스", route:"양산·밀양권(통도사-표충사-만어사, 서로 30~40분), 부산권(범어사-해동용궁사, 40분), 남해권(보리암-다솔사, 1시간)으로 구분", data: GYEONGNAM_SEED}
 ];
 
 let db=null, auth=null, localMode=false;
@@ -963,8 +966,9 @@ function renderPackOverlay(){
       <div>
         <div class="packrow-title">${p.label}</div>
         <div class="packrow-sub">${p.data.length}곳 중 ${have}곳 등록됨</div>
+        ${p.route ? `<div class="packrow-sub" style="margin-top:4px;color:var(--stamp);">🚗 ${p.route}</div>` : ''}
       </div>
-      <button class="btn btn-primary" style="padding:8px 14px;font-size:12.5px;" onclick="loadPack('${p.key}')">${have===p.data.length ? '다시 불러오기' : '불러오기'}</button>
+      <button class="btn btn-primary" style="padding:8px 14px;font-size:12.5px;flex-shrink:0;" onclick="loadPack('${p.key}')">${have===p.data.length ? '다시 불러오기' : '불러오기'}</button>
     </div>`;
   }).join('');
 }
