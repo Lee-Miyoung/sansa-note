@@ -106,7 +106,10 @@
   /* ---------- App shell ---------- */
   #app{display:none;min-height:100vh;}
   header.hero{
-    background:linear-gradient(160deg, var(--stamp) 0%, #ff6a00 100%);
+    background:
+      linear-gradient(160deg, rgba(255,138,0,.88) 0%, rgba(255,106,0,.88) 100%),
+      url('hero.jpg') center/cover no-repeat,
+      linear-gradient(160deg, var(--stamp) 0%, #ff6a00 100%);
     color:#fff;
     padding:32px 24px 24px;
     position:relative;
@@ -1620,15 +1623,39 @@ function render(){
 }
 
 function firstPhotoUrl(d){
-  if(!d.photos) return null;
-  const arr = Object.values(d.photos);
-  return arr.length ? arr[arr.length-1].url : null;
+  if(d.photos){
+    const arr = Object.values(d.photos);
+    if(arr.length) return arr[arr.length-1].url;
+  }
+  return d.coverPhoto || null;
+}
+
+let coverFetching = new Set();
+function fetchCoverPhoto(id, name){
+  if(coverFetching.has(id)) return;
+  coverFetching.add(id);
+  const url = `https://commons.wikimedia.org/w/api.php?action=query&generator=search&gsrsearch=${encodeURIComponent(name+' 사찰')}&gsrnamespace=6&gsrlimit=1&prop=imageinfo&iiprop=url&iiurlwidth=400&format=json&origin=*`;
+  fetch(url).then(r=>r.json()).then(data=>{
+    const pages = data && data.query && data.query.pages;
+    if(pages){
+      const page = Object.values(pages)[0];
+      const imgUrl = page && page.imageinfo && page.imageinfo[0] && (page.imageinfo[0].thumburl || page.imageinfo[0].url);
+      if(imgUrl && destinations[id]){
+        updateDestination(id, {coverPhoto: imgUrl});
+        destinations[id].coverPhoto = imgUrl;
+        render();
+      }
+    }
+  }).catch(()=>{});
 }
 
 function renderCard(id, d){
   const photo = firstPhotoUrl(d);
   const stageIdx = d.stage||0;
   const vc = visitCount(d);
+  if(!photo && !coverFetching.has(id)){
+    fetchCoverPhoto(id, d.name);
+  }
   return `
   <div class="card" data-id="${id}">
     <div class="card-photo" style="${photo?`background-image:url('${photo}')`:''}">
@@ -1680,8 +1707,8 @@ function openDetail(id){
   document.getElementById('visitNoteInput').value = '';
   document.getElementById('dMapLink').href = 'https://map.kakao.com/link/search/' + encodeURIComponent(d.name + ' ' + d.region);
   document.getElementById('dFoodLink').href = 'https://map.kakao.com/link/search/' + encodeURIComponent(d.name + ' 맛집');
-  setupDetailMap(d, id);
   document.getElementById('detailOverlay').classList.add('show');
+  requestAnimationFrame(()=> setupDetailMap(d, id));
 }
 
 function closeDetail(){
@@ -1984,36 +2011,45 @@ function openMapOverlay(){
         : `${plotted}곳의 위치가 표시됐어요.` + (missing>0 ? ` (${missing}곳은 자동으로 못 찾았어요, 상세화면 링크로 확인해주세요)` : '');
     }
 
+    const toResolve = [];
     Object.entries(destinations).forEach(([id,d])=>{
       if(d.lat && d.lng){
         plot(id, d, d.lat, d.lng);
       } else {
         pending++;
-        places.keywordSearch(d.name + ' ' + d.region, (data, status)=>{
-          if(status === kakao.maps.services.Status.OK && data[0]){
-            const lat = parseFloat(data[0].y), lng = parseFloat(data[0].x);
-            updateDestination(id, {lat, lng});
-            plot(id, d, lat, lng);
-          } else {
-            places.keywordSearch(d.name, (data2, status2)=>{
-              if(status2 === kakao.maps.services.Status.OK && data2[0]){
-                const lat = parseFloat(data2[0].y), lng = parseFloat(data2[0].x);
-                updateDestination(id, {lat, lng});
-                plot(id, d, lat, lng);
-              } else {
-                missing++;
-              }
-              pending--;
-              updateNote();
-            });
-            return;
-          }
-          pending--;
-          updateNote();
-        });
+        toResolve.push([id,d]);
       }
     });
     updateNote();
+
+    let queueIdx = 0;
+    function processNext(){
+      if(queueIdx >= toResolve.length) return;
+      const [id, d] = toResolve[queueIdx++];
+      places.keywordSearch(d.name + ' ' + d.region, (data, status)=>{
+        if(status === kakao.maps.services.Status.OK && data[0]){
+          const lat = parseFloat(data[0].y), lng = parseFloat(data[0].x);
+          updateDestination(id, {lat, lng});
+          plot(id, d, lat, lng);
+          pending--; updateNote();
+          setTimeout(processNext, 120);
+        } else {
+          places.keywordSearch(d.name, (data2, status2)=>{
+            if(status2 === kakao.maps.services.Status.OK && data2[0]){
+              const lat = parseFloat(data2[0].y), lng = parseFloat(data2[0].x);
+              updateDestination(id, {lat, lng});
+              plot(id, d, lat, lng);
+            } else {
+              missing++;
+            }
+            pending--; updateNote();
+            setTimeout(processNext, 120);
+          });
+        }
+      });
+    }
+    // 카카오 API 과다 호출을 막기 위해 3개씩만 동시에 진행
+    for(let i=0;i<3;i++) processNext();
   });
 }
 
