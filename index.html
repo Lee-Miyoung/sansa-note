@@ -456,9 +456,21 @@
       <div class="section-label">이렇게 해보세요</div>
       <div class="desc-block" id="dActivity"></div>
 
+      <div id="dSeasonWrap" style="display:none;">
+        <div class="section-label">가장 좋은 시기</div>
+        <div class="desc-block" id="dSeason" style="color:var(--stamp);font-weight:600;"></div>
+      </div>
+
+      <div id="dTipWrap" style="display:none;">
+        <div class="section-label">다녀온 사람들이 꼽는 점</div>
+        <div class="desc-block" id="dTip" style="background:#fff8e6;border-left:3px solid var(--gold);padding:10px 12px;border-radius:8px;"></div>
+      </div>
+
       <div class="section-label">위치</div>
       <div id="dMap"></div>
       <a id="dMapLink" class="maplink" target="_blank" rel="noopener">카카오맵에서 크게 보기 ↗</a>
+      <br>
+      <a id="dFoodLink" class="maplink" target="_blank" rel="noopener" style="color:var(--gold);">🍚 근처 맛집·카페 실시간 검색 ↗</a>
 
       <div class="section-label">방문 기록 <span id="visitCountLabel"></span></div>
       <div id="visitList"></div>
@@ -592,29 +604,29 @@ const REGIONS = ["수도권","강원","충청","전라","경상","제주"];
 const STAGES = ["가보고 싶다","다녀왔어요","순례 기록 완료","포스팅 완료"];
 
 const UNESCO_SEED = [
-  {region:"경상", name:"통도사", tag:"유명", desc:"삼보사찰 중 '불보' 사찰. 대웅전 뒤 금강계단에 부처님 진신사리를 모셔서 대웅전 안에는 불상이 없는 게 특징. 국보·보물급 문화재를 국내 사찰 중 가장 많이 보유.", activity:"무풍한송로 소나무숲길 산책, 불상 없는 대웅전과 금강계단 참배, 봄엔 수령 350년 넘은 매화 '지장매' 구경"},
-  {region:"경상", name:"부석사", tag:"유명", desc:"국보 무량수전의 배흘림기둥으로 유명한 절. 의상대사와 선묘낭자 설화가 전해지고, 안양루에서 내려다보는 소백산 능선 노을이 절경으로 꼽힘.", activity:"무량수전 배흘림기둥 감상, 안양루에서 소백산 능선 노을 사진"},
+  {region:"경상", name:"통도사", tag:"유명", desc:"삼보사찰 중 '불보' 사찰. 대웅전 뒤 금강계단에 부처님 진신사리를 모셔서 대웅전 안에는 불상이 없는 게 특징. 국보·보물급 문화재를 국내 사찰 중 가장 많이 보유.", activity:"무풍한송로 소나무숲길 산책, 불상 없는 대웅전과 금강계단 참배, 봄엔 수령 350년 넘은 매화 '지장매' 구경", visitorTip:"방문객들은 낮 12시·오후 5시경 제공되는 무료 공양을 놓치지 말라고 추천해요. 평일엔 한적해서 좋다는 후기가 많고, 봄엔 매화·벚나무 어우러진 경내 산책을 특히 좋아해요."},
+  {region:"경상", name:"부석사", tag:"유명", desc:"국보 무량수전의 배흘림기둥으로 유명한 절. 의상대사와 선묘낭자 설화가 전해지고, 안양루에서 내려다보는 소백산 능선 노을이 절경으로 꼽힘.", activity:"무량수전 배흘림기둥 감상, 안양루에서 소백산 능선 노을 사진", visitorTip:"무량수전까지 이어지는 진입로의 은행나무·단풍길이 가을에 특히 아름답다는 후기가 많아요. 계단이 가팔라서 다리가 불편하면 옆 비탈길을 추천하고, 해질녘 노을 감상도 인기예요."},
   {region:"경상", name:"봉정사", tag:"숨은", desc:"국보 극락전이 한국에 남아있는 가장 오래된 목조건물로 꼽히는 절. 영화 '달마가 동쪽으로 간 까닭은?' 촬영지였던 영산암 정원도 볼만함.", activity:"극락전 배흘림기둥 사진, 영산암 정원 산책"},
-  {region:"충청", name:"법주사", tag:"유명", desc:"국내에 남은 유일한 목탑 형태인 국보 팔상전과, 높이 33m 청동 미륵대불로 유명한 속리산 자락의 절.", activity:"5층 목탑 팔상전 한 바퀴 돌며 팔상도 감상, 미륵대불 앞 인증샷"},
-  {region:"충청", name:"마곡사", tag:"숨은", desc:"백제 무왕 때 창건됐다는 천년고찰로 '춘마곡'이라 불릴 만큼 봄 신록이 아름다움. 백범 김구가 한때 승려로 지낸 곳이기도 함.", activity:"대웅보전 싸리나무 기둥 돌아보기, 마곡천 태극 물돌이 솔바람길 산책"},
+  {region:"충청", name:"법주사", tag:"유명", desc:"국내에 남은 유일한 목탑 형태인 국보 팔상전과, 높이 33m 청동 미륵대불로 유명한 속리산 자락의 절.", activity:"5층 목탑 팔상전 한 바퀴 돌며 팔상도 감상, 미륵대불 앞 인증샷", season:"10월 말~11월 초 (단풍)"},
+  {region:"충청", name:"마곡사", tag:"숨은", desc:"백제 무왕 때 창건됐다는 천년고찰로 '춘마곡'이라 불릴 만큼 봄 신록이 아름다움. 백범 김구가 한때 승려로 지낸 곳이기도 함.", activity:"대웅보전 싸리나무 기둥 돌아보기, 마곡천 태극 물돌이 솔바람길 산책", season:"4월 초중순 (벚꽃)"},
   {region:"전라", name:"선암사", tag:"숨은", desc:"보물 승선교 무지개다리와 수령 수백 년 된 선암매(매화)로 유명한 조계산 자락의 절. 옛 모습 그대로인 해우소(뒷간) 건물도 독특한 볼거리.", activity:"승선교 아래서 강선루 풍경 사진, 봄철 선암매 탐매 산책"},
   {region:"전라", name:"대흥사", tag:"유명", desc:"초의선사가 다도 문화를 꽃피운 두륜산 자락의 절. 대웅보전과 무량수각 현판을 각각 원교 이광사와 추사 김정희가 쓴 것으로 유명.", activity:"일지암 차밭 산책, 두 대가의 현판 글씨체 비교해보기"}
 ];
 
 const CHONGNIM_SEED = [
-  {region:"경상", name:"해인사", tag:"유명", desc:"국보이자 세계기록유산인 팔만대장경을 보관한 해인총림. 장경판전 내부는 대장경 보존을 위해 사진 촬영이 금지되어 있음.", activity:"장경판전 소개 영상(내부 촬영은 금지, 외부만), 단풍길 브이로그"},
-  {region:"경상", name:"통도사", tag:"유명", desc:"영축총림이자 유네스코 산사. 불보 사찰로 참배객이 끊이지 않음.", activity:"소나무숲길 산책 영상"},
-  {region:"전라", name:"송광사", tag:"유명", desc:"삼보사찰 중 '승보' 사찰. 보조국사 지눌 이래 16명의 국사를 배출해 이름 붙었고, 16국사 진영을 모신 국사전이 승보사찰의 성격을 잘 보여줌.", activity:"국사전·하사당 등 국가지정문화재 둘러보기, 불일암 산책길"},
+  {region:"경상", name:"해인사", tag:"유명", desc:"국보이자 세계기록유산인 팔만대장경을 보관한 해인총림. 장경판전 내부는 대장경 보존을 위해 사진 촬영이 금지되어 있음.", activity:"장경판전 소개 영상(내부 촬영은 금지, 외부만), 단풍길 브이로그", season:"10월 말~11월 초 (가야산 단풍)", visitorTip:"대구에서 대중교통으로도 어렵지 않게 다녀올 수 있다는 후기가 많고, 주말엔 꽤 붐빈다는 평이 있어요. 국립공원 입장료가 별도로 붙는 점, 1박 템플스테이 후기가 특히 인기 많다는 점도 참고하세요."},
+  {region:"경상", name:"통도사", tag:"유명", desc:"영축총림이자 유네스코 산사. 불보 사찰로 참배객이 끊이지 않음.", activity:"소나무숲길 산책 영상", visitorTip:"방문객들은 낮 12시·오후 5시경 제공되는 무료 공양을 놓치지 말라고 추천해요. 평일엔 한적해서 좋다는 후기가 많고, 봄엔 매화·벚나무 어우러진 경내 산책을 특히 좋아해요."},
+  {region:"전라", name:"송광사", tag:"유명", desc:"삼보사찰 중 '승보' 사찰. 보조국사 지눌 이래 16명의 국사를 배출해 이름 붙었고, 16국사 진영을 모신 국사전이 승보사찰의 성격을 잘 보여줌.", activity:"국사전·하사당 등 국가지정문화재 둘러보기, 불일암 산책길", visitorTip:"삼청교(무지개다리)를 건너 우화각을 지나 들어가는 진입로 자체가 이미 여행의 하이라이트라는 후기가 많아요. 템플스테이 프로그램도 다양하게 운영돼서 체험 후기가 꾸준히 올라와요."},
   {region:"충청", name:"수덕사", tag:"숨은", desc:"덕숭총림. 국보 대웅전은 고려 1308년 건립 연대가 명확히 밝혀진 목조건축으로, 배흘림기둥과 소박한 맞배지붕이 특징.", activity:"국보 대웅전 배흘림기둥 감상, 덕숭산 산책"},
   {region:"전라", name:"백양사", tag:"숨은", desc:"고불총림. 백학봉을 배경으로 한 누각 쌍계루와 연못에 비친 풍경이 예로부터 '대한 8경'으로 꼽힐 만큼 아름다움.", activity:"쌍계루 연못 반영샷, 가을 백양사 단풍길 산책"},
-  {region:"경상", name:"동화사", tag:"숨은", desc:"팔공총림. 남북통일을 염원하며 세운 높이 33m 세계 최대급 석조 통일약사여래대불이 상징.", activity:"108계단 오르며 통일약사여래대불 참배, 팔공산 탐방로 연계 산행"},
-  {region:"경상", name:"쌍계사", tag:"숨은", desc:"쌍계총림. 화개장터에서 쌍계사까지 이어지는 십리벚꽃길이 국내에서 손꼽히는 봄 벚꽃 명소.", activity:"화개~쌍계사 십리벚꽃길 드라이브, 일주문 앞 벚꽃 프레임 사진"},
+  {region:"경상", name:"동화사", tag:"숨은", desc:"팔공총림. 남북통일을 염원하며 세운 높이 33m 세계 최대급 석조 통일약사여래대불이 상징.", activity:"108계단 오르며 통일약사여래대불 참배, 팔공산 탐방로 연계 산행", season:"10월 말~11월 초 (팔공산 단풍)"},
+  {region:"경상", name:"쌍계사", tag:"숨은", desc:"쌍계총림. 화개장터에서 쌍계사까지 이어지는 십리벚꽃길이 국내에서 손꼽히는 봄 벚꽃 명소.", activity:"화개~쌍계사 십리벚꽃길 드라이브, 일주문 앞 벚꽃 프레임 사진", season:"4월 초중순 (십리벚꽃길)"},
   {region:"경상", name:"범어사", tag:"숨은", desc:"금정총림. 해인사·통도사와 함께 영남 3대 사찰로 꼽히며, 금정산 자락 단풍길과 보물 대웅전으로 유명.", activity:"일주문~천왕문 단풍 터널 산책, 대웅전 신라~조선 양식 문양 찾아보기"},
 ];
 
 // 동선을 고려한 지역별 순례 코스 — 같은 코스 안의 절들은 서로 가까워서 하루~며칠 안에 묶어서 돌기 좋아요.
 const GYEONGJU_SEED = [
-  {region:"경상", name:"불국사", tag:"유명", desc:"석가탑·다보탑과 청운교·백운교로 유명한 신라 불교예술의 정수. 토함산 석굴암과 함께 1995년 유네스코 세계유산에 등재.", activity:"다보탑·석가탑 비교 감상, 청운교·백운교 배경 사진"},
+  {region:"경상", name:"불국사", tag:"유명", desc:"석가탑·다보탑과 청운교·백운교로 유명한 신라 불교예술의 정수. 토함산 석굴암과 함께 1995년 유네스코 세계유산에 등재.", activity:"다보탑·석가탑 비교 감상, 청운교·백운교 배경 사진", season:"10월 말~11월 초 (단풍) / 새벽 (인파 적은 시간대)"},
   {region:"경상", name:"석굴암", tag:"유명", desc:"화강암을 돔 형태로 쌓아 올린 석굴 사원. 본존불상을 중심으로 38구의 불상이 조화롭게 배치되어 불국사와 함께 유네스코 세계유산에 등재.", activity:"동해 일출과 본존불 함께 보기"},
   {region:"경상", name:"기림사", tag:"숨은", desc:"함월산 자락, 감은사지·문무대왕릉과 가까운 고찰로 오종수 약수로도 알려짐.", activity:"오종수 약수 체험, 감은사지·문무대왕릉과 묶어 도는 코스"},
   {region:"경상", name:"감은사지", tag:"숨은", desc:"신문왕이 아버지 문무왕의 뜻을 이어 682년 완공한 호국사찰 터. 국보 삼층석탑 두 기가 동해를 바라보며 나란히 서 있음.", activity:"일출 사진, 문무대왕릉과 함께 도는 코스"},
@@ -623,8 +635,8 @@ const GYEONGJU_SEED = [
 ];
 
 const JIRISAN_SEED = [
-  {region:"전라", name:"화엄사", tag:"유명", desc:"지리산 자락, 봄 홍매화와 가을 단풍이 아름다운 절.", activity:"각황전 배경 인물샷, 홍매화 클로즈업"},
-  {region:"경상", name:"쌍계사", tag:"숨은", desc:"쌍계총림, 봄이면 십리벚꽃길로 유명한 지리산 자락 산사.", activity:"벚꽃길 드론샷, 계곡물 소리 브이로그"},
+  {region:"전라", name:"화엄사", tag:"유명", desc:"지리산 자락, 봄 홍매화와 가을 단풍이 아름다운 절.", activity:"각황전 배경 인물샷, 홍매화 클로즈업", season:"3월 말~4월 초 (홍매화), 11월 초 (단풍)"},
+  {region:"경상", name:"쌍계사", tag:"숨은", desc:"쌍계총림, 봄이면 십리벚꽃길로 유명한 지리산 자락 산사.", activity:"벚꽃길 드론샷, 계곡물 소리 브이로그", season:"4월 초중순 (십리벚꽃길)"},
   {region:"전라", name:"연곡사", tag:"숨은", desc:"지리산 자락, 국보급 승탑(부도)이 여러 기 모여 있어 '승탑의 보고'로 불리는 조용한 절.", activity:"동부도·서부도 등 국보 승탑 감상, 계곡 산책"},
   {region:"경상", name:"벽송사", tag:"숨은", desc:"지리산 깊은 곳, 조선시대 선불교 최고 수행처로 꼽히는 참선 도량. 수백 년 된 미인송·도인송 소나무로도 유명.", activity:"미인송·도인송 소나무 사진"},
   {region:"전라", name:"실상사", tag:"숨은", desc:"지리산 자락, 국내 최초의 선종 사찰. 너른 들판에 자리한 평지 가람으로 백장암 삼층석탑도 함께 유명.", activity:"탁 트인 들판 배경 사진, 백장암 연계 방문"},
@@ -674,16 +686,16 @@ const JEJU_SEED = [
 ];
 
 const CHUNGCHEONG_SEED = [
-  {region:"충청", name:"법주사", tag:"유명", desc:"속리산 자락, 국내 최대 규모의 미륵대불이 있는 절.", activity:"가을 단풍 배경 인물 사진"},
-  {region:"충청", name:"마곡사", tag:"숨은", desc:"태화산 자락, 봄이면 벚꽃이 절 마당을 뒤덮는 조용한 절.", activity:"벚꽃 시즌 드론샷, 태화천 반영 사진"},
+  {region:"충청", name:"법주사", tag:"유명", desc:"속리산 자락, 국내 최대 규모의 미륵대불이 있는 절.", activity:"가을 단풍 배경 인물 사진", season:"10월 말~11월 초 (단풍)"},
+  {region:"충청", name:"마곡사", tag:"숨은", desc:"태화산 자락, 봄이면 벚꽃이 절 마당을 뒤덮는 조용한 절.", activity:"벚꽃 시즌 드론샷, 태화천 반영 사진", season:"4월 초중순 (벚꽃)"},
   {region:"충청", name:"수덕사", tag:"숨은", desc:"덕숭총림, 대웅전이 국내 목조건축의 걸작으로 꼽힘.", activity:"대웅전 배흘림기둥 사진, 덕숭산 산책"},
   {region:"충청", name:"관촉사", tag:"숨은", desc:"고려시대(968년경) 조성된 국내 최대 석불, 국보 은진미륵(높이 18m)으로 유명. 소박하면서도 개성 있는 조각으로 '백제의 미소'라 불림.", activity:"은진미륵 앞 인증샷, 논산평야 전망"},
-  {region:"충청", name:"개심사", tag:"숨은", desc:"'마음을 여는 절'이라는 뜻의 충남 4대 사찰. 보물 대웅전은 주심포·다포 양식이 혼용된 독특한 건축이고, 봄이면 청벚꽃(왕벚나무)이 만개.", activity:"봄꽃 시즌 사진, 연못 배경 컷"},
+  {region:"충청", name:"개심사", tag:"숨은", desc:"'마음을 여는 절'이라는 뜻의 충남 4대 사찰. 보물 대웅전은 주심포·다포 양식이 혼용된 독특한 건축이고, 봄이면 청벚꽃(왕벚나무)이 만개.", activity:"봄꽃 시즌 사진, 연못 배경 컷", season:"4월 중순 (청벚꽃)"},
   {region:"충청", name:"무량사", tag:"숨은", desc:"김시습이 말년을 보낸 절, 극락전이 국내에 몇 없는 2층 불전.", activity:"극락전 배경 사진"},
   {region:"충청", name:"신원사", tag:"숨은", desc:"계룡산 자락, 중악단(산신 제단)으로 알려진 절.", activity:"중악단 소개 영상"},
   {region:"충청", name:"각연사", tag:"숨은", desc:"충북 괴산, 비로자나불 좌상으로 알려진 조용한 절.", activity:"숲길 산책 영상"},
-  {region:"충청", name:"갑사", tag:"유명", desc:"계룡산 자락, 보물 철당간(쇠로 만든 깃대)으로 유명한 절. 동학사까지 이어지는 단풍 트레킹 코스로 인기.", activity:"철당간 배경 사진, 동학사까지 단풍길 트레킹"},
-  {region:"충청", name:"동학사", tag:"숨은", desc:"계룡산 자락, 비구니 강원으로 유명하고 벚꽃길이 아름다움.", activity:"봄 벚꽃길 사진"},
+  {region:"충청", name:"갑사", tag:"유명", desc:"계룡산 자락, 보물 철당간(쇠로 만든 깃대)으로 유명한 절. 동학사까지 이어지는 단풍 트레킹 코스로 인기.", activity:"철당간 배경 사진, 동학사까지 단풍길 트레킹", season:"10월 말~11월 초 (오리숲길 단풍)"},
+  {region:"충청", name:"동학사", tag:"숨은", desc:"계룡산 자락, 비구니 강원으로 유명하고 벚꽃길이 아름다움.", activity:"봄 벚꽃길 사진", season:"4월 초중순 (벚꽃)"},
   {region:"충청", name:"구인사", tag:"유명", desc:"대한불교 천태종의 총본산이자 국내 최대 규모 사찰. 계곡을 따라 5층짜리 설법보전 등 건물이 빼곡히 들어서 있음.", activity:"계단식 전각 파노라마 사진"},
   {region:"충청", name:"문수사", tag:"숨은", desc:"서산 마애불로 알려진 가야산 자락의 절.", activity:"마애불 소개 영상"}
 ];
@@ -706,7 +718,7 @@ const JEONNAM_SEED = [
 
 const JEONBUK_SEED = [
   {region:"전라", name:"금산사", tag:"숨은", desc:"모악산 자락, 국내 유일 3층 목조 미륵전(국보)이 있는 절. 미륵신앙의 본찰로 통일신라~고려를 거치며 크게 번성.", activity:"미륵전 배경 사진, 모악산 둘레길"},
-  {region:"전라", name:"내소사", tag:"유명", desc:"변산반도, 전나무숲길과 능가산 자락 풍경으로 유명한 절. 보물 대웅보전의 꽃살문 조각도 볼거리.", activity:"전나무숲길 산책 영상, 대웅보전 꽃살문 사진"},
+  {region:"전라", name:"내소사", tag:"유명", desc:"변산반도, 전나무숲길과 능가산 자락 풍경으로 유명한 절. 보물 대웅보전의 꽃살문 조각도 볼거리.", activity:"전나무숲길 산책 영상, 대웅보전 꽃살문 사진", season:"11월 초중순 (전나무숲 단풍)"},
   {region:"전라", name:"개암사", tag:"숨은", desc:"부안 우금암 아래, 백제 부흥운동의 거점이었던 역사 깊은 절. 보물 대웅전의 용머리·봉황 조각이 볼거리.", activity:"우금암 배경 사진, 대웅전 조각 감상"},
   {region:"전라", name:"선운사", tag:"유명", desc:"고창, 동백숲과 가을 꽃무릇으로 유명한 절.", activity:"동백숲길 산책, 꽃무릇 시즌 사진"},
   {region:"전라", name:"화암사", tag:"숨은", desc:"완주 불명산 자락, 국내 유일 하앙식 구조로 지어진 국보 극락전으로 유명한 '숨은 절 중의 숨은 절'.", activity:"극락전 하앙 구조 소개 영상"},
@@ -714,7 +726,7 @@ const JEONBUK_SEED = [
 ];
 
 const GYEONGBUK_SEED = [
-  {region:"경상", name:"부석사", tag:"유명", desc:"무량수전 배흘림기둥과 소백산 능선 조망으로 유명한 절.", activity:"무량수전 앞 노을 사진, 안양루에서 본 능선 뷰"},
+  {region:"경상", name:"부석사", tag:"유명", desc:"무량수전 배흘림기둥과 소백산 능선 조망으로 유명한 절.", activity:"무량수전 앞 노을 사진, 안양루에서 본 능선 뷰", visitorTip:"무량수전까지 이어지는 진입로의 은행나무·단풍길이 가을에 특히 아름답다는 후기가 많아요. 계단이 가팔라서 다리가 불편하면 옆 비탈길을 추천하고, 해질녘 노을 감상도 인기예요."},
   {region:"경상", name:"봉정사", tag:"숨은", desc:"현존하는 가장 오래된 목조건물 극락전이 있는 조용한 절.", activity:"극락전 배경 사진, 천등산 숲길 산책"},
   {region:"경상", name:"직지사", tag:"숨은", desc:"천불전의 천 개 불상으로 알려진 황악산 자락의 절.", activity:"천불전 소개 영상, 사명대사길 산책"},
   {region:"경상", name:"고운사", tag:"숨은", desc:"의성, 조계종 제16교구 본사로 숲길이 아름다운 절.", activity:"숲길 산책 영상"},
@@ -734,8 +746,8 @@ const GYEONGBUK_SEED = [
 ];
 
 const GYEONGNAM_SEED = [
-  {region:"경상", name:"통도사", tag:"유명", desc:"영축총림이자 유네스코 산사. 불보 사찰로 참배객이 끊이지 않음.", activity:"소나무숲길 산책 영상"},
-  {region:"경상", name:"해인사", tag:"유명", desc:"국보이자 세계기록유산인 팔만대장경을 보관한 해인총림. 장경판전 내부는 대장경 보존을 위해 사진 촬영이 금지되어 있음.", activity:"장경판전 소개 영상(내부 촬영은 금지, 외부만), 단풍길 브이로그"},
+  {region:"경상", name:"통도사", tag:"유명", desc:"영축총림이자 유네스코 산사. 불보 사찰로 참배객이 끊이지 않음.", activity:"소나무숲길 산책 영상", visitorTip:"방문객들은 낮 12시·오후 5시경 제공되는 무료 공양을 놓치지 말라고 추천해요. 평일엔 한적해서 좋다는 후기가 많고, 봄엔 매화·벚나무 어우러진 경내 산책을 특히 좋아해요."},
+  {region:"경상", name:"해인사", tag:"유명", desc:"국보이자 세계기록유산인 팔만대장경을 보관한 해인총림. 장경판전 내부는 대장경 보존을 위해 사진 촬영이 금지되어 있음.", activity:"장경판전 소개 영상(내부 촬영은 금지, 외부만), 단풍길 브이로그", season:"10월 말~11월 초 (가야산 단풍)", visitorTip:"대구에서 대중교통으로도 어렵지 않게 다녀올 수 있다는 후기가 많고, 주말엔 꽤 붐빈다는 평이 있어요. 국립공원 입장료가 별도로 붙는 점, 1박 템플스테이 후기가 특히 인기 많다는 점도 참고하세요."},
   {region:"경상", name:"표충사", tag:"숨은", desc:"밀양 재약산 자락, 사명대사를 기리는 사당에서 이름이 유래한 절. 일연 스님이 삼국유사를 완성했다는 이야기도 전해짐.", activity:"사명대사 유적 둘러보기, 숲길 산책"},
   {region:"경상", name:"옥천사", tag:"숨은", desc:"고성 연화산 자락, 계곡과 어우러진 조용한 절.", activity:"계곡 배경 사진"},
   {region:"경상", name:"다솔사", tag:"숨은", desc:"사천, 차밭과 소나무숲으로 알려진 절.", activity:"차밭 배경 사진"},
@@ -747,9 +759,31 @@ const GYEONGNAM_SEED = [
   {region:"경상", name:"만어사", tag:"숨은", desc:"밀양 만어산 8부 능선, 두드리면 종소리가 난다는 돌무더기(경석)로 유명한 '밀양 3대 신비' 중 하나. 삼국유사에도 등장하는 유서 깊은 절.", activity:"종소리 나는 돌 두드려보기, 소원돌 들어보기"}
 ];
 
+function buildMasterByName(){
+  const m = {};
+  [UNESCO_SEED, CHONGNIM_SEED, GYEONGJU_SEED, JIRISAN_SEED, GANGWON_SEED, SUDOKWON_SEED, JEJU_SEED, CHUNGCHEONG_SEED, JEONNAM_SEED, JEONBUK_SEED, GYEONGBUK_SEED, GYEONGNAM_SEED]
+    .forEach(arr=> arr.forEach(item=>{ if(!m[item.name]) m[item.name] = item; }));
+  return m;
+}
+const MASTER_BY_NAME = buildMasterByName();
+
+function resolvePackData(pack){
+  if(pack.data) return pack.data;
+  return pack.names.map(n=>MASTER_BY_NAME[n]).filter(Boolean);
+}
+
+const HAESU_SEED_NAMES = ["낙산사","보문사","보리암"];
+const JEOKMYEOL_SEED_NAMES = ["통도사","정암사","법흥사","상원사","봉정암"];
+const CHERRY_SEED_NAMES = ["화엄사","쌍계사","마곡사","개심사","동학사"];
+const AUTUMN_SEED_NAMES = ["내소사","법주사","갑사","해인사","동화사","불국사"];
+
 const PACKS = [
   {key:"unesco", label:"유네스코 산사 7곳", route:"전국에 흩어져 있어 한 번에 도는 코스는 아니고, 지역별로 나눠 방문하는 걸 추천해요.", data: UNESCO_SEED},
   {key:"chongnim", label:"조계종 8대 총림", route:"역시 전국 각지 본사라 지역별 코스(경주/지리산/경남 등)와 겹쳐서 도는 게 효율적이에요.", data: CHONGNIM_SEED},
+  {key:"haesu", label:"3대 해수관음 성지", route:"강원(낙산사)·수도권(보문사)·경남(보리암)에 하나씩 있어 전국 코스로 묶어보기 좋아요. 셋 다 바닷가/절벽 절경으로 유명해요.", names: HAESU_SEED_NAMES},
+  {key:"jeokmyeol", label:"5대 적멸보궁", route:"통도사(경남)·상원사·봉정암(오대산~설악산)·정암사·법흥사(정선~영월)로, 진신사리를 모신 다섯 곳. 봉정암은 왕복 10시간 걷는 난이도 최상 코스예요.", names: JEOKMYEOL_SEED_NAMES},
+  {key:"cherry", label:"봄 벚꽃 명소 사찰", route:"화엄사(구례)·쌍계사(하동)는 차로 40분, 마곡사(공주)·개심사(서산)·동학사(공주 계룡산)는 충청권끼리 묶기 좋아요. 4월 초중순이 절정.", names: CHERRY_SEED_NAMES},
+  {key:"autumn", label:"가을 단풍 명소 사찰", route:"내소사(부안)·법주사(보은)·갑사(공주)는 전북~충청 라인, 해인사(합천)·동화사(대구)·불국사(경주)는 경상권끼리 묶어서. 10월 말~11월 초가 절정.", names: AUTUMN_SEED_NAMES},
   {key:"gyeongju", label:"경주 사찰 순례 코스", route:"경주 시내 반경 20km 안에 모여있어 자동차로 당일 코스 가능. 추천 순서: 불국사→석굴암(차로 15분)→기림사(30분)→감은사지(10분)→분황사(30분)→골굴사(15분)", data: GYEONGJU_SEED},
   {key:"jirisan", label:"지리산 자락 사찰 코스", route:"지리산을 빙 둘러 흩어져 있어 전남·경남 넘나드는 1박2일 코스로 적당. 화엄사(구례)↔쌍계사(하동) 차로 40분, 실상사(남원)↔벽송사(함양) 차로 30분", data: JIRISAN_SEED},
   {key:"gangwon", label:"강원 사찰 코스", route:"영동(동해안)과 영서(내륙)로 나뉘어요. 영동: 낙산사-신흥사-백담사(설악산권, 서로 30~40분). 영서: 월정사-상원사-봉정암(오대산~설악산 종주), 정암사-법흥사(정선~영월, 40분)", data: GANGWON_SEED},
@@ -951,13 +985,12 @@ function removeDestinationData(id){
 }
 
 function refreshDescriptions(){
-  const master = {};
-  PACKS.forEach(p=> p.data.forEach(item=>{ master[item.name] = item; }));
+  const master = MASTER_BY_NAME;
   let updated = 0;
   Object.entries(destinations).forEach(([id,d])=>{
     const src = master[d.name];
-    if(src && (src.desc !== d.desc || src.activity !== d.activity)){
-      updateDestination(id, {desc: src.desc, activity: src.activity});
+    if(src && (src.desc !== d.desc || src.activity !== d.activity || src.season !== d.season || src.visitorTip !== d.visitorTip)){
+      updateDestination(id, {desc: src.desc, activity: src.activity, season: src.season || null, visitorTip: src.visitorTip || null});
       updated++;
     }
   });
@@ -983,9 +1016,10 @@ function maybeShowSeedBanner(){
 function loadPack(key){
   const pack = PACKS.find(p=>p.key===key);
   if(!pack) return;
+  const packData = resolvePackData(pack);
   const existingNames = new Set(Object.values(destinations).map(d=>d.name));
   let added = 0;
-  pack.data.forEach(item=>{
+  packData.forEach(item=>{
     if(existingNames.has(item.name)) return;
     const id = newId();
     const data = Object.assign({}, item, {stage:0, notes:'', photos:{}, createdAt: Date.now()});
@@ -993,7 +1027,7 @@ function loadPack(key){
     added++;
   });
   if(localMode){ persistLocal(); afterDataLoaded(); }
-  const skipped = pack.data.length - added;
+  const skipped = packData.length - added;
   showToast(skipped>0 ? `${added}곳을 추가했어요 (이미 있는 ${skipped}곳은 건너뜀)` : `${added}곳을 추가했어요`);
   document.getElementById('seedBannerWrap').innerHTML='';
   renderPackOverlay();
@@ -1010,16 +1044,43 @@ function renderPackOverlay(){
   const wrap = document.getElementById('packList');
   const existingNames = new Set(Object.values(destinations).map(d=>d.name));
   wrap.innerHTML = PACKS.map(p=>{
-    const have = p.data.filter(item=>existingNames.has(item.name)).length;
+    const packData = resolvePackData(p);
+    const have = packData.filter(item=>existingNames.has(item.name)).length;
     return `<div class="packrow">
       <div>
         <div class="packrow-title">${p.label}</div>
-        <div class="packrow-sub">${p.data.length}곳 중 ${have}곳 등록됨</div>
+        <div class="packrow-sub">${packData.length}곳 중 ${have}곳 등록됨</div>
         ${p.route ? `<div class="packrow-sub" style="margin-top:4px;color:var(--stamp);">🚗 ${p.route}</div>` : ''}
       </div>
-      <button class="btn btn-primary" style="padding:8px 14px;font-size:12.5px;flex-shrink:0;" onclick="loadPack('${p.key}')">${have===p.data.length ? '다시 불러오기' : '불러오기'}</button>
+      <div style="display:flex;flex-direction:column;gap:6px;flex-shrink:0;">
+        <button class="btn btn-primary" style="padding:8px 14px;font-size:12.5px;" onclick="loadPack('${p.key}')">${have===packData.length ? '다시 불러오기' : '불러오기'}</button>
+        <button class="btn btn-ghost" style="padding:8px 14px;font-size:12.5px;" onclick="openPackDetail('${p.key}')">자세히 보기</button>
+      </div>
     </div>`;
   }).join('');
+}
+
+function openPackDetail(key){
+  const pack = PACKS.find(p=>p.key===key);
+  if(!pack) return;
+  const packData = resolvePackData(pack);
+  const wrap = document.getElementById('packList');
+  wrap.innerHTML = `
+    <div style="margin-bottom:12px;">
+      <a onclick="renderPackOverlay()" style="cursor:pointer;color:var(--moss);font-size:12.5px;font-weight:700;">← 코스 목록으로</a>
+    </div>
+    <div class="packrow-title" style="font-size:18px;margin-bottom:4px;">${pack.label}</div>
+    ${pack.route ? `<div class="packrow-sub" style="color:var(--stamp);margin-bottom:12px;">🚗 ${pack.route}</div>` : ''}
+    <button class="btn btn-primary btn-block" style="margin-bottom:14px;" onclick="loadPack('${pack.key}')">이 코스 전체 불러오기</button>
+    ${packData.map((item,i)=>`
+      <div class="visitrow" style="border-left-color:${item.tag==='유명'?'var(--moss)':'var(--gold)'};">
+        <div style="font-weight:700;font-family:'Song Myung','Noto Serif KR',serif;font-size:15px;">${i+1}. ${escapeHtml(item.name)}</div>
+        <div style="font-size:11px;color:var(--ink-soft);margin-bottom:4px;">${item.region} · ${item.tag==='유명'?'유명한 곳':'숨은 곳'}</div>
+        <div class="vnote" style="margin-top:2px;">${escapeHtml(item.desc||'')}</div>
+        ${item.activity ? `<div class="vnote" style="margin-top:4px;color:var(--moss);font-weight:600;">✓ ${escapeHtml(item.activity)}</div>` : ''}
+      </div>
+    `).join('')}
+  `;
 }
 
 /* ============================================================
@@ -1135,12 +1196,25 @@ function openDetail(id){
   document.getElementById('dTag').textContent = d.tag==='유명' ? '유명한 곳' : '숨은 곳';
   document.getElementById('dDesc').textContent = d.desc || '';
   document.getElementById('dActivity').textContent = d.activity || '';
+  if(d.season){
+    document.getElementById('dSeasonWrap').style.display = 'block';
+    document.getElementById('dSeason').textContent = '🌸 ' + d.season;
+  } else {
+    document.getElementById('dSeasonWrap').style.display = 'none';
+  }
+  if(d.visitorTip){
+    document.getElementById('dTipWrap').style.display = 'block';
+    document.getElementById('dTip').textContent = d.visitorTip;
+  } else {
+    document.getElementById('dTipWrap').style.display = 'none';
+  }
   document.getElementById('dNotes').value = d.notes || '';
   renderStepper(d.stage||0);
   renderPhotos(d.photos||{});
   renderVisits(d.visits||{});
   document.getElementById('visitNoteInput').value = '';
   document.getElementById('dMapLink').href = 'https://map.kakao.com/link/search/' + encodeURIComponent(d.name + ' ' + d.region);
+  document.getElementById('dFoodLink').href = 'https://map.kakao.com/link/search/' + encodeURIComponent(d.name + ' 맛집');
   setupDetailMap(d, id);
   document.getElementById('detailOverlay').classList.add('show');
 }
