@@ -284,8 +284,9 @@
   }
   .toast{
     position:fixed;bottom:24px;left:50%;transform:translateX(-50%);
-    background:var(--ink);color:#fff;padding:10px 18px;border-radius:999px;font-size:13px;
+    background:var(--ink);color:#fff;padding:12px 22px;border-radius:16px;font-size:13px;
     z-index:200;opacity:0;transition:opacity .25s ease;pointer-events:none;
+    max-width:88vw;text-align:center;box-shadow:0 10px 26px rgba(0,0,0,.25);
   }
   .toast.show{opacity:1;}
   .icon-row{display:flex;gap:8px;flex-shrink:0;}
@@ -347,6 +348,11 @@
     border:1px solid var(--stamp);border-radius:10px;padding:12px 16px;display:flex;justify-content:space-between;
     align-items:center;gap:12px;font-size:13px;color:#7a2a2a;
   }
+  .trivia-banner{
+    max-width:1080px;margin:14px auto 0;background:var(--paper-soft);
+    border:1px dashed var(--paper-line);border-radius:10px;padding:12px 16px;font-size:13px;color:var(--ink);
+  }
+  .trivia-banner b{color:var(--stamp);}
   .level-pill{
     display:inline-block;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);
     color:#f5eeda;font-size:12px;font-weight:700;padding:4px 12px;border-radius:999px;
@@ -469,6 +475,7 @@
     </svg>
   </header>
 
+  <div id="triviaBannerWrap"></div>
   <div id="seedBannerWrap"></div>
   <div id="seasonBannerWrap"></div>
   <div id="almostBannerWrap"></div>
@@ -644,6 +651,8 @@
       <div id="rewardList" style="margin-bottom:18px;"></div>
       <div class="section-label">코스별 진행률</div>
       <div id="badgeList"></div>
+      <div class="section-label" style="margin-top:18px;">순례 등급표</div>
+      <div id="levelGuide"></div>
     </div>
   </div>
 </div>
@@ -1006,10 +1015,20 @@ function destinationRef(id){
 /* ============================================================
    DATA LAYER (Firebase or LocalStorage fallback)
 ============================================================ */
+function renderTriviaBanner(){
+  const pool = Object.values(MASTER_BY_NAME).filter(item=>item.visitorTip);
+  if(pool.length===0) return;
+  const dayOfYear = Math.floor((Date.now() - new Date(new Date().getFullYear(),0,0)) / 86400000);
+  const pick = pool[dayOfYear % pool.length];
+  const wrap = document.getElementById('triviaBannerWrap');
+  wrap.innerHTML = `<div class="trivia-banner">📖 <b>오늘의 절 상식 — ${escapeHtml(pick.name)}</b><br>${escapeHtml(pick.visitorTip)}</div>`;
+}
+
 function launchApp(){
   document.getElementById('app').style.display='block';
   buildRegionTabs();
   updateAccountInfo();
+  renderTriviaBanner();
 
   if(localMode){
     const raw = localStorage.getItem('travelDiaryLocalData');
@@ -1097,12 +1116,12 @@ function refreshDescriptions(){
    LEVEL TITLE, ALMOST-DONE BANNER, PHOTO ALBUM
 ============================================================ */
 const LEVEL_TIERS = [
-  {min:0, title:'초심자', icon:'🌱'},
-  {min:5, title:'구도자', icon:'🥾'},
-  {min:15, title:'행자', icon:'🎋'},
-  {min:30, title:'수행자', icon:'📿'},
-  {min:50, title:'선지식', icon:'🪷'},
-  {min:80, title:'대덕', icon:'👑'}
+  {min:0, title:'초심자', icon:'🌱', desc:'첫 발걸음을 뗀 당신. 모든 순례는 여기서 시작돼요.'},
+  {min:5, title:'구도자', icon:'🥾', desc:'길을 구하기 시작한 사람. 이제 슬슬 재미 붙었죠?'},
+  {min:15, title:'행자', icon:'🎋', desc:'출가해 수행 중인 예비 스님을 부르는 말이에요. 꽤 진지해지셨네요.'},
+  {min:30, title:'수행자', icon:'📿', desc:'본격적으로 정진하는 사람. 어지간한 스님보다 절을 많이 다니셨어요.'},
+  {min:50, title:'선지식', icon:'🪷', desc:'남을 깨달음으로 이끄는 스승 같은 존재를 뜻해요. 이 정도면 주변에 절 추천 좀 해주세요.'},
+  {min:80, title:'대덕', icon:'👑', desc:'덕이 큰 고승에게 붙이던 존칭이에요. 전국 절의 4분의 3 이상을 다녀오신 거예요.'}
 ];
 
 function computeVisitedCount(){
@@ -1117,7 +1136,50 @@ function renderLevelBadge(){
   const el = document.getElementById('levelBadge');
   if(!el) return;
   el.innerHTML = `<span class="level-pill">${tier.icon} ${tier.title} · ${n}곳 방문</span>` +
-    (next ? `<span style="color:#a9b39a;font-size:11.5px;margin-left:8px;">다음 등급 ${next.title}까지 ${next.min-n}곳</span>` : '');
+    (next ? `<span style="color:#a9b39a;font-size:11.5px;margin-left:8px;">다음 등급 ${next.title}까지 ${next.min-n}곳</span>` : '') +
+    `<div style="color:#cfd6c4;font-size:11.5px;margin-top:4px;">${tier.desc}</div>`;
+  checkLevelUpCelebration(tier);
+}
+
+let lastCelebratedTierMin = null;
+function checkLevelUpCelebration(tier){
+  const key = 'sansanoteLastTier_' + (currentUid || 'guest');
+  if(lastCelebratedTierMin === null){
+    const saved = localStorage.getItem(key);
+    lastCelebratedTierMin = saved !== null ? parseInt(saved,10) : tier.min;
+  }
+  if(tier.min > lastCelebratedTierMin){
+    showCelebration(`${tier.icon} 등급 상승! 이제 '${tier.title}'예요`, tier.desc);
+  }
+  lastCelebratedTierMin = tier.min;
+  localStorage.setItem(key, String(tier.min));
+}
+
+let celebratedPackKeys = null;
+function checkPackCelebrations(){
+  const key = 'sansanoteCelebratedPacks_' + (currentUid || 'guest');
+  if(celebratedPackKeys === null){
+    try{ celebratedPackKeys = new Set(JSON.parse(localStorage.getItem(key) || '[]')); }
+    catch(e){ celebratedPackKeys = new Set(); }
+  }
+  const have = new Set(Object.values(destinations).filter(d=>(d.stage||0)>=1).map(d=>d.name));
+  PACKS.forEach(p=>{
+    const packData = resolvePackData(p);
+    const earned = packData.length>0 && packData.every(item=>have.has(item.name));
+    if(earned && !celebratedPackKeys.has(p.key)){
+      celebratedPackKeys.add(p.key);
+      showCelebration(`🎉 "${p.label}" 코스 완주!`, '뱃지 목록에서 확인해보세요');
+    }
+  });
+  localStorage.setItem(key, JSON.stringify([...celebratedPackKeys]));
+}
+
+function showCelebration(title, sub){
+  const t = document.getElementById('toast');
+  t.innerHTML = `<div style="font-weight:700;">${title}</div><div style="font-size:11.5px;opacity:.85;margin-top:2px;">${sub}</div>`;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>t.classList.remove('show'), 3800);
 }
 
 function checkAlmostDoneBanner(){
@@ -1191,6 +1253,7 @@ function applyRewardEffects(){
 function openBadgeOverlay(){
   renderRewards();
   renderBadges();
+  renderLevelGuide();
   document.getElementById('badgeOverlay').classList.add('show');
 }
 function closeBadgeOverlay(){
@@ -1258,6 +1321,21 @@ function copyExportText(){
   const el = document.getElementById('exportText');
   el.select();
   navigator.clipboard && navigator.clipboard.writeText(el.value).then(()=> showToast('복사했어요! 블로그·인스타에 붙여넣으세요'));
+}
+
+function renderLevelGuide(){
+  const n = computeVisitedCount();
+  const wrap = document.getElementById('levelGuide');
+  wrap.innerHTML = LEVEL_TIERS.map(t=>{
+    const reached = n >= t.min;
+    return `<div class="reward-row">
+      <div class="reward-icon ${reached?'unlocked':'locked'}">${t.icon}</div>
+      <div>
+        <div style="font-weight:700;">${t.title} <span style="font-weight:400;color:var(--ink-soft);font-size:11.5px;">(${t.min}곳~)</span></div>
+        <div style="font-size:11.5px;color:var(--ink-soft);">${t.desc}</div>
+      </div>
+    </div>`;
+  }).join('');
 }
 
 function renderBadges(){
@@ -1430,6 +1508,7 @@ function render(){
   applyRewardEffects();
   renderLevelBadge();
   checkAlmostDoneBanner();
+  checkPackCelebrations();
   const stats = computeStats();
   document.getElementById('heroStats').innerHTML = `
     <div class="stat"><div class="num serif">${stats.total}</div><div class="lbl">등록한 곳</div></div>
