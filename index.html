@@ -17,24 +17,25 @@
 
 <style>
   :root{
-    --cover:#151116;
-    --cover-deep:#0a0810;
-    --paper:#f2e9d8;
-    --paper-soft:#faf4e7;
-    --paper-line:#e0cfa8;
-    --ink:#211a14;
-    --ink-soft:#5c5646;
-    --stamp:#c62828;
-    --moss:#0f6b5c;
-    --gold:#c9942f;
+    --cover:#2b1810;
+    --cover-deep:#180d07;
+    --paper:#fffbf2;
+    --paper-soft:#ffffff;
+    --paper-line:#ffe1b0;
+    --ink:#2b2118;
+    --ink-soft:#7a6a52;
+    --stamp:#ff8a00;
+    --stamp-dark:#d96f00;
+    --moss:#00a86b;
+    --moss-dark:#008554;
+    --gold:#ffc93c;
+    --red:#ff4d4d;
     --shadow:0 10px 26px rgba(20,16,8,.14);
   }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
   body{
-    background:
-      radial-gradient(rgba(33,26,20,.05) 1px, transparent 1.4px) 0 0/14px 14px,
-      var(--paper);
+    background:var(--paper);
     color:var(--ink);
     font-family:'Pretendard', -apple-system, sans-serif;
     -webkit-font-smoothing:antialiased;
@@ -47,7 +48,7 @@
     display:flex;
     align-items:center;
     justify-content:center;
-    background:radial-gradient(ellipse at top, #24352a 0%, var(--cover-deep) 70%);
+    background:linear-gradient(160deg, var(--stamp) 0%, #ff6a00 100%);
     padding:24px;
   }
   .setup-card{
@@ -81,14 +82,17 @@
   }
   .field-row input:focus{outline:2px solid var(--moss);outline-offset:1px;}
   .btn{
-    appearance:none;border:none;cursor:pointer;border-radius:9px;
-    font-family:inherit;font-weight:600;font-size:14px;padding:11px 18px;
-    transition:transform .12s ease, filter .12s ease;
+    appearance:none;border:none;cursor:pointer;border-radius:16px;
+    font-family:inherit;font-weight:800;font-size:14px;padding:13px 18px;
+    transition:transform .08s ease;
+    position:relative;top:0;
   }
-  .btn:active{transform:scale(.97);}
-  .btn-primary{background:var(--stamp);color:#fff;}
-  .btn-primary:hover{filter:brightness(1.07);}
-  .btn-ghost{background:transparent;color:var(--ink-soft);border:1px solid var(--paper-line);}
+  .btn:active{transform:translateY(3px);}
+  .btn-primary{background:var(--stamp);color:#fff;box-shadow:0 4px 0 var(--stamp-dark);}
+  .btn-primary:active{box-shadow:0 1px 0 var(--stamp-dark);}
+  .btn-primary:hover{filter:brightness(1.04);}
+  .btn-ghost{background:#fff;color:var(--ink);border:2.5px solid var(--paper-line);box-shadow:0 4px 0 var(--paper-line);}
+  .btn-ghost:active{box-shadow:0 1px 0 var(--paper-line);}
   .btn-ghost:hover{background:var(--paper);}
   .btn-block{width:100%;}
   #setupError{
@@ -102,39 +106,39 @@
   /* ---------- App shell ---------- */
   #app{display:none;min-height:100vh;}
   header.hero{
-    background:
-      radial-gradient(circle at 88% -10%, rgba(255,255,255,.06), transparent 45%),
-      linear-gradient(180deg, var(--cover) 0%, var(--cover-deep) 100%);
-    color:#f2ead2;
-    padding:36px 24px 26px;
+    background:linear-gradient(160deg, var(--stamp) 0%, #ff6a00 100%);
+    color:#fff;
+    padding:32px 24px 24px;
     position:relative;
     overflow:hidden;
+    border-radius:0 0 28px 28px;
   }
   header.hero::before{
-    content:'卍';
+    content:'🔔';
     position:absolute;
-    right:-40px;top:-60px;
-    font-size:340px;
-    font-family:'Song Myung',serif;
-    color:rgba(255,255,255,.045);
+    right:-10px;top:-30px;
+    font-size:180px;
+    opacity:.16;
     line-height:1;
     pointer-events:none;
+    transform:rotate(12deg);
   }
   .hero-inner{max-width:1080px;margin:0 auto;position:relative;z-index:1;}
   .hero-top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;}
-  .hero-top h1{font-size:30px;margin:0 0 6px;letter-spacing:.2px;}
-  .hero-top p{margin:0;font-size:13.5px;color:#cfd6c4;max-width:420px;line-height:1.6;}
+  .hero-top h1{font-size:32px;margin:0 0 6px;letter-spacing:.2px;}
+  .hero-top p{margin:0;font-size:13.5px;color:#fff0dc;max-width:420px;line-height:1.6;}
   .iconbtn{
-    background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);
-    color:#f2ead2;width:38px;height:38px;border-radius:10px;cursor:pointer;
+    background:rgba(255,255,255,.22);border:2px solid rgba(255,255,255,.4);
+    color:#fff;width:40px;height:40px;border-radius:12px;cursor:pointer;
     display:flex;align-items:center;justify-content:center;flex-shrink:0;
+    font-size:17px;
   }
-  .iconbtn:hover{background:rgba(255,255,255,.16);}
-  .hero-stats{display:flex;gap:22px;margin-top:22px;flex-wrap:wrap;}
+  .iconbtn:hover{background:rgba(255,255,255,.32);}
+  .hero-stats{display:flex;gap:22px;margin-top:20px;flex-wrap:wrap;}
   .stat{min-width:70px;}
-  .stat .num{font-family:'Noto Serif KR',serif;font-size:24px;color:#f5eeda;}
-  .stat .lbl{font-size:11.5px;color:#a9b39a;margin-top:2px;}
-  .route-svg{position:absolute;right:-20px;bottom:-30px;opacity:.5;width:280px;height:auto;}
+  .stat .num{font-family:'Song Myung','Noto Serif KR',serif;font-size:26px;color:#fff;}
+  .stat .lbl{font-size:11.5px;color:#fff0dc;margin-top:2px;font-weight:600;}
+  .route-svg{display:none;}
 
   /* ---------- Filter bar ---------- */
   .filterbar{
@@ -146,11 +150,11 @@
   .filterbar-inner{max-width:1080px;margin:0 auto;display:flex;flex-wrap:wrap;gap:10px;align-items:center;}
   .tabs{display:flex;gap:6px;flex-wrap:wrap;}
   .tab{
-    padding:7px 13px;border-radius:999px;font-size:13px;cursor:pointer;
-    border:1px solid var(--paper-line);background:#fff;color:var(--ink-soft);font-weight:600;
+    padding:8px 14px;border-radius:999px;font-size:13px;cursor:pointer;
+    border:2px solid var(--paper-line);background:#fff;color:var(--ink-soft);font-weight:800;
     white-space:nowrap;
   }
-  .tab.active{background:var(--cover);color:#f2ead2;border-color:var(--cover);}
+  .tab.active{background:var(--stamp);color:#fff;border-color:var(--stamp-dark);}
   .spacer{flex:1;}
   .chip-toggle{display:flex;gap:4px;background:#fff;border:1px solid var(--paper-line);border-radius:999px;padding:3px;}
   .chip-toggle button{
@@ -176,50 +180,50 @@
     display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px;
   }
   .card{
-    background:#fff;border-radius:14px;overflow:hidden;cursor:pointer;
-    box-shadow:0 4px 14px rgba(30,25,10,.08);
-    transition:transform .15s ease, box-shadow .15s ease;
+    background:#fff;border-radius:20px;overflow:hidden;cursor:pointer;
+    box-shadow:0 4px 0 var(--paper-line);
+    transition:transform .1s ease;
     position:relative;
-    border:1px solid rgba(0,0,0,.03);
+    border:2.5px solid var(--paper-line);
   }
-  .card:hover{transform:translateY(-3px);box-shadow:0 10px 22px rgba(30,25,10,.15);}
+  .card:hover{transform:translateY(-3px);}
+  .card:active{transform:translateY(3px);box-shadow:0 1px 0 var(--paper-line);}
   .card-photo{
-    height:130px;background:linear-gradient(135deg,#e4d9b8,#cfc298);
+    height:130px;background:linear-gradient(135deg,#ffd9a0,#ffb347);
     display:flex;align-items:center;justify-content:center;position:relative;
     background-size:cover;background-position:center;
   }
-  .card-photo .ph-icon{opacity:.45;}
+  .card-photo .ph-icon{opacity:.55;}
   .tagbadge{
-    position:absolute;top:8px;left:8px;font-size:10.5px;font-weight:700;
-    padding:3px 10px;border-radius:4px;color:#fff;letter-spacing:.2px;
-    border:1.5px solid rgba(255,255,255,.75);transform:rotate(-4deg);
-    font-family:'Song Myung','Noto Serif KR',serif;
+    position:absolute;top:8px;left:8px;font-size:11px;font-weight:800;
+    padding:4px 11px;border-radius:999px;color:#fff;letter-spacing:.2px;
+    border:2px solid rgba(255,255,255,.85);
   }
   .tagbadge.famous{background:var(--moss);}
-  .tagbadge.hidden{background:var(--gold);}
+  .tagbadge.hidden{background:var(--red);}
   .stampcorner{
     position:absolute;top:-6px;right:10px;width:34px;height:34px;border-radius:50%;
-    background:var(--stamp);color:#fff;display:flex;align-items:center;justify-content:center;
-    font-size:15px;box-shadow:0 3px 6px rgba(0,0,0,.25);transform:rotate(8deg);
+    background:var(--gold);color:var(--ink);display:flex;align-items:center;justify-content:center;
+    font-size:15px;font-weight:800;box-shadow:0 3px 0 #d9a800;border:2px solid #fff;
   }
   .card-body{padding:12px 14px 14px;}
-  .card-region{font-size:11px;color:var(--ink-soft);font-weight:700;letter-spacing:.3px;}
-  .card-title{font-size:15.5px;font-weight:700;margin:2px 0 6px;font-family:'Noto Serif KR',serif;}
+  .card-region{font-size:11px;color:var(--ink-soft);font-weight:800;letter-spacing:.3px;}
+  .card-title{font-size:16px;font-weight:700;margin:2px 0 6px;font-family:'Song Myung','Noto Serif KR',serif;}
   .card-desc{font-size:12px;color:var(--ink-soft);line-height:1.5;
     display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:34px;}
   .stagepill{
-    display:inline-block;margin-top:8px;font-size:11px;font-weight:700;padding:4px 10px;
-    border-radius:999px;background:var(--paper);color:var(--ink-soft);
+    display:inline-block;margin-top:8px;font-size:11px;font-weight:800;padding:5px 11px;
+    border-radius:999px;background:var(--paper);color:var(--ink-soft);border:2px solid var(--paper-line);
   }
-  .stagepill.s3{background:var(--stamp);color:#fff;}
+  .stagepill.s3{background:var(--moss);color:#fff;border-color:var(--moss-dark);}
 
   .fab{
-    position:fixed;bottom:26px;right:26px;width:56px;height:56px;border-radius:50%;
+    position:fixed;bottom:26px;right:26px;width:58px;height:58px;border-radius:50%;
     background:var(--stamp);color:#fff;font-size:28px;border:none;cursor:pointer;
-    box-shadow:0 10px 24px rgba(175,74,44,.4);display:flex;align-items:center;justify-content:center;
-    z-index:30;line-height:0;
+    box-shadow:0 5px 0 var(--stamp-dark);display:flex;align-items:center;justify-content:center;
+    z-index:30;line-height:0;transition:transform .08s ease;
   }
-  .fab:hover{filter:brightness(1.08);}
+  .fab:active{transform:translateY(4px);box-shadow:0 1px 0 var(--stamp-dark);}
 
   /* ---------- Modal ---------- */
   .overlay{
@@ -228,7 +232,7 @@
   }
   .overlay.show{display:flex;}
   .modal{
-    background:var(--paper-soft);border-radius:16px;max-width:560px;width:100%;
+    background:var(--paper-soft);border-radius:24px;max-width:560px;width:100%;
     max-height:88vh;overflow-y:auto;box-shadow:0 20px 50px rgba(0,0,0,.3);
   }
   .modal-head{
@@ -353,9 +357,36 @@
     border:1px dashed var(--paper-line);border-radius:10px;padding:12px 16px;font-size:13px;color:var(--ink);
   }
   .trivia-banner b{color:var(--stamp);}
+  .suggest-banner{
+    max-width:1080px;margin:10px auto 0;background:linear-gradient(135deg,var(--cover),var(--cover-deep));
+    color:#f2ead2;border-radius:12px;padding:16px 18px;display:flex;justify-content:space-between;
+    align-items:center;gap:14px;
+  }
+  .suggest-banner .stitle{font-family:'Song Myung','Noto Serif KR',serif;font-size:17px;margin-bottom:3px;}
+  .suggest-banner .sdesc{font-size:12px;color:#cfd6c4;max-width:420px;}
+  .certificate{
+    background:linear-gradient(135deg,var(--paper-soft),var(--paper));
+    border:3px double var(--gold);border-radius:14px;padding:30px 24px;text-align:center;
+  }
+  .certificate .cert-title{font-size:12px;letter-spacing:3px;color:var(--gold);font-weight:700;}
+  .certificate h2{font-size:26px;margin:10px 0 4px;}
+  .certificate .cert-sub{font-size:13px;color:var(--ink-soft);margin-bottom:18px;}
+  .certificate .cert-seal{
+    width:70px;height:70px;border-radius:50%;background:var(--stamp);color:#fff;margin:0 auto 14px;
+    display:flex;align-items:center;justify-content:center;font-size:30px;font-family:'Song Myung',serif;
+    transform:rotate(-8deg);box-shadow:0 6px 14px rgba(198,40,40,.35);
+  }
+  .certificate .cert-date{font-size:11px;color:var(--ink-soft);margin-top:16px;}
+  @keyframes confetti-fall{
+    0%{transform:translateY(-20px) rotate(0deg);opacity:1;}
+    100%{transform:translateY(70px) rotate(360deg);opacity:0;}
+  }
+  .confetti-piece{
+    position:absolute;top:0;width:6px;height:10px;animation:confetti-fall 1.1s ease-out forwards;
+  }
   .level-pill{
-    display:inline-block;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);
-    color:#f5eeda;font-size:12px;font-weight:700;padding:4px 12px;border-radius:999px;
+    display:inline-block;background:rgba(255,255,255,.25);border:2px solid rgba(255,255,255,.5);
+    color:#fff;font-size:12.5px;font-weight:800;padding:5px 14px;border-radius:999px;
     font-family:'Song Myung','Noto Serif KR',serif;
   }
   .album-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:8px;}
@@ -476,6 +507,7 @@
   </header>
 
   <div id="triviaBannerWrap"></div>
+  <div id="suggestBannerWrap"></div>
   <div id="seedBannerWrap"></div>
   <div id="seasonBannerWrap"></div>
   <div id="almostBannerWrap"></div>
@@ -1015,6 +1047,31 @@ function destinationRef(id){
 /* ============================================================
    DATA LAYER (Firebase or LocalStorage fallback)
 ============================================================ */
+function renderSuggestBanner(){
+  const haveNames = new Set(Object.values(destinations).map(d=>d.name));
+  const pool = Object.values(MASTER_BY_NAME).filter(item=>!haveNames.has(item.name));
+  const wrap = document.getElementById('suggestBannerWrap');
+  if(pool.length===0){ wrap.innerHTML=''; return; }
+  const pick = pool[Math.floor(Math.random()*pool.length)];
+  wrap.innerHTML = `<div class="suggest-banner">
+    <div>
+      <div class="stitle">오늘 이런 곳은 어때요? — ${escapeHtml(pick.name)}</div>
+      <div class="sdesc">${escapeHtml(pick.desc||'')}</div>
+    </div>
+    <button class="btn btn-primary" style="padding:9px 16px;font-size:12.5px;flex-shrink:0;" onclick="addSuggested('${escapeHtml(pick.name).replace(/'/g,"\\'")}')">가보고 싶다에 추가</button>
+  </div>`;
+}
+
+function addSuggested(name){
+  const item = MASTER_BY_NAME[name];
+  if(!item) return;
+  const id = newId();
+  const data = Object.assign({}, item, {stage:0, notes:'', photos:{}, createdAt: Date.now()});
+  writeDestination(id, data);
+  showToast(`"${name}"을(를) 목록에 추가했어요`);
+  renderSuggestBanner();
+}
+
 function renderTriviaBanner(){
   const pool = Object.values(MASTER_BY_NAME).filter(item=>item.visitorTip);
   if(pool.length===0) return;
@@ -1052,11 +1109,13 @@ function updateAccountInfo(){
   }
 }
 
+let suggestBannerRendered = false;
 function afterDataLoaded(){
   maybeShowSeedBanner();
   checkSeasonBanner();
   checkAlmostDoneBanner();
   renderLevelBadge();
+  if(!suggestBannerRendered){ renderSuggestBanner(); suggestBannerRendered = true; }
   render();
 }
 
@@ -1136,8 +1195,8 @@ function renderLevelBadge(){
   const el = document.getElementById('levelBadge');
   if(!el) return;
   el.innerHTML = `<span class="level-pill">${tier.icon} ${tier.title} · ${n}곳 방문</span>` +
-    (next ? `<span style="color:#a9b39a;font-size:11.5px;margin-left:8px;">다음 등급 ${next.title}까지 ${next.min-n}곳</span>` : '') +
-    `<div style="color:#cfd6c4;font-size:11.5px;margin-top:4px;">${tier.desc}</div>`;
+    (next ? `<span style="color:#fff0dc;font-size:11.5px;margin-left:8px;font-weight:600;">다음 등급 ${next.title}까지 ${next.min-n}곳</span>` : '') +
+    `<div style="color:#fff0dc;font-size:11.5px;margin-top:4px;font-weight:600;">${tier.desc}</div>`;
   checkLevelUpCelebration(tier);
 }
 
@@ -1176,7 +1235,15 @@ function checkPackCelebrations(){
 
 function showCelebration(title, sub){
   const t = document.getElementById('toast');
-  t.innerHTML = `<div style="font-weight:700;">${title}</div><div style="font-size:11.5px;opacity:.85;margin-top:2px;">${sub}</div>`;
+  const colors = ['#c62828','#c9942f','#0f6b5c','#f2ead2'];
+  let confetti = '';
+  for(let i=0;i<14;i++){
+    const left = Math.random()*100;
+    const delay = Math.random()*0.3;
+    const color = colors[i%colors.length];
+    confetti += `<span class="confetti-piece" style="left:${left}%;background:${color};animation-delay:${delay}s;"></span>`;
+  }
+  t.innerHTML = `${confetti}<div style="font-weight:700;position:relative;">${title}</div><div style="font-size:11.5px;opacity:.85;margin-top:2px;position:relative;">${sub}</div>`;
   t.classList.add('show');
   clearTimeout(toastTimer);
   toastTimer = setTimeout(()=>t.classList.remove('show'), 3800);
@@ -1347,15 +1414,35 @@ function renderBadges(){
     const total = packData.length;
     const earned = done === total;
     const pct = total>0 ? Math.round(done/total*100) : 0;
-    return `<div class="badge-item">
+    return `<div class="badge-item" style="${earned?'cursor:pointer;':''}" ${earned?`onclick="openCertificate('${p.key}')"`:''}>
       <div class="badge-medal ${earned?'earned':'locked'}">${earned?'✓':'卍'}</div>
       <div style="flex:1;">
         <div style="font-weight:700;font-family:'Song Myung','Noto Serif KR',serif;">${p.label}</div>
-        <div style="font-size:12px;color:var(--ink-soft);">${done}/${total}곳 다녀옴${earned?' · 완주!':''}</div>
+        <div style="font-size:12px;color:var(--ink-soft);">${done}/${total}곳 다녀옴${earned?' · 완주! (눌러서 인증서 보기)':''}</div>
         <div class="badge-bar"><div class="badge-bar-fill" style="width:${pct}%;"></div></div>
       </div>
     </div>`;
   }).join('');
+}
+
+function openCertificate(key){
+  const pack = PACKS.find(p=>p.key===key);
+  if(!pack) return;
+  const packData = resolvePackData(pack);
+  const today = new Date();
+  const dateStr = `${today.getFullYear()}년 ${today.getMonth()+1}월 ${today.getDate()}일`;
+  const wrap = document.getElementById('badgeList');
+  wrap.innerHTML = `
+    <a onclick="renderBadges()" style="cursor:pointer;color:var(--moss);font-size:12.5px;font-weight:700;">← 뱃지 목록으로</a>
+    <div class="certificate" style="margin-top:12px;">
+      <div class="cert-title">순 례 완 주 증</div>
+      <div class="cert-seal">卍</div>
+      <h2 class="serif">${pack.label}</h2>
+      <div class="cert-sub">위 사람은 산사노트와 함께<br>총 ${packData.length}곳의 순례를 모두 완주하였기에<br>이 증서를 드립니다.</div>
+      <div class="cert-date">${dateStr} · 산사노트</div>
+    </div>
+    <div class="map-note" style="text-align:center;padding:10px 0 0;">화면을 캡처해서 자랑해보세요 📸</div>
+  `;
 }
 
 function checkSeasonBanner(){
