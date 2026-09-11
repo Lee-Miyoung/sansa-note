@@ -763,6 +763,7 @@
       <button class="btn btn-ghost btn-block" onclick="closeSettings();openAlbumOverlay();" style="margin-bottom:10px;">🖼 나의 순례 앨범</button>
       <button class="btn btn-ghost btn-block" onclick="closeSettings();openBadgeOverlay();" style="margin-bottom:10px;">🏅 나의 뱃지</button>
       <button class="btn btn-ghost btn-block" onclick="closeSettings();openQuizOverlay();" style="margin-bottom:10px;">🧩 이 절 어디게? 퀴즈</button>
+      <button class="btn btn-ghost btn-block" onclick="closeSettings();openGlossaryOverlay();" style="margin-bottom:10px;">📖 불교 용어 사전</button>
       <button class="btn btn-ghost btn-block" onclick="doLogout()">로그아웃</button>
     </div>
   </div>
@@ -842,6 +843,17 @@
       <button class="close-x" onclick="closeRouletteOverlay()">✕</button>
     </div>
     <div class="modal-body" id="rouletteBody" style="text-align:center;"></div>
+  </div>
+</div>
+
+<!-- ===================== GLOSSARY MODAL ===================== -->
+<div class="overlay" id="glossaryOverlay">
+  <div class="modal">
+    <div class="modal-head">
+      <div><h2 class="serif">📖 불교 용어 사전</h2><div class="sub">절 설명에 자주 나오는 말들, 쉽게 풀어드려요</div></div>
+      <button class="close-x" onclick="closeGlossaryOverlay()">✕</button>
+    </div>
+    <div class="modal-body" id="glossaryBody"></div>
   </div>
 </div>
 
@@ -1817,6 +1829,35 @@ function spinRoulette(){
 }
 let quizScore = 0;
 let quizCurrentAnswer = null;
+
+const GLOSSARY = [
+  {term:"조계종 (曹溪宗)", desc:"한국 불교의 가장 큰 종파예요. 우리가 아는 절 대부분(통도사, 해인사, 송광사 등)이 이 종파에 속해요."},
+  {term:"산사 (山寺)", desc:"산속에 자리한 절을 말해요. 통도사, 부석사 등 7곳이 '산사, 한국의 산지승원'이라는 이름으로 유네스코 세계유산에 등재됐어요."},
+  {term:"총림 (叢林)", desc:"참선(명상)·경전 공부·계율 지키기를 모두 갖춘 큰 규모의 수행 도량이에요. 조계종에서 지정한 8곳이 있어요."},
+  {term:"삼보사찰 (三寶寺刹)", desc:"불교의 세 가지 보물을 상징하는 3대 사찰이에요. 통도사(부처님 진신사리)·해인사(팔만대장경)·송광사(훌륭한 스님을 많이 배출)가 여기 해당돼요."},
+  {term:"적멸보궁 (寂滅寶宮)", desc:"부처님의 진신사리(몸에서 나온 사리)를 모신 특별한 전각이에요. 사리 자체가 부처님을 상징하기 때문에, 신기하게도 법당 안에 불상을 따로 두지 않아요. 전국에 5곳이 있어요."},
+  {term:"진신사리 (眞身舍利)", desc:"부처님이나 훌륭한 스님이 돌아가신 뒤 남긴 유골이에요. 신성하게 여겨서 탑이나 보궁에 소중히 모셔요."},
+  {term:"관음성지 (觀音聖地)", desc:"자비의 상징인 관세음보살을 모시고 기도하는 유명한 곳이에요. 소원을 빌러 많이 찾아가요."},
+  {term:"해수관음 (海水觀音)", desc:"바다를 바라보고 서 있는 관세음보살상이에요. 바닷가 절에 많고, 뱃길의 안전이나 소원을 비는 곳으로 유명해요."},
+  {term:"도량 (道場)", desc:"수행하는 장소, 즉 절을 가리키는 다른 말이에요."},
+  {term:"참선 (參禪)", desc:"조용히 앉아 마음을 들여다보는 수행법이에요. 우리가 아는 '명상'과 비슷해요."},
+  {term:"만행 (卍行)", desc:"한곳에 머물지 않고 여러 절을 돌아다니며 수행하는 것을 말해요. 이 앱의 순례 콘셉트와 잘 어울리는 말이에요."},
+  {term:"템플스테이", desc:"절에 머물면서 스님과 비슷한 생활(예불, 참선, 발우공양 등)을 짧게 체험해보는 프로그램이에요."}
+];
+
+function openGlossaryOverlay(){
+  const wrap = document.getElementById('glossaryBody');
+  wrap.innerHTML = GLOSSARY.map(g=>`
+    <div class="visitrow" style="border-left-color:var(--gold);">
+      <div style="font-weight:800;font-family:'Nanum Myeongjo','Noto Serif KR',serif;font-size:15px;color:var(--stamp);">${g.term}</div>
+      <div class="vnote" style="margin-top:3px;">${g.desc}</div>
+    </div>
+  `).join('');
+  document.getElementById('glossaryOverlay').classList.add('show');
+}
+function closeGlossaryOverlay(){
+  document.getElementById('glossaryOverlay').classList.remove('show');
+}
 
 function openQuizOverlay(){
   quizScore = 0;
