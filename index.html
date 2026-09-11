@@ -385,6 +385,17 @@
     border:1px solid var(--moss);border-radius:10px;padding:12px 16px;display:flex;justify-content:space-between;
     align-items:center;gap:12px;font-size:13px;color:#2d5c4a;
   }
+  .fun-banner-row{max-width:1080px;margin:14px auto 0;padding:0 24px;display:flex;gap:10px;flex-wrap:wrap;}
+  .fun-banner-btn{
+    flex:1;min-width:150px;border:none;border-radius:14px;padding:16px;cursor:pointer;
+    display:flex;flex-direction:column;align-items:flex-start;gap:4px;font-family:inherit;
+    box-shadow:0 4px 0 rgba(0,0,0,.12);transition:transform .08s ease;
+  }
+  .fun-banner-btn:active{transform:translateY(3px);box-shadow:0 1px 0 rgba(0,0,0,.12);}
+  .fun-banner-btn .fb-title{font-weight:800;font-size:14.5px;}
+  .fun-banner-btn .fb-sub{font-size:11px;opacity:.85;}
+  .fun-banner-btn.roulette{background:linear-gradient(135deg,#ffe3cc,#ffd0a8);color:#8a4a1a;}
+  .fun-banner-btn.worry{background:linear-gradient(135deg,#e3ecff,#d3e0ff);color:#33448a;}
   .home-gallery{
     max-width:1080px;margin:14px auto 0;padding:0 24px;
   }
@@ -554,6 +565,7 @@
   </header>
 
   <div id="homeGalleryWrap"></div>
+  <div id="funBannerWrap"></div>
   <div id="triviaBannerWrap"></div>
   <div id="quizBannerWrap"></div>
   <div id="suggestBannerWrap"></div>
@@ -578,7 +590,6 @@
       </select>
       <input class="searchbox" id="searchBox" placeholder="절 이름, 지역, 유명한 것으로 검색" oninput="render()">
       <button class="btn btn-primary" style="padding:7px 14px;font-size:12.5px;flex-shrink:0;" onclick="openCourseBuilder()">🧭 코스 만들기</button>
-      <button class="btn btn-ghost" style="padding:7px 14px;font-size:12.5px;flex-shrink:0;" onclick="openRouletteOverlay()">🎡 오늘은 여기!</button>
     </div>
   </div>
 
@@ -734,6 +745,17 @@
   <button id="lbNext" style="position:fixed;right:10px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.15);color:#fff;border:none;width:44px;height:44px;border-radius:50%;font-size:20px;cursor:pointer;" onclick="lightboxNav(1)">›</button>
   <div id="lbCounter" style="position:fixed;bottom:24px;left:50%;transform:translateX(-50%);color:#fff;font-size:12px;background:rgba(255,255,255,.15);padding:5px 14px;border-radius:999px;"></div>
   <button class="close-x" style="position:fixed;top:20px;right:20px;color:#fff;font-size:28px;" onclick="closeLightbox()">✕</button>
+</div>
+
+<!-- ===================== WORRY MODAL ===================== -->
+<div class="overlay" id="worryOverlay">
+  <div class="modal">
+    <div class="modal-head">
+      <div><h2 class="serif">🙏 지금 마음은 어떠세요?</h2><div class="sub">가벼운 마음으로 골라보세요, 딱 맞는 절 하나 추천해드려요</div></div>
+      <button class="close-x" onclick="closeWorryOverlay()">✕</button>
+    </div>
+    <div class="modal-body" id="worryBody"></div>
+  </div>
 </div>
 
 <!-- ===================== ROULETTE MODAL ===================== -->
@@ -1236,6 +1258,20 @@ function updateStreak(){
   }
 }
 
+function renderFunBanner(){
+  const wrap = document.getElementById('funBannerWrap');
+  wrap.innerHTML = `<div class="fun-banner-row">
+    <button class="fun-banner-btn roulette" onclick="openRouletteOverlay()">
+      <div class="fb-title">🎡 오늘은 여기!</div>
+      <div class="fb-sub">랜덤으로 순례지 뽑기</div>
+    </button>
+    <button class="fun-banner-btn worry" onclick="openWorryOverlay()">
+      <div class="fb-title">🙏 마음이 복잡할 때</div>
+      <div class="fb-sub">고민 유형 고르면 딱 맞는 절 추천</div>
+    </button>
+  </div>`;
+}
+
 function launchApp(){
   document.getElementById('app').style.display='block';
   buildRegionTabs();
@@ -1243,6 +1279,7 @@ function launchApp(){
   updateStreak();
   renderTriviaBanner();
   renderQuizBanner();
+  renderFunBanner();
 
   if(localMode){
     const raw = localStorage.getItem('travelDiaryLocalData');
@@ -1334,6 +1371,53 @@ function removeDestinationData(id){
   }
 }
 
+
+/* ============================================================
+   WORRY COUNSELOR (마음이 복잡할 때)
+============================================================ */
+const WORRY_CATEGORIES = [
+  {key:"complex", label:"머리가 복잡해요", icon:"🌫", pool:["연곡사","벽송사","문수사","각연사","김룡사","불영사","오어사","백담사"],
+   phrase:"가끔은 아무 생각 없이 그냥 걷는 것만으로도 충분해요. 복잡한 건 잠시 내려놓아도 괜찮아요."},
+  {key:"tired", label:"지쳤어요, 쉬고 싶어요", icon:"😮‍💨", pool:["내소사","월정사","마곡사","개심사","무위사","천은사","화계사"],
+   phrase:"잠깐 멈춰도 괜찮아요. 그늘 아래서 숨 한 번 크게 쉬고 오세요. 쉬는 것도 순례의 일부예요."},
+  {key:"resolve", label:"새로운 결심이 필요해요", icon:"🔥", pool:["봉정암","갓바위(선본사)","청량사","보리암","향일암","해동용궁사"],
+   phrase:"한 걸음씩 오르다 보면 어느새 정상이에요. 당신의 다음 걸음도 분명 그럴 거예요."},
+  {key:"comfort", label:"그냥 위로가 필요해요", icon:"🕯", pool:["낙산사","보문사","관음사","신흥사","휴휴암","법화사"],
+   phrase:"당신의 마음이 편안해지길 바라요. 혼자 짊어지지 않아도 돼요."}
+];
+
+function openWorryOverlay(){
+  const wrap = document.getElementById('worryBody');
+  wrap.innerHTML = WORRY_CATEGORIES.map(c=>`
+    <button class="btn btn-ghost btn-block" style="text-align:left;margin-bottom:8px;padding:14px 16px;" onclick="pickWorryTemple('${c.key}')">
+      ${c.icon} ${c.label}
+    </button>
+  `).join('');
+  document.getElementById('worryOverlay').classList.add('show');
+}
+function closeWorryOverlay(){
+  document.getElementById('worryOverlay').classList.remove('show');
+}
+
+function pickWorryTemple(key){
+  const cat = WORRY_CATEGORIES.find(c=>c.key===key);
+  if(!cat) return;
+  const validPool = cat.pool.filter(n=>MASTER_BY_NAME[n]);
+  if(validPool.length===0) return;
+  const name = validPool[Math.floor(Math.random()*validPool.length)];
+  const item = MASTER_BY_NAME[name];
+  const wrap = document.getElementById('worryBody');
+  wrap.innerHTML = `
+    <a onclick="openWorryOverlay()" style="cursor:pointer;color:var(--moss);font-size:12.5px;font-weight:700;">← 다시 고르기</a>
+    <div style="text-align:center;margin-top:16px;">
+      <div style="font-size:13px;color:var(--ink-soft);font-style:italic;margin-bottom:16px;line-height:1.6;">"${cat.phrase}"</div>
+      <div class="serif" style="font-size:26px;color:var(--stamp);margin-bottom:6px;">${escapeHtml(name)}</div>
+      <div style="font-size:12px;color:var(--ink-soft);margin-bottom:18px;">${escapeHtml(item.region)} · ${item.tagline?('"'+escapeHtml(item.tagline)+'"'):''}</div>
+      <button class="btn btn-primary btn-block" style="margin-bottom:8px;" onclick="closeWorryOverlay();openPackItemDetail('${name.replace(/'/g,"\\'")}');">이 절 자세히 보기</button>
+      <button class="btn btn-ghost btn-block" onclick="pickWorryTemple('${key}')">다른 곳 추천받기</button>
+    </div>
+  `;
+}
 
 /* ============================================================
    ROULETTE (오늘은 여기!)
@@ -1502,27 +1586,28 @@ let fireworksContainer = null;
 function launchFireworks(){
   if(!fireworksContainer){
     fireworksContainer = document.createElement('div');
-    fireworksContainer.style.cssText = 'position:fixed;inset:0;pointer-events:none;z-index:400;overflow:hidden;';
+    fireworksContainer.style.cssText = 'position:fixed;inset:0;pointer-events:none;z-index:9999;overflow:hidden;';
     document.body.appendChild(fireworksContainer);
   }
-  const colors = ['#d97757','#e0a94f','#4a9b7f','#e2604f','#fff'];
-  const count = 60;
+  const colors = ['#d97757','#e0a94f','#4a9b7f','#e2604f','#ffffff','#ffd700'];
+  const count = 90;
   for(let i=0;i<count;i++){
     const piece = document.createElement('span');
-    const size = 6 + Math.random()*6;
+    const size = 10 + Math.random()*10;
     const left = Math.random()*100;
-    const duration = 1.6 + Math.random()*1.2;
-    const delay = Math.random()*0.4;
+    const startTop = Math.random()*20;
+    const duration = 2.2 + Math.random()*1.6;
+    const delay = Math.random()*0.5;
     const color = colors[i % colors.length];
     const rotate = Math.random()*360;
     piece.style.cssText = `
-      position:absolute;top:-20px;left:${left}%;width:${size}px;height:${size*0.6}px;
-      background:${color};opacity:.95;border-radius:2px;
+      position:absolute;top:${startTop}%;left:${left}%;width:${size}px;height:${size*0.6}px;
+      background:${color};opacity:1;border-radius:2px;box-shadow:0 0 4px rgba(0,0,0,.15);
       transform:rotate(${rotate}deg);
       animation:confetti-fall2 ${duration}s ${delay}s ease-in forwards;
     `;
     fireworksContainer.appendChild(piece);
-    setTimeout(()=> piece.remove(), (duration+delay)*1000+200);
+    setTimeout(()=> piece.remove(), (duration+delay)*1000+300);
   }
 }
 
