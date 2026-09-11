@@ -184,6 +184,19 @@
   .grid{
     display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px;
   }
+  @media (max-width:640px){
+    .grid{grid-template-columns:1fr 1fr;gap:10px;}
+    .card{border-radius:14px;border-width:2px;}
+    .card-photo{height:92px;}
+    .card-body{padding:8px 9px 10px;}
+    .card-region{font-size:9.5px;}
+    .card-title{font-size:13px;margin:2px 0 4px;line-height:1.25;}
+    .card-desc{font-size:10.5px;-webkit-line-clamp:2;min-height:27px;}
+    .tagbadge{font-size:9px;padding:3px 8px;top:6px;left:6px;}
+    .stampcorner{width:24px;height:24px;font-size:11px;top:-5px;right:6px;}
+    .stagepill{font-size:9.5px;padding:3px 8px;margin-top:5px;}
+    .visit-flag{font-size:8.5px;padding:2px 6px;right:32px;top:6px;}
+  }
   .card{
     background:#fff;border-radius:20px;overflow:hidden;cursor:pointer;
     box-shadow:0 4px 0 var(--paper-line);
@@ -1133,6 +1146,10 @@ window.addEventListener('DOMContentLoaded', ()=>{
       launchApp();
     }
   });
+
+  auth.getRedirectResult().catch(err=>{
+    if(err && err.code) showAuthError(friendlyAuthError(err));
+  });
 });
 
 function switchAuthTab(tab){
@@ -1152,9 +1169,15 @@ function submitAuthForm(){
   action.catch(err=> showAuthError(friendlyAuthError(err)));
 }
 
+let googleLoginInProgress = false;
 function googleLogin(){
+  if(googleLoginInProgress) return;
+  googleLoginInProgress = true;
   const provider = new firebase.auth.GoogleAuthProvider();
-  auth.signInWithPopup(provider).catch(err=> showAuthError(friendlyAuthError(err)));
+  auth.signInWithRedirect(provider).catch(err=>{
+    googleLoginInProgress = false;
+    showAuthError(friendlyAuthError(err));
+  });
 }
 
 function showAuthError(msg){
