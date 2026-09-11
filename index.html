@@ -208,10 +208,11 @@
   .tagbadge.famous{background:var(--moss);}
   .tagbadge.hidden{background:var(--red);}
   .stampcorner{
-    position:absolute;top:-6px;right:10px;width:34px;height:34px;border-radius:50%;
-    background:var(--gold);color:var(--ink);display:flex;align-items:center;justify-content:center;
-    font-size:15px;font-weight:800;box-shadow:0 3px 0 #d9a800;border:2px solid #fff;
+    position:absolute;top:-6px;right:10px;width:32px;height:32px;border-radius:50%;
+    background:var(--moss);color:#fff;display:flex;align-items:center;justify-content:center;
+    font-size:15px;font-weight:800;box-shadow:0 3px 0 var(--moss-dark);border:2px solid #fff;
   }
+  .stampcorner.done{background:var(--gold);box-shadow:0 3px 0 #c9942f;}
   .card-body{padding:12px 14px 14px;}
   .card-region{font-size:11px;color:var(--ink-soft);font-weight:800;letter-spacing:.3px;}
   .card-title{font-size:16px;font-weight:700;margin:2px 0 6px;font-family:'Song Myung','Noto Serif KR',serif;}
@@ -545,7 +546,6 @@
         <option value="0">가보고 싶다</option>
         <option value="1">다녀왔어요</option>
         <option value="2">순례 기록 완료</option>
-        <option value="3">포스팅 완료</option>
       </select>
       <input class="searchbox" id="searchBox" placeholder="절 이름, 지역, 유명한 것으로 검색" oninput="render()">
       <button class="btn btn-primary" style="padding:7px 14px;font-size:12.5px;flex-shrink:0;" onclick="openCourseBuilder()">🧭 코스 만들기</button>
@@ -781,7 +781,7 @@ function isFirebaseConfigured(){
    STATE & SEED DATA
 ============================================================ */
 const REGIONS = ["수도권","강원","충청","전라","경상","제주"];
-const STAGES = ["가보고 싶다","다녀왔어요","순례 기록 완료","포스팅 완료"];
+const STAGES = ["가보고 싶다","다녀왔어요","순례 기록 완료"];
 
 const UNESCO_SEED = [
   {region:"경상", name:"통도사", tag:"유명", desc:"삼보사찰 중 '불보' 사찰. 대웅전 뒤 금강계단에 부처님 진신사리를 모셔서 대웅전 안에는 불상이 없는 게 특징. 국보·보물급 문화재를 국내 사찰 중 가장 많이 보유.", activity:"무풍한송로 소나무숲길 산책, 불상 없는 대웅전과 금강계단 참배, 봄엔 수령 350년 넘은 매화 '지장매' 구경", visitorTip:"방문객들은 낮 12시·오후 5시경 제공되는 무료 공양을 놓치지 말라고 추천해요. 평일엔 한적해서 좋다는 후기가 많고, 봄엔 매화·벚나무 어우러진 경내 산책을 특히 좋아해요.", nearbySight:"영축산 자락의 서운암(장독대와 들꽃축제로 유명), 통도사 인근 자수정동굴나라도 함께 둘러볼 만해요."},
@@ -1718,8 +1718,7 @@ function computeStats(){
   return {
     total: list.length,
     visited: list.filter(d=>d.stage>=1).length,
-    shot: list.filter(d=>d.stage>=2).length,
-    posted: list.filter(d=>d.stage>=3).length
+    shot: list.filter(d=>d.stage>=2).length
   };
 }
 
@@ -1750,7 +1749,6 @@ function render(){
     <div class="stat"><div class="num serif">${stats.total}</div><div class="lbl">등록한 곳</div></div>
     <div class="stat"><div class="num serif">${stats.visited}</div><div class="lbl">다녀온 곳</div></div>
     <div class="stat"><div class="num serif">${stats.shot}</div><div class="lbl">순례 기록</div></div>
-    <div class="stat"><div class="num serif">${stats.posted}</div><div class="lbl">포스팅 완료</div></div>
   `;
 
   const list = getFilteredList();
@@ -1825,7 +1823,7 @@ function fetchCoverPhoto(id, name){
 
 function renderCard(id, d){
   const photo = firstPhotoUrl(d);
-  const stageIdx = d.stage||0;
+  const stageIdx = Math.min(d.stage||0, STAGES.length-1);
   const vc = visitCount(d);
   if(!photo && !coverFetching.has(id)){
     fetchCoverPhoto(id, d.name);
@@ -1836,13 +1834,13 @@ function renderCard(id, d){
       ${photo?'':'<span class="ph-icon serif" style="font-size:28px;color:#8a7a52;">🪷</span>'}
       <span class="tagbadge ${d.tag==='유명'?'famous':'hidden'}">${d.tag==='유명'?'유명':'숨은'}</span>
       ${vc>0 ? `<span class="visit-flag">${vc}회 방문</span>` : ''}
-      <span class="stampcorner">${stageIdx>=3?'✓':(stageIdx+1)}</span>
+      ${stageIdx>=1 ? `<span class="stampcorner ${stageIdx>=2?'done':''}">✓</span>` : ''}
     </div>
     <div class="card-body">
       <div class="card-region">${d.region}</div>
       <div class="card-title">${escapeHtml(d.name)}</div>
       <div class="card-desc">${escapeHtml(d.desc||'')}</div>
-      <span class="stagepill ${stageIdx>=3?'s3':''}">${STAGES[stageIdx]}</span>
+      <span class="stagepill ${stageIdx>=2?'s3':''}">${STAGES[stageIdx]}</span>
     </div>
   </div>`;
 }
