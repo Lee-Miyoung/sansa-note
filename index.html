@@ -501,6 +501,13 @@
   .stat-bar-row .bar{flex:1;height:10px;background:var(--paper-line);border-radius:99px;overflow:hidden;}
   .stat-bar-row .bar-fill{height:100%;background:var(--moss);}
   .stat-bar-row .val{width:34px;text-align:right;flex-shrink:0;font-weight:700;}
+  .repeat-challenge{
+    background:linear-gradient(135deg,#fff3e0,#ffe8cc);border:1.5px solid var(--gold);border-radius:12px;
+    padding:12px 14px;
+  }
+  .repeat-challenge .rc-title{font-weight:800;color:#8a5a1f;font-size:13.5px;margin-bottom:6px;}
+  .repeat-challenge .rc-bar{height:10px;border-radius:99px;background:#fff;overflow:hidden;margin-top:6px;}
+  .repeat-challenge .rc-bar-fill{height:100%;background:var(--gold);}
   .seedbanner{
     max-width:1080px;margin:14px auto 0;background:#fff8e6;border:1px solid #e8d29a;
     border-radius:10px;padding:12px 16px;display:flex;justify-content:space-between;
@@ -565,7 +572,7 @@
       <div class="hero-top">
         <div>
           <h1 class="serif">산사노트</h1>
-          <p>유네스코 산사·조계종 총림부터 조용한 숨은 고찰까지, 내가 다녀온 절과 사진을 기록하는 사찰 순례 노트.</p>
+          <p>불교 신자가 아니어도 괜찮아요. 마음이 복잡할 때, 그냥 걷고 싶을 때 발걸음이 닿는 곳. 그 절과 그날의 나를 기록하는 노트예요.</p>
           <div id="streakBadge" style="margin-top:8px;"></div>
           <div id="levelBadge" style="margin-top:8px;"></div>
           <span id="specialTitlePill" class="special-title-pill">🧭 만행자(卍行者)</span>
@@ -668,6 +675,7 @@
       <br>
       <a id="dFoodLink" class="maplink" target="_blank" rel="noopener" style="color:var(--gold);">🍚 근처 맛집·카페 실시간 검색 ↗</a>
 
+      <div id="repeatChallengeWrap" style="display:none;margin-bottom:12px;"></div>
       <div class="section-label">방문 기록 <span id="visitCountLabel"></span></div>
       <div id="visitList"></div>
       <textarea class="notes" id="visitNoteInput" placeholder="이번엔 어땠는지 소감을 남겨보세요 (날씨, 분위기, 다음엔 이렇게 해볼 것 등)"></textarea>
@@ -2196,9 +2204,9 @@ function render(){
   renderHomeGallery();
   const stats = computeStats();
   document.getElementById('heroStats').innerHTML = `
-    <div class="stat"><div class="num serif">${stats.total}</div><div class="lbl">등록한 곳</div></div>
-    <div class="stat"><div class="num serif">${stats.visited}</div><div class="lbl">다녀온 곳</div></div>
-    <div class="stat"><div class="num serif">${stats.shot}</div><div class="lbl">순례 기록</div></div>
+    <div class="stat"><div class="num serif">${stats.visited}</div><div class="lbl">다녀온 절 (전체 ${stats.total}곳 중)</div></div>
+    <div class="stat"><div class="num serif">${stats.shot}</div><div class="lbl">순례 기록 완료</div></div>
+    <div class="stat"><div class="num serif">${stats.total-stats.visited}</div><div class="lbl">아직 안 가본 곳</div></div>
   `;
 
   const list = getFilteredList();
@@ -2351,6 +2359,7 @@ function openDetail(id){
     fetchCoverPhoto(id, d.name);
   }
   renderVisits(d.visits||{});
+  renderRepeatChallenge(d);
   document.getElementById('visitNoteInput').value = '';
   document.getElementById('dMapLink').href = 'https://map.kakao.com/link/search/' + encodeURIComponent(d.name + ' ' + d.region);
   document.getElementById('dFoodLink').href = 'https://map.kakao.com/link/search/' + encodeURIComponent(d.name + ' 맛집');
@@ -2429,9 +2438,15 @@ function addVisitRecord(withLocation){
     updateDestination(id, patch);
     destinations[id] = Object.assign({}, destinations[id], patch);
     renderVisits(destinations[id].visits);
+    renderRepeatChallenge(destinations[id]);
     renderStepper(destinations[id].stage||0);
     document.getElementById('visitNoteInput').value = '';
-    showCelebration(verified ? '📍 위치 인증 완료!' : '방문 기록 저장!', verified ? '진짜 여기 다녀오셨네요' : '오늘의 순례, 잘 남겨뒀어요');
+    const newCount = visitCount(destinations[id]);
+    if(REPEAT_MILESTONES.includes(newCount)){
+      showCelebration(`🏔 ${newCount}회 순례 달성!`, `${destinations[id].name}, 진짜 단골이 되셨네요`);
+    } else {
+      showCelebration(verified ? '📍 위치 인증 완료!' : '방문 기록 저장!', verified ? '진짜 여기 다녀오셨네요' : '오늘의 순례, 잘 남겨뒀어요');
+    }
     render();
   }
 
@@ -2455,8 +2470,25 @@ function addVisitRecord(withLocation){
   }, {timeout:8000});
 }
 
+const REPEAT_MILESTONES = [10, 33, 50, 100];
 function visitCount(d){
   return d.visits ? Object.keys(d.visits).length : 0;
+}
+function renderRepeatChallenge(d){
+  const wrap = document.getElementById('repeatChallengeWrap');
+  const n = visitCount(d);
+  if(n < 3){ wrap.style.display='none'; return; }
+  const next = REPEAT_MILESTONES.find(m=>m>n) || null;
+  const prevMilestone = [0, ...REPEAT_MILESTONES].reverse().find(m=>m<=n) || 0;
+  const target = next || REPEAT_MILESTONES[REPEAT_MILESTONES.length-1];
+  const pct = Math.min(100, Math.round((n-prevMilestone)/(target-prevMilestone)*100));
+  const reachedTop = !next;
+  wrap.style.display = 'block';
+  wrap.innerHTML = `<div class="repeat-challenge">
+    <div class="rc-title">🏔 ${escapeHtml(d.name)} 반복 순례 챌린지 — ${n}회째</div>
+    <div style="font-size:12px;color:#8a5a1f;">${reachedTop ? `${target}회를 넘어선 진짜 단골 순례자시네요!` : `다음 목표 ${target}회까지 ${target-n}회 남았어요`}</div>
+    <div class="rc-bar"><div class="rc-bar-fill" style="width:${reachedTop?100:pct}%;"></div></div>
+  </div>`;
 }
 
 function saveNotes(){
