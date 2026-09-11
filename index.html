@@ -537,7 +537,7 @@
         <option value="2">순례 기록 완료</option>
         <option value="3">포스팅 완료</option>
       </select>
-      <input class="searchbox" id="searchBox" placeholder="절 이름 검색" oninput="render()">
+      <input class="searchbox" id="searchBox" placeholder="절 이름, 지역, 유명한 것으로 검색" oninput="render()">
       <button class="btn btn-primary" style="padding:7px 14px;font-size:12.5px;flex-shrink:0;" onclick="openCourseBuilder()">🧭 코스 만들기</button>
     </div>
   </div>
@@ -1707,6 +1707,17 @@ function computeStats(){
   };
 }
 
+function namesMatchingKeywordInPacks(search){
+  const matched = new Set();
+  PACKS.forEach(p=>{
+    const haystack = ((p.label||'')+' '+(p.route||'')+' '+(p.nearby||'')).toLowerCase();
+    if(haystack.includes(search)){
+      resolvePackData(p).forEach(item=> matched.add(item.name));
+    }
+  });
+  return matched;
+}
+
 function getFilteredList(){
   const stageFilter = document.getElementById('stageFilter').value;
   const search = document.getElementById('searchBox').value.trim().toLowerCase();
@@ -1714,7 +1725,13 @@ function getFilteredList(){
   if(filterRegion !== "전체") list = list.filter(([id,d])=>d.region===filterRegion);
   if(filterTag !== "all") list = list.filter(([id,d])=>d.tag===filterTag);
   if(stageFilter !== "all") list = list.filter(([id,d])=>String(d.stage)===stageFilter);
-  if(search) list = list.filter(([id,d])=>(d.name||'').toLowerCase().includes(search));
+  if(search){
+    const packMatchNames = namesMatchingKeywordInPacks(search);
+    list = list.filter(([id,d])=>{
+      const fields = [d.name, d.region, d.desc, d.activity, d.visitorTip, d.season].filter(Boolean).join(' ').toLowerCase();
+      return fields.includes(search) || packMatchNames.has(d.name);
+    });
+  }
   list.sort((a,b)=>(a[1].createdAt||0)-(b[1].createdAt||0));
   return list;
 }
