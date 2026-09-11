@@ -417,6 +417,7 @@
   .fun-banner-btn .fb-sub{font-size:11px;opacity:.85;}
   .fun-banner-btn.roulette{background:linear-gradient(135deg,#ffe3cc,#ffd0a8);color:#8a4a1a;}
   .fun-banner-btn.worry{background:linear-gradient(135deg,#e3ecff,#d3e0ff);color:#33448a;}
+  .fun-banner-btn.vow{background:linear-gradient(135deg,#fff3d6,#ffe7ad);color:#8a6a1f;}
   .explain108-banner{
     max-width:1080px;margin:14px auto 0;padding:12px 16px;background:var(--paper-soft);
     border:1px dashed var(--gold);border-radius:10px;font-size:12.5px;color:var(--ink-soft);
@@ -764,6 +765,8 @@
       <button class="btn btn-ghost btn-block" onclick="closeSettings();openBadgeOverlay();" style="margin-bottom:10px;">🏅 나의 뱃지</button>
       <button class="btn btn-ghost btn-block" onclick="closeSettings();openQuizOverlay();" style="margin-bottom:10px;">🧩 이 절 어디게? 퀴즈</button>
       <button class="btn btn-ghost btn-block" onclick="closeSettings();openGlossaryOverlay();" style="margin-bottom:10px;">📖 불교 용어 사전</button>
+      <button class="btn btn-ghost btn-block" onclick="closeSettings();openEtiquetteOverlay();" style="margin-bottom:10px;">🙏 처음 가는 법당 예절 · 108배</button>
+      <button class="btn btn-ghost btn-block" onclick="closeSettings();openVowOverlay();" style="margin-bottom:10px;">🌅 발원문 쓰기 (미래의 나에게)</button>
       <button class="btn btn-ghost btn-block" onclick="doLogout()">로그아웃</button>
     </div>
   </div>
@@ -843,6 +846,55 @@
       <button class="close-x" onclick="closeRouletteOverlay()">✕</button>
     </div>
     <div class="modal-body" id="rouletteBody" style="text-align:center;"></div>
+  </div>
+</div>
+
+<!-- ===================== ETIQUETTE MODAL ===================== -->
+<div class="overlay" id="etiquetteOverlay">
+  <div class="modal">
+    <div class="modal-head">
+      <div><h2 class="serif">🙏 법당 예절 · 108배</h2><div class="sub">처음이라 어색해도 괜찮아요, 천천히 따라해보세요</div></div>
+      <button class="close-x" onclick="closeEtiquetteOverlay()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="section-label">법당 들어가기 전</div>
+      <div class="desc-block">신발은 법당 밖에 가지런히 벗어두세요. 손을 씻고 들어가면 더 좋아요.</div>
+
+      <div class="section-label">어느 문으로 들어갈까</div>
+      <div class="desc-block">가운데 문(어간문)은 그 절의 큰스님만 다니는 문이에요. <b>일반 방문객은 양옆 문</b>으로 들어가면 돼요.</div>
+
+      <div class="section-label">인사하는 순서</div>
+      <div class="desc-block">
+        1. 부처님을 마주 보고 서요.<br>
+        2. <b>합장</b>(두 손바닥을 가슴 앞에 가지런히 모으기) 자세를 해요.<br>
+        3. 허리를 60도쯤 굽혀 <b>반배</b>(작은 절 한 번)를 해요. 처음이면 이것만 해도 충분해요.<br>
+        4. 여유가 되면 <b>큰절</b>(무릎 꿇고 이마를 바닥에 대는 절)을 3번(삼배) 올려도 좋아요.<br>
+        5. 나올 때도 부처님 쪽을 향해 다시 한번 반배하고 나오면 예의 있는 인사가 돼요.
+      </div>
+
+      <div class="section-label">법당 안에서</div>
+      <div class="desc-block">조용히, 큰 소리로 대화하지 않기. 불상 촬영 가능 여부는 절마다 달라서 안내판을 먼저 확인해보세요.</div>
+
+      <div class="section-label">108배란</div>
+      <div class="desc-block">108가지 번뇌(마음을 어지럽히는 생각들)를 하나씩 내려놓는다는 마음으로 절을 108번 올리는 수행이에요. 많은 절에서 '108배 참회문'이라는 108개의 짧은 글귀를 하나씩 읽으며 절을 하는데, 절마다 문구가 조금씩 달라요. 보통 앞부분은 지난 일을 돌아보는 참회, 중간은 부모·스승·자연에 대한 감사, 뒷부분은 앞으로의 다짐(발원)으로 이어지는 구성이 많아요.</div>
+      <div class="desc-block" style="margin-top:8px;color:var(--stamp);">처음이면 108번을 다 못 채워도 괜찮아요. 절 자체가 이미 좋은 운동이자 명상이에요. 무릎이 안 좋다면 무리하지 마세요.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== VOW MODAL ===================== -->
+<div class="overlay" id="vowOverlay">
+  <div class="modal">
+    <div class="modal-head">
+      <div><h2 class="serif">🌅 발원문</h2><div class="sub">1년 뒤, 모든 게 순조롭게 풀렸다면 당신의 삶은 어떤 모습일까요?</div></div>
+      <button class="close-x" onclick="closeVowOverlay()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="map-note" style="padding:0 0 12px;">절에서 소원을 마음에 새기고 다짐하는 걸 '발원(發願)'이라고 해요. 잘 안 되고 있는 것보다, 1년 뒤 가장 좋은 모습의 나를 구체적으로 그려보면 그 방향으로 마음이 움직인다고 해요. 정답은 없어요, 편하게 적어보세요.</div>
+      <textarea class="notes" id="vowInput" placeholder="예: 1년 뒤 나는... (건강, 관계, 하고 싶었던 일 등 편하게 떠오르는 대로)" style="min-height:140px;"></textarea>
+      <button class="btn btn-primary btn-block" style="margin-top:10px;" onclick="saveVow()">마음에 새기기</button>
+      <div id="vowSavedNote" style="font-size:11px;color:var(--ink-soft);margin-top:8px;"></div>
+    </div>
   </div>
 </div>
 
@@ -1368,6 +1420,10 @@ function renderFunBanner(){
       <div class="fb-title">🙏 마음이 복잡할 때</div>
       <div class="fb-sub">고민 유형 고르면 딱 맞는 절 추천</div>
     </button>
+    <button class="fun-banner-btn vow" onclick="openVowOverlay()">
+      <div class="fb-title">🌅 발원문 쓰기</div>
+      <div class="fb-sub">1년 뒤 나에게 다짐 남기기</div>
+    </button>
   </div>`;
 }
 
@@ -1857,6 +1913,33 @@ function openGlossaryOverlay(){
 }
 function closeGlossaryOverlay(){
   document.getElementById('glossaryOverlay').classList.remove('show');
+}
+
+function openEtiquetteOverlay(){
+  document.getElementById('etiquetteOverlay').classList.add('show');
+}
+function closeEtiquetteOverlay(){
+  document.getElementById('etiquetteOverlay').classList.remove('show');
+}
+
+function openVowOverlay(){
+  const key = 'sansanoteVow_' + (currentUid || 'guest');
+  let data;
+  try{ data = JSON.parse(localStorage.getItem(key)); } catch(e){ data = null; }
+  document.getElementById('vowInput').value = data ? data.text : '';
+  document.getElementById('vowSavedNote').textContent = data ? `마지막으로 새긴 날: ${new Date(data.ts).getFullYear()}.${new Date(data.ts).getMonth()+1}.${new Date(data.ts).getDate()}` : '';
+  document.getElementById('vowOverlay').classList.add('show');
+}
+function closeVowOverlay(){
+  document.getElementById('vowOverlay').classList.remove('show');
+}
+function saveVow(){
+  const key = 'sansanoteVow_' + (currentUid || 'guest');
+  const text = document.getElementById('vowInput').value.trim();
+  if(!text){ showToast('내용을 적어주세요'); return; }
+  localStorage.setItem(key, JSON.stringify({text, ts: Date.now()}));
+  showCelebration('🌅 발원문을 마음에 새겼어요', '가끔 다시 열어서 읽어보세요');
+  document.getElementById('vowSavedNote').textContent = `마지막으로 새긴 날: ${new Date().getFullYear()}.${new Date().getMonth()+1}.${new Date().getDate()}`;
 }
 
 function openQuizOverlay(){
