@@ -265,6 +265,16 @@
     padding:10px 12px;font-family:inherit;font-size:13px;resize:vertical;background:#fff;color:var(--ink);
   }
   .photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:8px;margin-top:8px;}
+  .photo-slider{
+    display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;
+    margin-top:8px;padding-bottom:6px;-webkit-overflow-scrolling:touch;
+  }
+  .photo-slider .slide{
+    flex:0 0 78%;scroll-snap-align:center;height:180px;border-radius:12px;
+    background-size:cover;background-position:center;cursor:pointer;
+  }
+  .photo-slider::-webkit-scrollbar{height:5px;}
+  .photo-slider::-webkit-scrollbar-thumb{background:var(--paper-line);border-radius:99px;}
   .photo-thumb{
     position:relative;height:84px;border-radius:8px;overflow:hidden;background:var(--paper);
     background-size:cover;background-position:center;
@@ -600,7 +610,7 @@
       <textarea class="notes" id="dNotes" placeholder="예: 예불 시간 확인, 템플스테이 운영 여부, 단풍 절정 시기, 근처 사찰음식점 태그..." onblur="saveNotes()"></textarea>
 
       <div class="section-label">참고 사진 <span style="font-weight:400;color:var(--ink-soft);font-size:11px;">(자동으로 찾은 사진, 클릭하면 크게 봐요)</span></div>
-      <div class="photo-grid" id="dCoverPhotos"></div>
+      <div class="photo-slider" id="dCoverPhotos"></div>
 
       <div class="section-label">내가 찍은 사진</div>
       <div class="photo-grid" id="dPhotos"></div>
@@ -1325,9 +1335,10 @@ function renderLevelBadge(){
   const next = LEVEL_TIERS.find(t=>t.min>n);
   const el = document.getElementById('levelBadge');
   if(!el) return;
-  el.innerHTML = `<span class="level-pill">${tier.icon} ${tier.title} · ${n}곳 방문</span>` +
-    (next ? `<span style="color:#fff0dc;font-size:11.5px;margin-left:8px;font-weight:600;">다음 등급 ${next.title}까지 ${next.min-n}곳</span>` : '') +
-    `<div style="color:#fff0dc;font-size:11.5px;margin-top:4px;font-weight:600;">${tier.desc}</div>`;
+  el.innerHTML = `
+    <div><span class="level-pill">${tier.icon} ${tier.title} · ${n}곳 방문</span></div>
+    ${next ? `<div style="color:#fff0dc;font-size:11px;font-weight:600;margin-top:6px;">다음 등급 ${next.title}까지 ${next.min-n}곳 남음</div>` : ''}
+  `;
   checkLevelUpCelebration(tier);
 }
 
@@ -1712,17 +1723,6 @@ function computeStats(){
   };
 }
 
-function namesMatchingKeywordInPacks(search){
-  const matched = new Set();
-  PACKS.forEach(p=>{
-    const haystack = ((p.label||'')+' '+(p.route||'')+' '+(p.nearby||'')).toLowerCase();
-    if(haystack.includes(search)){
-      resolvePackData(p).forEach(item=> matched.add(item.name));
-    }
-  });
-  return matched;
-}
-
 function getFilteredList(){
   const stageFilter = document.getElementById('stageFilter').value;
   const search = document.getElementById('searchBox').value.trim().toLowerCase();
@@ -1731,10 +1731,9 @@ function getFilteredList(){
   if(filterTag !== "all") list = list.filter(([id,d])=>d.tag===filterTag);
   if(stageFilter !== "all") list = list.filter(([id,d])=>String(d.stage)===stageFilter);
   if(search){
-    const packMatchNames = namesMatchingKeywordInPacks(search);
     list = list.filter(([id,d])=>{
       const fields = [d.name, d.region, d.desc, d.activity, d.visitorTip, d.season, d.nearbySight].filter(Boolean).join(' ').toLowerCase();
-      return fields.includes(search) || packMatchNames.has(d.name);
+      return fields.includes(search);
     });
   }
   list.sort((a,b)=>(a[1].createdAt||0)-(b[1].createdAt||0));
@@ -1784,9 +1783,10 @@ function fetchCoverPhoto(id, name){
   coverFetching.add(id);
 
   function trySetCovers(urls){
-    if(urls && urls.length && destinations[id]){
-      updateDestination(id, {coverPhotos: urls});
-      destinations[id].coverPhotos = urls;
+    const unique = [...new Set(urls)];
+    if(unique.length && destinations[id]){
+      updateDestination(id, {coverPhotos: unique});
+      destinations[id].coverPhotos = unique;
       render();
       if(currentDetailId === id) renderCoverPhotos(destinations[id]);
       return true;
@@ -1977,11 +1977,11 @@ function renderCoverPhotos(d){
   const wrap = document.getElementById('dCoverPhotos');
   const urls = d.coverPhotos || [];
   if(urls.length===0){
-    wrap.innerHTML = `<div class="map-note" style="padding:0;grid-column:1/-1;">아직 자동으로 찾은 사진이 없어요.</div>`;
+    wrap.innerHTML = `<div class="map-note" style="padding:0;">아직 자동으로 찾은 사진이 없어요.</div>`;
     return;
   }
   wrap.innerHTML = urls.map(url=>`
-    <div class="photo-thumb" style="background-image:url('${url}')" onclick="openLightbox('${url.replace(/'/g,"\\'")}')"></div>
+    <div class="slide" style="background-image:url('${url}')" onclick="openLightbox('${url.replace(/'/g,"\\'")}')"></div>
   `).join('');
 }
 
