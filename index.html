@@ -19,18 +19,18 @@
   :root{
     --cover:#2b1810;
     --cover-deep:#180d07;
-    --paper:#fffbf2;
+    --paper:#fdf8f0;
     --paper-soft:#ffffff;
-    --paper-line:#ffe1b0;
+    --paper-line:#ecdcc8;
     --ink:#2b2118;
-    --ink-soft:#7a6a52;
-    --stamp:#ff8a00;
-    --stamp-dark:#d96f00;
-    --moss:#00a86b;
-    --moss-dark:#008554;
-    --gold:#ffc93c;
-    --red:#ff4d4d;
-    --shadow:0 10px 26px rgba(20,16,8,.14);
+    --ink-soft:#87765f;
+    --stamp:#d97757;
+    --stamp-dark:#b85a3e;
+    --moss:#4a9b7f;
+    --moss-dark:#3a7d65;
+    --gold:#e0a94f;
+    --red:#e2604f;
+    --shadow:0 10px 26px rgba(20,16,8,.1);
   }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
@@ -48,7 +48,7 @@
     display:flex;
     align-items:center;
     justify-content:center;
-    background:linear-gradient(160deg, var(--stamp) 0%, #ff6a00 100%);
+    background:linear-gradient(160deg, #f3e3d3 0%, #e8c9ae 100%);
     padding:24px;
   }
   .setup-card{
@@ -107,9 +107,9 @@
   #app{display:none;min-height:100vh;}
   header.hero{
     background:
-      linear-gradient(160deg, rgba(210,110,10,.92) 0%, rgba(180,80,0,.92) 100%),
+      linear-gradient(160deg, rgba(180,110,80,.9) 0%, rgba(150,85,60,.9) 100%),
       url('hero.jpg') center/cover no-repeat,
-      linear-gradient(160deg, #e07800 0%, #c85c00 100%);
+      linear-gradient(160deg, #c98a68 0%, #a8654a 100%);
     color:#fff;
     padding:32px 24px 24px;
     position:relative;
@@ -363,6 +363,11 @@
     border:1px dashed var(--paper-line);border-radius:10px;padding:12px 16px;font-size:13px;color:var(--ink);
   }
   .trivia-banner b{color:var(--stamp);}
+  .quiz-banner{
+    max-width:1080px;margin:10px auto 0;background:linear-gradient(135deg,#eef7f3,#e3f2ec);
+    border:1px solid var(--moss);border-radius:10px;padding:12px 16px;display:flex;justify-content:space-between;
+    align-items:center;gap:12px;font-size:13px;color:#2d5c4a;
+  }
   .suggest-banner{
     max-width:1080px;margin:10px auto 0;background:linear-gradient(135deg,var(--cover),var(--cover-deep));
     color:#f2ead2;border-radius:12px;padding:16px 18px;display:flex;justify-content:space-between;
@@ -510,6 +515,7 @@
   </header>
 
   <div id="triviaBannerWrap"></div>
+  <div id="quizBannerWrap"></div>
   <div id="suggestBannerWrap"></div>
   <div id="seedBannerWrap"></div>
   <div id="seasonBannerWrap"></div>
@@ -588,7 +594,10 @@
       <div class="section-label">할 일 / 콘텐츠 아이디어</div>
       <textarea class="notes" id="dNotes" placeholder="예: 예불 시간 확인, 템플스테이 운영 여부, 단풍 절정 시기, 근처 사찰음식점 태그..." onblur="saveNotes()"></textarea>
 
-      <div class="section-label">사진</div>
+      <div class="section-label">참고 사진 <span style="font-weight:400;color:var(--ink-soft);font-size:11px;">(자동으로 찾은 사진, 클릭하면 크게 봐요)</span></div>
+      <div class="photo-grid" id="dCoverPhotos"></div>
+
+      <div class="section-label">내가 찍은 사진</div>
       <div class="photo-grid" id="dPhotos"></div>
       <input type="file" id="photoInput" accept="image/*" multiple style="display:none" onchange="uploadPhotos(event)">
 
@@ -665,6 +674,12 @@
       <div class="map-note" id="allMapNote"></div>
     </div>
   </div>
+</div>
+
+<!-- ===================== LIGHTBOX ===================== -->
+<div class="overlay" id="lightboxOverlay" style="background:rgba(0,0,0,.88);z-index:300;" onclick="closeLightbox()">
+  <img id="lightboxImg" src="" style="max-width:92vw;max-height:88vh;border-radius:14px;box-shadow:0 20px 50px rgba(0,0,0,.5);">
+  <button class="close-x" style="position:fixed;top:20px;right:20px;color:#fff;font-size:28px;" onclick="closeLightbox()">✕</button>
 </div>
 
 <!-- ===================== QUIZ MODAL ===================== -->
@@ -929,26 +944,26 @@ const AUTUMN_SEED_NAMES = ["내소사","법주사","갑사","해인사","동화�
 
 // 시·군 단위로 더 세밀하게 묶은 코스 20개 (기존 107곳 재조합, 새 데이터 조사 없이 동선만 재구성)
 const SUB_COURSES = [
-  {key:"andong", label:"안동·예천 코스", route:"안동↔예천 차로 30분 거리. 고운사(의성)까지 40분.", names:["봉정사","용문사(예천)","고운사"]},
-  {key:"mungyeong", label:"문경 코스", route:"세 곳 모두 문경 시내 기준 20~30분 이내.", names:["대승사","김룡사","봉암사"]},
-  {key:"yeongju", label:"영주·봉화 코스", route:"부석사↔청량사 차로 50분, 봉화 소백산 자락으로 이어짐.", names:["부석사","청량사"]},
-  {key:"miryang", label:"밀양 코스", route:"표충사↔만어사 차로 40분, 밀양 시내 경유.", names:["표충사","만어사"]},
+  {key:"andong", label:"안동·예천 코스", route:"안동↔예천 차로 30분 거리. 고운사(의성)까지 40분.", nearby:"안동 하회마을, 월영교(달빛 야경으로 유명)를 저녁에 함께 걸어보세요.", names:["봉정사","용문사(예천)","고운사"]},
+  {key:"mungyeong", label:"문경 코스", route:"세 곳 모두 문경 시내 기준 20~30분 이내.", nearby:"문경새재도립공원(옛 과거길, 드라마 세트장)이 세 절 모두와 가까워요.", names:["대승사","김룡사","봉암사"]},
+  {key:"yeongju", label:"영주·봉화 코스", route:"부석사↔청량사 차로 50분, 봉화 소백산 자락으로 이어짐.", nearby:"소백산 자락길 트레킹, 영주 무섬마을 외나무다리와 함께 즐기기 좋아요.", names:["부석사","청량사"]},
+  {key:"miryang", label:"밀양 코스", route:"표충사↔만어사 차로 40분, 밀양 시내 경유.", nearby:"밀양 얼음골(여름 피서지), 표충사 인근 재약산 케이블카도 함께 즐길 만해요.", names:["표충사","만어사"]},
   {key:"goseong_sacheon", label:"고성·사천 코스", route:"옥천사↔다솔사 차로 30분, 남해안 드라이브 코스와 연계.", names:["옥천사","다솔사"]},
   {key:"sanchung_hamyang", label:"산청·함양 코스", route:"대원사↔벽송사 차로 40분, 지리산 둘레길과 겹침.", names:["대원사","벽송사"]},
-  {key:"namhae_hadong", label:"남해·하동 코스", route:"보리암↔쌍계사 차로 1시간 10분, 남해대교 경유.", names:["보리암","쌍계사"]},
-  {key:"daegu", label:"대구 코스", route:"동화사↔파계사 40분, 갓바위(경산)까지 40분~1시간.", names:["동화사","파계사","갓바위(선본사)"]},
-  {key:"busan_gimhae", label:"부산·김해 코스", route:"범어사↔해동용궁사 40분, 은하사(김해)까지 30분.", names:["범어사","해동용궁사","은하사"]},
-  {key:"wanju_buan", label:"완주·부안 코스", route:"화암사↔완주 송광사 20분, 부안 내소사·개암사까지 50분.", names:["화암사","완주 송광사","내소사","개암사"]},
+  {key:"namhae_hadong", label:"남해·하동 코스", route:"보리암↔쌍계사 차로 1시간 10분, 남해대교 경유.", nearby:"다랭이마을(계단식 논), 독일마을(전망 카페)이 보리암 가는 길에 있어요.", names:["보리암","쌍계사"]},
+  {key:"daegu", label:"대구 코스", route:"동화사↔파계사 40분, 갓바위(경산)까지 40분~1시간.", nearby:"팔공산 케이블카, 동성로 야시장과 묶어서 대구 여행으로 확장하기 좋아요.", names:["동화사","파계사","갓바위(선본사)"]},
+  {key:"busan_gimhae", label:"부산·김해 코스", route:"범어사↔해동용궁사 40분, 은하사(김해)까지 30분.", nearby:"해운대·광안리 해변, 감천문화마을이 다 차로 30분 안쪽이에요.", names:["범어사","해동용궁사","은하사"]},
+  {key:"wanju_buan", label:"완주·부안 코스", route:"화암사↔완주 송광사 20분, 부안 내소사·개암사까지 50분.", nearby:"변산반도 채석강, 곰소 젓갈시장도 근처라 함께 들르기 좋아요.", names:["화암사","완주 송광사","내소사","개암사"]},
   {key:"gochang_yeonggwang", label:"고창·영광 코스", route:"선운사↔불갑사 차로 30분, 서해안고속도로로 연결.", names:["선운사","불갑사"]},
-  {key:"gurye_gokseong", label:"구례·곡성 코스", route:"화엄사↔천은사 20분, 태안사(곡성)·연곡사까지 30~40분.", names:["화엄사","천은사","태안사","연곡사"]},
-  {key:"haenam_gangjin", label:"해남·강진 코스", route:"대흥사↔미황사 30분, 강진 백련사·무위사까지 40분.", names:["대흥사","미황사","백련사","무위사"]},
+  {key:"gurye_gokseong", label:"구례·곡성 코스", route:"화엄사↔천은사 20분, 태안사(곡성)·연곡사까지 30~40분.", nearby:"곡성 기차마을(섬진강 증기기관차), 구례 산수유마을과 이어보세요.", names:["화엄사","천은사","태안사","연곡사"]},
+  {key:"haenam_gangjin", label:"해남·강진 코스", route:"대흥사↔미황사 30분, 강진 백련사·무위사까지 40분.", nearby:"땅끝마을(한반도 최남단), 강진 다산초당을 함께 묶으면 좋아요.", names:["대흥사","미황사","백련사","무위사"]},
   {key:"hwasun", label:"화순 코스", route:"운주사↔쌍봉사 차로 30분.", names:["운주사","쌍봉사"]},
-  {key:"yeosu", label:"여수 코스", route:"흥국사↔향일암 차로 40분, 여수 밤바다와 묶기 좋음.", names:["흥국사(여수)","향일암"]},
-  {key:"seosan", label:"서산 코스", route:"개심사↔문수사 차로 20분, 가야산 자락으로 연결.", names:["개심사","문수사"]},
-  {key:"gongju_nonsan", label:"공주·논산 코스", route:"마곡사↔관촉사 차로 40분, 공주 시내 경유.", names:["마곡사","관촉사"]},
-  {key:"gyeryongsan", label:"계룡산 3사 코스", route:"갑사↔동학사 등산로 8km(5시간), 신원사까지 차로 20분.", names:["갑사","동학사","신원사"]},
-  {key:"ganghwa", label:"강화 코스", route:"전등사↔보문사(석모도) 배 또는 연도교로 40분.", names:["전등사","보문사"]},
-  {key:"jeongseon_yeongwol", label:"정선·영월 코스", route:"정암사↔법흥사 차로 40분, 태백산 자락으로 연결.", names:["정암사","법흥사"]}
+  {key:"yeosu", label:"여수 코스", route:"흥국사↔향일암 차로 40분, 여수 밤바다와 묶기 좋음.", nearby:"여수 밤바다 케이블카, 낭만포차거리와 저녁 코스로 이어보세요.", names:["흥국사(여수)","향일암"]},
+  {key:"seosan", label:"서산 코스", route:"개심사↔문수사 차로 20분, 가야산 자락으로 연결.", nearby:"서산 해미읍성(조선시대 읍성), 간월암(밀물 때 섬이 되는 절)과 함께 즐기기 좋아요.", names:["개심사","문수사"]},
+  {key:"gongju_nonsan", label:"공주·논산 코스", route:"마곡사↔관촉사 차로 40분, 공주 시내 경유.", nearby:"공주 무령왕릉, 계백장군 유적지(논산)와 백제 역사 여행으로 이어보세요.", names:["마곡사","관촉사"]},
+  {key:"gyeryongsan", label:"계룡산 3사 코스", route:"갑사↔동학사 등산로 8km(5시간), 신원사까지 차로 20분.", nearby:"계룡산 자락길, 유성온천에서 하루 마무리하기 좋아요.", names:["갑사","동학사","신원사"]},
+  {key:"ganghwa", label:"강화 코스", route:"전등사↔보문사(석모도) 배 또는 연도교로 40분.", nearby:"강화 고인돌 유적(유네스코), 석모도 미네랄온천과 함께 즐기기 좋아요.", names:["전등사","보문사"]},
+  {key:"jeongseon_yeongwol", label:"정선·영월 코스", route:"정암사↔법흥사 차로 40분, 태백산 자락으로 연결.", nearby:"정선 아리랑시장, 영월 동강 래프팅과 이어서 즐기기 좋아요.", names:["정암사","법흥사"]}
 ];
 
 const PACKS = [
@@ -958,16 +973,16 @@ const PACKS = [
   {key:"jeokmyeol", label:"5대 적멸보궁", route:"통도사(경남)·상원사·봉정암(오대산~설악산)·정암사·법흥사(정선~영월)로, 진신사리를 모신 다섯 곳. 봉정암은 왕복 10시간 걷는 난이도 최상 코스예요.", names: JEOKMYEOL_SEED_NAMES},
   {key:"cherry", label:"봄 벚꽃 명소 사찰", route:"화엄사(구례)·쌍계사(하동)는 차로 40분, 마곡사(공주)·개심사(서산)·동학사(공주 계룡산)는 충청권끼리 묶기 좋아요. 4월 초중순이 절정.", names: CHERRY_SEED_NAMES},
   {key:"autumn", label:"가을 단풍 명소 사찰", route:"내소사(부안)·법주사(보은)·갑사(공주)는 전북~충청 라인, 해인사(합천)·동화사(대구)·불국사(경주)는 경상권끼리 묶어서. 10월 말~11월 초가 절정.", names: AUTUMN_SEED_NAMES},
-  {key:"gyeongju", label:"경주 사찰 순례 코스", route:"경주 시내 반경 20km 안에 모여있어 자동차로 당일 코스 가능. 추천 순서: 불국사→석굴암(차로 15분)→기림사(30분)→감은사지(10분)→분황사(30분)→골굴사(15분)", data: GYEONGJU_SEED},
-  {key:"jirisan", label:"지리산 자락 사찰 코스", route:"지리산을 빙 둘러 흩어져 있어 전남·경남 넘나드는 1박2일 코스로 적당. 화엄사(구례)↔쌍계사(하동) 차로 40분, 실상사(남원)↔벽송사(함양) 차로 30분", data: JIRISAN_SEED},
-  {key:"gangwon", label:"강원 사찰 코스", route:"영동(동해안)과 영서(내륙)로 나뉘어요. 영동: 낙산사-신흥사-백담사(설악산권, 서로 30~40분). 영서: 월정사-상원사-봉정암(오대산~설악산 종주), 정암사-법흥사(정선~영월, 40분)", data: GANGWON_SEED},
-  {key:"sudokwon", label:"수도권 사찰 코스", route:"서울 도심(조계사-봉은사-화계사, 대중교통 가능)과 근교(전등사-보문사 강화, 용주사 화성, 신륵사 여주)로 나눠서 도는 걸 추천", data: SUDOKWON_SEED},
-  {key:"jeju", label:"제주 사찰 코스", route:"제주시권(관음사-원당사, 차로 20분)과 서귀포권(약천사-산방굴사-법화사, 서로 20~30분)으로 나눠서 도는 게 효율적", data: JEJU_SEED},
-  {key:"chungcheong", label:"충청 사찰 코스", route:"계룡산 3사(갑사-동학사-신원사, 서로 20~30분)와 속리산 법주사, 서산 개심사·문수사(30분)로 나눠서 방문", data: CHUNGCHEONG_SEED},
-  {key:"jeonnam", label:"전남 사찰 코스", route:"해남·강진권(대흥사-미황사-백련사-무위사, 서로 20~40분)과 화순권(운주사-쌍봉사, 30분)으로 나눠서 도는 걸 추천", data: JEONNAM_SEED},
-  {key:"jeonbuk", label:"전북 사찰 코스", route:"부안권(내소사-개암사, 차로 20분)과 김제·완주권(금산사-화암사-완주 송광사, 서로 30~40분)으로 구분", data: JEONBUK_SEED},
-  {key:"gyeongbuk", label:"경북 사찰 코스", route:"영주·안동권(부석사-봉정사, 40분), 문경권(대승사-김룡사-봉암사, 서로 20~30분), 대구권(갓바위-파계사-운문사, 40분~1시간)으로 나눠서", data: GYEONGBUK_SEED},
-  {key:"gyeongnam", label:"경남 사찰 코스", route:"양산·밀양권(통도사-표충사-만어사, 서로 30~40분), 부산권(범어사-해동용궁사, 40분), 남해권(보리암-다솔사, 1시간)으로 구분", data: GYEONGNAM_SEED},
+  {key:"gyeongju", label:"경주 사찰 순례 코스", route:"경주 시내 반경 20km 안에 모여있어 자동차로 당일 코스 가능. 추천 순서: 불국사→석굴암(차로 15분)→기림사(30분)→감은사지(10분)→분황사(30분)→골굴사(15분)", nearby:"황리단길(대릉원 옆 한옥 카페거리)에서 쉬어가거나, 동궁과 월지 야경까지 묶으면 딱 좋은 하루 코스가 돼요.", data: GYEONGJU_SEED},
+  {key:"jirisan", label:"지리산 자락 사찰 코스", route:"지리산을 빙 둘러 흩어져 있어 전남·경남 넘나드는 1박2일 코스로 적당. 화엄사(구례)↔쌍계사(하동) 차로 40분, 실상사(남원)↔벽송사(함양) 차로 30분", nearby:"구례 산수유마을(3월 노란 꽃), 화개장터(십리벚꽃길과 이어짐)를 함께 들르면 좋아요.", data: JIRISAN_SEED},
+  {key:"gangwon", label:"강원 사찰 코스", route:"영동(동해안)과 영서(내륙)로 나뉘어요. 영동: 낙산사-신흥사-백담사(설악산권, 서로 30~40분). 영서: 월정사-상원사-봉정암(오대산~설악산 종주), 정암사-법흥사(정선~영월, 40분)", nearby:"속초 아바이마을(코다리 냉면), 정동진 모래시계공원과 묶어서 동해안 여행으로 확장하기 좋아요.", data: GANGWON_SEED},
+  {key:"sudokwon", label:"수도권 사찰 코스", route:"서울 도심(조계사-봉은사-화계사, 대중교통 가능)과 근교(전등사-보문사 강화, 용주사 화성, 신륵사 여주)로 나눠서 도는 걸 추천", nearby:"인사동 전통찻집, 여주라면 신륵사 옆 프리미엄 아울렛도 같이 들르기 좋아요.", data: SUDOKWON_SEED},
+  {key:"jeju", label:"제주 사찰 코스", route:"제주시권(관음사-원당사, 차로 20분)과 서귀포권(약천사-산방굴사-법화사, 서로 20~30분)으로 나눠서 도는 게 효율적", nearby:"정방폭포, 서귀포 매일올레시장에서 갈치조림 먹기 코스로 이어가 보세요.", data: JEJU_SEED},
+  {key:"chungcheong", label:"충청 사찰 코스", route:"계룡산 3사(갑사-동학사-신원사, 서로 20~30분)와 속리산 법주사, 서산 개심사·문수사(30분)로 나눠서 방문", nearby:"공주 공산성, 부여 궁남지(백제 정원)까지 백제 역사 여행으로 확장할 수 있어요.", data: CHUNGCHEONG_SEED},
+  {key:"jeonnam", label:"전남 사찰 코스", route:"해남·강진권(대흥사-미황사-백련사-무위사, 서로 20~40분)과 화순권(운주사-쌍봉사, 30분)으로 나눠서 도는 걸 추천", nearby:"보성 녹차밭, 순천만 습지(갈대밭 낙조)와 묶으면 남도 여행 코스가 완성돼요.", data: JEONNAM_SEED},
+  {key:"jeonbuk", label:"전북 사찰 코스", route:"부안권(내소사-개암사, 차로 20분)과 김제·완주권(금산사-화암사-완주 송광사, 서로 30~40분)으로 구분", nearby:"전주 한옥마을(비빔밥·한옥스테이), 부안 채석강(퇴적암 절벽)과 함께 즐기기 좋아요.", data: JEONBUK_SEED},
+  {key:"gyeongbuk", label:"경북 사찰 코스", route:"영주·안동권(부석사-봉정사, 40분), 문경권(대승사-김룡사-봉암사, 서로 20~30분), 대구권(갓바위-파계사-운문사, 40분~1시간)으로 나눠서", nearby:"안동 하회마을(유네스코 민속마을), 영주 무섬마을(외나무다리)도 근처예요.", data: GYEONGBUK_SEED},
+  {key:"gyeongnam", label:"경남 사찰 코스", route:"양산·밀양권(통도사-표충사-만어사, 서로 30~40분), 부산권(범어사-해동용궁사, 40분), 남해권(보리암-다솔사, 1시간)으로 구분", nearby:"통영 동피랑마을(벽화마을), 진주성(진주 남강)과 이어 다니기 좋아요.", data: GYEONGNAM_SEED},
   ...SUB_COURSES
 ];
 
@@ -1123,11 +1138,20 @@ function renderTriviaBanner(){
   wrap.innerHTML = `<div class="trivia-banner">📖 <b>오늘의 절 상식 — ${escapeHtml(pick.name)}</b><br>${escapeHtml(pick.visitorTip)}</div>`;
 }
 
+function renderQuizBanner(){
+  const wrap = document.getElementById('quizBannerWrap');
+  wrap.innerHTML = `<div class="quiz-banner">
+    <span>🧩 <b>이 절 어디게?</b> 퀴즈로 재밌게 절 상식 테스트해보세요</span>
+    <button class="btn btn-primary" style="padding:9px 16px;font-size:12.5px;flex-shrink:0;background:var(--moss);box-shadow:0 4px 0 var(--moss-dark);" onclick="openQuizOverlay()">퀴즈 풀기</button>
+  </div>`;
+}
+
 function launchApp(){
   document.getElementById('app').style.display='block';
   buildRegionTabs();
   updateAccountInfo();
   renderTriviaBanner();
+  renderQuizBanner();
 
   if(localMode){
     const raw = localStorage.getItem('travelDiaryLocalData');
@@ -1633,7 +1657,8 @@ function openPackDetail(key){
       <a onclick="renderPackOverlay()" style="cursor:pointer;color:var(--moss);font-size:12.5px;font-weight:700;">← 코스 목록으로</a>
     </div>
     <div class="packrow-title" style="font-size:18px;margin-bottom:4px;">${pack.label}</div>
-    ${pack.route ? `<div class="packrow-sub" style="color:var(--stamp);margin-bottom:12px;">🚗 ${pack.route}</div>` : ''}
+    ${pack.route ? `<div class="packrow-sub" style="color:var(--stamp);margin-bottom:8px;">🚗 ${pack.route}</div>` : ''}
+    ${pack.nearby ? `<div class="packrow-sub" style="color:var(--moss);margin-bottom:12px;">📍 주변 들를 만한 곳: ${pack.nearby}</div>` : ''}
     <button class="btn btn-primary btn-block" style="margin-bottom:14px;" onclick="loadPack('${pack.key}')">이 코스 전체 불러오기</button>
     ${packData.map((item,i)=>`
       <div class="visitrow" style="border-left-color:${item.tag==='유명'?'var(--moss)':'var(--gold)'};">
@@ -1641,6 +1666,7 @@ function openPackDetail(key){
         <div style="font-size:11px;color:var(--ink-soft);margin-bottom:4px;">${item.region} · ${item.tag==='유명'?'유명한 곳':'숨은 곳'}</div>
         <div class="vnote" style="margin-top:2px;">${escapeHtml(item.desc||'')}</div>
         ${item.activity ? `<div class="vnote" style="margin-top:4px;color:var(--moss);font-weight:600;">✓ ${escapeHtml(item.activity)}</div>` : ''}
+        ${item.visitorTip ? `<div class="vnote" style="margin-top:4px;background:#fff8e6;padding:6px 8px;border-radius:6px;">📖 ${escapeHtml(item.visitorTip)}</div>` : ''}
       </div>
     `).join('')}
   `;
@@ -1726,7 +1752,8 @@ function firstPhotoUrl(d){
     const arr = Object.values(d.photos);
     if(arr.length) return arr[arr.length-1].url;
   }
-  return d.coverPhoto || null;
+  if(d.coverPhotos && d.coverPhotos.length) return d.coverPhotos[0];
+  return null;
 }
 
 let coverFetching = new Set();
@@ -1734,32 +1761,44 @@ function fetchCoverPhoto(id, name){
   if(coverFetching.has(id)) return;
   coverFetching.add(id);
 
-  function trySetCover(url){
-    if(url && destinations[id]){
-      updateDestination(id, {coverPhoto: url});
-      destinations[id].coverPhoto = url;
+  function trySetCovers(urls){
+    if(urls && urls.length && destinations[id]){
+      updateDestination(id, {coverPhotos: urls});
+      destinations[id].coverPhotos = urls;
       render();
+      if(currentDetailId === id) renderCoverPhotos(destinations[id]);
       return true;
     }
     return false;
   }
 
-  function tryOpenverse(){
-    const url = `https://api.openverse.org/v1/images/?q=${encodeURIComponent(name+' temple Korea')}&license_type=commercial,modification&page_size=1`;
+  function wikiSearch(query, cb){
+    const url = `https://commons.wikimedia.org/w/api.php?action=query&generator=search&gsrsearch=${encodeURIComponent(query)}&gsrnamespace=6&gsrlimit=5&prop=imageinfo&iiprop=url&iiurlwidth=500&format=json&origin=*`;
     fetch(url).then(r=>r.json()).then(data=>{
-      const item = data && data.results && data.results[0];
-      const imgUrl = item && (item.thumbnail || item.url);
-      trySetCover(imgUrl);
+      const pages = data && data.query && data.query.pages;
+      if(!pages){ cb([]); return; }
+      const urls = Object.values(pages)
+        .map(p=> p.imageinfo && p.imageinfo[0] && (p.imageinfo[0].thumburl || p.imageinfo[0].url))
+        .filter(Boolean);
+      cb(urls);
+    }).catch(()=> cb([]));
+  }
+
+  function tryOpenverse(){
+    const url = `https://api.openverse.org/v1/images/?q=${encodeURIComponent(name+' Korea')}&license_type=commercial,modification&page_size=5`;
+    fetch(url).then(r=>r.json()).then(data=>{
+      const urls = (data.results||[]).map(item=> item.thumbnail || item.url).filter(Boolean);
+      trySetCovers(urls);
     }).catch(()=>{});
   }
 
-  const wikiUrl = `https://commons.wikimedia.org/w/api.php?action=query&generator=search&gsrsearch=${encodeURIComponent(name+' 사찰')}&gsrnamespace=6&gsrlimit=1&prop=imageinfo&iiprop=url&iiurlwidth=400&format=json&origin=*`;
-  fetch(wikiUrl).then(r=>r.json()).then(data=>{
-    const pages = data && data.query && data.query.pages;
-    const page = pages && Object.values(pages)[0];
-    const imgUrl = page && page.imageinfo && page.imageinfo[0] && (page.imageinfo[0].thumburl || page.imageinfo[0].url);
-    if(!trySetCover(imgUrl)) tryOpenverse();
-  }).catch(()=>{ tryOpenverse(); });
+  wikiSearch(name, urls1=>{
+    if(trySetCovers(urls1)) return;
+    wikiSearch(name+' temple Korea', urls2=>{
+      if(trySetCovers(urls2)) return;
+      tryOpenverse();
+    });
+  });
 }
 
 function renderCard(id, d){
@@ -1816,6 +1855,10 @@ function openDetail(id){
   document.getElementById('dNotes').value = d.notes || '';
   renderStepper(d.stage||0);
   renderPhotos(d.photos||{});
+  renderCoverPhotos(d);
+  if((!d.coverPhotos || d.coverPhotos.length===0) && !coverFetching.has(id)){
+    fetchCoverPhoto(id, d.name);
+  }
   renderVisits(d.visits||{});
   document.getElementById('visitNoteInput').value = '';
   document.getElementById('dMapLink').href = 'https://map.kakao.com/link/search/' + encodeURIComponent(d.name + ' ' + d.region);
@@ -1895,11 +1938,32 @@ function renderPhotos(photos){
   const wrap = document.getElementById('dPhotos');
   const entries = Object.entries(photos||{});
   let html = entries.map(([pid,p])=>`
-    <div class="photo-thumb" style="background-image:url('${p.url}')">
+    <div class="photo-thumb" style="background-image:url('${p.url}')" onclick="openLightbox('${p.url.replace(/'/g,"\\'")}')">
       <button class="del" onclick="deletePhoto('${pid}', event)">✕</button>
     </div>`).join('');
   html += `<div class="upload-tile" onclick="triggerUpload()">+</div>`;
   wrap.innerHTML = html;
+}
+
+function renderCoverPhotos(d){
+  const wrap = document.getElementById('dCoverPhotos');
+  const urls = d.coverPhotos || [];
+  if(urls.length===0){
+    wrap.innerHTML = `<div class="map-note" style="padding:0;grid-column:1/-1;">아직 자동으로 찾은 사진이 없어요.</div>`;
+    return;
+  }
+  wrap.innerHTML = urls.map(url=>`
+    <div class="photo-thumb" style="background-image:url('${url}')" onclick="openLightbox('${url.replace(/'/g,"\\'")}')"></div>
+  `).join('');
+}
+
+function openLightbox(url){
+  document.getElementById('lightboxImg').src = url;
+  document.getElementById('lightboxOverlay').classList.add('show');
+}
+function closeLightbox(){
+  document.getElementById('lightboxOverlay').classList.remove('show');
+  document.getElementById('lightboxImg').src = '';
 }
 
 function triggerUpload(){
