@@ -347,6 +347,13 @@
     position:absolute;top:8px;right:44px;background:rgba(0,0,0,.55);color:#fff;
     font-size:10.5px;font-weight:700;padding:3px 8px;border-radius:999px;
   }
+  .quick-chip{
+    display:inline-flex;align-items:center;gap:4px;background:var(--paper);border:1.5px solid var(--paper-line);
+    border-radius:999px;padding:5px 12px;font-size:11.5px;font-weight:700;color:var(--ink-soft);
+  }
+  .quick-chip.difficulty-easy{background:#eaf6ef;border-color:var(--moss);color:var(--moss-dark);}
+  .quick-chip.difficulty-medium{background:#fff5e0;border-color:var(--gold);color:#8a6a1f;}
+  .quick-chip.difficulty-hard{background:#fdeceb;border-color:var(--red);color:#a63a2c;}
   .badge-item{
     display:flex;align-items:center;gap:14px;padding:12px 0;border-bottom:1px solid var(--paper-line);
   }
@@ -590,6 +597,9 @@
       <button class="close-x" onclick="closeDetail()">✕</button>
     </div>
     <div class="modal-body">
+      <div id="dTagline" style="display:none;font-family:'Song Myung','Noto Serif KR',serif;font-size:16px;color:var(--stamp);margin-bottom:10px;line-height:1.4;"></div>
+      <div id="dQuickFacts" style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;"></div>
+
       <div class="stage-stepper" id="dStepper"></div>
 
       <div class="section-label">뭐 하러 가는 곳</div>
@@ -622,7 +632,10 @@
       <div class="section-label">방문 기록 <span id="visitCountLabel"></span></div>
       <div id="visitList"></div>
       <textarea class="notes" id="visitNoteInput" placeholder="이번엔 어땠는지 소감을 남겨보세요 (날씨, 분위기, 다음엔 이렇게 해볼 것 등)"></textarea>
-      <button class="btn btn-primary" style="margin-top:8px;padding:9px 16px;font-size:13px;" onclick="addVisitRecord()">+ 방문 기록 추가</button>
+      <div style="display:flex;gap:8px;margin-top:8px;">
+        <button class="btn btn-primary" style="padding:9px 16px;font-size:13px;flex:1;" onclick="addVisitRecord(false)">+ 방문 기록 추가</button>
+        <button class="btn btn-ghost" style="padding:9px 16px;font-size:13px;flex:1;" onclick="addVisitRecord(true)">📍 지금 여기예요! (위치 인증)</button>
+      </div>
 
       <div class="section-label">할 일 / 콘텐츠 아이디어</div>
       <textarea class="notes" id="dNotes" placeholder="예: 예불 시간 확인, 템플스테이 운영 여부, 단풍 절정 시기, 근처 사찰음식점 태그..." onblur="saveNotes()"></textarea>
@@ -805,24 +818,24 @@ const REGIONS = ["수도권","강원","충청","전라","경상","제주"];
 const STAGES = ["가보고 싶다","다녀왔어요","순례 기록 완료"];
 
 const UNESCO_SEED = [
-  {region:"경상", name:"통도사", tag:"유명", desc:"삼보사찰 중 '불보' 사찰. 대웅전 뒤 금강계단에 부처님 진신사리를 모셔서 대웅전 안에는 불상이 없는 게 특징. 국보·보물급 문화재를 국내 사찰 중 가장 많이 보유.", activity:"무풍한송로 소나무숲길 산책, 불상 없는 대웅전과 금강계단 참배, 봄엔 수령 350년 넘은 매화 '지장매' 구경", visitorTip:"방문객들은 낮 12시·오후 5시경 제공되는 무료 공양을 놓치지 말라고 추천해요. 평일엔 한적해서 좋다는 후기가 많고, 봄엔 매화·벚나무 어우러진 경내 산책을 특히 좋아해요.", nearbySight:"영축산 자락의 서운암(장독대와 들꽃축제로 유명), 통도사 인근 자수정동굴나라도 함께 둘러볼 만해요."},
-  {region:"경상", name:"부석사", tag:"유명", desc:"국보 무량수전의 배흘림기둥으로 유명한 절. 의상대사와 선묘낭자 설화가 전해지고, 안양루에서 내려다보는 소백산 능선 노을이 절경으로 꼽힘.", activity:"무량수전 배흘림기둥 감상, 안양루에서 소백산 능선 노을 사진", visitorTip:"무량수전까지 이어지는 진입로의 은행나무·단풍길이 가을에 특히 아름답다는 후기가 많아요. 계단이 가팔라서 다리가 불편하면 옆 비탈길을 추천하고, 해질녘 노을 감상도 인기예요.", nearbySight:"소수서원(한국 최초 사액서원), 선비촌 한옥마을이 차로 15분 거리예요."},
-  {region:"경상", name:"봉정사", tag:"숨은", desc:"국보 극락전이 한국에 남아있는 가장 오래된 목조건물로 꼽히는 절. 영화 '달마가 동쪽으로 간 까닭은?' 촬영지였던 영산암 정원도 볼만함.", activity:"극락전 배흘림기둥 사진, 영산암 정원 산책", visitorTip:"1999년 엘리자베스 2세 여왕이 방문해 극락전 앞 돌무더기에 소원을 빌고 갔던 곳으로 유명해요. 여왕도 반했다는 조용하고 아늑한 분위기를 방문객들이 가장 많이 꼽아요.", nearbySight:"안동 하회마을, 병산서원이 가까워요."},
-  {region:"충청", name:"법주사", tag:"유명", desc:"국내에 남은 유일한 목탑 형태인 국보 팔상전과, 높이 33m 청동 미륵대불로 유명한 속리산 자락의 절.", activity:"5층 목탑 팔상전 한 바퀴 돌며 팔상도 감상, 미륵대불 앞 인증샷", season:"10월 말~11월 초 (단풍)", visitorTip:"세조가 요양차 걸었다는 '세조길' 산책이 특히 힐링된다는 후기가 많고, 거대한 금동미륵대불 앞에서 사진 찍으면 사람이 난쟁이처럼 작게 나온다는 재미있는 후기도 있어요.", nearbySight:"속리산 정상 문장대, 법주사 세조길 끝에 있는 정이품송(천연기념물 소나무)도 놓치지 마세요."},
-  {region:"충청", name:"마곡사", tag:"숨은", desc:"백제 무왕 때 창건됐다는 천년고찰로 '춘마곡'이라 불릴 만큼 봄 신록이 아름다움. 백범 김구가 한때 승려로 지낸 곳이기도 함.", activity:"대웅보전 싸리나무 기둥 돌아보기, 마곡천 태극 물돌이 솔바람길 산책", season:"4월 초중순 (벚꽃)", visitorTip:"대웅보전 안 싸리나무 기둥을 돌면 극락에 간다는 전설 때문에, 다들 한 번씩 기둥을 돌아본다는 후기가 많아요. 백범 김구 선생이 걸었다는 '백범명상길'도 함께 걸어보길 추천해요.", nearbySight:"공주 무령왕릉, 공산성이 차로 20분 거리예요."},
-  {region:"전라", name:"선암사", tag:"숨은", desc:"보물 승선교 무지개다리와 수령 수백 년 된 선암매(매화)로 유명한 조계산 자락의 절. 옛 모습 그대로인 해우소(뒷간) 건물도 독특한 볼거리.", activity:"승선교 아래서 강선루 풍경 사진, 봄철 선암매 탐매 산책", visitorTip:"순천 현지인들은 오히려 송광사보다 선암사를 더 추천한다는 후기가 많아요. 한 건축가가 '한국에서 가장 아름다운 화장실'이라 평했다는 옛 해우소도 놓치지 말라는 팁이 있고, 송광사까지 이어지는 10.5km 등산 코스도 인기예요.", nearbySight:"순천만 국가정원(갈대밭과 습지), 낙안읍성 민속마을도 가까워요."},
-  {region:"전라", name:"대흥사", tag:"유명", desc:"초의선사가 다도 문화를 꽃피운 두륜산 자락의 절. 대웅보전과 무량수각 현판을 각각 원교 이광사와 추사 김정희가 쓴 것으로 유명.", activity:"일지암 차밭 산책, 두 대가의 현판 글씨체 비교해보기", visitorTip:"두륜산 케이블카와 묶어서 가는 사람이 많은데, 성수기엔 케이블카 대기가 길어서 절 먼저 보고 나중에 타거나 미리 표를 끊어두라는 팁이 많아요. 전각이 여러 구역에 흩어져 있어 천천히 산책하듯 둘러보기 좋다는 후기예요.", nearbySight:"두륜산 케이블카, 땅끝마을(한반도 최남단 전망대)이 근처예요."}
+  {region:"경상", name:"통도사", tag:"유명", desc:"삼보사찰 중 '불보' 사찰. 대웅전 뒤 금강계단에 부처님 진신사리를 모셔서 대웅전 안에는 불상이 없는 게 특징. 국보·보물급 문화재를 국내 사찰 중 가장 많이 보유.", activity:"무풍한송로 소나무숲길 산책, 불상 없는 대웅전과 금강계단 참배, 봄엔 수령 350년 넘은 매화 '지장매' 구경", visitorTip:"방문객들은 낮 12시·오후 5시경 제공되는 무료 공양을 놓치지 말라고 추천해요. 평일엔 한적해서 좋다는 후기가 많고, 봄엔 매화·벚나무 어우러진 경내 산책을 특히 좋아해요.", nearbySight:"영축산 자락의 서운암(장독대와 들꽃축제로 유명), 통도사 인근 자수정동굴나라도 함께 둘러볼 만해요.", tagline:"부처님 진신사리 앞에서는 절도 겸손해진다", difficulty:{level:"easy",icon:"🟢",label:"쉬움 · 주차장에서 도보 10분"}, bestFor:["문화재 덕후","사진러","가족 나들이"]},
+  {region:"경상", name:"부석사", tag:"유명", desc:"국보 무량수전의 배흘림기둥으로 유명한 절. 의상대사와 선묘낭자 설화가 전해지고, 안양루에서 내려다보는 소백산 능선 노을이 절경으로 꼽힘.", activity:"무량수전 배흘림기둥 감상, 안양루에서 소백산 능선 노을 사진", visitorTip:"무량수전까지 이어지는 진입로의 은행나무·단풍길이 가을에 특히 아름답다는 후기가 많아요. 계단이 가팔라서 다리가 불편하면 옆 비탈길을 추천하고, 해질녘 노을 감상도 인기예요.", nearbySight:"소수서원(한국 최초 사액서원), 선비촌 한옥마을이 차로 15분 거리예요.", tagline:"노을 앞에서는 다들 말을 잃는다", difficulty:{level:"medium",icon:"🟡",label:"보통 · 계단 많음, 편한 신발 필수"}, bestFor:["뷰 맛집 헌터","건축 덕후","혼자만의 시간"]},
+  {region:"경상", name:"봉정사", tag:"숨은", desc:"국보 극락전이 한국에 남아있는 가장 오래된 목조건물로 꼽히는 절. 영화 '달마가 동쪽으로 간 까닭은?' 촬영지였던 영산암 정원도 볼만함.", activity:"극락전 배흘림기둥 사진, 영산암 정원 산책", visitorTip:"1999년 엘리자베스 2세 여왕이 방문해 극락전 앞 돌무더기에 소원을 빌고 갔던 곳으로 유명해요. 여왕도 반했다는 조용하고 아늑한 분위기를 방문객들이 가장 많이 꼽아요.", nearbySight:"안동 하회마을, 병산서원이 가까워요.", tagline:"여왕도 반한 고요함", difficulty:{level:"easy",icon:"🟢",label:"쉬움"}, bestFor:["조용한 산책러","역사 덕후"]},
+  {region:"충청", name:"법주사", tag:"유명", desc:"국내에 남은 유일한 목탑 형태인 국보 팔상전과, 높이 33m 청동 미륵대불로 유명한 속리산 자락의 절.", activity:"5층 목탑 팔상전 한 바퀴 돌며 팔상도 감상, 미륵대불 앞 인증샷", season:"10월 말~11월 초 (단풍)", visitorTip:"세조가 요양차 걸었다는 '세조길' 산책이 특히 힐링된다는 후기가 많고, 거대한 금동미륵대불 앞에서 사진 찍으면 사람이 난쟁이처럼 작게 나온다는 재미있는 후기도 있어요.", nearbySight:"속리산 정상 문장대, 법주사 세조길 끝에 있는 정이품송(천연기념물 소나무)도 놓치지 마세요.", tagline:"미륵불 앞에 서면 내가 작아진다", difficulty:{level:"easy",icon:"🟢",label:"쉬움 · 평지 산책로"}, bestFor:["단풍 시즌 여행자","가족 단위"]},
+  {region:"충청", name:"마곡사", tag:"숨은", desc:"백제 무왕 때 창건됐다는 천년고찰로 '춘마곡'이라 불릴 만큼 봄 신록이 아름다움. 백범 김구가 한때 승려로 지낸 곳이기도 함.", activity:"대웅보전 싸리나무 기둥 돌아보기, 마곡천 태극 물돌이 솔바람길 산책", season:"4월 초중순 (벚꽃)", visitorTip:"대웅보전 안 싸리나무 기둥을 돌면 극락에 간다는 전설 때문에, 다들 한 번씩 기둥을 돌아본다는 후기가 많아요. 백범 김구 선생이 걸었다는 '백범명상길'도 함께 걸어보길 추천해요.", nearbySight:"공주 무령왕릉, 공산성이 차로 20분 거리예요.", tagline:"봄이면 절이 아니라 꽃밭", difficulty:{level:"easy",icon:"🟢",label:"쉬움"}, bestFor:["봄꽃 헌터","산책러"]},
+  {region:"전라", name:"선암사", tag:"숨은", desc:"보물 승선교 무지개다리와 수령 수백 년 된 선암매(매화)로 유명한 조계산 자락의 절. 옛 모습 그대로인 해우소(뒷간) 건물도 독특한 볼거리.", activity:"승선교 아래서 강선루 풍경 사진, 봄철 선암매 탐매 산책", visitorTip:"순천 현지인들은 오히려 송광사보다 선암사를 더 추천한다는 후기가 많아요. 한 건축가가 '한국에서 가장 아름다운 화장실'이라 평했다는 옛 해우소도 놓치지 말라는 팁이 있고, 송광사까지 이어지는 10.5km 등산 코스도 인기예요.", nearbySight:"순천만 국가정원(갈대밭과 습지), 낙안읍성 민속마을도 가까워요.", tagline:"뒷간마저 예술이 되는 절", difficulty:{level:"medium",icon:"🟡",label:"보통 · 산길 20분"}, bestFor:["매화 덕후","사진러","건축 덕후"]},
+  {region:"전라", name:"대흥사", tag:"유명", desc:"초의선사가 다도 문화를 꽃피운 두륜산 자락의 절. 대웅보전과 무량수각 현판을 각각 원교 이광사와 추사 김정희가 쓴 것으로 유명.", activity:"일지암 차밭 산책, 두 대가의 현판 글씨체 비교해보기", visitorTip:"두륜산 케이블카와 묶어서 가는 사람이 많은데, 성수기엔 케이블카 대기가 길어서 절 먼저 보고 나중에 타거나 미리 표를 끊어두라는 팁이 많아요. 전각이 여러 구역에 흩어져 있어 천천히 산책하듯 둘러보기 좋다는 후기예요.", nearbySight:"두륜산 케이블카, 땅끝마을(한반도 최남단 전망대)이 근처예요.", tagline:"차 한 잔에 산 하나를 담다", difficulty:{level:"medium",icon:"🟡",label:"보통 · 여러 구역에 흩어짐"}, bestFor:["차 애호가","서예 덕후"]}
 ];
 
 const CHONGNIM_SEED = [
-  {region:"경상", name:"해인사", tag:"유명", desc:"국보이자 세계기록유산인 팔만대장경을 보관한 해인총림. 장경판전 내부는 대장경 보존을 위해 사진 촬영이 금지되어 있음.", activity:"장경판전 소개 영상(내부 촬영은 금지, 외부만), 단풍길 브이로그", season:"10월 말~11월 초 (가야산 단풍)", visitorTip:"대구에서 대중교통으로도 어렵지 않게 다녀올 수 있다는 후기가 많고, 주말엔 꽤 붐빈다는 평이 있어요. 국립공원 입장료가 별도로 붙는 점, 1박 템플스테이 후기가 특히 인기 많다는 점도 참고하세요.", nearbySight:"합천 영상테마파크(사극 촬영지), 황매산 철쭉평원이 봄에 아름다워요."},
-  {region:"경상", name:"통도사", tag:"유명", desc:"영축총림이자 유네스코 산사. 불보 사찰로 참배객이 끊이지 않음.", activity:"소나무숲길 산책 영상", visitorTip:"방문객들은 낮 12시·오후 5시경 제공되는 무료 공양을 놓치지 말라고 추천해요. 평일엔 한적해서 좋다는 후기가 많고, 봄엔 매화·벚나무 어우러진 경내 산책을 특히 좋아해요.", nearbySight:"영축산 자락의 서운암(장독대와 들꽃축제로 유명), 통도사 인근 자수정동굴나라도 함께 둘러볼 만해요."},
-  {region:"전라", name:"송광사", tag:"유명", desc:"삼보사찰 중 '승보' 사찰. 보조국사 지눌 이래 16명의 국사를 배출해 이름 붙었고, 16국사 진영을 모신 국사전이 승보사찰의 성격을 잘 보여줌.", activity:"국사전·하사당 등 국가지정문화재 둘러보기, 불일암 산책길", visitorTip:"삼청교(무지개다리)를 건너 우화각을 지나 들어가는 진입로 자체가 이미 여행의 하이라이트라는 후기가 많아요. 템플스테이 프로그램도 다양하게 운영돼서 체험 후기가 꾸준히 올라와요.", nearbySight:"낙안읍성 민속마을, 조계산 자연휴양림 트레킹 코스가 이어져요."},
-  {region:"충청", name:"수덕사", tag:"숨은", desc:"덕숭총림. 국보 대웅전은 고려 1308년 건립 연대가 명확히 밝혀진 목조건축으로, 배흘림기둥과 소박한 맞배지붕이 특징.", activity:"국보 대웅전 배흘림기둥 감상, 덕숭산 산책", visitorTip:"한 번에 다 보려 하지 말고 대웅전 처마, 연등 그림자, 옛 수덕여관 나무문, 숲길을 천천히 느끼며 걸으라는 후기가 인상적이에요. 편한 신발은 필수라는 팁도 많아요.", nearbySight:"예산 예당호 출렁다리(국내 최장 출렁다리), 추사고택이 가까워요."},
-  {region:"전라", name:"백양사", tag:"숨은", desc:"고불총림. 백학봉을 배경으로 한 누각 쌍계루와 연못에 비친 풍경이 예로부터 '대한 8경'으로 꼽힐 만큼 아름다움.", activity:"쌍계루 연못 반영샷, 가을 백양사 단풍길 산책", visitorTip:"쌍계루와 계곡, 백학봉이 어우러진 풍경에 더해 경내 산채비빔밥이 맛있다는 후기가 꾸준히 올라와요. 단풍철엔 걷기 좋은 그늘길도 인기예요.", nearbySight:"장성호, 백암산 단풍터널 트레킹 코스가 이어져요."},
-  {region:"경상", name:"동화사", tag:"숨은", desc:"팔공총림. 남북통일을 염원하며 세운 높이 33m 세계 최대급 석조 통일약사여래대불이 상징.", activity:"108계단 오르며 통일약사여래대불 참배, 팔공산 탐방로 연계 산행", season:"10월 말~11월 초 (팔공산 단풍)", visitorTip:"절터가 봉황이 알을 품은 모양이라는 풍수설이 있어서, 입구 문 이름도 '봉황의 정기가 서렸다'는 뜻의 봉서루예요. 통일신라 시대 불상과 통일을 염원하는 현대 불상이 한 절 안에 공존하는 점이 인상적이라는 후기가 많아요.", nearbySight:"팔공산 케이블카, 갓바위(선본사)까지 40분이면 이동해요."},
-  {region:"경상", name:"쌍계사", tag:"숨은", desc:"쌍계총림. 화개장터에서 쌍계사까지 이어지는 십리벚꽃길이 국내에서 손꼽히는 봄 벚꽃 명소.", activity:"화개~쌍계사 십리벚꽃길 드라이브, 일주문 앞 벚꽃 프레임 사진", season:"4월 초중순 (십리벚꽃길)", visitorTip:"절 이름부터 재밌는 사연이 있어요 — 두 계곡 사이에 있어 '쌍계사'라 불렸대요. 진감선사가 섬진강에서 헤엄치는 물고기를 보고 우리나라 불교음악 '범패'를 만들었다는 일화도 전해져요.", nearbySight:"화개장터, 십리벚꽃길이 절 진입로 자체예요."},
-  {region:"경상", name:"범어사", tag:"숨은", desc:"금정총림. 해인사·통도사와 함께 영남 3대 사찰로 꼽히며, 금정산 자락 단풍길과 보물 대웅전으로 유명.", activity:"일주문~천왕문 단풍 터널 산책, 대웅전 신라~조선 양식 문양 찾아보기", visitorTip:"'하늘 우물(금샘)에서 내려온 금빛 물고기가 놀았다'는 전설에서 이름이 유래했어요. 부산 도심 한복판에 있으면서도 천년고찰 분위기를 그대로 간직하고 있다는 게 방문객들이 가장 신기해하는 점이에요.", nearbySight:"금정산성(임진왜란 산성), 동래온천이 근처예요."},
+  {region:"경상", name:"해인사", tag:"유명", desc:"국보이자 세계기록유산인 팔만대장경을 보관한 해인총림. 장경판전 내부는 대장경 보존을 위해 사진 촬영이 금지되어 있음.", activity:"장경판전 소개 영상(내부 촬영은 금지, 외부만), 단풍길 브이로그", season:"10월 말~11월 초 (가야산 단풍)", visitorTip:"대구에서 대중교통으로도 어렵지 않게 다녀올 수 있다는 후기가 많고, 주말엔 꽤 붐빈다는 평이 있어요. 국립공원 입장료가 별도로 붙는 점, 1박 템플스테이 후기가 특히 인기 많다는 점도 참고하세요.", nearbySight:"합천 영상테마파크(사극 촬영지), 황매산 철쭉평원이 봄에 아름다워요.", tagline:"팔만 개의 마음을 새긴 곳", difficulty:{level:"medium",icon:"🟡",label:"보통 · 산길 있음"}, bestFor:["역사 덕후","단풍 헌터"]},
+  {region:"경상", name:"통도사", tag:"유명", desc:"영축총림이자 유네스코 산사. 불보 사찰로 참배객이 끊이지 않음.", activity:"소나무숲길 산책 영상", visitorTip:"방문객들은 낮 12시·오후 5시경 제공되는 무료 공양을 놓치지 말라고 추천해요. 평일엔 한적해서 좋다는 후기가 많고, 봄엔 매화·벚나무 어우러진 경내 산책을 특히 좋아해요.", nearbySight:"영축산 자락의 서운암(장독대와 들꽃축제로 유명), 통도사 인근 자수정동굴나라도 함께 둘러볼 만해요.", tagline:"부처님 진신사리 앞에서는 절도 겸손해진다", difficulty:{level:"easy",icon:"🟢",label:"쉬움 · 주차장에서 도보 10분"}, bestFor:["문화재 덕후","사진러","가족 나들이"]},
+  {region:"전라", name:"송광사", tag:"유명", desc:"삼보사찰 중 '승보' 사찰. 보조국사 지눌 이래 16명의 국사를 배출해 이름 붙었고, 16국사 진영을 모신 국사전이 승보사찰의 성격을 잘 보여줌.", activity:"국사전·하사당 등 국가지정문화재 둘러보기, 불일암 산책길", visitorTip:"삼청교(무지개다리)를 건너 우화각을 지나 들어가는 진입로 자체가 이미 여행의 하이라이트라는 후기가 많아요. 템플스테이 프로그램도 다양하게 운영돼서 체험 후기가 꾸준히 올라와요.", nearbySight:"낙안읍성 민속마을, 조계산 자연휴양림 트레킹 코스가 이어져요.", tagline:"무지개다리를 건너면 딴 세상", difficulty:{level:"easy",icon:"🟢",label:"쉬움"}, bestFor:["템플스테이 초보","사진러"]},
+  {region:"충청", name:"수덕사", tag:"숨은", desc:"덕숭총림. 국보 대웅전은 고려 1308년 건립 연대가 명확히 밝혀진 목조건축으로, 배흘림기둥과 소박한 맞배지붕이 특징.", activity:"국보 대웅전 배흘림기둥 감상, 덕숭산 산책", visitorTip:"한 번에 다 보려 하지 말고 대웅전 처마, 연등 그림자, 옛 수덕여관 나무문, 숲길을 천천히 느끼며 걸으라는 후기가 인상적이에요. 편한 신발은 필수라는 팁도 많아요.", nearbySight:"예산 예당호 출렁다리(국내 최장 출렁다리), 추사고택이 가까워요.", tagline:"천천히 걸어야 보이는 절", difficulty:{level:"easy",icon:"🟢",label:"쉬움"}, bestFor:["느긋한 산책러","건축 덕후"]},
+  {region:"전라", name:"백양사", tag:"숨은", desc:"고불총림. 백학봉을 배경으로 한 누각 쌍계루와 연못에 비친 풍경이 예로부터 '대한 8경'으로 꼽힐 만큼 아름다움.", activity:"쌍계루 연못 반영샷, 가을 백양사 단풍길 산책", visitorTip:"쌍계루와 계곡, 백학봉이 어우러진 풍경에 더해 경내 산채비빔밥이 맛있다는 후기가 꾸준히 올라와요. 단풍철엔 걷기 좋은 그늘길도 인기예요.", nearbySight:"장성호, 백암산 단풍터널 트레킹 코스가 이어져요.", tagline:"산채비빔밥과 단풍의 콜라보", difficulty:{level:"easy",icon:"🟢",label:"쉬움 · 평지"}, bestFor:["미식가","단풍 헌터"]},
+  {region:"경상", name:"동화사", tag:"숨은", desc:"팔공총림. 남북통일을 염원하며 세운 높이 33m 세계 최대급 석조 통일약사여래대불이 상징.", activity:"108계단 오르며 통일약사여래대불 참배, 팔공산 탐방로 연계 산행", season:"10월 말~11월 초 (팔공산 단풍)", visitorTip:"절터가 봉황이 알을 품은 모양이라는 풍수설이 있어서, 입구 문 이름도 '봉황의 정기가 서렸다'는 뜻의 봉서루예요. 통일신라 시대 불상과 통일을 염원하는 현대 불상이 한 절 안에 공존하는 점이 인상적이라는 후기가 많아요.", nearbySight:"팔공산 케이블카, 갓바위(선본사)까지 40분이면 이동해요.", tagline:"봉황이 알을 품은 자리", difficulty:{level:"medium",icon:"🟡",label:"보통 · 케이블카 있음"}, bestFor:["대형 불상 인증샷러","가족 단위"]},
+  {region:"경상", name:"쌍계사", tag:"숨은", desc:"쌍계총림. 화개장터에서 쌍계사까지 이어지는 십리벚꽃길이 국내에서 손꼽히는 봄 벚꽃 명소.", activity:"화개~쌍계사 십리벚꽃길 드라이브, 일주문 앞 벚꽃 프레임 사진", season:"4월 초중순 (십리벚꽃길)", visitorTip:"절 이름부터 재밌는 사연이 있어요 — 두 계곡 사이에 있어 '쌍계사'라 불렸대요. 진감선사가 섬진강에서 헤엄치는 물고기를 보고 우리나라 불교음악 '범패'를 만들었다는 일화도 전해져요.", nearbySight:"화개장터, 십리벚꽃길이 절 진입로 자체예요.", tagline:"십리 벚꽃길의 종착지", difficulty:{level:"easy",icon:"🟢",label:"쉬움"}, bestFor:["봄꽃 헌터","드라이브족"]},
+  {region:"경상", name:"범어사", tag:"숨은", desc:"금정총림. 해인사·통도사와 함께 영남 3대 사찰로 꼽히며, 금정산 자락 단풍길과 보물 대웅전으로 유명.", activity:"일주문~천왕문 단풍 터널 산책, 대웅전 신라~조선 양식 문양 찾아보기", visitorTip:"'하늘 우물(금샘)에서 내려온 금빛 물고기가 놀았다'는 전설에서 이름이 유래했어요. 부산 도심 한복판에 있으면서도 천년고찰 분위기를 그대로 간직하고 있다는 게 방문객들이 가장 신기해하는 점이에요.", nearbySight:"금정산성(임진왜란 산성), 동래온천이 근처예요.", tagline:"도심 속에서 만나는 천년", difficulty:{level:"easy",icon:"🟢",label:"쉬움 · 대중교통 편리"}, bestFor:["부산 여행자","단풍 헌터"]},
 ];
 
 // 동선을 고려한 지역별 순례 코스 — 같은 코스 안의 절들은 서로 가까워서 하루~며칠 안에 묶어서 돌기 좋아요.
@@ -837,7 +850,7 @@ const GYEONGJU_SEED = [
 
 const JIRISAN_SEED = [
   {region:"전라", name:"화엄사", tag:"유명", desc:"지리산 자락, 봄 홍매화와 가을 단풍이 아름다운 절.", activity:"각황전 배경 인물샷, 홍매화 클로즈업", season:"3월 말~4월 초 (홍매화), 11월 초 (단풍)", visitorTip:"각황전이 대웅전보다 훨씬 커서 절 배치가 독특하다는 점이 재미있다는 후기가 많아요. 보제루를 정면으로 못 지나고 옆으로 돌아가게 만든 동선에 숨은 의도가 있다는 이야기도 흥미로운 포인트예요.", nearbySight:"지리산 노고단(첫 일출 명소), 구례 산수유마을이 근처예요."},
-  {region:"경상", name:"쌍계사", tag:"숨은", desc:"쌍계총림, 봄이면 십리벚꽃길로 유명한 지리산 자락 산사.", activity:"벚꽃길 드론샷, 계곡물 소리 브이로그", season:"4월 초중순 (십리벚꽃길)", visitorTip:"절 이름부터 재밌는 사연이 있어요 — 두 계곡 사이에 있어 '쌍계사'라 불렸대요. 진감선사가 섬진강에서 헤엄치는 물고기를 보고 우리나라 불교음악 '범패'를 만들었다는 일화도 전해져요.", nearbySight:"화개장터, 십리벚꽃길이 절 진입로 자체예요."},
+  {region:"경상", name:"쌍계사", tag:"숨은", desc:"쌍계총림, 봄이면 십리벚꽃길로 유명한 지리산 자락 산사.", activity:"벚꽃길 드론샷, 계곡물 소리 브이로그", season:"4월 초중순 (십리벚꽃길)", visitorTip:"절 이름부터 재밌는 사연이 있어요 — 두 계곡 사이에 있어 '쌍계사'라 불렸대요. 진감선사가 섬진강에서 헤엄치는 물고기를 보고 우리나라 불교음악 '범패'를 만들었다는 일화도 전해져요.", nearbySight:"화개장터, 십리벚꽃길이 절 진입로 자체예요.", tagline:"십리 벚꽃길의 종착지", difficulty:{level:"easy",icon:"🟢",label:"쉬움"}, bestFor:["봄꽃 헌터","드라이브족"]},
   {region:"전라", name:"연곡사", tag:"숨은", desc:"지리산 자락, 국보급 승탑(부도)이 여러 기 모여 있어 '승탑의 보고'로 불리는 조용한 절.", activity:"동부도·서부도 등 국보 승탑 감상, 계곡 산책", visitorTip:"이 절에 모인 승탑(부도)들은 조각이 매우 화려해서 우리나라 승탑 예술의 걸작으로 꼽혀요. 여러 차례 전란을 겪으면서도 이 승탑들만은 살아남아 지금까지 자리를 지키고 있어요.", nearbySight:"구례 피아골(단풍 명소), 화엄사가 이어져요."},
   {region:"경상", name:"벽송사", tag:"숨은", desc:"지리산 깊은 곳, 조선시대 선불교 최고 수행처로 꼽히는 참선 도량. 수백 년 된 미인송·도인송 소나무로도 유명.", activity:"미인송·도인송 소나무 사진", visitorTip:"특이하게도 정확한 창건 설화가 전혀 전해지지 않는 절이에요. 서산대사의 스승인 벽송 지엄대사가 1520년 중창한 뒤로 조선 불교 최고의 수행처로 이름났고, 지금도 매년 추모법회가 열려요.", nearbySight:"지리산 둘레길, 함양 오도재 전망대가 근처예요."},
   {region:"전라", name:"실상사", tag:"숨은", desc:"지리산 자락, 국내 최초의 선종 사찰. 너른 들판에 자리한 평지 가람으로 백장암 삼층석탑도 함께 유명.", activity:"탁 트인 들판 배경 사진, 백장암 연계 방문", visitorTip:"한국 선종(禪宗) 불교가 처음 뿌리내린 곳이라 '선풍 발상지'로 불려요. 조선시대엔 화재로 폐허가 됐던 시절도 있었는데, 한 유학자가 그 쓸쓸한 풍경을 시로 남기기도 했어요.", nearbySight:"지리산 뱀사골 계곡, 남원 국악의 성지가 차로 20분이에요."},
@@ -887,9 +900,9 @@ const JEJU_SEED = [
 ];
 
 const CHUNGCHEONG_SEED = [
-  {region:"충청", name:"법주사", tag:"유명", desc:"속리산 자락, 국내 최대 규모의 미륵대불이 있는 절.", activity:"가을 단풍 배경 인물 사진", season:"10월 말~11월 초 (단풍)", visitorTip:"세조가 요양차 걸었다는 '세조길' 산책이 특히 힐링된다는 후기가 많고, 거대한 금동미륵대불 앞에서 사진 찍으면 사람이 난쟁이처럼 작게 나온다는 재미있는 후기도 있어요.", nearbySight:"속리산 정상 문장대, 법주사 세조길 끝에 있는 정이품송(천연기념물 소나무)도 놓치지 마세요."},
-  {region:"충청", name:"마곡사", tag:"숨은", desc:"태화산 자락, 봄이면 벚꽃이 절 마당을 뒤덮는 조용한 절.", activity:"벚꽃 시즌 드론샷, 태화천 반영 사진", season:"4월 초중순 (벚꽃)", visitorTip:"대웅보전 안 싸리나무 기둥을 돌면 극락에 간다는 전설 때문에, 다들 한 번씩 기둥을 돌아본다는 후기가 많아요. 백범 김구 선생이 걸었다는 '백범명상길'도 함께 걸어보길 추천해요.", nearbySight:"공주 무령왕릉, 공산성이 차로 20분 거리예요."},
-  {region:"충청", name:"수덕사", tag:"숨은", desc:"덕숭총림, 대웅전이 국내 목조건축의 걸작으로 꼽힘.", activity:"대웅전 배흘림기둥 사진, 덕숭산 산책", visitorTip:"한 번에 다 보려 하지 말고 대웅전 처마, 연등 그림자, 옛 수덕여관 나무문, 숲길을 천천히 느끼며 걸으라는 후기가 인상적이에요. 편한 신발은 필수라는 팁도 많아요.", nearbySight:"예산 예당호 출렁다리(국내 최장 출렁다리), 추사고택이 가까워요."},
+  {region:"충청", name:"법주사", tag:"유명", desc:"속리산 자락, 국내 최대 규모의 미륵대불이 있는 절.", activity:"가을 단풍 배경 인물 사진", season:"10월 말~11월 초 (단풍)", visitorTip:"세조가 요양차 걸었다는 '세조길' 산책이 특히 힐링된다는 후기가 많고, 거대한 금동미륵대불 앞에서 사진 찍으면 사람이 난쟁이처럼 작게 나온다는 재미있는 후기도 있어요.", nearbySight:"속리산 정상 문장대, 법주사 세조길 끝에 있는 정이품송(천연기념물 소나무)도 놓치지 마세요.", tagline:"미륵불 앞에 서면 내가 작아진다", difficulty:{level:"easy",icon:"🟢",label:"쉬움 · 평지 산책로"}, bestFor:["단풍 시즌 여행자","가족 단위"]},
+  {region:"충청", name:"마곡사", tag:"숨은", desc:"태화산 자락, 봄이면 벚꽃이 절 마당을 뒤덮는 조용한 절.", activity:"벚꽃 시즌 드론샷, 태화천 반영 사진", season:"4월 초중순 (벚꽃)", visitorTip:"대웅보전 안 싸리나무 기둥을 돌면 극락에 간다는 전설 때문에, 다들 한 번씩 기둥을 돌아본다는 후기가 많아요. 백범 김구 선생이 걸었다는 '백범명상길'도 함께 걸어보길 추천해요.", nearbySight:"공주 무령왕릉, 공산성이 차로 20분 거리예요.", tagline:"봄이면 절이 아니라 꽃밭", difficulty:{level:"easy",icon:"🟢",label:"쉬움"}, bestFor:["봄꽃 헌터","산책러"]},
+  {region:"충청", name:"수덕사", tag:"숨은", desc:"덕숭총림, 대웅전이 국내 목조건축의 걸작으로 꼽힘.", activity:"대웅전 배흘림기둥 사진, 덕숭산 산책", visitorTip:"한 번에 다 보려 하지 말고 대웅전 처마, 연등 그림자, 옛 수덕여관 나무문, 숲길을 천천히 느끼며 걸으라는 후기가 인상적이에요. 편한 신발은 필수라는 팁도 많아요.", nearbySight:"예산 예당호 출렁다리(국내 최장 출렁다리), 추사고택이 가까워요.", tagline:"천천히 걸어야 보이는 절", difficulty:{level:"easy",icon:"🟢",label:"쉬움"}, bestFor:["느긋한 산책러","건축 덕후"]},
   {region:"충청", name:"관촉사", tag:"숨은", desc:"고려시대(968년경) 조성된 국내 최대 석불, 국보 은진미륵(높이 18m)으로 유명. 소박하면서도 개성 있는 조각으로 '백제의 미소'라 불림.", activity:"은진미륵 앞 인증샷, 논산평야 전망", visitorTip:"아이 밴 여인이 우연히 땅에서 커다란 돌이 솟아나는 소리를 듣고 관청에 알려 그 돌로 미륵불을 조성했다는 창건 설화가 전해져요. 조각이 다소 투박하지만 그래서 더 정겹다는 후기가 많아요.", nearbySight:"논산 탑정호 출렁다리가 차로 15분이에요."},
   {region:"충청", name:"개심사", tag:"숨은", desc:"'마음을 여는 절'이라는 뜻의 충남 4대 사찰. 보물 대웅전은 주심포·다포 양식이 혼용된 독특한 건축이고, 봄이면 청벚꽃(왕벚나무)이 만개.", activity:"봄꽃 시즌 사진, 연못 배경 컷", season:"4월 중순 (청벚꽃)", visitorTip:"'마음을 여는 절'이라는 이름 그대로, 대웅전 기둥이 삐뚤빼뚤한 자연 그대로의 나무를 다듬지 않고 그대로 썼다는 점이 재밌는 포인트예요. 완벽하지 않아서 더 편안하다는 후기가 많아요.", nearbySight:"서산 해미읍성, 마애여래삼존상이 차로 20분이에요."},
   {region:"충청", name:"무량사", tag:"숨은", desc:"김시습이 말년을 보낸 절, 극락전이 국내에 몇 없는 2층 불전.", activity:"극락전 배경 사진", visitorTip:"생육신 중 한 명인 김시습이 말년을 보내다 세상을 떠난 절이에요. 극락전은 겉보기엔 2층이지만 내부는 하나로 뚫린 공간이라 우리나라에서 보기 드문 독특한 구조예요.", nearbySight:"부여 궁남지, 정림사지가 차로 30분이에요."},
@@ -902,9 +915,9 @@ const CHUNGCHEONG_SEED = [
 ];
 
 const JEONNAM_SEED = [
-  {region:"전라", name:"선암사", tag:"숨은", desc:"승선교 무지개다리와 매화로 유명한 조계산 자락의 절.", activity:"승선교 배경 사진, 봄 매화 클로즈업", visitorTip:"순천 현지인들은 오히려 송광사보다 선암사를 더 추천한다는 후기가 많아요. 한 건축가가 '한국에서 가장 아름다운 화장실'이라 평했다는 옛 해우소도 놓치지 말라는 팁이 있고, 송광사까지 이어지는 10.5km 등산 코스도 인기예요.", nearbySight:"순천만 국가정원(갈대밭과 습지), 낙안읍성 민속마을도 가까워요."},
-  {region:"전라", name:"대흥사", tag:"유명", desc:"두륜산 자락, 초의선사와 다도 문화로 알려진 절.", activity:"두륜산 숲길 산책, 차담 브이로그", visitorTip:"두륜산 케이블카와 묶어서 가는 사람이 많은데, 성수기엔 케이블카 대기가 길어서 절 먼저 보고 나중에 타거나 미리 표를 끊어두라는 팁이 많아요. 전각이 여러 구역에 흩어져 있어 천천히 산책하듯 둘러보기 좋다는 후기예요.", nearbySight:"두륜산 케이블카, 땅끝마을(한반도 최남단 전망대)이 근처예요."},
-  {region:"전라", name:"백양사", tag:"숨은", desc:"고불총림, 가을 단풍이 특히 아름다운 절.", activity:"쌍계루 앞 단풍 반영샷", visitorTip:"쌍계루와 계곡, 백학봉이 어우러진 풍경에 더해 경내 산채비빔밥이 맛있다는 후기가 꾸준히 올라와요. 단풍철엔 걷기 좋은 그늘길도 인기예요.", nearbySight:"장성호, 백암산 단풍터널 트레킹 코스가 이어져요."},
+  {region:"전라", name:"선암사", tag:"숨은", desc:"승선교 무지개다리와 매화로 유명한 조계산 자락의 절.", activity:"승선교 배경 사진, 봄 매화 클로즈업", visitorTip:"순천 현지인들은 오히려 송광사보다 선암사를 더 추천한다는 후기가 많아요. 한 건축가가 '한국에서 가장 아름다운 화장실'이라 평했다는 옛 해우소도 놓치지 말라는 팁이 있고, 송광사까지 이어지는 10.5km 등산 코스도 인기예요.", nearbySight:"순천만 국가정원(갈대밭과 습지), 낙안읍성 민속마을도 가까워요.", tagline:"뒷간마저 예술이 되는 절", difficulty:{level:"medium",icon:"🟡",label:"보통 · 산길 20분"}, bestFor:["매화 덕후","사진러","건축 덕후"]},
+  {region:"전라", name:"대흥사", tag:"유명", desc:"두륜산 자락, 초의선사와 다도 문화로 알려진 절.", activity:"두륜산 숲길 산책, 차담 브이로그", visitorTip:"두륜산 케이블카와 묶어서 가는 사람이 많은데, 성수기엔 케이블카 대기가 길어서 절 먼저 보고 나중에 타거나 미리 표를 끊어두라는 팁이 많아요. 전각이 여러 구역에 흩어져 있어 천천히 산책하듯 둘러보기 좋다는 후기예요.", nearbySight:"두륜산 케이블카, 땅끝마을(한반도 최남단 전망대)이 근처예요.", tagline:"차 한 잔에 산 하나를 담다", difficulty:{level:"medium",icon:"🟡",label:"보통 · 여러 구역에 흩어짐"}, bestFor:["차 애호가","서예 덕후"]},
+  {region:"전라", name:"백양사", tag:"숨은", desc:"고불총림, 가을 단풍이 특히 아름다운 절.", activity:"쌍계루 앞 단풍 반영샷", visitorTip:"쌍계루와 계곡, 백학봉이 어우러진 풍경에 더해 경내 산채비빔밥이 맛있다는 후기가 꾸준히 올라와요. 단풍철엔 걷기 좋은 그늘길도 인기예요.", nearbySight:"장성호, 백암산 단풍터널 트레킹 코스가 이어져요.", tagline:"산채비빔밥과 단풍의 콜라보", difficulty:{level:"easy",icon:"🟢",label:"쉬움 · 평지"}, bestFor:["미식가","단풍 헌터"]},
   {region:"전라", name:"미황사", tag:"숨은", desc:"땅끝 두륜산 자락, 저녁노을이 아름답기로 유명한 절.", activity:"대웅보전 노을 실루엣 사진", visitorTip:"드라마 '박하경 여행기'의 템플스테이 촬영지로 알려지며 찾는 사람이 늘었어요. 산 정상까지 약 1시간 오르면 다도해가 한눈에 보이는 조망이 압권이라는 후기가 많아요.", nearbySight:"땅끝마을(한반도 최남단), 땅끝전망대가 차로 15분이에요."},
   {region:"전라", name:"도갑사", tag:"숨은", desc:"월출산 자락, 국보 해탈문(금강역사를 둔 절문)으로 유명한 절. 도선국사가 어린 시절을 보낸 터에 지어졌다는 이야기가 전해짐.", activity:"해탈문 배경 사진, 진입로 벚꽃길 산책", visitorTip:"도선국사가 어린 시절을 보낸 자리에 세워졌다는 창건 설화가 전해져요. 국보 해탈문은 우리나라에 몇 없는 고려~조선 초기 건축 양식을 간직하고 있어요.", nearbySight:"월출산 천황사 탐방로, 영암 왕인박사 유적지가 근처예요."},
   {region:"전라", name:"불갑사", tag:"숨은", desc:"영광, 가을 꽃무릇(상사화) 군락으로 유명한 절.", activity:"꽃무릇 시즌 사진", visitorTip:"이름 자체가 '모든 절의 시원이자 으뜸'이라는 뜻이에요. 백제에 불교를 처음 전한 인도 승려 마라난타가 서해를 건너와 세운 절이라는 이야기가 전해지고, 선운사·용천사와 함께 국내 3대 꽃무릇 군락지로 꼽혀요.", nearbySight:"영광 백수해안도로, 법성포 굴비거리가 근처예요."},
@@ -927,8 +940,8 @@ const JEONBUK_SEED = [
 ];
 
 const GYEONGBUK_SEED = [
-  {region:"경상", name:"부석사", tag:"유명", desc:"무량수전 배흘림기둥과 소백산 능선 조망으로 유명한 절.", activity:"무량수전 앞 노을 사진, 안양루에서 본 능선 뷰", visitorTip:"무량수전까지 이어지는 진입로의 은행나무·단풍길이 가을에 특히 아름답다는 후기가 많아요. 계단이 가팔라서 다리가 불편하면 옆 비탈길을 추천하고, 해질녘 노을 감상도 인기예요.", nearbySight:"소수서원(한국 최초 사액서원), 선비촌 한옥마을이 차로 15분 거리예요."},
-  {region:"경상", name:"봉정사", tag:"숨은", desc:"현존하는 가장 오래된 목조건물 극락전이 있는 조용한 절.", activity:"극락전 배경 사진, 천등산 숲길 산책", visitorTip:"1999년 엘리자베스 2세 여왕이 방문해 극락전 앞 돌무더기에 소원을 빌고 갔던 곳으로 유명해요. 여왕도 반했다는 조용하고 아늑한 분위기를 방문객들이 가장 많이 꼽아요.", nearbySight:"안동 하회마을, 병산서원이 가까워요."},
+  {region:"경상", name:"부석사", tag:"유명", desc:"무량수전 배흘림기둥과 소백산 능선 조망으로 유명한 절.", activity:"무량수전 앞 노을 사진, 안양루에서 본 능선 뷰", visitorTip:"무량수전까지 이어지는 진입로의 은행나무·단풍길이 가을에 특히 아름답다는 후기가 많아요. 계단이 가팔라서 다리가 불편하면 옆 비탈길을 추천하고, 해질녘 노을 감상도 인기예요.", nearbySight:"소수서원(한국 최초 사액서원), 선비촌 한옥마을이 차로 15분 거리예요.", tagline:"노을 앞에서는 다들 말을 잃는다", difficulty:{level:"medium",icon:"🟡",label:"보통 · 계단 많음, 편한 신발 필수"}, bestFor:["뷰 맛집 헌터","건축 덕후","혼자만의 시간"]},
+  {region:"경상", name:"봉정사", tag:"숨은", desc:"현존하는 가장 오래된 목조건물 극락전이 있는 조용한 절.", activity:"극락전 배경 사진, 천등산 숲길 산책", visitorTip:"1999년 엘리자베스 2세 여왕이 방문해 극락전 앞 돌무더기에 소원을 빌고 갔던 곳으로 유명해요. 여왕도 반했다는 조용하고 아늑한 분위기를 방문객들이 가장 많이 꼽아요.", nearbySight:"안동 하회마을, 병산서원이 가까워요.", tagline:"여왕도 반한 고요함", difficulty:{level:"easy",icon:"🟢",label:"쉬움"}, bestFor:["조용한 산책러","역사 덕후"]},
   {region:"경상", name:"직지사", tag:"숨은", desc:"천불전의 천 개 불상으로 알려진 황악산 자락의 절.", activity:"천불전 소개 영상, 사명대사길 산책", visitorTip:"'손가락으로 가리키다'라는 이름처럼, 아도화상이 절터를 손가락으로 가리켜 지었다는 설화가 전해져요. 계곡 위에 지은 누각 가운루를 지나야 극락전으로 이어지는 독특한 진입 동선이 인상적이라는 후기가 많아요.", nearbySight:"김천 부항댐 출렁다리가 차로 20분이에요."},
   {region:"경상", name:"고운사", tag:"숨은", desc:"의성, 조계종 제16교구 본사로 숲길이 아름다운 절.", activity:"숲길 산책 영상", visitorTip:"통일신라 대학자 최치원이 말년에 자주 머물며 흔적을 남긴 절이에요. 다만 2025년 3월 대형 산불로 가운루 등 많은 전각이 불타 없어졌어요. 지금 방문하면 복원 중인 모습을 함께 볼 수 있어요.", nearbySight:"의성 산수유마을, 조문국 사적지가 근처예요."},
   {region:"경상", name:"은해사", tag:"숨은", desc:"영천 팔공산 자락, 소나무숲길로 유명한 절.", activity:"소나무숲길 산책 영상", visitorTip:"1847년 큰 화재로 극락전만 남고 절 전체가 불탔는데, 다시 지으면서 대웅전·보화루·불광각 세 현판을 모두 추사 김정희가 직접 써줬어요. 본절보다 딸린 암자들(거조암, 백흥암 등)이 더 유명하다는 점도 독특해요.", nearbySight:"영천 최무선과학관, 은해사 인근 계곡이 여름 피서지예요."},
@@ -947,8 +960,8 @@ const GYEONGBUK_SEED = [
 ];
 
 const GYEONGNAM_SEED = [
-  {region:"경상", name:"통도사", tag:"유명", desc:"영축총림이자 유네스코 산사. 불보 사찰로 참배객이 끊이지 않음.", activity:"소나무숲길 산책 영상", visitorTip:"방문객들은 낮 12시·오후 5시경 제공되는 무료 공양을 놓치지 말라고 추천해요. 평일엔 한적해서 좋다는 후기가 많고, 봄엔 매화·벚나무 어우러진 경내 산책을 특히 좋아해요.", nearbySight:"영축산 자락의 서운암(장독대와 들꽃축제로 유명), 통도사 인근 자수정동굴나라도 함께 둘러볼 만해요."},
-  {region:"경상", name:"해인사", tag:"유명", desc:"국보이자 세계기록유산인 팔만대장경을 보관한 해인총림. 장경판전 내부는 대장경 보존을 위해 사진 촬영이 금지되어 있음.", activity:"장경판전 소개 영상(내부 촬영은 금지, 외부만), 단풍길 브이로그", season:"10월 말~11월 초 (가야산 단풍)", visitorTip:"대구에서 대중교통으로도 어렵지 않게 다녀올 수 있다는 후기가 많고, 주말엔 꽤 붐빈다는 평이 있어요. 국립공원 입장료가 별도로 붙는 점, 1박 템플스테이 후기가 특히 인기 많다는 점도 참고하세요.", nearbySight:"합천 영상테마파크(사극 촬영지), 황매산 철쭉평원이 봄에 아름다워요."},
+  {region:"경상", name:"통도사", tag:"유명", desc:"영축총림이자 유네스코 산사. 불보 사찰로 참배객이 끊이지 않음.", activity:"소나무숲길 산책 영상", visitorTip:"방문객들은 낮 12시·오후 5시경 제공되는 무료 공양을 놓치지 말라고 추천해요. 평일엔 한적해서 좋다는 후기가 많고, 봄엔 매화·벚나무 어우러진 경내 산책을 특히 좋아해요.", nearbySight:"영축산 자락의 서운암(장독대와 들꽃축제로 유명), 통도사 인근 자수정동굴나라도 함께 둘러볼 만해요.", tagline:"부처님 진신사리 앞에서는 절도 겸손해진다", difficulty:{level:"easy",icon:"🟢",label:"쉬움 · 주차장에서 도보 10분"}, bestFor:["문화재 덕후","사진러","가족 나들이"]},
+  {region:"경상", name:"해인사", tag:"유명", desc:"국보이자 세계기록유산인 팔만대장경을 보관한 해인총림. 장경판전 내부는 대장경 보존을 위해 사진 촬영이 금지되어 있음.", activity:"장경판전 소개 영상(내부 촬영은 금지, 외부만), 단풍길 브이로그", season:"10월 말~11월 초 (가야산 단풍)", visitorTip:"대구에서 대중교통으로도 어렵지 않게 다녀올 수 있다는 후기가 많고, 주말엔 꽤 붐빈다는 평이 있어요. 국립공원 입장료가 별도로 붙는 점, 1박 템플스테이 후기가 특히 인기 많다는 점도 참고하세요.", nearbySight:"합천 영상테마파크(사극 촬영지), 황매산 철쭉평원이 봄에 아름다워요.", tagline:"팔만 개의 마음을 새긴 곳", difficulty:{level:"medium",icon:"🟡",label:"보통 · 산길 있음"}, bestFor:["역사 덕후","단풍 헌터"]},
   {region:"경상", name:"표충사", tag:"숨은", desc:"밀양 재약산 자락, 사명대사를 기리는 사당에서 이름이 유래한 절. 일연 스님이 삼국유사를 완성했다는 이야기도 전해짐.", activity:"사명대사 유적 둘러보기, 숲길 산책", visitorTip:"18세기에 사명대사를 기리는 사당으로 나라의 공식 인정(사액)을 받는 과정에서 해인사와 갈등을 빚기도 했대요. 사명대사는 15살에 부모를 잃고 출가한 승려였다가, 훗날 임진왜란 의병장으로 활약한 극적인 인생을 살았어요.", nearbySight:"밀양 얼음골 케이블카, 재약산 사자평 억새평원이 근처예요."},
   {region:"경상", name:"옥천사", tag:"숨은", desc:"고성 연화산 자락, 계곡과 어우러진 조용한 절.", activity:"계곡 배경 사진", visitorTip:"대중교통이 전혀 없어서 자가용이나 택시로만 갈 수 있는 절이에요. 건물 4동의 기와지붕이 마당을 겹겹이 감싸안은 듯한 독특한 가람 배치로, 외부에서 보는 것과 안에 들어섰을 때 느낌이 완전히 다르다는 후기가 많아요.", nearbySight:"고성 상족암군립공원(공룡발자국)이 차로 20분이에요."},
   {region:"경상", name:"다솔사", tag:"숨은", desc:"사천, 차밭과 소나무숲으로 알려진 절.", activity:"차밭 배경 사진", visitorTip:"소설가 김동리가 이 절 요사채에 머물며 소설 '등신불'을 썼다는 일화가 유명해요. 만해 한용운의 회갑을 축하하며 심었다는 편백나무 7그루도 지금까지 남아있어요.", nearbySight:"사천 바다케이블카, 삼천포대교가 차로 20분이에요."},
@@ -1264,8 +1277,8 @@ function refreshDescriptions(){
   let updated = 0;
   Object.entries(destinations).forEach(([id,d])=>{
     const src = master[d.name];
-    if(src && (src.desc !== d.desc || src.activity !== d.activity || src.season !== d.season || src.visitorTip !== d.visitorTip || src.nearbySight !== d.nearbySight)){
-      updateDestination(id, {desc: src.desc, activity: src.activity, season: src.season || null, visitorTip: src.visitorTip || null, nearbySight: src.nearbySight || null});
+    if(src && (src.desc !== d.desc || src.activity !== d.activity || src.season !== d.season || src.visitorTip !== d.visitorTip || src.nearbySight !== d.nearbySight || src.tagline !== d.tagline)){
+      updateDestination(id, {desc: src.desc, activity: src.activity, season: src.season || null, visitorTip: src.visitorTip || null, nearbySight: src.nearbySight || null, tagline: src.tagline || null, difficulty: src.difficulty || null, bestFor: src.bestFor || null});
       updated++;
     }
   });
@@ -1928,6 +1941,21 @@ function openDetail(id){
   document.getElementById('dTag').textContent = d.tag==='유명' ? '유명한 곳' : '숨은 곳';
   document.getElementById('dDesc').textContent = d.desc || '';
   document.getElementById('dActivity').textContent = d.activity || '';
+  if(d.tagline){
+    document.getElementById('dTagline').style.display = 'block';
+    document.getElementById('dTagline').textContent = '"' + d.tagline + '"';
+  } else {
+    document.getElementById('dTagline').style.display = 'none';
+  }
+  const chips = [];
+  if(d.difficulty){
+    const diffClass = d.difficulty.level==='easy'?'difficulty-easy':d.difficulty.level==='hard'?'difficulty-hard':'difficulty-medium';
+    chips.push(`<span class="quick-chip ${diffClass}">${d.difficulty.icon} ${d.difficulty.label}</span>`);
+  }
+  if(d.bestFor){
+    d.bestFor.forEach(tag=> chips.push(`<span class="quick-chip">✨ ${escapeHtml(tag)}</span>`));
+  }
+  document.getElementById('dQuickFacts').innerHTML = chips.join('');
   if(d.season){
     document.getElementById('dSeasonWrap').style.display = 'block';
     document.getElementById('dSeason').textContent = '🌸 ' + d.season;
@@ -1995,28 +2023,51 @@ function renderVisits(visits){
     const dt = new Date(v.ts||Date.now());
     const dateStr = `${dt.getFullYear()}.${dt.getMonth()+1}.${dt.getDate()}`;
     return `<div class="visitrow">
-      <div class="vdate">${dateStr}</div>
+      <div class="vdate">${dateStr} ${v.verified ? '<span style="background:var(--moss);color:#fff;padding:1px 8px;border-radius:999px;font-size:10px;margin-left:6px;">📍 위치 인증됨</span>' : ''}</div>
       ${v.note ? `<div class="vnote">${escapeHtml(v.note)}</div>` : ''}
     </div>`;
   }).join('');
 }
 
-function addVisitRecord(){
+function addVisitRecord(withLocation){
   if(!currentDetailId) return;
   const id = currentDetailId;
+  const d = destinations[id];
   const note = document.getElementById('visitNoteInput').value.trim();
-  const vid = newId();
-  const visits = Object.assign({}, destinations[id].visits || {});
-  visits[vid] = {ts: Date.now(), note};
-  const patch = {visits};
-  if((destinations[id].stage||0) < 1) patch.stage = 1;
-  updateDestination(id, patch);
-  destinations[id] = Object.assign({}, destinations[id], patch);
-  renderVisits(destinations[id].visits);
-  renderStepper(destinations[id].stage||0);
-  document.getElementById('visitNoteInput').value = '';
-  showToast('방문 기록을 남겼어요');
-  render();
+
+  function save(verified){
+    const vid = newId();
+    const visits = Object.assign({}, destinations[id].visits || {});
+    visits[vid] = {ts: Date.now(), note, verified: !!verified};
+    const patch = {visits};
+    if((destinations[id].stage||0) < 1) patch.stage = 1;
+    updateDestination(id, patch);
+    destinations[id] = Object.assign({}, destinations[id], patch);
+    renderVisits(destinations[id].visits);
+    renderStepper(destinations[id].stage||0);
+    document.getElementById('visitNoteInput').value = '';
+    showToast(verified ? '📍 위치 인증되어 방문 기록을 남겼어요!' : '방문 기록을 남겼어요');
+    render();
+  }
+
+  if(!withLocation){ save(false); return; }
+
+  if(!navigator.geolocation){ showToast('이 브라우저는 위치 인증을 지원하지 않아요.'); save(false); return; }
+  if(!d.lat || !d.lng){ showToast('이 절의 위치 정보가 아직 없어서 인증이 어려워요. 그냥 기록할게요.'); save(false); return; }
+
+  showToast('현재 위치 확인 중...');
+  navigator.geolocation.getCurrentPosition(pos=>{
+    const dist = haversineKm(pos.coords.latitude, pos.coords.longitude, d.lat, d.lng);
+    if(dist <= 3){
+      save(true);
+    } else {
+      showToast(`절에서 약 ${dist.toFixed(1)}km 떨어져 있어서 인증이 안 됐어요. 그냥 기록할게요.`);
+      save(false);
+    }
+  }, err=>{
+    showToast('위치 권한을 허용해주셔야 인증할 수 있어요. 그냥 기록할게요.');
+    save(false);
+  }, {timeout:8000});
 }
 
 function visitCount(d){
