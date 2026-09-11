@@ -1797,14 +1797,17 @@ function closePackOverlay(){
 }
 function renderPackOverlay(){
   const wrap = document.getElementById('packList');
-  const existingNames = new Set(Object.values(destinations).map(d=>d.name));
+  const byName = {};
+  Object.values(destinations).forEach(d=> byName[d.name]=d);
   wrap.innerHTML = PACKS.map(p=>{
     const packData = resolvePackData(p);
-    const have = packData.filter(item=>existingNames.has(item.name)).length;
+    const have = packData.filter(item=>byName[item.name]).length;
+    const visited = packData.filter(item=>byName[item.name] && (byName[item.name].stage||0)>=1).length;
+    const earned = visited === packData.length;
     return `<div class="packrow">
       <div>
-        <div class="packrow-title">${p.label}</div>
-        <div class="packrow-sub">${packData.length}곳 중 ${have}곳 등록됨</div>
+        <div class="packrow-title">${earned?'🏅 ':''}${p.label}</div>
+        <div class="packrow-sub">${packData.length}곳 중 ${have}곳 등록 · <b style="color:var(--moss);">${visited}곳 다녀옴</b>${earned?' · 완주!':''}</div>
         ${p.route ? `<div class="packrow-sub" style="margin-top:4px;color:var(--stamp);">🚗 ${p.route}</div>` : ''}
       </div>
       <div style="display:flex;flex-direction:column;gap:6px;flex-shrink:0;">
@@ -1829,8 +1832,8 @@ function openPackDetail(key){
     ${pack.nearby ? `<div class="packrow-sub" style="color:var(--moss);margin-bottom:12px;">📍 주변 들를 만한 곳: ${pack.nearby}</div>` : ''}
     <button class="btn btn-primary btn-block" style="margin-bottom:14px;" onclick="loadPack('${pack.key}')">이 코스 전체 불러오기</button>
     ${packData.map((item,i)=>`
-      <div class="visitrow" style="border-left-color:${item.tag==='유명'?'var(--moss)':'var(--gold)'};">
-        <div style="font-weight:700;font-family:'Nanum Myeongjo','Noto Serif KR',serif;font-size:15px;">${i+1}. ${escapeHtml(item.name)}</div>
+      <div class="visitrow" style="border-left-color:${item.tag==='유명'?'var(--moss)':'var(--gold)'};cursor:pointer;" onclick="openPackItemDetail('${item.name.replace(/'/g,"\\'")}')">
+        <div style="font-weight:700;font-family:'Nanum Myeongjo','Noto Serif KR',serif;font-size:15px;">${i+1}. ${escapeHtml(item.name)} <span style="font-size:11px;color:var(--stamp);font-weight:400;">자세히 보기 ›</span></div>
         <div style="font-size:11px;color:var(--ink-soft);margin-bottom:4px;">${item.region} · ${item.tag==='유명'?'유명한 곳':'숨은 곳'}</div>
         <div class="vnote" style="margin-top:2px;">${escapeHtml(item.desc||'')}</div>
         ${item.activity ? `<div class="vnote" style="margin-top:4px;color:var(--moss);font-weight:600;">✓ ${escapeHtml(item.activity)}</div>` : ''}
@@ -1838,6 +1841,27 @@ function openPackDetail(key){
       </div>
     `).join('')}
   `;
+}
+
+function openPackItemDetail(name){
+  let existingId = null;
+  Object.entries(destinations).forEach(([id,d])=>{ if(d.name===name) existingId = id; });
+  if(existingId){
+    closePackOverlay();
+    openDetail(existingId);
+    return;
+  }
+  const item = MASTER_BY_NAME[name];
+  if(!item) return;
+  const id = newId();
+  const data = {name:item.name, region:item.region, tag:item.tag, stage:0, notes:'', photos:{}, createdAt: Date.now()};
+  writeDestination(id, mergeWithMaster(data));
+  showToast(`"${name}"을(를) 목록에 추가하고 열게요`);
+  setTimeout(()=>{
+    let newId2 = null;
+    Object.entries(destinations).forEach(([xid,d])=>{ if(d.name===name) newId2 = xid; });
+    if(newId2){ closePackOverlay(); openDetail(newId2); }
+  }, 400);
 }
 
 /* ============================================================
