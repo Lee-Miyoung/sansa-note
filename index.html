@@ -578,6 +578,7 @@
       </select>
       <input class="searchbox" id="searchBox" placeholder="절 이름, 지역, 유명한 것으로 검색" oninput="render()">
       <button class="btn btn-primary" style="padding:7px 14px;font-size:12.5px;flex-shrink:0;" onclick="openCourseBuilder()">🧭 코스 만들기</button>
+      <button class="btn btn-ghost" style="padding:7px 14px;font-size:12.5px;flex-shrink:0;" onclick="openRouletteOverlay()">🎡 오늘은 여기!</button>
     </div>
   </div>
 
@@ -628,6 +629,7 @@
       </div>
 
       <div class="section-label">위치</div>
+      <div id="dWeather" style="margin-bottom:8px;"></div>
       <div id="dMap"></div>
       <a id="dMapLink" class="maplink" target="_blank" rel="noopener">카카오맵에서 크게 보기 ↗</a>
       <br>
@@ -690,7 +692,6 @@
       <button class="btn btn-ghost btn-block" onclick="closeSettings();openAlbumOverlay();" style="margin-bottom:10px;">🖼 나의 순례 앨범</button>
       <button class="btn btn-ghost btn-block" onclick="closeSettings();openBadgeOverlay();" style="margin-bottom:10px;">🏅 나의 뱃지</button>
       <button class="btn btn-ghost btn-block" onclick="closeSettings();openQuizOverlay();" style="margin-bottom:10px;">🧩 이 절 어디게? 퀴즈</button>
-      <button class="btn btn-ghost btn-block" onclick="refreshDescriptions()" style="margin-bottom:10px;">저장된 절 설명 최신화</button>
       <button class="btn btn-ghost btn-block" onclick="doLogout()">로그아웃</button>
     </div>
   </div>
@@ -733,6 +734,17 @@
   <button id="lbNext" style="position:fixed;right:10px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.15);color:#fff;border:none;width:44px;height:44px;border-radius:50%;font-size:20px;cursor:pointer;" onclick="lightboxNav(1)">›</button>
   <div id="lbCounter" style="position:fixed;bottom:24px;left:50%;transform:translateX(-50%);color:#fff;font-size:12px;background:rgba(255,255,255,.15);padding:5px 14px;border-radius:999px;"></div>
   <button class="close-x" style="position:fixed;top:20px;right:20px;color:#fff;font-size:28px;" onclick="closeLightbox()">✕</button>
+</div>
+
+<!-- ===================== ROULETTE MODAL ===================== -->
+<div class="overlay" id="rouletteOverlay">
+  <div class="modal">
+    <div class="modal-head">
+      <div><h2 class="serif">🎡 오늘은 여기!</h2><div class="sub">가보고 싶은 곳 중에서 랜덤으로 골라드려요</div></div>
+      <button class="close-x" onclick="closeRouletteOverlay()">✕</button>
+    </div>
+    <div class="modal-body" id="rouletteBody" style="text-align:center;"></div>
+  </div>
 </div>
 
 <!-- ===================== QUIZ MODAL ===================== -->
@@ -1234,14 +1246,34 @@ function launchApp(){
 
   if(localMode){
     const raw = localStorage.getItem('travelDiaryLocalData');
-    destinations = raw ? JSON.parse(raw) : {};
+    destinations = mergeAllWithMaster(raw ? JSON.parse(raw) : {});
     afterDataLoaded();
   } else {
     destinationsRef().on('value', snap=>{
-      destinations = snap.val() || {};
+      destinations = mergeAllWithMaster(snap.val() || {});
       afterDataLoaded();
     });
   }
+}
+
+function mergeWithMaster(rawData){
+  const master = MASTER_BY_NAME[rawData.name];
+  if(!master) return rawData;
+  return Object.assign({}, rawData, {
+    region: master.region, tag: master.tag,
+    desc: master.desc, activity: master.activity,
+    season: master.season || null,
+    visitorTip: master.visitorTip || null,
+    nearbySight: master.nearbySight || null,
+    tagline: master.tagline || null,
+    difficulty: master.difficulty || null,
+    bestFor: master.bestFor || null
+  });
+}
+function mergeAllWithMaster(destObj){
+  const out = {};
+  Object.entries(destObj).forEach(([id,d])=> out[id] = mergeWithMaster(d));
+  return out;
 }
 
 function updateAccountInfo(){
@@ -1302,23 +1334,50 @@ function removeDestinationData(id){
   }
 }
 
-function refreshDescriptions(){
-  const master = MASTER_BY_NAME;
-  let updated = 0;
-  Object.entries(destinations).forEach(([id,d])=>{
-    const src = master[d.name];
-    if(src && (src.desc !== d.desc || src.activity !== d.activity || src.season !== d.season || src.visitorTip !== d.visitorTip || src.nearbySight !== d.nearbySight || src.tagline !== d.tagline)){
-      updateDestination(id, {desc: src.desc, activity: src.activity, season: src.season || null, visitorTip: src.visitorTip || null, nearbySight: src.nearbySight || null, tagline: src.tagline || null, difficulty: src.difficulty || null, bestFor: src.bestFor || null});
-      updated++;
-    }
-  });
-  showToast(updated>0 ? `${updated}곳의 설명을 최신화했어요` : '이미 다 최신 상태예요');
-  closeSettings();
-}
 
 /* ============================================================
-   QUIZ GAME (이 절 어디게?)
+   ROULETTE (오늘은 여기!)
 ============================================================ */
+let rouletteInterval = null;
+function openRouletteOverlay(){
+  document.getElementById('rouletteOverlay').classList.add('show');
+  spinRoulette();
+}
+function closeRouletteOverlay(){
+  document.getElementById('rouletteOverlay').classList.remove('show');
+  clearInterval(rouletteInterval);
+}
+function spinRoulette(){
+  const candidates = Object.entries(destinations).filter(([id,d])=>(d.stage||0)===0);
+  const body = document.getElementById('rouletteBody');
+  if(candidates.length===0){
+    body.innerHTML = '<div class="map-note" style="padding:20px 0;">"가보고 싶다" 상태인 절이 없어요. 순례 코스를 먼저 불러와보세요.</div>';
+    return;
+  }
+  let ticks = 0;
+  const maxTicks = 18 + Math.floor(Math.random()*8);
+  body.innerHTML = `<div class="serif" id="rouletteName" style="font-size:26px;margin:24px 0;color:var(--stamp);">...</div>`;
+  clearInterval(rouletteInterval);
+  rouletteInterval = setInterval(()=>{
+    const [,d] = candidates[Math.floor(Math.random()*candidates.length)];
+    document.getElementById('rouletteName').textContent = d.name;
+    ticks++;
+    if(ticks >= maxTicks){
+      clearInterval(rouletteInterval);
+      const [finalId, finalD] = candidates[Math.floor(Math.random()*candidates.length)];
+      document.getElementById('rouletteName').textContent = finalD.name;
+      showCelebration('🎡 오늘의 절은...', finalD.name+'!');
+      setTimeout(()=>{
+        body.innerHTML = `
+          <div class="serif" style="font-size:28px;margin:20px 0 6px;color:var(--stamp);">${escapeHtml(finalD.name)}</div>
+          <div style="color:var(--ink-soft);font-size:12.5px;margin-bottom:18px;">${escapeHtml(finalD.region)} · ${finalD.tagline?('"'+escapeHtml(finalD.tagline)+'"'):''}</div>
+          <button class="btn btn-primary btn-block" style="margin-bottom:8px;" onclick="closeRouletteOverlay();openDetail('${finalId}');">이 절 보러가기</button>
+          <button class="btn btn-ghost btn-block" onclick="spinRoulette()">다시 돌리기</button>
+        `;
+      }, 600);
+    }
+  }, 90);
+}
 let quizScore = 0;
 let quizCurrentAnswer = null;
 
@@ -2017,6 +2076,22 @@ function openDetail(id){
   document.getElementById('dFoodLink').href = 'https://map.kakao.com/link/search/' + encodeURIComponent(d.name + ' 맛집');
   document.getElementById('detailOverlay').classList.add('show');
   requestAnimationFrame(()=> setupDetailMap(d, id));
+  renderWeather(d);
+}
+
+const WEATHER_ICONS = {0:'☀️',1:'🌤',2:'⛅',3:'☁️',45:'🌫',48:'🌫',51:'🌦',53:'🌦',55:'🌦',61:'🌧',63:'🌧',65:'🌧',71:'🌨',73:'🌨',75:'🌨',80:'🌦',81:'🌧',82:'⛈',95:'⛈',96:'⛈',99:'⛈'};
+function renderWeather(d){
+  const el = document.getElementById('dWeather');
+  if(!d.lat || !d.lng){ el.innerHTML=''; return; }
+  el.innerHTML = `<div class="map-note" style="padding:0;">날씨 확인 중...</div>`;
+  fetch(`https://api.open-meteo.com/v1/forecast?latitude=${d.lat}&longitude=${d.lng}&current=temperature_2m,weather_code&timezone=Asia%2FSeoul`)
+    .then(r=>r.json())
+    .then(data=>{
+      const cur = data.current;
+      if(!cur){ el.innerHTML=''; return; }
+      const icon = WEATHER_ICONS[cur.weather_code] || '🌡';
+      el.innerHTML = `<div class="quick-chip" style="background:#eef4fb;border-color:#a8c8e8;color:#2c5a8a;">${icon} 지금 ${Math.round(cur.temperature_2m)}°C</div>`;
+    }).catch(()=>{ el.innerHTML=''; });
 }
 
 function closeDetail(){
@@ -2356,6 +2431,7 @@ function setupDetailMap(d, id){
 function renderPin(el, d, lat, lng){
   const map = new kakao.maps.Map(el, {center: new kakao.maps.LatLng(lat,lng), level:5});
   new kakao.maps.Marker({map, position: new kakao.maps.LatLng(lat,lng), image: markerImageFor(d.tag)});
+  renderWeather(Object.assign({}, d, {lat, lng}));
 }
 
 function openMapOverlay(){
