@@ -475,6 +475,11 @@
   .card.gold-unlocked{border:2px solid var(--gold);box-shadow:0 4px 14px rgba(201,148,47,.25);}
   body.reward-gold .card{border:2px solid var(--gold);box-shadow:0 4px 14px rgba(201,148,47,.25);}
   body.reward-purple{--stamp:#6b3fa0;--gold:#9b6fd6;}
+  body.reward-texture{
+    background:
+      radial-gradient(rgba(217,119,87,.06) 1px, transparent 1.4px) 0 0/16px 16px,
+      var(--paper);
+  }
   body.reward-stamp2 .stampcorner{
     background:linear-gradient(135deg,var(--gold),var(--stamp));
     box-shadow:0 0 0 3px #fff, 0 0 10px rgba(217,119,87,.6);
@@ -1391,16 +1396,40 @@ function removeDestinationData(id){
 const WORRY_CATEGORIES = [
   {key:"complex", label:"머리가 복잡해요", icon:"🌫", buddhist:"방하착 (放下着)",
    pool:["연곡사","벽송사","문수사","각연사","김룡사","불영사","오어사","백담사"],
-   phrase:"'방하착(放下着)' — 내려놓으라는 뜻이에요. 손에 쥔 것을 내려놓아야 새것을 잡을 수 있듯, 지금 붙들고 있는 생각도 잠시 내려놔도 괜찮아요."},
+   phrases:[
+     "손에 꽉 쥔 걸 잠시 내려놓아야 새로운 게 보인대요. 오늘은 그냥 내려놓고 걸어보세요.",
+     "생각이 많을 땐 없애려 하지 말고 그냥 흘러가게 두세요. 구름도 지나가면 하늘이 다시 맑아지잖아요.",
+     "머리가 복잡할 땐 머리보다 발을 써보세요. 걷다 보면 어느새 마음이 따라와요.",
+     "지금 드는 그 생각, 오늘 안에 답을 내지 않아도 괜찮아요. 마당 한 바퀴만 돌고 다시 생각해봐요.",
+     "같은 상황도 마음먹기 나름이라고 하죠. 오늘은 마음을 잠깐 쉬게 해주세요."
+   ]},
   {key:"tired", label:"지쳤어요, 쉬고 싶어요", icon:"😮‍💨", buddhist:"평상심시도 (平常心是道)",
    pool:["내소사","월정사","마곡사","개심사","무위사","천은사","화계사"],
-   phrase:"'평상심시도(平常心是道)' — 특별할 것 없는 평범한 마음이 곧 도(道)라는 뜻이에요. 애써 잘하려 하지 않아도, 지금 이대로도 충분해요."},
+   phrases:[
+     "특별하지 않은 오늘 이 마음 그대로도 충분하대요. 애쓰지 않아도 돼요.",
+     "쉬는 것도 수행의 일부예요. 부지런한 스님들도 쉼을 중요하게 여겨요.",
+     "지금은 잠시 멈춰도 되는 때예요. 그늘에 앉아 바람 소리만 들어보세요.",
+     "무리하지 마세요. 천천히 가도 결국 닿아요.",
+     "몸이 지치면 마음도 따라 지쳐요. 오늘 하루쯤은 나를 위해 아무것도 안 해도 괜찮아요."
+   ]},
   {key:"resolve", label:"새로운 결심이 필요해요", icon:"🔥", buddhist:"수처작주 (隨處作主)",
    pool:["봉정암","갓바위(선본사)","청량사","보리암","향일암","해동용궁사"],
-   phrase:"'수처작주(隨處作主)' — 어디에 있든 스스로 주인이 되라는 뜻이에요. 상황이 아니라 당신이 중심이에요. 한 걸음씩 오르다 보면 정상이에요."},
+   phrases:[
+     "어디에 있든 내가 중심이래요. 상황에 휘둘리지 말고 내가 정하면 돼요.",
+     "한 걸음씩 오르다 보면 어느새 정상이에요. 지금 그 한 걸음이면 충분해요.",
+     "시작이 반이라는 말, 여기서도 똑같아요. 첫 계단을 오르는 마음이면 돼요.",
+     "오늘 내딛는 작은 결심 하나가, 나중엔 큰 길이 되어 있을 거예요.",
+     "돌도 오래 갈면 빛이 난다고 하죠. 지금의 노력은 절대 사라지지 않아요."
+   ]},
   {key:"comfort", label:"그냥 위로가 필요해요", icon:"🕯", buddhist:"자비 (慈悲)",
    pool:["낙산사","보문사","관음사","신흥사","휴휴암","법화사"],
-   phrase:"'자비(慈悲)' — 남에게만이 아니라 나 자신에게도 베푸는 마음이에요. 오늘만큼은 스스로에게 조금 너그러워져도 괜찮아요."}
+   phrases:[
+     "자비는 남에게만 베푸는 게 아니에요. 오늘은 나 자신에게 좀 너그러워지세요.",
+     "당신은 혼자가 아니에요. 지금 그 마음, 누구나 한 번쯤 겪어요.",
+     "힘들다고 말해도 괜찮아요. 그런 날도 있는 거예요.",
+     "오늘 하루 버텨준 것만으로도 충분히 잘하고 있는 거예요.",
+     "괜찮지 않아도 괜찮아요. 천천히 괜찮아지면 돼요."
+   ]}
 ];
 
 function openWorryOverlay(){
@@ -1424,11 +1453,13 @@ function pickWorryTemple(key){
   if(validPool.length===0) return;
   const name = validPool[Math.floor(Math.random()*validPool.length)];
   const item = MASTER_BY_NAME[name];
+  const phrase = cat.phrases[Math.floor(Math.random()*cat.phrases.length)];
   const wrap = document.getElementById('worryBody');
   wrap.innerHTML = `
     <a onclick="openWorryOverlay()" style="cursor:pointer;color:var(--moss);font-size:12.5px;font-weight:700;">← 다시 고르기</a>
     <div style="text-align:center;margin-top:16px;">
-      <div style="font-size:13px;color:var(--ink-soft);font-style:italic;margin-bottom:16px;line-height:1.6;">"${cat.phrase}"</div>
+      <div style="font-size:11px;color:var(--stamp);font-weight:700;margin-bottom:6px;">${cat.buddhist}</div>
+      <div style="font-size:14px;color:var(--ink);font-style:italic;margin-bottom:16px;line-height:1.7;">${phrase}</div>
       <div class="serif" style="font-size:26px;color:var(--stamp);margin-bottom:6px;">${escapeHtml(name)}</div>
       <div style="font-size:12px;color:var(--ink-soft);margin-bottom:18px;">${escapeHtml(item.region)} · ${item.tagline?('"'+escapeHtml(item.tagline)+'"'):''}</div>
       <button class="btn btn-primary btn-block" style="margin-bottom:8px;" onclick="closeWorryOverlay();openPackItemDetail('${name.replace(/'/g,"\\'")}');">이 절 자세히 보기</button>
@@ -1689,12 +1720,14 @@ function closeAlbumOverlay(){
    BADGES (완주 뱃지) & SEASON BANNER
 ============================================================ */
 const REWARD_TIERS = [
-  {count:1, key:'gold', buddhist:'발심(發心)', icon:'✨', label:'카드 금테두리 테마', desc:'처음 뜻을 낸 당신에게. 코스 1개 완주하면 모든 절 카드에 금색 테두리가 생겨요.'},
-  {count:2, key:'stamp2', buddhist:'정진(精進)', icon:'🔶', label:'특별 완주 도장', desc:'꾸준히 나아가는 힘. 코스 2개 완주하면 완주 뱃지 도장이 더 화려해져요.'},
-  {count:3, key:'stats', buddhist:'관조(觀照)', icon:'📊', label:'나만의 순례 통계', desc:'스스로를 비추어 보는 시간. 코스 3개 완주하면 지역별·유형별 통계를 볼 수 있어요.'},
-  {count:5, key:'export', buddhist:'회향(廻向)', icon:'📝', label:'순례 기록 내보내기', desc:'내 공덕을 나누는 마음. 코스 5개 완주하면 블로그·인스타에 붙일 요약 문구를 만들 수 있어요.'},
-  {count:7, key:'title', buddhist:'만행(卍行)', icon:'🧭', label:'특별 칭호 획득', desc:'정처 없이 떠돌며 수행하는 자. 코스 7개 완주하면 이름 옆에 특별 칭호가 붙어요.'},
-  {count:10, key:'purple', buddhist:'해탈(解脫)', icon:'👑', label:'궁극의 보랏빛 테마', desc:'모든 속박에서 벗어난 자유. 코스 10개 완주하면 전설의 보랏빛 테마가 열려요.'}
+  {count:1, key:'gold', buddhist:'발심(發心)', icon:'✨', label:'카드 금테두리 테마', desc:'처음 뜻을 낸 당신에게. 모든 절 카드에 금색 테두리가 생겨요.'},
+  {count:2, key:'stamp2', buddhist:'정진(精進)', icon:'🔶', label:'빛나는 완주 도장', desc:'꾸준히 나아가는 힘. 완주 뱃지 도장이 은은하게 빛나는 효과로 바뀌어요.'},
+  {count:3, key:'stats', buddhist:'관조(觀照)', icon:'📊', label:'나만의 순례 통계', desc:'스스로를 비추어 보는 시간. 지역별·유형별 통계를 볼 수 있어요.'},
+  {count:4, key:'texture', buddhist:'불퇴전(不退轉)', icon:'🎨', label:'고요한 종이결 테마', desc:'물러서지 않는 마음. 배경에 은은한 한지 질감이 더해져요.'},
+  {count:5, key:'export', buddhist:'회향(廻向)', icon:'📝', label:'순례 기록 내보내기', desc:'내 공덕을 나누는 마음. 블로그·인스타에 붙일 요약 문구를 만들 수 있어요.'},
+  {count:7, key:'title', buddhist:'만행(卍行)', icon:'🧭', label:'특별 칭호 획득', desc:'정처 없이 떠돌며 수행하는 자. 이름 옆에 "만행자" 칭호가 붙어요.'},
+  {count:8, key:'bodhisattva', buddhist:'보살행(菩薩行)', icon:'🪷', label:'칭호 승급', desc:'나를 넘어 남을 위하는 마음. 칭호가 "만행자"에서 "보살"로 승급해요.'},
+  {count:10, key:'purple', buddhist:'해탈(解脫)', icon:'👑', label:'궁극의 보랏빛 테마', desc:'모든 속박에서 벗어난 자유. 전설의 보랏빛 테마가 열려요.'}
 ];
 
 function computeCompletedPacksCount(){
@@ -1715,8 +1748,19 @@ function applyRewardEffects(){
   document.body.classList.toggle('reward-gold', unlocked.includes('gold'));
   document.body.classList.toggle('reward-purple', unlocked.includes('purple'));
   document.body.classList.toggle('reward-stamp2', unlocked.includes('stamp2'));
+  document.body.classList.toggle('reward-texture', unlocked.includes('texture'));
   const titleEl = document.getElementById('specialTitlePill');
-  if(titleEl) titleEl.style.display = unlocked.includes('title') ? 'inline-block' : 'none';
+  if(titleEl){
+    if(unlocked.includes('bodhisattva')){
+      titleEl.style.display = 'inline-block';
+      titleEl.textContent = '🪷 보살(菩薩)';
+    } else if(unlocked.includes('title')){
+      titleEl.style.display = 'inline-block';
+      titleEl.textContent = '🧭 만행자(卍行者)';
+    } else {
+      titleEl.style.display = 'none';
+    }
+  }
 }
 
 function openBadgeOverlay(){
