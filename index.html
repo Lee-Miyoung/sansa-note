@@ -582,7 +582,7 @@
         <div>
           <h1 class="serif">산사노트</h1>
           <p>불교 신자가 아니어도 괜찮아요. 마음이 복잡할 때, 그냥 걷고 싶을 때 발걸음이 닿는 곳. 그 절과 그날의 나를 기록하는 노트예요.</p>
-          <p style="margin-top:6px;font-size:11.5px;color:#ffe3cc;font-style:italic;">✦ 기본 목록이 108곳인 건 우연이 아니에요 — 불교에서 말하는 108번뇌를 담았어요. 여기 없는, 앤이 아는 절은 오른쪽 아래 + 버튼으로 직접 추가할 수 있어요.</p>
+          <p style="margin-top:6px;font-size:11.5px;color:#ffe3cc;font-style:italic;">✦ 기본 목록이 <b style="font-size:15px;font-style:normal;color:#fff;">108</b>곳인 건 우연이 아니에요 — 불교에서 말하는 108번뇌를 담았어요. 여기 없는, 알고 계신 절은 오른쪽 아래 + 버튼으로 직접 추가할 수 있어요.</p>
           <div id="streakBadge" style="margin-top:8px;"></div>
           <div id="levelBadge" style="margin-top:8px;"></div>
           <span id="specialTitlePill" class="special-title-pill">🧭 만행자(卍行者)</span>
@@ -795,6 +795,22 @@
       <button class="close-x" onclick="closeWorryOverlay()">✕</button>
     </div>
     <div class="modal-body" id="worryBody"></div>
+  </div>
+</div>
+
+<!-- ===================== BREATHING MODAL ===================== -->
+<div class="overlay" id="breathOverlay">
+  <div class="modal" style="text-align:center;">
+    <div class="modal-head">
+      <div><h2 class="serif">🫁 수식관 호흡</h2><div class="sub">스님들이 참선할 때 쓰는 '수식관(數息觀)' — 숨을 헤아리며 마음을 가라앉히는 전통 수행법이에요</div></div>
+      <button class="close-x" onclick="closeBreathOverlay()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div id="breathCircle" style="width:140px;height:140px;border-radius:50%;background:radial-gradient(circle,var(--moss),var(--moss-dark));margin:20px auto;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:15px;transition:transform 4s ease-in-out;">준비</div>
+      <div id="breathCount" style="font-size:12px;color:var(--ink-soft);margin-bottom:14px;">시작 버튼을 눌러주세요</div>
+      <button class="btn btn-primary btn-block" id="breathStartBtn" onclick="startBreathing()">시작하기</button>
+      <div class="map-note" style="margin-top:14px;">🙏 이 숨 한 번은 마음을 잠시 쉬게 하는 작은 방편일 뿐이에요. 계속 마음이 무겁다면, 그 마음을 혼자 두지 말고 가까운 사람과 나눠보세요.</div>
+    </div>
   </div>
 </div>
 
@@ -1424,6 +1440,64 @@ function removeDestinationData(id){
 
 
 /* ============================================================
+   BREATHING EXERCISE (박스 호흡)
+============================================================ */
+let breathTimer = null;
+function openBreathOverlay(){
+  document.getElementById('breathOverlay').classList.add('show');
+  resetBreathing();
+}
+function closeBreathOverlay(){
+  document.getElementById('breathOverlay').classList.remove('show');
+  clearTimeout(breathTimer);
+  resetBreathing();
+}
+function resetBreathing(){
+  clearTimeout(breathTimer);
+  const circle = document.getElementById('breathCircle');
+  circle.style.transition = 'none';
+  circle.style.transform = 'scale(1)';
+  circle.textContent = '준비';
+  document.getElementById('breathCount').textContent = '시작 버튼을 눌러주세요';
+  document.getElementById('breathStartBtn').style.display = 'block';
+  document.getElementById('breathStartBtn').textContent = '시작하기';
+}
+function startBreathing(){
+  document.getElementById('breathStartBtn').style.display = 'none';
+  const circle = document.getElementById('breathCircle');
+  const countEl = document.getElementById('breathCount');
+  const steps = [
+    {label:'들이쉬기', scale:1.5},
+    {label:'멈추기', scale:1.5},
+    {label:'내쉬기', scale:1},
+    {label:'멈추기', scale:1}
+  ];
+  let cycle = 0;
+  const totalCycles = 4;
+  let stepIdx = 0;
+  function runStep(){
+    if(cycle >= totalCycles){
+      circle.style.transition = 'transform 1s ease';
+      circle.style.transform = 'scale(1)';
+      circle.textContent = '수고했어요';
+      countEl.textContent = '4번의 호흡을 마쳤어요. 잠시 더 앉아 있어도 좋아요.';
+      document.getElementById('breathStartBtn').style.display = 'block';
+      document.getElementById('breathStartBtn').textContent = '다시 하기';
+      return;
+    }
+    const step = steps[stepIdx];
+    circle.style.transition = 'transform 4s ease-in-out';
+    circle.style.transform = `scale(${step.scale})`;
+    circle.textContent = step.label;
+    countEl.textContent = `${cycle+1} / ${totalCycles} 회`;
+    stepIdx++;
+    if(stepIdx >= steps.length){ stepIdx = 0; cycle++; }
+    breathTimer = setTimeout(runStep, 4000);
+  }
+  runStep();
+}
+
+/* ============================================================
    WORRY COUNSELOR (마음이 복잡할 때)
 ============================================================ */
 const WORRY_CATEGORIES = [
@@ -1584,6 +1658,7 @@ function pickWorryTemple(key){
       <div class="serif" style="font-size:26px;color:var(--stamp);margin-bottom:6px;">${escapeHtml(name)}</div>
       <div style="font-size:12px;color:var(--ink-soft);margin-bottom:18px;">${escapeHtml(item.region)} · ${item.tagline?('"'+escapeHtml(item.tagline)+'"'):''}</div>
       <button class="btn btn-primary btn-block" style="margin-bottom:8px;" onclick="closeWorryOverlay();openPackItemDetail('${name.replace(/'/g,"\\'")}');">이 절 자세히 보기</button>
+      <button class="btn btn-ghost btn-block" style="margin-bottom:8px;" onclick="openBreathOverlay()">🫁 잠깐, 같이 숨 한 번 골라볼까요?</button>
       <button class="btn btn-ghost btn-block" onclick="pickWorryTemple('${key}')">다른 곳 추천받기</button>
     </div>
   `;
