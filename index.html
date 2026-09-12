@@ -478,6 +478,7 @@
   .fun-banner-btn.mantra{background:linear-gradient(135deg,#f0e6ff,#e0ccff);color:#5a3a8a;}
   .fun-banner-btn.amulet{background:linear-gradient(135deg,#ffe0e0,#ffc2c2);color:#8a2a2a;}
   .fun-banner-btn.moktak{background:linear-gradient(135deg,#e8d5b7,#d4b483);color:#5a3d1a;}
+  .fun-banner-btn.playlist{background:linear-gradient(135deg,#d0e8f5,#a8d0e8);color:#1a4a5a;}
   .mantra-speed.active{background:#5a3a8a;color:#fff;border-color:#5a3a8a;}
   .bow-speed.active{background:var(--stamp);color:#fff;border-color:var(--stamp-dark);}
   .explain108-banner{
@@ -1056,6 +1057,29 @@
       <button class="btn btn-primary btn-block" id="bowAutoToggleBtn" onclick="toggleBowAuto()">▶ 시작하기</button>
       <button class="btn btn-ghost btn-block" style="margin-top:8px;" onclick="resetBowCounter()">오늘 기록 초기화</button>
       <div class="map-note" style="margin-top:14px;">신호(종소리·진동)가 울릴 때마다 절을 한 번 올리면 돼요. 급하면 속도를 늦춰도 괜찮아요.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== PLAYLIST MODAL ===================== -->
+<div class="overlay" id="playlistOverlay">
+  <div class="modal" style="text-align:center;">
+    <div class="modal-head">
+      <div><h2 class="serif">🎵 명상 플레이리스트</h2><div class="sub" id="playlistSongTitle">비워내 비워내</div></div>
+      <button class="close-x" onclick="closePlaylistOverlay()">✕</button>
+    </div>
+    <div class="modal-body">
+      <audio id="playlistAudio" src="song1.mp3"></audio>
+      <div id="lyricsWrap" style="height:220px;overflow-y:auto;background:var(--paper);border-radius:12px;padding:16px 12px;margin-bottom:14px;scroll-behavior:smooth;">
+        <div id="lyricsInner"></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+        <span id="playlistCurTime" style="font-size:11px;color:var(--ink-soft);width:36px;">0:00</span>
+        <input type="range" id="playlistSeek" min="0" max="100" value="0" style="flex:1;" oninput="seekPlaylist(this.value)">
+        <span id="playlistDurTime" style="font-size:11px;color:var(--ink-soft);width:36px;">0:00</span>
+      </div>
+      <button class="btn btn-primary btn-block" id="playlistPlayBtn" onclick="togglePlaylistPlay()">▶ 재생하기</button>
+      <div class="map-note" style="margin-top:12px;">가사 싱크는 정확한 박자가 아니라 대략 맞춘 것이에요. 조금씩 어긋날 수 있어요.</div>
     </div>
   </div>
 </div>
@@ -1900,6 +1924,10 @@ function renderFunBanner(){
       <div class="fb-title">🥢 무한 목탁</div>
       <div class="fb-sub">두드리면서 스트레스 날리기</div>
     </button>
+    <button class="fun-banner-btn playlist" onclick="openPlaylistOverlay()">
+      <div class="fb-title">🎵 명상 플레이리스트</div>
+      <div class="fb-sub">가사 보면서 듣는 마음 노래</div>
+    </button>
   </div>`;
 }
 
@@ -2059,6 +2087,107 @@ function removeDestinationData(id){
 
 
 /* ============================================================
+   PLAYLIST (명상 플레이리스트 + 가사 싱크)
+============================================================ */
+const LYRICS_SONG1 = [
+  {t:0, text:'[Intro]'},
+  {t:2, text:'(잔잔한 풍경소리, 로파이 빗소리)'},
+  {t:8, text:'(은은한 목탁 리듬)'},
+  {t:14, text:'[Verse 1]'},
+  {t:15, text:'어지러운 세상 속, 잠시 내려놓아'},
+  {t:21, text:'숨을 깊게 들이쉬고 내쉬는 이 순간'},
+  {t:27, text:'바람이 불어와도 숲은 흔들리지 않듯'},
+  {t:33, text:'파도치는 네 마음도 곧 고요해질 거야'},
+  {t:39, text:'생각은 구름처럼 그저 스쳐 갈 뿐'},
+  {t:45, text:'붙잡지 말고 흘려보내, 다 괜찮아'},
+  {t:50, text:'[Pre-Chorus]'},
+  {t:51, text:'잡으려 할수록 멀어지던 것들'},
+  {t:57, text:'비워낼수록 채워지는 평온함'},
+  {t:63, text:'옴 마니 반메 훔 (Om Mani Padme Hum)'},
+  {t:69, text:'마음의 불을 꺼'},
+  {t:75, text:'[Chorus]'},
+  {t:76, text:'비워내 비워내, 번뇌는 바람결에'},
+  {t:82, text:'모든 건 인연 따라 피고 또 질 뿐인데'},
+  {t:88, text:'조용히 울려 퍼지는 목탁의 박자 속에'},
+  {t:94, text:'온전히 머무르는 지금 이 자리'},
+  {t:100, text:'내 안의 고요, 맑아진 평정심'},
+  {t:106, text:'[Verse 2]'},
+  {t:107, text:'어제의 후회도, 내일의 불안도'},
+  {t:113, text:'지금 여기엔 없어, 그저 숨만 쉴 뿐'},
+  {t:119, text:'무거운 짐 내려놓고 걸음을 늦춰봐'},
+  {t:125, text:'모든 것은 변하지만 본래 텅 빈 것'},
+  {t:131, text:'머무는 바 없이 그 마음을 낼 때'},
+  {t:137, text:'비로소 보이는 가장 맑은 너의 빛'},
+  {t:142, text:'[Chorus]'},
+  {t:143, text:'비워내 비워내, 번뇌는 바람결에'},
+  {t:149, text:'모든 건 인연 따라 피고 또 질 뿐인데'},
+  {t:155, text:'조용히 울려 퍼지는 목탁의 박자 속에'},
+  {t:161, text:'온전히 머무르는 지금 이 자리'},
+  {t:167, text:'내 안의 고요, 맑아진 평정심'},
+  {t:176, text:'[Outro]'},
+  {t:178, text:'가테 가테 바라가테 바라승가테 모제 사바하'},
+  {t:186, text:'(Gate gate pāragate pārasaṃgate bodhi svāhā)'},
+  {t:193, text:'흩어지는 안개처럼'},
+  {t:199, text:'평온하게, 깊숙이'},
+  {t:205, text:'(잔잔한 종소리와 함께 페이드아웃)'}
+];
+
+function formatTime(sec){
+  sec = Math.floor(sec||0);
+  return `${Math.floor(sec/60)}:${String(sec%60).padStart(2,'0')}`;
+}
+
+function openPlaylistOverlay(){
+  const wrap = document.getElementById('lyricsInner');
+  wrap.innerHTML = LYRICS_SONG1.map((l,i)=>`<div class="lyric-line" id="lyricLine${i}" style="padding:5px 0;font-size:${l.text.startsWith('[')?'11px':'13.5px'};color:${l.text.startsWith('[')?'var(--stamp)':'var(--ink-soft)'};font-weight:${l.text.startsWith('[')?'800':'500'};transition:color .3s ease;">${escapeHtml(l.text)}</div>`).join('');
+  document.getElementById('playlistOverlay').classList.add('show');
+  const audio = document.getElementById('playlistAudio');
+  audio.onloadedmetadata = ()=>{ document.getElementById('playlistDurTime').textContent = formatTime(audio.duration); };
+  audio.ontimeupdate = updatePlaylistProgress;
+  audio.onended = ()=>{ document.getElementById('playlistPlayBtn').textContent = '▶ 재생하기'; };
+}
+function closePlaylistOverlay(){
+  const audio = document.getElementById('playlistAudio');
+  audio.pause();
+  document.getElementById('playlistOverlay').classList.remove('show');
+}
+function togglePlaylistPlay(){
+  const audio = document.getElementById('playlistAudio');
+  if(audio.paused){
+    audio.play().catch(()=> showToast('음원 파일을 못 찾았어요 (song1.mp3가 같은 폴더에 있는지 확인해주세요)'));
+    document.getElementById('playlistPlayBtn').textContent = '⏸ 일시정지';
+  } else {
+    audio.pause();
+    document.getElementById('playlistPlayBtn').textContent = '▶ 재생하기';
+  }
+}
+function seekPlaylist(val){
+  const audio = document.getElementById('playlistAudio');
+  if(audio.duration) audio.currentTime = (val/100) * audio.duration;
+}
+let lastLyricIdx = -1;
+function updatePlaylistProgress(){
+  const audio = document.getElementById('playlistAudio');
+  if(!audio.duration) return;
+  document.getElementById('playlistCurTime').textContent = formatTime(audio.currentTime);
+  document.getElementById('playlistSeek').value = (audio.currentTime/audio.duration)*100;
+  let idx = 0;
+  for(let i=0;i<LYRICS_SONG1.length;i++){
+    if(LYRICS_SONG1[i].t <= audio.currentTime) idx = i; else break;
+  }
+  if(idx !== lastLyricIdx){
+    if(lastLyricIdx>=0){ const prev = document.getElementById('lyricLine'+lastLyricIdx); if(prev){ prev.style.color = 'var(--ink-soft)'; prev.style.fontWeight = '500'; } }
+    const cur = document.getElementById('lyricLine'+idx);
+    if(cur){
+      cur.style.color = 'var(--stamp)';
+      cur.style.fontWeight = '800';
+      cur.scrollIntoView({block:'center', behavior:'smooth'});
+    }
+    lastLyricIdx = idx;
+  }
+}
+
+/* ============================================================
    MOKTAK (무한 목탁 - 스트레스 해소)
 ============================================================ */
 let moktakSessionCount = 0;
@@ -2103,13 +2232,43 @@ function openMoktakOverlay(){
     if(!moktakAudioCtx) moktakAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
     if(moktakAudioCtx.state === 'suspended') moktakAudioCtx.resume();
   }catch(e){}
+  preloadMoktakSound();
 }
 function closeMoktakOverlay(){
   document.getElementById('moktakOverlay').classList.remove('show');
 }
+let moktakBuffer = null;
+let moktakBufferLoading = false;
+function preloadMoktakSound(){
+  if(moktakBuffer || moktakBufferLoading) return;
+  moktakBufferLoading = true;
+  try{
+    if(!moktakAudioCtx) moktakAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    fetch('moktak-hit.mp3')
+      .then(r=>r.arrayBuffer())
+      .then(buf=> moktakAudioCtx.decodeAudioData(buf))
+      .then(decoded=>{ moktakBuffer = decoded; })
+      .catch(()=>{ moktakBufferLoading = false; });
+  }catch(e){ moktakBufferLoading = false; }
+}
+
 function playMoktakSound(){
-  // TODO: 실제 목탁 효과음 파일이 준비되면 여기서 재생하세요. 예:
-  // const audio = new Audio('moktak.mp3'); audio.play();
+  try{
+    if(!moktakAudioCtx) moktakAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if(moktakAudioCtx.state === 'suspended') moktakAudioCtx.resume();
+    if(moktakBuffer){
+      const src = moktakAudioCtx.createBufferSource();
+      src.buffer = moktakBuffer;
+      src.connect(moktakAudioCtx.destination);
+      src.start(0);
+    } else {
+      preloadMoktakSound();
+      const audio = new Audio('moktak-hit.mp3');
+      audio.play().catch(()=>{
+        showToast('소리 파일을 못 찾았어요 (moktak-hit.mp3가 같은 폴더에 있는지 확인해주세요)');
+      });
+    }
+  }catch(e){}
   if(navigator.vibrate) navigator.vibrate(15);
 }
 function tapMoktak(){
