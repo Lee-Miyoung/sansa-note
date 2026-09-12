@@ -125,12 +125,15 @@
     border-radius:0 0 28px 28px;
   }
   header.hero::before{
-    content:'🪷';
+    content:'';
     position:absolute;
-    right:-10px;top:50%;transform:translateY(-50%);
-    font-size:230px;
-    opacity:.28;
-    line-height:1;
+    right:-10px;bottom:-15px;
+    width:190px;height:322px;
+    background-image:url('monk-bg.png');
+    background-size:contain;
+    background-repeat:no-repeat;
+    background-position:bottom right;
+    opacity:.35;
     pointer-events:none;
     filter:drop-shadow(0 4px 6px rgba(0,0,0,.15));
   }
@@ -476,6 +479,7 @@
   .fun-banner-btn.amulet{background:linear-gradient(135deg,#ffe0e0,#ffc2c2);color:#8a2a2a;}
   .fun-banner-btn.moktak{background:linear-gradient(135deg,#e8d5b7,#d4b483);color:#5a3d1a;}
   .mantra-speed.active{background:#5a3a8a;color:#fff;border-color:#5a3a8a;}
+  .bow-speed.active{background:var(--stamp);color:#fff;border-color:var(--stamp-dark);}
   .explain108-banner{
     max-width:1080px;margin:14px auto 0;padding:12px 16px;background:var(--paper-soft);
     border:1px dashed var(--gold);border-radius:10px;font-size:12.5px;color:var(--ink-soft);
@@ -646,7 +650,7 @@
       <h1 class="serif">산사노트</h1>
       <p class="lead">전국의 절을 기록하는 나만의 순례 노트. 유네스코 산사부터 조용한 숨은 고찰까지, 다녀온 절과 사진을 한곳에 모아보세요. 가입하면 어느 기기에서든 이어서 쓸 수 있어요.</p>
 
-      <button class="btn btn-primary btn-block" onclick="googleLogin()">Google로 계속하기</button>
+      <button class="btn btn-primary btn-block" id="googleLoginBtn" onclick="googleLogin()">Google로 계속하기</button>
       <div id="authError" style="color:var(--stamp);font-size:12.5px;margin-top:10px;display:none;"></div>
 
       <div class="setup-skip">가입 없이 <a onclick="startLocalMode()">게스트로 둘러보기</a> (이 브라우저에만 저장돼요)</div>
@@ -1032,18 +1036,26 @@
 <div class="overlay" id="bowCounterOverlay">
   <div class="modal" style="text-align:center;">
     <div class="modal-head">
-      <div><h2 class="serif">🙏 108배 세기</h2><div class="sub">순서를 따라가며 절을 세어드려요</div></div>
+      <div><h2 class="serif">🙏 108배 세기</h2><div class="sub">속도를 정하면 알아서 박자를 맞춰드려요, 그 박자에 맞춰 절하시면 돼요</div></div>
       <button class="close-x" onclick="closeBowCounterOverlay()">✕</button>
     </div>
     <div class="modal-body">
-      <div id="bowCounterNum" style="font-size:40px;font-weight:800;color:var(--stamp);">0<span style="font-size:16px;color:var(--ink-soft);"> / 108</span></div>
+      <div id="bowCounterNum" style="font-size:44px;font-weight:800;color:var(--stamp);">0<span style="font-size:16px;color:var(--ink-soft);"> / 108</span></div>
       <div class="badge-bar" style="max-width:220px;margin:6px auto 16px;"><div class="badge-bar-fill" id="bowCounterBar" style="width:0%;"></div></div>
-      <div id="bowCounterSvgWrap" style="height:150px;display:flex;align-items:center;justify-content:center;"></div>
-      <div id="bowCounterLabel" style="font-weight:800;color:var(--stamp);margin-top:8px;font-size:14px;"></div>
-      <div id="bowCounterDesc" style="font-size:12px;color:var(--ink-soft);margin-top:4px;min-height:32px;"></div>
-      <button class="btn btn-primary btn-block" style="margin-top:14px;" onclick="bowCounterNext()">다음 동작 (탭)</button>
+
+      <div id="bowCounterCircle" style="width:130px;height:130px;border-radius:50%;background:radial-gradient(circle,var(--stamp),var(--stamp-dark));margin:10px auto;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:15px;transition:transform .4s ease;">대기 중</div>
+
+      <div style="display:flex;gap:5px;justify-content:center;margin:16px 0 12px;flex-wrap:wrap;">
+        <button class="btn btn-ghost bow-speed" style="padding:6px 10px;font-size:11px;" onclick="setBowInterval(1500, this)">아주 빠르게</button>
+        <button class="btn btn-ghost bow-speed" style="padding:6px 10px;font-size:11px;" onclick="setBowInterval(2500, this)">빠르게</button>
+        <button class="btn btn-ghost bow-speed active" style="padding:6px 10px;font-size:11px;" onclick="setBowInterval(4000, this)">보통</button>
+        <button class="btn btn-ghost bow-speed" style="padding:6px 10px;font-size:11px;" onclick="setBowInterval(5500, this)">천천히</button>
+        <button class="btn btn-ghost bow-speed" style="padding:6px 10px;font-size:11px;" onclick="setBowInterval(7000, this)">아주 천천히</button>
+      </div>
+
+      <button class="btn btn-primary btn-block" id="bowAutoToggleBtn" onclick="toggleBowAuto()">▶ 시작하기</button>
       <button class="btn btn-ghost btn-block" style="margin-top:8px;" onclick="resetBowCounter()">오늘 기록 초기화</button>
-      <div class="map-note" style="margin-top:14px;">동작을 하나씩 따라 하면서 "다음 동작"을 눌러주세요. 여섯 동작(합장→일어나기)을 한 바퀴 돌면 절 1번이 세져요.</div>
+      <div class="map-note" style="margin-top:14px;">신호(종소리·진동)가 울릴 때마다 절을 한 번 올리면 돼요. 급하면 속도를 늦춰도 괜찮아요.</div>
     </div>
   </div>
 </div>
@@ -1058,50 +1070,8 @@
     <div class="modal-body">
       <div id="moktakCount" style="font-size:44px;font-weight:800;color:#5a3d1a;margin-bottom:4px;">0</div>
       <div id="moktakMsg" style="font-size:12.5px;color:var(--ink-soft);margin-bottom:18px;height:16px;">두드릴 때마다 번뇌가 하나씩 사라져요</div>
-      <div id="moktakWrap" onclick="tapMoktak()" style="cursor:pointer;user-select:none;display:inline-block;">
-        <svg width="220" height="220" viewBox="0 0 220 220" id="moktakSvg" style="transition:transform .06s ease;">
-          <defs>
-            <radialGradient id="moktakBody" cx="35%" cy="30%" r="75%">
-              <stop offset="0%" stop-color="#e0a860"/>
-              <stop offset="50%" stop-color="#a86a34"/>
-              <stop offset="100%" stop-color="#5c3115"/>
-            </radialGradient>
-            <radialGradient id="moktakGlow" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stop-color="#e8b84a" stop-opacity=".35"/>
-              <stop offset="100%" stop-color="#e8b84a" stop-opacity="0"/>
-            </radialGradient>
-          </defs>
-
-          <!-- 은은한 빛 링(잔물결) 이펙트 -->
-          <circle cx="110" cy="168" r="80" fill="url(#moktakGlow)"/>
-          <ellipse cx="110" cy="168" rx="70" ry="16" fill="none" stroke="#e8b84a" stroke-width="1.5" opacity=".35"/>
-          <ellipse cx="110" cy="168" rx="52" ry="12" fill="none" stroke="#e8b84a" stroke-width="1.5" opacity=".5"/>
-
-          <!-- 받침대 -->
-          <ellipse cx="110" cy="170" rx="34" ry="9" fill="#3d2410"/>
-          <path d="M84,150 L136,150 L130,170 L90,170 Z" fill="#6b4322" stroke="#3d2410" stroke-width="2"/>
-
-          <!-- 목탁 채(막대) -->
-          <g transform="rotate(35 165 150)">
-            <line x1="165" y1="150" x2="165" y2="95" stroke="#6b4322" stroke-width="7" stroke-linecap="round"/>
-            <circle cx="165" cy="88" r="11" fill="#8a5a2b" stroke="#3d2410" stroke-width="2"/>
-          </g>
-
-          <!-- 몸통(둥근 공) -->
-          <circle cx="100" cy="105" r="72" fill="url(#moktakBody)" stroke="#3d2410" stroke-width="3.5"/>
-
-          <!-- 위쪽 곡선 무늬 (미소 느낌) -->
-          <path d="M55,90 Q100,68 145,90" fill="none" stroke="#5c3115" stroke-width="3" stroke-linecap="round" opacity=".7"/>
-          <path d="M55,125 Q100,148 145,125" fill="none" stroke="#5c3115" stroke-width="3" stroke-linecap="round" opacity=".7"/>
-
-          <!-- 구멍 -->
-          <ellipse cx="100" cy="107" rx="17" ry="15" fill="#1a0d05"/>
-          <ellipse cx="100" cy="103" rx="17" ry="10" fill="#241206"/>
-
-          <!-- 광택 하이라이트 -->
-          <ellipse cx="68" cy="62" rx="22" ry="14" fill="rgba(255,255,255,.3)"/>
-          <ellipse cx="130" cy="150" rx="16" ry="9" fill="rgba(0,0,0,.15)"/>
-        </svg>
+      <div id="moktakWrap" onclick="tapMoktak()" style="cursor:pointer;user-select:none;display:inline-block;position:relative;">
+        <img src="moktak.png" id="moktakSvg" style="width:220px;max-width:80vw;transition:transform .06s ease;filter:drop-shadow(0 8px 12px rgba(0,0,0,.25));">
       </div>
       <div style="font-size:11px;color:var(--ink-soft);margin-top:14px;">오늘 총 <b id="moktakTotal">0</b>번 두드렸어요</div>
       <button class="btn btn-ghost btn-block" style="margin-top:14px;" onclick="resetMoktak()">오늘 기록 초기화</button>
@@ -1205,18 +1175,24 @@
       <div class="desc-block">108가지 번뇌(마음을 어지럽히는 생각들)를 하나씩 내려놓는다는 마음으로 절을 108번 올리는 수행이에요. 많은 절에서 '108배 참회문'이라는 108개의 짧은 글귀를 하나씩 읽으며 절을 하는데, 절마다 문구가 조금씩 달라요. 보통 앞부분은 지난 일을 돌아보는 참회, 중간은 부모·스승·자연에 대한 감사, 뒷부분은 앞으로의 다짐(발원)으로 이어지는 구성이 많아요.</div>
       <div class="desc-block" style="margin-top:8px;color:var(--stamp);">처음이면 108번을 다 못 채워도 괜찮아요. 절 자체가 이미 좋은 운동이자 명상이에요. 무릎이 안 좋다면 무리하지 마세요.</div>
 
-      <div class="section-label">큰절(오체투지) 동작, 그림으로 보기</div>
-      <div style="text-align:center;background:var(--paper);border-radius:12px;padding:16px;">
-        <div id="bowPoseSvgWrap" style="height:150px;display:flex;align-items:center;justify-content:center;"></div>
-        <div id="bowPoseLabel" style="font-weight:800;color:var(--stamp);margin-top:8px;font-size:14px;"></div>
-        <div id="bowPoseDesc" style="font-size:12px;color:var(--ink-soft);margin-top:4px;min-height:32px;"></div>
-        <div style="display:flex;gap:8px;margin-top:10px;justify-content:center;">
-          <button class="btn btn-ghost" style="padding:7px 14px;font-size:12px;" onclick="bowPoseNav(-1)">‹ 이전</button>
-          <button class="btn btn-primary" style="padding:7px 16px;font-size:12px;" onclick="playBowPoseCycle()">▶ 순서대로 보기</button>
-          <button class="btn btn-ghost" style="padding:7px 14px;font-size:12px;" onclick="bowPoseNav(1)">다음 ›</button>
-        </div>
-        <button class="btn btn-primary btn-block" style="margin-top:10px;" onclick="closeEtiquetteOverlay();openBowCounterOverlay();">🙏 절하면서 순서 따라 108배 세기</button>
+      <div class="section-label">몇 번 절해야 하나요?</div>
+      <div class="desc-block">
+        <b>1배</b>: 법당을 지나가며 가볍게 인사할 때, 스님께 인사할 때<br>
+        <b>3배</b>: 절에 들어가 처음 참배할 때, 예불에 참여할 때 가장 흔히 하는 횟수예요<br>
+        <b>108배</b>: 특별히 마음을 다잡고 수행하고 싶을 때, 108번뇌를 내려놓는다는 마음으로<br>
+        <b>1080배·3000배</b>: 아주 큰 정진을 하는 스님이나 신도들이 특별한 날에 하기도 해요 (초보자는 권하지 않아요)
       </div>
+
+      <div class="section-label">주의할 점</div>
+      <div class="desc-block">
+        · 절과 절 사이는 서두르지 말고, 한 번에 3~5초 정도의 여유 있는 속도로 해요.<br>
+        · 딱딱한 바닥이면 방석이나 절 방석을 깔고 하세요.<br>
+        · 무릎, 허리, 손목이 안 좋다면 무리하지 말고 반배로 대신하거나 개수를 줄이세요.<br>
+        · 숨을 참지 말고, 굽힐 때 내쉬고 일어날 때 들이쉬는 식으로 편하게 호흡하세요.<br>
+        · 처음엔 10~20번만 해봐도 충분해요. 다음에 조금씩 늘려가면 돼요.
+      </div>
+
+      <button class="btn btn-primary btn-block" style="margin-top:10px;" onclick="closeEtiquetteOverlay();openBowCounterOverlay();">🙏 108배 세기 시작하기</button>
     </div>
   </div>
 </div>
@@ -1750,9 +1726,24 @@ let googleLoginInProgress = false;
 function googleLogin(){
   if(googleLoginInProgress) return;
   googleLoginInProgress = true;
+  const btn = document.getElementById('googleLoginBtn');
+  const originalText = btn.textContent;
+  btn.textContent = '연결하는 중...';
+  btn.disabled = true;
+
+  const timeoutId = setTimeout(()=>{
+    googleLoginInProgress = false;
+    btn.textContent = originalText;
+    btn.disabled = false;
+    showAuthError('구글 로그인 연결이 지연되고 있어요. 인앱 브라우저(카톡·인스타 등)라면 우측 상단 메뉴에서 "다른 브라우저로 열기"를 눌러 사파리나 크롬에서 다시 시도해주세요.');
+  }, 6000);
+
   const provider = new firebase.auth.GoogleAuthProvider();
   auth.signInWithRedirect(provider).catch(err=>{
+    clearTimeout(timeoutId);
     googleLoginInProgress = false;
+    btn.textContent = originalText;
+    btn.disabled = false;
     showAuthError(friendlyAuthError(err));
   });
 }
@@ -3057,7 +3048,8 @@ function resetMantra(){
 }
 
 let bowCounterCount = 0;
-let bowCounterPoseIdx = 0;
+let bowAutoTimer = null;
+let bowAutoInterval = 4000;
 function bowCounterStorageKey(){
   const today = new Date();
   const dateStr = `${today.getFullYear()}-${today.getMonth()+1}-${today.getDate()}`;
@@ -3065,56 +3057,75 @@ function bowCounterStorageKey(){
 }
 function openBowCounterOverlay(){
   bowCounterCount = parseInt(localStorage.getItem(bowCounterStorageKey()) || '0', 10);
-  bowCounterPoseIdx = 0;
   renderBowCounterState();
   document.getElementById('bowCounterOverlay').classList.add('show');
 }
 function closeBowCounterOverlay(){
+  stopBowAuto();
   document.getElementById('bowCounterOverlay').classList.remove('show');
 }
 function renderBowCounterState(){
-  const p = BOW_POSES[bowCounterPoseIdx];
-  document.getElementById('bowCounterSvgWrap').innerHTML = p.svg;
-  document.getElementById('bowCounterLabel').textContent = p.label;
-  document.getElementById('bowCounterDesc').textContent = p.desc;
   document.getElementById('bowCounterNum').innerHTML = `${bowCounterCount}<span style="font-size:16px;color:var(--ink-soft);"> / 108</span>`;
   document.getElementById('bowCounterBar').style.width = Math.min(100, bowCounterCount/108*100) + '%';
 }
-function bowCounterNext(){
-  bowCounterPoseIdx++;
-  if(bowCounterPoseIdx >= BOW_POSES.length){
-    bowCounterPoseIdx = 0;
-    bowCounterCount++;
-    localStorage.setItem(bowCounterStorageKey(), String(bowCounterCount));
-    playMoktakSound();
-    if(bowCounterCount === 108){
-      showCelebration('🙏 108배를 다 채우셨어요!', '오늘 정말 큰 정진을 하셨어요');
-    } else if(bowCounterCount % 27 === 0){
-      showCelebration(`🙏 ${bowCounterCount}번째 절!`, '잘 이어가고 있어요');
-    }
-  }
+function setBowInterval(ms, btnEl){
+  bowAutoInterval = ms;
+  document.querySelectorAll('.bow-speed').forEach(b=>b.classList.remove('active'));
+  if(btnEl) btnEl.classList.add('active');
+  if(bowAutoTimer){ stopBowAuto(); startBowAuto(); }
+}
+function toggleBowAuto(){
+  if(bowAutoTimer) stopBowAuto(); else startBowAuto();
+}
+function bumpBowCount(){
+  bowCounterCount++;
+  localStorage.setItem(bowCounterStorageKey(), String(bowCounterCount));
   renderBowCounterState();
+  playMoktakSound();
+  const circle = document.getElementById('bowCounterCircle');
+  circle.style.transform = 'scale(1.12)';
+  circle.textContent = '절!';
+  setTimeout(()=>{ circle.style.transform = 'scale(1)'; circle.textContent = '준비...'; }, 400);
+  if(bowCounterCount >= 108){
+    stopBowAuto();
+    showCelebration('🙏 108배를 다 채우셨어요!', '오늘 정말 큰 정진을 하셨어요');
+  } else if(bowCounterCount % 27 === 0){
+    showCelebration(`🙏 ${bowCounterCount}번째 절!`, '잘 이어가고 있어요');
+  }
+}
+function startBowAuto(){
+  if(bowCounterCount >= 108){ bowCounterCount = 0; renderBowCounterState(); }
+  bumpBowCount();
+  bowAutoTimer = setInterval(bumpBowCount, bowAutoInterval);
+  document.getElementById('bowAutoToggleBtn').textContent = '⏸ 멈추기';
+}
+function stopBowAuto(){
+  if(bowAutoTimer){ clearInterval(bowAutoTimer); bowAutoTimer = null; }
+  const btn = document.getElementById('bowAutoToggleBtn');
+  if(btn) btn.textContent = '▶ 시작하기';
+  const circle = document.getElementById('bowCounterCircle');
+  if(circle) circle.textContent = '대기 중';
 }
 function resetBowCounter(){
   if(!confirm('오늘 기록을 초기화할까요?')) return;
+  stopBowAuto();
   bowCounterCount = 0;
-  bowCounterPoseIdx = 0;
   localStorage.setItem(bowCounterStorageKey(), '0');
   renderBowCounterState();
 }
 
 const BOW_POSES = [
-  {label:'1. 합장', desc:'부처님을 마주보고 서서, 두 손바닥을 가슴 앞에 가지런히 모아요.',
+  {label:'1. 합장', desc:'두 손바닥을 딱 붙여 가슴 앞(명치 높이)에 놓아요. 손가락은 가지런히 모으고, 팔꿈치는 몸에서 살짝 떨어뜨려요. 시선은 부처님을 향하거나 살짝 아래로 내려요.',
    svg:`<svg width="90" height="140" viewBox="0 0 90 140"><circle cx="45" cy="18" r="12" fill="#e8b98a"/><path d="M30,32 L60,32 L66,100 L24,100 Z" fill="#c47a3a"/><line x1="30" y1="45" x2="45" y2="60" stroke="#e8b98a" stroke-width="5" stroke-linecap="round"/><line x1="60" y1="45" x2="45" y2="60" stroke="#e8b98a" stroke-width="5" stroke-linecap="round"/><circle cx="45" cy="62" r="4" fill="#e8b98a"/><line x1="34" y1="100" x2="30" y2="138" stroke="#5c3115" stroke-width="7" stroke-linecap="round"/><line x1="56" y1="100" x2="60" y2="138" stroke="#5c3115" stroke-width="7" stroke-linecap="round"/></svg>`},
-  {label:'2. 반배(작은 절)', desc:'허리를 60도쯤 굽혀 가볍게 인사해요. 처음이면 이것만 해도 충분해요.',
+  {label:'2. 반배(작은 절)', desc:'합장한 채로 허리를 45~60도쯤 천천히 굽혀요. 무릎은 편 채로 유지하고, 숨을 내쉬면서 굽혔다가 들이쉬면서 다시 펴요. 처음이면 이것만 해도 충분해요.',
    svg:`<svg width="110" height="140" viewBox="0 0 110 140"><g transform="rotate(30 45 95)"><circle cx="45" cy="18" r="12" fill="#e8b98a"/><path d="M30,32 L60,32 L66,100 L24,100 Z" fill="#c47a3a"/><line x1="30" y1="45" x2="45" y2="60" stroke="#e8b98a" stroke-width="5" stroke-linecap="round"/><line x1="60" y1="45" x2="45" y2="60" stroke="#e8b98a" stroke-width="5" stroke-linecap="round"/><circle cx="45" cy="62" r="4" fill="#e8b98a"/></g><line x1="34" y1="100" x2="30" y2="138" stroke="#5c3115" stroke-width="7" stroke-linecap="round"/><line x1="56" y1="100" x2="60" y2="138" stroke="#5c3115" stroke-width="7" stroke-linecap="round"/></svg>`},
-  {label:'3. 무릎 꿇기', desc:'무릎을 꿇고 앉으면서, 두 손을 몸 앞 바닥 쪽으로 천천히 내려요.',
+  {label:'3. 무릎 꿇기', desc:'합장한 손을 풀지 않은 채, 양 무릎을 거의 동시에 바닥에 대요. 그다음 두 손을 몸 앞 바닥에 어깨너비만큼 벌려 짚어요. 이때 오른손을 먼저, 왼손을 나중에 짚는 순서로 하는 절도 있고 절마다 조금씩 달라요 — 크게 신경 쓰지 않아도 돼요.',
    svg:`<svg width="120" height="120" viewBox="0 0 120 120"><circle cx="60" cy="35" r="12" fill="#e8b98a"/><path d="M45,48 L75,48 L80,95 L40,95 Z" fill="#c47a3a"/><line x1="45" y1="58" x2="30" y2="90" stroke="#e8b98a" stroke-width="5" stroke-linecap="round"/><line x1="75" y1="58" x2="90" y2="90" stroke="#e8b98a" stroke-width="5" stroke-linecap="round"/><ellipse cx="30" cy="92" rx="6" ry="4" fill="#e8b98a"/><ellipse cx="90" cy="92" rx="6" ry="4" fill="#e8b98a"/><line x1="45" y1="95" x2="40" y2="115" stroke="#5c3115" stroke-width="9" stroke-linecap="round"/><line x1="75" y1="95" x2="80" y2="115" stroke="#5c3115" stroke-width="9" stroke-linecap="round"/></svg>`},
-  {label:'4. 오체투지(큰절)', desc:'이마와 두 팔꿈치, 두 무릎까지 다섯 곳이 바닥에 닿게 완전히 엎드려요. 이마를 손등 가까이에 대요.',
+  {label:'4. 오체투지(큰절)', desc:'엉덩이를 발뒤꿈치 쪽으로 낮추면서 상체를 숙여요. 이마를 두 손등 사이 바닥에 가볍게 대고, 양 팔꿈치도 바닥에 닿게 해요. 이렇게 이마·양 팔꿈치·양 무릎, 다섯 곳이 땅에 닿는다고 해서 "오체투지(五體投地)"라고 불러요.',
    svg:`<svg width="150" height="90" viewBox="0 0 150 90"><ellipse cx="30" cy="55" rx="11" ry="10" fill="#e8b98a"/><path d="M40,50 L100,58 L100,78 L38,72 Z" fill="#c47a3a"/><line x1="45" y1="60" x2="20" y2="72" stroke="#e8b98a" stroke-width="5" stroke-linecap="round"/><ellipse cx="18" cy="74" rx="7" ry="4" fill="#e8b98a"/><line x1="95" y1="70" x2="115" y2="82" stroke="#5c3115" stroke-width="9" stroke-linecap="round"/></svg>`},
-  {label:'5. 손바닥 뒤집기', desc:'엎드린 채로 손바닥을 위로 뒤집어요. 부처님 발을 받쳐 든다는 뜻으로, 가장 큰 존경을 표하는 동작이에요.',
+  {label:'5. 손바닥 뒤집기(접족례)', desc:'엎드린 채로 두 손바닥을 위로 뒤집어요. "부처님의 발을 두 손으로 받쳐 든다"는 뜻을 담은 동작으로, 가장 큰 존경을 표해요. 이 자세로 1~2초 정도 잠깐 멈춰요.',
    svg:`<svg width="150" height="90" viewBox="0 0 150 90"><ellipse cx="30" cy="55" rx="11" ry="10" fill="#e8b98a"/><path d="M40,50 L100,58 L100,78 L38,72 Z" fill="#c47a3a"/><line x1="45" y1="60" x2="20" y2="72" stroke="#e8b98a" stroke-width="5" stroke-linecap="round"/><ellipse cx="16" cy="70" rx="8" ry="5" fill="#f5d9b8" stroke="#c47a3a" stroke-width="1.5"/><path d="M10,66 Q16,62 22,66" fill="none" stroke="#c47a3a" stroke-width="1.5"/><line x1="95" y1="70" x2="115" y2="82" stroke="#5c3115" stroke-width="9" stroke-linecap="round"/></svg>`},
-  {label:'6. 다시 일어나기', desc:'손바닥을 다시 짚고, 상체를 일으켜 무릎 꿇은 자세로, 다시 일어서서 합장해요.',
+  {label:'6. 다시 일어나기', desc:'손바닥을 다시 뒤집어 바닥을 짚고, 팔 힘으로 상체를 일으켜 무릎 꿇은 자세로 돌아와요. 그다음 무릎을 펴고 완전히 일어서면서, 두 손을 다시 가슴 앞으로 모아 합장해요. 이렇게 한 바퀴가 절 1번이에요.',
    svg:`<svg width="120" height="130" viewBox="0 0 120 130"><circle cx="60" cy="40" r="12" fill="#e8b98a"/><path d="M45,53 L75,53 L80,100 L40,100 Z" fill="#c47a3a"/><line x1="45" y1="63" x2="35" y2="85" stroke="#e8b98a" stroke-width="5" stroke-linecap="round"/><line x1="75" y1="63" x2="85" y2="85" stroke="#e8b98a" stroke-width="5" stroke-linecap="round"/><circle cx="60" cy="66" r="4" fill="#e8b98a"/><line x1="45" y1="100" x2="40" y2="125" stroke="#5c3115" stroke-width="9" stroke-linecap="round"/><line x1="75" y1="100" x2="80" y2="125" stroke="#5c3115" stroke-width="9" stroke-linecap="round"/></svg>`}
 ];
 let bowPoseIdx = 0;
@@ -3146,7 +3157,6 @@ function playBowPoseCycle(){
 }
 
 function openEtiquetteOverlay(){
-  renderBowPose();
   document.getElementById('etiquetteOverlay').classList.add('show');
 }
 function closeEtiquetteOverlay(){
