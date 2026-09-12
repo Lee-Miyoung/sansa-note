@@ -1866,12 +1866,12 @@ function removeDestinationData(id){
    AMULET MAKER (나만의 기원 부적)
 ============================================================ */
 const AMULET_CATEGORIES = [
-  {key:"exam", icon:"📚", label:"합격·시험운", phrase:"이 마음이 반드시 좋은 결과로 이어지기를 기원합니다"},
-  {key:"promotion", icon:"💼", label:"승진·성공운", phrase:"노력한 만큼 인정받는 날이 오기를 기원합니다"},
-  {key:"love", icon:"💕", label:"인연·결혼운", phrase:"좋은 인연이 닿고, 그 마음이 오래가기를 기원합니다"},
-  {key:"health", icon:"🌿", label:"건강운", phrase:"몸과 마음이 늘 편안하기를 기원합니다"},
-  {key:"wealth", icon:"💰", label:"재물·사업운", phrase:"하는 일마다 순조롭게 풀리기를 기원합니다"},
-  {key:"newstart", icon:"🌱", label:"새출발운", phrase:"새로운 시작이 두렵지 않고 좋은 길로 이어지기를 기원합니다"}
+  {key:"exam", icon:"📚", hanja:"合格", label:"합격·시험운", phrase:"이 마음이 반드시 좋은 결과로 이어지기를 기원합니다"},
+  {key:"promotion", icon:"💼", hanja:"昇進", label:"승진·성공운", phrase:"노력한 만큼 인정받는 날이 오기를 기원합니다"},
+  {key:"love", icon:"💕", hanja:"良緣", label:"인연·결혼운", phrase:"좋은 인연이 닿고, 그 마음이 오래가기를 기원합니다"},
+  {key:"health", icon:"🌿", hanja:"健康", label:"건강운", phrase:"몸과 마음이 늘 편안하기를 기원합니다"},
+  {key:"wealth", icon:"💰", hanja:"財福", label:"재물·사업운", phrase:"하는 일마다 순조롭게 풀리기를 기원합니다"},
+  {key:"newstart", icon:"🌱", hanja:"新出發", label:"새출발운", phrase:"새로운 시작이 두렵지 않고 좋은 길로 이어지기를 기원합니다"}
 ];
 let amuletSelected = null;
 
@@ -1934,51 +1934,90 @@ function renderAmuletPreview(){
   const name = document.getElementById('amuletName').value.trim();
   const detail = document.getElementById('amuletDetail').value.trim();
   const cat = amuletSelected;
+  const W = 600, H = 800;
 
-  const grad = ctx.createLinearGradient(0,0,0,800);
-  grad.addColorStop(0, '#c62828');
-  grad.addColorStop(1, '#8a1f1f');
+  // 누런 한지 바탕
+  const grad = ctx.createRadialGradient(300,400,50,300,400,600);
+  grad.addColorStop(0, '#f3dfa0');
+  grad.addColorStop(1, '#e0c274');
   ctx.fillStyle = grad;
-  ctx.fillRect(0,0,600,800);
+  ctx.fillRect(0,0,W,H);
 
-  ctx.strokeStyle = '#e8b750';
-  ctx.lineWidth = 6;
-  ctx.strokeRect(24,24,552,752);
-  ctx.lineWidth = 2;
-  ctx.strokeRect(38,38,524,724);
+  // 한지 질감(은은한 점무늬)
+  ctx.fillStyle = 'rgba(120,80,20,.06)';
+  for(let i=0;i<400;i++){
+    ctx.beginPath();
+    ctx.arc(Math.random()*W, Math.random()*H, Math.random()*1.6, 0, Math.PI*2);
+    ctx.fill();
+  }
+
+  // 붉은 이중 테두리 (붓글씨 느낌으로 살짝 두껍게)
+  ctx.strokeStyle = '#a01f1f';
+  ctx.lineWidth = 10;
+  ctx.strokeRect(30,30,W-60,H-60);
+  ctx.lineWidth = 3;
+  ctx.strokeRect(46,46,W-92,H-92);
+
+  // 네 모서리 장식(구름무늬 느낌의 점)
+  ctx.fillStyle = '#a01f1f';
+  [[46,46],[W-46,46],[46,H-46],[W-46,H-46]].forEach(([x,y])=>{
+    ctx.beginPath(); ctx.arc(x,y,8,0,Math.PI*2); ctx.fill();
+  });
 
   ctx.textAlign = 'center';
-  ctx.fillStyle = '#ffe9a8';
-  ctx.font = '32px sans-serif';
-  ctx.fillText('卐 기 원 부 적 卐', 300, 110);
 
-  ctx.font = '90px sans-serif';
-  ctx.fillText(cat.icon, 300, 260);
+  // 상단 제목
+  ctx.fillStyle = '#a01f1f';
+  ctx.font = 'bold 30px serif';
+  ctx.fillText('祈 願 符', 300, 110);
+  ctx.font = '16px serif';
+  ctx.fillText('- 기 원 부 -', 300, 138);
 
-  ctx.fillStyle = '#fff';
-  ctx.font = 'bold 34px sans-serif';
-  ctx.fillText(cat.label, 300, 330);
+  // 큰 한자 (부적의 핵심 문양처럼)
+  ctx.fillStyle = '#a01f1f';
+  ctx.font = 'bold 130px serif';
+  ctx.fillText(cat.hanja, 300, 320);
 
-  ctx.font = '24px sans-serif';
-  ctx.fillStyle = '#ffe9a8';
-  wrapCanvasText(ctx, cat.phrase, 300, 420, 440, 36);
+  // 카테고리 라벨
+  ctx.font = 'bold 30px sans-serif';
+  ctx.fillStyle = '#7a1515';
+  ctx.fillText(`${cat.icon} ${cat.label}`, 300, 400);
+
+  // 기원 문구
+  ctx.font = '22px serif';
+  ctx.fillStyle = '#5a1010';
+  wrapCanvasText(ctx, cat.phrase, 300, 460, 440, 34);
 
   if(detail){
-    ctx.font = 'bold 26px sans-serif';
-    ctx.fillStyle = '#fff';
-    wrapCanvasText(ctx, `"${detail}"`, 300, 560, 460, 34);
+    ctx.font = 'bold 26px serif';
+    ctx.fillStyle = '#a01f1f';
+    wrapCanvasText(ctx, `"${detail}"`, 300, 590, 460, 34);
   }
 
   if(name){
-    ctx.font = '22px sans-serif';
-    ctx.fillStyle = '#ffe9a8';
+    ctx.font = '22px serif';
+    ctx.fillStyle = '#7a1515';
     ctx.fillText(`${name} 님을 위하여`, 300, 660);
   }
 
+  // 붉은 인장(도장) 느낌
+  ctx.save();
+  ctx.translate(W-100, H-110);
+  ctx.rotate(-0.15);
+  ctx.fillStyle = '#a01f1f';
+  ctx.fillRect(-45,-45,90,90);
+  ctx.fillStyle = '#f3dfa0';
+  ctx.font = 'bold 26px serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('山', 0, -6);
+  ctx.fillText('寺', 0, 24);
+  ctx.restore();
+
   const today = new Date();
-  ctx.font = '16px sans-serif';
-  ctx.fillStyle = 'rgba(255,255,255,.7)';
-  ctx.fillText(`${today.getFullYear()}.${today.getMonth()+1}.${today.getDate()} · 산사노트`, 300, 730);
+  ctx.font = '15px serif';
+  ctx.fillStyle = 'rgba(90,20,20,.6)';
+  ctx.textAlign = 'left';
+  ctx.fillText(`${today.getFullYear()}.${today.getMonth()+1}.${today.getDate()} · 산사노트`, 56, H-56);
 }
 function downloadAmulet(){
   const canvas = document.getElementById('amuletCanvas');
