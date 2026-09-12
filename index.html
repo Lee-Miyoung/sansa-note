@@ -3059,7 +3059,12 @@ function renderMountainCard(id, d){
   const photo = firstPhotoUrl(d);
   const stageIdx = Math.min(d.stage||0, 2);
   if(!photo && !coverFetching.has(id)){
-    fetchCoverPhoto(id, d.name, d.locationHint);
+    fetchCoverPhoto(id, d.name, d.locationHint, {
+      store: mountainDestinations,
+      updateFn: updateMountainDestination,
+      getCurrentId: ()=>currentMountainDetailId,
+      onDetailUpdate: ()=>{}
+    });
   }
   return `
   <div class="card" data-id="${id}">
@@ -3282,17 +3287,22 @@ function firstPhotoUrl(d){
 }
 
 let coverFetching = new Set();
-function fetchCoverPhoto(id, name, locationHint){
+function fetchCoverPhoto(id, name, locationHint, opts){
   if(coverFetching.has(id)) return;
   coverFetching.add(id);
+  opts = opts || {};
+  const store = opts.store || destinations;
+  const updateFn = opts.updateFn || updateDestination;
+  const getCurrentId = opts.getCurrentId || (()=>currentDetailId);
+  const onDetailUpdate = opts.onDetailUpdate || renderCoverPhotos;
 
   function trySetCovers(urls){
     const unique = [...new Set(urls)];
-    if(unique.length && destinations[id]){
-      updateDestination(id, {coverPhotos: unique});
-      destinations[id].coverPhotos = unique;
+    if(unique.length && store[id]){
+      updateFn(id, {coverPhotos: unique});
+      store[id].coverPhotos = unique;
       render();
-      if(currentDetailId === id) renderCoverPhotos(destinations[id]);
+      if(getCurrentId() === id) onDetailUpdate(store[id]);
       return true;
     }
     return false;
