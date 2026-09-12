@@ -3059,7 +3059,7 @@ function renderMountainCard(id, d){
   const photo = firstPhotoUrl(d);
   const stageIdx = Math.min(d.stage||0, 2);
   if(!photo && !coverFetching.has(id)){
-    fetchCoverPhoto(id, d.name, d.locationHint, {
+    queuePhotoFetch(id, d.name, d.locationHint, {
       store: mountainDestinations,
       updateFn: updateMountainDestination,
       getCurrentId: ()=>currentMountainDetailId,
@@ -3287,14 +3287,38 @@ function firstPhotoUrl(d){
 }
 
 let coverFetching = new Set();
-function fetchCoverPhoto(id, name, locationHint, opts){
+let photoFetchQueue = [];
+let activePhotoFetches = 0;
+const MAX_CONCURRENT_PHOTO_FETCHES = 3;
+
+function queuePhotoFetch(id, name, locationHint, opts){
   if(coverFetching.has(id)) return;
   coverFetching.add(id);
+  photoFetchQueue.push({id, name, locationHint, opts});
+  processPhotoQueue();
+}
+function processPhotoQueue(){
+  while(activePhotoFetches < MAX_CONCURRENT_PHOTO_FETCHES && photoFetchQueue.length > 0){
+    const task = photoFetchQueue.shift();
+    activePhotoFetches++;
+    fetchCoverPhotoNow(task.id, task.name, task.locationHint, task.opts, ()=>{
+      activePhotoFetches--;
+      processPhotoQueue();
+    });
+  }
+}
+function fetchCoverPhotoNow(id, name, locationHint, opts, done){
   opts = opts || {};
   const store = opts.store || destinations;
   const updateFn = opts.updateFn || updateDestination;
   const getCurrentId = opts.getCurrentId || (()=>currentDetailId);
   const onDetailUpdate = opts.onDetailUpdate || renderCoverPhotos;
+  let finished = false;
+  function finish(){
+    if(finished) return;
+    finished = true;
+    if(done) done();
+  }
 
   function trySetCovers(urls){
     const unique = [...new Set(urls)];
@@ -3303,6 +3327,7 @@ function fetchCoverPhoto(id, name, locationHint, opts){
       store[id].coverPhotos = unique;
       render();
       if(getCurrentId() === id) onDetailUpdate(store[id]);
+      finish();
       return true;
     }
     return false;
@@ -3325,8 +3350,8 @@ function fetchCoverPhoto(id, name, locationHint, opts){
     const url = `https://api.openverse.org/v1/images/?q=${encodeURIComponent(q)}&license_type=commercial,modification&page_size=5`;
     fetch(url).then(r=>r.json()).then(data=>{
       const urls = (data.results||[]).map(item=> item.thumbnail || item.url).filter(Boolean);
-      trySetCovers(urls);
-    }).catch(()=>{});
+      if(!trySetCovers(urls)) finish();
+    }).catch(()=> finish());
   }
 
   const firstQuery = locationHint ? `${name} ${locationHint}` : name;
@@ -3344,7 +3369,7 @@ function renderCard(id, d){
   const stageIdx = Math.min(d.stage||0, STAGES.length-1);
   const vc = visitCount(d);
   if(!photo && !coverFetching.has(id)){
-    fetchCoverPhoto(id, d.name, d.locationHint);
+    queuePhotoFetch(id, d.name, d.locationHint);
   }
   return `
   <div class="card" data-id="${id}">
@@ -3416,7 +3441,7 @@ function openDetail(id){
   renderPhotos(d.photos||{});
   renderCoverPhotos(d);
   if((!d.coverPhotos || d.coverPhotos.length===0) && !coverFetching.has(id)){
-    fetchCoverPhoto(id, d.name, d.locationHint);
+    queuePhotoFetch(id, d.name, d.locationHint);
   }
   renderVisits(d.visits||{});
   renderRepeatChallenge(d);
@@ -3453,7 +3478,7 @@ function refetchLocation(){
   showToast('위치와 사진을 다시 찾는 중이에요...');
   requestAnimationFrame(()=> setupDetailMap(destinations[id], id));
   coverFetching.delete(id);
-  fetchCoverPhoto(id, destinations[id].name, destinations[id].locationHint);
+  queuePhotoFetch(id, destinations[id].name, destinations[id].locationHint);
 }
 
 function closeDetail(){
