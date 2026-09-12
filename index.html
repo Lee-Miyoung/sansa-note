@@ -238,12 +238,14 @@
   .stampcorner{
     position:absolute;top:-6px;right:10px;width:32px;height:32px;border-radius:50%;
     background:linear-gradient(135deg,#5fc99a,var(--moss));color:#fff;display:flex;align-items:center;justify-content:center;
-    font-size:15px;font-weight:800;box-shadow:0 3px 0 var(--moss-dark), 0 0 0 3px rgba(255,255,255,.9), 0 0 8px rgba(74,155,127,.5);
-    border:2px solid #fff;
+    font-size:15px;font-weight:800;
+    border:2.5px solid #1a1613;
+    box-shadow:2px 2px 0 #1a1613;
+    transform:rotate(-8deg);
   }
   .stampcorner.done{
     background:linear-gradient(135deg,#ffe27a,var(--gold));
-    box-shadow:0 3px 0 #c9942f, 0 0 0 3px rgba(255,255,255,.9), 0 0 10px rgba(224,169,79,.7);
+    box-shadow:2px 2px 0 #1a1613;
   }
   .stampcorner::after{
     content:'';position:absolute;top:2px;left:6px;width:8px;height:5px;
@@ -395,18 +397,26 @@
   }
   .badge-item:last-child{border-bottom:none;}
   .badge-medal{
-    width:52px;height:52px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;
-    font-size:24px;font-family:'Nanum Myeongjo',serif;
+    width:56px;height:56px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;
+    font-size:24px;font-family:'Nanum Myeongjo',serif;position:relative;
   }
   .badge-medal.earned{
-    background:linear-gradient(135deg,#ffd76a,var(--stamp));color:#fff;
-    box-shadow:0 4px 10px rgba(198,40,40,.35), 0 0 0 3px rgba(255,215,106,.4);
-    position:relative;
+    background:linear-gradient(135deg,#ff8a3d,var(--stamp));color:#fff;
+    border:3px solid #1a1613;
+    box-shadow:3px 3px 0 #1a1613;
+    transform:rotate(-6deg);
+  }
+  .badge-medal.earned::before{
+    content:'DONE';
+    position:absolute;top:38%;left:-14%;width:128%;
+    background:#1a1613;color:#ffd76a;
+    font-family:'Pretendard',sans-serif;font-size:9px;font-weight:800;letter-spacing:1px;
+    text-align:center;padding:2px 0;transform:rotate(8deg);
   }
   .badge-medal.earned::after{
-    content:'✨';position:absolute;top:-8px;right:-6px;font-size:14px;
+    content:'✨';position:absolute;top:-10px;right:-8px;font-size:15px;transform:rotate(6deg);
   }
-  .badge-medal.locked{background:var(--paper-line);color:var(--ink-soft);opacity:.6;}
+  .badge-medal.locked{background:var(--paper-line);color:var(--ink-soft);opacity:.6;border:3px solid var(--paper-line);}
   .badge-bar{height:6px;border-radius:99px;background:var(--paper-line);overflow:hidden;margin-top:5px;}
   .badge-bar-fill{height:100%;background:var(--moss);}
   .season-banner{
@@ -2835,7 +2845,7 @@ function checkLevelUpCelebration(tier){
     lastCelebratedTierMin = saved !== null ? parseInt(saved,10) : tier.min;
   }
   if(tier.min > lastCelebratedTierMin){
-    showCelebration(`${tier.icon} 등급 상승! 이제 '${tier.title}'예요`, tier.desc);
+    showCelebration(`LEVEL UP 🔥 이제 '${tier.title}'예요`, tier.desc);
   }
   lastCelebratedTierMin = tier.min;
   localStorage.setItem(key, String(tier.min));
@@ -2854,7 +2864,7 @@ function checkPackCelebrations(){
     const earned = packData.length>0 && packData.every(item=>have.has(item.name));
     if(earned && !celebratedPackKeys.has(p.key)){
       celebratedPackKeys.add(p.key);
-      showCelebration(`🎉 "${p.label}" 코스 완주!`, '뱃지 목록에서 확인해보세요');
+      showCelebration(`COMPLETE ✅ "${p.label}"`, '뱃지 목록에서 확인해보세요');
     }
   });
   localStorage.setItem(key, JSON.stringify([...celebratedPackKeys]));
