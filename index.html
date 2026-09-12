@@ -230,10 +230,18 @@
   .tagbadge.hidden{background:var(--red);}
   .stampcorner{
     position:absolute;top:-6px;right:10px;width:32px;height:32px;border-radius:50%;
-    background:var(--moss);color:#fff;display:flex;align-items:center;justify-content:center;
-    font-size:15px;font-weight:800;box-shadow:0 3px 0 var(--moss-dark);border:2px solid #fff;
+    background:linear-gradient(135deg,#5fc99a,var(--moss));color:#fff;display:flex;align-items:center;justify-content:center;
+    font-size:15px;font-weight:800;box-shadow:0 3px 0 var(--moss-dark), 0 0 0 3px rgba(255,255,255,.9), 0 0 8px rgba(74,155,127,.5);
+    border:2px solid #fff;
   }
-  .stampcorner.done{background:var(--gold);box-shadow:0 3px 0 #c9942f;}
+  .stampcorner.done{
+    background:linear-gradient(135deg,#ffe27a,var(--gold));
+    box-shadow:0 3px 0 #c9942f, 0 0 0 3px rgba(255,255,255,.9), 0 0 10px rgba(224,169,79,.7);
+  }
+  .stampcorner::after{
+    content:'';position:absolute;top:2px;left:6px;width:8px;height:5px;
+    border-radius:50%;background:rgba(255,255,255,.55);transform:rotate(-20deg);
+  }
   .card-body{padding:12px 14px 14px;}
   .card-region{font-size:11px;color:var(--ink-soft);font-weight:800;letter-spacing:.3px;}
   .card-title{font-size:16px;font-weight:700;margin:2px 0 6px;font-family:'Nanum Myeongjo','Noto Serif KR',serif;}
@@ -383,7 +391,14 @@
     width:52px;height:52px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;
     font-size:24px;font-family:'Nanum Myeongjo',serif;
   }
-  .badge-medal.earned{background:var(--stamp);color:#fff;box-shadow:0 4px 10px rgba(198,40,40,.35);}
+  .badge-medal.earned{
+    background:linear-gradient(135deg,#ffd76a,var(--stamp));color:#fff;
+    box-shadow:0 4px 10px rgba(198,40,40,.35), 0 0 0 3px rgba(255,215,106,.4);
+    position:relative;
+  }
+  .badge-medal.earned::after{
+    content:'✨';position:absolute;top:-8px;right:-6px;font-size:14px;
+  }
   .badge-medal.locked{background:var(--paper-line);color:var(--ink-soft);opacity:.6;}
   .badge-bar{height:6px;border-radius:99px;background:var(--paper-line);overflow:hidden;margin-top:5px;}
   .badge-bar-fill{height:100%;background:var(--moss);}
@@ -678,7 +693,7 @@
     <div class="empty-note" id="emptyNote" style="display:none;">해당하는 절이 없어요. 필터를 바꾸거나 오른쪽 아래 + 버튼으로 새 절을 추가해보세요.</div>
   </main>
 
-  <button class="fab" onclick="openAddModal()">+</button>
+  <button class="fab" onclick="openAddModalForCurrentType()">+</button>
 </div>
 
 <!-- ===================== DETAIL MODAL ===================== -->
@@ -733,7 +748,7 @@
       <textarea class="notes" id="visitNoteInput" placeholder="이번엔 어땠는지 소감을 남겨보세요 (날씨, 분위기, 다음엔 이렇게 해볼 것 등)"></textarea>
       <div style="display:flex;gap:8px;margin-top:8px;">
         <button class="btn btn-primary" style="padding:9px 16px;font-size:13px;flex:1;" onclick="addVisitRecord(false)">+ 방문 기록 추가</button>
-        <button class="btn btn-ghost" style="padding:9px 16px;font-size:13px;flex:1;" onclick="addVisitRecord(true)">📍 지금 여기예요! (위치 인증)</button>
+        <button class="btn btn-ghost" style="padding:9px 16px;font-size:13px;flex:1;white-space:pre-line;line-height:1.4;" onclick="addVisitRecord(true)">📍 지금 여기예요!&#10;(위치 인증)</button>
       </div>
 
       <div class="section-label">할 일 / 콘텐츠 아이디어</div>
@@ -789,6 +804,11 @@
         <div class="desc-block" id="mTip" style="background:#fff8e6;border-left:3px solid var(--gold);padding:10px 12px;border-radius:8px;"></div>
       </div>
 
+      <div id="mSightWrap" style="display:none;">
+        <div class="section-label">📍 근처 여행지 추천</div>
+        <div class="desc-block" id="mSight" style="background:#eef7f3;border-left:3px solid var(--moss);padding:10px 12px;border-radius:8px;"></div>
+      </div>
+
       <div class="section-label">위치</div>
       <div id="mWeather" style="margin-bottom:8px;"></div>
       <div id="mMap"></div>
@@ -829,6 +849,25 @@
       <div class="field-row"><label>한 줄 설명</label><textarea class="plain" id="nDesc" placeholder="이 곳이 어떤 곳인지"></textarea></div>
       <div class="field-row"><label>뭐 하면 좋을지</label><textarea class="plain" id="nActivity" placeholder="사진/영상/체험 아이디어"></textarea></div>
       <button class="btn btn-primary btn-block" onclick="addDestination()">추가하기</button>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="addMountainOverlay">
+  <div class="modal">
+    <div class="modal-head">
+      <div><h2 class="serif">새 산 추가</h2></div>
+      <button class="close-x" onclick="closeAddMountain()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="field-row"><label>산 이름</label><input id="nmName" placeholder="예: 백양산"></div>
+      <div class="field-row"><label>지역</label>
+        <select id="nmRegion"></select>
+      </div>
+      <div class="field-row"><label>높이</label><input id="nmHeight" placeholder="예: 642m"></div>
+      <div class="field-row"><label>한 줄 설명</label><textarea class="plain" id="nmDesc" placeholder="이 산이 어떤 산인지"></textarea></div>
+      <div class="field-row"><label>뭐 하면 좋을지</label><textarea class="plain" id="nmActivity" placeholder="코스/볼거리 아이디어"></textarea></div>
+      <button class="btn btn-primary btn-block" onclick="addMountainDestinationCustom()">추가하기</button>
     </div>
   </div>
 </div>
@@ -1133,28 +1172,28 @@ const REGIONS = ["수도권","강원","충청","전라","경상","제주"];
 const STAGES = ["가보고 싶다","다녀왔어요","순례 기록 완료"];
 
 const MOUNTAIN_SEED = [
-  {region:"경상", name:"지리산", height:"1,915m", desc:"국립공원 1호. 전남·전북·경남에 걸쳐 있는 남한 육지에서 가장 넓은 산이에요.", activity:"천왕봉 일출, 노고단 트레킹", tagline:"어머니 같은 산이라 불리는 이유", difficulty:{level:"hard",icon:"🔴",label:"어려움 · 천왕봉까지 편도 5~7시간"}, history:"1967년 우리나라 최초의 국립공원으로 지정됐어요. 백두대간의 시작점이자 끝점으로 여겨지는 영산이에요.", episode:"빨치산이 이 산에 숨어 활동했던 근현대사의 아픈 역사도 품고 있어요. '지리산에 오르면 사람이 세 번 변한다'는 말이 있을 정도로 종주 코스가 길고 다채로워요.", visitorTip:"천왕봉 일출을 보려면 새벽 산행이 필수예요. 노고단~천왕봉 종주(약 2박3일)는 등산 매니아들의 버킷리스트로 꼽혀요."},
-  {region:"제주", name:"한라산", height:"1,947m", desc:"남한에서 가장 높은 산이자 화산섬 제주의 상징. 정상에 백록담이 있어요.", activity:"백록담 인증샷, 성판악·관음사 코스", tagline:"섬 전체가 산인 곳", difficulty:{level:"medium",icon:"🟡",label:"보통 · 왕복 8~9시간, 예약 필수"}, history:"제주도 전체를 만든 화산이에요. 정상 백록담은 화산 폭발로 생긴 분화구예요.", episode:"예전엔 '흰 사슴이 물을 마시던 연못'이라는 뜻에서 백록담이라는 이름이 붙었다는 전설이 전해져요.", visitorTip:"성판악·관음사 코스는 사전 예약이 필수예요. 정상엔 백록담에 물이 차 있는 날이 많지 않아서, 물 가득한 백록담을 보면 운이 좋다는 말이 있어요."},
-  {region:"강원", name:"설악산", height:"1,708m", desc:"기암절벽과 단풍으로 유명한 국립공원. 가을이면 전국에서 몰려와요.", activity:"울산바위, 흔들바위, 단풍 트레킹", tagline:"가을이면 전국이 몰려오는 이유", difficulty:{level:"hard",icon:"🔴",label:"어려움 · 대청봉까지 편도 4~5시간"}, history:"천연기념물과 명승이 밀집된, 우리나라에서 가장 아름다운 산 중 하나로 꼽혀요. 1982년 유네스코 생물권보전지역으로 지정됐어요.", episode:"울산바위는 원래 울산에 있어야 할 바위가 실수로 설악산에 자리 잡았다는 재미있는 전설이 전해져요.", visitorTip:"가을 단풍철엔 새벽부터 등산로가 꽉 찬다는 후기가 많아요. 흔들바위는 손으로 밀면 흔들리지만 절대 떨어지지 않는다는 게 신기 포인트예요."},
-  {region:"수도권", name:"북한산", height:"836m", desc:"서울과 경기에 걸친, 접근성 최고의 인기 등산 명소.", activity:"백운대 정상 인증샷, 둘레길 산책", tagline:"세계에서 인구밀도 대비 가장 붐비는 국립공원", difficulty:{level:"medium",icon:"🟡",label:"보통 · 백운대까지 왕복 4~5시간"}},
-  {region:"강원", name:"오대산", height:"1,563m", desc:"월정사·상원사가 자리한 불교 성지이자 아름다운 산.", activity:"전나무숲길, 비로봉 등정", tagline:"절과 산이 하나로 이어진 곳", difficulty:{level:"medium",icon:"🟡",label:"보통 · 비로봉까지 왕복 5~6시간"}, history:"신라 자장율사가 문수보살의 성지로 정한 산으로, 다섯 개의 평평한 봉우리가 있어 이런 이름이 붙었어요.", episode:"월정사 전나무숲길은 6.25 전쟁 때도 살아남은 나무들이 많아, 전쟁의 참화를 피한 숲으로도 알려져 있어요.", visitorTip:"월정사 전나무숲길만 걷고 내려오는 사람도 많을 만큼, 정상까지 안 가도 충분히 힐링된다는 후기가 많아요."},
-  {region:"강원", name:"태백산", height:"1,567m", desc:"주목 군락과 천제단(하늘에 제사 지내던 곳)으로 유명한 산.", activity:"주목 군락지 사진, 눈꽃 산행", tagline:"살아 천년 죽어 천년, 주목의 산", difficulty:{level:"medium",icon:"🟡",label:"보통 · 유일사 코스 왕복 4시간"}, history:"정상의 천제단은 삼국시대부터 하늘에 제사를 지내던 곳으로 전해지는 유서 깊은 제단이에요.", episode:"'살아 천년 죽어 천년'이라는 말처럼, 주목나무는 죽어서도 수백 년간 그 자리에 하얗게 서 있어요.", visitorTip:"겨울 눈꽃 산행이 가장 유명해요. 완만한 능선이라 초보자도 도전하기 좋다는 후기가 많아요."},
-  {region:"경상", name:"소백산", height:"1,439m", desc:"충북과 경북에 걸친 산으로, 봄 철쭉 군락이 장관이에요.", activity:"철쭉 시즌 트레킹, 연화봉 일출", tagline:"봄이면 붉게 물드는 능선", difficulty:{level:"medium",icon:"🟡",label:"보통 · 희방사 코스 왕복 5시간"}, history:"삼국시대엔 신라와 고구려의 국경이었던 산이에요. 온화한 능선 덕에 '어머니 같은 산'이라 불려요.", visitorTip:"5월 철쭉 시즌엔 연화봉 능선이 온통 붉게 물든다는 후기가 많아요. 바람이 세기로 유명해서 정상엔 늘 바람막이가 필수예요."},
-  {region:"충청", name:"계룡산", height:"845m", desc:"닭 벼슬을 쓴 용 모양이라는 이름의 유래를 가진 산. 갑사·동학사가 자리해요.", activity:"갑사~동학사 종주 코스", tagline:"용의 형상을 닮은 신비로운 산", difficulty:{level:"medium",icon:"🟡",label:"보통 · 갑사~동학사 종주 4~5시간"}, history:"조선을 세운 이성계가 한때 이곳을 도읍으로 정하려 했을 만큼 명당으로 여겨진 산이에요.", episode:"산 모양이 닭 벼슬을 쓴 용처럼 보인다고 해서 계룡산이라는 이름이 붙었다는 이야기가 전해져요.", visitorTip:"갑사에서 동학사로 넘어가는 종주 코스가 '계룡8경' 중 하나로 꼽힐 만큼 단풍이 아름답다는 후기가 많아요."},
-  {region:"충청", name:"속리산", height:"1,058m", desc:"법주사가 자리한 산으로, '속세를 떠난다'는 이름 뜻을 가져요.", activity:"문장대 등정, 세조길 산책", tagline:"속세와 이별하는 산", difficulty:{level:"medium",icon:"🟡",label:"보통 · 문장대까지 왕복 4시간"}, history:"법주사가 자리한 산으로, '속세를 여읜다'는 뜻의 이름을 가진 만큼 예로부터 수행처로 여겨졌어요.", visitorTip:"세조가 요양차 걸었다는 세조길은 완만해서 가족 단위로도 걷기 좋다는 후기가 많아요."},
-  {region:"충청", name:"월악산", height:"1,097m", desc:"기암절벽과 충주호 전망이 아름다운 산.", activity:"영봉 등정, 충주호 전망대", tagline:"충주호를 내려다보는 절경", difficulty:{level:"hard",icon:"🔴",label:"어려움 · 영봉까지 왕복 6시간"}, history:"삼국시대엔 신라·백제·고구려가 국경을 맞댄 요충지였던 산이에요.", visitorTip:"충주호 전망이 압도적이라는 후기가 많고, 정상 영봉 코스는 계단이 많아 체력 소모가 크다는 평이 있어요."},
-  {region:"강원", name:"치악산", height:"1,288m", desc:"'꿩이 죽어 은혜를 갚았다'는 전설이 깃든 산.", activity:"구룡사 계곡길, 비로봉 등정", tagline:"은혜 갚은 꿩 전설의 산", difficulty:{level:"medium",icon:"🟡",label:"보통 · 구룡사~비로봉 왕복 6시간"}, history:"원래 이름은 '적악산'이었는데, 꿩이 자신을 구해준 나그네를 위해 은혜를 갚았다는 전설 이후 '치악산(꿩 치)'으로 이름이 바뀌었대요.", episode:"은혜 갚은 꿩 이야기(치악산 전설)는 초등학교 교과서에도 실릴 만큼 유명해요.", visitorTip:"구룡사 계곡길이 유독 아름답다는 후기가 많고, 비로봉까지는 계단이 많아 체력 안배가 필요해요."},
-  {region:"경상", name:"가야산", height:"1,430m", desc:"해인사가 자리한 산으로, 팔만대장경의 배경이 되는 명산.", activity:"홍류동 계곡, 상왕봉 등정", tagline:"팔만대장경을 품은 산", difficulty:{level:"medium",icon:"🟡",label:"보통 · 상왕봉까지 왕복 5~6시간"}, history:"해인사와 팔만대장경을 품은 신령스러운 산으로 여겨져 왔어요.", visitorTip:"홍류동 계곡을 따라 걷는 길이 유독 운치 있다는 후기가 많아요."},
-  {region:"전라", name:"내장산", height:"763m", desc:"단풍 명소로 손꼽히는 산. 가을 단풍터널이 특히 유명해요.", activity:"단풍터널 사진, 케이블카", tagline:"전국 최고의 단풍 명소", difficulty:{level:"easy",icon:"🟢",label:"쉬움 · 케이블카 이용 가능"}, history:"조선왕조실록을 전란 중 안전하게 숨겨 보관했던 산이라는 역사가 있어요.", visitorTip:"단풍철엔 케이블카 대기가 1시간 넘는다는 후기가 많아요. 단풍터널을 걷는 것만으로도 충분히 만족스럽다는 평이 많아요."},
-  {region:"전라", name:"무등산", height:"1,187m", desc:"광주를 대표하는 산으로, 주상절리(입석대·서석대)가 특별해요.", activity:"입석대·서석대 주상절리 감상", tagline:"광주 사람들의 뒷동산", difficulty:{level:"easy",icon:"🟢",label:"쉬움 · 증심사 코스 완만"}, history:"광주 사람들에게 '평등한 산'이라는 별명으로 불리는, 시민들의 뒷동산 같은 산이에요.", episode:"정상 주상절리(입석대·서석대)는 오랜 세월 용암이 식으며 만들어진 다각형 돌기둥이에요.", visitorTip:"증심사 코스는 경사가 완만해 가족 단위 방문객이 많다는 후기가 있어요."},
-  {region:"경상", name:"팔공산", height:"1,193m", desc:"대구·경북에 걸친 산으로, 갓바위(선본사)가 자리해요.", activity:"갓바위 참배, 케이블카", tagline:"대구의 진산이자 기도의 산", difficulty:{level:"medium",icon:"🟡",label:"보통 · 케이블카+갓바위 연계 가능"}, history:"신라 화랑들이 심신을 수련하던 성지였고, 후삼국시대 왕건과 견훤이 격돌한 전쟁터이기도 했어요.", visitorTip:"갓바위(선본사)까지 오르는 계단이 꽤 길다는 후기가 많은데, 그만큼 소원 성취의 정성을 보여준다고들 해요."},
-  {region:"전라", name:"덕유산", height:"1,614m", desc:"전북·경남에 걸친 산으로, 무주 스키장과 곤돌라로도 유명해요.", activity:"향적봉 곤돌라, 눈꽃 산행", tagline:"곤돌라 타고 오르는 겨울왕국", difficulty:{level:"medium",icon:"🟡",label:"보통 · 곤돌라로 향적봉 근처까지"}, history:"무주 리조트의 곤돌라를 타면 정상 근처까지 편하게 오를 수 있는 몇 안 되는 고산이에요.", visitorTip:"겨울 상고대(눈꽃)가 필 때가 가장 아름답다는 후기가 압도적으로 많아요."},
-  {region:"경상", name:"주왕산", height:"721m", desc:"기암절벽이 병풍처럼 둘러싼 아기자기한 국립공원.", activity:"주산지 산책, 기암 절벽 감상", tagline:"작지만 알찬 기암절벽의 산", difficulty:{level:"easy",icon:"🟢",label:"쉬움 · 대전사~용추폭포 완만"}, history:"중국 당나라 주왕이 이곳에 숨어 지냈다는 전설에서 이름이 유래했다고 전해져요.", visitorTip:"규모는 작지만 기암절벽이 알차게 몰려있어 '가성비 좋은 국립공원'이라는 후기가 많아요."},
-  {region:"전라", name:"월출산", height:"809m", desc:"'남도의 금강산'이라 불릴 만큼 기암이 화려한 산.", activity:"구름다리 인증샷, 천황봉 등정", tagline:"남도의 작은 금강산", difficulty:{level:"hard",icon:"🔴",label:"어려움 · 천황봉까지 급경사 구간 많음"}, history:"'남도의 소금강'이라 불릴 만큼 화강암 기암이 화려한 산이에요.", visitorTip:"구름다리에서 내려다보는 풍경이 압도적이라는 후기가 많고, 계단과 철제 난간이 많아 다리 힘이 필요하다는 평이 있어요."},
+  {region:"경상", name:"지리산", height:"1,915m", desc:"국립공원 1호. 전남·전북·경남에 걸쳐 있는 남한 육지에서 가장 넓은 산이에요.", activity:"천왕봉 일출, 노고단 트레킹", tagline:"어머니 같은 산이라 불리는 이유", difficulty:{level:"hard",icon:"🔴",label:"어려움 · 천왕봉까지 편도 5~7시간"}, history:"1967년 우리나라 최초의 국립공원으로 지정됐어요. 백두대간의 시작점이자 끝점으로 여겨지는 영산이에요.", episode:"빨치산이 이 산에 숨어 활동했던 근현대사의 아픈 역사도 품고 있어요. '지리산에 오르면 사람이 세 번 변한다'는 말이 있을 정도로 종주 코스가 길고 다채로워요.", visitorTip:"천왕봉 일출을 보려면 새벽 산행이 필수예요. 노고단~천왕봉 종주(약 2박3일)는 등산 매니아들의 버킷리스트로 꼽혀요.", nearbySight:"구례 산수유마을, 화개장터(십리벚꽃길)가 근처예요."},
+  {region:"제주", name:"한라산", height:"1,947m", desc:"남한에서 가장 높은 산이자 화산섬 제주의 상징. 정상에 백록담이 있어요.", activity:"백록담 인증샷, 성판악·관음사 코스", tagline:"섬 전체가 산인 곳", difficulty:{level:"medium",icon:"🟡",label:"보통 · 왕복 8~9시간, 예약 필수"}, history:"제주도 전체를 만든 화산이에요. 정상 백록담은 화산 폭발로 생긴 분화구예요.", episode:"예전엔 '흰 사슴이 물을 마시던 연못'이라는 뜻에서 백록담이라는 이름이 붙었다는 전설이 전해져요.", visitorTip:"성판악·관음사 코스는 사전 예약이 필수예요. 정상엔 백록담에 물이 차 있는 날이 많지 않아서, 물 가득한 백록담을 보면 운이 좋다는 말이 있어요.", nearbySight:"성산일출봉, 우도가 함께 즐기기 좋은 제주 동부 코스예요."},
+  {region:"강원", name:"설악산", height:"1,708m", desc:"기암절벽과 단풍으로 유명한 국립공원. 가을이면 전국에서 몰려와요.", activity:"울산바위, 흔들바위, 단풍 트레킹", tagline:"가을이면 전국이 몰려오는 이유", difficulty:{level:"hard",icon:"🔴",label:"어려움 · 대청봉까지 편도 4~5시간"}, history:"천연기념물과 명승이 밀집된, 우리나라에서 가장 아름다운 산 중 하나로 꼽혀요. 1982년 유네스코 생물권보전지역으로 지정됐어요.", episode:"울산바위는 원래 울산에 있어야 할 바위가 실수로 설악산에 자리 잡았다는 재미있는 전설이 전해져요.", visitorTip:"가을 단풍철엔 새벽부터 등산로가 꽉 찬다는 후기가 많아요. 흔들바위는 손으로 밀면 흔들리지만 절대 떨어지지 않는다는 게 신기 포인트예요.", nearbySight:"속초 아바이마을, 낙산사가 근처예요."},
+  {region:"수도권", name:"북한산", height:"836m", desc:"서울과 경기에 걸친, 접근성 최고의 인기 등산 명소.", activity:"백운대 정상 인증샷, 둘레길 산책", tagline:"세계에서 인구밀도 대비 가장 붐비는 국립공원", difficulty:{level:"medium",icon:"🟡",label:"보통 · 백운대까지 왕복 4~5시간"}, nearbySight:"인사동, 삼청동 카페거리가 도심 쪽으로 이어져요."},
+  {region:"강원", name:"오대산", height:"1,563m", desc:"월정사·상원사가 자리한 불교 성지이자 아름다운 산.", activity:"전나무숲길, 비로봉 등정", tagline:"절과 산이 하나로 이어진 곳", difficulty:{level:"medium",icon:"🟡",label:"보통 · 비로봉까지 왕복 5~6시간"}, history:"신라 자장율사가 문수보살의 성지로 정한 산으로, 다섯 개의 평평한 봉우리가 있어 이런 이름이 붙었어요.", episode:"월정사 전나무숲길은 6.25 전쟁 때도 살아남은 나무들이 많아, 전쟁의 참화를 피한 숲으로도 알려져 있어요.", visitorTip:"월정사 전나무숲길만 걷고 내려오는 사람도 많을 만큼, 정상까지 안 가도 충분히 힐링된다는 후기가 많아요.", nearbySight:"월정사, 진고개 야생화 군락지가 함께예요."},
+  {region:"강원", name:"태백산", height:"1,567m", desc:"주목 군락과 천제단(하늘에 제사 지내던 곳)으로 유명한 산.", activity:"주목 군락지 사진, 눈꽃 산행", tagline:"살아 천년 죽어 천년, 주목의 산", difficulty:{level:"medium",icon:"🟡",label:"보통 · 유일사 코스 왕복 4시간"}, history:"정상의 천제단은 삼국시대부터 하늘에 제사를 지내던 곳으로 전해지는 유서 깊은 제단이에요.", episode:"'살아 천년 죽어 천년'이라는 말처럼, 주목나무는 죽어서도 수백 년간 그 자리에 하얗게 서 있어요.", visitorTip:"겨울 눈꽃 산행이 가장 유명해요. 완만한 능선이라 초보자도 도전하기 좋다는 후기가 많아요.", nearbySight:"낙동강 발원지, 구문소가 근처예요."},
+  {region:"경상", name:"소백산", height:"1,439m", desc:"충북과 경북에 걸친 산으로, 봄 철쭉 군락이 장관이에요.", activity:"철쭉 시즌 트레킹, 연화봉 일출", tagline:"봄이면 붉게 물드는 능선", difficulty:{level:"medium",icon:"🟡",label:"보통 · 희방사 코스 왕복 5시간"}, history:"삼국시대엔 신라와 고구려의 국경이었던 산이에요. 온화한 능선 덕에 '어머니 같은 산'이라 불려요.", visitorTip:"5월 철쭉 시즌엔 연화봉 능선이 온통 붉게 물든다는 후기가 많아요. 바람이 세기로 유명해서 정상엔 늘 바람막이가 필수예요.", nearbySight:"부석사, 죽령 옛길이 근처예요."},
+  {region:"충청", name:"계룡산", height:"845m", desc:"닭 벼슬을 쓴 용 모양이라는 이름의 유래를 가진 산. 갑사·동학사가 자리해요.", activity:"갑사~동학사 종주 코스", tagline:"용의 형상을 닮은 신비로운 산", difficulty:{level:"medium",icon:"🟡",label:"보통 · 갑사~동학사 종주 4~5시간"}, history:"조선을 세운 이성계가 한때 이곳을 도읍으로 정하려 했을 만큼 명당으로 여겨진 산이에요.", episode:"산 모양이 닭 벼슬을 쓴 용처럼 보인다고 해서 계룡산이라는 이름이 붙었다는 이야기가 전해져요.", visitorTip:"갑사에서 동학사로 넘어가는 종주 코스가 '계룡8경' 중 하나로 꼽힐 만큼 단풍이 아름답다는 후기가 많아요.", nearbySight:"갑사·동학사, 유성온천이 함께예요."},
+  {region:"충청", name:"속리산", height:"1,058m", desc:"법주사가 자리한 산으로, '속세를 떠난다'는 이름 뜻을 가져요.", activity:"문장대 등정, 세조길 산책", tagline:"속세와 이별하는 산", difficulty:{level:"medium",icon:"🟡",label:"보통 · 문장대까지 왕복 4시간"}, history:"법주사가 자리한 산으로, '속세를 여읜다'는 뜻의 이름을 가진 만큼 예로부터 수행처로 여겨졌어요.", visitorTip:"세조가 요양차 걸었다는 세조길은 완만해서 가족 단위로도 걷기 좋다는 후기가 많아요.", nearbySight:"법주사, 정이품송이 근처예요."},
+  {region:"충청", name:"월악산", height:"1,097m", desc:"기암절벽과 충주호 전망이 아름다운 산.", activity:"영봉 등정, 충주호 전망대", tagline:"충주호를 내려다보는 절경", difficulty:{level:"hard",icon:"🔴",label:"어려움 · 영봉까지 왕복 6시간"}, history:"삼국시대엔 신라·백제·고구려가 국경을 맞댄 요충지였던 산이에요.", visitorTip:"충주호 전망이 압도적이라는 후기가 많고, 정상 영봉 코스는 계단이 많아 체력 소모가 크다는 평이 있어요.", nearbySight:"충주호 유람선, 수안보온천이 근처예요."},
+  {region:"강원", name:"치악산", height:"1,288m", desc:"'꿩이 죽어 은혜를 갚았다'는 전설이 깃든 산.", activity:"구룡사 계곡길, 비로봉 등정", tagline:"은혜 갚은 꿩 전설의 산", difficulty:{level:"medium",icon:"🟡",label:"보통 · 구룡사~비로봉 왕복 6시간"}, history:"원래 이름은 '적악산'이었는데, 꿩이 자신을 구해준 나그네를 위해 은혜를 갚았다는 전설 이후 '치악산(꿩 치)'으로 이름이 바뀌었대요.", episode:"은혜 갚은 꿩 이야기(치악산 전설)는 초등학교 교과서에도 실릴 만큼 유명해요.", visitorTip:"구룡사 계곡길이 유독 아름답다는 후기가 많고, 비로봉까지는 계단이 많아 체력 안배가 필요해요.", nearbySight:"구룡사, 원주 한지테마파크가 근처예요."},
+  {region:"경상", name:"가야산", height:"1,430m", desc:"해인사가 자리한 산으로, 팔만대장경의 배경이 되는 명산.", activity:"홍류동 계곡, 상왕봉 등정", tagline:"팔만대장경을 품은 산", difficulty:{level:"medium",icon:"🟡",label:"보통 · 상왕봉까지 왕복 5~6시간"}, history:"해인사와 팔만대장경을 품은 신령스러운 산으로 여겨져 왔어요.", visitorTip:"홍류동 계곡을 따라 걷는 길이 유독 운치 있다는 후기가 많아요.", nearbySight:"해인사, 합천영상테마파크가 근처예요."},
+  {region:"전라", name:"내장산", height:"763m", desc:"단풍 명소로 손꼽히는 산. 가을 단풍터널이 특히 유명해요.", activity:"단풍터널 사진, 케이블카", tagline:"전국 최고의 단풍 명소", difficulty:{level:"easy",icon:"🟢",label:"쉬움 · 케이블카 이용 가능"}, history:"조선왕조실록을 전란 중 안전하게 숨겨 보관했던 산이라는 역사가 있어요.", visitorTip:"단풍철엔 케이블카 대기가 1시간 넘는다는 후기가 많아요. 단풍터널을 걷는 것만으로도 충분히 만족스럽다는 평이 많아요.", nearbySight:"백양사, 순창 고추장마을이 근처예요."},
+  {region:"전라", name:"무등산", height:"1,187m", desc:"광주를 대표하는 산으로, 주상절리(입석대·서석대)가 특별해요.", activity:"입석대·서석대 주상절리 감상", tagline:"광주 사람들의 뒷동산", difficulty:{level:"easy",icon:"🟢",label:"쉬움 · 증심사 코스 완만"}, history:"광주 사람들에게 '평등한 산'이라는 별명으로 불리는, 시민들의 뒷동산 같은 산이에요.", episode:"정상 주상절리(입석대·서석대)는 오랜 세월 용암이 식으며 만들어진 다각형 돌기둥이에요.", visitorTip:"증심사 코스는 경사가 완만해 가족 단위 방문객이 많다는 후기가 있어요.", nearbySight:"광주 양림동 역사문화마을이 근처예요."},
+  {region:"경상", name:"팔공산", height:"1,193m", desc:"대구·경북에 걸친 산으로, 갓바위(선본사)가 자리해요.", activity:"갓바위 참배, 케이블카", tagline:"대구의 진산이자 기도의 산", difficulty:{level:"medium",icon:"🟡",label:"보통 · 케이블카+갓바위 연계 가능"}, history:"신라 화랑들이 심신을 수련하던 성지였고, 후삼국시대 왕건과 견훤이 격돌한 전쟁터이기도 했어요.", visitorTip:"갓바위(선본사)까지 오르는 계단이 꽤 길다는 후기가 많은데, 그만큼 소원 성취의 정성을 보여준다고들 해요.", nearbySight:"갓바위(선본사), 동화사가 근처예요."},
+  {region:"전라", name:"덕유산", height:"1,614m", desc:"전북·경남에 걸친 산으로, 무주 스키장과 곤돌라로도 유명해요.", activity:"향적봉 곤돌라, 눈꽃 산행", tagline:"곤돌라 타고 오르는 겨울왕국", difficulty:{level:"medium",icon:"🟡",label:"보통 · 곤돌라로 향적봉 근처까지"}, history:"무주 리조트의 곤돌라를 타면 정상 근처까지 편하게 오를 수 있는 몇 안 되는 고산이에요.", visitorTip:"겨울 상고대(눈꽃)가 필 때가 가장 아름답다는 후기가 압도적으로 많아요.", nearbySight:"무주 태권도원, 안성탐방지원센터가 근처예요."},
+  {region:"경상", name:"주왕산", height:"721m", desc:"기암절벽이 병풍처럼 둘러싼 아기자기한 국립공원.", activity:"주산지 산책, 기암 절벽 감상", tagline:"작지만 알찬 기암절벽의 산", difficulty:{level:"easy",icon:"🟢",label:"쉬움 · 대전사~용추폭포 완만"}, history:"중국 당나라 주왕이 이곳에 숨어 지냈다는 전설에서 이름이 유래했다고 전해져요.", visitorTip:"규모는 작지만 기암절벽이 알차게 몰려있어 '가성비 좋은 국립공원'이라는 후기가 많아요.", nearbySight:"청송 얼음골, 주산지가 근처예요."},
+  {region:"전라", name:"월출산", height:"809m", desc:"'남도의 금강산'이라 불릴 만큼 기암이 화려한 산.", activity:"구름다리 인증샷, 천황봉 등정", tagline:"남도의 작은 금강산", difficulty:{level:"hard",icon:"🔴",label:"어려움 · 천황봉까지 급경사 구간 많음"}, history:"'남도의 소금강'이라 불릴 만큼 화강암 기암이 화려한 산이에요.", visitorTip:"구름다리에서 내려다보는 풍경이 압도적이라는 후기가 많고, 계단과 철제 난간이 많아 다리 힘이 필요하다는 평이 있어요.", nearbySight:"영암 왕인박사 유적지, 도갑사가 근처예요."},
   {region:"경상", name:"청량산", height:"870m", desc:"열두 봉우리가 병풍처럼 둘러싼 산으로, 청량사가 자리해요.", activity:"하늘다리, 청량사 조망", tagline:"열두 봉우리가 감싸안은 절경", difficulty:{"level":"medium","icon":"🟡","label":"보통 · 하늘다리 코스"}, history:"퇴계 이황이 어린 시절 공부하며 청량산인이라는 호를 쓸 정도로 아꼈던 산이에요.", visitorTip:"열두 봉우리가 병풍처럼 둘러싼 풍경이 압도적이라는 후기가 많아요."},
-  {region:"수도권", name:"관악산", height:"632m", desc:"서울 남쪽의 대표 명산. 바위산 특유의 시원한 조망이 특징이에요.", activity:"연주대 등정, 서울 시내 조망", tagline:"서울 남쪽을 지키는 바위산", difficulty:{level:"medium",icon:"🟡",label:"보통 · 연주대까지 왕복 4시간"}, history:"조선 건국 당시 관악산의 화기(불의 기운)를 누르기 위해 경복궁 앞에 해태상을 세웠다는 이야기가 전해져요.", visitorTip:"바위가 많아 미끄럽다는 후기가 있어 등산화가 필수라는 팁이 많아요."},
-  {region:"수도권", name:"도봉산", height:"740m", desc:"북한산과 이어지는 서울 동북부의 명산.", activity:"자운봉·선인봉 조망", tagline:"북한산과 짝을 이루는 산", difficulty:{level:"medium",icon:"🟡",label:"보통 · 자운봉 조망 코스"}, history:"북한산과 함께 예로부터 서울을 지키는 두 명산으로 꼽혀왔어요.", visitorTip:"주말 등산객이 매우 많다는 후기가 있어, 평일 방문을 추천하는 사람이 많아요."},
-  {region:"전라", name:"마이산", height:"686m", desc:"말의 귀를 닮았다는 독특한 두 봉우리로 유명한 산.", activity:"탑사 돌탑군 감상, 두 봉우리 사진", tagline:"말의 귀를 닮은 신비한 두 봉우리", difficulty:{level:"easy",icon:"🟢",label:"쉬움 · 탑사까지 완만"}, history:"말의 두 귀를 닮았다는 독특한 봉우리 모양 때문에 붙은 이름이에요. 계절에 따라 '돛대봉', '용각봉' 등 다른 이름으로도 불렸대요.", episode:"탑사의 돌탑들은 한 도승이 혼자서 30년에 걸쳐 쌓았다고 전해지는데, 신기하게도 아직까지 무너지지 않고 서 있어요.", visitorTip:"탑사 돌탑군을 보러 오는 사람이 대부분이고, 정상 등정보다는 산책 코스로 인기가 많다는 후기가 있어요."},
+  {region:"수도권", name:"관악산", height:"632m", desc:"서울 남쪽의 대표 명산. 바위산 특유의 시원한 조망이 특징이에요.", activity:"연주대 등정, 서울 시내 조망", tagline:"서울 남쪽을 지키는 바위산", difficulty:{level:"medium",icon:"🟡",label:"보통 · 연주대까지 왕복 4시간"}, history:"조선 건국 당시 관악산의 화기(불의 기운)를 누르기 위해 경복궁 앞에 해태상을 세웠다는 이야기가 전해져요.", visitorTip:"바위가 많아 미끄럽다는 후기가 있어 등산화가 필수라는 팁이 많아요.", nearbySight:"서울대학교, 낙성대공원이 근처예요."},
+  {region:"수도권", name:"도봉산", height:"740m", desc:"북한산과 이어지는 서울 동북부의 명산.", activity:"자운봉·선인봉 조망", tagline:"북한산과 짝을 이루는 산", difficulty:{level:"medium",icon:"🟡",label:"보통 · 자운봉 조망 코스"}, history:"북한산과 함께 예로부터 서울을 지키는 두 명산으로 꼽혀왔어요.", visitorTip:"주말 등산객이 매우 많다는 후기가 있어, 평일 방문을 추천하는 사람이 많아요.", nearbySight:"북한산 둘레길로 바로 이어져요."},
+  {region:"전라", name:"마이산", height:"686m", desc:"말의 귀를 닮았다는 독특한 두 봉우리로 유명한 산.", activity:"탑사 돌탑군 감상, 두 봉우리 사진", tagline:"말의 귀를 닮은 신비한 두 봉우리", difficulty:{level:"easy",icon:"🟢",label:"쉬움 · 탑사까지 완만"}, history:"말의 두 귀를 닮았다는 독특한 봉우리 모양 때문에 붙은 이름이에요. 계절에 따라 '돛대봉', '용각봉' 등 다른 이름으로도 불렸대요.", episode:"탑사의 돌탑들은 한 도승이 혼자서 30년에 걸쳐 쌓았다고 전해지는데, 신기하게도 아직까지 무너지지 않고 서 있어요.", visitorTip:"탑사 돌탑군을 보러 오는 사람이 대부분이고, 정상 등정보다는 산책 코스로 인기가 많다는 후기가 있어요.", nearbySight:"탑사, 진안 홍삼스파가 근처예요."},
   {region:"강원", name:"두타산", height:"1,353m", desc:"무릉계곡을 품은 산으로, 계곡 트레킹이 인기예요.", activity:"무릉계곡 트레킹, 용추폭포", tagline:"무릉도원이라는 이름의 계곡", difficulty:{"level":"medium","icon":"🟡","label":"보통 · 무릉계곡 코스"}, history:"'두타'는 속세의 번뇌를 떨쳐낸다는 뜻의 불교 용어에서 따온 이름이에요.", visitorTip:"무릉계곡의 이름 그대로 무릉도원 같은 풍경이라는 후기가 많아요."},
   {region:"경상", name:"금정산", height:"801m", desc:"부산을 대표하는 산으로, 범어사가 자리해요. 금정산성도 함께 볼 수 있어요.", activity:"금정산성 둘레길, 범어사 연계", tagline:"부산 사람들의 진산", difficulty:{"level":"medium","icon":"🟡","label":"보통 · 금정산성 둘레길"}, history:"산 정상 바위 우물에 금빛 물고기가 하늘에서 내려와 놀았다는 전설에서 범어사와 함께 이름이 유래했어요.", visitorTip:"부산 도심에서 대중교통으로 쉽게 갈 수 있다는 게 최대 장점이라는 후기가 많아요."},
   {region:"수도권", name:"청계산", height:"618m", desc:"서울 남부와 경기 성남·과천에 걸친 접근성 좋은 산.", activity:"매봉 정상 조망, 원터골 코스", tagline:"강남 사람들의 뒷동산", difficulty:{"level":"easy","icon":"🟢","label":"쉬움 · 원터골 코스"}, history:"조선 왕족과 사대부들이 즐겨 찾던 산으로, 정상 매봉엔 정자 터가 남아있어요.", visitorTip:"강남 접근성이 좋아 퇴근 후 등산객도 많다는 후기가 있어요."},
@@ -1252,6 +1291,7 @@ function mergeMountainWithMaster(rawData){
     history: master.history || null,
     episode: master.episode || null,
     visitorTip: master.visitorTip || null,
+    nearbySight: master.nearbySight || null,
     locationHint: master.locationHint || null
   });
 }
@@ -1866,12 +1906,12 @@ function removeDestinationData(id){
    AMULET MAKER (나만의 기원 부적)
 ============================================================ */
 const AMULET_CATEGORIES = [
-  {key:"exam", icon:"📚", hanja:"合格", label:"합격·시험운", phrase:"이 마음이 반드시 좋은 결과로 이어지기를 기원합니다"},
-  {key:"promotion", icon:"💼", hanja:"昇進", label:"승진·성공운", phrase:"노력한 만큼 인정받는 날이 오기를 기원합니다"},
-  {key:"love", icon:"💕", hanja:"良緣", label:"인연·결혼운", phrase:"좋은 인연이 닿고, 그 마음이 오래가기를 기원합니다"},
-  {key:"health", icon:"🌿", hanja:"健康", label:"건강운", phrase:"몸과 마음이 늘 편안하기를 기원합니다"},
-  {key:"wealth", icon:"💰", hanja:"財福", label:"재물·사업운", phrase:"하는 일마다 순조롭게 풀리기를 기원합니다"},
-  {key:"newstart", icon:"🌱", hanja:"新出發", label:"새출발운", phrase:"새로운 시작이 두렵지 않고 좋은 길로 이어지기를 기원합니다"}
+  {key:"exam", icon:"📚", hanja:"合格", label:"합격·시험운", phrase:"밤늦게까지 애쓴 그 시간이, 절대 헛되지 않기를 기원합니다"},
+  {key:"promotion", icon:"💼", hanja:"昇進", label:"승진·성공운", phrase:"묵묵히 견뎌온 그 노력을, 세상이 알아봐 주는 날이 오기를 기원합니다"},
+  {key:"love", icon:"💕", hanja:"良緣", label:"인연·결혼운", phrase:"오래 기다린 만큼, 진심으로 아껴줄 사람과 닿기를 기원합니다"},
+  {key:"health", icon:"🌿", hanja:"健康", label:"건강운", phrase:"아프지 않고, 지치지 않고, 오래오래 곁을 지킬 수 있기를 기원합니다"},
+  {key:"wealth", icon:"💰", hanja:"財福", label:"재물·사업운", phrase:"흘린 땀만큼 돌아와, 마음 편히 웃는 날이 늘어나기를 기원합니다"},
+  {key:"newstart", icon:"🌱", hanja:"新出發", label:"새출발운", phrase:"떨리는 그 첫걸음이, 두려움 대신 설렘으로 기억되기를 기원합니다"}
 ];
 let amuletSelected = null;
 
@@ -1958,30 +1998,69 @@ function renderAmuletPreview(){
   ctx.lineWidth = 3;
   ctx.strokeRect(46,46,W-92,H-92);
 
-  // 네 모서리 장식(구름무늬 느낌의 점)
+  // 네 모서리 붓터치 느낌 장식 (구름무늬 곡선)
+  ctx.strokeStyle = '#a01f1f';
+  ctx.lineWidth = 4;
+  function cornerFlourish(x, y, sx, sy){
+    ctx.save();
+    ctx.translate(x,y);
+    ctx.scale(sx,sy);
+    ctx.beginPath();
+    ctx.moveTo(0,26);
+    ctx.quadraticCurveTo(0,0, 26,0);
+    ctx.moveTo(10,32);
+    ctx.quadraticCurveTo(10,10, 32,10);
+    ctx.stroke();
+    ctx.restore();
+  }
+  cornerFlourish(46,46,1,1);
+  cornerFlourish(W-46,46,-1,1);
+  cornerFlourish(46,H-46,1,-1);
+  cornerFlourish(W-46,H-46,-1,-1);
+
+  // 상단 매듭(홍색 술) 장식
+  ctx.save();
+  ctx.translate(300, 20);
   ctx.fillStyle = '#a01f1f';
-  [[46,46],[W-46,46],[46,H-46],[W-46,H-46]].forEach(([x,y])=>{
-    ctx.beginPath(); ctx.arc(x,y,8,0,Math.PI*2); ctx.fill();
-  });
+  ctx.beginPath();
+  ctx.arc(0,0,14,0,Math.PI*2);
+  ctx.fill();
+  ctx.fillRect(-3,10,6,26);
+  for(let i=-2;i<=2;i++){
+    ctx.beginPath();
+    ctx.moveTo(i*7,36);
+    ctx.lineTo(i*7,58);
+    ctx.lineWidth = 3;
+    ctx.strokeStyle = '#a01f1f';
+    ctx.stroke();
+  }
+  ctx.restore();
+
+  // 은은한 비네트(테두리 쪽 살짝 어둡게)
+  const vg = ctx.createRadialGradient(300,400,260,300,400,520);
+  vg.addColorStop(0,'rgba(0,0,0,0)');
+  vg.addColorStop(1,'rgba(90,40,10,.18)');
+  ctx.fillStyle = vg;
+  ctx.fillRect(0,0,W,H);
 
   ctx.textAlign = 'center';
 
   // 상단 제목
   ctx.fillStyle = '#a01f1f';
   ctx.font = 'bold 30px serif';
-  ctx.fillText('祈 願 符', 300, 110);
+  ctx.fillText('祈 願 符', 300, 130);
   ctx.font = '16px serif';
-  ctx.fillText('- 기 원 부 -', 300, 138);
+  ctx.fillText('- 기 원 부 -', 300, 156);
 
   // 큰 한자 (부적의 핵심 문양처럼)
   ctx.fillStyle = '#a01f1f';
   ctx.font = 'bold 130px serif';
-  ctx.fillText(cat.hanja, 300, 320);
+  ctx.fillText(cat.hanja, 300, 330);
 
   // 카테고리 라벨
   ctx.font = 'bold 30px sans-serif';
   ctx.fillStyle = '#7a1515';
-  ctx.fillText(`${cat.icon} ${cat.label}`, 300, 400);
+  ctx.fillText(`${cat.icon} ${cat.label}`, 300, 405);
 
   // 기원 문구
   ctx.font = '22px serif';
@@ -3152,6 +3231,8 @@ function openPackItemDetail(name){
 function buildRegionSelects(){
   const sel = document.getElementById('nRegion');
   sel.innerHTML = REGIONS.map(r=>`<option value="${r}">${r}</option>`).join('');
+  const selM = document.getElementById('nmRegion');
+  if(selM) selM.innerHTML = REGIONS.map(r=>`<option value="${r}">${r}</option>`).join('');
 }
 
 function buildRegionTabs(){
@@ -3376,6 +3457,10 @@ function openMountainDetail(id){
     document.getElementById('mTipWrap').style.display = 'block';
     document.getElementById('mTip').textContent = d.visitorTip;
   } else { document.getElementById('mTipWrap').style.display = 'none'; }
+  if(d.nearbySight){
+    document.getElementById('mSightWrap').style.display = 'block';
+    document.getElementById('mSight').textContent = d.nearbySight;
+  } else { document.getElementById('mSightWrap').style.display = 'none'; }
   document.getElementById('mMapLink').href = 'https://map.kakao.com/link/search/' + encodeURIComponent(d.name + ' ' + (d.locationHint || d.region));
   document.getElementById('mNotes').value = d.notes || '';
   renderMountainStepper(d.stage||0);
@@ -3534,6 +3619,12 @@ function processPhotoQueue(){
     });
   }
 }
+let renderDebounceTimer = null;
+function debouncedRender(){
+  clearTimeout(renderDebounceTimer);
+  renderDebounceTimer = setTimeout(render, 400);
+}
+
 function fetchCoverPhotoNow(id, name, locationHint, opts, done){
   opts = opts || {};
   const store = opts.store || destinations;
@@ -3547,12 +3638,12 @@ function fetchCoverPhotoNow(id, name, locationHint, opts, done){
     if(done) done();
   }
 
-  function trySetCovers(urls){
+function trySetCovers(urls){
     const unique = [...new Set(urls)];
     if(unique.length && store[id]){
       updateFn(id, {coverPhotos: unique});
       store[id].coverPhotos = unique;
-      render();
+      debouncedRender();
       if(getCurrentId() === id) onDetailUpdate(store[id]);
       finish();
       return true;
@@ -3969,6 +4060,36 @@ function openAddModal(){
 }
 function closeAdd(){ document.getElementById('addOverlay').classList.remove('show'); }
 
+function openAddMountainModal(){
+  document.getElementById('nmName').value='';
+  document.getElementById('nmHeight').value='';
+  document.getElementById('nmDesc').value='';
+  document.getElementById('nmActivity').value='';
+  document.getElementById('addMountainOverlay').classList.add('show');
+}
+function closeAddMountain(){ document.getElementById('addMountainOverlay').classList.remove('show'); }
+
+function openAddModalForCurrentType(){
+  if(contentType==='mountain') openAddMountainModal(); else openAddModal();
+}
+
+function addMountainDestinationCustom(){
+  const name = document.getElementById('nmName').value.trim();
+  if(!name){ showToast('산 이름을 입력해주세요'); return; }
+  const id = newId();
+  const data = {
+    name,
+    region: document.getElementById('nmRegion').value,
+    height: document.getElementById('nmHeight').value.trim(),
+    desc: document.getElementById('nmDesc').value.trim(),
+    activity: document.getElementById('nmActivity').value.trim(),
+    stage:0, notes:'', photos:{}, createdAt: Date.now()
+  };
+  writeMountainDestination(id, data);
+  closeAddMountain();
+  showToast('산을 추가했어요');
+}
+
 function addDestination(){
   const name = document.getElementById('nName').value.trim();
   if(!name){ showToast('절 이름을 입력해주세요'); return; }
@@ -4108,11 +4229,15 @@ function openMapOverlay(){
     const places = new kakao.maps.services.Places();
     let plotted = 0, pending = 0, missing = 0;
 
+    const sourceObj = contentType==='mountain' ? mountainDestinations : destinations;
+    const openDetailFn = contentType==='mountain' ? openMountainDetail : openDetail;
+    const updateFn = contentType==='mountain' ? updateMountainDestination : updateDestination;
+
     function plot(id, d, lat, lng){
       const pos = new kakao.maps.LatLng(lat, lng);
       const marker = new kakao.maps.Marker({map, position:pos, image: markerImageFor(d.tag)});
       const iw = new kakao.maps.InfoWindow({content:`<div style="padding:6px 10px;font-size:12px;">${escapeHtml(d.name)}</div>`});
-      kakao.maps.event.addListener(marker,'click',()=>{ closeMapOverlay(); openDetail(id); });
+      kakao.maps.event.addListener(marker,'click',()=>{ closeMapOverlay(); openDetailFn(id); });
       kakao.maps.event.addListener(marker,'mouseover',()=>iw.open(map,marker));
       kakao.maps.event.addListener(marker,'mouseout',()=>iw.close());
       bounds.extend(pos);
@@ -4127,7 +4252,7 @@ function openMapOverlay(){
     }
 
     const toResolve = [];
-    Object.entries(destinations).forEach(([id,d])=>{
+    Object.entries(sourceObj).forEach(([id,d])=>{
       if(d.fixedLat && d.fixedLng){
         plot(id, d, d.fixedLat, d.fixedLng);
       } else if(d.lat && d.lng){
@@ -4146,7 +4271,7 @@ function openMapOverlay(){
       places.keywordSearch(d.name + ' ' + (d.locationHint || d.region), (data, status)=>{
         if(status === kakao.maps.services.Status.OK && data[0]){
           const lat = parseFloat(data[0].y), lng = parseFloat(data[0].x);
-          updateDestination(id, {lat, lng});
+          updateFn(id, {lat, lng});
           plot(id, d, lat, lng);
           pending--; updateNote();
           setTimeout(processNext, 120);
@@ -4154,7 +4279,7 @@ function openMapOverlay(){
           places.keywordSearch(d.name, (data2, status2)=>{
             if(status2 === kakao.maps.services.Status.OK && data2[0]){
               const lat = parseFloat(data2[0].y), lng = parseFloat(data2[0].x);
-              updateDestination(id, {lat, lng});
+              updateFn(id, {lat, lng});
               plot(id, d, lat, lng);
             } else {
               missing++;
