@@ -518,6 +518,12 @@
     80%{opacity:1;}
     100%{transform:translateY(100vh) rotate(540deg);opacity:0;}
   }
+  @keyframes float-up{
+    0%{transform:translateY(0) translateX(0);opacity:0;}
+    10%{opacity:.5;}
+    90%{opacity:.3;}
+    100%{transform:translateY(-260px) translateX(20px);opacity:0;}
+  }
   .level-pill{
     display:inline-block;background:rgba(255,255,255,.25);border:2px solid rgba(255,255,255,.5);
     color:#fff;font-size:12.5px;font-weight:800;padding:5px 14px;border-radius:999px;
@@ -981,14 +987,21 @@
 <div class="overlay" id="breathOverlay">
   <div class="modal" style="text-align:center;">
     <div class="modal-head">
-      <div><h2 class="serif">🫁 수식관 호흡</h2><div class="sub">스님들이 참선할 때 쓰는 '수식관(數息觀)' — 숨을 헤아리며 마음을 가라앉히는 전통 수행법이에요</div></div>
+      <div><h2 class="serif" id="breathTitle">🫁 수식관 호흡</h2><div class="sub" id="breathSub">스님들이 참선할 때 쓰는 '수식관(數息觀)' — 숨을 헤아리며 마음을 가라앉히는 전통 수행법이에요</div></div>
       <button class="close-x" onclick="closeBreathOverlay()">✕</button>
     </div>
     <div class="modal-body">
-      <div id="breathCircle" style="width:140px;height:140px;border-radius:50%;background:radial-gradient(circle,var(--moss),var(--moss-dark));margin:20px auto;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:15px;transition:transform 4s ease-in-out;">준비</div>
-      <div id="breathCount" style="font-size:12px;color:var(--ink-soft);margin-bottom:14px;">시작 버튼을 눌러주세요</div>
-      <button class="btn btn-primary btn-block" id="breathStartBtn" onclick="startBreathing()">시작하기</button>
-      <div class="map-note" style="margin-top:14px;">🙏 이 숨 한 번은 마음을 잠시 쉬게 하는 작은 방편일 뿐이에요. 계속 마음이 무겁다면, 그 마음을 혼자 두지 말고 가까운 사람과 나눠보세요.</div>
+      <div id="breathBreathBody" style="position:relative;">
+        <div id="breathParticles" style="position:absolute;inset:0;overflow:hidden;pointer-events:none;"></div>
+        <div id="breathCircle" style="position:relative;width:140px;height:140px;border-radius:50%;background:radial-gradient(circle,var(--moss),var(--moss-dark));margin:20px auto;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:15px;transition:transform 4s ease-in-out;">준비</div>
+        <div id="breathCount" style="position:relative;font-size:12px;color:var(--ink-soft);margin-bottom:14px;">시작 버튼을 눌러주세요</div>
+        <button class="btn btn-primary btn-block" id="breathStartBtn" onclick="startBreathing()" style="position:relative;">시작하기</button>
+      </div>
+      <div id="breathPhraseBody" style="display:none;padding:30px 10px;">
+        <div id="breathPhraseText" style="font-family:'Nanum Myeongjo','Noto Serif KR',serif;font-size:22px;color:var(--stamp);min-height:60px;transition:opacity .4s ease;line-height:1.6;"></div>
+      </div>
+      <button class="btn btn-ghost btn-block" id="ambientToggleBtn" onclick="toggleAmbient()" style="margin-top:8px;">🔊 소리 켜짐</button>
+      <div class="map-note" style="margin-top:14px;">🙏 이 시간은 마음을 잠시 쉬게 하는 작은 방편일 뿐이에요. 계속 마음이 무겁다면, 그 마음을 혼자 두지 말고 가까운 사람과 나눠보세요.</div>
     </div>
   </div>
 </div>
@@ -1017,21 +1030,32 @@
       <div id="moktakWrap" onclick="tapMoktak()" style="cursor:pointer;user-select:none;display:inline-block;">
         <svg width="200" height="200" viewBox="0 0 200 200" id="moktakSvg" style="transition:transform .06s ease;">
           <defs>
-            <radialGradient id="moktakBody" cx="40%" cy="35%" r="70%">
-              <stop offset="0%" stop-color="#c47a3a"/>
-              <stop offset="60%" stop-color="#8a4f22"/>
+            <radialGradient id="moktakBody" cx="38%" cy="30%" r="75%">
+              <stop offset="0%" stop-color="#d68a45"/>
+              <stop offset="55%" stop-color="#9a5825"/>
               <stop offset="100%" stop-color="#5c3115"/>
             </radialGradient>
           </defs>
-          <ellipse cx="100" cy="130" rx="16" ry="8" fill="rgba(0,0,0,.15)"/>
-          <circle cx="100" cy="105" r="78" fill="url(#moktakBody)" stroke="#3d1f0c" stroke-width="3"/>
-          <path d="M40,95 Q60,85 60,105 Q60,125 40,115" fill="none" stroke="#3d1f0c" stroke-width="2.5" opacity=".55"/>
-          <path d="M160,95 Q140,85 140,105 Q140,125 160,115" fill="none" stroke="#3d1f0c" stroke-width="2.5" opacity=".55"/>
-          <path d="M65,150 Q100,175 135,150 Q100,160 65,150 Z" fill="#2c160a"/>
-          <path d="M65,150 Q100,175 135,150" fill="none" stroke="#1a0d05" stroke-width="3"/>
-          <rect x="92" y="18" width="16" height="22" rx="6" fill="#5c3115" stroke="#3d1f0c" stroke-width="2"/>
-          <ellipse cx="100" cy="18" rx="12" ry="7" fill="#8a4f22" stroke="#3d1f0c" stroke-width="2"/>
-          <ellipse cx="70" cy="75" rx="18" ry="11" fill="rgba(255,255,255,.22)"/>
+          <ellipse cx="100" cy="172" rx="42" ry="9" fill="rgba(0,0,0,.18)"/>
+          <!-- 표주박형 몸통 -->
+          <path d="M100,25
+                   C140,25 158,55 158,90
+                   C158,130 138,168 100,168
+                   C62,168 42,130 42,90
+                   C42,55 60,25 100,25 Z"
+                fill="url(#moktakBody)" stroke="#3d1f0c" stroke-width="3.5"/>
+          <!-- 손잡이 -->
+          <rect x="91" y="6" width="18" height="22" rx="7" fill="#6b3d1a" stroke="#3d1f0c" stroke-width="2.5"/>
+          <ellipse cx="100" cy="8" rx="14" ry="7" fill="#8a4f22" stroke="#3d1f0c" stroke-width="2.5"/>
+          <!-- 눈(입) 모양 슬릿 -->
+          <path d="M48,100 Q100,78 152,100 Q100,122 48,100 Z" fill="#241206" stroke="#140a03" stroke-width="2.5"/>
+          <path d="M48,100 Q100,78 152,100" fill="none" stroke="#1a0d05" stroke-width="2"/>
+          <!-- 양끝 소용돌이 무늬 -->
+          <path d="M48,100 q-10,-4 -6,-14 q4,-8 12,-4" fill="none" stroke="#3d1f0c" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M152,100 q10,-4 6,-14 q-4,-8 -12,-4" fill="none" stroke="#3d1f0c" stroke-width="2.5" stroke-linecap="round"/>
+          <!-- 광택 하이라이트 -->
+          <ellipse cx="72" cy="58" rx="20" ry="13" fill="rgba(255,255,255,.28)"/>
+          <ellipse cx="130" cy="140" rx="14" ry="8" fill="rgba(0,0,0,.12)"/>
         </svg>
         <div style="margin-top:6px;">
           <div style="display:inline-block;width:70px;height:8px;border-radius:4px;background:#3d1f0c;transform:rotate(-25deg);"></div>
@@ -2021,6 +2045,10 @@ function openMoktakOverlay(){
   document.getElementById('moktakTotal').textContent = moktakSessionCount;
   document.getElementById('moktakMsg').textContent = "두드릴 때마다 번뇌가 하나씩 사라져요";
   document.getElementById('moktakOverlay').classList.add('show');
+  try{
+    if(!moktakAudioCtx) moktakAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if(moktakAudioCtx.state === 'suspended') moktakAudioCtx.resume();
+  }catch(e){}
 }
 function closeMoktakOverlay(){
   document.getElementById('moktakOverlay').classList.remove('show');
@@ -2040,11 +2068,7 @@ function playMoktakSound(){
       osc.connect(gain); gain.connect(ctx.destination);
       osc.start(); osc.stop(ctx.currentTime + 0.12);
     };
-    if(ctx.state === 'suspended'){
-      ctx.resume().then(startTone);
-    } else {
-      startTone();
-    }
+    ctx.resume().then(startTone).catch(startTone);
   }catch(e){}
   if(navigator.vibrate) navigator.vibrate(15);
 }
@@ -2303,13 +2327,126 @@ function downloadAmulet(){
    BREATHING EXERCISE (박스 호흡)
 ============================================================ */
 let breathTimer = null;
-function openBreathOverlay(){
+let currentMeditation = null;
+let ambientCtx = null;
+let ambientNodes = [];
+let ambientOn = true;
+
+function startAmbient(baseFreq){
+  stopAmbient();
+  if(!ambientOn) return;
+  try{
+    if(!ambientCtx) ambientCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const ctx = ambientCtx;
+    if(ctx.state === 'suspended') ctx.resume();
+    const masterGain = ctx.createGain();
+    masterGain.gain.setValueAtTime(0, ctx.currentTime);
+    masterGain.gain.linearRampToValueAtTime(0.05, ctx.currentTime + 1.5);
+    masterGain.connect(ctx.destination);
+    [1, 1.5, 2.01].forEach((mult,i)=>{
+      const osc = ctx.createOscillator();
+      osc.type = 'sine';
+      osc.frequency.value = baseFreq * mult;
+      const g = ctx.createGain();
+      g.gain.value = i===0 ? 1 : 0.4;
+      osc.connect(g); g.connect(masterGain);
+      osc.start();
+      ambientNodes.push(osc);
+    });
+    ambientNodes.push(masterGain);
+  }catch(e){}
+}
+function stopAmbient(){
+  ambientNodes.forEach(n=>{ try{ n.stop && n.stop(); n.disconnect && n.disconnect(); }catch(e){} });
+  ambientNodes = [];
+}
+function toggleAmbient(){
+  ambientOn = !ambientOn;
+  document.getElementById('ambientToggleBtn').textContent = ambientOn ? '🔊 소리 켜짐' : '🔇 소리 꺼짐';
+  if(ambientOn){ startAmbient(currentAmbientTone); }
+  else { stopAmbient(); }
+}
+
+function renderParticles(colorPair){
+  const wrap = document.getElementById('breathParticles');
+  let html = '';
+  for(let i=0;i<10;i++){
+    const left = Math.random()*100;
+    const delay = Math.random()*6;
+    const dur = 6 + Math.random()*4;
+    const size = 6 + Math.random()*8;
+    html += `<span style="position:absolute;left:${left}%;bottom:-20px;width:${size}px;height:${size}px;border-radius:50%;background:${colorPair[0]};opacity:.35;animation:float-up ${dur}s ${delay}s linear infinite;"></span>`;
+  }
+  wrap.innerHTML = html;
+}
+const MEDITATION_TYPES = {
+  box: {
+    title:'🫁 박스 호흡', sub:"스님들이 참선할 때 쓰는 '수식관(數息觀)', 숨을 헤아리며 마음을 가라앉히는 전통 수행법이에요",
+    steps:[{label:'들이쉬기',scale:1.5,dur:4000},{label:'멈추기',scale:1.5,dur:4000},{label:'내쉬기',scale:1,dur:4000},{label:'멈추기',scale:1,dur:4000}],
+    cycles:4, doneMsg:'4번의 호흡을 마쳤어요. 잠시 더 앉아 있어도 좋아요.',
+    color:['#4a9b7f','#3a7d65'], tone:220
+  },
+  counting: {
+    title:'🔢 수식관 (숫자 세기 호흡)', sub:'숨을 하나씩 헤아리며 잡생각을 가라앉히는 방법이에요',
+    steps:[{label:'들이쉬기',scale:1.4,dur:3500},{label:'내쉬기',scale:1,dur:3500}],
+    cycles:8, doneMsg:'열 번 가까이 숨을 세었어요. 머릿속이 조금 조용해졌나요?',
+    color:['#4a7fc7','#345d94'], tone:262
+  },
+  relax478: {
+    title:'😮‍💨 이완 호흡 (4-7-8)', sub:'길게 내쉬는 것에 집중해서 몸을 이완시키는 호흡법이에요',
+    steps:[{label:'들이쉬기',scale:1.5,dur:4000},{label:'멈추기',scale:1.5,dur:7000},{label:'길게 내쉬기',scale:1,dur:8000}],
+    cycles:4, doneMsg:'몸에 힘이 조금 빠졌나요? 이대로 잠시 쉬어도 좋아요.',
+    color:['#8a6fd6','#6b4fa8'], tone:196
+  },
+  energize: {
+    title:'⚡ 활력 호흡', sub:'짧고 리드미컬한 호흡으로 정신을 깨우고 결심을 다지는 호흡법이에요',
+    steps:[{label:'들이쉬기',scale:1.4,dur:1500},{label:'내쉬기',scale:1,dur:1500}],
+    cycles:8, doneMsg:'몸이 조금 깨어났나요? 이제 그 힘으로 한 걸음 내디뎌보세요.',
+    color:['#e8834a','#c4622a'], tone:330
+  },
+  cooling: {
+    title:'❄️ 냉각 호흡', sub:'천천히 길게 내쉬면서 끓어오른 마음을 식히는 호흡법이에요',
+    steps:[{label:'들이쉬기',scale:1.5,dur:4000},{label:'멈추기',scale:1.5,dur:2000},{label:'아주 길게 내쉬기',scale:1,dur:8000}],
+    cycles:4, doneMsg:'조금 진정이 되셨나요? 화는 자연스러운 감정이에요.',
+    color:['#4ab8c7','#2a8a98'], tone:174
+  }
+};
+const MEDITATION_PHRASES = {
+  lovingkindness: {
+    title:'🕊 자애 명상', sub:'나와 당신 모두의 평안을 빌어보는 명상이에요', tone:196,
+    phrases:['내가 평안하기를', '내가 건강하기를', '내가 사랑받기를', '당신도 평안하기를', '당신도 건강하기를', '우리 모두 평안하기를']
+  },
+  gratitude: {
+    title:'🙏 감사 명상', sub:'오늘 감사했던 것을 천천히 떠올려보는 시간이에요', tone:262,
+    phrases:['오늘 하루, 무사히 지나간 것에 감사해요', '지금 숨 쉬고 있는 것에 감사해요', '곁에 있는 사람들에게 감사해요', '작은 것에도 감사할 수 있는 마음에 감사해요', '오늘의 나에게 감사해요']
+  }
+};
+let currentAmbientTone = 220;
+
+function openBreathOverlay(typeKey){
+  typeKey = typeKey || 'box';
+  const phraseType = MEDITATION_PHRASES[typeKey];
+  if(phraseType){
+    openPhraseMeditation(typeKey);
+    return;
+  }
+  document.getElementById('breathPhraseBody').style.display = 'none';
+  document.getElementById('breathBreathBody').style.display = 'block';
+  currentMeditation = MEDITATION_TYPES[typeKey] || MEDITATION_TYPES.box;
+  document.getElementById('breathTitle').textContent = currentMeditation.title;
+  document.getElementById('breathSub').textContent = currentMeditation.sub;
+  document.getElementById('breathCircle').style.background = `radial-gradient(circle,${currentMeditation.color[0]},${currentMeditation.color[1]})`;
+  renderParticles(currentMeditation.color);
   document.getElementById('breathOverlay').classList.add('show');
   resetBreathing();
+  currentAmbientTone = currentMeditation.tone;
+  startAmbient(currentAmbientTone);
 }
 function closeBreathOverlay(){
   document.getElementById('breathOverlay').classList.remove('show');
   clearTimeout(breathTimer);
+  clearTimeout(phraseTimer);
+  stopAmbient();
   resetBreathing();
 }
 function resetBreathing(){
@@ -2326,35 +2463,53 @@ function startBreathing(){
   document.getElementById('breathStartBtn').style.display = 'none';
   const circle = document.getElementById('breathCircle');
   const countEl = document.getElementById('breathCount');
-  const steps = [
-    {label:'들이쉬기', scale:1.5},
-    {label:'멈추기', scale:1.5},
-    {label:'내쉬기', scale:1},
-    {label:'멈추기', scale:1}
-  ];
+  const med = currentMeditation;
   let cycle = 0;
-  const totalCycles = 4;
   let stepIdx = 0;
   function runStep(){
-    if(cycle >= totalCycles){
+    if(cycle >= med.cycles){
       circle.style.transition = 'transform 1s ease';
       circle.style.transform = 'scale(1)';
       circle.textContent = '수고했어요';
-      countEl.textContent = '4번의 호흡을 마쳤어요. 잠시 더 앉아 있어도 좋아요.';
+      countEl.textContent = med.doneMsg;
       document.getElementById('breathStartBtn').style.display = 'block';
       document.getElementById('breathStartBtn').textContent = '다시 하기';
       return;
     }
-    const step = steps[stepIdx];
-    circle.style.transition = 'transform 4s ease-in-out';
+    const step = med.steps[stepIdx];
+    circle.style.transition = `transform ${step.dur/1000}s ease-in-out`;
     circle.style.transform = `scale(${step.scale})`;
     circle.textContent = step.label;
-    countEl.textContent = `${cycle+1} / ${totalCycles} 회`;
+    countEl.textContent = `${cycle+1} / ${med.cycles} 회`;
     stepIdx++;
-    if(stepIdx >= steps.length){ stepIdx = 0; cycle++; }
-    breathTimer = setTimeout(runStep, 4000);
+    if(stepIdx >= med.steps.length){ stepIdx = 0; cycle++; }
+    breathTimer = setTimeout(runStep, step.dur);
   }
   runStep();
+}
+
+let phraseTimer = null;
+function openPhraseMeditation(key){
+  const data = MEDITATION_PHRASES[key];
+  document.getElementById('breathBreathBody').style.display = 'none';
+  document.getElementById('breathPhraseBody').style.display = 'block';
+  document.getElementById('breathTitle').textContent = data.title;
+  document.getElementById('breathSub').textContent = data.sub;
+  document.getElementById('breathOverlay').classList.add('show');
+  currentAmbientTone = data.tone;
+  startAmbient(currentAmbientTone);
+  let idx = 0;
+  const el = document.getElementById('breathPhraseText');
+  function showNext(){
+    el.style.opacity = 0;
+    setTimeout(()=>{
+      el.textContent = data.phrases[idx % data.phrases.length];
+      el.style.opacity = 1;
+      idx++;
+    }, 400);
+    phraseTimer = setTimeout(showNext, 4000);
+  }
+  showNext();
 }
 
 /* ============================================================
@@ -2571,6 +2726,18 @@ function closeWorryOverlay(){
   document.getElementById('worryOverlay').classList.remove('show');
 }
 
+const WORRY_TO_MEDITATION = {
+  complex: 'counting',
+  tired: 'relax478',
+  resolve: 'energize',
+  comfort: 'lovingkindness',
+  angry: 'cooling',
+  lonely: 'lovingkindness',
+  grateful: 'gratitude',
+  anxious: 'box',
+  forgive: 'lovingkindness'
+};
+
 function pickWorryTemple(key){
   const cat = WORRY_CATEGORIES.find(c=>c.key===key);
   if(!cat) return;
@@ -2588,7 +2755,7 @@ function pickWorryTemple(key){
       <div class="serif" style="font-size:26px;color:var(--stamp);margin-bottom:6px;">${escapeHtml(name)}</div>
       <div style="font-size:12px;color:var(--ink-soft);margin-bottom:18px;">${escapeHtml(item.region)} · ${item.tagline?('"'+escapeHtml(item.tagline)+'"'):''}</div>
       <button class="btn btn-primary btn-block" style="margin-bottom:8px;" onclick="closeWorryOverlay();openPackItemDetail('${name.replace(/'/g,"\\'")}');">이 절 자세히 보기</button>
-      <button class="btn btn-ghost btn-block" style="margin-bottom:8px;" onclick="openBreathOverlay()">🫁 잠깐, 같이 숨 한 번 골라볼까요?</button>
+      <button class="btn btn-ghost btn-block" style="margin-bottom:8px;" onclick="openBreathOverlay('${WORRY_TO_MEDITATION[key] || 'box'}')">🫁 잠깐, 같이 숨 한 번 골라볼까요?</button>
       <button class="btn btn-ghost btn-block" onclick="pickWorryTemple('${key}')">다른 곳 추천받기</button>
     </div>
   `;
