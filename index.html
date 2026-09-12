@@ -1028,6 +1028,26 @@
   </div>
 </div>
 
+<!-- ===================== BOW COUNTER MODAL ===================== -->
+<div class="overlay" id="bowCounterOverlay">
+  <div class="modal" style="text-align:center;">
+    <div class="modal-head">
+      <div><h2 class="serif">🙏 108배 세기</h2><div class="sub">순서를 따라가며 절을 세어드려요</div></div>
+      <button class="close-x" onclick="closeBowCounterOverlay()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div id="bowCounterNum" style="font-size:40px;font-weight:800;color:var(--stamp);">0<span style="font-size:16px;color:var(--ink-soft);"> / 108</span></div>
+      <div class="badge-bar" style="max-width:220px;margin:6px auto 16px;"><div class="badge-bar-fill" id="bowCounterBar" style="width:0%;"></div></div>
+      <div id="bowCounterSvgWrap" style="height:150px;display:flex;align-items:center;justify-content:center;"></div>
+      <div id="bowCounterLabel" style="font-weight:800;color:var(--stamp);margin-top:8px;font-size:14px;"></div>
+      <div id="bowCounterDesc" style="font-size:12px;color:var(--ink-soft);margin-top:4px;min-height:32px;"></div>
+      <button class="btn btn-primary btn-block" style="margin-top:14px;" onclick="bowCounterNext()">다음 동작 (탭)</button>
+      <button class="btn btn-ghost btn-block" style="margin-top:8px;" onclick="resetBowCounter()">오늘 기록 초기화</button>
+      <div class="map-note" style="margin-top:14px;">동작을 하나씩 따라 하면서 "다음 동작"을 눌러주세요. 여섯 동작(합장→일어나기)을 한 바퀴 돌면 절 1번이 세져요.</div>
+    </div>
+  </div>
+</div>
+
 <!-- ===================== MOKTAK MODAL ===================== -->
 <div class="overlay" id="moktakOverlay">
   <div class="modal" style="text-align:center;">
@@ -1195,6 +1215,7 @@
           <button class="btn btn-primary" style="padding:7px 16px;font-size:12px;" onclick="playBowPoseCycle()">▶ 순서대로 보기</button>
           <button class="btn btn-ghost" style="padding:7px 14px;font-size:12px;" onclick="bowPoseNav(1)">다음 ›</button>
         </div>
+        <button class="btn btn-primary btn-block" style="margin-top:10px;" onclick="closeEtiquetteOverlay();openBowCounterOverlay();">🙏 절하면서 순서 따라 108배 세기</button>
       </div>
     </div>
   </div>
@@ -2884,7 +2905,31 @@ const GLOSSARY = [
   {term:"윤장대 (輪藏臺)", desc:"손으로 돌리면서 소원을 비는 회전식 경전 보관함이에요. 글을 못 읽던 옛날 사람들도, 이걸 한 바퀴 돌리면 그 안의 불경을 다 읽은 것과 같은 공덕을 얻는다고 믿었대요. 예천 용문사에 국내 유일하게 남아있어요."},
   {term:"반야심경 (般若心經)", desc:"불교에서 가장 많이 외우는 짧은 경전이에요. '색즉시공 공즉시색'이라는 유명한 구절이 여기서 나왔어요."},
   {term:"나무아미타불 (南無阿彌陀佛)", desc:"'아미타 부처님께 귀의합니다'라는 뜻의 염불이에요. 극락왕생(좋은 곳에 다시 태어나기)을 바라며 반복해서 외워요."},
-  {term:"다비식 (茶毘式)", desc:"스님이 돌아가셨을 때 시신을 불에 태워 장례 지내는 의식이에요. 화장(火葬)의 불교식 표현이에요."}
+  {term:"다비식 (茶毘式)", desc:"스님이 돌아가셨을 때 시신을 불에 태워 장례 지내는 의식이에요. 화장(火葬)의 불교식 표현이에요."},
+  {term:"화두 (話頭)", desc:"참선할 때 마음속에 붙잡고 골똘히 생각하는 질문이에요. '나는 누구인가' 같은 답이 쉽게 안 나오는 질문을 붙잡고 계속 파고드는 수행법이에요."},
+  {term:"백중 (百中)", desc:"음력 7월 15일에 지내는 큰 명절이에요. 조상님의 넋을 기리고 극락왕생을 비는 날로, 절마다 큰 재(齋)를 지내요."},
+  {term:"초파일 (初八日)", desc:"음력 4월 8일, 부처님이 태어난 날이에요. '부처님오신날'이라고도 하며, 이날 절마다 연등을 달아요."},
+  {term:"연등 (燃燈)", desc:"부처님오신날에 절과 거리에 다는 등이에요. 어둠을 밝히는 지혜와 자비를 상징해요."},
+  {term:"입적 (入寂)", desc:"스님이 돌아가시는 것을 이르는 말이에요. '고요함에 들었다'는 뜻으로, 일반적인 죽음과 구분해서 존중을 담아 쓰는 표현이에요."},
+  {term:"열반 (涅槃)", desc:"모든 번뇌가 사라진 완전한 평화의 상태를 말해요. 부처님이 돌아가신 것도 '열반에 드셨다'고 표현해요."},
+  {term:"해우소 (解憂所)", desc:"절에서 화장실을 부르는 말이에요. '근심을 푸는 곳'이라는 뜻으로, 화장실도 수행의 공간으로 여기는 마음이 담겨있어요."},
+  {term:"부목 (負木)", desc:"절에서 나무를 하거나 허드렛일을 돕는 사람을 말해요. 꼭 스님이 아니어도, 절 살림을 돕는 재가자를 이렇게 부르기도 해요."},
+  {term:"방장 (方丈)", desc:"총림(큰 절)에서 가장 어른이 되는 큰스님의 지위예요. 학교로 치면 총장님 같은 자리예요."},
+  {term:"선방 (禪房)", desc:"스님들이 참선(명상) 수행을 하는 방이에요."},
+  {term:"강원 (講院)", desc:"스님들이 경전을 공부하는 절 안의 교육기관이에요. 학교로 치면 신학대학 같은 곳이에요."},
+  {term:"율원 (律院)", desc:"스님들이 계율(지켜야 할 규칙)을 전문적으로 공부하는 곳이에요."},
+  {term:"불이 (不二)", desc:"'둘이 아니다'라는 뜻이에요. 나와 남, 선과 악처럼 나눠 보이는 것들이 사실은 하나로 이어져 있다는 깊은 가르침이에요."},
+  {term:"자비 (慈悲)", desc:"남을 아끼고 그 아픔을 함께 느끼는 마음이에요. '자'는 즐거움을 주려는 마음, '비'는 슬픔을 없애주려는 마음을 뜻해요."},
+  {term:"보시 (布施)", desc:"대가를 바라지 않고 남에게 베푸는 거예요. 돈이나 물건뿐 아니라, 좋은 말 한마디나 친절도 보시가 될 수 있어요."},
+  {term:"공양 (供養)", desc:"부처님께 음식이나 꽃, 향 등을 올리는 것, 또는 절에서 밥을 먹는 것을 말해요. '오늘 공양 하셨어요?'는 '식사하셨어요?'라는 뜻이에요."},
+  {term:"불공 (佛供)", desc:"부처님께 음식과 정성을 올리며 소원을 비는 의식이에요."},
+  {term:"천도재 (薦度齋)", desc:"돌아가신 분이 좋은 곳(극락)에 가시길 바라며 지내는 의식이에요. 49재도 천도재의 한 종류예요."},
+  {term:"수계 (受戒)", desc:"불교 신자가 되기로 하며 지켜야 할 계율을 받는 의식이에요."},
+  {term:"법회 (法會)", desc:"스님의 설법(가르침)을 듣고 예불을 드리는 모임이에요. 매주 정해진 요일에 여는 절이 많아요."},
+  {term:"불자 (佛子)", desc:"'부처님의 자녀'라는 뜻으로, 불교를 믿는 사람을 부르는 말이에요."},
+  {term:"신중단 (神衆壇)", desc:"불법을 지키는 여러 신들을 모신 자리예요. 대웅전 안, 부처님 옆쪽에 따로 마련돼 있는 경우가 많아요."},
+  {term:"주련 (柱聯)", desc:"절 기둥에 세로로 걸어놓은 한자 글귀예요. 좋은 가르침이나 시가 적혀 있어요."},
+  {term:"단청 (丹靑)", desc:"절 건물에 칠하는 화려한 색색의 무늬예요. 붉은색과 푸른색이 주로 쓰인다고 해서 이런 이름이 붙었어요. 나무를 보호하는 실용적인 역할도 해요."}
 ];
 
 function openGlossaryOverlay(){
@@ -3009,6 +3054,53 @@ function resetMantra(){
   localStorage.setItem(mantraStorageKey(), '0');
   document.getElementById('mantraCount').textContent = 0;
   document.getElementById('mantraTotal').textContent = 0;
+}
+
+let bowCounterCount = 0;
+let bowCounterPoseIdx = 0;
+function bowCounterStorageKey(){
+  const today = new Date();
+  const dateStr = `${today.getFullYear()}-${today.getMonth()+1}-${today.getDate()}`;
+  return 'sansanoteBowCounter_' + (currentUid || 'guest') + '_' + dateStr;
+}
+function openBowCounterOverlay(){
+  bowCounterCount = parseInt(localStorage.getItem(bowCounterStorageKey()) || '0', 10);
+  bowCounterPoseIdx = 0;
+  renderBowCounterState();
+  document.getElementById('bowCounterOverlay').classList.add('show');
+}
+function closeBowCounterOverlay(){
+  document.getElementById('bowCounterOverlay').classList.remove('show');
+}
+function renderBowCounterState(){
+  const p = BOW_POSES[bowCounterPoseIdx];
+  document.getElementById('bowCounterSvgWrap').innerHTML = p.svg;
+  document.getElementById('bowCounterLabel').textContent = p.label;
+  document.getElementById('bowCounterDesc').textContent = p.desc;
+  document.getElementById('bowCounterNum').innerHTML = `${bowCounterCount}<span style="font-size:16px;color:var(--ink-soft);"> / 108</span>`;
+  document.getElementById('bowCounterBar').style.width = Math.min(100, bowCounterCount/108*100) + '%';
+}
+function bowCounterNext(){
+  bowCounterPoseIdx++;
+  if(bowCounterPoseIdx >= BOW_POSES.length){
+    bowCounterPoseIdx = 0;
+    bowCounterCount++;
+    localStorage.setItem(bowCounterStorageKey(), String(bowCounterCount));
+    playMoktakSound();
+    if(bowCounterCount === 108){
+      showCelebration('🙏 108배를 다 채우셨어요!', '오늘 정말 큰 정진을 하셨어요');
+    } else if(bowCounterCount % 27 === 0){
+      showCelebration(`🙏 ${bowCounterCount}번째 절!`, '잘 이어가고 있어요');
+    }
+  }
+  renderBowCounterState();
+}
+function resetBowCounter(){
+  if(!confirm('오늘 기록을 초기화할까요?')) return;
+  bowCounterCount = 0;
+  bowCounterPoseIdx = 0;
+  localStorage.setItem(bowCounterStorageKey(), '0');
+  renderBowCounterState();
 }
 
 const BOW_POSES = [
