@@ -862,11 +862,23 @@
         <button class="btn btn-ghost" id="mantraBtnA" style="padding:8px 14px;font-size:12.5px;" onclick="setMantraPhrase('관세음보살')">관세음보살</button>
         <button class="btn btn-ghost" id="mantraBtnB" style="padding:8px 14px;font-size:12.5px;" onclick="setMantraPhrase('나무아미타불')">나무아미타불</button>
       </div>
-      <div id="mantraBeadCircle" onclick="tapMantra()" style="width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,var(--gold),#b8860b);margin:10px auto;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;cursor:pointer;box-shadow:0 6px 0 #8a6a1f;user-select:none;">
+
+      <div id="mantraAutoPanel" style="display:none;background:#f3ecff;border-radius:12px;padding:12px;margin-bottom:12px;">
+        <div style="font-size:12px;color:#5a3a8a;margin-bottom:8px;">절하거나 합장한 채로 두세요. 정해진 간격마다 알아서 종소리로 세드려요.</div>
+        <div style="display:flex;gap:6px;justify-content:center;margin-bottom:10px;">
+          <button class="btn btn-ghost" style="padding:6px 12px;font-size:11.5px;" onclick="setAutoInterval(1500)">빠르게</button>
+          <button class="btn btn-ghost" style="padding:6px 12px;font-size:11.5px;" onclick="setAutoInterval(2500)">보통</button>
+          <button class="btn btn-ghost" style="padding:6px 12px;font-size:11.5px;" onclick="setAutoInterval(4000)">천천히</button>
+        </div>
+        <button class="btn btn-primary btn-block" id="autoToggleBtn" onclick="toggleAutoMantra()">▶ 자동 시작</button>
+      </div>
+
+      <div id="mantraBeadCircle" onclick="tapMantra()" style="width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,var(--gold),#b8860b);margin:10px auto;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;cursor:pointer;box-shadow:0 6px 0 #8a6a1f;user-select:none;transition:transform .1s ease;">
         <div id="mantraPhraseLabel" style="font-family:'Nanum Myeongjo','Noto Serif KR',serif;font-size:16px;font-weight:800;">관세음보살</div>
         <div id="mantraCount" style="font-size:34px;font-weight:800;margin-top:4px;">0</div>
       </div>
-      <div style="font-size:11px;color:var(--ink-soft);margin-bottom:14px;">원을 누를 때마다 하나씩 세져요. 오늘 총 <b id="mantraTotal">0</b>번 하셨어요.</div>
+      <div style="font-size:11px;color:var(--ink-soft);margin:10px 0 8px;">직접 누르거나(수동), 손을 뗀 채로 자동 모드를 켤 수 있어요. 오늘 총 <b id="mantraTotal">0</b>번 하셨어요.</div>
+      <button class="btn btn-ghost btn-block" style="margin-bottom:8px;" onclick="toggleAutoPanel()" id="autoPanelToggleBtn">🔔 자동 모드 열기 (손 안 대고 세기)</button>
       <button class="btn btn-ghost btn-block" onclick="resetMantra()">오늘 기록 초기화</button>
     </div>
   </div>
@@ -1930,47 +1942,47 @@ let quizScore = 0;
 let quizCurrentAnswer = null;
 
 const GLOSSARY = [
-  {term:"조계종 (曹溪宗)", desc:"한국 불교의 가장 큰 종파예요. 우리가 아는 절 대부분(통도사, 해인사, 송광사 등)이 이 종파에 속해요."},
-  {term:"산사 (山寺)", desc:"산속에 자리한 절을 말해요. 통도사, 부석사 등 7곳이 '산사, 한국의 산지승원'이라는 이름으로 유네스코 세계유산에 등재됐어요."},
-  {term:"총림 (叢林)", desc:"참선(명상)·경전 공부·계율 지키기를 모두 갖춘 큰 규모의 수행 도량이에요. 조계종에서 지정한 8곳이 있어요."},
-  {term:"삼보사찰 (三寶寺刹)", desc:"불교의 세 가지 보물을 상징하는 3대 사찰이에요. 통도사(부처님 진신사리)·해인사(팔만대장경)·송광사(훌륭한 스님을 많이 배출)가 여기 해당돼요."},
-  {term:"적멸보궁 (寂滅寶宮)", desc:"부처님의 진신사리를 모신 특별한 전각이에요. 사리 자체가 부처님을 상징하기 때문에, 신기하게도 법당 안에 불상을 따로 두지 않아요. 전국에 5곳(통도사·상원사·법흥사·정암사·봉정암)이 있어요."},
-  {term:"진신사리 (眞身舍利)", desc:"부처님이나 훌륭한 스님이 돌아가신 뒤 남긴 유골이에요. 신성하게 여겨서 탑이나 보궁에 소중히 모셔요."},
-  {term:"관음성지 (觀音聖地)", desc:"자비의 상징인 관세음보살을 모시고 기도하는 유명한 곳이에요. 소원을 빌러 많이 찾아가요."},
-  {term:"해수관음 (海水觀音)", desc:"바다를 바라보고 서 있는 관세음보살상이에요. 바닷가 절에 많고, 뱃길의 안전이나 소원을 비는 곳으로 유명해요."},
-  {term:"도량 (道場)", desc:"수행하는 장소, 즉 절을 가리키는 다른 말이에요."},
-  {term:"참선 (參禪)", desc:"조용히 앉아 마음을 들여다보는 수행법이에요. 우리가 아는 '명상'과 비슷해요."},
-  {term:"만행 (卍行)", desc:"한곳에 머물지 않고 여러 절을 돌아다니며 수행하는 것을 말해요. 이 앱의 순례 콘셉트와 잘 어울리는 말이에요."},
-  {term:"템플스테이", desc:"절에 머물면서 스님과 비슷한 생활(예불, 참선, 발우공양 등)을 짧게 체험해보는 프로그램이에요."},
-  {term:"일주문 (一柱門)", desc:"절 입구에 세워진 첫 번째 문이에요. 기둥이 한 줄로 서 있다고 해서 이런 이름이 붙었어요. 이 문을 기준으로 문밖은 속세, 문안은 부처님의 세계로 여겨요."},
-  {term:"천왕문 (天王門)", desc:"부처님의 세계를 지키는 사천왕(동서남북을 지키는 네 수호신)을 모신 문이에요. 험상궂은 표정의 큰 조각상들이 좌우로 서 있어요."},
-  {term:"불이문 (不二門)", desc:"절의 마지막 문이에요. '나와 남, 선과 악이 둘이 아니다'라는 불교의 깊은 뜻을 담고 있어요. 이 문을 지나면 바로 법당이 나와요."},
-  {term:"해탈문 (解脫門)", desc:"모든 번뇌와 망상에서 벗어나 깨달음에 이른다는 뜻을 담은 문이에요."},
-  {term:"대웅전 (大雄殿)", desc:"석가모니 부처님을 모신, 절에서 가장 중심이 되는 건물이에요."},
-  {term:"극락전 (極樂殿)", desc:"아미타불을 모신 건물이에요. '극락보전'이라고도 불러요."},
-  {term:"관음전 (觀音殿)", desc:"관세음보살을 따로 모신 건물이에요."},
-  {term:"나한전 (羅漢殿)", desc:"부처님의 제자였던 '나한'들을 모신 건물이에요. 표정이 저마다 개성 있게 조각된 경우가 많아 구경하는 재미가 있어요."},
-  {term:"산신각 (山神閣)", desc:"우리나라 전통 산신 신앙과 불교가 합쳐진 작은 전각이에요. 대부분 법당 뒤쪽 조용한 곳에 있어요."},
-  {term:"요사채 (寮舍-)", desc:"스님들이 실제로 생활하는 살림집이에요. 보통 방문객 출입은 제한돼요."},
-  {term:"사물 (四物)", desc:"절에서 아침저녁으로 울리는 네 가지 법구예요. 범종(모든 중생), 법고(땅 위 짐승), 목어(물속 생명), 운판(하늘 나는 것들)을 위해 각각 소리를 내요."},
-  {term:"부도 / 승탑 (浮屠 / 僧塔)", desc:"훌륭한 스님이 돌아가신 뒤 유골(사리)을 모신 작은 탑이에요. 절 한쪽에 여러 기가 모여 있는 경우가 많아요."},
-  {term:"예불 (禮佛)", desc:"하루 중 정해진 시간(새벽·저녁 등)에 부처님께 올리는 의식이에요."},
-  {term:"발우공양 (鉢盂供養)", desc:"스님들이 4개의 그릇(발우)에 음식을 덜어 먹는 전통 식사법이에요. 남기지 않고 그릇 씻은 물까지 마시는 게 특징이에요. 템플스테이에서 체험할 수 있어요."},
-  {term:"안거 (安居)", desc:"스님들이 한곳에 머물며 집중적으로 수행하는 기간이에요. 여름 3개월(하안거)과 겨울 3개월(동안거)이 있어요."},
-  {term:"출가 (出家)", desc:"가족과 세속의 삶을 떠나 스님이 되는 것을 말해요."},
-  {term:"염주 (念珠)", desc:"기도나 염불을 할 때 손에 들고 개수를 세는 구슬이에요. 108개로 된 것이 가장 대표적이에요."},
-  {term:"목탁 (木鐸)", desc:"물고기 모양을 본떠 만든 나무 타악기예요. 예불이나 염불의 박자를 맞출 때 두드려요. 물고기는 눈을 감지 않고 늘 깨어있다고 해서, 늘 깨어있으라는 뜻을 담고 있어요."},
-  {term:"오계 (五戒)", desc:"불교 신자가 지키기로 하는 다섯 가지 계율이에요 — 살생하지 않기, 훔치지 않기, 삿된 음행 하지 않기, 거짓말하지 않기, 술 마시지 않기예요."},
-  {term:"석가모니불 (釋迦牟尼佛)", desc:"불교를 처음 연 부처님 본인이에요. 대웅전의 주인공이에요."},
-  {term:"아미타불 (阿彌陀佛)", desc:"극락정토를 다스린다는 부처님이에요. 극락전(극락보전)에 모셔져 있어요."},
-  {term:"비로자나불 (毘盧遮那佛)", desc:"우주의 진리 그 자체를 상징하는 부처님이에요. 주로 대적광전에 모셔져 있어요."},
-  {term:"미륵불 (彌勒佛)", desc:"먼 미래에 나타나 아직 구제받지 못한 중생을 구원한다는 부처님이에요. 금산사 미륵전이 대표적이에요."},
-  {term:"관세음보살 (觀世音菩薩)", desc:"자비로 중생을 보살피는 보살이에요. 줄여서 '관음보살'이라고도 해요. 해수관음상의 주인공이에요."},
-  {term:"지장보살 (地藏菩薩)", desc:"지옥에 있는 중생까지 모두 구제하겠다고 서원한 보살이에요. 명부전(冥府殿)에 모셔져 있어요."},
-  {term:"문수보살 (文殊菩薩)", desc:"지혜를 상징하는 보살이에요."},
-  {term:"사천왕 (四天王)", desc:"동서남북 네 방향에서 부처님의 세계를 지키는 수호신이에요. 천왕문에 험상궂은 모습으로 서 있어요."},
-  {term:"인왕상 (仁王像)", desc:"절 입구나 문 양쪽에서 절을 지키는 근육질의 수문장 조각상이에요."},
-  {term:"49재 (四十九齋)", desc:"사람이 돌아가신 뒤 49일째 되는 날 지내는 불교식 추모 의식이에요."}
+  {term:"조계종 (曹溪宗)", desc:"우리나라 절 중에서 가장 많은 절이 속한 큰 모임이에요. 학교에도 여러 종류가 있듯 불교에도 여러 종파가 있는데, 그중 제일 큰 게 조계종이에요."},
+  {term:"산사 (山寺)", desc:"산속에 있는 절이에요. 우리나라 산속 절 7곳은 너무 소중해서, 유네스코라는 세계 기구가 '꼭 지켜야 할 유산'으로 정해놨어요."},
+  {term:"총림 (叢林)", desc:"명상하고, 공부하고, 규칙 지키는 것까지 다 할 수 있는 아주 큰 절이에요. 학교로 치면 유치원부터 대학교까지 다 있는 큰 학교 같은 거예요. 전국에 8곳 있어요."},
+  {term:"삼보사찰 (三寶寺刹)", desc:"불교에서 제일 소중히 여기는 세 가지(부처님 뼈·불경 책·훌륭한 스님)를 각각 대표하는 절 3곳이에요."},
+  {term:"적멸보궁 (寂滅寶宮)", desc:"부처님이 돌아가신 뒤 남은 뼈(사리)를 모셔둔 특별한 건물이에요. 신기하게 이 건물 안엔 불상(부처님 조각상)이 없어요 — 진짜 뼈가 있으니 조각상은 따로 안 둔 거예요."},
+  {term:"진신사리 (眞身舍利)", desc:"부처님이나 훌륭한 스님이 돌아가신 뒤 남은 뼈예요. 아주 소중하게 여겨서 탑 속에 넣어 보관해요."},
+  {term:"관음성지 (觀音聖地)", desc:"사람들이 소원을 빌러 많이 찾아가는 유명한 절이에요. 사람을 도와준다고 여겨지는 '관세음보살'을 모셔놓은 곳이에요."},
+  {term:"해수관음 (海水觀音)", desc:"바다를 바라보고 서 있는 커다란 조각상이에요. 옛날 배 타는 사람들의 안전을 빌던 곳이라, 바닷가 절에 많아요."},
+  {term:"도량 (道場)", desc:"절을 부르는 또 다른 이름이에요. '수행하는 장소'라는 뜻이에요."},
+  {term:"참선 (參禪)", desc:"가만히 앉아서 내 마음을 들여다보는 거예요. 요즘 말로 '명상'이랑 비슷해요."},
+  {term:"만행 (卍行)", desc:"한 절에만 있지 않고 여러 절을 돌아다니며 수행하는 거예요. 이 앱에서 여러 절을 다니는 것도 비슷한 느낌이에요."},
+  {term:"템플스테이", desc:"절에서 하루나 며칠 지내면서 스님처럼 살아보는 체험이에요."},
+  {term:"일주문 (一柱門)", desc:"절 입구에 있는 첫 번째 문이에요. 기둥이 한 줄로만 서 있어서 이런 이름이 붙었어요."},
+  {term:"천왕문 (天王門)", desc:"절을 지키는 힘센 문지기 넷(사천왕)이 서 있는 문이에요. 무섭게 생긴 조각상들이 양쪽에 서 있어요."},
+  {term:"불이문 (不二門)", desc:"절의 마지막 문이에요. 이 문을 지나면 부처님을 모신 건물(법당)이 나와요."},
+  {term:"해탈문 (解脫門)", desc:"'모든 걱정에서 자유로워진다'는 뜻을 담은 문이에요."},
+  {term:"대웅전 (大雄殿)", desc:"절에서 가장 중요한 건물이에요. 불교를 처음 만든 석가모니 부처님을 모셔둔 곳이에요."},
+  {term:"극락전 (極樂殿)", desc:"아미타불이라는 부처님을 모신 건물이에요. '극락보전'이라고도 불러요."},
+  {term:"관음전 (觀音殿)", desc:"관세음보살만 따로 모신 건물이에요."},
+  {term:"나한전 (羅漢殿)", desc:"부처님의 제자들(나한)을 모신 건물이에요. 조각상 얼굴이 다 달라서 구경하는 재미가 있어요."},
+  {term:"산신각 (山神閣)", desc:"옛날부터 있던 우리나라 산신 믿음과 불교가 합쳐진 작은 건물이에요. 법당 뒤 조용한 곳에 있어요."},
+  {term:"요사채 (寮舍-)", desc:"스님들이 실제로 잠자고 밥 먹는 살림집이에요. 보통 방문객은 들어갈 수 없어요."},
+  {term:"사물 (四物)", desc:"절에서 아침저녁으로 치는 네 가지 악기예요 — 종, 큰북, 나무물고기, 구름모양 판인데, 각각 다른 동물이나 존재를 위해 소리를 내요."},
+  {term:"부도 / 승탑 (浮屠 / 僧塔)", desc:"훌륭한 스님이 돌아가신 뒤 뼈를 모셔둔 작은 탑이에요. 절 한쪽에 여러 기가 모여 있기도 해요."},
+  {term:"예불 (禮佛)", desc:"정해진 시간(새벽·저녁 등)에 부처님께 인사드리는 의식이에요."},
+  {term:"발우공양 (鉢盂供養)", desc:"그릇 여러 개에 밥을 나눠 담아 먹는 스님들의 전통 식사법이에요. 밥을 하나도 안 남기고, 그릇 씻은 물까지 마셔요."},
+  {term:"안거 (安居)", desc:"스님들이 한곳에 머물며 열심히 수행하는 기간이에요. 여름 3개월(하안거), 겨울 3개월(동안거)이 있어요."},
+  {term:"출가 (出家)", desc:"가족과 헤어져서 스님이 되는 거예요."},
+  {term:"염주 (念珠)", desc:"기도할 때 손에 들고 숫자를 세는 구슬 팔찌예요. 보통 108개짜리를 많이 써요."},
+  {term:"목탁 (木鐸)", desc:"물고기 모양의 나무 악기예요. 물고기는 눈을 안 감고 항상 깨어있다고 해서, '늘 깨어있으라'는 뜻을 담고 있어요."},
+  {term:"오계 (五戒)", desc:"불교 신자가 지키기로 하는 5가지 약속이에요 — 생명 해치지 않기, 훔치지 않기, 나쁜 행동 하지 않기, 거짓말하지 않기, 술 마시지 않기예요."},
+  {term:"석가모니불 (釋迦牟尼佛)", desc:"불교를 처음 만든 진짜 사람, 부처님 본인이에요."},
+  {term:"아미타불 (阿彌陀佛)", desc:"극락(아주 좋은 세상)을 다스린다는 부처님이에요."},
+  {term:"비로자나불 (毘盧遮那佛)", desc:"이 세상 모든 진리 그 자체를 상징하는 부처님이에요."},
+  {term:"미륵불 (彌勒佛)", desc:"먼 미래에 나타나서 아직 구원받지 못한 사람들을 구해준다는 부처님이에요."},
+  {term:"관세음보살 (觀世音菩薩)", desc:"사람들을 자비롭게 돌봐주는 분이에요. '보살'은 부처님이 되기 직전 단계에서 사람들을 돕는 분을 말해요."},
+  {term:"지장보살 (地藏菩薩)", desc:"지옥에 있는 사람들까지 모두 구해주겠다고 약속한 분이에요."},
+  {term:"문수보살 (文殊菩薩)", desc:"지혜(똑똑함)를 상징하는 분이에요."},
+  {term:"사천왕 (四天王)", desc:"동서남북 네 방향에서 절을 지키는 힘센 수호신 네 명이에요. 천왕문에 험상궂은 모습으로 서 있어요."},
+  {term:"인왕상 (仁王像)", desc:"절 입구에서 근육질 몸으로 절을 지키는 조각상이에요."},
+  {term:"49재 (四十九齋)", desc:"사람이 돌아가신 뒤 49일째 되는 날, 그 사람을 위해 지내는 불교식 추모식이에요."}
 ];
 
 function openGlossaryOverlay(){
@@ -1999,6 +2011,25 @@ function closeGlossaryOverlay(){
 
 let mantraPhrase = '관세음보살';
 let mantraSessionCount = 0;
+let mantraAutoTimer = null;
+let mantraAutoInterval = 2500;
+let mantraAudioCtx = null;
+
+function playBell(){
+  try{
+    if(!mantraAudioCtx) mantraAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const ctx = mantraAudioCtx;
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = 'sine';
+    osc.frequency.value = 660;
+    gain.gain.setValueAtTime(0.25, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.6);
+    osc.connect(gain); gain.connect(ctx.destination);
+    osc.start(); osc.stop(ctx.currentTime + 0.6);
+  }catch(e){}
+  if(navigator.vibrate) navigator.vibrate(30);
+}
 
 function mantraStorageKey(){
   const today = new Date();
@@ -2013,26 +2044,56 @@ function openMantraOverlay(){
   document.getElementById('mantraOverlay').classList.add('show');
 }
 function closeMantraOverlay(){
+  stopAutoMantra();
   document.getElementById('mantraOverlay').classList.remove('show');
 }
 function setMantraPhrase(p){
   mantraPhrase = p;
   document.getElementById('mantraPhraseLabel').textContent = p;
 }
-function tapMantra(){
+function bumpMantraCount(){
   mantraSessionCount++;
   localStorage.setItem(mantraStorageKey(), String(mantraSessionCount));
   document.getElementById('mantraCount').textContent = mantraSessionCount;
   document.getElementById('mantraTotal').textContent = mantraSessionCount;
-  const circle = document.getElementById('mantraBeadCircle');
-  circle.style.transform = 'scale(0.92)';
-  setTimeout(()=> circle.style.transform = 'scale(1)', 100);
+  playBell();
   if(mantraSessionCount % 108 === 0){
     showCelebration(`📿 ${mantraSessionCount}번째 염불!`, '108의 배수를 채우셨어요');
   }
 }
+function tapMantra(){
+  bumpMantraCount();
+  const circle = document.getElementById('mantraBeadCircle');
+  circle.style.transform = 'scale(0.92)';
+  setTimeout(()=> circle.style.transform = 'scale(1)', 100);
+}
+function toggleAutoPanel(){
+  const panel = document.getElementById('mantraAutoPanel');
+  const isOpen = panel.style.display === 'block';
+  panel.style.display = isOpen ? 'none' : 'block';
+  document.getElementById('autoPanelToggleBtn').textContent = isOpen ? '🔔 자동 모드 열기 (손 안 대고 세기)' : '🔽 자동 모드 닫기';
+  if(isOpen) stopAutoMantra();
+}
+function setAutoInterval(ms){
+  mantraAutoInterval = ms;
+  if(mantraAutoTimer) { stopAutoMantra(); startAutoMantra(); }
+}
+function toggleAutoMantra(){
+  if(mantraAutoTimer) stopAutoMantra(); else startAutoMantra();
+}
+function startAutoMantra(){
+  bumpMantraCount();
+  mantraAutoTimer = setInterval(bumpMantraCount, mantraAutoInterval);
+  document.getElementById('autoToggleBtn').textContent = '⏸ 자동 멈추기';
+}
+function stopAutoMantra(){
+  if(mantraAutoTimer){ clearInterval(mantraAutoTimer); mantraAutoTimer = null; }
+  const btn = document.getElementById('autoToggleBtn');
+  if(btn) btn.textContent = '▶ 자동 시작';
+}
 function resetMantra(){
   if(!confirm('오늘 기록을 초기화할까요?')) return;
+  stopAutoMantra();
   mantraSessionCount = 0;
   localStorage.setItem(mantraStorageKey(), '0');
   document.getElementById('mantraCount').textContent = 0;
