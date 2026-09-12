@@ -1015,12 +1015,7 @@
       <div><h2 class="serif">🌅 발원문</h2><div class="sub">1년 뒤, 모든 게 순조롭게 풀렸다면 당신의 삶은 어떤 모습일까요?</div></div>
       <button class="close-x" onclick="closeVowOverlay()">✕</button>
     </div>
-    <div class="modal-body">
-      <div class="map-note" style="padding:0 0 12px;">절에서 소원을 마음에 새기고 다짐하는 걸 '발원(發願)'이라고 해요. 잘 안 되고 있는 것보다, 1년 뒤 가장 좋은 모습의 나를 구체적으로 그려보면 그 방향으로 마음이 움직인다고 해요. 정답은 없어요, 편하게 적어보세요.</div>
-      <textarea class="notes" id="vowInput" placeholder="예: 1년 뒤 나는... (건강, 관계, 하고 싶었던 일 등 편하게 떠오르는 대로)" style="min-height:140px;"></textarea>
-      <button class="btn btn-primary btn-block" style="margin-top:10px;" onclick="saveVow()">마음에 새기기</button>
-      <div id="vowSavedNote" style="font-size:11px;color:var(--ink-soft);margin-top:8px;"></div>
-    </div>
+    <div class="modal-body" id="vowBody"></div>
   </div>
 </div>
 
@@ -2372,24 +2367,72 @@ function closeEtiquetteOverlay(){
   document.getElementById('etiquetteOverlay').classList.remove('show');
 }
 
+function vowStorageKey(){
+  return 'sansanoteVows_' + (currentUid || 'guest');
+}
+function loadVows(){
+  try{ return JSON.parse(localStorage.getItem(vowStorageKey())) || []; }
+  catch(e){ return []; }
+}
+function saveVows(list){
+  localStorage.setItem(vowStorageKey(), JSON.stringify(list));
+}
+
 function openVowOverlay(){
-  const key = 'sansanoteVow_' + (currentUid || 'guest');
-  let data;
-  try{ data = JSON.parse(localStorage.getItem(key)); } catch(e){ data = null; }
-  document.getElementById('vowInput').value = data ? data.text : '';
-  document.getElementById('vowSavedNote').textContent = data ? `마지막으로 새긴 날: ${new Date(data.ts).getFullYear()}.${new Date(data.ts).getMonth()+1}.${new Date(data.ts).getDate()}` : '';
+  renderVowList();
   document.getElementById('vowOverlay').classList.add('show');
 }
 function closeVowOverlay(){
   document.getElementById('vowOverlay').classList.remove('show');
 }
+
+function renderVowList(){
+  const vows = loadVows().sort((a,b)=>b.ts-a.ts);
+  const achievedCount = vows.filter(v=>v.achieved).length;
+  const wrap = document.getElementById('vowBody');
+  wrap.innerHTML = `
+    <button class="btn btn-primary btn-block" style="margin-bottom:14px;" onclick="renderVowWrite()">✍️ 새 발원문 쓰기</button>
+    ${vows.length>0 ? `<div class="map-note" style="padding:0 0 10px;">지금까지 ${vows.length}개 중 <b style="color:var(--stamp);">${achievedCount}개 이루어짐</b></div>` : ''}
+    ${vows.length===0 ? '<div class="map-note" style="padding:0;">아직 쓴 발원문이 없어요. 첫 발원문을 남겨보세요.</div>' : vows.map(v=>{
+      const dt = new Date(v.ts);
+      const dateStr = `${dt.getFullYear()}.${dt.getMonth()+1}.${dt.getDate()}`;
+      return `<div class="visitrow" style="border-left-color:${v.achieved?'var(--moss)':'var(--gold)'};">
+        <div class="vdate">${dateStr} ${v.achieved?'<span style="background:var(--moss);color:#fff;padding:1px 8px;border-radius:999px;font-size:10px;margin-left:6px;">✅ 이루어짐</span>':''}</div>
+        <div class="vnote" style="margin-top:4px;white-space:pre-wrap;">${escapeHtml(v.text)}</div>
+        <button class="btn btn-ghost" style="margin-top:8px;padding:6px 12px;font-size:11.5px;" onclick="toggleVowAchieved('${v.id}')">${v.achieved?'성취 취소하기':'✅ 이루어졌어요'}</button>
+      </div>`;
+    }).join('')}
+  `;
+}
+
+function renderVowWrite(){
+  const wrap = document.getElementById('vowBody');
+  wrap.innerHTML = `
+    <a onclick="renderVowList()" style="cursor:pointer;color:var(--moss);font-size:12.5px;font-weight:700;">← 목록으로</a>
+    <div class="map-note" style="padding:12px 0;">절에서 소원을 마음에 새기고 다짐하는 걸 '발원(發願)'이라고 해요. 1년 뒤 가장 좋은 모습의 나를 구체적으로 그려보면 그 방향으로 마음이 움직인다고 해요. 정답은 없어요, 편하게 적어보세요.</div>
+    <textarea class="notes" id="vowInput" placeholder="예: 1년 뒤 나는... (건강, 관계, 하고 싶었던 일 등 편하게 떠오르는 대로)" style="min-height:140px;"></textarea>
+    <button class="btn btn-primary btn-block" style="margin-top:10px;" onclick="saveVow()">마음에 새기기</button>
+  `;
+}
+
 function saveVow(){
-  const key = 'sansanoteVow_' + (currentUid || 'guest');
   const text = document.getElementById('vowInput').value.trim();
   if(!text){ showToast('내용을 적어주세요'); return; }
-  localStorage.setItem(key, JSON.stringify({text, ts: Date.now()}));
+  const vows = loadVows();
+  vows.push({id: newId(), text, ts: Date.now(), achieved:false});
+  saveVows(vows);
   showCelebration('🌅 발원문을 마음에 새겼어요', '가끔 다시 열어서 읽어보세요');
-  document.getElementById('vowSavedNote').textContent = `마지막으로 새긴 날: ${new Date().getFullYear()}.${new Date().getMonth()+1}.${new Date().getDate()}`;
+  renderVowList();
+}
+
+function toggleVowAchieved(id){
+  const vows = loadVows();
+  const v = vows.find(x=>x.id===id);
+  if(!v) return;
+  v.achieved = !v.achieved;
+  saveVows(vows);
+  if(v.achieved) showCelebration('🎉 발원이 이루어졌어요!', '축하해요, 스스로에게 잘했다고 말해주세요');
+  renderVowList();
 }
 
 function openQuizOverlay(){
