@@ -119,11 +119,12 @@
   header.hero::before{
     content:'🪷';
     position:absolute;
-    right:-20px;bottom:-30px;
-    font-size:200px;
-    opacity:.13;
+    right:-10px;top:50%;transform:translateY(-50%);
+    font-size:230px;
+    opacity:.28;
     line-height:1;
     pointer-events:none;
+    filter:drop-shadow(0 4px 6px rgba(0,0,0,.15));
   }
   .hero-inner{max-width:1080px;margin:0 auto;position:relative;z-index:1;}
   .hero-top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;}
