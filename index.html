@@ -137,6 +137,13 @@
     margin:2px 0 10px;letter-spacing:.3px;
     text-shadow:0 1px 3px rgba(0,0,0,.15);
   }
+  .hip-badge{
+    width:52px;height:52px;border-radius:50%;
+    background:radial-gradient(circle,rgba(0,0,0,.28),rgba(0,0,0,.12));
+    flex-shrink:0;
+    animation:hip-spin 14s linear infinite;
+  }
+  @keyframes hip-spin{ from{transform:rotate(0deg);} to{transform:rotate(360deg);} }
   .iconbtn{
     background:rgba(255,255,255,.22);border:2px solid rgba(255,255,255,.4);
     color:#fff;width:40px;height:40px;border-radius:12px;cursor:pointer;
@@ -627,7 +634,24 @@
     <div class="hero-inner">
       <div class="hero-top">
         <div>
-          <h1 class="serif">산사노트</h1>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <h1 class="serif">산사노트</h1>
+            <div class="hip-badge">
+              <svg viewBox="0 0 100 100" width="52" height="52">
+                <circle cx="50" cy="50" r="47" fill="none" stroke="#fff" stroke-width="2.5"/>
+                <circle cx="50" cy="50" r="40" fill="none" stroke="#fff" stroke-width="1"/>
+                <path id="hipCircleTop" d="M 15,50 A 35,35 0 0 1 85,50" fill="none"/>
+                <path id="hipCircleBottom" d="M 85,52 A 35,35 0 0 1 15,52" fill="none"/>
+                <text font-size="10" font-weight="800" fill="#fff" letter-spacing="2">
+                  <textPath href="#hipCircleTop" startOffset="50%" text-anchor="middle">PILGRIM CLUB</textPath>
+                </text>
+                <text font-size="10" font-weight="800" fill="#fff" letter-spacing="2">
+                  <textPath href="#hipCircleBottom" startOffset="50%" text-anchor="middle">EST. 108</textPath>
+                </text>
+                <text x="50" y="58" font-size="26" text-anchor="middle">🪷</text>
+              </svg>
+            </div>
+          </div>
           <div class="hero-tagline">마음이 머무는 곳, 발걸음이 닿는 절</div>
           <p>불교 신자가 아니어도 괜찮아요. <b>마음이 복잡할 때</b>, 그냥 걷고 싶을 때 <b>발걸음이 닿는 곳</b>을 기록하는 노트예요.</p>
         </div>
