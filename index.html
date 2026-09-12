@@ -127,13 +127,13 @@
   header.hero::before{
     content:'';
     position:absolute;
-    right:-10px;bottom:-15px;
-    width:190px;height:322px;
+    right:6px;bottom:-15px;
+    width:140px;height:238px;
     background-image:url('IMG_4423.png');
     background-size:contain;
     background-repeat:no-repeat;
     background-position:bottom right;
-    opacity:.35;
+    opacity:.32;
     pointer-events:none;
     filter:drop-shadow(0 4px 6px rgba(0,0,0,.15));
   }
@@ -247,20 +247,16 @@
   .tagbadge.famous{background:var(--moss);}
   .tagbadge.hidden{background:var(--red);}
   .stampcorner{
-    position:absolute;top:-6px;right:10px;width:32px;height:32px;border-radius:50%;
-    background:linear-gradient(135deg,#5fc99a,var(--moss));color:#fff;display:flex;align-items:center;justify-content:center;
-    font-size:15px;font-weight:800;
-    border:2.5px solid #1a1613;
-    box-shadow:2px 2px 0 #1a1613;
-    transform:rotate(-8deg);
+    position:absolute;top:8px;right:-2px;
+    background:#1a1613;color:#ffd76a;
+    font-size:9px;font-weight:800;letter-spacing:.5px;
+    padding:3px 10px 3px 8px;
+    border-radius:4px 0 0 4px;
+    box-shadow:1px 2px 4px rgba(0,0,0,.35);
+    text-transform:uppercase;
   }
   .stampcorner.done{
-    background:linear-gradient(135deg,#ffe27a,var(--gold));
-    box-shadow:2px 2px 0 #1a1613;
-  }
-  .stampcorner::after{
-    content:'';position:absolute;top:2px;left:6px;width:8px;height:5px;
-    border-radius:50%;background:rgba(255,255,255,.55);transform:rotate(-20deg);
+    background:var(--stamp);color:#fff;
   }
   .card-body{padding:12px 14px 14px;}
   .card-region{font-size:11px;color:var(--ink-soft);font-weight:800;letter-spacing:.3px;}
@@ -481,6 +477,7 @@
   .fun-banner-btn.playlist{background:linear-gradient(135deg,#d0e8f5,#a8d0e8);color:#1a4a5a;}
   .mantra-speed.active{background:#5a3a8a;color:#fff;border-color:#5a3a8a;}
   .bow-speed.active{background:var(--stamp);color:#fff;border-color:var(--stamp-dark);}
+  .song-pick.active{background:#1a4a5a;color:#fff;border-color:#1a4a5a;}
   .explain108-banner{
     max-width:1080px;margin:14px auto 0;padding:12px 16px;background:var(--paper-soft);
     border:1px dashed var(--gold);border-radius:10px;font-size:12.5px;color:var(--ink-soft);
@@ -942,6 +939,7 @@
       <button class="btn btn-ghost btn-block" onclick="closeSettings();openQuizOverlay();" style="margin-bottom:10px;">🧩 이 절 어디게? 퀴즈</button>
       <button class="btn btn-ghost btn-block" onclick="closeSettings();openGlossaryOverlay();" style="margin-bottom:10px;">📖 불교 용어 사전</button>
       <button class="btn btn-ghost btn-block" onclick="closeSettings();openEtiquetteOverlay();" style="margin-bottom:10px;">🙏 처음 가는 법당 예절 · 108배</button>
+      <button class="btn btn-ghost btn-block" onclick="closeSettings();openPrayersOverlay();" style="margin-bottom:10px;">📿 기도문 모음 (천수경·반야심경·발원문·진언)</button>
       <button class="btn btn-ghost btn-block" onclick="closeSettings();openVowOverlay();" style="margin-bottom:10px;">🌅 발원문 쓰기 (미래의 나에게)</button>
       <button class="btn btn-ghost btn-block" onclick="doLogout()">로그아웃</button>
     </div>
@@ -1016,7 +1014,7 @@
       <div id="breathPhraseBody" style="display:none;padding:30px 10px;">
         <div id="breathPhraseText" style="font-family:'Nanum Myeongjo','Noto Serif KR',serif;font-size:22px;color:var(--stamp);min-height:60px;transition:opacity .4s ease;line-height:1.6;"></div>
       </div>
-      <button class="btn btn-ghost btn-block" id="ambientToggleBtn" onclick="toggleAmbient()" style="margin-top:8px;">🔊 소리 켜짐</button>
+      <button class="btn btn-ghost btn-block" id="ambientToggleBtn" onclick="toggleAmbient()" style="margin-top:8px;">🔇 소리 꺼짐</button>
       <div class="map-note" style="margin-top:14px;">🙏 이 시간은 마음을 잠시 쉬게 하는 작은 방편일 뿐이에요. 계속 마음이 무겁다면, 그 마음을 혼자 두지 말고 가까운 사람과 나눠보세요.</div>
     </div>
   </div>
@@ -1069,8 +1067,11 @@
       <button class="close-x" onclick="closePlaylistOverlay()">✕</button>
     </div>
     <div class="modal-body">
-      <audio id="playlistAudio" src="song1.mp3"></audio>
-      <div id="lyricsWrap" style="height:220px;overflow-y:auto;background:var(--paper);border-radius:12px;padding:16px 12px;margin-bottom:14px;scroll-behavior:smooth;">
+      <div style="display:flex;gap:6px;justify-content:center;margin-bottom:12px;">
+        <button class="btn btn-ghost song-pick" style="padding:7px 12px;font-size:12px;" onclick="loadSong(0)">1. 비워내 비워내</button>
+        <button class="btn btn-ghost song-pick" style="padding:7px 12px;font-size:12px;" onclick="loadSong(1)">2. 흘러가네</button>
+      </div>
+      <div id="lyricsWrap" style="height:200px;overflow-y:auto;background:var(--paper);border-radius:12px;padding:16px 12px;margin-bottom:14px;scroll-behavior:smooth;">
         <div id="lyricsInner"></div>
       </div>
       <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
@@ -1078,11 +1079,29 @@
         <input type="range" id="playlistSeek" min="0" max="100" value="0" style="flex:1;" oninput="seekPlaylist(this.value)">
         <span id="playlistDurTime" style="font-size:11px;color:var(--ink-soft);width:36px;">0:00</span>
       </div>
-      <button class="btn btn-primary btn-block" id="playlistPlayBtn" onclick="togglePlaylistPlay()">▶ 재생하기</button>
-      <div class="map-note" style="margin-top:12px;">가사 싱크는 정확한 박자가 아니라 대략 맞춘 것이에요. 조금씩 어긋날 수 있어요.</div>
+      <div style="display:flex;gap:8px;">
+        <button class="btn btn-ghost" style="padding:10px 16px;" onclick="prevSong()">⏮</button>
+        <button class="btn btn-primary" style="flex:1;" id="playlistPlayBtn" onclick="togglePlaylistPlay()">▶ 재생하기</button>
+        <button class="btn btn-ghost" style="padding:10px 16px;" onclick="nextSong()">⏭</button>
+      </div>
+      <button class="btn btn-ghost btn-block" style="margin-top:8px;" onclick="stopPlaylist()">⏹ 완전히 끄기</button>
+      <div class="map-note" style="margin-top:12px;">가사 싱크는 정확한 박자가 아니라 대략 맞춘 것이에요. 조금씩 어긋날 수 있어요. 창을 닫아도 음악은 계속 재생돼요.</div>
     </div>
   </div>
 </div>
+
+<!-- 미니 플레이어 (다른 화면 봐도 계속 떠있음) -->
+<div id="miniPlayer" style="display:none;position:fixed;left:12px;right:12px;bottom:12px;z-index:500;background:#1a1613;color:#fff;border-radius:14px;padding:10px 14px;box-shadow:0 6px 20px rgba(0,0,0,.3);align-items:center;gap:10px;">
+  <span style="font-size:18px;">🎵</span>
+  <div style="flex:1;overflow:hidden;">
+    <div id="miniPlayerTitle" style="font-size:12.5px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">비워내 비워내</div>
+    <div id="miniPlayerLyric" style="font-size:11px;color:#ffd76a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"></div>
+  </div>
+  <button onclick="togglePlaylistPlay()" id="miniPlayerBtn" style="background:none;border:none;color:#fff;font-size:20px;cursor:pointer;">⏸</button>
+  <button onclick="openPlaylistOverlay()" style="background:none;border:none;color:#fff;font-size:16px;cursor:pointer;">🔼</button>
+  <button onclick="stopPlaylist()" style="background:none;border:none;color:#fff;font-size:16px;cursor:pointer;">✕</button>
+</div>
+<audio id="playlistAudio"></audio>
 
 <!-- ===================== MOKTAK MODAL ===================== -->
 <div class="overlay" id="moktakOverlay">
@@ -1152,6 +1171,64 @@
 
       <button class="btn btn-ghost btn-block" style="margin-bottom:8px;" onclick="toggleManualMode()" id="manualToggleBtn">✋ 수동으로 하기 (직접 눌러서 세기)</button>
       <button class="btn btn-ghost btn-block" onclick="resetMantra()">오늘 기록 초기화</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== PRAYERS MODAL ===================== -->
+<div class="overlay" id="prayersOverlay">
+  <div class="modal">
+    <div class="modal-head">
+      <div><h2 class="serif">📿 기도문 모음</h2><div class="sub">자주 쓰이는 기도문 네 가지와 쉬운 해석이에요</div></div>
+      <button class="close-x" onclick="closePrayersOverlay()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="visitrow" style="border-left-color:var(--gold);">
+        <div style="font-weight:800;font-family:'Nanum Myeongjo','Noto Serif KR',serif;font-size:15px;color:var(--stamp);">1. 천수경 — 정구업진언 &amp; 개경게</div>
+        <div class="vnote" style="margin-top:6px;">기도를 시작할 때 마음과 입을 정돈하며 읽는, 천수경의 맨 앞 구절이에요.</div>
+        <div style="background:var(--paper);border-radius:8px;padding:10px 12px;margin-top:8px;font-family:'Nanum Myeongjo','Noto Serif KR',serif;font-size:13.5px;line-height:1.9;">
+          수리수리 마하수리 수수리 사바하<br>
+          무상심심미묘법 백천만겁난조우<br>
+          아금문견득수지 원해여래진실의
+        </div>
+        <div class="vnote" style="margin-top:8px;"><b>정구업진언:</b> "입으로 지은 모든 나쁜 말과 업을 깨끗이 씻어내어 맑고 상서롭게 하소서."<br><b>개경게:</b> "가장 높고 깊고 오묘한 부처님의 법은 백만 년의 세월이 흘러도 만나기 어렵습니다. 제가 이제 다행히 보고 듣고 마음에 새기오니, 부처님의 참된 뜻을 온전히 깨닫게 해 주소서."</div>
+      </div>
+
+      <div class="visitrow" style="border-left-color:var(--gold);">
+        <div style="font-weight:800;font-family:'Nanum Myeongjo','Noto Serif KR',serif;font-size:15px;color:var(--stamp);">2. 반야심경 — 핵심 구절</div>
+        <div class="vnote" style="margin-top:6px;">260자의 짧은 글이지만, 불교의 정수가 담긴 경전이에요.</div>
+        <div style="background:var(--paper);border-radius:8px;padding:10px 12px;margin-top:8px;font-family:'Nanum Myeongjo','Noto Serif KR',serif;font-size:13.5px;line-height:1.9;">
+          색불이공 공불이색 색즉시공 공즉시색<br>
+          아제아제 바라아제 바라승아제 모지 사바하
+        </div>
+        <div class="vnote" style="margin-top:8px;"><b>색즉시공:</b> "눈에 보이는 모든 형태와 세상만물(색)은 고정된 실체가 없으며(공), 텅 빈 본질(공)이 곧 우리가 눈으로 보는 모든 것(색)입니다." — 세상 모든 것은 끊임없이 변하니, 겉모습에 집착해 괴로워할 필요가 없다는 뜻이에요.<br><b>마무리 주문:</b> "가자, 가자, 저 너머 깨달음의 언덕으로 다 함께 건너가자. 깨달음을 이루어 영원한 평화를 얻으리라."</div>
+      </div>
+
+      <div class="visitrow" style="border-left-color:var(--moss);">
+        <div style="font-weight:800;font-family:'Nanum Myeongjo','Noto Serif KR',serif;font-size:15px;color:var(--stamp);">3. 발원문 — 일상 기도 예시</div>
+        <div class="vnote" style="margin-top:6px;">정해진 한문 경전이 아니라, 부처님께 내어놓는 진심 어린 편지글이에요.</div>
+        <div style="background:var(--paper);border-radius:8px;padding:10px 12px;margin-top:8px;font-size:13px;line-height:1.9;color:var(--ink);">
+          "자비로우신 부처님,<br>
+          오늘 제가 올린 이 작은 기도의 공덕을 모든 이웃과 나누고자 합니다.<br>
+          저희 가족이 건강하고 마음의 평안을 누리게 하시며,<br>
+          저 또한 남을 원망하지 않고 따뜻한 말 한마디를 건넬 수 있는 지혜와 용기를 주옵소서.<br>
+          괴로움 속에 있는 모든 생명이 부처님의 자비 속에서 평화롭기를 간절히 발원합니다."
+        </div>
+        <div class="vnote" style="margin-top:8px;">단순히 "돈 많이 벌게 해주세요" 같은 기복을 넘어서, 내 마음의 태도를 바로잡고 나와 남이 함께 행복해지기를 다짐하는 글이에요.</div>
+      </div>
+
+      <div class="visitrow" style="border-left-color:var(--moss);">
+        <div style="font-weight:800;font-family:'Nanum Myeongjo','Noto Serif KR',serif;font-size:15px;color:var(--stamp);">4. 진언(다라니) — 옴 마니 반메 훔</div>
+        <div class="vnote" style="margin-top:6px;">뜻을 해석하기보다, 그 소리의 맑은 울림 자체를 귀로 들으며 마음을 정화하는 수행이에요.</div>
+        <div style="background:var(--paper);border-radius:8px;padding:10px 12px;margin-top:8px;font-family:'Nanum Myeongjo','Noto Serif KR',serif;font-size:14px;text-align:center;">옴 마니 반메 훔 (Om Mani Padme Hum)</div>
+        <div class="vnote" style="margin-top:8px;">
+          <b>옴(Om):</b> 우주의 시작과 모든 신성함을 상징하는 소리<br>
+          <b>마니(Mani):</b> 원하는 것을 이루어 주는 투명한 보석(여의주)<br>
+          <b>반메(Padme):</b> 진흙탕 속에서도 물들지 않고 피어나는 연꽃<br>
+          <b>훔(Hum):</b> 깨달음을 완성하고 성취하는 소리
+        </div>
+        <div class="vnote" style="margin-top:8px;"><b>종합 해석:</b> "온 세상의 신성함이여, 더러운 진흙 속에서도 아름답게 피어나는 연꽃 속의 보석처럼, 내 마음속의 탐욕과 미움을 지우고 순수한 지혜로 깨어나게 하소서."</div>
+      </div>
     </div>
   </div>
 </div>
@@ -1747,6 +1824,10 @@ function submitAuthForm(){
 }
 
 let googleLoginInProgress = false;
+function isStandalonePWA(){
+  return window.navigator.standalone === true || window.matchMedia('(display-mode: standalone)').matches;
+}
+
 function googleLogin(){
   if(googleLoginInProgress) return;
   googleLoginInProgress = true;
@@ -1754,20 +1835,37 @@ function googleLogin(){
   const originalText = btn.textContent;
   btn.textContent = '연결하는 중...';
   btn.disabled = true;
+  const provider = new firebase.auth.GoogleAuthProvider();
 
-  const timeoutId = setTimeout(()=>{
+  function resetBtn(){
     googleLoginInProgress = false;
     btn.textContent = originalText;
     btn.disabled = false;
+  }
+
+  if(isStandalonePWA()){
+    // 홈 화면에 추가된 독립 실행 모드에서는 리다이렉트가 앱으로 돌아오지 못하는 경우가 많아 팝업 방식을 써요.
+    auth.signInWithPopup(provider).then(()=>{
+      resetBtn();
+    }).catch(err=>{
+      resetBtn();
+      if(err && err.code === 'auth/popup-blocked'){
+        showAuthError('팝업이 차단됐어요. 이 아이콘 대신 사파리 앱을 직접 열어서 로그인해주세요.');
+      } else {
+        showAuthError(friendlyAuthError(err));
+      }
+    });
+    return;
+  }
+
+  const timeoutId = setTimeout(()=>{
+    resetBtn();
     showAuthError('구글 로그인 연결이 지연되고 있어요. 인앱 브라우저(카톡·인스타 등)라면 우측 상단 메뉴에서 "다른 브라우저로 열기"를 눌러 사파리나 크롬에서 다시 시도해주세요.');
   }, 6000);
 
-  const provider = new firebase.auth.GoogleAuthProvider();
   auth.signInWithRedirect(provider).catch(err=>{
     clearTimeout(timeoutId);
-    googleLoginInProgress = false;
-    btn.textContent = originalText;
-    btn.disabled = false;
+    resetBtn();
     showAuthError(friendlyAuthError(err));
   });
 }
@@ -2132,34 +2230,133 @@ const LYRICS_SONG1 = [
   {t:205, text:'(잔잔한 종소리와 함께 페이드아웃)'}
 ];
 
+const LYRICS_SONG2 = [
+  {t:0, text:'[Intro]'},
+  {t:3, text:'(깊은 싱잉볼 울림)'},
+  {t:9, text:'(로파이 전자피아노)'},
+  {t:16, text:'[Verse 1]'},
+  {t:18, text:'가득 찬 생각의 소음, 볼륨을 줄여'},
+  {t:24, text:'무엇을 위해 그리 서둘러 달렸을까'},
+  {t:30, text:'손에 쥐려 애쓸수록 모래처럼 흩어져'},
+  {t:36, text:'잡으려던 것들 다 찰나의 환영인데'},
+  {t:42, text:'잠시 눈을 감고, 내 안의 숨을 느껴'},
+  {t:48, text:'들숨에 평화가, 날숨에 비움이'},
+  {t:55, text:'[Pre-Chorus]'},
+  {t:56, text:'색이 곧 공이고, 공이 곧 색이라'},
+  {t:62, text:'채워진 모든 것은 본래 비어있는 법'},
+  {t:68, text:'굳이 붙들지 않아도'},
+  {t:74, text:'강물은 바다로 흘러가듯'},
+  {t:81, text:'[Chorus]'},
+  {t:82, text:'흘러가네, 그저 흐르는 대로'},
+  {t:88, text:'집착의 강을 건너 저 너머의 숲으로'},
+  {t:94, text:'마음의 무게를 덜어내, 가볍게'},
+  {t:100, text:'지금 이 순간, 완벽한 평온 속으로'},
+  {t:106, text:'나무아미타불, 내 안의 작은 등불'},
+  {t:113, text:'[Verse 2]'},
+  {t:114, text:'비교와 불안, 그 쓸데없는 소용돌이'},
+  {t:120, text:'한 걸음 물러서면 찻잔 속의 파도일 뿐'},
+  {t:126, text:'연꽃이 진흙 속에서 맑게 피어나듯'},
+  {t:132, text:'어지러운 세상 속 나만의 중심을 찾아'},
+  {t:138, text:'아무것도 바라지 않을 때'},
+  {t:144, text:'비로소 모든 것이 온전해져'},
+  {t:151, text:'[Chorus]'},
+  {t:152, text:'흘러가네, 그저 흐르는 대로'},
+  {t:158, text:'집착의 강을 건너 저 너머의 숲으로'},
+  {t:164, text:'마음의 무게를 덜어내, 가볍게'},
+  {t:170, text:'지금 이 순간, 완벽한 평온 속으로'},
+  {t:176, text:'나무아미타불, 내 안의 작은 등불'},
+  {t:183, text:'[Bridge]'},
+  {t:185, text:'(몽환적인 신스 솔로와 깊은 베이스)'},
+  {t:191, text:'바람은 머물지 않고'},
+  {t:197, text:'달빛은 그림자를 남기지 않네'},
+  {t:203, text:'그저 바라보고, 놓아주고, 자유로워지길'},
+  {t:210, text:'[Outro]'},
+  {t:212, text:'(잔잔한 싱잉볼 울림, 서서히 사라짐)'},
+  {t:218, text:'사바하... 사바하...'},
+  {t:224, text:'비워진 자리에 차오르는 고요'},
+  {t:230, text:'그대로 편안해져'},
+  {t:236, text:'(음악이 부드럽게 페이드아웃)'}
+];
+
+const SONGS = [
+  {title:'비워내 비워내', src:'song1.mp3', lyrics: LYRICS_SONG1},
+  {title:'흘러가네', src:'song2.mp3', lyrics: LYRICS_SONG2}
+];
+let currentSongIdx = 0;
+
 function formatTime(sec){
   sec = Math.floor(sec||0);
   return `${Math.floor(sec/60)}:${String(sec%60).padStart(2,'0')}`;
 }
 
-function openPlaylistOverlay(){
-  const wrap = document.getElementById('lyricsInner');
-  wrap.innerHTML = LYRICS_SONG1.map((l,i)=>`<div class="lyric-line" id="lyricLine${i}" style="padding:5px 0;font-size:${l.text.startsWith('[')?'11px':'13.5px'};color:${l.text.startsWith('[')?'var(--stamp)':'var(--ink-soft)'};font-weight:${l.text.startsWith('[')?'800':'500'};transition:color .3s ease;">${escapeHtml(l.text)}</div>`).join('');
-  document.getElementById('playlistOverlay').classList.add('show');
+function loadSong(idx, autoplay){
+  currentSongIdx = idx;
+  const song = SONGS[idx];
   const audio = document.getElementById('playlistAudio');
+  const wasPlaying = !audio.paused;
+  audio.src = song.src;
+  document.getElementById('playlistSongTitle').textContent = song.title;
+  document.getElementById('miniPlayerTitle').textContent = song.title;
+  document.querySelectorAll('.song-pick').forEach((b,i)=> b.classList.toggle('active', i===idx));
+  const wrap = document.getElementById('lyricsInner');
+  wrap.innerHTML = song.lyrics.map((l,i)=>`<div class="lyric-line" id="lyricLine${i}" style="padding:5px 0;font-size:${l.text.startsWith('[')?'11px':'13.5px'};color:${l.text.startsWith('[')?'var(--stamp)':'var(--ink-soft)'};font-weight:${l.text.startsWith('[')?'800':'500'};transition:color .3s ease;">${escapeHtml(l.text)}</div>`).join('');
+  lastLyricIdx = -1;
+  if(autoplay || wasPlaying){
+    audio.play().catch(()=> showToast(`음원 파일을 못 찾았어요 (${song.src}가 같은 폴더에 있는지 확인해주세요)`));
+  }
+}
+
+function openPlaylistOverlay(){
+  const audio = document.getElementById('playlistAudio');
+  if(!audio.src){
+    loadSong(currentSongIdx, false);
+  } else {
+    document.querySelectorAll('.song-pick').forEach((b,i)=> b.classList.toggle('active', i===currentSongIdx));
+  }
+  document.getElementById('playlistOverlay').classList.add('show');
+  document.getElementById('miniPlayer').style.display = 'none';
   audio.onloadedmetadata = ()=>{ document.getElementById('playlistDurTime').textContent = formatTime(audio.duration); };
   audio.ontimeupdate = updatePlaylistProgress;
-  audio.onended = ()=>{ document.getElementById('playlistPlayBtn').textContent = '▶ 재생하기'; };
+  audio.onended = nextSong;
+  updatePlaylistPlayButtons();
 }
 function closePlaylistOverlay(){
+  document.getElementById('playlistOverlay').classList.remove('show');
+  const audio = document.getElementById('playlistAudio');
+  if(!audio.paused){
+    document.getElementById('miniPlayer').style.display = 'flex';
+  }
+}
+function stopPlaylist(){
   const audio = document.getElementById('playlistAudio');
   audio.pause();
+  audio.currentTime = 0;
+  document.getElementById('miniPlayer').style.display = 'none';
   document.getElementById('playlistOverlay').classList.remove('show');
 }
 function togglePlaylistPlay(){
   const audio = document.getElementById('playlistAudio');
+  if(!audio.src){ loadSong(currentSongIdx, true); return; }
   if(audio.paused){
-    audio.play().catch(()=> showToast('음원 파일을 못 찾았어요 (song1.mp3가 같은 폴더에 있는지 확인해주세요)'));
-    document.getElementById('playlistPlayBtn').textContent = '⏸ 일시정지';
+    audio.play().catch(()=> showToast('음원 파일을 못 찾았어요'));
   } else {
     audio.pause();
-    document.getElementById('playlistPlayBtn').textContent = '▶ 재생하기';
   }
+  updatePlaylistPlayButtons();
+}
+function updatePlaylistPlayButtons(){
+  const audio = document.getElementById('playlistAudio');
+  const playing = !audio.paused;
+  const btn = document.getElementById('playlistPlayBtn');
+  if(btn) btn.textContent = playing ? '⏸ 일시정지' : '▶ 재생하기';
+  const miniBtn = document.getElementById('miniPlayerBtn');
+  if(miniBtn) miniBtn.textContent = playing ? '⏸' : '▶';
+}
+function prevSong(){
+  loadSong((currentSongIdx - 1 + SONGS.length) % SONGS.length, true);
+}
+function nextSong(){
+  loadSong((currentSongIdx + 1) % SONGS.length, true);
 }
 function seekPlaylist(val){
   const audio = document.getElementById('playlistAudio');
@@ -2171,9 +2368,11 @@ function updatePlaylistProgress(){
   if(!audio.duration) return;
   document.getElementById('playlistCurTime').textContent = formatTime(audio.currentTime);
   document.getElementById('playlistSeek').value = (audio.currentTime/audio.duration)*100;
+  updatePlaylistPlayButtons();
+  const lyrics = SONGS[currentSongIdx].lyrics;
   let idx = 0;
-  for(let i=0;i<LYRICS_SONG1.length;i++){
-    if(LYRICS_SONG1[i].t <= audio.currentTime) idx = i; else break;
+  for(let i=0;i<lyrics.length;i++){
+    if(lyrics[i].t <= audio.currentTime) idx = i; else break;
   }
   if(idx !== lastLyricIdx){
     if(lastLyricIdx>=0){ const prev = document.getElementById('lyricLine'+lastLyricIdx); if(prev){ prev.style.color = 'var(--ink-soft)'; prev.style.fontWeight = '500'; } }
@@ -2185,6 +2384,7 @@ function updatePlaylistProgress(){
     }
     lastLyricIdx = idx;
   }
+  document.getElementById('miniPlayerLyric').textContent = lyrics[idx] ? lyrics[idx].text : '';
 }
 
 /* ============================================================
@@ -2529,7 +2729,7 @@ let breathTimer = null;
 let currentMeditation = null;
 let ambientCtx = null;
 let ambientNodes = [];
-let ambientOn = true;
+let ambientOn = false;
 
 function startAmbient(baseFreq){
   stopAmbient();
@@ -3315,6 +3515,13 @@ function playBowPoseCycle(){
   next();
 }
 
+function openPrayersOverlay(){
+  document.getElementById('prayersOverlay').classList.add('show');
+}
+function closePrayersOverlay(){
+  document.getElementById('prayersOverlay').classList.remove('show');
+}
+
 function openEtiquetteOverlay(){
   document.getElementById('etiquetteOverlay').classList.add('show');
 }
@@ -4076,7 +4283,7 @@ function renderMountainCard(id, d){
     <div class="card-photo" style="${photo?`background-image:url('${photo}')`:''}">
       ${photo?'':'<span class="ph-icon serif" style="font-size:28px;color:#8a7a52;">⛰️</span>'}
       <span class="tagbadge famous">${d.height||''}</span>
-      ${stageIdx>=1 ? `<span class="stampcorner ${stageIdx>=2?'done':''}">✓</span>` : ''}
+      ${stageIdx>=1 ? `<span class="stampcorner ${stageIdx>=2?'done':''}">${stageIdx>=2?'CLEAR':'DONE'}</span>` : ''}
     </div>
     <div class="card-body">
       <div class="card-region">${d.region}</div>
@@ -4392,7 +4599,7 @@ function renderCard(id, d){
       ${photo?'':'<span class="ph-icon serif" style="font-size:28px;color:#8a7a52;">🪷</span>'}
       <span class="tagbadge ${d.tag==='유명'?'famous':'hidden'}">${d.tag==='유명'?'유명':'숨은'}</span>
       ${vc>0 ? `<span class="visit-flag">${vc}회 방문</span>` : ''}
-      ${stageIdx>=1 ? `<span class="stampcorner ${stageIdx>=2?'done':''}">✓</span>` : ''}
+      ${stageIdx>=1 ? `<span class="stampcorner ${stageIdx>=2?'done':''}">${stageIdx>=2?'CLEAR':'DONE'}</span>` : ''}
     </div>
     <div class="card-body">
       <div class="card-region">${d.region}</div>
