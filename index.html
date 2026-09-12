@@ -418,6 +418,7 @@
   .fun-banner-btn.roulette{background:linear-gradient(135deg,#ffe3cc,#ffd0a8);color:#8a4a1a;}
   .fun-banner-btn.worry{background:linear-gradient(135deg,#e3ecff,#d3e0ff);color:#33448a;}
   .fun-banner-btn.vow{background:linear-gradient(135deg,#fff3d6,#ffe7ad);color:#8a6a1f;}
+  .fun-banner-btn.mantra{background:linear-gradient(135deg,#f0e6ff,#e0ccff);color:#5a3a8a;}
   .explain108-banner{
     max-width:1080px;margin:14px auto 0;padding:12px 16px;background:var(--paper-soft);
     border:1px dashed var(--gold);border-radius:10px;font-size:12.5px;color:var(--ink-soft);
@@ -849,6 +850,28 @@
   </div>
 </div>
 
+<!-- ===================== MANTRA MODAL ===================== -->
+<div class="overlay" id="mantraOverlay">
+  <div class="modal" style="text-align:center;">
+    <div class="modal-head">
+      <div><h2 class="serif">📿 염불 카운터</h2><div class="sub">이름을 부르며 마음을 모으는 '칭명염불'이에요</div></div>
+      <button class="close-x" onclick="closeMantraOverlay()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div style="display:flex;gap:8px;justify-content:center;margin-bottom:14px;">
+        <button class="btn btn-ghost" id="mantraBtnA" style="padding:8px 14px;font-size:12.5px;" onclick="setMantraPhrase('관세음보살')">관세음보살</button>
+        <button class="btn btn-ghost" id="mantraBtnB" style="padding:8px 14px;font-size:12.5px;" onclick="setMantraPhrase('나무아미타불')">나무아미타불</button>
+      </div>
+      <div id="mantraBeadCircle" onclick="tapMantra()" style="width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,var(--gold),#b8860b);margin:10px auto;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;cursor:pointer;box-shadow:0 6px 0 #8a6a1f;user-select:none;">
+        <div id="mantraPhraseLabel" style="font-family:'Nanum Myeongjo','Noto Serif KR',serif;font-size:16px;font-weight:800;">관세음보살</div>
+        <div id="mantraCount" style="font-size:34px;font-weight:800;margin-top:4px;">0</div>
+      </div>
+      <div style="font-size:11px;color:var(--ink-soft);margin-bottom:14px;">원을 누를 때마다 하나씩 세져요. 오늘 총 <b id="mantraTotal">0</b>번 하셨어요.</div>
+      <button class="btn btn-ghost btn-block" onclick="resetMantra()">오늘 기록 초기화</button>
+    </div>
+  </div>
+</div>
+
 <!-- ===================== ETIQUETTE MODAL ===================== -->
 <div class="overlay" id="etiquetteOverlay">
   <div class="modal">
@@ -857,25 +880,38 @@
       <button class="close-x" onclick="closeEtiquetteOverlay()">✕</button>
     </div>
     <div class="modal-body">
-      <div class="section-label">법당 들어가기 전</div>
-      <div class="desc-block">신발은 법당 밖에 가지런히 벗어두세요. 손을 씻고 들어가면 더 좋아요.</div>
-
-      <div class="section-label">어느 문으로 들어갈까</div>
-      <div class="desc-block">가운데 문(어간문)은 그 절의 큰스님만 다니는 문이에요. <b>일반 방문객은 양옆 문</b>으로 들어가면 돼요.</div>
-
-      <div class="section-label">인사하는 순서</div>
-      <div class="desc-block">
-        1. 부처님을 마주 보고 서요.<br>
-        2. <b>합장</b>(두 손바닥을 가슴 앞에 가지런히 모으기) 자세를 해요.<br>
-        3. 허리를 60도쯤 굽혀 <b>반배</b>(작은 절 한 번)를 해요. 처음이면 이것만 해도 충분해요.<br>
-        4. 여유가 되면 <b>큰절</b>(무릎 꿇고 이마를 바닥에 대는 절)을 3번(삼배) 올려도 좋아요.<br>
-        5. 나올 때도 부처님 쪽을 향해 다시 한번 반배하고 나오면 예의 있는 인사가 돼요.
+      <div class="visitrow" style="border-left-color:var(--gold);">
+        <div style="font-weight:800;font-size:14px;">👟 법당 들어가기 전</div>
+        <div class="vnote" style="margin-top:4px;">신발은 밖에 가지런히 벗어두세요. 손을 씻고 들어가면 더 좋아요. 반바지·민소매 등 노출 심한 옷차림은 피하고, 모자는 벗어주세요.</div>
+      </div>
+      <div class="visitrow" style="border-left-color:var(--gold);">
+        <div style="font-weight:800;font-size:14px;">🚪 어느 문으로 들어갈까</div>
+        <div class="vnote" style="margin-top:4px;">가운데 문(어간문)은 그 절의 큰스님만 다니는 문이에요. <b>일반 방문객은 양옆 문</b>으로 들어가세요. 문턱은 밟지 말고 넘어가는 게 예의예요.</div>
+      </div>
+      <div class="visitrow" style="border-left-color:var(--stamp);">
+        <div style="font-weight:800;font-size:14px;">🙏 인사하는 순서</div>
+        <div class="vnote" style="margin-top:4px;">
+          1. 부처님을 마주 보고 서요.<br>
+          2. <b>합장</b>(두 손바닥을 가슴 앞에 가지런히 모으기) 자세를 해요.<br>
+          3. 허리를 60도쯤 굽혀 <b>반배</b>(작은 절 한 번)를 해요. 처음이면 이것만 해도 충분해요.<br>
+          4. 여유가 되면 <b>큰절</b>(무릎 꿇고 이마를 바닥에 대는 절)을 3번(삼배) 올려도 좋아요.<br>
+          5. 나올 때도 부처님 쪽을 향해 다시 한번 반배하고, 뒷걸음으로 몇 걸음 물러난 뒤 돌아서 나오면 더 예의 있어요.
+        </div>
+      </div>
+      <div class="visitrow" style="border-left-color:var(--moss);">
+        <div style="font-weight:800;font-size:14px;">🧑‍🦱 스님을 만나면</div>
+        <div class="vnote" style="margin-top:4px;">스쳐 지나가듯 만났다면 합장하고 가볍게 반배(목례)만 해도 돼요. 다만 스님이 식사·양치·좌선·목욕 중이시거나 화장실에서 마주쳤을 땐 절하지 않고 목례만 해요.</div>
+      </div>
+      <div class="visitrow" style="border-left-color:var(--moss);">
+        <div style="font-weight:800;font-size:14px;">🕯 법당 안에서</div>
+        <div class="vnote" style="margin-top:4px;">조용히, 큰 소리로 대화하지 않기. 불상 정면을 함부로 가로지르지 않기. 불상 촬영 가능 여부는 절마다 달라서 안내판을 먼저 확인해보세요.</div>
+      </div>
+      <div class="visitrow" style="border-left-color:var(--moss);">
+        <div style="font-weight:800;font-size:14px;">🌀 탑돌이 예절</div>
+        <div class="vnote" style="margin-top:4px;">탑이나 불상 주위를 돌 때는 <b>시계 방향</b>으로 도는 게 전통이에요 (부처님을 오른쪽 어깨 쪽에 두고 도는 '우요삼잡'에서 유래).</div>
       </div>
 
-      <div class="section-label">법당 안에서</div>
-      <div class="desc-block">조용히, 큰 소리로 대화하지 않기. 불상 촬영 가능 여부는 절마다 달라서 안내판을 먼저 확인해보세요.</div>
-
-      <div class="section-label">108배란</div>
+      <div class="section-label" style="margin-top:16px;">108배란</div>
       <div class="desc-block">108가지 번뇌(마음을 어지럽히는 생각들)를 하나씩 내려놓는다는 마음으로 절을 108번 올리는 수행이에요. 많은 절에서 '108배 참회문'이라는 108개의 짧은 글귀를 하나씩 읽으며 절을 하는데, 절마다 문구가 조금씩 달라요. 보통 앞부분은 지난 일을 돌아보는 참회, 중간은 부모·스승·자연에 대한 감사, 뒷부분은 앞으로의 다짐(발원)으로 이어지는 구성이 많아요.</div>
       <div class="desc-block" style="margin-top:8px;color:var(--stamp);">처음이면 108번을 다 못 채워도 괜찮아요. 절 자체가 이미 좋은 운동이자 명상이에요. 무릎이 안 좋다면 무리하지 마세요.</div>
     </div>
@@ -905,7 +941,10 @@
       <div><h2 class="serif">📖 불교 용어 사전</h2><div class="sub">절 설명에 자주 나오는 말들, 쉽게 풀어드려요</div></div>
       <button class="close-x" onclick="closeGlossaryOverlay()">✕</button>
     </div>
-    <div class="modal-body" id="glossaryBody"></div>
+    <div class="modal-body">
+      <input class="searchbox" id="glossarySearch" placeholder="용어 검색 (예: 적멸보궁)" oninput="renderGlossaryList(this.value)" style="width:100%;margin-bottom:12px;">
+      <div id="glossaryBody"></div>
+    </div>
   </div>
 </div>
 
@@ -1424,6 +1463,10 @@ function renderFunBanner(){
       <div class="fb-title">🌅 발원문 쓰기</div>
       <div class="fb-sub">1년 뒤 나에게 다짐 남기기</div>
     </button>
+    <button class="fun-banner-btn mantra" onclick="openMantraOverlay()">
+      <div class="fb-title">📿 염불 카운터</div>
+      <div class="fb-sub">관세음보살 염불하며 숫자 세기</div>
+    </button>
   </div>`;
 }
 
@@ -1891,28 +1934,109 @@ const GLOSSARY = [
   {term:"산사 (山寺)", desc:"산속에 자리한 절을 말해요. 통도사, 부석사 등 7곳이 '산사, 한국의 산지승원'이라는 이름으로 유네스코 세계유산에 등재됐어요."},
   {term:"총림 (叢林)", desc:"참선(명상)·경전 공부·계율 지키기를 모두 갖춘 큰 규모의 수행 도량이에요. 조계종에서 지정한 8곳이 있어요."},
   {term:"삼보사찰 (三寶寺刹)", desc:"불교의 세 가지 보물을 상징하는 3대 사찰이에요. 통도사(부처님 진신사리)·해인사(팔만대장경)·송광사(훌륭한 스님을 많이 배출)가 여기 해당돼요."},
-  {term:"적멸보궁 (寂滅寶宮)", desc:"부처님의 진신사리(몸에서 나온 사리)를 모신 특별한 전각이에요. 사리 자체가 부처님을 상징하기 때문에, 신기하게도 법당 안에 불상을 따로 두지 않아요. 전국에 5곳이 있어요."},
+  {term:"적멸보궁 (寂滅寶宮)", desc:"부처님의 진신사리를 모신 특별한 전각이에요. 사리 자체가 부처님을 상징하기 때문에, 신기하게도 법당 안에 불상을 따로 두지 않아요. 전국에 5곳(통도사·상원사·법흥사·정암사·봉정암)이 있어요."},
   {term:"진신사리 (眞身舍利)", desc:"부처님이나 훌륭한 스님이 돌아가신 뒤 남긴 유골이에요. 신성하게 여겨서 탑이나 보궁에 소중히 모셔요."},
   {term:"관음성지 (觀音聖地)", desc:"자비의 상징인 관세음보살을 모시고 기도하는 유명한 곳이에요. 소원을 빌러 많이 찾아가요."},
   {term:"해수관음 (海水觀音)", desc:"바다를 바라보고 서 있는 관세음보살상이에요. 바닷가 절에 많고, 뱃길의 안전이나 소원을 비는 곳으로 유명해요."},
   {term:"도량 (道場)", desc:"수행하는 장소, 즉 절을 가리키는 다른 말이에요."},
   {term:"참선 (參禪)", desc:"조용히 앉아 마음을 들여다보는 수행법이에요. 우리가 아는 '명상'과 비슷해요."},
   {term:"만행 (卍行)", desc:"한곳에 머물지 않고 여러 절을 돌아다니며 수행하는 것을 말해요. 이 앱의 순례 콘셉트와 잘 어울리는 말이에요."},
-  {term:"템플스테이", desc:"절에 머물면서 스님과 비슷한 생활(예불, 참선, 발우공양 등)을 짧게 체험해보는 프로그램이에요."}
+  {term:"템플스테이", desc:"절에 머물면서 스님과 비슷한 생활(예불, 참선, 발우공양 등)을 짧게 체험해보는 프로그램이에요."},
+  {term:"일주문 (一柱門)", desc:"절 입구에 세워진 첫 번째 문이에요. 기둥이 한 줄로 서 있다고 해서 이런 이름이 붙었어요. 이 문을 기준으로 문밖은 속세, 문안은 부처님의 세계로 여겨요."},
+  {term:"천왕문 (天王門)", desc:"부처님의 세계를 지키는 사천왕(동서남북을 지키는 네 수호신)을 모신 문이에요. 험상궂은 표정의 큰 조각상들이 좌우로 서 있어요."},
+  {term:"불이문 (不二門)", desc:"절의 마지막 문이에요. '나와 남, 선과 악이 둘이 아니다'라는 불교의 깊은 뜻을 담고 있어요. 이 문을 지나면 바로 법당이 나와요."},
+  {term:"해탈문 (解脫門)", desc:"모든 번뇌와 망상에서 벗어나 깨달음에 이른다는 뜻을 담은 문이에요."},
+  {term:"대웅전 (大雄殿)", desc:"석가모니 부처님을 모신, 절에서 가장 중심이 되는 건물이에요."},
+  {term:"극락전 (極樂殿)", desc:"아미타불을 모신 건물이에요. '극락보전'이라고도 불러요."},
+  {term:"관음전 (觀音殿)", desc:"관세음보살을 따로 모신 건물이에요."},
+  {term:"나한전 (羅漢殿)", desc:"부처님의 제자였던 '나한'들을 모신 건물이에요. 표정이 저마다 개성 있게 조각된 경우가 많아 구경하는 재미가 있어요."},
+  {term:"산신각 (山神閣)", desc:"우리나라 전통 산신 신앙과 불교가 합쳐진 작은 전각이에요. 대부분 법당 뒤쪽 조용한 곳에 있어요."},
+  {term:"요사채 (寮舍-)", desc:"스님들이 실제로 생활하는 살림집이에요. 보통 방문객 출입은 제한돼요."},
+  {term:"사물 (四物)", desc:"절에서 아침저녁으로 울리는 네 가지 법구예요. 범종(모든 중생), 법고(땅 위 짐승), 목어(물속 생명), 운판(하늘 나는 것들)을 위해 각각 소리를 내요."},
+  {term:"부도 / 승탑 (浮屠 / 僧塔)", desc:"훌륭한 스님이 돌아가신 뒤 유골(사리)을 모신 작은 탑이에요. 절 한쪽에 여러 기가 모여 있는 경우가 많아요."},
+  {term:"예불 (禮佛)", desc:"하루 중 정해진 시간(새벽·저녁 등)에 부처님께 올리는 의식이에요."},
+  {term:"발우공양 (鉢盂供養)", desc:"스님들이 4개의 그릇(발우)에 음식을 덜어 먹는 전통 식사법이에요. 남기지 않고 그릇 씻은 물까지 마시는 게 특징이에요. 템플스테이에서 체험할 수 있어요."},
+  {term:"안거 (安居)", desc:"스님들이 한곳에 머물며 집중적으로 수행하는 기간이에요. 여름 3개월(하안거)과 겨울 3개월(동안거)이 있어요."},
+  {term:"출가 (出家)", desc:"가족과 세속의 삶을 떠나 스님이 되는 것을 말해요."},
+  {term:"염주 (念珠)", desc:"기도나 염불을 할 때 손에 들고 개수를 세는 구슬이에요. 108개로 된 것이 가장 대표적이에요."},
+  {term:"목탁 (木鐸)", desc:"물고기 모양을 본떠 만든 나무 타악기예요. 예불이나 염불의 박자를 맞출 때 두드려요. 물고기는 눈을 감지 않고 늘 깨어있다고 해서, 늘 깨어있으라는 뜻을 담고 있어요."},
+  {term:"오계 (五戒)", desc:"불교 신자가 지키기로 하는 다섯 가지 계율이에요 — 살생하지 않기, 훔치지 않기, 삿된 음행 하지 않기, 거짓말하지 않기, 술 마시지 않기예요."},
+  {term:"석가모니불 (釋迦牟尼佛)", desc:"불교를 처음 연 부처님 본인이에요. 대웅전의 주인공이에요."},
+  {term:"아미타불 (阿彌陀佛)", desc:"극락정토를 다스린다는 부처님이에요. 극락전(극락보전)에 모셔져 있어요."},
+  {term:"비로자나불 (毘盧遮那佛)", desc:"우주의 진리 그 자체를 상징하는 부처님이에요. 주로 대적광전에 모셔져 있어요."},
+  {term:"미륵불 (彌勒佛)", desc:"먼 미래에 나타나 아직 구제받지 못한 중생을 구원한다는 부처님이에요. 금산사 미륵전이 대표적이에요."},
+  {term:"관세음보살 (觀世音菩薩)", desc:"자비로 중생을 보살피는 보살이에요. 줄여서 '관음보살'이라고도 해요. 해수관음상의 주인공이에요."},
+  {term:"지장보살 (地藏菩薩)", desc:"지옥에 있는 중생까지 모두 구제하겠다고 서원한 보살이에요. 명부전(冥府殿)에 모셔져 있어요."},
+  {term:"문수보살 (文殊菩薩)", desc:"지혜를 상징하는 보살이에요."},
+  {term:"사천왕 (四天王)", desc:"동서남북 네 방향에서 부처님의 세계를 지키는 수호신이에요. 천왕문에 험상궂은 모습으로 서 있어요."},
+  {term:"인왕상 (仁王像)", desc:"절 입구나 문 양쪽에서 절을 지키는 근육질의 수문장 조각상이에요."},
+  {term:"49재 (四十九齋)", desc:"사람이 돌아가신 뒤 49일째 되는 날 지내는 불교식 추모 의식이에요."}
 ];
 
 function openGlossaryOverlay(){
+  document.getElementById('glossarySearch').value = '';
+  renderGlossaryList('');
+  document.getElementById('glossaryOverlay').classList.add('show');
+}
+function renderGlossaryList(search){
+  const q = (search||'').trim().toLowerCase();
+  const filtered = q ? GLOSSARY.filter(g=> g.term.toLowerCase().includes(q) || g.desc.toLowerCase().includes(q)) : GLOSSARY;
   const wrap = document.getElementById('glossaryBody');
-  wrap.innerHTML = GLOSSARY.map(g=>`
+  if(filtered.length===0){
+    wrap.innerHTML = '<div class="map-note" style="padding:0;">일치하는 용어가 없어요.</div>';
+    return;
+  }
+  wrap.innerHTML = filtered.map(g=>`
     <div class="visitrow" style="border-left-color:var(--gold);">
       <div style="font-weight:800;font-family:'Nanum Myeongjo','Noto Serif KR',serif;font-size:15px;color:var(--stamp);">${g.term}</div>
       <div class="vnote" style="margin-top:3px;">${g.desc}</div>
     </div>
   `).join('');
-  document.getElementById('glossaryOverlay').classList.add('show');
 }
 function closeGlossaryOverlay(){
   document.getElementById('glossaryOverlay').classList.remove('show');
+}
+
+let mantraPhrase = '관세음보살';
+let mantraSessionCount = 0;
+
+function mantraStorageKey(){
+  const today = new Date();
+  const dateStr = `${today.getFullYear()}-${today.getMonth()+1}-${today.getDate()}`;
+  return 'sansanoteMantra_' + (currentUid || 'guest') + '_' + dateStr;
+}
+
+function openMantraOverlay(){
+  mantraSessionCount = parseInt(localStorage.getItem(mantraStorageKey()) || '0', 10);
+  document.getElementById('mantraCount').textContent = mantraSessionCount;
+  document.getElementById('mantraTotal').textContent = mantraSessionCount;
+  document.getElementById('mantraOverlay').classList.add('show');
+}
+function closeMantraOverlay(){
+  document.getElementById('mantraOverlay').classList.remove('show');
+}
+function setMantraPhrase(p){
+  mantraPhrase = p;
+  document.getElementById('mantraPhraseLabel').textContent = p;
+}
+function tapMantra(){
+  mantraSessionCount++;
+  localStorage.setItem(mantraStorageKey(), String(mantraSessionCount));
+  document.getElementById('mantraCount').textContent = mantraSessionCount;
+  document.getElementById('mantraTotal').textContent = mantraSessionCount;
+  const circle = document.getElementById('mantraBeadCircle');
+  circle.style.transform = 'scale(0.92)';
+  setTimeout(()=> circle.style.transform = 'scale(1)', 100);
+  if(mantraSessionCount % 108 === 0){
+    showCelebration(`📿 ${mantraSessionCount}번째 염불!`, '108의 배수를 채우셨어요');
+  }
+}
+function resetMantra(){
+  if(!confirm('오늘 기록을 초기화할까요?')) return;
+  mantraSessionCount = 0;
+  localStorage.setItem(mantraStorageKey(), '0');
+  document.getElementById('mantraCount').textContent = 0;
+  document.getElementById('mantraTotal').textContent = 0;
 }
 
 function openEtiquetteOverlay(){
