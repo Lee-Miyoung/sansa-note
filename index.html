@@ -466,6 +466,7 @@
   .content-type-btn.active{background:var(--stamp);color:#fff;border-color:var(--stamp-dark);box-shadow:0 4px 0 var(--stamp-dark);}
   .fun-banner-btn.mantra{background:linear-gradient(135deg,#f0e6ff,#e0ccff);color:#5a3a8a;}
   .fun-banner-btn.amulet{background:linear-gradient(135deg,#ffe0e0,#ffc2c2);color:#8a2a2a;}
+  .fun-banner-btn.moktak{background:linear-gradient(135deg,#e8d5b7,#d4b483);color:#5a3d1a;}
   .explain108-banner{
     max-width:1080px;margin:14px auto 0;padding:12px 16px;background:var(--paper-soft);
     border:1px dashed var(--gold);border-radius:10px;font-size:12.5px;color:var(--ink-soft);
@@ -1000,6 +1001,31 @@
       <button class="close-x" onclick="closeRouletteOverlay()">✕</button>
     </div>
     <div class="modal-body" id="rouletteBody" style="text-align:center;"></div>
+  </div>
+</div>
+
+<!-- ===================== MOKTAK MODAL ===================== -->
+<div class="overlay" id="moktakOverlay">
+  <div class="modal" style="text-align:center;">
+    <div class="modal-head">
+      <div><h2 class="serif">🥢 무한 목탁</h2><div class="sub">답답할 때 마음껏 두드려보세요</div></div>
+      <button class="close-x" onclick="closeMoktakOverlay()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div id="moktakCount" style="font-size:44px;font-weight:800;color:#5a3d1a;margin-bottom:4px;">0</div>
+      <div id="moktakMsg" style="font-size:12.5px;color:var(--ink-soft);margin-bottom:18px;height:16px;">두드릴 때마다 번뇌가 하나씩 사라져요</div>
+      <div id="moktakWrap" onclick="tapMoktak()" style="cursor:pointer;user-select:none;display:inline-block;">
+        <svg width="220" height="170" viewBox="0 0 220 170" id="moktakSvg" style="transition:transform .06s ease;">
+          <ellipse cx="110" cy="95" rx="95" ry="65" fill="#8a5a2b"/>
+          <ellipse cx="110" cy="95" rx="95" ry="65" fill="none" stroke="#5a3616" stroke-width="4"/>
+          <ellipse cx="110" cy="85" rx="80" ry="50" fill="#a9702f"/>
+          <path d="M 40,95 Q110,60 180,95" fill="none" stroke="#5a3616" stroke-width="5" stroke-linecap="round"/>
+          <ellipse cx="75" cy="70" rx="10" ry="6" fill="rgba(255,255,255,.25)"/>
+        </svg>
+      </div>
+      <div style="font-size:11px;color:var(--ink-soft);margin-top:14px;">오늘 총 <b id="moktakTotal">0</b>번 두드렸어요</div>
+      <button class="btn btn-ghost btn-block" style="margin-top:14px;" onclick="resetMoktak()">오늘 기록 초기화</button>
+    </div>
   </div>
 </div>
 
@@ -1778,6 +1804,10 @@ function renderFunBanner(){
       <div class="fb-title">🧧 나만의 기원 부적</div>
       <div class="fb-sub">합격·승진·인연 등 소원 담아 이미지로</div>
     </button>
+    <button class="fun-banner-btn moktak" onclick="openMoktakOverlay()">
+      <div class="fb-title">🥢 무한 목탁</div>
+      <div class="fb-sub">두드리면서 스트레스 날리기</div>
+    </button>
   </div>`;
 }
 
@@ -1935,6 +1965,75 @@ function removeDestinationData(id){
   }
 }
 
+
+/* ============================================================
+   MOKTAK (무한 목탁 - 스트레스 해소)
+============================================================ */
+let moktakSessionCount = 0;
+let moktakAudioCtx = null;
+const MOKTAK_MESSAGES = [
+  "두드릴 때마다 번뇌가 하나씩 사라져요",
+  "마음속 답답함이 조금씩 빠져나가요",
+  "그래, 그거야. 계속 두드려보세요",
+  "복잡한 생각은 잠시 내려놓아도 돼요",
+  "이 소리에만 집중해보세요",
+  "속이 조금 시원해졌나요?",
+  "잘하고 있어요, 계속해보세요"
+];
+
+function moktakStorageKey(){
+  const today = new Date();
+  const dateStr = `${today.getFullYear()}-${today.getMonth()+1}-${today.getDate()}`;
+  return 'sansanoteMoktak_' + (currentUid || 'guest') + '_' + dateStr;
+}
+function openMoktakOverlay(){
+  moktakSessionCount = parseInt(localStorage.getItem(moktakStorageKey()) || '0', 10);
+  document.getElementById('moktakCount').textContent = moktakSessionCount;
+  document.getElementById('moktakTotal').textContent = moktakSessionCount;
+  document.getElementById('moktakMsg').textContent = MOKTAK_MESSAGES[0];
+  document.getElementById('moktakOverlay').classList.add('show');
+}
+function closeMoktakOverlay(){
+  document.getElementById('moktakOverlay').classList.remove('show');
+}
+function playMoktakSound(){
+  try{
+    if(!moktakAudioCtx) moktakAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const ctx = moktakAudioCtx;
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = 'triangle';
+    osc.frequency.setValueAtTime(1200, ctx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(300, ctx.currentTime + 0.08);
+    gain.gain.setValueAtTime(0.35, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.12);
+    osc.connect(gain); gain.connect(ctx.destination);
+    osc.start(); osc.stop(ctx.currentTime + 0.12);
+  }catch(e){}
+  if(navigator.vibrate) navigator.vibrate(15);
+}
+function tapMoktak(){
+  moktakSessionCount++;
+  localStorage.setItem(moktakStorageKey(), String(moktakSessionCount));
+  document.getElementById('moktakCount').textContent = moktakSessionCount;
+  document.getElementById('moktakTotal').textContent = moktakSessionCount;
+  playMoktakSound();
+  const svg = document.getElementById('moktakSvg');
+  svg.style.transform = 'scale(0.92) rotate(-2deg)';
+  setTimeout(()=> svg.style.transform = 'scale(1) rotate(0deg)', 70);
+  const msgEl = document.getElementById('moktakMsg');
+  msgEl.textContent = MOKTAK_MESSAGES[Math.floor(Math.random()*MOKTAK_MESSAGES.length)];
+  if(moktakSessionCount % 100 === 0){
+    showCelebration(`🥢 ${moktakSessionCount}번 두드렸어요!`, '번뇌를 많이 내려놓으셨네요');
+  }
+}
+function resetMoktak(){
+  if(!confirm('오늘 기록을 초기화할까요?')) return;
+  moktakSessionCount = 0;
+  localStorage.setItem(moktakStorageKey(), '0');
+  document.getElementById('moktakCount').textContent = 0;
+  document.getElementById('moktakTotal').textContent = 0;
+}
 
 /* ============================================================
    AMULET MAKER (나만의 기원 부적)
