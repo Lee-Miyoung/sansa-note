@@ -433,6 +433,7 @@
   .content-type-btn:active{transform:translateY(3px);box-shadow:0 1px 0 var(--paper-line);}
   .content-type-btn.active{background:var(--stamp);color:#fff;border-color:var(--stamp-dark);box-shadow:0 4px 0 var(--stamp-dark);}
   .fun-banner-btn.mantra{background:linear-gradient(135deg,#f0e6ff,#e0ccff);color:#5a3a8a;}
+  .fun-banner-btn.amulet{background:linear-gradient(135deg,#ffe0e0,#ffc2c2);color:#8a2a2a;}
   .explain108-banner{
     max-width:1080px;margin:14px auto 0;padding:12px 16px;background:var(--paper-soft);
     border:1px dashed var(--gold);border-radius:10px;font-size:12.5px;color:var(--ink-soft);
@@ -926,6 +927,17 @@
       <button class="close-x" onclick="closeRouletteOverlay()">✕</button>
     </div>
     <div class="modal-body" id="rouletteBody" style="text-align:center;"></div>
+  </div>
+</div>
+
+<!-- ===================== AMULET MODAL ===================== -->
+<div class="overlay" id="amuletOverlay">
+  <div class="modal" style="text-align:center;">
+    <div class="modal-head">
+      <div><h2 class="serif">🧧 나만의 기원 부적</h2><div class="sub">소원을 담아 이미지로 만들어드려요</div></div>
+      <button class="close-x" onclick="closeAmuletOverlay()">✕</button>
+    </div>
+    <div class="modal-body" id="amuletBody"></div>
   </div>
 </div>
 
@@ -1688,6 +1700,10 @@ function renderFunBanner(){
       <div class="fb-title">📿 염불 카운터</div>
       <div class="fb-sub">관세음보살 염불하며 숫자 세기</div>
     </button>
+    <button class="fun-banner-btn amulet" onclick="openAmuletOverlay()">
+      <div class="fb-title">🧧 나만의 기원 부적</div>
+      <div class="fb-sub">합격·승진·인연 등 소원 담아 이미지로</div>
+    </button>
   </div>`;
 }
 
@@ -1845,6 +1861,134 @@ function removeDestinationData(id){
   }
 }
 
+
+/* ============================================================
+   AMULET MAKER (나만의 기원 부적)
+============================================================ */
+const AMULET_CATEGORIES = [
+  {key:"exam", icon:"📚", label:"합격·시험운", phrase:"이 마음이 반드시 좋은 결과로 이어지기를 기원합니다"},
+  {key:"promotion", icon:"💼", label:"승진·성공운", phrase:"노력한 만큼 인정받는 날이 오기를 기원합니다"},
+  {key:"love", icon:"💕", label:"인연·결혼운", phrase:"좋은 인연이 닿고, 그 마음이 오래가기를 기원합니다"},
+  {key:"health", icon:"🌿", label:"건강운", phrase:"몸과 마음이 늘 편안하기를 기원합니다"},
+  {key:"wealth", icon:"💰", label:"재물·사업운", phrase:"하는 일마다 순조롭게 풀리기를 기원합니다"},
+  {key:"newstart", icon:"🌱", label:"새출발운", phrase:"새로운 시작이 두렵지 않고 좋은 길로 이어지기를 기원합니다"}
+];
+let amuletSelected = null;
+
+function openAmuletOverlay(){
+  renderAmuletCategoryPicker();
+  document.getElementById('amuletOverlay').classList.add('show');
+}
+function closeAmuletOverlay(){
+  document.getElementById('amuletOverlay').classList.remove('show');
+}
+function renderAmuletCategoryPicker(){
+  const wrap = document.getElementById('amuletBody');
+  wrap.innerHTML = `
+    <div class="map-note" style="padding:0 0 12px;">확정적인 약속이 아니라, 마음을 담은 응원 카드예요. 어떤 소원을 담을까요?</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+      ${AMULET_CATEGORIES.map(c=>`
+        <button class="btn btn-ghost" style="padding:14px;flex-direction:column;display:flex;gap:4px;" onclick="pickAmuletCategory('${c.key}')">
+          <div style="font-size:22px;">${c.icon}</div>
+          <div style="font-size:12.5px;font-weight:700;">${c.label}</div>
+        </button>
+      `).join('')}
+    </div>
+  `;
+}
+function pickAmuletCategory(key){
+  amuletSelected = AMULET_CATEGORIES.find(c=>c.key===key);
+  const wrap = document.getElementById('amuletBody');
+  wrap.innerHTML = `
+    <a onclick="renderAmuletCategoryPicker()" style="cursor:pointer;color:var(--moss);font-size:12.5px;font-weight:700;">← 다시 고르기</a>
+    <div style="margin:12px 0;">
+      <input class="searchbox" id="amuletName" placeholder="이름 (선택, 예: 앤)" style="width:100%;margin-bottom:8px;">
+      <input class="searchbox" id="amuletDetail" placeholder="구체적인 소원 (선택, 예: OO시험 합격)" style="width:100%;">
+    </div>
+    <canvas id="amuletCanvas" width="600" height="800" style="width:100%;max-width:280px;border-radius:12px;box-shadow:0 6px 20px rgba(0,0,0,.2);margin-bottom:14px;"></canvas>
+    <button class="btn btn-primary btn-block" style="margin-bottom:8px;" onclick="renderAmuletPreview()">미리보기 새로고침</button>
+    <button class="btn btn-ghost btn-block" onclick="downloadAmulet()">📥 이미지로 저장</button>
+  `;
+  renderAmuletPreview();
+}
+function wrapCanvasText(ctx, text, x, y, maxWidth, lineHeight){
+  const words = text.split('');
+  let line = '';
+  const lines = [];
+  words.forEach(ch=>{
+    const test = line + ch;
+    if(ctx.measureText(test).width > maxWidth && line.length>0){
+      lines.push(line);
+      line = ch;
+    } else {
+      line = test;
+    }
+  });
+  lines.push(line);
+  lines.forEach((l,i)=> ctx.fillText(l, x, y + i*lineHeight));
+  return lines.length;
+}
+function renderAmuletPreview(){
+  const canvas = document.getElementById('amuletCanvas');
+  const ctx = canvas.getContext('2d');
+  const name = document.getElementById('amuletName').value.trim();
+  const detail = document.getElementById('amuletDetail').value.trim();
+  const cat = amuletSelected;
+
+  const grad = ctx.createLinearGradient(0,0,0,800);
+  grad.addColorStop(0, '#c62828');
+  grad.addColorStop(1, '#8a1f1f');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0,0,600,800);
+
+  ctx.strokeStyle = '#e8b750';
+  ctx.lineWidth = 6;
+  ctx.strokeRect(24,24,552,752);
+  ctx.lineWidth = 2;
+  ctx.strokeRect(38,38,524,724);
+
+  ctx.textAlign = 'center';
+  ctx.fillStyle = '#ffe9a8';
+  ctx.font = '32px sans-serif';
+  ctx.fillText('卐 기 원 부 적 卐', 300, 110);
+
+  ctx.font = '90px sans-serif';
+  ctx.fillText(cat.icon, 300, 260);
+
+  ctx.fillStyle = '#fff';
+  ctx.font = 'bold 34px sans-serif';
+  ctx.fillText(cat.label, 300, 330);
+
+  ctx.font = '24px sans-serif';
+  ctx.fillStyle = '#ffe9a8';
+  wrapCanvasText(ctx, cat.phrase, 300, 420, 440, 36);
+
+  if(detail){
+    ctx.font = 'bold 26px sans-serif';
+    ctx.fillStyle = '#fff';
+    wrapCanvasText(ctx, `"${detail}"`, 300, 560, 460, 34);
+  }
+
+  if(name){
+    ctx.font = '22px sans-serif';
+    ctx.fillStyle = '#ffe9a8';
+    ctx.fillText(`${name} 님을 위하여`, 300, 660);
+  }
+
+  const today = new Date();
+  ctx.font = '16px sans-serif';
+  ctx.fillStyle = 'rgba(255,255,255,.7)';
+  ctx.fillText(`${today.getFullYear()}.${today.getMonth()+1}.${today.getDate()} · 산사노트`, 300, 730);
+}
+function downloadAmulet(){
+  const canvas = document.getElementById('amuletCanvas');
+  const url = canvas.toDataURL('image/jpeg', 0.92);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `기원부적_${amuletSelected.label}.jpg`;
+  a.click();
+  showToast('이미지로 저장했어요');
+}
 
 /* ============================================================
    BREATHING EXERCISE (박스 호흡)
