@@ -467,6 +467,7 @@
   .fun-banner-btn.mantra{background:linear-gradient(135deg,#f0e6ff,#e0ccff);color:#5a3a8a;}
   .fun-banner-btn.amulet{background:linear-gradient(135deg,#ffe0e0,#ffc2c2);color:#8a2a2a;}
   .fun-banner-btn.moktak{background:linear-gradient(135deg,#e8d5b7,#d4b483);color:#5a3d1a;}
+  .mantra-speed.active{background:#5a3a8a;color:#fff;border-color:#5a3a8a;}
   .explain108-banner{
     max-width:1080px;margin:14px auto 0;padding:12px 16px;background:var(--paper-soft);
     border:1px dashed var(--gold);border-radius:10px;font-size:12.5px;color:var(--ink-soft);
@@ -1082,31 +1083,38 @@
 <div class="overlay" id="mantraOverlay">
   <div class="modal" style="text-align:center;">
     <div class="modal-head">
-      <div><h2 class="serif">📿 염불 카운터</h2><div class="sub">이름을 부르며 마음을 모으는 '칭명염불'이에요</div></div>
+      <div><h2 class="serif">📿 염불 카운터</h2><div class="sub">부처님·보살님의 이름을 부르며 마음을 모으는 '칭명염불'이에요</div></div>
       <button class="close-x" onclick="closeMantraOverlay()">✕</button>
     </div>
     <div class="modal-body">
-      <div style="display:flex;gap:8px;justify-content:center;margin-bottom:14px;">
-        <button class="btn btn-ghost" id="mantraBtnA" style="padding:8px 14px;font-size:12.5px;" onclick="setMantraPhrase('관세음보살')">관세음보살</button>
-        <button class="btn btn-ghost" id="mantraBtnB" style="padding:8px 14px;font-size:12.5px;" onclick="setMantraPhrase('나무아미타불')">나무아미타불</button>
+      <div class="map-note" style="padding:0 0 12px;text-align:left;">📖 <b>어떻게 하나요?</b><br>합장하거나 절을 하면서, 아래 이름을 마음속으로(또는 소리 내어) 되뇌어보세요. <b>자동 모드</b>가 기본이라 손을 대지 않아도 알아서 종소리로 세줘요. 직접 누르며 세고 싶다면 아래에서 "수동으로 하기"를 눌러보세요.</div>
+
+      <div style="display:flex;gap:6px;justify-content:center;margin-bottom:14px;flex-wrap:wrap;">
+        <button class="btn btn-ghost" id="mantraBtnA" style="padding:7px 12px;font-size:11.5px;" onclick="setMantraPhrase('관세음보살')">관세음보살</button>
+        <button class="btn btn-ghost" id="mantraBtnB" style="padding:7px 12px;font-size:11.5px;" onclick="setMantraPhrase('나무아미타불')">나무아미타불</button>
+        <button class="btn btn-ghost" id="mantraBtnC" style="padding:7px 12px;font-size:11.5px;" onclick="setMantraPhrase('지장보살')">지장보살</button>
+        <button class="btn btn-ghost" id="mantraBtnD" style="padding:7px 12px;font-size:11.5px;" onclick="setMantraPhrase('석가모니불')">석가모니불</button>
       </div>
 
-      <div id="mantraAutoPanel" style="display:none;background:#f3ecff;border-radius:12px;padding:12px;margin-bottom:12px;">
-        <div style="font-size:12px;color:#5a3a8a;margin-bottom:8px;">절하거나 합장한 채로 두세요. 정해진 간격마다 알아서 종소리로 세드려요.</div>
-        <div style="display:flex;gap:6px;justify-content:center;margin-bottom:10px;">
-          <button class="btn btn-ghost" style="padding:6px 12px;font-size:11.5px;" onclick="setAutoInterval(1500)">빠르게</button>
-          <button class="btn btn-ghost" style="padding:6px 12px;font-size:11.5px;" onclick="setAutoInterval(2500)">보통</button>
-          <button class="btn btn-ghost" style="padding:6px 12px;font-size:11.5px;" onclick="setAutoInterval(4000)">천천히</button>
+      <div id="mantraBeadCircle" style="width:150px;height:150px;border-radius:50%;background:radial-gradient(circle,var(--gold),#b8860b);margin:10px auto;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;user-select:none;transition:transform .1s ease;">
+        <div id="mantraPhraseLabel" style="font-family:'Nanum Myeongjo','Noto Serif KR',serif;font-size:16px;font-weight:800;">관세음보살</div>
+        <div id="mantraCount" style="font-size:34px;font-weight:800;margin-top:4px;">0</div>
+      </div>
+      <div style="font-size:11px;color:var(--ink-soft);margin:10px 0 14px;">오늘 총 <b id="mantraTotal">0</b>번 하셨어요</div>
+
+      <div id="mantraAutoPanel" style="background:#f3ecff;border-radius:12px;padding:14px;margin-bottom:10px;">
+        <div style="font-size:12px;color:#5a3a8a;margin-bottom:10px;font-weight:700;">🔔 자동 모드 · 속도를 골라보세요</div>
+        <div style="display:flex;gap:5px;justify-content:center;margin-bottom:12px;flex-wrap:wrap;">
+          <button class="btn btn-ghost mantra-speed" style="padding:6px 10px;font-size:11px;" onclick="setAutoInterval(1000, this)">아주 빠르게</button>
+          <button class="btn btn-ghost mantra-speed" style="padding:6px 10px;font-size:11px;" onclick="setAutoInterval(1600, this)">빠르게</button>
+          <button class="btn btn-ghost mantra-speed active" style="padding:6px 10px;font-size:11px;" onclick="setAutoInterval(2500, this)">보통</button>
+          <button class="btn btn-ghost mantra-speed" style="padding:6px 10px;font-size:11px;" onclick="setAutoInterval(3500, this)">천천히</button>
+          <button class="btn btn-ghost mantra-speed" style="padding:6px 10px;font-size:11px;" onclick="setAutoInterval(5000, this)">아주 천천히</button>
         </div>
         <button class="btn btn-primary btn-block" id="autoToggleBtn" onclick="toggleAutoMantra()">▶ 자동 시작</button>
       </div>
 
-      <div id="mantraBeadCircle" onclick="tapMantra()" style="width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,var(--gold),#b8860b);margin:10px auto;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;cursor:pointer;box-shadow:0 6px 0 #8a6a1f;user-select:none;transition:transform .1s ease;">
-        <div id="mantraPhraseLabel" style="font-family:'Nanum Myeongjo','Noto Serif KR',serif;font-size:16px;font-weight:800;">관세음보살</div>
-        <div id="mantraCount" style="font-size:34px;font-weight:800;margin-top:4px;">0</div>
-      </div>
-      <div style="font-size:11px;color:var(--ink-soft);margin:10px 0 8px;">직접 누르거나(수동), 손을 뗀 채로 자동 모드를 켤 수 있어요. 오늘 총 <b id="mantraTotal">0</b>번 하셨어요.</div>
-      <button class="btn btn-ghost btn-block" style="margin-bottom:8px;" onclick="toggleAutoPanel()" id="autoPanelToggleBtn">🔔 자동 모드 열기 (손 안 대고 세기)</button>
+      <button class="btn btn-ghost btn-block" style="margin-bottom:8px;" onclick="toggleManualMode()" id="manualToggleBtn">✋ 수동으로 하기 (직접 눌러서 세기)</button>
       <button class="btn btn-ghost btn-block" onclick="resetMantra()">오늘 기록 초기화</button>
     </div>
   </div>
@@ -1154,6 +1162,18 @@
       <div class="section-label" style="margin-top:16px;">108배란</div>
       <div class="desc-block">108가지 번뇌(마음을 어지럽히는 생각들)를 하나씩 내려놓는다는 마음으로 절을 108번 올리는 수행이에요. 많은 절에서 '108배 참회문'이라는 108개의 짧은 글귀를 하나씩 읽으며 절을 하는데, 절마다 문구가 조금씩 달라요. 보통 앞부분은 지난 일을 돌아보는 참회, 중간은 부모·스승·자연에 대한 감사, 뒷부분은 앞으로의 다짐(발원)으로 이어지는 구성이 많아요.</div>
       <div class="desc-block" style="margin-top:8px;color:var(--stamp);">처음이면 108번을 다 못 채워도 괜찮아요. 절 자체가 이미 좋은 운동이자 명상이에요. 무릎이 안 좋다면 무리하지 마세요.</div>
+
+      <div class="section-label">큰절(오체투지) 동작, 그림으로 보기</div>
+      <div style="text-align:center;background:var(--paper);border-radius:12px;padding:16px;">
+        <div id="bowPoseSvgWrap" style="height:150px;display:flex;align-items:center;justify-content:center;"></div>
+        <div id="bowPoseLabel" style="font-weight:800;color:var(--stamp);margin-top:8px;font-size:14px;"></div>
+        <div id="bowPoseDesc" style="font-size:12px;color:var(--ink-soft);margin-top:4px;min-height:32px;"></div>
+        <div style="display:flex;gap:8px;margin-top:10px;justify-content:center;">
+          <button class="btn btn-ghost" style="padding:7px 14px;font-size:12px;" onclick="bowPoseNav(-1)">‹ 이전</button>
+          <button class="btn btn-primary" style="padding:7px 16px;font-size:12px;" onclick="playBowPoseCycle()">▶ 순서대로 보기</button>
+          <button class="btn btn-ghost" style="padding:7px 14px;font-size:12px;" onclick="bowPoseNav(1)">다음 ›</button>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -2925,6 +2945,12 @@ function openMantraOverlay(){
   mantraSessionCount = parseInt(localStorage.getItem(mantraStorageKey()) || '0', 10);
   document.getElementById('mantraCount').textContent = mantraSessionCount;
   document.getElementById('mantraTotal').textContent = mantraSessionCount;
+  manualModeOn = false;
+  const circle = document.getElementById('mantraBeadCircle');
+  circle.style.cursor = 'default';
+  circle.style.boxShadow = 'none';
+  circle.onclick = null;
+  document.getElementById('manualToggleBtn').textContent = '✋ 수동으로 하기 (직접 눌러서 세기)';
   document.getElementById('mantraOverlay').classList.add('show');
 }
 function closeMantraOverlay(){
@@ -2951,15 +2977,28 @@ function tapMantra(){
   circle.style.transform = 'scale(0.92)';
   setTimeout(()=> circle.style.transform = 'scale(1)', 100);
 }
-function toggleAutoPanel(){
-  const panel = document.getElementById('mantraAutoPanel');
-  const isOpen = panel.style.display === 'block';
-  panel.style.display = isOpen ? 'none' : 'block';
-  document.getElementById('autoPanelToggleBtn').textContent = isOpen ? '🔔 자동 모드 열기 (손 안 대고 세기)' : '🔽 자동 모드 닫기';
-  if(isOpen) stopAutoMantra();
+let manualModeOn = false;
+function toggleManualMode(){
+  manualModeOn = !manualModeOn;
+  const circle = document.getElementById('mantraBeadCircle');
+  const btn = document.getElementById('manualToggleBtn');
+  if(manualModeOn){
+    circle.style.cursor = 'pointer';
+    circle.style.boxShadow = '0 6px 0 #8a6a1f';
+    circle.onclick = tapMantra;
+    btn.textContent = '✋ 수동 모드 끄기';
+    stopAutoMantra();
+  } else {
+    circle.style.cursor = 'default';
+    circle.style.boxShadow = 'none';
+    circle.onclick = null;
+    btn.textContent = '✋ 수동으로 하기 (직접 눌러서 세기)';
+  }
 }
-function setAutoInterval(ms){
+function setAutoInterval(ms, btnEl){
   mantraAutoInterval = ms;
+  document.querySelectorAll('.mantra-speed').forEach(b=>b.classList.remove('active'));
+  if(btnEl) btnEl.classList.add('active');
   if(mantraAutoTimer) { stopAutoMantra(); startAutoMantra(); }
 }
 function toggleAutoMantra(){
@@ -2984,7 +3023,50 @@ function resetMantra(){
   document.getElementById('mantraTotal').textContent = 0;
 }
 
+const BOW_POSES = [
+  {label:'1. 합장', desc:'부처님을 마주보고 서서, 두 손바닥을 가슴 앞에 가지런히 모아요.',
+   svg:`<svg width="90" height="140" viewBox="0 0 90 140"><circle cx="45" cy="18" r="12" fill="#e8b98a"/><path d="M30,32 L60,32 L66,100 L24,100 Z" fill="#c47a3a"/><line x1="30" y1="45" x2="45" y2="60" stroke="#e8b98a" stroke-width="5" stroke-linecap="round"/><line x1="60" y1="45" x2="45" y2="60" stroke="#e8b98a" stroke-width="5" stroke-linecap="round"/><circle cx="45" cy="62" r="4" fill="#e8b98a"/><line x1="34" y1="100" x2="30" y2="138" stroke="#5c3115" stroke-width="7" stroke-linecap="round"/><line x1="56" y1="100" x2="60" y2="138" stroke="#5c3115" stroke-width="7" stroke-linecap="round"/></svg>`},
+  {label:'2. 반배(작은 절)', desc:'허리를 60도쯤 굽혀 가볍게 인사해요. 처음이면 이것만 해도 충분해요.',
+   svg:`<svg width="110" height="140" viewBox="0 0 110 140"><g transform="rotate(30 45 95)"><circle cx="45" cy="18" r="12" fill="#e8b98a"/><path d="M30,32 L60,32 L66,100 L24,100 Z" fill="#c47a3a"/><line x1="30" y1="45" x2="45" y2="60" stroke="#e8b98a" stroke-width="5" stroke-linecap="round"/><line x1="60" y1="45" x2="45" y2="60" stroke="#e8b98a" stroke-width="5" stroke-linecap="round"/><circle cx="45" cy="62" r="4" fill="#e8b98a"/></g><line x1="34" y1="100" x2="30" y2="138" stroke="#5c3115" stroke-width="7" stroke-linecap="round"/><line x1="56" y1="100" x2="60" y2="138" stroke="#5c3115" stroke-width="7" stroke-linecap="round"/></svg>`},
+  {label:'3. 무릎 꿇기', desc:'무릎을 꿇고 앉으면서, 두 손을 몸 앞 바닥 쪽으로 천천히 내려요.',
+   svg:`<svg width="120" height="120" viewBox="0 0 120 120"><circle cx="60" cy="35" r="12" fill="#e8b98a"/><path d="M45,48 L75,48 L80,95 L40,95 Z" fill="#c47a3a"/><line x1="45" y1="58" x2="30" y2="90" stroke="#e8b98a" stroke-width="5" stroke-linecap="round"/><line x1="75" y1="58" x2="90" y2="90" stroke="#e8b98a" stroke-width="5" stroke-linecap="round"/><ellipse cx="30" cy="92" rx="6" ry="4" fill="#e8b98a"/><ellipse cx="90" cy="92" rx="6" ry="4" fill="#e8b98a"/><line x1="45" y1="95" x2="40" y2="115" stroke="#5c3115" stroke-width="9" stroke-linecap="round"/><line x1="75" y1="95" x2="80" y2="115" stroke="#5c3115" stroke-width="9" stroke-linecap="round"/></svg>`},
+  {label:'4. 오체투지(큰절)', desc:'이마와 두 팔꿈치, 두 무릎까지 다섯 곳이 바닥에 닿게 완전히 엎드려요. 이마를 손등 가까이에 대요.',
+   svg:`<svg width="150" height="90" viewBox="0 0 150 90"><ellipse cx="30" cy="55" rx="11" ry="10" fill="#e8b98a"/><path d="M40,50 L100,58 L100,78 L38,72 Z" fill="#c47a3a"/><line x1="45" y1="60" x2="20" y2="72" stroke="#e8b98a" stroke-width="5" stroke-linecap="round"/><ellipse cx="18" cy="74" rx="7" ry="4" fill="#e8b98a"/><line x1="95" y1="70" x2="115" y2="82" stroke="#5c3115" stroke-width="9" stroke-linecap="round"/></svg>`},
+  {label:'5. 손바닥 뒤집기', desc:'엎드린 채로 손바닥을 위로 뒤집어요. 부처님 발을 받쳐 든다는 뜻으로, 가장 큰 존경을 표하는 동작이에요.',
+   svg:`<svg width="150" height="90" viewBox="0 0 150 90"><ellipse cx="30" cy="55" rx="11" ry="10" fill="#e8b98a"/><path d="M40,50 L100,58 L100,78 L38,72 Z" fill="#c47a3a"/><line x1="45" y1="60" x2="20" y2="72" stroke="#e8b98a" stroke-width="5" stroke-linecap="round"/><ellipse cx="16" cy="70" rx="8" ry="5" fill="#f5d9b8" stroke="#c47a3a" stroke-width="1.5"/><path d="M10,66 Q16,62 22,66" fill="none" stroke="#c47a3a" stroke-width="1.5"/><line x1="95" y1="70" x2="115" y2="82" stroke="#5c3115" stroke-width="9" stroke-linecap="round"/></svg>`},
+  {label:'6. 다시 일어나기', desc:'손바닥을 다시 짚고, 상체를 일으켜 무릎 꿇은 자세로, 다시 일어서서 합장해요.',
+   svg:`<svg width="120" height="130" viewBox="0 0 120 130"><circle cx="60" cy="40" r="12" fill="#e8b98a"/><path d="M45,53 L75,53 L80,100 L40,100 Z" fill="#c47a3a"/><line x1="45" y1="63" x2="35" y2="85" stroke="#e8b98a" stroke-width="5" stroke-linecap="round"/><line x1="75" y1="63" x2="85" y2="85" stroke="#e8b98a" stroke-width="5" stroke-linecap="round"/><circle cx="60" cy="66" r="4" fill="#e8b98a"/><line x1="45" y1="100" x2="40" y2="125" stroke="#5c3115" stroke-width="9" stroke-linecap="round"/><line x1="75" y1="100" x2="80" y2="125" stroke="#5c3115" stroke-width="9" stroke-linecap="round"/></svg>`}
+];
+let bowPoseIdx = 0;
+let bowPoseTimer = null;
+function renderBowPose(){
+  const p = BOW_POSES[bowPoseIdx];
+  document.getElementById('bowPoseSvgWrap').innerHTML = p.svg;
+  document.getElementById('bowPoseLabel').textContent = p.label;
+  document.getElementById('bowPoseDesc').textContent = p.desc;
+}
+function bowPoseNav(dir){
+  clearTimeout(bowPoseTimer);
+  bowPoseIdx = (bowPoseIdx + dir + BOW_POSES.length) % BOW_POSES.length;
+  renderBowPose();
+}
+function playBowPoseCycle(){
+  clearTimeout(bowPoseTimer);
+  bowPoseIdx = 0;
+  renderBowPose();
+  function next(){
+    bowPoseTimer = setTimeout(()=>{
+      bowPoseIdx++;
+      if(bowPoseIdx >= BOW_POSES.length){ bowPoseIdx = 0; renderBowPose(); return; }
+      renderBowPose();
+      next();
+    }, 1600);
+  }
+  next();
+}
+
 function openEtiquetteOverlay(){
+  renderBowPose();
   document.getElementById('etiquetteOverlay').classList.add('show');
 }
 function closeEtiquetteOverlay(){
