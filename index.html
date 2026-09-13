@@ -782,7 +782,7 @@
   <main>
     <div class="grid" id="grid"></div>
     <div class="empty-note" id="emptyNote" style="display:none;text-align:center;">
-      <img src="monk-waving.png" style="width:140px;margin-bottom:10px;" alt="">
+      <img src="IMG_4440.png" style="width:140px;margin-bottom:10px;" alt="">
       <div>해당하는 절이 없어요. 필터를 바꾸거나 오른쪽 아래 + 버튼으로 새 절을 추가해보세요.</div>
     </div>
   </main>
@@ -1066,7 +1066,7 @@
         <button class="btn btn-primary btn-block" id="breathStartBtn" onclick="startBreathing()" style="position:relative;">시작하기</button>
       </div>
       <div id="breathPhraseBody" style="display:none;padding:10px 10px 30px;">
-        <img src="monk-sitting.png" style="width:130px;margin-bottom:10px;" alt="">
+        <img src="IMG_4439.png" style="width:130px;margin-bottom:10px;" alt="">
         <div id="breathPhraseText" style="font-family:'Nanum Myeongjo','Noto Serif KR',serif;font-size:22px;color:var(--stamp);min-height:60px;transition:opacity .4s ease;line-height:1.6;"></div>
       </div>
       <button class="btn btn-ghost btn-block" id="ambientToggleBtn" onclick="toggleAmbient()" style="margin-top:8px;">🔇 소리 꺼짐</button>
@@ -3856,7 +3856,127 @@ function openStoryCardOverlay(){
 function closeStoryCardOverlay(){
   document.getElementById('storyCardOverlay').classList.remove('show');
 }
-const CARD_HANJA = ['心','空','禪','悟','靜','慈','定','緣','覺','忍'];
+const TEMPLE_HANJA = {
+  "봉원사": {ch:"空", mean:"비움"},
+  "봉은사": {ch:"靜", mean:"고요함"},
+  "조계사": {ch:"願", mean:"발원"},
+  "화계사": {ch:"空", mean:"비움"},
+  "진관사": {ch:"安", mean:"평안"},
+  "도선사": {ch:"慈", mean:"자비"},
+  "용주사": {ch:"恩", mean:"은혜"},
+  "전등사": {ch:"忍", mean:"인내"},
+  "신륵사": {ch:"忘", mean:"내려놓음"},
+  "보문사": {ch:"慈", mean:"자비"},
+  "자재암": {ch:"無", mean:"무념"},
+  "용문사(양평)": {ch:"忘", mean:"내려놓음"},
+  "봉선사": {ch:"願", mean:"발원"},
+  "보광사": {ch:"眞", mean:"진실"},
+  "칠장사": {ch:"悟", mean:"깨달음"},
+  "회암사": {ch:"空", mean:"비움"},
+  "낙산사": {ch:"淸", mean:"맑음"},
+  "신흥사": {ch:"靜", mean:"고요함"},
+  "백담사": {ch:"願", mean:"발원"},
+  "월정사": {ch:"靜", mean:"고요함"},
+  "상원사": {ch:"悟", mean:"깨달음"},
+  "청평사": {ch:"靜", mean:"고요함"},
+  "건봉사": {ch:"安", mean:"평안"},
+  "휴휴암": {ch:"空", mean:"비움"},
+  "법흥사": {ch:"空", mean:"비움"},
+  "정암사": {ch:"誠", mean:"정성"},
+  "봉정암": {ch:"願", mean:"발원"},
+  "도피안사": {ch:"慈", mean:"자비"},
+  "법주사": {ch:"忘", mean:"내려놓음"},
+  "마곡사": {ch:"喜", mean:"기쁨"},
+  "수덕사": {ch:"眞", mean:"진실"},
+  "관촉사": {ch:"眞", mean:"진실"},
+  "개심사": {ch:"和", mean:"화합"},
+  "무량사": {ch:"忘", mean:"내려놓음"},
+  "신원사": {ch:"願", mean:"발원"},
+  "각연사": {ch:"定", mean:"집중(선정)"},
+  "갑사": {ch:"忘", mean:"내려놓음"},
+  "동학사": {ch:"定", mean:"집중(선정)"},
+  "구인사": {ch:"樂", mean:"즐거움"},
+  "문수사": {ch:"喜", mean:"기쁨"},
+  "선암사": {ch:"忘", mean:"내려놓음"},
+  "대흥사": {ch:"安", mean:"평안"},
+  "송광사": {ch:"悟", mean:"깨달음"},
+  "백양사": {ch:"靜", mean:"고요함"},
+  "화엄사": {ch:"光", mean:"빛"},
+  "연곡사": {ch:"誠", mean:"정성"},
+  "실상사": {ch:"眞", mean:"진실"},
+  "천은사": {ch:"靜", mean:"고요함"},
+  "미황사": {ch:"慈", mean:"자비"},
+  "도갑사": {ch:"光", mean:"빛"},
+  "불갑사": {ch:"緣", mean:"인연"},
+  "향일암": {ch:"悟", mean:"깨달음"},
+  "쌍봉사": {ch:"眞", mean:"진실"},
+  "운주사": {ch:"願", mean:"발원"},
+  "백련사": {ch:"恩", mean:"은혜"},
+  "무위사": {ch:"眞", mean:"진실"},
+  "태안사": {ch:"靜", mean:"고요함"},
+  "흥국사(여수)": {ch:"恩", mean:"은혜"},
+  "금산사": {ch:"願", mean:"발원"},
+  "내소사": {ch:"眞", mean:"진실"},
+  "개암사": {ch:"定", mean:"집중(선정)"},
+  "선운사": {ch:"忍", mean:"인내"},
+  "화암사": {ch:"安", mean:"평안"},
+  "완주 송광사": {ch:"悟", mean:"깨달음"},
+  "통도사": {ch:"空", mean:"비움"},
+  "부석사": {ch:"安", mean:"평안"},
+  "봉정사": {ch:"眞", mean:"진실"},
+  "해인사": {ch:"願", mean:"발원"},
+  "동화사": {ch:"慈", mean:"자비"},
+  "쌍계사": {ch:"恩", mean:"은혜"},
+  "범어사": {ch:"定", mean:"집중(선정)"},
+  "불국사": {ch:"眞", mean:"진실"},
+  "석굴암": {ch:"安", mean:"평안"},
+  "기림사": {ch:"淸", mean:"맑음"},
+  "감은사지": {ch:"願", mean:"발원"},
+  "분황사": {ch:"和", mean:"화합"},
+  "골굴사": {ch:"悟", mean:"깨달음"},
+  "벽송사": {ch:"忍", mean:"인내"},
+  "직지사": {ch:"眞", mean:"진실"},
+  "고운사": {ch:"空", mean:"비움"},
+  "은해사": {ch:"淨", mean:"청정함"},
+  "청량사": {ch:"願", mean:"발원"},
+  "청암사": {ch:"慈", mean:"자비"},
+  "대승사": {ch:"悟", mean:"깨달음"},
+  "김룡사": {ch:"靜", mean:"고요함"},
+  "불영사": {ch:"淨", mean:"청정함"},
+  "갓바위(선본사)": {ch:"願", mean:"발원"},
+  "오어사": {ch:"和", mean:"화합"},
+  "봉암사": {ch:"誠", mean:"정성"},
+  "용문사(예천)": {ch:"慈", mean:"자비"},
+  "도리사": {ch:"誠", mean:"정성"},
+  "파계사": {ch:"定", mean:"집중(선정)"},
+  "운문사": {ch:"德", mean:"덕"},
+  "표충사": {ch:"誠", mean:"정성"},
+  "옥천사": {ch:"慈", mean:"자비"},
+  "다솔사": {ch:"誠", mean:"정성"},
+  "보리암": {ch:"空", mean:"비움"},
+  "대원사": {ch:"淨", mean:"청정함"},
+  "관룡사": {ch:"喜", mean:"기쁨"},
+  "은하사": {ch:"和", mean:"화합"},
+  "해동용궁사": {ch:"智", mean:"지혜"},
+  "만어사": {ch:"淨", mean:"청정함"},
+  "관음사": {ch:"慈", mean:"자비"},
+  "약천사": {ch:"覺", mean:"깨달음"},
+  "산방굴사": {ch:"淨", mean:"청정함"},
+  "법화사": {ch:"淨", mean:"청정함"},
+  "원당사": {ch:"忍", mean:"인내"},
+  "존자암": {ch:"悟", mean:"깨달음"},
+};
+
+const CARD_HANJA = [
+  {ch:'心', mean:'마음'}, {ch:'空', mean:'비움'}, {ch:'禪', mean:'참선'}, {ch:'悟', mean:'깨달음'},
+  {ch:'靜', mean:'고요함'}, {ch:'慈', mean:'자비'}, {ch:'定', mean:'집중(선정)'}, {ch:'緣', mean:'인연'},
+  {ch:'覺', mean:'깨달음'}, {ch:'忍', mean:'인내'}, {ch:'和', mean:'화합'}, {ch:'福', mean:'복'},
+  {ch:'善', mean:'선함'}, {ch:'淨', mean:'청정함'}, {ch:'眞', mean:'진실'}, {ch:'光', mean:'빛'},
+  {ch:'喜', mean:'기쁨'}, {ch:'安', mean:'평안'}, {ch:'德', mean:'덕'}, {ch:'誠', mean:'정성'},
+  {ch:'智', mean:'지혜'}, {ch:'忘', mean:'내려놓음'}, {ch:'無', mean:'무념'}, {ch:'願', mean:'발원'},
+  {ch:'恩', mean:'은혜'}, {ch:'樂', mean:'즐거움'}, {ch:'平', mean:'평온'}, {ch:'淸', mean:'맑음'},
+  {ch:'一', mean:'한마음'}, {ch:'佛', mean:'부처'}
+];
 function renderStoryCard(){
   const canvas = document.getElementById('storyCardCanvas');
   const ctx = canvas.getContext('2d');
@@ -3866,7 +3986,7 @@ function renderStoryCard(){
   const poetic = POETIC_DESC[d.name];
   const today = new Date();
   const dateStr = `${today.getFullYear()}.${String(today.getMonth()+1).padStart(2,'0')}`;
-  const hanja = CARD_HANJA[Math.floor(Math.random()*CARD_HANJA.length)];
+  const hanjaPick = TEMPLE_HANJA[d.name] || CARD_HANJA[Math.floor(Math.random()*CARD_HANJA.length)];
 
   function drawAll(){
     // 배경: 한지색 그라데이션
@@ -3893,7 +4013,10 @@ function renderStoryCard(){
     ctx.textAlign = 'center';
     ctx.fillStyle = 'rgba(160,31,31,.10)';
     ctx.font = 'bold 560px serif';
-    ctx.fillText(hanja, W/2, H*0.42);
+    ctx.fillText(hanjaPick.ch, W/2, H*0.42);
+    ctx.font = '30px sans-serif';
+    ctx.fillStyle = 'rgba(160,31,31,.35)';
+    ctx.fillText(`- ${hanjaPick.mean} -`, W/2, H*0.42 + 70);
 
     // 상단 연꽃 아이콘
     ctx.font = '90px serif';
@@ -3957,7 +4080,7 @@ function renderStoryCard(){
     img.crossOrigin = 'anonymous';
     img.onload = ()=>{ window.__cardMonkImg = img; drawAll(); };
     img.onerror = drawAll;
-    img.src = 'card-monk.png';
+    img.src = 'IMG_4438.png';
   } else {
     drawAll();
   }
