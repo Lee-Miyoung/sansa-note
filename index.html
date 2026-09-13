@@ -3782,6 +3782,7 @@ function renderStoryCard(){
       const w = img.width*scale, h = img.height*scale;
       try{
         ctx.drawImage(img, (W-w)/2, (H-h)/2, w, h);
+        applyInkWashEffect(canvas, 0, 0, W, H);
       }catch(e){}
       drawTextLayer();
     };
@@ -3851,6 +3852,34 @@ function closePhotobookOverlay(){
   document.getElementById('photobookOverlay').classList.remove('show');
 }
 
+function applyInkWashEffect(canvas, rx, ry, rw, rh){
+  const ctx = canvas.getContext('2d');
+  rx = rx||0; ry = ry||0; rw = rw||canvas.width; rh = rh||canvas.height;
+  const imgData = ctx.getImageData(rx,ry,rw,rh);
+  const data = imgData.data;
+  // 먹색(어두운 갈색)과 한지색(따뜻한 미색) 사이를 명암에 따라 매핑
+  const inkR=42, inkG=33, inkB=24;
+  const paperR=248, paperG=240, paperB=220;
+  for(let i=0;i<data.length;i+=4){
+    const gray = 0.299*data[i] + 0.587*data[i+1] + 0.114*data[i+2];
+    // 대비를 살짝 올려서 붓터치 느낌
+    let t = gray/255;
+    t = Math.pow(t, 0.85);
+    data[i]   = paperR*t + inkR*(1-t);
+    data[i+1] = paperG*t + inkG*(1-t);
+    data[i+2] = paperB*t + inkB*(1-t);
+  }
+  ctx.putImageData(imgData,rx,ry);
+  // 은은한 종이 질감 노이즈
+  ctx.globalAlpha = 0.05;
+  for(let i=0;i<Math.min(400, rw*rh/300);i++){
+    ctx.fillStyle = Math.random()>0.5 ? '#000' : '#fff';
+    ctx.fillRect(rx+Math.random()*rw, ry+Math.random()*rh, 1.5, 1.5);
+  }
+  ctx.globalAlpha = 1;
+  return canvas;
+}
+
 function loadImageSafe(url){
   return new Promise(resolve=>{
     if(!url){ resolve(null); return; }
@@ -3883,6 +3912,7 @@ function drawPhotobookPage(temple, img){
     ctx.clip();
     ctx.drawImage(img, 80-(w-boxW)/2, y-(h-boxH)/2, w, h);
     ctx.restore();
+    applyInkWashEffect(canvas, 80, y, boxW, boxH);
     y += boxH + 60;
   } else {
     y += 20;
