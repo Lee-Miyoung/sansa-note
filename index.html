@@ -5346,8 +5346,9 @@ function addVisitRecord(withLocation){
   const d = destinations[id];
   const note = document.getElementById('visitNoteInput').value.trim();
 
-  function save(verified){
+  function save(verified, distKm){
     const vid = newId();
+    const wasUnvisited = (destinations[id].stage||0) < 1;
     const visits = Object.assign({}, destinations[id].visits || {});
     visits[vid] = {ts: Date.now(), note, verified: !!verified};
     const patch = {visits};
@@ -5357,12 +5358,14 @@ function addVisitRecord(withLocation){
     renderVisits(destinations[id].visits);
     renderRepeatChallenge(destinations[id]);
     renderStepper(destinations[id].stage||0);
+    if(wasUnvisited || verified) playStampAnimation();
     document.getElementById('visitNoteInput').value = '';
     const newCount = visitCount(destinations[id]);
+    const distNote = (typeof distKm === 'number') ? ` (거리 약 ${distKm < 1 ? Math.round(distKm*1000)+'m' : distKm.toFixed(1)+'km'})` : '';
     if(REPEAT_MILESTONES.includes(newCount)){
       showCelebration(`🏔 ${newCount}회 순례 달성!`, `${destinations[id].name}, 진짜 단골이 되셨네요`);
     } else {
-      showCelebration(verified ? '📍 위치 인증 완료!' : '방문 기록 저장!', verified ? '진짜 여기 다녀오셨네요' : '오늘의 순례, 잘 남겨뒀어요');
+      showCelebration(verified ? `📍 위치 인증 완료!${distNote}` : '방문 기록 저장!', verified ? '진짜 여기 다녀오셨네요' : '오늘의 순례, 잘 남겨뒀어요');
     }
     render();
   }
@@ -5376,10 +5379,10 @@ function addVisitRecord(withLocation){
   navigator.geolocation.getCurrentPosition(pos=>{
     const dist = haversineKm(pos.coords.latitude, pos.coords.longitude, d.lat, d.lng);
     if(dist <= 0.5){
-      save(true);
+      save(true, dist);
     } else {
       showToast(`절에서 약 ${dist.toFixed(1)}km 떨어져 있어서 인증이 안 됐어요. 그냥 기록할게요.`);
-      save(false);
+      save(false, dist);
     }
   }, err=>{
     showToast('위치 권한을 허용해주셔야 인증할 수 있어요. 그냥 기록할게요.');
