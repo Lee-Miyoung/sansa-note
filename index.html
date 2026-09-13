@@ -19,17 +19,17 @@
   :root{
     --cover:#2b1810;
     --cover-deep:#180d07;
-    --paper:#fdf8f0;
-    --paper-soft:#ffffff;
-    --paper-line:#ecdcc8;
+    --paper:#f8f7f4;
+    --paper-soft:#fdfcfa;
+    --paper-line:#e8ddc8;
     --ink:#2b2118;
     --ink-soft:#87765f;
-    --stamp:#d97757;
-    --stamp-dark:#b85a3e;
-    --moss:#4a9b7f;
-    --moss-dark:#3a7d65;
-    --gold:#e0a94f;
-    --red:#e2604f;
+    --stamp:#c0392b;
+    --stamp-dark:#962d21;
+    --moss:#4a6741;
+    --moss-dark:#38502f;
+    --gold:#c8963e;
+    --red:#c0392b;
     --shadow:0 10px 26px rgba(20,16,8,.1);
   }
   *{box-sizing:border-box;}
@@ -225,7 +225,7 @@
     .visit-flag{font-size:8.5px;padding:2px 6px;right:32px;top:6px;}
   }
   .card{
-    background:#fff;border-radius:20px;overflow:hidden;cursor:pointer;
+    background:var(--paper-soft);border-radius:20px;overflow:hidden;cursor:pointer;
     box-shadow:0 4px 0 var(--paper-line);
     transition:transform .1s ease;
     position:relative;
@@ -247,13 +247,13 @@
   .tagbadge.famous{background:var(--moss);}
   .tagbadge.hidden{background:var(--red);}
   .stampcorner{
-    position:absolute;top:8px;right:-2px;
+    position:absolute;top:8px;right:8px;
+    width:22px;height:22px;border-radius:50%;
     background:#1a1613;color:#ffd76a;
-    font-size:9px;font-weight:800;letter-spacing:.5px;
-    padding:3px 10px 3px 8px;
-    border-radius:4px 0 0 4px;
-    box-shadow:1px 2px 4px rgba(0,0,0,.35);
-    text-transform:uppercase;
+    display:flex;align-items:center;justify-content:center;
+    font-size:12px;font-weight:800;
+    box-shadow:0 2px 5px rgba(0,0,0,.4);
+    border:1.5px solid rgba(255,255,255,.85);
   }
   .stampcorner.done{
     background:var(--stamp);color:#fff;
@@ -287,6 +287,34 @@
     background:var(--paper-soft);border-radius:24px;max-width:560px;width:100%;
     max-height:88vh;overflow-y:auto;box-shadow:0 20px 50px rgba(0,0,0,.3);
   }
+  @media (max-width:640px){
+    .overlay{align-items:flex-end;padding:0;}
+    .overlay.show .modal{animation:sheet-up .25s ease-out;}
+    .modal{
+      border-radius:22px 22px 0 0;max-width:100%;max-height:92vh;
+      padding-top:8px;
+    }
+    .modal-head{position:relative;}
+    .modal-head::before{
+      content:'';position:absolute;top:-2px;left:50%;transform:translateX(-50%);
+      width:40px;height:4px;border-radius:99px;background:var(--paper-line);
+    }
+  }
+  @keyframes sheet-up{
+    from{transform:translateY(100%);} to{transform:translateY(0);}
+  }
+  body.dark-mode{
+    --paper:#1a1613;
+    --paper-soft:#231e1a;
+    --paper-line:#3d342c;
+    --ink:#e8dfd0;
+    --ink-soft:#a89880;
+  }
+  body.dark-mode .card-photo{filter:brightness(.85);}
+  body.dark-mode .btn-ghost{background:var(--paper-soft);}
+  body.dark-mode input, body.dark-mode select, body.dark-mode textarea{background:var(--paper-soft);color:var(--ink);border-color:var(--paper-line);}
+  body.dark-mode .chip-toggle{background:var(--paper-soft);}
+  body.dark-mode .stagefilter{background:var(--paper-soft);color:var(--ink);}
   .modal-head{
     padding:20px 22px 14px;border-bottom:1px solid var(--paper-line);
     display:flex;justify-content:space-between;align-items:flex-start;gap:10px;
@@ -940,6 +968,7 @@
       <button class="btn btn-ghost btn-block" onclick="closeSettings();openGlossaryOverlay();" style="margin-bottom:10px;">📖 불교 용어 사전</button>
       <button class="btn btn-ghost btn-block" onclick="closeSettings();openEtiquetteOverlay();" style="margin-bottom:10px;">🙏 처음 가는 법당 예절 · 108배</button>
       <button class="btn btn-ghost btn-block" onclick="closeSettings();openPrayersOverlay();" style="margin-bottom:10px;">📿 기도문 모음 (천수경·반야심경·발원문·진언)</button>
+      <button class="btn btn-ghost btn-block" id="darkModeBtn" onclick="toggleDarkMode()" style="margin-bottom:10px;">🌙 야간/템플스테이 모드 켜기</button>
       <button class="btn btn-ghost btn-block" onclick="closeSettings();openVowOverlay();" style="margin-bottom:10px;">🌅 발원문 쓰기 (미래의 나에게)</button>
       <button class="btn btn-ghost btn-block" onclick="doLogout()">로그아웃</button>
     </div>
@@ -1070,6 +1099,7 @@
       <div style="display:flex;gap:6px;justify-content:center;margin-bottom:12px;">
         <button class="btn btn-ghost song-pick" style="padding:7px 12px;font-size:12px;" onclick="loadSong(0)">1. 비워내 비워내</button>
         <button class="btn btn-ghost song-pick" style="padding:7px 12px;font-size:12px;" onclick="loadSong(1)">2. 흘러가네</button>
+        <button class="btn btn-ghost song-pick" style="padding:7px 12px;font-size:12px;" onclick="loadSong(2)">3. 가벼워진 마음</button>
       </div>
       <div id="lyricsWrap" style="height:200px;overflow-y:auto;background:var(--paper);border-radius:12px;padding:16px 12px;margin-bottom:14px;scroll-behavior:smooth;">
         <div id="lyricsInner"></div>
@@ -2188,99 +2218,153 @@ function removeDestinationData(id){
    PLAYLIST (명상 플레이리스트 + 가사 싱크)
 ============================================================ */
 const LYRICS_SONG1 = [
-  {t:0, text:'[Intro]'},
-  {t:2, text:'(잔잔한 풍경소리, 로파이 빗소리)'},
-  {t:8, text:'(은은한 목탁 리듬)'},
-  {t:14, text:'[Verse 1]'},
-  {t:15, text:'어지러운 세상 속, 잠시 내려놓아'},
-  {t:21, text:'숨을 깊게 들이쉬고 내쉬는 이 순간'},
-  {t:27, text:'바람이 불어와도 숲은 흔들리지 않듯'},
-  {t:33, text:'파도치는 네 마음도 곧 고요해질 거야'},
-  {t:39, text:'생각은 구름처럼 그저 스쳐 갈 뿐'},
-  {t:45, text:'붙잡지 말고 흘려보내, 다 괜찮아'},
-  {t:50, text:'[Pre-Chorus]'},
-  {t:51, text:'잡으려 할수록 멀어지던 것들'},
-  {t:57, text:'비워낼수록 채워지는 평온함'},
-  {t:63, text:'옴 마니 반메 훔 (Om Mani Padme Hum)'},
-  {t:69, text:'마음의 불을 꺼'},
-  {t:75, text:'[Chorus]'},
-  {t:76, text:'비워내 비워내, 번뇌는 바람결에'},
-  {t:82, text:'모든 건 인연 따라 피고 또 질 뿐인데'},
-  {t:88, text:'조용히 울려 퍼지는 목탁의 박자 속에'},
-  {t:94, text:'온전히 머무르는 지금 이 자리'},
-  {t:100, text:'내 안의 고요, 맑아진 평정심'},
-  {t:106, text:'[Verse 2]'},
-  {t:107, text:'어제의 후회도, 내일의 불안도'},
-  {t:113, text:'지금 여기엔 없어, 그저 숨만 쉴 뿐'},
-  {t:119, text:'무거운 짐 내려놓고 걸음을 늦춰봐'},
-  {t:125, text:'모든 것은 변하지만 본래 텅 빈 것'},
-  {t:131, text:'머무는 바 없이 그 마음을 낼 때'},
-  {t:137, text:'비로소 보이는 가장 맑은 너의 빛'},
-  {t:142, text:'[Chorus]'},
-  {t:143, text:'비워내 비워내, 번뇌는 바람결에'},
-  {t:149, text:'모든 건 인연 따라 피고 또 질 뿐인데'},
-  {t:155, text:'조용히 울려 퍼지는 목탁의 박자 속에'},
-  {t:161, text:'온전히 머무르는 지금 이 자리'},
-  {t:167, text:'내 안의 고요, 맑아진 평정심'},
-  {t:176, text:'[Outro]'},
-  {t:178, text:'가테 가테 바라가테 바라승가테 모제 사바하'},
-  {t:186, text:'(Gate gate pāragate pārasaṃgate bodhi svāhā)'},
-  {t:193, text:'흩어지는 안개처럼'},
-  {t:199, text:'평온하게, 깊숙이'},
-  {t:205, text:'(잔잔한 종소리와 함께 페이드아웃)'}
+  {t:2, text:'[Intro]'},
+  {t:4, text:'(잔잔한 풍경소리, 로파이 빗소리)'},
+  {t:10, text:'(은은한 목탁 리듬)'},
+  {t:16, text:'[Verse 1]'},
+  {t:17, text:'어지러운 세상 속, 잠시 내려놓아'},
+  {t:23, text:'숨을 깊게 들이쉬고 내쉬는 이 순간'},
+  {t:29, text:'바람이 불어와도 숲은 흔들리지 않듯'},
+  {t:35, text:'파도치는 네 마음도 곧 고요해질 거야'},
+  {t:41, text:'생각은 구름처럼 그저 스쳐 갈 뿐'},
+  {t:47, text:'붙잡지 말고 흘려보내, 다 괜찮아'},
+  {t:52, text:'[Pre-Chorus]'},
+  {t:53, text:'잡으려 할수록 멀어지던 것들'},
+  {t:59, text:'비워낼수록 채워지는 평온함'},
+  {t:65, text:'옴 마니 반메 훔 (Om Mani Padme Hum)'},
+  {t:71, text:'마음의 불을 꺼'},
+  {t:77, text:'[Chorus]'},
+  {t:78, text:'비워내 비워내, 번뇌는 바람결에'},
+  {t:84, text:'모든 건 인연 따라 피고 또 질 뿐인데'},
+  {t:90, text:'조용히 울려 퍼지는 목탁의 박자 속에'},
+  {t:96, text:'온전히 머무르는 지금 이 자리'},
+  {t:102, text:'내 안의 고요, 맑아진 평정심'},
+  {t:108, text:'[Verse 2]'},
+  {t:109, text:'어제의 후회도, 내일의 불안도'},
+  {t:115, text:'지금 여기엔 없어, 그저 숨만 쉴 뿐'},
+  {t:121, text:'무거운 짐 내려놓고 걸음을 늦춰봐'},
+  {t:127, text:'모든 것은 변하지만 본래 텅 빈 것'},
+  {t:133, text:'머무는 바 없이 그 마음을 낼 때'},
+  {t:139, text:'비로소 보이는 가장 맑은 너의 빛'},
+  {t:144, text:'[Chorus]'},
+  {t:145, text:'비워내 비워내, 번뇌는 바람결에'},
+  {t:151, text:'모든 건 인연 따라 피고 또 질 뿐인데'},
+  {t:157, text:'조용히 울려 퍼지는 목탁의 박자 속에'},
+  {t:163, text:'온전히 머무르는 지금 이 자리'},
+  {t:169, text:'내 안의 고요, 맑아진 평정심'},
+  {t:178, text:'[Outro]'},
+  {t:180, text:'가테 가테 바라가테 바라승가테 모제 사바하'},
+  {t:188, text:'(Gate gate pāragate pārasaṃgate bodhi svāhā)'},
+  {t:195, text:'흩어지는 안개처럼'},
+  {t:201, text:'평온하게, 깊숙이'},
+  {t:207, text:'(잔잔한 종소리와 함께 페이드아웃)'}
 ];
 
 const LYRICS_SONG2 = [
-  {t:0, text:'[Intro]'},
-  {t:3, text:'(깊은 싱잉볼 울림)'},
-  {t:9, text:'(로파이 전자피아노)'},
-  {t:16, text:'[Verse 1]'},
-  {t:18, text:'가득 찬 생각의 소음, 볼륨을 줄여'},
-  {t:24, text:'무엇을 위해 그리 서둘러 달렸을까'},
-  {t:30, text:'손에 쥐려 애쓸수록 모래처럼 흩어져'},
-  {t:36, text:'잡으려던 것들 다 찰나의 환영인데'},
-  {t:42, text:'잠시 눈을 감고, 내 안의 숨을 느껴'},
-  {t:48, text:'들숨에 평화가, 날숨에 비움이'},
-  {t:55, text:'[Pre-Chorus]'},
-  {t:56, text:'색이 곧 공이고, 공이 곧 색이라'},
-  {t:62, text:'채워진 모든 것은 본래 비어있는 법'},
-  {t:68, text:'굳이 붙들지 않아도'},
-  {t:74, text:'강물은 바다로 흘러가듯'},
-  {t:81, text:'[Chorus]'},
-  {t:82, text:'흘러가네, 그저 흐르는 대로'},
-  {t:88, text:'집착의 강을 건너 저 너머의 숲으로'},
-  {t:94, text:'마음의 무게를 덜어내, 가볍게'},
-  {t:100, text:'지금 이 순간, 완벽한 평온 속으로'},
-  {t:106, text:'나무아미타불, 내 안의 작은 등불'},
-  {t:113, text:'[Verse 2]'},
-  {t:114, text:'비교와 불안, 그 쓸데없는 소용돌이'},
-  {t:120, text:'한 걸음 물러서면 찻잔 속의 파도일 뿐'},
-  {t:126, text:'연꽃이 진흙 속에서 맑게 피어나듯'},
-  {t:132, text:'어지러운 세상 속 나만의 중심을 찾아'},
-  {t:138, text:'아무것도 바라지 않을 때'},
-  {t:144, text:'비로소 모든 것이 온전해져'},
-  {t:151, text:'[Chorus]'},
-  {t:152, text:'흘러가네, 그저 흐르는 대로'},
-  {t:158, text:'집착의 강을 건너 저 너머의 숲으로'},
-  {t:164, text:'마음의 무게를 덜어내, 가볍게'},
-  {t:170, text:'지금 이 순간, 완벽한 평온 속으로'},
-  {t:176, text:'나무아미타불, 내 안의 작은 등불'},
-  {t:183, text:'[Bridge]'},
-  {t:185, text:'(몽환적인 신스 솔로와 깊은 베이스)'},
-  {t:191, text:'바람은 머물지 않고'},
-  {t:197, text:'달빛은 그림자를 남기지 않네'},
-  {t:203, text:'그저 바라보고, 놓아주고, 자유로워지길'},
-  {t:210, text:'[Outro]'},
-  {t:212, text:'(잔잔한 싱잉볼 울림, 서서히 사라짐)'},
-  {t:218, text:'사바하... 사바하...'},
-  {t:224, text:'비워진 자리에 차오르는 고요'},
-  {t:230, text:'그대로 편안해져'},
-  {t:236, text:'(음악이 부드럽게 페이드아웃)'}
+  {t:2, text:'[Intro]'},
+  {t:5, text:'(깊은 싱잉볼 울림)'},
+  {t:11, text:'(로파이 전자피아노)'},
+  {t:18, text:'[Verse 1]'},
+  {t:20, text:'가득 찬 생각의 소음, 볼륨을 줄여'},
+  {t:26, text:'무엇을 위해 그리 서둘러 달렸을까'},
+  {t:32, text:'손에 쥐려 애쓸수록 모래처럼 흩어져'},
+  {t:38, text:'잡으려던 것들 다 찰나의 환영인데'},
+  {t:44, text:'잠시 눈을 감고, 내 안의 숨을 느껴'},
+  {t:50, text:'들숨에 평화가, 날숨에 비움이'},
+  {t:57, text:'[Pre-Chorus]'},
+  {t:58, text:'색이 곧 공이고, 공이 곧 색이라'},
+  {t:64, text:'채워진 모든 것은 본래 비어있는 법'},
+  {t:70, text:'굳이 붙들지 않아도'},
+  {t:76, text:'강물은 바다로 흘러가듯'},
+  {t:83, text:'[Chorus]'},
+  {t:84, text:'흘러가네, 그저 흐르는 대로'},
+  {t:90, text:'집착의 강을 건너 저 너머의 숲으로'},
+  {t:96, text:'마음의 무게를 덜어내, 가볍게'},
+  {t:102, text:'지금 이 순간, 완벽한 평온 속으로'},
+  {t:108, text:'나무아미타불, 내 안의 작은 등불'},
+  {t:115, text:'[Verse 2]'},
+  {t:116, text:'비교와 불안, 그 쓸데없는 소용돌이'},
+  {t:122, text:'한 걸음 물러서면 찻잔 속의 파도일 뿐'},
+  {t:128, text:'연꽃이 진흙 속에서 맑게 피어나듯'},
+  {t:134, text:'어지러운 세상 속 나만의 중심을 찾아'},
+  {t:140, text:'아무것도 바라지 않을 때'},
+  {t:146, text:'비로소 모든 것이 온전해져'},
+  {t:153, text:'[Chorus]'},
+  {t:154, text:'흘러가네, 그저 흐르는 대로'},
+  {t:160, text:'집착의 강을 건너 저 너머의 숲으로'},
+  {t:166, text:'마음의 무게를 덜어내, 가볍게'},
+  {t:172, text:'지금 이 순간, 완벽한 평온 속으로'},
+  {t:178, text:'나무아미타불, 내 안의 작은 등불'},
+  {t:185, text:'[Bridge]'},
+  {t:187, text:'(몽환적인 신스 솔로와 깊은 베이스)'},
+  {t:193, text:'바람은 머물지 않고'},
+  {t:199, text:'달빛은 그림자를 남기지 않네'},
+  {t:205, text:'그저 바라보고, 놓아주고, 자유로워지길'},
+  {t:212, text:'[Outro]'},
+  {t:214, text:'(잔잔한 싱잉볼 울림, 서서히 사라짐)'},
+  {t:220, text:'사바하... 사바하...'},
+  {t:226, text:'비워진 자리에 차오르는 고요'},
+  {t:232, text:'그대로 편안해져'},
+  {t:238, text:'(음악이 부드럽게 페이드아웃)'}
+];
+
+const LYRICS_SONG3 = [
+  {t:2, text:'[Intro]'},
+  {t:4, text:'(업비트 바이닐 스크래치+빠른 목탁 비트)'},
+  {t:8, text:'(Yeah, turn it up! 마음을 가볍게, Let\'s go!)'},
+  {t:11, text:'[Verse 1 - Rap]'},
+  {t:12, text:'머릿속 복잡한 생각들은 전부 Delete'},
+  {t:15, text:'알람 소리에 쫓기던 하루는 이제 Reset'},
+  {t:18, text:'왜 그리 아등바등 손에 쥐려 해'},
+  {t:21, text:'모든 건 인연 따라 왔다가 가는 법인데'},
+  {t:24, text:'비교하는 마음 따윈 주머니에 집어넣어'},
+  {t:27, text:'어제의 후회? 오늘 웃음으로 덮어'},
+  {t:30, text:'한 걸음 쿵, 두 걸음 착, 발걸음은 가볍게'},
+  {t:33, text:'구름 걷힌 하늘처럼 마음도 환하게'},
+  {t:36, text:'[Pre-Chorus]'},
+  {t:37, text:'바람이 불어오면 부는 대로 춤을 춰'},
+  {t:40, text:'파도가 밀려오면 파도 타고 넘어가'},
+  {t:43, text:'다 지나가, 다 비워내'},
+  {t:46, text:'지금 이 리듬에 몸을 맡겨봐!'},
+  {t:49, text:'[Chorus]'},
+  {t:50, text:'훌훌 털어버려, 번뇌는 Zero!'},
+  {t:53, text:'가벼워진 마음, 내가 바로 영웅'},
+  {t:56, text:'탁! 탁! 울리는 목탁 박자에 맞춰'},
+  {t:59, text:'웃어봐 활짝, 오늘 하루도 나이스 샷!'},
+  {t:62, text:'옴 마니 반메 훔, 빛나는 내 하루'},
+  {t:65, text:'모든 게 다 잘 풀릴 테니까!'},
+  {t:68, text:'[Verse 2 - Rap]'},
+  {t:69, text:'욕심이란 짐보따리 내려놓으니 날아갈 듯'},
+  {t:72, text:'내 안의 붓다를 깨워, 밝아지는 내 눈빛'},
+  {t:75, text:'꽃이 피는 이유를 굳이 묻지 않듯이'},
+  {t:78, text:'그냥 존재하는 것만으로 너는 완벽하지'},
+  {t:81, text:'남들의 시선은 패스, 내 길을 직진'},
+  {t:84, text:'순간마다 감사하며 채워가는 긍정의 힘'},
+  {t:87, text:'한숨 대신 박수 짝짝, 템포를 올려'},
+  {t:90, text:'답답했던 가슴속에 시원한 바람 불어!'},
+  {t:93, text:'[Chorus]'},
+  {t:94, text:'훌훌 털어버려, 번뇌는 Zero!'},
+  {t:97, text:'가벼워진 마음, 내가 바로 영웅'},
+  {t:100, text:'탁! 탁! 울리는 목탁 박자에 맞춰'},
+  {t:103, text:'웃어봐 활짝, 오늘 하루도 나이스 샷!'},
+  {t:106, text:'옴 마니 반메 훔, 빛나는 내 하루'},
+  {t:109, text:'모든 게 다 잘 풀릴 테니까!'},
+  {t:112, text:'[Bridge]'},
+  {t:114, text:'(펑키한 슬랩베이스와 밝은 호른 솔로)'},
+  {t:119, text:'욕심은 버리고, 미소는 챙기고'},
+  {t:123, text:'지금 이 순간이 가장 눈부신 선물'},
+  {t:127, text:'준비됐지? 한 번 더 뛰어봐!'},
+  {t:131, text:'[Outro]'},
+  {t:133, text:'사바하! 외치며 높이 Jump'},
+  {t:137, text:'걸림돌은 디딤돌이 될 테니 Keep going'},
+  {t:142, text:'(빠른 목탁 비트와 함께 페이드아웃)'},
+  {t:147, text:'오늘도 평화롭게, Peace!'}
 ];
 
 const SONGS = [
   {title:'비워내 비워내', src:'song1.mp3', lyrics: LYRICS_SONG1},
-  {title:'흘러가네', src:'song2.mp3', lyrics: LYRICS_SONG2}
+  {title:'흘러가네', src:'song2.mp3', lyrics: LYRICS_SONG2},
+  {title:'가벼워진 마음', src:'song3.mp3', lyrics: LYRICS_SONG3}
 ];
 let currentSongIdx = 0;
 
@@ -3514,6 +3598,21 @@ function playBowPoseCycle(){
   }
   next();
 }
+
+function toggleDarkMode(){
+  const on = document.body.classList.toggle('dark-mode');
+  localStorage.setItem('sansanoteDarkMode', on ? '1' : '0');
+  document.getElementById('darkModeBtn').textContent = on ? '☀️ 야간 모드 끄기' : '🌙 야간/템플스테이 모드 켜기';
+}
+(function initDarkMode(){
+  if(localStorage.getItem('sansanoteDarkMode') === '1'){
+    document.body.classList.add('dark-mode');
+    document.addEventListener('DOMContentLoaded', ()=>{
+      const btn = document.getElementById('darkModeBtn');
+      if(btn) btn.textContent = '☀️ 야간 모드 끄기';
+    });
+  }
+})();
 
 function openPrayersOverlay(){
   document.getElementById('prayersOverlay').classList.add('show');
