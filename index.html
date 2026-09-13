@@ -14,6 +14,7 @@
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <style>
   :root{
@@ -44,9 +45,18 @@
   body::before{
     content:'';
     position:fixed;inset:0;
-    background:var(--paper);
-    opacity:.88;
+    background:
+      radial-gradient(rgba(135,118,95,.05) 1px, transparent 1.4px) 0 0/14px 14px,
+      radial-gradient(rgba(135,118,95,.04) 1px, transparent 1.6px) 7px 7px/22px 22px,
+      var(--paper);
+    opacity:.92;
     z-index:-2;
+  }
+  body.dark-mode::before{
+    background:
+      radial-gradient(rgba(232,223,208,.03) 1px, transparent 1.4px) 0 0/14px 14px,
+      radial-gradient(rgba(232,223,208,.025) 1px, transparent 1.6px) 7px 7px/22px 22px,
+      var(--paper);
   }
   h1,h2,h3,.serif{font-family:'Nanum Myeongjo', 'Noto Serif KR', serif;}
 
@@ -815,6 +825,9 @@
         <div class="desc-block" id="dSight" style="background:#eef7f3;border-left:3px solid var(--moss);padding:10px 12px;border-radius:8px;"></div>
       </div>
 
+      <div class="section-label">🌅 방문 팁</div>
+      <div id="dVisitTips" style="background:#fff8e6;border-left:3px solid var(--gold);padding:10px 12px;border-radius:8px;font-size:12.5px;line-height:1.7;"></div>
+
       <div class="section-label">위치</div>
       <div id="dWeather" style="margin-bottom:8px;"></div>
       <div id="dMap"></div>
@@ -842,6 +855,7 @@
       <div class="photo-grid" id="dPhotos"></div>
       <input type="file" id="photoInput" accept="image/*" multiple style="display:none" onchange="uploadPhotos(event)">
 
+      <button class="btn btn-primary btn-block" style="margin-top:14px;" onclick="openStoryCardOverlay()">📸 순례 인증 카드 만들기</button>
       <div class="danger-link" onclick="deleteDestination()">이 절 기록 삭제</div>
     </div>
   </div>
@@ -968,6 +982,8 @@
       <button class="btn btn-ghost btn-block" onclick="closeSettings();openGlossaryOverlay();" style="margin-bottom:10px;">📖 불교 용어 사전</button>
       <button class="btn btn-ghost btn-block" onclick="closeSettings();openEtiquetteOverlay();" style="margin-bottom:10px;">🙏 처음 가는 법당 예절 · 108배</button>
       <button class="btn btn-ghost btn-block" onclick="closeSettings();openPrayersOverlay();" style="margin-bottom:10px;">📿 기도문 모음 (천수경·반야심경·발원문·진언)</button>
+      <button class="btn btn-ghost btn-block" onclick="closeSettings();openPhotobookOverlay();" style="margin-bottom:10px;">📖 나만의 순례집 PDF 만들기</button>
+      <button class="btn btn-ghost btn-block" onclick="closeSettings();openPassportOverlay();" style="margin-bottom:10px;">🛂 순례 여권 (현장 인증 스탬프)</button>
       <button class="btn btn-ghost btn-block" id="darkModeBtn" onclick="toggleDarkMode()" style="margin-bottom:10px;">🌙 야간/템플스테이 모드 켜기</button>
       <button class="btn btn-ghost btn-block" onclick="closeSettings();openVowOverlay();" style="margin-bottom:10px;">🌅 발원문 쓰기 (미래의 나에게)</button>
       <button class="btn btn-ghost btn-block" onclick="doLogout()">로그아웃</button>
@@ -1205,6 +1221,48 @@
   </div>
 </div>
 
+<!-- ===================== STORY CARD MODAL ===================== -->
+<div class="overlay" id="storyCardOverlay">
+  <div class="modal" style="text-align:center;">
+    <div class="modal-head">
+      <div><h2 class="serif">📸 순례 인증 카드</h2><div class="sub">인스타 스토리에 바로 올릴 수 있는 크기예요</div></div>
+      <button class="close-x" onclick="closeStoryCardOverlay()">✕</button>
+    </div>
+    <div class="modal-body">
+      <input class="searchbox" id="storyCardMsg" placeholder="한 줄 소감 (예: 마음을 비우고 갑니다)" style="width:100%;margin-bottom:12px;" oninput="renderStoryCard()">
+      <canvas id="storyCardCanvas" width="1080" height="1920" style="width:100%;max-width:220px;border-radius:12px;box-shadow:0 6px 20px rgba(0,0,0,.25);margin-bottom:14px;"></canvas>
+      <button class="btn btn-primary btn-block" onclick="downloadStoryCard()">📥 이미지로 저장</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== PASSPORT MODAL ===================== -->
+<div class="overlay" id="passportOverlay">
+  <div class="modal">
+    <div class="modal-head">
+      <div><h2 class="serif">🛂 순례 여권</h2><div class="sub">대표 순례 코스 5가지, 현장(반경 500m)에서 인증하면 도장이 찍혀요</div></div>
+      <button class="close-x" onclick="closePassportOverlay()">✕</button>
+    </div>
+    <div class="modal-body" id="passportBody"></div>
+  </div>
+</div>
+
+<!-- ===================== PHOTOBOOK MODAL ===================== -->
+<div class="overlay" id="photobookOverlay">
+  <div class="modal" style="text-align:center;">
+    <div class="modal-head">
+      <div><h2 class="serif">📖 나만의 순례집</h2><div class="sub">다녀온 절들을 한 권의 책으로 만들어드려요</div></div>
+      <button class="close-x" onclick="closePhotobookOverlay()">✕</button>
+    </div>
+    <div class="modal-body">
+      <input class="searchbox" id="photobookTitle" placeholder="책 제목 (예: 2026년, 나의 순례)" style="width:100%;margin-bottom:12px;">
+      <div id="photobookStatus" class="map-note" style="padding:0 0 12px;text-align:left;">다녀온 절 <b id="photobookCount">0</b>곳이 담겨요. 사진이 있는 곳은 함께 들어가요.</div>
+      <button class="btn btn-primary btn-block" id="photobookGenBtn" onclick="generatePhotobook()">📥 PDF로 만들기</button>
+      <div class="map-note" style="margin-top:12px;">절 개수가 많으면 만드는 데 시간이 좀 걸려요. 창을 닫지 말고 기다려주세요.</div>
+    </div>
+  </div>
+</div>
+
 <!-- ===================== PRAYERS MODAL ===================== -->
 <div class="overlay" id="prayersOverlay">
   <div class="modal">
@@ -1305,6 +1363,9 @@
       <div class="section-label" style="margin-top:16px;">108배란</div>
       <div class="desc-block">108가지 번뇌(마음을 어지럽히는 생각들)를 하나씩 내려놓는다는 마음으로 절을 108번 올리는 수행이에요. 많은 절에서 '108배 참회문'이라는 108개의 짧은 글귀를 하나씩 읽으며 절을 하는데, 절마다 문구가 조금씩 달라요. 보통 앞부분은 지난 일을 돌아보는 참회, 중간은 부모·스승·자연에 대한 감사, 뒷부분은 앞으로의 다짐(발원)으로 이어지는 구성이 많아요.</div>
       <div class="desc-block" style="margin-top:8px;color:var(--stamp);">처음이면 108번을 다 못 채워도 괜찮아요. 절 자체가 이미 좋은 운동이자 명상이에요. 무릎이 안 좋다면 무리하지 마세요.</div>
+
+      <div class="section-label">🎒 사찰 방문 준비물 체크리스트</div>
+      <div id="templeChecklist"></div>
 
       <div class="section-label">몇 번 절해야 하나요?</div>
       <div class="desc-block">
@@ -1740,6 +1801,21 @@ function resolvePackData(pack){
 }
 
 const HAESU_SEED_NAMES = ["낙산사","보문사","보리암"];
+const SAMBO_SEED_NAMES = ["통도사","해인사","송광사"];
+const PRACTICAL_TIPS = {
+  "불국사": "일주문 앞 대형 주차장 있음(유료). 경내 대부분 평지·계단 혼재라 휠체어는 일부 구간 우회 필요.",
+  "석굴암": "주차장에서 석굴암까지 셔틀버스 운행. 유모차·휠체어는 오르막이 있어 다소 힘들 수 있어요.",
+  "해인사": "일주문 훨씬 못 미쳐 큰 주차장 있고, 거기서 절까지 도보 15~20분 걸리니 편한 신발 필수.",
+  "송광사": "매표소 앞 주차장에서 절까지 평탄한 숲길 도보 10분, 유모차도 무난해요.",
+  "통도사": "무풍한송로 소나무숲길이 길어서, 주차 후 절까지 도보 15분 정도 걸려요.",
+  "부석사": "일주문 아래 주차장에서 무량수전까지는 계단이 꽤 있어 휠체어·유모차는 어려운 편이에요.",
+  "화엄사": "경내 가까이까지 차로 진입 가능한 주차장이 있어 접근성이 좋은 편이에요.",
+  "법주사": "매표소~법주사까지 평탄한 숲길, 유모차로도 다닐 만해요.",
+  "낙산사": "의상대까지 가는 길에 오르막이 있어, 어르신 동반 시 천천히 이동을 권해요.",
+  "월정사": "전나무숲길이 평탄해서 유모차·휠체어 모두 무난하게 다닐 수 있어요.",
+  "봉정암": "설악산 깊은 곳이라 왕복 10시간 가까이 걸리는 등산 코스라, 일반 관광 접근은 사실상 불가능해요.",
+  "미황사": "주차장에서 대웅보전까지 완만한 오르막, 편한 신발 정도면 충분해요."
+};
 const JEOKMYEOL_SEED_NAMES = ["통도사","정암사","법흥사","상원사","봉정암"];
 const CHERRY_SEED_NAMES = ["화엄사","쌍계사","마곡사","개심사","동학사"];
 const AUTUMN_SEED_NAMES = ["내소사","법주사","갑사","해인사","동화사","불국사"];
@@ -1772,6 +1848,7 @@ const PACKS = [
   {key:"unesco", label:"유네스코 산사 7곳", route:"전국에 흩어져 있어 한 번에 도는 코스는 아니고, 지역별로 나눠 방문하는 걸 추천해요.", data: UNESCO_SEED},
   {key:"chongnim", label:"조계종 8대 총림", route:"역시 전국 각지 본사라 지역별 코스(경주/지리산/경남 등)와 겹쳐서 도는 게 효율적이에요.", data: CHONGNIM_SEED},
   {key:"haesu", label:"3대 해수관음 성지", route:"강원(낙산사)·수도권(보문사)·경남(보리암)에 하나씩 있어 전국 코스로 묶어보기 좋아요. 셋 다 바닷가/절벽 절경으로 유명해요.", names: HAESU_SEED_NAMES},
+  {key:"sambo", label:"삼보사찰", route:"통도사(경남 양산, 불보)·해인사(경남 합천, 법보)·송광사(전남 순천, 승보)로, 불교의 세 가지 보물을 상징하는 사찰이에요.", names: SAMBO_SEED_NAMES},
   {key:"jeokmyeol", label:"5대 적멸보궁", route:"통도사(경남)·상원사·봉정암(오대산~설악산)·정암사·법흥사(정선~영월)로, 진신사리를 모신 다섯 곳. 봉정암은 왕복 10시간 걷는 난이도 최상 코스예요.", names: JEOKMYEOL_SEED_NAMES},
   {key:"cherry", label:"봄 벚꽃 명소 사찰", route:"화엄사(구례)·쌍계사(하동)는 차로 40분, 마곡사(공주)·개심사(서산)·동학사(공주 계룡산)는 충청권끼리 묶기 좋아요. 4월 초중순이 절정.", names: CHERRY_SEED_NAMES},
   {key:"autumn", label:"가을 단풍 명소 사찰", route:"내소사(부안)·법주사(보은)·갑사(공주)는 전북~충청 라인, 해인사(합천)·동화사(대구)·불국사(경주)는 경상권끼리 묶어서. 10월 말~11월 초가 절정.", names: AUTUMN_SEED_NAMES},
@@ -1800,6 +1877,42 @@ let kakaoReadyCallbacks=[];
 ============================================================ */
 let currentUid = null;
 let authTab = 'login';
+
+(function setupSwipeToClose(){
+  let startY = null;
+  let startX = null;
+  let activeHead = null;
+  document.addEventListener('touchstart', e=>{
+    const head = e.target.closest('.modal-head');
+    if(!head) return;
+    const overlay = head.closest('.overlay');
+    if(!overlay || !overlay.classList.contains('show')) return;
+    activeHead = head;
+    startY = e.touches[0].clientY;
+    startX = e.touches[0].clientX;
+  }, {passive:true});
+  document.addEventListener('touchmove', e=>{
+    if(startY === null || !activeHead) return;
+    const dy = e.touches[0].clientY - startY;
+    const dx = Math.abs(e.touches[0].clientX - startX);
+    if(dy > 0 && dy > dx){
+      const modal = activeHead.closest('.modal');
+      if(modal) modal.style.transform = `translateY(${Math.min(dy,220)}px)`;
+    }
+  }, {passive:true});
+  document.addEventListener('touchend', e=>{
+    if(startY === null || !activeHead) return;
+    const modal = activeHead.closest('.modal');
+    const overlay = activeHead.closest('.overlay');
+    const dy = (e.changedTouches && e.changedTouches[0]) ? e.changedTouches[0].clientY - startY : 0;
+    if(modal){ modal.style.transform = ''; }
+    if(dy > 90 && overlay){
+      const closeBtn = overlay.querySelector('.close-x');
+      if(closeBtn) closeBtn.click();
+    }
+    startY = null; startX = null; activeHead = null;
+  }, {passive:true});
+})();
 
 window.addEventListener('DOMContentLoaded', ()=>{
   buildRegionSelects();
@@ -3614,6 +3727,272 @@ function toggleDarkMode(){
   }
 })();
 
+function openStoryCardOverlay(){
+  document.getElementById('storyCardMsg').value = '';
+  document.getElementById('storyCardOverlay').classList.add('show');
+  renderStoryCard();
+}
+function closeStoryCardOverlay(){
+  document.getElementById('storyCardOverlay').classList.remove('show');
+}
+function renderStoryCard(){
+  const canvas = document.getElementById('storyCardCanvas');
+  const ctx = canvas.getContext('2d');
+  const W = 1080, H = 1920;
+  const d = destinations[currentDetailId];
+  const msg = document.getElementById('storyCardMsg').value.trim();
+  const today = new Date();
+  const dateStr = `${today.getFullYear()}.${String(today.getMonth()+1).padStart(2,'0')}`;
+
+  function drawTextLayer(){
+    const grad = ctx.createLinearGradient(0,H*0.55,0,H);
+    grad.addColorStop(0, 'rgba(0,0,0,0)');
+    grad.addColorStop(1, 'rgba(0,0,0,.75)');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0,H*0.55,W,H*0.45);
+
+    ctx.textAlign = 'center';
+    ctx.fillStyle = 'rgba(255,255,255,.85)';
+    ctx.font = '36px sans-serif';
+    ctx.fillText(`${dateStr} · ${d.region}`, W/2, H*0.68);
+
+    ctx.fillStyle = '#fff';
+    ctx.font = 'bold 76px serif';
+    ctx.fillText(d.name, W/2, H*0.76);
+
+    if(msg){
+      ctx.font = '38px serif';
+      ctx.fillStyle = 'rgba(255,255,255,.95)';
+      ctx.fillText(`"${msg}"`, W/2, H*0.83);
+    }
+
+    ctx.font = '28px sans-serif';
+    ctx.fillStyle = 'rgba(255,255,255,.6)';
+    ctx.fillText('🪷 산사노트', W/2, H*0.94);
+  }
+
+  const photoUrl = firstPhotoUrl(d);
+  ctx.fillStyle = '#3a2a1a';
+  ctx.fillRect(0,0,W,H);
+  if(photoUrl){
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = ()=>{
+      const scale = Math.max(W/img.width, H/img.height);
+      const w = img.width*scale, h = img.height*scale;
+      try{
+        ctx.drawImage(img, (W-w)/2, (H-h)/2, w, h);
+      }catch(e){}
+      drawTextLayer();
+    };
+    img.onerror = drawTextLayer;
+    img.src = photoUrl;
+  } else {
+    drawTextLayer();
+  }
+}
+function downloadStoryCard(){
+  const canvas = document.getElementById('storyCardCanvas');
+  try{
+    const url = canvas.toDataURL('image/jpeg', 0.92);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `순례인증_${destinations[currentDetailId].name}.jpg`;
+    a.click();
+    showToast('이미지로 저장했어요');
+  }catch(e){
+    showToast('이미지 저장에 실패했어요. 사진 없이 다시 시도해보세요.');
+  }
+}
+
+const PASSPORT_PACK_KEYS = ['unesco','chongnim','sambo','haesu','jeokmyeol'];
+function isTempleVerified(name){
+  const d = Object.values(destinations).find(x=>x.name===name);
+  if(!d) return false;
+  return Object.values(d.visits||{}).some(v=>v.verified);
+}
+function openPassportOverlay(){
+  const wrap = document.getElementById('passportBody');
+  wrap.innerHTML = PASSPORT_PACK_KEYS.map(key=>{
+    const pack = PACKS.find(p=>p.key===key);
+    if(!pack) return '';
+    const items = resolvePackData(pack);
+    const stampedCount = items.filter(it=>isTempleVerified(it.name)).length;
+    return `
+      <div class="visitrow" style="border-left-color:var(--stamp);">
+        <div style="font-weight:800;font-family:'Nanum Myeongjo','Noto Serif KR',serif;font-size:15px;color:var(--stamp);">${pack.label} <span style="font-weight:400;color:var(--ink-soft);font-size:11.5px;">(${stampedCount}/${items.length} 현장인증)</span></div>
+        <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:10px;">
+          ${items.map(it=>{
+            const verified = isTempleVerified(it.name);
+            return `<div style="text-align:center;width:64px;">
+              <div style="width:52px;height:52px;border-radius:50%;margin:0 auto;display:flex;align-items:center;justify-content:center;font-size:22px;
+                ${verified ? 'background:radial-gradient(circle,#e05a44,var(--stamp-dark));color:#fff;box-shadow:0 3px 8px rgba(192,57,43,.4);transform:rotate(-6deg);' : 'background:none;border:2.5px dashed var(--paper-line);color:var(--paper-line);'}">
+                ${verified ? '印' : '?'}
+              </div>
+              <div style="font-size:10px;margin-top:4px;color:${verified?'var(--stamp)':'var(--ink-soft)'};font-weight:${verified?'800':'500'};">${escapeHtml(it.name)}</div>
+            </div>`;
+          }).join('')}
+        </div>
+      </div>
+    `;
+  }).join('');
+  document.getElementById('passportOverlay').classList.add('show');
+}
+function closePassportOverlay(){
+  document.getElementById('passportOverlay').classList.remove('show');
+}
+
+function openPhotobookOverlay(){
+  const visited = Object.values(destinations).filter(d=>(d.stage||0)>=1);
+  document.getElementById('photobookCount').textContent = visited.length;
+  document.getElementById('photobookOverlay').classList.add('show');
+}
+function closePhotobookOverlay(){
+  document.getElementById('photobookOverlay').classList.remove('show');
+}
+
+function loadImageSafe(url){
+  return new Promise(resolve=>{
+    if(!url){ resolve(null); return; }
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = ()=> resolve(img);
+    img.onerror = ()=> resolve(null);
+    img.src = url;
+  });
+}
+
+function drawPhotobookPage(temple, img){
+  const canvas = document.createElement('canvas');
+  canvas.width = 1240; canvas.height = 1754;
+  const ctx = canvas.getContext('2d');
+  ctx.fillStyle = '#faf6ee';
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+  ctx.strokeStyle = '#d8c9ac';
+  ctx.lineWidth = 3;
+  ctx.strokeRect(30,30,canvas.width-60,canvas.height-60);
+
+  let y = 100;
+  if(img){
+    const boxW = canvas.width-160, boxH = 700;
+    const scale = Math.max(boxW/img.width, boxH/img.height);
+    const w = img.width*scale, h = img.height*scale;
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(80, y, boxW, boxH);
+    ctx.clip();
+    ctx.drawImage(img, 80-(w-boxW)/2, y-(h-boxH)/2, w, h);
+    ctx.restore();
+    y += boxH + 60;
+  } else {
+    y += 20;
+  }
+
+  ctx.textAlign = 'center';
+  ctx.fillStyle = '#2b2118';
+  ctx.font = 'bold 58px serif';
+  ctx.fillText(temple.name, canvas.width/2, y);
+  y += 50;
+  ctx.font = '30px sans-serif';
+  ctx.fillStyle = '#87765f';
+  ctx.fillText(temple.region, canvas.width/2, y);
+  y += 60;
+
+  const visits = Object.values(temple.visits||{}).sort((a,b)=>a.ts-b.ts);
+  if(visits.length){
+    const first = new Date(visits[0].ts);
+    ctx.font = '26px sans-serif';
+    ctx.fillStyle = '#87765f';
+    ctx.fillText(`방문일: ${first.getFullYear()}.${first.getMonth()+1}.${first.getDate()}`, canvas.width/2, y);
+    y += 60;
+    const notesTexts = visits.map(v=>v.note).filter(Boolean);
+    if(notesTexts.length){
+      ctx.font = '30px serif';
+      ctx.fillStyle = '#2b2118';
+      ctx.textAlign = 'left';
+      notesTexts.forEach(note=>{
+        const lines = wrapCanvasTextLines(ctx, `"${note}"`, canvas.width-200);
+        lines.forEach(line=>{
+          ctx.fillText(line, 100, y);
+          y += 44;
+        });
+        y += 20;
+      });
+    }
+  }
+  return canvas;
+}
+function wrapCanvasTextLines(ctx, text, maxWidth){
+  const chars = text.split('');
+  let line = '', lines = [];
+  chars.forEach(ch=>{
+    const test = line + ch;
+    if(ctx.measureText(test).width > maxWidth && line.length>0){ lines.push(line); line = ch; }
+    else line = test;
+  });
+  if(line) lines.push(line);
+  return lines;
+}
+
+function drawPhotobookCover(title, count){
+  const canvas = document.createElement('canvas');
+  canvas.width = 1240; canvas.height = 1754;
+  const ctx = canvas.getContext('2d');
+  const grad = ctx.createLinearGradient(0,0,0,canvas.height);
+  grad.addColorStop(0,'#c0392b'); grad.addColorStop(1,'#7a2419');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+  ctx.textAlign = 'center';
+  ctx.fillStyle = 'rgba(255,255,255,.85)';
+  ctx.font = '34px sans-serif';
+  ctx.fillText('산사노트', canvas.width/2, 700);
+  ctx.fillStyle = '#fff';
+  ctx.font = 'bold 74px serif';
+  wrapCanvasTextLines(ctx, title || '나의 순례 기록', 900).forEach((line,i)=>{
+    ctx.fillText(line, canvas.width/2, 800+i*90);
+  });
+  ctx.font = '32px sans-serif';
+  ctx.fillStyle = 'rgba(255,255,255,.8)';
+  ctx.fillText(`총 ${count}곳의 순례 기록`, canvas.width/2, 1000);
+  const today = new Date();
+  ctx.font = '26px sans-serif';
+  ctx.fillText(`${today.getFullYear()}.${today.getMonth()+1}.${today.getDate()} 엮음`, canvas.width/2, 1600);
+  return canvas;
+}
+
+async function generatePhotobook(){
+  const btn = document.getElementById('photobookGenBtn');
+  const original = btn.textContent;
+  btn.disabled = true;
+  const visited = Object.entries(destinations).filter(([id,d])=>(d.stage||0)>=1).map(([id,d])=>d);
+  if(visited.length===0){
+    showToast('아직 다녀온 절이 없어요');
+    btn.disabled = false;
+    return;
+  }
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({unit:'px', format:[1240,1754]});
+  const title = document.getElementById('photobookTitle').value.trim();
+
+  const cover = drawPhotobookCover(title, visited.length);
+  doc.addImage(cover.toDataURL('image/jpeg',0.9), 'JPEG', 0, 0, 1240, 1754);
+
+  for(let i=0;i<visited.length;i++){
+    btn.textContent = `만드는 중... (${i+1}/${visited.length})`;
+    const temple = visited[i];
+    const photoUrl = firstPhotoUrl(temple);
+    const img = await loadImageSafe(photoUrl);
+    const page = drawPhotobookPage(temple, img);
+    doc.addPage([1240,1754]);
+    doc.addImage(page.toDataURL('image/jpeg',0.9), 'JPEG', 0, 0, 1240, 1754);
+  }
+
+  doc.save(`나의_순례집_${title||'기록'}.pdf`);
+  btn.textContent = original;
+  btn.disabled = false;
+  showToast('PDF로 저장했어요');
+}
+
 function openPrayersOverlay(){
   document.getElementById('prayersOverlay').classList.add('show');
 }
@@ -3621,7 +4000,68 @@ function closePrayersOverlay(){
   document.getElementById('prayersOverlay').classList.remove('show');
 }
 
+const CHECKLIST_ITEMS = [
+  {key:'socks', label:'편한 양말 (법당 안은 맨발/양말로 다녀요)'},
+  {key:'pants', label:'긴 바지·헐렁한 옷 (너무 짧거나 딱 붙는 옷은 피해요)'},
+  {key:'coat', label:'겉옷 (산속 절은 기온이 낮은 경우가 많아요)'},
+  {key:'tumbler', label:'텀블러·물병'},
+  {key:'cash', label:'현금 (공양미·기와불사·시주함용, 카드 안 되는 곳 많아요)'},
+  {key:'hat', label:'모자 (법당 안에서는 벗어야 해요)'},
+  {key:'sunscreen', label:'햇빛 차단용품 (야외 이동이 많아요)'},
+  {key:'mask', label:'혹시 모를 방한/방충 용품 (계절에 따라)'}
+];
+function checklistStorageKey(){ return 'sansanoteChecklist_' + (currentUid || 'guest'); }
+function renderTempleChecklist(){
+  let checked;
+  try{ checked = JSON.parse(localStorage.getItem(checklistStorageKey())) || {}; } catch(e){ checked = {}; }
+  const wrap = document.getElementById('templeChecklist');
+  if(!wrap) return;
+  wrap.innerHTML = CHECKLIST_ITEMS.map(item=>`
+    <label style="display:flex;align-items:center;gap:10px;padding:8px 4px;border-bottom:1px solid var(--paper-line);cursor:pointer;">
+      <input type="checkbox" ${checked[item.key]?'checked':''} onchange="toggleChecklistItem('${item.key}', this.checked)" style="width:18px;height:18px;accent-color:var(--stamp);">
+      <span style="font-size:13px;${checked[item.key]?'text-decoration:line-through;color:var(--ink-soft);':''}">${item.label}</span>
+    </label>
+  `).join('');
+}
+function toggleChecklistItem(key, val){
+  let checked;
+  try{ checked = JSON.parse(localStorage.getItem(checklistStorageKey())) || {}; } catch(e){ checked = {}; }
+  checked[key] = val;
+  localStorage.setItem(checklistStorageKey(), JSON.stringify(checked));
+  renderTempleChecklist();
+}
+
+function renderVisitTips(d){
+  const wrap = document.getElementById('dVisitTips');
+  if(!wrap) return;
+  let html = `🔔 <b>새벽 예불</b>: 보통 새벽 3~4시경 타종과 함께 시작해요.<br>🔔 <b>저녁 예불</b>: 보통 오후 6시경(계절따라 다름) 사물(범종·법고 등) 타종이 있어요.<br>💡 예불 시간은 절마다 달라서, 정확한 시간은 도착해서 안내판이나 스님께 확인해보세요.`;
+  const practical = PRACTICAL_TIPS[d.name];
+  if(practical){
+    html += `<br><br>🅿️ ${practical}`;
+  }
+  wrap.innerHTML = html + `<div id="dSunTimes" style="margin-top:6px;"></div>`;
+  const lat = d.fixedLat || d.lat;
+  const lng = d.fixedLng || d.lng;
+  if(lat && lng){
+    fetchSunTimes(lat, lng, 'dSunTimes');
+  }
+}
+function fetchSunTimes(lat, lng, elId){
+  const el = document.getElementById(elId);
+  if(!el) return;
+  fetch(`https://api.sunrise-sunset.org/json?lat=${lat}&lng=${lng}&formatted=0`)
+    .then(r=>r.json())
+    .then(data=>{
+      if(data.status !== 'OK') return;
+      const sunrise = new Date(data.results.sunrise);
+      const sunset = new Date(data.results.sunset);
+      const fmt = t => t.toLocaleTimeString('ko-KR', {hour:'2-digit', minute:'2-digit', timeZone:'Asia/Seoul'});
+      el.innerHTML = `🌄 오늘 일출 <b>${fmt(sunrise)}</b> · 🌇 일몰 <b>${fmt(sunset)}</b>`;
+    }).catch(()=>{});
+}
+
 function openEtiquetteOverlay(){
+  renderTempleChecklist();
   document.getElementById('etiquetteOverlay').classList.add('show');
 }
 function closeEtiquetteOverlay(){
@@ -4770,6 +5210,7 @@ function openDetail(id){
   document.getElementById('dMapLink').href = 'https://map.kakao.com/link/search/' + encodeURIComponent(d.name + ' ' + (d.locationHint || d.region));
   document.getElementById('dFoodLink').href = 'https://map.kakao.com/link/search/' + encodeURIComponent(d.name + ' ' + (d.locationHint || d.region) + ' 맛집');
   document.getElementById('detailOverlay').classList.add('show');
+  renderVisitTips(d);
   requestAnimationFrame(()=> setupDetailMap(d, id));
   renderWeather(d);
 }
@@ -4824,10 +5265,31 @@ function renderStepper(stage){
   wrap.querySelectorAll('.stage-btn').forEach(btn=>{
     btn.onclick = ()=>{
       const i = parseInt(btn.dataset.i,10);
+      const prevStage = destinations[currentDetailId] ? (destinations[currentDetailId].stage||0) : 0;
       updateDestination(currentDetailId, {stage:i});
+      if(i >= 1 && i !== prevStage) playStampAnimation();
       renderStepper(i);
     };
   });
+}
+
+function playStampAnimation(){
+  const el = document.createElement('div');
+  el.style.cssText = 'position:fixed;inset:0;z-index:900;display:flex;align-items:center;justify-content:center;pointer-events:none;';
+  el.innerHTML = `<div id="stampSeal" style="width:140px;height:140px;border-radius:50%;background:radial-gradient(circle,#c0392b,#962d21);border:5px solid #962d21;display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Nanum Myeongjo','Noto Serif KR',serif;font-size:15px;font-weight:800;text-align:center;line-height:1.4;opacity:0;transform:scale(2.2) rotate(-15deg);box-shadow:0 0 30px rgba(0,0,0,.4);">순례<br>완료</div>`;
+  document.body.appendChild(el);
+  const seal = el.querySelector('#stampSeal');
+  requestAnimationFrame(()=>{
+    seal.style.transition = 'transform .18s cubic-bezier(.2,.9,.3,1), opacity .12s ease';
+    seal.style.opacity = '1';
+    seal.style.transform = 'scale(1) rotate(-8deg)';
+  });
+  if(navigator.vibrate) navigator.vibrate([20,30,20]);
+  setTimeout(()=>{
+    seal.style.transition = 'opacity .4s ease';
+    seal.style.opacity = '0';
+    setTimeout(()=> el.remove(), 400);
+  }, 900);
 }
 
 function renderVisits(visits){
@@ -4883,7 +5345,7 @@ function addVisitRecord(withLocation){
   showToast('현재 위치 확인 중...');
   navigator.geolocation.getCurrentPosition(pos=>{
     const dist = haversineKm(pos.coords.latitude, pos.coords.longitude, d.lat, d.lng);
-    if(dist <= 3){
+    if(dist <= 0.5){
       save(true);
     } else {
       showToast(`절에서 약 ${dist.toFixed(1)}km 떨어져 있어서 인증이 안 됐어요. 그냥 기록할게요.`);
