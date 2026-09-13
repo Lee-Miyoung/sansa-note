@@ -125,7 +125,7 @@
   #app{display:none;min-height:100vh;}
   header.hero{
     background:
-      linear-gradient(160deg, rgba(180,110,80,.9) 0%, rgba(150,85,60,.9) 100%),
+      linear-gradient(160deg, rgba(180,110,80,.55) 0%, rgba(150,85,60,.55) 100%),
       url('hero.jpg') center/cover no-repeat,
       linear-gradient(160deg, #c98a68 0%, #a8654a 100%);
     color:#fff;
@@ -137,13 +137,13 @@
   header.hero::before{
     content:'';
     position:absolute;
-    right:6px;bottom:-15px;
-    width:140px;height:238px;
+    right:2px;bottom:-15px;
+    width:165px;height:280px;
     background-image:url('IMG_4423.png');
     background-size:contain;
     background-repeat:no-repeat;
     background-position:bottom right;
-    opacity:.32;
+    opacity:.55;
     pointer-events:none;
     filter:drop-shadow(0 4px 6px rgba(0,0,0,.15));
   }
@@ -3972,51 +3972,49 @@ function closePhotobookOverlay(){
 function applyInkWashEffect(canvas, rx, ry, rw, rh){
   const ctx = canvas.getContext('2d');
   rx = rx||0; ry = ry||0; rw = rw||canvas.width; rh = rh||canvas.height;
+
+  // 1) 살짝 블러를 줘서 사진 느낌을 없애고 그림 같은 부드러움을 만듦
+  const tmp = document.createElement('canvas');
+  tmp.width = rw; tmp.height = rh;
+  const tctx = tmp.getContext('2d');
+  tctx.drawImage(canvas, rx, ry, rw, rh, 0, 0, rw, rh);
+  ctx.save();
+  ctx.filter = 'blur(1.4px) saturate(55%) contrast(92%)';
+  ctx.drawImage(tmp, 0, 0, rw, rh, rx, ry, rw, rh);
+  ctx.filter = 'none';
+  ctx.restore();
+
   const imgData = ctx.getImageData(rx,ry,rw,rh);
   const data = imgData.data;
-  const w = rw, h = rh;
 
-  // 1) 그레이스케일 배열 만들기
-  const gray = new Float32Array(w*h);
-  for(let p=0, i=0; i<data.length; i+=4, p++){
-    gray[p] = 0.299*data[i] + 0.587*data[i+1] + 0.114*data[i+2];
-  }
-
-  // 2) 간단한 엣지(윤곽선) 검출 - 이웃 픽셀과의 차이가 크면 선으로 표시
-  const edge = new Uint8Array(w*h);
-  for(let y=1;y<h-1;y++){
-    for(let x=1;x<w-1;x++){
-      const p = y*w+x;
-      const gx = gray[p-1] - gray[p+1];
-      const gy = gray[p-w] - gray[p+w];
-      const mag = Math.sqrt(gx*gx + gy*gy);
-      edge[p] = mag > 28 ? 1 : 0;
-    }
-  }
-
-  // 3) 명암을 4단계로 포스터라이즈해서 만화식 셀 셰이딩 느낌 + 먹빛/한지색 매핑
-  const inkR=42, inkG=33, inkB=24;
+  // 2) 먹색~한지색 사이 톤으로 부드럽게 매핑 (딱딱한 경계 없이)
+  const inkR=58, inkG=46, inkB=34;
   const paperR=250, paperG=243, paperB=225;
-  const levels = 4;
-  for(let p=0, i=0; i<data.length; i+=4, p++){
-    let t = gray[p]/255;
-    t = Math.round(t*levels)/levels; // 포스터라이즈
-    t = Math.pow(t, 0.9);
-    let r = paperR*t + inkR*(1-t);
-    let g = paperG*t + inkG*(1-t);
-    let b = paperB*t + inkB*(1-t);
-    if(edge[p]){ r*=0.25; g*=0.22; b*=0.2; } // 윤곽선을 진하게
-    data[i]=r; data[i+1]=g; data[i+2]=b;
+  for(let i=0;i<data.length;i+=4){
+    const gray = 0.299*data[i] + 0.587*data[i+1] + 0.114*data[i+2];
+    let t = gray/255;
+    t = Math.pow(t, 0.92);
+    data[i]   = paperR*t + inkR*(1-t);
+    data[i+1] = paperG*t + inkG*(1-t);
+    data[i+2] = paperB*t + inkB*(1-t);
   }
   ctx.putImageData(imgData,rx,ry);
 
-  // 4) 은은한 종이 질감 + 해칭(빗금) 느낌 텍스처
-  ctx.globalAlpha = 0.06;
-  for(let i=0;i<Math.min(500, rw*rh/250);i++){
+  // 3) 은은한 종이 질감
+  ctx.globalAlpha = 0.05;
+  for(let i=0;i<Math.min(300, rw*rh/350);i++){
     ctx.fillStyle = Math.random()>0.5 ? '#000' : '#fff';
     ctx.fillRect(rx+Math.random()*rw, ry+Math.random()*rh, 1.5, 1.5);
   }
   ctx.globalAlpha = 1;
+
+  // 4) 가장자리를 살짝 어둡게(비네트)해서 그림 느낌 강조
+  const vg = ctx.createRadialGradient(rx+rw/2, ry+rh/2, rw*0.3, rx+rw/2, ry+rh/2, rw*0.7);
+  vg.addColorStop(0, 'rgba(0,0,0,0)');
+  vg.addColorStop(1, 'rgba(40,25,15,.18)');
+  ctx.fillStyle = vg;
+  ctx.fillRect(rx,ry,rw,rh);
+
   return canvas;
 }
 
@@ -5481,17 +5479,24 @@ function renderVisits(visits){
   wrap.innerHTML = entries.map(([vid,v])=>{
     const dt = new Date(v.ts||Date.now());
     const dateStr = `${dt.getFullYear()}.${dt.getMonth()+1}.${dt.getDate()}`;
-    return `<div class="visitrow" id="visitRow_${vid}">
-      <div class="vdate">${dateStr} ${v.verified ? '<span style="background:var(--moss);color:#fff;padding:1px 8px;border-radius:999px;font-size:10px;margin-left:6px;">📍 위치 인증됨</span>' : ''}</div>
+    return `<div class="visitrow" id="visitRow_${vid}" onclick="toggleVisitMenu('${vid}')" style="cursor:pointer;">
+      <div class="vdate">${dateStr} ${v.verified ? '<span style="background:var(--moss);color:#fff;padding:1px 8px;border-radius:999px;font-size:10px;margin-left:6px;">📍 위치 인증됨</span>' : ''} <span style="float:right;color:var(--paper-line);">⋯</span></div>
       <div id="visitNoteView_${vid}">
         ${v.note ? `<div class="vnote">${escapeHtml(v.note)}</div>` : ''}
-        <div style="margin-top:6px;display:flex;gap:12px;">
-          <a onclick="startEditVisit('${vid}')" style="font-size:11px;color:var(--ink-soft);cursor:pointer;">✏️ 수정</a>
-          <a onclick="deleteVisitRecord('${vid}')" style="font-size:11px;color:var(--stamp);cursor:pointer;">🗑 삭제</a>
-        </div>
+      </div>
+      <div id="visitMenu_${vid}" style="display:none;margin-top:8px;gap:12px;" onclick="event.stopPropagation()">
+        <a onclick="startEditVisit('${vid}')" style="font-size:11px;color:var(--ink-soft);cursor:pointer;margin-right:14px;">✏️ 수정</a>
+        <a onclick="deleteVisitRecord('${vid}')" style="font-size:11px;color:var(--stamp);cursor:pointer;">🗑 삭제</a>
       </div>
     </div>`;
   }).join('');
+}
+function toggleVisitMenu(vid){
+  const menu = document.getElementById('visitMenu_'+vid);
+  if(!menu) return;
+  const isOpen = menu.style.display === 'flex';
+  document.querySelectorAll('[id^="visitMenu_"]').forEach(m=> m.style.display = 'none');
+  menu.style.display = isOpen ? 'none' : 'flex';
 }
 
 function startEditVisit(vid){
