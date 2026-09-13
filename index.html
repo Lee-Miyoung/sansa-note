@@ -5381,12 +5381,10 @@ function addVisitRecord(withLocation){
     if(dist <= 0.5){
       save(true, dist);
     } else {
-      showToast(`절에서 약 ${dist.toFixed(1)}km 떨어져 있어서 인증이 안 됐어요. 그냥 기록할게요.`);
-      save(false, dist);
+      showToast(`절에서 약 ${dist < 1 ? Math.round(dist*1000)+'m' : dist.toFixed(1)+'km'} 떨어져 있어서 인증이 안 됐어요. 여기 계실 때 다시 눌러주세요. (기록은 저장 안 됐어요)`);
     }
   }, err=>{
-    showToast('위치 권한을 허용해주셔야 인증할 수 있어요. 그냥 기록할게요.');
-    save(false);
+    showToast('위치 권한을 허용해주셔야 인증할 수 있어요. (기록은 저장 안 됐어요)');
   }, {timeout:8000});
 }
 
