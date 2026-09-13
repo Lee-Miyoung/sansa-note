@@ -1176,12 +1176,20 @@
 </div>
 
 <!-- ===================== LIGHTBOX ===================== -->
-<div class="overlay" id="lightboxOverlay" style="background:rgba(0,0,0,.88);z-index:300;" onclick="if(event.target===this)closeLightbox()">
-  <button id="lbPrev" style="position:fixed;left:10px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.15);color:#fff;border:none;width:44px;height:44px;border-radius:50%;font-size:20px;cursor:pointer;" onclick="lightboxNav(-1)">‹</button>
-  <img id="lightboxImg" src="" style="max-width:88vw;max-height:82vh;border-radius:14px;box-shadow:0 20px 50px rgba(0,0,0,.5);">
-  <button id="lbNext" style="position:fixed;right:10px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.15);color:#fff;border:none;width:44px;height:44px;border-radius:50%;font-size:20px;cursor:pointer;" onclick="lightboxNav(1)">›</button>
-  <div id="lbCounter" style="position:fixed;bottom:24px;left:50%;transform:translateX(-50%);color:#fff;font-size:12px;background:rgba(255,255,255,.15);padding:5px 14px;border-radius:999px;"></div>
-  <button class="close-x" style="position:fixed;top:20px;right:20px;color:#fff;font-size:28px;" onclick="closeLightbox()">✕</button>
+<div class="overlay" id="lightboxOverlay" style="background:rgba(0,0,0,.92);z-index:300;align-items:center!important;justify-content:center!important;padding:0!important;" onclick="if(event.target===this)closeLightbox()">
+  <button id="lbPrev" style="position:fixed;left:10px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.15);color:#fff;border:none;width:44px;height:44px;border-radius:50%;font-size:20px;cursor:pointer;z-index:3;" onclick="lightboxNav(-1)">‹</button>
+  <div id="lightboxStage" style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;overflow:hidden;touch-action:none;pointer-events:none;">
+    <img id="lightboxImg" src="" style="max-width:90vw;max-height:82vh;width:auto;height:auto;object-fit:contain;border-radius:14px;box-shadow:0 20px 50px rgba(0,0,0,.5);transform:scale(1);transform-origin:center center;transition:transform .18s ease;pointer-events:auto;touch-action:none;" ondblclick="toggleLightboxZoom()">
+  </div>
+  <button id="lbNext" style="position:fixed;right:10px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.15);color:#fff;border:none;width:44px;height:44px;border-radius:50%;font-size:20px;cursor:pointer;z-index:3;" onclick="lightboxNav(1)">›</button>
+  <div id="lbZoomControls" style="position:fixed;top:18px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:4;">
+    <button type="button" onclick="changeLightboxZoom(-.5)" style="width:40px;height:40px;border:0;border-radius:50%;background:rgba(255,255,255,.18);color:#fff;font-size:22px;cursor:pointer;">−</button>
+    <button type="button" id="lbZoomLabel" onclick="resetLightboxZoom()" style="min-width:58px;height:40px;border:0;border-radius:999px;background:rgba(255,255,255,.18);color:#fff;font-size:12px;cursor:pointer;">100%</button>
+    <button type="button" onclick="changeLightboxZoom(.5)" style="width:40px;height:40px;border:0;border-radius:50%;background:rgba(255,255,255,.18);color:#fff;font-size:22px;cursor:pointer;">+</button>
+  </div>
+  <div id="lbCounter" style="position:fixed;bottom:24px;left:50%;transform:translateX(-50%);color:#fff;font-size:12px;background:rgba(255,255,255,.15);padding:5px 14px;border-radius:999px;z-index:4;"></div>
+  <div style="position:fixed;bottom:58px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.72);font-size:10.5px;white-space:nowrap;z-index:4;">두 손가락 확대 · 두 번 탭 확대</div>
+  <button class="close-x" style="position:fixed;top:20px;right:20px;color:#fff;font-size:28px;z-index:5;" onclick="closeLightbox()">✕</button>
 </div>
 
 <!-- ===================== WORRY MODAL ===================== -->
@@ -4049,10 +4057,17 @@ function toggleDarkMode(){
   }
 })();
 
+let storyCardDetailId = null;
 function openStoryCardOverlay(){
-  document.getElementById('storyCardMsg').value = '';
+  storyCardDetailId = currentDetailId;
+  if(!storyCardDetailId || !destinations[storyCardDetailId]){
+    showToast('먼저 절을 하나 열어주세요');
+    return;
+  }
+  const msg = document.getElementById('storyCardMsg');
+  if(msg) msg.value = '';
   document.getElementById('storyCardOverlay').classList.add('show');
-  renderStoryCard();
+  requestAnimationFrame(()=>renderStoryCard());
 }
 function closeStoryCardOverlay(){
   document.getElementById('storyCardOverlay').classList.remove('show');
@@ -4182,7 +4197,9 @@ function renderStoryCard(){
   const canvas = document.getElementById('storyCardCanvas');
   const ctx = canvas.getContext('2d');
   const W = 1080, H = 1920;
-  const d = destinations[currentDetailId];
+  const cardId = storyCardDetailId || currentDetailId;
+  const d = destinations[cardId];
+  if(!d){ showToast('순례 카드를 만들 절 정보를 찾지 못했어요'); return; }
   const msg = document.getElementById('storyCardMsg').value.trim();
   const poetic = POETIC_DESC[d.name];
   const today = new Date();
@@ -4276,30 +4293,32 @@ function renderStoryCard(){
     ctx.fillText('🪷 산사노트', W/2, H-90);
   }
 
-  if(!window.__cardMonkImg){
+  // 캐릭터 이미지가 늦게 뜨거나 없어도 카드 본문은 즉시 보이게 한다.
+  drawAll();
+  if(!window.__cardMonkImg && !window.__cardMonkImgLoading){
+    window.__cardMonkImgLoading = true;
     const img = new Image();
-    img.crossOrigin = 'anonymous';
-    img.onload = ()=>{ window.__cardMonkImg = img; drawAll(); };
-    img.onerror = ()=>{
-      showToast('캐릭터 이미지(IMG_4438.png)를 못 찾았어요');
-      drawAll();
-    };
+    img.onload = ()=>{ window.__cardMonkImg = img; window.__cardMonkImgLoading = false; drawAll(); };
+    img.onerror = ()=>{ window.__cardMonkImgLoading = false; };
     img.src = 'IMG_4438.png';
-  } else {
-    drawAll();
   }
 }
 function downloadStoryCard(){
   const canvas = document.getElementById('storyCardCanvas');
+  const cardId = storyCardDetailId || currentDetailId;
+  const d = destinations[cardId];
+  if(!d){ showToast('순례 카드 정보를 찾지 못했어요'); return; }
   try{
     const url = canvas.toDataURL('image/jpeg', 0.92);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `순례인증_${destinations[currentDetailId].name}.jpg`;
+    a.download = `순례인증_${d.name}.jpg`;
+    document.body.appendChild(a);
     a.click();
+    a.remove();
     showToast('이미지로 저장했어요');
   }catch(e){
-    showToast('이미지 저장에 실패했어요. 사진 없이 다시 시도해보세요.');
+    showToast('이미지 저장에 실패했어요. 다시 시도해주세요.');
   }
 }
 
@@ -6030,15 +6049,42 @@ function renderCoverPhotos(d){
 
 let lightboxImages = [];
 let lightboxIndex = 0;
+let lightboxScale = 1;
+let lbTouchStartX = null;
+let lbPinchStartDistance = null;
+let lbPinchStartScale = 1;
+let lbLastTap = 0;
 
+function applyLightboxZoom(){
+  const img = document.getElementById('lightboxImg');
+  if(img) img.style.transform = `scale(${lightboxScale})`;
+  const label = document.getElementById('lbZoomLabel');
+  if(label) label.textContent = `${Math.round(lightboxScale*100)}%`;
+}
+function resetLightboxZoom(){
+  lightboxScale = 1;
+  applyLightboxZoom();
+}
+function changeLightboxZoom(delta){
+  lightboxScale = Math.max(1, Math.min(4, lightboxScale + delta));
+  applyLightboxZoom();
+}
+function toggleLightboxZoom(){
+  lightboxScale = lightboxScale > 1 ? 1 : 2;
+  applyLightboxZoom();
+}
 function openLightbox(urls, index){
   lightboxImages = Array.isArray(urls) ? urls : [urls];
   lightboxIndex = index || 0;
+  resetLightboxZoom();
   renderLightbox();
   document.getElementById('lightboxOverlay').classList.add('show');
+  document.body.style.overflow = 'hidden';
 }
 function renderLightbox(){
-  document.getElementById('lightboxImg').src = lightboxImages[lightboxIndex];
+  const img = document.getElementById('lightboxImg');
+  img.src = lightboxImages[lightboxIndex];
+  resetLightboxZoom();
   document.getElementById('lbCounter').textContent = `${lightboxIndex+1} / ${lightboxImages.length}`;
   const multi = lightboxImages.length > 1;
   document.getElementById('lbPrev').style.display = multi ? 'flex' : 'none';
@@ -6046,23 +6092,66 @@ function renderLightbox(){
   document.getElementById('lbCounter').style.display = multi ? 'block' : 'none';
 }
 function lightboxNav(dir){
+  if(lightboxScale > 1) return;
   lightboxIndex = (lightboxIndex + dir + lightboxImages.length) % lightboxImages.length;
   renderLightbox();
 }
 function closeLightbox(){
   document.getElementById('lightboxOverlay').classList.remove('show');
   document.getElementById('lightboxImg').src = '';
+  resetLightboxZoom();
+  document.body.style.overflow = '';
 }
-let lbTouchStartX = null;
+function lbDistance(touches){
+  const dx = touches[0].clientX - touches[1].clientX;
+  const dy = touches[0].clientY - touches[1].clientY;
+  return Math.hypot(dx,dy);
+}
 document.addEventListener('touchstart', e=>{
-  if(document.getElementById('lightboxOverlay').classList.contains('show')) lbTouchStartX = e.touches[0].clientX;
-});
+  const overlay = document.getElementById('lightboxOverlay');
+  if(!overlay || !overlay.classList.contains('show')) return;
+  if(e.touches.length===2){
+    lbPinchStartDistance = lbDistance(e.touches);
+    lbPinchStartScale = lightboxScale;
+    lbTouchStartX = null;
+  }else if(e.touches.length===1){
+    lbTouchStartX = e.touches[0].clientX;
+    const now=Date.now();
+    if(now-lbLastTap < 300){ toggleLightboxZoom(); e.preventDefault(); }
+    lbLastTap=now;
+  }
+},{passive:false});
+document.addEventListener('touchmove', e=>{
+  const overlay = document.getElementById('lightboxOverlay');
+  if(!overlay || !overlay.classList.contains('show')) return;
+  if(e.touches.length===2 && lbPinchStartDistance){
+    e.preventDefault();
+    const ratio = lbDistance(e.touches)/lbPinchStartDistance;
+    lightboxScale = Math.max(1, Math.min(4, lbPinchStartScale*ratio));
+    applyLightboxZoom();
+  }
+},{passive:false});
 document.addEventListener('touchend', e=>{
-  if(lbTouchStartX===null) return;
+  const overlay = document.getElementById('lightboxOverlay');
+  if(!overlay || !overlay.classList.contains('show')) return;
+  if(lbPinchStartDistance){
+    if(e.touches.length<2) lbPinchStartDistance=null;
+    return;
+  }
+  if(lbTouchStartX===null || lightboxScale>1) { lbTouchStartX=null; return; }
   const dx = e.changedTouches[0].clientX - lbTouchStartX;
   if(Math.abs(dx) > 50) lightboxNav(dx > 0 ? -1 : 1);
   lbTouchStartX = null;
 });
+
+document.addEventListener('wheel', e=>{
+  const overlay = document.getElementById('lightboxOverlay');
+  if(!overlay || !overlay.classList.contains('show')) return;
+  if(e.ctrlKey || Math.abs(e.deltaY)>0){
+    e.preventDefault();
+    changeLightboxZoom(e.deltaY<0 ? .25 : -.25);
+  }
+},{passive:false});
 
 function triggerUpload(){
   document.getElementById('photoInput').click();
@@ -6524,7 +6613,75 @@ if('serviceWorker' in navigator && (location.protocol==='https:' || location.hos
    HIP TEMPLE FESTIVAL · 극락 즉문즉설 / Beat Lab / Psy Mode
 ============================================================ */
 const ORACLE_EXAMPLES = [
-  '스님, 퇴사하고 싶어요.','연애가 너무 힘들어요.','요즘 아무것도 하기 싫어요.','돈 걱정 때문에 잠이 안 와요.','자꾸 남과 비교하게 돼요.','일이 너무 많아서 번아웃이에요.'
+  '스님, 퇴사하고 싶어요.',
+  '회사 가는 게 너무 싫어요.',
+  '이직해야 할지 버텨야 할지 모르겠어요.',
+  '상사 때문에 매일 스트레스 받아요.',
+  '일이 너무 많아서 번아웃이에요.',
+  '연애가 너무 힘들어요.',
+  '헤어진 사람을 아직 못 잊겠어요.',
+  '썸 타는 사람이 저를 좋아하는지 모르겠어요.',
+  '결혼해야 할지 확신이 없어요.',
+  '남편이랑 자꾸 싸워요.',
+  '아내와 대화가 안 돼요.',
+  '친구에게 서운한데 말해야 할까요?',
+  '사람들한테 자꾸 상처받아요.',
+  '인간관계를 다 끊고 싶어요.',
+  '혼자 있는 게 너무 외로워요.',
+  '가족 때문에 마음이 무거워요.',
+  '아이 걱정 때문에 잠이 안 와요.',
+  '딸이 제 말을 안 들어요.',
+  '아들이 진로를 못 정해서 걱정이에요.',
+  '부모님과 자꾸 부딪혀요.',
+  '돈 걱정 때문에 잠이 안 와요.',
+  '장사가 너무 안돼서 불안해요.',
+  '매출이 떨어져서 겁나요.',
+  '빚 생각만 하면 숨이 막혀요.',
+  '사업을 계속해야 할지 접어야 할지 모르겠어요.',
+  '시험에 떨어질까 봐 무서워요.',
+  '공부가 너무 안돼요.',
+  '취업이 계속 안돼서 자신감이 떨어져요.',
+  '면접만 보면 너무 긴장해요.',
+  '성적 때문에 자꾸 비교하게 돼요.',
+  '요즘 아무것도 하기 싫어요.',
+  '아침에 일어나는 것부터 힘들어요.',
+  '의욕이 하나도 없어요.',
+  '매일 피곤하고 지쳐요.',
+  '나는 왜 이렇게 게으를까요?',
+  '자꾸 남과 비교하게 돼요.',
+  '인스타 보면 내가 뒤처진 것 같아요.',
+  '자존감이 너무 떨어졌어요.',
+  '내가 잘하는 게 뭔지 모르겠어요.',
+  '나이만 먹는 것 같아 불안해요.',
+  '앞으로 뭘 해야 할지 모르겠어요.',
+  '선택을 해야 하는데 결정을 못하겠어요.',
+  '지금 길이 맞는지 모르겠어요.',
+  '새로운 일을 시작해도 될까요?',
+  '실수한 게 계속 생각나요.',
+  '과거 후회가 자꾸 떠올라요.',
+  '미래 생각만 하면 불안해요.',
+  '별일 없는데도 마음이 초조해요.',
+  '화가 나서 누군가에게 막 따지고 싶어요.',
+  '억울한 일을 당해서 잠이 안 와요.',
+  '미운 사람이 자꾸 생각나요.',
+  '용서가 안 되는 사람이 있어요.',
+  '건강검진 결과가 걱정돼요.',
+  '잠을 잘 못 자서 너무 힘들어요.',
+  '몸이 자꾸 아픈데 겁나요.',
+  '운동을 시작하고 싶은데 자꾸 미뤄요.',
+  '다이어트를 또 실패했어요.',
+  '오늘 정말 아무도 만나고 싶지 않아요.',
+  '그냥 어디론가 사라지고 싶을 만큼 지쳤어요.',
+  '내가 너무 예민한 사람 같아요.',
+  '왜 사소한 말에도 상처받을까요?',
+  '열심히 하는데 결과가 안 나와요.',
+  '포기하고 싶은데 포기하면 후회할 것 같아요.',
+  '새로운 도전을 하기엔 너무 늦은 것 같아요.',
+  '잘하고 싶은데 자꾸 겁부터 나요.',
+  '오늘 하루가 너무 꼬였어요.',
+  '아무 이유 없이 마음이 답답해요.',
+  '누구한테도 말 못 할 고민이 있어요.',
+  '그냥 위로 한마디 듣고 싶어요.'
 ];
 function openOracleOverlay(){
   const ov=document.getElementById('oracleOverlay'); if(!ov) return; ov.classList.add('show');
