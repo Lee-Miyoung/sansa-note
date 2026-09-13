@@ -646,6 +646,99 @@
     .hero-top h1{font-size:30px;}
     .route-svg{display:none;}
   }
+
+
+  /* ==========================================================
+     HIP TEMPLE FESTIVAL 2026 · 극락 클럽 스킨
+     기존 기능은 유지하고 첫 화면/놀이 기능만 확장
+  ========================================================== */
+  :root{
+    --neon-pink:#ff3dbd;
+    --neon-purple:#8b5cff;
+    --neon-green:#b8ff3d;
+    --neon-cyan:#28e7ff;
+    --club-black:#0d0714;
+    --club-panel:#171020;
+  }
+  .hip-hero-stage{
+    margin-top:20px;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(280px,.85fr);
+    gap:20px;align-items:stretch;
+  }
+  .hip-hero-copy{
+    min-height:280px;border-radius:26px;padding:28px;position:relative;overflow:hidden;
+    background:linear-gradient(135deg,rgba(20,7,30,.94),rgba(66,15,78,.9));
+    border:1px solid rgba(255,255,255,.2);box-shadow:0 18px 40px rgba(20,0,35,.24);
+  }
+  .hip-hero-copy::before{
+    content:'';position:absolute;inset:-80px -30px auto auto;width:250px;height:250px;border-radius:50%;
+    background:radial-gradient(circle,var(--neon-pink),transparent 65%);opacity:.34;filter:blur(8px);
+  }
+  .hip-kicker{font-size:11px;font-weight:900;letter-spacing:2.5px;color:var(--neon-green);margin-bottom:10px;}
+  .hip-title{font-size:clamp(30px,5vw,60px);line-height:.98;font-weight:950;letter-spacing:-2px;margin:0;color:#fff;text-shadow:4px 4px 0 #6f28d9;}
+  .hip-title .acid{color:var(--neon-green);text-shadow:3px 3px 0 #111,0 0 18px rgba(184,255,61,.35);}
+  .hip-copy{max-width:520px;margin-top:16px;color:#eadff1;font-size:13px;line-height:1.72;position:relative;z-index:1;}
+  .neon-slogans{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px;position:relative;z-index:1;}
+  .neon-slogan{padding:7px 10px;border-radius:999px;font-size:11px;font-weight:900;letter-spacing:.2px;border:1px solid currentColor;box-shadow:0 0 14px currentColor inset,0 0 10px rgba(255,255,255,.08);}
+  .neon-slogan.pink{color:#ff71d1}.neon-slogan.green{color:#caff68}.neon-slogan.cyan{color:#6cf2ff}
+  .hip-cta-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px;position:relative;z-index:2;}
+  .club-btn{border:0;border-radius:16px;padding:12px 16px;font-family:inherit;font-weight:900;cursor:pointer;box-shadow:0 5px 0 rgba(0,0,0,.4);transition:.12s transform,.12s filter;}
+  .club-btn:active{transform:translateY(4px);box-shadow:0 1px 0 rgba(0,0,0,.4)}
+  .club-btn.primary{background:var(--neon-green);color:#180c22}.club-btn.secondary{background:#fff;color:#2b1137}.club-btn.hot{background:var(--neon-pink);color:#fff}
+  .dj-monk-card{
+    min-height:280px;border-radius:26px;position:relative;overflow:hidden;
+    background:radial-gradient(circle at 50% 30%,#a742c0 0,#3b1254 37%,#100718 72%);
+    border:1px solid rgba(255,255,255,.24);box-shadow:0 18px 40px rgba(20,0,35,.3);
+  }
+  .dj-monk-card::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 18px,rgba(255,255,255,.03) 19px 20px),repeating-linear-gradient(0deg,transparent 0 18px,rgba(255,255,255,.03) 19px 20px);}
+  .dj-light{position:absolute;border-radius:50%;filter:blur(8px);opacity:.65;animation:djFloat 4s ease-in-out infinite alternate;}
+  .dj-light.a{width:130px;height:130px;background:var(--neon-pink);left:-30px;top:30px}.dj-light.b{width:110px;height:110px;background:var(--neon-green);right:-20px;top:100px;animation-delay:-1.7s}.dj-light.c{width:85px;height:85px;background:var(--neon-cyan);left:45%;bottom:-25px;animation-delay:-.8s}
+  @keyframes djFloat{to{transform:translateY(18px) scale(1.12)}}
+  .monk-figure{position:absolute;left:50%;top:45%;transform:translate(-50%,-50%);width:190px;height:205px;z-index:2;}
+  .monk-head{position:absolute;left:50%;top:0;transform:translateX(-50%);width:88px;height:88px;border-radius:48% 48% 44% 44%;background:#f2ba87;border:4px solid #160b1d;box-shadow:inset 0 -6px rgba(134,70,56,.12)}
+  .monk-head::before,.monk-head::after{content:'';position:absolute;top:34px;width:42px;height:20px;border:5px solid #111;border-radius:8px;background:linear-gradient(135deg,rgba(255,61,189,.82),rgba(40,231,255,.72));}
+  .monk-head::before{left:-3px;transform:rotate(-4deg)}.monk-head::after{right:-3px;transform:rotate(4deg)}
+  .monk-bridge{position:absolute;left:50%;top:40px;width:18px;height:5px;transform:translateX(-50%);background:#111;z-index:3}
+  .headphone-band{position:absolute;left:50%;top:-12px;transform:translateX(-50%);width:112px;height:67px;border:10px solid #131018;border-bottom:0;border-radius:70px 70px 0 0;z-index:-1}
+  .headphone-l,.headphone-r{position:absolute;top:27px;width:21px;height:45px;border-radius:10px;background:#111;border:4px solid var(--neon-green)}.headphone-l{left:-20px}.headphone-r{right:-20px}
+  .monk-body{position:absolute;left:50%;top:76px;transform:translateX(-50%);width:136px;height:115px;border-radius:60px 60px 24px 24px;background:linear-gradient(135deg,#d65b24 0 48%,#721d8f 49% 100%);border:4px solid #160b1d;}
+  .monk-hands{position:absolute;left:50%;top:114px;transform:translateX(-50%);font-size:48px;filter:drop-shadow(0 3px 0 #160b1d);z-index:4;animation:handsBeat .8s ease-in-out infinite alternate}
+  @keyframes handsBeat{to{transform:translateX(-50%) translateY(-3px) scale(1.06)}}
+  .dj-deck{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);width:86%;height:70px;background:#0b0810;border:3px solid #393040;border-radius:14px;z-index:5;box-shadow:0 9px 20px rgba(0,0,0,.35)}
+  .turntable{position:absolute;top:10px;width:50px;height:50px;border:4px solid #4c4254;border-radius:50%;background:repeating-radial-gradient(circle,#0b0810 0 5px,#2f2935 6px 7px)}.turntable.left{left:15px}.turntable.right{right:15px}
+  .mixer{position:absolute;left:50%;top:9px;transform:translateX(-50%);width:64px;height:50px;border-radius:7px;background:#241a2b;display:grid;grid-template-columns:repeat(3,1fr);gap:5px;padding:8px}.mixer i{display:block;border-radius:99px;background:var(--neon-green);box-shadow:0 0 8px var(--neon-green)}
+  .graffiti-tag{position:absolute;right:10px;top:12px;transform:rotate(7deg);font-weight:950;font-style:italic;font-size:15px;color:var(--neon-green);text-shadow:2px 2px #000;z-index:6}
+  .club-feature-dock{max-width:1080px;margin:16px auto 0;padding:0 24px;display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+  .club-feature{border:2px solid #24142e;border-radius:18px;background:#fff;padding:14px 12px;text-align:left;cursor:pointer;box-shadow:0 5px 0 #24142e;font-family:inherit;transition:.12s transform,.12s filter;}
+  .club-feature:hover{filter:brightness(1.03);transform:translateY(-2px)}.club-feature:active{transform:translateY(3px);box-shadow:0 2px 0 #24142e}
+  .club-feature .ico{font-size:24px}.club-feature b{display:block;font-size:13px;margin-top:6px}.club-feature small{display:block;color:#75637e;font-size:10.5px;margin-top:3px;line-height:1.4}
+  .club-feature.qna{background:#f5e6ff}.club-feature.beat{background:#e9ffbd}.club-feature.amuletx{background:#ffe2f3}.club-feature.mode{background:#dbfaff}
+  .hip-sheet{background:linear-gradient(180deg,#1d1124,#0e0813)!important;color:#fff;border:1px solid #4f2b65;}
+  .hip-sheet .modal-head{border-color:#452651}.hip-sheet .close-x,.hip-sheet .sub{color:#d6c6df}.hip-sheet .modal-body{color:#fff}
+  .oracle-monk{display:flex;align-items:center;gap:12px;padding:12px;border:1px solid #523360;border-radius:16px;background:rgba(255,255,255,.05);margin-bottom:12px}
+  .oracle-avatar{width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:31px;background:linear-gradient(135deg,var(--neon-pink),var(--neon-purple));box-shadow:0 0 22px rgba(255,61,189,.28)}
+  .oracle-input{width:100%;min-height:100px;border:1px solid #5e4269;border-radius:15px;padding:13px;font:inherit;background:#0d0811;color:#fff;resize:vertical;outline:none}.oracle-input:focus{border-color:var(--neon-green);box-shadow:0 0 0 3px rgba(184,255,61,.12)}
+  .oracle-answer{margin-top:14px;padding:18px;border-radius:18px;background:linear-gradient(135deg,#2b1135,#0b1520);border:1px solid #65407a;line-height:1.7;display:none;position:relative;overflow:hidden}.oracle-answer.show{display:block;animation:answerPop .25s ease-out}@keyframes answerPop{from{transform:scale(.96);opacity:0}}
+  .oracle-answer .big{font-weight:950;font-size:19px;color:var(--neon-green);margin-bottom:7px}.oracle-answer .small{font-size:12px;color:#dacbe2}
+  .beat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}.beat-pad{aspect-ratio:1;border:0;border-radius:20px;font-family:inherit;font-weight:950;font-size:13px;cursor:pointer;color:#160a1e;box-shadow:0 6px 0 rgba(0,0,0,.45);transition:.08s transform,.08s filter}.beat-pad:active,.beat-pad.hit{transform:translateY(5px) scale(.98);box-shadow:0 1px 0 rgba(0,0,0,.45);filter:brightness(1.15)}
+  .beat-pad:nth-child(1){background:#caff68}.beat-pad:nth-child(2){background:#ff74d1}.beat-pad:nth-child(3){background:#66efff}.beat-pad:nth-child(4){background:#ffc95c}.beat-pad:nth-child(5){background:#bf8dff}.beat-pad:nth-child(6){background:#fff}
+  .bpm-row{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.06);padding:10px 12px;border-radius:14px}.bpm-row input{flex:1;accent-color:var(--neon-green)}
+  body.psy-mode{
+    --paper:#100815;--paper-soft:#1a1020;--paper-line:#382441;--ink:#fff8ff;--ink-soft:#c5abc9;
+    --stamp:#ff3dbd;--stamp-dark:#982070;--moss:#8b5cff;--moss-dark:#5b35a8;--gold:#b8ff3d;--red:#ff4672;
+    background:#100815;
+  }
+  body.psy-mode::before{background:radial-gradient(circle at 20% 10%,rgba(255,61,189,.13),transparent 25%),radial-gradient(circle at 80% 20%,rgba(184,255,61,.10),transparent 24%),linear-gradient(130deg,#0c0611,#171020 50%,#07141b)!important;opacity:1}
+  body.psy-mode header.hero{background:linear-gradient(125deg,rgba(17,4,24,.96),rgba(76,14,82,.92)),url('hero.jpg') center/cover no-repeat;border-radius:0 0 36px 36px;box-shadow:0 12px 36px rgba(255,61,189,.12)}
+  body.psy-mode header.hero::before{opacity:.2;filter:hue-rotate(210deg) saturate(1.7) drop-shadow(0 0 16px #ff3dbd)}
+  body.psy-mode .card{background:#191020;border-color:#54305e;box-shadow:0 4px 0 #54305e}body.psy-mode .filterbar{background:rgba(18,9,23,.92);backdrop-filter:blur(12px)}
+  body.psy-mode .tab,body.psy-mode .content-type-btn,body.psy-mode .club-feature{background:#201326;color:#f9ecff;border-color:#51305a}body.psy-mode .tab.active,body.psy-mode .content-type-btn.active{background:var(--neon-pink);border-color:#ff84da;color:#fff}
+  body.psy-mode .club-feature.qna{background:#35123c}body.psy-mode .club-feature.beat{background:#263413}body.psy-mode .club-feature.amuletx{background:#3a132b}body.psy-mode .club-feature.mode{background:#0c3037}
+  body.psy-mode .fun-banner-btn{filter:saturate(1.4) brightness(.85);color:#fff!important}
+  body.psy-mode .modal{background:#18101d;color:#fff}body.psy-mode .visitrow,body.psy-mode .upload-tile{background:#201326}
+  .micro-burst{position:fixed;z-index:9999;pointer-events:none;font-size:24px;animation:burstFly .7s ease-out forwards}@keyframes burstFly{0%{transform:translate(-50%,-50%) scale(.5);opacity:1}100%{transform:translate(-50%,-110px) rotate(18deg) scale(1.45);opacity:0}}
+  @media(max-width:780px){.hip-hero-stage{grid-template-columns:1fr}.dj-monk-card{min-height:245px}.club-feature-dock{grid-template-columns:1fr 1fr}.hip-hero-copy{min-height:unset}}
+  @media(max-width:520px){.hip-hero-stage{margin-top:16px}.hip-hero-copy{padding:21px;border-radius:21px}.hip-title{letter-spacing:-1px}.dj-monk-card{min-height:220px;border-radius:21px}.monk-figure{transform:translate(-50%,-50%) scale(.88)}.club-feature-dock{padding:0 14px;gap:8px}.club-feature{padding:12px 10px}.hero-stats{gap:12px}.hip-cta-row .club-btn{flex:1;padding:11px 10px;font-size:12px}}
+
 </style>
 </head>
 <body>
@@ -728,6 +821,30 @@
           <button class="iconbtn ib-3" title="설정" onclick="openSettings()">⚙</button>
         </div>
       </div>
+      <div class="hip-hero-stage">
+        <section class="hip-hero-copy">
+          <div class="hip-kicker">SANSA NOTE · TEMPLE RAVE EDITION</div>
+          <h2 class="hip-title">번뇌는 내려놓고<br><span class="acid">극락 비트</span>는 올리고</h2>
+          <div class="hip-copy">절은 조용해야만 한다는 법은 없죠. 순례 기록은 그대로, 마음은 조금 더 가볍게. 오늘의 번뇌를 털고 나만의 템플 플레이리스트를 만들어보세요.</div>
+          <div class="neon-slogans">
+            <span class="neon-slogan pink">극락왕생</span><span class="neon-slogan green">번뇌 OUT</span><span class="neon-slogan cyan">이 또한 지나가리</span>
+          </div>
+          <div class="hip-cta-row">
+            <button class="club-btn primary" onclick="openOracleOverlay()">🤖 극락 즉문즉설</button>
+            <button class="club-btn hot" onclick="openBeatLab()">🎧 목탁 BEAT LAB</button>
+            <button class="club-btn secondary" onclick="togglePsyMode()">⚡ 극락 모드</button>
+          </div>
+        </section>
+        <section class="dj-monk-card" aria-label="헤드셋과 선글라스를 쓴 DJ 스님 일러스트">
+          <span class="dj-light a"></span><span class="dj-light b"></span><span class="dj-light c"></span>
+          <div class="graffiti-tag">NO 번뇌 · JUST BEAT</div>
+          <div class="monk-figure">
+            <div class="monk-head"><span class="monk-bridge"></span><span class="headphone-band"></span><span class="headphone-l"></span><span class="headphone-r"></span></div>
+            <div class="monk-body"></div><div class="monk-hands">🙏</div>
+          </div>
+          <div class="dj-deck"><span class="turntable left"></span><span class="turntable right"></span><span class="mixer"><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
+        </section>
+      </div>
       <div class="hero-badge-row">
         <div id="streakBadge"></div>
         <div id="levelBadge"></div>
@@ -743,6 +860,13 @@
       <circle cx="40" cy="130" r="3" fill="#efe8d4" opacity=".7"/>
     </svg>
   </header>
+
+  <div class="club-feature-dock">
+    <button class="club-feature qna" onclick="openOracleOverlay()"><span class="ico">🤖</span><b>극락 즉문즉설</b><small>퇴사·연애·현타, 일단 털어놓기</small></button>
+    <button class="club-feature beat" onclick="openBeatLab()"><span class="ico">🎛️</span><b>목탁 BEAT LAB</b><small>목탁·종·킥으로 나만의 극락 비트</small></button>
+    <button class="club-feature amuletx" onclick="openAmuletOverlay()"><span class="ico">🧧</span><b>스웩 부적</b><small>야근 탈출·합격·재물 기원 카드</small></button>
+    <button class="club-feature mode" onclick="togglePsyMode()"><span class="ico">🌈</span><b>사이키델릭 극락</b><small>한 번 누르면 밤 사찰 페스티벌</small></button>
+  </div>
 
   <div id="explain108Wrap"></div>
   <div id="homeGalleryWrap"></div>
@@ -999,6 +1123,7 @@
       <button class="btn btn-ghost btn-block" onclick="closeSettings();openPhotobookOverlay();" style="margin-bottom:10px;">📖 나만의 순례집 PDF 만들기</button>
       <button class="btn btn-ghost btn-block" onclick="closeSettings();openPassportOverlay();" style="margin-bottom:10px;">🛂 순례 여권 (현장 인증 스탬프)</button>
       <button class="btn btn-ghost btn-block" id="darkModeBtn" onclick="toggleDarkMode()" style="margin-bottom:10px;">🌙 야간/템플스테이 모드 켜기</button>
+      <button class="btn btn-ghost btn-block" id="psyModeBtn" onclick="togglePsyMode()" style="margin-bottom:10px;">🌈 사이키델릭 극락 모드 켜기</button>
       <button class="btn btn-ghost btn-block" onclick="closeSettings();openVowOverlay();" style="margin-bottom:10px;">🌅 발원문 쓰기 (미래의 나에게)</button>
       <button class="btn btn-ghost btn-block" onclick="doLogout()">로그아웃</button>
     </div>
@@ -1484,6 +1609,46 @@
 </div>
 
 <div class="toast" id="toast"></div>
+
+
+<!-- ===================== HIP ORACLE · 극락 즉문즉설 ===================== -->
+<div class="overlay" id="oracleOverlay">
+  <div class="modal hip-sheet">
+    <div class="modal-head">
+      <div><h2 style="margin:0;font-size:22px;">🤖 극락 즉문즉설</h2><div class="sub">세속의 번뇌를 적어보세요. 짧고 시원하게 받아칩니다.</div></div>
+      <button class="close-x" onclick="closeOracleOverlay()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="oracle-monk"><div class="oracle-avatar">😎</div><div><b>DJ 무념 스님</b><div style="font-size:11px;color:#cdbbd7;margin-top:2px;">“고민은 무겁게, 답은 가볍게.”</div></div></div>
+      <textarea id="oracleInput" class="oracle-input" placeholder="예: 스님, 진짜 퇴사하고 싶어요. / 연애가 너무 힘들어요. / 아무것도 하기 싫어요."></textarea>
+      <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;">
+        <button class="club-btn primary" style="flex:1;" onclick="askOracle()">🙏 번뇌 내려놓기</button>
+        <button class="club-btn secondary" onclick="fillOracleExample()">🎲 아무 고민이나</button>
+      </div>
+      <div class="oracle-answer" id="oracleAnswer"><div class="big" id="oracleBig"></div><div class="small" id="oracleSmall"></div></div>
+      <div style="font-size:10.5px;color:#9f8aaa;margin-top:12px;line-height:1.55;">이 기능은 재미와 가벼운 위로를 위한 랜덤 응답 카드예요. 중요한 결정은 현실의 정보와 사람들의 도움도 함께 살펴보세요.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== MOKTAK BEAT LAB ===================== -->
+<div class="overlay" id="beatLabOverlay">
+  <div class="modal hip-sheet">
+    <div class="modal-head">
+      <div><h2 style="margin:0;font-size:22px;">🎛️ 목탁 BEAT LAB</h2><div class="sub">화면을 두드려 나만의 극락왕생 루프를 만들어보세요.</div></div>
+      <button class="close-x" onclick="closeBeatLab()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="bpm-row"><b style="color:var(--neon-green);">BPM <span id="beatBpmLabel">96</span></b><input id="beatBpm" type="range" min="60" max="150" value="96" oninput="updateBeatBpm(this.value)"><button class="club-btn secondary" style="padding:8px 10px;" id="loopBtn" onclick="toggleTempleLoop()">▶ LOOP</button></div>
+      <div class="beat-grid">
+        <button class="beat-pad" onclick="playBeat('mok',this)">🥢<br>목탁</button><button class="beat-pad" onclick="playBeat('kick',this)">💥<br>KICK</button><button class="beat-pad" onclick="playBeat('bell',this)">🔔<br>BELL</button>
+        <button class="beat-pad" onclick="playBeat('clap',this)">🙏<br>CLAP</button><button class="beat-pad" onclick="playBeat('bass',this)">🪷<br>BASS</button><button class="beat-pad" onclick="playBeat('air',this)">✨<br>극락 FX</button>
+      </div>
+      <div style="display:flex;gap:8px;"><button class="club-btn hot" style="flex:1;" onclick="playTempleDrop()">⚡ 극락 DROP</button><button class="club-btn secondary" style="flex:1;" onclick="openMoktakOverlay();closeBeatLab();">🥢 무한 목탁</button></div>
+      <div style="font-size:10.5px;color:#9f8aaa;margin-top:13px;line-height:1.55;">소리는 브라우저 Web Audio로 즉석 생성돼요. 별도 음원 파일이 없어도 동작합니다.</div>
+    </div>
+  </div>
+</div>
 
 <script>
 /* ============================================================
@@ -2291,9 +2456,9 @@ function renderFunBanner(){
       <div class="fb-title">🎡 오늘은 여기!</div>
       <div class="fb-sub">랜덤으로 순례지 뽑기</div>
     </button>
-    <button class="fun-banner-btn worry" onclick="openWorryOverlay()">
-      <div class="fb-title">🙏 마음이 복잡할 때</div>
-      <div class="fb-sub">고민 유형 고르면 딱 맞는 절 추천</div>
+    <button class="fun-banner-btn worry" onclick="openOracleOverlay()">
+      <div class="fb-title">🤖 극락 즉문즉설</div>
+      <div class="fb-sub">고민 털고 사이다 한마디 받기</div>
     </button>
     <button class="fun-banner-btn vow" onclick="openVowOverlay()">
       <div class="fb-title">🌅 발원문 쓰기</div>
@@ -2307,13 +2472,13 @@ function renderFunBanner(){
       <div class="fb-title">🧧 나만의 기원 부적</div>
       <div class="fb-sub">합격·승진·인연 등 소원 담아 이미지로</div>
     </button>
-    <button class="fun-banner-btn moktak" onclick="openMoktakOverlay()">
-      <div class="fb-title">🥢 무한 목탁</div>
-      <div class="fb-sub">두드리면서 스트레스 날리기</div>
+    <button class="fun-banner-btn moktak" onclick="openBeatLab()">
+      <div class="fb-title">🎛️ 클럽 목탁 잼</div>
+      <div class="fb-sub">목탁을 비트로 두드려 번뇌 OUT</div>
     </button>
     <button class="fun-banner-btn playlist" onclick="openPlaylistOverlay()">
-      <div class="fb-title">🎵 명상 플레이리스트</div>
-      <div class="fb-sub">가사 보면서 듣는 마음 노래</div>
+      <div class="fb-title">🎧 극락왕생 플레이리스트</div>
+      <div class="fb-sub">마음 노래 + 템플 DJ 무드</div>
     </button>
   </div>`;
 }
@@ -6342,6 +6507,79 @@ if('serviceWorker' in navigator && (location.protocol==='https:' || location.hos
     });
   });
 }
+
+
+/* ============================================================
+   HIP TEMPLE FESTIVAL · 극락 즉문즉설 / Beat Lab / Psy Mode
+============================================================ */
+const ORACLE_EXAMPLES = [
+  '스님, 퇴사하고 싶어요.','연애가 너무 힘들어요.','요즘 아무것도 하기 싫어요.','돈 걱정 때문에 잠이 안 와요.','자꾸 남과 비교하게 돼요.','일이 너무 많아서 번아웃이에요.'
+];
+const ORACLE_GENERIC = [
+  ['번뇌 OUT. 오늘은 결론 말고 숨부터.','답을 지금 당장 정하지 않아도 돼요. 오늘 할 수 있는 가장 작은 한 가지부터 해보세요.'],
+  ['이 또한 지나가리. 그런데 그냥 지나가게 두진 마세요.','내가 바꿀 수 있는 것 1개와 못 바꾸는 것 1개만 나눠 적어보세요. 마음이 의외로 가벼워집니다.'],
+  ['극락은 멀리 있지 않다. 알림 끄는 데 있다.','10분만 세상과 연결을 끊고 몸부터 쉬게 해주세요. 피곤한 마음은 모든 문제를 두 배로 크게 보여줘요.'],
+  ['합장. 그리고 내 편 한 명 확보.','혼자 머릿속에서 반복하지 말고 믿을 만한 사람 한 명에게 지금 상황을 말로 꺼내보세요.'],
+  ['오늘의 수행: 남의 인생 스크롤 금지.','비교가 시작되면 내 속도가 사라져요. 오늘은 어제의 나와만 비교해도 충분합니다.']
+];
+function openOracleOverlay(){
+  const ov=document.getElementById('oracleOverlay'); if(!ov) return; ov.classList.add('show');
+  setTimeout(()=>document.getElementById('oracleInput')?.focus(),120);
+}
+function closeOracleOverlay(){ document.getElementById('oracleOverlay')?.classList.remove('show'); }
+function fillOracleExample(){ const el=document.getElementById('oracleInput'); if(el) el.value=ORACLE_EXAMPLES[Math.floor(Math.random()*ORACLE_EXAMPLES.length)]; }
+function askOracle(){
+  const input=(document.getElementById('oracleInput')?.value||'').trim();
+  if(!input){ showToast('번뇌를 한 줄만 적어주세요 😎'); return; }
+  const t=input.toLowerCase(); let pair;
+  if(/퇴사|회사|직장|상사|야근|업무|번아웃/.test(t)) pair=['사표는 내일. 퇴근은 오늘.','지친 상태에서 인생 결론까지 내릴 필요는 없어요. 먼저 쉬고, 퇴사 이유·남을 이유·다음 수입원을 각각 한 줄씩 적어보세요.'];
+  else if(/연애|남친|여친|이별|헤어|사랑|썸/.test(t)) pair=['인연은 붙잡는다고 고정되지 않는다.','나를 계속 작아지게 만드는 관계인지, 서로 더 편안한 사람이 되는 관계인지부터 보세요. 사랑에도 내 마음의 자리는 필요합니다.'];
+  else if(/돈|빚|대출|재물|로또|사업/.test(t)) pair=['재물운보다 먼저 현금흐름.','불안할수록 숫자를 직접 보는 게 수행입니다. 이번 달 들어올 돈, 꼭 나갈 돈, 미뤄도 될 돈부터 세 칸으로 나눠보세요.'];
+  else if(/비교|인스타|남들|열등|자존감/.test(t)) pair=['남의 하이라이트로 내 비하인드를 평가하지 마세요.','오늘은 비교 앱을 잠깐 닫고 내가 최근 해낸 일 세 가지를 적어보세요. 작아 보여도 실제 내 삶의 기록입니다.'];
+  else if(/힘들|우울|무기력|아무것도|지쳤|피곤/.test(t)) pair=['오늘 수행은 “버티기”가 아니라 “회복하기”.','해야 할 일을 줄이는 것도 수행이에요. 물 한 잔, 씻기, 10분 걷기처럼 몸이 따라올 수 있는 작은 행동 하나만 골라보세요.'];
+  else pair=ORACLE_GENERIC[Math.floor(Math.random()*ORACLE_GENERIC.length)];
+  document.getElementById('oracleBig').textContent=pair[0]; document.getElementById('oracleSmall').textContent=pair[1];
+  document.getElementById('oracleAnswer').classList.remove('show'); void document.getElementById('oracleAnswer').offsetWidth; document.getElementById('oracleAnswer').classList.add('show');
+  spawnMicroBurst(window.innerWidth/2, Math.min(window.innerHeight*.65, 520), '🙏');
+}
+
+let hipAudioCtx=null, templeLoopTimer=null, templeLoopStep=0;
+function getHipAudio(){ if(!hipAudioCtx) hipAudioCtx=new (window.AudioContext||window.webkitAudioContext)(); if(hipAudioCtx.state==='suspended') hipAudioCtx.resume(); return hipAudioCtx; }
+function synthTone(freq=440,dur=.12,type='sine',gain=.15,when=0){
+  try{const c=getHipAudio(),o=c.createOscillator(),g=c.createGain();o.type=type;o.frequency.setValueAtTime(freq,c.currentTime+when);g.gain.setValueAtTime(gain,c.currentTime+when);g.gain.exponentialRampToValueAtTime(.001,c.currentTime+when+dur);o.connect(g);g.connect(c.destination);o.start(c.currentTime+when);o.stop(c.currentTime+when+dur);}catch(e){}
+}
+function noiseHit(dur=.08,gain=.08,when=0){
+  try{const c=getHipAudio(),len=Math.max(1,Math.floor(c.sampleRate*dur)),buf=c.createBuffer(1,len,c.sampleRate),d=buf.getChannelData(0);for(let i=0;i<len;i++)d[i]=(Math.random()*2-1)*(1-i/len);const src=c.createBufferSource(),g=c.createGain();src.buffer=buf;g.gain.value=gain;src.connect(g);g.connect(c.destination);src.start(c.currentTime+when);}catch(e){}
+}
+function playBeat(kind,btn){
+  if(btn){btn.classList.add('hit');setTimeout(()=>btn.classList.remove('hit'),100);const r=btn.getBoundingClientRect();spawnMicroBurst(r.left+r.width/2,r.top+r.height/2,kind==='mok'?'🥢':kind==='bell'?'🔔':'✨');}
+  if(kind==='mok'){synthTone(760,.045,'square',.09);synthTone(470,.08,'triangle',.06,.025)}
+  if(kind==='kick'){synthTone(120,.18,'sine',.24);synthTone(55,.20,'sine',.16,.025)}
+  if(kind==='bell'){synthTone(880,.55,'sine',.10);synthTone(1320,.4,'sine',.05,.02)}
+  if(kind==='clap'){noiseHit(.09,.15);noiseHit(.06,.07,.025)}
+  if(kind==='bass'){synthTone(82,.28,'sawtooth',.08);synthTone(41,.24,'sine',.12)}
+  if(kind==='air'){synthTone(523,.22,'sine',.06);synthTone(659,.22,'sine',.05,.08);synthTone(784,.35,'sine',.05,.16)}
+}
+function openBeatLab(){document.getElementById('beatLabOverlay')?.classList.add('show');getHipAudio();}
+function closeBeatLab(){document.getElementById('beatLabOverlay')?.classList.remove('show');}
+function updateBeatBpm(v){document.getElementById('beatBpmLabel').textContent=v;if(templeLoopTimer){stopTempleLoop();startTempleLoop();}}
+function startTempleLoop(){
+  if(templeLoopTimer) return; const bpm=parseInt(document.getElementById('beatBpm')?.value||96,10),ms=60000/bpm/2; templeLoopStep=0;
+  const tick=()=>{const st=templeLoopStep++%8;if(st%2===0)playBeat('mok');if(st===0||st===4)playBeat('kick');if(st===2||st===6)playBeat('clap');if(st===7)playBeat('bell');};tick();templeLoopTimer=setInterval(tick,ms); const b=document.getElementById('loopBtn');if(b)b.textContent='⏸ LOOP';
+}
+function stopTempleLoop(){clearInterval(templeLoopTimer);templeLoopTimer=null;const b=document.getElementById('loopBtn');if(b)b.textContent='▶ LOOP';}
+function toggleTempleLoop(){templeLoopTimer?stopTempleLoop():startTempleLoop();}
+function playTempleDrop(){['kick','bass','mok','clap','bell','air'].forEach((k,i)=>setTimeout(()=>playBeat(k),i*105));spawnMicroBurst(window.innerWidth/2,window.innerHeight/2,'⚡');}
+function togglePsyMode(){
+  const on=document.body.classList.toggle('psy-mode');localStorage.setItem('sansanotePsyMode',on?'1':'0');
+  const b=document.getElementById('psyModeBtn');if(b)b.textContent=on?'🌤 사이키델릭 극락 모드 끄기':'🌈 사이키델릭 극락 모드 켜기';
+  showToast(on?'🌈 사이키델릭 극락 모드 ON':'차분한 산사 모드로 돌아왔어요');
+}
+function initPsyMode(){if(localStorage.getItem('sansanotePsyMode')==='1'){document.body.classList.add('psy-mode');const b=document.getElementById('psyModeBtn');if(b)b.textContent='🌤 사이키델릭 극락 모드 끄기';}}
+function spawnMicroBurst(x,y,icon){const el=document.createElement('div');el.className='micro-burst';el.textContent=icon||(['🙏','📿','✨','🪷'][Math.floor(Math.random()*4)]);el.style.left=x+'px';el.style.top=y+'px';document.body.appendChild(el);setTimeout(()=>el.remove(),750);}
+document.addEventListener('click',e=>{const btn=e.target.closest('button');if(btn && !btn.classList.contains('beat-pad') && Math.random()>.55){const r=btn.getBoundingClientRect();spawnMicroBurst(r.left+r.width/2,r.top+5);}});
+document.addEventListener('DOMContentLoaded',initPsyMode);
+
 </script>
 </body>
 </html>
