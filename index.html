@@ -4875,9 +4875,13 @@ function updateAccountInfo(){
 }
 function resetGuestData(){
   if(!localMode){ showToast('게스트(둘러보기) 상태에서만 초기화할 수 있어요'); return; }
-  if(!confirm('방문자(게스트) 절·산 목록을 전부 초기화할까요?\n방문 표시, 메모, 사진 등 이 브라우저에 저장된 기록이 모두 사라지고, 기본 목록으로 다시 채워져요.\n이 동작은 되돌릴 수 없어요.')) return;
+  if(!confirm('방문자(게스트) 절·산 목록을 전부 초기화할까요?\n방문 표시, 메모, 사진 등 이 브라우저에 저장된 기록이 모두 사라지고, 처음 시작 화면으로 돌아가요.\n이 동작은 되돌릴 수 없어요.')) return;
   localStorage.removeItem('travelDiaryLocalData');
   localStorage.removeItem('travelDiaryLocalMountains');
+  // 초기화 직후 한 번은 기본 목록을 자동으로 다시 채우지 않고, 빈 목록 +
+  // 안내 화면을 실제로 보여줍니다. (그대로 두면 새로고침하자마자 자동 채우기가
+  // 실행돼서 방금 초기화한 게 무의미해 보이는 문제가 있었습니다.)
+  localStorage.setItem('travelDiarySkipAutoSeedOnce', '1');
   location.reload();
 }
 
@@ -4898,6 +4902,10 @@ function afterDataLoaded(){
 // (writeDestination 등)도 거치지 않고 직접 씁니다.
 function ensureDestinationsSeeded(){
   if(!localMode) return;
+  if(localStorage.getItem('travelDiarySkipAutoSeedOnce') === '1'){
+    localStorage.removeItem('travelDiarySkipAutoSeedOnce');
+    return;
+  }
   const existingNames = new Set(Object.values(destinations).map(d=>d.name));
   const missing = Object.values(MASTER_BY_NAME).filter(item=>!existingNames.has(item.name));
   if(missing.length===0) return;
