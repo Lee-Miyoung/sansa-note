@@ -2664,6 +2664,73 @@ body:has(#beatLabOverlay.show) #miniPlayer{
   .map-mini-btn{min-width:88px!important}
 }
 
+
+/* ===== Beat Shooter: unmistakable defense line ===== */
+#worrySmashZone .beat-defense-line{
+  position:absolute;
+  left:0;right:0;
+  height:0;
+  z-index:42;
+  pointer-events:none;
+  border-top:3px solid rgba(239,116,92,.96);
+  box-shadow:
+    0 -1px 0 rgba(255,255,255,.16),
+    0 0 10px rgba(239,116,92,.55),
+    0 0 24px rgba(239,116,92,.22);
+}
+#worrySmashZone .beat-defense-line::before{
+  content:'';
+  position:absolute;
+  left:0;right:0;top:-8px;
+  height:15px;
+  background:repeating-linear-gradient(
+    90deg,
+    rgba(239,116,92,.20) 0 14px,
+    transparent 14px 27px
+  );
+  opacity:.58;
+}
+#worrySmashZone .beat-defense-line span{
+  position:absolute;
+  left:8px;
+  top:-26px;
+  padding:4px 8px;
+  border-radius:7px 7px 0 0;
+  background:#bd4e41;
+  color:#fff;
+  font-size:9px;
+  font-weight:950;
+  letter-spacing:.55px;
+  box-shadow:0 4px 12px rgba(0,0,0,.22);
+}
+#worrySmashZone .beat-defense-line b{
+  position:absolute;
+  right:8px;
+  top:-23px;
+  color:#ffd7cc;
+  font-size:8.5px;
+  font-weight:850;
+  text-shadow:0 1px 3px rgba(0,0,0,.85);
+}
+#beatLabOverlay.combo20 #worrySmashZone .beat-defense-line{
+  border-top-color:#ff886f;
+  box-shadow:0 0 14px rgba(255,136,111,.72),0 0 30px rgba(255,136,111,.26);
+}
+
+/* ===== Photo flicker fix ===== */
+.card-cover-img.stable-cover{
+  opacity:1!important;
+  transform:none!important;
+  transition:none!important;
+  background:#e9e6db!important;
+}
+.card-photo{
+  contain:paint;
+}
+.home-gallery-strip .hg-item{
+  background-color:#e7e4da;
+}
+
 </style>
 </head>
 <body>
@@ -3597,7 +3664,11 @@ body:has(#beatLabOverlay.show) #miniPlayer{
             <div class="worry-wave" id="worryWave">WAVE 1</div>
             <div class="worry-game-hint">단어 아래의 작은 표시와 같은 패드를 눌러야 HIT · 다른 패드는 MISS</div>
             <div class="worry-lane-launchers"><i></i><i></i><i></i><i></i><i></i><i></i></div>
-            <div class="beat-gameover" id="beatGameOver"><b>GAME OVER</b><span style="margin:8px 0 4px;color:#d8c9df;">번뇌가 방어선을 3번 통과했습니다</span><span style="margin:0 0 14px;color:#9ee88b;font-size:11px;">한 번 통과한 직후에는 잠깐 보호막이 생겨 연속 실점하지 않아요.</span><button class="club-btn hot" type="button" onclick="restartWorryGame()">🪷 다시 출격</button></div>
+            <div class="beat-defense-line" id="beatDefenseLine" aria-hidden="true">
+              <span>🛡 DEFENSE LINE</span>
+              <b>여기 넘으면 생명 -1</b>
+            </div>
+            <div class="beat-gameover" id="beatGameOver"><b>GAME OVER</b><span style="margin:8px 0 4px;color:#d8c9df;">번뇌가 DEFENSE LINE을 3번 통과했습니다</span><span style="margin:0 0 14px;color:#9ee88b;font-size:11px;">한 번 통과한 직후에는 잠깐 보호막이 생겨 연속 실점하지 않아요.</span><button class="club-btn hot" type="button" onclick="restartWorryGame()">🪷 다시 출격</button></div>
           </div>
           <div class="release-banner"><span>정확 격추 <b id="worrySmashCount">0</b></span><span id="releaseMsg">🎯 맞는 패드를 골라 직선으로 쏘세요</span></div>
           <div class="beat-grid">
@@ -7820,11 +7891,16 @@ function mountainPlaceholderHtml(label='사진 확인 중'){
     <span>${escapeHtml(label)}</span>
   </div>`;
 }
+function replaceBrokenCardCover(img,kind){
+  if(!img)return;
+  const html=kind==='mountain'?mountainPlaceholderHtml('산 풍경 준비 중'):lotusPlaceholderHtml('사찰 사진 준비 중');
+  img.outerHTML=html;
+}
 function cardCoverMedia(photo, kind, name){
   const placeholder = kind==='mountain' ? mountainPlaceholderHtml('산 풍경 준비 중') : lotusPlaceholderHtml('사찰 사진 준비 중');
   if(!photo) return placeholder;
-  return `${placeholder}<img class="card-cover-img" src="${escapeAttr(photo)}" alt="${escapeAttr(name||'')}" loading="lazy"
-    onload="this.classList.add('loaded')" onerror="this.remove()">`;
+  return `<img class="card-cover-img loaded stable-cover" src="${escapeAttr(photo)}" alt="${escapeAttr(name||'')}"
+    loading="lazy" decoding="async" onerror="replaceBrokenCardCover(this,'${kind}')">`;
 }
 function progressSealHtml(stageIdx){
   if(stageIdx<1) return '';
@@ -7857,9 +7933,29 @@ function processPhotoQueue(){
   }
 }
 let renderDebounceTimer = null;
+function patchVisibleCover(id,url,kind,name){
+  if(!url)return;
+  const cards=[...document.querySelectorAll('.card[data-id]')];
+  const card=cards.find(x=>x.dataset.id===String(id));
+  const photo=card?.querySelector('.card-photo');
+  if(!photo)return;
+  const oldImg=photo.querySelector('.card-cover-img');
+  const ph=photo.querySelector('.cover-placeholder');
+  const img=document.createElement('img');
+  img.className='card-cover-img loaded stable-cover';
+  img.src=url;img.alt=name||'';img.loading='lazy';img.decoding='async';
+  img.onerror=()=>replaceBrokenCardCover(img,kind);
+  if(oldImg)oldImg.replaceWith(img);
+  else if(ph)ph.replaceWith(img);
+  else photo.prepend(img);
+}
 function debouncedRender(){
   clearTimeout(renderDebounceTimer);
-  renderDebounceTimer = setTimeout(render, 400);
+  renderDebounceTimer=setTimeout(()=>{
+    if(activePhotoFetches===0 && photoFetchQueue.length===0){
+      try{renderHomeGallery();}catch(_){}
+    }
+  },600);
 }
 
 const WIKI_TITLE_HINTS = {
@@ -7969,6 +8065,7 @@ function fetchCoverPhotoNow(id, name, locationHint, opts, done){
       store[id].coverPhotoMeta=unique;
       store[id].coverPhotoVersion=PHOTO_SCHEMA_VERSION;
       store[id].coverPhotoStatus='verified';
+      patchVisibleCover(id,urls[0],isMountain?'mountain':'temple',name);
       debouncedRender();
       if(getCurrentId()===id) onDetailUpdate(store[id]);
       finish(); return;
@@ -10199,7 +10296,7 @@ function loseBeatLife(enemy){
   const now=performance.now();
   if(now<beatLifeGraceUntil){setTimeout(()=>enemy.remove(),120);return;}
   beatLastLifeLostAt=now;beatLifeGraceUntil=now+1050;
-  beatLives=Math.max(0,beatLives-1);updateBeatLives();resetComboForMiss(null,'방어선 돌파! 보호막 1초');noiseHit(.12,.12);setTimeout(()=>enemy.remove(),150);
+  beatLives=Math.max(0,beatLives-1);updateBeatLives();resetComboForMiss(null,'DEFENSE LINE 돌파! 생명 -1 · 보호막 1초');noiseHit(.12,.12);setTimeout(()=>enemy.remove(),150);
   const zone=document.getElementById('worrySmashZone');if(zone){const f=document.createElement('i');f.className='beat-shield-flash';zone.appendChild(f);setTimeout(()=>f.remove(),760)}
   const em=document.getElementById('beatEventMain'),es=document.getElementById('beatEventSub');if(em)em.textContent=beatLives>0?'🛡 SHIELD':'GAME OVER';if(es)es.textContent=beatLives>0?`생명 ${beatLives} · 1초 무적`:'3번 돌파 허용';
   saveBeatRun(beatLives>0);if(beatLives<=0){clearBeatRun();stopWorryShooter();saveBeatLeaderboardScore(true).finally(()=>loadBeatLeaderboard());setTimeout(()=>document.getElementById('beatGameOver')?.classList.add('show'),180);}
@@ -10217,7 +10314,16 @@ function beatLevelTuning(){
   const l=Math.max(1,beatLevel);if(l===1)return{speed:.58,gap:1320,max:6,tier:1};if(l===2)return{speed:.72,gap:1150,max:7,tier:2};if(l===3)return{speed:.88,gap:980,max:8,tier:2};if(l===4)return{speed:1.05,gap:830,max:8,tier:3};if(l===5)return{speed:1.22,gap:710,max:9,tier:3};if(l===6)return{speed:1.40,gap:620,max:9,tier:4};return{speed:Math.min(1.85,1.52+(l-7)*.07),gap:Math.max(430,560-(l-7)*20),max:10,tier:5};
 }
 function worryGameSpeed(){const t=beatLevelTuning(),waveBoost=Math.min(.42,(worryWave-1)*.035),base=t.speed+waveBoost;return performance.now()<beatSlowUntil?base*.48:base;}
-function lockBeatDefenseLine(){const z=document.getElementById('worrySmashZone');if(!z)return;beatZoneLockedHeight=z.clientHeight;beatDefenseY=Math.max(170,beatZoneLockedHeight-42);}
+function lockBeatDefenseLine(){
+  const z=document.getElementById('worrySmashZone');if(!z)return;
+  beatZoneLockedHeight=z.clientHeight;
+  beatDefenseY=Math.max(170,beatZoneLockedHeight-42);
+  const line=document.getElementById('beatDefenseLine');
+  if(line){
+    line.style.top=beatDefenseY+'px';
+    line.style.bottom='auto';
+  }
+}
 function beatSpeedLabel(){const t=beatLevelTuning(),v=(t.speed+Math.min(.42,(worryWave-1)*.035));return v.toFixed(2);}
 function beatLevelRush(){beatRushUntil=performance.now()+1250;beatLifeGraceUntil=Math.max(beatLifeGraceUntil,performance.now()+850);const z=document.getElementById('worrySmashZone');if(z){const e=document.createElement('div');e.className='beat-rush-pop';e.innerHTML=`LEVEL ${beatLevel} RUSH<small>SPEED ×${beatSpeedLabel()}</small>`;z.appendChild(e);setTimeout(()=>e.remove(),1100)}beatConfettiBurst(38);document.querySelectorAll('#worrySmashZone .worry-enemy:not(.smash)').forEach(e=>e.classList.add('rush'));setTimeout(()=>document.querySelectorAll('#worrySmashZone .worry-enemy').forEach(e=>e.classList.remove('rush')),900);}
 
