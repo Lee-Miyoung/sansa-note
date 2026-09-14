@@ -1405,6 +1405,15 @@
   .fun-banner-btn.playlist{grid-column:1/-1!important;min-height:56px!important}
 }
 
+
+  /* 게임 격추 FX 가시성 보정 */
+  #worrySmashZone .worry-missile{z-index:26!important}
+  #worrySmashZone .worry-hit-ring,
+  #worrySmashZone .worry-explosion,
+  #worrySmashZone .worry-shard{z-index:27!important}
+  #beatFxCanvas{z-index:20!important}
+  #worrySmashZone .worry-enemy{z-index:12!important}
+
 </style>
 </head>
 <body>
@@ -8322,9 +8331,17 @@ function worryShooterTick(ts){
   if(!worryGameRunning)return;const zone=document.getElementById('worrySmashZone');if(!zone)return;const dt=Math.min(2.1,Math.max(.4,(ts-worryGameLast)/16.67));worryGameLast=ts;
   worrySpawnClock+=dt*16.67;const tune=beatLevelTuning(),spawnGap=Math.max(390,tune.gap-(worryWave-1)*26);if(worrySpawnClock>=spawnGap){worrySpawnClock=0;spawnWorryOrb(0);if(beatLevel>=5&&Math.random()<.16)spawnWorryOrb(140);}
   zone.querySelectorAll('.worry-enemy:not(.smash)').forEach(enemy=>{
-    const boss=enemy.classList.contains('boss'),eh=boss?92:78,ew=boss?78:72,lane=parseInt(enemy.dataset.lane||'0',10);let y=parseFloat(enemy.dataset.y||34);y+=worryGameSpeed()*dt*(boss?.72:1);
-    enemy.style.left=laneX(zone,lane,ew)+'px';enemy.style.top=y+'px';enemy.dataset.y=String(y);
-    const defense=beatDefenseY||Math.max(170,zone.clientHeight-42),dangerLine=defense-eh;enemy.classList.toggle('danger',y>dangerLine-48);if(y>=dangerLine){loseBeatLife(enemy);}
+    const boss=enemy.classList.contains('boss'),eh=boss?92:78,ew=boss?78:72,lane=parseInt(enemy.dataset.lane||'0',10);let y=parseFloat(enemy.dataset.y||34);
+    // 미사일이 이미 조준한 번뇌는 명중할 때까지 잠깐 정지시킨다.
+    // iPhone/iPad에서 비행 중 방어선을 넘어 target DOM이 사라지던 버그 방지.
+    if(enemy.dataset.locked!=='1'){
+      y+=worryGameSpeed()*dt*(boss?.72:1);
+      enemy.dataset.y=String(y);
+    }
+    enemy.style.left=laneX(zone,lane,ew)+'px';enemy.style.top=y+'px';
+    const defense=beatDefenseY||Math.max(170,zone.clientHeight-42),dangerLine=defense-eh;
+    enemy.classList.toggle('danger',y>dangerLine-48);
+    if(enemy.dataset.locked!=='1' && y>=dangerLine){loseBeatLife(enemy);}
   });
   worryGameTimer=requestAnimationFrame(worryShooterTick);
 }
@@ -8340,15 +8357,40 @@ function fireStraightLane(kind,btn){
   const m=document.createElement('i');m.className='worry-missile weapon-'+kind;m.style.left=(sx-3)+'px';m.style.top=(sy-18)+'px';zone.appendChild(m);
   let ty=22,hit=false;if(enemy){const er=enemy.getBoundingClientRect(),zr=zone.getBoundingClientRect();ty=er.top-zr.top+er.height*.34;hit=true;enemy.dataset.locked='1';enemy.classList.add('targeted');}
   const dy=ty-sy,dur=Math.max(150,Math.min(330,Math.abs(dy)*.72));
-  const finish=()=>{m.remove();if(hit&&enemy&&enemy.isConnected){hitWorryEnemy(enemy,sx,ty,kind)}else resetComboForMiss(btn,'그 레인에 맞는 번뇌가 없어요')};
+  const finish=()=>{
+    m.remove();
+    if(hit&&enemy&&enemy.isConnected){
+      const er2=enemy.getBoundingClientRect(),zr2=zone.getBoundingClientRect();
+      const hx=er2.left-zr2.left+er2.width/2,hy=er2.top-zr2.top+er2.height*.34;
+      hitWorryEnemy(enemy,hx,hy,kind);
+    }else{
+      if(enemy){enemy.dataset.locked='0';enemy.classList.remove('targeted');}
+      resetComboForMiss(btn,'그 레인에 맞는 번뇌가 없어요');
+    }
+  };
   if(m.animate){const anim=m.animate([{transform:'translateY(0) scaleY(1)'},{transform:`translateY(${dy}px) scaleY(1.45)`}],{duration:dur,easing:'linear',fill:'forwards'});anim.onfinish=finish}else{m.style.transition=`transform ${dur}ms linear`;requestAnimationFrame(()=>m.style.transform=`translateY(${dy}px) scaleY(1.45)`);setTimeout(finish,dur+20)}
 }
+function beatCanvasExplosion(cx,cy,big=false){
+  try{
+    const fx=ensureBeatFxCanvas();if(!fx)return;
+    const palette=big?['#fff7a9','#ffd56a','#ff7a44','#ff62bc','#ffffff']:['#ffffff','#b9ff84','#ffd56a','#ff62bc','#9bc7ff'];
+    beatFxBurst(cx,cy,big?28:18,palette);
+    beatFxTexts.push({
+      text:big?'💥':'✦',sub:'',x:cx,y:cy,
+      vy:.012,size:big?30:20,color:'#ffffff',glow:big?'#ff8a3d':'#ff62bc',
+      life:big?420:300
+    });
+    beatFxKick();
+  }catch(_){}
+}
+
 function hitWorryEnemy(enemy,cx,cy,kind='mok'){
   if(!enemy||enemy.classList.contains('smash'))return;const zone=document.getElementById('worrySmashZone');if(!zone)return;
   if(enemy.dataset.weapon!==kind){enemy.dataset.locked='0';enemy.classList.remove('targeted');resetComboForMiss(document.querySelector(`.beat-pad[data-weapon="${kind}"]`),'버튼과 번뇌 종류가 달라요');return;}
   let hp=Math.max(0,parseInt(enemy.dataset.hp||'1',10)-1);enemy.dataset.hp=String(hp);
+  beatCanvasExplosion(cx,cy,hp===0 && enemy.classList.contains('boss'));
   const ring=document.createElement('i');ring.className='worry-hit-ring';ring.style.left=(cx-10)+'px';ring.style.top=(cy-10)+'px';zone.appendChild(ring);setTimeout(()=>ring.remove(),450);
-  const boom=document.createElement('i');boom.className='worry-explosion';boom.style.left=cx+'px';boom.style.top=cy+'px';zone.appendChild(boom);setTimeout(()=>boom.remove(),520);
+  const boom=document.createElement('i');boom.className='worry-explosion';boom.style.left=cx+'px';boom.style.top=cy+'px';boom.style.zIndex='24';zone.appendChild(boom);setTimeout(()=>boom.remove(),520);
   noiseHit(.045,.07);synthTone(180,.08,'sawtooth',.08);for(let i=0;i<10;i++){const sh=document.createElement('i');sh.className='worry-shard';sh.style.left=cx+'px';sh.style.top=cy+'px';const a=Math.random()*Math.PI*2,d=22+Math.random()*48;sh.style.setProperty('--dx',Math.cos(a)*d+'px');sh.style.setProperty('--dy',Math.sin(a)*d+'px');sh.style.color=['#ff62bc','#b9ff84','#ffd56a','#9bc7ff'][i%4];zone.appendChild(sh);setTimeout(()=>sh.remove(),620)}
   if(hp>0){const bar=enemy.querySelector('.worry-boss-hp i');if(bar)bar.style.width=(hp/parseInt(enemy.dataset.maxHp,10)*100)+'%';enemy.dataset.locked='0';enemy.classList.remove('targeted');beatScore+=25;const s=document.getElementById('beatScore');if(s)s.textContent=beatScore.toLocaleString();const bm=document.getElementById('beatEventMain'),bs=document.getElementById('beatEventSub');if(bm)bm.textContent='BOSS HIT';if(bs)bs.textContent=hp+'발 남음';return;}
   smashWorryOrb(enemy,true);
@@ -8375,10 +8417,35 @@ function registerWorryKill(enemy){
   if(beatScore>beatLocalBest){beatLocalBest=beatScore;localStorage.setItem('sansaBeatBest',String(beatLocalBest));}
 }
 function smashWorryOrb(enemy,manual=false){
-  if(!enemy||enemy.classList.contains('smash'))return;enemy.classList.add('smash');enemy.dataset.locked='1';worrySmashTotal++;
-  const cnt=document.getElementById('worrySmashCount');if(cnt)cnt.textContent=worrySmashTotal;const wave=document.getElementById('worryWave');if(wave)wave.textContent='WAVE '+worryWave;
+  if(!enemy||enemy.classList.contains('smash'))return;
+  const wasBoss=enemy.classList.contains('boss');
+  const zone=document.getElementById('worrySmashZone');
+  if(zone){
+    const r=enemy.getBoundingClientRect(),zr=zone.getBoundingClientRect();
+    beatCanvasExplosion(r.left-zr.left+r.width/2,r.top-zr.top+r.height*.38,wasBoss);
+  }
+  enemy.classList.add('smash');enemy.dataset.locked='1';
+  // CSS animation이 iOS에서 누락돼도 반드시 '터지고 사라지는' 것이 보이도록 inline fallback.
+  const orb=enemy.querySelector('.worry-orb');
+  if(orb){
+    orb.style.transition='transform .22s cubic-bezier(.2,.8,.2,1), opacity .22s ease, filter .22s ease';
+    orb.style.transform='scale(1.45)';
+    orb.style.filter='brightness(3) saturate(1.8)';
+    requestAnimationFrame(()=>requestAnimationFrame(()=>{
+      orb.style.transform='scale(.06)';
+      orb.style.opacity='0';
+      orb.style.filter='brightness(2) blur(4px)';
+    }));
+  }
+  worrySmashTotal++;
+  const cnt=document.getElementById('worrySmashCount');if(cnt)cnt.textContent=worrySmashTotal;
+  const wave=document.getElementById('worryWave');if(wave)wave.textContent='WAVE '+worryWave;
   const msg=document.getElementById('releaseMsg');if(msg)msg.textContent=worrySmashTotal>=24?'🔥 속도 상승 · 정확도 유지!':worrySmashTotal>=16?'⚡ WAVE UP · 더 빨라집니다':worrySmashTotal>=8?'✨ 좋은 집중이에요':'🎯 정확 HIT · 같은 색 패드 성공';
-  if(manual)registerWorryKill(enemy);const wasBoss=enemy.classList.contains('boss');setTimeout(()=>{enemy.remove();if(wasBoss){beatPop('💥 대왕 번뇌 격파!');beatConfettiBurst(24)}},300);
+  if(manual)registerWorryKill(enemy);
+  setTimeout(()=>{
+    enemy.remove();
+    if(wasBoss){beatPop('💥 대왕 번뇌 격파!');beatConfettiBurst(24)}
+  },240);
 }
 function smashNearestWorry(){/* 사용하지 않음: 패드-레인 일치만 허용 */}
 function smashAllWorries(noScore=true){
