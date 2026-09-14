@@ -4491,6 +4491,9 @@ function mountainsRef(){
 function mountainRef(id){
   return db.ref('users/'+currentUid+'/mountains/'+id);
 }
+function streakRef(){
+  return db.ref('users/'+currentUid+'/streak');
+}
 
 
 /* ============================================================
@@ -4560,28 +4563,46 @@ function renderQuizBanner(){
 }
 
 function updateStreak(){
-  const key = 'sansanoteStreak_' + (currentUid || 'guest');
   const today = new Date();
   const todayStr = `${today.getFullYear()}-${today.getMonth()+1}-${today.getDate()}`;
-  let data;
-  try{ data = JSON.parse(localStorage.getItem(key)) || {}; } catch(e){ data = {}; }
-  if(data.lastDate === todayStr){
-    // 오늘 이미 접속함, 그대로
-  } else {
+  function computeNext(data){
+    data = data || {};
+    if(data.lastDate === todayStr) return {data, changed:false};
     const yesterday = new Date(today); yesterday.setDate(yesterday.getDate()-1);
     const yStr = `${yesterday.getFullYear()}-${yesterday.getMonth()+1}-${yesterday.getDate()}`;
-    if(data.lastDate === yStr){
-      data.streak = (data.streak||0) + 1;
-    } else {
-      data.streak = 1;
+    const next = {
+      streak: (data.lastDate === yStr) ? (data.streak||0) + 1 : 1,
+      lastDate: todayStr
+    };
+    return {data:next, changed:true};
+  }
+  function renderBadge(data){
+    const el = document.getElementById('streakBadge');
+    if(el && data && data.streak){
+      el.innerHTML = `<span class="streak-pill">🔥 ${data.streak}일 연속 접속 중</span>`;
     }
-    data.lastDate = todayStr;
-    localStorage.setItem(key, JSON.stringify(data));
   }
-  const el = document.getElementById('streakBadge');
-  if(el && data.streak){
-    el.innerHTML = `<span class="streak-pill">🔥 ${data.streak}일 연속 접속 중</span>`;
+  const localKey = 'sansanoteStreak_' + (currentUid || 'guest');
+  if(localMode || !currentUid){
+    // 로컬 모드(오프라인/게스트)는 기기에만 저장되므로 localStorage를 그대로 사용
+    let data; try{ data = JSON.parse(localStorage.getItem(localKey)) || {}; } catch(e){ data = {}; }
+    const {data:next, changed} = computeNext(data);
+    if(changed) localStorage.setItem(localKey, JSON.stringify(next));
+    renderBadge(next);
+    return;
   }
+  // 로그인 계정이 있으면 다른 기기·브라우저·PWA에서 접속해도 연속 기록이 이어지도록
+  // localStorage 대신 Firebase(계정별 저장소)에 기록합니다.
+  // (localStorage는 기기/브라우저마다 따로 저장돼서, 다른 기기로 접속하면 3일 연속이어도 1일로 보이는 문제가 있었습니다.)
+  streakRef().once('value').then(snap=>{
+    const {data:next, changed} = computeNext(snap.val());
+    if(changed) streakRef().set(next);
+    renderBadge(next);
+  }).catch(()=>{
+    // 네트워크 문제 등으로 조회에 실패하면 기기에 남아있던 기록으로라도 표시
+    let data; try{ data = JSON.parse(localStorage.getItem(localKey)) || {}; } catch(e){ data = {}; }
+    renderBadge(computeNext(data).data);
+  });
 }
 
 function renderFunBanner(){
@@ -7926,7 +7947,7 @@ function progressSealHtml(stageIdx){
   </span>`;
 }
 
-const PHOTO_SCHEMA_VERSION = 6; // v6: 공공누리 전 유형(비영리 제외)·GFDL 등 저작권표시 가능한 라이선스로 허용 범위를 넓힘
+const PHOTO_SCHEMA_VERSION = 7; // v7: 로마자 표기(예: Seokguram)라 한글 이름이 그대로 안 보이는 사진도 다른 신호로 통과되도록 완화
 const PHOTO_RETRY_COOLDOWN_MS = 3*24*60*60*1000; // 사진을 못 찾은 곳은 사흘 지나야 다시 시도 (매 렌더마다 재시도해서 화면이 깜빡이는 것을 막기 위함)
 function shouldSkipPhotoRetry(d){
   if(!d || d.coverPhotoStatus!=='not-found') return false;
@@ -8046,8 +8067,15 @@ function fetchCoverPhotoNow(id, name, locationHint, opts, done){
     const lic=cleanText((meta.LicenseShortName&&meta.LicenseShortName.value)||(meta.UsageTerms&&meta.UsageTerms.value));
     if(!isReusableLicense(lic)) return -999;
     const core=coreName(name), coreCompact=compact(core);
-    if(!trustedArticle && (!coreCompact || !hayCompact.includes(coreCompact))) return -999;
-    let score=trustedArticle?34:20;
+    const nameMatches = !!(coreCompact && hayCompact.includes(coreCompact));
+    // 커먼즈에는 "석굴암"처럼 한국어 이름 그대로가 아니라 로마자 표기("Seokguram")로만
+    // 올라온 사진이 아주 많습니다. 이름이 그대로 안 보인다고 무조건 걸러내면 유명한 곳도
+    // 사진을 거의 못 찾게 되므로, trustedArticle이 아니어도 완전히 버리지 않고
+    // 시작 점수만 낮춰서(다른 신호들로 통과 여부를 가리도록) 둡니다.
+    let score;
+    if(trustedArticle) score=34;
+    else if(nameMatches) score=20;
+    else score=4;
     if(core && title.includes(core)) score+=18;
     if(visualWords.test(hay)) score+=14;
     if(/jpg|jpeg|png/i.test(ii.mime||'')) score+=3;
@@ -9793,7 +9821,7 @@ const ORACLE_INTENT_RULES = [
   },
   {
     id:'breakup_ex', priority:110,
-    any:['헤어졌','이별','전남친','전여친','못 잊','재회','다시 만나','미련','연락 왔'],
+    any:['헤어졌','이별','전남친','전여친','못 잊','재회','다시 만나','미련','연락 왔','헤어질까'],
     replies:[
       ['그리운 마음과 다시 만나야 한다는 결론은 같지 않아요.','그 사람이 그리운지, 익숙했던 관계가 그리운지, 외로운 지금이 힘든 건지 나눠보세요. 재회는 “달라진 점이 실제로 있는가”를 확인한 뒤 결정해도 늦지 않아요.'],
       ['헤어진 뒤 흔들리는 건 아주 자연스러워요.','좋았던 기억만 커질 때는 왜 끝났는지도 함께 적어보세요. 감정의 파도와 관계의 현실을 같이 보는 데 도움이 돼요.'],
@@ -9813,8 +9841,8 @@ const ORACLE_INTENT_RULES = [
   },
   {
     id:'relationship_communication', priority:100,
-    any:['연락','대화가 안','자꾸 싸','서운','말이 안 통해','소통','스킨십','권태','예전 같지','당연하게','장거리','말을 듣지 않','정이 떨어','제 일을 존중하지','제가 작아','돈 쓰는 방식이','더 많이 노력하는','가족 문제로 스트레스','결혼 얘기만 나오면','제 친구를 싫어해','연애가 편하지 않고','사과를 잘 안 해','연애를 계속해야 할지'],
-    context:['남친','여친','남자친구','여자친구','남편','아내','와이프','배우자','연인','결혼','부부','상대','연애','관계'],
+    any:['연락','대화가 안','자꾸 싸','서운','말이 안 통해','소통','스킨십','권태','예전 같지','당연하게','장거리','말을 듣지 않','정이 떨어','제 일을 존중하지','제가 작아','돈 쓰는 방식이','더 많이 노력하는','가족 문제로 스트레스','결혼 얘기만 나오면','제 친구를 싫어해','연애가 편하지 않고','사과를 잘 안 해','연애를 계속해야 할지','관심이 없는 거 같아요','성격차이','시댁 편만'],
+    context:['남친','여친','남자친구','여자친구','남편','아내','와이프','배우자','연인','결혼','부부','상대','연애','관계','애인'],
     replies:[
       ['같은 문제로 반복해서 싸운다면 내용보다 “싸우는 방식”을 먼저 볼 필요가 있어요.','비난 대신 “네가 왜 그래”가 아니라 “나는 이런 상황에서 이렇게 느껴”로 말하고, 한 번에 한 문제만 다뤄보세요.'],
       ['연락 빈도는 사랑의 절대 기준이 아니라 서로의 기대가 맞는지의 문제예요.','원하는 연락 횟수와 힘든 지점을 구체적으로 말해보세요. “더 잘해줘”보다 “퇴근 후 한 번은 연락해줬으면 해”가 해결에 가까워요.'],
@@ -9825,7 +9853,7 @@ const ORACLE_INTENT_RULES = [
   },
   {
     id:'work_resignation', priority:108,
-    any:['퇴사','사표','그만두고','회사 그만','직장 그만','그만둬도','버티는 게 맞는지','옮겨도 똑같','버티기 힘들어','이직 준비 없이','회사가 싫은 건지','일이 싫은 건지','연봉을 포기하고','회사에 남는 게'],
+    any:['퇴사','사표','그만두고','회사 그만','직장 그만','그만둬도','버티는 게 맞는지','옮겨도 똑같','버티기 힘들어','이직 준비 없이','회사가 싫은 건지','일이 싫은 건지','연봉을 포기하고','회사에 남는 게','회사 다니기 너무 싫은데'],
     replies:[
       ['퇴사는 감정보다 “나간 뒤 계획”까지 같이 볼 때 판단이 좋아져요.','생활비 여유 기간, 다음 일자리 가능성, 지금 회사에서 바꿀 수 있는 것 세 가지를 먼저 적어보세요. 버틸지 나갈지가 훨씬 현실적으로 보여요.'],
       ['오늘 너무 힘들다고 당장 사표를 내야 하는 건 아니지만, 계속 망가질 때까지 버틸 이유도 없어요.','몸과 마음의 소진 정도, 재정 여유, 이직 가능성을 기준으로 퇴사 시점을 정해보세요.'],
@@ -9835,7 +9863,7 @@ const ORACLE_INTENT_RULES = [
   },
   {
     id:'work_conflict', priority:102,
-    any:['상사','직장 동료','팀장','동료','뒷말','공을 가져','직장 내','회사 문화','눈치','뒷담화가 힘들','팀 분위기','업무 지시가','책임이 아닌 일','인정받지 못하는','관계 때문에 퇴사','메신저 말투','회의에서 제 의견','업무 경계를 세우기','직장 사람 때문에'],
+    any:['상사','직장 동료','팀장','동료','뒷말','공을 가져','직장 내','회사 문화','눈치','뒷담화가 힘들','팀 분위기','업무 지시가','책임이 아닌 일','인정받지 못하는','관계 때문에 퇴사','메신저 말투','회의에서 제 의견','업무 경계를 세우기','직장 사람 때문에','은따','직장에서 은따'],
     replies:[
       ['직장 갈등은 감정과 기록을 분리하는 게 중요해요.','문제가 반복된다면 날짜·상황·요청한 내용·결과를 짧게 기록해두세요. 감정이 아니라 사실로 이야기할 근거가 생겨요.'],
       ['상대의 태도까지 바꾸려 하면 더 지칠 수 있어요.','내가 통제할 수 있는 범위—업무 경계, 전달 방식, 기록, 도움 요청—에 힘을 쓰는 편이 현실적이에요.'],
@@ -9866,7 +9894,7 @@ const ORACLE_INTENT_RULES = [
   },
   {
     id:'debt_money', priority:106,
-    any:['빚','대출','이자','연체','카드값','생활비','월급이 사라','돈 걱정','노후 돈','생활비 부담','돈 문제로','저축이 전혀','집을 사도 될지','전세를 계속','돈을 빌려줘야','하고 싶은 걸 포기','재정 계획','고정비를 어디서','돈을 쓰면 죄책감','경제적으로 뒤처진'],
+    any:['빚','대출','이자','연체','카드값','생활비','월급이 사라','돈 걱정','노후 돈','생활비 부담','돈 문제로','저축이 전혀','집을 사도 될지','전세를 계속','돈을 빌려줘야','하고 싶은 걸 포기','재정 계획','고정비를 어디서','돈을 쓰면 죄책감','경제적으로 뒤처진','헤프게'],
     replies:[
       ['빚 문제는 불안보다 순서가 중요해요.','금리·잔액·월 상환액을 한 표에 적고, 연체 위험이 있는 것과 고금리부터 구분해보세요. 숫자를 한 번에 보는 것만으로도 통제감이 생겨요.'],
       ['돈이 부족할 때는 “아껴야지”보다 고정비와 변동비를 나누는 게 먼저예요.','이번 달 꼭 나갈 돈, 줄일 수 있는 돈, 미룰 수 있는 돈 세 칸으로 나눠보세요.'],
@@ -9898,8 +9926,8 @@ const ORACLE_INTENT_RULES = [
   },
   {
     id:'parent_conflict', priority:103,
-    any:['엄마','아빠','부모님','시부모','장인','장모','형제','자매','언니','오빠','동생','가족','명절'],
-    any2:['간섭','싸워','서운','부딪','기대','비교','돈 문제','연락 끊','연락을 끊','스트레스','이해하지','경계를 어떻게 세워야','너무 의지','거리를 두면','연락을 줄이고 싶','배우자를 싫어해','마음을 말하기 어려','명절이','늙어가는 게 무서워','너무 안 맞아','선택을 말하기가 무서워'],
+    any:['엄마','아빠','부모님','시부모','시댁','장인','장모','형제','자매','언니','오빠','동생','가족','명절'],
+    any2:['간섭','싸워','서운','부딪','기대','비교','돈 문제','연락 끊','연락을 끊','스트레스','이해하지','경계를 어떻게 세워야','너무 의지','거리를 두면','연락을 줄이고 싶','배우자를 싫어해','마음을 말하기 어려','명절이','늙어가는 게 무서워','너무 안 맞아','선택을 말하기가 무서워','결혼하라고 압박','애 낳으라고','이혼한다고'],
     not:['상대 가족','배우자 가족','남편 가족','아내 가족'],
     replies:[
       ['가족은 가까워서 경계가 더 흐려지기 쉬워요.','설득하려 하기보다 “이 결정은 내가 책임질게”처럼 내 선택의 범위를 짧고 반복해서 말해보세요.'],
@@ -9920,7 +9948,7 @@ const ORACLE_INTENT_RULES = [
   },
   {
     id:'exam_study', priority:101,
-    any:['시험','공부','토익','자격증','수능','성적','대학','면접','취업 준비','합격 발표','공부와 일을','부모님 눈치','시험 전날','취업 때문에'],
+    any:['시험','공부','토익','자격증','수능','성적','대학','면접','취업 준비','합격 발표','공부와 일을','부모님 눈치','시험 전날','취업 때문에','취준','계속 떨어져요'],
     replies:[
       ['지금 불안한 건 결과가 중요해서예요.','결과 생각을 멈추려 하기보다 오늘 통제 가능한 공부량을 아주 작게 정해보세요. 25분 한 번, 문제 10개처럼요.'],
       ['성적이 안 오를 때는 시간을 더 넣기보다 틀리는 이유를 분류하는 게 좋아요.','개념 부족·시간 부족·실수 중 무엇이 많은지 먼저 확인해보세요.'],
@@ -9940,7 +9968,7 @@ const ORACLE_INTENT_RULES = [
   },
   {
     id:'anxiety', priority:96,
-    any:['불안','걱정','초조','무서','두려','긴장','가슴이 답답','최악의 상황','계속 확인','잠이 안 와','최악으로 생각','결과를 기다리는','몸이 떨려','나쁜 일이 생길 것 같','큰 병 같아','마음이 늘 급해','뭔가 놓친 것 같아','결정을 하고 나서도 계속 의심'],
+    any:['불안','걱정','초조','무서','두려','긴장','가슴이 답답','최악의 상황','계속 확인','잠이 안 와','최악으로 생각','결과를 기다리는','몸이 떨려','나쁜 일이 생길 것 같','큰 병 같아','마음이 늘 급해','뭔가 놓친 것 같아','결정을 하고 나서도 계속 의심','임신 준비'],
     replies:[
       ['불안은 가능성을 사실처럼 느끼게 만들어요.','지금 걱정이 “확인된 사실”인지 “일어날지도 모르는 예상”인지 두 칸으로 나눠 적어보세요.'],
       ['걱정이 계속 돌아오면 생각으로 이기려 하기보다 몸을 먼저 안정시키는 게 도움이 돼요.','숨을 4초 들이쉬고 6초 내쉬는 호흡을 1~2분만 해보세요.'],
@@ -9971,7 +9999,7 @@ const ORACLE_INTENT_RULES = [
   },
   {
     id:'grief', priority:110,
-    any:['사별','장례','떠나보냈','죽음','돌아가셨','반려동물 떠','상실','그리워','세상을 떠','고인이','그리움이','시간이 지나도 눈물','혼자 남은 느낌','기일이','사진을 보면 마음이','괜찮다가 갑자기 슬퍼','다시 행복해져도','슬픔이 끝나지 않는','반려동물을 보내고','떠나보낸','기억이 오히려','떠난 사람에게'],
+    any:['사별','장례','떠나보냈','죽음','돌아가셨','반려동물 떠','상실','그리워','세상을 떠','고인이','그리움이','시간이 지나도 눈물','혼자 남은 느낌','기일이','사진을 보면 마음이','괜찮다가 갑자기 슬퍼','다시 행복해져도','슬픔이 끝나지 않는','반려동물을 보내고','떠나보낸','기억이 오히려','떠난 사람에게','무지개다리를 건넜','무지개다리를 건너'],
     replies:[
       ['슬픔에는 정해진 완료 날짜가 없어요.','괜찮은 날과 무너지는 날이 번갈아 와도 이상한 일이 아닙니다. 그리움을 없애기보다 함께 살아가는 법을 천천히 찾는 과정이에요.'],
       ['떠난 사람을 자꾸 생각하는 건 미련해서가 아니라 소중했기 때문이에요.','사진 한 장, 좋아했던 음식, 기억 한 줄처럼 안전하게 추억할 작은 의식을 만들어도 좋아요.'],
@@ -10012,7 +10040,7 @@ const ORACLE_INTENT_RULES = [
   },
   {
     id:'sleep', priority:102,
-    any:['불면','잠이 안','잠을 못','새벽에 깨','수면','잠들기 어려','잠을 푹','잠들','새벽마다','정신이 또렷','두근거려','개운하지 않','잠 때문에','수면제','잠이','못 자','자도 피곤','늦게 자요','일찍 자고 싶은데','꿈을 너무 많이','카페인을 끊어야'],
+    any:['불면','잠이 안','잠을 못','새벽에 깨','수면','잠들기 어려','잠을 푹','잠들','새벽마다','정신이 또렷','두근거려','개운하지 않','잠 때문에','수면제','잠이','못 자','자도 피곤','늦게 자요','일찍 자고 싶은데','꿈을 너무 많이','카페인을 끊어야','자도 계속 피곤'],
     replies:[
       ['잠은 억지로 자려고 할수록 더 멀어질 때가 있어요.','20~30분 넘게 깨어 있으면 침대에서 잠깐 나와 어두운 곳에서 조용한 활동을 하다가 졸릴 때 다시 누워보세요.'],
       ['수면 시간을 늘리기보다 기상 시간을 일정하게 맞추는 게 리듬 회복에 도움이 돼요.','주말에도 기상 시간을 크게 흔들지 않는 것부터 해보세요.'],
