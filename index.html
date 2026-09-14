@@ -4644,14 +4644,9 @@ function getAlmostDonePackInfo(){
 
 function renderQuizBanner(){
   const wrap = document.getElementById('quizBannerWrap');
-  const best = getAlmostDonePackInfo();
-  const progress = best
-    ? `<span class="quiz-mini-pill">🔥 ${escapeHtml(best.label)} · ${best.remaining}곳만 더 가면 완주</span>`
-    : '';
   wrap.innerHTML = `<div class="quiz-banner compact">
     <div class="quiz-banner-main">
       <span>🧩 <b>이 절 어디게?</b> 퀴즈로 재밌게 절 상식 테스트해보세요</span>
-      ${progress}
     </div>
     <button class="btn btn-primary" style="padding:9px 16px;font-size:12.5px;flex-shrink:0;background:var(--moss);box-shadow:0 4px 0 var(--moss-dark);" onclick="openQuizOverlay()">퀴즈 풀기</button>
   </div>`;
@@ -4757,7 +4752,7 @@ function renderGuestAddHint(){
   if(!localMode){ wrap.innerHTML=''; return; }
   if(guestAddHintDismissedThisLoad){ wrap.innerHTML=''; return; }
   wrap.innerHTML = `<div class="explain108-banner">
-    <span>👋 지금은 둘러보기 중이에요. 목록에 없는 절은 화면 오른쪽 <b>아래 + 버튼</b>을 눌러 직접 추가할 수 있고, 방문 표시·사진·메모 저장은 Google 로그인 후에 할 수 있어요.</span>
+    <span>👋 지금은 둘러보기 중이에요. 목록에 없는 절은 화면 오른쪽 <b>아래 + 버튼</b>을 눌러 직접 추가할 수 있고, 방문 표시·메모 저장은 Google 로그인 후에 할 수 있어요. (사진 추가는 저장 공간 준비 중이라 로그인해도 아직은 이용할 수 없어요.)</span>
     <button class="close108" onclick="dismissGuestAddHint()">✕</button>
   </div>`;
 }
@@ -7567,7 +7562,14 @@ function showCelebration(title, sub){
 
 function checkAlmostDoneBanner(){
   const wrap = document.getElementById('almostBannerWrap');
-  if(wrap) wrap.innerHTML = '';
+  const best = getAlmostDonePackInfo();
+  if(wrap){
+    wrap.innerHTML = best
+      ? `<div class="seedbanner" style="background:#fff4e0;border-color:#e8c98a;">
+          <span>🔥 <b>${escapeHtml(best.label)}</b> 코스, <b>${best.remaining}곳</b>만 더 가면 완주예요!</span>
+        </div>`
+      : '';
+  }
   renderQuizBanner();
 }
 
@@ -7832,6 +7834,9 @@ function addFamousTemplesNow(){
 function maybeShowSeedBanner(){
   const wrap = document.getElementById('seedBannerWrap');
   if(Object.keys(destinations).length === 0){
+    const photoNote = localMode
+      ? `<br><b>④ 사진 추가</b> — 방문 표시·메모는 로그인 후 이용할 수 있어요. 사진 추가는 저장 공간을 준비 중이라 아직은 모두에게 준비 중이에요.`
+      : `<br><b>④ 사진 추가</b> — 아직 저장 공간을 준비 중이라, 로그인 여부와 상관없이 잠시 후에 이용할 수 있어요.`;
     wrap.innerHTML = `<div class="seedbanner" style="flex-direction:column;align-items:flex-start;gap:10px;">
       <div>
         <b>아직 목록에 절이 하나도 없어요.</b><br>
@@ -7840,7 +7845,7 @@ function maybeShowSeedBanner(){
       <div style="font-size:13px;line-height:1.7;">
         <b>① 유명한 절부터 빠르게 채우기</b> — 아래 버튼 하나로 불국사·해인사 같은 유명한 절들이 목록에 바로 추가돼요. 가장 쉬운 시작 방법이에요.<br>
         <b>② 테마별 코스로 채우기</b> — 화면 <b>맨 위쪽, 오른쪽에 있는 📥 아이콘</b>을 누르면 "유네스코 산사 7곳", "조계종 8대 총림", "3대 해수관음 성지" 같은 다양한 코스 중 골라서 통째로 불러올 수 있어요.<br>
-        <b>③ 내가 아는 절 직접 추가하기</b> — 목록에 없는, 알고 계신 절이라면 화면 <b>오른쪽 아래 + 버튼</b>을 눌러 이름을 직접 적어 추가할 수 있어요.
+        <b>③ 내가 아는 절 직접 추가하기</b> — 목록에 없는, 알고 계신 절이라면 화면 <b>오른쪽 아래 + 버튼</b>을 눌러 이름을 직접 적어 추가할 수 있어요.${photoNote}
       </div>
       <div style="display:flex;gap:8px;flex-wrap:wrap;">
         <button class="btn btn-primary" style="padding:8px 14px;font-size:12.5px;" onclick="addFamousTemplesNow()">⭐ 유명한 절 바로 추가하기</button>
