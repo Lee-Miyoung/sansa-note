@@ -15,7 +15,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Noto+Serif+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
 
-<meta name="theme-color" content="#151116">
+<meta name="theme-color" content="#17352e">
 <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23d97757'/%3E%3Ctext x='50' y='68' font-size='55' text-anchor='middle'%3E%F0%9F%AA%B7%3C/text%3E%3C/svg%3E">
 <link rel="manifest" href="data:application/manifest+json,%7B%22name%22%3A%22%EC%82%B0%EC%82%AC%EB%85%B8%ED%8A%B8%22%2C%22short_name%22%3A%22%EC%82%B0%EC%82%AC%EB%85%B8%ED%8A%B8%22%2C%22start_url%22%3A%22.%2F%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23151116%22%2C%22theme_color%22%3A%22%23151116%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data%3Aimage%2Fsvg%2Bxml%2C%253Csvg%2520xmlns%3D%2527http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%2527%2520viewBox%3D%25270%25200%2520100%2520100%2527%253E%253Crect%2520width%3D%2527100%2527%2520height%3D%2527100%2527%2520fill%3D%2527%2523151116%2527%2F%253E%253Ctext%2520x%3D%252750%2527%2520y%3D%252768%2527%2520font-size%3D%252760%2527%2520text-anchor%3D%2527middle%2527%2520fill%3D%2527%2523c9942f%2527%253E%25E5%258D%2586%253C%2Ftext%253E%253C%2Fsvg%253E%22%2C%22sizes%22%3A%22192x192%22%2C%22type%22%3A%22image%2Fsvg%2Bxml%22%7D%5D%7D">
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
@@ -1433,6 +1433,311 @@
   to{transform:translate(-50%,-50%) translate(var(--gx),var(--gy)) scale(.15);opacity:0}
 }
 
+
+/* =========================================================
+   SANSA NOTE · VISUAL REFRESH 2026
+   Design-only override. No functions / onclick / ids changed.
+   ========================================================= */
+:root{
+  --cover:#17352e;
+  --cover-deep:#102821;
+  --paper:#f5f4ef;
+  --paper-soft:#fbfaf6;
+  --paper-line:#deddd5;
+  --ink:#202b27;
+  --ink-soft:#6f7974;
+  --stamp:#96584f;
+  --stamp-dark:#744239;
+  --moss:#46695b;
+  --moss-dark:#345246;
+  --gold:#c2a06a;
+  --red:#a45149;
+  --shadow:0 14px 34px rgba(29,42,36,.08);
+}
+html{background:#f5f4ef}
+body{
+  background:
+    radial-gradient(circle at 13% 8%,rgba(194,160,106,.08),transparent 26%),
+    radial-gradient(circle at 88% 20%,rgba(70,105,91,.07),transparent 28%),
+    #f5f4ef!important;
+  color:var(--ink)!important;
+}
+body::before{
+  background:
+    linear-gradient(rgba(255,255,255,.44),rgba(255,255,255,.44)),
+    radial-gradient(rgba(53,82,70,.045) .8px,transparent .9px) 0 0/18px 18px!important;
+  opacity:.64!important;
+}
+#appBgVideo{opacity:.035!important;filter:saturate(.3) contrast(.9)!important}
+
+header.hero{
+  min-height:344px!important;
+  padding:42px 30px 30px!important;
+  border-radius:0 0 34px 34px!important;
+  background:
+    radial-gradient(circle at 78% 18%,rgba(222,190,127,.17),transparent 24%),
+    linear-gradient(112deg,rgba(14,42,34,.96) 0%,rgba(33,65,54,.94) 54%,rgba(42,60,52,.91) 100%),
+    url('hero.jpg') center/cover no-repeat!important;
+  box-shadow:0 16px 42px rgba(22,44,36,.14)!important;
+  border-bottom:1px solid rgba(255,255,255,.16)!important;
+}
+header.hero::after{
+  content:'';
+  position:absolute;inset:0;
+  pointer-events:none;
+  background:
+    linear-gradient(90deg,rgba(10,31,25,.24),transparent 48%),
+    radial-gradient(circle at 94% 72%,rgba(205,171,106,.13),transparent 22%);
+  z-index:0;
+}
+header.hero::before{
+  width:238px!important;
+  height:350px!important;
+  right:max(22px,calc((100vw - 1180px)/2 - 5px))!important;
+  bottom:-34px!important;
+  opacity:.92!important;
+  filter:drop-shadow(0 18px 28px rgba(0,0,0,.28)) saturate(.9)!important;
+  z-index:2!important;
+}
+.hero-inner{
+  max-width:1180px!important;
+  margin:0 auto!important;
+  position:relative!important;
+  z-index:3!important;
+}
+.hero-top{
+  position:relative!important;
+  padding-right:300px!important;
+  min-height:112px!important;
+  gap:20px!important;
+}
+.hero-top>div:first-child{max-width:710px!important}
+.hero-top h1{
+  font-size:51px!important;
+  line-height:1.04!important;
+  letter-spacing:-1.6px!important;
+  margin:0 0 7px!important;
+  color:#fffdf6!important;
+  text-shadow:0 4px 18px rgba(0,0,0,.13)!important;
+}
+.hero-tagline{
+  margin:4px 0 10px!important;
+  color:#e9d9b9!important;
+  font-size:16px!important;
+  line-height:1.4!important;
+  font-style:normal!important;
+  font-weight:700!important;
+  letter-spacing:-.15px!important;
+  text-shadow:none!important;
+}
+.hero-top p{
+  max-width:620px!important;
+  color:rgba(255,255,255,.76)!important;
+  font-size:13.6px!important;
+  line-height:1.7!important;
+  letter-spacing:-.15px!important;
+}
+.hero-top p b{
+  color:#fff!important;
+  border-bottom:1px solid rgba(224,194,133,.75)!important;
+  padding-bottom:1px!important;
+}
+.hip-badge{width:62px!important;height:62px!important;filter:drop-shadow(0 8px 16px rgba(0,0,0,.25))!important}
+.hip-badge svg{width:62px!important;height:62px!important}
+.icon-row{position:absolute!important;top:0!important;right:272px!important;display:flex!important;gap:7px!important}
+.iconbtn{
+  width:38px!important;height:38px!important;border-radius:50%!important;
+  border:1px solid rgba(255,255,255,.30)!important;background:rgba(255,255,255,.10)!important;
+  color:#fff!important;box-shadow:0 6px 18px rgba(0,0,0,.08)!important;backdrop-filter:blur(8px)!important;
+}
+.iconbtn.ib-1,.iconbtn.ib-2,.iconbtn.ib-3{background:rgba(255,255,255,.10)!important;border-color:rgba(255,255,255,.30)!important}
+.iconbtn:hover{background:rgba(255,255,255,.20)!important;transform:translateY(-1px)!important}
+
+.hip-quick-row{
+  display:flex!important;flex-wrap:nowrap!important;gap:8px!important;margin-top:19px!important;
+  width:min(650px,calc(100% - 300px))!important;max-width:650px!important;
+}
+.hip-quick-btn{
+  flex:1 1 0!important;width:auto!important;min-height:52px!important;padding:8px 12px 8px 9px!important;
+  border-radius:15px!important;background:rgba(255,255,255,.085)!important;border:1px solid rgba(255,255,255,.20)!important;
+  box-shadow:none!important;backdrop-filter:blur(10px)!important;gap:9px!important;color:#fff!important;
+}
+.hip-quick-btn:hover{background:rgba(255,255,255,.15)!important;border-color:rgba(223,195,137,.45)!important;transform:translateY(-1px)!important}
+.hip-quick-btn .hq-icon{
+  width:34px!important;height:34px!important;flex:0 0 34px!important;border-radius:11px!important;
+  background:rgba(245,232,203,.12)!important;border:1px solid rgba(255,255,255,.12)!important;font-size:17px!important;
+}
+.hip-quick-btn b{font-size:12px!important;color:#fff!important;letter-spacing:-.1px!important}
+.hip-quick-btn small{font-size:9px!important;color:rgba(255,255,255,.64)!important;margin-top:3px!important}
+
+.hero-badge-row{margin-top:14px!important;gap:7px!important;max-width:650px!important}
+.hero-badge-row>*,.streak-pill,.special-title-pill{border-radius:999px!important}
+#nextLevelCaption{color:rgba(255,255,255,.58)!important;font-size:10px!important;margin-top:6px!important}
+.hero-stats{
+  width:470px!important;max-width:calc(100% - 300px)!important;margin-top:13px!important;padding:11px 14px!important;
+  gap:0!important;flex-wrap:nowrap!important;border-radius:16px!important;border:1px solid rgba(255,255,255,.16)!important;
+  background:rgba(7,28,22,.18)!important;backdrop-filter:blur(9px)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05)!important;
+}
+.hero-stats .stat{flex:1 1 0!important;min-width:0!important;padding:0 14px!important;border-right:1px solid rgba(255,255,255,.13)!important}
+.hero-stats .stat:first-child{padding-left:0!important}
+.hero-stats .stat:last-child{border-right:0!important;padding-right:0!important}
+.hero-stats .stat .num{font-size:27px!important;color:#fffdf7!important;line-height:1.1!important}
+.hero-stats .stat .lbl{color:rgba(255,255,255,.63)!important;font-size:10px!important;line-height:1.4!important;margin-top:3px!important}
+
+#explain108Wrap,#homeGalleryWrap,#funBannerWrap,#triviaBannerWrap,#quizBannerWrap,#suggestBannerWrap,#seedBannerWrap,#seasonBannerWrap,#almostBannerWrap{position:relative;z-index:1}
+.explain108-banner{
+  max-width:1080px!important;margin:18px auto 0!important;border:1px solid #e1ded4!important;
+  background:rgba(255,255,255,.82)!important;color:#626d67!important;border-radius:14px!important;
+  box-shadow:0 6px 20px rgba(30,49,41,.045)!important;font-size:11px!important;
+}
+.explain108-banner b{color:#8a5e3f!important}
+
+.home-gallery{
+  max-width:1080px!important;margin:12px auto 0!important;padding:10px!important;
+  background:rgba(255,255,255,.62)!important;border:1px solid #e4e1d8!important;
+  border-radius:18px!important;box-shadow:0 8px 24px rgba(31,50,42,.05)!important;
+}
+.home-gallery-strip{gap:8px!important;padding-bottom:2px!important}
+.home-gallery-strip .hg-item{border-radius:12px!important;overflow:hidden!important;box-shadow:none!important;border:1px solid rgba(27,50,40,.08)!important}
+.home-gallery-strip .hg-item::after{background:linear-gradient(transparent 52%,rgba(8,22,17,.72))!important}
+.home-gallery-strip .hg-item .hg-name{font-weight:800!important;letter-spacing:-.2px!important}
+
+.fun-banner-row{
+  max-width:1080px!important;margin:14px auto 0!important;padding:0!important;display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:10px!important;
+}
+.fun-banner-btn{
+  position:relative!important;min-height:78px!important;padding:12px 14px!important;border-radius:16px!important;
+  background:#fff!important;color:#27352f!important;border:1px solid #dfdfd8!important;
+  box-shadow:0 5px 16px rgba(35,55,47,.045)!important;grid-template-columns:40px minmax(0,1fr)!important;
+  column-gap:11px!important;transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease!important;
+}
+.fun-banner-btn::before{
+  content:'';position:absolute;left:0;top:14px;bottom:14px;width:3px;border-radius:0 4px 4px 0;
+  background:#b8a680;opacity:.8;
+}
+.fun-banner-btn:hover{transform:translateY(-2px)!important;border-color:#cfd4cf!important;box-shadow:0 10px 24px rgba(35,55,47,.075)!important}
+.fun-banner-btn .fb-icon{
+  width:40px!important;height:40px!important;border-radius:12px!important;background:#f4f2eb!important;
+  border:1px solid #ebe8df!important;font-size:18px!important;
+}
+.fun-banner-btn .fb-title{color:#26332e!important;font-size:13px!important;line-height:1.3!important;font-weight:900!important;letter-spacing:-.15px!important}
+.fun-banner-btn .fb-sub{color:#7b837f!important;font-size:10px!important;line-height:1.35!important;opacity:1!important}
+.fun-banner-btn.roulette::before{background:#c49a55!important}
+.fun-banner-btn.worry::before{background:#557c6d!important}
+.fun-banner-btn.vow::before{background:#a46d76!important}
+.fun-banner-btn.mantra::before{background:#7a6e9e!important}
+.fun-banner-btn.amulet::before{background:#a15f55!important}
+.fun-banner-btn.moktak::before{background:#3f7868!important}
+.fun-banner-btn.playlist::before{background:#596d87!important}
+.fun-banner-btn.roulette,.fun-banner-btn.worry,.fun-banner-btn.vow,.fun-banner-btn.mantra,.fun-banner-btn.amulet,.fun-banner-btn.moktak,.fun-banner-btn.playlist{background:#fff!important;color:#27352f!important}
+.fun-banner-btn.playlist{
+  grid-column:1/-1!important;min-height:62px!important;grid-template-columns:40px minmax(0,1fr) auto!important;
+  background:linear-gradient(90deg,rgba(69,104,91,.045),rgba(194,160,106,.045)),#fff!important;
+}
+.fun-banner-btn.playlist .fb-title,.fun-banner-btn.playlist .fb-sub{white-space:normal!important}
+
+.trivia-banner,.quiz-banner,.suggest-banner,.season-banner,.almost-banner{
+  max-width:1080px!important;border-radius:16px!important;border:1px solid #e1dfd7!important;
+  background:rgba(255,255,255,.84)!important;box-shadow:0 6px 20px rgba(31,50,42,.045)!important;color:#46514c!important;
+}
+.trivia-banner b,.quiz-banner b{color:#3f6759!important}
+.filterbar{background:rgba(251,250,246,.92)!important;border-bottom:1px solid #dfded8!important;backdrop-filter:blur(12px)!important}
+.tab,.chip-toggle,select.stagefilter,.searchbox{border-color:#dcddd7!important}
+.tab.active{background:#46695b!important;border-color:#46695b!important}
+.chip-toggle button.active{background:#46695b!important}
+.btn-primary{background:#46695b!important;box-shadow:0 3px 0 #345246!important}
+.btn-ghost{border-color:#dddcd5!important;box-shadow:0 3px 0 #dddcd5!important}
+
+@media(min-width:901px){.hero-inner{padding:0 12px!important}}
+
+@media(max-width:900px){
+  header.hero{min-height:322px!important;padding:28px 18px 24px!important;border-radius:0 0 26px 26px!important}
+  header.hero::before{width:178px!important;height:286px!important;right:-4px!important;bottom:-30px!important;opacity:.82!important}
+  .hero-top{padding-right:118px!important;min-height:auto!important}
+  .hero-top h1{font-size:36px!important;letter-spacing:-1px!important}
+  .hero-tagline{font-size:13.5px!important}
+  .hero-top p{font-size:11.5px!important;max-width:360px!important}
+  .icon-row{position:static!important;display:flex!important;margin-left:auto!important}
+  .iconbtn{width:34px!important;height:34px!important;font-size:14px!important}
+  .hip-badge{width:50px!important;height:50px!important}.hip-badge svg{width:50px!important;height:50px!important}
+  .hip-quick-row{width:calc(100% - 112px)!important;max-width:520px!important;gap:6px!important;margin-top:14px!important}
+  .hip-quick-btn{min-height:46px!important;padding:7px 8px!important;gap:6px!important}
+  .hip-quick-btn .hq-icon{width:29px!important;height:29px!important;flex-basis:29px!important;font-size:14px!important}
+  .hip-quick-btn b{font-size:10.5px!important}.hip-quick-btn small{font-size:7.5px!important}
+  .hero-badge-row,#nextLevelCaption{max-width:calc(100% - 112px)!important}
+  .hero-stats{width:min(430px,calc(100% - 112px))!important;max-width:calc(100% - 112px)!important}
+  .fun-banner-row{padding:0 14px!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important}
+  .fun-banner-btn.playlist{grid-column:1/-1!important}
+  .home-gallery,.explain108-banner{margin-left:14px!important;margin-right:14px!important}
+}
+
+@media(max-width:560px){
+  body{background:#f7f6f2!important}
+  header.hero{min-height:354px!important;padding:23px 14px 22px!important;border-radius:0 0 24px 24px!important}
+  header.hero::before{width:148px!important;height:246px!important;right:-20px!important;bottom:-26px!important;opacity:.72!important}
+  .hero-top{padding-right:88px!important;display:block!important}
+  .hero-top>div:first-child{max-width:none!important}
+  .hero-top h1{font-size:31px!important;letter-spacing:-.8px!important}
+  .hip-badge{width:43px!important;height:43px!important}.hip-badge svg{width:43px!important;height:43px!important}
+  .hero-tagline{font-size:12.5px!important;margin:2px 0 8px!important}
+  .hero-top p{font-size:10.5px!important;line-height:1.55!important;max-width:230px!important}
+  .icon-row{position:absolute!important;right:0!important;top:0!important;gap:5px!important}
+  .iconbtn{width:31px!important;height:31px!important;font-size:13px!important}
+  .hip-quick-row{width:calc(100% - 72px)!important;max-width:none!important;display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:5px!important;margin-top:13px!important}
+  .hip-quick-btn{width:100%!important;min-height:55px!important;padding:6px 4px!important;flex-direction:column!important;justify-content:center!important;text-align:center!important;gap:3px!important;border-radius:12px!important}
+  .hip-quick-btn .hq-icon{width:25px!important;height:25px!important;flex-basis:25px!important;border-radius:8px!important;font-size:13px!important}
+  .hip-quick-btn>span:last-child{align-items:center!important}.hip-quick-btn b{font-size:9px!important;white-space:normal!important}.hip-quick-btn small{display:none!important}
+  .hero-badge-row{max-width:calc(100% - 76px)!important;margin-top:10px!important;gap:5px!important}
+  #nextLevelCaption{max-width:calc(100% - 76px)!important;font-size:8.5px!important}
+  .hero-stats{width:calc(100% - 76px)!important;max-width:calc(100% - 76px)!important;padding:9px 10px!important;border-radius:13px!important}
+  .hero-stats .stat{padding:0 7px!important}.hero-stats .stat .num{font-size:20px!important}.hero-stats .stat .lbl{font-size:8px!important}
+  .explain108-banner{margin:12px 10px 0!important;padding:10px 11px!important;font-size:9.5px!important}
+  .home-gallery{margin:9px 10px 0!important;padding:7px!important;border-radius:14px!important}
+  .fun-banner-row{padding:0 10px!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:7px!important;margin-top:10px!important}
+  .fun-banner-btn{min-height:72px!important;padding:9px 9px!important;grid-template-columns:34px minmax(0,1fr)!important;column-gap:8px!important;border-radius:13px!important}
+  .fun-banner-btn .fb-icon{width:34px!important;height:34px!important;border-radius:10px!important;font-size:16px!important}
+  .fun-banner-btn .fb-title{font-size:11px!important}.fun-banner-btn .fb-sub{font-size:8.5px!important;line-height:1.3!important}
+  .fun-banner-btn.playlist{min-height:56px!important;grid-column:1/-1!important}
+}
+
+
+/* ===== Beat Shooter hard-hit reliability layer ===== */
+#worrySmashZone .worry-missile{z-index:40!important;pointer-events:none!important}
+#worrySmashZone .worry-enemy{z-index:12!important}
+#worrySmashZone .worry-enemy.targeted .worry-orb{
+  outline:2px solid rgba(255,255,255,.8);
+  outline-offset:3px;
+  box-shadow:0 0 24px rgba(255,255,255,.5),0 0 42px rgba(185,255,132,.28)!important;
+}
+#worrySmashZone .worry-enemy.boss-hit .worry-orb{transform:scale(1.12)!important;filter:brightness(2)!important}
+.beat-hard-explosion{
+  position:absolute;z-index:50;pointer-events:none;
+  width:70px;height:70px;border-radius:50%;
+  transform:translate(-50%,-50%) scale(.15);
+  background:radial-gradient(circle,#fff 0 10%,#fff4a5 11% 24%,#ffbd3f 25% 42%,#ff4f96 43% 60%,rgba(255,79,150,0) 72%);
+  box-shadow:0 0 22px #fff,0 0 52px #ffb938,0 0 78px rgba(255,75,155,.85);
+  animation:beatHardBoom .28s cubic-bezier(.08,.75,.2,1) forwards;
+}
+@keyframes beatHardBoom{
+  0%{transform:translate(-50%,-50%) scale(.12);opacity:1}
+  58%{transform:translate(-50%,-50%) scale(1.15);opacity:1}
+  100%{transform:translate(-50%,-50%) scale(1.65);opacity:0}
+}
+.beat-hard-shard{
+  position:absolute;z-index:51;pointer-events:none;
+  width:7px;height:7px;border-radius:50%;
+  background:#ffd85a;box-shadow:0 0 9px #fff;
+  transform:translate(-50%,-50%);
+  animation:beatHardShard .34s ease-out forwards;
+}
+.beat-hard-shard:nth-of-type(3n){background:#ff68c2}
+.beat-hard-shard:nth-of-type(3n+1){background:#b9ff84}
+@keyframes beatHardShard{
+  to{transform:translate(-50%,-50%) translate(var(--bx),var(--by)) scale(.1);opacity:0}
+}
+
 </style>
 </head>
 <body>
@@ -2324,7 +2629,7 @@
         <button class="club-btn secondary" onclick="fillOracleExample()">🎲 아무 고민이나</button>
       </div>
       <div class="oracle-answer" id="oracleAnswer"><div class="big" id="oracleBig"></div><div class="small" id="oracleSmall"></div></div>
-      <div style="font-size:10.5px;color:#9f8aaa;margin-top:12px;line-height:1.55;">이 기능은 재미와 가벼운 위로를 위한 랜덤 응답 카드예요. 중요한 결정은 현실의 정보와 사람들의 도움도 함께 살펴보세요.</div>
+      <div style="font-size:10.5px;color:#9f8aaa;margin-top:12px;line-height:1.55;">연애·부부·외모·가족·직장·사업·돈·건강·공부·인간관계까지 폭넓게 받아요. 중요한 결정은 현실의 정보와 사람들의 도움도 함께 살펴보세요.</div>
     </div>
   </div>
 </div>
@@ -8079,6 +8384,58 @@ const ORACLE_EXAMPLES = [
   '울고 싶은데 울면 무너질 것 같아 참아요.',
   '괜찮다는 말을 듣고 싶은데 누구에게 말해야 할지 모르겠어요.'
 ];
+
+// 2026-09 · '아무 고민이나' 확장: 아래 10개 묶음 × 100개 = 정확히 1,000개 추가
+const ORACLE_EXTRA_PACKS = [
+  {
+    a:['남자친구가 ','여자친구가 ','남편이 ','아내가 ','배우자가 ','연인이 ','썸남이 ','썸녀가 ','결혼할 사람이 ','오래 만난 사람이 '],
+    b:['살이 많이 쪄서 제 마음이 복잡해요.','예전보다 외모가 달라져서 끌림이 줄어든 것 같아요.','못생겨 보인다는 생각이 들어 제가 나쁜 사람 같아요.','몸매가 제 취향과 달라졌는데 어떻게 말해야 할지 모르겠어요.','외모 이야기를 꺼내면 상처받을까 봐 고민돼요.','건강이 걱정되지만 살 이야기를 어떻게 해야 할지 모르겠어요.','꾸미지 않는 모습에 자꾸 불만이 생겨요.','사진을 찍을 때 외모가 신경 쓰여 마음이 복잡해요.','외적인 끌림이 예전 같지 않아 사랑이 식은 건지 모르겠어요.','외모보다 사람을 봐야 한다는 생각 때문에 제 감정을 숨기고 있어요.']
+  },
+  {
+    a:['남자친구와 ','여자친구와 ','남편과 ','아내와 ','배우자와 ','연인과 ','썸 타는 사람과 ','결혼할 사람과 ','오래 만난 사람과 ','헤어진 사람과 '],
+    b:['대화가 자꾸 엇갈려요.','연락 문제로 계속 싸워요.','스킨십 온도가 달라 고민돼요.','돈 쓰는 방식이 너무 달라요.','가족 문제로 자꾸 부딪혀요.','결혼 생각이 서로 달라 불안해요.','혼자만 노력하는 것 같아 지쳐요.','신뢰가 예전 같지 않아 걱정돼요.','사소한 말에도 상처를 많이 받아요.','같이 있어도 외로운 느낌이 들어요.']
+  },
+  {
+    a:['회사에서 ','직장에서 ','팀에서 ','새 직장에서 ','오래 다닌 회사에서 ','상사와 일하면서 ','동료들과 일하면서 ','재택근무를 하면서 ','프리랜서로 일하면서 ','대표로 일하면서 '],
+    b:['인정받지 못하는 것 같아 속상해요.','업무가 너무 많아 번아웃이 왔어요.','실수가 반복돼 자신감이 떨어져요.','눈치를 너무 많이 보게 돼요.','퇴사 생각이 자꾸 나요.','이직할지 버틸지 모르겠어요.','사람 관계가 일보다 더 힘들어요.','성과 압박 때문에 잠이 안 와요.','일과 삶의 경계가 사라졌어요.','잘하고 있는데도 계속 부족한 기분이에요.']
+  },
+  {
+    a:['엄마와 ','아빠와 ','부모님과 ','딸과 ','아들과 ','형제와 ','자매와 ','시부모님과 ','장인·장모님과 ','가족 전체와 '],
+    b:['대화하면 자꾸 싸우게 돼요.','돈 문제로 마음이 무거워요.','기대가 너무 커서 부담돼요.','거리를 두고 싶은데 죄책감이 들어요.','서운했던 일이 오래 남아 있어요.','간병과 돌봄 때문에 너무 지쳤어요.','제 선택을 이해하지 못해 답답해요.','비교하는 말에 상처를 받아요.','명절과 모임만 생각하면 스트레스예요.','사랑하지만 같이 있으면 너무 피곤해요.']
+  },
+  {
+    a:['생활비가 ','대출이 ','빚이 ','저축이 ','노후 준비가 ','사업 자금이 ','매출이 ','월급이 ','투자 손실이 ','큰 지출이 '],
+    b:['너무 부담돼서 잠이 안 와요.','생각만 해도 가슴이 답답해요.','앞으로 더 나빠질까 봐 무서워요.','가족에게 말하기가 어렵습니다.','계획대로 안 돼서 자책하게 돼요.','남들과 비교하면 뒤처진 느낌이에요.','어디서부터 정리해야 할지 모르겠어요.','결정을 잘못할까 봐 손을 못 대겠어요.','하루 종일 머릿속에서 떠나지 않아요.','때문에 하고 싶은 일을 포기해야 할 것 같아요.']
+  },
+  {
+    a:['제 외모가 ','제 몸매가 ','제 체중이 ','제 피부가 ','제 나이가 ','사진 속 제 모습이 ','거울 속 제 모습이 ','제 키가 ','제 얼굴이 ','제 체형이 '],
+    b:['마음에 들지 않아 자신감이 떨어져요.','남들과 비교돼서 자꾸 위축돼요.','사람들이 평가할까 봐 신경 쓰여요.','연애할 때 단점이 될까 봐 걱정돼요.','꾸며도 만족이 안 돼요.','칭찬을 들어도 믿기지 않아요.','자꾸 단점만 보이게 돼요.','SNS를 보면 더 싫어져요.','이것 때문에 제 가치까지 낮게 느껴져요.','있는 그대로 받아들이는 방법을 모르겠어요.']
+  },
+  {
+    a:['시험이 ','면접이 ','취업 준비가 ','자격증 공부가 ','토익 공부가 ','대학 생활이 ','전공 공부가 ','대학원 준비가 ','공무원 시험이 ','새로운 공부가 '],
+    b:['생각처럼 안 돼서 불안해요.','다가오는데 집중이 안 돼요.','길어져서 너무 지쳤어요.','남들과 비교돼서 조급해요.','실패할까 봐 시작하기가 무서워요.','결과를 기다리는 시간이 괴로워요.','제 길이 맞는지 모르겠어요.','부모님 기대 때문에 부담돼요.','한 번 실패한 뒤 자신감이 안 돌아와요.','포기할지 한 번 더 해볼지 고민돼요.']
+  },
+  {
+    a:['잠을 ','운동을 ','건강검진을 ','병원 진료를 ','식사를 ','휴식을 ','약 복용을 ','건강 관리를 ','통증 관리를 ','체력 관리를 '],
+    b:['제대로 못 챙겨서 걱정돼요.','자꾸 미루게 돼요.','생각하면 겁부터 나요.','꾸준히 하는 게 너무 어려워요.','일 때문에 계속 뒤로 미뤄요.','잘해야 한다는 압박 때문에 더 힘들어요.','혼자 관리하려니 지쳐요.','결과가 나쁠까 봐 불안해요.','조금만 이상해도 큰 병일까 걱정돼요.','어디서부터 바꿔야 할지 모르겠어요.']
+  },
+  {
+    a:['친구에게 ','동료에게 ','가족에게 ','모임 사람들에게 ','오래된 친구에게 ','새로 만난 사람에게 ','이웃에게 ','선배에게 ','후배에게 ','가까운 사람에게 '],
+    b:['싫다고 말하지 못해 힘들어요.','거절하면 미움받을까 봐 무서워요.','제 의견을 말하면 분위기가 깨질까 걱정돼요.','계속 맞춰주다 보니 지쳤어요.','서운한 걸 말해야 할지 고민돼요.','먼저 연락하기가 자존심 상해요.','오해받는 것 같아 속상해요.','선을 어디까지 그어야 할지 모르겠어요.','상처받기 싫어서 먼저 멀어지게 돼요.','좋은 사람으로 보이려 너무 애쓰는 것 같아요.']
+  },
+  {
+    a:['나이가 들수록 ','아이들이 독립하면서 ','은퇴를 생각하면서 ','부모님이 늙어가면서 ','이사를 앞두고 ','새 일을 시작하려니 ','관계가 끝난 뒤 ','소중한 사람을 떠나보낸 뒤 ','인생 후반전을 생각하면 ','혼자 있는 시간이 늘면서 '],
+    b:['앞으로가 막막하게 느껴져요.','제 역할이 사라지는 느낌이에요.','새로운 시작이 너무 늦은 것 같아요.','외로움이 커지는 것 같아요.','잘 살아온 건지 자꾸 돌아보게 돼요.','무엇을 즐기며 살아야 할지 모르겠어요.','후회가 자꾸 떠올라요.','마음을 어디에 두어야 할지 모르겠어요.','변화를 받아들이기가 어렵습니다.','다시 제 삶을 만드는 방법을 모르겠어요.']
+  }
+];
+(function addThousandOracleExamples(){
+  const extra=[];
+  ORACLE_EXTRA_PACKS.forEach(pack=>{
+    pack.a.forEach(a=>pack.b.forEach(b=>extra.push(a+b)));
+  });
+  ORACLE_EXAMPLES.push(...extra.slice(0,1000));
+})();
+
 function openOracleOverlay(){
   const ov=document.getElementById('oracleOverlay'); if(!ov) return; ov.classList.add('show');
   setTimeout(()=>document.getElementById('oracleInput')?.focus(),120);
@@ -8195,7 +8552,21 @@ const ORACLE_RESPONSE_BANK = [
     ['모든 걸 확신한 뒤 움직이는 사람은 거의 없어요.','70%쯤 괜찮다면 작은 시험부터 해보세요. 한 번에 인생 전체를 결정할 필요는 없어요.']
   ]}
 ];
+const PARTNER_APPEARANCE_REPLIES = [
+  ['외모에 대한 마음이 흔들릴 수는 있지만, 상대를 한 단어로 평가하면 관계가 더 아파질 수 있어요.','“뚱뚱하다·못생겼다”는 표현보다 내가 실제로 걱정하는 게 외적 끌림의 변화인지, 건강인지, 관계의 권태인지 먼저 구분해보세요. 말해야 한다면 상대의 몸을 평가하기보다 내 감정과 관계의 필요를 존중 있게 이야기하는 편이 좋아요.'],
+  ['사랑과 외적인 끌림은 현실적으로 함께 존재하는 문제예요. 그렇다고 상대의 몸이나 얼굴이 존중받을 가치까지 결정하지는 않아요.','외모를 바꾸라고 요구하기 전에 “요즘 우리 사이에서 내가 무엇을 그리워하는지”를 먼저 살펴보세요. 데이트 방식·친밀감·건강 습관처럼 둘이 함께 바꿀 수 있는 문제라면 비난보다 제안으로 이야기해보세요.'],
+  ['상대를 사랑하면서도 외모가 신경 쓰이는 마음 때문에 죄책감이 들 수 있어요.','감정 자체를 억지로 부정할 필요는 없지만, 그 감정을 상대의 상처로 전달할 필요도 없어요. 관계에서 정말 중요한 불만이 무엇인지 적어보고 외모 문제와 관계 문제를 분리해서 생각해보세요.'],
+  ['건강이 걱정되는 것과 몸을 평가하는 것은 다른 이야기예요.','건강 때문이라면 체중이나 외모를 지적하기보다 “같이 산책할까, 건강검진 같이 받을까”처럼 행동을 함께 제안해보세요. 상대의 몸에 대한 결정권은 상대에게 있다는 점도 지켜주는 게 좋아요.'],
+  ['끌림이 예전과 달라졌다면 그 사실을 무시하기보다 이유를 천천히 살펴볼 필요가 있어요.','익숙함, 쌓인 서운함, 스킨십 감소, 생활 스트레스가 외모 문제처럼 느껴지는 경우도 있어요. 바로 상처 주는 말을 하기 전에 관계 전체를 먼저 점검해보세요.'],
+  ['“예뻐야, 잘생겨야 사랑할 수 있다”는 기준과 실제 관계의 만족은 꼭 같은 것은 아니에요.','내가 이 사람과 있을 때 존중받는지, 편안한지, 함께 성장하는지까지 같이 보세요. 외모 하나로 관계 전체의 결론을 서두르지 않아도 됩니다.']
+];
+
 function pickOracleReply(t){
+  const partner=/(남친|여친|남자친구|여자친구|남편|아내|와이프|배우자|연인|썸남|썸녀|결혼할 사람)/.test(t);
+  const appearance=/(뚱뚱|살이 쪘|살쪘|살찐|못생|외모|몸매|체중|얼굴|꾸미지|매력 없|끌림이 줄|안 예뻐|안 잘생)/.test(t);
+  if(partner&&appearance){
+    return PARTNER_APPEARANCE_REPLIES[Math.floor(Math.random()*PARTNER_APPEARANCE_REPLIES.length)];
+  }
   const hit = ORACLE_RESPONSE_BANK.find(x=>x.re.test(t));
   if(hit) return hit.replies[Math.floor(Math.random()*hit.replies.length)];
   return null;
@@ -8327,9 +8698,17 @@ function beatSpeedLabel(){const t=beatLevelTuning(),v=(t.speed+Math.min(.42,(wor
 function beatLevelRush(){beatRushUntil=performance.now()+1250;beatLifeGraceUntil=Math.max(beatLifeGraceUntil,performance.now()+850);const z=document.getElementById('worrySmashZone');if(z){const e=document.createElement('div');e.className='beat-rush-pop';e.innerHTML=`LEVEL ${beatLevel} RUSH<small>SPEED ×${beatSpeedLabel()}</small>`;z.appendChild(e);setTimeout(()=>e.remove(),1100)}beatConfettiBurst(38);document.querySelectorAll('#worrySmashZone .worry-enemy:not(.smash)').forEach(e=>e.classList.add('rush'));setTimeout(()=>document.querySelectorAll('#worrySmashZone .worry-enemy').forEach(e=>e.classList.remove('rush')),900);}
 
 function initWorrySmash(){
-  const zone=document.getElementById('worrySmashZone');if(!zone)return;stopWorryShooter();clearWorryField();worrySmashTotal=0;worryWave=1;worryEnemySerial=0;worrySpawnClock=0;beatLifeGraceUntil=performance.now()+900;lockBeatDefenseLine();
-  const cnt=document.getElementById('worrySmashCount');if(cnt)cnt.textContent='0';const wave=document.getElementById('worryWave');if(wave)wave.textContent='WAVE 1';
-  for(let i=0;i<3;i++)spawnWorryOrb(i*230);worryGameRunning=true;worryGameLast=performance.now();worryGameTimer=requestAnimationFrame(worryShooterTick);
+  const zone=document.getElementById('worrySmashZone');if(!zone)return;
+  stopWorryShooter();clearWorryField();
+  worrySmashTotal=0;worryWave=1;worryEnemySerial=0;worrySpawnClock=0;
+  beatLifeGraceUntil=performance.now()+1400;lockBeatDefenseLine();
+  const cnt=document.getElementById('worrySmashCount');if(cnt)cnt.textContent='0';
+  const wave=document.getElementById('worryWave');if(wave)wave.textContent='WAVE 1';
+
+  // 시작할 때 6개 레인에 하나씩 보여줘서 어떤 버튼을 눌러야 하는지 명확하게 한다.
+  BEAT_WEAPON_KEYS.forEach((key,i)=>spawnWorryOrb(i*90,false,key));
+  worryGameRunning=true;worryGameLast=performance.now();
+  worryGameTimer=requestAnimationFrame(worryShooterTick);
 }
 function stopWorryShooter(){worryGameRunning=false;if(worryGameTimer){cancelAnimationFrame(worryGameTimer);worryGameTimer=null;}}
 function laneX(zone,lane,enemyWidth=72){const laneW=zone.clientWidth/6;return lane*laneW+(laneW-enemyWidth)/2;}
@@ -8364,74 +8743,61 @@ function worryShooterTick(ts){
 }
 function nearestEnemyInLane(kind){
   const cfg=BEAT_WEAPONS[kind];if(!cfg)return null;
-  const arr=[...document.querySelectorAll('#worrySmashZone .worry-enemy:not(.smash)')].filter(e=>e.dataset.weapon===kind&&e.dataset.locked!=='1');
-  if(!arr.length)return null;return arr.sort((a,b)=>parseFloat(b.dataset.y||0)-parseFloat(a.dataset.y||0))[0];
+  const enemies=[...document.querySelectorAll('#worrySmashZone .worry-enemy:not(.smash)')]
+    .filter(e=>Number(e.dataset.lane)===cfg.lane && e.dataset.locked!=='1');
+  if(!enemies.length)return null;
+  return enemies.sort((a,b)=>parseFloat(b.dataset.y||0)-parseFloat(a.dataset.y||0))[0];
 }
 function fireStraightLane(kind,btn){
   const zone=document.getElementById('worrySmashZone'),cfg=BEAT_WEAPONS[kind];
   if(!zone||!cfg||beatLives<=0)return;
+
   beatShots++;scheduleBeatHud();
-
-  const enemy=nearestEnemyInLane(kind);
-  const laneW=zone.clientWidth/6,sx=cfg.lane*laneW+laneW/2,sy=zone.clientHeight-18;
-
   directBeatGestureTone();unlockIOSMedia();unlockHipAudio().then(updateBeatAudioState);
-  synthTone(950,.045,'square',.045);
+
+  const laneW=zone.clientWidth/6;
+  const sx=cfg.lane*laneW+laneW/2;
+  const sy=Math.max(80,(beatDefenseY||zone.clientHeight-28)-2);
+  const enemy=nearestEnemyInLane(kind);
+
+  // 항상 버튼 바로 위에서 직선 발사
+  const missile=document.createElement('i');
+  missile.className='worry-missile weapon-'+kind;
+  missile.style.cssText=`left:${sx-3}px;top:${sy-17}px;z-index:40;opacity:1;`;
+  zone.appendChild(missile);
 
   if(!enemy){
-    // 빈 레인: 미사일은 발사되지만 점수/격추 없음
-    const miss=document.createElement('i');
-    miss.className='worry-missile weapon-'+kind;
-    miss.style.left=(sx-3)+'px';miss.style.top=(sy-18)+'px';miss.style.zIndex='30';
-    zone.appendChild(miss);
-    miss.style.transition='transform 180ms linear, opacity 180ms linear';
-    requestAnimationFrame(()=>{miss.style.transform='translateY(-180px) scaleY(1.4)';miss.style.opacity='.25';});
-    setTimeout(()=>miss.remove(),210);
-    resetComboForMiss(btn,'이 레인에 맞는 번뇌가 없어요');
+    missile.style.transition='transform 150ms linear,opacity 150ms linear';
+    requestAnimationFrame(()=>requestAnimationFrame(()=>{
+      missile.style.transform='translateY(-150px) scaleY(1.5)';
+      missile.style.opacity='.15';
+    }));
+    setTimeout(()=>missile.remove(),175);
+    resetComboForMiss(btn,'지금 이 레인에는 맞힐 번뇌가 없어요');
     return;
   }
 
   enemy.dataset.locked='1';
   enemy.classList.add('targeted');
 
-  const er=enemy.getBoundingClientRect(),zr=zone.getBoundingClientRect();
-  const tx=er.left-zr.left+er.width/2;
-  const ty=er.top-zr.top+er.height*.38;
+  const y=parseFloat(enemy.dataset.y||34);
+  const enemyH=enemy.classList.contains('boss')?92:78;
+  const ty=y+enemyH*.38;
+  const dy=ty-sy;
+  const duration=Math.max(90,Math.min(190,Math.abs(dy)*.34));
 
-  const missile=document.createElement('i');
-  missile.className='worry-missile weapon-'+kind;
-  missile.style.left=(sx-3)+'px';
-  missile.style.top=(sy-18)+'px';
-  missile.style.zIndex='30';
-  missile.style.willChange='transform,opacity';
-  zone.appendChild(missile);
-
-  const dx=tx-sx,dy=ty-sy;
-  const dist=Math.hypot(dx,dy);
-  const dur=Math.max(110,Math.min(240,dist*.46));
-
-  missile.style.transition=`transform ${dur}ms linear, opacity ${dur}ms linear`;
+  missile.style.transition=`transform ${duration}ms linear`;
   requestAnimationFrame(()=>requestAnimationFrame(()=>{
-    missile.style.transform=`translate(${dx}px,${dy}px) scaleY(1.35)`;
-    missile.style.opacity='1';
+    missile.style.transform=`translateY(${dy}px) scaleY(1.55)`;
   }));
 
-  let resolved=false;
-  const resolveHit=()=>{
-    if(resolved)return; resolved=true;
+  // Safari animation/transition 이벤트에 기대지 않고 정해진 시간에 무조건 명중 처리
+  setTimeout(()=>{
     missile.remove();
-    if(enemy&&enemy.isConnected&&!enemy.classList.contains('smash')){
-      const r2=enemy.getBoundingClientRect(),z2=zone.getBoundingClientRect();
-      const hx=r2.left-z2.left+r2.width/2,hy=r2.top-z2.top+r2.height*.38;
-      hitWorryEnemy(enemy,hx,hy,kind);
-    }else{
-      if(enemy){enemy.dataset.locked='0';enemy.classList.remove('targeted');}
-      resetComboForMiss(btn,'타깃을 놓쳤어요');
-    }
-  };
-
-  // Safari/iPad에서 transitionend/onfinish 누락돼도 무조건 명중 판정
-  setTimeout(resolveHit,dur+24);
+    if(!enemy.isConnected || enemy.classList.contains('smash'))return;
+    const currentY=parseFloat(enemy.dataset.y||y);
+    forceBeatHit(enemy,sx,currentY+enemyH*.38,kind);
+  },duration+18);
 }
 function guaranteedBeatExplosion(zone,cx,cy,big=false){
   if(!zone)return;
@@ -8453,16 +8819,86 @@ function guaranteedBeatExplosion(zone,cx,cy,big=false){
   }
   setTimeout(()=>flash.remove(),360);
 }
+function forceBeatHit(enemy,cx,cy,kind){
+  if(!enemy||!enemy.isConnected||enemy.classList.contains('smash'))return;
+  const zone=document.getElementById('worrySmashZone');if(!zone)return;
+
+  // 레인은 버튼과 1:1 고정. 다른 버튼이면 여기까지 올 수 없지만 방어 코드 유지.
+  if(enemy.dataset.weapon!==kind){
+    enemy.dataset.locked='0';enemy.classList.remove('targeted');
+    resetComboForMiss(document.querySelector(`.beat-pad[data-weapon="${kind}"]`),'다른 종류의 번뇌예요');
+    return;
+  }
+
+  let hp=Math.max(0,Number(enemy.dataset.hp||1)-1);
+  enemy.dataset.hp=String(hp);
+
+  // 브라우저 종류와 무관하게 즉시 보이는 폭발
+  const burst=document.createElement('div');
+  burst.className='beat-hard-explosion';
+  burst.style.left=cx+'px';burst.style.top=cy+'px';
+  zone.appendChild(burst);
+  for(let i=0;i<14;i++){
+    const p=document.createElement('i');p.className='beat-hard-shard';
+    const a=Math.PI*2*i/14+(Math.random()-.5)*.35;
+    const d=28+Math.random()*44;
+    p.style.left=cx+'px';p.style.top=cy+'px';
+    p.style.setProperty('--bx',(Math.cos(a)*d)+'px');
+    p.style.setProperty('--by',(Math.sin(a)*d)+'px');
+    zone.appendChild(p);setTimeout(()=>p.remove(),360);
+  }
+  setTimeout(()=>burst.remove(),300);
+  noiseHit(.04,.07);synthTone(190,.07,'sawtooth',.07);
+
+  if(hp>0){
+    const bar=enemy.querySelector('.worry-boss-hp i');
+    if(bar)bar.style.width=(hp/Number(enemy.dataset.maxHp||4)*100)+'%';
+    enemy.dataset.locked='0';enemy.classList.remove('targeted');
+    enemy.classList.add('boss-hit');setTimeout(()=>enemy.classList.remove('boss-hit'),130);
+    beatScore+=25;
+    const sc=document.getElementById('beatScore');if(sc)sc.textContent=beatScore.toLocaleString();
+    return;
+  }
+
+  forceBeatExplodeEnemy(enemy);
+}
+
+function forceBeatExplodeEnemy(enemy){
+  if(!enemy||enemy.classList.contains('smash'))return;
+  const wasBoss=enemy.classList.contains('boss');
+  enemy.classList.add('smash');
+  enemy.dataset.locked='1';
+
+  // CSS 애니메이션이 실패해도 inline 스타일로 반드시 사라짐
+  const orb=enemy.querySelector('.worry-orb');
+  if(orb){
+    orb.style.transition='transform 160ms ease-out,opacity 160ms ease-out,filter 160ms ease-out';
+    orb.style.transform='scale(1.55)';
+    orb.style.filter='brightness(3.2) saturate(2)';
+    setTimeout(()=>{
+      orb.style.transform='scale(.01)';
+      orb.style.opacity='0';
+      orb.style.filter='brightness(4) blur(6px)';
+    },35);
+  }
+
+  registerWorryKill(enemy);
+  worrySmashTotal++;
+  const cnt=document.getElementById('worrySmashCount');if(cnt)cnt.textContent=worrySmashTotal;
+
+  // 격추된 레인은 잠깐 뒤 새 번뇌를 보충
+  const key=enemy.dataset.weapon||'mok';
+  setTimeout(()=>{
+    enemy.remove();
+    if(beatLives>0 && document.getElementById('beatLabOverlay')?.classList.contains('show')){
+      spawnWorryOrb(180,false,key);
+    }
+    if(wasBoss){beatPop('💥 BOSS BREAK','beat-reward-pop','대왕 번뇌 격파');beatConfettiBurst(24);}
+  },175);
+}
+
 function hitWorryEnemy(enemy,cx,cy,kind='mok'){
-  if(!enemy||enemy.classList.contains('smash'))return;const zone=document.getElementById('worrySmashZone');if(!zone)return;
-  if(enemy.dataset.weapon!==kind){enemy.dataset.locked='0';enemy.classList.remove('targeted');resetComboForMiss(document.querySelector(`.beat-pad[data-weapon="${kind}"]`),'버튼과 번뇌 종류가 달라요');return;}
-  let hp=Math.max(0,parseInt(enemy.dataset.hp||'1',10)-1);enemy.dataset.hp=String(hp);
-  guaranteedBeatExplosion(zone,cx,cy,hp===0&&enemy.classList.contains('boss'));
-  const ring=document.createElement('i');ring.className='worry-hit-ring';ring.style.left=(cx-10)+'px';ring.style.top=(cy-10)+'px';zone.appendChild(ring);setTimeout(()=>ring.remove(),450);
-  const boom=document.createElement('i');boom.className='worry-explosion';boom.style.left=cx+'px';boom.style.top=cy+'px';zone.appendChild(boom);setTimeout(()=>boom.remove(),520);
-  noiseHit(.045,.07);synthTone(180,.08,'sawtooth',.08);for(let i=0;i<10;i++){const sh=document.createElement('i');sh.className='worry-shard';sh.style.left=cx+'px';sh.style.top=cy+'px';const a=Math.random()*Math.PI*2,d=22+Math.random()*48;sh.style.setProperty('--dx',Math.cos(a)*d+'px');sh.style.setProperty('--dy',Math.sin(a)*d+'px');sh.style.color=['#ff62bc','#b9ff84','#ffd56a','#9bc7ff'][i%4];zone.appendChild(sh);setTimeout(()=>sh.remove(),620)}
-  if(hp>0){const bar=enemy.querySelector('.worry-boss-hp i');if(bar)bar.style.width=(hp/parseInt(enemy.dataset.maxHp,10)*100)+'%';enemy.dataset.locked='0';enemy.classList.remove('targeted');beatScore+=25;const s=document.getElementById('beatScore');if(s)s.textContent=beatScore.toLocaleString();const bm=document.getElementById('beatEventMain'),bs=document.getElementById('beatEventSub');if(bm)bm.textContent='BOSS HIT';if(bs)bs.textContent=hp+'발 남음';return;}
-  smashWorryOrb(enemy,true);
+  forceBeatHit(enemy,cx,cy,kind);
 }
 function registerWorryKill(enemy){
   const now=Date.now();beatCombo=(now-beatLastHit<1800)?beatCombo+1:1;beatLastHit=now;beatHits++;beatBestCombo=Math.max(beatBestCombo,beatCombo);
@@ -8487,32 +8923,13 @@ function registerWorryKill(enemy){
 }
 function smashWorryOrb(enemy,manual=false){
   if(!enemy||enemy.classList.contains('smash'))return;
-  enemy.classList.add('smash');enemy.dataset.locked='1';
-  const wasBoss=enemy.classList.contains('boss');
-  const orb=enemy.querySelector('.worry-orb');
-
-  if(orb){
-    orb.style.transition='transform .18s ease-out,opacity .18s ease-out,filter .18s ease-out';
-    orb.style.transform='scale(1.35)';
-    orb.style.filter='brightness(3) saturate(2)';
-    requestAnimationFrame(()=>requestAnimationFrame(()=>{
-      orb.style.transform='scale(.02)';
-      orb.style.opacity='0';
-      orb.style.filter='brightness(4) blur(5px)';
-    }));
+  if(manual) forceBeatExplodeEnemy(enemy);
+  else{
+    enemy.classList.add('smash');
+    const orb=enemy.querySelector('.worry-orb');
+    if(orb){orb.style.opacity='0';orb.style.transform='scale(.01)';}
+    setTimeout(()=>enemy.remove(),80);
   }
-
-  worrySmashTotal++;
-  const cnt=document.getElementById('worrySmashCount');if(cnt)cnt.textContent=worrySmashTotal;
-  const wave=document.getElementById('worryWave');if(wave)wave.textContent='WAVE '+worryWave;
-  const msg=document.getElementById('releaseMsg');if(msg)msg.textContent='💥 격추 성공 · 같은 패드 적중';
-
-  if(manual)registerWorryKill(enemy);
-
-  setTimeout(()=>{
-    enemy.remove();
-    if(wasBoss){beatPop('💥 대왕 번뇌 격파!');beatConfettiBurst(24);}
-  },190);
 }
 function smashNearestWorry(){/* 사용하지 않음: 패드-레인 일치만 허용 */}
 function smashAllWorries(noScore=true){
