@@ -18,7 +18,25 @@
 <meta name="theme-color" content="#17352e">
 <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23d97757'/%3E%3Ctext x='50' y='68' font-size='55' text-anchor='middle'%3E%F0%9F%AA%B7%3C/text%3E%3C/svg%3E">
 <link rel="manifest" href="data:application/manifest+json,%7B%22name%22%3A%22%EC%82%B0%EC%82%AC%EB%85%B8%ED%8A%B8%22%2C%22short_name%22%3A%22%EC%82%B0%EC%82%AC%EB%85%B8%ED%8A%B8%22%2C%22start_url%22%3A%22.%2F%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23151116%22%2C%22theme_color%22%3A%22%23151116%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data%3Aimage%2Fsvg%2Bxml%2C%253Csvg%2520xmlns%3D%2527http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%2527%2520viewBox%3D%25270%25200%2520100%2520100%2527%253E%253Crect%2520width%3D%2527100%2527%2520height%3D%2527100%2527%2520fill%3D%2527%2523151116%2527%2F%253E%253Ctext%2520x%3D%252750%2527%2520y%3D%252768%2527%2520font-size%3D%252760%2527%2520text-anchor%3D%2527middle%2527%2520fill%3D%2527%2523c9942f%2527%253E%25E5%258D%2586%253C%2Ftext%253E%253C%2Fsvg%253E%22%2C%22sizes%22%3A%22192x192%22%2C%22type%22%3A%22image%2Fsvg%2Bxml%22%7D%5D%7D">
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js">
+window.addEventListener('beforeunload',()=>{
+  try{
+    if(document.getElementById('beatLabOverlay')?.classList.contains('show') && beatLives>0)saveBeatRun(true);
+  }catch(_){}
+});
+window.addEventListener('load',()=>{
+  setTimeout(()=>{
+    const s=loadBeatRun();
+    if(!s)return;
+    const authVisible=getComputedStyle(document.getElementById('authScreen')||document.body).display!=='none';
+    const adminVisible=getComputedStyle(document.getElementById('adminNoticeScreen')||document.body).display!=='none';
+    if(!authVisible&&!adminVisible&&!document.getElementById('beatLabOverlay')?.classList.contains('show')){
+      openBeatLab(false);
+    }
+  },1200);
+});
+
+</script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -2161,6 +2179,297 @@ header.hero::before{
   transition:opacity .08s linear,transform .08s linear,filter .08s linear!important;
 }
 
+
+/* ===== Header quick tools · refined color identity ===== */
+.hip-quick-row{
+  gap:9px!important;
+}
+.hip-quick-btn{
+  position:relative!important;
+  overflow:hidden!important;
+  border:1px solid rgba(255,255,255,.18)!important;
+  background:rgba(255,255,255,.075)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 7px 20px rgba(0,0,0,.07)!important;
+}
+.hip-quick-btn::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
+  background:var(--quick-accent,#d6bd83);
+}
+.hip-quick-btn::after{
+  content:'';position:absolute;width:78px;height:78px;border-radius:50%;
+  right:-34px;top:-42px;background:var(--quick-glow,rgba(214,189,131,.12));
+  filter:blur(2px);pointer-events:none;
+}
+.hip-quick-btn.worry-q{--quick-accent:#d5a660;--quick-glow:rgba(213,166,96,.22)}
+.hip-quick-btn.breath-q{--quick-accent:#7ca99a;--quick-glow:rgba(124,169,154,.22)}
+.hip-quick-btn.moktak-q{--quick-accent:#b67b72;--quick-glow:rgba(182,123,114,.20)}
+.hip-quick-btn.worry-q .hq-icon{
+  background:linear-gradient(145deg,rgba(213,166,96,.22),rgba(213,166,96,.07))!important;
+  color:#f4d79d!important;
+}
+.hip-quick-btn.breath-q .hq-icon{
+  background:linear-gradient(145deg,rgba(124,169,154,.24),rgba(124,169,154,.07))!important;
+  color:#c4e3d8!important;
+}
+.hip-quick-btn.moktak-q .hq-icon{
+  background:linear-gradient(145deg,rgba(182,123,114,.24),rgba(182,123,114,.07))!important;
+  color:#e9c2ba!important;
+}
+.hip-quick-btn:hover{
+  background:rgba(255,255,255,.12)!important;
+  border-color:rgba(255,255,255,.28)!important;
+  transform:translateY(-2px)!important;
+}
+.hip-quick-btn b{position:relative;z-index:2}
+.hip-quick-btn small{position:relative;z-index:2}
+
+/* game dopamine, still no layout shift */
+#beatLabOverlay.combo10 .modal{
+  box-shadow:0 26px 80px rgba(0,0,0,.48),0 0 0 1px rgba(213,185,116,.08),0 0 45px rgba(213,185,116,.08)!important;
+}
+#beatLabOverlay.combo20 .modal{
+  box-shadow:0 26px 80px rgba(0,0,0,.48),0 0 0 1px rgba(117,171,145,.12),0 0 62px rgba(117,171,145,.12)!important;
+}
+#beatLabOverlay.lotus-jackpot .modal{
+  animation:lotusJackpotGlow .85s ease-out!important;
+}
+@keyframes lotusJackpotGlow{
+  0%,100%{filter:none}
+  35%{filter:brightness(1.16) saturate(1.18)}
+  55%{filter:brightness(1.07)}
+}
+#beatLabOverlay.combo20 #worrySmashZone{
+  background:
+    radial-gradient(circle at 50% 100%,rgba(80,128,105,.12),transparent 42%),
+    linear-gradient(to bottom,rgba(255,255,255,.018),transparent 20%),
+    #0e1311!important;
+}
+
+
+/* Beat Shooter sound control: one clear ON/OFF switch */
+#beatLabOverlay .beat-audio-simple{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  gap:12px!important;
+}
+#beatLabOverlay .beat-audio-simple #beatAudioState{
+  font-weight:800!important;
+  color:#dbe3de!important;
+  white-space:nowrap!important;
+}
+#beatLabOverlay #beatSoundToggle{
+  min-width:58px!important;
+  padding:7px 13px!important;
+  border-radius:999px!important;
+  border:1px solid rgba(157,205,174,.28)!important;
+  background:#476c59!important;
+  color:#fff!important;
+  font-weight:900!important;
+  letter-spacing:.5px!important;
+  box-shadow:none!important;
+}
+#beatLabOverlay #beatSoundToggle.off{
+  background:#2b312e!important;
+  border-color:rgba(255,255,255,.10)!important;
+  color:#9aa49f!important;
+}
+
+
+/* =========================================================
+   SANSA NOTE · Livelier home cards + spacing alignment
+   ========================================================= */
+.home-gallery,
+.fun-banner-row,
+.trivia-banner,
+.quiz-banner,
+.suggest-banner,
+.season-banner,
+.almost-banner,
+.explain108-banner{
+  max-width:1080px !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+}
+.home-gallery{margin-top:14px !important;}
+.fun-banner-row{margin-top:16px !important; gap:14px !important;}
+.trivia-banner,.quiz-banner,.suggest-banner,.season-banner,.almost-banner{
+  margin-top:16px !important;
+}
+
+.fun-banner-btn{
+  position:relative !important;
+  overflow:hidden !important;
+  min-height:86px !important;
+  border-radius:20px !important;
+  border:1px solid rgba(45,64,54,.10) !important;
+  box-shadow:0 10px 26px rgba(29,45,37,.06), inset 0 1px 0 rgba(255,255,255,.55) !important;
+  transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease !important;
+}
+.fun-banner-btn::before{
+  width:5px !important;
+  top:12px !important;
+  bottom:12px !important;
+  border-radius:0 8px 8px 0 !important;
+}
+.fun-banner-btn::after{
+  content:'' !important;
+  position:absolute !important;
+  width:88px !important;
+  height:88px !important;
+  right:-26px !important;
+  top:-30px !important;
+  border-radius:50% !important;
+  background:var(--card-glow, rgba(194,160,106,.14)) !important;
+  filter:blur(2px) !important;
+  pointer-events:none !important;
+  opacity:.95 !important;
+}
+.fun-banner-btn:hover{
+  transform:translateY(-4px) !important;
+  box-shadow:0 16px 32px rgba(29,45,37,.10), inset 0 1px 0 rgba(255,255,255,.6) !important;
+}
+
+.fun-banner-btn.roulette{
+  background:linear-gradient(135deg, #fff8eb 0%, #fff4d9 100%) !important;
+  --card-glow: rgba(223,175,83,.18);
+}
+.fun-banner-btn.worry{
+  background:linear-gradient(135deg, #eff7f4 0%, #e5f1ed 100%) !important;
+  --card-glow: rgba(92,144,123,.18);
+}
+.fun-banner-btn.vow{
+  background:linear-gradient(135deg, #fff3f7 0%, #fae7ee 100%) !important;
+  --card-glow: rgba(178,105,134,.18);
+}
+.fun-banner-btn.mantra{
+  background:linear-gradient(135deg, #f5f1ff 0%, #ede5fb 100%) !important;
+  --card-glow: rgba(123,105,178,.18);
+}
+.fun-banner-btn.amulet{
+  background:linear-gradient(135deg, #fff2ef 0%, #f7e5e0 100%) !important;
+  --card-glow: rgba(174,97,80,.17);
+}
+.fun-banner-btn.moktak{
+  background:linear-gradient(135deg, #effaf5 0%, #e0f3ea 100%) !important;
+  --card-glow: rgba(61,136,112,.17);
+}
+.fun-banner-btn.playlist{
+  min-height:82px !important;
+  background:
+    radial-gradient(circle at 88% 18%, rgba(255,255,255,.14), transparent 18%),
+    linear-gradient(135deg, #1d3b36 0%, #284f48 42%, #6a5543 100%) !important;
+  border:1px solid rgba(30,55,46,.28) !important;
+  box-shadow:0 14px 30px rgba(23,39,32,.16), inset 0 1px 0 rgba(255,255,255,.12) !important;
+}
+.fun-banner-btn.playlist::before{
+  background:linear-gradient(180deg,#f2cd7d,#c28b5d) !important;
+}
+.fun-banner-btn.playlist::after{
+  content:'' !important;
+  position:absolute !important;
+  right:18px !important;
+  top:50% !important;
+  transform:translateY(-50%) !important;
+  width:112px !important;
+  height:42px !important;
+  border-radius:999px !important;
+  background:
+    radial-gradient(circle at 16% 50%, rgba(255,255,255,.38) 0 4px, transparent 5px),
+    linear-gradient(90deg, transparent 0 6%, rgba(255,255,255,.26) 6% 8%, transparent 8% 16%, rgba(255,255,255,.22) 16% 18%, transparent 18% 26%, rgba(255,255,255,.28) 26% 28%, transparent 28% 36%, rgba(255,255,255,.18) 36% 38%, transparent 38% 46%, rgba(255,255,255,.3) 46% 48%, transparent 48% 56%, rgba(255,255,255,.16) 56% 58%, transparent 58% 66%, rgba(255,255,255,.28) 66% 68%, transparent 68% 76%, rgba(255,255,255,.2) 76% 78%, transparent 78% 86%, rgba(255,255,255,.3) 86% 88%, transparent 88% 100%),
+    rgba(255,255,255,.06) !important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.14) !important;
+  opacity:.95 !important;
+}
+.fun-banner-btn.playlist .fb-icon{
+  background:rgba(255,255,255,.12) !important;
+  border-color:rgba(255,255,255,.18) !important;
+  color:#fff8e3 !important;
+}
+.fun-banner-btn.playlist .fb-title{
+  color:#fffaf0 !important;
+  font-size:15px !important;
+  letter-spacing:-.2px !important;
+}
+.fun-banner-btn.playlist .fb-sub{
+  color:rgba(255,249,237,.78) !important;
+  font-size:10.5px !important;
+}
+.fun-banner-btn.playlist:hover{
+  transform:translateY(-4px) !important;
+  box-shadow:0 18px 36px rgba(23,39,32,.2), inset 0 1px 0 rgba(255,255,255,.14) !important;
+}
+
+.fun-banner-btn .fb-icon{
+  width:44px !important;
+  height:44px !important;
+  border-radius:14px !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.45) !important;
+}
+.fun-banner-btn .fb-title{
+  font-size:14px !important;
+  line-height:1.28 !important;
+  margin-bottom:3px !important;
+}
+.fun-banner-btn .fb-sub{
+  font-size:10.5px !important;
+  line-height:1.4 !important;
+}
+
+.home-gallery{
+  padding:12px !important;
+  border-radius:20px !important;
+  box-shadow:0 10px 26px rgba(29,45,37,.05) !important;
+}
+.home-gallery-strip{
+  gap:10px !important;
+}
+.home-gallery-strip .hg-item{
+  border-radius:14px !important;
+  border:1px solid rgba(39,58,48,.08) !important;
+}
+.home-gallery-strip .hg-item .hg-name{
+  font-size:11px !important;
+}
+
+.trivia-banner,.quiz-banner,.suggest-banner,.season-banner,.almost-banner{
+  border-radius:16px !important;
+  padding-top:2px !important;
+  padding-bottom:2px !important;
+}
+
+@media (max-width:900px){
+  .fun-banner-row{gap:10px !important; margin-top:12px !important;}
+  .fun-banner-btn{min-height:80px !important; border-radius:16px !important;}
+  .fun-banner-btn .fb-title{font-size:12px !important;}
+  .fun-banner-btn .fb-sub{font-size:9px !important;}
+  .fun-banner-btn.playlist::after{
+    width:78px !important;
+    height:32px !important;
+    right:12px !important;
+  }
+}
+@media (max-width:560px){
+  .home-gallery{margin:10px 10px 0 !important; padding:8px !important;}
+  .fun-banner-row{padding:0 10px !important; gap:8px !important;}
+  .fun-banner-btn{
+    min-height:76px !important;
+    padding:10px 10px !important;
+    border-radius:14px !important;
+  }
+  .fun-banner-btn .fb-icon{
+    width:36px !important;
+    height:36px !important;
+    border-radius:11px !important;
+  }
+  .fun-banner-btn.playlist .fb-title{font-size:12.5px !important;}
+  .fun-banner-btn.playlist::after{
+    width:64px !important;
+    height:28px !important;
+    opacity:.8 !important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -3068,7 +3377,7 @@ header.hero::before{
       <div class="beat-desktop-layout">
         <section class="beat-left-panel">
           <div class="beat-top-controls">
-            <div class="beat-audio-status"><span id="beatAudioState">🔊 소리 준비중</span><div style="display:flex;gap:6px;"><button type="button" onclick="forceBeatAudioUnlock(true)">🔊 테스트</button><button type="button" onclick="forceBeatAudioUnlock()">소리 켜기</button></div></div>
+            <div class="beat-audio-status beat-audio-simple"><span id="beatAudioState">🔊 소리 ON</span><button type="button" id="beatSoundToggle" onclick="toggleBeatSound()">ON</button></div>
             <div class="bpm-row"><b style="color:#b9ff84;">BPM <span id="beatBpmLabel">96</span></b><input id="beatBpm" type="range" min="60" max="150" value="96" oninput="updateBeatBpm(this.value)"><button class="club-btn secondary" style="padding:6px 9px;" id="loopBtn" onclick="toggleTempleLoop()">▶ LOOP</button></div>
           </div>
           <div class="beat-game-head">
@@ -9082,6 +9391,7 @@ function askOracle(){
 
 let hipAudioCtx=null, templeLoopTimer=null, templeLoopStep=0;
 let beatScore=0, beatCombo=0, beatLastHit=0, beatGameStep=0, hipAudioUnlocked=false;
+let beatSoundOn = localStorage.getItem('sansaBeatSound') !== 'off';
 let beatLevel=1, beatXp=0, beatCoins=0, beatBestCombo=0, beatHits=0, beatLives=3;
 
 // iPad/iOS Safari/PWA용 이중 오디오 엔진: Web Audio가 잠겨도 짧은 WAV를 직접 재생
@@ -9104,8 +9414,8 @@ function playIOSBeat(kind,volume=.75){
   try{
     const pool=iosBeatPool[kind]||(iosBeatPool[kind]=Array.from({length:4},()=>{const a=new Audio(IOS_BEAT_WAV[kind]);a.preload='auto';a.setAttribute('playsinline','');return a;}));
     const a=pool.find(x=>x.paused||x.ended)||pool[0];a.volume=volume;try{a.currentTime=0}catch(e){}
-    const p=a.play(); if(p&&p.then)p.then(()=>updateBeatAudioState(true)).catch(()=>updateBeatAudioState(false)); return true;
-  }catch(e){updateBeatAudioState(false);return false;}
+    const p=a.play(); if(p&&p.then)p.then(()=>updateBeatAudioState(true)).catch(()=>updateBeatAudioState()); return true;
+  }catch(e){updateBeatAudioState();return false;}
 }
 
 
@@ -9154,6 +9464,56 @@ const BEAT_WEAPON_KEYS=['mok','kick','bell','clap','bass','air'];
 let worrySmashTotal=0,worryGameTimer=null,worryGameLast=0,worryWave=1,worryGameRunning=false,worryEnemySerial=0,worrySpawnClock=0;
 let beatShots=0,beatMisses=0,beatSlowUntil=0,beatLastSavedScore=0,beatLeaderboardBusy=false,beatDefenseY=0,beatZoneLockedHeight=0,beatLastLifeLostAt=0,beatLifeGraceUntil=0,beatRushUntil=0,beatHudRaf=0;
 let beatLocalBest=Number(localStorage.getItem('sansaBeatBest')||0);
+
+const BEAT_RUN_KEY='sansaBeatRunV3';
+let beatRunSaveTimer=0;
+
+function beatRunSnapshot(active=true){
+  return {
+    v:3,active:!!active,ts:Date.now(),
+    score:beatScore,combo:beatCombo,lastHit:beatLastHit,step:beatGameStep,
+    level:beatLevel,xp:beatXp,coins:beatCoins,bestCombo:beatBestCombo,hits:beatHits,lives:beatLives,
+    smash:worrySmashTotal,wave:worryWave,shots:beatShots,misses:beatMisses,
+    bpm:Number(document.getElementById('beatBpm')?.value||96)
+  };
+}
+function saveBeatRun(active=true){
+  clearTimeout(beatRunSaveTimer);
+  beatRunSaveTimer=setTimeout(()=>{
+    try{localStorage.setItem(BEAT_RUN_KEY,JSON.stringify(beatRunSnapshot(active)));}catch(_){}
+  },35);
+}
+function loadBeatRun(){
+  try{
+    const raw=localStorage.getItem(BEAT_RUN_KEY);if(!raw)return null;
+    const s=JSON.parse(raw);
+    if(!s||s.v!==3||!s.active)return null;
+    if(Date.now()-Number(s.ts||0)>1000*60*60*8)return null;
+    if(Number(s.lives||0)<=0)return null;
+    return s;
+  }catch(_){return null;}
+}
+function applyBeatRun(s){
+  if(!s)return false;
+  beatScore=Number(s.score||0);beatCombo=Number(s.combo||0);beatLastHit=Number(s.lastHit||0);beatGameStep=Number(s.step||0);
+  beatLevel=Math.max(1,Number(s.level||1));beatXp=Math.max(0,Number(s.xp||0));beatCoins=Math.max(0,Number(s.coins||0));
+  beatBestCombo=Math.max(0,Number(s.bestCombo||0));beatHits=Math.max(0,Number(s.hits||0));beatLives=Math.max(1,Math.min(3,Number(s.lives||3)));
+  worrySmashTotal=Math.max(0,Number(s.smash||0));worryWave=Math.max(1,Number(s.wave||1));
+  beatShots=Math.max(0,Number(s.shots||0));beatMisses=Math.max(0,Number(s.misses||0));
+  const bpm=document.getElementById('beatBpm');if(bpm&&s.bpm)bpm.value=String(s.bpm);
+  const bpmLabel=document.getElementById('beatBpmLabel');if(bpmLabel&&s.bpm)bpmLabel.textContent=String(s.bpm);
+  updateBeatLives();updateBeatProgress();updateBeatArcadeHud();
+  const sc=document.getElementById('beatScore');if(sc)sc.textContent=beatScore.toLocaleString();
+  const co=document.getElementById('beatCombo');if(co)co.textContent=beatCombo;
+  const cnt=document.getElementById('worrySmashCount');if(cnt)cnt.textContent=worrySmashTotal;
+  const wave=document.getElementById('worryWave');if(wave)wave.textContent='WAVE '+worryWave;
+  document.querySelectorAll('#beatTrack .beat-step').forEach((el,i)=>el.classList.toggle('on',i===beatGameStep));
+  return true;
+}
+function clearBeatRun(){
+  try{localStorage.removeItem(BEAT_RUN_KEY);}catch(_){}
+}
+
 function updateBeatLives(){const e=document.getElementById('beatLives');if(e)e.textContent='❤️'.repeat(Math.max(0,beatLives))+'🖤'.repeat(Math.max(0,3-beatLives));}
 function resetComboForMiss(btn,msg='MISS · 다른 레인을 쐈어요'){
   beatMisses++;scheduleBeatHud();beatCombo=0;beatLastHit=0;const c=document.getElementById('beatCombo');if(c)c.textContent='0';
@@ -9170,10 +9530,17 @@ function loseBeatLife(enemy){
   beatLives=Math.max(0,beatLives-1);updateBeatLives();resetComboForMiss(null,'방어선 돌파! 보호막 1초');noiseHit(.12,.12);setTimeout(()=>enemy.remove(),150);
   const zone=document.getElementById('worrySmashZone');if(zone){const f=document.createElement('i');f.className='beat-shield-flash';zone.appendChild(f);setTimeout(()=>f.remove(),760)}
   const em=document.getElementById('beatEventMain'),es=document.getElementById('beatEventSub');if(em)em.textContent=beatLives>0?'🛡 SHIELD':'GAME OVER';if(es)es.textContent=beatLives>0?`생명 ${beatLives} · 1초 무적`:'3번 돌파 허용';
-  if(beatLives<=0){stopWorryShooter();saveBeatLeaderboardScore(true).finally(()=>loadBeatLeaderboard());setTimeout(()=>document.getElementById('beatGameOver')?.classList.add('show'),180);}
+  saveBeatRun(beatLives>0);if(beatLives<=0){clearBeatRun();stopWorryShooter();saveBeatLeaderboardScore(true).finally(()=>loadBeatLeaderboard());setTimeout(()=>document.getElementById('beatGameOver')?.classList.add('show'),180);}
 }
 function clearWorryField(){const z=document.getElementById('worrySmashZone');z?.querySelectorAll('.worry-enemy,.worry-missile,.worry-hit-ring,.worry-explosion,.worry-shard,.beat-guaranteed-boom,.beat-guaranteed-shard').forEach(x=>x.remove());}
-function restartWorryGame(){beatLives=3;beatLifeGraceUntil=performance.now()+700;updateBeatLives();document.getElementById('beatGameOver')?.classList.remove('show');clearWorryField();lockBeatDefenseLine();worrySpawnClock=0;for(let i=0;i<3;i++)spawnWorryOrb(i*220);worryGameRunning=true;worryGameLast=performance.now();worryGameTimer=requestAnimationFrame(worryShooterTick);directBeatGestureTone();}
+function restartWorryGame(){
+  beatLives=3;beatLifeGraceUntil=performance.now()+700;updateBeatLives();
+  document.getElementById('beatGameOver')?.classList.remove('show');
+  clearWorryField();lockBeatDefenseLine();worrySpawnClock=0;
+  for(let i=0;i<3;i++)spawnWorryOrb(i*220);
+  worryGameRunning=true;worryGameLast=performance.now();worryGameTimer=requestAnimationFrame(worryShooterTick);
+  directBeatGestureTone();saveBeatRun(true);
+}
 function beatLevelTuning(){
   const l=Math.max(1,beatLevel);if(l===1)return{speed:.58,gap:1320,max:6,tier:1};if(l===2)return{speed:.72,gap:1150,max:7,tier:2};if(l===3)return{speed:.88,gap:980,max:8,tier:2};if(l===4)return{speed:1.05,gap:830,max:8,tier:3};if(l===5)return{speed:1.22,gap:710,max:9,tier:3};if(l===6)return{speed:1.40,gap:620,max:9,tier:4};return{speed:Math.min(1.85,1.52+(l-7)*.07),gap:Math.max(430,560-(l-7)*20),max:10,tier:5};
 }
@@ -9182,18 +9549,19 @@ function lockBeatDefenseLine(){const z=document.getElementById('worrySmashZone')
 function beatSpeedLabel(){const t=beatLevelTuning(),v=(t.speed+Math.min(.42,(worryWave-1)*.035));return v.toFixed(2);}
 function beatLevelRush(){beatRushUntil=performance.now()+1250;beatLifeGraceUntil=Math.max(beatLifeGraceUntil,performance.now()+850);const z=document.getElementById('worrySmashZone');if(z){const e=document.createElement('div');e.className='beat-rush-pop';e.innerHTML=`LEVEL ${beatLevel} RUSH<small>SPEED ×${beatSpeedLabel()}</small>`;z.appendChild(e);setTimeout(()=>e.remove(),1100)}beatConfettiBurst(38);document.querySelectorAll('#worrySmashZone .worry-enemy:not(.smash)').forEach(e=>e.classList.add('rush'));setTimeout(()=>document.querySelectorAll('#worrySmashZone .worry-enemy').forEach(e=>e.classList.remove('rush')),900);}
 
-function initWorrySmash(){
+function initWorrySmash(resuming=false){
   const zone=document.getElementById('worrySmashZone');if(!zone)return;
   stopWorryShooter();clearWorryField();
-  worrySmashTotal=0;worryWave=1;worryEnemySerial=0;worrySpawnClock=0;
+  worryEnemySerial=0;worrySpawnClock=0;
+  if(!resuming){worrySmashTotal=0;worryWave=1;}
   beatLifeGraceUntil=performance.now()+1400;lockBeatDefenseLine();
-  const cnt=document.getElementById('worrySmashCount');if(cnt)cnt.textContent='0';
-  const wave=document.getElementById('worryWave');if(wave)wave.textContent='WAVE 1';
+  const cnt=document.getElementById('worrySmashCount');if(cnt)cnt.textContent=String(worrySmashTotal);
+  const wave=document.getElementById('worryWave');if(wave)wave.textContent='WAVE '+worryWave;
 
-  // 시작할 때 6개 레인에 하나씩 보여줘서 어떤 버튼을 눌러야 하는지 명확하게 한다.
   BEAT_WEAPON_KEYS.forEach((key,i)=>spawnWorryOrb(i*90,false,key));
   worryGameRunning=true;worryGameLast=performance.now();
   worryGameTimer=requestAnimationFrame(worryShooterTick);
+  saveBeatRun(true);
 }
 function stopWorryShooter(){worryGameRunning=false;if(worryGameTimer){cancelAnimationFrame(worryGameTimer);worryGameTimer=null;}}
 function laneX(zone,lane,enemyWidth=72){const laneW=zone.clientWidth/6;return lane*laneW+(laneW-enemyWidth)/2;}
@@ -9365,7 +9733,7 @@ function fireStraightLane(kind,btn){
   if(!zone||!cfg||beatLives<=0)return;
 
   beatShots++;try{scheduleBeatHud();}catch(_){updateBeatArcadeHud();}
-  directBeatGestureTone();unlockIOSMedia();unlockHipAudio().then(updateBeatAudioState);
+  directBeatGestureTone();unlockIOSMedia();unlockHipAudio().then(()=>updateBeatAudioState());
 
   const laneW=zone.clientWidth/6;
   const sx=cfg.lane*laneW+laneW/2;
@@ -9528,14 +9896,26 @@ function registerWorryKill(enemy){
   const base=boss?650:bonus?300:freeze?220:100,points=Math.round(base*mult*(perfect?1.35:1));
   beatScore+=points;beatCoins+=boss?12:bonus?10:freeze?4:1;
   if(freeze){beatSlowUntil=performance.now()+2800;beatPop('❄️ 마음이 느려집니다','beat-reward-pop','2.8초 SLOW TIME');}
-  if(bonus){beatPop('✨ GOLDEN HIT','beat-reward-pop','코인 +10');beatConfettiBurst(18);}
+  if(bonus){
+    beatPop('✨ GOLDEN HIT','beat-reward-pop','코인 +10');beatConfettiBurst(18);
+    if(Math.random()<.18){
+      beatCoins+=30;beatScore+=500;
+      beatPop('🪷 LOTUS JACKPOT','beat-level-pop','+500 SCORE · +30 COIN');
+      beatConfettiBurst(36);
+      const ov=document.getElementById('beatLabOverlay');ov?.classList.add('lotus-jackpot');
+      setTimeout(()=>ov?.classList.remove('lotus-jackpot'),900);
+    }
+  }
   if(perfect&&!boss){const rail=document.getElementById('beatEventRail'),main=document.getElementById('beatEventMain'),subEl=document.getElementById('beatEventSub');if(main)main.textContent='PERFECT ×'+mult;if(subEl)subEl.textContent='+'+points+' · 정확 타격';rail?.classList.add('hot');clearTimeout(registerWorryKill._railTimer);registerWorryKill._railTimer=setTimeout(()=>rail?.classList.remove('hot'),300);}
   gainBeatXp(boss?140:bonus?85:freeze?60:38);
   const s=document.getElementById('beatScore'),c=document.getElementById('beatCombo');if(s)s.textContent=beatScore.toLocaleString();if(c)c.textContent=beatCombo;
   beatGameStep=(beatGameStep+1)%8;document.querySelectorAll('#beatTrack .beat-step').forEach((el,i)=>el.classList.toggle('on',i===beatGameStep));
   const mission=document.getElementById('beatMission');if(mission)mission.textContent=beatCombo>=30?'🌈 MAX FEVER · 배율 ×5 유지!':beatCombo>=20?'🔥 FEVER · 정확도 유지!':beatCombo>=10?'⚡ SUPER COMBO · 더 빠르게!':`MISSION · ${Math.max(0,10-beatCombo)}개 더 정확히 맞히면 FEVER!`;
   if(beatCombo===10||beatCombo===20||beatCombo===30){beatPop(`${beatCombo} COMBO!`);beatConfettiBurst(16+beatCombo/2)}
-  document.getElementById('beatLabOverlay')?.classList.toggle('fever',beatCombo>=20);rewardBeatMilestone();scheduleBeatHud();
+  const beatOv=document.getElementById('beatLabOverlay');
+  beatOv?.classList.toggle('fever',beatCombo>=20);
+  beatOv?.classList.toggle('combo10',beatCombo>=10&&beatCombo<20);
+  beatOv?.classList.toggle('combo20',beatCombo>=20);rewardBeatMilestone();scheduleBeatHud();saveBeatRun(true);
   const nextWave=1+Math.floor((worrySmashTotal+1)/10);
   if(nextWave>worryWave){worryWave=nextWave;const w=document.getElementById('worryWave');if(w)w.textContent='WAVE '+worryWave;beatPop(`WAVE ${worryWave}`,'beat-wave-pop',`SPEED ×${beatSpeedLabel()}`);beatConfettiBurst(26);const modal=document.querySelector('#beatLabOverlay .modal');modal?.classList.add('beat-screen-shake');setTimeout(()=>modal?.classList.remove('beat-screen-shake'),220);updateBeatArcadeHud();}
   if(beatScore>beatLocalBest){beatLocalBest=beatScore;localStorage.setItem('sansaBeatBest',String(beatLocalBest));}
@@ -9567,7 +9947,7 @@ function playBeat(kind,btn,skipGame=false){
 
   try{
     playIOSBeat(kind,kind==='kick'?.9:kind==='mok'?.85:.75);
-    unlockHipAudio().then(updateBeatAudioState).catch(()=>{});
+    unlockHipAudio().then(()=>updateBeatAudioState()).catch(()=>{});
   }catch(_){}
 
   if(btn){
@@ -9740,25 +10120,93 @@ function beatPop(text,cls='beat-reward-pop',sub=''){
   beatFxBurst(fx.w*.5,fx.h*(isWave?.30:.39),isLevel?24:12);
   beatFxKick();
 }
-function gainBeatXp(amount){beatXp+=amount;beatCoins+=Math.max(1,Math.floor(amount/80));let leveled=false;while(beatXp>=beatXpNeed(beatLevel)){beatXp-=beatXpNeed(beatLevel);beatLevel++;beatCoins+=25*beatLevel;leveled=true;}updateBeatProgress();updateBeatArcadeHud();if(leveled){beatPop(`LEVEL ${beatLevel}!`,'beat-level-pop',BEAT_RANKS[Math.min(beatLevel-1,BEAT_RANKS.length-1)]);beatLevelRush();playIOSBeat('bell',.9);synthTone(523,.18,'sine',.08);synthTone(659,.22,'sine',.08,.12);synthTone(784,.30,'sine',.09,.24);}}
+function gainBeatXp(amount){beatXp+=amount;beatCoins+=Math.max(1,Math.floor(amount/80));let leveled=false;while(beatXp>=beatXpNeed(beatLevel)){beatXp-=beatXpNeed(beatLevel);beatLevel++;beatCoins+=25*beatLevel;leveled=true;}updateBeatProgress();updateBeatArcadeHud();if(leveled){beatPop(`LEVEL ${beatLevel}!`,'beat-level-pop',BEAT_RANKS[Math.min(beatLevel-1,BEAT_RANKS.length-1)]);beatLevelRush();playIOSBeat('bell',.9);synthTone(523,.18,'sine',.08);synthTone(659,.22,'sine',.08,.12);synthTone(784,.30,'sine',.09,.24);}saveBeatRun(true);}
 function rewardBeatMilestone(){if(beatCombo===10){beatCoins+=20;beatPop('🪙 +20 BONUS');beatConfettiBurst(16)}if(beatCombo===20){beatCoins+=50;beatPop('🪷 LOTUS BONUS');beatConfettiBurst(22)}if(beatCombo===30){beatCoins+=100;beatPop('🔥 FEVER BONUS');beatConfettiBurst(28)}if(beatCombo>0&&beatCombo%50===0){beatCoins+=250;beatPop('👑 LEGEND COMBO');beatConfettiBurst(40)}updateBeatProgress();}
-function updateBeatAudioState(ok){const e=document.getElementById('beatAudioState');if(!e)return;const c=hipAudioCtx;e.textContent=(ok||c?.state==='running')?'🔊 소리 ON · iPad 준비 완료':'🔇 소리 잠김 · 오른쪽 버튼을 눌러주세요';}
-function directBeatGestureTone(){
-  const c=getHipAudio(); if(!c) return false;
-  try{if(c.state==='suspended'&&c.resume)c.resume();const o=c.createOscillator(),g=c.createGain();o.type='square';o.frequency.value=720;g.gain.setValueAtTime(.16,c.currentTime);g.gain.exponentialRampToValueAtTime(.001,c.currentTime+.12);o.connect(g);g.connect(c.destination);o.start(c.currentTime);o.stop(c.currentTime+.13);hipAudioUnlocked=true;return true;}catch(e){return false;}
+function updateBeatAudioState(){
+  const e=document.getElementById('beatAudioState');
+  const b=document.getElementById('beatSoundToggle');
+  if(e)e.textContent=beatSoundOn?'🔊 소리 ON':'🔇 소리 OFF';
+  if(b){
+    b.textContent=beatSoundOn?'ON':'OFF';
+    b.classList.toggle('off',!beatSoundOn);
+    b.setAttribute('aria-pressed',beatSoundOn?'true':'false');
+  }
 }
-function forceBeatAudioUnlock(testOnly=false){
+function directBeatGestureTone(){
+  if(!beatSoundOn)return false;
+  const c=getHipAudio(); if(!c) return false;
+  try{
+    if(c.state==='suspended'&&c.resume)c.resume();
+    const o=c.createOscillator(),g=c.createGain();
+    o.type='square';o.frequency.value=720;
+    g.gain.setValueAtTime(.12,c.currentTime);
+    g.gain.exponentialRampToValueAtTime(.001,c.currentTime+.08);
+    o.connect(g);g.connect(c.destination);o.start(c.currentTime);o.stop(c.currentTime+.09);
+    hipAudioUnlocked=true;return true;
+  }catch(e){return false;}
+}
+function forceBeatAudioUnlock(){
+  if(!beatSoundOn)return Promise.resolve(false);
   unlockIOSMedia();
   const immediate=directBeatGestureTone();
   const c=getHipAudio();
   try{if(c&&c.state==='suspended'&&c.resume)c.resume();}catch(e){}
-  setTimeout(()=>{const ok=!!c&&c.state==='running';hipAudioUnlocked=ok;updateBeatAudioState(ok||immediate);if(ok||immediate){playIOSBeat('bell',1);if(testOnly)showToast('🔊 테스트 소리가 들리면 준비 완료!');else showToast('🔊 소리를 켰어요');}else showToast('아이패드 볼륨/무음 모드도 확인해주세요');},80);
+  return new Promise(resolve=>{
+    setTimeout(()=>{
+      const ok=!!c&&c.state==='running';
+      hipAudioUnlocked=ok||immediate;
+      updateBeatAudioState();
+      resolve(hipAudioUnlocked);
+    },60);
+  });
 }
-function resetBeatGame(){beatFxParticles.length=0;beatFxTexts.length=0;const fxc=document.getElementById('beatFxCanvas');if(fxc){const c=fxc.getContext('2d');c&&c.clearRect(0,0,fxc.width,fxc.height);}const er=document.getElementById('beatEventRail'),em=document.getElementById('beatEventMain'),es=document.getElementById('beatEventSub');if(er)er.classList.remove('hot');if(em)em.textContent='READY';if(es)es.textContent='맞는 패드만 정확히 쏘세요';beatScore=0;beatCombo=0;beatLastHit=0;beatGameStep=0;worrySmashTotal=0;beatLevel=1;beatXp=0;beatCoins=0;beatBestCombo=0;beatHits=0;beatShots=0;beatMisses=0;beatSlowUntil=0;beatDefenseY=0;beatZoneLockedHeight=0;beatLastLifeLostAt=0;beatLifeGraceUntil=0;beatLives=3;updateBeatLives();document.getElementById('beatGameOver')?.classList.remove('show');document.getElementById('beatLabOverlay')?.classList.remove('fever');const s=document.getElementById('beatScore'),c=document.getElementById('beatCombo'),m=document.getElementById('beatMission');if(s)s.textContent='0';if(c)c.textContent='0';if(m)m.textContent='MISSION · 같은 레인의 맞는 패드로 8번 연속 격추!';document.querySelectorAll('#beatTrack .beat-step').forEach(el=>el.classList.remove('on'));updateBeatProgress();updateBeatArcadeHud();updateBeatAudioState(false);}
+function toggleBeatSound(){
+  beatSoundOn=!beatSoundOn;
+  try{localStorage.setItem('sansaBeatSound',beatSoundOn?'on':'off');}catch(_){}
+  if(beatSoundOn){
+    forceBeatAudioUnlock().then(()=>{
+      try{playIOSBeat('bell',.7);}catch(_){}
+    });
+  }else{
+    try{stopTempleLoop();}catch(_){}
+    try{
+      if(hipAudioCtx&&hipAudioCtx.state==='running'&&hipAudioCtx.suspend)hipAudioCtx.suspend();
+    }catch(_){}
+  }
+  updateBeatAudioState();
+}
+function resetBeatGame(){beatFxParticles.length=0;beatFxTexts.length=0;const fxc=document.getElementById('beatFxCanvas');if(fxc){const c=fxc.getContext('2d');c&&c.clearRect(0,0,fxc.width,fxc.height);}const er=document.getElementById('beatEventRail'),em=document.getElementById('beatEventMain'),es=document.getElementById('beatEventSub');if(er)er.classList.remove('hot');if(em)em.textContent='READY';if(es)es.textContent='맞는 패드만 정확히 쏘세요';beatScore=0;beatCombo=0;beatLastHit=0;beatGameStep=0;worrySmashTotal=0;beatLevel=1;beatXp=0;beatCoins=0;beatBestCombo=0;beatHits=0;beatShots=0;beatMisses=0;beatSlowUntil=0;beatDefenseY=0;beatZoneLockedHeight=0;beatLastLifeLostAt=0;beatLifeGraceUntil=0;beatLives=3;updateBeatLives();document.getElementById('beatGameOver')?.classList.remove('show');document.getElementById('beatLabOverlay')?.classList.remove('fever');const s=document.getElementById('beatScore'),c=document.getElementById('beatCombo'),m=document.getElementById('beatMission');if(s)s.textContent='0';if(c)c.textContent='0';if(m)m.textContent='MISSION · 같은 레인의 맞는 패드로 8번 연속 격추!';document.querySelectorAll('#beatTrack .beat-step').forEach(el=>el.classList.remove('on'));updateBeatProgress();updateBeatArcadeHud();updateBeatAudioState();}
 function freezeBeatViewport(){const ov=document.getElementById('beatLabOverlay'),modal=ov?.querySelector('.modal');if(!ov||!modal)return;const vh=Math.round((window.visualViewport?.height||window.innerHeight));const desktop=window.innerWidth>=900;const h=Math.max(520,vh-(desktop?20:0));ov.style.setProperty('--beat-fixed-vh',h+'px');ov.classList.add('beat-vh-locked');document.documentElement.style.overflow='hidden';document.body.style.overflow='hidden';}
 function releaseBeatViewport(){const ov=document.getElementById('beatLabOverlay');ov?.classList.remove('beat-vh-locked');ov?.style.removeProperty('--beat-fixed-vh');if(!document.querySelector('.overlay.show:not(#beatLabOverlay)')){document.documentElement.style.overflow='';document.body.style.overflow='';}}
-function openBeatLab(){const ov=document.getElementById('beatLabOverlay');ov?.classList.add('show');freezeBeatViewport();resetBeatGame();updateBeatLives();requestAnimationFrame(()=>{ensureBeatFxCanvas();lockBeatDefenseLine();initWorrySmash();});updateBeatAudioState(false);loadBeatLeaderboard();}
-function closeBeatLab(){beatFxParticles.length=0;beatFxTexts.length=0;if(beatFxRaf){cancelAnimationFrame(beatFxRaf);beatFxRaf=0;}saveBeatLeaderboardScore(true);document.getElementById('beatLeaderboard')?.classList.remove('show');document.getElementById('beatLabOverlay')?.classList.remove('show');stopTempleLoop();stopWorryShooter();releaseBeatViewport();}
+function openBeatLab(forceFresh=false){
+  const ov=document.getElementById('beatLabOverlay');ov?.classList.add('show');freezeBeatViewport();
+  let resumed=false;
+  if(!forceFresh){
+    const saved=loadBeatRun();
+    if(saved)resumed=applyBeatRun(saved);
+  }
+  if(!resumed)resetBeatGame();
+  updateBeatLives();
+  requestAnimationFrame(()=>{
+    ensureBeatFxCanvas();lockBeatDefenseLine();initWorrySmash(resumed);
+    if(resumed){
+      const em=document.getElementById('beatEventMain'),es=document.getElementById('beatEventSub');
+      if(em)em.textContent='RESUME';
+      if(es)es.textContent=`LV.${beatLevel} · ${beatScore.toLocaleString()}점에서 이어하기`;
+      beatPop('↩ CONTINUE','beat-reward-pop',`WAVE ${worryWave} · SCORE ${beatScore.toLocaleString()}`);
+    }
+  });
+  updateBeatAudioState();loadBeatLeaderboard();saveBeatRun(true);
+}
+function closeBeatLab(){
+  beatFxParticles.length=0;beatFxTexts.length=0;
+  if(beatFxRaf){cancelAnimationFrame(beatFxRaf);beatFxRaf=0;}
+  saveBeatRun(false);clearBeatRun();
+  saveBeatLeaderboardScore(true);
+  document.getElementById('beatLeaderboard')?.classList.remove('show');
+  document.getElementById('beatLabOverlay')?.classList.remove('show');
+  stopTempleLoop();stopWorryShooter();releaseBeatViewport();
+}
 function updateBeatBpm(v){document.getElementById('beatBpmLabel').textContent=v;if(templeLoopTimer){stopTempleLoop();startTempleLoop();}}
 function startTempleLoop(){
   unlockHipAudio().then(ok=>{
@@ -9770,14 +10218,19 @@ function startTempleLoop(){
 function stopTempleLoop(){clearInterval(templeLoopTimer);templeLoopTimer=null;const b=document.getElementById('loopBtn');if(b)b.textContent='▶ LOOP';}
 function toggleTempleLoop(){unlockHipAudio();templeLoopTimer?stopTempleLoop():startTempleLoop();}
 function playTempleDrop(){
-  unlockHipAudio().then(updateBeatAudioState);
+  unlockHipAudio().then(()=>updateBeatAudioState());
   if(beatCoins<40){beatPop('🪙 코인 부족','beat-reward-pop','40코인이 필요해요');return;}
   beatCoins-=40;updateBeatProgress();['kick','bass','mok','clap','bell','air'].forEach((k,i)=>setTimeout(()=>playBeat(k,null,true),i*75));
   const enemies=[...document.querySelectorAll('#worrySmashZone .worry-enemy:not(.smash)')];enemies.forEach((e,i)=>setTimeout(()=>{e.dataset.hp='1';const z=document.getElementById('worrySmashZone'),r=e.getBoundingClientRect(),zr=z?.getBoundingClientRect();if(zr)hitWorryEnemy(e,r.left-zr.left+r.width/2,r.top-zr.top+r.height*.34,e.dataset.weapon||'mok')},i*45));
   beatCombo=0;const c=document.getElementById('beatCombo');if(c)c.textContent='0';beatPop('⚡ 정화폭탄!','beat-reward-pop','콤보는 초기화 · 생존용 특수기');beatConfettiBurst(24);
 }
 // iPad Safari/PWA는 첫 터치 시점의 unlock이 특히 중요함
-['pointerdown','touchstart'].forEach(evt=>document.addEventListener(evt,e=>{unlockIOSMedia();if(document.getElementById('beatLabOverlay')?.classList.contains('show')) directBeatGestureTone();if(!hipAudioUnlocked) unlockHipAudio().then(updateBeatAudioState);},{passive:true}));
+['pointerdown','touchstart'].forEach(evt=>document.addEventListener(evt,e=>{
+  if(!beatSoundOn)return;
+  unlockIOSMedia();
+  if(document.getElementById('beatLabOverlay')?.classList.contains('show'))directBeatGestureTone();
+  if(!hipAudioUnlocked)unlockHipAudio().then(()=>updateBeatAudioState());
+},{passive:true}));
 document.addEventListener('visibilitychange',()=>{if(!document.hidden&&worryGameRunning)worryGameLast=performance.now();});
 window.addEventListener('orientationchange',()=>{if(document.getElementById('beatLabOverlay')?.classList.contains('show')){stopWorryShooter();setTimeout(()=>{freezeBeatViewport();lockBeatDefenseLine();worryGameLast=performance.now();worryGameRunning=beatLives>0;if(worryGameRunning)worryGameTimer=requestAnimationFrame(worryShooterTick);},380);}});
 function togglePsyMode(){
