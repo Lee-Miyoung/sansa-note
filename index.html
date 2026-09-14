@@ -2622,6 +2622,48 @@ body:has(#beatLabOverlay.show) #miniPlayer{
 #beatLabOverlay{z-index:900!important}
 #miniPlayer{z-index:500!important}
 
+
+/* ===== Kakao map restore + photo UX ===== */
+.content-type-row{
+  justify-content:flex-end!important;
+}
+.content-type-btn{
+  flex:0 0 auto!important;
+  min-width:82px!important;
+  padding:8px 13px!important;
+  border-radius:999px!important;
+  font-size:12px!important;
+}
+.map-mini-btn{
+  min-width:98px!important;
+  background:#fffdf7!important;
+  border-color:#d8d4c9!important;
+  color:#3d554a!important;
+}
+.map-mini-btn:hover{background:#eef5f1!important}
+.map-fallback-card{
+  width:min(440px,calc(100% - 28px));
+  margin:auto;padding:16px;border-radius:16px;
+  background:#f8f6f0;border:1px solid #dfddd5;
+  text-align:center;color:#53605a;line-height:1.55;
+}
+.map-fallback-card b{display:block;font-size:13px;color:#31463c;margin-bottom:5px}
+.map-fallback-card span{display:block;font-size:10.5px;margin-bottom:10px}
+.map-fallback-card a{
+  display:inline-flex;align-items:center;justify-content:center;
+  padding:8px 12px;border-radius:999px;
+  background:#3f6657;color:#fff;text-decoration:none;font-size:11px;font-weight:800
+}
+.heritage-photo-link{
+  display:inline-block;margin-top:7px;
+  color:#49695d;font-size:10px;font-weight:800;text-decoration:none;
+  border-bottom:1px solid rgba(73,105,93,.28);
+}
+@media(max-width:560px){
+  .content-type-btn{min-width:68px!important;padding:7px 10px!important}
+  .map-mini-btn{min-width:88px!important}
+}
+
 </style>
 </head>
 <body>
@@ -2746,6 +2788,7 @@ body:has(#beatLabOverlay.show) #miniPlayer{
   <div class="content-type-row">
     <button class="content-type-btn active" id="ctypeTemple" onclick="switchContentType('temple')">🏯 절</button>
     <button class="content-type-btn" id="ctypeMountain" onclick="switchContentType('mountain')">⛰️ 산</button>
+    <button class="content-type-btn map-mini-btn" id="ctypeMap" onclick="openMapOverlay()">🗺 카카오맵</button>
   </div>
 
   <div class="filterbar">
@@ -7819,6 +7862,17 @@ function debouncedRender(){
   renderDebounceTimer = setTimeout(render, 400);
 }
 
+const WIKI_TITLE_HINTS = {
+  "통도사":"통도사","부석사":"부석사","봉정사":"봉정사","법주사":"법주사","마곡사":"마곡사","선암사":"선암사","대흥사":"대흥사",
+  "해인사":"해인사","송광사":"송광사 (순천시)","수덕사":"수덕사","백양사":"백양사","동화사":"동화사","쌍계사":"쌍계사","범어사":"범어사",
+  "불국사":"불국사","석굴암":"석굴암","화엄사":"화엄사","월정사":"월정사","낙산사":"낙산사","신흥사":"신흥사 (속초시)",
+  "선운사":"선운사","금산사":"금산사","조계사":"조계사","봉은사":"봉은사","전등사":"전등사","보문사":"보문사 (강화군)",
+  "보리암":"보리암","해동용궁사":"해동용궁사","운문사":"운문사","직지사":"직지사","갑사":"갑사","동학사":"동학사",
+  "지리산":"지리산","한라산":"한라산","설악산":"설악산","북한산":"북한산","오대산":"오대산","태백산":"태백산",
+  "소백산":"소백산","계룡산":"계룡산","속리산":"속리산","월악산":"월악산","치악산":"치악산","가야산":"가야산",
+  "내장산":"내장산","무등산":"무등산","팔공산":"팔공산","덕유산":"덕유산","주왕산":"주왕산","월출산":"월출산"
+};
+
 function fetchCoverPhotoNow(id, name, locationHint, opts, done){
   opts = opts || {};
   const store = opts.store || destinations;
@@ -7922,7 +7976,7 @@ function fetchCoverPhotoNow(id, name, locationHint, opts, done){
 
     // 핵심 변경: 검색 실패가 기존 사진 삭제를 의미하지 않도록 한다.
     if(store[id]){
-      const patch={coverPhotoVersion:PHOTO_SCHEMA_VERSION,coverPhotoStatus:oldUrls.length?'kept-old':'not-found'};
+      const patch={coverPhotoVersion:PHOTO_SCHEMA_VERSION,coverPhotoStatus:oldUrls.length?'kept-old':'not-found',coverPhotoLastChecked:Date.now()};
       updateFn(id,patch);
       store[id].coverPhotoVersion=PHOTO_SCHEMA_VERSION;
       store[id].coverPhotoStatus=patch.coverPhotoStatus;
@@ -7950,7 +8004,8 @@ function fetchCoverPhotoNow(id, name, locationHint, opts, done){
 
   function exactWikipediaPage(cb){
     const base=coreName(name);
-    const exactUrl=`https://ko.wikipedia.org/w/api.php?action=query&titles=${encodeURIComponent(base)}&prop=pageimages|images|info&imlimit=80&pithumbsize=1280&piprop=thumbnail|original|name&inprop=url&redirects=1&format=json&origin=*`;
+    const exactTitle=WIKI_TITLE_HINTS[name]||base;
+    const exactUrl=`https://ko.wikipedia.org/w/api.php?action=query&titles=${encodeURIComponent(exactTitle)}&prop=pageimages|images|info&imlimit=100&pithumbsize=1400&piprop=thumbnail|original|name&inprop=url&redirects=1&format=json&origin=*`;
     fetch(exactUrl).then(r=>r.json()).then(data=>{
       let pages=Object.values(data?.query?.pages||{}).filter(p=>!p.missing);
       const page=pages[0];
@@ -7972,7 +8027,7 @@ function fetchCoverPhotoNow(id, name, locationHint, opts, done){
 
   function trustedArticlePhotos(page, cb){
     if(!page){cb([]);return;}
-    let titles=(page.images||[]).map(x=>x.title).filter(t=>/^File:/i.test(t)&&!badPhotoWords.test(t));
+    let titles=(page.images||[]).map(x=>x.title).filter(t=>/^File:/i.test(t)&&!badPhotoWords.test(t)).slice(0,90);
     if(page.pageimage){
       const hero='File:'+page.pageimage;
       titles=[hero,...titles.filter(t=>t!==hero)];
@@ -7995,9 +8050,10 @@ function fetchCoverPhotoNow(id, name, locationHint, opts, done){
     trustedArticlePhotos(page, articleItems=>{
       if(articleItems.length>=3){saveResults(articleItems);return;}
       const base=coreName(name);
-      const q1=isMountain?`${base} ${queryHint||''} Korea mountain`: `${base} ${queryHint||''} Korean Buddhist temple`;
-      const q2=isMountain?`${base} ${queryHint||''} 산`: `${base} ${queryHint||''} 사찰`;
-      commonsSearch(q1,a=>commonsSearch(q2,b=>saveResults([...articleItems,...a,...b])));
+      const q1=isMountain?`"${base}" ${queryHint||''} Korea mountain`: `"${base}" ${queryHint||''} Korean Buddhist temple`;
+      const q2=isMountain?`${base} ${queryHint||''} 산 전경`: `${base} ${queryHint||''} 사찰 전경`;
+      const q3=isMountain?`${base} landscape Korea`: `${base} temple architecture Korea`;
+      commonsSearch(q1,a=>commonsSearch(q2,b=>commonsSearch(q3,c=>saveResults([...articleItems,...a,...b,...c]))));
     });
   });
 }
@@ -8348,7 +8404,8 @@ function renderAutoCoverPhotos(wrapId,d){
   const wrap=document.getElementById(wrapId);if(!wrap)return;
   const urls=d.coverPhotos||[];
   if(urls.length===0){
-    wrap.innerHTML=`<div class="auto-photo-empty">${lotusPlaceholderHtml('사진을 확인하고 있어요')}<div><b>정확한 사진을 우선 확인해요.</b><span>엉뚱한 사진은 넣지 않고, 확인되는 즉시 자동으로 연결합니다.</span></div></div>`;
+    const q=encodeURIComponent((d.name||'')+' 국가유산');
+    wrap.innerHTML=`<div class="auto-photo-empty">${lotusPlaceholderHtml('사진을 확인하고 있어요')}<div><b>정확한 사진을 우선 확인해요.</b><span>Wikipedia·Wikimedia Commons의 검증 가능한 사진부터 찾고 있어요.</span><a class="heritage-photo-link" href="https://www.heritage.go.kr/heri/cul/culSelectViewList.do?searchCondition=${q}" target="_blank" rel="noopener">국가유산포털에서도 사진 확인 ↗</a></div></div>`;
     return;
   }
   const meta=d.coverPhotoMeta||[];
@@ -8628,26 +8685,45 @@ function closeSettings(){ document.getElementById('settingsOverlay').classList.r
 function getKakaoKey(){ return KAKAO_MAP_KEY && KAKAO_MAP_KEY.indexOf('REPLACE_ME') !== 0 ? KAKAO_MAP_KEY : ''; }
 
 function ensureKakao(cb){
-  const key = getKakaoKey();
-  if(!key){ cb(false); return; }
-  if(window.kakao && window.kakao.maps && window.kakao.maps.services){ cb(true); return; }
+  const key=getKakaoKey();
+  if(!key){cb(false);return;}
+  if(window.kakao&&window.kakao.maps&&window.kakao.maps.services){cb(true);return;}
   kakaoReadyCallbacks.push(cb);
-  if(kakaoLoading) return;
-  kakaoLoading = true;
-  const script = document.createElement('script');
-  script.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${encodeURIComponent(key)}&libraries=services&autoload=false`;
-  script.onload = ()=>{
-    window.kakao.maps.load(()=>{
-      kakaoReadyCallbacks.forEach(fn=>fn(true));
-      kakaoReadyCallbacks = [];
-    });
+  if(kakaoLoading)return;
+  kakaoLoading=true;
+
+  let settled=false;
+  const finish=(ok)=>{
+    if(settled)return;settled=true;kakaoLoading=false;
+    const q=kakaoReadyCallbacks.slice();kakaoReadyCallbacks=[];
+    q.forEach(fn=>{try{fn(ok)}catch(_){}});
   };
-  script.onerror = ()=>{
-    kakaoReadyCallbacks.forEach(fn=>fn(false));
-    kakaoReadyCallbacks = [];
-    kakaoLoading = false;
+
+  const old=document.getElementById('kakaoMapsSdk');
+  if(old)old.remove();
+  const script=document.createElement('script');
+  script.id='kakaoMapsSdk';
+  script.src=`https://dapi.kakao.com/v2/maps/sdk.js?appkey=${encodeURIComponent(key)}&libraries=services&autoload=false`;
+  script.onload=()=>{
+    try{
+      if(!window.kakao||!window.kakao.maps){finish(false);return;}
+      window.kakao.maps.load(()=>finish(!!(window.kakao?.maps?.services)));
+    }catch(_){finish(false);}
   };
+  script.onerror=()=>finish(false);
   document.head.appendChild(script);
+  setTimeout(()=>finish(!!(window.kakao?.maps?.services)),6500);
+}
+
+function kakaoExternalSearchUrl(q){
+  return 'https://map.kakao.com/link/search/'+encodeURIComponent(q||'사찰');
+}
+function kakaoFallbackHtml(q){
+  return `<div class="map-fallback-card">
+    <b>카카오맵을 앱 안에서 불러오지 못했어요.</b>
+    <span>사이트 도메인 등록이나 네트워크 상태 때문에 SDK가 막힌 경우예요.</span>
+    <a href="${kakaoExternalSearchUrl(q)}" target="_blank" rel="noopener">🗺 카카오맵에서 바로 열기</a>
+  </div>`;
 }
 
 function markerImageFor(tag){
@@ -8670,8 +8746,8 @@ function setupDetailMap(d, id, opts){
   mapEl.style.justifyContent = 'center';
   ensureKakao(ready=>{
     if(!ready){
-      mapEl.style.background = 'var(--paper)';
-      mapEl.innerHTML = '<div class="map-note" style="padding:0 14px;">지도 기능이 아직 준비 중이에요. 위 링크로 카카오맵에서 바로 확인할 수 있어요.</div>';
+      mapEl.style.background='var(--paper)';
+      mapEl.innerHTML=kakaoFallbackHtml(d.name+' '+(d.locationHint||d.region||''));
       return;
     }
     mapEl.innerHTML='';
@@ -8727,7 +8803,7 @@ function openMapOverlay(){
   el.innerHTML=''; note.textContent='';
   ensureKakao(ready=>{
     if(!ready){
-      note.textContent = '지도 기능이 아직 준비 중이에요.';
+      note.innerHTML = kakaoFallbackHtml((contentType==='mountain'?'대한민국 산':'대한민국 사찰'));
       return;
     }
     const map = new kakao.maps.Map(el, {center: new kakao.maps.LatLng(36.2, 127.9), level:12});
