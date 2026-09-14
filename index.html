@@ -2784,7 +2784,7 @@ body:has(#beatLabOverlay.show) #miniPlayer{
 .song-sort-list{display:flex;gap:6px;justify-content:center;margin-bottom:12px;flex-wrap:wrap}
 .song-sort-item{display:flex;align-items:center;gap:5px}
 .song-drag-handle{width:25px;height:31px;border:1px solid var(--paper-line);border-radius:9px;background:var(--paper);color:var(--ink-soft);font-size:14px;cursor:grab;touch-action:none}
-.lyric-line.sync-selected{outline:2px solid var(--gold);outline-offset:1px;border-radius:7px;background:rgba(200,150,62,.08)}
+.lyric-line.sync-selected{outline:2px solid var(--gold);outline-offset:1px;border-radius:7px;background:rgba(200,150,62,.08);color:var(--gold)!important;font-weight:800!important;}
 .sync-panel{margin-top:10px;padding:10px;border:1px solid var(--paper-line);border-radius:12px;background:var(--paper-soft)}
 .sync-slider-row{display:flex;align-items:center;gap:7px}
 .sync-slider-row input{flex:1;min-width:100px}
@@ -3325,7 +3325,7 @@ body:has(#beatLabOverlay.show) #miniPlayer{
         <button class="btn btn-primary" style="flex:1;" id="playlistPlayBtn" onclick="togglePlaylistPlay()">▶ 재생하기</button>
         <button class="btn btn-ghost" style="padding:10px 16px;" onclick="nextSong()">⏭</button>
       </div>
-      <div class="sync-panel">
+      <div class="sync-panel" id="lyricSyncPanel">
         <div class="sync-slider-row">
           <button class="btn btn-ghost" style="padding:6px 9px;font-size:11px;" onclick="adjustLyricOffset(-0.1)">−0.1</button>
           <input id="lyricOffsetRange" type="range" min="-8" max="8" step="0.1" value="0" oninput="setLyricOffset(this.value)">
@@ -4562,6 +4562,18 @@ function mountainsRef(){
 function mountainRef(id){
   return db.ref('users/'+currentUid+'/mountains/'+id);
 }
+// 가사 싱크는 다른 데이터와 달리 사용자별(users/{uid})이 아니라
+// 모든 사람이 함께 보는 공용 경로에 저장합니다 — 관리자 한 명이 맞추면
+// 전체 사용자에게 똑같이 적용되어야 하기 때문입니다.
+const ADMIN_EMAIL_LOCALPART = 'song4mi12';
+function isAdminUser(){
+  const email = auth && auth.currentUser && auth.currentUser.email;
+  if(!email) return false;
+  return email.split('@')[0].toLowerCase() === ADMIN_EMAIL_LOCALPART;
+}
+function lyricSyncRef(){
+  return db.ref('shared/lyricSync');
+}
 function streakRef(){
   return db.ref('users/'+currentUid+'/streak');
 }
@@ -4763,6 +4775,16 @@ function launchApp(){
       }
       if(contentType==='mountain') debouncedFullRender(render);
     });
+    lyricSyncRef().on('value', snap=>{
+      const shared = snap.val();
+      if(shared && typeof shared==='object' && !Array.isArray(shared)){
+        lyricOffsets = shared;
+        try{ localStorage.setItem('sansaLyricOffsets_v3', JSON.stringify(lyricOffsets)); }catch(e){}
+        lastLyricIdx = -1;
+        updateLyricOffsetLabel();
+        if(document.getElementById('playlistOverlay')?.classList.contains('show')) updatePlaylistProgress();
+      }
+    });
   }
 }
 
@@ -4801,12 +4823,32 @@ function updateAccountInfo(){
 
 let suggestBannerRendered = false;
 function afterDataLoaded(){
+  ensureDestinationsSeeded();
   maybeShowSeedBanner();
   checkSeasonBanner();
   checkAlmostDoneBanner();
   renderLevelBadge();
   if(!suggestBannerRendered){ renderSuggestBanner(); suggestBannerRendered = true; }
   render();
+}
+// 절 기본 목록(MASTER_BY_NAME)에 있는 곳인데 아직 내 기록에 없는 곳을 자동으로 채워 넣습니다.
+// 게스트(둘러보기) 모드에서만 실행합니다 — 로그인 계정은 이미 각자 취향대로
+// 큐레이션한 목록(예: 108곳)을 갖고 있을 수 있어서, 전체 마스터 목록을 강제로
+// 채워 넣으면 원치 않는 절이 잔뜩 추가돼버립니다. 개인 저장을 막는 게이트
+// (writeDestination 등)도 거치지 않고 직접 씁니다.
+function ensureDestinationsSeeded(){
+  if(!localMode) return;
+  const existingNames = new Set(Object.values(destinations).map(d=>d.name));
+  const missing = Object.values(MASTER_BY_NAME).filter(item=>!existingNames.has(item.name));
+  if(missing.length===0) return;
+  const batch={};
+  missing.forEach((item,idx)=>{
+    const id = newId();
+    const data = Object.assign({}, item, {stage:0, notes:'', photos:{}, createdAt: Date.now()+idx});
+    destinations[id]=data;
+    batch[id]=data;
+  });
+  persistLocal();
 }
 
 function persistLocal(){
@@ -4820,62 +4862,38 @@ function newId(){
   return 'd_' + Date.now() + '_' + Math.random().toString(36).slice(2,7);
 }
 
-function writeMountainDestination(id, data){
-  if(localMode){
-    mountainDestinations[id] = data;
-    persistLocalMountains();
-    render();
-  } else {
-    mountainRef(id).set(data);
+function promptGuestLoginRequired(){
+  if(confirm('기록을 저장하려면 Google 계정으로 로그인해야 해요. 지금 로그인 화면으로 이동할까요?')){
+    localStorage.removeItem('travelDiaryGuestMode');
+    location.reload();
   }
+}
+function writeMountainDestination(id, data){
+  if(localMode){ promptGuestLoginRequired(); return; }
+  mountainRef(id).set(data);
 }
 function updateMountainDestination(id, patch){
-  if(localMode){
-    mountainDestinations[id] = Object.assign({}, mountainDestinations[id], patch);
-    persistLocalMountains();
-    render();
-  } else {
-    mountainRef(id).update(patch);
-  }
+  if(localMode){ promptGuestLoginRequired(); return; }
+  mountainRef(id).update(patch);
 }
 function removeMountainData(id){
-  if(localMode){
-    delete mountainDestinations[id];
-    persistLocalMountains();
-    render();
-  } else {
-    mountainRef(id).remove();
-  }
+  if(localMode){ promptGuestLoginRequired(); return; }
+  mountainRef(id).remove();
 }
 
 function writeDestination(id, data){
-  if(localMode){
-    destinations[id] = data;
-    persistLocal();
-    render();
-  } else {
-    destinationRef(id).set(data);
-  }
+  if(localMode){ promptGuestLoginRequired(); return; }
+  destinationRef(id).set(data);
 }
 
 function updateDestination(id, patch){
-  if(localMode){
-    destinations[id] = Object.assign({}, destinations[id], patch);
-    persistLocal();
-    render();
-  } else {
-    destinationRef(id).update(patch);
-  }
+  if(localMode){ promptGuestLoginRequired(); return; }
+  destinationRef(id).update(patch);
 }
 
 function removeDestinationData(id){
-  if(localMode){
-    delete destinations[id];
-    persistLocal();
-    render();
-  } else {
-    destinationRef(id).remove();
-  }
+  if(localMode){ promptGuestLoginRequired(); return; }
+  destinationRef(id).remove();
 }
 
 
@@ -5156,6 +5174,10 @@ let selectedLyricSyncIdx = -1;
 function currentLyricOffset(){ return Number(lyricOffsets[SONGS[currentSongIdx]?.title] || 0); }
 function saveLyricOffsets(){
   try { localStorage.setItem('sansaLyricOffsets_v3', JSON.stringify(lyricOffsets)); } catch(e){}
+  // 관리자가 맞춘 싱크만 모두에게 공통 적용되는 공용 경로에 저장합니다.
+  if(!localMode && db && isAdminUser()){
+    try{ lyricSyncRef().set(lyricOffsets); }catch(e){}
+  }
 }
 function updateLyricOffsetLabel(){
   const el = document.getElementById('lyricOffsetLabel');
@@ -5165,6 +5187,7 @@ function updateLyricOffsetLabel(){
   const range=document.getElementById('lyricOffsetRange'); if(range) range.value=String(v);
 }
 function adjustLyricOffset(delta){
+  if(!isAdminUser()) return;
   lyricOffsets[SONGS[currentSongIdx].title] = Math.max(-8, Math.min(8, Math.round((currentLyricOffset()+delta)*10)/10));
   saveLyricOffsets();
   lastLyricIdx = -1;
@@ -5173,15 +5196,18 @@ function adjustLyricOffset(delta){
 }
 
 function setLyricOffset(v){
+  if(!isAdminUser()) return;
   const n=Math.max(-8,Math.min(8,Number(v)||0));
   lyricOffsets[SONGS[currentSongIdx].title]=Math.round(n*10)/10;
   saveLyricOffsets(); lastLyricIdx=-1; updateLyricOffsetLabel(); updatePlaylistProgress();
 }
 function selectLyricForSync(i){
+  if(!isAdminUser()) return;
   selectedLyricSyncIdx=i;
   document.querySelectorAll('#lyricsInner .lyric-line').forEach((el,idx)=>el.classList.toggle('sync-selected',idx===i));
 }
 function alignSelectedLyricToNow(){
+  if(!isAdminUser()) return;
   const audio=document.getElementById('playlistAudio');
   const lyrics=SONGS[currentSongIdx]?.lyrics||[];
   const i=selectedLyricSyncIdx>=0?selectedLyricSyncIdx:lastLyricIdx;
@@ -5191,6 +5217,7 @@ function alignSelectedLyricToNow(){
 }
 
 function resetLyricOffset(){
+  if(!isAdminUser()) return;
   lyricOffsets[SONGS[currentSongIdx].title] = 0;
   saveLyricOffsets();
   lastLyricIdx = -1;
@@ -5248,6 +5275,8 @@ function openPlaylistOverlay(){
   } else {
     document.querySelectorAll('.song-pick').forEach((b,i)=> b.classList.toggle('active', i===currentSongIdx));
   }
+  const syncPanel = document.getElementById('lyricSyncPanel');
+  if(syncPanel) syncPanel.style.display = isAdminUser() ? '' : 'none';
   document.getElementById('playlistOverlay').classList.add('show');
   syncMiniPlayerVisibility();
   audio.onloadedmetadata = ()=>{ document.getElementById('playlistDurTime').textContent = formatTime(audio.duration); };
@@ -8131,6 +8160,7 @@ function renderMountainPhotos(photos){
 function uploadMountainPhotos(event){
   const files = Array.from(event.target.files || []);
   if(files.length===0) return;
+  if(localMode){ event.target.value=''; promptGuestLoginRequired(); return; }
   if(!CLOUDINARY_CLOUD_NAME || CLOUDINARY_CLOUD_NAME.indexOf('REPLACE_ME')===0){
     showToast('사진 저장소가 아직 설정되지 않았어요. 관리자에게 문의해주세요.');
     event.target.value = '';
@@ -8158,6 +8188,7 @@ function uploadMountainPhotos(event){
 }
 function deleteMountainPhoto(pid, evt){
   evt.stopPropagation();
+  if(localMode){ promptGuestLoginRequired(); return; }
   const id = currentMountainDetailId;
   const photos = Object.assign({}, mountainDestinations[id].photos || {});
   delete photos[pid];
@@ -9084,6 +9115,7 @@ function triggerUpload(){
 function uploadPhotos(evt){
   const files = Array.from(evt.target.files||[]);
   if(!files.length || !currentDetailId) return;
+  if(localMode){ evt.target.value=''; promptGuestLoginRequired(); return; }
   if(!CLOUDINARY_CLOUD_NAME || CLOUDINARY_CLOUD_NAME.indexOf('REPLACE_ME')===0){
     showToast('사진 저장소가 아직 설정되지 않았어요. 관리자에게 문의해주세요.');
     return;
@@ -9101,15 +9133,7 @@ function uploadPhotos(evt){
     }).then(res=>res.json()).then(data=>{
       if(!data.secure_url){ throw new Error(data.error ? data.error.message : '업로드 실패'); }
       const photoData = {url: data.secure_url, publicId: data.public_id};
-      if(localMode){
-        destinations[id].photos = destinations[id].photos || {};
-        destinations[id].photos[pid] = photoData;
-        persistLocal();
-        renderPhotos(destinations[id].photos);
-        render();
-      } else {
-        destinationRef(id).child('photos/'+pid).set(photoData);
-      }
+      destinationRef(id).child('photos/'+pid).set(photoData);
       showToast('업로드 완료');
     }).catch(err=>{
       showToast('업로드 실패: '+err.message);
@@ -9122,20 +9146,14 @@ function deletePhoto(pid, evt){
   evt.stopPropagation();
   if(!currentDetailId) return;
   const id = currentDetailId;
+  if(localMode){ promptGuestLoginRequired(); return; }
   // Cloudinary의 무서명(unsigned) 방식은 브라우저에서 안전하게 삭제 요청을 보낼 방법이 없어서,
   // 목록에서만 제거해요. 실제 파일은 Cloudinary 계정에 남지만 무료 용량 안에서는 문제되지 않아요.
-  if(localMode){
+  destinationRef(id).child('photos/'+pid).remove();
+  if(destinations[id] && destinations[id].photos){
     delete destinations[id].photos[pid];
-    persistLocal();
     renderPhotos(destinations[id].photos);
     render();
-  } else {
-    destinationRef(id).child('photos/'+pid).remove();
-    if(destinations[id] && destinations[id].photos){
-      delete destinations[id].photos[pid];
-      renderPhotos(destinations[id].photos);
-      render();
-    }
   }
 }
 
