@@ -2904,6 +2904,7 @@ body:has(#beatLabOverlay.show) #miniPlayer{
 
 
 
+  <div id="seedBannerWrap"></div>
   <div id="iconRowHintWrap"></div>
   <div id="guestAddHintWrap"></div>
   <div id="explain108Wrap"></div>
@@ -2912,7 +2913,6 @@ body:has(#beatLabOverlay.show) #miniPlayer{
   <div id="triviaBannerWrap"></div>
   <div id="quizBannerWrap"></div>
   <div id="suggestBannerWrap"></div>
-  <div id="seedBannerWrap"></div>
   <div id="seasonBannerWrap"></div>
   <div id="almostBannerWrap"></div>
 
@@ -7780,9 +7780,17 @@ function checkSeasonBanner(){
 function maybeShowSeedBanner(){
   const wrap = document.getElementById('seedBannerWrap');
   if(Object.keys(destinations).length === 0){
-    wrap.innerHTML = `<div class="seedbanner">
-      <span>아직 등록된 절이 없어요. 유네스코 산사 7곳을 바로 불러올까요?</span>
-      <button class="btn btn-primary" style="padding:8px 14px;font-size:12.5px;" onclick="loadPack('unesco')">불러오기</button>
+    wrap.innerHTML = `<div class="seedbanner" style="flex-direction:column;align-items:flex-start;gap:10px;">
+      <div>
+        <b>아직 목록에 절이 하나도 없어요.</b><br>
+        절을 채우는 방법은 두 가지예요.
+      </div>
+      <div style="font-size:13px;line-height:1.6;">
+        <b>① 바로 채우기</b> — 아래 버튼을 누르면 유네스코 산사 7곳이 목록에 바로 추가돼요.<br>
+        <b>② 직접 고르기</b> — 화면 위쪽의 <b>📥 아이콘</b>을 누르면 "조계종 8대 총림", "3대 해수관음 성지" 같은 다양한 코스를 골라서 불러올 수 있어요.<br>
+        <b>③ 내가 아는 절 추가하기</b> — 목록에 없는, 알고 계신 절이라면 화면 <b>오른쪽 아래 + 버튼</b>을 눌러 직접 이름을 적어 추가할 수 있어요.
+      </div>
+      <button class="btn btn-primary" style="padding:8px 14px;font-size:12.5px;" onclick="loadPack('unesco')">유네스코 산사 7곳 바로 불러오기</button>
     </div>`;
   } else {
     wrap.innerHTML = '';
