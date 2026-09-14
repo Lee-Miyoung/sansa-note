@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5, user-scalable=yes">
 <title>산사노트 | 전국 사찰·산 순례 기록과 나만의 절 여행 노트</title>
 <link rel="canonical" href="https://sansanote.com/">
 <meta name="description" content="산사노트는 전국 사찰과 산을 찾아보고, 다녀온 절과 순례 기록·사진·방문 메모를 한곳에 남기는 개인 순례 기록 서비스입니다. 유네스코 산사부터 숨은 고찰까지 나만의 사찰 여행을 기록해보세요.">
@@ -973,22 +973,22 @@ window.addEventListener('load',()=>{
     .worry-smash-title{font-size:11px}
     .worry-game-hint{font-size:9px;max-width:240px}
   }
-  /* 사이키델릭 모드는 기본 화면과 분리된 선택 기능으로만 유지 */
-  body.psy-mode{
-    --paper:#17121a;--paper-soft:#211925;--paper-line:#44394a;--ink:#f1e9f3;--ink-soft:#b8a8bd;
-    --stamp:#d84d92;--stamp-dark:#a12d68;--moss:#78995e;--moss-dark:#5f784a;--gold:#d2a84f;
-    background:#17121a;
-  }
+  /* 사이키델릭 모드는 기본 화면과 분리된 선택 기능으로만 유지.
+     예전엔 --ink/--paper 같은 색상 변수 자체를 바꿔서 앱 전체 배경/글씨색을
+     뒤집었는데, 컴포넌트마다 배경은 고정 색(흰색 계열)을 쓰면서 글씨색만
+     변수를 물려받는 곳이 많아서 일부 화면에서 글씨가 배경과 같은 색이 되어
+     안 보이는 문제가 있었습니다. 그래서 이제는 색상 변수는 그대로 두고,
+     은은한 색감 오버레이만 배경에 더합니다 — 글씨 가독성에 영향이 없어요. */
   body.psy-mode::before{
     background:
-      radial-gradient(circle at 15% 20%,rgba(216,77,146,.10),transparent 28%),
-      radial-gradient(circle at 80% 10%,rgba(120,153,94,.09),transparent 26%),
+      radial-gradient(circle at 15% 20%,rgba(216,77,146,.14),transparent 30%),
+      radial-gradient(circle at 80% 10%,rgba(120,153,94,.12),transparent 28%),
+      radial-gradient(circle at 50% 80%,rgba(210,168,79,.10),transparent 32%),
+      radial-gradient(rgba(135,118,95,.05) 1px, transparent 1.4px) 0 0/14px 14px,
+      radial-gradient(rgba(135,118,95,.04) 1px, transparent 1.6px) 7px 7px/22px 22px,
       var(--paper);
   }
-  body.psy-mode header.hero{filter:saturate(1.10) contrast(1.03)}
-  body.psy-mode .card,body.psy-mode .filterbar,body.psy-mode .content-type-btn{background:var(--paper-soft);color:var(--ink)}
-  body.psy-mode .modal{background:var(--paper-soft);color:var(--ink)}
-  body.psy-mode .visitrow,body.psy-mode .upload-tile{background:#2a202e}
+  body.psy-mode header.hero{filter:saturate(1.25) contrast(1.05) hue-rotate(6deg)}
 
   .micro-burst{position:fixed;z-index:9999;pointer-events:none;font-size:22px;animation:burstFly .65s ease-out forwards}
   @keyframes burstFly{0%{transform:translate(-50%,-50%) scale(.6);opacity:1}100%{transform:translate(-50%,-90px) rotate(12deg) scale(1.25);opacity:0}}
@@ -3218,7 +3218,7 @@ body:has(#beatLabOverlay.show) #miniPlayer{
 <div class="overlay" id="lightboxOverlay" style="background:rgba(0,0,0,.92);z-index:300;align-items:center!important;justify-content:center!important;padding:0!important;" onclick="if(event.target===this)closeLightbox()">
   <button id="lbPrev" style="position:fixed;left:10px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.15);color:#fff;border:none;width:44px;height:44px;border-radius:50%;font-size:20px;cursor:pointer;z-index:3;" onclick="lightboxNav(-1)">‹</button>
   <div id="lightboxStage" style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;overflow:hidden;touch-action:none;pointer-events:none;">
-    <img id="lightboxImg" src="" style="max-width:90vw;max-height:82vh;width:auto;height:auto;object-fit:contain;border-radius:14px;box-shadow:0 20px 50px rgba(0,0,0,.5);transform:scale(1);transform-origin:center center;transition:transform .18s ease;pointer-events:auto;touch-action:none;" ondblclick="toggleLightboxZoom()">
+    <img id="lightboxImg" src="" draggable="false" oncontextmenu="return false" style="max-width:90vw;max-height:82vh;width:auto;height:auto;object-fit:contain;border-radius:14px;box-shadow:0 20px 50px rgba(0,0,0,.5);transform:scale(1);transform-origin:center center;transition:transform .18s ease;pointer-events:auto;touch-action:none;-webkit-touch-callout:none;-webkit-user-select:none;user-select:none;" ondblclick="toggleLightboxZoom()">
   </div>
   <button id="lbNext" style="position:fixed;right:10px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.15);color:#fff;border:none;width:44px;height:44px;border-radius:50%;font-size:20px;cursor:pointer;z-index:3;" onclick="lightboxNav(1)">›</button>
   <div id="lbZoomControls" style="position:fixed;top:18px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:4;">
@@ -4729,18 +4729,24 @@ function renderFunBanner(){
   </div>`;
 }
 
+// 아래 세 안내 배너는 X로 닫아도 "이번에 켜져 있는 화면"에서만 숨겨지고,
+// 새로고침하면 다시 보여요. 게스트/일반 사용자 모두에게 계속 도움이 되는
+// 안내라, localStorage로 영구히 숨기면 정작 필요할 때 다시 못 보게 돼요.
+let iconRowHintDismissedThisLoad = false;
+let guestAddHintDismissedThisLoad = false;
+let explain108DismissedThisLoad = false;
+
 function renderIconRowHint(){
   const wrap = document.getElementById('iconRowHintWrap');
   if(!wrap) return;
-  const key = 'sansanoteIconRowHintDismissed';
-  if(localStorage.getItem(key) === '1'){ wrap.innerHTML=''; return; }
+  if(iconRowHintDismissedThisLoad){ wrap.innerHTML=''; return; }
   wrap.innerHTML = `<div class="explain108-banner">
-    <span>👆 위쪽 오른편의 작은 아이콘 3개도 눌러보세요 — 📥 순례 코스 불러오기, 🗺 전체 지도, ⚙ 설정이에요.</span>
+    <span>👆 화면 위쪽 오른편 아이콘도 눌러보세요 — 📥 순례 코스 불러오기, 🗺 전체 지도, 그리고 <b>⚙ 설정</b> 안에는 순례 앨범·뱃지·불교 용어 사전·108배 예절·기도문 모음까지 숨어있어요.</span>
     <button class="close108" onclick="dismissIconRowHint()">✕</button>
   </div>`;
 }
 function dismissIconRowHint(){
-  localStorage.setItem('sansanoteIconRowHintDismissed', '1');
+  iconRowHintDismissedThisLoad = true;
   const wrap = document.getElementById('iconRowHintWrap');
   if(wrap) wrap.innerHTML = '';
 }
@@ -4748,21 +4754,19 @@ function renderGuestAddHint(){
   const wrap = document.getElementById('guestAddHintWrap');
   if(!wrap) return;
   if(!localMode){ wrap.innerHTML=''; return; }
-  const key = 'sansanoteGuestAddHintDismissed';
-  if(localStorage.getItem(key) === '1'){ wrap.innerHTML=''; return; }
+  if(guestAddHintDismissedThisLoad){ wrap.innerHTML=''; return; }
   wrap.innerHTML = `<div class="explain108-banner">
     <span>👋 지금은 둘러보기 중이에요. 목록에 없는 절은 화면 오른쪽 <b>아래 + 버튼</b>을 눌러 직접 추가할 수 있고, 방문 표시·사진·메모 저장은 Google 로그인 후에 할 수 있어요.</span>
     <button class="close108" onclick="dismissGuestAddHint()">✕</button>
   </div>`;
 }
 function dismissGuestAddHint(){
-  localStorage.setItem('sansanoteGuestAddHintDismissed', '1');
+  guestAddHintDismissedThisLoad = true;
   const wrap = document.getElementById('guestAddHintWrap');
   if(wrap) wrap.innerHTML = '';
 }
 function renderExplain108(){
-  const key = 'sansanoteExplain108Dismissed';
-  if(localStorage.getItem(key) === '1') return;
+  if(explain108DismissedThisLoad) return;
   const wrap = document.getElementById('explain108Wrap');
   wrap.innerHTML = `<div class="explain108-banner">
     <span>✦ 기본 목록이 <b>108</b>곳인 건 우연이 아니에요 — 불교에서 말하는 108번뇌를 담았어요. 여기 없는, 알고 계신 절은 오른쪽 아래 + 버튼으로 직접 추가할 수 있어요.</span>
@@ -4770,7 +4774,7 @@ function renderExplain108(){
   </div>`;
 }
 function dismissExplain108(){
-  localStorage.setItem('sansanoteExplain108Dismissed', '1');
+  explain108DismissedThisLoad = true;
   document.getElementById('explain108Wrap').innerHTML = '';
 }
 
@@ -8393,7 +8397,7 @@ function cardCoverMedia(photo, kind, name){
   const placeholder = kind==='mountain' ? mountainPlaceholderHtml('산 풍경 준비 중') : lotusPlaceholderHtml('사찰 사진 준비 중');
   if(!photo) return placeholder;
   return `<img class="card-cover-img loaded stable-cover" src="${escapeAttr(photo)}" alt="${escapeAttr(name||'')}"
-    loading="lazy" decoding="async" onerror="replaceBrokenCardCover(this,'${kind}')">`;
+    loading="lazy" decoding="async" draggable="false" oncontextmenu="return false" style="-webkit-touch-callout:none;-webkit-user-select:none;user-select:none;" onerror="replaceBrokenCardCover(this,'${kind}')">`;
 }
 function progressSealHtml(stageIdx){
   if(stageIdx<1) return '';
@@ -9109,7 +9113,7 @@ function renderAutoCoverPhotos(wrapId,d){
     <div class="auto-photo-item">
       <div class="slide auto-photo-slide" onclick='openLightbox(${JSON.stringify(urls)},${i},${JSON.stringify(meta)})'>
         ${lotusPlaceholderHtml('사진 불러오는 중')}
-        <img src="${escapeAttr(url)}" alt="${escapeAttr(d.name||'사찰 사진')}" loading="lazy"
+        <img src="${escapeAttr(url)}" alt="${escapeAttr(d.name||'사찰 사진')}" loading="lazy" draggable="false" oncontextmenu="return false" style="-webkit-touch-callout:none;-webkit-user-select:none;user-select:none;"
           onload="this.classList.add('loaded')" onerror="this.remove()">
       </div>
       ${photoCreditHtml(meta[i],i)}
