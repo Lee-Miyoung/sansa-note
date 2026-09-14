@@ -884,7 +884,7 @@
   .beat-desktop-layout{display:block}
   .beat-left-panel,.beat-right-panel{min-width:0}
   .beat-pad small{display:block;margin-top:7px;font-size:8px;letter-spacing:1.3px;color:rgba(255,255,255,.58)}
-  .beat-side-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .beat-side-actions{display:grid;grid-template-columns:1fr;gap:8px}
   .beat-side-tip{font-size:10px;color:#a995b2;line-height:1.55;margin-top:10px;padding:10px 12px;border:1px solid rgba(255,255,255,.08);border-radius:12px;background:rgba(255,255,255,.035)}
   .worry-missile.weapon-mok{background:linear-gradient(180deg,#fff,#ffd56a 45%,#ff9b37);box-shadow:0 0 9px #ffd56a,0 0 20px rgba(255,155,55,.68)}
   .worry-missile.weapon-kick{width:8px;background:linear-gradient(180deg,#fff,#ff5f84 42%,#ff3030);box-shadow:0 0 10px #ff5f84,0 0 24px rgba(255,48,48,.72)}
@@ -1050,7 +1050,7 @@
   #beatLabOverlay .beat-pad b{font-size:11px!important}
   #beatLabOverlay .beat-pad small{font-size:6.5px!important;margin-top:3px!important;letter-spacing:.5px!important}
   .beat-pad.wrong-shot{animation:wrongShot .28s ease-out}@keyframes wrongShot{0%,100%{transform:none}35%{transform:translateX(-4px);filter:saturate(.2)}70%{transform:translateX(4px);filter:saturate(.2)}}
-  .beat-side-actions{grid-template-columns:1fr 1fr!important;gap:7px!important;margin-top:6px!important}
+  .beat-side-actions{grid-template-columns:1fr!important;gap:7px!important;margin-top:6px!important}
   .beat-side-actions .club-btn{padding:8px 10px!important;font-size:10px!important}
   .beat-side-tip{display:none!important}
   .release-banner{margin:0 0 5px!important;font-size:9.5px!important}
@@ -1149,6 +1149,32 @@
   }
   @media(max-width:520px){.worry-smash-zone{height:clamp(250px,41vh,330px)!important;min-height:240px!important;}}
 
+
+  /* ===== Beat Shooter FX v5: zero-layout-shift canvas feedback ===== */
+  .worry-smash-zone{contain:layout paint style;isolation:isolate}
+  .beat-fx-canvas{
+    position:absolute;inset:0;width:100%;height:100%;z-index:18;
+    pointer-events:none;display:block;contain:strict;
+  }
+  .beat-event-rail{
+    position:absolute;left:50%;top:44px;transform:translateX(-50%);
+    z-index:19;pointer-events:none;min-width:128px;max-width:70%;
+    padding:5px 10px;border-radius:999px;text-align:center;
+    background:rgba(10,8,18,.48);border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(5px);opacity:.78;
+  }
+  .beat-event-rail b{display:block;font-size:10px;line-height:1.05;color:#fff;letter-spacing:.5px}
+  .beat-event-rail span{display:block;margin-top:2px;font-size:7px;color:#cdbed4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .beat-event-rail.hot{box-shadow:0 0 22px rgba(255,98,188,.24);border-color:rgba(255,213,106,.22)}
+  /* old DOM popup classes remain for compatibility but never take visual space */
+  #beatLabOverlay .beat-level-pop,
+  #beatLabOverlay .beat-reward-pop,
+  #beatLabOverlay .beat-wave-pop{display:none!important}
+  @media(max-width:900px){
+    .beat-event-rail{top:39px;max-width:66%;padding:4px 8px}
+    .beat-event-rail b{font-size:9px}.beat-event-rail span{font-size:6.5px}
+  }
+
 </style>
 </head>
 <body>
@@ -1241,6 +1267,7 @@
         <button class="hip-quick-btn" onclick="openOracleOverlay()">🙏 <em>마음 고민</em> 처방</button>
         <button class="hip-quick-btn" onclick="openBreathOverlay('counting')">🫁 1분 호흡</button>
         <button class="hip-quick-btn" onclick="openAmuletOverlay()">🧧 오늘의 부적</button>
+        <button class="hip-quick-btn" onclick="openMoktakOverlay()">🥢 무한 목탁</button>
       </div>
       <div class="hero-badge-row">
         <div id="streakBadge"></div>
@@ -2075,6 +2102,8 @@
           <div class="beat-life-row"><span>생명 <b class="beat-lives" id="beatLives">❤️❤️❤️</b></span><span class="beat-streak" id="beatStreak">맞는 패드만 점수 · 빗나가면 콤보 RESET</span></div>
           <div class="beat-track" id="beatTrack"><i class="beat-step" data-step="0"></i><i class="beat-step" data-step="1"></i><i class="beat-step" data-step="2"></i><i class="beat-step" data-step="3"></i><i class="beat-step" data-step="4"></i><i class="beat-step" data-step="5"></i><i class="beat-step" data-step="6"></i><i class="beat-step" data-step="7"></i></div>
           <div class="worry-smash-zone" id="worrySmashZone">
+            <canvas class="beat-fx-canvas" id="beatFxCanvas" aria-hidden="true"></canvas>
+            <div class="beat-event-rail" id="beatEventRail"><b id="beatEventMain">READY</b><span id="beatEventSub">맞는 패드만 정확히 쏘세요</span></div>
             <div class="worry-smash-title">🚀 6-LANE SHOOTER · 패드 바로 위로 직선 발사</div>
             <div class="worry-wave" id="worryWave">WAVE 1</div>
             <div class="worry-game-hint">단어 아래의 작은 표시와 같은 패드를 눌러야 HIT · 다른 패드는 MISS</div>
@@ -2090,7 +2119,7 @@
             <button class="beat-pad" data-weapon="bass" onclick="playBeat('bass',this)">🪷<br><b>BASS</b><small>집착·미련</small></button>
             <button class="beat-pad" data-weapon="air" onclick="playBeat('air',this)">✨<br><b>극락 FX</b><small>두려움·외로움</small></button>
           </div>
-          <div class="beat-side-actions"><button class="club-btn hot" onclick="playTempleDrop()">⚡ 40코인 · 정화폭탄</button><button class="club-btn secondary" onclick="openMoktakOverlay();closeBeatLab();">🥢 무한 목탁</button></div>
+          <div class="beat-side-actions"><button class="club-btn hot" onclick="playTempleDrop()">⚡ 40코인 · 정화폭탄</button></div>
           <div class="beat-leaderboard" id="beatLeaderboard">
             <div class="beat-leader-head"><b>🏆 번뇌 타파 실시간 TOP 10</b><button type="button" onclick="closeBeatLeaderboard()">✕</button></div>
             <div class="beat-leader-sub" id="beatLeaderStatus">로그인한 플레이어 최고점수 기준</div>
@@ -7949,10 +7978,10 @@ let beatShots=0,beatMisses=0,beatSlowUntil=0,beatLastSavedScore=0,beatLeaderboar
 let beatLocalBest=Number(localStorage.getItem('sansaBeatBest')||0);
 function updateBeatLives(){const e=document.getElementById('beatLives');if(e)e.textContent='❤️'.repeat(Math.max(0,beatLives))+'🖤'.repeat(Math.max(0,3-beatLives));}
 function resetComboForMiss(btn,msg='MISS · 다른 레인을 쐈어요'){
-  beatMisses++;updateBeatArcadeHud();beatCombo=0;beatLastHit=0;const c=document.getElementById('beatCombo');if(c)c.textContent='0';
+  beatMisses++;scheduleBeatHud();beatCombo=0;beatLastHit=0;const c=document.getElementById('beatCombo');if(c)c.textContent='0';
   beatScore=Math.max(0,beatScore-25);const s=document.getElementById('beatScore');if(s)s.textContent=beatScore.toLocaleString();
   if(btn){btn.classList.remove('wrong-shot');void btn.offsetWidth;btn.classList.add('wrong-shot');setTimeout(()=>btn.classList.remove('wrong-shot'),320)}
-  const m=document.getElementById('releaseMsg');if(m)m.textContent='❌ '+msg;beatPop('MISS','beat-reward-pop','콤보 RESET · -25');
+  const m=document.getElementById('releaseMsg');if(m)m.textContent='❌ '+msg;const em=document.getElementById('beatEventMain'),es=document.getElementById('beatEventSub');if(em)em.textContent='MISS';if(es)es.textContent='콤보 RESET · -25';
 }
 function loseBeatLife(enemy){
   if(!enemy||enemy.classList.contains('smash'))return;
@@ -7962,7 +7991,7 @@ function loseBeatLife(enemy){
   beatLastLifeLostAt=now;beatLifeGraceUntil=now+1050;
   beatLives=Math.max(0,beatLives-1);updateBeatLives();resetComboForMiss(null,'방어선 돌파! 보호막 1초');noiseHit(.12,.12);setTimeout(()=>enemy.remove(),150);
   const zone=document.getElementById('worrySmashZone');if(zone){const f=document.createElement('i');f.className='beat-shield-flash';zone.appendChild(f);setTimeout(()=>f.remove(),760)}
-  beatPop(beatLives>0?'🛡 SHIELD!':'GAME OVER','beat-reward-pop',beatLives>0?`생명 ${beatLives} · 1초 무적`:'3번 돌파 허용');
+  const em=document.getElementById('beatEventMain'),es=document.getElementById('beatEventSub');if(em)em.textContent=beatLives>0?'🛡 SHIELD':'GAME OVER';if(es)es.textContent=beatLives>0?`생명 ${beatLives} · 1초 무적`:'3번 돌파 허용';
   if(beatLives<=0){stopWorryShooter();saveBeatLeaderboardScore(true).finally(()=>loadBeatLeaderboard());setTimeout(()=>document.getElementById('beatGameOver')?.classList.add('show'),180);}
 }
 function clearWorryField(){const z=document.getElementById('worrySmashZone');z?.querySelectorAll('.worry-enemy,.worry-missile,.worry-hit-ring,.worry-explosion,.worry-shard').forEach(x=>x.remove());}
@@ -8011,7 +8040,7 @@ function nearestEnemyInLane(kind){
   if(!arr.length)return null;return arr.sort((a,b)=>parseFloat(b.dataset.y||0)-parseFloat(a.dataset.y||0))[0];
 }
 function fireStraightLane(kind,btn){
-  const zone=document.getElementById('worrySmashZone'),cfg=BEAT_WEAPONS[kind];if(!zone||!cfg)return;beatShots++;updateBeatArcadeHud();
+  const zone=document.getElementById('worrySmashZone'),cfg=BEAT_WEAPONS[kind];if(!zone||!cfg)return;beatShots++;scheduleBeatHud();
   const enemy=nearestEnemyInLane(kind),laneW=zone.clientWidth/6,sx=cfg.lane*laneW+laneW/2,sy=zone.clientHeight-16;
   directBeatGestureTone();unlockIOSMedia();unlockHipAudio().then(updateBeatAudioState);synthTone(950,.045,'square',.045);
   const m=document.createElement('i');m.className='worry-missile weapon-'+kind;m.style.left=(sx-3)+'px';m.style.top=(sy-18)+'px';zone.appendChild(m);
@@ -8027,7 +8056,7 @@ function hitWorryEnemy(enemy,cx,cy,kind='mok'){
   const ring=document.createElement('i');ring.className='worry-hit-ring';ring.style.left=(cx-10)+'px';ring.style.top=(cy-10)+'px';zone.appendChild(ring);setTimeout(()=>ring.remove(),450);
   const boom=document.createElement('i');boom.className='worry-explosion';boom.style.left=cx+'px';boom.style.top=cy+'px';zone.appendChild(boom);setTimeout(()=>boom.remove(),520);
   noiseHit(.045,.07);synthTone(180,.08,'sawtooth',.08);for(let i=0;i<10;i++){const sh=document.createElement('i');sh.className='worry-shard';sh.style.left=cx+'px';sh.style.top=cy+'px';const a=Math.random()*Math.PI*2,d=22+Math.random()*48;sh.style.setProperty('--dx',Math.cos(a)*d+'px');sh.style.setProperty('--dy',Math.sin(a)*d+'px');sh.style.color=['#ff62bc','#b9ff84','#ffd56a','#9bc7ff'][i%4];zone.appendChild(sh);setTimeout(()=>sh.remove(),620)}
-  if(hp>0){const bar=enemy.querySelector('.worry-boss-hp i');if(bar)bar.style.width=(hp/parseInt(enemy.dataset.maxHp,10)*100)+'%';enemy.dataset.locked='0';enemy.classList.remove('targeted');beatScore+=25;const s=document.getElementById('beatScore');if(s)s.textContent=beatScore.toLocaleString();beatPop(`BOSS HIT · ${hp}발 남음`);return;}
+  if(hp>0){const bar=enemy.querySelector('.worry-boss-hp i');if(bar)bar.style.width=(hp/parseInt(enemy.dataset.maxHp,10)*100)+'%';enemy.dataset.locked='0';enemy.classList.remove('targeted');beatScore+=25;const s=document.getElementById('beatScore');if(s)s.textContent=beatScore.toLocaleString();const bm=document.getElementById('beatEventMain'),bs=document.getElementById('beatEventSub');if(bm)bm.textContent='BOSS HIT';if(bs)bs.textContent=hp+'발 남음';return;}
   smashWorryOrb(enemy,true);
 }
 function registerWorryKill(enemy){
@@ -8040,13 +8069,13 @@ function registerWorryKill(enemy){
   beatScore+=points;beatCoins+=boss?12:bonus?10:freeze?4:1;
   if(freeze){beatSlowUntil=performance.now()+2800;beatPop('❄️ 마음이 느려집니다','beat-reward-pop','2.8초 SLOW TIME');}
   if(bonus){beatPop('✨ GOLDEN HIT','beat-reward-pop','코인 +10');beatConfettiBurst(18);}
-  if(perfect&&!boss){beatPop('PERFECT!','beat-reward-pop',`×${mult} · +${points}`);}
+  if(perfect&&!boss){const rail=document.getElementById('beatEventRail'),main=document.getElementById('beatEventMain'),subEl=document.getElementById('beatEventSub');if(main)main.textContent='PERFECT ×'+mult;if(subEl)subEl.textContent='+'+points+' · 정확 타격';rail?.classList.add('hot');clearTimeout(registerWorryKill._railTimer);registerWorryKill._railTimer=setTimeout(()=>rail?.classList.remove('hot'),300);}
   gainBeatXp(boss?140:bonus?85:freeze?60:38);
   const s=document.getElementById('beatScore'),c=document.getElementById('beatCombo');if(s)s.textContent=beatScore.toLocaleString();if(c)c.textContent=beatCombo;
   beatGameStep=(beatGameStep+1)%8;document.querySelectorAll('#beatTrack .beat-step').forEach((el,i)=>el.classList.toggle('on',i===beatGameStep));
   const mission=document.getElementById('beatMission');if(mission)mission.textContent=beatCombo>=30?'🌈 MAX FEVER · 배율 ×5 유지!':beatCombo>=20?'🔥 FEVER · 정확도 유지!':beatCombo>=10?'⚡ SUPER COMBO · 더 빠르게!':`MISSION · ${Math.max(0,10-beatCombo)}개 더 정확히 맞히면 FEVER!`;
   if(beatCombo===10||beatCombo===20||beatCombo===30){beatPop(`${beatCombo} COMBO!`);beatConfettiBurst(16+beatCombo/2)}
-  document.getElementById('beatLabOverlay')?.classList.toggle('fever',beatCombo>=20);rewardBeatMilestone();updateBeatArcadeHud();
+  document.getElementById('beatLabOverlay')?.classList.toggle('fever',beatCombo>=20);rewardBeatMilestone();scheduleBeatHud();
   const nextWave=1+Math.floor((worrySmashTotal+1)/10);
   if(nextWave>worryWave){worryWave=nextWave;const w=document.getElementById('worryWave');if(w)w.textContent='WAVE '+worryWave;beatPop(`WAVE ${worryWave}`,'beat-wave-pop',`SPEED ×${beatSpeedLabel()}`);beatConfettiBurst(26);const modal=document.querySelector('#beatLabOverlay .modal');modal?.classList.add('beat-screen-shake');setTimeout(()=>modal?.classList.remove('beat-screen-shake'),220);updateBeatArcadeHud();}
   if(beatScore>beatLocalBest){beatLocalBest=beatScore;localStorage.setItem('sansaBeatBest',String(beatLocalBest));}
@@ -8075,6 +8104,10 @@ function playBeat(kind,btn,skipGame=false){
   if(!skipGame&&document.getElementById('beatLabOverlay')?.classList.contains('show')&&beatLives>0)fireBeatPadShot(kind,btn);
 }
 const BEAT_RANKS=['초심자','마음 관찰자','번뇌 타파자','리듬 수행자','극락 DJ','해탈 마스터','무아 LEGEND'];
+function scheduleBeatHud(){
+  if(beatHudRaf)return;
+  beatHudRaf=requestAnimationFrame(()=>{beatHudRaf=0;updateBeatArcadeHud();});
+}
 function updateBeatArcadeHud(){
   const mult=Math.min(5,1+Math.floor(Math.max(0,beatCombo-1)/5)),acc=beatShots?Math.round(Math.max(0,(beatShots-beatMisses)/beatShots)*100):100;
   const m=document.getElementById('beatMultiplier'),a=document.getElementById('beatAccuracy'),b=document.getElementById('beatBestText');
@@ -8108,8 +8141,121 @@ function updateBeatProgress(){
   const q=id=>document.getElementById(id); if(q('beatLevel'))q('beatLevel').textContent=beatLevel;if(q('beatXpNow'))q('beatXpNow').textContent=Math.floor(beatXp);if(q('beatXpNeed'))q('beatXpNeed').textContent=need;if(q('beatXpBar'))q('beatXpBar').style.width=pct+'%';if(q('beatCoins'))q('beatCoins').textContent=beatCoins;if(q('beatRankName'))q('beatRankName').textContent=BEAT_RANKS[Math.min(beatLevel-1,BEAT_RANKS.length-1)];
   document.querySelectorAll('#beatRewards .beat-reward').forEach(el=>el.classList.toggle('on',Number(el.dataset.level)<=beatLevel));
 }
-function beatConfettiBurst(n=24){const modal=document.querySelector('#beatLabOverlay .modal');if(!modal)return;const colors=['#b9ff84','#ffd56a','#ff62bc','#9bc7ff','#fff'];for(let i=0;i<n;i++){const e=document.createElement('i');e.className='beat-confetti';e.style.left='50%';e.style.top='42%';e.style.background=colors[i%colors.length];const a=Math.random()*Math.PI*2,d=70+Math.random()*180;e.style.setProperty('--cx',Math.cos(a)*d+'px');e.style.setProperty('--cy',Math.sin(a)*d+'px');e.style.setProperty('--cr',(Math.random()*900-450)+'deg');modal.appendChild(e);setTimeout(()=>e.remove(),1050)}}
-function beatPop(text,cls='beat-reward-pop',sub=''){const modal=document.querySelector('#beatLabOverlay .modal');if(!modal)return;const e=document.createElement('div');e.className=cls;e.innerHTML=text+(sub?`<small>${sub}</small>`:'');modal.appendChild(e);setTimeout(()=>e.remove(),1100)}
+let beatFxCtx=null,beatFxParticles=[],beatFxTexts=[],beatFxRaf=0,beatFxLast=0;
+
+function ensureBeatFxCanvas(){
+  const canvas=document.getElementById('beatFxCanvas'),zone=document.getElementById('worrySmashZone');
+  if(!canvas||!zone)return null;
+  const rect=zone.getBoundingClientRect(),dpr=Math.min(2,window.devicePixelRatio||1);
+  const w=Math.max(1,Math.round(rect.width*dpr)),h=Math.max(1,Math.round(rect.height*dpr));
+  if(canvas.width!==w||canvas.height!==h){
+    canvas.width=w;canvas.height=h;
+    canvas.style.width=rect.width+'px';canvas.style.height=rect.height+'px';
+    beatFxCtx=canvas.getContext('2d',{alpha:true,desynchronized:true});
+    if(beatFxCtx)beatFxCtx.setTransform(dpr,0,0,dpr,0,0);
+  }else if(!beatFxCtx){
+    beatFxCtx=canvas.getContext('2d',{alpha:true,desynchronized:true});
+    if(beatFxCtx)beatFxCtx.setTransform(dpr,0,0,dpr,0,0);
+  }
+  return {canvas,zone,ctx:beatFxCtx,w:rect.width,h:rect.height,dpr};
+}
+
+function beatFxKick(){
+  if(beatFxRaf)return;
+  beatFxLast=performance.now();
+  beatFxRaf=requestAnimationFrame(beatFxFrame);
+}
+
+function beatFxFrame(now){
+  const fx=ensureBeatFxCanvas();
+  if(!fx||!fx.ctx){beatFxRaf=0;return;}
+  const ctx=fx.ctx,dt=Math.min(32,Math.max(8,now-beatFxLast));beatFxLast=now;
+  ctx.clearRect(0,0,fx.w,fx.h);
+
+  for(let i=beatFxParticles.length-1;i>=0;i--){
+    const p=beatFxParticles[i];
+    p.life-=dt;p.x+=p.vx*dt;p.y+=p.vy*dt;p.vy+=p.g*dt;p.vx*=.994;
+    if(p.life<=0){beatFxParticles.splice(i,1);continue;}
+    const a=Math.max(0,p.life/p.maxLife);
+    ctx.globalAlpha=a;
+    ctx.fillStyle=p.color;
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.r*(.65+.35*a),0,Math.PI*2);
+    ctx.fill();
+  }
+
+  for(let i=beatFxTexts.length-1;i>=0;i--){
+    const t=beatFxTexts[i];
+    t.life-=dt;t.y-=t.vy*dt;
+    if(t.life<=0){beatFxTexts.splice(i,1);continue;}
+    const a=Math.min(1,t.life/180);
+    ctx.globalAlpha=a;
+    ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.font=`900 ${t.size}px system-ui,-apple-system,sans-serif`;
+    ctx.shadowBlur=18;ctx.shadowColor=t.glow||t.color;
+    ctx.fillStyle=t.color;
+    ctx.fillText(t.text,t.x,t.y);
+    ctx.shadowBlur=0;
+    if(t.sub){
+      ctx.globalAlpha=a*.9;
+      ctx.font=`800 ${Math.max(8,Math.round(t.size*.34))}px system-ui,-apple-system,sans-serif`;
+      ctx.fillStyle='#ffffff';
+      ctx.fillText(t.sub,t.x,t.y+t.size*.78);
+    }
+  }
+  ctx.globalAlpha=1;
+  if(beatFxParticles.length||beatFxTexts.length){
+    beatFxRaf=requestAnimationFrame(beatFxFrame);
+  }else{
+    ctx.clearRect(0,0,fx.w,fx.h);
+    beatFxRaf=0;
+  }
+}
+
+function beatFxBurst(x,y,n=18,palette){
+  const fx=ensureBeatFxCanvas();if(!fx)return;
+  const colors=palette||['#b9ff84','#ffd56a','#ff62bc','#9bc7ff','#ffffff'];
+  const count=Math.min(28,Math.max(6,n));
+  for(let i=0;i<count;i++){
+    const a=Math.random()*Math.PI*2,s=.045+Math.random()*.11;
+    beatFxParticles.push({
+      x,y,vx:Math.cos(a)*s,vy:Math.sin(a)*s-.035,g:.00018,
+      r:1.8+Math.random()*2.8,color:colors[i%colors.length],
+      life:420+Math.random()*330,maxLife:750
+    });
+  }
+  beatFxKick();
+}
+
+function beatConfettiBurst(n=24){
+  const fx=ensureBeatFxCanvas();if(!fx)return;
+  beatFxBurst(fx.w*.5,fx.h*.36,Math.min(26,n));
+}
+
+function beatPop(text,cls='beat-reward-pop',sub=''){
+  const fx=ensureBeatFxCanvas();
+  const rail=document.getElementById('beatEventRail'),main=document.getElementById('beatEventMain'),s=document.getElementById('beatEventSub');
+  if(main)main.textContent=String(text).replace(/<[^>]*>/g,'');
+  if(s)s.textContent=sub||'';
+  rail?.classList.add('hot');
+  clearTimeout(beatPop._railTimer);
+  beatPop._railTimer=setTimeout(()=>rail?.classList.remove('hot'),520);
+  if(!fx)return;
+  const isLevel=cls==='beat-level-pop',isWave=cls==='beat-wave-pop';
+  beatFxTexts.push({
+    text:String(text).replace(/<[^>]*>/g,''),
+    sub:String(sub||''),
+    x:fx.w*.5,
+    y:fx.h*(isWave?.26:.34),
+    vy:isLevel?.015:.010,
+    size:isLevel?30:(isWave?24:20),
+    color:isLevel?'#b9ff84':(isWave?'#9bc7ff':'#ffd56a'),
+    glow:isLevel?'#7dff70':'#ff62bc',
+    life:isLevel?720:560
+  });
+  beatFxBurst(fx.w*.5,fx.h*(isWave?.30:.39),isLevel?24:12);
+  beatFxKick();
+}
 function gainBeatXp(amount){beatXp+=amount;beatCoins+=Math.max(1,Math.floor(amount/80));let leveled=false;while(beatXp>=beatXpNeed(beatLevel)){beatXp-=beatXpNeed(beatLevel);beatLevel++;beatCoins+=25*beatLevel;leveled=true;}updateBeatProgress();updateBeatArcadeHud();if(leveled){beatPop(`LEVEL ${beatLevel}!`,'beat-level-pop',BEAT_RANKS[Math.min(beatLevel-1,BEAT_RANKS.length-1)]);beatLevelRush();playIOSBeat('bell',.9);synthTone(523,.18,'sine',.08);synthTone(659,.22,'sine',.08,.12);synthTone(784,.30,'sine',.09,.24);}}
 function rewardBeatMilestone(){if(beatCombo===10){beatCoins+=20;beatPop('🪙 +20 BONUS');beatConfettiBurst(16)}if(beatCombo===20){beatCoins+=50;beatPop('🪷 LOTUS BONUS');beatConfettiBurst(22)}if(beatCombo===30){beatCoins+=100;beatPop('🔥 FEVER BONUS');beatConfettiBurst(28)}if(beatCombo>0&&beatCombo%50===0){beatCoins+=250;beatPop('👑 LEGEND COMBO');beatConfettiBurst(40)}updateBeatProgress();}
 function updateBeatAudioState(ok){const e=document.getElementById('beatAudioState');if(!e)return;const c=hipAudioCtx;e.textContent=(ok||c?.state==='running')?'🔊 소리 ON · iPad 준비 완료':'🔇 소리 잠김 · 오른쪽 버튼을 눌러주세요';}
@@ -8124,11 +8270,11 @@ function forceBeatAudioUnlock(testOnly=false){
   try{if(c&&c.state==='suspended'&&c.resume)c.resume();}catch(e){}
   setTimeout(()=>{const ok=!!c&&c.state==='running';hipAudioUnlocked=ok;updateBeatAudioState(ok||immediate);if(ok||immediate){playIOSBeat('bell',1);if(testOnly)showToast('🔊 테스트 소리가 들리면 준비 완료!');else showToast('🔊 소리를 켰어요');}else showToast('아이패드 볼륨/무음 모드도 확인해주세요');},80);
 }
-function resetBeatGame(){beatScore=0;beatCombo=0;beatLastHit=0;beatGameStep=0;worrySmashTotal=0;beatLevel=1;beatXp=0;beatCoins=0;beatBestCombo=0;beatHits=0;beatShots=0;beatMisses=0;beatSlowUntil=0;beatDefenseY=0;beatZoneLockedHeight=0;beatLastLifeLostAt=0;beatLifeGraceUntil=0;beatLives=3;updateBeatLives();document.getElementById('beatGameOver')?.classList.remove('show');document.getElementById('beatLabOverlay')?.classList.remove('fever');const s=document.getElementById('beatScore'),c=document.getElementById('beatCombo'),m=document.getElementById('beatMission');if(s)s.textContent='0';if(c)c.textContent='0';if(m)m.textContent='MISSION · 같은 레인의 맞는 패드로 8번 연속 격추!';document.querySelectorAll('#beatTrack .beat-step').forEach(el=>el.classList.remove('on'));updateBeatProgress();updateBeatArcadeHud();updateBeatAudioState(false);}
+function resetBeatGame(){beatFxParticles.length=0;beatFxTexts.length=0;const fxc=document.getElementById('beatFxCanvas');if(fxc){const c=fxc.getContext('2d');c&&c.clearRect(0,0,fxc.width,fxc.height);}const er=document.getElementById('beatEventRail'),em=document.getElementById('beatEventMain'),es=document.getElementById('beatEventSub');if(er)er.classList.remove('hot');if(em)em.textContent='READY';if(es)es.textContent='맞는 패드만 정확히 쏘세요';beatScore=0;beatCombo=0;beatLastHit=0;beatGameStep=0;worrySmashTotal=0;beatLevel=1;beatXp=0;beatCoins=0;beatBestCombo=0;beatHits=0;beatShots=0;beatMisses=0;beatSlowUntil=0;beatDefenseY=0;beatZoneLockedHeight=0;beatLastLifeLostAt=0;beatLifeGraceUntil=0;beatLives=3;updateBeatLives();document.getElementById('beatGameOver')?.classList.remove('show');document.getElementById('beatLabOverlay')?.classList.remove('fever');const s=document.getElementById('beatScore'),c=document.getElementById('beatCombo'),m=document.getElementById('beatMission');if(s)s.textContent='0';if(c)c.textContent='0';if(m)m.textContent='MISSION · 같은 레인의 맞는 패드로 8번 연속 격추!';document.querySelectorAll('#beatTrack .beat-step').forEach(el=>el.classList.remove('on'));updateBeatProgress();updateBeatArcadeHud();updateBeatAudioState(false);}
 function freezeBeatViewport(){const ov=document.getElementById('beatLabOverlay'),modal=ov?.querySelector('.modal');if(!ov||!modal)return;const vh=Math.round((window.visualViewport?.height||window.innerHeight));const desktop=window.innerWidth>=900;const h=Math.max(520,vh-(desktop?20:0));ov.style.setProperty('--beat-fixed-vh',h+'px');ov.classList.add('beat-vh-locked');document.documentElement.style.overflow='hidden';document.body.style.overflow='hidden';}
 function releaseBeatViewport(){const ov=document.getElementById('beatLabOverlay');ov?.classList.remove('beat-vh-locked');ov?.style.removeProperty('--beat-fixed-vh');if(!document.querySelector('.overlay.show:not(#beatLabOverlay)')){document.documentElement.style.overflow='';document.body.style.overflow='';}}
-function openBeatLab(){const ov=document.getElementById('beatLabOverlay');ov?.classList.add('show');freezeBeatViewport();resetBeatGame();updateBeatLives();requestAnimationFrame(()=>{lockBeatDefenseLine();initWorrySmash();});updateBeatAudioState(false);loadBeatLeaderboard();}
-function closeBeatLab(){saveBeatLeaderboardScore(true);document.getElementById('beatLeaderboard')?.classList.remove('show');document.getElementById('beatLabOverlay')?.classList.remove('show');stopTempleLoop();stopWorryShooter();releaseBeatViewport();}
+function openBeatLab(){const ov=document.getElementById('beatLabOverlay');ov?.classList.add('show');freezeBeatViewport();resetBeatGame();updateBeatLives();requestAnimationFrame(()=>{ensureBeatFxCanvas();lockBeatDefenseLine();initWorrySmash();});updateBeatAudioState(false);loadBeatLeaderboard();}
+function closeBeatLab(){beatFxParticles.length=0;beatFxTexts.length=0;if(beatFxRaf){cancelAnimationFrame(beatFxRaf);beatFxRaf=0;}saveBeatLeaderboardScore(true);document.getElementById('beatLeaderboard')?.classList.remove('show');document.getElementById('beatLabOverlay')?.classList.remove('show');stopTempleLoop();stopWorryShooter();releaseBeatViewport();}
 function updateBeatBpm(v){document.getElementById('beatBpmLabel').textContent=v;if(templeLoopTimer){stopTempleLoop();startTempleLoop();}}
 function startTempleLoop(){
   unlockHipAudio().then(ok=>{
