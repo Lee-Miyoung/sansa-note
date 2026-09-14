@@ -4892,38 +4892,83 @@ function newId(){
   return 'd_' + Date.now() + '_' + Math.random().toString(36).slice(2,7);
 }
 
+let guestLoginPromptShown = false;
 function promptGuestLoginRequired(){
-  if(confirm('기록을 저장하려면 Google 계정으로 로그인해야 해요. 지금 로그인 화면으로 이동할까요?')){
+  // 사진 자동매칭, 위치 좌표 캐싱처럼 사람이 직접 하지 않은 백그라운드 저장
+  // 여러 개가 한꺼번에 시도되면 이 안내가 연달아 여러 번 뜰 수 있어서,
+  // 하나가 떠 있는 동안(또는 방금 닫힌 직후)은 다시 띄우지 않습니다.
+  if(guestLoginPromptShown) return;
+  guestLoginPromptShown = true;
+  const goLogin = confirm('기록을 저장하려면 Google 계정으로 로그인해야 해요. 지금 로그인 화면으로 이동할까요?');
+  if(goLogin){
     localStorage.removeItem('travelDiaryGuestMode');
     location.reload();
+    return;
+  }
+  setTimeout(()=>{ guestLoginPromptShown = false; }, 4000);
+}
+// 아래 여섯 개는 절/산 데이터의 저수준 저장 함수입니다. 개인이 직접 한 저장(방문
+// 표시, 메모, 사진, 순서 변경 등)뿐 아니라 앱이 스스로 하는 백그라운드 저장
+// (사진 자동매칭 결과, 위치 좌표 캐싱)도 전부 이 함수들을 거치기 때문에,
+// 여기서 로그인을 막아버리면 게스트가 홈 화면만 봐도 로그인 요구 팝업이 계속
+// 뜨는 문제가 생깁니다. 그래서 로그인 요구는 여기서 하지 않고, 사람이 실제로
+// 개인 기록을 남기려는 지점(각 기능 함수)에서 개별적으로 안내합니다.
+function writeMountainDestination(id, data){
+  if(localMode){
+    mountainDestinations[id] = data;
+    persistLocalMountains();
+    render();
+  } else {
+    mountainRef(id).set(data);
   }
 }
-function writeMountainDestination(id, data){
-  if(localMode){ promptGuestLoginRequired(); return; }
-  mountainRef(id).set(data);
-}
 function updateMountainDestination(id, patch){
-  if(localMode){ promptGuestLoginRequired(); return; }
-  mountainRef(id).update(patch);
+  if(localMode){
+    mountainDestinations[id] = Object.assign({}, mountainDestinations[id], patch);
+    persistLocalMountains();
+    render();
+  } else {
+    mountainRef(id).update(patch);
+  }
 }
 function removeMountainData(id){
-  if(localMode){ promptGuestLoginRequired(); return; }
-  mountainRef(id).remove();
+  if(localMode){
+    delete mountainDestinations[id];
+    persistLocalMountains();
+    render();
+  } else {
+    mountainRef(id).remove();
+  }
 }
 
 function writeDestination(id, data){
-  if(localMode){ promptGuestLoginRequired(); return; }
-  destinationRef(id).set(data);
+  if(localMode){
+    destinations[id] = data;
+    persistLocal();
+    render();
+  } else {
+    destinationRef(id).set(data);
+  }
 }
 
 function updateDestination(id, patch){
-  if(localMode){ promptGuestLoginRequired(); return; }
-  destinationRef(id).update(patch);
+  if(localMode){
+    destinations[id] = Object.assign({}, destinations[id], patch);
+    persistLocal();
+    render();
+  } else {
+    destinationRef(id).update(patch);
+  }
 }
 
 function removeDestinationData(id){
-  if(localMode){ promptGuestLoginRequired(); return; }
-  destinationRef(id).remove();
+  if(localMode){
+    delete destinations[id];
+    persistLocal();
+    render();
+  } else {
+    destinationRef(id).remove();
+  }
 }
 
 
@@ -8120,6 +8165,7 @@ function renderMountainStepper(stage){
   wrap.querySelectorAll('.stage-btn').forEach(btn=>{
     btn.onclick = ()=>{
       const i = parseInt(btn.dataset.i,10);
+      if(localMode){ promptGuestLoginRequired(); return; }
       updateMountainDestination(currentMountainDetailId, {stage:i});
       mountainDestinations[currentMountainDetailId].stage = i;
       renderMountainStepper(i);
@@ -8130,6 +8176,7 @@ function renderMountainStepper(stage){
 
 function saveMountainNotes(){
   if(!currentMountainDetailId) return;
+  if(localMode){ promptGuestLoginRequired(); return; }
   updateMountainDestination(currentMountainDetailId, {notes: document.getElementById('mNotes').value});
 }
 
@@ -8150,6 +8197,7 @@ function renderMountainVisits(visits){
 
 function addMountainVisit(){
   if(!currentMountainDetailId) return;
+  if(localMode){ promptGuestLoginRequired(); return; }
   const id = currentMountainDetailId;
   const note = document.getElementById('mVisitNoteInput').value.trim();
   const vid = newId();
@@ -8188,7 +8236,9 @@ function renderMountainPhotos(photos){
       ghostClass:'sortable-ghost', chosenClass:'sortable-chosen', filter:'.upload-tile',
       onEnd:()=>{
         const newOrder=[...wrap.querySelectorAll('.photo-thumb[data-pid]')].map(x=>x.dataset.pid);
-        if(currentMountainDetailId) updateMountainDestination(currentMountainDetailId, {photoOrder:newOrder});
+        if(!currentMountainDetailId) return;
+        if(localMode){ promptGuestLoginRequired(); return; }
+        updateMountainDestination(currentMountainDetailId, {photoOrder:newOrder});
       }
     });
   }
@@ -8788,6 +8838,7 @@ function renderStepper(stage){
   wrap.querySelectorAll('.stage-btn').forEach(btn=>{
     btn.onclick = ()=>{
       const i = parseInt(btn.dataset.i,10);
+      if(localMode){ promptGuestLoginRequired(); return; }
       const prevStage = destinations[currentDetailId] ? (destinations[currentDetailId].stage||0) : 0;
       updateDestination(currentDetailId, {stage:i});
       if(i >= 1 && i !== prevStage) playStampAnimation();
@@ -8860,6 +8911,7 @@ function startEditVisit(vid){
   `;
 }
 function saveEditVisit(vid){
+  if(localMode){ promptGuestLoginRequired(); return; }
   const id = currentDetailId;
   const newNote = document.getElementById('editVisitInput_'+vid).value.trim();
   const visits = Object.assign({}, destinations[id].visits || {});
@@ -8885,6 +8937,7 @@ function deleteVisitRecord(vid){
 
 function addVisitRecord(withLocation){
   if(!currentDetailId) return;
+  if(localMode){ promptGuestLoginRequired(); return; }
   const id = currentDetailId;
   const d = destinations[id];
   const note = document.getElementById('visitNoteInput').value.trim();
@@ -8954,6 +9007,7 @@ function renderRepeatChallenge(d){
 
 function saveNotes(){
   if(!currentDetailId) return;
+  if(localMode){ promptGuestLoginRequired(); return; }
   updateDestination(currentDetailId, {notes: document.getElementById('dNotes').value});
 }
 
@@ -8987,7 +9041,9 @@ function renderPhotos(photos){
       ghostClass:'sortable-ghost', chosenClass:'sortable-chosen', filter:'.upload-tile',
       onEnd:()=>{
         const newOrder=[...wrap.querySelectorAll('.photo-thumb[data-pid]')].map(x=>x.dataset.pid);
-        if(currentDetailId) updateDestination(currentDetailId, {photoOrder:newOrder});
+        if(!currentDetailId) return;
+        if(localMode){ promptGuestLoginRequired(); return; }
+        updateDestination(currentDetailId, {photoOrder:newOrder});
       }
     });
   }
@@ -9230,6 +9286,7 @@ function openAddModalForCurrentType(){
 function addMountainDestinationCustom(){
   const name = document.getElementById('nmName').value.trim();
   if(!name){ showToast('산 이름을 입력해주세요'); return; }
+  if(localMode){ promptGuestLoginRequired(); return; }
   const id = newId();
   const data = {
     name,
@@ -9247,6 +9304,7 @@ function addMountainDestinationCustom(){
 function addDestination(){
   const name = document.getElementById('nName').value.trim();
   if(!name){ showToast('절 이름을 입력해주세요'); return; }
+  if(localMode){ promptGuestLoginRequired(); return; }
   const id = newId();
   const data = {
     name,
