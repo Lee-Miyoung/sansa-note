@@ -2901,6 +2901,7 @@ body:has(#beatLabOverlay.show) #miniPlayer{
 
 
 
+  <div id="guestAddHintWrap"></div>
   <div id="explain108Wrap"></div>
   <div id="homeGalleryWrap"></div>
   <div id="funBannerWrap"></div>
@@ -4718,6 +4719,22 @@ function renderFunBanner(){
   </div>`;
 }
 
+function renderGuestAddHint(){
+  const wrap = document.getElementById('guestAddHintWrap');
+  if(!wrap) return;
+  if(!localMode){ wrap.innerHTML=''; return; }
+  const key = 'sansanoteGuestAddHintDismissed';
+  if(localStorage.getItem(key) === '1'){ wrap.innerHTML=''; return; }
+  wrap.innerHTML = `<div class="explain108-banner">
+    <span>👋 지금은 둘러보기 중이에요. 목록에 없는 절은 화면 오른쪽 <b>아래 + 버튼</b>을 눌러 직접 추가할 수 있고, 방문 표시·사진·메모 저장은 Google 로그인 후에 할 수 있어요.</span>
+    <button class="close108" onclick="dismissGuestAddHint()">✕</button>
+  </div>`;
+}
+function dismissGuestAddHint(){
+  localStorage.setItem('sansanoteGuestAddHintDismissed', '1');
+  const wrap = document.getElementById('guestAddHintWrap');
+  if(wrap) wrap.innerHTML = '';
+}
 function renderExplain108(){
   const key = 'sansanoteExplain108Dismissed';
   if(localStorage.getItem(key) === '1') return;
@@ -4741,6 +4758,7 @@ function launchApp(){
   renderQuizBanner();
   renderFunBanner();
   renderExplain108();
+  renderGuestAddHint();
 
   if(localMode){
     const raw = localStorage.getItem('travelDiaryLocalData');
