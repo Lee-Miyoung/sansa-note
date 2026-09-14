@@ -1592,7 +1592,7 @@
       <div class="section-label">할 일 / 콘텐츠 아이디어</div>
       <textarea class="notes" id="mNotes" placeholder="예: 등산로 정보, 준비물, 가고 싶은 코스 등" onblur="saveMountainNotes()"></textarea>
 
-      <div class="section-label">참고 사진 <span style="font-weight:400;color:var(--ink-soft);font-size:11px;">(검증된 Wikimedia Commons 사진)</span></div>
+      <div class="section-label">참고 사진 <span style="font-weight:400;color:var(--ink-soft);font-size:11px;">(위키 문서·Commons 교차검증 사진)</span></div>
       <div class="photo-slider" id="mCoverPhotos"></div>
 
       <div class="section-label">내가 찍은 사진</div>
@@ -6159,12 +6159,13 @@ function getFilteredMountainList(){
 function renderMountainCard(id, d){
   const photo = firstPhotoUrl(d);
   const stageIdx = Math.min(d.stage||0, 2);
-  if((!d.coverPhotoMeta || d.coverPhotoMeta.length===0) && !coverFetching.has(id)){
-    queuePhotoFetch(id, d.name, d.locationHint || d.region, {
+  if((d.coverPhotoVersion!==PHOTO_SCHEMA_VERSION || !d.coverPhotoMeta || d.coverPhotoMeta.length===0) && !coverFetching.has(id)){
+    queuePhotoFetch(id, d.name, d.locationHint || '', {
       store: mountainDestinations,
       updateFn: updateMountainDestination,
       getCurrentId: ()=>currentMountainDetailId,
-      onDetailUpdate: ()=>{}
+      onDetailUpdate: ()=>{},
+      region: d.region
     });
   }
   return `
@@ -6258,12 +6259,13 @@ function openMountainDetail(id){
   document.getElementById('mNotes').value = d.notes || '';
   renderMountainStepper(d.stage||0);
   renderMountainCoverPhotos(d);
-  if((!d.coverPhotoMeta || d.coverPhotoMeta.length===0) && !coverFetching.has(id)){
-    queuePhotoFetch(id, d.name, d.locationHint || d.region, {
+  if((d.coverPhotoVersion!==PHOTO_SCHEMA_VERSION || !d.coverPhotoMeta || d.coverPhotoMeta.length===0) && !coverFetching.has(id)){
+    queuePhotoFetch(id, d.name, d.locationHint || '', {
       store: mountainDestinations,
       updateFn: updateMountainDestination,
       getCurrentId: ()=>currentMountainDetailId,
-      onDetailUpdate: renderMountainCoverPhotos
+      onDetailUpdate: renderMountainCoverPhotos,
+      region: d.region
     });
   }
   renderMountainPhotos(d.photos||{});
@@ -6400,6 +6402,7 @@ function firstPhotoUrl(d){
   return null;
 }
 
+const PHOTO_SCHEMA_VERSION = 4;
 let coverFetching = new Set();
 let photoFetchQueue = [];
 let activePhotoFetches = 0;
@@ -6434,6 +6437,9 @@ function fetchCoverPhotoNow(id, name, locationHint, opts, done){
   const getCurrentId = opts.getCurrentId || (()=>currentDetailId);
   const onDetailUpdate = opts.onDetailUpdate || renderCoverPhotos;
   const isMountain = store === mountainDestinations;
+  const place = store[id] || {};
+  const strictHint = (!isMountain && VERIFIED_LOCATION_HINTS[name]) || place.locationHint || '';
+  const queryHint = strictHint || locationHint || place.region || '';
   let finished = false;
   function finish(){
     if(finished) return;
@@ -6442,39 +6448,61 @@ function fetchCoverPhotoNow(id, name, locationHint, opts, done){
   }
 
   function cleanText(v){
-    return (v||'').replace(/<[^>]*>/g,' ').replace(/&[^;]+;/g,' ').replace(/\s+/g,' ').trim();
+    return String(v||'').replace(/<[^>]*>/g,' ').replace(/&[^;]+;/g,' ').replace(/\s+/g,' ').trim();
   }
-  function coreName(v){
-    return (v||'').replace(/\([^)]*\)/g,'').replace(/\s+/g,'').toLowerCase();
+  function compact(v){ return cleanText(v).replace(/[\s·ㆍ,.()\[\]{}\-_/]/g,'').toLowerCase(); }
+  function coreName(v){ return String(v||'').replace(/\([^)]*\)/g,'').trim(); }
+  function meaningfulHintTokens(v){
+    return cleanText(v).split(/[\s,/·ㆍ-]+/).map(x=>x.trim()).filter(x=>x.length>=2 && !['대한민국','한국','경기','경상','충청','전라','강원','제주','서울','부산','대구','인천','광주','대전','울산','세종'].includes(x));
   }
-  function isLikelyMatch(page){
+  function isReusableLicense(lic){
+    const s=(lic||'').toLowerCase();
+    return /cc\s*by|cc-by|cc\s*0|cc0|public domain|퍼블릭 도메인|공공누리\s*제?1유형/.test(s);
+  }
+  const badPhotoWords = /map|locator|logo|icon|symbol|seal|stamp|poster|brochure|diagram|plan|floorplan|route|signboard|signage|ticket|flag|coat of arms|emblem|문서|지도|약도|로고|아이콘|도면|평면도|안내판|표지판|포스터|현수막|팸플릿|티켓|국기/i;
+  const exteriorBoost = /exterior|facade|building|temple|monastery|hall|gate|pagoda|산사|사찰|전경|대웅전|극락전|일주문|천왕문|법당|석탑|전각|산|봉우리|정상|능선|계곡|국립공원/i;
+
+  function pageHay(page){
     const ii = page.imageinfo && page.imageinfo[0];
-    if(!ii) return false;
-    const meta = ii.extmetadata || {};
-    const hay = [page.title, meta.ImageDescription&&meta.ImageDescription.value, meta.ObjectName&&meta.ObjectName.value,
-      meta.Categories&&meta.Categories.value, meta.Location&&meta.Location.value]
-      .map(cleanText).join(' ').replace(/\s+/g,'').toLowerCase();
-    const core = coreName(name);
-    if(core && hay.includes(core)) return true;
-    // 동명이 있는 곳은 지역 힌트까지 맞아야 허용
-    if(locationHint){
-      const hint = coreName(locationHint);
-      return !!(core && hint && hay.includes(core) && hay.includes(hint));
-    }
-    return false;
+    const meta = ii && ii.extmetadata || {};
+    return [page.title, meta.ImageDescription&&meta.ImageDescription.value, meta.ObjectName&&meta.ObjectName.value,
+      meta.Categories&&meta.Categories.value, meta.Location&&meta.Location.value, meta.DepictedPlace&&meta.DepictedPlace.value]
+      .map(cleanText).join(' ');
   }
-  function pageToPhoto(page){
+  function scorePage(page){
+    const ii=page.imageinfo&&page.imageinfo[0]; if(!ii) return -999;
+    const hay=pageHay(page), hayCompact=compact(hay), title=cleanText(page.title||'');
+    const core=coreName(name), coreCompact=compact(core);
+    if(!coreCompact || !hayCompact.includes(coreCompact)) return -999;
+    if(badPhotoWords.test(title)) return -999;
+    const meta=ii.extmetadata||{};
+    const lic=cleanText((meta.LicenseShortName&&meta.LicenseShortName.value)||(meta.UsageTerms&&meta.UsageTerms.value));
+    if(!isReusableLicense(lic)) return -999;
+    let score=20;
+    if(title.includes(core)) score+=18;
+    if(exteriorBoost.test(hay)) score+=12;
+    if(/jpg|jpeg|png/i.test(ii.mime||'')) score+=2;
+    if(strictHint){
+      const toks=meaningfulHintTokens(strictHint);
+      const matched=toks.filter(t=>compact(hay).includes(compact(t))).length;
+      if(toks.length && matched===0) score-=18; else score+=matched*8;
+    }
+    if(/interior|inside|ceiling|detail|statue|painting|inscription|tablet|내부|천장|불상|벽화|현판|세부/i.test(hay)) score-=7;
+    return score;
+  }
+  function pageToPhoto(page, sourceType){
     const ii = page.imageinfo && page.imageinfo[0];
     if(!ii) return null;
     const meta = ii.extmetadata || {};
     const url = ii.thumburl || ii.url;
     if(!url) return null;
     const lic = cleanText((meta.LicenseShortName&&meta.LicenseShortName.value) || (meta.UsageTerms&&meta.UsageTerms.value));
+    if(!isReusableLicense(lic)) return null;
     const artist = cleanText(meta.Artist&&meta.Artist.value);
     const source = ii.descriptionurl || `https://commons.wikimedia.org/wiki/${encodeURIComponent(page.title||'')}`;
-    return {url, title:cleanText(page.title||''), artist, license:lic, source};
+    return {url, title:cleanText(page.title||''), artist, license:lic, source, sourceType:sourceType||'commons', verified:true};
   }
-  function trySetCovers(items){
+  function setCovers(items){
     const seen = new Set();
     const unique = (items||[]).filter(Boolean).filter(x=>{
       if(!x.url || seen.has(x.url)) return false;
@@ -6482,45 +6510,88 @@ function fetchCoverPhotoNow(id, name, locationHint, opts, done){
     }).slice(0,5);
     if(unique.length && store[id]){
       const urls = unique.map(x=>x.url);
-      updateFn(id, {coverPhotos: urls, coverPhotoMeta: unique});
+      updateFn(id, {coverPhotos: urls, coverPhotoMeta: unique, coverPhotoVersion: PHOTO_SCHEMA_VERSION});
       store[id].coverPhotos = urls;
       store[id].coverPhotoMeta = unique;
+      store[id].coverPhotoVersion = PHOTO_SCHEMA_VERSION;
       debouncedRender();
       if(getCurrentId() === id) onDetailUpdate(store[id]);
       finish();
       return true;
     }
-    return false;
+    // 검증 실패 시 이전 자동사진을 지워 잘못된 사진이 계속 남지 않게 한다.
+    if(store[id]){
+      updateFn(id, {coverPhotos: [], coverPhotoMeta: [], coverPhotoVersion: PHOTO_SCHEMA_VERSION});
+      store[id].coverPhotos=[]; store[id].coverPhotoMeta=[]; store[id].coverPhotoVersion=PHOTO_SCHEMA_VERSION;
+      if(getCurrentId()===id) onDetailUpdate(store[id]);
+    }
+    finish(); return false;
   }
 
-  function wikiSearch(query, cb){
-    const url = `https://commons.wikimedia.org/w/api.php?action=query&generator=search&gsrsearch=${encodeURIComponent(query)}&gsrnamespace=6&gsrlimit=18&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=1000&format=json&origin=*`;
+  function commonsImageInfo(titles, cb, sourceType){
+    titles=(titles||[]).filter(Boolean).slice(0,40);
+    if(!titles.length){ cb([]); return; }
+    const url='https://commons.wikimedia.org/w/api.php?action=query&prop=imageinfo&iiprop=url|mime|extmetadata&iiurlwidth=1200&format=json&origin=*&titles='+encodeURIComponent(titles.join('|'));
     fetch(url).then(r=>r.json()).then(data=>{
-      const pages = data && data.query && data.query.pages;
-      if(!pages){ cb([]); return; }
-      const items = Object.values(pages)
-        .filter(isLikelyMatch)
-        .map(pageToPhoto)
-        .filter(Boolean)
-        .slice(0,5);
-      cb(items);
-    }).catch(()=> cb([]));
+      const pages=Object.values(data?.query?.pages||{});
+      const scored=pages.map(p=>({p,s:scorePage(p)})).filter(x=>x.s>0).sort((a,b)=>b.s-a.s).map(x=>pageToPhoto(x.p,sourceType)).filter(Boolean);
+      cb(scored);
+    }).catch(()=>cb([]));
   }
 
-  // Openverse 자동 폴백은 제거. 정확한 사진이 없으면 잘못된 사진 대신 빈 상태로 둔다.
-  const base = name.replace(/\([^)]*\)/g,'').trim();
-  const query1 = isMountain
-    ? `${base} 산 대한민국 ${locationHint||''}`.trim()
-    : `${base} 사찰 대한민국 ${locationHint||''}`.trim();
-  const query2 = isMountain
-    ? `${base} mountain South Korea ${locationHint||''}`.trim()
-    : `${base} temple Korea ${locationHint||''}`.trim();
+  function wikipediaResolve(cb){
+    const base=coreName(name);
+    const extra=isMountain?'산':'사찰';
+    const q=`${base} ${queryHint||''} ${extra}`.trim();
+    const url=`https://ko.wikipedia.org/w/api.php?action=query&generator=search&gsrsearch=${encodeURIComponent(q)}&gsrlimit=6&prop=pageimages|info&pithumbsize=1200&piprop=thumbnail|original|name&inprop=url&format=json&origin=*`;
+    fetch(url).then(r=>r.json()).then(data=>{
+      let pages=Object.values(data?.query?.pages||{});
+      const bc=compact(base);
+      pages=pages.filter(p=>compact(p.title).includes(bc) && !/동음이의|목록|분류:/.test(p.title||''));
+      pages.sort((a,b)=>{
+        let sa=(compact(a.title)===bc?20:0)+(strictHint&&compact(a.title).includes(compact(strictHint))?8:0);
+        let sb=(compact(b.title)===bc?20:0)+(strictHint&&compact(b.title).includes(compact(strictHint))?8:0);
+        return sb-sa;
+      });
+      const best=pages[0];
+      if(!best){cb(null);return;}
+      cb(best);
+    }).catch(()=>cb(null));
+  }
 
-  wikiSearch(query1, items1=>{
-    if(items1.length >= 3 && trySetCovers(items1)) return;
-    wikiSearch(query2, items2=>{
-      const merged = [...items1, ...items2];
-      if(!trySetCovers(merged)) finish();
+  function wikipediaArticleImages(page, cb){
+    if(!page){cb([]);return;}
+    const url=`https://ko.wikipedia.org/w/api.php?action=query&pageids=${encodeURIComponent(page.pageid)}&prop=images&imlimit=80&format=json&origin=*`;
+    fetch(url).then(r=>r.json()).then(data=>{
+      const p=data?.query?.pages?.[page.pageid];
+      let titles=(p?.images||[]).map(x=>x.title).filter(t=>/^File:/i.test(t) && !badPhotoWords.test(t));
+      // 대표 이미지가 있으면 가장 먼저 검증
+      if(page.pageimage){
+        const hero='File:'+page.pageimage;
+        titles=[hero,...titles.filter(t=>t!==hero)];
+      }
+      commonsImageInfo(titles, cb, 'wikipedia');
+    }).catch(()=>cb([]));
+  }
+
+  function commonsSearch(query, cb){
+    const url = `https://commons.wikimedia.org/w/api.php?action=query&generator=search&gsrsearch=${encodeURIComponent(query)}&gsrnamespace=6&gsrlimit=30&prop=imageinfo&iiprop=url|mime|extmetadata&iiurlwidth=1200&format=json&origin=*`;
+    fetch(url).then(r=>r.json()).then(data=>{
+      const pages=Object.values(data?.query?.pages||{});
+      const items=pages.map(p=>({p,s:scorePage(p)})).filter(x=>x.s>0).sort((a,b)=>b.s-a.s).map(x=>pageToPhoto(x.p,'commons')).filter(Boolean);
+      cb(items);
+    }).catch(()=>cb([]));
+  }
+
+  // 1순위: 정확한 한국어 위키백과 문서에 실제로 연결된 사진들
+  // 2순위: Commons 자유검색. 이름+지역+사찰/산 키워드로 엄격하게 검증한다.
+  wikipediaResolve(page=>{
+    wikipediaArticleImages(page, articleItems=>{
+      if(articleItems.length>=3){ setCovers(articleItems); return; }
+      const base=coreName(name);
+      const q1=isMountain ? `"${base}" ${queryHint||''} mountain Korea` : `"${base}" ${queryHint||''} temple Korea`;
+      const q2=isMountain ? `"${base}" ${queryHint||''} 대한민국 산` : `"${base}" ${queryHint||''} 대한민국 사찰`;
+      commonsSearch(q1, a=>commonsSearch(q2, b=>setCovers([...articleItems,...a,...b])));
     });
   });
 }
@@ -6529,8 +6600,8 @@ function renderCard(id, d){
   const photo = firstPhotoUrl(d);
   const stageIdx = Math.min(d.stage||0, STAGES.length-1);
   const vc = visitCount(d);
-  if((!d.coverPhotoMeta || d.coverPhotoMeta.length===0) && !coverFetching.has(id)){
-    queuePhotoFetch(id, d.name, d.locationHint || d.region);
+  if((d.coverPhotoVersion!==PHOTO_SCHEMA_VERSION || !d.coverPhotoMeta || d.coverPhotoMeta.length===0) && !coverFetching.has(id)){
+    queuePhotoFetch(id, d.name, d.locationHint || '', {region:d.region});
   }
   return `
   <div class="card" data-id="${id}">
@@ -6610,8 +6681,8 @@ function openDetail(id){
   renderStepper(d.stage||0);
   renderPhotos(d.photos||{});
   renderCoverPhotos(d);
-  if((!d.coverPhotoMeta || d.coverPhotoMeta.length===0) && !coverFetching.has(id)){
-    queuePhotoFetch(id, d.name, d.locationHint || d.region);
+  if((d.coverPhotoVersion!==PHOTO_SCHEMA_VERSION || !d.coverPhotoMeta || d.coverPhotoMeta.length===0) && !coverFetching.has(id)){
+    queuePhotoFetch(id, d.name, d.locationHint || '', {region:d.region});
   }
   renderVisits(d.visits||{});
   renderRepeatChallenge(d);
@@ -6649,7 +6720,7 @@ function refetchLocation(){
   showToast('위치와 사진을 다시 찾는 중이에요...');
   requestAnimationFrame(()=> setupDetailMap(destinations[id], id));
   coverFetching.delete(id);
-  queuePhotoFetch(id, destinations[id].name, destinations[id].locationHint);
+  queuePhotoFetch(id, destinations[id].name, destinations[id].locationHint || '', {region:destinations[id].region});
 }
 
 function closeDetail(){
@@ -6859,10 +6930,11 @@ function escapeAttr(v){
   return String(v||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 function photoCreditHtml(m, i){
-  if(!m) return `<div class="photo-credit">사진 ${i+1} · Wikimedia Commons</div>`;
+  if(!m) return `<div class="photo-credit">사진 ${i+1} · 출처 확인 필요</div>`;
   const artist = m.artist ? escapeHtml(m.artist) : '저작자 정보 확인';
   const license = m.license ? escapeHtml(m.license) : '라이선스 원본 확인';
-  const link = m.source ? `<a href="${escapeAttr(m.source)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">원본·저작권 ↗</a>` : 'Wikimedia Commons';
+  const origin = m.sourceType==='wikipedia' ? 'Wikipedia 연계' : 'Wikimedia Commons';
+  const link = m.source ? `${origin} · <a href="${escapeAttr(m.source)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">원본·저작권 ↗</a>` : origin;
   return `<div class="photo-credit">📷 ${artist} · ${license}<br>${link}</div>`;
 }
 function renderAutoCoverPhotos(wrapId, d){
@@ -6870,7 +6942,7 @@ function renderAutoCoverPhotos(wrapId, d){
   if(!wrap) return;
   const urls = d.coverPhotos || [];
   if(urls.length===0){
-    wrap.innerHTML = `<div class="map-note" style="padding:0;">정확히 확인된 자동 사진이 아직 없어요.</div>`;
+    wrap.innerHTML = `<div class="map-note" style="padding:0;">정확히 확인된 사진이 아직 없어요. 잘못된 사진 대신 빈 상태로 두었어요.</div>`;
     return;
   }
   const meta = d.coverPhotoMeta || [];
