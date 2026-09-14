@@ -67,15 +67,10 @@ window.addEventListener('beforeunload',()=>{
   }catch(_){}
 });
 window.addEventListener('load',()=>{
-  setTimeout(()=>{
-    const s=loadBeatRun();
-    if(!s)return;
-    const authVisible=getComputedStyle(document.getElementById('authScreen')||document.body).display!=='none';
-    const adminVisible=getComputedStyle(document.getElementById('adminNoticeScreen')||document.body).display!=='none';
-    if(!authVisible&&!adminVisible&&!document.getElementById('beatLabOverlay')?.classList.contains('show')){
-      openBeatLab(false);
-    }
-  },1200);
+  // 예전엔 여기서 저장된 게임 기록이 있으면 1.2초 뒤 자동으로 미니게임 화면을
+  // 열었는데, 그 바람에 절 기록을 보러 들어왔다가 메인 화면이 잠깐 보인 뒤
+  // 바로 게임으로 튕기는 문제가 있었습니다. 이제 자동으로 열지 않고,
+  // 사용자가 직접 게임을 열 때(openBeatLab)만 저장된 기록을 이어서 보여줍니다.
 });
 </script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
