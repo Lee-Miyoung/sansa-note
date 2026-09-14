@@ -4752,10 +4752,20 @@ function launchApp(){
     }
     destinationsRef().on('value', snap=>{
       destinations = mergeAllWithMaster(snap.val() || {});
+      if(suppressNextDestinationRender){
+        // 사진 자동 매칭 결과는 patchVisibleCover로 이미 화면에 바로 반영했으므로,
+        // 여기서 또 전체 목록을 다시 그리면 모든 카드 사진이 깜빡이게 됩니다. 건너뜁니다.
+        suppressNextDestinationRender = false;
+        return;
+      }
       debouncedFullRender(afterDataLoaded);
     });
     mountainsRef().on('value', snap=>{
       mountainDestinations = mergeAllMountainsWithMaster(snap.val() || {});
+      if(suppressNextMountainRender){
+        suppressNextMountainRender = false;
+        return;
+      }
       if(contentType==='mountain') debouncedFullRender(render);
     });
   }
@@ -5317,7 +5327,14 @@ function updatePlaylistProgress(){
     if(cur){
       cur.style.color = 'var(--stamp)';
       cur.style.fontWeight = '800';
-      cur.scrollIntoView({block:'center', behavior:'smooth'});
+      // cur.scrollIntoView(...)는 가사창뿐 아니라 그 뒤의 모달/배경 화면까지
+      // 같이 스크롤시켜서, 플레이리스트 창을 닫으면 홈 화면이 엉뚱한 위치로
+      // 튀어 있는 원인이 됐습니다. 가사창(#lyricsWrap) 내부로만 스크롤을 제한합니다.
+      const lyricsWrapEl = document.getElementById('lyricsWrap');
+      if(lyricsWrapEl){
+        const target = cur.offsetTop - (lyricsWrapEl.clientHeight/2) + (cur.clientHeight/2);
+        lyricsWrapEl.scrollTo({top:Math.max(0,target), behavior:'smooth'});
+      }
     }
     lastLyricIdx = idx;
   }
@@ -7823,9 +7840,8 @@ function renderHomeGallery(){
   const wrap = document.getElementById('homeGalleryWrap');
   const items = [];
   Object.entries(destinations).forEach(([id,d])=>{
-    const userPhoto = d.photos && Object.values(d.photos)[0];
-    if(userPhoto) items.push({url:userPhoto.url, name:d.name, id});
-    else if(d.coverPhotos && d.coverPhotos[0]) items.push({url:d.coverPhotos[0], name:d.name, id});
+    const url = firstPhotoUrl(d);
+    if(url) items.push({url, name:d.name, id});
   });
   if(items.length===0){ wrap.innerHTML=''; return; }
   wrap.innerHTML = `<div class="home-gallery"><div class="home-gallery-strip">` +
@@ -8088,10 +8104,12 @@ function addMountainVisit(){
 
 function renderMountainPhotos(photos){
   const wrap = document.getElementById('mPhotos');
-  const entries = Object.entries(photos||{});
+  const d = mountainDestinations[currentMountainDetailId] || {};
+  const entries = orderedPhotoEntries(photos, d.photoOrder);
   const urls = entries.map(([pid,p])=>p.url);
   let html = entries.map(([pid,p],i)=>`
-    <div class="photo-thumb" style="background-image:url('${p.url}')" onclick='openLightbox(${JSON.stringify(urls)}, ${i})'>
+    <div class="photo-thumb" data-pid="${escapeAttr(pid)}" style="background-image:url('${p.url}')" onclick='openLightbox(${JSON.stringify(urls)}, ${i})'>
+      <button class="drag-handle" type="button" aria-label="사진 순서 바꾸기" onclick="event.stopPropagation()">☰</button>
       <button class="del" onclick="deleteMountainPhoto('${pid}', event)">✕</button>
     </div>`).join('');
   const cloudinaryReady = CLOUDINARY_CLOUD_NAME && CLOUDINARY_CLOUD_NAME.indexOf('REPLACE_ME')!==0;
@@ -8099,6 +8117,17 @@ function renderMountainPhotos(photos){
     ? `<div class="upload-tile" onclick="document.getElementById('mPhotoInput').click()">+</div>`
     : `<div class="upload-tile" style="opacity:.55;font-size:10px;line-height:1.3;text-align:center;padding:6px;" onclick="document.getElementById('mPhotoInput').click()" title="사진 저장소(Cloudinary)가 아직 설정되지 않았어요">사진 저장소<br>설정 필요</div>`;
   wrap.innerHTML = html;
+  if(window.Sortable){
+    if(wrap._sortable) wrap._sortable.destroy();
+    wrap._sortable = new Sortable(wrap, {
+      animation:160, handle:'.drag-handle', delay:80, delayOnTouchOnly:true, touchStartThreshold:3,
+      ghostClass:'sortable-ghost', chosenClass:'sortable-chosen', filter:'.upload-tile',
+      onEnd:()=>{
+        const newOrder=[...wrap.querySelectorAll('.photo-thumb[data-pid]')].map(x=>x.dataset.pid);
+        if(currentMountainDetailId) updateMountainDestination(currentMountainDetailId, {photoOrder:newOrder});
+      }
+    });
+  }
 }
 
 function uploadMountainPhotos(event){
@@ -8155,7 +8184,13 @@ function isLikelyValidPhotoUrl(u){
 }
 function firstPhotoUrl(d){
   if(d.photos){
-    // 최근 것부터 살펴보되, 비어있거나 이상한 값(깨진 URL)이면 건너뛰고
+    // 사용자가 사진 순서를 직접 바꿔뒀다면(photoOrder), 맨 앞으로 옮긴 사진을
+    // 대표 사진으로 우선 사용합니다 — "이 사진을 대표로 하고 싶다"는 의도를 반영.
+    if(Array.isArray(d.photoOrder) && d.photoOrder.length){
+      const byOrder = d.photoOrder.map(pid=>d.photos[pid]).filter(p=>isLikelyValidPhotoUrl(p&&p.url));
+      if(byOrder.length) return byOrder[0].url;
+    }
+    // 순서를 안 바꿨다면 최근 것부터 살펴보되, 비어있거나 이상한 값(깨진 URL)이면 건너뛰고
     // 그다음으로 최근인 사진이나 자동으로 찾아둔 대표 사진으로 대신합니다.
     // (예전엔 마지막 사진의 url이 비어있으면 그 값을 그대로 반환해서
     //  깨진 이미지 아이콘이 뜨는 원인이 됐습니다.)
@@ -8226,6 +8261,8 @@ function shouldSkipPhotoRetry(d){
   if(d.coverPhotoVersion !== PHOTO_SCHEMA_VERSION) return false;
   return (Date.now() - (d.coverPhotoLastChecked||0)) < PHOTO_RETRY_COOLDOWN_MS;
 }
+let suppressNextDestinationRender = false;
+let suppressNextMountainRender = false;
 let coverFetching = new Set();
 let photoFetchQueue = [];
 let photoQueueGeneration = 0;
@@ -8412,6 +8449,7 @@ function fetchCoverPhotoNow(id, name, locationHint, opts, done){
 
     if(unique.length && store[id]){
       const urls=unique.map(x=>x.url);
+      if(isMountain) suppressNextMountainRender=true; else suppressNextDestinationRender=true;
       updateFn(id,{coverPhotos:urls,coverPhotoMeta:unique,coverPhotoVersion:PHOTO_SCHEMA_VERSION,coverPhotoStatus:'verified'});
       store[id].coverPhotos=urls;
       store[id].coverPhotoMeta=unique;
@@ -8437,6 +8475,7 @@ function fetchCoverPhotoNow(id, name, locationHint, opts, done){
         patch.coverPhotos=[];
         patch.coverPhotoMeta=[];
       }
+      if(isMountain) suppressNextMountainRender=true; else suppressNextDestinationRender=true;
       updateFn(id,patch);
       Object.assign(store[id],patch);
       if(getCurrentId()===id) onDetailUpdate(store[id]);
@@ -8852,12 +8891,22 @@ function saveNotes(){
   updateDestination(currentDetailId, {notes: document.getElementById('dNotes').value});
 }
 
+function orderedPhotoEntries(photos, order){
+  const entries = Object.entries(photos||{});
+  if(!Array.isArray(order) || !order.length) return entries;
+  const map = new Map(entries);
+  const ordered = order.filter(pid=>map.has(pid)).map(pid=>[pid, map.get(pid)]);
+  entries.forEach(([pid,p])=>{ if(!order.includes(pid)) ordered.push([pid,p]); });
+  return ordered;
+}
 function renderPhotos(photos){
   const wrap = document.getElementById('dPhotos');
-  const entries = Object.entries(photos||{});
+  const d = destinations[currentDetailId] || {};
+  const entries = orderedPhotoEntries(photos, d.photoOrder);
   const urls = entries.map(([pid,p])=>p.url);
   let html = entries.map(([pid,p],i)=>`
-    <div class="photo-thumb" style="background-image:url('${p.url}')" onclick='openLightbox(${JSON.stringify(urls)}, ${i})'>
+    <div class="photo-thumb" data-pid="${escapeAttr(pid)}" style="background-image:url('${p.url}')" onclick='openLightbox(${JSON.stringify(urls)}, ${i})'>
+      <button class="drag-handle" type="button" aria-label="사진 순서 바꾸기" onclick="event.stopPropagation()">☰</button>
       <button class="del" onclick="deletePhoto('${pid}', event)">✕</button>
     </div>`).join('');
   const cloudinaryReady = CLOUDINARY_CLOUD_NAME && CLOUDINARY_CLOUD_NAME.indexOf('REPLACE_ME')!==0;
@@ -8865,6 +8914,17 @@ function renderPhotos(photos){
     ? `<div class="upload-tile" onclick="triggerUpload()">+</div>`
     : `<div class="upload-tile" style="opacity:.55;font-size:10px;line-height:1.3;text-align:center;padding:6px;" onclick="triggerUpload()" title="사진 저장소(Cloudinary)가 아직 설정되지 않았어요">사진 저장소<br>설정 필요</div>`;
   wrap.innerHTML = html;
+  if(window.Sortable){
+    if(wrap._sortable) wrap._sortable.destroy();
+    wrap._sortable = new Sortable(wrap, {
+      animation:160, handle:'.drag-handle', delay:80, delayOnTouchOnly:true, touchStartThreshold:3,
+      ghostClass:'sortable-ghost', chosenClass:'sortable-chosen', filter:'.upload-tile',
+      onEnd:()=>{
+        const newOrder=[...wrap.querySelectorAll('.photo-thumb[data-pid]')].map(x=>x.dataset.pid);
+        if(currentDetailId) updateDestination(currentDetailId, {photoOrder:newOrder});
+      }
+    });
+  }
 }
 
 function escapeAttr(v){
