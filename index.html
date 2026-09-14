@@ -304,6 +304,8 @@
   #storyCardOverlay{z-index:240;align-items:center!important;justify-content:center!important;padding:16px!important;}
   #storyCardOverlay .modal{max-width:520px;border-radius:24px!important;max-height:92vh;}
   .story-card-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+
+
   @media(max-width:640px){
     #storyCardOverlay .modal{border-radius:22px!important;max-width:calc(100% - 24px);padding-top:0;}
     .story-card-actions{grid-template-columns:1fr;}
@@ -851,7 +853,7 @@
   .worry-enemy{position:absolute;width:76px;height:92px;z-index:3;will-change:left,top;touch-action:manipulation}
   .worry-orb{position:relative;left:9px;top:0;width:58px;height:58px;cursor:default;animation:none;transition:transform .12s,filter .12s,opacity .18s}
   .worry-orb::after{content:"✦";position:absolute;right:5px;top:2px;font-size:9px;color:#ffd56a;opacity:.8}
-  .worry-fire-btn{position:absolute;left:5px;right:5px;bottom:0;height:25px;border:1px solid rgba(185,255,132,.55);border-radius:8px;background:linear-gradient(180deg,rgba(185,255,132,.23),rgba(105,255,189,.09));color:#eaffdc;font-size:9px;font-weight:1000;letter-spacing:.5px;box-shadow:0 0 10px rgba(185,255,132,.12);cursor:pointer;-webkit-tap-highlight-color:transparent}
+  .worry-fire-btn{display:none;position:absolute;left:5px;right:5px;bottom:0;height:25px;border:1px solid rgba(185,255,132,.55);border-radius:8px;background:linear-gradient(180deg,rgba(185,255,132,.23),rgba(105,255,189,.09));color:#eaffdc;font-size:9px;font-weight:1000;letter-spacing:.5px;box-shadow:0 0 10px rgba(185,255,132,.12);cursor:pointer;-webkit-tap-highlight-color:transparent}
   .worry-fire-btn:active{transform:scale(.94);filter:brightness(1.5)}
   .worry-fire-btn.locked{opacity:.42;pointer-events:none}
   .worry-enemy.targeted .worry-orb{filter:brightness(1.8);transform:scale(1.08);box-shadow:0 0 24px rgba(255,213,106,.78),inset 0 0 15px rgba(255,255,255,.18)}
@@ -877,6 +879,42 @@
   .beat-audio-status{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0 0 9px;padding:7px 9px;border-radius:11px;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.10);font-size:10px;color:#d7cadc}.beat-audio-status button{border:none;border-radius:999px;padding:6px 9px;font-size:10px;font-weight:900;background:#b9ff84;color:#1c2516;cursor:pointer}
   #beatLabOverlay.fever .modal{animation:feverPulse .55s ease-in-out infinite alternate}@keyframes feverPulse{from{box-shadow:0 26px 80px rgba(31,11,42,.42),0 0 0 rgba(255,76,174,0)}to{box-shadow:0 26px 80px rgba(31,11,42,.42),0 0 36px rgba(255,76,174,.22)}}
 
+
+  /* BEAT LAB desktop — 넓은 게임 화면 + 오른쪽 조작 패널 */
+  .beat-desktop-layout{display:block}
+  .beat-left-panel,.beat-right-panel{min-width:0}
+  .beat-pad small{display:block;margin-top:7px;font-size:8px;letter-spacing:1.3px;color:rgba(255,255,255,.58)}
+  .beat-side-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .beat-side-tip{font-size:10px;color:#a995b2;line-height:1.55;margin-top:10px;padding:10px 12px;border:1px solid rgba(255,255,255,.08);border-radius:12px;background:rgba(255,255,255,.035)}
+  .worry-missile.weapon-mok{background:linear-gradient(180deg,#fff,#ffd56a 45%,#ff9b37);box-shadow:0 0 9px #ffd56a,0 0 20px rgba(255,155,55,.68)}
+  .worry-missile.weapon-kick{width:8px;background:linear-gradient(180deg,#fff,#ff5f84 42%,#ff3030);box-shadow:0 0 10px #ff5f84,0 0 24px rgba(255,48,48,.72)}
+  .worry-missile.weapon-bell{background:linear-gradient(180deg,#fff,#79d8ff 48%,#4d7cff);box-shadow:0 0 10px #79d8ff,0 0 22px rgba(77,124,255,.72)}
+  .worry-missile.weapon-clap{width:7px;background:linear-gradient(180deg,#fff,#ffd86b 42%,#ffb62d);box-shadow:0 0 10px #ffd86b,0 0 22px rgba(255,182,45,.7)}
+  .worry-missile.weapon-bass{width:9px;background:linear-gradient(180deg,#fff,#b884ff 44%,#7136ff);box-shadow:0 0 10px #b884ff,0 0 24px rgba(113,54,255,.75)}
+  .worry-missile.weapon-air{width:4px;height:27px;background:linear-gradient(180deg,#fff,#84ffd5 42%,#3cffe2);box-shadow:0 0 11px #84ffd5,0 0 28px rgba(60,255,226,.82)}
+  @media(min-width:900px){
+    #beatLabOverlay{padding:24px!important}
+    #beatLabOverlay .modal{width:min(1160px,calc(100vw - 48px))!important;max-width:1160px!important;height:min(760px,calc(100dvh - 48px))!important;max-height:none!important;border-radius:26px!important}
+    #beatLabOverlay .modal-head{padding:18px 22px 14px!important}
+    #beatLabOverlay .modal-body{overflow:hidden!important;padding:14px 20px 20px!important}
+    .beat-desktop-layout{height:100%;display:grid;grid-template-columns:minmax(0,1.42fr) minmax(330px,.78fr);gap:18px}
+    .beat-left-panel,.beat-right-panel{display:flex;flex-direction:column;min-height:0}
+    .beat-game-head{margin-bottom:9px}
+    .beat-progression{margin-bottom:8px}
+    .beat-reward-row{padding-bottom:5px}
+    .beat-life-row{margin:4px 0 5px}
+    .beat-track{margin:6px 0 9px}
+    .beat-left-panel .worry-smash-zone{flex:1;min-height:360px;height:auto;margin:0 0 9px}
+    .beat-right-panel{padding:12px;border:1px solid rgba(255,255,255,.10);border-radius:18px;background:rgba(8,6,12,.22)}
+    .beat-right-panel .beat-audio-status{margin-bottom:10px}
+    .beat-right-panel .bpm-row{margin-bottom:10px}
+    #beatLabOverlay .beat-grid{grid-template-columns:repeat(2,1fr);gap:10px;margin:0 0 12px;flex:1;align-content:stretch}
+    #beatLabOverlay .beat-pad{aspect-ratio:auto;min-height:105px;border-radius:16px;font-size:14px}
+    #beatLabOverlay .beat-pad b{font-size:15px}
+    .release-banner{margin:-2px 0 0}
+    .worry-smash-title{font-size:11px}
+    .worry-game-hint{font-size:9px;max-width:240px}
+  }
   /* 사이키델릭 모드는 기본 화면과 분리된 선택 기능으로만 유지 */
   body.psy-mode{
     --paper:#17121a;--paper-soft:#211925;--paper-line:#44394a;--ink:#f1e9f3;--ink-soft:#b8a8bd;
@@ -909,6 +947,50 @@
   }
   .tagbadge.famous{background:rgba(55,85,69,.74)!important;}
   .tagbadge.hidden{background:rgba(118,69,84,.74)!important;}
+
+
+  /* ===== Desktop hero rebalance ===== */
+  @media(min-width:900px){
+    header.hero{
+      padding:28px 28px 24px;
+      min-height:338px;
+      border-radius:0 0 34px 34px;
+    }
+    .hero-inner{max-width:1180px;}
+    .hero-top{padding-right:320px;position:relative;min-height:104px;}
+    .hero-top>div:first-child{max-width:700px;}
+    .hero-top h1{font-size:46px;line-height:1.06;margin-bottom:4px;}
+    .hip-badge{width:74px;height:74px;}
+    .hip-badge svg{width:74px;height:74px;}
+    .hero-tagline{font-size:16px;margin-top:4px;margin-bottom:9px;}
+    .hero-top p{font-size:13.8px;line-height:1.65;max-width:610px;}
+    .icon-row{position:absolute;right:292px;top:2px;display:flex;gap:8px;}
+    .iconbtn{width:42px;height:42px;border-radius:13px;}
+    header.hero::before{
+      right:max(34px,calc((100vw - 1180px)/2 + 6px));
+      bottom:-28px;
+      width:248px;height:360px;
+      opacity:.90;
+    }
+    .hip-quick-row{margin-top:15px;gap:9px;max-width:650px;}
+    .hip-quick-btn{font-size:12.5px;padding:10px 16px;min-height:40px;}
+    .hero-badge-row{margin-top:13px;gap:8px;max-width:700px;}
+    #nextLevelCaption{max-width:690px;margin-top:6px!important;}
+    .hero-stats{
+      width:500px;max-width:calc(100% - 330px);
+      display:grid;grid-template-columns:repeat(3,1fr);gap:0;
+      margin-top:12px;padding:10px 14px;
+      border:1px solid rgba(255,255,255,.22);
+      border-radius:16px;
+      background:rgba(34,20,23,.16);
+      backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);
+    }
+    .hero-stats .stat{min-width:0;padding:0 14px;border-right:1px solid rgba(255,255,255,.18);}
+    .hero-stats .stat:first-child{padding-left:2px;}
+    .hero-stats .stat:last-child{border-right:0;}
+    .hero-stats .stat .num{font-size:27px;}
+    .hero-stats .stat .lbl{font-size:10.8px;}
+  }
 
   @media(max-width:640px){
     header.hero{padding:26px 18px 22px;}
@@ -1833,35 +1915,45 @@
       <button class="close-x" onclick="closeBeatLab()">✕</button>
     </div>
     <div class="modal-body">
-      <div class="beat-game-head">
-        <div class="beat-mission" id="beatMission">MISSION · 움직이는 번뇌의 FIRE 버튼을 눌러 8 COMBO!</div>
-        <div class="beat-score-box"><b id="beatScore">0</b><span>SCORE</span></div>
-        <div class="beat-score-box"><b id="beatCombo">0</b><span>COMBO</span></div>
+      <div class="beat-desktop-layout">
+        <section class="beat-left-panel">
+          <div class="beat-game-head">
+            <div class="beat-mission" id="beatMission">MISSION · 아래 비트 패드를 눌러 번뇌를 8연속 격추!</div>
+            <div class="beat-score-box"><b id="beatScore">0</b><span>SCORE</span></div>
+            <div class="beat-score-box"><b id="beatCombo">0</b><span>COMBO</span></div>
+          </div>
+          <div class="beat-progression">
+            <div class="beat-level-badge"><b id="beatLevel">1</b>LEVEL</div>
+            <div class="beat-xp-wrap"><div class="beat-xp-top"><span id="beatRankName">초심자</span><span><b id="beatXpNow">0</b>/<span id="beatXpNeed">800</span> XP</span></div><div class="beat-xp"><i id="beatXpBar"></i></div></div>
+            <div class="beat-coin">🪙 <span id="beatCoins">0</span></div>
+          </div>
+          <div class="beat-reward-row" id="beatRewards"><span class="beat-reward on" data-level="1">🌱 입문</span><span class="beat-reward" data-level="2">🪷 연꽃</span><span class="beat-reward" data-level="3">🔔 범종</span><span class="beat-reward" data-level="4">🔥 무아</span><span class="beat-reward" data-level="5">🌈 극락</span><span class="beat-reward" data-level="6">👑 해탈</span></div>
+          <div class="beat-life-row"><span>생명 <b class="beat-lives" id="beatLives">❤️❤️❤️</b></span><span class="beat-streak" id="beatStreak">패드를 눌러 자동 조준 · 콤보 UP</span></div>
+          <div class="beat-track" id="beatTrack"><i class="beat-step" data-step="0"></i><i class="beat-step" data-step="1"></i><i class="beat-step" data-step="2"></i><i class="beat-step" data-step="3"></i><i class="beat-step" data-step="4"></i><i class="beat-step" data-step="5"></i><i class="beat-step" data-step="6"></i><i class="beat-step" data-step="7"></i></div>
+          <div class="worry-smash-zone" id="worrySmashZone">
+            <div class="worry-smash-title">🚀 번뇌 타파 슈팅 · 비트 패드가 곧 미사일 버튼!</div>
+            <div class="worry-wave" id="worryWave">WAVE 1</div>
+            <div class="worry-game-hint">목탁 · KICK · BELL · CLAP · BASS · 극락 FX를 누르면 미사일 발사</div>
+            <div class="worry-player">🪷</div>
+            <div class="beat-gameover" id="beatGameOver"><b>번뇌가 밀려왔어요!</b><span style="margin:8px 0 14px;color:#d8c9df;">점수는 그대로 · 다시 3목숨으로 도전</span><button class="club-btn hot" type="button" onclick="restartWorryGame()">🪷 다시 출격</button></div>
+          </div>
+          <div class="release-banner"><span>터뜨린 번뇌 <b id="worrySmashCount">0</b></span><span id="releaseMsg">패드를 칠 때마다 번뇌 하나를 향해 발사!</span></div>
+        </section>
+        <aside class="beat-right-panel">
+          <div class="beat-audio-status"><span id="beatAudioState">🔊 소리 준비중</span><div style="display:flex;gap:6px;"><button type="button" onclick="forceBeatAudioUnlock(true)">🔊 테스트</button><button type="button" onclick="forceBeatAudioUnlock()">소리 켜기</button></div></div>
+          <div class="bpm-row"><b style="color:#b9ff84;">BPM <span id="beatBpmLabel">96</span></b><input id="beatBpm" type="range" min="60" max="150" value="96" oninput="updateBeatBpm(this.value)"><button class="club-btn secondary" style="padding:8px 10px;" id="loopBtn" onclick="toggleTempleLoop()">▶ LOOP</button></div>
+          <div class="beat-grid">
+            <button class="beat-pad" data-weapon="mok" onclick="playBeat('mok',this)">🥢<br><b>목탁</b><small>MISSILE</small></button>
+            <button class="beat-pad" data-weapon="kick" onclick="playBeat('kick',this)">💥<br><b>KICK</b><small>POWER</small></button>
+            <button class="beat-pad" data-weapon="bell" onclick="playBeat('bell',this)">🔔<br><b>BELL</b><small>LOCK</small></button>
+            <button class="beat-pad" data-weapon="clap" onclick="playBeat('clap',this)">🙏<br><b>CLAP</b><small>BURST</small></button>
+            <button class="beat-pad" data-weapon="bass" onclick="playBeat('bass',this)">🪷<br><b>BASS</b><small>HEAVY</small></button>
+            <button class="beat-pad" data-weapon="air" onclick="playBeat('air',this)">✨<br><b>극락 FX</b><small>LASER</small></button>
+          </div>
+          <div class="beat-side-actions"><button class="club-btn hot" onclick="playTempleDrop()">💣 극락 전체폭발</button><button class="club-btn secondary" onclick="openMoktakOverlay();closeBeatLab();">🥢 무한 목탁</button></div>
+          <div class="beat-side-tip">TIP · 패드를 빠르게 이어 치면 콤보와 레벨이 올라가고, 레벨이 오를수록 번뇌 이동 속도도 빨라져요.</div>
+        </aside>
       </div>
-      <div class="beat-progression">
-        <div class="beat-level-badge"><b id="beatLevel">1</b>LEVEL</div>
-        <div class="beat-xp-wrap"><div class="beat-xp-top"><span id="beatRankName">초심자</span><span><b id="beatXpNow">0</b>/<span id="beatXpNeed">800</span> XP</span></div><div class="beat-xp"><i id="beatXpBar"></i></div></div>
-        <div class="beat-coin">🪙 <span id="beatCoins">0</span></div>
-      </div>
-      <div class="beat-reward-row" id="beatRewards"><span class="beat-reward on" data-level="1">🌱 입문</span><span class="beat-reward" data-level="2">🪷 연꽃</span><span class="beat-reward" data-level="3">🔔 범종</span><span class="beat-reward" data-level="4">🔥 무아</span><span class="beat-reward" data-level="5">🌈 극락</span><span class="beat-reward" data-level="6">👑 해탈</span></div>
-      <div class="beat-audio-status"><span id="beatAudioState">🔊 소리 준비중</span><div style="display:flex;gap:6px;"><button type="button" onclick="forceBeatAudioUnlock(true)">🔊 소리 테스트</button><button type="button" onclick="forceBeatAudioUnlock()">소리 켜기</button></div></div>
-      <div class="beat-life-row"><span>생명 <b class="beat-lives" id="beatLives">❤️❤️❤️</b></span><span class="beat-streak" id="beatStreak">정확히 쏘면 콤보 UP</span></div>
-      <div class="beat-track" id="beatTrack"><i class="beat-step" data-step="0"></i><i class="beat-step" data-step="1"></i><i class="beat-step" data-step="2"></i><i class="beat-step" data-step="3"></i><i class="beat-step" data-step="4"></i><i class="beat-step" data-step="5"></i><i class="beat-step" data-step="6"></i><i class="beat-step" data-step="7"></i></div>
-      <div class="worry-smash-zone" id="worrySmashZone">
-        <div class="worry-smash-title">🚀 번뇌 타파 슈팅 · 움직이는 번뇌 아래의 FIRE만 눌러 격추!</div>
-        <div class="worry-wave" id="worryWave">WAVE 1</div>
-        <div class="worry-game-hint">목탁 패드는 음악용 · 번뇌는 각 단어 아래 FIRE로만 격추돼요</div>
-        <div class="worry-player">🪷</div>
-        <div class="beat-gameover" id="beatGameOver"><b>번뇌가 밀려왔어요!</b><span style="margin:8px 0 14px;color:#d8c9df;">점수는 그대로 · 다시 3목숨으로 도전</span><button class="club-btn hot" type="button" onclick="restartWorryGame()">🪷 다시 출격</button></div>
-      </div>
-      <div class="release-banner"><span>터뜨린 번뇌 <b id="worrySmashCount">0</b></span><span id="releaseMsg">한 번 두드릴 때마다 하나씩 가볍게</span></div>
-      <div class="bpm-row"><b style="color:#b9ff84;">BPM <span id="beatBpmLabel">96</span></b><input id="beatBpm" type="range" min="60" max="150" value="96" oninput="updateBeatBpm(this.value)"><button class="club-btn secondary" style="padding:8px 10px;" id="loopBtn" onclick="toggleTempleLoop()">▶ LOOP</button></div>
-      <div class="beat-grid">
-        <button class="beat-pad" onclick="playBeat('mok',this)">🥢<br>목탁</button><button class="beat-pad" onclick="playBeat('kick',this)">💥<br>KICK</button><button class="beat-pad" onclick="playBeat('bell',this)">🔔<br>BELL</button>
-        <button class="beat-pad" onclick="playBeat('clap',this)">🙏<br>CLAP</button><button class="beat-pad" onclick="playBeat('bass',this)">🪷<br>BASS</button><button class="beat-pad" onclick="playBeat('air',this)">✨<br>극락 FX</button>
-      </div>
-      <div style="display:flex;gap:8px;"><button class="club-btn hot" style="flex:1;" onclick="playTempleDrop()">💣 극락 전체폭발</button><button class="club-btn secondary" style="flex:1;" onclick="openMoktakOverlay();closeBeatLab();">🥢 무한 목탁</button></div>
-      <div style="font-size:10.5px;color:#9f8aaa;margin-top:13px;line-height:1.55;">소리는 브라우저 Web Audio로 즉석 생성돼요. 별도 음원 파일이 없어도 동작합니다.</div>
     </div>
   </div>
 </div>
@@ -7716,13 +7808,12 @@ function spawnWorryOrb(delay=0,forceBoss=false){
     const boss=forceBoss || (worrySmashTotal>0 && worrySmashTotal%12===0 && !zone.querySelector('.worry-enemy.boss'));
     const enemy=document.createElement('div'); enemy.className='worry-enemy'+(boss?' boss':''); enemy.dataset.id=String(++worryEnemySerial); enemy.dataset.hp=boss?'3':'1'; enemy.dataset.maxHp=boss?'3':'1'; enemy.dataset.birth=String(performance.now()); enemy.dataset.ttl=String(Math.max(4300,7800-beatLevel*260-worryWave*140));
     const word=BEAT_WORRIES[Math.floor(Math.random()*BEAT_WORRIES.length)];
-    enemy.innerHTML=`<div class="worry-orb">${boss?'대왕 '+word:word}</div>${boss?'<div class="worry-boss-hp"><i style="width:100%"></i></div>':''}<button class="worry-fire-btn" type="button">🚀 FIRE</button>`;
+    enemy.innerHTML=`<div class="worry-orb">${boss?'대왕 '+word:word}</div>${boss?'<div class="worry-boss-hp"><i style="width:100%"></i></div>':''}`;
     const ew=boss?92:76, eh=boss?108:92, maxX=Math.max(4,zone.clientWidth-ew-4), maxY=Math.max(55,zone.clientHeight-eh-42);
     enemy.dataset.x=String(6+Math.random()*Math.max(1,maxX-12)); enemy.dataset.y=String(35+Math.random()*Math.max(1,maxY-35));
     const a=Math.random()*Math.PI*2; const sp=worryGameSpeed()*(.75+Math.random()*.45); enemy.dataset.vx=String((Math.cos(a)||.7)*sp); enemy.dataset.vy=String((Math.sin(a)||.5)*sp*.7);
     enemy.style.left=enemy.dataset.x+'px'; enemy.style.top=enemy.dataset.y+'px';
-    enemy.querySelector('.worry-fire-btn').addEventListener('click',ev=>{ev.stopPropagation();fireAtWorry(enemy)});
-    enemy.querySelector('.worry-orb').addEventListener('click',()=>{enemy.classList.add('targeted');setTimeout(()=>enemy.classList.remove('targeted'),180);showToast('아래 FIRE 버튼을 눌러야 격추돼요 🚀')});
+    enemy.querySelector('.worry-orb').addEventListener('click',()=>{enemy.classList.add('targeted');setTimeout(()=>enemy.classList.remove('targeted'),180);showToast('아래 비트 패드를 눌러 미사일을 발사하세요 🚀')});
     zone.appendChild(enemy);
   },delay);
 }
@@ -7739,13 +7830,13 @@ function worryShooterTick(ts){
   });
   worryGameTimer=requestAnimationFrame(worryShooterTick);
 }
-function fireAtWorry(enemy){
+function fireAtWorry(enemy,weapon='mok'){
   directBeatGestureTone(); unlockIOSMedia();
   if(!enemy||enemy.classList.contains('smash')||enemy.dataset.locked==='1') return; const zone=document.getElementById('worrySmashZone');if(!zone)return;
-  enemy.dataset.locked='1';const btn=enemy.querySelector('.worry-fire-btn');if(btn)btn.classList.add('locked');enemy.classList.add('targeted');
-  unlockHipAudio().then(updateBeatAudioState);playIOSBeat('air',.8);synthTone(950,.055,'square',.055);synthTone(1320,.08,'sine',.035,.035);
+  enemy.dataset.locked='1';enemy.classList.add('targeted');
+  unlockHipAudio().then(updateBeatAudioState);synthTone(950,.055,'square',.055);synthTone(1320,.08,'sine',.035,.035);
   const zr=zone.getBoundingClientRect(),er=enemy.getBoundingClientRect();const sx=zr.width/2,sy=zr.height-27,tx=er.left-zr.left+er.width/2,ty=er.top-zr.top+er.height*.36;
-  const m=document.createElement('i');m.className='worry-missile';m.style.left=(sx-2.5)+'px';m.style.top=(sy-10)+'px';zone.appendChild(m);const dx=tx-sx,dy=ty-sy;const dist=Math.hypot(dx,dy),dur=Math.max(145,Math.min(330,dist*1.15));
+  const m=document.createElement('i');m.className='worry-missile weapon-'+weapon;m.style.left=(sx-2.5)+'px';m.style.top=(sy-10)+'px';zone.appendChild(m);const dx=tx-sx,dy=ty-sy;const dist=Math.hypot(dx,dy),dur=Math.max(145,Math.min(330,dist*1.15));
   if(m.animate){const anim=m.animate([{transform:'translate(0,0) scaleY(1)'},{transform:`translate(${dx}px,${dy}px) scaleY(1.35)`}],{duration:dur,easing:'cubic-bezier(.18,.7,.25,1)',fill:'forwards'});anim.onfinish=()=>{m.remove();hitWorryEnemy(enemy,tx,ty)};}
   else{m.style.transition=`transform ${dur}ms cubic-bezier(.18,.7,.25,1)`;requestAnimationFrame(()=>{m.style.transform=`translate(${dx}px,${dy}px) scaleY(1.35)`});setTimeout(()=>{m.remove();hitWorryEnemy(enemy,tx,ty)},dur+20);}
 }
@@ -7754,7 +7845,7 @@ function hitWorryEnemy(enemy,cx,cy){
   const ring=document.createElement('i');ring.className='worry-hit-ring';ring.style.left=(cx-10)+'px';ring.style.top=(cy-10)+'px';zone.appendChild(ring);setTimeout(()=>ring.remove(),450);
   const boom=document.createElement('i');boom.className='worry-explosion';boom.style.left=cx+'px';boom.style.top=cy+'px';zone.appendChild(boom);setTimeout(()=>boom.remove(),520);
   noiseHit(.045,.07);synthTone(180,.08,'sawtooth',.08);for(let i=0;i<8;i++){const sh=document.createElement('i');sh.className='worry-shard';sh.style.left=cx+'px';sh.style.top=cy+'px';const a=Math.random()*Math.PI*2,d=20+Math.random()*45;sh.style.setProperty('--dx',Math.cos(a)*d+'px');sh.style.setProperty('--dy',Math.sin(a)*d+'px');sh.style.color=['#ff62bc','#b9ff84','#ffd56a','#9bc7ff'][i%4];zone.appendChild(sh);setTimeout(()=>sh.remove(),620)}
-  if(hp>0){const bar=enemy.querySelector('.worry-boss-hp i');if(bar)bar.style.width=(hp/parseInt(enemy.dataset.maxHp,10)*100)+'%';enemy.dataset.locked='0';enemy.querySelector('.worry-fire-btn')?.classList.remove('locked');enemy.classList.remove('targeted');beatPop(`BOSS HIT · ${hp}발 남음`);return;}
+  if(hp>0){const bar=enemy.querySelector('.worry-boss-hp i');if(bar)bar.style.width=(hp/parseInt(enemy.dataset.maxHp,10)*100)+'%';enemy.dataset.locked='0';enemy.classList.remove('targeted');beatPop(`BOSS HIT · ${hp}발 남음`);return;}
   smashWorryOrb(enemy,true);
 }
 function smashWorryOrb(enemy,manual=false){
@@ -7797,6 +7888,22 @@ function beatGameHit(kind,btn){
   if(beatCombo===12||beatCombo===24||beatCombo===36) beatConfettiBurst(18+beatCombo/2);
   if(navigator.vibrate && beatCombo%4===0) navigator.vibrate(10);
 }
+function pickWorryTarget(){
+  const enemies=[...document.querySelectorAll('#worrySmashZone .worry-enemy:not(.smash)')].filter(e=>e.dataset.locked!=='1');
+  if(!enemies.length) return null;
+  // 가장 오래 살아남은 번뇌를 우선 조준해서 화면이 답답하게 쌓이지 않게 함
+  return enemies.sort((a,b)=>(parseFloat(a.dataset.birth||0)-parseFloat(b.dataset.birth||0)))[0];
+}
+function fireBeatPadShot(kind,btn){
+  const enemy=pickWorryTarget();
+  if(!enemy){
+    spawnWorryOrb(0);
+    beatPop('🎯 번뇌 출현 대기');
+    return;
+  }
+  enemy.classList.add('targeted');
+  fireAtWorry(enemy,kind);
+}
 function playBeat(kind,btn,skipGame=false){
   // iPad/PWA에서는 HTMLAudio WAV를 사용자 터치에서 즉시 재생하고, 그 외 기기에서는 Web Audio 사용
   // iPad에서는 HTMLAudio + WebAudio를 둘 다 시도한다. HTMLAudio play()가 거절되어도 WebAudio 합성음까지 막지 않는다.
@@ -7809,6 +7916,7 @@ function playBeat(kind,btn,skipGame=false){
   if(kind==='clap'){noiseHit(.09,.15);noiseHit(.06,.07,.025)}
   if(kind==='bass'){synthTone(82,.28,'sawtooth',.08);synthTone(41,.24,'sine',.12)}
   if(kind==='air'){synthTone(523,.22,'sine',.06);synthTone(659,.22,'sine',.05,.08);synthTone(784,.35,'sine',.05,.16)}
+  if(!skipGame && document.getElementById('beatLabOverlay')?.classList.contains('show')) fireBeatPadShot(kind,btn);
 }
 const BEAT_RANKS=['초심자','마음 관찰자','번뇌 타파자','리듬 수행자','극락 DJ','해탈 마스터','무아 LEGEND'];
 function beatXpNeed(level){return 700 + level*250;}
@@ -7833,7 +7941,7 @@ function forceBeatAudioUnlock(testOnly=false){
   try{if(c&&c.state==='suspended'&&c.resume)c.resume();}catch(e){}
   setTimeout(()=>{const ok=!!c&&c.state==='running';hipAudioUnlocked=ok;updateBeatAudioState(ok||immediate);if(ok||immediate){playIOSBeat('bell',1);if(testOnly)showToast('🔊 테스트 소리가 들리면 준비 완료!');else showToast('🔊 소리를 켰어요');}else showToast('아이패드 볼륨/무음 모드도 확인해주세요');},80);
 }
-function resetBeatGame(){beatScore=0;beatCombo=0;beatLastHit=0;beatGameStep=0;worrySmashTotal=0;beatLevel=1;beatXp=0;beatCoins=0;beatBestCombo=0;beatHits=0;beatLives=3;updateBeatLives();document.getElementById('beatGameOver')?.classList.remove('show');document.getElementById('beatLabOverlay')?.classList.remove('fever');const s=document.getElementById('beatScore'),c=document.getElementById('beatCombo'),m=document.getElementById('beatMission');if(s)s.textContent='0';if(c)c.textContent='0';if(m)m.textContent='MISSION · 움직이는 번뇌의 FIRE 버튼을 눌러 8 COMBO!';document.querySelectorAll('#beatTrack .beat-step').forEach(el=>el.classList.remove('on'));updateBeatProgress();updateBeatAudioState(false);}
+function resetBeatGame(){beatScore=0;beatCombo=0;beatLastHit=0;beatGameStep=0;worrySmashTotal=0;beatLevel=1;beatXp=0;beatCoins=0;beatBestCombo=0;beatHits=0;beatLives=3;updateBeatLives();document.getElementById('beatGameOver')?.classList.remove('show');document.getElementById('beatLabOverlay')?.classList.remove('fever');const s=document.getElementById('beatScore'),c=document.getElementById('beatCombo'),m=document.getElementById('beatMission');if(s)s.textContent='0';if(c)c.textContent='0';if(m)m.textContent='MISSION · 아래 비트 패드를 눌러 번뇌를 8연속 격추!';document.querySelectorAll('#beatTrack .beat-step').forEach(el=>el.classList.remove('on'));updateBeatProgress();updateBeatAudioState(false);}
 function openBeatLab(){document.getElementById('beatLabOverlay')?.classList.add('show');resetBeatGame();updateBeatLives();initWorrySmash();updateBeatAudioState(false);}
 function closeBeatLab(){document.getElementById('beatLabOverlay')?.classList.remove('show');stopTempleLoop();stopWorryShooter();}
 function updateBeatBpm(v){document.getElementById('beatBpmLabel').textContent=v;if(templeLoopTimer){stopTempleLoop();startTempleLoop();}}
