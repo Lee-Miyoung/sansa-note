@@ -3301,10 +3301,12 @@ body:has(#beatLabOverlay.show) #miniPlayer{
       <button class="close-x" onclick="closePlaylistOverlay()">✕</button>
     </div>
     <div class="modal-body">
-      <div style="display:flex;gap:6px;justify-content:center;margin-bottom:12px;">
+      <div style="display:flex;gap:6px;justify-content:center;margin-bottom:12px;flex-wrap:wrap;">
         <button class="btn btn-ghost song-pick" style="padding:7px 12px;font-size:12px;" onclick="loadSong(0)">1. 비워내 비워내</button>
         <button class="btn btn-ghost song-pick" style="padding:7px 12px;font-size:12px;" onclick="loadSong(1)">2. 흘러가네</button>
         <button class="btn btn-ghost song-pick" style="padding:7px 12px;font-size:12px;" onclick="loadSong(2)">3. 가벼워진 마음</button>
+        <button class="btn btn-ghost song-pick" style="padding:7px 12px;font-size:12px;" onclick="loadSong(3)">4. 깨부숴</button>
+        <button class="btn btn-ghost song-pick" style="padding:7px 12px;font-size:12px;" onclick="loadSong(4)">5. 마음의 쉼표</button>
       </div>
       <div id="lyricsWrap" style="height:200px;overflow-y:auto;background:var(--paper);border-radius:12px;padding:16px 12px;margin-bottom:14px;scroll-behavior:smooth;">
         <div id="lyricsInner"></div>
@@ -5004,10 +5006,103 @@ const LYRICS_SONG3 = [
   {t:150.24, text:'오늘도 평화롭게, Peace!'}
 ];
 
+
+const LYRICS_SONG4 = [
+  {t:2, text:'[Intro]'},
+  {t:4, text:'(Deep booming 808 bass drop with massive temple buk drum)'},
+  {t:8, text:'(Check the beat, 깨달음의 울림, Let’s ride!)'},
+  {t:12, text:'[Verse 1 - Fast Rap]'},
+  {t:13, text:'어둠을 가르는 섬광, 번뇌의 사슬을 끊어'},
+  {t:18, text:'가짜 욕망들이 만든 환영 속에서 깨어나'},
+  {t:23, text:'앞뒤 가리지 않고 덤벼드는 망상들'},
+  {t:28, text:'사자후 한 방으로 전부 가루로 만들어'},
+  {t:33, text:'내 안의 거센 폭풍, 집착이 낳은 불꽃'},
+  {t:38, text:'숨 한 번 들이쉬고 전부 재로 털어내'},
+  {t:43, text:'비워낼 때 생기는 폭발적인 에너지'},
+  {t:48, text:'물러서지 마, 진짜 너를 마주해'},
+  {t:53, text:'[Pre-Chorus]'},
+  {t:54, text:'거친 파도가 밀려와도'},
+  {t:58, text:'바위처럼 꿈쩍도 하지 않아'},
+  {t:62, text:'번뇌를 부수는 이 거대한 울림'},
+  {t:66, text:'더 깊게, 더 강하게!'},
+  {t:70, text:'[Chorus - Powerful & Heavy]'},
+  {t:71, text:'깨부숴! 네 안의 모든 어둠'},
+  {t:76, text:'번뇌망상 전부 태워, 불꽃처럼 Burn up!'},
+  {t:81, text:'쿵쾅거리는 북소리에 발을 맞춰'},
+  {t:86, text:'마음의 칼날을 세워, 탁! 탁! 탁!'},
+  {t:91, text:'옴 마니 반메 훔, 흔들림 없이 가!'},
+  {t:97, text:'[Verse 2 - Fast Rap]'},
+  {t:98, text:'누가 널 가둬, 스스로 만든 감옥 속에'},
+  {t:103, text:'잡념은 껍데기, 본질은 그 안에 있네'},
+  {t:108, text:'한 치의 망설임 없이 단칼에 베어버려'},
+  {t:113, text:'두려움이란 허상, 고통은 찰나일 뿐'},
+  {t:118, text:'비바람 지나가면 맑은 하늘이 오듯'},
+  {t:123, text:'깨어난 정신으로 세상 중심에 서'},
+  {t:128, text:'내 길을 막아서는 잡귀들은 물러가라'},
+  {t:133, text:'한 걸음 뗄 때마다 대지가 요동친다!'},
+  {t:139, text:'[Chorus - Powerful & Heavy]'},
+  {t:140, text:'깨부숴! 네 안의 모든 어둠'},
+  {t:145, text:'번뇌망상 전부 태워, 불꽃처럼 Burn up!'},
+  {t:150, text:'쿵쾅거리는 북소리에 발을 맞춰'},
+  {t:155, text:'마음의 칼날을 세워, 탁! 탁! 탁!'},
+  {t:160, text:'옴 마니 반메 훔, 흔들림 없이 가!'},
+  {t:166, text:'[Outro]'},
+  {t:167, text:'바라승가테! 사바하!'},
+  {t:172, text:'모든 게 사라진 자리에 남는 평정'},
+  {t:178, text:'(Massive 808 bass hit and gong fade)'}
+];
+
+const LYRICS_SONG5 = [
+  {t:2, text:'[Intro]'},
+  {t:4, text:'(Warm acoustic guitar strumming softly)'},
+  {t:8, text:'(Gentle rain sound and distant, peaceful wind chime)'},
+  {t:12, text:'[Verse 1 - Calm Spoken Rap]'},
+  {t:13, text:'오늘 하루도 참 고생 많았어'},
+  {t:17, text:'어깨에 얹힌 짐, 여기 잠시 내려놔'},
+  {t:21, text:'세상이 자꾸 서두르라 재촉해도'},
+  {t:25, text:'너만의 속도가 있어, 천천히 걸어가도 돼'},
+  {t:30, text:'시원한 밤바람에 한숨을 실어 보내면'},
+  {t:35, text:'복잡했던 머릿속도 조금씩 맑아져'},
+  {t:40, text:'달빛이 길을 비추듯'},
+  {t:44, text:'네 안의 고요가 너를 안아줄 거야'},
+  {t:49, text:'[Pre-Chorus]'},
+  {t:50, text:'완벽하지 않아도 다 괜찮아'},
+  {t:54, text:'피어나는 꽃들은 서두르는 법이 없잖아'},
+  {t:59, text:'깊게 숨을 들이쉬고'},
+  {t:63, text:'그저 편안하게 내쉬어봐'},
+  {t:67, text:'[Chorus - Soft Melodic]'},
+  {t:68, text:'나무아미타불, 마음의 쉼표 하나'},
+  {t:73, text:'바람결에 번뇌는 스르륵 날아가'},
+  {t:78, text:'달콤한 차 한 잔 나누듯 편안하게'},
+  {t:83, text:'오늘 밤은 그저 푹 쉬어가도 돼'},
+  {t:88, text:'따뜻한 평온이 네 곁에 머물기를'},
+  {t:94, text:'[Verse 2 - Calm Spoken Rap]'},
+  {t:95, text:'남들과 비교하며 마음 다치지 마'},
+  {t:100, text:'너라는 존재 자체로 이미 충만한걸'},
+  {t:105, text:'물결이 잔잔해져야 바닥이 보이듯'},
+  {t:110, text:'마음이 고요해지면 답은 자연스레 찾아와'},
+  {t:115, text:'지나간 일은 어제의 낙엽처럼 두고'},
+  {t:120, text:'다정한 호흡 하나로 지금을 채워봐'},
+  {t:125, text:'괜찮아, 다 잘 흘러가고 있어'},
+  {t:130, text:'[Chorus - Soft Melodic]'},
+  {t:131, text:'나무아미타불, 마음의 쉼표 하나'},
+  {t:136, text:'바람결에 번뇌는 스르륵 날아가'},
+  {t:141, text:'달콤한 차 한 잔 나누듯 편안하게'},
+  {t:146, text:'오늘 밤은 그저 푹 쉬어가도 돼'},
+  {t:151, text:'따뜻한 평온이 네 곁에 머물기를'},
+  {t:156, text:'[Outro]'},
+  {t:157, text:'비워내면 채워지는 따뜻한 위로'},
+  {t:162, text:'사바하... 좋은 꿈 꿔'}
+];
+
+
+
 const SONGS = [
   {title:'비워내 비워내', src:'song1.mp3', lyrics: LYRICS_SONG1},
   {title:'흘러가네', src:'song2.mp3', lyrics: LYRICS_SONG2},
-  {title:'가벼워진 마음', src:'song3.mp3', lyrics: LYRICS_SONG3}
+  {title:'가벼워진 마음', src:'song3.mp3', lyrics: LYRICS_SONG3},
+  {title:'깨부숴', src:'song4.mp3', lyrics: LYRICS_SONG4},
+  {title:'마음의 쉼표', src:'song5.mp3', lyrics: LYRICS_SONG5}
 ];
 let currentSongIdx = 0;
 let lyricOffsets = (()=>{
