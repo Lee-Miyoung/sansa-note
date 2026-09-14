@@ -10179,11 +10179,19 @@ function unlockIOSMedia(){
 }
 const iosBeatPool={};
 function playIOSBeat(kind,volume=.75){
+  if(!beatSoundOn)return false;
   if(!isIPadLike()||!IOS_BEAT_WAV[kind]) return false;
   try{
-    const pool=iosBeatPool[kind]||(iosBeatPool[kind]=Array.from({length:4},()=>{const a=new Audio(IOS_BEAT_WAV[kind]);a.preload='auto';a.setAttribute('playsinline','');return a;}));
-    const a=pool.find(x=>x.paused||x.ended)||pool[0];a.volume=volume;try{a.currentTime=0}catch(e){}
-    const p=a.play(); if(p&&p.then)p.then(()=>updateBeatAudioState(true)).catch(()=>updateBeatAudioState()); return true;
+    const pool=iosBeatPool[kind]||(iosBeatPool[kind]=Array.from({length:4},()=>{
+      const a=new Audio(IOS_BEAT_WAV[kind]);
+      a.preload='auto';a.setAttribute('playsinline','');return a;
+    }));
+    const a=pool.find(x=>x.paused||x.ended)||pool[0];
+    a.volume=volume;
+    try{a.currentTime=0}catch(e){}
+    const p=a.play();
+    if(p&&p.then)p.then(()=>updateBeatAudioState()).catch(()=>updateBeatAudioState());
+    return true;
   }catch(e){updateBeatAudioState();return false;}
 }
 
@@ -10195,30 +10203,60 @@ function getHipAudio(){
   return hipAudioCtx;
 }
 function unlockHipAudio(){
+  if(!beatSoundOn)return Promise.resolve(false);
   const c=getHipAudio();
   unlockIOSMedia();
   if(!c) return Promise.resolve(false);
-  // 중요: iPad Safari는 첫 터치 콜스택 안에서 source.start()가 실행되어야 잠금이 풀리는 경우가 있음
   try{
     const b=c.createBuffer(1,1,22050),src=c.createBufferSource(),g=c.createGain();
     src.buffer=b;g.gain.value=0.00001;src.connect(g);g.connect(c.destination);src.start(0);
   }catch(e){}
   try{
     const p=(c.state==='suspended'&&c.resume)?c.resume():Promise.resolve();
-    return Promise.resolve(p).then(()=>{hipAudioUnlocked=(c.state==='running');return hipAudioUnlocked;}).catch(()=>false);
-  }catch(e){hipAudioUnlocked=(c.state==='running');return Promise.resolve(hipAudioUnlocked);}
+    return Promise.resolve(p).then(()=>{
+      hipAudioUnlocked=(beatSoundOn&&c.state==='running');
+      return hipAudioUnlocked;
+    }).catch(()=>false);
+  }catch(e){
+    hipAudioUnlocked=(beatSoundOn&&c.state==='running');
+    return Promise.resolve(hipAudioUnlocked);
+  }
 }
 function withUnlockedAudio(fn){
+  if(!beatSoundOn)return;
   const c=getHipAudio();
-  if(!c) return;
+  if(!c)return;
   if(c.state==='running'){hipAudioUnlocked=true;fn(c);return;}
-  unlockHipAudio().then(ok=>{if(ok) fn(c); else showToast('🔊 소리를 켜려면 화면을 한 번 더 눌러주세요');});
+  unlockHipAudio().then(ok=>{
+    if(ok&&beatSoundOn)fn(c);
+  });
 }
 function synthTone(freq=440,dur=.12,type='sine',gain=.15,when=0){
-  withUnlockedAudio(c=>{try{const o=c.createOscillator(),g=c.createGain();o.type=type;o.frequency.setValueAtTime(freq,c.currentTime+when);g.gain.setValueAtTime(Math.max(.0001,gain),c.currentTime+when);g.gain.exponentialRampToValueAtTime(.001,c.currentTime+when+dur);o.connect(g);g.connect(c.destination);o.start(c.currentTime+when);o.stop(c.currentTime+when+dur+.02);}catch(e){}});
+  if(!beatSoundOn)return;
+  withUnlockedAudio(c=>{
+    if(!beatSoundOn)return;
+    try{
+      const o=c.createOscillator(),g=c.createGain();
+      o.type=type;o.frequency.setValueAtTime(freq,c.currentTime+when);
+      g.gain.setValueAtTime(Math.max(.0001,gain),c.currentTime+when);
+      g.gain.exponentialRampToValueAtTime(.001,c.currentTime+when+dur);
+      o.connect(g);g.connect(c.destination);
+      o.start(c.currentTime+when);o.stop(c.currentTime+when+dur+.02);
+    }catch(e){}
+  });
 }
 function noiseHit(dur=.08,gain=.08,when=0){
-  withUnlockedAudio(c=>{try{const len=Math.max(1,Math.floor(c.sampleRate*dur)),buf=c.createBuffer(1,len,c.sampleRate),d=buf.getChannelData(0);for(let i=0;i<len;i++)d[i]=(Math.random()*2-1)*(1-i/len);const src=c.createBufferSource(),g=c.createGain();src.buffer=buf;g.gain.value=gain;src.connect(g);g.connect(c.destination);src.start(c.currentTime+when);}catch(e){}});
+  if(!beatSoundOn)return;
+  withUnlockedAudio(c=>{
+    if(!beatSoundOn)return;
+    try{
+      const len=Math.max(1,Math.floor(c.sampleRate*dur)),buf=c.createBuffer(1,len,c.sampleRate),d=buf.getChannelData(0);
+      for(let i=0;i<len;i++)d[i]=(Math.random()*2-1)*(1-i/len);
+      const src=c.createBufferSource(),g=c.createGain();
+      src.buffer=buf;g.gain.value=gain;src.connect(g);g.connect(c.destination);
+      src.start(c.currentTime+when);
+    }catch(e){}
+  });
 }
 
 const BEAT_WEAPONS={
@@ -10717,16 +10755,9 @@ function fireBeatPadShot(kind,btn){
   return beatShootGuaranteed(kind,btn);
 }
 function playBeat(kind,btn,skipGame=false){
-  // 게임 입력을 가장 먼저 처리한다.
-  // 소리/파티클/오디오 잠금 오류가 생겨도 격추 로직은 이미 실행된다.
   if(!skipGame && document.getElementById('beatLabOverlay')?.classList.contains('show') && beatLives>0){
     beatShootGuaranteed(kind,btn);
   }
-
-  try{
-    playIOSBeat(kind,kind==='kick'?.9:kind==='mok'?.85:.75);
-    unlockHipAudio().then(()=>updateBeatAudioState()).catch(()=>{});
-  }catch(_){}
 
   if(btn){
     try{
@@ -10735,7 +10766,14 @@ function playBeat(kind,btn,skipGame=false){
     }catch(_){}
   }
 
-  // 오디오는 보너스 기능. 게임 판정과 완전히 분리.
+  // 게임 판정과 소리를 완전히 분리. OFF면 여기서 즉시 끝.
+  if(!beatSoundOn)return;
+
+  try{
+    playIOSBeat(kind,kind==='kick'?.9:kind==='mok'?.85:.75);
+    unlockHipAudio().then(()=>updateBeatAudioState()).catch(()=>{});
+  }catch(_){}
+
   try{
     if(kind==='mok'){synthTone(760,.045,'square',.09);synthTone(470,.08,'triangle',.06,.025)}
     if(kind==='kick'){synthTone(120,.18,'sine',.24);synthTone(55,.20,'sine',.16,.025)}
@@ -10931,8 +10969,8 @@ function forceBeatAudioUnlock(){
   try{if(c&&c.state==='suspended'&&c.resume)c.resume();}catch(e){}
   return new Promise(resolve=>{
     setTimeout(()=>{
-      const ok=!!c&&c.state==='running';
-      hipAudioUnlocked=ok||immediate;
+      const ok=beatSoundOn&&!!c&&c.state==='running';
+      hipAudioUnlocked=beatSoundOn&&(ok||immediate);
       updateBeatAudioState();
       resolve(hipAudioUnlocked);
     },60);
@@ -10941,17 +10979,37 @@ function forceBeatAudioUnlock(){
 function toggleBeatSound(){
   beatSoundOn=!beatSoundOn;
   try{localStorage.setItem('sansaBeatSound',beatSoundOn?'on':'off');}catch(_){}
-  if(beatSoundOn){
-    forceBeatAudioUnlock().then(()=>{
-      try{playIOSBeat('bell',.7);}catch(_){}
-    });
-  }else{
+
+  if(!beatSoundOn){
+    // 1) LOOP 즉시 정지
     try{stopTempleLoop();}catch(_){}
+
+    // 2) iPad용 HTMLAudio 효과음 즉시 정지
     try{
-      if(hipAudioCtx&&hipAudioCtx.state==='running'&&hipAudioCtx.suspend)hipAudioCtx.suspend();
+      Object.values(iosBeatPool).flat().forEach(a=>{
+        try{a.pause();a.currentTime=0;}catch(_){}
+      });
     }catch(_){}
+
+    // 3) WebAudio 전체 즉시 음소거
+    try{
+      if(hipAudioCtx&&hipAudioCtx.state!=='closed'&&hipAudioCtx.suspend){
+        hipAudioCtx.suspend().catch(()=>{});
+      }
+    }catch(_){}
+
+    hipAudioUnlocked=false;
+    updateBeatAudioState();
+    return;
   }
-  updateBeatAudioState();
+
+  // ON으로 바꾼 순간에만 다시 오디오를 연다.
+  forceBeatAudioUnlock().then(()=>{
+    if(beatSoundOn){
+      try{playIOSBeat('bell',.55);}catch(_){}
+    }
+    updateBeatAudioState();
+  }).catch(()=>updateBeatAudioState());
 }
 function resetBeatGame(){beatFxParticles.length=0;beatFxTexts.length=0;const fxc=document.getElementById('beatFxCanvas');if(fxc){const c=fxc.getContext('2d');c&&c.clearRect(0,0,fxc.width,fxc.height);}const er=document.getElementById('beatEventRail'),em=document.getElementById('beatEventMain'),es=document.getElementById('beatEventSub');if(er)er.classList.remove('hot');if(em)em.textContent='READY';if(es)es.textContent='맞는 패드만 정확히 쏘세요';beatScore=0;beatCombo=0;beatLastHit=0;beatGameStep=0;worrySmashTotal=0;beatLevel=1;beatXp=0;beatCoins=0;beatBestCombo=0;beatHits=0;beatShots=0;beatMisses=0;beatSlowUntil=0;beatDefenseY=0;beatZoneLockedHeight=0;beatLastLifeLostAt=0;beatLifeGraceUntil=0;beatLives=3;updateBeatLives();document.getElementById('beatGameOver')?.classList.remove('show');document.getElementById('beatLabOverlay')?.classList.remove('fever');const s=document.getElementById('beatScore'),c=document.getElementById('beatCombo'),m=document.getElementById('beatMission');if(s)s.textContent='0';if(c)c.textContent='0';if(m)m.textContent='MISSION · 같은 레인의 맞는 패드로 8번 연속 격추!';document.querySelectorAll('#beatTrack .beat-step').forEach(el=>el.classList.remove('on'));updateBeatProgress();updateBeatArcadeHud();updateBeatAudioState();}
 function freezeBeatViewport(){const ov=document.getElementById('beatLabOverlay'),modal=ov?.querySelector('.modal');if(!ov||!modal)return;const vh=Math.round((window.visualViewport?.height||window.innerHeight));const desktop=window.innerWidth>=900;const h=Math.max(520,vh-(desktop?20:0));ov.style.setProperty('--beat-fixed-vh',h+'px');ov.classList.add('beat-vh-locked');document.documentElement.style.overflow='hidden';document.body.style.overflow='hidden';}
@@ -10989,14 +11047,34 @@ function closeBeatLab(){
 }
 function updateBeatBpm(v){document.getElementById('beatBpmLabel').textContent=v;if(templeLoopTimer){stopTempleLoop();startTempleLoop();}}
 function startTempleLoop(){
+  if(!beatSoundOn){stopTempleLoop();return;}
   unlockHipAudio().then(ok=>{
-    if(!ok || templeLoopTimer) return;
-    const bpm=parseInt(document.getElementById('beatBpm')?.value||96,10),ms=60000/bpm/2; templeLoopStep=0;
-    const tick=()=>{const st=templeLoopStep++%8;document.querySelectorAll('#beatTrack .beat-step').forEach((el,i)=>el.classList.toggle('on',i===st));if(st%2===0)playBeat('mok',null,true);if(st===0||st===4)playBeat('kick',null,true);if(st===2||st===6)playBeat('clap',null,true);if(st===7)playBeat('bell',null,true);};tick();templeLoopTimer=setInterval(tick,ms); const b=document.getElementById('loopBtn');if(b)b.textContent='⏸ LOOP';
+    if(!beatSoundOn||!ok||templeLoopTimer)return;
+    const bpm=parseInt(document.getElementById('beatBpm')?.value||96,10),ms=60000/bpm/2;
+    templeLoopStep=0;
+    const tick=()=>{
+      if(!beatSoundOn){stopTempleLoop();return;}
+      const st=templeLoopStep++%8;
+      document.querySelectorAll('#beatTrack .beat-step').forEach((el,i)=>el.classList.toggle('on',i===st));
+      if(st%2===0)playBeat('mok',null,true);
+      if(st===0||st===4)playBeat('kick',null,true);
+      if(st===2||st===6)playBeat('clap',null,true);
+      if(st===7)playBeat('bell',null,true);
+    };
+    tick();
+    templeLoopTimer=setInterval(tick,ms);
+    const b=document.getElementById('loopBtn');if(b)b.textContent='⏸ LOOP';
   });
 }
 function stopTempleLoop(){clearInterval(templeLoopTimer);templeLoopTimer=null;const b=document.getElementById('loopBtn');if(b)b.textContent='▶ LOOP';}
-function toggleTempleLoop(){unlockHipAudio();templeLoopTimer?stopTempleLoop():startTempleLoop();}
+function toggleTempleLoop(){
+  if(!beatSoundOn){
+    stopTempleLoop();
+    updateBeatAudioState();
+    return;
+  }
+  templeLoopTimer?stopTempleLoop():startTempleLoop();
+}
 function playTempleDrop(){
   unlockHipAudio().then(()=>updateBeatAudioState());
   if(beatCoins<40){beatPop('🪙 코인 부족','beat-reward-pop','40코인이 필요해요');return;}
