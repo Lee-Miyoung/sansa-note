@@ -7891,12 +7891,25 @@ function deleteMountainDestination(){
   closeMountainDetail();
 }
 
+function isLikelyValidPhotoUrl(u){
+  if(!u || typeof u!=='string') return false;
+  const s=u.trim();
+  if(!s) return false;
+  return /^https?:\/\//i.test(s) || /^data:image\//i.test(s);
+}
 function firstPhotoUrl(d){
   if(d.photos){
-    const arr = Object.values(d.photos);
+    // 최근 것부터 살펴보되, 비어있거나 이상한 값(깨진 URL)이면 건너뛰고
+    // 그다음으로 최근인 사진이나 자동으로 찾아둔 대표 사진으로 대신합니다.
+    // (예전엔 마지막 사진의 url이 비어있으면 그 값을 그대로 반환해서
+    //  깨진 이미지 아이콘이 뜨는 원인이 됐습니다.)
+    const arr = Object.values(d.photos).filter(p=>isLikelyValidPhotoUrl(p&&p.url));
     if(arr.length) return arr[arr.length-1].url;
   }
-  if(d.coverPhotos && d.coverPhotos.length) return d.coverPhotos[0];
+  if(d.coverPhotos && d.coverPhotos.length){
+    const valid = d.coverPhotos.find(isLikelyValidPhotoUrl);
+    if(valid) return valid;
+  }
   return null;
 }
 
@@ -7951,6 +7964,10 @@ const PHOTO_SCHEMA_VERSION = 7; // v7: 로마자 표기(예: Seokguram)라 한�
 const PHOTO_RETRY_COOLDOWN_MS = 3*24*60*60*1000; // 사진을 못 찾은 곳은 사흘 지나야 다시 시도 (매 렌더마다 재시도해서 화면이 깜빡이는 것을 막기 위함)
 function shouldSkipPhotoRetry(d){
   if(!d || d.coverPhotoStatus!=='not-found') return false;
+  // 매칭 기준(PHOTO_SCHEMA_VERSION)이 바뀐 뒤라면, 예전 기준으로 "못 찾음" 판정을 받은
+  // 것이어도 쿨다운을 무시하고 새 기준으로 다시 시도합니다. 같은 기준으로 이미
+  // 최근에 확인한 경우에만 쿨다운을 적용해서 API를 과도하게 두드리지 않게 해요.
+  if(d.coverPhotoVersion !== PHOTO_SCHEMA_VERSION) return false;
   return (Date.now() - (d.coverPhotoLastChecked||0)) < PHOTO_RETRY_COOLDOWN_MS;
 }
 let coverFetching = new Set();
@@ -7976,7 +7993,7 @@ function processPhotoQueue(){
 }
 let renderDebounceTimer = null;
 function patchVisibleCover(id,url,kind,name){
-  if(!url)return;
+  if(!isLikelyValidPhotoUrl(url))return;
   const cards=[...document.querySelectorAll('.card[data-id]')];
   const card=cards.find(x=>x.dataset.id===String(id));
   const photo=card?.querySelector('.card-photo');
