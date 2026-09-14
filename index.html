@@ -2904,6 +2904,7 @@ body:has(#beatLabOverlay.show) #miniPlayer{
 
 
 
+  <div id="iconRowHintWrap"></div>
   <div id="guestAddHintWrap"></div>
   <div id="explain108Wrap"></div>
   <div id="homeGalleryWrap"></div>
@@ -2918,7 +2919,6 @@ body:has(#beatLabOverlay.show) #miniPlayer{
   <div class="content-type-row">
     <button class="content-type-btn active" id="ctypeTemple" onclick="switchContentType('temple')">🏯 절</button>
     <button class="content-type-btn" id="ctypeMountain" onclick="switchContentType('mountain')">⛰️ 산</button>
-    <button class="content-type-btn map-mini-btn" id="ctypeMap" onclick="openMapOverlay()">🗺 카카오맵</button>
   </div>
 
   <div class="filterbar">
@@ -4729,6 +4729,21 @@ function renderFunBanner(){
   </div>`;
 }
 
+function renderIconRowHint(){
+  const wrap = document.getElementById('iconRowHintWrap');
+  if(!wrap) return;
+  const key = 'sansanoteIconRowHintDismissed';
+  if(localStorage.getItem(key) === '1'){ wrap.innerHTML=''; return; }
+  wrap.innerHTML = `<div class="explain108-banner">
+    <span>👆 위쪽 오른편의 작은 아이콘 3개도 눌러보세요 — 📥 순례 코스 불러오기, 🗺 전체 지도, ⚙ 설정이에요.</span>
+    <button class="close108" onclick="dismissIconRowHint()">✕</button>
+  </div>`;
+}
+function dismissIconRowHint(){
+  localStorage.setItem('sansanoteIconRowHintDismissed', '1');
+  const wrap = document.getElementById('iconRowHintWrap');
+  if(wrap) wrap.innerHTML = '';
+}
 function renderGuestAddHint(){
   const wrap = document.getElementById('guestAddHintWrap');
   if(!wrap) return;
@@ -4768,6 +4783,7 @@ function launchApp(){
   renderQuizBanner();
   renderFunBanner();
   renderExplain108();
+  renderIconRowHint();
   renderGuestAddHint();
 
   if(localMode){
@@ -7796,6 +7812,25 @@ function openPackOverlay(){
 function closePackOverlay(){
   document.getElementById('packOverlay').classList.remove('show');
 }
+function cancelPack(key){
+  const pack = PACKS.find(p=>p.key===key);
+  if(!pack) return;
+  const packData = resolvePackData(pack);
+  const packNames = new Set(packData.map(item=>item.name));
+  const removable = [];
+  let keptCount = 0;
+  Object.entries(destinations).forEach(([id,d])=>{
+    if(!packNames.has(d.name)) return;
+    const untouched = (!d.stage || d.stage===0) && !(d.notes && d.notes.trim()) && !(d.photos && Object.keys(d.photos).length);
+    if(untouched) removable.push(id); else keptCount++;
+  });
+  if(removable.length===0){ showToast('뺄 곳이 없어요 (방문 기록이나 사진이 있는 곳은 보호돼요)'); return; }
+  if(!confirm(`"${pack.label}"으로 불러온 ${removable.length}곳을 목록에서 뺄까요?` + (keptCount>0 ? ` (방문 기록·사진이 있는 ${keptCount}곳은 그대로 남아요)` : ''))) return;
+  removable.forEach(id=> removeDestinationData(id));
+  showToast(`${removable.length}곳을 목록에서 뺐어요` + (keptCount>0 ? ` (기록이 있는 ${keptCount}곳은 남겨뒀어요)` : ''));
+  renderPackOverlay();
+  render();
+}
 function renderPackOverlay(){
   const wrap = document.getElementById('packList');
   const byName = {};
@@ -7814,6 +7849,7 @@ function renderPackOverlay(){
       <div style="display:flex;flex-direction:column;gap:6px;flex-shrink:0;">
         <button class="btn btn-primary" style="padding:8px 14px;font-size:12.5px;" onclick="loadPack('${p.key}')">${have===packData.length ? '다시 불러오기' : '불러오기'}</button>
         <button class="btn btn-ghost" style="padding:8px 14px;font-size:12.5px;" onclick="openPackDetail('${p.key}')">자세히 보기</button>
+        ${have>0 ? `<button class="btn btn-ghost" style="padding:8px 14px;font-size:12.5px;color:var(--stamp);" onclick="cancelPack('${p.key}')">목록에서 빼기</button>` : ''}
       </div>
     </div>`;
   }).join('');
