@@ -81,6 +81,7 @@ window.addEventListener('load',()=>{
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.6/Sortable.min.js"></script>
 
 <style>
   :root{
@@ -2780,6 +2781,20 @@ body:has(#beatLabOverlay.show) #miniPlayer{
 .seo-intro p{margin:7px 0;font-size:13px;line-height:1.8;}
 @media(max-width:640px){.seo-intro{padding:0 18px;margin-bottom:88px}.seo-intro h2{font-size:17px}.seo-intro p{font-size:12px}}
 
+
+/* ===== v11: touch reorder + faster tab/photo loading ===== */
+.drag-handle{position:absolute;right:8px;bottom:8px;z-index:8;width:32px;height:32px;border:1px solid rgba(255,255,255,.8);border-radius:10px;background:rgba(25,20,16,.62);color:#fff;display:flex;align-items:center;justify-content:center;font-size:17px;line-height:1;cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none;backdrop-filter:blur(4px)}
+.drag-handle:active{cursor:grabbing;transform:scale(.96)}
+.sortable-ghost{opacity:.32!important}.sortable-chosen{transform:scale(.985)}
+.song-sort-list{display:flex;gap:6px;justify-content:center;margin-bottom:12px;flex-wrap:wrap}
+.song-sort-item{display:flex;align-items:center;gap:5px}
+.song-drag-handle{width:25px;height:31px;border:1px solid var(--paper-line);border-radius:9px;background:var(--paper);color:var(--ink-soft);font-size:14px;cursor:grab;touch-action:none}
+.lyric-line.sync-selected{outline:2px solid var(--gold);outline-offset:1px;border-radius:7px;background:rgba(200,150,62,.08)}
+.sync-panel{margin-top:10px;padding:10px;border:1px solid var(--paper-line);border-radius:12px;background:var(--paper-soft)}
+.sync-slider-row{display:flex;align-items:center;gap:7px}
+.sync-slider-row input{flex:1;min-width:100px}
+@media(max-width:640px){.drag-handle{width:30px;height:30px;right:6px;bottom:6px}.song-sort-list{justify-content:flex-start}.song-sort-item{width:100%}.song-sort-item .song-pick{flex:1;text-align:left}.song-drag-handle{height:34px}}
+
 </style>
 </head>
 <body>
@@ -3301,13 +3316,7 @@ body:has(#beatLabOverlay.show) #miniPlayer{
       <button class="close-x" onclick="closePlaylistOverlay()">✕</button>
     </div>
     <div class="modal-body">
-      <div style="display:flex;gap:6px;justify-content:center;margin-bottom:12px;flex-wrap:wrap;">
-        <button class="btn btn-ghost song-pick" style="padding:7px 12px;font-size:12px;" onclick="loadSong(0)">1. 비워내 비워내</button>
-        <button class="btn btn-ghost song-pick" style="padding:7px 12px;font-size:12px;" onclick="loadSong(1)">2. 흘러가네</button>
-        <button class="btn btn-ghost song-pick" style="padding:7px 12px;font-size:12px;" onclick="loadSong(2)">3. 가벼워진 마음</button>
-        <button class="btn btn-ghost song-pick" style="padding:7px 12px;font-size:12px;" onclick="loadSong(3)">4. 깨부숴</button>
-        <button class="btn btn-ghost song-pick" style="padding:7px 12px;font-size:12px;" onclick="loadSong(4)">5. 마음의 쉼표</button>
-      </div>
+      <div id="songOrderList" class="song-sort-list"></div>
       <div id="lyricsWrap" style="height:200px;overflow-y:auto;background:var(--paper);border-radius:12px;padding:16px 12px;margin-bottom:14px;scroll-behavior:smooth;">
         <div id="lyricsInner"></div>
       </div>
@@ -3321,14 +3330,21 @@ body:has(#beatLabOverlay.show) #miniPlayer{
         <button class="btn btn-primary" style="flex:1;" id="playlistPlayBtn" onclick="togglePlaylistPlay()">▶ 재생하기</button>
         <button class="btn btn-ghost" style="padding:10px 16px;" onclick="nextSong()">⏭</button>
       </div>
-      <div style="display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap;margin-top:9px;">
-        <button class="btn btn-ghost" style="padding:6px 10px;font-size:11px;" onclick="adjustLyricOffset(-0.2)">◀ 가사 0.2초 앞당김</button>
-        <span id="lyricOffsetLabel" style="min-width:78px;font-size:11px;font-weight:800;color:var(--stamp);">싱크 0.0초</span>
-        <button class="btn btn-ghost" style="padding:6px 10px;font-size:11px;" onclick="adjustLyricOffset(0.2)">가사 0.2초 늦춤 ▶</button>
-        <button class="btn btn-ghost" style="padding:6px 9px;font-size:10.5px;" onclick="resetLyricOffset()">초기화</button>
+      <div class="sync-panel">
+        <div class="sync-slider-row">
+          <button class="btn btn-ghost" style="padding:6px 9px;font-size:11px;" onclick="adjustLyricOffset(-0.1)">−0.1</button>
+          <input id="lyricOffsetRange" type="range" min="-8" max="8" step="0.1" value="0" oninput="setLyricOffset(this.value)">
+          <button class="btn btn-ghost" style="padding:6px 9px;font-size:11px;" onclick="adjustLyricOffset(0.1)">+0.1</button>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap;margin-top:8px;">
+          <span id="lyricOffsetLabel" style="min-width:92px;font-size:11px;font-weight:800;color:var(--stamp);">싱크 0.0초</span>
+          <button class="btn btn-primary" style="padding:7px 10px;font-size:11px;" onclick="alignSelectedLyricToNow()">🎯 선택한 줄을 지금에 맞춤</button>
+          <button class="btn btn-ghost" style="padding:6px 9px;font-size:10.5px;" onclick="resetLyricOffset()">초기화</button>
+        </div>
+        <div class="map-note" style="margin-top:7px;padding:0;">가사 한 줄을 먼저 톡 누른 뒤, 실제 노래에서 그 줄이 시작되는 순간 <b>‘선택한 줄을 지금에 맞춤’</b>을 누르세요.</div>
       </div>
       <button class="btn btn-ghost btn-block" style="margin-top:8px;" onclick="stopPlaylist()">⏹ 완전히 끄기</button>
-      <div class="map-note" style="margin-top:12px;">현재 곡마다 싱크 보정값을 따로 저장해요. 가사가 먼저 나오면 ‘늦춤’, 가사가 늦게 나오면 ‘앞당김’을 눌러 0.2초씩 맞출 수 있어요. 창을 닫아도 음악은 계속 재생돼요.</div>
+      <div class="map-note" style="margin-top:12px;">노래 순서는 손잡이(☰)를 끌어 바꿀 수 있고, 곡마다 가사 싱크값이 따로 저장돼요. 창을 닫아도 음악은 계속 재생돼요.</div>
     </div>
   </div>
 </div>
@@ -5097,39 +5113,80 @@ const LYRICS_SONG5 = [
 
 
 
-const SONGS = [
+let SONGS = [
   {title:'비워내 비워내', src:'song1.mp3', lyrics: LYRICS_SONG1},
   {title:'흘러가네', src:'song2.mp3', lyrics: LYRICS_SONG2},
   {title:'가벼워진 마음', src:'song3.mp3', lyrics: LYRICS_SONG3},
   {title:'깨부숴', src:'song4.mp3', lyrics: LYRICS_SONG4},
   {title:'마음의 쉼표', src:'song5.mp3', lyrics: LYRICS_SONG5}
 ];
+
+const SONG_ORDER_KEY='sansaSongOrder_v1';
+function restoreSongOrder(){
+  try{
+    const saved=JSON.parse(localStorage.getItem(SONG_ORDER_KEY)||'[]');
+    if(Array.isArray(saved)&&saved.length){
+      const byTitle=new Map(SONGS.map(x=>[x.title,x]));
+      const ordered=saved.map(t=>byTitle.get(t)).filter(Boolean);
+      SONGS.forEach(x=>{if(!saved.includes(x.title)) ordered.push(x);});
+      if(ordered.length===SONGS.length) SONGS=ordered;
+    }
+  }catch(e){}
+}
+restoreSongOrder();
 let currentSongIdx = 0;
 let lyricOffsets = (()=>{
   try {
-    const saved = JSON.parse(localStorage.getItem('sansaLyricOffsets_v2') || '[]');
-    return SONGS.map((_,i)=> Number.isFinite(Number(saved[i])) ? Number(saved[i]) : 0);
-  } catch(e){ return SONGS.map(()=>0); }
+    const keyed = JSON.parse(localStorage.getItem('sansaLyricOffsets_v3') || '{}');
+    if(keyed && typeof keyed==='object' && !Array.isArray(keyed)) return keyed;
+  } catch(e){}
+  const out={};
+  try{
+    const old=JSON.parse(localStorage.getItem('sansaLyricOffsets_v2')||'[]');
+    if(Array.isArray(old)) SONGS.forEach((song,i)=>{if(Number.isFinite(Number(old[i])))out[song.title]=Number(old[i]);});
+  }catch(e){}
+  return out;
 })();
-function currentLyricOffset(){ return Number(lyricOffsets[currentSongIdx] || 0); }
+let selectedLyricSyncIdx = -1;
+function currentLyricOffset(){ return Number(lyricOffsets[SONGS[currentSongIdx]?.title] || 0); }
 function saveLyricOffsets(){
-  try { localStorage.setItem('sansaLyricOffsets_v2', JSON.stringify(lyricOffsets)); } catch(e){}
+  try { localStorage.setItem('sansaLyricOffsets_v3', JSON.stringify(lyricOffsets)); } catch(e){}
 }
 function updateLyricOffsetLabel(){
   const el = document.getElementById('lyricOffsetLabel');
   if(!el) return;
   const v = currentLyricOffset();
   el.textContent = `싱크 ${v>=0?'+':''}${v.toFixed(1)}초`;
+  const range=document.getElementById('lyricOffsetRange'); if(range) range.value=String(v);
 }
 function adjustLyricOffset(delta){
-  lyricOffsets[currentSongIdx] = Math.max(-8, Math.min(8, Math.round((currentLyricOffset()+delta)*10)/10));
+  lyricOffsets[SONGS[currentSongIdx].title] = Math.max(-8, Math.min(8, Math.round((currentLyricOffset()+delta)*10)/10));
   saveLyricOffsets();
   lastLyricIdx = -1;
   updateLyricOffsetLabel();
   updatePlaylistProgress();
 }
+
+function setLyricOffset(v){
+  const n=Math.max(-8,Math.min(8,Number(v)||0));
+  lyricOffsets[SONGS[currentSongIdx].title]=Math.round(n*10)/10;
+  saveLyricOffsets(); lastLyricIdx=-1; updateLyricOffsetLabel(); updatePlaylistProgress();
+}
+function selectLyricForSync(i){
+  selectedLyricSyncIdx=i;
+  document.querySelectorAll('#lyricsInner .lyric-line').forEach((el,idx)=>el.classList.toggle('sync-selected',idx===i));
+}
+function alignSelectedLyricToNow(){
+  const audio=document.getElementById('playlistAudio');
+  const lyrics=SONGS[currentSongIdx]?.lyrics||[];
+  const i=selectedLyricSyncIdx>=0?selectedLyricSyncIdx:lastLyricIdx;
+  if(!audio||i<0||!lyrics[i]){ showToast('먼저 맞추고 싶은 가사 줄을 눌러주세요'); return; }
+  setLyricOffset(audio.currentTime-lyrics[i].t);
+  showToast('이 줄을 현재 재생 위치에 맞췄어요');
+}
+
 function resetLyricOffset(){
-  lyricOffsets[currentSongIdx] = 0;
+  lyricOffsets[SONGS[currentSongIdx].title] = 0;
   saveLyricOffsets();
   lastLyricIdx = -1;
   updateLyricOffsetLabel();
@@ -5141,6 +5198,24 @@ function formatTime(sec){
   return `${Math.floor(sec/60)}:${String(sec%60).padStart(2,'0')}`;
 }
 
+
+function renderSongPicks(){
+  const wrap=document.getElementById('songOrderList'); if(!wrap)return;
+  wrap.innerHTML=SONGS.map((song,i)=>`<div class="song-sort-item" data-title="${escapeAttr(song.title)}"><button class="song-drag-handle" type="button" aria-label="노래 순서 바꾸기">☰</button><button class="btn btn-ghost song-pick ${i===currentSongIdx?'active':''}" style="padding:7px 12px;font-size:12px;" onclick="loadSong(${i})">${i+1}. ${escapeHtml(song.title)}</button></div>`).join('');
+  if(window.Sortable){
+    if(wrap._sortable) wrap._sortable.destroy();
+    wrap._sortable=new Sortable(wrap,{animation:160,handle:'.song-drag-handle',delay:80,delayOnTouchOnly:true,touchStartThreshold:3,onEnd:()=>{
+      const current=SONGS[currentSongIdx];
+      const titles=[...wrap.querySelectorAll('.song-sort-item')].map(x=>x.dataset.title);
+      const byTitle=new Map(SONGS.map(x=>[x.title,x]));
+      SONGS=titles.map(t=>byTitle.get(t)).filter(Boolean);
+      currentSongIdx=Math.max(0,SONGS.indexOf(current));
+      try{localStorage.setItem(SONG_ORDER_KEY,JSON.stringify(SONGS.map(x=>x.title)));}catch(e){}
+      renderSongPicks();
+    }});
+  }
+}
+
 function loadSong(idx, autoplay){
   currentSongIdx = idx;
   const song = SONGS[idx];
@@ -5149,9 +5224,10 @@ function loadSong(idx, autoplay){
   audio.src = song.src;
   document.getElementById('playlistSongTitle').textContent = song.title;
   document.getElementById('miniPlayerTitle').textContent = song.title;
-  document.querySelectorAll('.song-pick').forEach((b,i)=> b.classList.toggle('active', i===idx));
+  renderSongPicks();
   const wrap = document.getElementById('lyricsInner');
-  wrap.innerHTML = song.lyrics.map((l,i)=>`<div class="lyric-line" id="lyricLine${i}" style="padding:5px 0;font-size:${l.text.startsWith('[')?'11px':'13.5px'};color:${l.text.startsWith('[')?'var(--stamp)':'var(--ink-soft)'};font-weight:${l.text.startsWith('[')?'800':'500'};transition:color .3s ease;">${escapeHtml(l.text)}</div>`).join('');
+  wrap.innerHTML = song.lyrics.map((l,i)=>`<div class="lyric-line" id="lyricLine${i}" onclick="selectLyricForSync(${i})" style="padding:5px 0;font-size:${l.text.startsWith('[')?'11px':'13.5px'};color:${l.text.startsWith('[')?'var(--stamp)':'var(--ink-soft)'};font-weight:${l.text.startsWith('[')?'800':'500'};transition:color .3s ease;cursor:pointer;">${escapeHtml(l.text)}</div>`).join('');
+  selectedLyricSyncIdx=-1;
   lastLyricIdx = -1;
   updateLyricOffsetLabel();
   if(autoplay || wasPlaying){
@@ -5160,6 +5236,7 @@ function loadSong(idx, autoplay){
 }
 
 function openPlaylistOverlay(){
+  renderSongPicks();
   const audio = document.getElementById('playlistAudio');
   if(!audio.src){
     loadSong(currentSongIdx, false);
@@ -7671,6 +7748,35 @@ function buildRegionSelects(){
   if(selM) selM.innerHTML = REGIONS.map(r=>`<option value="${r}">${r}</option>`).join('');
 }
 
+
+const CARD_ORDER_KEYS={temple:'sansaTempleOrder_v1',mountain:'sansaMountainOrder_v1'};
+function getSavedCardOrder(type){try{const x=JSON.parse(localStorage.getItem(CARD_ORDER_KEYS[type])||'[]');return Array.isArray(x)?x:[];}catch(e){return [];}}
+function sortEntriesBySavedOrder(entries,type){
+  const order=getSavedCardOrder(type), rank=new Map(order.map((id,i)=>[String(id),i]));
+  return entries.slice().sort((a,b)=>{
+    const ar=rank.has(String(a[0]))?rank.get(String(a[0])):1e9, br=rank.has(String(b[0]))?rank.get(String(b[0])):1e9;
+    return ar-br || ((a[1].createdAt||0)-(b[1].createdAt||0));
+  });
+}
+function saveVisibleCardOrder(type,visibleIds){
+  const store=type==='mountain'?mountainDestinations:destinations;
+  let all=getSavedCardOrder(type).filter(id=>store[id]);
+  Object.keys(store).forEach(id=>{if(!all.includes(id))all.push(id);});
+  const visSet=new Set(visibleIds); let q=visibleIds.slice();
+  all=all.map(id=>visSet.has(id)?q.shift():id);
+  try{localStorage.setItem(CARD_ORDER_KEYS[type],JSON.stringify(all));}catch(e){}
+}
+let gridSortable=null;
+function initGridSortable(type){
+  const grid=document.getElementById('grid'); if(!grid||!window.Sortable)return;
+  if(gridSortable){try{gridSortable.destroy();}catch(e){}}
+  gridSortable=new Sortable(grid,{animation:170,handle:'.drag-handle',delay:100,delayOnTouchOnly:true,touchStartThreshold:4,ghostClass:'sortable-ghost',chosenClass:'sortable-chosen',onEnd:()=>{
+    const ids=[...grid.querySelectorAll('.card[data-id]')].map(x=>x.dataset.id);
+    saveVisibleCardOrder(type,ids);
+    showToast(type==='mountain'?'산 순서를 저장했어요':'절 순서를 저장했어요');
+  }});
+}
+
 function buildRegionTabs(){
   const wrap = document.getElementById('regionTabs');
   const tabs = ["전체", ...REGIONS];
@@ -7710,8 +7816,7 @@ function getFilteredList(){
       return fields.includes(search);
     });
   }
-  list.sort((a,b)=>(a[1].createdAt||0)-(b[1].createdAt||0));
-  return list;
+  return sortEntriesBySavedOrder(list,'temple');
 }
 
 function renderHomeGallery(){
@@ -7732,16 +7837,12 @@ function renderHomeGallery(){
 }
 
 function render(){
+  if(contentType === 'mountain'){ renderMountainView(); return; }
   applyRewardEffects();
   renderLevelBadge();
   checkAlmostDoneBanner();
   checkPackCelebrations();
   renderHomeGallery();
-
-  if(contentType === 'mountain'){
-    renderMountainView();
-    return;
-  }
 
   const stats = computeStats();
   document.getElementById('heroStats').innerHTML = `
@@ -7762,6 +7863,8 @@ function render(){
     grid.querySelectorAll('.card').forEach(card=>{
       card.onclick = ()=> openDetail(card.dataset.id);
     });
+    initGridSortable('temple');
+    schedulePhotoHydration('temple',list);
   }
 }
 
@@ -7771,7 +7874,10 @@ function render(){
 let contentType = 'temple';
 
 function switchContentType(type){
+  if(contentType===type) return;
   contentType = type;
+  photoQueueGeneration++;
+  if(photoHydrationObserver){try{photoHydrationObserver.disconnect();}catch(e){}}
   document.getElementById('ctypeTemple').classList.toggle('active', type==='temple');
   document.getElementById('ctypeMountain').classList.toggle('active', type==='mountain');
   document.getElementById('stageFilter').innerHTML = type==='mountain'
@@ -7780,7 +7886,8 @@ function switchContentType(type){
   document.getElementById('tagToggle').style.display = type==='mountain' ? 'none' : 'flex';
   filterRegion = '전체';
   buildRegionTabs();
-  render();
+  const grid=document.getElementById('grid'); if(grid) grid.style.opacity='.72';
+  requestAnimationFrame(()=>{ render(); requestAnimationFrame(()=>{if(grid)grid.style.opacity='1';}); });
 }
 
 function getFilteredMountainList(){
@@ -7795,28 +7902,19 @@ function getFilteredMountainList(){
       return fields.includes(search);
     });
   }
-  list.sort((a,b)=>(a[1].createdAt||0)-(b[1].createdAt||0));
-  return list;
+  return sortEntriesBySavedOrder(list,'mountain');
 }
 
 function renderMountainCard(id,d){
   const photo=firstPhotoUrl(d);
   const stageIdx=Math.min(d.stage||0,2);
-  if((!photo||d.coverPhotoVersion!==PHOTO_SCHEMA_VERSION)&&!coverFetching.has(id)&&!shouldSkipPhotoRetry(d)){
-    queuePhotoFetch(id,d.name,d.locationHint||'',{
-      store:mountainDestinations,
-      updateFn:updateMountainDestination,
-      getCurrentId:()=>currentMountainDetailId,
-      onDetailUpdate:()=>{},
-      region:d.region
-    });
-  }
   return `
   <div class="card" data-id="${id}">
     <div class="card-photo">
       ${cardCoverMedia(photo,'mountain',d.name)}
       <span class="tagbadge famous">${escapeHtml(d.height||'')}</span>
       ${progressSealHtml(stageIdx)}
+      <button class="drag-handle" type="button" aria-label="순서 바꾸기" onclick="event.stopPropagation()">☰</button>
     </div>
     <div class="card-body">
       <div class="card-region">${escapeHtml(d.region)}</div>
@@ -7847,6 +7945,8 @@ function renderMountainView(){
     grid.querySelectorAll('.card').forEach(card=>{
       card.onclick = ()=> openMountainDetail(card.dataset.id);
     });
+    initGridSortable('mountain');
+    schedulePhotoHydration('mountain',filtered);
   }
 }
 
@@ -7854,12 +7954,15 @@ function ensureMountainsSeeded(){
   const existingNames = new Set(Object.values(mountainDestinations).map(d=>d.name));
   const missing = MOUNTAIN_SEED.filter(item=>!existingNames.has(item.name));
   if(missing.length===0) return;
-  missing.forEach(item=>{
+  const batch={};
+  missing.forEach((item,idx)=>{
     const id = newId();
-    const data = Object.assign({}, item, {stage:0, notes:'', photos:{}, createdAt: Date.now()});
-    if(localMode){ mountainDestinations[id] = data; } else { mountainRef(id).set(data); }
+    const data = Object.assign({}, item, {stage:0, notes:'', photos:{}, createdAt: Date.now()+idx});
+    mountainDestinations[id]=data;
+    batch[id]=data;
   });
   if(localMode) persistLocalMountains();
+  else mountainsRef().update(batch).catch(()=>{});
 }
 
 function openMountainDetail(id){
@@ -8125,18 +8228,21 @@ function shouldSkipPhotoRetry(d){
 }
 let coverFetching = new Set();
 let photoFetchQueue = [];
+let photoQueueGeneration = 0;
+let photoHydrationObserver = null;
 let activePhotoFetches = 0;
-const MAX_CONCURRENT_PHOTO_FETCHES = 2;
+const MAX_CONCURRENT_PHOTO_FETCHES = 3;
 
 function queuePhotoFetch(id, name, locationHint, opts){
   if(coverFetching.has(id)) return;
   coverFetching.add(id);
-  photoFetchQueue.push({id, name, locationHint, opts});
+  photoFetchQueue.push({id, name, locationHint, opts:opts||{}});
   processPhotoQueue();
 }
 function processPhotoQueue(){
   while(activePhotoFetches < MAX_CONCURRENT_PHOTO_FETCHES && photoFetchQueue.length > 0){
     const task = photoFetchQueue.shift();
+    if(task.opts?.cancelOnTabChange && task.opts.generation!==photoQueueGeneration){ coverFetching.delete(task.id); continue; }
     activePhotoFetches++;
     fetchCoverPhotoNow(task.id, task.name, task.locationHint, task.opts, ()=>{
       activePhotoFetches--;
@@ -8145,6 +8251,31 @@ function processPhotoQueue(){
   }
 }
 let renderDebounceTimer = null;
+
+function schedulePhotoHydration(type, entries){
+  if(photoHydrationObserver){try{photoHydrationObserver.disconnect();}catch(e){}}
+  const gen=photoQueueGeneration;
+  const isMountain=type==='mountain';
+  const store=isMountain?mountainDestinations:destinations;
+  const queueOne=(id)=>{
+    const d=store[id]; if(!d)return;
+    const photo=firstPhotoUrl(d);
+    if(photo && d.coverPhotoVersion===PHOTO_SCHEMA_VERSION)return;
+    if(coverFetching.has(id)||shouldSkipPhotoRetry(d))return;
+    const opts=isMountain?{store:mountainDestinations,updateFn:updateMountainDestination,getCurrentId:()=>currentMountainDetailId,onDetailUpdate:()=>{},region:d.region,cancelOnTabChange:true,generation:gen}:{region:d.region,cancelOnTabChange:true,generation:gen};
+    queuePhotoFetch(id,d.name,d.locationHint||'',opts);
+  };
+  const cards=[...document.querySelectorAll('#grid .card[data-id]')];
+  if('IntersectionObserver' in window){
+    photoHydrationObserver=new IntersectionObserver(items=>{items.forEach(it=>{if(it.isIntersecting){queueOne(it.target.dataset.id);photoHydrationObserver.unobserve(it.target);}})},{rootMargin:'500px 0px'});
+    cards.forEach(c=>photoHydrationObserver.observe(c));
+  }else{ cards.slice(0,12).forEach(c=>queueOne(c.dataset.id)); }
+  // 대표 사찰/첫 화면은 브라우저가 한가해진 뒤 우선 보강
+  const priority=(entries||[]).filter(([id,d])=>!firstPhotoUrl(d) && (isMountain || d.tag==='유명')).slice(0,8);
+  const kick=()=>priority.forEach(([id])=>queueOne(id));
+  if(window.requestIdleCallback) requestIdleCallback(kick,{timeout:900}); else setTimeout(kick,180);
+}
+
 function patchVisibleCover(id,url,kind,name){
   if(!isLikelyValidPhotoUrl(url))return;
   const cards=[...document.querySelectorAll('.card[data-id]')];
@@ -8394,10 +8525,14 @@ function fetchCoverPhotoNow(id, name, locationHint, opts, done){
     trustedArticlePhotos(page, articleItems=>{
       if(articleItems.length>=3){saveResults(articleItems);return;}
       const base=coreName(name);
+      const directHero=(page && page.thumbnail && page.thumbnail.source) ? {url:page.thumbnail.source,title:page.title||name,artist:'',license:'Wikipedia page image',source:page.fullurl||`https://ko.wikipedia.org/wiki/${encodeURIComponent(page.title||name)}`,sourceType:'wikipedia-pageimage',verified:true} : null;
       const q1=isMountain?`"${base}" ${queryHint||''} Korea mountain`: `"${base}" ${queryHint||''} Korean Buddhist temple`;
       const q2=isMountain?`${base} ${queryHint||''} 산 전경`: `${base} ${queryHint||''} 사찰 전경`;
       const q3=isMountain?`${base} landscape Korea`: `${base} temple architecture Korea`;
-      commonsSearch(q1,a=>commonsSearch(q2,b=>commonsSearch(q3,c=>saveResults([...articleItems,...a,...b,...c]))));
+      commonsSearch(q1,a=>commonsSearch(q2,b=>commonsSearch(q3,c=>{
+        let combined=[...(directHero?[directHero]:[]),...articleItems,...a,...b,...c];
+        saveResults(combined);
+      })));
     });
   });
 }
@@ -8406,11 +8541,6 @@ function renderCard(id,d){
   const photo=firstPhotoUrl(d);
   const stageIdx=Math.min(d.stage||0,STAGES.length-1);
   const vc=visitCount(d);
-  const needsPhoto=!photo;
-  const needsVerifiedRefresh=d.coverPhotoVersion!==PHOTO_SCHEMA_VERSION;
-  if((needsPhoto||needsVerifiedRefresh)&&!coverFetching.has(id)&&!shouldSkipPhotoRetry(d)){
-    queuePhotoFetch(id,d.name,d.locationHint||'',{region:d.region});
-  }
   return `
   <div class="card" data-id="${id}">
     <div class="card-photo">
@@ -8418,6 +8548,7 @@ function renderCard(id,d){
       <span class="tagbadge ${d.tag==='유명'?'famous':'hidden'}">${d.tag==='유명'?'대표 산사':'숨은 산사'}</span>
       ${vc>0?`<span class="visit-flag">${vc}회 방문</span>`:''}
       ${progressSealHtml(stageIdx)}
+      <button class="drag-handle" type="button" aria-label="순서 바꾸기" onclick="event.stopPropagation()">☰</button>
     </div>
     <div class="card-body">
       <div class="card-region">${escapeHtml(d.region)}</div>
