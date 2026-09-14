@@ -5209,7 +5209,7 @@ function renderSongPicks(){
   wrap.innerHTML=SONGS.map((song,i)=>`<div class="song-sort-item" data-title="${escapeAttr(song.title)}"><button class="song-drag-handle" type="button" aria-label="노래 순서 바꾸기">☰</button><button class="btn btn-ghost song-pick ${i===currentSongIdx?'active':''}" style="padding:7px 12px;font-size:12px;" onclick="loadSong(${i})">${i+1}. ${escapeHtml(song.title)}</button></div>`).join('');
   if(window.Sortable){
     if(wrap._sortable) wrap._sortable.destroy();
-    wrap._sortable=new Sortable(wrap,{animation:160,handle:'.song-drag-handle',delay:80,delayOnTouchOnly:true,touchStartThreshold:3,onEnd:()=>{
+    wrap._sortable=new Sortable(wrap,{animation:160,handle:'.song-drag-handle',delay:80,delayOnTouchOnly:true,touchStartThreshold:3,forceFallback:true,fallbackTolerance:3,onEnd:()=>{
       const current=SONGS[currentSongIdx];
       const titles=[...wrap.querySelectorAll('.song-sort-item')].map(x=>x.dataset.title);
       const byTitle=new Map(SONGS.map(x=>[x.title,x]));
@@ -5322,12 +5322,15 @@ function updatePlaylistProgress(){
     if(cur){
       cur.style.color = 'var(--stamp)';
       cur.style.fontWeight = '800';
-      // cur.scrollIntoView(...)는 가사창뿐 아니라 그 뒤의 모달/배경 화면까지
-      // 같이 스크롤시켜서, 플레이리스트 창을 닫으면 홈 화면이 엉뚱한 위치로
-      // 튀어 있는 원인이 됐습니다. 가사창(#lyricsWrap) 내부로만 스크롤을 제한합니다.
+      // offsetTop은 조상 요소의 스크롤 위치를 반영하지 않는 "레이아웃상 고정값"이라
+      // 실제 스크롤해야 할 위치와 어긋나 화면 밖으로 튕기는 원인이 됐습니다.
+      // getBoundingClientRect로 현재 화면 기준 위치를 직접 계산해서 가사창 내부로만 스크롤합니다.
       const lyricsWrapEl = document.getElementById('lyricsWrap');
       if(lyricsWrapEl){
-        const target = cur.offsetTop - (lyricsWrapEl.clientHeight/2) + (cur.clientHeight/2);
+        const wrapRect = lyricsWrapEl.getBoundingClientRect();
+        const curRect = cur.getBoundingClientRect();
+        const offsetWithinWrap = (curRect.top - wrapRect.top) + lyricsWrapEl.scrollTop;
+        const target = offsetWithinWrap - (lyricsWrapEl.clientHeight/2) + (curRect.height/2);
         lyricsWrapEl.scrollTo({top:Math.max(0,target), behavior:'smooth'});
       }
     }
@@ -7782,7 +7785,7 @@ let gridSortable=null;
 function initGridSortable(type){
   const grid=document.getElementById('grid'); if(!grid||!window.Sortable)return;
   if(gridSortable){try{gridSortable.destroy();}catch(e){}}
-  gridSortable=new Sortable(grid,{animation:170,handle:'.drag-handle',delay:100,delayOnTouchOnly:true,touchStartThreshold:4,ghostClass:'sortable-ghost',chosenClass:'sortable-chosen',onEnd:()=>{
+  gridSortable=new Sortable(grid,{animation:170,handle:'.drag-handle',delay:100,delayOnTouchOnly:true,touchStartThreshold:4,forceFallback:true,fallbackTolerance:3,ghostClass:'sortable-ghost',chosenClass:'sortable-chosen',onEnd:()=>{
     const ids=[...grid.querySelectorAll('.card[data-id]')].map(x=>x.dataset.id);
     saveVisibleCardOrder(type,ids);
     showToast(type==='mountain'?'산 순서를 저장했어요':'절 순서를 저장했어요');
@@ -8115,7 +8118,7 @@ function renderMountainPhotos(photos){
   if(window.Sortable){
     if(wrap._sortable) wrap._sortable.destroy();
     wrap._sortable = new Sortable(wrap, {
-      animation:160, handle:'.drag-handle', delay:80, delayOnTouchOnly:true, touchStartThreshold:3,
+      animation:160, handle:'.drag-handle', delay:80, delayOnTouchOnly:true, touchStartThreshold:3, forceFallback:true, fallbackTolerance:3,
       ghostClass:'sortable-ghost', chosenClass:'sortable-chosen', filter:'.upload-tile',
       onEnd:()=>{
         const newOrder=[...wrap.querySelectorAll('.photo-thumb[data-pid]')].map(x=>x.dataset.pid);
@@ -8912,7 +8915,7 @@ function renderPhotos(photos){
   if(window.Sortable){
     if(wrap._sortable) wrap._sortable.destroy();
     wrap._sortable = new Sortable(wrap, {
-      animation:160, handle:'.drag-handle', delay:80, delayOnTouchOnly:true, touchStartThreshold:3,
+      animation:160, handle:'.drag-handle', delay:80, delayOnTouchOnly:true, touchStartThreshold:3, forceFallback:true, fallbackTolerance:3,
       ghostClass:'sortable-ghost', chosenClass:'sortable-chosen', filter:'.upload-tile',
       onEnd:()=>{
         const newOrder=[...wrap.querySelectorAll('.photo-thumb[data-pid]')].map(x=>x.dataset.pid);
