@@ -7960,7 +7960,7 @@ function progressSealHtml(stageIdx){
   </span>`;
 }
 
-const PHOTO_SCHEMA_VERSION = 7; // v7: 로마자 표기(예: Seokguram)라 한글 이름이 그대로 안 보이는 사진도 다른 신호로 통과되도록 완화
+const PHOTO_SCHEMA_VERSION = 8; // v8: "갑사"처럼 이름이 동음이의어라 위키백과 문서를 잘못 짚던 문제 수정
 const PHOTO_RETRY_COOLDOWN_MS = 3*24*60*60*1000; // 사진을 못 찾은 곳은 사흘 지나야 다시 시도 (매 렌더마다 재시도해서 화면이 깜빡이는 것을 막기 위함)
 function shouldSkipPhotoRetry(d){
   if(!d || d.coverPhotoStatus!=='not-found') return false;
@@ -8170,11 +8170,16 @@ function fetchCoverPhotoNow(id, name, locationHint, opts, done){
   function exactWikipediaPage(cb){
     const base=coreName(name);
     const exactTitle=WIKI_TITLE_HINTS[name]||base;
-    const exactUrl=`https://ko.wikipedia.org/w/api.php?action=query&titles=${encodeURIComponent(exactTitle)}&prop=pageimages|images|info&imlimit=100&pithumbsize=1400&piprop=thumbnail|original|name&inprop=url&redirects=1&format=json&origin=*`;
+    const exactUrl=`https://ko.wikipedia.org/w/api.php?action=query&titles=${encodeURIComponent(exactTitle)}&prop=pageimages|images|info|pageprops&ppprop=disambiguation&imlimit=100&pithumbsize=1400&piprop=thumbnail|original|name&inprop=url&redirects=1&format=json&origin=*`;
     fetch(exactUrl).then(r=>r.json()).then(data=>{
       let pages=Object.values(data?.query?.pages||{}).filter(p=>!p.missing);
       const page=pages[0];
-      if(page && compact(page.title).includes(compact(base))){cb(page);return;}
+      // "갑사"처럼 절 이름이 흔한 단어와 겹쳐서 위키백과에서 동음이의어 문서로
+      // 잡히는 경우가 많습니다(실제 절 문서는 "갑사 (사찰)"처럼 따로 있음).
+      // 동음이의어 문서는 사진이 없으니, 이름만 같다고 그대로 받아들이지 않고
+      // 아래 검색 기반 방식으로 넘어가서 진짜 절 문서를 찾습니다.
+      const isDisambiguation = page && (page.pageprops && 'disambiguation' in page.pageprops) || /동음이의|목록|분류:/.test((page&&page.title)||'');
+      if(page && !isDisambiguation && compact(page.title).includes(compact(base))){cb(page);return;}
       const q=`${base} ${queryHint||''} ${isMountain?'산':'사찰'}`.trim();
       const searchUrl=`https://ko.wikipedia.org/w/api.php?action=query&generator=search&gsrsearch=${encodeURIComponent(q)}&gsrlimit=8&prop=pageimages|images|info&imlimit=80&pithumbsize=1280&piprop=thumbnail|original|name&inprop=url&format=json&origin=*`;
       return fetch(searchUrl).then(r=>r.json()).then(sd=>{
@@ -8182,7 +8187,7 @@ function fetchCoverPhotoNow(id, name, locationHint, opts, done){
         let candidates=Object.values(sd?.query?.pages||{}).filter(p=>bc&&compact(p.title).includes(bc)&&!/동음이의|목록|분류:/.test(p.title||''));
         const toks=meaningfulHintTokens(strictHint||queryHint);
         candidates.sort((a,b)=>{
-          const score=x=>(compact(x.title)===bc?30:12)+toks.filter(t=>compact(x.title).includes(compact(t))).length*8;
+          const score=x=>(compact(x.title)===bc?30:12)+(/\(사찰\)|\(절\)|\(산\)/.test(x.title||'')?10:0)+toks.filter(t=>compact(x.title).includes(compact(t))).length*8;
           return score(b)-score(a);
         });
         cb(candidates[0]||null);
