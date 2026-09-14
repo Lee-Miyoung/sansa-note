@@ -1738,6 +1738,373 @@ header.hero::before{
   to{transform:translate(-50%,-50%) translate(var(--bx),var(--by)) scale(.1);opacity:0}
 }
 
+
+/* =========================================================
+   BEAT SHOOTER · MODERN ARCADE REFRESH
+   ========================================================= */
+#beatLabOverlay .modal{
+  background:
+    radial-gradient(circle at 20% 0%,rgba(85,119,101,.18),transparent 26%),
+    radial-gradient(circle at 90% 10%,rgba(194,160,106,.11),transparent 22%),
+    #121714!important;
+  border:1px solid rgba(255,255,255,.09)!important;
+  box-shadow:0 26px 80px rgba(0,0,0,.48)!important;
+  color:#f4f2eb!important;
+}
+#beatLabOverlay .modal-head{
+  background:rgba(18,23,20,.96)!important;
+  border-bottom:1px solid rgba(255,255,255,.08)!important;
+  backdrop-filter:blur(12px)!important;
+}
+#beatLabOverlay .modal-title{
+  color:#f7f4ea!important;
+  letter-spacing:-.3px!important;
+}
+#beatLabOverlay .modal-sub{
+  color:#9fa9a3!important;
+}
+#beatLabOverlay .beat-audio-row,
+#beatLabOverlay .beat-bpm-row,
+#beatLabOverlay .beat-game-head,
+#beatLabOverlay .beat-level-row{
+  background:#19201c!important;
+  border:1px solid rgba(255,255,255,.075)!important;
+  box-shadow:none!important;
+  border-radius:14px!important;
+}
+#beatLabOverlay .beat-mission{
+  color:#e8e6dd!important;
+  background:transparent!important;
+  border:0!important;
+  font-weight:750!important;
+}
+#beatLabOverlay .beat-score-box{
+  background:#202823!important;
+  border:1px solid rgba(255,255,255,.07)!important;
+  border-radius:12px!important;
+}
+#beatLabOverlay .beat-score-box b{color:#fff!important}
+#beatLabOverlay .beat-score-box span{color:#88958f!important}
+#beatLabOverlay .beat-mult-row>span{
+  background:#19201c!important;
+  border:1px solid rgba(255,255,255,.07)!important;
+  color:#aeb8b2!important;
+}
+#beatLabOverlay #beatMultiplier{color:#d8bd80!important}
+#beatLabOverlay .beat-mult-row button{
+  background:rgba(194,160,106,.08)!important;
+  border-color:rgba(194,160,106,.24)!important;
+  color:#d9bd83!important;
+}
+#beatLabOverlay .beat-level-badge{
+  background:linear-gradient(145deg,#3f6657,#2f5044)!important;
+  color:#fff!important;
+  border:1px solid rgba(255,255,255,.12)!important;
+  box-shadow:none!important;
+}
+#beatLabOverlay .beat-xp-track{
+  background:#252e29!important;
+  border:1px solid rgba(255,255,255,.05)!important;
+}
+#beatLabOverlay .beat-xp-track i{
+  background:linear-gradient(90deg,#b99660,#d5c28f)!important;
+  box-shadow:0 0 18px rgba(203,176,119,.2)!important;
+}
+#beatLabOverlay .beat-life-row{color:#c7d0ca!important}
+#beatLabOverlay .beat-life-guide{color:#b9c6bf!important}
+#beatLabOverlay #beatLives{filter:saturate(.7)!important}
+
+/* playfield */
+#worrySmashZone{
+  border:1px solid rgba(255,255,255,.08)!important;
+  background:
+    linear-gradient(to bottom,rgba(255,255,255,.018),transparent 20%),
+    linear-gradient(90deg,
+      transparent 16.55%,rgba(255,255,255,.045) 16.66%,transparent 16.78%,
+      transparent 33.22%,rgba(255,255,255,.045) 33.33%,transparent 33.45%,
+      transparent 49.88%,rgba(255,255,255,.045) 50%,transparent 50.12%,
+      transparent 66.55%,rgba(255,255,255,.045) 66.66%,transparent 66.78%,
+      transparent 83.22%,rgba(255,255,255,.045) 83.33%,transparent 83.45%),
+    #0e1311!important;
+  border-radius:18px!important;
+  box-shadow:inset 0 12px 32px rgba(0,0,0,.2)!important;
+}
+#worrySmashZone .worry-smash-title{
+  color:#c5cec8!important;
+  font-size:11px!important;
+  letter-spacing:.8px!important;
+}
+#worrySmashZone .worry-match-badge{
+  background:rgba(15,20,17,.72)!important;
+  color:#e7e5dc!important;
+  border:1px solid rgba(255,255,255,.10)!important;
+  backdrop-filter:blur(6px)!important;
+}
+#worrySmashZone .worry-orb{
+  background:
+    radial-gradient(circle at 32% 26%,rgba(255,255,255,.28),transparent 18%),
+    linear-gradient(145deg,#4b6459,#24382f)!important;
+  border:1px solid rgba(255,255,255,.14)!important;
+  color:#fff!important;
+  box-shadow:0 12px 30px rgba(0,0,0,.26)!important;
+  text-shadow:none!important;
+}
+#worrySmashZone .worry-enemy[data-weapon="kick"] .worry-orb{background:linear-gradient(145deg,#724853,#3f252d)!important}
+#worrySmashZone .worry-enemy[data-weapon="bell"] .worry-orb{background:linear-gradient(145deg,#52697a,#2d3d49)!important}
+#worrySmashZone .worry-enemy[data-weapon="clap"] .worry-orb{background:linear-gradient(145deg,#756747,#463c28)!important}
+#worrySmashZone .worry-enemy[data-weapon="bass"] .worry-orb{background:linear-gradient(145deg,#665679,#3d344c)!important}
+#worrySmashZone .worry-enemy[data-weapon="air"] .worry-orb{background:linear-gradient(145deg,#4c736a,#29463f)!important}
+#worrySmashZone .worry-enemy.targeted .worry-orb{
+  outline:2px solid rgba(226,198,138,.95)!important;
+  outline-offset:3px!important;
+  box-shadow:0 0 0 5px rgba(226,198,138,.08),0 16px 32px rgba(0,0,0,.3)!important;
+}
+#worrySmashZone .worry-enemy.danger .worry-orb{
+  animation:none!important;
+  outline:2px solid rgba(192,88,75,.72)!important;
+  box-shadow:0 0 0 5px rgba(192,88,75,.10),0 14px 30px rgba(0,0,0,.28)!important;
+}
+.beat-lane-flash{
+  position:absolute;bottom:0;top:0;z-index:8;pointer-events:none;
+  background:linear-gradient(to top,rgba(215,188,128,.16),rgba(215,188,128,.02) 48%,transparent 70%);
+  animation:beatLaneFlash .18s ease-out forwards;
+}
+@keyframes beatLaneFlash{from{opacity:1}to{opacity:0}}
+.beat-hard-explosion{
+  background:radial-gradient(circle,#fff 0 9%,#f7e5b2 10% 23%,#d6ad66 24% 43%,#9a5b50 44% 59%,rgba(154,91,80,0) 72%)!important;
+  box-shadow:0 0 18px rgba(255,255,255,.75),0 0 44px rgba(213,179,111,.65),0 0 68px rgba(154,91,80,.4)!important;
+}
+.beat-hard-shard{
+  background:#d9bd83!important;
+  box-shadow:0 0 8px rgba(255,255,255,.55)!important;
+}
+
+/* pad deck */
+#beatLabOverlay .beat-pad-grid{
+  gap:7px!important;
+}
+#beatLabOverlay .beat-pad{
+  min-height:68px!important;
+  height:68px!important;
+  border-radius:13px!important;
+  border:1px solid rgba(255,255,255,.08)!important;
+  box-shadow:0 4px 0 rgba(0,0,0,.22)!important;
+  background:#1d2521!important;
+  color:#e9ece9!important;
+  text-shadow:none!important;
+  font-size:11px!important;
+}
+#beatLabOverlay .beat-pad:nth-child(1){background:#273b32!important}
+#beatLabOverlay .beat-pad:nth-child(2){background:#3f2c31!important}
+#beatLabOverlay .beat-pad:nth-child(3){background:#2d3941!important}
+#beatLabOverlay .beat-pad:nth-child(4){background:#413a29!important}
+#beatLabOverlay .beat-pad:nth-child(5){background:#383142!important}
+#beatLabOverlay .beat-pad:nth-child(6){background:#294039!important}
+#beatLabOverlay .beat-pad b{
+  color:#fff!important;
+  font-size:11px!important;
+}
+#beatLabOverlay .beat-pad small{
+  color:#9eaaa3!important;
+  font-size:7px!important;
+  letter-spacing:.2px!important;
+  margin-top:3px!important;
+}
+#beatLabOverlay .beat-pad:active,
+#beatLabOverlay .beat-pad.hit{
+  transform:translateY(2px) scale(.985)!important;
+  box-shadow:0 1px 0 rgba(0,0,0,.24),0 0 0 2px rgba(213,189,132,.16)!important;
+  filter:brightness(1.12)!important;
+}
+#beatLabOverlay .club-btn.hot{
+  background:#6f4e45!important;
+  border-color:#845f54!important;
+  color:#fff!important;
+}
+#beatLabOverlay .beat-rank-chip{
+  background:#202823!important;
+  border-color:rgba(194,160,106,.20)!important;
+  color:#e8e2d2!important;
+}
+#beatLabOverlay .beat-rank-chip b{color:#d8bd80!important}
+
+/* game over */
+#beatGameOver{
+  background:rgba(10,14,12,.94)!important;
+  backdrop-filter:blur(10px)!important;
+}
+#beatGameOver h3{color:#e0c58a!important}
+#beatGameOver p{color:#b4bdb8!important}
+#beatGameOver button{
+  background:#46695b!important;
+  border:0!important;
+  box-shadow:none!important;
+}
+
+/* mobile: less cramped, less carnival-like */
+@media(max-width:700px){
+  #beatLabOverlay .modal{border-radius:0!important}
+  #beatLabOverlay .beat-pad{
+    min-height:60px!important;height:60px!important;
+    border-radius:11px!important;
+  }
+  #beatLabOverlay .beat-pad b{font-size:9px!important}
+  #beatLabOverlay .beat-pad small{display:none!important}
+  #worrySmashZone{border-radius:15px!important}
+}
+
+
+/* =========================================================
+   SANSA NOTE · CARD / PHOTO POLISH
+   ========================================================= */
+.grid{
+  gap:18px!important;
+  grid-template-columns:repeat(auto-fill,minmax(238px,1fr))!important;
+}
+.card{
+  background:rgba(255,255,255,.94)!important;
+  border:1px solid #dedfd9!important;
+  border-radius:18px!important;
+  box-shadow:0 7px 22px rgba(26,48,39,.055)!important;
+  overflow:hidden!important;
+  transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease!important;
+}
+.card:hover{
+  transform:translateY(-4px)!important;
+  border-color:#cfd5cf!important;
+  box-shadow:0 15px 34px rgba(26,48,39,.10)!important;
+}
+.card:active{transform:translateY(-1px)!important;box-shadow:0 7px 20px rgba(26,48,39,.08)!important}
+.card-photo{
+  height:154px!important;
+  position:relative!important;
+  overflow:hidden!important;
+  display:block!important;
+  background:#e9e6db!important;
+}
+.card-cover-img{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:center;
+  opacity:0;transform:scale(1.015);
+  transition:opacity .28s ease,transform .5s ease;
+  z-index:2;
+}
+.card-cover-img.loaded{opacity:1;transform:scale(1)}
+.cover-placeholder{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:6px;color:#756f60;
+  background:
+    radial-gradient(circle at 50% 40%,rgba(255,255,255,.85),transparent 34%),
+    linear-gradient(135deg,#eeeade,#e3dfd2);
+  z-index:1;
+}
+.cover-placeholder svg{width:64px;height:48px;opacity:.78}
+.cover-placeholder span{font-size:9.5px;font-weight:750;letter-spacing:.1px;color:#918a79}
+.cover-placeholder-mountain{
+  color:#65756d;
+  background:
+    radial-gradient(circle at 50% 35%,rgba(255,255,255,.82),transparent 35%),
+    linear-gradient(135deg,#e5ebe6,#d9e2db);
+}
+.tagbadge{
+  top:auto!important;left:9px!important;bottom:9px!important;
+  z-index:5!important;
+  border:1px solid rgba(255,255,255,.62)!important;
+  box-shadow:0 3px 10px rgba(0,0,0,.12)!important;
+  backdrop-filter:blur(8px)!important;
+  font-size:9.5px!important;
+  padding:4px 8px!important;
+  font-weight:800!important;
+}
+.tagbadge.famous{background:rgba(44,79,65,.88)!important;color:#fff!important}
+.tagbadge.hidden{background:rgba(112,91,72,.82)!important;color:#fff!important}
+.visit-flag{
+  top:9px!important;right:42px!important;
+  z-index:5!important;
+  background:rgba(20,29,25,.64)!important;
+  backdrop-filter:blur(8px)!important;
+  border:1px solid rgba(255,255,255,.16)!important;
+  font-size:9px!important;padding:4px 7px!important;
+}
+.stampcorner{display:none!important}
+.progress-seal{
+  position:absolute;right:9px;top:9px;z-index:6;
+  width:26px;height:26px;border-radius:50%;
+  display:grid;place-items:center;
+  background:rgba(255,255,255,.84);
+  border:1px solid rgba(31,64,51,.22);
+  box-shadow:0 5px 14px rgba(0,0,0,.11);
+  backdrop-filter:blur(8px);
+}
+.progress-seal svg{width:15px;height:15px;fill:none;stroke:#3f6657;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.progress-seal.complete{
+  background:#3f6657;border-color:#3f6657;
+}
+.progress-seal.complete svg{stroke:#fff}
+.card-body{padding:13px 14px 14px!important}
+.card-region{font-size:10px!important;letter-spacing:.45px!important;color:#87908a!important}
+.card-title{font-size:16px!important;line-height:1.3!important;margin:3px 0 6px!important;color:#24322c!important}
+.card-desc{
+  font-size:11.5px!important;line-height:1.55!important;
+  color:#737c77!important;min-height:36px!important;
+}
+.stagepill{
+  margin-top:9px!important;
+  border:1px solid #dde0db!important;
+  background:#f7f6f2!important;
+  color:#6c756f!important;
+  font-size:9.5px!important;padding:4px 9px!important;
+}
+.stagepill.s3{background:#e8f0eb!important;color:#315446!important;border-color:#cadacf!important}
+.badge-medal.earned::before{
+  content:'✓'!important;
+  top:-5px!important;left:auto!important;right:-5px!important;
+  width:20px!important;height:20px!important;line-height:20px!important;
+  padding:0!important;border-radius:50%!important;
+  transform:none!important;background:#3f6657!important;color:#fff!important;
+  font-size:11px!important;letter-spacing:0!important;
+}
+.badge-medal.earned::after{display:none!important}
+
+.auto-photo-slide{
+  position:relative!important;overflow:hidden!important;background:#e8e5db!important;
+}
+.auto-photo-slide img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  opacity:0;transition:opacity .25s ease;z-index:2;
+}
+.auto-photo-slide img.loaded{opacity:1}
+.auto-photo-slide .cover-placeholder{z-index:1}
+.auto-photo-empty{
+  min-width:280px;
+  display:flex;align-items:center;gap:14px;
+  padding:13px 14px;border-radius:14px;
+  background:#f8f7f2;border:1px solid #e2e1da;color:#5f6964;
+}
+.auto-photo-empty .cover-placeholder{
+  position:relative;inset:auto;width:90px;height:70px;flex:0 0 90px;border-radius:11px;
+}
+.auto-photo-empty .cover-placeholder svg{width:48px;height:36px}
+.auto-photo-empty .cover-placeholder span{display:none}
+.auto-photo-empty b{display:block;font-size:12px;margin-bottom:3px;color:#33463d}
+.auto-photo-empty>div:last-child span{display:block;font-size:10.5px;line-height:1.45;color:#7a847f}
+
+@media(max-width:640px){
+  .grid{gap:10px!important;grid-template-columns:1fr 1fr!important}
+  .card{border-radius:14px!important}
+  .card-photo{height:104px!important}
+  .card-body{padding:9px 10px 10px!important}
+  .card-title{font-size:13px!important}
+  .card-desc{font-size:10px!important;min-height:29px!important}
+  .cover-placeholder svg{width:48px;height:36px}
+  .cover-placeholder span{font-size:8px}
+  .tagbadge{left:6px!important;bottom:6px!important;font-size:8px!important;padding:3px 6px!important}
+  .progress-seal{right:6px!important;top:6px!important;width:23px;height:23px}
+  .progress-seal svg{width:13px;height:13px}
+  .visit-flag{right:34px!important;top:6px!important;font-size:8px!important;padding:3px 6px!important}
+}
+
 </style>
 </head>
 <body>
@@ -6600,27 +6967,27 @@ function getFilteredMountainList(){
   return list;
 }
 
-function renderMountainCard(id, d){
-  const photo = firstPhotoUrl(d);
-  const stageIdx = Math.min(d.stage||0, 2);
-  if((d.coverPhotoVersion!==PHOTO_SCHEMA_VERSION || !d.coverPhotoMeta || d.coverPhotoMeta.length===0) && !coverFetching.has(id)){
-    queuePhotoFetch(id, d.name, d.locationHint || '', {
-      store: mountainDestinations,
-      updateFn: updateMountainDestination,
-      getCurrentId: ()=>currentMountainDetailId,
-      onDetailUpdate: ()=>{},
-      region: d.region
+function renderMountainCard(id,d){
+  const photo=firstPhotoUrl(d);
+  const stageIdx=Math.min(d.stage||0,2);
+  if((!photo||d.coverPhotoVersion!==PHOTO_SCHEMA_VERSION)&&!coverFetching.has(id)){
+    queuePhotoFetch(id,d.name,d.locationHint||'',{
+      store:mountainDestinations,
+      updateFn:updateMountainDestination,
+      getCurrentId:()=>currentMountainDetailId,
+      onDetailUpdate:()=>{},
+      region:d.region
     });
   }
   return `
   <div class="card" data-id="${id}">
-    <div class="card-photo" style="${photo?`background-image:url('${photo}')`:''}">
-      ${photo?'':'<span class="ph-icon serif" style="font-size:28px;color:#8a7a52;">⛰️</span>'}
-      <span class="tagbadge famous">${d.height||''}</span>
-      ${stageIdx>=1 ? `<span class="stampcorner ${stageIdx>=2?'done':''}">${stageIdx>=2?'CLEAR':'DONE'}</span>` : ''}
+    <div class="card-photo">
+      ${cardCoverMedia(photo,'mountain',d.name)}
+      <span class="tagbadge famous">${escapeHtml(d.height||'')}</span>
+      ${progressSealHtml(stageIdx)}
     </div>
     <div class="card-body">
-      <div class="card-region">${d.region}</div>
+      <div class="card-region">${escapeHtml(d.region)}</div>
       <div class="card-title serif">${escapeHtml(d.name)}</div>
       <div class="card-desc">${escapeHtml(d.desc||'')}</div>
       <span class="stagepill ${stageIdx>=2?'s3':''}">${mountainStagesLabel(stageIdx)}</span>
@@ -6703,7 +7070,7 @@ function openMountainDetail(id){
   document.getElementById('mNotes').value = d.notes || '';
   renderMountainStepper(d.stage||0);
   renderMountainCoverPhotos(d);
-  if((d.coverPhotoVersion!==PHOTO_SCHEMA_VERSION || !d.coverPhotoMeta || d.coverPhotoMeta.length===0) && !coverFetching.has(id)){
+  if((!firstPhotoUrl(d) || d.coverPhotoVersion!==PHOTO_SCHEMA_VERSION) && !coverFetching.has(id)){
     queuePhotoFetch(id, d.name, d.locationHint || '', {
       store: mountainDestinations,
       updateFn: updateMountainDestination,
@@ -6846,11 +7213,53 @@ function firstPhotoUrl(d){
   return null;
 }
 
-const PHOTO_SCHEMA_VERSION = 4;
+function lotusPlaceholderHtml(label='사진 확인 중'){
+  return `<div class="cover-placeholder cover-placeholder-lotus" aria-label="${escapeAttr(label)}">
+    <svg viewBox="0 0 120 86" aria-hidden="true">
+      <g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M60 58c-11-11-17-22 0-39 17 17 11 28 0 39Z"/>
+        <path d="M57 60c-17-5-27-14-24-31 19 6 25 17 24 31Z"/>
+        <path d="M63 60c17-5 27-14 24-31-19 6-25 17-24 31Z"/>
+        <path d="M53 63c-18 2-29-3-34-17 19-2 30 5 34 17Z"/>
+        <path d="M67 63c18 2 29-3 34-17-19-2-30 5-34 17Z"/>
+        <path d="M30 67c14 7 46 7 60 0"/>
+        <path d="M43 73c10 4 24 4 34 0"/>
+      </g>
+    </svg>
+    <span>${escapeHtml(label)}</span>
+  </div>`;
+}
+function mountainPlaceholderHtml(label='사진 확인 중'){
+  return `<div class="cover-placeholder cover-placeholder-mountain" aria-label="${escapeAttr(label)}">
+    <svg viewBox="0 0 120 86" aria-hidden="true">
+      <g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M15 68 42 31l13 18 10-13 39 32Z"/>
+        <path d="m35 41 7-10 7 10"/>
+        <path d="M20 68h84"/>
+      </g>
+    </svg>
+    <span>${escapeHtml(label)}</span>
+  </div>`;
+}
+function cardCoverMedia(photo, kind, name){
+  const placeholder = kind==='mountain' ? mountainPlaceholderHtml('산 풍경 준비 중') : lotusPlaceholderHtml('사찰 사진 준비 중');
+  if(!photo) return placeholder;
+  return `${placeholder}<img class="card-cover-img" src="${escapeAttr(photo)}" alt="${escapeAttr(name||'')}" loading="lazy"
+    onload="this.classList.add('loaded')" onerror="this.remove()">`;
+}
+function progressSealHtml(stageIdx){
+  if(stageIdx<1) return '';
+  const done = stageIdx>=2;
+  return `<span class="progress-seal ${done?'complete':''}" title="${done?'순례 기록 완료':'방문함'}" aria-label="${done?'순례 기록 완료':'방문함'}">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6.8 12.4 3.2 3.2 7.2-7.2"/></svg>
+  </span>`;
+}
+
+const PHOTO_SCHEMA_VERSION = 5;
 let coverFetching = new Set();
 let photoFetchQueue = [];
 let activePhotoFetches = 0;
-const MAX_CONCURRENT_PHOTO_FETCHES = 3;
+const MAX_CONCURRENT_PHOTO_FETCHES = 2;
 
 function queuePhotoFetch(id, name, locationHint, opts){
   if(coverFetching.has(id)) return;
@@ -6884,13 +7293,16 @@ function fetchCoverPhotoNow(id, name, locationHint, opts, done){
   const place = store[id] || {};
   const strictHint = (!isMountain && VERIFIED_LOCATION_HINTS[name]) || place.locationHint || '';
   const queryHint = strictHint || locationHint || place.region || '';
+  const oldUrls = Array.isArray(place.coverPhotos) ? place.coverPhotos.slice() : [];
+  const oldMeta = Array.isArray(place.coverPhotoMeta) ? place.coverPhotoMeta.slice() : [];
   let finished = false;
+
   function finish(){
     if(finished) return;
     finished = true;
+    coverFetching.delete(id);
     if(done) done();
   }
-
   function cleanText(v){
     return String(v||'').replace(/<[^>]*>/g,' ').replace(/&[^;]+;/g,' ').replace(/\s+/g,' ').trim();
   }
@@ -6903,160 +7315,176 @@ function fetchCoverPhotoNow(id, name, locationHint, opts, done){
     const s=(lic||'').toLowerCase();
     return /cc\s*by|cc-by|cc\s*0|cc0|public domain|퍼블릭 도메인|공공누리\s*제?1유형/.test(s);
   }
-  const badPhotoWords = /map|locator|logo|icon|symbol|seal|stamp|poster|brochure|diagram|plan|floorplan|route|signboard|signage|ticket|flag|coat of arms|emblem|문서|지도|약도|로고|아이콘|도면|평면도|안내판|표지판|포스터|현수막|팸플릿|티켓|국기/i;
-  const exteriorBoost = /exterior|facade|building|temple|monastery|hall|gate|pagoda|산사|사찰|전경|대웅전|극락전|일주문|천왕문|법당|석탑|전각|산|봉우리|정상|능선|계곡|국립공원/i;
+  const badPhotoWords = /map|locator|logo|icon|symbol|seal|stamp|poster|brochure|diagram|plan|floorplan|route|signboard|signage|ticket|flag|coat of arms|emblem|document|문서|지도|약도|로고|아이콘|도면|평면도|안내판|표지판|포스터|현수막|팸플릿|티켓|국기/i;
+  const visualWords = isMountain
+    ? /mountain|peak|ridge|valley|trail|summit|landscape|산|봉우리|정상|능선|계곡|국립공원|등산/i
+    : /temple|monastery|buddhist|hall|gate|pagoda|architecture|building|산사|사찰|전경|대웅전|극락전|일주문|천왕문|법당|석탑|전각/i;
+  const detailPenalty = isMountain
+    ? /map|sign|marker|diagram|지도|안내판|표지판/i
+    : /interior|inside|ceiling|detail|statue|painting|inscription|tablet|내부|천장|불상|벽화|현판|세부/i;
 
   function pageHay(page){
-    const ii = page.imageinfo && page.imageinfo[0];
-    const meta = ii && ii.extmetadata || {};
-    return [page.title, meta.ImageDescription&&meta.ImageDescription.value, meta.ObjectName&&meta.ObjectName.value,
-      meta.Categories&&meta.Categories.value, meta.Location&&meta.Location.value, meta.DepictedPlace&&meta.DepictedPlace.value]
+    const ii=page.imageinfo&&page.imageinfo[0], meta=ii&&ii.extmetadata||{};
+    return [page.title,meta.ImageDescription&&meta.ImageDescription.value,meta.ObjectName&&meta.ObjectName.value,
+      meta.Categories&&meta.Categories.value,meta.Location&&meta.Location.value,meta.DepictedPlace&&meta.DepictedPlace.value]
       .map(cleanText).join(' ');
   }
-  function scorePage(page){
+  function scorePage(page, trustedArticle=false){
     const ii=page.imageinfo&&page.imageinfo[0]; if(!ii) return -999;
-    const hay=pageHay(page), hayCompact=compact(hay), title=cleanText(page.title||'');
-    const core=coreName(name), coreCompact=compact(core);
-    if(!coreCompact || !hayCompact.includes(coreCompact)) return -999;
+    const title=cleanText(page.title||''), hay=pageHay(page), hayCompact=compact(hay);
     if(badPhotoWords.test(title)) return -999;
     const meta=ii.extmetadata||{};
     const lic=cleanText((meta.LicenseShortName&&meta.LicenseShortName.value)||(meta.UsageTerms&&meta.UsageTerms.value));
     if(!isReusableLicense(lic)) return -999;
-    let score=20;
-    if(title.includes(core)) score+=18;
-    if(exteriorBoost.test(hay)) score+=12;
-    if(/jpg|jpeg|png/i.test(ii.mime||'')) score+=2;
-    if(strictHint){
+    const core=coreName(name), coreCompact=compact(core);
+    if(!trustedArticle && (!coreCompact || !hayCompact.includes(coreCompact))) return -999;
+    let score=trustedArticle?34:20;
+    if(core && title.includes(core)) score+=18;
+    if(visualWords.test(hay)) score+=14;
+    if(/jpg|jpeg|png/i.test(ii.mime||'')) score+=3;
+    if(detailPenalty.test(hay)) score-=8;
+    if(strictHint && !trustedArticle){
       const toks=meaningfulHintTokens(strictHint);
-      const matched=toks.filter(t=>compact(hay).includes(compact(t))).length;
-      if(toks.length && matched===0) score-=18; else score+=matched*8;
+      const matched=toks.filter(t=>hayCompact.includes(compact(t))).length;
+      if(toks.length && matched===0) score-=16;
+      else score+=matched*8;
     }
-    if(/interior|inside|ceiling|detail|statue|painting|inscription|tablet|내부|천장|불상|벽화|현판|세부/i.test(hay)) score-=7;
     return score;
   }
   function pageToPhoto(page, sourceType){
-    const ii = page.imageinfo && page.imageinfo[0];
-    if(!ii) return null;
-    const meta = ii.extmetadata || {};
-    const url = ii.thumburl || ii.url;
-    if(!url) return null;
-    const lic = cleanText((meta.LicenseShortName&&meta.LicenseShortName.value) || (meta.UsageTerms&&meta.UsageTerms.value));
+    const ii=page.imageinfo&&page.imageinfo[0]; if(!ii) return null;
+    const meta=ii.extmetadata||{}, url=ii.thumburl||ii.url; if(!url) return null;
+    const lic=cleanText((meta.LicenseShortName&&meta.LicenseShortName.value)||(meta.UsageTerms&&meta.UsageTerms.value));
     if(!isReusableLicense(lic)) return null;
-    const artist = cleanText(meta.Artist&&meta.Artist.value);
-    const source = ii.descriptionurl || `https://commons.wikimedia.org/wiki/${encodeURIComponent(page.title||'')}`;
-    return {url, title:cleanText(page.title||''), artist, license:lic, source, sourceType:sourceType||'commons', verified:true};
+    return {
+      url,
+      title:cleanText(page.title||''),
+      artist:cleanText(meta.Artist&&meta.Artist.value),
+      license:lic,
+      source:ii.descriptionurl||`https://commons.wikimedia.org/wiki/${encodeURIComponent(page.title||'')}`,
+      sourceType:sourceType||'commons',
+      verified:true
+    };
   }
-  function setCovers(items){
-    const seen = new Set();
-    const unique = (items||[]).filter(Boolean).filter(x=>{
-      if(!x.url || seen.has(x.url)) return false;
-      seen.add(x.url); return true;
+  function saveResults(items){
+    const seen=new Set();
+    const unique=(items||[]).filter(Boolean).filter(x=>{
+      if(!x.url||seen.has(x.url))return false;seen.add(x.url);return true;
     }).slice(0,5);
+
     if(unique.length && store[id]){
-      const urls = unique.map(x=>x.url);
-      updateFn(id, {coverPhotos: urls, coverPhotoMeta: unique, coverPhotoVersion: PHOTO_SCHEMA_VERSION});
-      store[id].coverPhotos = urls;
-      store[id].coverPhotoMeta = unique;
-      store[id].coverPhotoVersion = PHOTO_SCHEMA_VERSION;
+      const urls=unique.map(x=>x.url);
+      updateFn(id,{coverPhotos:urls,coverPhotoMeta:unique,coverPhotoVersion:PHOTO_SCHEMA_VERSION,coverPhotoStatus:'verified'});
+      store[id].coverPhotos=urls;
+      store[id].coverPhotoMeta=unique;
+      store[id].coverPhotoVersion=PHOTO_SCHEMA_VERSION;
+      store[id].coverPhotoStatus='verified';
       debouncedRender();
-      if(getCurrentId() === id) onDetailUpdate(store[id]);
-      finish();
-      return true;
+      if(getCurrentId()===id) onDetailUpdate(store[id]);
+      finish(); return;
     }
-    // 검증 실패 시 이전 자동사진을 지워 잘못된 사진이 계속 남지 않게 한다.
+
+    // 핵심 변경: 검색 실패가 기존 사진 삭제를 의미하지 않도록 한다.
     if(store[id]){
-      updateFn(id, {coverPhotos: [], coverPhotoMeta: [], coverPhotoVersion: PHOTO_SCHEMA_VERSION});
-      store[id].coverPhotos=[]; store[id].coverPhotoMeta=[]; store[id].coverPhotoVersion=PHOTO_SCHEMA_VERSION;
+      const patch={coverPhotoVersion:PHOTO_SCHEMA_VERSION,coverPhotoStatus:oldUrls.length?'kept-old':'not-found'};
+      updateFn(id,patch);
+      store[id].coverPhotoVersion=PHOTO_SCHEMA_VERSION;
+      store[id].coverPhotoStatus=patch.coverPhotoStatus;
+      if(oldUrls.length){
+        store[id].coverPhotos=oldUrls;
+        store[id].coverPhotoMeta=oldMeta;
+      }
       if(getCurrentId()===id) onDetailUpdate(store[id]);
     }
-    finish(); return false;
+    finish();
   }
 
-  function commonsImageInfo(titles, cb, sourceType){
-    titles=(titles||[]).filter(Boolean).slice(0,40);
-    if(!titles.length){ cb([]); return; }
-    const url='https://commons.wikimedia.org/w/api.php?action=query&prop=imageinfo&iiprop=url|mime|extmetadata&iiurlwidth=1200&format=json&origin=*&titles='+encodeURIComponent(titles.join('|'));
+  function imageInfo(titles, cb, sourceType, trustedArticle=false){
+    titles=(titles||[]).filter(Boolean).slice(0,50);
+    if(!titles.length){cb([]);return;}
+    const url='https://commons.wikimedia.org/w/api.php?action=query&prop=imageinfo&iiprop=url|mime|extmetadata&iiurlwidth=1280&format=json&origin=*&titles='+encodeURIComponent(titles.join('|'));
     fetch(url).then(r=>r.json()).then(data=>{
       const pages=Object.values(data?.query?.pages||{});
-      const scored=pages.map(p=>({p,s:scorePage(p)})).filter(x=>x.s>0).sort((a,b)=>b.s-a.s).map(x=>pageToPhoto(x.p,sourceType)).filter(Boolean);
-      cb(scored);
-    }).catch(()=>cb([]));
-  }
-
-  function wikipediaResolve(cb){
-    const base=coreName(name);
-    const extra=isMountain?'산':'사찰';
-    const q=`${base} ${queryHint||''} ${extra}`.trim();
-    const url=`https://ko.wikipedia.org/w/api.php?action=query&generator=search&gsrsearch=${encodeURIComponent(q)}&gsrlimit=6&prop=pageimages|info&pithumbsize=1200&piprop=thumbnail|original|name&inprop=url&format=json&origin=*`;
-    fetch(url).then(r=>r.json()).then(data=>{
-      let pages=Object.values(data?.query?.pages||{});
-      const bc=compact(base);
-      pages=pages.filter(p=>compact(p.title).includes(bc) && !/동음이의|목록|분류:/.test(p.title||''));
-      pages.sort((a,b)=>{
-        let sa=(compact(a.title)===bc?20:0)+(strictHint&&compact(a.title).includes(compact(strictHint))?8:0);
-        let sb=(compact(b.title)===bc?20:0)+(strictHint&&compact(b.title).includes(compact(strictHint))?8:0);
-        return sb-sa;
-      });
-      const best=pages[0];
-      if(!best){cb(null);return;}
-      cb(best);
-    }).catch(()=>cb(null));
-  }
-
-  function wikipediaArticleImages(page, cb){
-    if(!page){cb([]);return;}
-    const url=`https://ko.wikipedia.org/w/api.php?action=query&pageids=${encodeURIComponent(page.pageid)}&prop=images&imlimit=80&format=json&origin=*`;
-    fetch(url).then(r=>r.json()).then(data=>{
-      const p=data?.query?.pages?.[page.pageid];
-      let titles=(p?.images||[]).map(x=>x.title).filter(t=>/^File:/i.test(t) && !badPhotoWords.test(t));
-      // 대표 이미지가 있으면 가장 먼저 검증
-      if(page.pageimage){
-        const hero='File:'+page.pageimage;
-        titles=[hero,...titles.filter(t=>t!==hero)];
-      }
-      commonsImageInfo(titles, cb, 'wikipedia');
-    }).catch(()=>cb([]));
-  }
-
-  function commonsSearch(query, cb){
-    const url = `https://commons.wikimedia.org/w/api.php?action=query&generator=search&gsrsearch=${encodeURIComponent(query)}&gsrnamespace=6&gsrlimit=30&prop=imageinfo&iiprop=url|mime|extmetadata&iiurlwidth=1200&format=json&origin=*`;
-    fetch(url).then(r=>r.json()).then(data=>{
-      const pages=Object.values(data?.query?.pages||{});
-      const items=pages.map(p=>({p,s:scorePage(p)})).filter(x=>x.s>0).sort((a,b)=>b.s-a.s).map(x=>pageToPhoto(x.p,'commons')).filter(Boolean);
+      const items=pages.map(p=>({p,s:scorePage(p,trustedArticle)}))
+        .filter(x=>x.s>0).sort((a,b)=>b.s-a.s)
+        .map(x=>pageToPhoto(x.p,sourceType)).filter(Boolean);
       cb(items);
     }).catch(()=>cb([]));
   }
 
-  // 1순위: 정확한 한국어 위키백과 문서에 실제로 연결된 사진들
-  // 2순위: Commons 자유검색. 이름+지역+사찰/산 키워드로 엄격하게 검증한다.
-  wikipediaResolve(page=>{
-    wikipediaArticleImages(page, articleItems=>{
-      if(articleItems.length>=3){ setCovers(articleItems); return; }
+  function exactWikipediaPage(cb){
+    const base=coreName(name);
+    const exactUrl=`https://ko.wikipedia.org/w/api.php?action=query&titles=${encodeURIComponent(base)}&prop=pageimages|images|info&imlimit=80&pithumbsize=1280&piprop=thumbnail|original|name&inprop=url&redirects=1&format=json&origin=*`;
+    fetch(exactUrl).then(r=>r.json()).then(data=>{
+      let pages=Object.values(data?.query?.pages||{}).filter(p=>!p.missing);
+      const page=pages[0];
+      if(page && compact(page.title).includes(compact(base))){cb(page);return;}
+      const q=`${base} ${queryHint||''} ${isMountain?'산':'사찰'}`.trim();
+      const searchUrl=`https://ko.wikipedia.org/w/api.php?action=query&generator=search&gsrsearch=${encodeURIComponent(q)}&gsrlimit=8&prop=pageimages|images|info&imlimit=80&pithumbsize=1280&piprop=thumbnail|original|name&inprop=url&format=json&origin=*`;
+      return fetch(searchUrl).then(r=>r.json()).then(sd=>{
+        const bc=compact(base);
+        let candidates=Object.values(sd?.query?.pages||{}).filter(p=>bc&&compact(p.title).includes(bc)&&!/동음이의|목록|분류:/.test(p.title||''));
+        const toks=meaningfulHintTokens(strictHint||queryHint);
+        candidates.sort((a,b)=>{
+          const score=x=>(compact(x.title)===bc?30:12)+toks.filter(t=>compact(x.title).includes(compact(t))).length*8;
+          return score(b)-score(a);
+        });
+        cb(candidates[0]||null);
+      });
+    }).catch(()=>cb(null));
+  }
+
+  function trustedArticlePhotos(page, cb){
+    if(!page){cb([]);return;}
+    let titles=(page.images||[]).map(x=>x.title).filter(t=>/^File:/i.test(t)&&!badPhotoWords.test(t));
+    if(page.pageimage){
+      const hero='File:'+page.pageimage;
+      titles=[hero,...titles.filter(t=>t!==hero)];
+    }
+    imageInfo(titles,cb,'wikipedia',true);
+  }
+
+  function commonsSearch(q, cb){
+    const url=`https://commons.wikimedia.org/w/api.php?action=query&generator=search&gsrsearch=${encodeURIComponent(q)}&gsrnamespace=6&gsrlimit=40&prop=imageinfo&iiprop=url|mime|extmetadata&iiurlwidth=1280&format=json&origin=*`;
+    fetch(url).then(r=>r.json()).then(data=>{
+      const pages=Object.values(data?.query?.pages||{});
+      const items=pages.map(p=>({p,s:scorePage(p,false)}))
+        .filter(x=>x.s>0).sort((a,b)=>b.s-a.s)
+        .map(x=>pageToPhoto(x.p,'commons')).filter(Boolean);
+      cb(items);
+    }).catch(()=>cb([]));
+  }
+
+  exactWikipediaPage(page=>{
+    trustedArticlePhotos(page, articleItems=>{
+      if(articleItems.length>=3){saveResults(articleItems);return;}
       const base=coreName(name);
-      const q1=isMountain ? `"${base}" ${queryHint||''} mountain Korea` : `"${base}" ${queryHint||''} temple Korea`;
-      const q2=isMountain ? `"${base}" ${queryHint||''} 대한민국 산` : `"${base}" ${queryHint||''} 대한민국 사찰`;
-      commonsSearch(q1, a=>commonsSearch(q2, b=>setCovers([...articleItems,...a,...b])));
+      const q1=isMountain?`${base} ${queryHint||''} Korea mountain`: `${base} ${queryHint||''} Korean Buddhist temple`;
+      const q2=isMountain?`${base} ${queryHint||''} 산`: `${base} ${queryHint||''} 사찰`;
+      commonsSearch(q1,a=>commonsSearch(q2,b=>saveResults([...articleItems,...a,...b])));
     });
   });
 }
 
-function renderCard(id, d){
-  const photo = firstPhotoUrl(d);
-  const stageIdx = Math.min(d.stage||0, STAGES.length-1);
-  const vc = visitCount(d);
-  if((d.coverPhotoVersion!==PHOTO_SCHEMA_VERSION || !d.coverPhotoMeta || d.coverPhotoMeta.length===0) && !coverFetching.has(id)){
-    queuePhotoFetch(id, d.name, d.locationHint || '', {region:d.region});
+function renderCard(id,d){
+  const photo=firstPhotoUrl(d);
+  const stageIdx=Math.min(d.stage||0,STAGES.length-1);
+  const vc=visitCount(d);
+  const needsPhoto=!photo;
+  const needsVerifiedRefresh=d.tag==='유명' && d.coverPhotoVersion!==PHOTO_SCHEMA_VERSION;
+  if((needsPhoto||needsVerifiedRefresh)&&!coverFetching.has(id)){
+    queuePhotoFetch(id,d.name,d.locationHint||'',{region:d.region});
   }
   return `
   <div class="card" data-id="${id}">
-    <div class="card-photo" style="${photo?`background-image:url('${photo}')`:''}">
-      ${photo?'':'<span class="ph-icon serif" style="font-size:28px;color:#8a7a52;">🪷</span>'}
-      <span class="tagbadge ${d.tag==='유명'?'famous':'hidden'}">${d.tag==='유명'?'유명 사찰':'숨은 산사'}</span>
-      ${vc>0 ? `<span class="visit-flag">${vc}회 방문</span>` : ''}
-      ${stageIdx>=1 ? `<span class="stampcorner ${stageIdx>=2?'done':''}">${stageIdx>=2?'CLEAR':'DONE'}</span>` : ''}
+    <div class="card-photo">
+      ${cardCoverMedia(photo,'temple',d.name)}
+      <span class="tagbadge ${d.tag==='유명'?'famous':'hidden'}">${d.tag==='유명'?'대표 산사':'숨은 산사'}</span>
+      ${vc>0?`<span class="visit-flag">${vc}회 방문</span>`:''}
+      ${progressSealHtml(stageIdx)}
     </div>
     <div class="card-body">
-      <div class="card-region">${d.region}</div>
+      <div class="card-region">${escapeHtml(d.region)}</div>
       <div class="card-title">${escapeHtml(d.name)}</div>
       <div class="card-desc">${escapeHtml(d.desc||'')}</div>
       <span class="stagepill ${stageIdx>=2?'s3':''}">${STAGES[stageIdx]}</span>
@@ -7125,7 +7553,7 @@ function openDetail(id){
   renderStepper(d.stage||0);
   renderPhotos(d.photos||{});
   renderCoverPhotos(d);
-  if((d.coverPhotoVersion!==PHOTO_SCHEMA_VERSION || !d.coverPhotoMeta || d.coverPhotoMeta.length===0) && !coverFetching.has(id)){
+  if((!firstPhotoUrl(d) || d.coverPhotoVersion!==PHOTO_SCHEMA_VERSION) && !coverFetching.has(id)){
     queuePhotoFetch(id, d.name, d.locationHint || '', {region:d.region});
   }
   renderVisits(d.visits||{});
@@ -7157,14 +7585,13 @@ function renderWeather(d, elId){
 
 function refetchLocation(){
   if(!currentDetailId) return;
-  const id = currentDetailId;
-  const d = destinations[id];
-  updateDestination(id, {lat: null, lng: null, coverPhotos: null});
-  destinations[id] = Object.assign({}, d, {lat: null, lng: null, coverPhotos: null});
-  showToast('위치와 사진을 다시 찾는 중이에요...');
-  requestAnimationFrame(()=> setupDetailMap(destinations[id], id));
+  const id=currentDetailId,d=destinations[id];
+  updateDestination(id,{lat:null,lng:null,coverPhotoVersion:0});
+  destinations[id]=Object.assign({},d,{lat:null,lng:null,coverPhotoVersion:0});
+  showToast('위치와 사진을 다시 확인하는 중이에요. 기존 사진은 유지해요.');
+  requestAnimationFrame(()=>setupDetailMap(destinations[id],id));
   coverFetching.delete(id);
-  queuePhotoFetch(id, destinations[id].name, destinations[id].locationHint || '', {region:destinations[id].region});
+  queuePhotoFetch(id,destinations[id].name,destinations[id].locationHint||'',{region:destinations[id].region});
 }
 
 function closeDetail(){
@@ -7381,21 +7808,23 @@ function photoCreditHtml(m, i){
   const link = m.source ? `${origin} · <a href="${escapeAttr(m.source)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">원본·저작권 ↗</a>` : origin;
   return `<div class="photo-credit">📷 ${artist} · ${license}<br>${link}</div>`;
 }
-function renderAutoCoverPhotos(wrapId, d){
-  const wrap = document.getElementById(wrapId);
-  if(!wrap) return;
-  const urls = d.coverPhotos || [];
+function renderAutoCoverPhotos(wrapId,d){
+  const wrap=document.getElementById(wrapId);if(!wrap)return;
+  const urls=d.coverPhotos||[];
   if(urls.length===0){
-    wrap.innerHTML = `<div class="map-note" style="padding:0;">정확히 확인된 사진이 아직 없어요. 잘못된 사진 대신 빈 상태로 두었어요.</div>`;
+    wrap.innerHTML=`<div class="auto-photo-empty">${lotusPlaceholderHtml('사진을 확인하고 있어요')}<div><b>정확한 사진을 우선 확인해요.</b><span>엉뚱한 사진은 넣지 않고, 확인되는 즉시 자동으로 연결합니다.</span></div></div>`;
     return;
   }
-  const meta = d.coverPhotoMeta || [];
-  wrap.innerHTML = urls.map((url,i)=>`
+  const meta=d.coverPhotoMeta||[];
+  wrap.innerHTML=urls.map((url,i)=>`
     <div class="auto-photo-item">
-      <div class="slide" style="background-image:url('${escapeAttr(url)}')" onclick='openLightbox(${JSON.stringify(urls)}, ${i}, ${JSON.stringify(meta)})'></div>
-      ${photoCreditHtml(meta[i], i)}
-    </div>
-  `).join('');
+      <div class="slide auto-photo-slide" onclick='openLightbox(${JSON.stringify(urls)},${i},${JSON.stringify(meta)})'>
+        ${lotusPlaceholderHtml('사진 불러오는 중')}
+        <img src="${escapeAttr(url)}" alt="${escapeAttr(d.name||'사찰 사진')}" loading="lazy"
+          onload="this.classList.add('loaded')" onerror="this.remove()">
+      </div>
+      ${photoCreditHtml(meta[i],i)}
+    </div>`).join('');
 }
 function renderCoverPhotos(d){ renderAutoCoverPhotos('dCoverPhotos', d); }
 function renderMountainCoverPhotos(d){ renderAutoCoverPhotos('mCoverPhotos', d); }
@@ -8667,7 +9096,7 @@ const BEAT_WEAPONS={
 };
 const BEAT_WEAPON_KEYS=['mok','kick','bell','clap','bass','air'];
 let worrySmashTotal=0,worryGameTimer=null,worryGameLast=0,worryWave=1,worryGameRunning=false,worryEnemySerial=0,worrySpawnClock=0;
-let beatShots=0,beatMisses=0,beatSlowUntil=0,beatLastSavedScore=0,beatLeaderboardBusy=false,beatDefenseY=0,beatZoneLockedHeight=0,beatLastLifeLostAt=0,beatLifeGraceUntil=0,beatRushUntil=0;
+let beatShots=0,beatMisses=0,beatSlowUntil=0,beatLastSavedScore=0,beatLeaderboardBusy=false,beatDefenseY=0,beatZoneLockedHeight=0,beatLastLifeLostAt=0,beatLifeGraceUntil=0,beatRushUntil=0,beatHudRaf=0;
 let beatLocalBest=Number(localStorage.getItem('sansaBeatBest')||0);
 function updateBeatLives(){const e=document.getElementById('beatLives');if(e)e.textContent='❤️'.repeat(Math.max(0,beatLives))+'🖤'.repeat(Math.max(0,3-beatLives));}
 function resetComboForMiss(btn,msg='MISS · 다른 레인을 쐈어요'){
@@ -8752,7 +9181,7 @@ function fireStraightLane(kind,btn){
   const zone=document.getElementById('worrySmashZone'),cfg=BEAT_WEAPONS[kind];
   if(!zone||!cfg||beatLives<=0)return;
 
-  beatShots++;scheduleBeatHud();
+  beatShots++;try{scheduleBeatHud();}catch(_){updateBeatArcadeHud();}
   directBeatGestureTone();unlockIOSMedia();unlockHipAudio().then(updateBeatAudioState);
 
   const laneW=zone.clientWidth/6;
@@ -8819,9 +9248,16 @@ function guaranteedBeatExplosion(zone,cx,cy,big=false){
   }
   setTimeout(()=>flash.remove(),360);
 }
+function flashBeatLane(kind){
+  const zone=document.getElementById('worrySmashZone'),cfg=BEAT_WEAPONS[kind];if(!zone||!cfg)return;
+  const lane=document.createElement('i');lane.className='beat-lane-flash';
+  lane.style.left=(cfg.lane*(100/6))+'%';lane.style.width=(100/6)+'%';
+  zone.appendChild(lane);setTimeout(()=>lane.remove(),180);
+}
 function forceBeatHit(enemy,cx,cy,kind){
   if(!enemy||!enemy.isConnected||enemy.classList.contains('smash'))return;
   const zone=document.getElementById('worrySmashZone');if(!zone)return;
+  flashBeatLane(kind);
 
   // 레인은 버튼과 1:1 고정. 다른 버튼이면 여기까지 올 수 없지만 방어 코드 유지.
   if(enemy.dataset.weapon!==kind){
