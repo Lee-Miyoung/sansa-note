@@ -7087,6 +7087,73 @@ function getStoryCardUserPhotoUrl(d){
   return unique[0]?.url || null;
 }
 
+function normalizeStoryCardPlaceName(name){
+  return String(name||'')
+    .replace(/\s+/g,'')
+    .replace(/[()（）·ㆍ\-]/g,'')
+    .toLowerCase();
+}
+
+function findStoryCardPhotoInRecords(records, targetName){
+  const target=normalizeStoryCardPlaceName(targetName);
+  const candidates=[];
+  Object.values(records||{}).forEach(record=>{
+    if(!record || normalizeStoryCardPlaceName(record.name)!==target || !record.photos) return;
+
+    if(Array.isArray(record.photoOrder) && record.photoOrder.length){
+      record.photoOrder.forEach((pid,idx)=>{
+        const p=record.photos[pid];
+        if(p && isLikelyValidPhotoUrl(p.url)){
+          candidates.push({url:p.url,priority:1000000-idx,ts:Number(p.createdAt||record.updatedAt||record.createdAt||0)});
+        }
+      });
+    }
+    Object.values(record.photos).forEach(p=>{
+      if(p && isLikelyValidPhotoUrl(p.url)){
+        candidates.push({url:p.url,priority:0,ts:Number(p.createdAt||record.updatedAt||record.createdAt||0)});
+      }
+    });
+  });
+  candidates.sort((a,b)=>b.priority-a.priority || b.ts-a.ts);
+  return candidates[0]?.url || null;
+}
+
+async function resolveStoryCardUserPhotoUrl(cardId,d){
+  // 1) 현재 화면에 로드된 데이터에서 먼저 찾기
+  let url=getStoryCardUserPhotoUrl(d);
+  if(url) return url;
+
+  // 2) 순례앨범에서 실제 표시 중인 개인사진에서도 같은 장소를 찾기
+  try{
+    const target=normalizeStoryCardPlaceName(d&&d.name);
+    const album=buildPilgrimageAlbumItems();
+    const match=album.find(x=>normalizeStoryCardPlaceName(x.place)===target && isLikelyValidPhotoUrl(x.url));
+    if(match) return match.url;
+  }catch(_){ }
+
+  // 3) Firebase에서 최신 사용자 기록을 직접 다시 읽어 찾기
+  //    사진 업로드 직후 메모리 동기화가 늦더라도 인증카드가 사진을 놓치지 않게 함.
+  if(!localMode && db && currentUid){
+    try{
+      const snap=await db.ref('users/'+currentUid+'/destinations').once('value');
+      const cloudRecords=snap.val()||{};
+      url=findStoryCardPhotoInRecords(cloudRecords,d&&d.name);
+      if(url) return url;
+
+      // cardId 자체 기록을 한 번 더 직접 확인
+      if(cardId && cloudRecords[cardId] && cloudRecords[cardId].photos){
+        const direct=Object.values(cloudRecords[cardId].photos)
+          .filter(p=>p&&isLikelyValidPhotoUrl(p.url))
+          .sort((a,b)=>Number(b.createdAt||0)-Number(a.createdAt||0));
+        if(direct.length) return direct[0].url;
+      }
+    }catch(e){
+      console.warn('story card photo refresh failed',e);
+    }
+  }
+  return null;
+}
+
 function renderStoryCard(){
   const canvas = document.getElementById('storyCardCanvas');
   if(!canvas){ showToast('카드 화면을 찾지 못했어요'); return; }
@@ -7101,7 +7168,7 @@ function renderStoryCard(){
   const today = new Date();
   const dateStr = `${today.getFullYear()}.${String(today.getMonth()+1).padStart(2,'0')}`;
   const hanjaPick = TEMPLE_HANJA[d.name] || CARD_HANJA[Math.floor(Math.random()*CARD_HANJA.length)];
-  const photoUrl = getStoryCardUserPhotoUrl(d);
+  let photoUrl = null;
   const renderToken = Date.now() + Math.random();
   window.__storyCardRenderToken = renderToken;
 
@@ -7234,7 +7301,7 @@ function renderStoryCard(){
     if(status){
       status.textContent = usedPhoto
         ? `${d.name} · 내가 올린 사진을 배경으로 넣었어요. 한 줄 소감도 자유롭게 바꿔보세요.`
-        : `${d.name} · 이 절에서 저장된 개인사진을 아직 찾지 못했어요. 사진을 저장한 뒤 다시 열면 자동으로 배경에 들어가요.`;
+        : `${d.name} · 저장된 개인사진을 찾지 못했어요. 사진이 보이는데도 이 문구가 나오면 새로고침 후 다시 열어주세요.`;
     }
   }
 
@@ -7243,10 +7310,19 @@ function renderStoryCard(){
     applyStatus(false);
   }
 
-  // 기본은 바로 보여주기
+  // 기본 카드를 먼저 보여주되, 실제 사진은 Firebase까지 다시 확인해서 자동 적용합니다.
   drawFallback();
+  const statusNow=document.getElementById('storyCardStatus');
+  if(statusNow) statusNow.textContent=`${d.name} · 내가 올린 사진을 확인하고 있어요...`;
 
-  if(photoUrl){
+  resolveStoryCardUserPhotoUrl(cardId,d).then(resolvedUrl=>{
+    if(window.__storyCardRenderToken !== renderToken) return;
+    photoUrl=resolvedUrl;
+    if(!photoUrl){
+      drawFallback();
+      return;
+    }
+
     const bg = new Image();
     bg.crossOrigin = 'anonymous';
     bg.onload = ()=>{
@@ -7261,10 +7337,15 @@ function renderStoryCard(){
     };
     bg.onerror = ()=>{
       if(window.__storyCardRenderToken !== renderToken) return;
-      drawFallback();
+      // URL은 찾았지만 브라우저가 이미지 로드를 막은 경우 사용자에게 정확히 안내.
+      const status=document.getElementById('storyCardStatus');
+      if(status) status.textContent=`${d.name} · 사진은 찾았지만 카드 배경으로 불러오지 못했어요. 새로고침 후 다시 시도해주세요.`;
     };
     bg.src = photoUrl;
-  }
+  }).catch(e=>{
+    console.warn('story card photo resolve failed',e);
+    if(window.__storyCardRenderToken === renderToken) drawFallback();
+  });
 
   // 캐릭터 이미지가 늦게 뜨거나 없어도 카드 본문은 즉시 보이게 한다.
   if(!window.__cardMonkImg && !window.__cardMonkImgLoading){
