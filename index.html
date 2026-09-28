@@ -2880,6 +2880,30 @@ body:has(#beatLabOverlay.show) #miniPlayer{
   margin-top:8px;font-size:10px;line-height:1.5;color:var(--ink-soft)
 }
 
+
+/* ===== 나의 순례앨범 슬라이드 ===== */
+#lightboxOverlay.album-slide-mode #lightboxImg{
+  max-width:94vw!important;
+  max-height:88vh!important;
+  border-radius:12px!important;
+}
+#lightboxOverlay.album-slide-mode #lbPhotoInfo{
+  display:block!important;
+  bottom:26px!important;
+  max-width:min(86vw,520px)!important;
+  padding:9px 15px!important;
+  border-radius:999px!important;
+  background:rgba(0,0,0,.58)!important;
+  font-size:13px!important;
+  font-weight:800!important;
+  letter-spacing:-.02em!important;
+}
+#lightboxOverlay.album-slide-mode #lbPrev,
+#lightboxOverlay.album-slide-mode #lbNext{
+  background:rgba(0,0,0,.34)!important;
+  backdrop-filter:blur(6px);
+}
+
 </style>
 </head>
 <body>
@@ -3422,7 +3446,7 @@ body:has(#beatLabOverlay.show) #miniPlayer{
   </div>
   <div id="lbCounter" style="position:fixed;bottom:24px;left:50%;transform:translateX(-50%);color:#fff;font-size:12px;background:rgba(255,255,255,.15);padding:5px 14px;border-radius:999px;z-index:4;"></div>
   <div id="lbPhotoInfo" style="display:none;position:fixed;left:50%;bottom:58px;transform:translateX(-50%);max-width:min(86vw,620px);color:#fff;font-size:10.5px;line-height:1.45;background:rgba(0,0,0,.58);padding:8px 11px;border-radius:10px;z-index:4;text-align:center;"></div>
-  <div style="position:fixed;bottom:96px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.72);font-size:10.5px;white-space:nowrap;z-index:4;">두 손가락 확대 · 두 번 탭 확대</div>
+  <div id="lbGestureTip" style="position:fixed;bottom:96px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.72);font-size:10.5px;white-space:nowrap;z-index:4;">두 손가락 확대 · 두 번 탭 확대</div>
   <button class="close-x" style="position:fixed;top:20px;right:20px;color:#fff;font-size:28px;z-index:5;" onclick="closeLightbox()">✕</button>
 </div>
 
@@ -8276,18 +8300,64 @@ function getFilteredList(){
   return sortEntriesBySavedOrder(list,'temple');
 }
 
+
+let pilgrimageAlbumMode=false;
+let pilgrimageAlbumItems=[];
+
+function buildPilgrimageAlbumItems(){
+  const items=[];
+
+  Object.entries(destinations||{}).forEach(([id,d])=>{
+    Object.values((d&&d.photos)||{}).forEach(p=>{
+      if(p && p.url) items.push({
+        url:p.url,
+        place:d.name||'사찰',
+        kind:'temple',
+        ts:Number(p.createdAt||d.updatedAt||d.createdAt||0)
+      });
+    });
+  });
+
+  Object.entries(mountainDestinations||{}).forEach(([id,d])=>{
+    Object.values((d&&d.photos)||{}).forEach(p=>{
+      if(p && p.url) items.push({
+        url:p.url,
+        place:d.name||'산',
+        kind:'mountain',
+        ts:Number(p.createdAt||d.updatedAt||d.createdAt||0)
+      });
+    });
+  });
+
+  items.sort((a,b)=>(b.ts||0)-(a.ts||0));
+  return items;
+}
+
+function openPilgrimageAlbum(index){
+  pilgrimageAlbumItems=buildPilgrimageAlbumItems();
+  if(!pilgrimageAlbumItems.length) return;
+  pilgrimageAlbumMode=true;
+  const urls=pilgrimageAlbumItems.map(x=>x.url);
+  const meta=pilgrimageAlbumItems.map(x=>({albumPlace:x.place, albumKind:x.kind}));
+  openLightbox(urls, Math.max(0,Math.min(index||0,urls.length-1)), meta);
+}
+
 function renderHomeGallery(){
   const wrap = document.getElementById('homeGalleryWrap');
-  const items = [];
-  Object.entries(destinations).forEach(([id,d])=>{
-    const url = firstPhotoUrl(d);
-    if(url) items.push({url, name:d.name, id});
-  });
+  const items = buildPilgrimageAlbumItems();
+  pilgrimageAlbumItems = items;
+
   if(items.length===0){ wrap.innerHTML=''; return; }
-  wrap.innerHTML = `<div class="home-gallery"><div class="home-gallery-strip">` +
-    items.slice(0,16).map(it=>`
-      <div class="hg-item" style="background-image:url('${it.url}')" onclick="openDetail('${it.id}')">
-        <div class="hg-name">${escapeHtml(it.name)}</div>
+
+  wrap.innerHTML = `<div class="home-gallery">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:1px 2px 9px;">
+        <b style="font-size:12px;color:#17352e;">📷 나의 순례앨범</b>
+        <span style="font-size:10px;color:var(--ink-soft);">${items.length}장 · 사진을 눌러 넘겨보세요</span>
+      </div>
+      <div class="home-gallery-strip">` +
+    items.slice(0,24).map((it,i)=>`
+      <div class="hg-item" style="background-image:url('${escapeAttr(it.url)}')" onclick="openPilgrimageAlbum(${i})">
+        <div class="hg-name">${escapeHtml(it.place)}</div>
       </div>`).join('') +
     `</div></div>`;
 }
@@ -9515,6 +9585,8 @@ function toggleLightboxZoom(){
 function openLightbox(urls, index, meta){
   lightboxImages = Array.isArray(urls) ? urls : [urls];
   lightboxMeta = Array.isArray(meta) ? meta : [];
+  const isAlbumCall = lightboxMeta.some(x=>x && x.albumPlace);
+  if(!isAlbumCall) pilgrimageAlbumMode=false;
   lightboxIndex = index || 0;
   resetLightboxZoom();
   renderLightbox();
@@ -9522,23 +9594,52 @@ function openLightbox(urls, index, meta){
   document.body.style.overflow = 'hidden';
 }
 function renderLightbox(){
+  const overlay=document.getElementById('lightboxOverlay');
   const img = document.getElementById('lightboxImg');
   img.src = lightboxImages[lightboxIndex];
   resetLightboxZoom();
-  document.getElementById('lbCounter').textContent = `${lightboxIndex+1} / ${lightboxImages.length}`;
+
   const multi = lightboxImages.length > 1;
-  document.getElementById('lbPrev').style.display = multi ? 'flex' : 'none';
-  document.getElementById('lbNext').style.display = multi ? 'flex' : 'none';
-  document.getElementById('lbCounter').style.display = multi ? 'block' : 'none';
+  const counter=document.getElementById('lbCounter');
+  const zoom=document.getElementById('lbZoomControls');
+  const tip=document.getElementById('lbGestureTip');
   const info = document.getElementById('lbPhotoInfo');
   const m = lightboxMeta[lightboxIndex];
+
+  overlay?.classList.toggle('album-slide-mode', !!pilgrimageAlbumMode);
+
+  document.getElementById('lbPrev').style.display = multi ? 'flex' : 'none';
+  document.getElementById('lbNext').style.display = multi ? 'flex' : 'none';
+
+  if(pilgrimageAlbumMode){
+    if(counter) counter.style.display='none';
+    if(zoom) zoom.style.display='none';
+    if(tip) tip.style.display='none';
+
+    if(info){
+      info.textContent = m && m.albumPlace ? `📍 ${m.albumPlace}` : '';
+      info.style.display = m && m.albumPlace ? 'block' : 'none';
+    }
+    return;
+  }
+
+  if(zoom) zoom.style.display='flex';
+  if(tip) tip.style.display='block';
+  if(counter){
+    counter.textContent = `${lightboxIndex+1} / ${lightboxImages.length}`;
+    counter.style.display = multi ? 'block' : 'none';
+  }
+
   if(info && m){
     const artist = escapeHtml(m.artist || '저작자 정보 확인');
     const license = escapeHtml(m.license || '라이선스 원본 확인');
     const source = m.source ? `<a href="${escapeAttr(m.source)}" target="_blank" rel="noopener" style="color:#ffe0a0;font-weight:800;">원본·저작권 ↗</a>` : '';
     info.innerHTML = `📷 ${artist} · ${license}${source ? ' · '+source : ''}`;
     info.style.display = 'block';
-  }else if(info){ info.style.display = 'none'; info.innerHTML=''; }
+  }else if(info){
+    info.style.display = 'none';
+    info.innerHTML='';
+  }
 }
 function lightboxNav(dir){
   if(lightboxScale > 1) return;
@@ -9546,10 +9647,19 @@ function lightboxNav(dir){
   renderLightbox();
 }
 function closeLightbox(){
-  document.getElementById('lightboxOverlay').classList.remove('show');
+  document.getElementById('lightboxOverlay').classList.remove('show','album-slide-mode');
   document.getElementById('lightboxImg').src = '';
   lightboxMeta = [];
-  const info = document.getElementById('lbPhotoInfo'); if(info){info.style.display='none';info.innerHTML='';}
+  pilgrimageAlbumMode=false;
+  pilgrimageAlbumItems=[];
+  const info = document.getElementById('lbPhotoInfo');
+  if(info){info.style.display='none';info.innerHTML='';}
+  const counter=document.getElementById('lbCounter');
+  if(counter) counter.style.display='none';
+  const zoom=document.getElementById('lbZoomControls');
+  if(zoom) zoom.style.display='flex';
+  const tip=document.getElementById('lbGestureTip');
+  if(tip) tip.style.display='block';
   resetLightboxZoom();
   document.body.style.overflow = '';
 }
