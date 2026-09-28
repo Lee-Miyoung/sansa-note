@@ -7154,6 +7154,43 @@ async function resolveStoryCardUserPhotoUrl(cardId,d){
   return null;
 }
 
+
+async function loadStoryCardBackgroundImage(url){
+  if(!url) throw new Error('photo url missing');
+
+  // iPhone Safari에서 Firebase Storage 이미지를 canvas에 바로 넣을 때
+  // crossOrigin 로딩이 실패하는 경우가 있어, 먼저 fetch→Blob→data URL로
+  // 같은 문서 안의 이미지처럼 바꿔서 canvas에 그립니다.
+  try{
+    const res=await fetch(url,{mode:'cors',credentials:'omit',cache:'no-store'});
+    if(!res.ok) throw new Error(`photo fetch ${res.status}`);
+    const blob=await res.blob();
+
+    const dataUrl=await new Promise((resolve,reject)=>{
+      const reader=new FileReader();
+      reader.onload=()=>resolve(reader.result);
+      reader.onerror=()=>reject(reader.error||new Error('file reader failed'));
+      reader.readAsDataURL(blob);
+    });
+
+    return await new Promise((resolve,reject)=>{
+      const img=new Image();
+      img.onload=()=>resolve(img);
+      img.onerror=()=>reject(new Error('data image load failed'));
+      img.src=dataUrl;
+    });
+  }catch(fetchErr){
+    // 첫 방법이 막힐 때 일반 CORS 이미지 로딩도 한 번 더 시도.
+    return await new Promise((resolve,reject)=>{
+      const img=new Image();
+      img.crossOrigin='anonymous';
+      img.onload=()=>resolve(img);
+      img.onerror=()=>reject(fetchErr||new Error('image load failed'));
+      img.src=url + (url.includes('?') ? '&' : '?') + '_sc=' + Date.now();
+    });
+  }
+}
+
 function renderStoryCard(){
   const canvas = document.getElementById('storyCardCanvas');
   if(!canvas){ showToast('카드 화면을 찾지 못했어요'); return; }
@@ -7323,25 +7360,22 @@ function renderStoryCard(){
       return;
     }
 
-    const bg = new Image();
-    bg.crossOrigin = 'anonymous';
-    bg.onload = ()=>{
+    loadStoryCardBackgroundImage(photoUrl).then(bg=>{
       if(window.__storyCardRenderToken !== renderToken) return;
       try{
         drawAll(bg);
         applyStatus(true);
       }catch(e){
         console.warn('story card bg draw failed', e);
-        drawFallback();
+        const status=document.getElementById('storyCardStatus');
+        if(status) status.textContent=`${d.name} · 사진은 찾았지만 카드로 만드는 과정에서 오류가 났어요.`;
       }
-    };
-    bg.onerror = ()=>{
+    }).catch(err=>{
+      console.warn('story card background load failed',err);
       if(window.__storyCardRenderToken !== renderToken) return;
-      // URL은 찾았지만 브라우저가 이미지 로드를 막은 경우 사용자에게 정확히 안내.
       const status=document.getElementById('storyCardStatus');
-      if(status) status.textContent=`${d.name} · 사진은 찾았지만 카드 배경으로 불러오지 못했어요. 새로고침 후 다시 시도해주세요.`;
-    };
-    bg.src = photoUrl;
+      if(status) status.textContent=`${d.name} · 사진 주소는 찾았지만 아이폰 브라우저가 카드 배경 변환을 막았어요.`;
+    });
   }).catch(e=>{
     console.warn('story card photo resolve failed',e);
     if(window.__storyCardRenderToken === renderToken) drawFallback();
