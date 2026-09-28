@@ -3369,13 +3369,13 @@ body:has(#beatLabOverlay.show) #miniPlayer{
           <button type="button" class="photo-pause-btn" id="photoPauseAdminBtn" onclick="toggleGlobalPhotoUploadPause()">업로드 허용 중</button>
         </div>
         <input class="photo-pause-message" id="photoPauseMessageInput" maxlength="100" value="사진 저장소 점검 중이에요. 잠시 후 다시 이용해주세요." aria-label="사진 업로드 일시정지 안내문">
-        <div class="photo-pause-help" id="photoPauseAdminHelp">버튼을 누르면 로그인한 모든 사용자에게 같은 안내문이 표시됩니다.</div>
+        <div class="photo-pause-help" id="photoPauseAdminHelp">일시정지하면 산사노트 화면에서 모든 회원의 새 사진 업로드 버튼이 막히고 같은 안내문이 표시됩니다. 기존 사진은 그대로 볼 수 있어요.</div>
       </div>
       <button class="btn btn-primary btn-block" onclick="refreshAdminStats()" style="margin-bottom:10px;">↻ 운영 현황 새로고침</button>
 
       <div class="photo-policy-card">
         <h3>회원별 사진 사용량</h3>
-        <p id="adminReadNotice">Firebase 관리자 읽기 권한을 설정하면 전체 회원의 사용량이 여기에 표시돼요. 권한이 아직 없으면 내 계정 사용량만 확인할 수 있어요.</p>
+        <p id="adminReadNotice">전체 회원 수 · 가입일 · 최근 접속 · 사진 사용량을 확인할 수 있어요.</p>
         <div class="admin-member-list" id="adminMemberList"></div>
       </div>
 
@@ -4631,6 +4631,7 @@ window.addEventListener('DOMContentLoaded', ()=>{
       localMode = false;
       currentUid = user.uid;
       document.getElementById('authScreen').style.display = 'none';
+      ensureUserProfile(user);
       launchApp();
     }
   });
@@ -4796,6 +4797,35 @@ function doLogout(){
 /* ============================================================
    DATA PATH HELPERS (per-user)
 ============================================================ */
+
+async function ensureUserProfile(user){
+  if(!db || !user || !user.uid) return;
+  const ref=db.ref('users/'+user.uid+'/profile');
+  try{
+    const snap=await ref.once('value');
+    const old=snap.val()||{};
+    const patch={
+      email:user.email||old.email||'',
+      displayName:user.displayName||old.displayName||'',
+      photoURL:user.photoURL||old.photoURL||'',
+      lastSeenAt:firebase.database.ServerValue.TIMESTAMP
+    };
+    if(!old.joinedAt) patch.joinedAt=firebase.database.ServerValue.TIMESTAMP;
+    await ref.update(patch);
+  }catch(err){
+    console.warn('profile save failed',err&&err.code);
+  }
+}
+function formatAdminDate(ts){
+  if(!ts) return '—';
+  const d=new Date(Number(ts));
+  if(Number.isNaN(d.getTime())) return '—';
+  const yy=String(d.getFullYear()).slice(2);
+  const mm=String(d.getMonth()+1).padStart(2,'0');
+  const dd=String(d.getDate()).padStart(2,'0');
+  return `${yy}.${mm}.${dd}`;
+}
+
 function destinationsRef(){
   return db.ref('users/'+currentUid+'/destinations');
 }
@@ -4811,11 +4841,10 @@ function mountainRef(id){
 // 가사 싱크는 다른 데이터와 달리 사용자별(users/{uid})이 아니라
 // 모든 사람이 함께 보는 공용 경로에 저장합니다 — 관리자 한 명이 맞추면
 // 전체 사용자에게 똑같이 적용되어야 하기 때문입니다.
-const ADMIN_EMAIL_LOCALPART = 'song4mi12';
+const ADMIN_EMAIL = 'song4mi12@gmail.com';
 function isAdminUser(){
   const email = auth && auth.currentUser && auth.currentUser.email;
-  if(!email) return false;
-  return email.split('@')[0].toLowerCase() === ADMIN_EMAIL_LOCALPART;
+  return !!email && email.toLowerCase() === ADMIN_EMAIL;
 }
 function lyricSyncRef(){
   return db.ref('shared/lyricSync');
@@ -10459,21 +10488,24 @@ async function refreshAdminStats(){
   const storageBadge=document.getElementById('adminStorageBadge');
   if(storageBadge){
     if(isFirebaseStorageReady()){
-      storageBadge.textContent='코드 연결됨';
+      storageBadge.textContent='연결됨';
       storageBadge.className='admin-badge ok';
     }else{
-      storageBadge.textContent='Storage 시작 필요';
+      storageBadge.textContent='확인 필요';
       storageBadge.className='admin-badge wait';
     }
   }
+
+  updatePhotoPauseAdminButton();
 
   const usersEl=document.getElementById('adminUserCount');
   const photosEl=document.getElementById('adminPhotoCount');
   const list=document.getElementById('adminMemberList');
   const notice=document.getElementById('adminReadNotice');
+
   if(usersEl) usersEl.textContent='—';
   if(photosEl) photosEl.textContent='—';
-  if(list) list.innerHTML=`<div class="admin-member-row"><span><b>내 계정</b><br><small>${escapeHtml(auth?.currentUser?.email||'관리자')}</small></span><span>${my}/${FREE_PHOTO_LIMIT}장</span></div>`;
+  if(list) list.innerHTML='<div style="font-size:11px;color:var(--ink-soft);padding:8px 0;">회원 현황을 불러오는 중...</div>';
 
   if(!db) return;
   try{
@@ -10481,25 +10513,41 @@ async function refreshAdminStats(){
     const users=snap.val()||{};
     const entries=Object.entries(users);
     let totalPhotos=0;
+
     const rows=entries.map(([uid,u])=>{
       const c=countPhotosInUserData(u);
       totalPhotos+=c;
-      const label=(u&&u.profile&&(u.profile.displayName||u.profile.email)) || (uid===currentUid ? (auth?.currentUser?.email||'내 계정') : `회원 ${uid.slice(0,6)}…`);
-      return {uid,label,c};
-    }).sort((a,b)=>b.c-a.c);
+      const profile=(u&&u.profile)||{};
+      const email=profile.email || (uid===currentUid ? (auth?.currentUser?.email||'') : '');
+      const displayName=profile.displayName || '';
+      const label=displayName || email || `회원 ${uid.slice(0,6)}…`;
+      return {
+        uid,label,email,c,
+        joinedAt:Number(profile.joinedAt||0),
+        lastSeenAt:Number(profile.lastSeenAt||0)
+      };
+    }).sort((a,b)=>(b.lastSeenAt||0)-(a.lastSeenAt||0));
 
     if(usersEl) usersEl.textContent=String(entries.length);
     if(photosEl) photosEl.textContent=String(totalPhotos);
-    if(notice) notice.textContent='현재 Firebase 읽기 권한으로 확인한 회원별 사진 사용량이에요.';
+    if(notice) notice.textContent=`전체 ${entries.length}명 · 최근 접속 순서 · 사진은 사찰+산 합계`;
+
     if(list){
-      list.innerHTML=rows.length ? rows.slice(0,100).map(r=>`
-        <div class="admin-member-row">
-          <span><b>${escapeHtml(r.label)}</b><br><small>${escapeHtml(r.uid.slice(0,10))}…</small></span>
-          <span>${r.c}/${FREE_PHOTO_LIMIT}장</span>
-        </div>`).join('') : '<div style="font-size:11px;color:var(--ink-soft);padding:8px 0;">아직 회원 데이터가 없어요.</div>';
+      list.innerHTML=rows.length ? rows.slice(0,200).map(r=>`
+        <div class="admin-member-row" style="grid-template-columns:1fr auto;">
+          <span>
+            <b>${escapeHtml(r.label)}</b>
+            ${r.email && r.email!==r.label ? `<br><small>${escapeHtml(r.email)}</small>` : ''}
+            <br><small>가입 ${formatAdminDate(r.joinedAt)} · 최근 ${formatAdminDate(r.lastSeenAt)}</small>
+          </span>
+          <span style="text-align:right;"><b>${r.c}/${FREE_PHOTO_LIMIT}장</b><br><small>${r.uid===currentUid?'관리자':'회원'}</small></span>
+        </div>`).join('')
+        : '<div style="font-size:11px;color:var(--ink-soft);padding:8px 0;">아직 회원 데이터가 없어요.</div>';
     }
   }catch(err){
-    if(notice) notice.textContent='전체 회원 통계는 Firebase 관리자 읽기 권한을 설정한 뒤 자동으로 표시돼요. 지금은 내 계정 사용량만 보여드려요.';
+    console.warn('admin users read failed',err&&err.code);
+    if(notice) notice.textContent='전체 회원을 읽을 관리자 권한이 아직 없어요. 아래 Realtime Database 규칙을 게시하면 표시됩니다.';
+    if(list) list.innerHTML=`<div style="font-size:11px;color:#8b4224;padding:8px 0;">관리자 전체조회 권한 필요 · ${escapeHtml(err?.code||'permission_denied')}</div>`;
   }
 }
 
