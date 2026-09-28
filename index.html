@@ -2793,6 +2793,51 @@ body:has(#beatLabOverlay.show) #miniPlayer{
 .sync-slider-row input{flex:1;min-width:100px}
 @media(max-width:640px){.drag-handle{width:30px;height:30px;right:6px;bottom:6px}.song-sort-list{justify-content:flex-start}.song-sort-item{width:100%}.song-sort-item .song-pick{flex:1;text-align:left}.song-drag-handle{height:34px}}
 
+
+.photo-opt-note{
+  margin:-3px 0 8px;
+  font-size:10.5px;
+  line-height:1.45;
+  color:var(--ink-soft);
+}
+
+
+/* ===== 산사노트 사진 보관 안내 / 관리자 모드 ===== */
+.photo-policy-card{
+  border:1px solid rgba(23,53,46,.13);
+  background:linear-gradient(145deg,#fbfaf4,#f4f1e6);
+  border-radius:18px;padding:16px;margin-bottom:12px;
+}
+.photo-policy-card h3{margin:0 0 8px;font-size:16px;color:#17352e}
+.photo-policy-card p{margin:0;font-size:12px;line-height:1.7;color:var(--ink-soft)}
+.photo-policy-flow{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;margin:12px 0}
+.photo-policy-step{
+  min-height:62px;border-radius:13px;background:#fff;border:1px solid rgba(23,53,46,.09);
+  display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;
+  padding:8px 5px;font-size:10.5px;line-height:1.35;color:#31443e
+}
+.photo-policy-step b{font-size:17px;margin-bottom:3px}
+.photo-policy-pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.photo-policy-pill{font-size:10.5px;padding:5px 9px;border-radius:999px;background:#17352e;color:#fff}
+.photo-policy-note{font-size:11px;line-height:1.6;padding:10px 12px;border-radius:12px;background:rgba(185,139,50,.09);color:#6d5626;margin-top:10px}
+.admin-entry{display:none;margin-bottom:10px!important;background:#17352e!important;color:#fff!important;border-color:#17352e!important}
+.admin-dashboard-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin:12px 0}
+.admin-stat{border:1px solid rgba(23,53,46,.11);border-radius:15px;padding:13px;background:#fff}
+.admin-stat small{display:block;color:var(--ink-soft);font-size:10.5px;margin-bottom:4px}
+.admin-stat b{font-size:20px;color:#17352e}
+.admin-status-row{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid rgba(0,0,0,.06);font-size:12px}
+.admin-status-row:last-child{border-bottom:0}
+.admin-badge{font-size:10px;padding:4px 8px;border-radius:999px;background:#eee;color:#555;white-space:nowrap}
+.admin-badge.ok{background:#e8f2ec;color:#205b3d}
+.admin-badge.wait{background:#fff2d8;color:#835c0d}
+.admin-member-list{margin-top:10px;max-height:260px;overflow:auto}
+.admin-member-row{display:grid;grid-template-columns:1fr auto;gap:10px;padding:9px 0;border-bottom:1px solid rgba(0,0,0,.06);font-size:11px}
+.admin-member-row b{font-size:11.5px}
+@media(max-width:600px){
+  .photo-policy-flow{grid-template-columns:1fr 1fr}
+  .photo-policy-step:last-child{grid-column:1/-1}
+}
+
 </style>
 </head>
 <body>
@@ -3037,6 +3082,7 @@ body:has(#beatLabOverlay.show) #miniPlayer{
       <div class="photo-slider" id="dCoverPhotos"></div>
 
       <div class="section-label">내가 찍은 사진</div>
+      <div class="photo-opt-note">📷 큰 사진도 자동으로 웹용 크기로 줄여 저장해요. 원본은 휴대폰에 보관해주세요.</div>
       <div class="photo-grid" id="dPhotos"></div>
       <input type="file" id="photoInput" accept="image/*" multiple style="display:none" onchange="uploadPhotos(event)">
 
@@ -3106,6 +3152,7 @@ body:has(#beatLabOverlay.show) #miniPlayer{
       <div class="photo-slider" id="mCoverPhotos"></div>
 
       <div class="section-label">내가 찍은 사진</div>
+      <div class="photo-opt-note">📷 큰 사진도 자동으로 웹용 크기로 줄여 저장해요. 원본은 휴대폰에 보관해주세요.</div>
       <div class="photo-grid" id="mPhotos"></div>
       <input type="file" id="mPhotoInput" accept="image/*" multiple style="display:none" onchange="uploadMountainPhotos(event)">
 
@@ -3173,10 +3220,103 @@ body:has(#beatLabOverlay.show) #miniPlayer{
       <button class="btn btn-ghost btn-block" onclick="closeSettings();openPrayersOverlay();" style="margin-bottom:10px;">📿 기도문 모음 (천수경·반야심경·발원문·진언)</button>
       <button class="btn btn-ghost btn-block" onclick="closeSettings();openPhotobookOverlay();" style="margin-bottom:10px;">📖 나만의 순례집 PDF 만들기</button>
       <button class="btn btn-ghost btn-block" onclick="closeSettings();openPassportOverlay();" style="margin-bottom:10px;">🛂 순례 여권 (현장 인증 스탬프)</button>
+      <button class="btn btn-ghost btn-block" onclick="closeSettings();openPhotoPolicyOverlay();" style="margin-bottom:10px;">📷 사진 저장 · 무료 이용 안내</button>
+      <button class="btn btn-ghost btn-block admin-entry" id="adminModeBtn" onclick="closeSettings();openAdminOverlay();">🛠 관리자 모드</button>
       <button class="btn btn-ghost btn-block" id="darkModeBtn" onclick="toggleDarkMode()" style="margin-bottom:10px;">🌙 야간/템플스테이 모드 켜기</button>
       <button class="btn btn-ghost btn-block" id="psyModeBtn" onclick="togglePsyMode()" style="margin-bottom:10px;">🌈 사이키델릭 극락 모드 켜기</button>
       <button class="btn btn-ghost btn-block" onclick="closeSettings();openVowOverlay();" style="margin-bottom:10px;">🌅 발원문 쓰기 (미래의 나에게)</button>
       <button class="btn btn-ghost btn-block" onclick="doLogout()">로그아웃</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ===================== PHOTO POLICY MODAL ===================== -->
+<div class="overlay" id="photoPolicyOverlay">
+  <div class="modal">
+    <div class="modal-head">
+      <div>
+        <h2 class="serif">사진 저장 안내</h2>
+        <div class="sub">산사노트는 처음 6개월 동안 무료로 운영할 예정이에요.</div>
+      </div>
+      <button class="close-x" onclick="closePhotoPolicyOverlay()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="photo-policy-card">
+        <h3>📷 무료회원 사진은 1인 최대 50장</h3>
+        <p>사찰과 산에 올린 사진을 모두 합해서 50장까지 저장하는 것을 목표로 준비하고 있어요. 사이트가 커지면 무료회원은 기본 용량을 유지하고, 더 많은 사진이 필요한 분을 위한 PLUS 기능을 추가할 수 있어요.</p>
+        <div class="photo-policy-pills">
+          <span class="photo-policy-pill">처음 6개월 무료</span>
+          <span class="photo-policy-pill">1인 50장 목표</span>
+          <span class="photo-policy-pill">자동 압축</span>
+        </div>
+      </div>
+
+      <div class="photo-policy-flow">
+        <div class="photo-policy-step"><b>📱</b>사진 선택</div>
+        <div class="photo-policy-step"><b>↘</b>자동으로<br>크기 줄이기</div>
+        <div class="photo-policy-step"><b>☁️</b>사진 창고에<br>안전하게 저장</div>
+        <div class="photo-policy-step"><b>🔒</b>내 계정과<br>연결</div>
+        <div class="photo-policy-step"><b>♻️</b>삭제 사진<br>복구 준비</div>
+      </div>
+
+      <div class="photo-policy-card">
+        <h3>사진은 자동으로 가볍게 저장해요</h3>
+        <p>휴대폰의 큰 원본 사진을 그대로 올리지 않고, 산사노트가 웹에서 보기 좋은 크기로 자동 최적화해 저장해요. 업로드가 빨라지고 저장공간도 아낄 수 있어요.</p>
+        <div class="photo-policy-note">원본 사진 보관 서비스는 아니에요. 소중한 원본 사진은 아이폰·갤럭시 또는 개인 클라우드에도 꼭 보관해주세요.</div>
+      </div>
+
+      <div class="photo-policy-card">
+        <h3>🧺 삭제한 사진도 바로 포기하지 않도록</h3>
+        <p>사진 저장소를 Firebase Storage로 연결한 뒤에는 삭제된 사진을 일정 기간 복구할 수 있는 구조로 운영할 계획이에요. 목표는 <b>30일 복구 기간</b>이에요.</p>
+      </div>
+
+      <div class="photo-policy-card">
+        <h3>🚧 현재 준비 상태</h3>
+        <p id="photoStoragePlanStatus">자동 압축 기능은 준비되어 있어요. 실제 사용자 사진 저장소는 Firebase Storage 연결 후 정식 운영합니다.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== ADMIN MODE MODAL ===================== -->
+<div class="overlay" id="adminOverlay">
+  <div class="modal wide">
+    <div class="modal-head">
+      <div>
+        <h2 class="serif">🛠 관리자 모드</h2>
+        <div class="sub">산사노트 운영 현황을 한눈에 확인하는 화면</div>
+      </div>
+      <button class="close-x" onclick="closeAdminOverlay()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="photo-policy-card">
+        <h3>운영 계획</h3>
+        <div class="admin-status-row"><span>처음 6개월</span><span class="admin-badge ok">무료 운영</span></div>
+        <div class="admin-status-row"><span>무료회원 사진</span><span class="admin-badge ok">1인 50장 목표</span></div>
+        <div class="admin-status-row"><span>사진 자동 압축</span><span class="admin-badge ok">코드 적용됨</span></div>
+        <div class="admin-status-row"><span>Firebase Storage</span><span class="admin-badge wait" id="adminStorageBadge">연결 준비</span></div>
+        <div class="admin-status-row"><span>삭제 사진 복구</span><span class="admin-badge wait">Storage 연결 후 30일 목표</span></div>
+      </div>
+
+      <div class="admin-dashboard-grid">
+        <div class="admin-stat"><small>전체 회원</small><b id="adminUserCount">—</b></div>
+        <div class="admin-stat"><small>전체 개인사진</small><b id="adminPhotoCount">—</b></div>
+        <div class="admin-stat"><small>내 계정 사진</small><b id="adminMyPhotoCount">0 / 50</b></div>
+        <div class="admin-stat"><small>사진 한도</small><b>50장</b></div>
+      </div>
+
+      <button class="btn btn-primary btn-block" onclick="refreshAdminStats()" style="margin-bottom:10px;">↻ 운영 현황 새로고침</button>
+
+      <div class="photo-policy-card">
+        <h3>회원별 사진 사용량</h3>
+        <p id="adminReadNotice">Firebase 관리자 읽기 권한을 설정하면 전체 회원의 사용량이 여기에 표시돼요. 권한이 아직 없으면 내 계정 사용량만 확인할 수 있어요.</p>
+        <div class="admin-member-list" id="adminMemberList"></div>
+      </div>
+
+      <div class="photo-policy-note">
+        이 관리자 화면은 관리자 계정에만 보여요. 실제 사진 저장·복구 기능은 Firebase Storage 연결 단계에서 이어서 완성하면 됩니다.
+      </div>
     </div>
   </div>
 </div>
@@ -4433,7 +4573,10 @@ window.addEventListener('DOMContentLoaded', ()=>{
 
   if(isStandalonePWA()){
     const note = document.getElementById('pwaLoginNote');
-    if(note) note.style.display = 'block';
+    if(note){
+      note.style.display = 'block';
+      if(isIOSLike()) note.innerHTML = '📱 iPhone 홈 화면 앱에서 Google 로그인이 안 되면 <b>Safari에서 sansanote.com을 직접 열어 먼저 로그인</b>해 주세요.';
+    }
   }
 });
 
@@ -4461,10 +4604,12 @@ function makeGoogleProvider(){
 
 async function googleLogin(){
   if(googleLoginInProgress || !auth) return;
+
   googleLoginInProgress = true;
   const btn = document.getElementById('googleLoginBtn');
-  const originalText = btn ? btn.textContent : 'Google로 계속하기';
+  const originalText = btn ? btn.textContent : 'Google로 시작하기';
   if(btn){ btn.textContent = 'Google 연결 중...'; btn.disabled = true; }
+
   const provider = makeGoogleProvider();
 
   function resetBtn(){
@@ -4473,22 +4618,54 @@ async function googleLogin(){
   }
 
   try{
-    // 기기 간 로그인 유지. Safari/iPad에서 기본 persistence 결정이 늦어지는 문제도 예방합니다.
-    await auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
-    await auth.signInWithPopup(provider);
+    /*
+      iPhone Safari 핵심:
+      팝업 전에 await를 실행하면 Safari가 "사용자가 직접 누른 팝업"으로
+      인식하지 못해 차단하는 경우가 있습니다.
+      persistence는 DOMContentLoaded에서 이미 LOCAL로 설정하고 있으므로
+      여기서는 버튼 클릭 직후 바로 signInWithPopup()을 호출합니다.
+    */
+    const popupPromise = auth.signInWithPopup(provider);
+    await popupPromise;
     resetBtn();
+    return;
   }catch(err){
     const code = err && err.code ? err.code : '';
 
-    // 일반 Safari/브라우저에서는 popup이 막히면 redirect를 한 번 더 시도합니다.
-    // 단, 홈 화면 PWA에서 sessionStorage를 못 쓰면 예전의 'missing initial state' 오류가 나므로 redirect를 금지합니다.
-    const mayRedirect = !isStandalonePWA() && canUseSessionStorage() &&
-      (code === 'auth/popup-blocked' || code === 'auth/operation-not-supported-in-this-environment' || code === 'auth/web-storage-unsupported');
+    resetBtn();
+
+    if(code === 'auth/unauthorized-domain'){
+      showAuthError('Firebase 승인 도메인에 현재 주소가 없어요. Firebase → Authentication → Settings → 승인된 도메인에 sansanote.com 과 www.sansanote.com 을 추가해주세요.');
+      return;
+    }
+
+    /*
+      Safari 16.1+에서는 타사 스토리지 제한 때문에
+      sansanote.com → *.firebaseapp.com 형태의 redirect 로그인이
+      불안정할 수 있습니다. iPhone/iPad에서는 redirect fallback을
+      사용하지 않고 popup만 사용합니다.
+    */
+    if(isIOSLike()){
+      if(isStandalonePWA()){
+        showAuthError('아이폰 홈 화면에 추가한 산사노트에서는 Google 로그인이 막힐 수 있어요. Safari에서 https://sansanote.com 을 직접 열고 Google 로그인을 먼저 해주세요. 로그인 후 홈 화면 앱을 다시 열면 계정이 유지됩니다.');
+      }else if(code === 'auth/popup-blocked'){
+        showAuthError('Safari가 Google 로그인 창을 막았어요. 설정 → Safari → 팝업 차단을 잠시 끄거나, 주소창의 팝업 허용 후 다시 눌러주세요.');
+      }else{
+        showAuthError(friendlyAuthError(err));
+      }
+      return;
+    }
+
+    // iOS가 아닌 일반 브라우저에서만 redirect fallback 사용
+    const mayRedirect = canUseSessionStorage() &&
+      (code === 'auth/popup-blocked' ||
+       code === 'auth/operation-not-supported-in-this-environment' ||
+       code === 'auth/web-storage-unsupported');
 
     if(mayRedirect){
       try{
-        if(btn) btn.textContent = 'Google로 이동 중...';
-        await auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+        googleLoginInProgress = true;
+        if(btn){ btn.textContent = 'Google로 이동 중...'; btn.disabled = true; }
         await auth.signInWithRedirect(provider);
         return;
       }catch(redirectErr){
@@ -4498,14 +4675,7 @@ async function googleLogin(){
       }
     }
 
-    resetBtn();
-    if(code === 'auth/unauthorized-domain'){
-      showAuthError('현재 주소가 Firebase 승인 도메인에 등록되지 않았어요. Firebase → Authentication → Settings → 승인된 도메인에 sansanote.com 과 www.sansanote.com 을 추가해주세요.');
-    }else if(isStandalonePWA() && isIOSLike()){
-      showAuthError('아이폰·아이패드 홈 화면 앱에서는 Google 팝업/리디렉션이 iOS 보안 때문에 막힐 수 있어요. Safari에서 산사노트를 열어 Google 로그인을 먼저 해보세요. Safari에서 sansanote.com을 열어 Google 로그인을 먼저 완료한 뒤 다시 앱을 열어주세요.');
-    }else{
-      showAuthError(friendlyAuthError(err));
-    }
+    showAuthError(friendlyAuthError(err));
   }
 }
 
@@ -8352,34 +8522,64 @@ function renderMountainPhotos(photos){
   }
 }
 
-function uploadMountainPhotos(event){
-  const files = Array.from(event.target.files || []);
+async function uploadMountainPhotos(event){
+  const files=Array.from(event.target.files||[]);
   if(files.length===0) return;
-  if(localMode){ event.target.value=''; promptGuestLoginRequired(); return; }
+  if(localMode){event.target.value='';promptGuestLoginRequired();return;}
   if(!CLOUDINARY_CLOUD_NAME || CLOUDINARY_CLOUD_NAME.indexOf('REPLACE_ME')===0){
     showToast('사진 저장소가 아직 설정되지 않았어요. 관리자에게 문의해주세요.');
-    event.target.value = '';
+    event.target.value='';
     return;
   }
-  const id = currentMountainDetailId;
-  files.forEach(file=>{
-    const formData = new FormData();
-    formData.append('file', file);
-    formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
-    fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`, {method:'POST', body:formData})
-      .then(r=>r.json())
-      .then(data=>{
-        if(!data.secure_url) throw new Error(data.error ? data.error.message : '업로드 실패');
-        const pid = newId();
-        const photos = Object.assign({}, mountainDestinations[id].photos || {});
-        photos[pid] = {url:data.secure_url};
-        updateMountainDestination(id, {photos});
-        mountainDestinations[id].photos = photos;
-        renderMountainPhotos(photos);
-        render();
-      }).catch(err=> showToast('업로드 실패: '+err.message));
-  });
-  event.target.value = '';
+
+  const id=currentMountainDetailId;
+  event.target.value='';
+  showToast(files.length>1 ? `${files.length}장 최적화 중...` : '사진 자동 최적화 중...');
+
+  let success=0, failed=0, savedBytes=0;
+  for(const original of files){
+    try{
+      const optimized=await compressUserPhoto(original);
+      savedBytes += Math.max(0, optimized.originalBytes-optimized.optimizedBytes);
+
+      const formData=new FormData();
+      formData.append('file', optimized.file);
+      formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+      formData.append('folder','users/'+currentUid+'/mountains/'+id);
+
+      const res=await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`, {
+        method:'POST',body:formData
+      });
+      const data=await res.json();
+      if(!data.secure_url) throw new Error(data.error ? data.error.message : '업로드 실패');
+
+      const pid=newId();
+      const photos=Object.assign({}, mountainDestinations[id].photos||{});
+      photos[pid]={
+        url:data.secure_url,
+        publicId:data.public_id,
+        optimized:true,
+        width:optimized.width,
+        height:optimized.height,
+        bytes:optimized.optimizedBytes
+      };
+      await updateMountainDestination(id,{photos});
+      mountainDestinations[id].photos=photos;
+      renderMountainPhotos(photos);
+      success++;
+    }catch(err){
+      failed++;
+      showToast(`사진 1장 실패: ${err.message}`);
+    }
+  }
+
+  if(success){
+    render();
+    const saved=savedBytes>0 ? ` · 약 ${humanFileSize(savedBytes)} 절약` : '';
+    showToast(`사진 ${success}장 저장 완료${saved}${failed?` · ${failed}장 실패`:''}`);
+  }else if(failed){
+    showToast('사진을 저장하지 못했어요.');
+  }
 }
 function deleteMountainPhoto(pid, evt){
   evt.stopPropagation();
@@ -9314,38 +9514,153 @@ document.addEventListener('wheel', e=>{
   }
 },{passive:false});
 
+
+/* ============================================================
+   사용자 사진 자동 최적화
+   - 원본은 브라우저 안에서 먼저 줄이고, 줄인 파일만 저장소로 업로드
+   - 긴 변 최대 1600px
+   - JPEG 품질 82%
+   - 15MB를 넘는 원본은 업로드 전 안내
+============================================================ */
+const USER_PHOTO_MAX_SOURCE_BYTES = 15 * 1024 * 1024;
+const USER_PHOTO_MAX_EDGE = 1600;
+const USER_PHOTO_JPEG_QUALITY = 0.82;
+
+function humanFileSize(bytes){
+  if(!Number.isFinite(bytes)) return '';
+  if(bytes < 1024) return bytes+'B';
+  if(bytes < 1024*1024) return Math.round(bytes/1024)+'KB';
+  return (bytes/(1024*1024)).toFixed(1)+'MB';
+}
+
+function loadPhotoForCompression(file){
+  return new Promise((resolve,reject)=>{
+    const url=URL.createObjectURL(file);
+    const img=new Image();
+    img.onload=()=>resolve({img,url});
+    img.onerror=()=>{
+      URL.revokeObjectURL(url);
+      reject(new Error('이 사진 형식은 브라우저에서 읽지 못했어요.'));
+    };
+    img.src=url;
+  });
+}
+
+async function compressUserPhoto(file){
+  if(!file || !String(file.type||'').startsWith('image/')){
+    throw new Error('사진 파일만 올릴 수 있어요.');
+  }
+  if(file.size > USER_PHOTO_MAX_SOURCE_BYTES){
+    throw new Error(`원본 사진이 ${humanFileSize(file.size)}예요. 15MB 이하 사진을 선택해주세요.`);
+  }
+
+  const {img,url}=await loadPhotoForCompression(file);
+  try{
+    let w=img.naturalWidth||img.width;
+    let h=img.naturalHeight||img.height;
+    if(!w||!h) throw new Error('사진 크기를 확인하지 못했어요.');
+
+    const scale=Math.min(1, USER_PHOTO_MAX_EDGE/Math.max(w,h));
+    const nw=Math.max(1,Math.round(w*scale));
+    const nh=Math.max(1,Math.round(h*scale));
+
+    const canvas=document.createElement('canvas');
+    canvas.width=nw; canvas.height=nh;
+    const ctx=canvas.getContext('2d',{alpha:false});
+    if(!ctx) throw new Error('사진을 줄이지 못했어요.');
+
+    // JPEG의 투명 영역이 검게 되는 것을 막기 위해 흰 배경을 먼저 칠함.
+    ctx.fillStyle='#fff';
+    ctx.fillRect(0,0,nw,nh);
+    ctx.drawImage(img,0,0,nw,nh);
+
+    let quality=USER_PHOTO_JPEG_QUALITY;
+    let blob=await new Promise(resolve=>canvas.toBlob(resolve,'image/jpeg',quality));
+    if(!blob) throw new Error('사진 압축에 실패했어요.');
+
+    // 아주 큰 결과물은 품질을 조금씩 낮춰 1MB 안쪽을 목표로 함.
+    while(blob.size > 1024*1024 && quality > 0.68){
+      quality-=0.05;
+      blob=await new Promise(resolve=>canvas.toBlob(resolve,'image/jpeg',quality));
+      if(!blob) break;
+    }
+
+    const base=(file.name||'photo').replace(/\.[^.]+$/,'').replace(/[^\w가-힣.-]+/g,'_').slice(0,80)||'photo';
+    const optimized=new File([blob], `${base}.jpg`, {
+      type:'image/jpeg',
+      lastModified:Date.now()
+    });
+
+    return {
+      file:optimized,
+      originalBytes:file.size,
+      optimizedBytes:optimized.size,
+      width:nw,
+      height:nh
+    };
+  } finally {
+    URL.revokeObjectURL(url);
+  }
+}
+
 function triggerUpload(){
   document.getElementById('photoInput').click();
 }
 
-function uploadPhotos(evt){
+async function uploadPhotos(evt){
   const files = Array.from(evt.target.files||[]);
   if(!files.length || !currentDetailId) return;
   if(localMode){ evt.target.value=''; promptGuestLoginRequired(); return; }
   if(!CLOUDINARY_CLOUD_NAME || CLOUDINARY_CLOUD_NAME.indexOf('REPLACE_ME')===0){
     showToast('사진 저장소가 아직 설정되지 않았어요. 관리자에게 문의해주세요.');
+    evt.target.value='';
     return;
   }
-  const id = currentDetailId;
-  showToast('사진 업로드 중...');
-  files.forEach(file=>{
-    const pid = newId();
-    const form = new FormData();
-    form.append('file', file);
-    form.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
-    form.append('folder', 'users/'+currentUid+'/'+id);
-    fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`, {
-      method:'POST', body: form
-    }).then(res=>res.json()).then(data=>{
-      if(!data.secure_url){ throw new Error(data.error ? data.error.message : '업로드 실패'); }
-      const photoData = {url: data.secure_url, publicId: data.public_id};
-      destinationRef(id).child('photos/'+pid).set(photoData);
-      showToast('업로드 완료');
-    }).catch(err=>{
-      showToast('업로드 실패: '+err.message);
-    });
-  });
-  evt.target.value = '';
+
+  const id=currentDetailId;
+  evt.target.value='';
+  showToast(files.length>1 ? `${files.length}장 최적화 중...` : '사진 자동 최적화 중...');
+
+  let success=0, failed=0, savedBytes=0;
+  for(const original of files){
+    try{
+      const optimized=await compressUserPhoto(original);
+      savedBytes += Math.max(0, optimized.originalBytes-optimized.optimizedBytes);
+
+      const pid=newId();
+      const form=new FormData();
+      form.append('file', optimized.file);
+      form.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+      form.append('folder', 'users/'+currentUid+'/'+id);
+
+      const res=await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`, {
+        method:'POST', body:form
+      });
+      const data=await res.json();
+      if(!data.secure_url) throw new Error(data.error ? data.error.message : '업로드 실패');
+
+      const photoData={
+        url:data.secure_url,
+        publicId:data.public_id,
+        optimized:true,
+        width:optimized.width,
+        height:optimized.height,
+        bytes:optimized.optimizedBytes
+      };
+      await destinationRef(id).child('photos/'+pid).set(photoData);
+      success++;
+    }catch(err){
+      failed++;
+      showToast(`사진 1장 실패: ${err.message}`);
+    }
+  }
+
+  if(success){
+    const saved=savedBytes>0 ? ` · 약 ${humanFileSize(savedBytes)} 절약` : '';
+    showToast(`사진 ${success}장 저장 완료${saved}${failed?` · ${failed}장 실패`:''}`);
+  }else if(failed){
+    showToast('사진을 저장하지 못했어요.');
+  }
 }
 
 function deletePhoto(pid, evt){
@@ -9432,11 +9747,112 @@ function addDestination(){
   showToast('절을 추가했어요');
 }
 
+
+/* ============================================================
+   PHOTO POLICY / ADMIN MODE
+============================================================ */
+const FREE_PHOTO_LIMIT = 50;
+
+function openPhotoPolicyOverlay(){
+  const el=document.getElementById('photoPolicyOverlay');
+  if(el) el.classList.add('show');
+  updatePhotoStoragePlanStatus();
+}
+function closePhotoPolicyOverlay(){
+  document.getElementById('photoPolicyOverlay')?.classList.remove('show');
+}
+function updatePhotoStoragePlanStatus(){
+  const el=document.getElementById('photoStoragePlanStatus');
+  if(!el) return;
+  const cloudinaryReady = typeof CLOUDINARY_CLOUD_NAME!=='undefined' &&
+    CLOUDINARY_CLOUD_NAME && CLOUDINARY_CLOUD_NAME.indexOf('REPLACE_ME')!==0;
+  if(cloudinaryReady){
+    el.textContent='현재 사진 업로드 저장소가 연결되어 있어요. 다음 단계에서 Firebase Storage 방식으로 통일하면 사용자별 50장 제한과 복구 정책을 함께 적용할 수 있어요.';
+  }else{
+    el.textContent='자동 압축 기능은 이미 준비되어 있어요. 실제 사용자 사진 저장소는 Firebase Storage 연결 후 정식 운영합니다.';
+  }
+}
+
+function countPhotosInUserData(userData){
+  let n=0;
+  const ds=(userData&&userData.destinations)||{};
+  const ms=(userData&&userData.mountains)||{};
+  Object.values(ds).forEach(d=>{ n += Object.keys((d&&d.photos)||{}).length; });
+  Object.values(ms).forEach(m=>{ n += Object.keys((m&&m.photos)||{}).length; });
+  return n;
+}
+function countMyLoadedPhotos(){
+  let n=0;
+  Object.values(destinations||{}).forEach(d=>{ n += Object.keys((d&&d.photos)||{}).length; });
+  Object.values(mountainDestinations||{}).forEach(m=>{ n += Object.keys((m&&m.photos)||{}).length; });
+  return n;
+}
+function syncAdminEntry(){
+  const btn=document.getElementById('adminModeBtn');
+  if(btn) btn.style.display = isAdminUser() ? 'block' : 'none';
+}
+async function openAdminOverlay(){
+  if(!isAdminUser()){ showToast('관리자 계정에서만 열 수 있어요.'); return; }
+  document.getElementById('adminOverlay')?.classList.add('show');
+  await refreshAdminStats();
+}
+function closeAdminOverlay(){
+  document.getElementById('adminOverlay')?.classList.remove('show');
+}
+async function refreshAdminStats(){
+  if(!isAdminUser()) return;
+  const my=countMyLoadedPhotos();
+  const myEl=document.getElementById('adminMyPhotoCount');
+  if(myEl) myEl.textContent=`${my} / ${FREE_PHOTO_LIMIT}`;
+
+  const storageBadge=document.getElementById('adminStorageBadge');
+  if(storageBadge){
+    storageBadge.textContent='연결 준비';
+    storageBadge.className='admin-badge wait';
+  }
+
+  const usersEl=document.getElementById('adminUserCount');
+  const photosEl=document.getElementById('adminPhotoCount');
+  const list=document.getElementById('adminMemberList');
+  const notice=document.getElementById('adminReadNotice');
+  if(usersEl) usersEl.textContent='—';
+  if(photosEl) photosEl.textContent='—';
+  if(list) list.innerHTML=`<div class="admin-member-row"><span><b>내 계정</b><br><small>${escapeHtml(auth?.currentUser?.email||'관리자')}</small></span><span>${my}/${FREE_PHOTO_LIMIT}장</span></div>`;
+
+  if(!db) return;
+  try{
+    const snap=await db.ref('users').once('value');
+    const users=snap.val()||{};
+    const entries=Object.entries(users);
+    let totalPhotos=0;
+    const rows=entries.map(([uid,u])=>{
+      const c=countPhotosInUserData(u);
+      totalPhotos+=c;
+      const label=(u&&u.profile&&(u.profile.displayName||u.profile.email)) || (uid===currentUid ? (auth?.currentUser?.email||'내 계정') : `회원 ${uid.slice(0,6)}…`);
+      return {uid,label,c};
+    }).sort((a,b)=>b.c-a.c);
+
+    if(usersEl) usersEl.textContent=String(entries.length);
+    if(photosEl) photosEl.textContent=String(totalPhotos);
+    if(notice) notice.textContent='현재 Firebase 읽기 권한으로 확인한 회원별 사진 사용량이에요.';
+    if(list){
+      list.innerHTML=rows.length ? rows.slice(0,100).map(r=>`
+        <div class="admin-member-row">
+          <span><b>${escapeHtml(r.label)}</b><br><small>${escapeHtml(r.uid.slice(0,10))}…</small></span>
+          <span>${r.c}/${FREE_PHOTO_LIMIT}장</span>
+        </div>`).join('') : '<div style="font-size:11px;color:var(--ink-soft);padding:8px 0;">아직 회원 데이터가 없어요.</div>';
+    }
+  }catch(err){
+    if(notice) notice.textContent='전체 회원 통계는 Firebase 관리자 읽기 권한을 설정한 뒤 자동으로 표시돼요. 지금은 내 계정 사용량만 보여드려요.';
+  }
+}
+
 /* ============================================================
    SETTINGS MODAL
 ============================================================ */
 function openSettings(){
   updateAccountInfo();
+  syncAdminEntry();
   document.getElementById('settingsOverlay').classList.add('show');
 }
 function closeSettings(){ document.getElementById('settingsOverlay').classList.remove('show'); }
