@@ -3655,12 +3655,12 @@ body:has(#beatLabOverlay.show) #miniPlayer{
 <div class="overlay" id="storyCardOverlay">
   <div class="modal" style="text-align:center;">
     <div class="modal-head">
-      <div><h2 class="serif">📸 순례 인증 카드</h2><div class="sub">인스타 스토리에 바로 올릴 수 있는 크기예요</div></div>
+      <div><h2 class="serif">📸 순례 인증 카드</h2><div class="sub">인스타 스토리에 바로 올릴 수 있는 크기예요 · 사진이 있으면 배경에 자동 적용돼요</div></div>
       <button class="close-x" onclick="closeStoryCardOverlay()">✕</button>
     </div>
     <div class="modal-body">
       <input class="searchbox" id="storyCardMsg" placeholder="한 줄 소감 (예: 마음을 비우고 갑니다)" style="width:100%;margin-bottom:12px;" oninput="renderStoryCard()">
-      <div id="storyCardStatus" style="font-size:11.5px;color:var(--ink-soft);margin:-2px 0 10px;">선택한 절로 카드를 만들고 있어요.</div>
+      <div id="storyCardStatus" style="font-size:11.5px;color:var(--ink-soft);margin:-2px 0 10px;">선택한 절로 카드를 만들고 있어요. 사진이 있으면 자동으로 배경에 들어가요.</div>
       <canvas id="storyCardCanvas" width="1080" height="1920" style="width:100%;max-width:220px;border-radius:12px;box-shadow:0 6px 20px rgba(0,0,0,.25);margin-bottom:14px;background:#f5ead2;"></canvas>
       <div class="story-card-actions">
         <button class="btn btn-primary btn-block" onclick="downloadStoryCard()">📥 저장하기</button>
@@ -7039,6 +7039,18 @@ const CARD_HANJA = [
   {ch:'恩', mean:'은혜'}, {ch:'樂', mean:'즐거움'}, {ch:'平', mean:'평온'}, {ch:'淸', mean:'맑음'},
   {ch:'一', mean:'한마음'}, {ch:'佛', mean:'부처'}
 ];
+function getStoryCardUserPhotoUrl(d){
+  if(!d || !d.photos) return null;
+  if(Array.isArray(d.photoOrder) && d.photoOrder.length){
+    const ordered = d.photoOrder.map(pid=>d.photos[pid]).filter(p=>isLikelyValidPhotoUrl(p&&p.url));
+    if(ordered.length) return ordered[0].url;
+  }
+  const arr = Object.values(d.photos).filter(p=>isLikelyValidPhotoUrl(p&&p.url));
+  if(!arr.length) return null;
+  arr.sort((a,b)=>Number(b.createdAt||0)-Number(a.createdAt||0));
+  return arr[0].url || null;
+}
+
 function renderStoryCard(){
   const canvas = document.getElementById('storyCardCanvas');
   if(!canvas){ showToast('카드 화면을 찾지 못했어요'); return; }
@@ -7053,17 +7065,44 @@ function renderStoryCard(){
   const today = new Date();
   const dateStr = `${today.getFullYear()}.${String(today.getMonth()+1).padStart(2,'0')}`;
   const hanjaPick = TEMPLE_HANJA[d.name] || CARD_HANJA[Math.floor(Math.random()*CARD_HANJA.length)];
+  const photoUrl = getStoryCardUserPhotoUrl(d);
+  const renderToken = Date.now() + Math.random();
+  window.__storyCardRenderToken = renderToken;
 
-  function drawAll(){
-    // 배경: 한지색 그라데이션
-    const grad = ctx.createRadialGradient(W/2,H*0.35,80,W/2,H*0.35,H*0.9);
-    grad.addColorStop(0, '#fbf3e0');
-    grad.addColorStop(1, '#e8d3a8');
-    ctx.fillStyle = grad;
-    ctx.fillRect(0,0,W,H);
+  function drawAll(bgImg){
+    ctx.clearRect(0,0,W,H);
+
+    // 배경: 사용자가 올린 대표 사진이 있으면 자동 적용, 없으면 한지 배경 유지
+    if(bgImg){
+      const scale = Math.max(W / bgImg.width, H / bgImg.height);
+      const dw = bgImg.width * scale;
+      const dh = bgImg.height * scale;
+      const dx = (W - dw) / 2;
+      const dy = (H - dh) / 2;
+      ctx.drawImage(bgImg, dx, dy, dw, dh);
+
+      const overlay = ctx.createLinearGradient(0,0,0,H);
+      overlay.addColorStop(0,'rgba(20,16,12,.18)');
+      overlay.addColorStop(.45,'rgba(38,26,14,.28)');
+      overlay.addColorStop(1,'rgba(34,22,10,.50)');
+      ctx.fillStyle = overlay;
+      ctx.fillRect(0,0,W,H);
+
+      const warm = ctx.createRadialGradient(W*0.5,H*0.28,40,W*0.5,H*0.3,H*0.9);
+      warm.addColorStop(0,'rgba(255,243,220,.20)');
+      warm.addColorStop(1,'rgba(233,212,170,.30)');
+      ctx.fillStyle = warm;
+      ctx.fillRect(0,0,W,H);
+    }else{
+      const grad = ctx.createRadialGradient(W/2,H*0.35,80,W/2,H*0.35,H*0.9);
+      grad.addColorStop(0, '#fbf3e0');
+      grad.addColorStop(1, '#e8d3a8');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0,0,W,H);
+    }
 
     // 기하학적 격자 문양
-    ctx.strokeStyle = 'rgba(160,31,31,.08)';
+    ctx.strokeStyle = bgImg ? 'rgba(255,250,240,.10)' : 'rgba(160,31,31,.08)';
     ctx.lineWidth = 1.5;
     for(let x=40; x<W; x+=48){ ctx.beginPath(); ctx.moveTo(x,80); ctx.lineTo(x,H-80); ctx.stroke(); }
     for(let y=80+24; y<H-80; y+=48){ ctx.beginPath(); ctx.moveTo(40,y); ctx.lineTo(W-40,y); ctx.stroke(); }
@@ -7075,24 +7114,35 @@ function renderStoryCard(){
     ctx.lineWidth = 2.5;
     ctx.strokeRect(54,54,W-108,H-108);
 
-    // 큰 한자 문양 (랜덤, 은은하게)
+    // 큰 한자 문양 (사진이 있을 땐 더 은은하게)
     ctx.textAlign = 'center';
-    ctx.fillStyle = 'rgba(160,31,31,.10)';
+    ctx.fillStyle = bgImg ? 'rgba(255,246,232,.14)' : 'rgba(160,31,31,.10)';
     ctx.font = 'bold 560px serif';
     ctx.fillText(hanjaPick.ch, W/2, H*0.42);
     ctx.font = '30px sans-serif';
-    ctx.fillStyle = 'rgba(160,31,31,.35)';
+    ctx.fillStyle = bgImg ? 'rgba(255,241,219,.42)' : 'rgba(160,31,31,.35)';
     ctx.fillText(`- ${hanjaPick.mean} -`, W/2, H*0.42 + 70);
 
     // 상단 연꽃 아이콘
     ctx.font = '90px serif';
-    ctx.fillStyle = 'rgba(160,31,31,.7)';
+    ctx.fillStyle = bgImg ? 'rgba(255,240,210,.88)' : 'rgba(160,31,31,.7)';
     ctx.fillText('🪷', W/2, 220);
 
-    // 캐릭터 워터마크 — 본문/한자/캐릭터를 가리지 않도록 우상단에 작고 은은하게
+    // 상단 안내 pill
+    ctx.save();
+    ctx.beginPath();
+    if(ctx.roundRect){ ctx.roundRect(W/2-178, 246, 356, 46, 23); } else { ctx.rect(W/2-178, 246, 356, 46); }
+    ctx.fillStyle = bgImg ? 'rgba(255,255,255,.18)' : 'rgba(160,31,31,.08)';
+    ctx.fill();
+    ctx.font = 'bold 21px sans-serif';
+    ctx.fillStyle = bgImg ? 'rgba(255,250,240,.92)' : '#8b3b1f';
+    ctx.fillText(photoUrl ? '내가 올린 사진 배경 자동 적용' : '대표 한자 카드', W/2, 276);
+    ctx.restore();
+
+    // 캐릭터 워터마크
     if(window.__cardMonkImg){
       ctx.save();
-      ctx.globalAlpha = 0.16;
+      ctx.globalAlpha = bgImg ? 0.20 : 0.16;
       const mw = 150, mh = mw * (window.__cardMonkImg.height/window.__cardMonkImg.width);
       ctx.drawImage(window.__cardMonkImg, W-mw-78, 92, mw, mh);
       ctx.restore();
@@ -7100,11 +7150,13 @@ function renderStoryCard(){
 
     // 하단 텍스트 카드 영역
     const boxTop = H*0.60;
-    ctx.fillStyle = 'rgba(255,255,255,.68)';
-    ctx.fillRect(60, boxTop, W-120, H-boxTop-60);
-    ctx.strokeStyle = 'rgba(160,31,31,.25)';
+    ctx.beginPath();
+    if(ctx.roundRect){ ctx.roundRect(60, boxTop, W-120, H-boxTop-60, 28); } else { ctx.rect(60, boxTop, W-120, H-boxTop-60); }
+    ctx.fillStyle = bgImg ? 'rgba(255,251,245,.76)' : 'rgba(255,255,255,.68)';
+    ctx.fill();
+    ctx.strokeStyle = bgImg ? 'rgba(160,31,31,.32)' : 'rgba(160,31,31,.25)';
     ctx.lineWidth = 1.5;
-    ctx.strokeRect(60, boxTop, W-120, H-boxTop-60);
+    ctx.stroke();
 
     let y = boxTop + 80;
     ctx.fillStyle = '#7a1515';
@@ -7141,14 +7193,48 @@ function renderStoryCard(){
     ctx.fillText('🪷 산사노트', W/2, H-90);
   }
 
+  function applyStatus(usedPhoto){
+    const status = document.getElementById('storyCardStatus');
+    if(status){
+      status.textContent = usedPhoto
+        ? `${d.name} · 내가 올린 사진을 배경으로 넣었어요. 한 줄 소감도 자유롭게 바꿔보세요.`
+        : `${d.name} · 사진이 없어서 감성 한자 카드로 만들었어요. 사진을 올리면 자동으로 배경에 들어가요.`;
+    }
+  }
+
+  function drawFallback(){
+    drawAll(null);
+    applyStatus(false);
+  }
+
+  // 기본은 바로 보여주기
+  drawFallback();
+
+  if(photoUrl){
+    const bg = new Image();
+    bg.crossOrigin = 'anonymous';
+    bg.onload = ()=>{
+      if(window.__storyCardRenderToken !== renderToken) return;
+      try{
+        drawAll(bg);
+        applyStatus(true);
+      }catch(e){
+        console.warn('story card bg draw failed', e);
+        drawFallback();
+      }
+    };
+    bg.onerror = ()=>{
+      if(window.__storyCardRenderToken !== renderToken) return;
+      drawFallback();
+    };
+    bg.src = photoUrl;
+  }
+
   // 캐릭터 이미지가 늦게 뜨거나 없어도 카드 본문은 즉시 보이게 한다.
-  drawAll();
-  const status = document.getElementById('storyCardStatus');
-  if(status) status.textContent = `${d.name} · 카드가 완성됐어요. 한 줄 소감도 자유롭게 바꿔보세요.`;
   if(!window.__cardMonkImg && !window.__cardMonkImgLoading){
     window.__cardMonkImgLoading = true;
     const img = new Image();
-    img.onload = ()=>{ window.__cardMonkImg = img; window.__cardMonkImgLoading = false; drawAll(); };
+    img.onload = ()=>{ window.__cardMonkImg = img; window.__cardMonkImgLoading = false; renderStoryCard(); };
     img.onerror = ()=>{ window.__cardMonkImgLoading = false; };
     img.src = 'IMG_4438.png';
   }
