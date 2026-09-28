@@ -980,18 +980,7 @@ window.addEventListener('load',()=>{
      변수를 물려받는 곳이 많아서 일부 화면에서 글씨가 배경과 같은 색이 되어
      안 보이는 문제가 있었습니다. 그래서 이제는 색상 변수는 그대로 두고,
      은은한 색감 오버레이만 배경에 더합니다 — 글씨 가독성에 영향이 없어요. */
-  body.psy-mode::before{
-    background:
-      radial-gradient(circle at 15% 20%,rgba(216,77,146,.14),transparent 30%),
-      radial-gradient(circle at 80% 10%,rgba(120,153,94,.12),transparent 28%),
-      radial-gradient(circle at 50% 80%,rgba(210,168,79,.10),transparent 32%),
-      radial-gradient(rgba(135,118,95,.05) 1px, transparent 1.4px) 0 0/14px 14px,
-      radial-gradient(rgba(135,118,95,.04) 1px, transparent 1.6px) 7px 7px/22px 22px,
-      var(--paper);
-  }
-  body.psy-mode header.hero{filter:saturate(1.25) contrast(1.05) hue-rotate(6deg)}
-
-  .micro-burst{position:fixed;z-index:9999;pointer-events:none;font-size:22px;animation:burstFly .65s ease-out forwards}
+.micro-burst{position:fixed;z-index:9999;pointer-events:none;font-size:22px;animation:burstFly .65s ease-out forwards}
   @keyframes burstFly{0%{transform:translate(-50%,-50%) scale(.6);opacity:1}100%{transform:translate(-50%,-90px) rotate(12deg) scale(1.25);opacity:0}}
 
   /* 사진을 가리지 않는 미니 라벨 */
@@ -3289,8 +3278,7 @@ body:has(#beatLabOverlay.show) #miniPlayer{
       <button class="btn btn-ghost btn-block" onclick="closeSettings();openPhotoPolicyOverlay();" style="margin-bottom:10px;">📷 사진 저장 · 무료 이용 안내</button>
       <button class="btn btn-ghost btn-block admin-entry" id="adminModeBtn" onclick="closeSettings();openAdminOverlay();">🛠 관리자 모드</button>
       <button class="btn btn-ghost btn-block" id="darkModeBtn" onclick="toggleDarkMode()" style="margin-bottom:10px;">🌙 야간/템플스테이 모드 켜기</button>
-      <button class="btn btn-ghost btn-block" id="psyModeBtn" onclick="togglePsyMode()" style="margin-bottom:10px;">🌈 사이키델릭 극락 모드 켜기</button>
-      <button class="btn btn-ghost btn-block" onclick="closeSettings();openVowOverlay();" style="margin-bottom:10px;">🌅 발원문 쓰기 (미래의 나에게)</button>
+<button class="btn btn-ghost btn-block" onclick="closeSettings();openVowOverlay();" style="margin-bottom:10px;">🌅 발원문 쓰기 (미래의 나에게)</button>
       <button class="btn btn-ghost btn-block" onclick="doLogout()">로그아웃</button>
     </div>
   </div>
@@ -7040,15 +7028,63 @@ const CARD_HANJA = [
   {ch:'一', mean:'한마음'}, {ch:'佛', mean:'부처'}
 ];
 function getStoryCardUserPhotoUrl(d){
-  if(!d || !d.photos) return null;
-  if(Array.isArray(d.photoOrder) && d.photoOrder.length){
-    const ordered = d.photoOrder.map(pid=>d.photos[pid]).filter(p=>isLikelyValidPhotoUrl(p&&p.url));
-    if(ordered.length) return ordered[0].url;
+  if(!d) return null;
+
+  const candidates=[];
+
+  function collectFromRecord(record){
+    if(!record || !record.photos) return;
+
+    // 사용자가 직접 정한 사진 순서가 있으면 맨 앞 사진을 가장 우선.
+    if(Array.isArray(record.photoOrder) && record.photoOrder.length){
+      record.photoOrder.forEach((pid,idx)=>{
+        const p=record.photos[pid];
+        if(p && isLikelyValidPhotoUrl(p.url)){
+          candidates.push({
+            url:p.url,
+            priority:1000000-idx,
+            ts:Number(p.createdAt||record.updatedAt||record.createdAt||0)
+          });
+        }
+      });
+    }
+
+    Object.values(record.photos).forEach(p=>{
+      if(p && isLikelyValidPhotoUrl(p.url)){
+        candidates.push({
+          url:p.url,
+          priority:0,
+          ts:Number(p.createdAt||record.updatedAt||record.createdAt||0)
+        });
+      }
+    });
   }
-  const arr = Object.values(d.photos).filter(p=>isLikelyValidPhotoUrl(p&&p.url));
-  if(!arr.length) return null;
-  arr.sort((a,b)=>Number(b.createdAt||0)-Number(a.createdAt||0));
-  return arr[0].url || null;
+
+  // 현재 카드의 절 기록
+  collectFromRecord(d);
+
+  // 같은 이름의 절이 목록에 중복 생성되어 있어도 사용자가 올린 사진을 놓치지 않게 함.
+  Object.values(destinations||{}).forEach(record=>{
+    if(record !== d && record && record.name === d.name){
+      collectFromRecord(record);
+    }
+  });
+
+  if(!candidates.length) return null;
+
+  const seen=new Set();
+  const unique=candidates.filter(x=>{
+    if(seen.has(x.url)) return false;
+    seen.add(x.url);
+    return true;
+  });
+
+  unique.sort((a,b)=>{
+    if(b.priority!==a.priority) return b.priority-a.priority;
+    return b.ts-a.ts;
+  });
+
+  return unique[0]?.url || null;
 }
 
 function renderStoryCard(){
@@ -7198,7 +7234,7 @@ function renderStoryCard(){
     if(status){
       status.textContent = usedPhoto
         ? `${d.name} · 내가 올린 사진을 배경으로 넣었어요. 한 줄 소감도 자유롭게 바꿔보세요.`
-        : `${d.name} · 사진이 없어서 감성 한자 카드로 만들었어요. 사진을 올리면 자동으로 배경에 들어가요.`;
+        : `${d.name} · 이 절에서 저장된 개인사진을 아직 찾지 못했어요. 사진을 저장한 뒤 다시 열면 자동으로 배경에 들어가요.`;
     }
   }
 
@@ -12683,15 +12719,8 @@ function playTempleDrop(){
 },{passive:true}));
 document.addEventListener('visibilitychange',()=>{if(!document.hidden&&worryGameRunning)worryGameLast=performance.now();});
 window.addEventListener('orientationchange',()=>{if(document.getElementById('beatLabOverlay')?.classList.contains('show')){stopWorryShooter();setTimeout(()=>{freezeBeatViewport();lockBeatDefenseLine();worryGameLast=performance.now();worryGameRunning=beatLives>0;if(worryGameRunning)worryGameTimer=requestAnimationFrame(worryShooterTick);},380);}});
-function togglePsyMode(){
-  const on=document.body.classList.toggle('psy-mode');localStorage.setItem('sansanotePsyMode',on?'1':'0');
-  const b=document.getElementById('psyModeBtn');if(b)b.textContent=on?'🌤 사이키델릭 극락 모드 끄기':'🌈 사이키델릭 극락 모드 켜기';
-  showToast(on?'🌈 사이키델릭 극락 모드 ON':'차분한 산사 모드로 돌아왔어요');
-}
-function initPsyMode(){if(localStorage.getItem('sansanotePsyMode')==='1'){document.body.classList.add('psy-mode');const b=document.getElementById('psyModeBtn');if(b)b.textContent='🌤 사이키델릭 극락 모드 끄기';}}
 function spawnMicroBurst(x,y,icon){const el=document.createElement('div');el.className='micro-burst';el.textContent=icon||(['🙏','📿','✨','🪷'][Math.floor(Math.random()*4)]);el.style.left=x+'px';el.style.top=y+'px';document.body.appendChild(el);setTimeout(()=>el.remove(),750);}
 document.addEventListener('click',e=>{const btn=e.target.closest('button');if(btn && !btn.classList.contains('beat-pad') && Math.random()>.55){const r=btn.getBoundingClientRect();spawnMicroBurst(r.left+r.width/2,r.top+5);}});
-document.addEventListener('DOMContentLoaded',initPsyMode);
 
 </script>
 </body>
