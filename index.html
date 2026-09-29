@@ -8826,8 +8826,13 @@ function openHeroStatList(kind){
 
   filterRegion='전체';
   filterTag='all';
-  document.querySelectorAll('#regionTabs .tab').forEach(btn=>btn.classList.toggle('active',btn.textContent.trim()==='전체'));
-  document.querySelectorAll('#tagToggle button').forEach(btn=>btn.classList.toggle('active',btn.dataset.tag==='all'));
+
+  document.querySelectorAll('#regionTabs .tab').forEach(btn=>{
+    btn.classList.toggle('active',btn.textContent.trim()==='전체');
+  });
+  document.querySelectorAll('#tagToggle button').forEach(btn=>{
+    btn.classList.toggle('active',btn.dataset.tag==='all');
+  });
 
   const stage=document.getElementById('stageFilter');
   if(stage) stage.value='all';
@@ -8842,10 +8847,11 @@ function openHeroStatList(kind){
     : kind==='unvisited' ? '아직 안 가본 곳'
     : '전체 절';
 
+  const currentCount=getFilteredList().length;
   const note=document.getElementById('heroListFilterNote');
   if(note){
     note.style.display='block';
-    note.innerHTML=`<div class="hero-list-filter-note-inner"><span>📍 <b>${label}</b>만 보고 있어요.</span><button type="button" onclick="clearHeroQuickFilter()">전체 보기</button></div>`;
+    note.innerHTML=`<div class="hero-list-filter-note-inner"><span>📍 <b>${label}</b> ${currentCount}곳을 보고 있어요.</span><button type="button" onclick="clearHeroQuickFilter()">전체 보기</button></div>`;
   }
 
   setTimeout(()=>{
@@ -8853,30 +8859,40 @@ function openHeroStatList(kind){
   },50);
 }
 
+
+function getVisibleTempleEntries(){
+  return Object.entries(destinations||{}).filter(([id,d])=>d && !d.hiddenFromList);
+}
+
 function computeStats(){
-  const list = Object.values(destinations);
+  const list = getVisibleTempleEntries().map(([id,d])=>d);
+  const visited = list.filter(d=>(Number(d.stage)||0)>=1).length;
+  const shot = list.filter(d=>(Number(d.stage)||0)>=2).length;
+  const unvisited = list.filter(d=>(Number(d.stage)||0)===0).length;
   return {
-    total: list.length,
-    visited: list.filter(d=>d.stage>=1).length,
-    shot: list.filter(d=>d.stage>=2).length
+    total:list.length,
+    visited,
+    shot,
+    unvisited
   };
 }
 
 function getFilteredList(){
   const stageFilter = document.getElementById('stageFilter').value;
   const search = document.getElementById('searchBox').value.trim().toLowerCase();
-  let list = Object.entries(destinations).filter(([id,d])=>!d.hiddenFromList);
+  let list = getVisibleTempleEntries();
 
-  if(heroQuickFilter==='visited') list=list.filter(([id,d])=>(d.stage||0)>=1);
-  else if(heroQuickFilter==='recorded') list=list.filter(([id,d])=>(d.stage||0)>=2);
-  else if(heroQuickFilter==='unvisited') list=list.filter(([id,d])=>(d.stage||0)===0);
+  if(heroQuickFilter==='visited') list=list.filter(([id,d])=>(Number(d.stage)||0)>=1);
+  else if(heroQuickFilter==='recorded') list=list.filter(([id,d])=>(Number(d.stage)||0)>=2);
+  else if(heroQuickFilter==='unvisited') list=list.filter(([id,d])=>(Number(d.stage)||0)===0);
 
   if(filterRegion !== "전체") list = list.filter(([id,d])=>d.region===filterRegion);
   if(filterTag !== "all") list = list.filter(([id,d])=>d.tag===filterTag);
-  if(stageFilter !== "all") list = list.filter(([id,d])=>String(d.stage)===stageFilter);
+  if(stageFilter !== "all") list = list.filter(([id,d])=>String(Number(d.stage)||0)===stageFilter);
   if(search){
     list = list.filter(([id,d])=>{
-      const fields = [d.name, d.region, d.desc, d.activity, d.visitorTip, d.season, d.nearbySight].filter(Boolean).join(' ').toLowerCase();
+      const fields=[d.name,d.region,d.desc,d.activity,d.visitorTip,d.season,d.nearbySight]
+        .filter(Boolean).join(' ').toLowerCase();
       return fields.includes(search);
     });
   }
@@ -8956,9 +8972,9 @@ function render(){
 
   const stats = computeStats();
   document.getElementById('heroStats').innerHTML = `
-    <button class="stat hero-stat-link" type="button" onclick="openHeroStatList('visited')" aria-label="다녀온 절 목록 보기"><div class="num serif">${stats.visited}</div><div class="lbl">다녀온 절 (전체 ${stats.total}곳 중)</div></button>
+    <button class="stat hero-stat-link" type="button" onclick="openHeroStatList('visited')" aria-label="다녀온 절 목록 보기"><div class="num serif">${stats.visited}</div><div class="lbl">다녀온 절 (현재 목록 ${stats.total}곳 중)</div></button>
     <button class="stat hero-stat-link" type="button" onclick="openHeroStatList('recorded')" aria-label="순례 기록 완료 목록 보기"><div class="num serif">${stats.shot}</div><div class="lbl">순례 기록 완료</div></button>
-    <button class="stat hero-stat-link" type="button" onclick="openHeroStatList('unvisited')" aria-label="아직 안 가본 곳 목록 보기"><div class="num serif">${stats.total-stats.visited}</div><div class="lbl">아직 안 가본 곳</div></button>
+    <button class="stat hero-stat-link" type="button" onclick="openHeroStatList('unvisited')" aria-label="아직 안 가본 곳 목록 보기"><div class="num serif">${stats.unvisited}</div><div class="lbl">아직 안 가본 곳</div></button>
   `;
 
   const list = getFilteredList();
