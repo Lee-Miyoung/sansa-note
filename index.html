@@ -2893,6 +2893,150 @@ body:has(#beatLabOverlay.show) #miniPlayer{
   backdrop-filter:blur(6px);
 }
 
+
+
+
+
+/* ============================================================
+   MAIN READABILITY · soft ivory + deep green
+============================================================ */
+body{
+  color:#26352f!important;
+  background:#f7f5ef!important;
+}
+.hero .hero-sub,
+.hero .hero-copy,
+.hero p{
+  color:rgba(255,255,255,.86)!important;
+}
+.hero .hero-note,
+#nextLevelCaption{
+  color:rgba(255,255,255,.76)!important;
+}
+.filterbar{
+  background:rgba(250,249,245,.96)!important;
+  border-top:1px solid rgba(31,66,55,.08)!important;
+  border-bottom:1px solid rgba(31,66,55,.12)!important;
+  box-shadow:0 5px 18px rgba(30,54,45,.055)!important;
+}
+.filterbar-inner{gap:10px!important}
+.tabs .tab,
+.chip-toggle button,
+.stagefilter,
+.searchbox{
+  color:#43524c!important;
+  background:#fff!important;
+  border-color:#d8ddd8!important;
+}
+.tabs .tab.active,
+.chip-toggle button.active{
+  color:#fff!important;
+  background:#315f50!important;
+  border-color:#315f50!important;
+  font-weight:800!important;
+}
+.stagefilter,.searchbox{
+  font-weight:650!important;
+}
+.searchbox::placeholder{color:#929b96!important;opacity:1!important}
+
+.card{
+  background:#fff!important;
+  border:1px solid #dfe2dd!important;
+  box-shadow:0 7px 22px rgba(32,53,45,.075)!important;
+}
+.card-body{background:#fff!important}
+.card-region{
+  color:#66756e!important;
+  font-weight:800!important;
+}
+.card-title{
+  color:#1e3029!important;
+  font-weight:900!important;
+}
+.card-desc{
+  color:#596861!important;
+  opacity:1!important;
+  font-weight:500!important;
+  line-height:1.58!important;
+}
+.stagepill{
+  color:#365247!important;
+  border-color:#d4ddd7!important;
+  background:#f7f9f7!important;
+  font-weight:800!important;
+}
+.stagepill.s3{
+  color:#fff!important;
+  background:#315f50!important;
+  border-color:#315f50!important;
+}
+.suggest-banner .sdesc,
+.quiz-banner,
+.trivia-banner,
+.season-banner,
+.explain108-banner{
+  color:#4f5d57!important;
+}
+.suggest-banner .stitle,
+.quiz-banner b,
+.trivia-banner b{
+  color:#233d33!important;
+}
+
+/* 목록에서 빼기: 기록 삭제가 아니라 '숨기기' */
+.card-list-hide{
+  position:absolute;
+  right:44px;
+  bottom:8px;
+  z-index:9;
+  height:32px;
+  padding:0 9px;
+  border:1px solid rgba(255,255,255,.88);
+  border-radius:10px;
+  background:rgba(37,60,51,.82);
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:10px;
+  font-weight:900;
+  cursor:pointer;
+  backdrop-filter:blur(5px);
+  box-shadow:0 3px 10px rgba(0,0,0,.15);
+}
+.card-list-hide:active{transform:scale(.96)}
+.hidden-temple-btn{
+  white-space:nowrap!important;
+  padding:8px 12px!important;
+  font-size:11px!important;
+  border:1px solid #d5ddd8!important;
+  color:#3a564b!important;
+  background:#fff!important;
+}
+.hidden-temple-list{
+  display:flex;flex-direction:column;gap:8px;margin-top:10px;
+}
+.hidden-temple-row{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:11px 12px;border:1px solid #e0e3df;border-radius:13px;background:#fff;
+}
+.hidden-temple-row .meta{min-width:0;text-align:left}
+.hidden-temple-row .name{font-size:13px;font-weight:900;color:#21372e}
+.hidden-temple-row .sub{font-size:10.5px;color:#748078;margin-top:2px}
+.hidden-temple-row button{
+  border:0;border-radius:999px;background:#315f50;color:#fff;
+  font-size:10.5px;font-weight:900;padding:8px 11px;cursor:pointer;white-space:nowrap;
+}
+.hidden-temple-empty{
+  padding:24px 10px;text-align:center;color:#77837d;font-size:12px;line-height:1.6;
+}
+@media(max-width:640px){
+  .filterbar-inner{gap:8px!important}
+  .card-list-hide{right:42px;bottom:6px;height:30px;padding:0 8px;font-size:9.5px}
+  .card-desc{font-size:10.8px!important;color:#52625b!important}
+}
+
 </style>
 </head>
 <body>
@@ -3037,6 +3181,7 @@ body:has(#beatLabOverlay.show) #miniPlayer{
         <option value="2">순례 기록 완료</option>
       </select>
       <input class="searchbox" id="searchBox" placeholder="절 이름, 지역, 유명한 것으로 검색" oninput="render()">
+      <button class="btn btn-ghost hidden-temple-btn" id="hiddenTempleBtn" type="button" onclick="openHiddenTempleOverlay()">🙈 숨긴 절 0</button>
       <button class="btn btn-primary" style="padding:7px 14px;font-size:12.5px;flex-shrink:0;" onclick="openCourseBuilder()">🧭 코스 만들기</button>
     </div>
   </div>
@@ -3059,6 +3204,26 @@ body:has(#beatLabOverlay.show) #miniPlayer{
   </section>
 
   <button class="fab" onclick="openAddModalForCurrentType()">+</button>
+</div>
+
+
+<!-- ===================== HIDDEN TEMPLE RESTORE MODAL ===================== -->
+<div class="overlay" id="hiddenTempleOverlay">
+  <div class="modal">
+    <div class="modal-head">
+      <div>
+        <h2 class="serif">🏯 숨긴 절 다시 불러오기</h2>
+        <div class="sub">목록에서 뺀 절도 기록과 사진은 그대로 보관돼요.</div>
+      </div>
+      <button class="close-x" onclick="closeHiddenTempleOverlay()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="map-note" style="padding:0 0 10px;text-align:left;">
+        필요 없는 절은 메인에서 잠시 숨길 수 있고, 언제든 여기서 다시 불러올 수 있어요.
+      </div>
+      <div class="hidden-temple-list" id="hiddenTempleList"></div>
+    </div>
+  </div>
 </div>
 
 <!-- ===================== DETAIL MODAL ===================== -->
@@ -3142,7 +3307,7 @@ body:has(#beatLabOverlay.show) #miniPlayer{
       <input type="file" id="photoInput" accept="image/*" multiple style="display:none" onchange="uploadPhotos(event)">
 
       <button class="btn btn-primary btn-block" style="margin-top:14px;" onclick="openStoryCardOverlay()">📸 순례 인증 카드 만들기</button>
-      <div class="danger-link" onclick="deleteDestination()">이 절 기록 삭제</div>
+      <div class="danger-link" onclick="hideCurrentDestination()">이 절을 메인 목록에서 빼기</div>
     </div>
   </div>
 </div>
@@ -4858,8 +5023,8 @@ function streakRef(){
    DATA LAYER (Firebase or LocalStorage fallback)
 ============================================================ */
 function renderSuggestBanner(){
-  const haveNames = new Set(Object.values(destinations).map(d=>d.name));
-  const pool = Object.values(MASTER_BY_NAME).filter(item=>!haveNames.has(item.name));
+  const visibleNames = new Set(Object.values(destinations).filter(d=>!d.hiddenFromList).map(d=>d.name));
+  const pool = Object.values(MASTER_BY_NAME).filter(item=>!visibleNames.has(item.name));
   const wrap = document.getElementById('suggestBannerWrap');
   if(pool.length===0){ wrap.innerHTML=''; return; }
   const pick = pool[Math.floor(Math.random()*pool.length)];
@@ -4875,6 +5040,24 @@ function renderSuggestBanner(){
 function addSuggested(name){
   const item = MASTER_BY_NAME[name];
   if(!item) return;
+
+  const hiddenEntry = Object.entries(destinations).find(([id,d])=>d && d.name===name && d.hiddenFromList);
+  if(hiddenEntry){
+    const [id] = hiddenEntry;
+    updateDestination(id,{hiddenFromList:false,hiddenAt:null});
+    if(destinations[id]){
+      destinations[id].hiddenFromList=false;
+      destinations[id].hiddenAt=null;
+    }
+    showToast(`"${name}"을(를) 다시 불러왔어요`);
+    renderSuggestBanner();
+    render();
+    return;
+  }
+
+  const existing = Object.values(destinations).some(d=>d && d.name===name && !d.hiddenFromList);
+  if(existing){ showToast('이미 목록에 있는 절이에요.'); return; }
+
   const id = newId();
   const data = Object.assign({}, item, {stage:0, notes:'', photos:{}, createdAt: Date.now()});
   writeDestination(id, data);
@@ -8542,7 +8725,7 @@ function buildRegionTabs(){
 }
 
 function computeStats(){
-  const list = Object.values(destinations);
+  const list = Object.values(destinations).filter(d=>!d.hiddenFromList);
   return {
     total: list.length,
     visited: list.filter(d=>d.stage>=1).length,
@@ -8553,7 +8736,7 @@ function computeStats(){
 function getFilteredList(){
   const stageFilter = document.getElementById('stageFilter').value;
   const search = document.getElementById('searchBox').value.trim().toLowerCase();
-  let list = Object.entries(destinations);
+  let list = Object.entries(destinations).filter(([id,d])=>!d.hiddenFromList);
   if(filterRegion !== "전체") list = list.filter(([id,d])=>d.region===filterRegion);
   if(filterTag !== "all") list = list.filter(([id,d])=>d.tag===filterTag);
   if(stageFilter !== "all") list = list.filter(([id,d])=>String(d.stage)===stageFilter);
@@ -8629,6 +8812,7 @@ function renderHomeGallery(){
 }
 
 function render(){
+  updateHiddenTempleButton();
   if(contentType === 'mountain'){ renderMountainView(); return; }
   applyRewardEffects();
   renderLevelBadge();
@@ -8668,6 +8852,7 @@ let contentType = 'temple';
 function switchContentType(type){
   if(contentType===type) return;
   contentType = type;
+  updateHiddenTempleButton();
   photoQueueGeneration++;
   if(photoHydrationObserver){try{photoHydrationObserver.disconnect();}catch(e){}}
   document.getElementById('ctypeTemple').classList.toggle('active', type==='temple');
@@ -9437,6 +9622,7 @@ function renderCard(id,d){
       <span class="tagbadge ${d.tag==='유명'?'famous':'hidden'}">${d.tag==='유명'?'대표 산사':'숨은 산사'}</span>
       ${vc>0?`<span class="visit-flag">${vc}회 방문</span>`:''}
       ${progressSealHtml(stageIdx)}
+      <button class="card-list-hide" type="button" aria-label="${escapeAttr(d.name)} 메인 목록에서 빼기" title="기록은 남기고 목록에서만 숨기기" onclick="hideDestinationFromMain('${id}', event)">목록 빼기</button>
       <button class="drag-handle" type="button" aria-label="순서 바꾸기" onclick="event.stopPropagation()">☰</button>
     </div>
     <div class="card-body">
@@ -10226,13 +10412,115 @@ async function deletePhoto(pid, evt){
   }
 }
 
-function deleteDestination(){
+
+async 
+function getHiddenTempleEntries(){
+  return Object.entries(destinations||{})
+    .filter(([id,d])=>d && d.hiddenFromList)
+    .sort((a,b)=>(b[1].hiddenAt||0)-(a[1].hiddenAt||0));
+}
+function updateHiddenTempleButton(){
+  const btn=document.getElementById('hiddenTempleBtn');
+  if(!btn) return;
+  const n=getHiddenTempleEntries().length;
+  btn.textContent=`🙈 숨긴 절 ${n}`;
+  btn.style.display = contentType==='temple' ? '' : 'none';
+}
+function openHiddenTempleOverlay(){
+  renderHiddenTempleList();
+  document.getElementById('hiddenTempleOverlay')?.classList.add('show');
+}
+function closeHiddenTempleOverlay(){
+  document.getElementById('hiddenTempleOverlay')?.classList.remove('show');
+}
+function renderHiddenTempleList(){
+  const wrap=document.getElementById('hiddenTempleList');
+  if(!wrap) return;
+  const entries=getHiddenTempleEntries();
+  if(!entries.length){
+    wrap.innerHTML='<div class="hidden-temple-empty">숨긴 절이 없어요.<br>메인 카드의 <b>목록 빼기</b>를 누르면 여기에서 다시 불러올 수 있어요.</div>';
+    return;
+  }
+  wrap.innerHTML=entries.map(([id,d])=>`
+    <div class="hidden-temple-row">
+      <div class="meta">
+        <div class="name">${escapeHtml(d.name)}</div>
+        <div class="sub">${escapeHtml(d.region||'')} · 기록/사진 그대로 보관 중</div>
+      </div>
+      <button type="button" onclick="restoreHiddenTemple('${id}')">다시 불러오기</button>
+    </div>`).join('');
+}
+async function hideDestinationFromMain(id, evt){
+  if(evt){evt.preventDefault();evt.stopPropagation();}
+  const d=destinations[id];
+  if(!d) return;
+  if(!confirm(`"${d.name}"을(를) 메인 목록에서 뺄까요?\n방문기록과 사진은 삭제되지 않고, 언제든 다시 불러올 수 있어요.`)) return;
+
+  const patch={hiddenFromList:true,hiddenAt:Date.now()};
+  try{
+    if(localMode){
+      destinations[id]=Object.assign({},destinations[id],patch);
+      persistLocal();
+    }else{
+      await destinationRef(id).update(patch);
+      destinations[id]=Object.assign({},destinations[id],patch);
+    }
+    showToast(`"${d.name}"을(를) 목록에서 뺐어요.`);
+    render();
+  }catch(err){
+    console.error(err);
+    showToast('목록에서 빼지 못했어요. 다시 시도해주세요.');
+  }
+}
+async function restoreHiddenTemple(id){
+  const d=destinations[id];
+  if(!d) return;
+  const patch={hiddenFromList:false,hiddenAt:null};
+  try{
+    if(localMode){
+      destinations[id]=Object.assign({},destinations[id],patch);
+      persistLocal();
+    }else{
+      await destinationRef(id).update(patch);
+      destinations[id]=Object.assign({},destinations[id],patch);
+    }
+    renderHiddenTempleList();
+    render();
+    showToast(`"${d.name}"을(를) 다시 불러왔어요.`);
+  }catch(err){
+    console.error(err);
+    showToast('다시 불러오지 못했어요.');
+  }
+}
+
+
+async function hideCurrentDestination(){
   if(!currentDetailId) return;
-  const d = destinations[currentDetailId];
-  if(!confirm(`"${d.name}"을(를) 삭제할까요? 등록된 사진 기록도 함께 삭제됩니다.`)) return;
-  removeDestinationData(currentDetailId);
-  closeDetail();
-  showToast('삭제했어요');
+  const id=currentDetailId;
+  const d=destinations[id];
+  if(!d) return;
+  if(!confirm(`"${d.name}"을(를) 메인 목록에서 뺄까요?\n방문기록과 사진은 그대로 보관됩니다.`)) return;
+  try{
+    const patch={hiddenFromList:true,hiddenAt:Date.now()};
+    if(localMode){
+      destinations[id]=Object.assign({},destinations[id],patch);
+      persistLocal();
+    }else{
+      await destinationRef(id).update(patch);
+      destinations[id]=Object.assign({},destinations[id],patch);
+    }
+    closeDetail();
+    render();
+    showToast('메인 목록에서 뺐어요. 숨긴 절에서 다시 불러올 수 있어요.');
+  }catch(err){
+    console.error(err);
+    showToast('처리하지 못했어요.');
+  }
+}
+
+function deleteDestination(){
+  // 예전 버튼/캐시가 이 함수를 호출해도 실제 삭제 대신 목록에서만 숨깁니다.
+  hideCurrentDestination();
 }
 
 /* ============================================================
