@@ -52,6 +52,10 @@
   ]
 }
 </script>
+<link rel="preconnect" href="https://commons.wikimedia.org" crossorigin>
+<link rel="preconnect" href="https://ko.wikipedia.org" crossorigin>
+<link rel="preconnect" href="https://api.openverse.org" crossorigin>
+<link rel="dns-prefetch" href="//upload.wikimedia.org">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Noto+Serif+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
@@ -61,18 +65,6 @@
 <link rel="manifest" href="data:application/manifest+json,%7B%22name%22%3A%22%EC%82%B0%EC%82%AC%EB%85%B8%ED%8A%B8%22%2C%22short_name%22%3A%22%EC%82%B0%EC%82%AC%EB%85%B8%ED%8A%B8%22%2C%22start_url%22%3A%22.%2F%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23151116%22%2C%22theme_color%22%3A%22%23151116%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data%3Aimage%2Fsvg%2Bxml%2C%253Csvg%2520xmlns%3D%2527http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%2527%2520viewBox%3D%25270%25200%2520100%2520100%2527%253E%253Crect%2520width%3D%2527100%2527%2520height%3D%2527100%2527%2520fill%3D%2527%2523151116%2527%2F%253E%253Ctext%2520x%3D%252750%2527%2520y%3D%252768%2527%2520font-size%3D%252760%2527%2520text-anchor%3D%2527middle%2527%2520fill%3D%2527%2523c9942f%2527%253E%25E5%258D%2586%253C%2Ftext%253E%253C%2Fsvg%253E%22%2C%22sizes%22%3A%22192x192%22%2C%22type%22%3A%22image%2Fsvg%2Bxml%22%7D%5D%7D">
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 
-<footer class="site-footer">
-  <div class="site-footer-inner">
-    <div>
-      <div class="site-footer-brand">산사노트</div>
-      <div class="site-footer-copy">사찰·산 순례 기록을 위한 개인 아카이브<br>문의 · 오류 제보 · 협업 제안</div>
-    </div>
-    <div class="site-footer-links">
-      <a class="site-footer-link" href="mailto:sansanote.help@gmail.com?subject=%5B%EC%82%B0%EC%82%AC%EB%85%B8%ED%8A%B8%20%EB%AC%B8%EC%9D%98%5D">✉ 문의하기</a>
-      <a class="site-footer-link" href="mailto:sansanote.help@gmail.com?subject=%5B%EC%82%B0%EC%82%AC%EB%85%B8%ED%8A%B8%20%ED%98%91%EC%97%85%20%EB%AC%B8%EC%9D%98%5D">🤝 협업 문의</a>
-    </div>
-  </div>
-</footer>
 
 <script>
 window.addEventListener('beforeunload',()=>{
@@ -3598,6 +3590,428 @@ body.guest-browsing #guestSettingsLoginBtn{display:block}
   .guest-save-callout-inner button{padding:7px 10px;font-size:9.5px}
 }
 
+
+
+/* ============================================================
+   2026 HOME REDESIGN · Editorial, warm, less "AI UI"
+============================================================ */
+body,
+button,
+input,
+select,
+textarea{
+  font-family:Pretendard,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;
+  letter-spacing:-.015em;
+}
+.serif,
+.hero-top h1,
+.stat .num,
+.site-footer-brand{
+  font-family:"Nanum Myeongjo","Noto Serif KR",serif!important;
+}
+
+/* HERO */
+header.hero{
+  min-height:410px!important;
+  padding:46px 28px 34px!important;
+  border-radius:0 0 34px 34px!important;
+  background:
+    radial-gradient(circle at 76% 18%,rgba(225,192,128,.18),transparent 25%),
+    radial-gradient(circle at 18% 90%,rgba(79,126,108,.20),transparent 34%),
+    linear-gradient(108deg,#173a30 0%,#234f41 52%,#3d5145 100%)!important;
+  box-shadow:0 18px 48px rgba(24,49,40,.15)!important;
+}
+header.hero::after{
+  background:
+    linear-gradient(90deg,rgba(7,26,21,.18),transparent 52%),
+    radial-gradient(circle at 85% 66%,rgba(224,181,99,.12),transparent 25%)!important;
+}
+header.hero::before{
+  width:262px!important;
+  height:388px!important;
+  right:max(24px,calc((100vw - 1180px)/2 + 8px))!important;
+  bottom:-40px!important;
+  opacity:.95!important;
+  filter:drop-shadow(0 22px 30px rgba(0,0,0,.25)) saturate(.92)!important;
+}
+.hero-inner{
+  max-width:1180px!important;
+}
+.hero-top{
+  padding-right:325px!important;
+  min-height:126px!important;
+}
+.hero-top>div:first-child{
+  max-width:720px!important;
+}
+.hero-eyebrow{
+  display:inline-flex;
+  align-items:center;
+  min-height:23px;
+  padding:0 9px;
+  margin-bottom:10px;
+  border:1px solid rgba(233,216,177,.22);
+  border-radius:999px;
+  color:rgba(247,234,204,.72);
+  background:rgba(255,255,255,.045);
+  font-size:8.5px;
+  font-weight:800;
+  letter-spacing:.14em;
+}
+.hero-title-row{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.hero-top h1{
+  font-size:54px!important;
+  font-weight:800!important;
+  line-height:1!important;
+  letter-spacing:-2.6px!important;
+  color:#fffdf7!important;
+  margin:0 0 7px!important;
+}
+.hip-badge{
+  width:48px!important;
+  height:48px!important;
+  animation:none!important;
+  opacity:.9;
+}
+.hip-badge svg{
+  width:48px!important;
+  height:48px!important;
+}
+.hero-tagline{
+  margin:5px 0 9px!important;
+  color:#e6c985!important;
+  font-size:17px!important;
+  font-weight:800!important;
+  letter-spacing:-.035em!important;
+}
+.hero-top p{
+  max-width:590px!important;
+  color:rgba(255,255,255,.73)!important;
+  font-size:13px!important;
+  line-height:1.72!important;
+  font-weight:500!important;
+}
+.hero-top p b{
+  color:#fff!important;
+  border-bottom:0!important;
+  font-weight:800!important;
+}
+.icon-row{
+  right:292px!important;
+  top:2px!important;
+  gap:7px!important;
+}
+.iconbtn{
+  width:38px!important;
+  height:38px!important;
+  border-radius:12px!important;
+  background:rgba(255,255,255,.08)!important;
+  border:1px solid rgba(255,255,255,.20)!important;
+  box-shadow:none!important;
+}
+.iconbtn:hover{
+  background:rgba(255,255,255,.16)!important;
+}
+
+/* 세 기능은 일부러 서로 다른 색으로 */
+.hip-quick-row{
+  width:min(680px,calc(100% - 310px))!important;
+  max-width:680px!important;
+  margin-top:21px!important;
+  gap:10px!important;
+}
+.hip-quick-btn{
+  min-height:67px!important;
+  padding:10px 13px 10px 10px!important;
+  border:1px solid rgba(255,255,255,.16)!important;
+  border-radius:17px!important;
+  box-shadow:0 8px 22px rgba(4,19,15,.12)!important;
+  backdrop-filter:blur(8px)!important;
+  text-align:left!important;
+  gap:10px!important;
+}
+.hip-quick-btn.worry-q{
+  background:linear-gradient(135deg,rgba(103,61,80,.92),rgba(78,52,66,.88))!important;
+}
+.hip-quick-btn.breath-q{
+  background:linear-gradient(135deg,rgba(52,102,87,.95),rgba(42,79,68,.90))!important;
+}
+.hip-quick-btn.moktak-q{
+  background:linear-gradient(135deg,rgba(145,105,51,.94),rgba(112,82,43,.90))!important;
+}
+.hip-quick-btn:hover{
+  transform:translateY(-2px)!important;
+  filter:brightness(1.06);
+}
+.hip-quick-btn .hq-icon{
+  width:40px!important;
+  height:40px!important;
+  flex:0 0 40px!important;
+  border-radius:13px!important;
+  display:grid!important;
+  place-items:center!important;
+  background:rgba(255,255,255,.13)!important;
+  border:1px solid rgba(255,255,255,.15)!important;
+  font-family:"Nanum Myeongjo",serif!important;
+  font-size:18px!important;
+  font-weight:800!important;
+  color:#fff5dc!important;
+}
+.hip-quick-btn b{
+  font-size:12.5px!important;
+  font-weight:800!important;
+  color:#fff!important;
+  letter-spacing:-.035em!important;
+}
+.hip-quick-btn small{
+  display:block!important;
+  margin-top:4px!important;
+  color:rgba(255,255,255,.70)!important;
+  font-size:9.5px!important;
+  font-weight:500!important;
+  line-height:1.3!important;
+}
+
+/* 뱃지/통계 */
+.hero-badge-row{
+  margin-top:14px!important;
+}
+.hero-stats{
+  width:500px!important;
+  max-width:calc(100% - 310px)!important;
+  margin-top:12px!important;
+  padding:12px 15px!important;
+  border-radius:17px!important;
+  background:rgba(6,26,20,.20)!important;
+  border:1px solid rgba(255,255,255,.14)!important;
+}
+.hero-stats .stat.hero-stat-link{
+  border-right:1px solid rgba(255,255,255,.12)!important;
+}
+.hero-stats .stat .num{
+  font-size:28px!important;
+}
+.hero-stats .stat .lbl{
+  color:rgba(255,255,255,.65)!important;
+  font-size:9.5px!important;
+}
+
+/* 로그인 유도: 광고처럼 보이지 않게 */
+.guest-save-callout{
+  margin-top:14px!important;
+}
+.guest-save-callout-inner{
+  min-height:52px;
+  border-radius:14px!important;
+  border:1px solid #dedfd9!important;
+  background:rgba(255,255,255,.82)!important;
+  box-shadow:none!important;
+  color:#68736d!important;
+}
+.guest-save-callout-inner b{
+  color:#2c493e!important;
+}
+.guest-save-callout-inner button{
+  background:#315f50!important;
+  padding:8px 13px!important;
+}
+
+/* 불필요하게 여러 줄 쌓이던 안내 영역은 비워진 상태에서도 공간 0 */
+#iconRowHintWrap:empty,
+#guestAddHintWrap:empty,
+#explain108Wrap:empty{
+  display:none!important;
+}
+
+/* 사진 로딩중도 '깨짐'처럼 보이지 않게 */
+.cover-placeholder{
+  position:relative;
+  overflow:hidden;
+}
+.cover-placeholder::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  transform:translateX(-110%);
+  background:linear-gradient(100deg,transparent 25%,rgba(255,255,255,.28) 46%,transparent 68%);
+  animation:sansaShimmer 1.5s ease-in-out infinite;
+}
+@keyframes sansaShimmer{
+  100%{transform:translateX(110%)}
+}
+
+/* footer는 이제 진짜 하단에 */
+.site-footer{
+  margin-top:34px!important;
+  margin-bottom:28px!important;
+}
+.site-footer-inner{
+  padding-top:18px!important;
+}
+
+/* 카드 영역과 첫 화면 사이 호흡 */
+.content-type-row{
+  margin-top:20px!important;
+}
+
+/* 태블릿 */
+@media(max-width:900px){
+  header.hero{
+    min-height:390px!important;
+    padding:31px 18px 27px!important;
+  }
+  header.hero::before{
+    width:190px!important;
+    height:300px!important;
+    right:-6px!important;
+    bottom:-28px!important;
+  }
+  .hero-top{
+    padding-right:145px!important;
+  }
+  .hero-eyebrow{font-size:7.5px}
+  .hero-top h1{font-size:40px!important}
+  .hero-tagline{font-size:14px!important}
+  .hero-top p{font-size:11.5px!important;max-width:440px!important}
+  .icon-row{
+    position:absolute!important;
+    right:0!important;
+    top:0!important;
+  }
+  .hip-quick-row{
+    width:calc(100% - 130px)!important;
+    max-width:560px!important;
+  }
+  .hip-quick-btn{
+    min-height:61px!important;
+  }
+  .hero-badge-row,#nextLevelCaption{
+    max-width:calc(100% - 130px)!important;
+  }
+  .hero-stats{
+    width:min(470px,calc(100% - 130px))!important;
+    max-width:calc(100% - 130px)!important;
+  }
+}
+
+/* 모바일: 캐릭터를 살리고 텍스트/버튼은 답답하지 않게 */
+@media(max-width:560px){
+  header.hero{
+    min-height:430px!important;
+    padding:23px 13px 23px!important;
+    border-radius:0 0 24px 24px!important;
+  }
+  header.hero::before{
+    width:134px!important;
+    height:225px!important;
+    right:-18px!important;
+    bottom:-22px!important;
+    opacity:.80!important;
+  }
+  .hero-top{
+    padding-right:72px!important;
+  }
+  .hero-eyebrow{
+    font-size:6.8px;
+    padding:0 7px;
+    margin-bottom:7px;
+    letter-spacing:.10em;
+  }
+  .hero-title-row{
+    gap:8px;
+  }
+  .hero-top h1{
+    font-size:33px!important;
+    letter-spacing:-1.8px!important;
+  }
+  .hip-badge{
+    width:36px!important;
+    height:36px!important;
+  }
+  .hip-badge svg{
+    width:36px!important;
+    height:36px!important;
+  }
+  .hero-tagline{
+    font-size:12px!important;
+    max-width:230px!important;
+  }
+  .hero-top p{
+    max-width:245px!important;
+    font-size:10px!important;
+    line-height:1.55!important;
+  }
+  .icon-row{
+    right:0!important;
+    gap:4px!important;
+  }
+  .iconbtn{
+    width:30px!important;
+    height:30px!important;
+    border-radius:10px!important;
+    font-size:12px!important;
+  }
+  .hip-quick-row{
+    width:calc(100% - 60px)!important;
+    max-width:none!important;
+    display:grid!important;
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+    gap:5px!important;
+    margin-top:13px!important;
+  }
+  .hip-quick-btn{
+    min-height:66px!important;
+    padding:7px 4px!important;
+    border-radius:13px!important;
+    flex-direction:column!important;
+    justify-content:center!important;
+    text-align:center!important;
+    gap:4px!important;
+  }
+  .hip-quick-btn .hq-icon{
+    width:27px!important;
+    height:27px!important;
+    flex-basis:27px!important;
+    border-radius:8px!important;
+    font-size:13px!important;
+  }
+  .hip-quick-btn>span:last-child{
+    align-items:center!important;
+  }
+  .hip-quick-btn b{
+    font-size:8.8px!important;
+    white-space:normal!important;
+    line-height:1.18!important;
+  }
+  .hip-quick-btn small{
+    display:none!important;
+  }
+  .hero-badge-row,#nextLevelCaption{
+    max-width:calc(100% - 66px)!important;
+  }
+  .hero-stats{
+    width:calc(100% - 66px)!important;
+    max-width:calc(100% - 66px)!important;
+    padding:9px 9px!important;
+  }
+  .hero-stats .stat{
+    padding:0 6px!important;
+  }
+  .hero-stats .stat .num{
+    font-size:20px!important;
+  }
+  .hero-stats .stat .lbl{
+    font-size:7.8px!important;
+  }
+  .guest-save-callout-inner{
+    align-items:flex-start!important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -3656,7 +4070,8 @@ body.guest-browsing #guestSettingsLoginBtn{display:block}
     <div class="hero-inner">
       <div class="hero-top">
         <div>
-          <div style="display:flex;align-items:center;gap:12px;">
+          <div class="hero-eyebrow">TEMPLE JOURNAL · SANSANOTE</div>
+          <div class="hero-title-row">
             <h1 class="serif">산사노트</h1>
             <div class="hip-badge">
               <svg viewBox="0 0 100 100" aria-label="연꽃 레코드">
@@ -3679,7 +4094,7 @@ body.guest-browsing #guestSettingsLoginBtn{display:block}
             </div>
           </div>
           <div class="hero-tagline">마음이 복잡한 날, 발걸음이 먼저 이끄는 곳</div>
-          <p>불교 신자가 아니어도 괜찮아요. <b>마음이 헛헛한 날</b>, 이유 없이 걷고 싶은 날, 발걸음이 닿은 절 마당 하나하나가 <b>내 하루를 다독여준 기록</b>이 되어줄 거예요.</p>
+          <p>전국의 산사를 천천히 둘러보고, 마음에 남은 곳을 기록해보세요. <b>절을 찾는 시간도 여행의 일부</b>가 되도록 만들었어요.</p>
         </div>
         <div class="icon-row">
           <button class="iconbtn guest-login-icon" title="로그인" onclick="openLoginOverlay()">👤</button>
@@ -3689,9 +4104,15 @@ body.guest-browsing #guestSettingsLoginBtn{display:block}
         </div>
       </div>
       <div class="hip-quick-row" aria-label="마음 쉬어가기">
-        <button class="hip-quick-btn worry-q" onclick="openOracleOverlay()"><span class="hq-icon">🙏</span><span><b>마음 고민 처방</b><small>마음을 가볍게</small></span></button>
-        <button class="hip-quick-btn breath-q" onclick="openBreathOverlay('counting')"><span class="hq-icon">🫁</span><span><b>1분 호흡</b><small>잠깐 숨 고르기</small></span></button>
-        <button class="hip-quick-btn moktak-q" onclick="openMoktakOverlay()"><span class="hq-icon">🥢</span><span><b>무한 목탁</b><small>탁탁 비워내기</small></span></button>
+        <button class="hip-quick-btn worry-q" onclick="openOracleOverlay()">
+          <span class="hq-icon">心</span><span><b>마음 고민 처방</b><small>복잡한 마음에 한 문장</small></span>
+        </button>
+        <button class="hip-quick-btn breath-q" onclick="openBreathOverlay('counting')">
+          <span class="hq-icon">息</span><span><b>1분 호흡</b><small>잠깐 호흡에 집중하기</small></span>
+        </button>
+        <button class="hip-quick-btn moktak-q" onclick="openMoktakOverlay()">
+          <span class="hq-icon">木</span><span><b>무한 목탁</b><small>리듬으로 머리 비우기</small></span>
+        </button>
       </div>
       <div class="hero-badge-row">
         <div id="streakBadge"></div>
@@ -3713,8 +4134,8 @@ body.guest-browsing #guestSettingsLoginBtn{display:block}
 
   <div class="guest-save-callout" id="guestSaveCallout">
     <div class="guest-save-callout-inner">
-      <span><b>먼저 편하게 둘러보세요.</b> 마음에 드는 절을 기록하고 싶을 때 로그인하면 기기마다 이어서 볼 수 있어요.</span>
-      <button type="button" onclick="openLoginOverlay()">Google 로그인</button>
+      <span><b>로그인 없이 먼저 둘러보세요.</b> 마음에 드는 곳을 저장하고 싶을 때만 로그인하면 돼요.</span>
+      <button type="button" onclick="openLoginOverlay()">기록 시작하기</button>
     </div>
   </div>
 
@@ -3796,6 +4217,19 @@ body.guest-browsing #guestSettingsLoginBtn{display:block}
   </section>
 
   <button class="fab" id="mainFab" onclick="openAddModalForCurrentType()">+</button>
+
+<footer class="site-footer">
+  <div class="site-footer-inner">
+    <div>
+      <div class="site-footer-brand">산사노트</div>
+      <div class="site-footer-copy">사찰·산 순례 기록을 위한 개인 아카이브<br>문의 · 오류 제보 · 협업 제안</div>
+    </div>
+    <div class="site-footer-links">
+      <a class="site-footer-link" href="mailto:sansanote.help@gmail.com?subject=%5B%EC%82%B0%EC%82%AC%EB%85%B8%ED%8A%B8%20%EB%AC%B8%EC%9D%98%5D">✉ 문의하기</a>
+      <a class="site-footer-link" href="mailto:sansanote.help@gmail.com?subject=%5B%EC%82%B0%EC%82%AC%EB%85%B8%ED%8A%B8%20%ED%98%91%EC%97%85%20%EB%AC%B8%EC%9D%98%5D">🤝 협업 문의</a>
+    </div>
+  </div>
+</footer>
 </div>
 
 
@@ -5871,13 +6305,8 @@ let guestAddHintDismissedThisLoad = false;
 let explain108DismissedThisLoad = false;
 
 function renderIconRowHint(){
-  const wrap = document.getElementById('iconRowHintWrap');
-  if(!wrap) return;
-  if(iconRowHintDismissedThisLoad){ wrap.innerHTML=''; return; }
-  wrap.innerHTML = `<div class="explain108-banner">
-    <span>👆 화면 위쪽 오른편 아이콘도 눌러보세요 — 📥 순례 코스 불러오기, 🗺 전체 지도, 그리고 <b>⚙ 설정</b> 안에는 순례 앨범·뱃지·불교 용어 사전·108배 예절·기도문 모음까지 숨어있어요.</span>
-    <button class="close108" onclick="dismissIconRowHint()">✕</button>
-  </div>`;
+  const wrap=document.getElementById('iconRowHintWrap');
+  if(wrap) wrap.innerHTML='';
 }
 function dismissIconRowHint(){
   iconRowHintDismissedThisLoad = true;
@@ -5885,14 +6314,8 @@ function dismissIconRowHint(){
   if(wrap) wrap.innerHTML = '';
 }
 function renderGuestAddHint(){
-  const wrap = document.getElementById('guestAddHintWrap');
-  if(!wrap) return;
-  if(!localMode){ wrap.innerHTML=''; return; }
-  if(guestAddHintDismissedThisLoad){ wrap.innerHTML=''; return; }
-  wrap.innerHTML = `<div class="explain108-banner">
-    <span>👋 지금은 둘러보기 중이에요. 목록에 없는 절은 화면 오른쪽 <b>아래 + 버튼</b>을 눌러 직접 추가할 수 있고, 방문 표시·메모 저장은 Google 로그인 후에 할 수 있어요. (사진 추가는 저장 공간 준비 중이라 로그인해도 아직은 이용할 수 없어요.)</span>
-    <button class="close108" onclick="dismissGuestAddHint()">✕</button>
-  </div>`;
+  const wrap=document.getElementById('guestAddHintWrap');
+  if(wrap) wrap.innerHTML='';
 }
 function dismissGuestAddHint(){
   guestAddHintDismissedThisLoad = true;
@@ -5900,12 +6323,8 @@ function dismissGuestAddHint(){
   if(wrap) wrap.innerHTML = '';
 }
 function renderExplain108(){
-  if(explain108DismissedThisLoad) return;
-  const wrap = document.getElementById('explain108Wrap');
-  wrap.innerHTML = `<div class="explain108-banner">
-    <span>✦ 기본 목록이 <b>108</b>곳인 건 우연이 아니에요 — 불교에서 말하는 108번뇌를 담았어요. 여기 없는, 알고 계신 절은 오른쪽 아래 + 버튼으로 직접 추가할 수 있어요.</span>
-    <button class="close108" onclick="dismissExplain108()">✕</button>
-  </div>`;
+  const wrap=document.getElementById('explain108Wrap');
+  if(wrap) wrap.innerHTML='';
 }
 function dismissExplain108(){
   explain108DismissedThisLoad = true;
@@ -10499,7 +10918,7 @@ function progressSealHtml(stageIdx){
 }
 
 const PHOTO_SCHEMA_VERSION = 9; // v9: 대표사진 오매칭 방지 + 모든 사찰의 오래된 자동사진 재검증
-const PHOTO_RETRY_COOLDOWN_MS = 3*24*60*60*1000; // 사진을 못 찾은 곳은 사흘 지나야 다시 시도 (매 렌더마다 재시도해서 화면이 깜빡이는 것을 막기 위함)
+const PHOTO_RETRY_COOLDOWN_MS = 6*60*60*1000; // 사진을 못 찾은 곳은 사흘 지나야 다시 시도 (매 렌더마다 재시도해서 화면이 깜빡이는 것을 막기 위함)
 function shouldSkipPhotoRetry(d){
   if(!d || d.coverPhotoStatus!=='not-found') return false;
   // 매칭 기준(PHOTO_SCHEMA_VERSION)이 바뀐 뒤라면, 예전 기준으로 "못 찾음" 판정을 받은
@@ -10515,7 +10934,7 @@ let photoFetchQueue = [];
 let photoQueueGeneration = 0;
 let photoHydrationObserver = null;
 let activePhotoFetches = 0;
-const MAX_CONCURRENT_PHOTO_FETCHES = 3;
+const MAX_CONCURRENT_PHOTO_FETCHES = 5;
 
 function queuePhotoFetch(id, name, locationHint, opts){
   if(coverFetching.has(id)) return;
@@ -10544,20 +10963,29 @@ function schedulePhotoHydration(type, entries){
   const queueOne=(id)=>{
     const d=store[id]; if(!d)return;
     const photo=firstPhotoUrl(d);
-    if(photo && d.coverPhotoVersion===PHOTO_SCHEMA_VERSION)return;
+    if(photo) return;
     if(coverFetching.has(id)||shouldSkipPhotoRetry(d))return;
     const opts=isMountain?{store:mountainDestinations,updateFn:updateMountainDestination,getCurrentId:()=>currentMountainDetailId,onDetailUpdate:()=>{},region:d.region,cancelOnTabChange:true,generation:gen}:{region:d.region,cancelOnTabChange:true,generation:gen};
     queuePhotoFetch(id,d.name,d.locationHint||'',opts);
   };
   const cards=[...document.querySelectorAll('#grid .card[data-id]')];
   if('IntersectionObserver' in window){
-    photoHydrationObserver=new IntersectionObserver(items=>{items.forEach(it=>{if(it.isIntersecting){queueOne(it.target.dataset.id);photoHydrationObserver.unobserve(it.target);}})},{rootMargin:'500px 0px'});
+    photoHydrationObserver=new IntersectionObserver(items=>{
+      items.forEach(it=>{
+        if(it.isIntersecting){
+          queueOne(it.target.dataset.id);
+          photoHydrationObserver.unobserve(it.target);
+        }
+      });
+    },{rootMargin:'900px 0px'});
     cards.forEach(c=>photoHydrationObserver.observe(c));
-  }else{ cards.slice(0,12).forEach(c=>queueOne(c.dataset.id)); }
-  // 대표 사찰/첫 화면은 브라우저가 한가해진 뒤 우선 보강
-  const priority=(entries||[]).filter(([id,d])=>!firstPhotoUrl(d) && (isMountain || d.tag==='유명')).slice(0,8);
-  const kick=()=>priority.forEach(([id])=>queueOne(id));
-  if(window.requestIdleCallback) requestIdleCallback(kick,{timeout:900}); else setTimeout(kick,180);
+  }else{
+    cards.slice(0,16).forEach(c=>queueOne(c.dataset.id));
+  }
+
+  // 첫 화면 카드 10개는 idle까지 기다리지 않고 즉시 사진을 찾습니다.
+  const priority=(entries||[]).filter(([id,d])=>!firstPhotoUrl(d)).slice(0,10);
+  setTimeout(()=>priority.forEach(([id])=>queueOne(id)),30);
 }
 
 function patchVisibleCover(id,url,kind,name){
@@ -10694,6 +11122,7 @@ function fetchCoverPhotoNow(id, name, locationHint, opts, done){
     };
   }
   function saveResults(items){
+    if(finished) return;
     const seen=new Set();
     const unique=(items||[]).filter(Boolean).filter(x=>{
       if(!x.url||seen.has(x.url))return false;seen.add(x.url);return true;
@@ -10738,7 +11167,7 @@ function fetchCoverPhotoNow(id, name, locationHint, opts, done){
   function imageInfo(titles, cb, sourceType, trustedArticle=false){
     titles=(titles||[]).filter(Boolean).slice(0,50);
     if(!titles.length){cb([]);return;}
-    const url='https://commons.wikimedia.org/w/api.php?action=query&prop=imageinfo&iiprop=url|mime|extmetadata&iiurlwidth=1280&format=json&origin=*&titles='+encodeURIComponent(titles.join('|'));
+    const url='https://commons.wikimedia.org/w/api.php?action=query&prop=imageinfo&iiprop=url|mime|extmetadata&iiurlwidth=900&format=json&origin=*&titles='+encodeURIComponent(titles.join('|'));
     fetch(url).then(r=>r.json()).then(data=>{
       const pages=Object.values(data?.query?.pages||{});
       const items=pages.map(p=>({p,s:scorePage(p,trustedArticle)}))
@@ -10751,7 +11180,7 @@ function fetchCoverPhotoNow(id, name, locationHint, opts, done){
   function exactWikipediaPage(cb){
     const base=coreName(name);
     const exactTitle=WIKI_TITLE_HINTS[name]||base;
-    const exactUrl=`https://ko.wikipedia.org/w/api.php?action=query&titles=${encodeURIComponent(exactTitle)}&prop=pageimages|images|info|pageprops&ppprop=disambiguation&imlimit=100&pithumbsize=1400&piprop=thumbnail|original|name&inprop=url&redirects=1&format=json&origin=*`;
+    const exactUrl=`https://ko.wikipedia.org/w/api.php?action=query&titles=${encodeURIComponent(exactTitle)}&prop=pageimages|images|info|pageprops&ppprop=disambiguation&imlimit=100&pithumbsize=900&piprop=thumbnail|original|name&inprop=url&redirects=1&format=json&origin=*`;
     fetch(exactUrl).then(r=>r.json()).then(data=>{
       let pages=Object.values(data?.query?.pages||{}).filter(p=>!p.missing);
       const page=pages[0];
@@ -10762,7 +11191,7 @@ function fetchCoverPhotoNow(id, name, locationHint, opts, done){
       const isDisambiguation = page && (page.pageprops && 'disambiguation' in page.pageprops) || /동음이의|목록|분류:/.test((page&&page.title)||'');
       if(page && !isDisambiguation && compact(page.title).includes(compact(base))){cb(page);return;}
       const q=`${base} ${queryHint||''} ${isMountain?'산':'사찰'}`.trim();
-      const searchUrl=`https://ko.wikipedia.org/w/api.php?action=query&generator=search&gsrsearch=${encodeURIComponent(q)}&gsrlimit=8&prop=pageimages|images|info&imlimit=80&pithumbsize=1280&piprop=thumbnail|original|name&inprop=url&format=json&origin=*`;
+      const searchUrl=`https://ko.wikipedia.org/w/api.php?action=query&generator=search&gsrsearch=${encodeURIComponent(q)}&gsrlimit=8&prop=pageimages|images|info&imlimit=80&pithumbsize=900&piprop=thumbnail|original|name&inprop=url&format=json&origin=*`;
       return fetch(searchUrl).then(r=>r.json()).then(sd=>{
         const bc=compact(base);
         let candidates=Object.values(sd?.query?.pages||{}).filter(p=>bc&&compact(p.title).includes(bc)&&!/동음이의|목록|분류:/.test(p.title||''));
@@ -10802,7 +11231,7 @@ function fetchCoverPhotoNow(id, name, locationHint, opts, done){
   }
 
   function commonsSearch(q, cb){
-    const url=`https://commons.wikimedia.org/w/api.php?action=query&generator=search&gsrsearch=${encodeURIComponent(q)}&gsrnamespace=6&gsrlimit=40&prop=imageinfo&iiprop=url|mime|extmetadata&iiurlwidth=1280&format=json&origin=*`;
+    const url=`https://commons.wikimedia.org/w/api.php?action=query&generator=search&gsrsearch=${encodeURIComponent(q)}&gsrnamespace=6&gsrlimit=40&prop=imageinfo&iiprop=url|mime|extmetadata&iiurlwidth=900&format=json&origin=*`;
     fetch(url).then(r=>r.json()).then(data=>{
       const pages=Object.values(data?.query?.pages||{});
       const items=pages.map(p=>({p,s:scorePage(p,false)}))
@@ -10812,20 +11241,124 @@ function fetchCoverPhotoNow(id, name, locationHint, opts, done){
     }).catch(()=>cb([]));
   }
 
+  function openverseSearch(q, cb){
+    const url=`https://api.openverse.org/v1/images/?q=${encodeURIComponent(q)}&page_size=12`;
+    fetch(url,{headers:{'Accept':'application/json'}})
+      .then(r=>r.ok?r.json():Promise.reject(new Error('openverse '+r.status)))
+      .then(data=>{
+        const core=compact(coreName(name));
+        const allowed=new Set(['cc0','by','by-sa','pdm']);
+        const items=(data?.results||[]).map(r=>{
+          const licenseCode=String(r.license||'').toLowerCase();
+          if(!allowed.has(licenseCode)) return null;
+          const tags=Array.isArray(r.tags)?r.tags.map(t=>typeof t==='string'?t:(t&&t.name)||'').join(' '):'';
+          const hay=cleanText([r.title,r.creator,r.source,r.category,tags].filter(Boolean).join(' '));
+          const hc=compact(hay);
+          const nameMatch=!!(core && hc.includes(core));
+          const visualMatch=visualWords.test(hay);
+          if(!nameMatch && !visualMatch) return null;
+
+          let score=(nameMatch?30:0)+(visualMatch?12:0);
+          if(detailPenalty.test(hay)) score-=8;
+          const toks=meaningfulHintTokens(strictHint||queryHint);
+          const matched=toks.filter(t=>hc.includes(compact(t))).length;
+          if(matched) score+=matched*5;
+
+          const imageUrl=r.thumbnail||r.url;
+          if(!imageUrl) return null;
+          const lic=licenseCode==='pdm'
+            ? 'Public Domain'
+            : licenseCode==='cc0'
+              ? 'CC0'
+              : `CC ${licenseCode.toUpperCase()}${r.license_version?' '+r.license_version:''}`;
+
+          return {
+            url:imageUrl,
+            title:cleanText(r.title||name),
+            artist:cleanText(r.creator||''),
+            license:lic,
+            source:r.foreign_landing_url||r.detail_url||r.url||'',
+            sourceType:'openverse',
+            verified:true,
+            _score:score
+          };
+        }).filter(Boolean).sort((a,b)=>(b._score||0)-(a._score||0));
+        cb(items);
+      }).catch(()=>cb([]));
+  }
+
+  // 빠른 경로:
+  // 한국어 Wikipedia / Wikimedia Commons / Openverse를 동시에 확인합니다.
+  // 먼저 정확한 사진을 찾은 쪽을 즉시 카드에 표시하고,
+  // 세 곳 모두 비었을 때만 보조 검색어를 한 번 더 시도합니다.
+  const base=coreName(name);
+  const q1=isMountain
+    ? `"${base}" ${queryHint||''} Korea mountain`
+    : `"${base}" ${queryHint||''} Korean Buddhist temple`;
+  const openQ=isMountain
+    ? `${base} ${queryHint||''} Korea mountain landscape`
+    : `${base} ${queryHint||''} Korea Buddhist temple architecture`;
+
+  let firstRoundPending=3;
+  let fallbackStarted=false;
+
+  function firstRoundDone(items){
+    if(finished) return;
+    if(items && items.length){
+      saveResults(items);
+      return;
+    }
+    firstRoundPending--;
+    if(firstRoundPending<=0) runFallback();
+  }
+
+  function runFallback(){
+    if(finished || fallbackStarted) return;
+    fallbackStarted=true;
+    const q2=isMountain?`${base} ${queryHint||''} 산 전경`:`${base} ${queryHint||''} 사찰 전경`;
+    const q3=isMountain?`${base} landscape Korea`:`${base} temple architecture Korea`;
+    let pending=2;
+    let gathered=[];
+    const doneFallback=(items)=>{
+      if(finished) return;
+      if(items && items.length){
+        gathered=gathered.concat(items);
+        saveResults(gathered);
+        return;
+      }
+      pending--;
+      if(pending<=0) saveResults(gathered);
+    };
+    commonsSearch(q2,doneFallback);
+    openverseSearch(q3,doneFallback);
+  }
+
+  // 1) Wikipedia: 대표 썸네일이 있으면 가장 빠르게 사용
   exactWikipediaPage(page=>{
-    trustedArticlePhotos(page, articleItems=>{
-      if(articleItems.length>=3){saveResults(articleItems);return;}
-      const base=coreName(name);
-      const directHero=(page && page.thumbnail && page.thumbnail.source) ? {url:page.thumbnail.source,title:page.title||name,artist:'',license:'Wikipedia page image',source:page.fullurl||`https://ko.wikipedia.org/wiki/${encodeURIComponent(page.title||name)}`,sourceType:'wikipedia-pageimage',verified:true} : null;
-      const q1=isMountain?`"${base}" ${queryHint||''} Korea mountain`: `"${base}" ${queryHint||''} Korean Buddhist temple`;
-      const q2=isMountain?`${base} ${queryHint||''} 산 전경`: `${base} ${queryHint||''} 사찰 전경`;
-      const q3=isMountain?`${base} landscape Korea`: `${base} temple architecture Korea`;
-      commonsSearch(q1,a=>commonsSearch(q2,b=>commonsSearch(q3,c=>{
-        let combined=[...(directHero?[directHero]:[]),...articleItems,...a,...b,...c];
-        saveResults(combined);
-      })));
-    });
+    if(finished) return;
+    const directHero=(page && page.thumbnail && page.thumbnail.source)
+      ? {
+          url:page.thumbnail.source,
+          title:page.title||name,
+          artist:'',
+          license:'Wikipedia / Commons 원본 확인',
+          source:page.fullurl||`https://ko.wikipedia.org/wiki/${encodeURIComponent(page.title||name)}`,
+          sourceType:'wikipedia-pageimage',
+          verified:true
+        }
+      : null;
+    if(directHero){
+      saveResults([directHero]);
+      return;
+    }
+    trustedArticlePhotos(page,firstRoundDone);
   });
+
+  // 2) Commons 직접 검색
+  commonsSearch(q1,firstRoundDone);
+
+  // 3) Openverse(CC/공개 라이선스) 보조 검색
+  openverseSearch(openQ,firstRoundDone);
 }
 
 function renderCard(id,d){
@@ -11203,7 +11736,11 @@ function photoCreditHtml(m, i){
   if(!m) return `<div class="photo-credit">사진 ${i+1} · 출처 확인 필요</div>`;
   const artist = m.artist ? escapeHtml(m.artist) : '저작자 정보 확인';
   const license = m.license ? escapeHtml(m.license) : '라이선스 원본 확인';
-  const origin = m.sourceType==='wikipedia' ? 'Wikipedia 연계' : 'Wikimedia Commons';
+  const origin = m.sourceType==='openverse'
+    ? 'Openverse'
+    : (m.sourceType==='wikipedia' || m.sourceType==='wikipedia-pageimage')
+      ? 'Wikipedia 연계'
+      : 'Wikimedia Commons';
   const link = m.source ? `${origin} · <a href="${escapeAttr(m.source)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">원본·저작권 ↗</a>` : origin;
   return `<div class="photo-credit">📷 ${artist} · ${license}<br>${link}</div>`;
 }
@@ -11212,7 +11749,7 @@ function renderAutoCoverPhotos(wrapId,d){
   const urls=d.coverPhotos||[];
   if(urls.length===0){
     const q=encodeURIComponent((d.name||'')+' 국가유산');
-    wrap.innerHTML=`<div class="auto-photo-empty">${lotusPlaceholderHtml('사진을 확인하고 있어요')}<div><b>정확한 사진을 우선 확인해요.</b><span>Wikipedia·Wikimedia Commons의 검증 가능한 사진부터 찾고 있어요.</span><a class="heritage-photo-link" href="https://www.heritage.go.kr/heri/cul/culSelectViewList.do?searchCondition=${q}" target="_blank" rel="noopener">국가유산포털에서도 사진 확인 ↗</a></div></div>`;
+    wrap.innerHTML=`<div class="auto-photo-empty">${lotusPlaceholderHtml('사진을 확인하고 있어요')}<div><b>정확한 사진을 우선 확인해요.</b><span>Wikipedia·Wikimedia Commons·Openverse의 재사용 가능한 사진을 빠르게 찾고 있어요.</span><a class="heritage-photo-link" href="https://www.heritage.go.kr/heri/cul/culSelectViewList.do?searchCondition=${q}" target="_blank" rel="noopener">국가유산포털에서도 사진 확인 ↗</a></div></div>`;
     return;
   }
   const meta=d.coverPhotoMeta||[];
