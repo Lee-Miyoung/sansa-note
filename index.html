@@ -6071,6 +6071,122 @@ header.hero::before{
   }
 }
 
+
+
+/* ============================================================
+   HIDDEN TEMPLE · swipe to clear tray
+============================================================ */
+.hidden-temple-list{
+  display:flex!important;
+  flex-direction:column!important;
+  gap:10px!important;
+}
+.hidden-swipe-shell{
+  position:relative!important;
+  overflow:hidden!important;
+  border-radius:18px!important;
+  background:#b8584e!important;
+  box-shadow:0 3px 0 #e0ded7!important;
+  touch-action:pan-y!important;
+}
+.hidden-swipe-delete{
+  position:absolute!important;
+  top:0!important;right:0!important;bottom:0!important;
+  width:82px!important;
+  border:0!important;
+  background:#b8584e!important;
+  color:#fff!important;
+  font-size:13px!important;
+  font-weight:900!important;
+  cursor:pointer!important;
+}
+.hidden-temple-row.hidden-swipe-content{
+  position:relative!important;
+  z-index:2!important;
+  margin:0!important;
+  min-height:92px!important;
+  padding:15px 16px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  gap:12px!important;
+  border:1px solid #dfddd5!important;
+  border-radius:18px!important;
+  background:#fff!important;
+  box-sizing:border-box!important;
+  will-change:transform!important;
+}
+.hidden-temple-copy{min-width:0!important;flex:1!important}
+.hidden-temple-copy .name{
+  font-size:15px!important;
+  line-height:1.2!important;
+  font-weight:900!important;
+  color:#26362f!important;
+}
+.hidden-temple-copy .sub{
+  margin-top:5px!important;
+  font-size:11.5px!important;
+  line-height:1.35!important;
+  color:#7c8982!important;
+}
+.hidden-swipe-hint{
+  margin-top:6px!important;
+  font-size:9px!important;
+  color:#a2aaa6!important;
+  font-weight:700!important;
+}
+.hidden-restore-btn{
+  flex-shrink:0!important;
+  border:0!important;
+  border-radius:999px!important;
+  background:#3e705e!important;
+  color:#fff!important;
+  padding:10px 13px!important;
+  font-size:11.5px!important;
+  font-weight:900!important;
+  cursor:pointer!important;
+}
+.hidden-swipe-shell.swiped .hidden-swipe-hint{color:#b8584e!important}
+
+@media(min-width:641px){
+  .hidden-swipe-delete::before{content:'← ';opacity:.7}
+}
+@media(max-width:640px){
+  .hidden-temple-row.hidden-swipe-content{
+    min-height:88px!important;
+    padding:13px 14px!important;
+  }
+  .hidden-temple-copy .name{font-size:14px!important}
+  .hidden-temple-copy .sub{font-size:10.5px!important}
+  .hidden-restore-btn{
+    padding:9px 11px!important;
+    font-size:10.5px!important;
+  }
+  .hidden-swipe-hint{font-size:8.5px!important}
+}
+
+
+
+/* ===== FAST CONTENT TAB SWITCH ===== */
+.content-type-btn{
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+}
+body.content-tab-switching .content-type-btn.active{
+  transform:scale(.985)!important;
+}
+#grid .card{
+  content-visibility:auto;
+  contain-intrinsic-size:260px 220px;
+}
+.community-post-card{
+  content-visibility:auto;
+  contain-intrinsic-size:100px;
+}
+@media(max-width:640px){
+  #grid .card{contain-intrinsic-size:180px 165px}
+}
+
 </style>
 </head>
 <body>
@@ -6403,11 +6519,11 @@ header.hero::before{
 <div class="overlay" id="hiddenTempleOverlay">
   <div class="modal">
     <div class="modal-head">
-      <div><h2 class="serif">🏯 메인에서 뺀 절 메인에 다시 넣기</h2><div class="sub">메인에서 뺀 절도 기록과 사진은 그대로 보관돼요.</div></div>
+      <div><h2 class="serif">🏯 메인에서 뺀 절</h2><div class="sub">오른쪽에서 왼쪽으로 밀면 목록에서 정리할 수 있어요.</div></div>
       <button class="close-x" onclick="closeHiddenTempleOverlay()">✕</button>
     </div>
     <div class="modal-body">
-      <div class="map-note" style="padding:0 0 10px;text-align:left;">목록에서 숨겨도 사진과 방문기록은 삭제하지 않아요.</div>
+      <div class="map-note" style="padding:0 0 10px;text-align:left;">밀어서 삭제해도 절 자체·방문기록·사진은 지우지 않아요. 이 보관 목록에서만 사라져요.</div>
       <button class="btn btn-ghost btn-block" type="button" onclick="manualRecoverPhotos()" style="margin-bottom:10px;">📷 저장소 사진 다시 연결하기</button>
       <div class="hidden-temple-list" id="hiddenTempleList"></div>
     </div>
@@ -12418,7 +12534,7 @@ async function loadPack(key){
       }else{
         // 같은 이름의 중복 데이터가 있어도 전부 메인 상태로 맞춥니다.
         entries.forEach(([id,d])=>{
-          destinations[id]=Object.assign({},d,{hiddenFromList:false,hiddenAt:null});
+          destinations[id]=Object.assign({},d,{hiddenFromList:false,hiddenAt:null,hiddenTrayDismissed:false,hiddenTrayDismissedAt:null});
           if(!localMode){
             cloudUpdates[`users/${currentUid}/destinations/${id}/hiddenFromList`]=false;
             cloudUpdates[`users/${currentUid}/destinations/${id}/hiddenAt`]=null;
@@ -12801,7 +12917,7 @@ async function addTempleToMainByName(name,evt){
       // 코스에서 불러왔는데 안 보이는 현상을 없앱니다.
       if(localMode){
         existing.forEach(([id,d])=>{
-          destinations[id]=Object.assign({},d,{hiddenFromList:false,hiddenAt:null});
+          destinations[id]=Object.assign({},d,{hiddenFromList:false,hiddenAt:null,hiddenTrayDismissed:false,hiddenTrayDismissedAt:null});
         });
         persistLocal();
       }else{
@@ -12809,7 +12925,9 @@ async function addTempleToMainByName(name,evt){
         existing.forEach(([id])=>{
           updates[`users/${currentUid}/destinations/${id}/hiddenFromList`]=false;
           updates[`users/${currentUid}/destinations/${id}/hiddenAt`]=null;
-          destinations[id]=Object.assign({},destinations[id],{hiddenFromList:false,hiddenAt:null});
+          updates[`users/${currentUid}/destinations/${id}/hiddenTrayDismissed`]=false;
+          updates[`users/${currentUid}/destinations/${id}/hiddenTrayDismissedAt`]=null;
+          destinations[id]=Object.assign({},destinations[id],{hiddenFromList:false,hiddenAt:null,hiddenTrayDismissed:false,hiddenTrayDismissedAt:null});
         });
         await db.ref().update(updates);
       }
@@ -12962,24 +13080,46 @@ function openPilgrimageAlbum(index){
   openLightbox(urls, Math.max(0,Math.min(index||0,urls.length-1)), meta);
 }
 
+
+let homeGallerySignature='';
+function getHomeGallerySignature(){
+  let count=0,maxTs=0;
+  Object.values(destinations||{}).forEach(d=>{
+    Object.values(d?.photos||{}).forEach(p=>{
+      count++;
+      maxTs=Math.max(maxTs,Number(p?.createdAt||0));
+    });
+  });
+  Object.values(mountainDestinations||{}).forEach(d=>{
+    Object.values(d?.photos||{}).forEach(p=>{
+      count++;
+      maxTs=Math.max(maxTs,Number(p?.createdAt||0));
+    });
+  });
+  return `${count}:${maxTs}`;
+}
+
 function renderHomeGallery(){
-  const wrap = document.getElementById('homeGalleryWrap');
-  const items = buildPilgrimageAlbumItems();
-  pilgrimageAlbumItems = items;
+  const wrap=document.getElementById('homeGalleryWrap');
+  if(!wrap) return;
+  const sig=getHomeGallerySignature();
+  if(sig===homeGallerySignature && wrap.innerHTML) return;
+  homeGallerySignature=sig;
 
-  if(items.length===0){ wrap.innerHTML=''; return; }
+  const items=buildPilgrimageAlbumItems();
+  pilgrimageAlbumItems=items;
+  if(items.length===0){wrap.innerHTML='';return;}
 
-  wrap.innerHTML = `<div class="home-gallery">
+  wrap.innerHTML=`<div class="home-gallery">
       <div style="display:flex;align-items:center;justify-content:space-between;padding:1px 2px 9px;">
         <b style="font-size:12px;color:#17352e;">📷 나의 순례앨범</b>
         <span style="font-size:10px;color:var(--ink-soft);">${items.length}장 · 사진을 눌러 넘겨보세요</span>
       </div>
-      <div class="home-gallery-strip">` +
-    items.slice(0,24).map((it,i)=>`
-      <div class="hg-item" style="background-image:url('${escapeAttr(it.url)}')" onclick="openPilgrimageAlbum(${i})">
-        <div class="hg-name">${escapeHtml(it.place)}</div>
-      </div>`).join('') +
-    `</div></div>`;
+      <div class="home-gallery-strip">${items.slice(0,24).map((it,i)=>`
+        <div class="hg-item" style="background-image:url('${escapeAttr(it.url)}')" onclick="openPilgrimageAlbum(${i})">
+          <div class="hg-name">${escapeHtml(it.place)}</div>
+        </div>`).join('')}</div>
+    </div>`;
 }
 
 
@@ -13356,6 +13496,7 @@ function render(){
     initGridSortable('temple');
     schedulePhotoHydration('temple',list);
   }
+  snapshotCurrentContentTab('temple');
 }
 
 /* ============================================================
@@ -13363,38 +13504,123 @@ function render(){
 ============================================================ */
 let contentType = 'temple';
 
+
+const contentTabCache={temple:null,mountain:null};
+let tabSwitchToken=0;
+let deferredTabRefreshTimer=null;
+
+function bindCurrentGridCards(type){
+  const grid=document.getElementById('grid');
+  if(!grid) return;
+  grid.querySelectorAll('.card').forEach(card=>{
+    card.onclick=()=>{
+      if(type==='mountain') openMountainDetail(card.dataset.id);
+      else openDetail(card.dataset.id);
+    };
+  });
+  initGridSortable(type);
+}
+function snapshotCurrentContentTab(type){
+  if(type!=='temple'&&type!=='mountain') return;
+  const grid=document.getElementById('grid');
+  const empty=document.getElementById('emptyNote');
+  const stats=document.getElementById('heroStats');
+  if(!grid||!empty||!stats) return;
+  contentTabCache[type]={
+    gridHtml:grid.innerHTML,
+    emptyDisplay:empty.style.display,
+    statsHtml:stats.innerHTML,
+    savedAt:Date.now()
+  };
+}
+function restoreContentTabSnapshot(type){
+  const snap=contentTabCache[type];
+  if(!snap) return false;
+  const grid=document.getElementById('grid');
+  const empty=document.getElementById('emptyNote');
+  const stats=document.getElementById('heroStats');
+  if(!grid||!empty||!stats) return false;
+  grid.innerHTML=snap.gridHtml;
+  empty.style.display=snap.emptyDisplay;
+  stats.innerHTML=snap.statsHtml;
+  bindCurrentGridCards(type);
+  return true;
+}
+function scheduleDeferredTabRefresh(type,token){
+  if(deferredTabRefreshTimer){
+    clearTimeout(deferredTabRefreshTimer);
+    deferredTabRefreshTimer=null;
+  }
+  const run=()=>{
+    if(token!==tabSwitchToken||contentType!==type) return;
+    render();
+  };
+  if(window.requestIdleCallback){
+    requestIdleCallback(run,{timeout:700});
+  }else{
+    deferredTabRefreshTimer=setTimeout(run,180);
+  }
+}
+
 function switchContentType(type){
   if(contentType===type) return;
+
+  const previous=contentType;
+  if(previous==='temple'||previous==='mountain') snapshotCurrentContentTab(previous);
+
   contentType=type;
+  const token=++tabSwitchToken;
   photoQueueGeneration++;
   if(photoHydrationObserver){try{photoHydrationObserver.disconnect();}catch(e){}}
 
+  document.body.classList.add('content-tab-switching');
   document.getElementById('ctypeTemple')?.classList.toggle('active',type==='temple');
   document.getElementById('ctypeMountain')?.classList.toggle('active',type==='mountain');
   document.getElementById('ctypeCommunity')?.classList.toggle('active',type==='community');
 
   if(type==='community'){
     setCommunityViewMode(true);
-    renderCommunityHero();
-    renderCommunity();
-    window.scrollTo({top:document.querySelector('.content-type-row')?.offsetTop||0,behavior:'smooth'});
+    // 커뮤니티는 독립 DOM이라 즉시 보이고, 목록 갱신만 다음 프레임에 처리
+    requestAnimationFrame(()=>{
+      if(token!==tabSwitchToken) return;
+      renderCommunityHero();
+      renderCommunity();
+      document.body.classList.remove('content-tab-switching');
+    });
     return;
   }
 
   setCommunityViewMode(false);
-  document.getElementById('stageFilter').innerHTML = type==='mountain'
-    ? `<option value="all">단계 전체</option><option value="0">가보고 싶다</option><option value="1">올랐어요</option><option value="2">등반 기록 완료</option>`
-    : `<option value="all">단계 전체</option><option value="0">가보고 싶다</option><option value="1">다녀왔어요</option><option value="2">순례 기록 완료</option>`;
-  document.getElementById('tagToggle').style.display=type==='mountain'?'none':'flex';
-  document.getElementById('searchBox').placeholder=type==='mountain'
-    ? '산 이름, 지역으로 검색'
-    : '절 이름, 지역, 유명한 것으로 검색';
+  const stage=document.getElementById('stageFilter');
+  if(stage){
+    stage.innerHTML=type==='mountain'
+      ? `<option value="all">단계 전체</option><option value="0">가보고 싶다</option><option value="1">올랐어요</option><option value="2">등반 기록 완료</option>`
+      : `<option value="all">단계 전체</option><option value="0">가보고 싶다</option><option value="1">다녀왔어요</option><option value="2">순례 기록 완료</option>`;
+  }
+  const tagToggle=document.getElementById('tagToggle');
+  if(tagToggle) tagToggle.style.display=type==='mountain'?'none':'flex';
+  const search=document.getElementById('searchBox');
+  if(search) search.placeholder=type==='mountain'?'산 이름, 지역으로 검색':'108개 사찰 전체에서 검색';
 
   filterRegion='전체';
   buildRegionTabs();
-  const grid=document.getElementById('grid');
-  if(grid) grid.style.opacity='.72';
-  requestAnimationFrame(()=>{render();requestAnimationFrame(()=>{if(grid)grid.style.opacity='1';});});
+
+  const restored=restoreContentTabSnapshot(type);
+  requestAnimationFrame(()=>{
+    if(token!==tabSwitchToken) return;
+    document.body.classList.remove('content-tab-switching');
+  });
+
+  // 캐시가 있으면 화면은 즉시 전환하고 실제 계산/사진 연결은 브라우저가 한가할 때 갱신.
+  if(restored){
+    scheduleDeferredTabRefresh(type,token);
+  }else{
+    // 첫 진입만 실제 렌더링을 다음 프레임에 수행해서 탭 버튼 터치가 먼저 반응하도록 함.
+    requestAnimationFrame(()=>{
+      if(token!==tabSwitchToken) return;
+      render();
+    });
+  }
 }
 
 function getFilteredMountainList(){
@@ -13455,6 +13681,7 @@ function renderMountainView(){
     initGridSortable('mountain');
     schedulePhotoHydration('mountain',filtered);
   }
+  snapshotCurrentContentTab('mountain');
 }
 
 function ensureMountainsSeeded(){
@@ -13855,13 +14082,17 @@ function schedulePhotoHydration(type, entries){
   const isMountain=type==='mountain';
   const store=isMountain?mountainDestinations:destinations;
   const queueOne=(id)=>{
+    if(gen!==photoQueueGeneration||contentType!==type) return;
     const d=store[id]; if(!d)return;
     const photo=firstPhotoUrl(d);
     if(photo) return;
     if(coverFetching.has(id)||shouldSkipPhotoRetry(d))return;
-    const opts=isMountain?{store:mountainDestinations,updateFn:updateMountainDestination,getCurrentId:()=>currentMountainDetailId,onDetailUpdate:()=>{},region:d.region,cancelOnTabChange:true,generation:gen}:{region:d.region,cancelOnTabChange:true,generation:gen};
+    const opts=isMountain
+      ? {store:mountainDestinations,updateFn:updateMountainDestination,getCurrentId:()=>currentMountainDetailId,onDetailUpdate:()=>{},region:d.region,cancelOnTabChange:true,generation:gen}
+      : {region:d.region,cancelOnTabChange:true,generation:gen};
     queuePhotoFetch(id,d.name,d.locationHint||'',opts);
   };
+
   const cards=[...document.querySelectorAll('#grid .card[data-id]')];
   if('IntersectionObserver' in window){
     photoHydrationObserver=new IntersectionObserver(items=>{
@@ -13871,15 +14102,20 @@ function schedulePhotoHydration(type, entries){
           photoHydrationObserver.unobserve(it.target);
         }
       });
-    },{rootMargin:'900px 0px'});
+    },{rootMargin:'500px 0px'});
     cards.forEach(c=>photoHydrationObserver.observe(c));
   }else{
-    cards.slice(0,16).forEach(c=>queueOne(c.dataset.id));
+    cards.slice(0,8).forEach(c=>queueOne(c.dataset.id));
   }
 
-  // 첫 화면 카드 10개는 idle까지 기다리지 않고 즉시 사진을 찾습니다.
-  const priority=(entries||[]).filter(([id,d])=>!firstPhotoUrl(d)).slice(0,10);
-  setTimeout(()=>priority.forEach(([id])=>queueOne(id)),30);
+  // 탭 전환 직후 네트워크 검색을 몰아넣지 않음. 화면이 안정된 뒤 앞쪽 4개만 보강.
+  const priority=(entries||[]).filter(([id,d])=>!firstPhotoUrl(d)).slice(0,4);
+  const kick=()=>{
+    if(gen!==photoQueueGeneration||contentType!==type) return;
+    priority.forEach(([id])=>queueOne(id));
+  };
+  if(window.requestIdleCallback) requestIdleCallback(kick,{timeout:1200});
+  else setTimeout(kick,420);
 }
 
 function patchVisibleCover(id,url,kind,name){
@@ -15150,7 +15386,8 @@ async function manualRecoverPhotos(){
 }
 
 function getHiddenTempleEntries(){
-  return Object.entries(destinations||{}).filter(([id,d])=>d&&d.hiddenFromList)
+  return Object.entries(destinations||{})
+    .filter(([id,d])=>d&&d.hiddenFromList&&!d.hiddenTrayDismissed)
     .sort((a,b)=>(b[1].hiddenAt||0)-(a[1].hiddenAt||0));
 }
 function updateHiddenTempleButton(){
@@ -15160,6 +15397,77 @@ function updateHiddenTempleButton(){
   btn.textContent=`🙈 메인에서 뺀 절 ${n}`;
   btn.style.display=contentType==='temple'?'':'none';
 }
+async function dismissHiddenTempleFromTray(id,evt){
+  if(evt){evt.preventDefault();evt.stopPropagation();}
+  const d=destinations[id];
+  if(!d) return;
+
+  // 사용자 기록/사진/사찰 마스터는 절대 삭제하지 않고,
+  // '메인에서 뺀 절' 보관 목록에서만 감춥니다.
+  const patch={hiddenTrayDismissed:true,hiddenTrayDismissedAt:Date.now()};
+  try{
+    if(localMode){
+      destinations[id]=Object.assign({},d,patch);
+      persistLocal();
+    }else{
+      await destinationRef(id).update(patch);
+      destinations[id]=Object.assign({},d,patch);
+    }
+    renderHiddenTempleList();
+    updateHiddenTempleButton();
+    showToast(`"${d.name}"을(를) 보관 목록에서 정리했어요. 기록과 사진은 그대로예요.`);
+  }catch(e){
+    showToast('목록에서 정리하지 못했어요.');
+  }
+}
+
+function initHiddenTempleSwipe(){
+  document.querySelectorAll('.hidden-swipe-shell').forEach(shell=>{
+    const content=shell.querySelector('.hidden-swipe-content');
+    if(!content||shell.dataset.swipeReady==='1') return;
+    shell.dataset.swipeReady='1';
+
+    let startX=0,startY=0,currentX=0,dragging=false,vertical=false;
+    const max=82;
+
+    const setX=(x,animate=false)=>{
+      currentX=Math.max(-max,Math.min(0,x));
+      content.style.transition=animate?'transform .18s ease':'none';
+      content.style.transform=`translateX(${currentX}px)`;
+      shell.classList.toggle('swiped',currentX<-35);
+    };
+
+    content.addEventListener('touchstart',e=>{
+      if(!e.touches||!e.touches[0]) return;
+      const t=e.touches[0];
+      startX=t.clientX-currentX;
+      startY=t.clientY;
+      dragging=true;
+      vertical=false;
+      content.style.transition='none';
+    },{passive:true});
+
+    content.addEventListener('touchmove',e=>{
+      if(!dragging||!e.touches||!e.touches[0]) return;
+      const t=e.touches[0];
+      const dx=t.clientX-startX;
+      const dy=t.clientY-startY;
+      if(!vertical&&Math.abs(dy)>Math.abs(dx)+5){vertical=true;return;}
+      if(vertical) return;
+      if(Math.abs(dx)>4) e.preventDefault();
+      setX(dx,false);
+    },{passive:false});
+
+    const finish=()=>{
+      if(!dragging) return;
+      dragging=false;
+      setX(currentX<-40?-max:0,true);
+    };
+    content.addEventListener('touchend',finish,{passive:true});
+    content.addEventListener('touchcancel',finish,{passive:true});
+  });
+}
+
 function openHiddenTempleOverlay(){
   renderHiddenTempleList();
   document.getElementById('hiddenTempleOverlay')?.classList.add('show');
@@ -15172,21 +15480,29 @@ function renderHiddenTempleList(){
   if(!wrap) return;
   const entries=getHiddenTempleEntries();
   if(!entries.length){
-    wrap.innerHTML='<div class="hidden-temple-empty">숨긴 절이 없어요.<br>메인 카드의 <b>목록 빼기</b>를 누르면 이곳에서 다시 불러올 수 있어요.</div>';
+    wrap.innerHTML='<div class="hidden-temple-empty">메인에서 뺀 절이 없어요.<br>절 카드의 <b>메인에서 빼기</b>를 누르면 이곳에 보관돼요.</div>';
     return;
   }
   wrap.innerHTML=entries.map(([id,d])=>`
-    <div class="hidden-temple-row">
-      <div><div class="name">${escapeHtml(d.name)}</div><div class="sub">${escapeHtml(d.region||'')} · 기록/사진 보관 중</div></div>
-      <button type="button" onclick="restoreHiddenTemple('${id}')">메인에 다시 넣기</button>
+    <div class="hidden-swipe-shell" data-hidden-id="${id}">
+      <button class="hidden-swipe-delete" type="button" onclick="dismissHiddenTempleFromTray('${id}',event)">삭제</button>
+      <div class="hidden-temple-row hidden-swipe-content">
+        <div class="hidden-temple-copy">
+          <div class="name">${escapeHtml(d.name)}</div>
+          <div class="sub">${escapeHtml(d.region||'')} · 기록/사진 보관 중</div>
+          <div class="hidden-swipe-hint">← 밀어서 목록에서 삭제</div>
+        </div>
+        <button class="hidden-restore-btn" type="button" onclick="restoreHiddenTemple('${id}',event)">메인에 다시 넣기</button>
+      </div>
     </div>`).join('');
+  initHiddenTempleSwipe();
 }
 async function hideDestinationFromMain(id,evt){
   if(evt){evt.preventDefault();evt.stopPropagation();}
   const d=destinations[id];
   if(!d) return;
   if(!confirm(`"${d.name}"을(를) 메인에서 뺄까요?\n방문기록·메모·사진은 그대로 보관돼요.`)) return;
-  const patch={hiddenFromList:true,hiddenAt:Date.now()};
+  const patch={hiddenFromList:true,hiddenAt:Date.now(),hiddenTrayDismissed:false,hiddenTrayDismissedAt:null};
   try{
     if(localMode){
       destinations[id]=Object.assign({},d,patch);
@@ -15201,14 +15517,25 @@ async function hideDestinationFromMain(id,evt){
     showToast('처리하지 못했어요.');
   }
 }
-async function restoreHiddenTemple(id){
-  const d=destinations[id]; if(!d)return;
-  const patch={hiddenFromList:false,hiddenAt:null};
+async function restoreHiddenTemple(id,evt){
+  if(evt){evt.preventDefault();evt.stopPropagation();}
+  const d=destinations[id];
+  if(!d) return;
+  const patch={hiddenFromList:false,hiddenAt:null,hiddenTrayDismissed:false};
   try{
-    if(localMode){destinations[id]=Object.assign({},destinations[id],patch);persistLocal();}
-    else{await destinationRef(id).update(patch);destinations[id]=Object.assign({},destinations[id],patch);}
-    renderHiddenTempleList(); render(); showToast(`"${d.name}"을(를) 다시 불러왔어요.`);
-  }catch(e){showToast('다시 불러오지 못했어요.');}
+    if(localMode){
+      destinations[id]=Object.assign({},d,patch);
+      persistLocal();
+    }else{
+      await destinationRef(id).update(patch);
+      destinations[id]=Object.assign({},d,patch);
+    }
+    renderHiddenTempleList();
+    render();
+    showToast(`"${d.name}"을(를) 메인에 다시 넣었어요.`);
+  }catch(e){
+    showToast('메인에 다시 넣지 못했어요.');
+  }
 }
 
 
