@@ -4148,6 +4148,200 @@ button.contact-email{display:block;}
   .content-type-btn .ctype-copy small{display:none}
 }
 
+
+
+/* ===== STORY CARD FORM ===== */
+.story-card-form-grid{
+  display:grid;
+  grid-template-columns:150px 1fr;
+  gap:8px;
+  margin-bottom:10px;
+  text-align:left;
+}
+.story-card-field{
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+}
+.story-card-field>span{
+  font-size:10px;
+  font-weight:850;
+  color:#56655e;
+}
+.story-card-field .searchbox{
+  width:100%!important;
+  box-sizing:border-box!important;
+  margin:0!important;
+}
+@media(max-width:560px){
+  .story-card-form-grid{grid-template-columns:1fr}
+}
+
+
+
+/* ===== CLICKABLE COURSE PROGRESS ===== */
+.badge-item-clickable{
+  width:100%;
+  appearance:none;
+  -webkit-appearance:none;
+  border:0;
+  background:transparent;
+  font:inherit;
+  color:inherit;
+  cursor:pointer!important;
+  text-align:left;
+  transition:transform .14s ease,background .14s ease;
+}
+.badge-item-clickable:hover{background:rgba(49,95,80,.035)}
+.badge-item-clickable:active{transform:scale(.99)}
+.badge-title-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+}
+.badge-detail-arrow{
+  width:24px;
+  height:24px;
+  display:grid;
+  place-items:center;
+  border-radius:999px;
+  background:#eef3f0;
+  color:#315f50;
+  font-size:20px;
+  line-height:1;
+  font-weight:500;
+}
+.course-progress-hero{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  padding:14px;
+  margin-bottom:13px;
+  border-radius:17px;
+  background:linear-gradient(135deg,#f5f1e8,#edf4ef);
+  border:1px solid #dde3de;
+}
+.course-progress-ring{
+  --course-pct:0deg;
+  width:86px;
+  height:86px;
+  flex:0 0 86px;
+  border-radius:50%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  background:conic-gradient(#315f50 var(--course-pct),#dfe5e1 0);
+}
+.course-progress-ring::after{
+  content:'';
+  position:absolute;
+  inset:8px;
+  border-radius:50%;
+  background:#fffdf8;
+}
+.course-progress-ring b,
+.course-progress-ring span{
+  position:relative;
+  z-index:1;
+}
+.course-progress-ring b{
+  font-family:"Nanum Myeongjo","Noto Serif KR",serif;
+  font-size:21px;
+  color:#29493d;
+}
+.course-progress-ring span{
+  margin-top:2px;
+  font-size:8.5px;
+  font-weight:800;
+  color:#849089;
+}
+.course-progress-copy{
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+}
+.course-progress-copy>b{
+  font-size:17px;
+  color:#253c32;
+}
+.course-progress-copy>span{
+  color:#748078;
+  font-size:10.5px;
+  line-height:1.55;
+}
+.course-progress-places{
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+}
+.course-progress-place{
+  width:100%;
+  display:grid;
+  grid-template-columns:30px 1fr auto;
+  align-items:center;
+  gap:9px;
+  padding:10px 11px;
+  border:1px solid #e0e4e1;
+  border-radius:13px;
+  background:#fff;
+  text-align:left;
+  cursor:pointer;
+  font:inherit;
+  color:inherit;
+}
+.course-progress-place:not(:disabled):active{transform:scale(.99)}
+.course-progress-place:disabled{cursor:default;opacity:.78}
+.course-progress-order{
+  width:27px;
+  height:27px;
+  display:grid;
+  place-items:center;
+  border-radius:9px;
+  background:#f0f2ef;
+  color:#7a8680;
+  font-size:10px;
+  font-weight:900;
+}
+.course-progress-place.visited .course-progress-order,
+.course-progress-place.recorded .course-progress-order{
+  background:#315f50;
+  color:#fff;
+}
+.course-progress-place-copy{
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+  gap:3px;
+}
+.course-progress-place-copy b{
+  font-size:12.5px;
+  color:#293d35;
+}
+.course-progress-place-copy small{
+  font-size:9.5px;
+  color:#849089;
+  line-height:1.35;
+}
+.course-progress-state{
+  min-width:32px;
+  text-align:center;
+  font-weight:900;
+  font-size:13px;
+  color:#a0aaa5;
+}
+.course-progress-place.visited .course-progress-state{color:#527966}
+.course-progress-place.recorded .course-progress-state{color:#a06a32}
+@media(max-width:560px){
+  .course-progress-hero{padding:12px;gap:12px}
+  .course-progress-ring{width:72px;height:72px;flex-basis:72px}
+  .course-progress-ring b{font-size:18px}
+  .course-progress-copy>b{font-size:15px}
+}
+
 </style>
 </head>
 <body>
@@ -5079,17 +5273,24 @@ button.contact-email{display:block;}
 <div class="overlay" id="storyCardOverlay">
   <div class="modal" style="text-align:center;">
     <div class="modal-head">
-      <div><h2 class="serif">📸 순례 인증 카드</h2><div class="sub">인스타 스토리에 바로 올릴 수 있는 크기예요 · 사진이 있으면 배경에 자동 적용돼요</div></div>
+      <div><h2 class="serif">📸 순례 인증 카드</h2><div class="sub">인스타 스토리에 바로 올릴 수 있는 크기예요 · 한지와 한자 중심으로 만들어요</div></div>
       <button class="close-x" onclick="closeStoryCardOverlay()">✕</button>
     </div>
     <div class="modal-body">
-      <input class="searchbox" id="storyCardMsg" placeholder="한 줄 소감 (예: 마음을 비우고 갑니다)" style="width:100%;margin-bottom:12px;" oninput="renderStoryCard()">
-      <div id="storyCardStatus" style="font-size:11.5px;color:var(--ink-soft);margin:-2px 0 10px;">선택한 절로 카드를 만들고 있어요. 사진이 있으면 자동으로 배경에 들어가요.</div>
+      <div class="story-card-form-grid">
+        <label class="story-card-field">
+          <span>방문 날짜</span>
+          <input class="searchbox" id="storyCardDate" type="date" onchange="renderStoryCard()">
+        </label>
+        <label class="story-card-field">
+          <span>한 줄 소감</span>
+          <input class="searchbox" id="storyCardMsg" placeholder="예: 마음을 비우고 갑니다" oninput="renderStoryCard()">
+        </label>
+      </div>
+      <div id="storyCardStatus" style="font-size:11.5px;color:var(--ink-soft);margin:0 0 10px;">한지와 한자 중심의 순례 인증카드를 만들어요.</div>
       <canvas id="storyCardCanvas" width="1080" height="1920" style="width:100%;max-width:220px;border-radius:12px;box-shadow:0 6px 20px rgba(0,0,0,.25);margin-bottom:14px;background:#f5ead2;"></canvas>
-      <input type="file" id="storyCardLocalPhotoInput" accept="image/*" style="display:none" onchange="useLocalStoryCardPhoto(event)">
-      <button class="btn btn-ghost btn-block" id="storyCardPickPhotoBtn" type="button" onclick="document.getElementById('storyCardLocalPhotoInput').click()" style="margin-bottom:9px;">📷 배경 사진 직접 선택</button>
       <div class="story-card-actions">
-        <button class="btn btn-primary btn-block" onclick="downloadStoryCard()">📥 저장하기</button>
+        <button class="btn btn-primary btn-block" id="storyCardSaveBtn" onclick="downloadStoryCard()">📥 저장하기</button>
         <button class="btn btn-ghost btn-block" onclick="shareStoryCard()">↗ 공유하기</button>
       </div>
     </div>
@@ -5309,6 +5510,30 @@ button.contact-email{display:block;}
       <div id="badgeList"></div>
       <div class="section-label" style="margin-top:18px;">순례 등급표</div>
       <div id="levelGuide"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== COURSE PROGRESS DETAIL MODAL ===================== -->
+<div class="overlay" id="courseProgressOverlay">
+  <div class="modal">
+    <div class="modal-head">
+      <div>
+        <h2 class="serif" id="courseProgressTitle">🧭 코스 진행률</h2>
+        <div class="sub" id="courseProgressSubtitle">코스별 방문 현황</div>
+      </div>
+      <button class="close-x" onclick="closeCourseProgressDetail()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="course-progress-hero">
+        <div class="course-progress-ring" id="courseProgressRing"><b>0%</b><span>완료</span></div>
+        <div class="course-progress-copy">
+          <b id="courseProgressCount">0 / 0곳</b>
+          <span id="courseProgressRoute"></span>
+        </div>
+      </div>
+      <div id="courseProgressPlaces" class="course-progress-places"></div>
+      <button class="btn btn-primary btn-block" id="courseCertificateBtn" type="button" style="display:none;margin-top:12px;">🏅 완주 인증서 보기</button>
     </div>
   </div>
 </div>
@@ -8460,28 +8685,43 @@ function toggleDarkMode(){
 
 let storyCardDetailId = null;
 function openStoryCardOverlay(){
-  const candidateId = currentDetailId || storyCardDetailId;
-  if(!candidateId || !destinations[candidateId]){
+  const candidateId=currentDetailId||storyCardDetailId;
+  if(!candidateId||!destinations[candidateId]){
     showToast('먼저 절을 하나 열어주세요');
     return;
   }
-  storyCardDetailId = candidateId;
-  storyCardManualPhotoBlob=null;
-  storyCardManualPhotoName='';
-  const msg = document.getElementById('storyCardMsg');
-  if(msg) msg.value = '';
-  const status = document.getElementById('storyCardStatus');
-  if(status) status.textContent = `${destinations[candidateId].name} 순례 카드를 준비하고 있어요.`;
-  const overlay = document.getElementById('storyCardOverlay');
+  storyCardDetailId=candidateId;
+
+  const msg=document.getElementById('storyCardMsg');
+  if(msg) msg.value='';
+
+  const dateInput=document.getElementById('storyCardDate');
+  if(dateInput){
+    const now=new Date();
+    const localDate=new Date(now.getTime()-now.getTimezoneOffset()*60000).toISOString().slice(0,10);
+    dateInput.value=localDate;
+  }
+
+  const status=document.getElementById('storyCardStatus');
+  if(status) status.textContent=`${destinations[candidateId].name} · 한지와 한자 중심의 순례 인증카드를 만들어요.`;
+
+  const saveBtn=document.getElementById('storyCardSaveBtn');
+  if(saveBtn){
+    const mobile=/Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || navigator.maxTouchPoints>1;
+    saveBtn.textContent=mobile?'📱 사진앱에 저장':'📥 이미지 저장';
+  }
+
+  const overlay=document.getElementById('storyCardOverlay');
   overlay.classList.add('show');
-  document.body.style.overflow = 'hidden';
+  document.body.style.overflow='hidden';
   setTimeout(()=>{
-    try{ renderStoryCard(); }catch(e){
-      console.error('story card render error', e);
-      if(status) status.textContent = '카드를 만드는 중 오류가 났어요. 다시 눌러주세요.';
+    try{renderStoryCard();}
+    catch(e){
+      console.error('story card render error',e);
+      if(status) status.textContent='카드를 만드는 중 오류가 났어요. 다시 눌러주세요.';
       showToast('순례 카드를 다시 만들어주세요');
     }
-  }, 40);
+  },40);
 }
 function closeStoryCardOverlay(){
   document.getElementById('storyCardOverlay').classList.remove('show');
@@ -8899,235 +9139,182 @@ async function useLocalStoryCardPhoto(event){
 }
 
 function renderStoryCard(){
-  const canvas = document.getElementById('storyCardCanvas');
-  if(!canvas){ showToast('카드 화면을 찾지 못했어요'); return; }
-  const ctx = canvas.getContext('2d');
-  if(!ctx){ showToast('이 브라우저에서 카드 미리보기를 만들 수 없어요'); return; }
-  const W = 1080, H = 1920;
-  const cardId = storyCardDetailId || currentDetailId;
-  const d = destinations[cardId];
-  if(!d){ showToast('순례 카드를 만들 절 정보를 찾지 못했어요'); return; }
-  const msg = document.getElementById('storyCardMsg').value.trim();
-  const poetic = POETIC_DESC[d.name];
-  const today = new Date();
-  const dateStr = `${today.getFullYear()}.${String(today.getMonth()+1).padStart(2,'0')}`;
-  const hanjaPick = TEMPLE_HANJA[d.name] || CARD_HANJA[Math.floor(Math.random()*CARD_HANJA.length)];
-  let photoUrl = null;
-  const renderToken = Date.now() + Math.random();
-  window.__storyCardRenderToken = renderToken;
+  const canvas=document.getElementById('storyCardCanvas');
+  if(!canvas){showToast('카드 화면을 찾지 못했어요');return;}
+  const ctx=canvas.getContext('2d');
+  if(!ctx){showToast('이 브라우저에서 카드 미리보기를 만들 수 없어요');return;}
 
-  function drawAll(bgImg){
-    ctx.clearRect(0,0,W,H);
+  const W=1080,H=1920;
+  const cardId=storyCardDetailId||currentDetailId;
+  const d=destinations[cardId];
+  if(!d){showToast('순례 카드를 만들 절 정보를 찾지 못했어요');return;}
 
-    // 배경: 사용자가 올린 대표 사진이 있으면 자동 적용, 없으면 한지 배경 유지
-    if(bgImg){
-      const scale = Math.max(W / bgImg.width, H / bgImg.height);
-      const dw = bgImg.width * scale;
-      const dh = bgImg.height * scale;
-      const dx = (W - dw) / 2;
-      const dy = (H - dh) / 2;
-      ctx.drawImage(bgImg, dx, dy, dw, dh);
+  const msg=(document.getElementById('storyCardMsg')?.value||'').trim();
+  const dateValue=document.getElementById('storyCardDate')?.value||'';
+  const poetic=POETIC_DESC[d.name];
+  const chosenDate=dateValue ? new Date(dateValue+'T00:00:00') : new Date();
+  const dateStr=`${chosenDate.getFullYear()}.${String(chosenDate.getMonth()+1).padStart(2,'0')}.${String(chosenDate.getDate()).padStart(2,'0')}`;
+  const hanjaPick=TEMPLE_HANJA[d.name]||CARD_HANJA[Math.floor(Math.random()*CARD_HANJA.length)];
 
-      const overlay = ctx.createLinearGradient(0,0,0,H);
-      overlay.addColorStop(0,'rgba(20,16,12,.18)');
-      overlay.addColorStop(.45,'rgba(38,26,14,.28)');
-      overlay.addColorStop(1,'rgba(34,22,10,.50)');
-      ctx.fillStyle = overlay;
-      ctx.fillRect(0,0,W,H);
+  ctx.clearRect(0,0,W,H);
 
-      const warm = ctx.createRadialGradient(W*0.5,H*0.28,40,W*0.5,H*0.3,H*0.9);
-      warm.addColorStop(0,'rgba(255,243,220,.20)');
-      warm.addColorStop(1,'rgba(233,212,170,.30)');
-      ctx.fillStyle = warm;
-      ctx.fillRect(0,0,W,H);
-    }else{
-      const grad = ctx.createRadialGradient(W/2,H*0.35,80,W/2,H*0.35,H*0.9);
-      grad.addColorStop(0, '#fbf3e0');
-      grad.addColorStop(1, '#e8d3a8');
-      ctx.fillStyle = grad;
-      ctx.fillRect(0,0,W,H);
-    }
+  // 한지 배경
+  const grad=ctx.createRadialGradient(W*.46,H*.31,80,W*.5,H*.38,H*.95);
+  grad.addColorStop(0,'#fff9e9');
+  grad.addColorStop(.55,'#f3e5c7');
+  grad.addColorStop(1,'#dfc79b');
+  ctx.fillStyle=grad;
+  ctx.fillRect(0,0,W,H);
 
-    // 기하학적 격자 문양
-    ctx.strokeStyle = bgImg ? 'rgba(255,250,240,.10)' : 'rgba(160,31,31,.08)';
-    ctx.lineWidth = 1.5;
-    for(let x=40; x<W; x+=48){ ctx.beginPath(); ctx.moveTo(x,80); ctx.lineTo(x,H-80); ctx.stroke(); }
-    for(let y=80+24; y<H-80; y+=48){ ctx.beginPath(); ctx.moveTo(40,y); ctx.lineTo(W-40,y); ctx.stroke(); }
-
-    // 붉은 이중 테두리
-    ctx.strokeStyle = '#a01f1f';
-    ctx.lineWidth = 8;
-    ctx.strokeRect(36,36,W-72,H-72);
-    ctx.lineWidth = 2.5;
-    ctx.strokeRect(54,54,W-108,H-108);
-
-    // 큰 한자 문양 (사진이 있을 땐 더 은은하게)
-    ctx.textAlign = 'center';
-    ctx.fillStyle = bgImg ? 'rgba(255,246,232,.14)' : 'rgba(160,31,31,.10)';
-    ctx.font = 'bold 560px serif';
-    ctx.fillText(hanjaPick.ch, W/2, H*0.42);
-    ctx.font = '30px sans-serif';
-    ctx.fillStyle = bgImg ? 'rgba(255,241,219,.42)' : 'rgba(160,31,31,.35)';
-    ctx.fillText(`- ${hanjaPick.mean} -`, W/2, H*0.42 + 70);
-
-    // 상단 연꽃 아이콘
-    ctx.font = '90px serif';
-    ctx.fillStyle = bgImg ? 'rgba(255,240,210,.88)' : 'rgba(160,31,31,.7)';
-    ctx.fillText('🪷', W/2, 220);
-
-    // 상단 안내 pill
-    ctx.save();
+  // 은은한 종이결
+  ctx.save();
+  for(let i=0;i<260;i++){
+    const x=(i*83)%W;
+    const y=(i*137)%H;
+    ctx.strokeStyle=i%3===0?'rgba(112,82,45,.028)':'rgba(255,255,255,.040)';
+    ctx.lineWidth=1;
     ctx.beginPath();
-    if(ctx.roundRect){ ctx.roundRect(W/2-178, 246, 356, 46, 23); } else { ctx.rect(W/2-178, 246, 356, 46); }
-    ctx.fillStyle = bgImg ? 'rgba(255,255,255,.18)' : 'rgba(160,31,31,.08)';
-    ctx.fill();
-    ctx.font = 'bold 21px sans-serif';
-    ctx.fillStyle = bgImg ? 'rgba(255,250,240,.92)' : '#8b3b1f';
-    ctx.fillText(photoUrl ? '내가 올린 사진 배경 자동 적용' : '대표 한자 카드', W/2, 276);
-    ctx.restore();
-
-    // 캐릭터 워터마크
-    if(window.__cardMonkImg){
-      ctx.save();
-      ctx.globalAlpha = bgImg ? 0.20 : 0.16;
-      const mw = 150, mh = mw * (window.__cardMonkImg.height/window.__cardMonkImg.width);
-      ctx.drawImage(window.__cardMonkImg, W-mw-78, 92, mw, mh);
-      ctx.restore();
-    }
-
-    // 하단 텍스트 카드 영역
-    const boxTop = H*0.60;
-    ctx.beginPath();
-    if(ctx.roundRect){ ctx.roundRect(60, boxTop, W-120, H-boxTop-60, 28); } else { ctx.rect(60, boxTop, W-120, H-boxTop-60); }
-    ctx.fillStyle = bgImg ? 'rgba(255,251,245,.76)' : 'rgba(255,255,255,.68)';
-    ctx.fill();
-    ctx.strokeStyle = bgImg ? 'rgba(160,31,31,.32)' : 'rgba(160,31,31,.25)';
-    ctx.lineWidth = 1.5;
+    ctx.moveTo(x,y);
+    ctx.lineTo(Math.min(W,x+70+(i%35)),Math.min(H,y+7+(i%19)));
     ctx.stroke();
+  }
+  ctx.restore();
 
-    let y = boxTop + 80;
-    ctx.fillStyle = '#7a1515';
-    ctx.font = '30px sans-serif';
-    ctx.fillText(`${dateStr} · ${d.region}`, W/2, y);
-    y += 68;
+  // 붉은 이중 테두리
+  ctx.strokeStyle='#8f2722';
+  ctx.lineWidth=8;
+  ctx.strokeRect(36,36,W-72,H-72);
+  ctx.lineWidth=2.5;
+  ctx.strokeStyle='rgba(143,39,34,.58)';
+  ctx.strokeRect(54,54,W-108,H-108);
 
-    ctx.fillStyle = '#3d1f0c';
-    ctx.font = 'bold 62px serif';
-    ctx.fillText(d.name, W/2, y);
-    y += 60;
+  // 중앙 한자: 이전보다 훨씬 선명하게
+  ctx.textAlign='center';
+  ctx.textBaseline='alphabetic';
+  ctx.fillStyle='rgba(128,28,25,.17)';
+  ctx.font='700 650px "Nanum Myeongjo","Noto Serif KR",serif';
+  ctx.fillText(hanjaPick.ch,W/2,H*.445);
 
-    if(poetic){
-      ctx.font = '30px "Nanum Myeongjo", serif';
-      ctx.fillStyle = '#5a3a1a';
-      wrapCanvasTextLines(ctx, poetic.sketch, W-220).forEach(line=>{
-        y += 44;
-        ctx.fillText(line, W/2, y);
-      });
-      y += 20;
+  // 한자 뒤 얇은 원형 낙관 느낌
+  ctx.beginPath();
+  ctx.arc(W/2,H*.32,335,0,Math.PI*2);
+  ctx.strokeStyle='rgba(143,39,34,.10)';
+  ctx.lineWidth=3;
+  ctx.stroke();
+
+  ctx.font='600 32px "Nanum Myeongjo","Noto Serif KR",serif';
+  ctx.fillStyle='rgba(109,45,31,.72)';
+  ctx.fillText(`— ${hanjaPick.mean} —`,W/2,H*.445+74);
+
+  // 상단
+  ctx.font='74px "Nanum Myeongjo","Noto Serif KR",serif';
+  ctx.fillStyle='#8f2722';
+  ctx.fillText('山寺記',W/2,180);
+
+  ctx.font='700 21px Pretendard,-apple-system,sans-serif';
+  ctx.fillStyle='rgba(76,57,39,.68)';
+  ctx.fillText('SANSANOTE · PILGRIMAGE RECORD',W/2,224);
+
+  // 작은 대표 한자 카드 pill
+  ctx.beginPath();
+  if(ctx.roundRect) ctx.roundRect(W/2-142,250,284,44,22);
+  else ctx.rect(W/2-142,250,284,44);
+  ctx.fillStyle='rgba(143,39,34,.075)';
+  ctx.fill();
+  ctx.font='700 20px Pretendard,-apple-system,sans-serif';
+  ctx.fillStyle='#7c392e';
+  ctx.fillText('순례 인증 기록',W/2,279);
+
+  // 캐릭터 워터마크
+  if(window.__cardMonkImg){
+    ctx.save();
+    ctx.globalAlpha=.12;
+    const mw=142,mh=mw*(window.__cardMonkImg.height/window.__cardMonkImg.width);
+    ctx.drawImage(window.__cardMonkImg,W-mw-74,84,mw,mh);
+    ctx.restore();
+  }
+
+  // 하단 정보 카드 - 더 넓고 명확하게
+  const boxX=72;
+  const boxW=W-144;
+  const boxTop=1120;
+  const boxBottom=1810;
+  const boxH=boxBottom-boxTop;
+
+  ctx.beginPath();
+  if(ctx.roundRect) ctx.roundRect(boxX,boxTop,boxW,boxH,32);
+  else ctx.rect(boxX,boxTop,boxW,boxH);
+  ctx.fillStyle='rgba(255,253,246,.90)';
+  ctx.fill();
+  ctx.strokeStyle='rgba(126,75,47,.20)';
+  ctx.lineWidth=2;
+  ctx.stroke();
+
+  let y=boxTop+66;
+
+  ctx.font='700 24px Pretendard,-apple-system,sans-serif';
+  ctx.fillStyle='#8b3029';
+  ctx.fillText(`${dateStr}  ·  ${d.region}`,W/2,y);
+  y+=78;
+
+  ctx.fillStyle='#2f2419';
+  ctx.font='700 66px "Nanum Myeongjo","Noto Serif KR",serif';
+  ctx.fillText(d.name,W/2,y);
+  y+=64;
+
+  // 짧은 구분선
+  ctx.strokeStyle='rgba(143,39,34,.24)';
+  ctx.lineWidth=2;
+  ctx.beginPath();
+  ctx.moveTo(W/2-90,y);
+  ctx.lineTo(W/2+90,y);
+  ctx.stroke();
+  y+=34;
+
+  // 설명: 단어 단위 줄바꿈, 넉넉한 행간
+  if(poetic && poetic.sketch){
+    ctx.font='500 29px "Nanum Myeongjo","Noto Serif KR",serif';
+    ctx.fillStyle='#554532';
+    const lines=wrapCanvasTextLines(ctx,poetic.sketch,boxW-150).slice(0,5);
+    for(const line of lines){
+      ctx.fillText(line,W/2,y);
+      y+=48;
     }
-
-    if(msg){
-      ctx.font = 'italic 30px serif';
-      ctx.fillStyle = '#a01f1f';
-      wrapCanvasTextLines(ctx, `"${msg}"`, W-240).forEach(line=>{
-        y += 44;
-        ctx.fillText(line, W/2, y);
-      });
-    }
-
-    ctx.font = '26px sans-serif';
-    ctx.fillStyle = 'rgba(122,21,21,.6)';
-    ctx.fillText('🪷 산사노트', W/2, H-90);
+    y+=14;
   }
 
-  function applyStatus(usedPhoto){
-    const status = document.getElementById('storyCardStatus');
-    if(status){
-      status.textContent = usedPhoto
-        ? `${d.name} · 내가 올린 사진을 배경으로 넣었어요. 한 줄 소감도 자유롭게 바꿔보세요.`
-        : `${d.name} · 저장된 개인사진을 찾지 못했어요. 사진이 보이는데도 이 문구가 나오면 새로고침 후 다시 열어주세요.`;
+  // 사용자가 쓴 한 줄 소감
+  if(msg){
+    const msgTop=Math.min(y+10,boxBottom-180);
+    ctx.beginPath();
+    if(ctx.roundRect) ctx.roundRect(boxX+52,msgTop,boxW-104,Math.min(150,boxBottom-msgTop-48),18);
+    else ctx.rect(boxX+52,msgTop,boxW-104,120);
+    ctx.fillStyle='rgba(143,39,34,.055)';
+    ctx.fill();
+
+    ctx.font='600 28px "Nanum Myeongjo","Noto Serif KR",serif';
+    ctx.fillStyle='#8f2722';
+    const msgLines=wrapCanvasTextLines(ctx,`“${msg}”`,boxW-160).slice(0,3);
+    let my=msgTop+46;
+    for(const line of msgLines){
+      ctx.fillText(line,W/2,my);
+      my+=43;
     }
   }
 
-  function drawFallback(){
-    drawAll(null);
-    applyStatus(false);
-  }
+  ctx.font='600 24px Pretendard,-apple-system,sans-serif';
+  ctx.fillStyle='rgba(98,57,43,.60)';
+  ctx.fillText('산사노트 · 나만의 순례 기록',W/2,H-92);
 
-  // 기본 카드를 먼저 보여주되, 실제 사진은 Firebase까지 다시 확인해서 자동 적용합니다.
-  drawFallback();
-  const statusNow=document.getElementById('storyCardStatus');
-  if(statusNow) statusNow.textContent=`${d.name} · 내가 올린 사진을 확인하고 있어요...`;
+  const status=document.getElementById('storyCardStatus');
+  if(status) status.textContent=`${d.name} · ${dateStr} · 한자 중심 카드로 만들었어요.`;
 
-  const applyPhotoRecord=(photoRecord)=>{
-    if(window.__storyCardRenderToken !== renderToken) return;
-    photoUrl=photoRecord&&photoRecord.url ? photoRecord.url : 'local-manual';
-    loadStoryCardBackgroundImage(photoRecord).then(bg=>{
-      if(window.__storyCardRenderToken !== renderToken){
-        if(bg&&bg.__storyObjectUrl) URL.revokeObjectURL(bg.__storyObjectUrl);
-        return;
-      }
-      try{
-        drawAll(bg);
-        const status=document.getElementById('storyCardStatus');
-        if(status){
-          status.textContent = bg.__storySource==='local-cache'
-            ? `${d.name} · 내가 올린 사진을 이 기기에서 바로 불러와 배경에 넣었어요.`
-            : `${d.name} · 내가 올린 사진을 배경으로 넣었어요.`;
-        }
-      }catch(e){
-        console.warn('story card bg draw failed',e);
-        const status=document.getElementById('storyCardStatus');
-        if(status) status.textContent=`${d.name} · 사진은 찾았지만 카드로 만드는 과정에서 오류가 났어요.`;
-      }finally{
-        if(bg&&bg.__storyObjectUrl){
-          setTimeout(()=>URL.revokeObjectURL(bg.__storyObjectUrl),1200);
-        }
-      }
-    }).catch(err=>{
-      console.warn('story card background load failed',err);
-      if(window.__storyCardRenderToken !== renderToken) return;
-      drawAll(null);
-      const status=document.getElementById('storyCardStatus');
-      if(status) status.textContent=`${d.name} · 저장된 사진은 찾았지만 브라우저 보안 때문에 자동 변환이 막혔어요. 아래 '배경 사진 직접 선택'을 누르면 바로 만들 수 있어요.`;
-    });
-  };
-
-  // 사용자가 이번 카드에서 직접 고른 사진은 가장 우선.
-  if(storyCardManualPhotoBlob){
-    imageFromBlobForStoryCard(storyCardManualPhotoBlob).then(bg=>{
-      if(window.__storyCardRenderToken !== renderToken){
-        if(bg.__storyObjectUrl) URL.revokeObjectURL(bg.__storyObjectUrl);
-        return;
-      }
-      photoUrl='local-manual';
-      bg.__storySource='manual';
-      drawAll(bg);
-      const status=document.getElementById('storyCardStatus');
-      if(status) status.textContent=`${d.name} · 직접 선택한 사진을 배경으로 적용했어요.`;
-      if(bg.__storyObjectUrl) setTimeout(()=>URL.revokeObjectURL(bg.__storyObjectUrl),1200);
-    }).catch(()=>drawFallback());
-  }else{
-    resolveStoryCardUserPhotoRecord(cardId,d).then(photoRecord=>{
-      if(window.__storyCardRenderToken !== renderToken) return;
-      if(!photoRecord){
-        drawFallback();
-        return;
-      }
-      applyPhotoRecord(photoRecord);
-    }).catch(e=>{
-      console.warn('story card photo resolve failed',e);
-      if(window.__storyCardRenderToken === renderToken) drawFallback();
-    });
-  }
-
-  // 캐릭터 이미지가 늦게 뜨거나 없어도 카드 본문은 즉시 보이게 한다.
-  if(!window.__cardMonkImg && !window.__cardMonkImgLoading){
-    window.__cardMonkImgLoading = true;
-    const img = new Image();
-    img.onload = ()=>{ window.__cardMonkImg = img; window.__cardMonkImgLoading = false; renderStoryCard(); };
-    img.onerror = ()=>{ window.__cardMonkImgLoading = false; };
-    img.src = 'IMG_4438.png';
+  if(!window.__cardMonkImg&&!window.__cardMonkImgLoading){
+    window.__cardMonkImgLoading=true;
+    const img=new Image();
+    img.onload=()=>{window.__cardMonkImg=img;window.__cardMonkImgLoading=false;renderStoryCard();};
+    img.onerror=()=>{window.__cardMonkImgLoading=false;};
+    img.src='IMG_4438.png';
   }
 }
 function storyCardBlob(){
@@ -9138,43 +9325,70 @@ function storyCardBlob(){
   });
 }
 async function downloadStoryCard(){
-  const cardId = storyCardDetailId || currentDetailId;
-  const d = destinations[cardId];
-  if(!d){ showToast('순례 카드 정보를 찾지 못했어요'); return; }
+  const cardId=storyCardDetailId||currentDetailId;
+  const d=destinations[cardId];
+  if(!d){showToast('순례 카드 정보를 찾지 못했어요');return;}
+
   try{
-    const blob = await storyCardBlob();
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `순례인증_${d.name}.jpg`;
+    const blob=await storyCardBlob();
+    const filename=`순례인증_${d.name}.jpg`;
+    const file=new File([blob],filename,{type:'image/jpeg'});
+    const mobile=/Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || navigator.maxTouchPoints>1;
+
+    // 모바일 브라우저는 웹페이지가 사진앱에 무단으로 직접 저장할 수 없습니다.
+    // 파일 공유를 지원하면 OS 기본 공유창을 열어 '이미지 저장/사진에 저장'이 바로 보이게 합니다.
+    if(mobile && navigator.share && navigator.canShare && navigator.canShare({files:[file]})){
+      try{
+        await navigator.share({
+          files:[file],
+          title:`${d.name} 순례 인증`,
+          text:'산사노트 순례 인증카드'
+        });
+        return;
+      }catch(e){
+        if(e && e.name==='AbortError') return;
+      }
+    }
+
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');
+    a.href=url;
+    a.download=filename;
     document.body.appendChild(a);
     a.click();
     a.remove();
-    setTimeout(()=>URL.revokeObjectURL(url), 1500);
-    showToast('순례 카드를 저장했어요');
+    setTimeout(()=>URL.revokeObjectURL(url),1800);
+
+    if(mobile){
+      showToast('이미지가 열리면 길게 눌러 사진에 저장해주세요.');
+    }else{
+      showToast('순례 카드를 저장했어요.');
+    }
   }catch(e){
     console.error(e);
     try{
-      const url = document.getElementById('storyCardCanvas').toDataURL('image/jpeg', .92);
-      window.open(url, '_blank');
-      showToast('이미지를 새 화면에 열었어요. 길게 눌러 저장해주세요.');
-    }catch(_){ showToast('이미지 저장에 실패했어요. 다시 시도해주세요.'); }
+      const dataUrl=document.getElementById('storyCardCanvas').toDataURL('image/jpeg',.92);
+      window.open(dataUrl,'_blank');
+      showToast('이미지를 새 화면에 열었어요. 길게 눌러 사진에 저장해주세요.');
+    }catch(_){
+      showToast('이미지 저장에 실패했어요. 다시 시도해주세요.');
+    }
   }
 }
 async function shareStoryCard(){
-  const cardId = storyCardDetailId || currentDetailId;
-  const d = destinations[cardId];
-  if(!d){ showToast('순례 카드 정보를 찾지 못했어요'); return; }
+  const cardId=storyCardDetailId||currentDetailId;
+  const d=destinations[cardId];
+  if(!d){showToast('순례 카드 정보를 찾지 못했어요');return;}
   try{
-    const blob = await storyCardBlob();
-    const file = new File([blob], `순례인증_${d.name}.jpg`, {type:'image/jpeg'});
-    if(navigator.canShare && navigator.canShare({files:[file]}) && navigator.share){
-      await navigator.share({files:[file], title:`${d.name} 순례 인증`, text:'산사노트 순례 기록'});
+    const blob=await storyCardBlob();
+    const file=new File([blob],`순례인증_${d.name}.jpg`,{type:'image/jpeg'});
+    if(navigator.canShare&&navigator.canShare({files:[file]})&&navigator.share){
+      await navigator.share({files:[file],title:`${d.name} 순례 인증`,text:'산사노트 순례 기록'});
     }else{
       await downloadStoryCard();
     }
   }catch(e){
-    if(e && e.name !== 'AbortError') await downloadStoryCard();
+    if(e&&e.name!=='AbortError') await downloadStoryCard();
   }
 }
 
@@ -9354,14 +9568,51 @@ function drawPhotobookPage(temple, img){
   }
   return canvas;
 }
-function wrapCanvasTextLines(ctx, text, maxWidth){
-  const chars = text.split('');
-  let line = '', lines = [];
-  chars.forEach(ch=>{
-    const test = line + ch;
-    if(ctx.measureText(test).width > maxWidth && line.length>0){ lines.push(line); line = ch; }
-    else line = test;
-  });
+function wrapCanvasTextLines(ctx,text,maxWidth){
+  const raw=String(text||'').trim();
+  if(!raw) return [];
+
+  const words=raw.split(/\s+/);
+  const lines=[];
+  let line='';
+
+  function pushLongWord(word){
+    // 아주 긴 영문/URL 같은 예외만 글자 단위로 나눕니다.
+    let chunk='';
+    for(const ch of word){
+      const test=chunk+ch;
+      if(ctx.measureText(test).width>maxWidth && chunk){
+        lines.push(chunk);
+        chunk=ch;
+      }else{
+        chunk=test;
+      }
+    }
+    if(chunk) line=chunk;
+  }
+
+  for(const word of words){
+    if(!line){
+      if(ctx.measureText(word).width<=maxWidth){
+        line=word;
+      }else{
+        pushLongWord(word);
+      }
+      continue;
+    }
+    const test=line+' '+word;
+    if(ctx.measureText(test).width<=maxWidth){
+      line=test;
+    }else{
+      lines.push(line);
+      if(ctx.measureText(word).width<=maxWidth){
+        line=word;
+      }else{
+        line='';
+        pushLongWord(word);
+      }
+    }
+  }
   if(line) lines.push(line);
   return lines;
 }
@@ -9865,6 +10116,76 @@ function applyRewardEffects(){
   }
 }
 
+
+function findDestinationIdByName(name){
+  const entry=Object.entries(destinations||{}).find(([id,d])=>d&&d.name===name);
+  return entry?entry[0]:null;
+}
+function openCourseProgressTemple(name){
+  const id=findDestinationIdByName(name);
+  if(!id){
+    showToast('이 절은 아직 내 목록에 없어요.');
+    return;
+  }
+  closeCourseProgressDetail();
+  closeBadgeOverlay();
+  setTimeout(()=>openDetail(id),80);
+}
+function openCourseProgressDetail(packKey){
+  const pack=PACKS.find(p=>p.key===packKey);
+  if(!pack){showToast('코스 정보를 찾지 못했어요.');return;}
+
+  const packData=resolvePackData(pack);
+  const visitedNames=new Set(
+    Object.values(destinations||{}).filter(d=>(Number(d.stage)||0)>=1).map(d=>d.name)
+  );
+  const recordedNames=new Set(
+    Object.values(destinations||{}).filter(d=>(Number(d.stage)||0)>=2).map(d=>d.name)
+  );
+
+  const total=packData.length;
+  const done=packData.filter(item=>visitedNames.has(item.name)).length;
+  const recorded=packData.filter(item=>recordedNames.has(item.name)).length;
+  const pct=total?Math.round(done/total*100):0;
+  const earned=total>0&&done===total;
+
+  document.getElementById('courseProgressTitle').textContent=`🧭 ${pack.label}`;
+  document.getElementById('courseProgressSubtitle').textContent=`${done}곳 방문 · ${recorded}곳 기록 완료`;
+  document.getElementById('courseProgressCount').textContent=`${done} / ${total}곳`;
+  document.getElementById('courseProgressRoute').textContent=pack.route||'각 장소를 눌러 내 기록을 바로 확인할 수 있어요.';
+
+  const ring=document.getElementById('courseProgressRing');
+  ring.style.setProperty('--course-pct',`${pct*3.6}deg`);
+  ring.querySelector('b').textContent=`${pct}%`;
+
+  const list=document.getElementById('courseProgressPlaces');
+  list.innerHTML=packData.map((item,idx)=>{
+    const d=Object.values(destinations||{}).find(x=>x&&x.name===item.name);
+    const stage=d?(Number(d.stage)||0):0;
+    const state=stage>=2?'기록 완료':stage>=1?'다녀왔어요':'아직';
+    const cls=stage>=2?'recorded':stage>=1?'visited':'pending';
+    const region=(d&&d.region)||(item&&item.region)||'';
+    const clickable=!!d;
+    return `<button class="course-progress-place ${cls}" type="button" ${clickable?`onclick="openCourseProgressTemple('${escapeAttr(item.name)}')"`:'disabled'}>
+      <span class="course-progress-order">${idx+1}</span>
+      <span class="course-progress-place-copy">
+        <b>${escapeHtml(item.name)}</b>
+        <small>${region?escapeHtml(region)+' · ':''}${state}${clickable?' · 눌러서 기록 보기':''}</small>
+      </span>
+      <span class="course-progress-state">${stage>=2?'✓✓':stage>=1?'✓':'○'}</span>
+    </button>`;
+  }).join('');
+
+  const certBtn=document.getElementById('courseCertificateBtn');
+  certBtn.style.display=earned?'block':'none';
+  certBtn.onclick=earned?()=>{closeCourseProgressDetail();setTimeout(()=>openCertificate(pack.key),80);}:null;
+
+  document.getElementById('courseProgressOverlay').classList.add('show');
+}
+function closeCourseProgressDetail(){
+  document.getElementById('courseProgressOverlay')?.classList.remove('show');
+}
+
 function openBadgeOverlay(){
   renderRewards();
   renderBadges();
@@ -9985,22 +10306,25 @@ function renderLevelGuide(){
 }
 
 function renderBadges(){
-  const have = new Set(Object.values(destinations).filter(d=>(d.stage||0)>=1).map(d=>d.name));
-  const wrap = document.getElementById('badgeList');
-  wrap.innerHTML = PACKS.map(p=>{
-    const packData = resolvePackData(p);
-    const done = packData.filter(item=>have.has(item.name)).length;
-    const total = packData.length;
-    const earned = done === total;
-    const pct = total>0 ? Math.round(done/total*100) : 0;
-    return `<div class="badge-item" style="${earned?'cursor:pointer;':''}" ${earned?`onclick="openCertificate('${p.key}')"`:''}>
+  const have=new Set(Object.values(destinations).filter(d=>(d.stage||0)>=1).map(d=>d.name));
+  const wrap=document.getElementById('badgeList');
+  wrap.innerHTML=PACKS.map(p=>{
+    const packData=resolvePackData(p);
+    const done=packData.filter(item=>have.has(item.name)).length;
+    const total=packData.length;
+    const earned=total>0 && done===total;
+    const pct=total>0?Math.round(done/total*100):0;
+    return `<button class="badge-item badge-item-clickable" type="button" onclick="openCourseProgressDetail('${p.key}')">
       <div class="badge-medal ${earned?'earned':'locked'}">${earned?'✓':'🪷'}</div>
-      <div style="flex:1;">
-        <div style="font-weight:700;font-family:'Nanum Myeongjo','Noto Serif KR',serif;">${p.label}</div>
-        <div style="font-size:12px;color:var(--ink-soft);">${done}/${total}곳 다녀옴${earned?' · 완주! (눌러서 인증서 보기)':''}</div>
+      <div style="flex:1;text-align:left;">
+        <div class="badge-title-row">
+          <div style="font-weight:700;font-family:'Nanum Myeongjo','Noto Serif KR',serif;">${escapeHtml(p.label)}</div>
+          <span class="badge-detail-arrow">›</span>
+        </div>
+        <div style="font-size:12px;color:var(--ink-soft);">${done}/${total}곳 다녀옴${earned?' · 완주!':''}</div>
         <div class="badge-bar"><div class="badge-bar-fill" style="width:${pct}%;"></div></div>
       </div>
-    </div>`;
+    </button>`;
   }).join('');
 }
 
