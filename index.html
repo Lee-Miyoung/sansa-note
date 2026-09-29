@@ -60,6 +60,20 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23d97757'/%3E%3Ctext x='50' y='68' font-size='55' text-anchor='middle'%3E%F0%9F%AA%B7%3C/text%3E%3C/svg%3E">
 <link rel="manifest" href="data:application/manifest+json,%7B%22name%22%3A%22%EC%82%B0%EC%82%AC%EB%85%B8%ED%8A%B8%22%2C%22short_name%22%3A%22%EC%82%B0%EC%82%AC%EB%85%B8%ED%8A%B8%22%2C%22start_url%22%3A%22.%2F%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23151116%22%2C%22theme_color%22%3A%22%23151116%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data%3Aimage%2Fsvg%2Bxml%2C%253Csvg%2520xmlns%3D%2527http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%2527%2520viewBox%3D%25270%25200%2520100%2520100%2527%253E%253Crect%2520width%3D%2527100%2527%2520height%3D%2527100%2527%2520fill%3D%2527%2523151116%2527%2F%253E%253Ctext%2520x%3D%252750%2527%2520y%3D%252768%2527%2520font-size%3D%252760%2527%2520text-anchor%3D%2527middle%2527%2520fill%3D%2527%2523c9942f%2527%253E%25E5%258D%2586%253C%2Ftext%253E%253C%2Fsvg%253E%22%2C%22sizes%22%3A%22192x192%22%2C%22type%22%3A%22image%2Fsvg%2Bxml%22%7D%5D%7D">
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+
+<footer class="site-footer">
+  <div class="site-footer-inner">
+    <div>
+      <div class="site-footer-brand">산사노트</div>
+      <div class="site-footer-copy">사찰·산 순례 기록을 위한 개인 아카이브<br>문의 · 오류 제보 · 협업 제안</div>
+    </div>
+    <div class="site-footer-links">
+      <a class="site-footer-link" href="mailto:sansanote.help@gmail.com?subject=%5B%EC%82%B0%EC%82%AC%EB%85%B8%ED%8A%B8%20%EB%AC%B8%EC%9D%98%5D">✉ 문의하기</a>
+      <a class="site-footer-link" href="mailto:sansanote.help@gmail.com?subject=%5B%EC%82%B0%EC%82%AC%EB%85%B8%ED%8A%B8%20%ED%98%91%EC%97%85%20%EB%AC%B8%EC%9D%98%5D">🤝 협업 문의</a>
+    </div>
+  </div>
+</footer>
+
 <script>
 window.addEventListener('beforeunload',()=>{
   try{
@@ -3089,6 +3103,439 @@ body:has(#beatLabOverlay.show) #miniPlayer{
   .hero-stats .stat.hero-stat-link{text-align:center!important}
 }
 
+
+/* ===== 메인 카드 사진 영역 간결화 ===== */
+.card-photo .tagbadge,
+.card-photo .progress-seal,
+.card-photo .card-list-hide{
+  display:none!important;
+}
+.card-photo .visit-flag{
+  top:8px!important;
+  right:8px!important;
+  left:auto!important;
+  bottom:auto!important;
+  padding:4px 8px!important;
+  border-radius:999px!important;
+  background:rgba(24,42,35,.72)!important;
+  color:#fff!important;
+  border:1px solid rgba(255,255,255,.62)!important;
+  box-shadow:none!important;
+  font-size:9.5px!important;
+  font-weight:850!important;
+  backdrop-filter:blur(5px);
+}
+.card-photo .drag-handle{
+  top:auto!important;
+  right:8px!important;
+  bottom:8px!important;
+  width:34px!important;
+  height:34px!important;
+  border-radius:11px!important;
+  background:rgba(25,38,33,.70)!important;
+  border:1px solid rgba(255,255,255,.72)!important;
+  color:#fff!important;
+  box-shadow:none!important;
+  backdrop-filter:blur(5px);
+}
+.card-meta-line{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  flex-wrap:wrap;
+  margin-bottom:2px;
+}
+.card-meta-line .card-region{margin:0!important}
+.card-meta-dot{color:#b3bbb6;font-size:9px}
+.card-tag-text{
+  color:#6e7b75;
+  font-size:9.5px;
+  font-weight:800;
+}
+.card-footer-actions{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  margin-top:8px;
+}
+.card-footer-actions .stagepill{margin:0!important}
+.card-hide-text{
+  border:0;
+  background:transparent;
+  color:#84908a;
+  font-size:9.5px;
+  font-weight:750;
+  padding:3px 0;
+  cursor:pointer;
+}
+.card-hide-text:hover{color:#4d6258}
+.card-hide-text:active{opacity:.65}
+@media(max-width:640px){
+  .card-photo .visit-flag{font-size:8.5px!important;padding:3px 7px!important}
+  .card-photo .drag-handle{width:31px!important;height:31px!important}
+  .card-tag-text{font-size:8.8px}
+  .card-hide-text{font-size:8.8px}
+}
+
+
+/* ===== CONTACT / FOOTER ===== */
+.site-footer{
+  max-width:1080px;
+  margin:28px auto 96px;
+  padding:0 18px;
+}
+.site-footer-inner{
+  border-top:1px solid rgba(36,60,51,.12);
+  padding:20px 4px 6px;
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:16px;
+  color:var(--ink-soft);
+}
+.site-footer-brand{
+  font-family:'Nanum Myeongjo','Noto Serif KR',serif;
+  font-size:14px;
+  font-weight:800;
+  color:var(--ink);
+  margin-bottom:5px;
+}
+.site-footer-copy{
+  font-size:10.5px;
+  line-height:1.6;
+}
+.site-footer-links{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  justify-content:flex-end;
+}
+.site-footer-link{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  text-decoration:none;
+  border:1px solid rgba(36,60,51,.14);
+  background:#fff;
+  color:#35564a;
+  border-radius:999px;
+  padding:8px 11px;
+  font-size:10.5px;
+  font-weight:800;
+}
+.site-footer-link:hover{background:#f5f7f5}
+.contact-card{
+  border:1px solid rgba(23,53,46,.12);
+  background:#fbfaf6;
+  border-radius:16px;
+  padding:15px;
+  text-align:left;
+}
+.contact-card h3{
+  margin:0 0 5px;
+  font-size:15px;
+  color:#21372f;
+}
+.contact-card p{
+  margin:0;
+  color:var(--ink-soft);
+  font-size:11.5px;
+  line-height:1.6;
+}
+.contact-email{
+  display:block;
+  margin:12px 0 10px;
+  padding:12px 14px;
+  border-radius:12px;
+  background:#fff;
+  border:1px solid rgba(23,53,46,.12);
+  text-decoration:none;
+  color:#244c3d;
+  font-size:14px;
+  font-weight:900;
+  word-break:break-all;
+}
+.contact-chips{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin-top:10px;
+}
+.contact-chip{
+  font-size:10px;
+  border-radius:999px;
+  padding:5px 8px;
+  background:#eef4f0;
+  color:#436356;
+  font-weight:800;
+}
+@media(max-width:640px){
+  .site-footer{margin-top:22px}
+  .site-footer-inner{flex-direction:column}
+  .site-footer-links{justify-content:flex-start}
+}
+
+
+/* ============================================================
+   COMMUNITY · 질문 / 꿀팁 / 후기
+============================================================ */
+.community-view{
+  display:none;
+  max-width:1080px;
+  margin:18px auto 70px;
+  padding:0 18px;
+}
+.community-head{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:14px;
+  margin-bottom:14px;
+}
+.community-head h2{
+  margin:0;
+  font-size:23px;
+  color:#1f382f;
+}
+.community-head p{
+  margin:5px 0 0;
+  color:var(--ink-soft);
+  font-size:11.5px;
+  line-height:1.55;
+}
+.community-write-btn{
+  flex-shrink:0;
+  border:0;
+  border-radius:999px;
+  background:var(--moss);
+  color:#fff;
+  font-weight:900;
+  font-size:12px;
+  padding:10px 15px;
+  cursor:pointer;
+  box-shadow:0 4px 12px rgba(28,57,47,.12);
+}
+.community-toolbar{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-bottom:12px;
+}
+.community-filter{
+  border:1px solid #d9dfdb;
+  background:#fff;
+  color:#52635c;
+  border-radius:999px;
+  padding:7px 11px;
+  font-size:10.5px;
+  font-weight:800;
+  cursor:pointer;
+}
+.community-filter.active{
+  background:#315f50;
+  color:#fff;
+  border-color:#315f50;
+}
+.community-search{
+  margin-left:auto;
+  min-width:220px;
+  border:1px solid #d9dfdb;
+  background:#fff;
+  border-radius:999px;
+  padding:8px 12px;
+  font-size:11px;
+  color:#2d3e37;
+  outline:none;
+}
+.community-status{
+  display:none;
+  border:1px dashed #d7d4c7;
+  background:#fbfaf5;
+  border-radius:13px;
+  padding:11px 13px;
+  margin-bottom:12px;
+  color:#726c60;
+  font-size:11px;
+  line-height:1.55;
+}
+.community-list{
+  display:flex;
+  flex-direction:column;
+  gap:9px;
+}
+.community-post-card{
+  width:100%;
+  border:1px solid #e1e3df;
+  background:#fff;
+  border-radius:16px;
+  padding:14px 15px;
+  text-align:left;
+  cursor:pointer;
+  box-shadow:0 5px 16px rgba(33,52,44,.045);
+}
+.community-post-card:hover{
+  border-color:#cdd7d1;
+}
+.community-post-top{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  flex-wrap:wrap;
+  margin-bottom:7px;
+}
+.community-cat{
+  display:inline-flex;
+  align-items:center;
+  border-radius:999px;
+  padding:4px 8px;
+  font-size:9.5px;
+  font-weight:900;
+}
+.community-cat.question{background:#edf4f0;color:#315f50}
+.community-cat.tip{background:#fff3dc;color:#7a5a1f}
+.community-cat.review{background:#f2eef6;color:#665273}
+.community-temple{
+  color:#6e7a74;
+  font-size:10px;
+  font-weight:800;
+}
+.community-post-title{
+  color:#20362d;
+  font-size:15px;
+  font-weight:900;
+  margin-bottom:5px;
+}
+.community-post-preview{
+  color:#66736d;
+  font-size:11px;
+  line-height:1.55;
+  display:-webkit-box;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+}
+.community-post-meta{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-top:9px;
+  color:#8a938e;
+  font-size:9.5px;
+  font-weight:700;
+}
+.community-empty{
+  padding:42px 14px;
+  text-align:center;
+  color:#7d8882;
+  font-size:12px;
+  border:1px dashed #d8ddd9;
+  border-radius:16px;
+  background:#fbfcfb;
+}
+.community-form-label{
+  display:block;
+  font-size:11px;
+  font-weight:900;
+  color:#33483f;
+  margin:12px 0 6px;
+}
+.community-input,.community-select,.community-textarea{
+  width:100%;
+  box-sizing:border-box;
+  border:1px solid #d8ded9;
+  border-radius:11px;
+  background:#fff;
+  color:#283a33;
+  padding:10px 11px;
+  font:inherit;
+  font-size:12px;
+  outline:none;
+}
+.community-textarea{min-height:150px;resize:vertical;line-height:1.65}
+.community-detail-body{
+  white-space:pre-wrap;
+  color:#374940;
+  font-size:13px;
+  line-height:1.78;
+  padding:4px 0 14px;
+}
+.community-detail-meta{
+  color:#89928d;
+  font-size:10px;
+  margin:6px 0 14px;
+}
+.community-detail-actions{
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+  margin:0 0 15px;
+}
+.community-mini-btn{
+  border:1px solid #d9dfdb;
+  background:#fff;
+  color:#596861;
+  border-radius:999px;
+  padding:6px 9px;
+  font-size:9.5px;
+  font-weight:800;
+  cursor:pointer;
+}
+.community-mini-btn.danger{color:#a35247;border-color:#e5cbc6}
+.community-comments-title{
+  font-size:12px;
+  font-weight:900;
+  color:#2b4037;
+  padding-top:12px;
+  border-top:1px solid #e8e9e6;
+}
+.community-comment{
+  padding:11px 0;
+  border-bottom:1px solid #ededeb;
+}
+.community-comment-head{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  font-size:9.5px;
+  color:#8a938e;
+  margin-bottom:4px;
+}
+.community-comment-text{
+  white-space:pre-wrap;
+  color:#3c4d46;
+  font-size:11.5px;
+  line-height:1.6;
+}
+.community-comment-form{
+  display:flex;
+  gap:7px;
+  margin-top:11px;
+}
+.community-comment-form textarea{
+  flex:1;
+  min-height:48px;
+  resize:none;
+}
+.community-login-note{
+  margin-top:11px;
+  padding:10px 11px;
+  border-radius:11px;
+  background:#f6f6f2;
+  color:#757c77;
+  font-size:10.5px;
+  line-height:1.55;
+}
+@media(max-width:640px){
+  .community-view{padding:0 12px;margin-top:12px}
+  .community-head{align-items:flex-start}
+  .community-head h2{font-size:20px}
+  .community-search{margin-left:0;width:100%;min-width:0}
+  .community-post-card{padding:12px}
+  .community-post-title{font-size:14px}
+}
+
 </style>
 </head>
 <body>
@@ -3215,9 +3662,10 @@ body:has(#beatLabOverlay.show) #miniPlayer{
   <div class="content-type-row">
     <button class="content-type-btn active" id="ctypeTemple" onclick="switchContentType('temple')">🏯 절</button>
     <button class="content-type-btn" id="ctypeMountain" onclick="switchContentType('mountain')">⛰️ 산</button>
+    <button class="content-type-btn" id="ctypeCommunity" onclick="switchContentType('community')">💬 커뮤니티</button>
   </div>
 
-  <div class="filterbar">
+  <div class="filterbar" id="mainFilterbar">
     <div class="filterbar-inner">
       <div class="tabs" id="regionTabs"></div>
       <div class="spacer"></div>
@@ -3239,7 +3687,7 @@ body:has(#beatLabOverlay.show) #miniPlayer{
   </div>
 
   <div class="hero-list-filter-note" id="heroListFilterNote" style="display:none;"></div>
-  <main>
+  <main id="mainListArea">
     <div class="grid" id="grid"></div>
     <div class="empty-note" id="emptyNote" style="display:none;text-align:center;">
       <img src="IMG_4440.png" style="width:140px;margin-bottom:10px;" alt="" onerror="this.style.display='none'">
@@ -3248,7 +3696,27 @@ body:has(#beatLabOverlay.show) #miniPlayer{
   </main>
 
 
-  <section class="seo-intro" aria-labelledby="seoIntroTitle">
+  <section class="community-view" id="communityView">
+    <div class="community-head">
+      <div>
+        <h2 class="serif">💬 산사노트 커뮤니티</h2>
+        <p>사찰을 다녀온 사람끼리 질문하고, 직접 겪은 꿀팁과 후기를 나눠요.</p>
+      </div>
+      <button class="community-write-btn" type="button" onclick="openCommunityWrite()">글쓰기</button>
+    </div>
+    <div class="community-toolbar">
+      <button class="community-filter active" data-community-filter="all" onclick="setCommunityFilter('all',this)">전체</button>
+      <button class="community-filter" data-community-filter="question" onclick="setCommunityFilter('question',this)">질문</button>
+      <button class="community-filter" data-community-filter="tip" onclick="setCommunityFilter('tip',this)">꿀팁</button>
+      <button class="community-filter" data-community-filter="review" onclick="setCommunityFilter('review',this)">후기</button>
+      <input class="community-search" id="communitySearch" placeholder="제목·내용·사찰명 검색" oninput="renderCommunity()">
+    </div>
+    <div class="community-status" id="communityStatus"></div>
+    <div class="community-list" id="communityList"></div>
+  </section>
+
+
+  <section class="seo-intro" id="seoIntroSection" aria-labelledby="seoIntroTitle">
     <div class="seo-intro-inner">
       <h2 id="seoIntroTitle">산사노트 — 전국 사찰과 산을 기록하는 나만의 순례 노트</h2>
       <p><strong>산사노트</strong>는 전국의 사찰과 산을 찾아보고, 가보고 싶은 곳과 다녀온 곳을 나눠 기록하는 개인 순례 기록 서비스입니다. 통도사·부석사·봉정사·법주사·마곡사·선암사·대흥사 같은 유네스코 산사부터 지역의 숨은 고찰까지 한곳에서 살펴볼 수 있습니다.</p>
@@ -3256,9 +3724,67 @@ body:has(#beatLabOverlay.show) #miniPlayer{
     </div>
   </section>
 
-  <button class="fab" onclick="openAddModalForCurrentType()">+</button>
+  <button class="fab" id="mainFab" onclick="openAddModalForCurrentType()">+</button>
 </div>
 
+
+
+<!-- ===================== COMMUNITY WRITE MODAL ===================== -->
+<div class="overlay" id="communityWriteOverlay">
+  <div class="modal">
+    <div class="modal-head">
+      <div>
+        <h2 class="serif">✍️ 커뮤니티 글쓰기</h2>
+        <div class="sub">질문 · 꿀팁 · 후기만 가볍게 나눠요.</div>
+      </div>
+      <button class="close-x" onclick="closeCommunityWrite()">✕</button>
+    </div>
+    <div class="modal-body">
+      <label class="community-form-label" for="communityCategory">종류</label>
+      <select class="community-select" id="communityCategory">
+        <option value="question">질문</option>
+        <option value="tip">꿀팁</option>
+        <option value="review">후기</option>
+      </select>
+
+      <label class="community-form-label" for="communityTemple">관련 사찰 <span style="font-weight:500;color:var(--ink-soft);">(선택)</span></label>
+      <select class="community-select" id="communityTemple">
+        <option value="">사찰 선택 안 함</option>
+      </select>
+
+      <label class="community-form-label" for="communityTitle">제목</label>
+      <input class="community-input" id="communityTitle" maxlength="80" placeholder="예: 해인사 주차 어디가 편한가요?">
+
+      <label class="community-form-label" for="communityBody">내용</label>
+      <textarea class="community-textarea" id="communityBody" maxlength="2000" placeholder="직접 경험한 정보나 궁금한 점을 적어주세요."></textarea>
+
+      <div class="community-login-note">광고·욕설·개인정보 노출·종교 비방 글은 관리자에 의해 삭제될 수 있어요.</div>
+      <button class="btn btn-primary btn-block" type="button" style="margin-top:12px;" onclick="submitCommunityPost()">등록하기</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== COMMUNITY DETAIL MODAL ===================== -->
+<div class="overlay" id="communityDetailOverlay">
+  <div class="modal">
+    <div class="modal-head">
+      <div>
+        <div id="communityDetailBadge"></div>
+        <h2 class="serif" id="communityDetailTitle" style="margin-top:6px;"></h2>
+      </div>
+      <button class="close-x" onclick="closeCommunityDetail()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="community-detail-meta" id="communityDetailMeta"></div>
+      <div class="community-detail-body" id="communityDetailBody"></div>
+      <div class="community-detail-actions" id="communityDetailActions"></div>
+
+      <div class="community-comments-title">댓글 <span id="communityCommentCount">0</span></div>
+      <div id="communityComments"></div>
+      <div id="communityCommentFormWrap"></div>
+    </div>
+  </div>
+</div>
 
 <!-- ===================== HIDDEN TEMPLE RESTORE MODAL ===================== -->
 <div class="overlay" id="hiddenTempleOverlay">
@@ -3490,6 +4016,7 @@ body:has(#beatLabOverlay.show) #miniPlayer{
       <button class="btn btn-ghost btn-block" onclick="closeSettings();openPhotobookOverlay();" style="margin-bottom:10px;">📖 나만의 순례집 PDF 만들기</button>
       <button class="btn btn-ghost btn-block" onclick="closeSettings();openPassportOverlay();" style="margin-bottom:10px;">🛂 순례 여권 (현장 인증 스탬프)</button>
       <button class="btn btn-ghost btn-block" onclick="closeSettings();openPhotoPolicyOverlay();" style="margin-bottom:10px;">📷 사진 저장 · 무료 이용 안내</button>
+      <button class="btn btn-ghost btn-block" onclick="closeSettings();openContactOverlay();" style="margin-bottom:10px;">✉ 문의 · 오류 제보 · 협업 문의</button>
       <button class="btn btn-ghost btn-block admin-entry" id="adminModeBtn" onclick="closeSettings();openAdminOverlay();">🛠 관리자 모드</button>
       <button class="btn btn-ghost btn-block" id="darkModeBtn" onclick="toggleDarkMode()" style="margin-bottom:10px;">🌙 야간/템플스테이 모드 켜기</button>
 <button class="btn btn-ghost btn-block" onclick="closeSettings();openVowOverlay();" style="margin-bottom:10px;">🌅 발원문 쓰기 (미래의 나에게)</button>
@@ -3498,6 +4025,34 @@ body:has(#beatLabOverlay.show) #miniPlayer{
   </div>
 </div>
 
+
+
+<!-- ===================== CONTACT MODAL ===================== -->
+<div class="overlay" id="contactOverlay">
+  <div class="modal">
+    <div class="modal-head">
+      <div>
+        <h2 class="serif">✉ 산사노트 문의</h2>
+        <div class="sub">오류 제보 · 사진/계정 문의 · 협업 제안</div>
+      </div>
+      <button class="close-x" onclick="closeContactOverlay()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="contact-card">
+        <h3>산사노트에 연락하기</h3>
+        <p>사이트 오류, 사진 저장 문제, 계정 문의, 사찰·여행 콘텐츠 협업이나 제휴 제안은 아래 이메일로 보내주세요.</p>
+        <a class="contact-email" href="mailto:sansanote.help@gmail.com?subject=%5B%EC%82%B0%EC%82%AC%EB%85%B8%ED%8A%B8%20%EB%AC%B8%EC%9D%98%5D">sansanote.help@gmail.com</a>
+        <div class="contact-chips">
+          <span class="contact-chip">오류 제보</span>
+          <span class="contact-chip">사진·계정 문의</span>
+          <span class="contact-chip">콘텐츠 협업</span>
+          <span class="contact-chip">제휴 문의</span>
+        </div>
+      </div>
+      <a class="btn btn-primary btn-block" style="margin-top:12px;text-decoration:none;" href="mailto:sansanote.help@gmail.com?subject=%5B%EC%82%B0%EC%82%AC%EB%85%B8%ED%8A%B8%20%EB%AC%B8%EC%9D%98%5D">메일 보내기</a>
+    </div>
+  </div>
+</div>
 
 <!-- ===================== PHOTO POLICY MODAL ===================== -->
 <div class="overlay" id="photoPolicyOverlay">
@@ -3757,6 +4312,7 @@ body:has(#beatLabOverlay.show) #miniPlayer{
         </div>
         <div style="display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap;margin-top:8px;">
           <span id="lyricOffsetLabel" style="min-width:92px;font-size:11px;font-weight:800;color:var(--stamp);">싱크 0.0초</span>
+          <span id="lyricSyncSaveStatus" style="font-size:10px;font-weight:800;color:var(--ink-soft);">공용 싱크 준비</span>
           <button class="btn btn-primary" style="padding:7px 10px;font-size:11px;" onclick="alignSelectedLyricToNow()">🎯 선택한 줄을 지금에 맞춤</button>
           <button class="btn btn-ghost" style="padding:6px 9px;font-size:10.5px;" onclick="resetLyricOffset()">초기화</button>
         </div>
@@ -5060,6 +5616,17 @@ function isAdminUser(){
   const email = auth && auth.currentUser && auth.currentUser.email;
   return !!email && email.toLowerCase() === ADMIN_EMAIL;
 }
+
+function communityPostsRef(){
+  return db.ref('community/posts');
+}
+function communityCommentsRef(postId){
+  return db.ref('community/comments/'+postId);
+}
+function communityReportsRef(){
+  return db.ref('community/reports');
+}
+
 function lyricSyncRef(){
   return db.ref('shared/lyricSync');
 }
@@ -5301,9 +5868,38 @@ async function recoverTemplePhotoMetadataFromStorage(){
   }
 }
 
+
+let lyricSyncListening=false;
+function startSharedLyricSyncListener(){
+  if(!db || lyricSyncListening) return;
+  lyricSyncListening=true;
+  lyricSyncRef().on('value', snap=>{
+    const shared=snap.val();
+    if(shared && typeof shared==='object' && !Array.isArray(shared)){
+      const changed=JSON.stringify(shared)!==JSON.stringify(lyricOffsets);
+      lyricOffsets=shared;
+      try{ localStorage.setItem('sansaLyricOffsets_v3',JSON.stringify(lyricOffsets)); }catch(e){}
+      const st=document.getElementById('lyricSyncSaveStatus');
+      if(st && !isAdminUser()) st.textContent='공용 싱크 적용됨';
+      if(changed){
+        lastLyricIdx=-1;
+        updateLyricOffsetLabel();
+        if(document.getElementById('playlistOverlay')?.classList.contains('show')) updatePlaylistProgress();
+      }
+    }
+  },err=>{
+    lyricSyncListening=false;
+    console.warn('shared lyric sync read failed',err&&err.code);
+    const st=document.getElementById('lyricSyncSaveStatus');
+    if(st) st.textContent='공용 싱크 읽기 실패';
+  });
+}
+
 function launchApp(){
   document.getElementById('app').style.display='block';
+  startSharedLyricSyncListener();
   startPhotoUploadControlListener();
+  startCommunityListener();
   buildRegionTabs();
   updateAccountInfo();
   updateStreak();
@@ -5350,18 +5946,7 @@ function launchApp(){
       }
       if(contentType==='mountain') debouncedFullRender(render);
     });
-    lyricSyncRef().on('value', snap=>{
-      const shared = snap.val();
-      if(shared && typeof shared==='object' && !Array.isArray(shared)){
-        const changed = JSON.stringify(shared) !== JSON.stringify(lyricOffsets);
-        lyricOffsets = shared;
-        try{ localStorage.setItem('sansaLyricOffsets_v3', JSON.stringify(lyricOffsets)); }catch(e){}
-        if(!changed) return;
-        lastLyricIdx = -1;
-        updateLyricOffsetLabel();
-        if(document.getElementById('playlistOverlay')?.classList.contains('show')) updatePlaylistProgress();
-      }
-    });
+
   }
 }
 
@@ -5813,17 +6398,42 @@ let selectedLyricSyncIdx = -1;
 function currentLyricOffset(){ return Number(lyricOffsets[SONGS[currentSongIdx]?.title] || 0); }
 let lyricSyncSaveTimer = null;
 function saveLyricOffsets(){
-  try { localStorage.setItem('sansaLyricOffsets_v3', JSON.stringify(lyricOffsets)); } catch(e){}
-  // 관리자가 맞춘 싱크만 모두에게 공통 적용되는 공용 경로에 저장합니다.
-  // 슬라이더를 드래그하면 이 함수가 초당 수십 번 호출될 수 있는데, 그때마다
-  // Firebase에 바로 쓰면 그 응답이 다시 화면을 스크롤시켜서 버벅이거나
-  // 튕기는 것처럼 보이는 원인이 됩니다. 짧게 묶어서 한 번만 저장합니다.
-  if(!localMode && db && isAdminUser()){
-    clearTimeout(lyricSyncSaveTimer);
-    lyricSyncSaveTimer = setTimeout(()=>{
-      try{ lyricSyncRef().set(lyricOffsets); }catch(e){}
-    }, 400);
+  try{ localStorage.setItem('sansaLyricOffsets_v3',JSON.stringify(lyricOffsets)); }catch(e){}
+
+  if(!isAdminUser()){
+    const st=document.getElementById('lyricSyncSaveStatus');
+    if(st) st.textContent='관리자만 저장 가능';
+    return;
   }
+  if(!db){
+    const st=document.getElementById('lyricSyncSaveStatus');
+    if(st) st.textContent='Firebase 연결 없음';
+    return;
+  }
+
+  const st=document.getElementById('lyricSyncSaveStatus');
+  if(st){
+    st.textContent='저장 중…';
+    st.style.color='var(--gold)';
+  }
+
+  clearTimeout(lyricSyncSaveTimer);
+  lyricSyncSaveTimer=setTimeout(async()=>{
+    try{
+      await lyricSyncRef().set(lyricOffsets);
+      if(st){
+        st.textContent='✓ 전체 사용자에게 저장됨';
+        st.style.color='var(--moss)';
+      }
+    }catch(err){
+      console.warn('lyric sync save failed',err&&err.code,err);
+      if(st){
+        st.textContent='저장 실패 · DB 규칙 확인';
+        st.style.color='var(--stamp)';
+      }
+      showToast('가사 싱크를 공용으로 저장하지 못했어요. Realtime Database 규칙을 확인해주세요.');
+    }
+  },350);
 }
 function updateLyricOffsetLabel(){
   const el = document.getElementById('lyricOffsetLabel');
@@ -5923,6 +6533,11 @@ function openPlaylistOverlay(){
   }
   const syncPanel = document.getElementById('lyricSyncPanel');
   if(syncPanel) syncPanel.style.display = isAdminUser() ? '' : 'none';
+  const syncStatus=document.getElementById('lyricSyncSaveStatus');
+  if(syncStatus){
+    syncStatus.textContent=isAdminUser() ? '관리자 공용 싱크' : '공용 싱크 적용됨';
+    syncStatus.style.color=isAdminUser() ? 'var(--stamp)' : 'var(--ink-soft)';
+  }
   document.getElementById('playlistOverlay').classList.add('show');
   syncMiniPlayerVisibility();
   audio.onloadedmetadata = ()=>{ document.getElementById('playlistDurTime').textContent = formatTime(audio.duration); };
@@ -8961,8 +9576,349 @@ function renderHomeGallery(){
     `</div></div>`;
 }
 
+
+/* ============================================================
+   COMMUNITY
+============================================================ */
+let communityPosts = {};
+let communityComments = {};
+let communityListening = false;
+let communityFilter = 'all';
+let currentCommunityPostId = null;
+
+function communityUserName(){
+  const u=auth && auth.currentUser;
+  if(!u) return '산사노트 회원';
+  const name=(u.displayName||'').trim();
+  if(name) return name.slice(0,20);
+  const email=(u.email||'').trim();
+  if(email) return email.split('@')[0].slice(0,20);
+  return '산사노트 회원';
+}
+function communityCategoryLabel(cat){
+  return cat==='question'?'질문':cat==='tip'?'꿀팁':'후기';
+}
+function communityCategoryClass(cat){
+  return cat==='question'?'question':cat==='tip'?'tip':'review';
+}
+function formatCommunityDate(ts){
+  const n=Number(ts||0);
+  if(!n) return '방금';
+  const d=new Date(n);
+  if(Number.isNaN(d.getTime())) return '';
+  const now=new Date();
+  const sameYear=d.getFullYear()===now.getFullYear();
+  return sameYear
+    ? `${d.getMonth()+1}.${String(d.getDate()).padStart(2,'0')}`
+    : `${d.getFullYear()}.${d.getMonth()+1}.${String(d.getDate()).padStart(2,'0')}`;
+}
+function communityCommentCount(postId){
+  return Object.keys((communityComments&&communityComments[postId])||{}).length;
+}
+function showCommunityStatus(msg){
+  const el=document.getElementById('communityStatus');
+  if(!el) return;
+  if(!msg){el.style.display='none';el.textContent='';return;}
+  el.style.display='block';
+  el.textContent=msg;
+}
+function startCommunityListener(){
+  if(!db || communityListening) return;
+  communityListening=true;
+
+  communityPostsRef().on('value',snap=>{
+    communityPosts=snap.val()||{};
+    showCommunityStatus('');
+    if(contentType==='community') renderCommunity();
+  },err=>{
+    console.warn('community posts read failed',err&&err.code);
+    showCommunityStatus('커뮤니티 연결이 아직 준비되지 않았어요. Firebase Realtime Database 규칙을 적용하면 바로 사용할 수 있어요.');
+  });
+
+  db.ref('community/comments').on('value',snap=>{
+    communityComments=snap.val()||{};
+    if(contentType==='community') renderCommunity();
+    if(currentCommunityPostId) renderCommunityDetail(currentCommunityPostId);
+  },err=>{
+    console.warn('community comments read failed',err&&err.code);
+  });
+}
+function populateCommunityTempleSelect(){
+  const sel=document.getElementById('communityTemple');
+  if(!sel) return;
+  const names=new Set();
+  Object.values(MASTER_BY_NAME||{}).forEach(d=>{if(d&&d.name) names.add(d.name);});
+  Object.values(destinations||{}).forEach(d=>{if(d&&d.name) names.add(d.name);});
+  const sorted=[...names].sort((a,b)=>a.localeCompare(b,'ko'));
+  sel.innerHTML='<option value="">사찰 선택 안 함</option>'+sorted.map(n=>`<option value="${escapeAttr(n)}">${escapeHtml(n)}</option>`).join('');
+}
+function setCommunityFilter(filter,btn){
+  communityFilter=filter;
+  document.querySelectorAll('[data-community-filter]').forEach(el=>el.classList.toggle('active',el===btn));
+  renderCommunity();
+}
+function renderCommunity(){
+  const wrap=document.getElementById('communityList');
+  if(!wrap) return;
+  const q=(document.getElementById('communitySearch')?.value||'').trim().toLowerCase();
+  let items=Object.entries(communityPosts||{})
+    .filter(([id,p])=>p && !p.hidden)
+    .filter(([id,p])=>communityFilter==='all' || p.category===communityFilter)
+    .filter(([id,p])=>{
+      if(!q) return true;
+      return [p.title,p.body,p.temple,p.authorName].filter(Boolean).join(' ').toLowerCase().includes(q);
+    })
+    .sort((a,b)=>(Number(b[1].createdAt)||0)-(Number(a[1].createdAt)||0));
+
+  if(!items.length){
+    wrap.innerHTML='<div class="community-empty">아직 글이 없어요.<br>첫 질문이나 꿀팁을 남겨보세요.</div>';
+    return;
+  }
+
+  wrap.innerHTML=items.map(([id,p])=>{
+    const cat=communityCategoryLabel(p.category);
+    const cls=communityCategoryClass(p.category);
+    const temple=p.temple?`<span class="community-temple">📍 ${escapeHtml(p.temple)}</span>`:'';
+    const comments=communityCommentCount(id);
+    return `<button class="community-post-card" type="button" onclick="openCommunityDetail('${id}')">
+      <div class="community-post-top">
+        <span class="community-cat ${cls}">${cat}</span>${temple}
+      </div>
+      <div class="community-post-title">${escapeHtml(p.title||'')}</div>
+      <div class="community-post-preview">${escapeHtml(p.body||'')}</div>
+      <div class="community-post-meta">
+        <span>${escapeHtml(p.authorName||'산사노트 회원')}</span>
+        <span>·</span>
+        <span>${formatCommunityDate(p.createdAt)}</span>
+        <span>·</span>
+        <span>댓글 ${comments}</span>
+      </div>
+    </button>`;
+  }).join('');
+}
+function renderCommunityHero(){
+  const items=Object.values(communityPosts||{}).filter(p=>p&&!p.hidden);
+  const q=items.filter(p=>p.category==='question').length;
+  const t=items.filter(p=>p.category==='tip').length;
+  const r=items.filter(p=>p.category==='review').length;
+  const hero=document.getElementById('heroStats');
+  if(hero){
+    hero.innerHTML=`
+      <div class="stat"><div class="num serif">${q}</div><div class="lbl">질문</div></div>
+      <div class="stat"><div class="num serif">${t}</div><div class="lbl">꿀팁</div></div>
+      <div class="stat"><div class="num serif">${r}</div><div class="lbl">후기</div></div>`;
+  }
+}
+function setCommunityViewMode(active){
+  const idsToHide=['seedBannerWrap','iconRowHintWrap','guestAddHintWrap','explain108Wrap','homeGalleryWrap','funBannerWrap','triviaBannerWrap','quizBannerWrap','suggestBannerWrap','seasonBannerWrap','almostBannerWrap'];
+  idsToHide.forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) el.style.display=active?'none':'';
+  });
+  const filter=document.getElementById('mainFilterbar');
+  const main=document.getElementById('mainListArea');
+  const seo=document.getElementById('seoIntroSection');
+  const fab=document.getElementById('mainFab');
+  const community=document.getElementById('communityView');
+  const quickNote=document.getElementById('heroListFilterNote');
+  if(filter) filter.style.display=active?'none':'';
+  if(main) main.style.display=active?'none':'';
+  if(seo) seo.style.display=active?'none':'';
+  if(fab) fab.style.display=active?'none':'';
+  if(community) community.style.display=active?'block':'none';
+  if(quickNote && active) quickNote.style.display='none';
+}
+function openCommunityWrite(){
+  if(localMode || !auth || !auth.currentUser){
+    showToast('커뮤니티 글쓰기는 Google 로그인 후 이용할 수 있어요.');
+    return;
+  }
+  populateCommunityTempleSelect();
+  document.getElementById('communityCategory').value='question';
+  document.getElementById('communityTemple').value='';
+  document.getElementById('communityTitle').value='';
+  document.getElementById('communityBody').value='';
+  document.getElementById('communityWriteOverlay')?.classList.add('show');
+}
+function closeCommunityWrite(){
+  document.getElementById('communityWriteOverlay')?.classList.remove('show');
+}
+async function submitCommunityPost(){
+  if(localMode || !auth || !auth.currentUser || !currentUid){
+    showToast('Google 로그인 후 글을 작성할 수 있어요.');
+    return;
+  }
+  const category=document.getElementById('communityCategory').value;
+  const temple=document.getElementById('communityTemple').value.trim();
+  const title=document.getElementById('communityTitle').value.trim();
+  const body=document.getElementById('communityBody').value.trim();
+
+  if(!['question','tip','review'].includes(category)){showToast('글 종류를 확인해주세요.');return;}
+  if(title.length<2){showToast('제목을 두 글자 이상 적어주세요.');return;}
+  if(body.length<2){showToast('내용을 조금 더 적어주세요.');return;}
+
+  const ref=communityPostsRef().push();
+  const post={
+    uid:currentUid,
+    authorName:communityUserName(),
+    category,
+    temple:temple.slice(0,60),
+    title:title.slice(0,80),
+    body:body.slice(0,2000),
+    createdAt:firebase.database.ServerValue.TIMESTAMP
+  };
+  try{
+    await ref.set(post);
+    closeCommunityWrite();
+    showToast('커뮤니티에 글을 올렸어요.');
+  }catch(err){
+    console.warn('community post save failed',err&&err.code);
+    showToast('글을 올리지 못했어요. Firebase 규칙을 확인해주세요.');
+  }
+}
+function openCommunityDetail(id){
+  currentCommunityPostId=id;
+  renderCommunityDetail(id);
+  document.getElementById('communityDetailOverlay')?.classList.add('show');
+}
+function closeCommunityDetail(){
+  currentCommunityPostId=null;
+  document.getElementById('communityDetailOverlay')?.classList.remove('show');
+}
+function renderCommunityDetail(id){
+  const p=communityPosts[id];
+  if(!p) return;
+  const badge=document.getElementById('communityDetailBadge');
+  const title=document.getElementById('communityDetailTitle');
+  const meta=document.getElementById('communityDetailMeta');
+  const body=document.getElementById('communityDetailBody');
+  const actions=document.getElementById('communityDetailActions');
+  const commentsWrap=document.getElementById('communityComments');
+  const countEl=document.getElementById('communityCommentCount');
+  const formWrap=document.getElementById('communityCommentFormWrap');
+
+  if(badge) badge.innerHTML=`<span class="community-cat ${communityCategoryClass(p.category)}">${communityCategoryLabel(p.category)}</span>${p.temple?` <span class="community-temple">📍 ${escapeHtml(p.temple)}</span>`:''}`;
+  if(title) title.textContent=p.title||'';
+  if(meta) meta.textContent=`${p.authorName||'산사노트 회원'} · ${formatCommunityDate(p.createdAt)}`;
+  if(body) body.textContent=p.body||'';
+
+  const mine=!!(currentUid && p.uid===currentUid);
+  const canDelete=mine || isAdminUser();
+  let actionHtml='';
+  if(canDelete) actionHtml+=`<button class="community-mini-btn danger" type="button" onclick="deleteCommunityPost('${id}')">글 삭제</button>`;
+  if(auth && auth.currentUser && !mine) actionHtml+=`<button class="community-mini-btn" type="button" onclick="reportCommunityPost('${id}')">신고</button>`;
+  if(actions) actions.innerHTML=actionHtml;
+
+  const comments=Object.entries((communityComments&&communityComments[id])||{})
+    .filter(([cid,c])=>c)
+    .sort((a,b)=>(Number(a[1].createdAt)||0)-(Number(b[1].createdAt)||0));
+
+  if(countEl) countEl.textContent=String(comments.length);
+  if(commentsWrap){
+    commentsWrap.innerHTML=comments.map(([cid,c])=>{
+      const mineComment=!!(currentUid && c.uid===currentUid);
+      const canDeleteComment=mineComment || isAdminUser();
+      return `<div class="community-comment">
+        <div class="community-comment-head">
+          <span>${escapeHtml(c.authorName||'산사노트 회원')} · ${formatCommunityDate(c.createdAt)}</span>
+          ${canDeleteComment?`<button class="community-mini-btn danger" type="button" onclick="deleteCommunityComment('${id}','${cid}')">삭제</button>`:''}
+        </div>
+        <div class="community-comment-text">${escapeHtml(c.body||'')}</div>
+      </div>`;
+    }).join('');
+  }
+
+  if(formWrap){
+    if(auth && auth.currentUser && !localMode){
+      formWrap.innerHTML=`<div class="community-comment-form">
+        <textarea class="community-input" id="communityCommentInput" maxlength="500" placeholder="댓글을 남겨보세요."></textarea>
+        <button class="btn btn-primary" type="button" style="align-self:stretch;padding:0 13px;" onclick="submitCommunityComment('${id}')">등록</button>
+      </div>`;
+    }else{
+      formWrap.innerHTML='<div class="community-login-note">댓글 작성은 Google 로그인 후 이용할 수 있어요.</div>';
+    }
+  }
+}
+async function submitCommunityComment(postId){
+  if(!auth || !auth.currentUser || !currentUid){showToast('Google 로그인 후 댓글을 작성할 수 있어요.');return;}
+  const input=document.getElementById('communityCommentInput');
+  const body=(input?.value||'').trim();
+  if(body.length<1){showToast('댓글 내용을 적어주세요.');return;}
+  const ref=communityCommentsRef(postId).push();
+  try{
+    await ref.set({
+      uid:currentUid,
+      authorName:communityUserName(),
+      body:body.slice(0,500),
+      createdAt:firebase.database.ServerValue.TIMESTAMP
+    });
+    if(input) input.value='';
+  }catch(err){
+    console.warn('community comment save failed',err&&err.code);
+    showToast('댓글을 저장하지 못했어요.');
+  }
+}
+async function deleteCommunityPost(postId){
+  const p=communityPosts[postId];
+  if(!p) return;
+  const allowed=isAdminUser() || (currentUid && p.uid===currentUid);
+  if(!allowed) return;
+  if(!confirm('이 글을 삭제할까요? 댓글도 함께 삭제돼요.')) return;
+  try{
+    const updates={};
+    updates['community/posts/'+postId]=null;
+    updates['community/comments/'+postId]=null;
+    await db.ref().update(updates);
+    closeCommunityDetail();
+    showToast('글을 삭제했어요.');
+  }catch(err){
+    console.warn('community post delete failed',err&&err.code);
+    showToast('글을 삭제하지 못했어요.');
+  }
+}
+async function deleteCommunityComment(postId,commentId){
+  const c=communityComments?.[postId]?.[commentId];
+  if(!c) return;
+  const allowed=isAdminUser() || (currentUid && c.uid===currentUid);
+  if(!allowed) return;
+  if(!confirm('이 댓글을 삭제할까요?')) return;
+  try{
+    await communityCommentsRef(postId).child(commentId).remove();
+  }catch(err){
+    console.warn('comment delete failed',err&&err.code);
+    showToast('댓글을 삭제하지 못했어요.');
+  }
+}
+async function reportCommunityPost(postId){
+  if(!auth || !auth.currentUser || !currentUid){showToast('로그인 후 신고할 수 있어요.');return;}
+  const p=communityPosts[postId];
+  if(!p) return;
+  if(!confirm('이 글을 관리자에게 신고할까요?')) return;
+  try{
+    const ref=communityReportsRef().push();
+    await ref.set({
+      postId,
+      reporterUid:currentUid,
+      postTitle:(p.title||'').slice(0,80),
+      createdAt:firebase.database.ServerValue.TIMESTAMP
+    });
+    showToast('신고가 접수됐어요.');
+  }catch(err){
+    console.warn('community report failed',err&&err.code);
+    showToast('신고를 접수하지 못했어요.');
+  }
+}
+
+
 function render(){
   updateHiddenTempleButton();
+  if(contentType === 'community'){
+    setCommunityViewMode(true);
+    renderCommunityHero();
+    renderCommunity();
+    return;
+  }
+  setCommunityViewMode(false);
   if(contentType === 'mountain'){ renderMountainView(); return; }
   applyRewardEffects();
   renderLevelBadge();
@@ -9001,19 +9957,36 @@ let contentType = 'temple';
 
 function switchContentType(type){
   if(contentType===type) return;
-  contentType = type;
+  contentType=type;
   photoQueueGeneration++;
   if(photoHydrationObserver){try{photoHydrationObserver.disconnect();}catch(e){}}
-  document.getElementById('ctypeTemple').classList.toggle('active', type==='temple');
-  document.getElementById('ctypeMountain').classList.toggle('active', type==='mountain');
+
+  document.getElementById('ctypeTemple')?.classList.toggle('active',type==='temple');
+  document.getElementById('ctypeMountain')?.classList.toggle('active',type==='mountain');
+  document.getElementById('ctypeCommunity')?.classList.toggle('active',type==='community');
+
+  if(type==='community'){
+    setCommunityViewMode(true);
+    renderCommunityHero();
+    renderCommunity();
+    window.scrollTo({top:document.querySelector('.content-type-row')?.offsetTop||0,behavior:'smooth'});
+    return;
+  }
+
+  setCommunityViewMode(false);
   document.getElementById('stageFilter').innerHTML = type==='mountain'
     ? `<option value="all">단계 전체</option><option value="0">가보고 싶다</option><option value="1">올랐어요</option><option value="2">등반 기록 완료</option>`
     : `<option value="all">단계 전체</option><option value="0">가보고 싶다</option><option value="1">다녀왔어요</option><option value="2">순례 기록 완료</option>`;
-  document.getElementById('tagToggle').style.display = type==='mountain' ? 'none' : 'flex';
-  filterRegion = '전체';
+  document.getElementById('tagToggle').style.display=type==='mountain'?'none':'flex';
+  document.getElementById('searchBox').placeholder=type==='mountain'
+    ? '산 이름, 지역으로 검색'
+    : '절 이름, 지역, 유명한 것으로 검색';
+
+  filterRegion='전체';
   buildRegionTabs();
-  const grid=document.getElementById('grid'); if(grid) grid.style.opacity='.72';
-  requestAnimationFrame(()=>{ render(); requestAnimationFrame(()=>{if(grid)grid.style.opacity='1';}); });
+  const grid=document.getElementById('grid');
+  if(grid) grid.style.opacity='.72';
+  requestAnimationFrame(()=>{render();requestAnimationFrame(()=>{if(grid)grid.style.opacity='1';});});
 }
 
 function getFilteredMountainList(){
@@ -9762,23 +10735,28 @@ function fetchCoverPhotoNow(id, name, locationHint, opts, done){
 
 function renderCard(id,d){
   const photo=firstPhotoUrl(d);
-  const stageIdx=Math.min(d.stage||0,STAGES.length-1);
+  const stageIdx=Math.min(Number(d.stage)||0,STAGES.length-1);
   const vc=visitCount(d);
+  const tagLabel=d.tag==='유명'?'대표 산사':'숨은 산사';
   return `
   <div class="card" data-id="${id}">
     <div class="card-photo">
       ${cardCoverMedia(photo,'temple',d.name)}
-      <span class="tagbadge ${d.tag==='유명'?'famous':'hidden'}">${d.tag==='유명'?'대표 산사':'숨은 산사'}</span>
       ${vc>0?`<span class="visit-flag">${vc}회 방문</span>`:''}
-      ${progressSealHtml(stageIdx)}
-      <button class="card-list-hide" type="button" aria-label="${escapeAttr(d.name)} 메인 목록에서 빼기" title="기록은 남기고 목록에서만 숨기기" onclick="hideDestinationFromMain('${id}', event)">목록 빼기</button>
-      <button class="drag-handle" type="button" aria-label="순서 바꾸기" onclick="event.stopPropagation()">☰</button>
+      <button class="drag-handle" type="button" aria-label="순서 바꾸기" title="길게 눌러 순서 바꾸기" onclick="event.stopPropagation()">☰</button>
     </div>
     <div class="card-body">
-      <div class="card-region">${escapeHtml(d.region)}</div>
+      <div class="card-meta-line">
+        <div class="card-region">${escapeHtml(d.region)}</div>
+        <span class="card-meta-dot">•</span>
+        <span class="card-tag-text">${tagLabel}</span>
+      </div>
       <div class="card-title">${escapeHtml(d.name)}</div>
       <div class="card-desc">${escapeHtml(d.desc||'')}</div>
-      <span class="stagepill ${stageIdx>=2?'s3':''}">${STAGES[stageIdx]}</span>
+      <div class="card-footer-actions">
+        <span class="stagepill ${stageIdx>=2?'s3':''}">${STAGES[stageIdx]}</span>
+        <button class="card-hide-text" type="button" onclick="hideDestinationFromMain('${id}', event)">목록에서 빼기</button>
+      </div>
     </div>
   </div>`;
 }
@@ -10839,6 +11817,14 @@ async function toggleGlobalPhotoUploadPause(){
     const help=document.getElementById('photoPauseAdminHelp');
     if(help) help.textContent='Firebase Realtime Database 규칙에서 shared/photoUploadControl의 관리자 쓰기 권한을 한 번 설정해야 해요.';
   }
+}
+
+
+function openContactOverlay(){
+  document.getElementById('contactOverlay')?.classList.add('show');
+}
+function closeContactOverlay(){
+  document.getElementById('contactOverlay')?.classList.remove('show');
 }
 
 /* ============================================================
