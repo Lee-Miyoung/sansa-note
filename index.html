@@ -6403,6 +6403,339 @@ small{font-size:13px!important}
   .hidden-swipe-hint{font-size:10.5px!important}
 }
 
+
+
+/* ============================================================
+   NAV / FEATURES / VISITED / IOS TOUCH
+============================================================ */
+body.sansa-overlay-locked{
+  position:fixed!important;
+  left:0!important;
+  right:0!important;
+  width:100%!important;
+  overflow:hidden!important;
+}
+.overlay{
+  overscroll-behavior:contain!important;
+  touch-action:pan-y!important;
+}
+.overlay .modal{
+  overscroll-behavior:contain!important;
+}
+.overlay .modal-body{
+  overscroll-behavior-y:contain!important;
+  -webkit-overflow-scrolling:touch!important;
+}
+
+/* top-right: map + login */
+.hero-top-actions{
+  position:absolute;
+  top:26px;
+  right:24px;
+  z-index:8;
+  display:flex;
+  gap:8px;
+}
+.hero-top-action{
+  min-height:42px;
+  padding:7px 11px;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  border:1px solid rgba(255,255,255,.28);
+  border-radius:999px;
+  background:rgba(255,255,255,.12);
+  color:#fff;
+  font-weight:850;
+  font-size:12px;
+  backdrop-filter:blur(10px);
+  cursor:pointer;
+}
+.hero-top-action .hta-icon{
+  width:27px;height:27px;
+  display:grid;place-items:center;
+  border-radius:50%;
+  background:rgba(255,255,255,.13);
+  font-family:"Nanum Myeongjo","Noto Serif KR",serif;
+}
+.hero-top-action.map-action{border-color:rgba(172,225,197,.46)}
+.hero-top-action.login-action{border-color:rgba(255,215,139,.48)}
+.hero-top-action.login-action.is-logged-in{background:rgba(225,188,111,.18)}
+
+/* lower quick utility = course + features, not vague settings */
+.hero-utility{
+  grid-template-columns:repeat(2,110px)!important;
+}
+.hero-util-btn{
+  width:110px!important;
+  min-height:48px!important;
+}
+.hero-util-btn.util-course .hero-util-icon{background:#c78a43!important}
+.hero-util-btn.util-features .hero-util-icon{background:#8a68a5!important}
+.hero-util-btn.util-features{
+  background:linear-gradient(135deg,rgba(125,91,149,.32),rgba(255,255,255,.08))!important;
+  border-color:rgba(215,190,233,.42)!important;
+}
+
+/* Settings becomes a visible feature hub */
+.features-modal{max-width:650px!important}
+.settings-account-card{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:10px 14px;
+  align-items:center;
+  padding:14px;
+  margin-bottom:10px;
+  border:1px solid #dde4df;
+  border-radius:16px;
+  background:linear-gradient(135deg,#f7faf8,#f5efe5);
+}
+.settings-account-card b{font-size:16px;color:#29463a}
+.settings-account-card p{margin:4px 0 0!important;font-size:13px!important;line-height:1.5!important;color:#718078!important}
+.settings-login-btn,.settings-logout-btn{
+  border:0;border-radius:999px;padding:10px 13px;
+  font-size:13px;font-weight:900;cursor:pointer;
+}
+.settings-login-btn{background:#356b58;color:#fff}
+.settings-logout-btn{background:#f0e7e4;color:#8b4c43}
+.settings-reset-link,.settings-admin-link{
+  width:100%;
+  border:0;background:transparent;
+  text-align:left;padding:8px 3px;
+  font-size:12px;font-weight:750;color:#8b665d;cursor:pointer;
+}
+.settings-section-title{
+  margin:17px 2px 8px;
+  font-size:12px;
+  font-weight:900;
+  color:#66766f;
+  letter-spacing:.04em;
+}
+.settings-feature-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:8px;
+}
+.settings-feature{
+  min-height:94px;
+  padding:12px;
+  display:grid;
+  grid-template-columns:38px 1fr;
+  grid-template-rows:auto auto;
+  column-gap:9px;
+  text-align:left;
+  border:1px solid #e0e4e1;
+  border-radius:15px;
+  background:#fff;
+  color:#2c3f37;
+  cursor:pointer;
+}
+.settings-feature>span{
+  grid-row:1/3;
+  width:38px;height:38px;
+  display:grid;place-items:center;
+  border-radius:12px;
+  font-size:19px;
+  background:#eef3f0;
+}
+.settings-feature>b{
+  align-self:end;
+  font-size:14px;
+  line-height:1.2;
+  word-break:keep-all;
+}
+.settings-feature>small{
+  align-self:start;
+  margin-top:3px;
+  font-size:11px!important;
+  line-height:1.3;
+  color:#7d8983;
+  word-break:keep-all;
+}
+.sf-album>span{background:#e8f0f7}.sf-badge>span{background:#fff0cf}
+.sf-passport>span{background:#efe9f7}.sf-book>span{background:#f6eadf}
+.sf-prayer>span{background:#e9f3ee}.sf-etiquette>span{background:#fff1df}
+.sf-glossary>span{background:#e9eef7}.sf-vow>span{background:#f8e8e4}
+.sf-quiz>span{background:#f0e8f5}.sf-photo>span{background:#e6f3f1}
+.sf-contact>span{background:#f8ece6}.sf-dark>span{background:#ececf5}
+
+/* colorful content tabs */
+.content-type-btn{
+  word-break:keep-all!important;
+  white-space:nowrap!important;
+  overflow:visible!important;
+}
+.content-type-btn .ctype-copy,
+.content-type-btn .ctype-copy b,
+.content-type-btn .ctype-copy small{
+  word-break:keep-all!important;
+  white-space:nowrap!important;
+}
+.content-type-btn.temple-tab{
+  background:linear-gradient(135deg,#fff5ef,#fff)!important;
+  border-color:#e2b3a4!important;
+}
+.content-type-btn.mountain-tab{
+  background:linear-gradient(135deg,#eff7f0,#fff)!important;
+  border-color:#abcbb1!important;
+}
+.content-type-btn.community-tab{
+  background:linear-gradient(135deg,#eff3fa,#fff)!important;
+  border-color:#b5c3dc!important;
+}
+.content-type-btn.temple-tab.active{
+  background:linear-gradient(135deg,#a65745,#c77b64)!important;color:#fff!important
+}
+.content-type-btn.mountain-tab.active{
+  background:linear-gradient(135deg,#3f7757,#65a06f)!important;color:#fff!important
+}
+.content-type-btn.community-tab.active{
+  background:linear-gradient(135deg,#516f9a,#7690ba)!important;color:#fff!important
+}
+.content-type-btn.active .ctype-copy small{color:rgba(255,255,255,.76)!important;opacity:1!important}
+.content-type-btn.active .ctype-icon{background:rgba(255,255,255,.18)!important;box-shadow:none!important}
+
+/* visited temple = lotus, different palette */
+.card.visited-temple-card{
+  border-color:#d9b6bd!important;
+  background:linear-gradient(180deg,#fff,#fff8f7)!important;
+  box-shadow:0 7px 20px rgba(139,71,84,.10)!important;
+}
+.card.recorded-temple-card{
+  border-color:#c9a76d!important;
+  background:linear-gradient(180deg,#fff,#fffaf0)!important;
+}
+.card.visited-temple-card .card-title{color:#7c3f4c!important}
+.card.visited-temple-card .stagepill{
+  background:#f4e3e7!important;color:#864857!important;border-color:#dfbdc5!important
+}
+.card.recorded-temple-card .stagepill{
+  background:#f3e5c6!important;color:#76521d!important;border-color:#ddc18a!important
+}
+.lotus-visited-mark{
+  position:absolute;
+  left:8px;top:8px;
+  display:inline-flex;align-items:center;gap:4px;
+  max-width:calc(100% - 74px);
+  padding:5px 8px;
+  border-radius:999px;
+  background:rgba(255,250,249,.91);
+  color:#874b58;
+  border:1px solid rgba(195,139,151,.65);
+  font-size:10px;
+  font-weight:900;
+  backdrop-filter:blur(5px);
+}
+.lotus-visited-mark b{font-size:9px;white-space:nowrap}
+.card.visited-mountain-card{
+  border-color:#a9cdb4!important;
+  background:linear-gradient(180deg,#fff,#f5fbf6)!important;
+}
+.lotus-visited-mark.mountain-mark{color:#3e7251;border-color:#a7cbb0;background:rgba(246,253,247,.92)}
+
+/* filters/tabs no word chopping */
+.tabs,.chip-toggle,.content-type-row{flex-wrap:nowrap!important}
+.tab,.chip-toggle button{
+  white-space:nowrap!important;
+  word-break:keep-all!important;
+}
+
+/* mobile */
+@media(max-width:560px){
+  .hero-top-actions{
+    top:15px;
+    right:11px;
+    gap:5px;
+  }
+  .hero-top-action{
+    min-height:36px;
+    padding:5px 8px;
+    font-size:10.5px!important;
+  }
+  .hero-top-action .hta-icon{width:23px;height:23px;font-size:11px}
+  .hero-utility{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    width:100%!important;
+    gap:7px!important;
+  }
+  .hero-util-btn{
+    width:100%!important;
+    min-height:58px!important;
+    flex-direction:row!important;
+    justify-content:center!important;
+    gap:7px!important;
+  }
+  .hero-util-label{font-size:11px!important}
+  .settings-feature-grid{grid-template-columns:1fr 1fr;gap:7px}
+  .settings-feature{min-height:88px;padding:10px;grid-template-columns:34px 1fr;column-gap:7px}
+  .settings-feature>span{width:34px;height:34px;font-size:17px}
+  .settings-feature>b{font-size:13px}
+  .settings-feature>small{font-size:10.5px!important}
+  .settings-account-card{grid-template-columns:1fr;align-items:stretch}
+  .settings-login-btn,.settings-logout-btn{width:100%}
+
+  .content-type-row{
+    display:grid!important;
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+    width:100%!important;
+    overflow:visible!important;
+  }
+  .content-type-btn{
+    width:100%!important;
+    min-width:0!important;
+    padding:7px 5px!important;
+  }
+  .content-type-btn .ctype-copy b{font-size:12.5px!important}
+  .content-type-btn .ctype-copy small{display:none!important}
+
+  .tabs{
+    overflow-x:auto!important;
+    -webkit-overflow-scrolling:touch!important;
+    scrollbar-width:none!important;
+    padding-bottom:2px!important;
+  }
+  .tabs::-webkit-scrollbar{display:none!important}
+  .tab{flex:0 0 auto!important}
+
+  .lotus-visited-mark{
+    left:6px;top:6px;padding:4px 6px;font-size:9px;
+  }
+  .lotus-visited-mark b{font-size:8.5px}
+}
+
+/* iOS sheets: internal scroll only, no home-page rubber-band */
+@media(max-width:640px){
+  #settingsOverlay,#badgeOverlay,#pilgrimCollectionOverlay,#mapOverlay,#packOverlay{
+    align-items:stretch!important;
+    justify-content:flex-start!important;
+    height:100dvh!important;
+    min-height:100dvh!important;
+    padding:0!important;
+  }
+  #settingsOverlay .modal,#badgeOverlay .modal,#pilgrimCollectionOverlay .modal,#mapOverlay .modal,#packOverlay .modal{
+    width:100%!important;
+    max-width:none!important;
+    height:100dvh!important;
+    max-height:100dvh!important;
+    border-radius:0!important;
+    display:flex!important;
+    flex-direction:column!important;
+    overflow:hidden!important;
+  }
+  #settingsOverlay .modal-head,#badgeOverlay .modal-head,#pilgrimCollectionOverlay .modal-head,#mapOverlay .modal-head,#packOverlay .modal-head{
+    flex:0 0 auto!important;
+    padding-top:calc(14px + env(safe-area-inset-top))!important;
+    background:var(--paper-soft)!important;
+    z-index:5!important;
+  }
+  #settingsOverlay .modal-body,#badgeOverlay .modal-body,#pilgrimCollectionOverlay .modal-body,#mapOverlay .modal-body,#packOverlay .modal-body{
+    flex:1 1 auto!important;
+    min-height:0!important;
+    overflow-y:auto!important;
+    padding-bottom:calc(26px + env(safe-area-inset-bottom))!important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -6490,18 +6823,21 @@ small{font-size:13px!important}
         <div class="hero-character-space" aria-hidden="true"></div>
       </div>
 
-      <nav class="hero-utility" aria-label="산사노트 빠른 메뉴">
-        <button class="hero-util-btn util-login guest-login-icon" title="로그인" onclick="openLoginOverlay()">
-          <span class="hero-util-icon">人</span><span class="hero-util-label">로그인</span>
+      <div class="hero-top-actions" aria-label="계정과 지도">
+        <button class="hero-top-action map-action" type="button" onclick="openMapOverlay()">
+          <span class="hta-icon">⌖</span><span>지도</span>
         </button>
+        <button class="hero-top-action login-action guest-login-icon" id="heroLoginBtn" type="button" onclick="openHeroAccountAction()">
+          <span class="hta-icon">人</span><span id="heroLoginLabel">로그인</span>
+        </button>
+      </div>
+
+      <nav class="hero-utility" aria-label="산사노트 빠른 기능">
         <button class="hero-util-btn util-course" title="순례 코스 불러오기" onclick="openPackOverlay()">
           <span class="hero-util-icon">旅</span><span class="hero-util-label">코스 추가</span>
         </button>
-        <button class="hero-util-btn util-map" title="전체 지도" onclick="openMapOverlay()">
-          <span class="hero-util-icon">地</span><span class="hero-util-label">전체 지도</span>
-        </button>
-        <button class="hero-util-btn util-settings" title="설정" onclick="openSettings()">
-          <span class="hero-util-icon">⚙</span><span class="hero-util-label">설정</span>
+        <button class="hero-util-btn util-features" title="산사노트 기능 모음" onclick="openSettings()">
+          <span class="hero-util-icon">✦</span><span class="hero-util-label">기능 모음</span>
         </button>
       </nav>
 
@@ -6941,35 +7277,56 @@ small{font-size:13px!important}
   </div>
 </div>
 
-<!-- ===================== SETTINGS MODAL ===================== -->
+<!-- ===================== SETTINGS / FEATURES MODAL ===================== -->
 <div class="overlay" id="settingsOverlay">
-  <div class="modal">
+  <div class="modal features-modal">
     <div class="modal-head">
-      <div><h2 class="serif">설정</h2></div>
+      <div>
+        <h2 class="serif">✦ 산사노트 기능</h2>
+        <div class="sub">기록부터 기도문·퀴즈·순례집까지 한곳에서 이용하세요.</div>
+      </div>
       <button class="close-x" onclick="closeSettings()">✕</button>
     </div>
     <div class="modal-body">
-      <p style="font-size:13px;color:var(--ink-soft);" id="accountInfo">로그인 정보를 불러오는 중...</p>
-      <button class="btn btn-primary btn-block" id="guestSettingsLoginBtn" onclick="closeSettings();openLoginOverlay();" style="margin-bottom:10px;">G&nbsp;&nbsp;Google 로그인 · 기록 안전하게 저장</button>
-      <button class="btn btn-ghost btn-block" id="resetGuestBtn" onclick="resetGuestData()" style="margin-bottom:10px;display:none;color:var(--stamp);border-color:var(--stamp);">🔄 방문자(게스트) 절·산 목록 초기화</button>
-      <button class="btn btn-ghost btn-block" onclick="closeSettings();openAlbumOverlay();" style="margin-bottom:10px;">🖼 나의 순례 앨범</button>
-      <button class="btn btn-ghost btn-block" onclick="closeSettings();openBadgeOverlay();" style="margin-bottom:10px;">🏅 나의 뱃지</button>
-      <button class="btn btn-ghost btn-block" onclick="closeSettings();openQuizOverlay();" style="margin-bottom:10px;">🧩 이 절 어디게? 퀴즈</button>
-      <button class="btn btn-ghost btn-block" onclick="closeSettings();openGlossaryOverlay();" style="margin-bottom:10px;">📖 불교 용어 사전</button>
-      <button class="btn btn-ghost btn-block" onclick="closeSettings();openEtiquetteOverlay();" style="margin-bottom:10px;">🙏 처음 가는 법당 예절 · 108배</button>
-      <button class="btn btn-ghost btn-block" onclick="closeSettings();openPrayersOverlay();" style="margin-bottom:10px;">📿 기도문 모음 (천수경·반야심경·발원문·진언)</button>
-      <button class="btn btn-ghost btn-block" onclick="closeSettings();openPhotobookOverlay();" style="margin-bottom:10px;">📖 나만의 순례집 PDF 만들기</button>
-      <button class="btn btn-ghost btn-block" onclick="closeSettings();openPassportOverlay();" style="margin-bottom:10px;">🛂 순례 여권 (현장 인증 스탬프)</button>
-      <button class="btn btn-ghost btn-block" onclick="closeSettings();openPhotoPolicyOverlay();" style="margin-bottom:10px;">📷 사진 저장 · 무료 이용 안내</button>
-      <button class="btn btn-ghost btn-block" onclick="closeSettings();openContactOverlay();" style="margin-bottom:10px;">✉ 문의 · 오류 제보 · 협업 문의</button>
-      <button class="btn btn-ghost btn-block admin-entry" id="adminModeBtn" onclick="closeSettings();openAdminOverlay();">🛠 관리자 모드</button>
-      <button class="btn btn-ghost btn-block" id="darkModeBtn" onclick="toggleDarkMode()" style="margin-bottom:10px;">🌙 야간/템플스테이 모드 켜기</button>
-<button class="btn btn-ghost btn-block" onclick="closeSettings();openVowOverlay();" style="margin-bottom:10px;">🌅 발원문 쓰기 (미래의 나에게)</button>
-      <button class="btn btn-ghost btn-block" onclick="doLogout()">로그아웃</button>
+      <div class="settings-account-card">
+        <div>
+          <b id="settingsAccountTitle">계정</b>
+          <p id="accountInfo">로그인 정보를 불러오는 중...</p>
+        </div>
+        <button class="settings-login-btn" id="guestSettingsLoginBtn" type="button" onclick="closeSettings();openLoginOverlay();">Google 로그인</button>
+        <button class="settings-logout-btn" id="settingsLogoutBtn" type="button" onclick="doLogout()" style="display:none;">로그아웃</button>
+      </div>
+
+      <button class="settings-reset-link" id="resetGuestBtn" type="button" onclick="resetGuestData()" style="display:none;">↻ 이 기기의 게스트 목록 초기화</button>
+
+      <div class="settings-section-title">나의 순례</div>
+      <div class="settings-feature-grid">
+        <button class="settings-feature sf-album" onclick="closeSettings();openAlbumOverlay();"><span>🖼</span><b>순례 앨범</b><small>내 사진 모아보기</small></button>
+        <button class="settings-feature sf-badge" onclick="closeSettings();openBadgeOverlay();"><span>🏅</span><b>뱃지 · 코스</b><small>진행률과 완주 기록</small></button>
+        <button class="settings-feature sf-passport" onclick="closeSettings();openPassportOverlay();"><span>🛂</span><b>순례 여권</b><small>현장 인증 스탬프</small></button>
+        <button class="settings-feature sf-book" onclick="closeSettings();openPhotobookOverlay();"><span>📖</span><b>나의 순례집</b><small>PDF로 간직하기</small></button>
+      </div>
+
+      <div class="settings-section-title">마음 · 불교</div>
+      <div class="settings-feature-grid">
+        <button class="settings-feature sf-prayer" onclick="closeSettings();openPrayersOverlay();"><span>📿</span><b>기도문 모음</b><small>천수경 · 반야심경</small></button>
+        <button class="settings-feature sf-etiquette" onclick="closeSettings();openEtiquetteOverlay();"><span>🙏</span><b>법당 예절</b><small>처음 가는 법당 · 108배</small></button>
+        <button class="settings-feature sf-glossary" onclick="closeSettings();openGlossaryOverlay();"><span>📚</span><b>불교 용어</b><small>낯선 말 쉽게 보기</small></button>
+        <button class="settings-feature sf-vow" onclick="closeSettings();openVowOverlay();"><span>🌅</span><b>발원문 쓰기</b><small>미래의 나에게</small></button>
+      </div>
+
+      <div class="settings-section-title">재미 · 도움</div>
+      <div class="settings-feature-grid">
+        <button class="settings-feature sf-quiz" onclick="closeSettings();openQuizOverlay();"><span>🧩</span><b>절 퀴즈</b><small>이 절 어디게?</small></button>
+        <button class="settings-feature sf-photo" onclick="closeSettings();openPhotoPolicyOverlay();"><span>📷</span><b>사진 저장 안내</b><small>용량 · 무료 이용</small></button>
+        <button class="settings-feature sf-contact" onclick="closeSettings();openContactOverlay();"><span>✉️</span><b>문의 · 협업</b><small>오류 제보 포함</small></button>
+        <button class="settings-feature sf-dark" id="darkModeBtn" onclick="toggleDarkMode()"><span>🌙</span><b>야간 모드</b><small>템플스테이 분위기</small></button>
+      </div>
+
+      <button class="settings-admin-link admin-entry" id="adminModeBtn" onclick="closeSettings();openAdminOverlay();">🛠 관리자 모드</button>
     </div>
   </div>
 </div>
-
 
 
 <!-- ===================== CONTACT MODAL ===================== -->
@@ -8995,16 +9352,42 @@ function mergeAllWithMaster(destObj){
   return out;
 }
 
-function updateAccountInfo(){
-  const el = document.getElementById('accountInfo');
-  if(!el) return;
-  const resetBtn = document.getElementById('resetGuestBtn');
-  if(resetBtn) resetBtn.style.display = localMode ? 'block' : 'none';
-  if(localMode){
-    el.textContent = '지금은 둘러보기 모드예요. 절·산 탐색과 ‘가보고 싶다’ 목록은 이 브라우저에서 쓸 수 있고, 방문기록·메모·내 사진·순례 인증카드는 Google 로그인 후 계정에 안전하게 저장돼요.';
-  } else if(auth && auth.currentUser){
-    el.textContent = auth.currentUser.email + ' 계정으로 로그인되어 있어요.';
+
+function openHeroAccountAction(){
+  if(auth && auth.currentUser && !localMode){
+    openSettings();
+  }else{
+    openLoginOverlay();
   }
+}
+function syncHeroAccountButton(){
+  const label=document.getElementById('heroLoginLabel');
+  const btn=document.getElementById('heroLoginBtn');
+  const loggedIn=!!(auth && auth.currentUser && !localMode);
+  if(label) label.textContent=loggedIn?'내 계정':'로그인';
+  if(btn) btn.classList.toggle('is-logged-in',loggedIn);
+}
+
+function updateAccountInfo(){
+  const el=document.getElementById('accountInfo');
+  const title=document.getElementById('settingsAccountTitle');
+  const resetBtn=document.getElementById('resetGuestBtn');
+  const loginBtn=document.getElementById('guestSettingsLoginBtn');
+  const logoutBtn=document.getElementById('settingsLogoutBtn');
+  const loggedIn=!!(auth && auth.currentUser && !localMode);
+
+  if(resetBtn) resetBtn.style.display=localMode?'block':'none';
+  if(loginBtn) loginBtn.style.display=loggedIn?'none':'inline-flex';
+  if(logoutBtn) logoutBtn.style.display=loggedIn?'inline-flex':'none';
+
+  if(loggedIn){
+    if(title) title.textContent='내 계정';
+    if(el) el.textContent=`${auth.currentUser.email} 계정으로 기록을 안전하게 저장하고 있어요.`;
+  }else{
+    if(title) title.textContent='둘러보기 모드';
+    if(el) el.textContent='로그인하면 방문기록·메모·사진을 계정에 저장하고 다른 기기에서도 이어볼 수 있어요.';
+  }
+  syncHeroAccountButton();
 }
 function resetGuestData(){
   if(!localMode){ showToast('게스트(둘러보기) 상태에서만 초기화할 수 있어요'); return; }
@@ -13856,11 +14239,13 @@ function getFilteredMountainList(){
 function renderMountainCard(id,d){
   const photo=firstPhotoUrl(d);
   const stageIdx=Math.min(d.stage||0,2);
+  const visited=stageIdx>=1;
   return `
-  <div class="card" data-id="${id}">
+  <div class="card ${visited?'visited-mountain-card':''}" data-id="${id}">
     <div class="card-photo">
       ${cardCoverMedia(photo,'mountain',d.name)}
       <span class="tagbadge famous">${escapeHtml(d.height||'')}</span>
+      ${visited?`<span class="lotus-visited-mark mountain-mark">🌿 <b>오른 산</b></span>`:''}
       ${progressSealHtml(stageIdx)}
       <button class="drag-handle" type="button" aria-label="순서 바꾸기" onclick="event.stopPropagation()">☰</button>
     </div>
@@ -14711,10 +15096,13 @@ function renderCard(id,d){
   const stageIdx=Math.min(Number(d.stage)||0,STAGES.length-1);
   const vc=visitCount(d);
   const tagLabel=d.tag==='유명'?'대표 산사':'숨은 산사';
+  const visited=stageIdx>=1;
+  const recorded=stageIdx>=2;
   return `
-  <div class="card" data-id="${id}">
+  <div class="card ${visited?'visited-temple-card':''} ${recorded?'recorded-temple-card':''}" data-id="${id}">
     <div class="card-photo">
       ${cardCoverMedia(photo,'temple',d.name)}
+      ${visited?`<span class="lotus-visited-mark" title="다녀온 절">🪷 <b>${recorded?'기록 완료':'다녀온 곳'}</b></span>`:''}
       ${vc>0?`<span class="visit-flag">${vc}회 방문</span>`:''}
       <button class="drag-handle" type="button" aria-label="순서 바꾸기" title="길게 눌러 순서 바꾸기" onclick="event.stopPropagation()">☰</button>
     </div>
@@ -16128,8 +16516,76 @@ async function refreshAdminStats(){
 /* ============================================================
    SETTINGS MODAL
 ============================================================ */
+
+let sansaOverlayScrollY=0;
+let sansaOverlayLockCount=0;
+let sansaTouchStartY=0;
+
+function lockPageForOverlay(){
+  const shown=[...document.querySelectorAll('.overlay.show')];
+  if(!shown.length) return;
+  if(document.body.classList.contains('sansa-overlay-locked')) return;
+  sansaOverlayScrollY=window.scrollY||0;
+  document.body.classList.add('sansa-overlay-locked');
+  document.body.style.top=`-${sansaOverlayScrollY}px`;
+}
+function unlockPageAfterOverlay(){
+  const stillShown=document.querySelector('.overlay.show');
+  if(stillShown) return;
+  if(!document.body.classList.contains('sansa-overlay-locked')) return;
+  document.body.classList.remove('sansa-overlay-locked');
+  document.body.style.top='';
+  window.scrollTo(0,sansaOverlayScrollY);
+}
+function installOverlayBounceGuard(){
+  if(window.__sansaOverlayGuardInstalled) return;
+  window.__sansaOverlayGuardInstalled=true;
+
+  const observer=new MutationObserver(()=>{
+    requestAnimationFrame(()=>{
+      if(document.querySelector('.overlay.show')) lockPageForOverlay();
+      else unlockPageAfterOverlay();
+    });
+  });
+  document.querySelectorAll('.overlay').forEach(el=>observer.observe(el,{attributes:true,attributeFilter:['class']}));
+
+  document.addEventListener('touchstart',e=>{
+    if(!e.target.closest('.overlay.show')||!e.touches?.[0]) return;
+    sansaTouchStartY=e.touches[0].clientY;
+  },{passive:true});
+
+  document.addEventListener('touchmove',e=>{
+    const overlay=e.target.closest('.overlay.show');
+    if(!overlay||!e.touches?.[0]) return;
+
+    let scroller=e.target.closest('.modal-body,[data-modal-scroll],.modal');
+    if(!scroller||!overlay.contains(scroller)) scroller=overlay.querySelector('.modal-body')||overlay.querySelector('.modal');
+    if(!scroller) return;
+
+    // find the nearest actually scrollable container
+    let node=scroller;
+    while(node && node!==overlay){
+      if(node.scrollHeight>node.clientHeight+2){scroller=node;break;}
+      node=node.parentElement;
+    }
+
+    const dy=e.touches[0].clientY-sansaTouchStartY;
+    const atTop=scroller.scrollTop<=0;
+    const atBottom=Math.ceil(scroller.scrollTop+scroller.clientHeight)>=scroller.scrollHeight-1;
+    if((atTop&&dy>0)||(atBottom&&dy<0)){
+      e.preventDefault();
+    }
+  },{passive:false});
+}
+if(document.readyState==='loading'){
+  document.addEventListener('DOMContentLoaded',installOverlayBounceGuard,{once:true});
+}else{
+  installOverlayBounceGuard();
+}
+
 function openSettings(){
   updateAccountInfo();
+  syncHeroAccountButton();
   syncAdminEntry();
   document.getElementById('settingsOverlay').classList.add('show');
 }
