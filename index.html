@@ -4342,6 +4342,40 @@ button.contact-email{display:block;}
   .course-progress-copy>b{font-size:15px}
 }
 
+
+
+/* ===== PACK VISIT BREAKDOWN ===== */
+.packrow-main{min-width:0;flex:1}
+.pack-progress-summary{
+  display:flex;align-items:center;gap:7px;flex-wrap:wrap;
+  padding:0;margin:4px 0 7px;border:0;background:transparent;
+  color:var(--ink-soft);font:inherit;font-size:11.5px;cursor:pointer;text-align:left;
+}
+.pack-progress-summary b{color:var(--moss);font-weight:900}
+.pack-progress-arrow{color:#8a948f;font-size:10px;font-weight:800}
+.pack-progress-summary:hover .pack-progress-arrow{color:var(--moss)}
+.pack-visit-breakdown{display:flex;flex-direction:column;gap:5px;margin:7px 0 8px}
+.pack-breakdown-row{display:grid;grid-template-columns:78px 1fr;gap:7px;align-items:start;font-size:10.5px;line-height:1.45}
+.pack-breakdown-label{font-weight:900;white-space:nowrap}
+.pack-breakdown-row.visited .pack-breakdown-label{color:#315f50}
+.pack-breakdown-row.pending .pack-breakdown-label{color:#9a7d67}
+.pack-breakdown-names{color:#66736d;word-break:keep-all}
+.pack-route-note{margin-top:6px!important}
+.packrow-actions{display:flex;flex-direction:column;gap:6px;flex-shrink:0}
+.packrow-actions .btn{padding:8px 14px!important;font-size:12px!important}
+.pack-remove-btn{color:var(--stamp)!important}
+.pack-detail-place{cursor:pointer}
+.pack-detail-place-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:4px}
+.pack-place-status{flex-shrink:0;border-radius:999px;padding:5px 8px;font-size:9.5px;font-weight:900}
+.pack-place-status.visited{background:#eaf3ee;color:#315f50}
+.pack-place-status.recorded{background:#315f50;color:#fff}
+.pack-place-status.pending{background:#f4efe9;color:#8b725e}
+@media(max-width:620px){
+  .packrow{align-items:flex-start!important}
+  .pack-breakdown-row{grid-template-columns:70px 1fr;font-size:10px}
+  .packrow-actions .btn{padding:7px 10px!important;font-size:10.5px!important}
+}
+
 </style>
 </head>
 <body>
@@ -4649,7 +4683,7 @@ button.contact-email{display:block;}
 <div class="overlay" id="hiddenTempleOverlay">
   <div class="modal">
     <div class="modal-head">
-      <div><h2 class="serif">🏯 숨긴 절 다시 불러오기</h2><div class="sub">목록에서 뺀 절도 기록과 사진은 그대로 보관돼요.</div></div>
+      <div><h2 class="serif">🏯 목록에서 뺀 절 다시 불러오기</h2><div class="sub">목록에서 뺀 절도 기록과 사진은 그대로 보관돼요.</div></div>
       <button class="close-x" onclick="closeHiddenTempleOverlay()">✕</button>
     </div>
     <div class="modal-body">
@@ -10405,24 +10439,81 @@ function maybeShowSeedBanner(){
   }
 }
 
-function loadPack(key){
-  const pack = PACKS.find(p=>p.key===key);
+async function loadPack(key){
+  const pack=PACKS.find(p=>p.key===key);
   if(!pack) return;
-  const packData = resolvePackData(pack);
-  const existingNames = new Set(Object.values(destinations).map(d=>d.name));
-  let added = 0;
-  packData.forEach(item=>{
-    if(existingNames.has(item.name)) return;
-    const id = newId();
-    const data = Object.assign({}, item, {stage:0, notes:'', photos:{}, createdAt: Date.now()});
-    if(localMode){ destinations[id] = data; } else { destinationRef(id).set(data); }
-    added++;
-  });
-  if(localMode){ persistLocal(); afterDataLoaded(); }
-  const skipped = packData.length - added;
-  showToast(skipped>0 ? `${added}곳을 추가했어요 (이미 있는 ${skipped}곳은 건너뜀)` : `${added}곳을 추가했어요`);
-  document.getElementById('seedBannerWrap').innerHTML='';
-  renderPackOverlay();
+  const packData=resolvePackData(pack);
+
+  let added=0;
+  let restored=0;
+  let skipped=0;
+  const cloudUpdates={};
+
+  for(const item of packData){
+    const existingEntry=Object.entries(destinations||{}).find(([id,d])=>d&&d.name===item.name);
+
+    if(existingEntry){
+      const [id,d]=existingEntry;
+
+      // 이미 데이터는 있지만 메인에서 숨긴 절이면,
+      // 새로 만들지 않고 기존 기록/사진을 그대로 살려서 메인 목록으로 복원합니다.
+      if(d.hiddenFromList){
+        const patch={hiddenFromList:false,hiddenAt:null};
+        destinations[id]=Object.assign({},d,patch);
+
+        if(localMode){
+          restored++;
+        }else{
+          cloudUpdates[`users/${currentUid}/destinations/${id}/hiddenFromList`]=false;
+          cloudUpdates[`users/${currentUid}/destinations/${id}/hiddenAt`]=null;
+          restored++;
+        }
+      }else{
+        skipped++;
+      }
+      continue;
+    }
+
+    const id=newId();
+    const data=Object.assign({},item,{
+      stage:0,
+      notes:'',
+      photos:{},
+      hiddenFromList:false,
+      hiddenAt:null,
+      createdAt:Date.now()+added
+    });
+    destinations[id]=data;
+
+    if(localMode){
+      added++;
+    }else{
+      cloudUpdates[`users/${currentUid}/destinations/${id}`]=data;
+      added++;
+    }
+  }
+
+  try{
+    if(localMode){
+      persistLocal();
+      afterDataLoaded();
+    }else if(Object.keys(cloudUpdates).length){
+      await db.ref().update(cloudUpdates);
+    }
+
+    document.getElementById('seedBannerWrap').innerHTML='';
+    renderPackOverlay();
+    render();
+
+    const parts=[];
+    if(added) parts.push(`${added}곳 새로 추가`);
+    if(restored) parts.push(`${restored}곳 숨김에서 복원`);
+    if(skipped) parts.push(`${skipped}곳 이미 목록에 있음`);
+    showToast(parts.length?parts.join(' · '):'이미 모두 목록에 있어요.');
+  }catch(err){
+    console.error('loadPack failed',err);
+    showToast('코스를 불러오지 못했어요. 다시 시도해주세요.');
+  }
 }
 
 function openPackOverlay(){
@@ -10452,51 +10543,88 @@ function cancelPack(key){
   render();
 }
 function renderPackOverlay(){
-  const wrap = document.getElementById('packList');
-  const byName = {};
-  Object.values(destinations).forEach(d=> byName[d.name]=d);
-  wrap.innerHTML = PACKS.map(p=>{
-    const packData = resolvePackData(p);
-    const have = packData.filter(item=>byName[item.name]).length;
-    const visited = packData.filter(item=>byName[item.name] && (byName[item.name].stage||0)>=1).length;
-    const earned = visited === packData.length;
+  const wrap=document.getElementById('packList');
+  const byName={};
+  Object.values(destinations||{}).forEach(d=>{if(d&&d.name) byName[d.name]=d;});
+
+  wrap.innerHTML=PACKS.map(p=>{
+    const packData=resolvePackData(p);
+    const have=packData.filter(item=>byName[item.name]).length;
+    const visitedItems=packData.filter(item=>byName[item.name]&&(Number(byName[item.name].stage)||0)>=1);
+    const unvisitedItems=packData.filter(item=>!(byName[item.name]&&(Number(byName[item.name].stage)||0)>=1));
+    const visited=visitedItems.length;
+    const earned=packData.length>0&&visited===packData.length;
+    const visitedNames=visitedItems.map(x=>x.name);
+    const unvisitedNames=unvisitedItems.map(x=>x.name);
+
     return `<div class="packrow">
-      <div>
-        <div class="packrow-title">${earned?'🏅 ':''}${p.label}</div>
-        <div class="packrow-sub">${packData.length}곳 중 ${have}곳 등록 · <b style="color:var(--moss);">${visited}곳 다녀옴</b>${earned?' · 완주!':''}</div>
-        ${p.route ? `<div class="packrow-sub" style="margin-top:4px;color:var(--stamp);">🚗 ${p.route}</div>` : ''}
+      <div class="packrow-main">
+        <div class="packrow-title">${earned?'🏅 ':''}${escapeHtml(p.label)}</div>
+
+        <button class="pack-progress-summary" type="button" onclick="openCourseProgressDetail('${p.key}')">
+          <span>${packData.length}곳 중 ${have}곳 등록</span>
+          <b>${visited}곳 다녀옴</b>
+          <span class="pack-progress-arrow">자세히 ›</span>
+        </button>
+
+        <div class="pack-visit-breakdown">
+          <div class="pack-breakdown-row visited">
+            <span class="pack-breakdown-label">✓ 다녀온 곳</span>
+            <span class="pack-breakdown-names">${visitedNames.length?visitedNames.map(escapeHtml).join(' · '):'아직 없음'}</span>
+          </div>
+          <div class="pack-breakdown-row pending">
+            <span class="pack-breakdown-label">○ 아직</span>
+            <span class="pack-breakdown-names">${unvisitedNames.length?unvisitedNames.map(escapeHtml).join(' · '):'모두 다녀옴'}</span>
+          </div>
+        </div>
+
+        ${p.route?`<div class="packrow-sub pack-route-note">🚗 ${escapeHtml(p.route)}</div>`:''}
       </div>
-      <div style="display:flex;flex-direction:column;gap:6px;flex-shrink:0;">
-        <button class="btn btn-primary" style="padding:8px 14px;font-size:12.5px;" onclick="loadPack('${p.key}')">${have===packData.length ? '다시 불러오기' : '불러오기'}</button>
-        <button class="btn btn-ghost" style="padding:8px 14px;font-size:12.5px;" onclick="openPackDetail('${p.key}')">자세히 보기</button>
-        ${have>0 ? `<button class="btn btn-ghost" style="padding:8px 14px;font-size:12.5px;color:var(--stamp);" onclick="cancelPack('${p.key}')">목록에서 빼기</button>` : ''}
+
+      <div class="packrow-actions">
+        <button class="btn btn-primary" onclick="loadPack('${p.key}')">${have===packData.length?'다시 불러오기':'불러오기'}</button>
+        <button class="btn btn-ghost" onclick="openCourseProgressDetail('${p.key}')">진행 상세</button>
+        <button class="btn btn-ghost" onclick="openPackDetail('${p.key}')">코스 정보</button>
+        ${have>0?`<button class="btn btn-ghost pack-remove-btn" onclick="cancelPack('${p.key}')">목록에서 빼기</button>`:''}
       </div>
     </div>`;
   }).join('');
 }
 
 function openPackDetail(key){
-  const pack = PACKS.find(p=>p.key===key);
+  const pack=PACKS.find(p=>p.key===key);
   if(!pack) return;
-  const packData = resolvePackData(pack);
-  const wrap = document.getElementById('packList');
-  wrap.innerHTML = `
+  const packData=resolvePackData(pack);
+  const wrap=document.getElementById('packList');
+
+  wrap.innerHTML=`
     <div style="margin-bottom:12px;">
       <a onclick="renderPackOverlay()" style="cursor:pointer;color:var(--moss);font-size:12.5px;font-weight:700;">← 코스 목록으로</a>
     </div>
-    <div class="packrow-title" style="font-size:18px;margin-bottom:4px;">${pack.label}</div>
-    ${pack.route ? `<div class="packrow-sub" style="color:var(--stamp);margin-bottom:8px;">🚗 ${pack.route}</div>` : ''}
-    ${pack.nearby ? `<div class="packrow-sub" style="color:var(--moss);margin-bottom:12px;">📍 주변 들를 만한 곳: ${pack.nearby}</div>` : ''}
-    <button class="btn btn-primary btn-block" style="margin-bottom:14px;" onclick="loadPack('${pack.key}')">이 코스 전체 불러오기</button>
-    ${packData.map((item,i)=>`
-      <div class="visitrow" style="border-left-color:${item.tag==='유명'?'var(--moss)':'var(--gold)'};cursor:pointer;" onclick="openPackItemDetail('${item.name.replace(/'/g,"\\'")}')">
-        <div style="font-weight:700;font-family:'Nanum Myeongjo','Noto Serif KR',serif;font-size:15px;">${i+1}. ${escapeHtml(item.name)} <span style="font-size:11px;color:var(--stamp);font-weight:400;">자세히 보기 ›</span></div>
-        <div style="font-size:11px;color:var(--ink-soft);margin-bottom:4px;">${item.region} · ${item.tag==='유명'?'유명한 곳':'숨은 곳'}</div>
+    <div class="packrow-title" style="font-size:18px;margin-bottom:4px;">${escapeHtml(pack.label)}</div>
+    ${pack.route?`<div class="packrow-sub" style="color:var(--stamp);margin-bottom:8px;">🚗 ${escapeHtml(pack.route)}</div>`:''}
+    ${pack.nearby?`<div class="packrow-sub" style="color:var(--moss);margin-bottom:12px;">📍 주변 들를 만한 곳: ${escapeHtml(pack.nearby)}</div>`:''}
+
+    <button class="btn btn-primary btn-block" style="margin-bottom:8px;" onclick="loadPack('${pack.key}')">이 코스 전체 불러오기</button>
+    <button class="btn btn-ghost btn-block" style="margin-bottom:14px;" onclick="openCourseProgressDetail('${pack.key}')">📊 방문 현황 자세히 보기</button>
+
+    ${packData.map((item,i)=>{
+      const existing=Object.values(destinations||{}).find(d=>d&&d.name===item.name);
+      const stage=existing?(Number(existing.stage)||0):0;
+      const label=stage>=2?'기록 완료':stage>=1?'다녀왔어요':'아직 안 감';
+      const cls=stage>=2?'recorded':stage>=1?'visited':'pending';
+      return `
+      <div class="visitrow pack-detail-place ${cls}" onclick="openPackItemDetail('${item.name.replace(/'/g,"\\'")}')">
+        <div class="pack-detail-place-head">
+          <div style="font-weight:700;font-family:'Nanum Myeongjo','Noto Serif KR',serif;font-size:15px;">${i+1}. ${escapeHtml(item.name)}</div>
+          <span class="pack-place-status ${cls}">${label}</span>
+        </div>
+        <div style="font-size:11px;color:var(--ink-soft);margin-bottom:4px;">${escapeHtml(item.region||'')} · ${item.tag==='유명'?'유명한 곳':'숨은 곳'}</div>
         <div class="vnote" style="margin-top:2px;">${escapeHtml(item.desc||'')}</div>
-        ${item.activity ? `<div class="vnote" style="margin-top:4px;color:var(--moss);font-weight:600;">✓ ${escapeHtml(item.activity)}</div>` : ''}
-        ${item.visitorTip ? `<div class="vnote" style="margin-top:4px;background:#fff8e6;padding:6px 8px;border-radius:6px;">📖 ${escapeHtml(item.visitorTip)}</div>` : ''}
-      </div>
-    `).join('')}
+        ${item.activity?`<div class="vnote" style="margin-top:4px;color:var(--moss);font-weight:600;">✓ ${escapeHtml(item.activity)}</div>`:''}
+        ${item.visitorTip?`<div class="vnote" style="margin-top:4px;background:#fff8e6;padding:6px 8px;border-radius:6px;">📖 ${escapeHtml(item.visitorTip)}</div>`:''}
+      </div>`;
+    }).join('')}
   `;
 }
 
@@ -12903,7 +13031,7 @@ function updateHiddenTempleButton(){
   const btn=document.getElementById('hiddenTempleBtn');
   if(!btn) return;
   const n=getHiddenTempleEntries().length;
-  btn.textContent=`🙈 숨긴 절 ${n}`;
+  btn.textContent=`🙈 목록에서 뺀 절 ${n}`;
   btn.style.display=contentType==='temple'?'':'none';
 }
 function openHiddenTempleOverlay(){
