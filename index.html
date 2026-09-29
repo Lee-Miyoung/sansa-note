@@ -4392,6 +4392,257 @@ button.contact-email{display:block;}
   border-color:#d9bbb4!important;
 }
 
+
+
+/* ===== PILGRIMAGE GAME COLLECTION ===== */
+.pilgrim-collection-chip{
+  border:1px solid rgba(255,255,255,.22);
+  background:rgba(255,255,255,.08);
+  color:#fff8e8;
+  border-radius:999px;
+  padding:6px 10px;
+  font-size:9px;
+  font-weight:900;
+  cursor:pointer;
+}
+.pilgrim-game-tabs{
+  display:flex;
+  gap:6px;
+  padding:4px;
+  border-radius:999px;
+  background:#f1f3f0;
+  margin-bottom:12px;
+}
+.pilgrim-game-tabs button{
+  flex:1;
+  border:0;
+  background:transparent;
+  border-radius:999px;
+  padding:8px 10px;
+  font-size:10.5px;
+  font-weight:850;
+  color:#68766f;
+  cursor:pointer;
+}
+.pilgrim-game-tabs button.active{
+  background:#315f50;
+  color:#fff;
+  box-shadow:0 3px 10px rgba(49,95,80,.16);
+}
+.pilgrim-today-card{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:14px;
+  border:1px solid #e2d7bf;
+  border-radius:16px;
+  background:linear-gradient(135deg,#fff9ec,#f4efe4);
+  margin-bottom:14px;
+}
+.pilgrim-today-card>div{
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+  gap:3px;
+}
+.pilgrim-today-card small{
+  font-size:7px;
+  letter-spacing:.15em;
+  color:#a3814a;
+  font-weight:900;
+}
+.pilgrim-today-card b{
+  font-family:"Nanum Myeongjo","Noto Serif KR",serif;
+  font-size:16px;
+  color:#293d34;
+}
+.pilgrim-today-card span{
+  font-size:10.5px;
+  color:#748078;
+  line-height:1.45;
+}
+.pilgrim-today-card>button{
+  flex-shrink:0;
+  border:0;
+  border-radius:999px;
+  background:#9b6940;
+  color:#fff;
+  padding:8px 11px;
+  font-size:10px;
+  font-weight:900;
+  cursor:pointer;
+}
+.pilgrim-today-card.picked{cursor:pointer}
+.pg-summary{
+  display:flex;
+  gap:13px;
+  align-items:center;
+  padding:13px;
+  border:1px solid #e0e4e0;
+  border-radius:15px;
+  background:#fbfcfa;
+  margin-bottom:11px;
+}
+.pg-summary>div:first-child{
+  min-width:76px;
+  text-align:center;
+}
+.pg-summary>div:first-child b{
+  font-family:"Nanum Myeongjo","Noto Serif KR",serif;
+  font-size:30px;
+  color:#315f50;
+}
+.pg-summary>div:first-child span{
+  font-size:11px;
+  color:#8b958f;
+}
+.pg-summary-copy{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+}
+.pg-summary-copy strong{font-size:12px;color:#32473e}
+.pg-summary-copy small{font-size:9.5px;color:#7a8680}
+.pg-progress{
+  height:6px;
+  background:#e5e9e6;
+  border-radius:999px;
+  overflow:hidden;
+}
+.pg-progress i{
+  display:block;
+  height:100%;
+  border-radius:999px;
+  background:linear-gradient(90deg,#315f50,#b48a49);
+}
+.pg-lotus-grid{
+  display:grid;
+  grid-template-columns:repeat(12,1fr);
+  gap:5px;
+}
+.pg-lotus{
+  aspect-ratio:1;
+  border:1px solid #e0e4e1;
+  background:#fafbf9;
+  border-radius:9px;
+  display:grid;
+  place-items:center;
+  color:#a8b0ac;
+  font-size:8px;
+  font-weight:800;
+}
+.pg-lotus.done{
+  cursor:pointer;
+  color:#fff6de;
+  background:linear-gradient(145deg,#315f50,#557a69);
+  border-color:#315f50;
+  box-shadow:0 2px 7px rgba(49,95,80,.16);
+}
+.pg-note{
+  margin-top:10px;
+  color:#7d8882;
+  font-size:10px;
+  text-align:center;
+}
+.pg-section-head{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:10px;
+}
+.pg-section-head>div{display:flex;flex-direction:column;gap:2px}
+.pg-section-head b{font-size:13px;color:#33483f}
+.pg-section-head span{font-size:9.5px;color:#84908a}
+.pg-hanja-grid{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:8px;
+}
+.pg-hanja-card{
+  min-height:100px;
+  border:1px solid #e2d7c3;
+  background:linear-gradient(145deg,#fffaf0,#f3e7ce);
+  border-radius:14px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:3px;
+  cursor:pointer;
+}
+.pg-hanja-card strong{
+  font-family:"Nanum Myeongjo","Noto Serif KR",serif;
+  font-size:34px;
+  color:#8d2f27;
+  line-height:1;
+}
+.pg-hanja-card b{font-size:10px;color:#58493b}
+.pg-hanja-card small{font-size:8.5px;color:#9a8b7b}
+.pg-hanja-detail{
+  display:grid;
+  grid-template-columns:82px 1fr;
+  gap:12px;
+  margin-top:12px;
+  padding:12px;
+  border:1px solid #e1e4e1;
+  border-radius:14px;
+  background:#fff;
+}
+.pg-hanja-big{
+  display:grid;
+  place-items:center;
+  font-family:"Nanum Myeongjo","Noto Serif KR",serif;
+  font-size:46px;
+  color:#8d2f27;
+  background:#fbf4e7;
+  border-radius:12px;
+}
+.pg-hanja-detail>div:last-child>div{
+  display:flex;
+  flex-wrap:wrap;
+  gap:5px;
+  margin-top:7px;
+}
+.pg-hanja-detail button{
+  border:1px solid #dce2de;
+  background:#f8faf8;
+  color:#41584e;
+  border-radius:999px;
+  padding:5px 8px;
+  font-size:9px;
+  cursor:pointer;
+}
+.pg-region-list{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+.pg-region-row{
+  padding:11px 12px;
+  border:1px solid #e1e4e1;
+  border-radius:13px;
+  background:#fff;
+}
+.pg-region-top{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:7px;
+}
+.pg-region-top b{font-size:11.5px;color:#33483f}
+.pg-region-top span{font-size:10px;color:#76837c;font-weight:800}
+.pg-region-row small{
+  display:block;
+  margin-top:5px;
+  font-size:8.8px;
+  color:#8d9792;
+}
+@media(max-width:600px){
+  .pg-lotus-grid{grid-template-columns:repeat(9,1fr);gap:4px}
+  .pg-hanja-grid{grid-template-columns:repeat(4,1fr)}
+  .pilgrim-today-card{padding:12px}
+}
+
 </style>
 </head>
 <body>
@@ -4498,6 +4749,7 @@ button.contact-email{display:block;}
         <div id="streakBadge"></div>
         <div id="levelBadge"></div>
         <span id="specialTitlePill" class="special-title-pill">🧭 만행자(卍行者)</span>
+        <button class="pilgrim-collection-chip" type="button" onclick="openPilgrimCollection()">✦ 순례 컬렉션</button>
       </div>
       <div id="nextLevelCaption" style="font-size:11px;color:#ffe3cc;margin-top:5px;"></div>
       <div class="hero-stats" id="heroStats"></div>
@@ -5549,6 +5801,38 @@ button.contact-email{display:block;}
       <button class="close-x" onclick="closeAlbumOverlay()">✕</button>
     </div>
     <div class="modal-body" id="albumBody"></div>
+  </div>
+</div>
+
+
+<!-- ===================== PILGRIMAGE GAME COLLECTION MODAL ===================== -->
+<div class="overlay" id="pilgrimCollectionOverlay">
+  <div class="modal wide">
+    <div class="modal-head">
+      <div>
+        <h2 class="serif">✦ 순례 컬렉션</h2>
+        <div class="sub">다녀온 절이 하나씩 지도와 한자로 쌓여요.</div>
+      </div>
+      <button class="close-x" onclick="closePilgrimCollection()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="pilgrim-game-tabs">
+        <button class="active" data-pg-tab="map" onclick="setPilgrimGameTab('map',this)">108 순례</button>
+        <button data-pg-tab="hanja" onclick="setPilgrimGameTab('hanja',this)">한자 수집</button>
+        <button data-pg-tab="region" onclick="setPilgrimGameTab('region',this)">지역 컬렉션</button>
+      </div>
+
+      <div class="pilgrim-today-card">
+        <div>
+          <small>TODAY'S TEMPLE</small>
+          <b id="pilgrimTodayTitle">오늘의 한 절</b>
+          <span id="pilgrimTodayDesc">아직 안 가본 곳 중 한 곳을 뽑아보세요.</span>
+        </div>
+        <button type="button" onclick="drawTodayTemple()">한 절 뽑기</button>
+      </div>
+
+      <div id="pilgrimGameBody"></div>
+    </div>
   </div>
 </div>
 
@@ -9270,13 +9554,13 @@ function renderStoryCard(){
     ctx.textAlign='center';
     ctx.fillStyle='#8d2f27';
     ctx.font='700 46px "Nanum Myeongjo","Noto Serif KR",serif';
-    ctx.fillText('순례 인증',W/2,152);
+    ctx.fillText('순례 인증',W/2,145);
     ctx.font='700 19px Pretendard,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif';
     ctx.fillStyle='rgba(84,65,49,.64)';
-    ctx.fillText('SANSANOTE · PILGRIMAGE RECORD',W/2,190);
+    ctx.fillText('SANSANOTE · PILGRIMAGE RECORD',W/2,184);
 
     if(photoImg){
-      const px=95, py=240, pw=W-190, ph=590;
+      const px=78, py=218, pw=W-156, ph=690;
       ctx.save();
       ctx.beginPath();
       if(ctx.roundRect) ctx.roundRect(px,py,pw,ph,30); else ctx.rect(px,py,pw,ph);
@@ -9288,39 +9572,42 @@ function renderStoryCard(){
       ctx.drawImage(photoImg,dx,dy,dw,dh);
 
       const shade=ctx.createLinearGradient(0,py,0,py+ph);
-      shade.addColorStop(0,'rgba(21,15,10,.06)');
-      shade.addColorStop(1,'rgba(26,17,10,.26)');
+      shade.addColorStop(0,'rgba(21,15,10,.02)');
+      shade.addColorStop(1,'rgba(26,17,10,.22)');
       ctx.fillStyle=shade;
       ctx.fillRect(px,py,pw,ph);
       ctx.restore();
 
       ctx.fillStyle='rgba(255,250,240,.82)';
-      ctx.font='700 180px "Nanum Myeongjo","Noto Serif KR",serif';
-      ctx.fillText(hanjaPick.ch,W/2,590);
+      ctx.font='700 190px "Nanum Myeongjo","Noto Serif KR",serif';
+      ctx.fillText(hanjaPick.ch,W/2,625);
       ctx.font='700 24px "Nanum Myeongjo","Noto Serif KR",serif';
       ctx.fillStyle='rgba(255,250,240,.90)';
-      ctx.fillText(hanjaPick.mean,W/2,640);
+      ctx.fillText(hanjaPick.mean,W/2,675);
     }else{
       ctx.beginPath();
-      ctx.arc(W/2,500,275,0,Math.PI*2);
+      ctx.arc(W/2,535,290,0,Math.PI*2);
       ctx.strokeStyle='rgba(141,47,39,.11)';
       ctx.lineWidth=3;
       ctx.stroke();
 
       ctx.fillStyle='rgba(128,28,25,.24)';
-      ctx.font='700 545px "Nanum Myeongjo","Noto Serif KR",serif';
-      ctx.fillText(hanjaPick.ch,W/2,665);
+      ctx.font='700 575px "Nanum Myeongjo","Noto Serif KR",serif';
+      ctx.fillText(hanjaPick.ch,W/2,705);
 
       ctx.font='700 29px "Nanum Myeongjo","Noto Serif KR",serif';
       ctx.fillStyle='rgba(108,54,38,.78)';
-      ctx.fillText(`— ${hanjaPick.mean} —`,W/2,735);
+      ctx.fillText(`— ${hanjaPick.mean} —`,W/2,778);
     }
 
     const boxX=70, boxW=W-140;
-    const boxTop=900, boxBottom=1710, boxH=boxBottom-boxTop;
+    const boxTop=955;
+    const boxBottom=1645;
+    const boxH=boxBottom-boxTop;
+
     ctx.beginPath();
     if(ctx.roundRect) ctx.roundRect(boxX,boxTop,boxW,boxH,34); else ctx.rect(boxX,boxTop,boxW,boxH);
-    ctx.fillStyle='rgba(255,253,247,.94)';
+    ctx.fillStyle='rgba(255,253,247,.95)';
     ctx.fill();
     ctx.strokeStyle='rgba(128,76,48,.18)';
     ctx.lineWidth=2;
@@ -9331,43 +9618,49 @@ function renderStoryCard(){
     ctx.font='700 24px Pretendard,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif';
     ctx.fillStyle='#8d3a30';
     ctx.fillText(`${dateStr}  ·  ${d.region}`,W/2,y);
-    y+=78;
+    y+=82;
 
     ctx.fillStyle='#2e241a';
     ctx.font='700 66px "Nanum Myeongjo","Noto Serif KR",serif';
     ctx.fillText(d.name,W/2,y);
-    y+=56;
+    y+=60;
 
     ctx.strokeStyle='rgba(141,47,39,.22)';
     ctx.lineWidth=2;
     ctx.beginPath();
-    ctx.moveTo(W/2-90,y);
-    ctx.lineTo(W/2+90,y);
+    ctx.moveTo(W/2-86,y);
+    ctx.lineTo(W/2+86,y);
     ctx.stroke();
-    y+=44;
+    y+=40;
 
+    // 본문 폭을 의도적으로 좁혀 문장이 옆으로 늘어지지 않게.
+    // 대신 4~6줄 정도로 자연스럽게 쌓여 여백을 채웁니다.
     if(poetic?.sketch){
-      ctx.font='500 28px "Nanum Myeongjo","Noto Serif KR",serif';
-      ctx.fillStyle='#4b4033';
-      const lines=wrapCanvasTextLines(ctx,poetic.sketch,boxW-180).slice(0,5);
+      ctx.font='500 29px "Nanum Myeongjo","Noto Serif KR",serif';
+      ctx.fillStyle='#493d30';
+      const textMaxWidth=650;
+      const lines=wrapCanvasTextLines(ctx,poetic.sketch,textMaxWidth).slice(0,6);
+      const lineH=47;
       for(const line of lines){
         ctx.fillText(line,W/2,y);
-        y+=46;
+        y+=lineH;
       }
+      y+=10;
     }
 
-    const quoteH=150;
-    const quoteY=boxBottom-quoteH-58;
     if(msg){
+      ctx.font='600 28px "Nanum Myeongjo","Noto Serif KR",serif';
+      const quoteLines=wrapCanvasTextLines(ctx,`“${msg}”`,620).slice(0,3);
+      const lineH=43;
+      const quoteH=Math.max(120,quoteLines.length*lineH+44);
+      const quoteY=Math.min(y+12,boxBottom-quoteH-30);
+
       ctx.beginPath();
-      if(ctx.roundRect) ctx.roundRect(boxX+48,quoteY,boxW-96,quoteH,22); else ctx.rect(boxX+48,quoteY,boxW-96,quoteH);
+      if(ctx.roundRect) ctx.roundRect(boxX+92,quoteY,boxW-184,quoteH,22); else ctx.rect(boxX+92,quoteY,boxW-184,quoteH);
       ctx.fillStyle='rgba(141,47,39,.06)';
       ctx.fill();
 
-      ctx.font='600 27px "Nanum Myeongjo","Noto Serif KR",serif';
       ctx.fillStyle='#8d2f27';
-      const quoteLines=wrapCanvasTextLines(ctx,`“${msg}”`,boxW-190).slice(0,3);
-      const lineH=42;
       const totalH=(quoteLines.length-1)*lineH;
       let qy=quoteY+quoteH/2-totalH/2+10;
       for(const line of quoteLines){
@@ -9376,22 +9669,22 @@ function renderStoryCard(){
       }
     }
 
-    ctx.strokeStyle='rgba(126,88,58,.16)';
+    ctx.strokeStyle='rgba(126,88,58,.15)';
     ctx.lineWidth=1.5;
     ctx.beginPath();
-    ctx.moveTo(180,1770);
-    ctx.lineTo(W-180,1770);
+    ctx.moveTo(190,1740);
+    ctx.lineTo(W-190,1740);
     ctx.stroke();
 
-    ctx.font='600 23px Pretendard,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif';
-    ctx.fillStyle='rgba(86,62,46,.68)';
-    ctx.fillText('산사노트 · 나만의 순례 기록',W/2,1830);
+    ctx.font='600 22px Pretendard,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif';
+    ctx.fillStyle='rgba(86,62,46,.62)';
+    ctx.fillText('산사노트 · 나만의 순례 기록',W/2,1802);
 
     const status=document.getElementById('storyCardStatus');
     if(status){
       status.textContent=photoImg
-        ? `${d.name} · 선택한 사진을 넣은 카드예요. 사진은 자동 적용되지 않아요.`
-        : `${d.name} · 한지와 한자 중심의 카드예요. 원하면 아래에서 사진을 직접 넣을 수 있어요.`;
+        ? `${d.name} · 선택한 사진을 크게 넣었어요.`
+        : `${d.name} · 본문 폭을 줄여 읽기 좋은 비율로 정리했어요.`;
     }
   }
 
@@ -10274,6 +10567,158 @@ function openCourseProgressDetail(packKey){
 }
 function closeCourseProgressDetail(){
   document.getElementById('courseProgressOverlay')?.classList.remove('show');
+}
+
+
+let pilgrimGameTab='map';
+
+function openPilgrimCollection(){
+  pilgrimGameTab='map';
+  document.querySelectorAll('[data-pg-tab]').forEach(btn=>{
+    btn.classList.toggle('active',btn.dataset.pgTab==='map');
+  });
+  renderPilgrimGame();
+  document.getElementById('pilgrimCollectionOverlay')?.classList.add('show');
+}
+function closePilgrimCollection(){
+  document.getElementById('pilgrimCollectionOverlay')?.classList.remove('show');
+}
+function setPilgrimGameTab(tab,btn){
+  pilgrimGameTab=tab;
+  document.querySelectorAll('[data-pg-tab]').forEach(el=>el.classList.toggle('active',el===btn));
+  renderPilgrimGame();
+}
+function getVisitedTempleRecords(){
+  return Object.entries(destinations||{})
+    .filter(([id,d])=>d && (Number(d.stage)||0)>=1)
+    .sort((a,b)=>(Number(a[1].createdAt)||0)-(Number(b[1].createdAt)||0));
+}
+function stableHanjaForTemple(name){
+  if(TEMPLE_HANJA && TEMPLE_HANJA[name]) return TEMPLE_HANJA[name];
+  const pool=(typeof CARD_HANJA!=='undefined'&&Array.isArray(CARD_HANJA)&&CARD_HANJA.length)
+    ? CARD_HANJA
+    : [{ch:'心',mean:'마음'},{ch:'靜',mean:'고요'},{ch:'緣',mean:'인연'},{ch:'空',mean:'비움'},{ch:'慈',mean:'자비'}];
+  let hash=0;
+  for(const ch of String(name||'')) hash=((hash<<5)-hash)+ch.charCodeAt(0);
+  return pool[Math.abs(hash)%pool.length];
+}
+function renderPilgrimGame(){
+  const body=document.getElementById('pilgrimGameBody');
+  if(!body) return;
+  if(pilgrimGameTab==='hanja') renderHanjaCollection(body);
+  else if(pilgrimGameTab==='region') renderRegionCollection(body);
+  else render108Pilgrimage(body);
+}
+function render108Pilgrimage(body){
+  const visited=getVisitedTempleRecords();
+  const count=Math.min(108,visited.length);
+  const pct=Math.round(count/108*100);
+  const next=count>=108?'108 순례 완주!':`${108-count}곳 남음`;
+
+  body.innerHTML=`
+    <div class="pg-summary">
+      <div><b>${count}</b><span>/ 108</span></div>
+      <div class="pg-summary-copy">
+        <strong>${next}</strong>
+        <small>다녀온 절 하나마다 연꽃 한 송이가 채워져요.</small>
+        <div class="pg-progress"><i style="width:${pct}%"></i></div>
+      </div>
+    </div>
+    <div class="pg-lotus-grid">
+      ${Array.from({length:108},(_,i)=>{
+        const done=i<count;
+        const rec=done?visited[i]:null;
+        const name=rec?rec[1].name:'';
+        return `<button class="pg-lotus ${done?'done':''}" type="button" ${done?`title="${escapeAttr(name)}" onclick="openPilgrimTempleFromCollection('${rec[0]}')"`:'disabled'}>
+          <span>${done?'✦':i+1}</span>
+        </button>`;
+      }).join('')}
+    </div>
+    <div class="pg-note">${count?`최근 채운 절: <b>${escapeHtml(visited[count-1][1].name)}</b>`:'첫 순례를 기록하면 첫 칸이 채워져요.'}</div>
+  `;
+}
+function renderHanjaCollection(body){
+  const visited=getVisitedTempleRecords();
+  const byChar=new Map();
+  visited.forEach(([id,d])=>{
+    const h=stableHanjaForTemple(d.name);
+    if(!byChar.has(h.ch)) byChar.set(h.ch,{...h,temples:[]});
+    byChar.get(h.ch).temples.push({id,name:d.name});
+  });
+  const items=[...byChar.values()];
+  body.innerHTML=`
+    <div class="pg-section-head">
+      <div><b>모은 한자 ${items.length}개</b><span>같은 한자가 나와도 절은 계속 기록돼요.</span></div>
+    </div>
+    ${items.length?`<div class="pg-hanja-grid">
+      ${items.map(item=>`
+        <button class="pg-hanja-card" type="button" onclick="showHanjaTemples('${escapeAttr(item.ch)}')">
+          <strong>${escapeHtml(item.ch)}</strong>
+          <b>${escapeHtml(item.mean||'')}</b>
+          <small>${item.temples.length}곳</small>
+        </button>`).join('')}
+    </div>`:'<div class="community-empty">아직 모은 한자가 없어요.<br>절을 다녀왔다고 기록하면 첫 글자가 열려요.</div>'}
+    <div id="pgHanjaDetail"></div>
+  `;
+}
+function showHanjaTemples(ch){
+  const visited=getVisitedTempleRecords();
+  const rows=visited.filter(([id,d])=>stableHanjaForTemple(d.name).ch===ch);
+  const h=rows.length?stableHanjaForTemple(rows[0][1].name):{ch,mean:''};
+  const wrap=document.getElementById('pgHanjaDetail');
+  if(!wrap) return;
+  wrap.innerHTML=`<div class="pg-hanja-detail">
+    <div class="pg-hanja-big">${escapeHtml(h.ch)}</div>
+    <div>
+      <b>${escapeHtml(h.mean||'')}</b>
+      <div>${rows.map(([id,d])=>`<button type="button" onclick="openPilgrimTempleFromCollection('${id}')">${escapeHtml(d.name)}</button>`).join('')}</div>
+    </div>
+  </div>`;
+}
+function renderRegionCollection(body){
+  const all=Object.values(destinations||{}).filter(d=>d&&!d.hiddenFromList);
+  const visited=all.filter(d=>(Number(d.stage)||0)>=1);
+  const regions=(typeof REGIONS!=='undefined'&&REGIONS.length)?REGIONS:[...new Set(all.map(d=>d.region).filter(Boolean))];
+  body.innerHTML=`<div class="pg-region-list">
+    ${regions.map(region=>{
+      const total=all.filter(d=>d.region===region).length;
+      const done=visited.filter(d=>d.region===region).length;
+      const pct=total?Math.round(done/total*100):0;
+      return `<div class="pg-region-row">
+        <div class="pg-region-top"><b>${escapeHtml(region)}</b><span>${done} / ${total}</span></div>
+        <div class="pg-progress"><i style="width:${pct}%"></i></div>
+        <small>${pct===100&&total>0?'완료 · 지역 도장 획득':'다녀온 절이 늘수록 채워져요'}</small>
+      </div>`;
+    }).join('')}
+  </div>`;
+}
+function drawTodayTemple(){
+  const candidates=Object.entries(destinations||{})
+    .filter(([id,d])=>d&&!d.hiddenFromList&&(Number(d.stage)||0)===0);
+  const title=document.getElementById('pilgrimTodayTitle');
+  const desc=document.getElementById('pilgrimTodayDesc');
+  if(!candidates.length){
+    if(title) title.textContent='모두 다녀왔어요';
+    if(desc) desc.textContent='지금 목록의 절을 모두 방문했어요. 새 코스를 불러와보세요.';
+    return;
+  }
+  const [id,d]=candidates[Math.floor(Math.random()*candidates.length)];
+  if(title) title.textContent=d.name;
+  if(desc) desc.innerHTML=`${escapeHtml(d.region||'')} · ${escapeHtml(d.desc||'오늘의 한 절로 골랐어요.')}`;
+  const card=document.querySelector('.pilgrim-today-card');
+  if(card){
+    card.dataset.templeId=id;
+    card.classList.add('picked');
+    card.onclick=(e)=>{
+      if(e.target.closest('button')) return;
+      closePilgrimCollection();
+      setTimeout(()=>openDetail(id),80);
+    };
+  }
+}
+function openPilgrimTempleFromCollection(id){
+  closePilgrimCollection();
+  setTimeout(()=>openDetail(id),80);
 }
 
 function openBadgeOverlay(){
