@@ -2900,7 +2900,7 @@ body:has(#beatLabOverlay.show) #miniPlayer{
 }
 
 
-/* ===== 메인 목록에서만 숨기기 / 다시 불러오기 ===== */
+/* ===== 메인 목록에서만 숨기기 / 메인에 다시 넣기 ===== */
 .card-list-hide{
   position:absolute;
   right:44px;
@@ -4740,6 +4740,168 @@ body.pack-modal-open{
   }
 }
 
+
+
+/* ============================================================
+   MAIN MEMBERSHIP SEARCH + BRIGHTER HOME
+============================================================ */
+.master-search-panel{
+  max-width:1080px;
+  margin:10px auto 0;
+  padding:0 24px;
+}
+.master-search-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:12px 14px 8px;
+}
+.master-search-head>div{
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+}
+.master-search-head b{
+  font-size:12px;
+  color:#29483c;
+}
+.master-search-head span{
+  font-size:9.5px;
+  color:#819089;
+}
+.master-search-results{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:7px;
+  padding:0 0 10px;
+}
+.master-search-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  padding:10px 11px;
+  border:1px solid #dfe6e1;
+  border-radius:13px;
+  background:#fff;
+  box-shadow:0 3px 10px rgba(32,54,45,.035);
+}
+.master-search-copy{
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+}
+.master-search-copy b{
+  font-size:12px;
+  color:#263d33;
+}
+.master-search-copy span{
+  font-size:9px;
+  color:#85918b;
+}
+.master-search-row>button{
+  flex-shrink:0;
+  border:0;
+  border-radius:999px;
+  background:#315f50;
+  color:#fff;
+  padding:7px 9px;
+  font-size:9px;
+  font-weight:900;
+  cursor:pointer;
+}
+.master-search-row>button.is-on-main{
+  background:#eef2ef;
+  color:#7a8780;
+  border:1px solid #dce3df;
+}
+.master-search-empty{
+  padding:15px;
+  text-align:center;
+  border:1px dashed #d9dfdb;
+  border-radius:13px;
+  color:#7f8a84;
+  font-size:10.5px;
+  background:#fbfcfa;
+}
+
+/* collection becomes a proper CTA */
+.pilgrim-collection-chip{
+  min-height:36px!important;
+  padding:8px 14px!important;
+  border:1px solid rgba(255,235,187,.66)!important;
+  background:linear-gradient(135deg,#f0bb5d,#c88a35)!important;
+  color:#2f2417!important;
+  box-shadow:0 5px 15px rgba(198,139,52,.26)!important;
+  font-size:10.5px!important;
+  letter-spacing:-.02em!important;
+}
+.pilgrim-collection-chip::before{
+  content:'COLLECT';
+  margin-right:6px;
+  font-size:6.5px;
+  letter-spacing:.14em;
+  opacity:.62;
+}
+
+/* lift the home from dark/flat to warmer green */
+header.hero{
+  background:
+    radial-gradient(circle at 77% 16%,rgba(255,215,132,.27),transparent 28%),
+    radial-gradient(circle at 14% 92%,rgba(112,176,144,.27),transparent 35%),
+    linear-gradient(108deg,#245a49 0%,#39705d 55%,#667663 100%)!important;
+}
+.hero-stats{
+  background:rgba(17,57,45,.25)!important;
+  border-color:rgba(255,255,255,.21)!important;
+}
+.hero-badge-row{
+  gap:9px!important;
+}
+.hero-badge-row>div,
+.hero-badge-row>.special-title-pill{
+  background:rgba(255,255,255,.12)!important;
+  border-color:rgba(255,255,255,.33)!important;
+}
+
+/* filter area less grey */
+.filterbar{
+  background:#fbfaf5!important;
+  box-shadow:0 5px 18px rgba(31,52,43,.05)!important;
+}
+.tab.active{
+  background:#40705f!important;
+  border-color:#40705f!important;
+}
+.hidden-temple-btn{
+  color:#52655c!important;
+}
+.card-hide-text{
+  color:#8f5b4e!important;
+}
+.card-hide-text::before{
+  content:'− ';
+}
+
+/* disabled pack button */
+.packrow-actions .btn:disabled{
+  opacity:.55;
+  cursor:default;
+  box-shadow:none!important;
+}
+
+@media(max-width:640px){
+  .master-search-panel{padding:0 12px}
+  .master-search-results{grid-template-columns:1fr}
+  .master-search-head{padding-left:3px;padding-right:3px}
+  .pilgrim-collection-chip{
+    order:-1;
+    width:auto;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -4846,7 +5008,7 @@ body.pack-modal-open{
         <div id="streakBadge"></div>
         <div id="levelBadge"></div>
         <span id="specialTitlePill" class="special-title-pill">🧭 만행자(卍行者)</span>
-        <button class="pilgrim-collection-chip" type="button" onclick="openPilgrimCollection()">✦ 순례 컬렉션</button>
+        <button class="pilgrim-collection-chip" type="button" onclick="openPilgrimCollection()">✦ 108 순례 컬렉션</button>
       </div>
       <div id="nextLevelCaption" style="font-size:11px;color:#ffe3cc;margin-top:5px;"></div>
       <div class="hero-stats" id="heroStats"></div>
@@ -4925,13 +5087,14 @@ body.pack-modal-open{
         <option value="1">다녀왔어요</option>
         <option value="2">순례 기록 완료</option>
       </select>
-      <input class="searchbox" id="searchBox" placeholder="절 이름, 지역, 유명한 것으로 검색" oninput="heroQuickFilter='all';document.getElementById('heroListFilterNote').style.display='none';render()">
+      <input class="searchbox" id="searchBox" placeholder="108개 사찰 전체에서 검색" oninput="heroQuickFilter='all';document.getElementById('heroListFilterNote').style.display='none';render()">
       <button class="btn btn-ghost hidden-temple-btn" id="hiddenTempleBtn" type="button" onclick="openHiddenTempleOverlay()">🙈 숨긴 절 0</button>
       <button class="btn btn-primary" style="padding:7px 14px;font-size:12.5px;flex-shrink:0;" onclick="openCourseBuilder()">🧭 코스 만들기</button>
     </div>
   </div>
 
   <div class="hero-list-filter-note" id="heroListFilterNote" style="display:none;"></div>
+  <div class="master-search-panel" id="masterSearchPanel" style="display:none;"></div>
   <main id="mainListArea">
     <div class="grid" id="grid"></div>
     <div class="empty-note" id="emptyNote" style="display:none;text-align:center;">
@@ -5048,7 +5211,7 @@ body.pack-modal-open{
 <div class="overlay" id="hiddenTempleOverlay">
   <div class="modal">
     <div class="modal-head">
-      <div><h2 class="serif">🏯 목록에서 뺀 절 다시 불러오기</h2><div class="sub">목록에서 뺀 절도 기록과 사진은 그대로 보관돼요.</div></div>
+      <div><h2 class="serif">🏯 메인에서 뺀 절 메인에 다시 넣기</h2><div class="sub">메인에서 뺀 절도 기록과 사진은 그대로 보관돼요.</div></div>
       <button class="close-x" onclick="closeHiddenTempleOverlay()">✕</button>
     </div>
     <div class="modal-body">
@@ -5907,7 +6070,7 @@ body.pack-modal-open{
   <div class="modal wide">
     <div class="modal-head">
       <div>
-        <h2 class="serif">✦ 순례 컬렉션</h2>
+        <h2 class="serif">✦ 108 순례 컬렉션</h2>
         <div class="sub">다녀온 절이 하나씩 지도와 한자로 쌓여요.</div>
       </div>
       <button class="close-x" onclick="closePilgrimCollection()">✕</button>
@@ -11042,53 +11205,37 @@ async function loadPack(key){
   if(!pack) return;
   const packData=resolvePackData(pack);
 
-  let added=0;
-  let restored=0;
-  let skipped=0;
+  let added=0, restored=0, alreadyMain=0;
   const cloudUpdates={};
 
   for(const item of packData){
-    const existingEntry=Object.entries(destinations||{}).find(([id,d])=>d&&d.name===item.name);
+    const entries=getTempleEntriesByName(item.name);
 
-    if(existingEntry){
-      const [id,d]=existingEntry;
-
-      // 이미 데이터는 있지만 메인에서 숨긴 절이면,
-      // 새로 만들지 않고 기존 기록/사진을 그대로 살려서 메인 목록으로 복원합니다.
-      if(d.hiddenFromList){
-        const patch={hiddenFromList:false,hiddenAt:null};
-        destinations[id]=Object.assign({},d,patch);
-
-        if(localMode){
-          restored++;
-        }else{
-          cloudUpdates[`users/${currentUid}/destinations/${id}/hiddenFromList`]=false;
-          cloudUpdates[`users/${currentUid}/destinations/${id}/hiddenAt`]=null;
-          restored++;
-        }
+    if(entries.length){
+      const hasVisible=entries.some(([id,d])=>!d.hiddenFromList);
+      if(hasVisible){
+        alreadyMain++;
       }else{
-        skipped++;
+        // 같은 이름의 중복 데이터가 있어도 전부 메인 상태로 맞춥니다.
+        entries.forEach(([id,d])=>{
+          destinations[id]=Object.assign({},d,{hiddenFromList:false,hiddenAt:null});
+          if(!localMode){
+            cloudUpdates[`users/${currentUid}/destinations/${id}/hiddenFromList`]=false;
+            cloudUpdates[`users/${currentUid}/destinations/${id}/hiddenAt`]=null;
+          }
+        });
+        restored++;
       }
       continue;
     }
 
     const id=newId();
     const data=Object.assign({},item,{
-      stage:0,
-      notes:'',
-      photos:{},
-      hiddenFromList:false,
-      hiddenAt:null,
-      createdAt:Date.now()+added
+      stage:0,notes:'',photos:{},hiddenFromList:false,hiddenAt:null,createdAt:Date.now()+added
     });
     destinations[id]=data;
-
-    if(localMode){
-      added++;
-    }else{
-      cloudUpdates[`users/${currentUid}/destinations/${id}`]=data;
-      added++;
-    }
+    if(!localMode) cloudUpdates[`users/${currentUid}/destinations/${id}`]=data;
+    added++;
   }
 
   try{
@@ -11099,18 +11246,17 @@ async function loadPack(key){
       await db.ref().update(cloudUpdates);
     }
 
-    document.getElementById('seedBannerWrap').innerHTML='';
     renderPackOverlay();
     render();
 
     const parts=[];
-    if(added) parts.push(`${added}곳 새로 추가`);
-    if(restored) parts.push(`${restored}곳 숨김에서 복원`);
-    if(skipped) parts.push(`${skipped}곳 이미 목록에 있음`);
-    showToast(parts.length?parts.join(' · '):'이미 모두 목록에 있어요.');
+    if(added) parts.push(`${added}곳 메인에 추가`);
+    if(restored) parts.push(`${restored}곳 메인에 다시 넣음`);
+    if(alreadyMain) parts.push(`${alreadyMain}곳 이미 메인에 있음`);
+    showToast(parts.length?parts.join(' · '):'이미 모두 메인에 있어요.');
   }catch(err){
     console.error('loadPack failed',err);
-    showToast('코스를 불러오지 못했어요. 다시 시도해주세요.');
+    showToast('코스를 메인에 넣지 못했어요. 다시 시도해주세요.');
   }
 }
 
@@ -11173,58 +11319,75 @@ function closePackOverlay(){
   delete document.body.dataset.packScrollY;
   window.scrollTo(0,y);
 }
-function cancelPack(key){
-  const pack = PACKS.find(p=>p.key===key);
+async function cancelPack(key){
+  const pack=PACKS.find(p=>p.key===key);
   if(!pack) return;
-  const packData = resolvePackData(pack);
-  const packNames = new Set(packData.map(item=>item.name));
-  const removable = [];
-  let keptCount = 0;
-  Object.entries(destinations).forEach(([id,d])=>{
-    if(!packNames.has(d.name)) return;
-    const untouched = (!d.stage || d.stage===0) && !(d.notes && d.notes.trim()) && !(d.photos && Object.keys(d.photos).length);
-    if(untouched) removable.push(id); else keptCount++;
-  });
-  if(removable.length===0){ showToast('뺄 곳이 없어요 (방문 기록이나 사진이 있는 곳은 보호돼요)'); return; }
-  if(!confirm(`"${pack.label}"으로 불러온 ${removable.length}곳을 목록에서 뺄까요?` + (keptCount>0 ? ` (방문 기록·사진이 있는 ${keptCount}곳은 그대로 남아요)` : ''))) return;
-  removable.forEach(id=> removeDestinationData(id));
-  showToast(`${removable.length}곳을 목록에서 뺐어요` + (keptCount>0 ? ` (기록이 있는 ${keptCount}곳은 남겨뒀어요)` : ''));
-  renderPackOverlay();
-  render();
+  const names=new Set(resolvePackData(pack).map(x=>x.name));
+  const targets=Object.entries(destinations||{}).filter(([id,d])=>d&&names.has(d.name)&&!d.hiddenFromList);
+  if(!targets.length){
+    showToast('이 코스는 현재 메인에 없어요.');
+    return;
+  }
+  if(!confirm(`"${pack.label}" ${targets.length}곳을 메인에서 뺄까요?\n기록·사진은 삭제되지 않아요.`)) return;
+
+  try{
+    if(localMode){
+      targets.forEach(([id,d])=>{
+        destinations[id]=Object.assign({},d,{hiddenFromList:true,hiddenAt:Date.now()});
+      });
+      persistLocal();
+    }else{
+      const updates={};
+      targets.forEach(([id,d])=>{
+        destinations[id]=Object.assign({},d,{hiddenFromList:true,hiddenAt:Date.now()});
+        updates[`users/${currentUid}/destinations/${id}/hiddenFromList`]=true;
+        updates[`users/${currentUid}/destinations/${id}/hiddenAt`]=Date.now();
+      });
+      await db.ref().update(updates);
+    }
+    renderPackOverlay();
+    render();
+    showToast(`${targets.length}곳을 메인에서 뺐어요. 기록은 그대로예요.`);
+  }catch(err){
+    console.error(err);
+    showToast('메인에서 빼지 못했어요.');
+  }
 }
 function renderPackOverlay(){
   const wrap=document.getElementById('packList');
-  const byName={};
-  Object.values(destinations||{}).forEach(d=>{if(d&&d.name) byName[d.name]=d;});
 
   wrap.innerHTML=PACKS.map(p=>{
     const packData=resolvePackData(p);
-    const have=packData.filter(item=>byName[item.name]).length;
-    const visitedItems=packData.filter(item=>byName[item.name]&&(Number(byName[item.name].stage)||0)>=1);
-    const unvisitedItems=packData.filter(item=>!(byName[item.name]&&(Number(byName[item.name].stage)||0)>=1));
+    const registered=packData.filter(item=>getTempleEntriesByName(item.name).length>0).length;
+    const mainItems=packData.filter(item=>isTempleOnMain(item.name));
+    const mainCount=mainItems.length;
+    const visitedItems=packData.filter(item=>{
+      const best=getBestTempleEntryByName(item.name);
+      return best&&(Number(best[1].stage)||0)>=1;
+    });
+    const unvisitedItems=packData.filter(item=>!visitedItems.some(v=>v.name===item.name));
     const visited=visitedItems.length;
     const earned=packData.length>0&&visited===packData.length;
-    const visitedNames=visitedItems.map(x=>x.name);
-    const unvisitedNames=unvisitedItems.map(x=>x.name);
+    const allOnMain=mainCount===packData.length;
 
     return `<div class="packrow">
       <div class="packrow-main">
         <div class="packrow-title">${earned?'🏅 ':''}${escapeHtml(p.label)}</div>
 
         <button class="pack-progress-summary" type="button" onclick="openCourseProgressDetail('${p.key}')">
-          <span>${packData.length}곳 중 ${have}곳 등록</span>
-          <b>${visited}곳 다녀옴</b>
+          <span>${packData.length}곳 중 <b>${mainCount}곳 메인</b></span>
+          <span>${visited}곳 다녀옴</span>
           <span class="pack-progress-arrow">자세히 ›</span>
         </button>
 
         <div class="pack-visit-breakdown">
           <div class="pack-breakdown-row visited">
             <span class="pack-breakdown-label">✓ 다녀온 곳</span>
-            <span class="pack-breakdown-names">${visitedNames.length?visitedNames.map(escapeHtml).join(' · '):'아직 없음'}</span>
+            <span class="pack-breakdown-names">${visitedItems.length?visitedItems.map(x=>escapeHtml(x.name)).join(' · '):'아직 없음'}</span>
           </div>
           <div class="pack-breakdown-row pending">
             <span class="pack-breakdown-label">○ 아직</span>
-            <span class="pack-breakdown-names">${unvisitedNames.length?unvisitedNames.map(escapeHtml).join(' · '):'모두 다녀옴'}</span>
+            <span class="pack-breakdown-names">${unvisitedItems.length?unvisitedItems.map(x=>escapeHtml(x.name)).join(' · '):'모두 다녀옴'}</span>
           </div>
         </div>
 
@@ -11232,10 +11395,12 @@ function renderPackOverlay(){
       </div>
 
       <div class="packrow-actions">
-        <button class="btn btn-primary" onclick="loadPack('${p.key}')">${have===packData.length?'다시 불러오기':'불러오기'}</button>
+        <button class="btn btn-primary" ${allOnMain?'disabled':''} onclick="loadPack('${p.key}')">
+          ${allOnMain?'메인에 있음':registered===packData.length?'메인에 다시 넣기':'메인에 추가'}
+        </button>
         <button class="btn btn-ghost" onclick="openCourseProgressDetail('${p.key}')">진행 상세</button>
         <button class="btn btn-ghost" onclick="openPackDetail('${p.key}')">코스 정보</button>
-        ${have>0?`<button class="btn btn-ghost pack-remove-btn" onclick="cancelPack('${p.key}')">목록에서 빼기</button>`:''}
+        ${mainCount>0?`<button class="btn btn-ghost pack-remove-btn" onclick="cancelPack('${p.key}')">메인에서 빼기</button>`:''}
       </div>
     </div>`;
   }).join('');
@@ -11405,6 +11570,116 @@ function openHeroStatList(kind){
   },50);
 }
 
+
+
+function getTempleEntriesByName(name){
+  return Object.entries(destinations||{}).filter(([id,d])=>d&&d.name===name);
+}
+function getBestTempleEntryByName(name){
+  const entries=getTempleEntriesByName(name);
+  if(!entries.length) return null;
+  entries.sort((a,b)=>{
+    const ad=a[1], bd=b[1];
+    const aScore=(Number(ad.stage)||0)*1000+Object.keys(ad.photos||{}).length*100+Object.keys(ad.visits||{}).length*50+(ad.notes?20:0);
+    const bScore=(Number(bd.stage)||0)*1000+Object.keys(bd.photos||{}).length*100+Object.keys(bd.visits||{}).length*50+(bd.notes?20:0);
+    return bScore-aScore;
+  });
+  return entries[0];
+}
+function isTempleOnMain(name){
+  return getTempleEntriesByName(name).some(([id,d])=>!d.hiddenFromList);
+}
+async function addTempleToMainByName(name,evt){
+  if(evt){evt.preventDefault();evt.stopPropagation();}
+  const master=MASTER_BY_NAME[name];
+  if(!master){showToast('108 사찰 목록에서 찾지 못했어요.');return;}
+
+  const existing=getTempleEntriesByName(name);
+  try{
+    if(existing.length){
+      // 중복 레코드가 있어도 모두 같은 메인 상태로 맞춰
+      // 코스에서 불러왔는데 안 보이는 현상을 없앱니다.
+      if(localMode){
+        existing.forEach(([id,d])=>{
+          destinations[id]=Object.assign({},d,{hiddenFromList:false,hiddenAt:null});
+        });
+        persistLocal();
+      }else{
+        const updates={};
+        existing.forEach(([id])=>{
+          updates[`users/${currentUid}/destinations/${id}/hiddenFromList`]=false;
+          updates[`users/${currentUid}/destinations/${id}/hiddenAt`]=null;
+          destinations[id]=Object.assign({},destinations[id],{hiddenFromList:false,hiddenAt:null});
+        });
+        await db.ref().update(updates);
+      }
+      showToast(`"${name}"을(를) 메인에 다시 넣었어요.`);
+    }else{
+      const id=newId();
+      const data=Object.assign({},master,{
+        stage:0,notes:'',photos:{},hiddenFromList:false,hiddenAt:null,createdAt:Date.now()
+      });
+      destinations[id]=data;
+      if(localMode){
+        persistLocal();
+      }else{
+        await destinationRef(id).set(data);
+      }
+      showToast(`"${name}"을(를) 메인에 추가했어요.`);
+    }
+    render();
+  }catch(err){
+    console.error(err);
+    showToast('메인에 추가하지 못했어요.');
+  }
+}
+function renderMasterSearchResults(){
+  const panel=document.getElementById('masterSearchPanel');
+  const input=document.getElementById('searchBox');
+  if(!panel||!input||contentType!=='temple'){
+    if(panel) panel.style.display='none';
+    return;
+  }
+  const q=input.value.trim().toLowerCase();
+  if(!q){
+    panel.style.display='none';
+    panel.innerHTML='';
+    return;
+  }
+  const matches=Object.values(MASTER_BY_NAME||{}).filter(d=>{
+    const hay=[d.name,d.region,d.desc,d.activity,d.visitorTip,d.locationHint].filter(Boolean).join(' ').toLowerCase();
+    return hay.includes(q);
+  }).slice(0,12);
+
+  if(!matches.length){
+    panel.style.display='block';
+    panel.innerHTML='<div class="master-search-empty">108개 기본 사찰에서도 검색 결과가 없어요.</div>';
+    return;
+  }
+
+  panel.style.display='block';
+  panel.innerHTML=`
+    <div class="master-search-head">
+      <div><b>108 사찰 전체 검색</b><span>메인에 없는 절도 여기서 바로 추가할 수 있어요.</span></div>
+      <span>${matches.length}곳</span>
+    </div>
+    <div class="master-search-results">
+      ${matches.map(d=>{
+        const onMain=isTempleOnMain(d.name);
+        const stored=getTempleEntriesByName(d.name).length>0;
+        return `<div class="master-search-row">
+          <div class="master-search-copy">
+            <b>${escapeHtml(d.name)}</b>
+            <span>${escapeHtml(d.region||'')} · ${d.tag==='유명'?'대표 산사':'숨은 산사'}</span>
+          </div>
+          <button type="button" class="${onMain?'is-on-main':''}" ${onMain?'disabled':''}
+            onclick="addTempleToMainByName('${escapeAttr(d.name)}',event)">
+            ${onMain?'메인에 있음':stored?'메인에 다시 추가':'＋ 메인에 추가'}
+          </button>
+        </div>`;
+      }).join('')}
+    </div>`;
+}
 
 function getVisibleTempleEntries(){
   return Object.entries(destinations||{}).filter(([id,d])=>d && !d.hiddenFromList);
@@ -11844,6 +12119,7 @@ async function reportCommunityPost(postId){
 
 function render(){
   updateHiddenTempleButton();
+  renderMasterSearchResults();
   if(contentType === 'community'){
     setCommunityViewMode(true);
     renderCommunityHero();
@@ -12801,7 +13077,7 @@ function renderCard(id,d){
       <div class="card-desc">${escapeHtml(d.desc||'')}</div>
       <div class="card-footer-actions">
         <span class="stagepill ${stageIdx>=2?'s3':''}">${STAGES[stageIdx]}</span>
-        <button class="card-hide-text" type="button" onclick="hideDestinationFromMain('${id}', event)">목록에서 빼기</button>
+        <button class="card-hide-text" type="button" onclick="hideDestinationFromMain('${id}', event)">메인에서 빼기</button>
       </div>
     </div>
   </div>`;
@@ -13681,7 +13957,7 @@ function updateHiddenTempleButton(){
   const btn=document.getElementById('hiddenTempleBtn');
   if(!btn) return;
   const n=getHiddenTempleEntries().length;
-  btn.textContent=`🙈 목록에서 뺀 절 ${n}`;
+  btn.textContent=`🙈 메인에서 뺀 절 ${n}`;
   btn.style.display=contentType==='temple'?'':'none';
 }
 function openHiddenTempleOverlay(){
@@ -13702,19 +13978,28 @@ function renderHiddenTempleList(){
   wrap.innerHTML=entries.map(([id,d])=>`
     <div class="hidden-temple-row">
       <div><div class="name">${escapeHtml(d.name)}</div><div class="sub">${escapeHtml(d.region||'')} · 기록/사진 보관 중</div></div>
-      <button type="button" onclick="restoreHiddenTemple('${id}')">다시 불러오기</button>
+      <button type="button" onclick="restoreHiddenTemple('${id}')">메인에 다시 넣기</button>
     </div>`).join('');
 }
 async function hideDestinationFromMain(id,evt){
   if(evt){evt.preventDefault();evt.stopPropagation();}
-  const d=destinations[id]; if(!d)return;
-  if(!confirm(`"${d.name}"을(를) 메인 목록에서 뺄까요?\n기록과 사진은 삭제되지 않아요.`))return;
+  const d=destinations[id];
+  if(!d) return;
+  if(!confirm(`"${d.name}"을(를) 메인에서 뺄까요?\n방문기록·메모·사진은 그대로 보관돼요.`)) return;
   const patch={hiddenFromList:true,hiddenAt:Date.now()};
   try{
-    if(localMode){destinations[id]=Object.assign({},destinations[id],patch);persistLocal();}
-    else{await destinationRef(id).update(patch);destinations[id]=Object.assign({},destinations[id],patch);}
-    render(); showToast('목록에서 뺐어요. 언제든 다시 불러올 수 있어요.');
-  }catch(e){showToast('처리하지 못했어요.');}
+    if(localMode){
+      destinations[id]=Object.assign({},d,patch);
+      persistLocal();
+    }else{
+      await destinationRef(id).update(patch);
+      destinations[id]=Object.assign({},d,patch);
+    }
+    render();
+    showToast(`"${d.name}"을(를) 메인에서 뺐어요.`);
+  }catch(e){
+    showToast('처리하지 못했어요.');
+  }
 }
 async function restoreHiddenTemple(id){
   const d=destinations[id]; if(!d)return;
