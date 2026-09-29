@@ -3536,6 +3536,68 @@ body:has(#beatLabOverlay.show) #miniPlayer{
   .community-post-title{font-size:14px}
 }
 
+
+/* ===== FIRST VISIT: browse first, login later ===== */
+.guest-login-icon{
+  display:none;
+}
+body.guest-browsing .guest-login-icon{
+  display:inline-flex;
+}
+.auth-back-btn{
+  width:100%;
+  margin-top:10px;
+  border:0;
+  background:transparent;
+  color:var(--ink-soft);
+  font-size:11px;
+  font-weight:800;
+  cursor:pointer;
+  padding:8px;
+}
+.auth-back-btn:hover{color:var(--moss)}
+.guest-save-callout{
+  display:none;
+  max-width:1080px;
+  margin:12px auto 0;
+  padding:0 18px;
+}
+body.guest-browsing .guest-save-callout{display:block}
+.guest-save-callout-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:11px 13px;
+  border:1px solid rgba(49,95,80,.13);
+  border-radius:14px;
+  background:rgba(255,255,255,.88);
+  color:#53635c;
+  font-size:11px;
+  line-height:1.5;
+  box-shadow:0 4px 14px rgba(29,49,40,.04);
+}
+.guest-save-callout-inner b{color:#27483b}
+.guest-save-callout-inner button{
+  flex-shrink:0;
+  border:0;
+  border-radius:999px;
+  background:#315f50;
+  color:#fff;
+  padding:8px 12px;
+  font-size:10.5px;
+  font-weight:900;
+  cursor:pointer;
+}
+#guestSettingsLoginBtn{display:none}
+body.guest-browsing #guestSettingsLoginBtn{display:block}
+@media(max-width:640px){
+  .guest-save-callout{padding:0 10px;margin-top:9px}
+  .guest-save-callout-inner{padding:10px 11px}
+  .guest-save-callout-inner span{font-size:10px}
+  .guest-save-callout-inner button{padding:7px 10px;font-size:9.5px}
+}
+
 </style>
 </head>
 <body>
@@ -3572,7 +3634,8 @@ body:has(#beatLabOverlay.show) #miniPlayer{
 <!-- ===================== AUTH SCREEN (방문자용) ===================== -->
 <div id="authScreen" style="display:none;">
   <div id="setupScreen">
-    <div class="setup-card">
+    <div class="setup-card" style="position:relative;">
+      <button type="button" aria-label="로그인 창 닫기" onclick="closeLoginOverlay()" style="position:absolute;right:14px;top:12px;border:0;background:transparent;color:var(--ink-soft);font-size:20px;cursor:pointer;">✕</button>
       <h1 class="serif">산사노트</h1>
       <p class="lead">전국의 절을 기록하는 나만의 순례 노트. 유네스코 산사부터 조용한 숨은 고찰까지, 다녀온 절과 사진을 한곳에 모아보세요. 가입하면 어느 기기에서든 이어서 쓸 수 있어요.</p>
 
@@ -3581,7 +3644,7 @@ body:has(#beatLabOverlay.show) #miniPlayer{
       <div style="margin:12px 0 0;padding:10px 12px;border-radius:12px;background:rgba(83,108,74,.07);font-size:11px;line-height:1.55;color:var(--ink-soft);text-align:center;">Google 계정 하나로 순례 기록과 게임 최고점수를 기기마다 이어서 볼 수 있어요.</div>
       <div id="authError" style="color:var(--stamp);font-size:12.5px;margin-top:10px;display:none;"></div>
 
-      <div class="setup-skip">로그인 없이 <a onclick="startLocalMode()">게스트로 둘러보기</a> (이 브라우저에만 저장돼요)</div>
+      <button class="auth-back-btn" type="button" onclick="closeLoginOverlay()">← 로그인하지 않고 계속 둘러보기</button>
     </div>
   </div>
 </div>
@@ -3619,6 +3682,7 @@ body:has(#beatLabOverlay.show) #miniPlayer{
           <p>불교 신자가 아니어도 괜찮아요. <b>마음이 헛헛한 날</b>, 이유 없이 걷고 싶은 날, 발걸음이 닿은 절 마당 하나하나가 <b>내 하루를 다독여준 기록</b>이 되어줄 거예요.</p>
         </div>
         <div class="icon-row">
+          <button class="iconbtn guest-login-icon" title="로그인" onclick="openLoginOverlay()">👤</button>
           <button class="iconbtn ib-1" title="순례 코스 불러오기" onclick="openPackOverlay()">📥</button>
           <button class="iconbtn ib-2" title="전체 지도" onclick="openMapOverlay()">🗺</button>
           <button class="iconbtn ib-3" title="설정" onclick="openSettings()">⚙</button>
@@ -3646,6 +3710,13 @@ body:has(#beatLabOverlay.show) #miniPlayer{
   </header>
 
 
+
+  <div class="guest-save-callout" id="guestSaveCallout">
+    <div class="guest-save-callout-inner">
+      <span><b>먼저 편하게 둘러보세요.</b> 마음에 드는 절을 기록하고 싶을 때 로그인하면 기기마다 이어서 볼 수 있어요.</span>
+      <button type="button" onclick="openLoginOverlay()">Google 로그인</button>
+    </div>
+  </div>
 
   <div id="seedBannerWrap"></div>
   <div id="iconRowHintWrap"></div>
@@ -4006,6 +4077,7 @@ body:has(#beatLabOverlay.show) #miniPlayer{
     </div>
     <div class="modal-body">
       <p style="font-size:13px;color:var(--ink-soft);" id="accountInfo">로그인 정보를 불러오는 중...</p>
+      <button class="btn btn-primary btn-block" id="guestSettingsLoginBtn" onclick="closeSettings();openLoginOverlay();" style="margin-bottom:10px;">G&nbsp;&nbsp;Google 로그인 · 기록 안전하게 저장</button>
       <button class="btn btn-ghost btn-block" id="resetGuestBtn" onclick="resetGuestData()" style="margin-bottom:10px;display:none;color:var(--stamp);border-color:var(--stamp);">🔄 방문자(게스트) 절·산 목록 초기화</button>
       <button class="btn btn-ghost btn-block" onclick="closeSettings();openAlbumOverlay();" style="margin-bottom:10px;">🖼 나의 순례 앨범</button>
       <button class="btn btn-ghost btn-block" onclick="closeSettings();openBadgeOverlay();" style="margin-bottom:10px;">🏅 나의 뱃지</button>
@@ -5387,22 +5459,27 @@ window.addEventListener('DOMContentLoaded', ()=>{
     });
   }
 
-  const guestFlag = localStorage.getItem('travelDiaryGuestMode');
-  if(guestFlag === '1' && !auth.currentUser){
-    startLocalMode();
-    return;
-  }
-
-  document.getElementById('authScreen').style.display = 'block';
-
+  // 첫 방문부터 로그인 화면으로 막지 않습니다.
+  // Firebase가 실제 로그인 상태를 확인한 뒤, 로그인되어 있으면 계정 모드,
+  // 아니면 바로 둘러보기(게스트)로 앱을 엽니다.
+  let authInitialHandled = false;
   auth.onAuthStateChanged(user=>{
     if(user){
       localStorage.removeItem('travelDiaryGuestMode');
       localMode = false;
       currentUid = user.uid;
+      document.body.classList.remove('guest-browsing');
       document.getElementById('authScreen').style.display = 'none';
       ensureUserProfile(user);
-      launchApp();
+      if(!authInitialHandled || document.getElementById('app').style.display!=='block'){
+        launchApp();
+      }else{
+        location.reload();
+      }
+      authInitialHandled = true;
+    }else if(!authInitialHandled){
+      authInitialHandled = true;
+      startLocalMode();
     }
   });
 
@@ -5415,6 +5492,21 @@ window.addEventListener('DOMContentLoaded', ()=>{
   }
 });
 
+
+
+function openLoginOverlay(){
+  const screen=document.getElementById('authScreen');
+  if(!screen) return;
+  screen.style.display='block';
+  document.body.style.overflow='hidden';
+  const err=document.getElementById('authError');
+  if(err){err.style.display='none';err.textContent='';}
+}
+function closeLoginOverlay(){
+  const screen=document.getElementById('authScreen');
+  if(screen) screen.style.display='none';
+  document.body.style.overflow='';
+}
 
 let googleLoginInProgress = false;
 function isStandalonePWA(){
@@ -5541,7 +5633,9 @@ function startLocalMode(){
   localMode = true;
   currentUid = null;
   localStorage.setItem('travelDiaryGuestMode', '1');
+  document.body.classList.add('guest-browsing');
   document.getElementById('authScreen').style.display = 'none';
+  document.body.style.overflow='';
   launchApp();
 }
 
@@ -5979,7 +6073,7 @@ function updateAccountInfo(){
   const resetBtn = document.getElementById('resetGuestBtn');
   if(resetBtn) resetBtn.style.display = localMode ? 'block' : 'none';
   if(localMode){
-    el.textContent = '게스트 모드로 이용 중이에요. 이 브라우저에만 저장되고 있어요.';
+    el.textContent = '지금은 둘러보기 모드예요. 로그인하면 내 순례 기록과 사진을 기기마다 이어서 볼 수 있어요.';
   } else if(auth && auth.currentUser){
     el.textContent = auth.currentUser.email + ' 계정으로 로그인되어 있어요.';
   }
@@ -9730,7 +9824,8 @@ function setCommunityViewMode(active){
 }
 function openCommunityWrite(){
   if(localMode || !auth || !auth.currentUser){
-    showToast('커뮤니티 글쓰기는 Google 로그인 후 이용할 수 있어요.');
+    showToast('글쓰기는 로그인 후 이용할 수 있어요.');
+    setTimeout(openLoginOverlay,250);
     return;
   }
   populateCommunityTempleSelect();
