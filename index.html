@@ -4012,6 +4012,16 @@ header.hero::before{
   }
 }
 
+
+/* contact links can be buttons too */
+button.site-footer-link,
+button.contact-email{
+  font-family:inherit;
+  appearance:none;
+  -webkit-appearance:none;
+}
+button.contact-email{display:block;}
+
 </style>
 </head>
 <body>
@@ -4093,8 +4103,8 @@ header.hero::before{
               </svg>
             </div>
           </div>
-          <div class="hero-tagline">마음이 복잡한 날, 발걸음이 먼저 이끄는 곳</div>
-          <p>전국의 산사를 천천히 둘러보고, 마음에 남은 곳을 기록해보세요. <b>절을 찾는 시간도 여행의 일부</b>가 되도록 만들었어요.</p>
+          <div class="hero-tagline">종교를 떠나, 마음이 쉬어갈 자리를 찾아서</div>
+          <p>누군가는 기도하러, 누군가는 걷기 위해, 또 누군가는 <b>잠시 조용해지고 싶어서</b> 절을 찾습니다. 산사노트는 그곳에서 만난 풍경과 마음을 오래 남겨두는 <b>나만의 순례 기록</b>입니다.</p>
         </div>
         <div class="icon-row">
           <button class="iconbtn guest-login-icon" title="로그인" onclick="openLoginOverlay()">👤</button>
@@ -4225,8 +4235,8 @@ header.hero::before{
       <div class="site-footer-copy">사찰·산 순례 기록을 위한 개인 아카이브<br>문의 · 오류 제보 · 협업 제안</div>
     </div>
     <div class="site-footer-links">
-      <a class="site-footer-link" href="mailto:sansanote.help@gmail.com?subject=%5B%EC%82%B0%EC%82%AC%EB%85%B8%ED%8A%B8%20%EB%AC%B8%EC%9D%98%5D">✉ 문의하기</a>
-      <a class="site-footer-link" href="mailto:sansanote.help@gmail.com?subject=%5B%EC%82%B0%EC%82%AC%EB%85%B8%ED%8A%B8%20%ED%98%91%EC%97%85%20%EB%AC%B8%EC%9D%98%5D">🤝 협업 문의</a>
+      <button class="site-footer-link" type="button" onclick="openSansaMail('contact')" style="cursor:pointer;">✉ 문의하기</button>
+      <button class="site-footer-link" type="button" onclick="openSansaMail('collab')" style="cursor:pointer;">🤝 협업 문의</button>
     </div>
   </div>
 </footer>
@@ -4547,7 +4557,7 @@ header.hero::before{
       <div class="contact-card">
         <h3>산사노트에 연락하기</h3>
         <p>사이트 오류, 사진 저장 문제, 계정 문의, 사찰·여행 콘텐츠 협업이나 제휴 제안은 아래 이메일로 보내주세요.</p>
-        <a class="contact-email" href="mailto:sansanote.help@gmail.com?subject=%5B%EC%82%B0%EC%82%AC%EB%85%B8%ED%8A%B8%20%EB%AC%B8%EC%9D%98%5D">sansanote.help@gmail.com</a>
+        <button class="contact-email" type="button" onclick="openSansaMail('contact')" style="width:100%;text-align:left;cursor:pointer;">sansanote.help@gmail.com</button>
         <div class="contact-chips">
           <span class="contact-chip">오류 제보</span>
           <span class="contact-chip">사진·계정 문의</span>
@@ -4555,7 +4565,7 @@ header.hero::before{
           <span class="contact-chip">제휴 문의</span>
         </div>
       </div>
-      <a class="btn btn-primary btn-block" style="margin-top:12px;text-decoration:none;" href="mailto:sansanote.help@gmail.com?subject=%5B%EC%82%B0%EC%82%AC%EB%85%B8%ED%8A%B8%20%EB%AC%B8%EC%9D%98%5D">메일 보내기</a>
+      <button class="btn btn-primary btn-block" type="button" style="margin-top:12px;" onclick="openSansaMail('contact')">메일 보내기</button>
     </div>
   </div>
 </div>
@@ -12451,6 +12461,24 @@ async function toggleGlobalPhotoUploadPause(){
   }
 }
 
+
+function openSansaMail(kind){
+  const email='sansanote.help@gmail.com';
+  const subject=kind==='collab' ? '[산사노트 협업 문의]' : '[산사노트 문의]';
+  const body=kind==='collab'
+    ? '안녕하세요, 산사노트 협업 관련 문의드립니다.%0A%0A'
+    : '안녕하세요, 산사노트에 문의드립니다.%0A%0A';
+
+  const gmailUrl='https://mail.google.com/mail/?view=cm&fs=1'
+    +'&to='+encodeURIComponent(email)
+    +'&su='+encodeURIComponent(subject)
+    +'&body='+body;
+
+  const win=window.open(gmailUrl,'_blank','noopener,noreferrer');
+  if(!win){
+    window.location.href='mailto:'+email+'?subject='+encodeURIComponent(subject);
+  }
+}
 
 function openContactOverlay(){
   document.getElementById('contactOverlay')?.classList.add('show');
