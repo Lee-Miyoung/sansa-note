@@ -5589,7 +5589,7 @@ header.hero::before{
   font-size:8.9px!important;
 }
 
-/* 6) MY PILGRIMAGE는 반투명 박스보다 얇은 편집형 패널 */
+/* 6) 나의 순례는 반투명 박스보다 얇은 편집형 패널 */
 .hero-journey-panel{
   background:linear-gradient(180deg,rgba(14,47,38,.22),rgba(14,47,38,.12))!important;
   border:1px solid rgba(255,255,255,.16)!important;
@@ -5885,7 +5885,7 @@ header.hero::before{
 
 
 /* ============================================================
-   ACCESSIBILITY PASS · MY PILGRIMAGE
+   ACCESSIBILITY PASS · 나의 순례
    작은 글씨를 줄이고, 고령 사용자도 읽기 편하도록 확대
 ============================================================ */
 .hero-journey-panel{
@@ -6736,6 +6736,280 @@ body.sansa-overlay-locked{
   }
 }
 
+
+
+/* ============================================================
+   BRIGHT EDITORIAL V4 · Korean labels, stronger highlights
+============================================================ */
+html,body{
+  overscroll-behavior-y:none!important;
+}
+html{
+  background:#f6f1e7!important;
+}
+body{
+  background:#f6f1e7!important;
+}
+
+/* richer, less grey hero */
+header.hero{
+  background:
+    radial-gradient(circle at 84% 14%,rgba(255,211,116,.34),transparent 25%),
+    radial-gradient(circle at 8% 88%,rgba(105,202,159,.30),transparent 36%),
+    linear-gradient(118deg,#17634d 0%,#2d7a60 48%,#6f8069 100%)!important;
+}
+header.hero::after{
+  opacity:.45!important;
+}
+
+/* all micro section labels in Korean get visible treatment */
+.hero-eyebrow{
+  color:#f3d691!important;
+  font-size:10px!important;
+  font-weight:900!important;
+  letter-spacing:.08em!important;
+}
+.hero-section-kicker{
+  color:#dff2e8!important;
+  font-size:12px!important;
+  font-weight:900!important;
+  letter-spacing:.02em!important;
+  text-transform:none!important;
+}
+.hero-section-kicker.journey{
+  color:#3f5c4e!important;
+}
+
+/* mind cards brighter */
+.hip-quick-btn.worry-q{
+  background:linear-gradient(145deg,#a45b72,#7d4359)!important;
+}
+.hip-quick-btn.breath-q{
+  background:linear-gradient(145deg,#47957b,#2f735d)!important;
+}
+.hip-quick-btn.moktak-q{
+  background:linear-gradient(145deg,#d99a42,#a96d28)!important;
+}
+.hip-quick-btn{
+  border-color:rgba(255,255,255,.32)!important;
+  box-shadow:0 10px 24px rgba(25,63,50,.14)!important;
+}
+.hq-copy b{font-size:15px!important}
+.hq-copy small{font-size:12px!important;color:rgba(255,255,255,.78)!important}
+
+/* pilgrimage becomes a light editorial card, not another dark green block */
+.hero-journey-panel{
+  background:linear-gradient(145deg,rgba(255,252,243,.96),rgba(241,247,241,.94))!important;
+  border:1px solid rgba(255,255,255,.75)!important;
+  box-shadow:0 14px 32px rgba(20,55,43,.16)!important;
+  color:#31483e!important;
+}
+.hero-journey-panel .hero-next-level{
+  color:#6f7f77!important;
+}
+.hero-badge-row>*,
+.hero-badge-row .level-pill,
+.special-title-pill,
+#levelBadge{
+  color:#315346!important;
+  background:#eef5f0!important;
+  border-color:#b9cec2!important;
+}
+.special-title-pill{
+  background:#f7efe1!important;
+  color:#795a2b!important;
+  border-color:#dfc89b!important;
+}
+
+/* collection = main playful hook */
+.pilgrim-collection-chip{
+  width:230px!important;
+  min-height:82px!important;
+  grid-template-columns:48px 1fr 26px!important;
+  padding:12px 14px!important;
+  background:
+    radial-gradient(circle at 82% 14%,rgba(255,255,255,.42),transparent 25%),
+    linear-gradient(135deg,#ffd783,#edae45)!important;
+  border:2px solid #ffe7ad!important;
+  box-shadow:0 10px 20px rgba(143,92,24,.18)!important;
+}
+.pc-lotus{font-size:32px!important}
+.pc-label{
+  font-size:10px!important;
+  font-weight:900!important;
+  letter-spacing:.02em!important;
+  color:#74521f!important;
+}
+.pc-title{
+  font-size:18px!important;
+  color:#342719!important;
+}
+.pc-progress{
+  display:block;
+  margin-top:3px;
+  font-size:11px;
+  line-height:1.25;
+  font-weight:750;
+  color:#765623;
+  word-break:keep-all;
+}
+.pc-arrow{font-size:25px!important}
+
+/* stats: each state visually distinct */
+.hero-stats{
+  gap:8px!important;
+  border-top:0!important;
+  padding-top:12px!important;
+}
+.hero-stats .stat,
+.hero-stats .stat.hero-stat-link{
+  min-height:82px!important;
+  padding:12px!important;
+  border:1px solid transparent!important;
+  border-radius:14px!important;
+  text-align:left!important;
+}
+.hero-stats .stat-visited{
+  background:#fff0f2!important;
+  border-color:#ebc6ce!important;
+}
+.hero-stats .stat-recorded{
+  background:#eef6f0!important;
+  border-color:#c1d9c8!important;
+}
+.hero-stats .stat-unvisited{
+  background:#fff6df!important;
+  border-color:#ead39a!important;
+}
+.hero-stats .stat .num{
+  color:#25483b!important;
+  font-size:34px!important;
+}
+.hero-stats .stat .lbl{
+  color:#425b50!important;
+  font-size:13px!important;
+  font-weight:850!important;
+  white-space:nowrap!important;
+  word-break:keep-all!important;
+}
+.hero-stats .stat.hero-stat-link .lbl::after{
+  color:#8a968f!important;
+}
+
+/* colorful main tabs + filters */
+.content-type-btn{
+  box-shadow:0 5px 14px rgba(32,64,51,.06)!important;
+}
+.content-type-btn.temple-tab:not(.active){
+  background:#fff2ed!important;color:#7f4035!important;
+}
+.content-type-btn.mountain-tab:not(.active){
+  background:#edf8f0!important;color:#376d4a!important;
+}
+.content-type-btn.community-tab:not(.active){
+  background:#edf2fb!important;color:#45638d!important;
+}
+.tabs .tab{
+  background:#fff!important;
+  border-color:#ddd9cc!important;
+  color:#5b6862!important;
+}
+.tabs .tab.active{
+  background:#3d7d66!important;
+  border-color:#3d7d66!important;
+  color:#fff!important;
+}
+.chip-toggle{
+  background:#f4efe4!important;
+}
+.chip-toggle button[data-tag="유명"].active{
+  background:#d49b42!important;color:#fff!important;
+}
+.chip-toggle button[data-tag="숨은"].active{
+  background:#9a6a86!important;color:#fff!important;
+}
+.stagefilter{
+  background:#fffdf8!important;
+  border-color:#d8d2c3!important;
+}
+
+/* no awkward Korean word breaks */
+.hero-tagline,.hero-copy p,
+.hero-badge-row,.hero-next-level,
+.pc-copy,.pc-title,.pc-progress,
+.hero-stats .lbl,
+.content-type-btn,.content-type-btn *,
+.tab,.chip-toggle button,.stagefilter,
+.settings-feature,.settings-feature *,
+.packrow,.packrow *,
+.card-title,.card-desc{
+  word-break:keep-all!important;
+  overflow-wrap:normal!important;
+}
+
+/* title duplication reduction */
+.hero-journey-top{
+  align-items:start!important;
+}
+
+/* mobile */
+@media(max-width:560px){
+  header.hero{
+    background:
+      radial-gradient(circle at 92% 11%,rgba(255,211,116,.30),transparent 22%),
+      linear-gradient(150deg,#17664f 0%,#3c8067 58%,#75836e 100%)!important;
+  }
+  .hero-section-kicker{
+    font-size:11.5px!important;
+  }
+  .hero-journey-panel{
+    padding:12px!important;
+  }
+  .hero-journey-top{
+    gap:10px!important;
+  }
+  .pilgrim-collection-chip{
+    width:100%!important;
+    min-height:72px!important;
+    grid-template-columns:42px 1fr 24px!important;
+  }
+  .pc-lotus{font-size:28px!important}
+  .pc-label{font-size:9px!important}
+  .pc-title{font-size:16px!important}
+  .pc-progress{font-size:10.5px!important}
+  .hero-stats{
+    display:grid!important;
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+    gap:6px!important;
+  }
+  .hero-stats .stat,
+  .hero-stats .stat.hero-stat-link{
+    min-width:0!important;
+    min-height:80px!important;
+    padding:9px 8px!important;
+  }
+  .hero-stats .stat .num{font-size:28px!important}
+  .hero-stats .stat .lbl{
+    font-size:11px!important;
+    white-space:normal!important;
+    line-height:1.3!important;
+  }
+  .hero-badge-row{
+    flex-wrap:wrap!important;
+  }
+}
+
+/* Safari white-flash mitigation */
+@supports (-webkit-touch-callout:none){
+  html,body{
+    min-height:100%;
+    background:#f6f1e7!important;
+  }
+  body{
+    overscroll-behavior:none!important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -6794,7 +7068,7 @@ body.sansa-overlay-locked{
     <div class="hero-inner">
       <div class="hero-main-grid">
         <div class="hero-copy">
-          <div class="hero-eyebrow"><span></span>TEMPLE JOURNAL · SANSANOTE</div>
+          <div class="hero-eyebrow"><span></span>산사 · 쉼 · 기록</div>
           <div class="hero-title-row">
             <h1 class="serif">산사노트</h1>
             <div class="hip-badge">
@@ -6842,7 +7116,7 @@ body.sansa-overlay-locked{
       </nav>
 
       <div class="hero-experience">
-        <div class="hero-section-kicker">MIND BREAK</div>
+        <div class="hero-section-kicker">마음 쉬어가기</div>
         <div class="hip-quick-row" aria-label="마음 쉬어가기">
           <button class="hip-quick-btn worry-q" onclick="openOracleOverlay()">
             <span class="hq-index">01</span><span class="hq-icon">心</span>
@@ -6862,7 +7136,7 @@ body.sansa-overlay-locked{
       <div class="hero-journey-panel">
         <div class="hero-journey-top">
           <div>
-            <div class="hero-section-kicker journey">MY PILGRIMAGE</div>
+            <div class="hero-section-kicker journey">나의 순례</div>
             <div class="hero-badge-row">
               <div id="levelBadge"></div>
               <span id="specialTitlePill" class="special-title-pill">🧭 만행자(卍行者)</span>
@@ -6871,7 +7145,7 @@ body.sansa-overlay-locked{
           </div>
           <button class="pilgrim-collection-chip" type="button" onclick="openPilgrimCollection()">
             <span class="pc-lotus">🪷</span>
-            <span class="pc-copy"><span class="pc-label">108 PILGRIMAGE</span><span class="pc-title">순례 컬렉션</span></span>
+            <span class="pc-copy"><span class="pc-label">108 순례</span><span class="pc-title">순례 컬렉션</span><span class="pc-progress" id="heroLotusProgress">연꽃을 하나씩 피워보세요</span></span>
             <span class="pc-arrow">→</span>
           </button>
         </div>
@@ -14073,14 +14347,21 @@ function render(){
   renderHomeGallery();
 
   const stats = computeStats();
+  const allVisited = (typeof getVisitedTempleRecords==='function') ? Math.min(108,getVisitedTempleRecords().length) : stats.visited;
+  const lotusProgress=document.getElementById('heroLotusProgress');
+  if(lotusProgress){
+    lotusProgress.textContent=allVisited>=108
+      ? '연꽃 108송이 · 완주했어요'
+      : `연꽃 ${allVisited}송이 · ${108-allVisited}곳 남음`;
+  }
+
   document.getElementById('heroStats').innerHTML = `
-    <button class="stat hero-stat-link" type="button" onclick="openHeroStatList('visited')" aria-label="다녀온 절 목록 보기"><div class="num serif">${stats.visited}</div><div class="lbl">다녀온 절 (현재 목록 ${stats.total}곳 중)</div></button>
-    <button class="stat hero-stat-link" type="button" onclick="openHeroStatList('recorded')" aria-label="순례 기록 완료 목록 보기"><div class="num serif">${stats.shot}</div><div class="lbl">순례 기록 완료</div></button>
-    <button class="stat hero-stat-link" type="button" onclick="openHeroStatList('unvisited')" aria-label="아직 안 가본 곳 목록 보기"><div class="num serif">${stats.unvisited}</div><div class="lbl">아직 안 가본 곳</div></button>
+    <button class="stat hero-stat-link stat-visited" type="button" onclick="openHeroStatList('visited')" aria-label="다녀온 절 목록 보기"><div class="num serif">${stats.visited}</div><div class="lbl">다녀온 절</div></button>
+    <button class="stat hero-stat-link stat-recorded" type="button" onclick="openHeroStatList('recorded')" aria-label="순례 기록 완료 목록 보기"><div class="num serif">${stats.shot}</div><div class="lbl">기록 완료</div></button>
+    <button class="stat hero-stat-link stat-unvisited" type="button" onclick="openHeroStatList('unvisited')" aria-label="아직 안 가본 곳 목록 보기"><div class="num serif">${stats.unvisited}</div><div class="lbl">가보고 싶은 곳</div></button>
   `;
 
   const list = getFilteredList();
-
   const grid = document.getElementById('grid');
   const emptyNote = document.getElementById('emptyNote');
   if(list.length===0){
@@ -16516,6 +16797,53 @@ async function refreshAdminStats(){
 /* ============================================================
    SETTINGS MODAL
 ============================================================ */
+
+
+let sansaPageTouchStartY=0;
+let sansaPageTouchStartX=0;
+let sansaPageEdgeGuardReady=false;
+
+function installPageEdgeGuard(){
+  if(sansaPageEdgeGuardReady) return;
+  sansaPageEdgeGuardReady=true;
+
+  document.addEventListener('touchstart',e=>{
+    if(!e.touches?.[0]) return;
+    sansaPageTouchStartY=e.touches[0].clientY;
+    sansaPageTouchStartX=e.touches[0].clientX;
+  },{passive:true});
+
+  document.addEventListener('touchmove',e=>{
+    if(!e.touches?.[0]) return;
+    if(e.target.closest('.overlay.show')) return;
+
+    const t=e.touches[0];
+    const dy=t.clientY-sansaPageTouchStartY;
+    const dx=t.clientX-sansaPageTouchStartX;
+
+    // Horizontal carousels/tabs keep their own gesture.
+    if(Math.abs(dx)>Math.abs(dy)+6) return;
+
+    const doc=document.documentElement;
+    const maxScroll=Math.max(0,doc.scrollHeight-window.innerHeight);
+    const y=window.scrollY||doc.scrollTop||0;
+
+    // iPhone Safari: pulling down at page top can trigger white flash + reload.
+    if(y<=1 && dy>7){
+      e.preventDefault();
+      return;
+    }
+    // Also stop the white rubber-band at the very bottom.
+    if(y>=maxScroll-1 && dy<-7){
+      e.preventDefault();
+    }
+  },{passive:false});
+}
+if(document.readyState==='loading'){
+  document.addEventListener('DOMContentLoaded',installPageEdgeGuard,{once:true});
+}else{
+  installPageEdgeGuard();
+}
 
 let sansaOverlayScrollY=0;
 let sansaOverlayLockCount=0;
