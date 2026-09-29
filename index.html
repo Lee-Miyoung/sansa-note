@@ -4022,6 +4022,132 @@ button.contact-email{
 }
 button.contact-email{display:block;}
 
+
+
+/* ============================================================
+   CONTENT NAV · colored editorial tabs
+============================================================ */
+.content-type-row{
+  max-width:1080px!important;
+  margin:22px auto 10px!important;
+  padding:0 24px!important;
+  gap:9px!important;
+}
+.content-type-btn{
+  min-height:58px!important;
+  padding:8px 13px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:9px!important;
+  border:1px solid #d9ddd9!important;
+  border-radius:17px!important;
+  background:#fff!important;
+  box-shadow:0 5px 16px rgba(30,49,41,.055)!important;
+  color:#3f4c46!important;
+  transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease!important;
+}
+.content-type-btn:active{
+  transform:scale(.98)!important;
+  box-shadow:0 2px 8px rgba(30,49,41,.05)!important;
+}
+.content-type-btn .ctype-icon{
+  width:35px;
+  height:35px;
+  flex:0 0 35px;
+  display:grid;
+  place-items:center;
+  border-radius:12px;
+  color:#fff;
+}
+.content-type-btn .ctype-icon svg{
+  width:22px;
+  height:22px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.8;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.content-type-btn .ctype-copy{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  line-height:1.05;
+}
+.content-type-btn .ctype-copy b{
+  font-size:13px;
+  font-weight:900;
+  letter-spacing:-.04em;
+}
+.content-type-btn .ctype-copy small{
+  margin-top:4px;
+  font-size:7px;
+  font-weight:850;
+  letter-spacing:.11em;
+  opacity:.52;
+}
+.content-type-btn.temple-tab .ctype-icon{
+  background:linear-gradient(145deg,#c65d48,#88473c);
+  box-shadow:0 5px 12px rgba(150,72,59,.22);
+}
+.content-type-btn.mountain-tab .ctype-icon{
+  background:linear-gradient(145deg,#5f8c67,#315e47);
+  box-shadow:0 5px 12px rgba(49,94,71,.20);
+}
+.content-type-btn.community-tab .ctype-icon{
+  background:linear-gradient(145deg,#587db0,#46577e);
+  box-shadow:0 5px 12px rgba(63,83,126,.20);
+}
+.content-type-btn.temple-tab.active{
+  background:#fff4ef!important;
+  border-color:#dba293!important;
+  color:#743c32!important;
+}
+.content-type-btn.mountain-tab.active{
+  background:#eef6f0!important;
+  border-color:#9fc0a6!important;
+  color:#315d45!important;
+}
+.content-type-btn.community-tab.active{
+  background:#eef2f8!important;
+  border-color:#a8b7d0!important;
+  color:#405675!important;
+}
+.content-type-btn.active{
+  box-shadow:0 7px 18px rgba(30,49,41,.085)!important;
+}
+
+/* 인증카드 사진 fallback 버튼 */
+#storyCardPickPhotoBtn{
+  border:1px dashed #b9c5bf!important;
+  background:#f7f9f7!important;
+  color:#36584a!important;
+  font-weight:850!important;
+}
+#storyCardStatus{
+  line-height:1.55!important;
+}
+
+@media(max-width:640px){
+  .content-type-row{
+    padding:0 12px!important;
+    gap:6px!important;
+  }
+  .content-type-btn{
+    min-height:52px!important;
+    padding:7px 6px!important;
+    gap:6px!important;
+    border-radius:14px!important;
+  }
+  .content-type-btn .ctype-icon{
+    width:30px;height:30px;flex-basis:30px;border-radius:10px;
+  }
+  .content-type-btn .ctype-icon svg{width:18px;height:18px}
+  .content-type-btn .ctype-copy b{font-size:11px}
+  .content-type-btn .ctype-copy small{display:none}
+}
+
 </style>
 </head>
 <body>
@@ -4161,10 +4287,34 @@ button.contact-email{display:block;}
   <div id="seasonBannerWrap"></div>
   <div id="almostBannerWrap"></div>
 
-  <div class="content-type-row">
-    <button class="content-type-btn active" id="ctypeTemple" onclick="switchContentType('temple')">🏯 절</button>
-    <button class="content-type-btn" id="ctypeMountain" onclick="switchContentType('mountain')">⛰️ 산</button>
-    <button class="content-type-btn" id="ctypeCommunity" onclick="switchContentType('community')">💬 커뮤니티</button>
+  <div class="content-type-row" aria-label="콘텐츠 선택">
+    <button class="content-type-btn active temple-tab" id="ctypeTemple" onclick="switchContentType('temple')">
+      <span class="ctype-icon">
+        <svg viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M7 14h18M10 14l2-5h8l2 5M9 18h14M11 18v7M21 18v7M7 25h18"/>
+          <path d="M6 10c4 1 6-3 10-5 4 2 6 6 10 5"/>
+        </svg>
+      </span>
+      <span class="ctype-copy"><b>절</b><small>TEMPLE</small></span>
+    </button>
+    <button class="content-type-btn mountain-tab" id="ctypeMountain" onclick="switchContentType('mountain')">
+      <span class="ctype-icon">
+        <svg viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M3 25 11.5 10l4.2 7L19.5 9 29 25Z"/>
+          <path d="m9.2 14.2 2.3-4.2 2.1 3.5M17.7 12.2 19.5 9l2.6 4.4"/>
+        </svg>
+      </span>
+      <span class="ctype-copy"><b>산</b><small>MOUNTAIN</small></span>
+    </button>
+    <button class="content-type-btn community-tab" id="ctypeCommunity" onclick="switchContentType('community')">
+      <span class="ctype-icon">
+        <svg viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M6 7h20v14H15l-6 5v-5H6Z"/>
+          <path d="M11 12h10M11 16h7"/>
+        </svg>
+      </span>
+      <span class="ctype-copy"><b>커뮤니티</b><small>COMMUNITY</small></span>
+    </button>
   </div>
 
   <div class="filterbar" id="mainFilterbar">
@@ -4936,6 +5086,8 @@ button.contact-email{display:block;}
       <input class="searchbox" id="storyCardMsg" placeholder="한 줄 소감 (예: 마음을 비우고 갑니다)" style="width:100%;margin-bottom:12px;" oninput="renderStoryCard()">
       <div id="storyCardStatus" style="font-size:11.5px;color:var(--ink-soft);margin:-2px 0 10px;">선택한 절로 카드를 만들고 있어요. 사진이 있으면 자동으로 배경에 들어가요.</div>
       <canvas id="storyCardCanvas" width="1080" height="1920" style="width:100%;max-width:220px;border-radius:12px;box-shadow:0 6px 20px rgba(0,0,0,.25);margin-bottom:14px;background:#f5ead2;"></canvas>
+      <input type="file" id="storyCardLocalPhotoInput" accept="image/*" style="display:none" onchange="useLocalStoryCardPhoto(event)">
+      <button class="btn btn-ghost btn-block" id="storyCardPickPhotoBtn" type="button" onclick="document.getElementById('storyCardLocalPhotoInput').click()" style="margin-bottom:9px;">📷 배경 사진 직접 선택</button>
       <div class="story-card-actions">
         <button class="btn btn-primary btn-block" onclick="downloadStoryCard()">📥 저장하기</button>
         <button class="btn btn-ghost btn-block" onclick="shareStoryCard()">↗ 공유하기</button>
@@ -6502,7 +6654,7 @@ function updateAccountInfo(){
   const resetBtn = document.getElementById('resetGuestBtn');
   if(resetBtn) resetBtn.style.display = localMode ? 'block' : 'none';
   if(localMode){
-    el.textContent = '지금은 둘러보기 모드예요. 로그인하면 내 순례 기록과 사진을 기기마다 이어서 볼 수 있어요.';
+    el.textContent = '지금은 둘러보기 모드예요. 절·산 탐색과 ‘가보고 싶다’ 목록은 이 브라우저에서 쓸 수 있고, 방문기록·메모·내 사진·순례 인증카드는 Google 로그인 후 계정에 안전하게 저장돼요.';
   } else if(auth && auth.currentUser){
     el.textContent = auth.currentUser.email + ' 계정으로 로그인되어 있어요.';
   }
@@ -6566,18 +6718,11 @@ function newId(){
 
 let guestLoginPromptShown = false;
 function promptGuestLoginRequired(){
-  // 사진 자동매칭, 위치 좌표 캐싱처럼 사람이 직접 하지 않은 백그라운드 저장
-  // 여러 개가 한꺼번에 시도되면 이 안내가 연달아 여러 번 뜰 수 있어서,
-  // 하나가 떠 있는 동안(또는 방금 닫힌 직후)은 다시 띄우지 않습니다.
   if(guestLoginPromptShown) return;
-  guestLoginPromptShown = true;
-  const goLogin = confirm('기록을 저장하려면 Google 계정으로 로그인해야 해요. 지금 로그인 화면으로 이동할까요?');
-  if(goLogin){
-    localStorage.removeItem('travelDiaryGuestMode');
-    location.reload();
-    return;
-  }
-  setTimeout(()=>{ guestLoginPromptShown = false; }, 4000);
+  guestLoginPromptShown=true;
+  showToast('방문기록·메모·내 사진은 Google 로그인 후 안전하게 저장할 수 있어요.');
+  openLoginOverlay();
+  setTimeout(()=>{guestLoginPromptShown=false;},1200);
 }
 // 아래 여섯 개는 절/산 데이터의 저수준 저장 함수입니다. 개인이 직접 한 저장(방문
 // 표시, 메모, 사진, 순서 변경 등)뿐 아니라 앱이 스스로 하는 백그라운드 저장
@@ -8321,6 +8466,8 @@ function openStoryCardOverlay(){
     return;
   }
   storyCardDetailId = candidateId;
+  storyCardManualPhotoBlob=null;
+  storyCardManualPhotoName='';
   const msg = document.getElementById('storyCardMsg');
   if(msg) msg.value = '';
   const status = document.getElementById('storyCardStatus');
@@ -8461,6 +8608,63 @@ const CARD_HANJA = [
   {ch:'恩', mean:'은혜'}, {ch:'樂', mean:'즐거움'}, {ch:'平', mean:'평온'}, {ch:'淸', mean:'맑음'},
   {ch:'一', mean:'한마음'}, {ch:'佛', mean:'부처'}
 ];
+
+function collectStoryCardPhotoCandidatesFromRecord(record, bag){
+  if(!record || !record.photos) return;
+  if(Array.isArray(record.photoOrder) && record.photoOrder.length){
+    record.photoOrder.forEach((pid,idx)=>{
+      const p=record.photos[pid];
+      if(p && isLikelyValidPhotoUrl(p.url)){
+        bag.push({
+          url:p.url,
+          storagePath:p.storagePath||'',
+          priority:1000000-idx,
+          ts:Number(p.createdAt||record.updatedAt||record.createdAt||0)
+        });
+      }
+    });
+  }
+  Object.values(record.photos).forEach(p=>{
+    if(p && isLikelyValidPhotoUrl(p.url)){
+      bag.push({
+        url:p.url,
+        storagePath:p.storagePath||'',
+        priority:0,
+        ts:Number(p.createdAt||record.updatedAt||record.createdAt||0)
+      });
+    }
+  });
+}
+function getStoryCardUserPhotoRecord(d){
+  if(!d) return null;
+  const candidates=[];
+  collectStoryCardPhotoCandidatesFromRecord(d,candidates);
+  Object.values(destinations||{}).forEach(record=>{
+    if(record!==d && record && normalizeStoryCardPlaceName(record.name)===normalizeStoryCardPlaceName(d.name)){
+      collectStoryCardPhotoCandidatesFromRecord(record,candidates);
+    }
+  });
+  const seen=new Set();
+  const unique=candidates.filter(x=>{
+    const key=x.storagePath||x.url;
+    if(!key || seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+  unique.sort((a,b)=>b.priority-a.priority || b.ts-a.ts);
+  return unique[0]||null;
+}
+function findStoryCardPhotoRecordInRecords(records,targetName){
+  const target=normalizeStoryCardPlaceName(targetName);
+  const candidates=[];
+  Object.values(records||{}).forEach(record=>{
+    if(!record || normalizeStoryCardPlaceName(record.name)!==target) return;
+    collectStoryCardPhotoCandidatesFromRecord(record,candidates);
+  });
+  candidates.sort((a,b)=>b.priority-a.priority || b.ts-a.ts);
+  return candidates[0]||null;
+}
+
 function getStoryCardUserPhotoUrl(d){
   if(!d) return null;
 
@@ -8552,6 +8756,45 @@ function findStoryCardPhotoInRecords(records, targetName){
   return candidates[0]?.url || null;
 }
 
+
+async function resolveStoryCardUserPhotoRecord(cardId,d){
+  let photo=getStoryCardUserPhotoRecord(d);
+  if(photo) return photo;
+
+  try{
+    const target=normalizeStoryCardPlaceName(d&&d.name);
+    const album=buildPilgrimageAlbumItems();
+    const match=album.find(x=>normalizeStoryCardPlaceName(x.place)===target && isLikelyValidPhotoUrl(x.url));
+    if(match) return {url:match.url,storagePath:match.storagePath||'',priority:0,ts:Number(match.createdAt||0)};
+  }catch(_){}
+
+  if(!localMode && db && currentUid){
+    try{
+      const snap=await db.ref('users/'+currentUid+'/destinations').once('value');
+      const cloudRecords=snap.val()||{};
+      photo=findStoryCardPhotoRecordInRecords(cloudRecords,d&&d.name);
+      if(photo) return photo;
+
+      if(cardId && cloudRecords[cardId] && cloudRecords[cardId].photos){
+        const direct=Object.values(cloudRecords[cardId].photos)
+          .filter(p=>p&&isLikelyValidPhotoUrl(p.url))
+          .sort((a,b)=>Number(b.createdAt||0)-Number(a.createdAt||0));
+        if(direct.length){
+          return {
+            url:direct[0].url,
+            storagePath:direct[0].storagePath||'',
+            priority:0,
+            ts:Number(direct[0].createdAt||0)
+          };
+        }
+      }
+    }catch(e){
+      console.warn('story card photo record refresh failed',e);
+    }
+  }
+  return null;
+}
+
 async function resolveStoryCardUserPhotoUrl(cardId,d){
   // 1) 현재 화면에 로드된 데이터에서 먼저 찾기
   let url=getStoryCardUserPhotoUrl(d);
@@ -8589,39 +8832,69 @@ async function resolveStoryCardUserPhotoUrl(cardId,d){
 }
 
 
-async function loadStoryCardBackgroundImage(url){
+async function loadStoryCardBackgroundImage(photo){
+  const rec=typeof photo==='string' ? {url:photo,storagePath:''} : (photo||{});
+  const url=rec.url;
   if(!url) throw new Error('photo url missing');
 
-  // iPhone Safari에서 Firebase Storage 이미지를 canvas에 바로 넣을 때
-  // crossOrigin 로딩이 실패하는 경우가 있어, 먼저 fetch→Blob→data URL로
-  // 같은 문서 안의 이미지처럼 바꿔서 canvas에 그립니다.
+  // 1) 같은 기기에서 직접 올린 사진은 IndexedDB 압축본을 우선 사용.
+  //    이 경로는 외부 CORS와 무관해서 iPhone에서도 canvas 저장이 안정적입니다.
+  const cacheKey=storyPhotoCacheKey(rec);
+  if(cacheKey){
+    const cached=await getCachedStoryPhotoBlob(cacheKey);
+    if(cached){
+      const img=await imageFromBlobForStoryCard(cached);
+      img.__storySource='local-cache';
+      return img;
+    }
+  }
+
+  // 2) Firebase URL을 Blob으로 받아 canvas-safe 이미지로 변환.
   try{
-    const res=await fetch(url,{mode:'cors',credentials:'omit',cache:'no-store'});
+    const res=await fetch(url,{mode:'cors',credentials:'omit',cache:'force-cache'});
     if(!res.ok) throw new Error(`photo fetch ${res.status}`);
     const blob=await res.blob();
-
-    const dataUrl=await new Promise((resolve,reject)=>{
-      const reader=new FileReader();
-      reader.onload=()=>resolve(reader.result);
-      reader.onerror=()=>reject(reader.error||new Error('file reader failed'));
-      reader.readAsDataURL(blob);
-    });
-
-    return await new Promise((resolve,reject)=>{
-      const img=new Image();
-      img.onload=()=>resolve(img);
-      img.onerror=()=>reject(new Error('data image load failed'));
-      img.src=dataUrl;
-    });
+    if(cacheKey) cacheStoryPhotoBlob(cacheKey,blob).catch(()=>{});
+    const img=await imageFromBlobForStoryCard(blob);
+    img.__storySource='firebase-blob';
+    return img;
   }catch(fetchErr){
-    // 첫 방법이 막힐 때 일반 CORS 이미지 로딩도 한 번 더 시도.
+    // 3) 버킷 CORS가 설정되어 있으면 일반 anonymous 이미지 로딩도 가능.
     return await new Promise((resolve,reject)=>{
       const img=new Image();
       img.crossOrigin='anonymous';
-      img.onload=()=>resolve(img);
+      img.onload=()=>{
+        img.__storySource='remote-cors';
+        resolve(img);
+      };
       img.onerror=()=>reject(fetchErr||new Error('image load failed'));
       img.src=url + (url.includes('?') ? '&' : '?') + '_sc=' + Date.now();
     });
+  }
+}
+
+
+let storyCardManualPhotoBlob=null;
+let storyCardManualPhotoName='';
+
+async function useLocalStoryCardPhoto(event){
+  const file=event && event.target && event.target.files ? event.target.files[0] : null;
+  if(!file) return;
+  if(!String(file.type||'').startsWith('image/')){
+    showToast('사진 파일을 선택해주세요.');
+    return;
+  }
+  try{
+    const optimized=await compressUserPhoto(file);
+    storyCardManualPhotoBlob=optimized.file;
+    storyCardManualPhotoName=file.name||'선택한 사진';
+    const status=document.getElementById('storyCardStatus');
+    if(status) status.textContent='선택한 사진을 카드 배경으로 적용했어요.';
+    renderStoryCard();
+  }catch(err){
+    showToast(err&&err.message?err.message:'사진을 불러오지 못했어요.');
+  }finally{
+    if(event && event.target) event.target.value='';
   }
 }
 
@@ -8786,34 +9059,67 @@ function renderStoryCard(){
   const statusNow=document.getElementById('storyCardStatus');
   if(statusNow) statusNow.textContent=`${d.name} · 내가 올린 사진을 확인하고 있어요...`;
 
-  resolveStoryCardUserPhotoUrl(cardId,d).then(resolvedUrl=>{
+  const applyPhotoRecord=(photoRecord)=>{
     if(window.__storyCardRenderToken !== renderToken) return;
-    photoUrl=resolvedUrl;
-    if(!photoUrl){
-      drawFallback();
-      return;
-    }
-
-    loadStoryCardBackgroundImage(photoUrl).then(bg=>{
-      if(window.__storyCardRenderToken !== renderToken) return;
+    photoUrl=photoRecord&&photoRecord.url ? photoRecord.url : 'local-manual';
+    loadStoryCardBackgroundImage(photoRecord).then(bg=>{
+      if(window.__storyCardRenderToken !== renderToken){
+        if(bg&&bg.__storyObjectUrl) URL.revokeObjectURL(bg.__storyObjectUrl);
+        return;
+      }
       try{
         drawAll(bg);
-        applyStatus(true);
+        const status=document.getElementById('storyCardStatus');
+        if(status){
+          status.textContent = bg.__storySource==='local-cache'
+            ? `${d.name} · 내가 올린 사진을 이 기기에서 바로 불러와 배경에 넣었어요.`
+            : `${d.name} · 내가 올린 사진을 배경으로 넣었어요.`;
+        }
       }catch(e){
-        console.warn('story card bg draw failed', e);
+        console.warn('story card bg draw failed',e);
         const status=document.getElementById('storyCardStatus');
         if(status) status.textContent=`${d.name} · 사진은 찾았지만 카드로 만드는 과정에서 오류가 났어요.`;
+      }finally{
+        if(bg&&bg.__storyObjectUrl){
+          setTimeout(()=>URL.revokeObjectURL(bg.__storyObjectUrl),1200);
+        }
       }
     }).catch(err=>{
       console.warn('story card background load failed',err);
       if(window.__storyCardRenderToken !== renderToken) return;
+      drawAll(null);
       const status=document.getElementById('storyCardStatus');
-      if(status) status.textContent=`${d.name} · 사진 주소는 찾았지만 아이폰 브라우저가 카드 배경 변환을 막았어요.`;
+      if(status) status.textContent=`${d.name} · 저장된 사진은 찾았지만 브라우저 보안 때문에 자동 변환이 막혔어요. 아래 '배경 사진 직접 선택'을 누르면 바로 만들 수 있어요.`;
     });
-  }).catch(e=>{
-    console.warn('story card photo resolve failed',e);
-    if(window.__storyCardRenderToken === renderToken) drawFallback();
-  });
+  };
+
+  // 사용자가 이번 카드에서 직접 고른 사진은 가장 우선.
+  if(storyCardManualPhotoBlob){
+    imageFromBlobForStoryCard(storyCardManualPhotoBlob).then(bg=>{
+      if(window.__storyCardRenderToken !== renderToken){
+        if(bg.__storyObjectUrl) URL.revokeObjectURL(bg.__storyObjectUrl);
+        return;
+      }
+      photoUrl='local-manual';
+      bg.__storySource='manual';
+      drawAll(bg);
+      const status=document.getElementById('storyCardStatus');
+      if(status) status.textContent=`${d.name} · 직접 선택한 사진을 배경으로 적용했어요.`;
+      if(bg.__storyObjectUrl) setTimeout(()=>URL.revokeObjectURL(bg.__storyObjectUrl),1200);
+    }).catch(()=>drawFallback());
+  }else{
+    resolveStoryCardUserPhotoRecord(cardId,d).then(photoRecord=>{
+      if(window.__storyCardRenderToken !== renderToken) return;
+      if(!photoRecord){
+        drawFallback();
+        return;
+      }
+      applyPhotoRecord(photoRecord);
+    }).catch(e=>{
+      console.warn('story card photo resolve failed',e);
+      if(window.__storyCardRenderToken === renderToken) drawFallback();
+    });
+  }
 
   // 캐릭터 이미지가 늦게 뜨거나 없어도 카드 본문은 즉시 보이게 한다.
   if(!window.__cardMonkImg && !window.__cardMonkImgLoading){
@@ -12032,6 +12338,77 @@ function firebasePhotoPath(kind, placeId, pid){
   const safeKind = kind === 'mountain' ? 'mountains' : 'temples';
   return `users/${currentUid}/photos/${safeKind}/${placeId}/${pid}.jpg`;
 }
+
+const STORY_PHOTO_CACHE_DB='sansaStoryPhotoCache_v1';
+const STORY_PHOTO_CACHE_STORE='photos';
+
+function openStoryPhotoCache(){
+  return new Promise((resolve,reject)=>{
+    if(!window.indexedDB){ reject(new Error('indexedDB unavailable')); return; }
+    const req=indexedDB.open(STORY_PHOTO_CACHE_DB,1);
+    req.onupgradeneeded=()=>{
+      const dbi=req.result;
+      if(!dbi.objectStoreNames.contains(STORY_PHOTO_CACHE_STORE)){
+        dbi.createObjectStore(STORY_PHOTO_CACHE_STORE);
+      }
+    };
+    req.onsuccess=()=>resolve(req.result);
+    req.onerror=()=>reject(req.error||new Error('cache open failed'));
+  });
+}
+async function cacheStoryPhotoBlob(key,blob){
+  if(!key || !blob) return false;
+  try{
+    const dbi=await openStoryPhotoCache();
+    await new Promise((resolve,reject)=>{
+      const tx=dbi.transaction(STORY_PHOTO_CACHE_STORE,'readwrite');
+      tx.objectStore(STORY_PHOTO_CACHE_STORE).put(blob,key);
+      tx.oncomplete=()=>resolve();
+      tx.onerror=()=>reject(tx.error||new Error('cache write failed'));
+    });
+    dbi.close();
+    return true;
+  }catch(_){
+    return false;
+  }
+}
+async function getCachedStoryPhotoBlob(key){
+  if(!key) return null;
+  try{
+    const dbi=await openStoryPhotoCache();
+    const blob=await new Promise((resolve,reject)=>{
+      const tx=dbi.transaction(STORY_PHOTO_CACHE_STORE,'readonly');
+      const req=tx.objectStore(STORY_PHOTO_CACHE_STORE).get(key);
+      req.onsuccess=()=>resolve(req.result||null);
+      req.onerror=()=>reject(req.error||new Error('cache read failed'));
+    });
+    dbi.close();
+    return blob||null;
+  }catch(_){
+    return null;
+  }
+}
+function storyPhotoCacheKey(photo){
+  if(!photo) return '';
+  return photo.storagePath || photo.url || '';
+}
+function imageFromBlobForStoryCard(blob){
+  return new Promise((resolve,reject)=>{
+    if(!blob){reject(new Error('blob missing'));return;}
+    const objectUrl=URL.createObjectURL(blob);
+    const img=new Image();
+    img.onload=()=>{
+      img.__storyObjectUrl=objectUrl;
+      resolve(img);
+    };
+    img.onerror=()=>{
+      URL.revokeObjectURL(objectUrl);
+      reject(new Error('blob image load failed'));
+    };
+    img.src=objectUrl;
+  });
+}
+
 async function uploadOptimizedPhotoToFirebase(optimized, kind, placeId, pid){
   if(!isFirebaseStorageReady()) throw new Error('Firebase Storage가 아직 준비되지 않았어요.');
   const storagePath = firebasePhotoPath(kind, placeId, pid);
@@ -12047,6 +12424,9 @@ async function uploadOptimizedPhotoToFirebase(optimized, kind, placeId, pid){
   };
   const snapshot = await ref.put(optimized.file, metadata);
   const url = await snapshot.ref.getDownloadURL();
+  // 이 기기에서는 Firebase CORS 상태와 무관하게 인증카드 배경에 바로 쓸 수 있도록
+  // 업로드한 압축본을 브라우저 IndexedDB에도 가볍게 보관합니다.
+  cacheStoryPhotoBlob(storagePath, optimized.file).catch(()=>{});
   return {url, storagePath};
 }
 async function deleteFirebasePhotoObject(photo){
