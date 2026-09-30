@@ -7010,6 +7010,262 @@ header.hero::after{
   }
 }
 
+
+
+/* ============================================================
+   LOTUS + LEVEL INFO · desktop/mobile same content
+============================================================ */
+.special-title-pill{
+  cursor:pointer!important;
+  font-family:inherit!important;
+}
+.pilgrim-title-info{
+  margin-top:8px;
+  max-width:620px;
+  padding:10px 12px;
+  border-radius:12px;
+  background:#fff8e9;
+  border:1px solid #ead5a9;
+  color:#665237;
+  font-size:12px;
+  line-height:1.55;
+}
+.pilgrim-title-info b{display:block;margin-bottom:3px;color:#76561f}
+.pilgrim-title-info span{display:block}
+
+.level-desc{color:#607168}
+.hero-next-level b{color:#855f25}
+.hero-next-level{line-height:1.5!important}
+
+/* CSS lotus: same on Windows/Mac/iPhone/Android, no emoji dependency */
+.lotus-css{
+  position:relative;
+  display:inline-block;
+  width:32px;
+  height:26px;
+}
+.lotus-css .lp{
+  position:absolute;
+  width:13px;
+  height:19px;
+  left:9px;
+  top:2px;
+  border-radius:70% 70% 60% 60% / 85% 85% 45% 45%;
+  background:linear-gradient(180deg,#f8a6b6,#d95f83);
+  border:1px solid rgba(159,62,92,.18);
+  transform-origin:50% 88%;
+  box-shadow:inset 0 1px rgba(255,255,255,.45);
+}
+.lotus-css .p1{transform:rotate(-55deg) translateY(3px);background:linear-gradient(180deg,#ffd0d8,#e7859c)}
+.lotus-css .p2{transform:rotate(-35deg) translateY(1px)}
+.lotus-css .p3{transform:rotate(-15deg)}
+.lotus-css .p4{transform:rotate(15deg)}
+.lotus-css .p5{transform:rotate(35deg) translateY(1px)}
+.lotus-css .p6{transform:rotate(55deg) translateY(3px);background:linear-gradient(180deg,#ffd0d8,#e7859c)}
+.lotus-css .p7{
+  width:12px;height:18px;left:10px;top:0;
+  transform:rotate(0deg);
+  background:linear-gradient(180deg,#fff0f3,#ef8ea5);
+}
+.lotus-css .lotus-core{
+  position:absolute;
+  left:12px;bottom:1px;
+  width:8px;height:6px;
+  border-radius:50% 50% 55% 55%;
+  background:#e7b44f;
+  z-index:5;
+}
+
+.pg-mini-lotus-shape{
+  display:inline-flex;
+  width:24px;height:20px;
+  vertical-align:middle;
+}
+.pg-mini-lotus-shape .lotus-css{
+  transform:scale(.70);
+  transform-origin:left center;
+}
+.pg-lotus-legend .pg-mini-lotus-shape{
+  width:26px;
+}
+
+/* collection tiles */
+.pg-lotus-grid{
+  display:grid!important;
+  grid-template-columns:repeat(9,minmax(0,1fr))!important;
+  gap:8px!important;
+}
+.pg-lotus{
+  aspect-ratio:auto!important;
+  min-height:72px!important;
+  padding:7px 4px 6px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:5px!important;
+  border:1px solid #e0e5e1!important;
+  border-radius:12px!important;
+  background:#fafbf9!important;
+  color:#98a29d!important;
+}
+.pg-lotus.done{
+  background:linear-gradient(180deg,#fff7f8,#fffdf9)!important;
+  border-color:#e3bdc7!important;
+  box-shadow:0 4px 10px rgba(143,72,91,.09)!important;
+  cursor:pointer!important;
+}
+.pg-lotus-flower{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:34px;
+  height:28px;
+}
+.pg-lotus-flower .lotus-css{transform:scale(.95)}
+.pg-lotus-number{
+  font-size:11px!important;
+  font-weight:850;
+  color:#9ea7a2;
+}
+.pg-lotus-name{
+  display:block;
+  width:100%;
+  min-height:14px;
+  font-size:10.5px!important;
+  line-height:1.2;
+  font-weight:850;
+  color:#6d4650;
+  text-align:center;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  word-break:keep-all;
+}
+.pg-lotus-name.empty-name{
+  color:#a7afab;
+  font-weight:700;
+  font-size:9.5px!important;
+}
+.pg-lotus-legend{
+  display:flex!important;
+  align-items:center!important;
+  gap:16px!important;
+  margin:0 0 10px!important;
+  font-size:12px!important;
+}
+.pg-lotus-legend>span{display:inline-flex;align-items:center;gap:4px}
+
+/* level guide */
+.pg-level-guide{
+  margin-top:18px;
+  padding-top:16px;
+  border-top:1px solid #e5e3db;
+}
+.pg-level-guide-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:10px;
+}
+.pg-level-guide-head>div{
+  display:flex;flex-direction:column;gap:2px;
+}
+.pg-level-guide-head b{font-size:15px;color:#30483e}
+.pg-level-guide-head span{font-size:12px;color:#7a8781}
+.pg-level-guide-head button{
+  flex-shrink:0;
+  border:1px solid #c8d8cf;
+  background:#f2f7f4;
+  color:#3d6b58;
+  border-radius:999px;
+  padding:7px 10px;
+  font-size:11px;
+  font-weight:850;
+  cursor:pointer;
+}
+.pg-current-level{
+  display:grid;
+  grid-template-columns:46px 1fr;
+  gap:10px;
+  align-items:center;
+  padding:12px;
+  border-radius:14px;
+  background:linear-gradient(135deg,#eef7f1,#fff9ea);
+  border:1px solid #d7e1da;
+}
+.pg-current-icon{
+  width:46px;height:46px;
+  display:grid;place-items:center;
+  border-radius:14px;
+  background:#fff;
+  font-size:24px;
+}
+.pg-current-level>div{display:flex;flex-direction:column;gap:3px}
+.pg-current-level b{font-size:14px;color:#30483e}
+.pg-current-level span{font-size:12px;color:#68766f;line-height:1.45}
+.pg-current-level small{font-size:11px!important;color:#8a6b35}
+.pg-level-track{
+  display:grid;
+  grid-template-columns:repeat(6,minmax(0,1fr));
+  gap:6px;
+  margin-top:9px;
+}
+.pg-level-step{
+  padding:8px 5px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  gap:4px;
+  border-radius:11px;
+  background:#f8f9f7;
+  border:1px solid #e3e7e4;
+}
+.pg-level-step.active{
+  background:#fff1d6;
+  border-color:#e7c47d;
+  box-shadow:0 3px 8px rgba(155,107,32,.10);
+}
+.pg-level-icon{font-size:18px}
+.pg-level-copy{display:flex;flex-direction:column;gap:2px}
+.pg-level-copy b{font-size:10.5px;color:#45584f;white-space:nowrap}
+.pg-level-copy small{font-size:9px!important;color:#8b9690;line-height:1.25}
+.pg-manhang-note{
+  margin-top:9px;
+  padding:9px 11px;
+  display:flex;
+  align-items:center;
+  gap:7px;
+  border-radius:11px;
+  background:#f7efe3;
+  color:#745b34;
+}
+.pg-manhang-note b{font-size:11.5px}
+.pg-manhang-note span{font-size:11px}
+
+@media(max-width:640px){
+  .pilgrim-title-info{font-size:11.5px}
+  .pg-lotus-grid{
+    grid-template-columns:repeat(5,minmax(0,1fr))!important;
+    gap:6px!important;
+  }
+  .pg-lotus{
+    min-height:70px!important;
+    padding:6px 2px!important;
+  }
+  .pg-lotus-name{
+    font-size:10px!important;
+  }
+  .pg-level-track{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+  }
+  .pg-level-step{min-height:70px}
+  .pg-level-copy b{font-size:11px}
+  .pg-level-copy small{font-size:9.5px!important}
+}
+
 </style>
 </head>
 <body>
@@ -7139,9 +7395,13 @@ header.hero::after{
             <div class="hero-section-kicker journey">나의 순례</div>
             <div class="hero-badge-row">
               <div id="levelBadge"></div>
-              <span id="specialTitlePill" class="special-title-pill">🧭 만행자(卍行者)</span>
+              <button id="specialTitlePill" class="special-title-pill" type="button" onclick="togglePilgrimTitleInfo()">🧭 순례 호칭 · 만행자</button>
             </div>
             <div id="nextLevelCaption" class="hero-next-level"></div>
+            <div id="pilgrimTitleInfo" class="pilgrim-title-info" style="display:none;">
+              <b>‘만행자’는 레벨이 아니에요.</b>
+              <span>산사노트에서 절과 길을 다니며 마음을 돌보는 순례자를 부르는 별도 호칭이에요. 방문 수에 따라 오르는 레벨은 ‘초심자 → 구도자 → 행자 → 수행자 → 선지식 → 대덕’ 순서예요.</span>
+            </div>
           </div>
           <button class="pilgrim-collection-chip" type="button" onclick="openPilgrimCollection()">
             <span class="pc-lotus">🪷</span>
@@ -8246,6 +8506,13 @@ header.hero::after{
       </div>
 
       <div id="pilgrimGameBody"></div>
+      <div class="pg-level-guide" id="pgLevelGuide">
+        <div class="pg-level-guide-head">
+          <div><b>나의 순례 레벨</b><span>방문한 절 수에 따라 한 단계씩 올라가요.</span></div>
+          <button type="button" onclick="togglePilgrimLevelGuide()">레벨 설명</button>
+        </div>
+        <div id="pgLevelGuideBody" class="pg-level-guide-body"></div>
+      </div>
     </div>
   </div>
 </div>
@@ -12767,15 +13034,17 @@ function computeVisitedCount(){
 }
 
 function renderLevelBadge(){
-  const n = computeVisitedCount();
-  let tier = LEVEL_TIERS[0];
-  LEVEL_TIERS.forEach(t=>{ if(n>=t.min) tier = t; });
-  const next = LEVEL_TIERS.find(t=>t.min>n);
-  const el = document.getElementById('levelBadge');
+  const n=computeVisitedCount();
+  let tier=LEVEL_TIERS[0];
+  LEVEL_TIERS.forEach(t=>{if(n>=t.min) tier=t;});
+  const next=LEVEL_TIERS.find(t=>t.min>n);
+  const el=document.getElementById('levelBadge');
   if(!el) return;
-  el.innerHTML = `<span class="level-pill">${tier.icon} ${tier.title} · ${n}곳 방문</span>`;
-  const capEl = document.getElementById('nextLevelCaption');
-  if(capEl) capEl.textContent = next ? `다음 등급 ${next.title}까지 ${next.min-n}곳 남음` : '';
+  el.innerHTML=`<span class="level-pill" title="${escapeAttr(tier.desc)}">${tier.icon} 나의 레벨 · ${tier.title} · ${n}곳</span>`;
+  const capEl=document.getElementById('nextLevelCaption');
+  if(capEl){
+    capEl.innerHTML=`<span class="level-desc">${escapeHtml(tier.desc)}</span>${next?` <b>다음 ${escapeHtml(next.title)}까지 ${next.min-n}곳</b>`:''}`;
+  }
   checkLevelUpCelebration(tier);
 }
 
@@ -13012,12 +13281,53 @@ function closeCourseProgressDetail(){
 
 let pilgrimGameTab='map';
 
+
+function togglePilgrimTitleInfo(){
+  const el=document.getElementById('pilgrimTitleInfo');
+  if(!el) return;
+  el.style.display=el.style.display==='none'||!el.style.display?'block':'none';
+}
+function currentPilgrimLevel(){
+  const n=typeof computeVisitedCount==='function'?computeVisitedCount():0;
+  let tier=LEVEL_TIERS[0];
+  LEVEL_TIERS.forEach(t=>{if(n>=t.min) tier=t;});
+  const next=LEVEL_TIERS.find(t=>t.min>n)||null;
+  return {n,tier,next};
+}
+function renderPilgrimLevelGuide(expanded=false){
+  const wrap=document.getElementById('pgLevelGuideBody');
+  if(!wrap) return;
+  const {n,tier,next}=currentPilgrimLevel();
+  const levels=LEVEL_TIERS.map(t=>{
+    const active=t.title===tier.title;
+    return `<div class="pg-level-step ${active?'active':''}">
+      <span class="pg-level-icon">${t.icon}</span>
+      <span class="pg-level-copy"><b>${escapeHtml(t.title)}</b><small>${t.min}곳부터${expanded?' · '+escapeHtml(t.desc):''}</small></span>
+    </div>`;
+  }).join('');
+  wrap.innerHTML=`
+    <div class="pg-current-level">
+      <span class="pg-current-icon">${tier.icon}</span>
+      <div><b>현재 ${escapeHtml(tier.title)} · ${n}곳 방문</b>
+      <span>${escapeHtml(tier.desc)}</span>${next?`<small>다음 ‘${escapeHtml(next.title)}’까지 ${next.min-n}곳 남았어요.</small>`:''}</div>
+    </div>
+    <div class="pg-level-track">${levels}</div>
+    <div class="pg-manhang-note"><b>🧭 만행자</b><span>레벨명이 아니라 산사노트의 순례자 호칭이에요.</span></div>`;
+  wrap.dataset.expanded=expanded?'1':'0';
+}
+function togglePilgrimLevelGuide(){
+  const wrap=document.getElementById('pgLevelGuideBody');
+  const expanded=!(wrap&&wrap.dataset.expanded==='1');
+  renderPilgrimLevelGuide(expanded);
+}
+
 function openPilgrimCollection(){
   pilgrimGameTab='map';
   document.querySelectorAll('[data-pg-tab]').forEach(btn=>{
     btn.classList.toggle('active',btn.dataset.pgTab==='map');
   });
   renderPilgrimGame();
+  renderPilgrimLevelGuide(false);
   document.getElementById('pilgrimCollectionOverlay')?.classList.add('show');
 }
 function closePilgrimCollection(){
@@ -13056,6 +13366,13 @@ function renderPilgrimGame(){
   else if(pilgrimGameTab==='region') renderRegionCollection(body);
   else render108Pilgrimage(body);
 }
+
+function lotusShapeHtml(){
+  return `<span class="lotus-css" aria-hidden="true">
+    <i class="lp p1"></i><i class="lp p2"></i><i class="lp p3"></i><i class="lp p4"></i><i class="lp p5"></i>
+    <i class="lp p6"></i><i class="lp p7"></i><i class="lotus-core"></i>
+  </span>`;
+}
 function render108Pilgrimage(body){
   const visited=getVisitedTempleRecords();
   const count=Math.min(108,visited.length);
@@ -13067,18 +13384,23 @@ function render108Pilgrimage(body){
       <div><b>${count}</b><span>/ 108</span></div>
       <div class="pg-summary-copy">
         <strong>${next}</strong>
-        <small><span class="pg-mini-lotus">🪷</span> 다녀온 절 하나마다 연꽃 한 송이가 피어요.</small>
+        <small><span class="pg-mini-lotus-shape">${lotusShapeHtml()}</span> 다녀온 절마다 연꽃이 한 송이씩 피어요.</small>
         <div class="pg-progress"><i style="width:${pct}%"></i></div>
       </div>
     </div>
-    <div class="pg-lotus-legend"><span><i class="legend-bloom">🪷</i> 다녀온 절</span><span><i class="legend-empty"></i> 아직</span></div>
+    <div class="pg-lotus-legend">
+      <span><i class="pg-mini-lotus-shape">${lotusShapeHtml()}</i> 다녀온 절</span>
+      <span><i class="legend-empty"></i> 아직</span>
+    </div>
     <div class="pg-lotus-grid">
       ${Array.from({length:108},(_,i)=>{
         const done=i<count;
         const rec=done?visited[i]:null;
         const name=rec?rec[1].name:'';
         return `<button class="pg-lotus ${done?'done':''}" type="button" ${done?`title="${escapeAttr(name)}" aria-label="${escapeAttr(name)} 방문 완료" onclick="openPilgrimTempleFromCollection('${rec[0]}')"`:`aria-label="${i+1}번째 순례 칸" disabled`}>
-          ${done?`<span class="pg-lotus-flower">🪷</span>`:`<span class="pg-lotus-number">${i+1}</span>`}
+          ${done
+            ? `<span class="pg-lotus-flower">${lotusShapeHtml()}</span><span class="pg-lotus-name">${escapeHtml(name)}</span>`
+            : `<span class="pg-lotus-number">${i+1}</span><span class="pg-lotus-name empty-name">아직</span>`}
         </button>`;
       }).join('')}
     </div>
