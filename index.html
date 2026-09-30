@@ -7266,6 +7266,399 @@ header.hero::after{
   .pg-level-copy small{font-size:9.5px!important}
 }
 
+
+
+/* ============================================================
+   DESKTOP BALANCE V5 · clear hierarchy, visible primary actions
+============================================================ */
+
+/* ---------- desktop editorial rhythm ---------- */
+@media(min-width:901px){
+  header.hero{
+    padding:34px 30px 30px!important;
+    border-radius:0 0 34px 34px!important;
+  }
+  .hero-inner{
+    max-width:1160px!important;
+    margin:0 auto!important;
+    padding:0!important;
+  }
+
+  .hero-main-grid{
+    display:grid!important;
+    grid-template-columns:minmax(0,690px) minmax(300px,1fr)!important;
+    gap:38px!important;
+    align-items:start!important;
+  }
+  .hero-copy{
+    padding-top:5px!important;
+  }
+  .hero-eyebrow{
+    margin:0 0 11px!important;
+    font-size:10px!important;
+    line-height:1!important;
+  }
+  .hero-title-row{
+    gap:12px!important;
+  }
+  .hero-title-row h1,
+  .hero-top h1{
+    font-size:54px!important;
+    line-height:1.03!important;
+    letter-spacing:-2.8px!important;
+  }
+  .hip-badge,
+  .hip-badge svg{
+    width:47px!important;
+    height:47px!important;
+  }
+  .hero-tagline{
+    max-width:620px!important;
+    margin:16px 0 10px!important;
+    font-size:20px!important;
+    line-height:1.45!important;
+    letter-spacing:-.035em!important;
+  }
+  .hero-copy p{
+    max-width:650px!important;
+    font-size:15.5px!important;
+    line-height:1.82!important;
+    letter-spacing:-.025em!important;
+  }
+
+  /* map/account: compact secondary actions */
+  .hero-top-actions{
+    top:25px!important;
+    right:28px!important;
+    gap:6px!important;
+  }
+  .hero-top-action{
+    min-height:34px!important;
+    padding:4px 8px!important;
+    gap:5px!important;
+    border-radius:11px!important;
+    font-size:10.5px!important;
+    background:rgba(255,255,255,.10)!important;
+    border-color:rgba(255,255,255,.20)!important;
+    box-shadow:none!important;
+  }
+  .hero-top-action .hta-icon{
+    width:22px!important;
+    height:22px!important;
+    font-size:10px!important;
+    border-radius:7px!important;
+  }
+
+  /* primary actions: make them unmistakable */
+  .hero-utility{
+    position:relative!important;
+    inset:auto!important;
+    width:min(650px,100%)!important;
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:10px!important;
+    margin:20px 0 0!important;
+    z-index:5!important;
+  }
+  .hero-util-btn{
+    width:100%!important;
+    min-height:66px!important;
+    height:auto!important;
+    padding:10px 12px!important;
+    display:grid!important;
+    grid-template-columns:38px minmax(0,1fr) 22px!important;
+    align-items:center!important;
+    gap:10px!important;
+    border-radius:16px!important;
+    text-align:left!important;
+    box-shadow:0 9px 20px rgba(17,46,37,.13)!important;
+    transform:none!important;
+  }
+  .hero-util-btn.util-course{
+    background:linear-gradient(135deg,#f0bd64,#ce8737)!important;
+    border:1px solid rgba(255,229,176,.75)!important;
+    color:#372416!important;
+  }
+  .hero-util-btn.util-features{
+    background:linear-gradient(135deg,#8f719f,#705783)!important;
+    border:1px solid rgba(232,215,242,.45)!important;
+    color:#fff!important;
+  }
+  .hero-util-btn .hero-util-icon{
+    width:38px!important;
+    height:38px!important;
+    border-radius:12px!important;
+    font-size:17px!important;
+    background:rgba(255,255,255,.20)!important;
+    color:inherit!important;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.20)!important;
+  }
+  .hero-util-copy{
+    min-width:0!important;
+    display:flex!important;
+    flex-direction:column!important;
+    gap:3px!important;
+  }
+  .hero-util-copy b{
+    font-size:15px!important;
+    line-height:1.15!important;
+    font-weight:900!important;
+    letter-spacing:-.035em!important;
+  }
+  .hero-util-copy small{
+    display:block!important;
+    font-size:11.5px!important;
+    line-height:1.3!important;
+    color:inherit!important;
+    opacity:.78!important;
+    white-space:nowrap!important;
+    word-break:keep-all!important;
+  }
+  .hero-util-arrow{
+    font-size:18px!important;
+    font-weight:800!important;
+    opacity:.72!important;
+  }
+  .hero-util-btn:hover{
+    transform:translateY(-2px)!important;
+    filter:brightness(1.03)!important;
+  }
+
+  /* mind cards align to the same width as the copy/actions */
+  .hero-experience{
+    width:min(760px,calc(100% - 255px))!important;
+    max-width:760px!important;
+    margin-top:24px!important;
+  }
+  .hero-section-kicker{
+    margin-bottom:9px!important;
+    font-size:11px!important;
+  }
+  .hip-quick-row{
+    gap:9px!important;
+  }
+  .hip-quick-btn{
+    min-height:80px!important;
+    padding:11px 12px!important;
+    grid-template-columns:27px 36px minmax(0,1fr) 14px!important;
+    gap:8px!important;
+  }
+  .hq-copy b{
+    font-size:13.5px!important;
+  }
+  .hq-copy small{
+    font-size:11px!important;
+  }
+
+  /* character: keep present, but no longer dominate */
+  header.hero::before{
+    width:250px!important;
+    height:390px!important;
+    right:max(24px,calc((100vw - 1160px)/2 + 10px))!important;
+    bottom:-52px!important;
+    opacity:.88!important;
+  }
+
+  /* pilgrimage panel gets one coherent horizontal rhythm */
+  .hero-journey-panel{
+    width:100%!important;
+    margin-top:22px!important;
+    padding:17px 18px!important;
+    display:grid!important;
+    grid-template-columns:minmax(0,1.45fr) minmax(360px,.95fr)!important;
+    gap:18px!important;
+    align-items:stretch!important;
+    border-radius:19px!important;
+  }
+  .hero-journey-top{
+    min-width:0!important;
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr) 230px!important;
+    gap:16px!important;
+    align-items:center!important;
+  }
+  .hero-section-kicker.journey{
+    margin:0 0 8px!important;
+    font-size:11px!important;
+    letter-spacing:.04em!important;
+  }
+  .hero-badge-row{
+    margin-top:0!important;
+    gap:7px!important;
+  }
+  .hero-badge-row>*,
+  .hero-badge-row .level-pill,
+  .special-title-pill,
+  #levelBadge{
+    min-height:34px!important;
+    padding:7px 10px!important;
+    font-size:11.5px!important;
+  }
+  .hero-next-level{
+    margin-top:7px!important;
+    font-size:11.5px!important;
+    line-height:1.45!important;
+  }
+  .pilgrim-title-info{
+    font-size:11.5px!important;
+  }
+  .pilgrim-collection-chip{
+    width:230px!important;
+    min-height:76px!important;
+    padding:10px 12px!important;
+    grid-template-columns:42px 1fr 20px!important;
+    border-radius:15px!important;
+  }
+  .pc-lotus{font-size:27px!important}
+  .pc-label{font-size:9px!important}
+  .pc-title{font-size:16px!important}
+  .pc-progress{font-size:10px!important}
+  .pc-arrow{font-size:20px!important}
+
+  .hero-stats{
+    display:grid!important;
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+    gap:7px!important;
+    margin:0!important;
+    padding:0!important;
+    align-self:stretch!important;
+  }
+  .hero-stats .stat,
+  .hero-stats .stat.hero-stat-link{
+    min-width:0!important;
+    min-height:100%!important;
+    padding:12px 10px!important;
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:flex-start!important;
+    justify-content:center!important;
+  }
+  .hero-stats .stat .num{
+    font-size:30px!important;
+  }
+  .hero-stats .stat .lbl{
+    margin-top:5px!important;
+    font-size:11.5px!important;
+    line-height:1.3!important;
+    white-space:normal!important;
+  }
+}
+
+/* ---------- laptop widths: prevent crowding ---------- */
+@media(min-width:901px) and (max-width:1120px){
+  .hero-main-grid{
+    grid-template-columns:minmax(0,620px) minmax(230px,1fr)!important;
+    gap:24px!important;
+  }
+  .hero-title-row h1,.hero-top h1{
+    font-size:49px!important;
+  }
+  .hero-copy p{
+    max-width:590px!important;
+    font-size:14.5px!important;
+  }
+  .hero-utility{
+    width:590px!important;
+  }
+  .hero-experience{
+    width:690px!important;
+  }
+  header.hero::before{
+    width:218px!important;
+    height:350px!important;
+    right:10px!important;
+  }
+  .hero-journey-panel{
+    grid-template-columns:minmax(0,1.3fr) minmax(330px,.9fr)!important;
+  }
+  .hero-journey-top{
+    grid-template-columns:minmax(0,1fr) 205px!important;
+  }
+  .pilgrim-collection-chip{
+    width:205px!important;
+  }
+}
+
+/* ---------- mobile/tablet: keep hierarchy, not the oversized desktop geometry ---------- */
+@media(max-width:900px){
+  .hero-util-copy{
+    display:flex!important;
+    flex-direction:column!important;
+    min-width:0!important;
+  }
+  .hero-util-copy b{
+    font-size:12px!important;
+    line-height:1.15!important;
+    font-weight:900!important;
+  }
+  .hero-util-copy small{
+    display:block!important;
+    margin-top:2px!important;
+    font-size:9.5px!important;
+    line-height:1.25!important;
+    opacity:.76!important;
+    color:inherit!important;
+    white-space:normal!important;
+    word-break:keep-all!important;
+  }
+  .hero-util-arrow{
+    display:none!important;
+  }
+  .hero-util-btn{
+    text-align:left!important;
+  }
+}
+
+@media(max-width:560px){
+  .hero-top-actions{
+    top:13px!important;
+    right:9px!important;
+  }
+  .hero-top-action{
+    min-height:32px!important;
+    padding:4px 6px!important;
+    font-size:9.8px!important;
+  }
+  .hero-top-action .hta-icon{
+    width:20px!important;
+    height:20px!important;
+  }
+
+  .hero-utility{
+    grid-template-columns:1fr 1fr!important;
+    gap:7px!important;
+  }
+  .hero-util-btn{
+    min-height:64px!important;
+    padding:8px 9px!important;
+    display:grid!important;
+    grid-template-columns:31px minmax(0,1fr)!important;
+    gap:7px!important;
+    border-radius:13px!important;
+  }
+  .hero-util-btn.util-course{
+    background:linear-gradient(135deg,#efbc63,#ce8737)!important;
+    color:#372416!important;
+  }
+  .hero-util-btn.util-features{
+    background:linear-gradient(135deg,#8b6d9d,#6f5682)!important;
+    color:#fff!important;
+  }
+  .hero-util-btn .hero-util-icon{
+    width:31px!important;
+    height:31px!important;
+    font-size:14px!important;
+    background:rgba(255,255,255,.20)!important;
+  }
+  .hero-util-copy b{
+    font-size:11.5px!important;
+  }
+  .hero-util-copy small{
+    font-size:9px!important;
+    line-height:1.2!important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -7364,10 +7757,14 @@ header.hero::after{
 
       <nav class="hero-utility" aria-label="산사노트 빠른 기능">
         <button class="hero-util-btn util-course" title="순례 코스 불러오기" onclick="openPackOverlay()">
-          <span class="hero-util-icon">旅</span><span class="hero-util-label">코스 추가</span>
+          <span class="hero-util-icon">旅</span>
+          <span class="hero-util-copy"><b>코스 추가</b><small>추천 순례길 불러오기</small></span>
+          <span class="hero-util-arrow">→</span>
         </button>
         <button class="hero-util-btn util-features" title="산사노트 기능 모음" onclick="openSettings()">
-          <span class="hero-util-icon">✦</span><span class="hero-util-label">기능 모음</span>
+          <span class="hero-util-icon">✦</span>
+          <span class="hero-util-copy"><b>기능 모음</b><small>앨범 · 기도문 · 퀴즈 · 순례집</small></span>
+          <span class="hero-util-arrow">→</span>
         </button>
       </nav>
 
