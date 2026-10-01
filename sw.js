@@ -2,7 +2,7 @@
 // index.html은 온라인일 때 항상 최신 버전을 먼저 가져오고,
 // 오프라인일 때만 캐시를 사용합니다.
 
-const CACHE_VERSION = 'sansanote-v3';
+const CACHE_VERSION = 'sansanote-v4';
 
 const CORE_ASSETS = [
   './',
@@ -32,7 +32,6 @@ function freshFetch(request) {
 
 // index.html 또는 페이지 이동 요청인지 확인
 function isAppShellRequest(request) {
-
   if (request.mode === 'navigate') {
     return true;
   }
@@ -49,76 +48,54 @@ function isAppShellRequest(request) {
 
 // 설치
 self.addEventListener('install', event => {
-
   event.waitUntil(
-
     caches
       .open(CACHE_VERSION)
 
       .then(cache => {
-
         return Promise.all(
-
           CORE_ASSETS.map(url =>
-
             freshFetch(url)
 
               .then(response => {
-
                 if (
                   response &&
                   response.status === 200
                 ) {
-
                   return cache.put(
                     url,
                     response
                   );
-
                 }
-
               })
 
               .catch(err => {
-
                 console.warn(
                   '캐싱 실패(무시하고 계속):',
                   url,
                   err
                 );
-
               })
-
           )
-
         );
-
       })
 
       .then(() => {
-
         return self.skipWaiting();
-
       })
-
   );
-
 });
 
 
 // 활성화
 // 예전 캐시 삭제
 self.addEventListener('activate', event => {
-
   event.waitUntil(
-
     caches
       .keys()
 
       .then(keys => {
-
         return Promise.all(
-
           keys
 
             .filter(
@@ -130,25 +107,18 @@ self.addEventListener('activate', event => {
               key =>
                 caches.delete(key)
             )
-
         );
-
       })
 
       .then(() => {
-
         return self.clients.claim();
-
       })
-
   );
-
 });
 
 
 // 네트워크 요청 처리
 self.addEventListener('fetch', event => {
-
   if (
     event.request.method !== 'GET'
   ) {
@@ -169,20 +139,16 @@ self.addEventListener('fetch', event => {
       event.request
     )
   ) {
-
     event.respondWith(
-
       freshFetch(
         event.request
       )
 
         .then(response => {
-
           if (
             response &&
             response.status === 200
           ) {
-
             const clone =
               response.clone();
 
@@ -190,28 +156,33 @@ self.addEventListener('fetch', event => {
               .open(CACHE_VERSION)
 
               .then(cache => {
-
                 return cache.put(
                   event.request,
                   clone
                 );
+              })
 
-              });
-
+              .catch(() => {});
           }
 
           return response;
-
         })
 
-        .catch(() => {
+        .catch(async () => {
+          return (
+            await caches.match(
+              event.request
+            ) ||
 
-          return caches.match(
-            event.request
+            await caches.match(
+              './index.html'
+            ) ||
+
+            await caches.match(
+              './'
+            )
           );
-
         })
-
     );
 
     return;
@@ -226,26 +197,22 @@ self.addEventListener('fetch', event => {
    * 백그라운드에서 최신 파일 갱신
    */
   event.respondWith(
-
     caches
       .match(
         event.request
       )
 
       .then(cached => {
-
         const networkFetch =
           fetch(
             event.request
           )
 
             .then(response => {
-
               if (
                 response &&
                 response.status === 200
               ) {
-
                 const clone =
                   response.clone();
 
@@ -255,24 +222,20 @@ self.addEventListener('fetch', event => {
                   )
 
                   .then(cache => {
-
                     return cache.put(
                       event.request,
                       clone
                     );
+                  })
 
-                  });
-
+                  .catch(() => {});
               }
 
               return response;
-
             })
 
             .catch(() => {
-
               return cached;
-
             });
 
 
@@ -280,9 +243,6 @@ self.addEventListener('fetch', event => {
           cached ||
           networkFetch
         );
-
       })
-
   );
-
 });
