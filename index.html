@@ -10138,13 +10138,19 @@ function dismissExplain108(){
 
 async function recoverTemplePhotoMetadataFromStorage(){
   if(localMode || !storage || !db || !currentUid) return;
+
+  // 비용 주의:
+  // 이 함수는 폴더마다 listAll()을 호출하므로 자동 실행하면 안 됩니다.
+  // 반드시 사용자가 수동 복구를 요청했을 때만 호출하세요.
   try{
     const entries=Object.entries(destinations||{});
+    let scannedFolders = 0;
     for(const [id,d] of entries){
       const known=Object.keys((d&&d.photos)||{}).length;
       if(known>0) continue;
 
       const folder=storage.ref(`users/${currentUid}/photos/temples/${id}`);
+      scannedFolders++;
       let listed;
       try{
         listed=await folder.listAll();
@@ -10179,6 +10185,7 @@ async function recoverTemplePhotoMetadataFromStorage(){
         destinations[id].photos=Object.assign({},destinations[id].photos||{},recovered);
       }
     }
+    console.info(`[photo-recovery] Storage 폴더 확인 수: ${scannedFolders}`);
     renderHomeGallery();
   }catch(err){
     console.warn('photo metadata recovery failed',err);
@@ -10252,7 +10259,10 @@ function launchApp(){
       }
       debouncedFullRender(()=>{
         afterDataLoaded();
-        recoverTemplePhotoMetadataFromStorage();
+        // 중요: 여기서 Firebase Storage 전체 복구를 자동 실행하지 않습니다.
+        // 예전에는 DB가 갱신될 때마다 모든 사찰 폴더에 listAll()을 호출해서
+        // 사진이 거의 없어도 Class A Operations가 수천~수만 회 발생할 수 있었습니다.
+        // Storage 복구는 사용자가 '저장소 사진 다시 연결하기'를 직접 눌렀을 때만 실행합니다.
       });
     });
     mountainsRef().on('value', snap=>{
@@ -16980,12 +16990,41 @@ async function deletePhoto(pid, evt){
 
 
 
+let photoRecoveryRunning = false;
+let lastPhotoRecoveryAt = 0;
+const PHOTO_RECOVERY_COOLDOWN_MS = 10 * 60 * 1000;
+
 async function manualRecoverPhotos(){
   if(localMode){ showToast('Google 로그인 후 사용할 수 있어요.'); return; }
-  showToast('Firebase Storage의 사진을 다시 확인하고 있어요...');
-  await recoverTemplePhotoMetadataFromStorage();
-  render();
-  showToast('사진 저장소 확인을 마쳤어요.');
+  if(photoRecoveryRunning){
+    showToast('사진 저장소 확인이 이미 진행 중이에요.');
+    return;
+  }
+
+  const now = Date.now();
+  if(lastPhotoRecoveryAt && now - lastPhotoRecoveryAt < PHOTO_RECOVERY_COOLDOWN_MS){
+    const left = Math.ceil((PHOTO_RECOVERY_COOLDOWN_MS - (now-lastPhotoRecoveryAt))/60000);
+    showToast(`저장소 전체 확인은 비용 절약을 위해 ${left}분 뒤 다시 할 수 있어요.`);
+    return;
+  }
+
+  const ok = confirm(
+    '저장소 사진 다시 연결하기는 Firebase Storage의 여러 폴더를 확인합니다.\n' +
+    '평소에는 실행할 필요가 없고, DB 기록은 없는데 예전 사진이 사라져 보일 때만 사용하세요.\n\n' +
+    '지금 한 번 확인할까요?'
+  );
+  if(!ok) return;
+
+  photoRecoveryRunning = true;
+  lastPhotoRecoveryAt = now;
+  showToast('Firebase Storage의 사진을 한 번만 확인하고 있어요...');
+  try{
+    await recoverTemplePhotoMetadataFromStorage();
+    render();
+    showToast('사진 저장소 확인을 마쳤어요.');
+  }finally{
+    photoRecoveryRunning = false;
+  }
 }
 
 function getHiddenTempleEntries(){
