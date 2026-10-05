@@ -7659,6 +7659,23 @@ header.hero::after{
   }
 }
 
+
+/* ===== 마음 필사 진입 버튼 ===== */
+.hip-quick-btn.copy-q{
+  background:linear-gradient(135deg,rgba(133,104,73,.97),rgba(93,76,56,.93))!important;
+  border-color:rgba(255,239,207,.34)!important;
+}
+.hip-quick-btn.copy-q .hq-icon{
+  background:rgba(255,247,226,.15)!important;
+  border-color:rgba(255,247,226,.24)!important;
+}
+.sf-copy>span{
+  background:#f3ecdf!important;
+  color:#6f5b43!important;
+  font-family:"Nanum Myeongjo","Noto Serif KR",serif;
+  font-weight:800;
+}
+
 </style>
 </head>
 <body>
@@ -7782,6 +7799,10 @@ header.hero::after{
           <button class="hip-quick-btn moktak-q" onclick="openMoktakOverlay()">
             <span class="hq-index">03</span><span class="hq-icon">木</span>
             <span class="hq-copy"><b>무한 목탁</b><small>리듬으로 머리 비우기</small></span><span class="hq-arrow">↗</span>
+          </button>
+          <button class="hip-quick-btn copy-q" onclick="location.href='/copy/'">
+            <span class="hq-index">04</span><span class="hq-icon">書</span>
+            <span class="hq-copy"><b>오늘의 필사</b><small>마음에 한 문장 새기기</small></span><span class="hq-arrow">↗</span>
           </button>
         </div>
       </div>
@@ -8244,6 +8265,7 @@ header.hero::after{
         <button class="settings-feature sf-etiquette" onclick="closeSettings();openEtiquetteOverlay();"><span>🙏</span><b>법당 예절</b><small>처음 가는 법당 · 108배</small></button>
         <button class="settings-feature sf-glossary" onclick="closeSettings();openGlossaryOverlay();"><span>📚</span><b>불교 용어</b><small>낯선 말 쉽게 보기</small></button>
         <button class="settings-feature sf-vow" onclick="closeSettings();openVowOverlay();"><span>🌅</span><b>발원문 쓰기</b><small>미래의 나에게</small></button>
+        <button class="settings-feature sf-copy" onclick="location.href='/copy/'"><span>書</span><b>마음 필사</b><small>한 문장씩 천천히</small></button>
       </div>
 
       <div class="settings-section-title">재미 · 도움</div>
