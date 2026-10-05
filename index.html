@@ -7660,9 +7660,136 @@ header.hero::after{
 }
 
 
+/* ===== HOME REDESIGN · WARM SANSA PALETTE + 4 QUICK TILES ===== */
+/* 메인 히어로의 초록 비중을 줄이고, 먹갈색·자주·황토 계열로 통일 */
+header.hero{
+  background:
+    radial-gradient(circle at 82% 12%,rgba(239,203,139,.16),transparent 27%),
+    radial-gradient(circle at 10% 92%,rgba(178,126,110,.16),transparent 32%),
+    linear-gradient(118deg,#554b47 0%,#685453 46%,#74624f 100%)!important;
+}
+header.hero::after{
+  background:
+    linear-gradient(90deg,rgba(31,24,22,.13),transparent 58%),
+    radial-gradient(circle at 78% 68%,rgba(227,179,105,.12),transparent 25%),
+    repeating-linear-gradient(0deg,rgba(255,255,255,.012) 0 1px,transparent 1px 5px)!important;
+}
+.hero-journey-panel{
+  background:linear-gradient(180deg,rgba(79,60,55,.42),rgba(62,48,45,.28))!important;
+  border-color:rgba(255,241,219,.16)!important;
+}
+.hero-section-kicker{color:#f1e8dc!important}
+.hero-section-kicker.journey{color:#ead8c6!important}
+.hero-next-level{color:rgba(255,246,234,.66)!important}
+
+/* 마음 쉬어가기: 데스크톱/모바일 모두 정확히 4칸 한 줄 */
+.hip-quick-row{
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  width:100%!important;
+  max-width:760px!important;
+  gap:8px!important;
+  margin-top:14px!important;
+}
+.hip-quick-btn{
+  width:100%!important;
+  min-width:0!important;
+  min-height:88px!important;
+  padding:9px 6px!important;
+  border-radius:16px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:5px!important;
+  text-align:center!important;
+  border:1px solid rgba(255,244,225,.26)!important;
+  box-shadow:0 7px 17px rgba(35,24,22,.13)!important;
+  backdrop-filter:blur(8px)!important;
+  -webkit-backdrop-filter:blur(8px)!important;
+}
+.hip-quick-btn .hq-index,
+.hip-quick-btn .hq-arrow{display:none!important}
+.hip-quick-btn .hq-icon{
+  width:34px!important;height:34px!important;flex:0 0 34px!important;
+  border-radius:11px!important;
+  font-size:18px!important;
+  background:rgba(255,248,235,.13)!important;
+  border:1px solid rgba(255,248,235,.22)!important;
+}
+.hip-quick-btn .hq-copy{display:flex!important;align-items:center!important;min-width:0!important}
+.hip-quick-btn .hq-copy b{
+  color:#fffaf2!important;
+  font-size:12px!important;
+  line-height:1.28!important;
+  white-space:normal!important;
+  word-break:keep-all!important;
+}
+.hip-quick-btn .hq-copy small{display:none!important}
+.hip-quick-btn.worry-q{background:linear-gradient(145deg,#9a5d70,#774b59)!important}
+.hip-quick-btn.breath-q{background:linear-gradient(145deg,#7c766a,#625f57)!important}
+.hip-quick-btn.moktak-q{background:linear-gradient(145deg,#b57a37,#8f5f30)!important}
+.hip-quick-btn.copy-q{background:linear-gradient(145deg,#806b5b,#635348)!important}
+.hip-quick-btn.worry-q:hover,.hip-quick-btn.breath-q:hover,.hip-quick-btn.moktak-q:hover,.hip-quick-btn.copy-q:hover{filter:brightness(1.05)!important}
+
+/* 상단 두 기능 카드도 너무 선명한 색 대신 차분한 산사 팔레트 */
+.hero-util-btn.util-course{
+  background:linear-gradient(135deg,#d9a557,#b97837)!important;
+  color:#342319!important;
+}
+.hero-util-btn.util-features{
+  background:linear-gradient(135deg,#826d82,#69596c)!important;
+  color:#fffaf4!important;
+}
+
+/* 108 순례 컬렉션도 노랑을 살짝 눌러 전체 톤과 연결 */
+.pilgrim-collection-chip{
+  background:
+    radial-gradient(circle at 82% 18%,rgba(255,255,255,.22),transparent 24%),
+    linear-gradient(135deg,#e0b064,#bd7f3f)!important;
+  border-color:rgba(255,232,193,.48)!important;
+}
+
+@media(max-width:900px){
+  .hip-quick-row{
+    grid-template-columns:repeat(4,minmax(0,1fr))!important;
+    max-width:none!important;
+    gap:7px!important;
+    flex-wrap:nowrap!important;
+  }
+  .hip-quick-btn{
+    min-height:82px!important;
+    padding:8px 4px!important;
+    gap:4px!important;
+  }
+  .hip-quick-btn .hq-icon{width:31px!important;height:31px!important;flex-basis:31px!important;font-size:16px!important}
+  .hip-quick-btn .hq-copy b{font-size:11px!important}
+}
+@media(max-width:520px){
+  .hip-quick-row{
+    display:grid!important;
+    grid-template-columns:repeat(4,minmax(0,1fr))!important;
+    width:100%!important;
+    gap:6px!important;
+  }
+  .hip-quick-btn{
+    width:100%!important;
+    min-height:76px!important;
+    border-radius:14px!important;
+    padding:7px 3px!important;
+  }
+  .hip-quick-btn .hq-icon{width:29px!important;height:29px!important;flex-basis:29px!important;font-size:15px!important}
+  .hip-quick-btn .hq-copy b{font-size:10.3px!important;letter-spacing:-.25px!important}
+}
+@media(max-width:370px){
+  .hip-quick-row{gap:4px!important}
+  .hip-quick-btn{min-height:72px!important;padding:6px 2px!important}
+  .hip-quick-btn .hq-copy b{font-size:9.5px!important}
+}
+
 /* ===== 마음 필사 진입 버튼 ===== */
 .hip-quick-btn.copy-q{
-  background:linear-gradient(135deg,rgba(133,104,73,.97),rgba(93,76,56,.93))!important;
+  background:linear-gradient(145deg,#806b5b,#635348)!important;
   border-color:rgba(255,239,207,.34)!important;
 }
 .hip-quick-btn.copy-q .hq-icon{
@@ -7674,6 +7801,127 @@ header.hero::after{
   color:#6f5b43!important;
   font-family:"Nanum Myeongjo","Noto Serif KR",serif;
   font-weight:800;
+}
+
+
+
+/* ===== FINAL HOME OVERRIDE · HANJI / INK / OCHRE ===== */
+/* 전체 히어로를 초록 대신 따뜻한 한지·먹·황토 톤으로 */
+header.hero{
+  background:
+    radial-gradient(circle at 84% 8%,rgba(223,184,121,.20),transparent 28%),
+    radial-gradient(circle at 7% 90%,rgba(128,78,69,.16),transparent 34%),
+    linear-gradient(118deg,#4b403c 0%,#5b4747 46%,#6c5949 100%)!important;
+}
+header.hero::after{
+  background:
+    linear-gradient(90deg,rgba(27,21,19,.17),rgba(27,21,19,.03) 58%,transparent),
+    repeating-linear-gradient(0deg,rgba(255,250,240,.018) 0 1px,transparent 1px 5px)!important;
+  opacity:1!important;
+}
+.hero-copy p{color:rgba(255,248,237,.78)!important}
+.hero-tagline{color:#fff8ed!important}
+.hero-kicker,.hero-section-kicker{color:#f0dfc9!important}
+.hero-journey-panel{
+  background:linear-gradient(180deg,rgba(50,38,36,.42),rgba(50,38,36,.20))!important;
+  border-color:rgba(255,238,214,.17)!important;
+}
+
+/* 코스/기능: 탁한 황토 + 말린자두 톤 */
+.hero-util-btn.util-course{
+  background:linear-gradient(135deg,#d8aa61,#bd7d3e)!important;
+  color:#39281f!important;
+  border-color:rgba(255,239,208,.35)!important;
+}
+.hero-util-btn.util-features{
+  background:linear-gradient(135deg,#776276,#5f505f)!important;
+  color:#fff8ef!important;
+  border-color:rgba(255,239,250,.20)!important;
+}
+
+/* 마음 쉬어가기: 무조건 한 줄 4칸. 기존 모바일 3칸 규칙까지 최종 덮어쓰기 */
+.hero-experience{width:100%!important;max-width:none!important}
+.hero-experience .hip-quick-row{
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  grid-auto-flow:column!important;
+  grid-auto-columns:minmax(0,1fr)!important;
+  width:100%!important;
+  max-width:none!important;
+  gap:10px!important;
+  margin:14px 0 0!important;
+  flex-wrap:nowrap!important;
+}
+.hero-experience .hip-quick-btn{
+  width:100%!important;
+  min-width:0!important;
+  max-width:none!important;
+  min-height:86px!important;
+  margin:0!important;
+  padding:9px 5px!important;
+  border-radius:15px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:6px!important;
+  text-align:center!important;
+  box-shadow:0 7px 18px rgba(33,23,20,.14)!important;
+}
+.hero-experience .hip-quick-btn .hq-index,
+.hero-experience .hip-quick-btn .hq-arrow{display:none!important}
+.hero-experience .hip-quick-btn .hq-icon{
+  width:34px!important;height:34px!important;flex:0 0 34px!important;
+  border-radius:11px!important;font-size:18px!important;
+  background:rgba(255,248,234,.12)!important;
+  border:1px solid rgba(255,248,234,.22)!important;
+}
+.hero-experience .hip-quick-btn .hq-copy{
+  display:flex!important;align-items:center!important;justify-content:center!important;
+  width:100%!important;min-width:0!important;
+}
+.hero-experience .hip-quick-btn .hq-copy b{
+  color:#fffaf1!important;font-size:12px!important;line-height:1.2!important;
+  white-space:normal!important;word-break:keep-all!important;letter-spacing:-.2px!important;
+}
+.hero-experience .hip-quick-btn .hq-copy small{display:none!important}
+.hero-experience .hip-quick-btn.worry-q{background:linear-gradient(145deg,#955c6d,#744855)!important}
+.hero-experience .hip-quick-btn.breath-q{background:linear-gradient(145deg,#80776c,#625c55)!important}
+.hero-experience .hip-quick-btn.moktak-q{background:linear-gradient(145deg,#b77b39,#8d5d2f)!important}
+.hero-experience .hip-quick-btn.copy-q{background:linear-gradient(145deg,#756459,#594d46)!important}
+
+/* 108 컬렉션은 밝은 황토 한지 카드 */
+.pilgrim-collection-chip{
+  background:
+    radial-gradient(circle at 84% 18%,rgba(255,255,255,.24),transparent 24%),
+    linear-gradient(135deg,#e0b76f,#c68a48)!important;
+  color:#3e2b1f!important;
+  border-color:rgba(255,236,200,.54)!important;
+  box-shadow:0 10px 24px rgba(67,43,25,.16)!important;
+}
+
+@media(max-width:900px){
+  .hero-experience .hip-quick-row{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:7px!important}
+  .hero-experience .hip-quick-btn{min-height:78px!important;padding:7px 3px!important}
+  .hero-experience .hip-quick-btn .hq-icon{width:30px!important;height:30px!important;flex-basis:30px!important;font-size:16px!important}
+  .hero-experience .hip-quick-btn .hq-copy b{font-size:10.8px!important}
+}
+@media(max-width:520px){
+  .hero-experience .hip-quick-row{
+    display:grid!important;
+    grid-template-columns:repeat(4,minmax(0,1fr))!important;
+    grid-auto-flow:column!important;
+    width:100%!important;
+    gap:5px!important;
+  }
+  .hero-experience .hip-quick-btn{min-height:72px!important;border-radius:13px!important;padding:6px 2px!important}
+  .hero-experience .hip-quick-btn .hq-icon{width:27px!important;height:27px!important;flex-basis:27px!important;font-size:14px!important}
+  .hero-experience .hip-quick-btn .hq-copy b{font-size:9.7px!important;letter-spacing:-.35px!important}
+}
+@media(max-width:370px){
+  .hero-experience .hip-quick-row{gap:4px!important}
+  .hero-experience .hip-quick-btn{min-height:68px!important}
+  .hero-experience .hip-quick-btn .hq-copy b{font-size:9.1px!important}
 }
 
 </style>
