@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>산사노트 | 마음필사</title>
+<meta name="description" content="산사노트 마음필사 — 한 문장씩 천천히 마음에 새기는 시간">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Noto+Serif+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<div class="paper-noise"></div>
+<header class="topbar">
+<a class="icon-btn" href="../" aria-label="산사노트 메인으로 돌아가기">←</a>
+<div class="topbar-title">오늘의 마음 필사</div>
+<button class="icon-btn" id="openListBtn" type="button" aria-label="필사 목록 열기">☰</button>
+</header>
+<main class="page-shell">
+<section class="hero-card">
+<div class="vertical-hanja" id="verticalHanja" aria-hidden="true"></div>
+<div class="hero-inner">
+<div class="eyebrow">산사노트 · 마음필사</div>
+<h1 id="titleHanja">頓悟漸修</h1>
+<h2 id="titleKo">돈오점수</h2>
+<p class="subtitle" id="subtitle">깨닫고, 다시 닦는다는 것</p>
+<div class="mountain-line" aria-hidden="true"><span></span><span></span><span></span></div>
+<blockquote id="mainQuote"></blockquote>
+<div class="source" id="source"></div>
+</div>
+</section>
+<section class="content-card">
+<div class="section-kicker">🪷 쉽게 읽기</div>
+<div class="explain" id="explanation"></div>
+</section>
+<section class="content-card">
+<div class="section-kicker">✍️ 오늘, 이 문장을 써봅니다</div>
+<div class="copy-guide" id="copyGuide"></div>
+<textarea id="copyText" class="writing-area" rows="7" placeholder="여기에 천천히 따라 써보세요..."></textarea>
+<div class="section-kicker question-kicker">🍃 오늘의 마음 한 줄</div>
+<p class="question" id="question"></p>
+<textarea id="memoText" class="memo-area" rows="5" placeholder="오늘 떠오른 마음을 남겨보세요..."></textarea>
+<button class="primary-btn" id="completeBtn" type="button">필사 완료하기</button>
+<button class="ghost-btn" id="clearBtn" type="button">작성 내용 비우기</button>
+<p class="save-hint">로그인 연동 전에는 이 기기에만 임시 저장됩니다.</p>
+</section>
+<section class="progress-card">
+<div><div class="progress-label">나의 필사첩</div><div class="progress-title"><strong id="doneCount">0</strong>일째, 마음을 써 내려가고 있어요.</div></div>
+<div class="lotus-row" id="lotusRow"></div>
+</section>
+</main>
+<div class="sheet-backdrop" id="sheetBackdrop" hidden></div>
+<aside class="sheet" id="listSheet" aria-hidden="true">
+<div class="sheet-handle"></div>
+<div class="sheet-head"><div><div class="eyebrow dark">산사노트</div><h3>108 마음필사</h3></div><button class="sheet-close" id="closeListBtn" type="button">✕</button></div>
+<p class="sheet-desc">한 문장씩, 조금 더 평온한 나를 만나는 시간</p>
+<div class="content-list" id="contentList"></div>
+</aside>
+<div class="complete-overlay" id="completeOverlay" hidden>
+<div class="complete-card"><div class="lotus-mark">🪷</div><h3>오늘 한 문장을<br>마음에 새겼습니다.</h3><p>작은 실천이 모여<br>마음의 결을 조금씩 바꿉니다.</p><button class="primary-btn" id="closeCompleteBtn" type="button">나의 필사첩에 담기</button><button class="ghost-btn" id="nextContentBtn" type="button">다른 문장 이어서 보기</button></div>
+</div>
+<script src="./contents.js"></script>
+<script src="./app.js"></script>
+</body>
+</html>
