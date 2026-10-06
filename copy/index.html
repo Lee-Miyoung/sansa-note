@@ -147,23 +147,5 @@
 
   <script src="./contents.js"></script>
   <script src="./app.js"></script>
-  <script>
-    // Visual-only helpers; existing app.js keeps all saving/navigation logic.
-    (function(){
-      const updateVisuals=()=>{
-        const q=new URLSearchParams(location.search);
-        const id=Number(q.get('id'))||1;
-        const n=document.getElementById('currentNumber');
-        if(n)n.textContent=id;
-        const done=Number(document.getElementById('doneCount')?.textContent||0);
-        const bar=document.getElementById('progressBar');
-        if(bar)bar.style.width=Math.max(0,Math.min(100,done/108*100))+'%';
-      };
-      document.getElementById('sideListBtn')?.addEventListener('click',()=>document.getElementById('openListBtn')?.click());
-      new MutationObserver(updateVisuals).observe(document.body,{subtree:true,childList:true,characterData:true});
-      window.addEventListener('popstate',updateVisuals);
-      setTimeout(updateVisuals,50);
-    })();
-  </script>
 </body>
 </html>
