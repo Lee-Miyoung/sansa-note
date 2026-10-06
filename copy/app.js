@@ -4,10 +4,10 @@
   const $ = (s) => document.querySelector(s);
 
   /* =========================================================
-     CONTENTS.JS 호환
+     CONTENTS.JS 연결
   ========================================================= */
 
-  const contentSource =
+  const contents =
     (
       typeof COPY_CONTENTS !== 'undefined' &&
       Array.isArray(COPY_CONTENTS)
@@ -19,40 +19,26 @@
             : []
         );
 
-  if (!contentSource.length) {
+  if (!contents.length) {
     console.error('COPY_CONTENTS를 불러오지 못했습니다.');
 
     document.body.insertAdjacentHTML(
       'afterbegin',
       `
       <div style="
-        padding:14px 16px;
+        padding:14px;
         background:#fff3cd;
         color:#5b4615;
         text-align:center;
         font-size:13px;
-        line-height:1.6;
       ">
-        필사 콘텐츠를 불러오지 못했습니다.<br>
-        contents.js 파일을 확인해주세요.
+        필사 콘텐츠를 불러오지 못했습니다.
+        contents.js를 확인해주세요.
       </div>
       `
     );
 
     return;
-  }
-
-  const contents = contentSource;
-
-  /* =========================================================
-     저장 키
-  ========================================================= */
-
-  const LAST_ID_KEY =
-    'sansanote_copy_last_id';
-
-  function storageKey(id) {
-    return `sansanote_copy_${id}`;
   }
 
   /* =========================================================
@@ -88,7 +74,17 @@
   };
 
   /* =========================================================
-     기본 유틸
+     저장 키
+  ========================================================= */
+
+  const LAST_ID_KEY = 'sansanote_copy_last_id';
+
+  function storageKey(id) {
+    return `sansanote_copy_${id}`;
+  }
+
+  /* =========================================================
+     유틸
   ========================================================= */
 
   function safeParse(raw) {
@@ -135,11 +131,13 @@
   }
 
   /* =========================================================
-     시작 번호 결정
+     현재 번호 결정
   ========================================================= */
 
   const validIds = new Set(
-    contents.map(item => Number(item.id))
+    contents.map(
+      item => Number(item.id)
+    )
   );
 
   const params =
@@ -148,18 +146,12 @@
     );
 
   const queryId =
-    Number(params.get('id'));
+    Number(
+      params.get('id')
+    );
 
   const rememberedId =
     getLastId();
-
-  /*
-    우선순위
-
-    1. 주소에 ?id=가 있으면 그 번호
-    2. 없으면 마지막으로 보던 번호
-    3. 그것도 없으면 1번
-  */
 
   let currentId =
     validIds.has(queryId)
@@ -171,7 +163,7 @@
         );
 
   let saveTimer = null;
-  let listSignatureCache = '';
+  let listCache = '';
 
   /* =========================================================
      현재 콘텐츠
@@ -183,34 +175,38 @@
         item =>
           Number(item.id) ===
           Number(currentId)
-      ) || contents[0]
+      ) ||
+      contents[0]
     );
   }
 
   function setCurrentId(id) {
-    const numberId =
+    const n =
       Number(id);
 
-    if (!validIds.has(numberId)) {
-      return;
+    if (!validIds.has(n)) {
+      return false;
     }
 
-    currentId =
-      numberId;
+    currentId = n;
 
     saveLastId(
       currentId
     );
+
+    return true;
   }
 
   /* =========================================================
-     URL
+     URL 갱신
   ========================================================= */
 
   function updateUrl(id) {
     try {
       const url =
-        new URL(location.href);
+        new URL(
+          location.href
+        );
 
       url.searchParams.set(
         'id',
@@ -220,7 +216,8 @@
       history.replaceState(
         { id },
         '',
-        url.pathname + url.search
+        url.pathname +
+        url.search
       );
     } catch (error) {}
   }
@@ -260,7 +257,7 @@
       completed.length;
 
     const total =
-      contents.length || 108;
+      contents.length;
 
     if (els.doneCount) {
       els.doneCount.textContent =
@@ -268,7 +265,7 @@
     }
 
     if (els.progressBar) {
-      const percent =
+      const pct =
         Math.max(
           0,
           Math.min(
@@ -278,7 +275,7 @@
         );
 
       els.progressBar.style.width =
-        `${percent}%`;
+        `${pct}%`;
     }
 
     if (els.lotusRow) {
@@ -290,7 +287,7 @@
           totalDots
         );
 
-      const fragment =
+      const frag =
         document.createDocumentFragment();
 
       for (
@@ -314,13 +311,13 @@
         dot.textContent =
           '🪷';
 
-        fragment.appendChild(
+        frag.appendChild(
           dot
         );
       }
 
       els.lotusRow.replaceChildren(
-        fragment
+        frag
       );
     }
   }
@@ -337,7 +334,7 @@
       currentContent();
 
     setCurrentId(
-      Number(item.id)
+      item.id
     );
 
     if (els.titleHanja) {
@@ -399,32 +396,18 @@
           .join('\n');
     }
 
-    /*
-      저장된 글 복원
-    */
-
     const saved =
       getSaved(item.id);
 
     if (els.copyText) {
       els.copyText.value =
-        typeof saved.copyText ===
-        'string'
-          ? saved.copyText
-          : '';
+        saved.copyText || '';
     }
 
     if (els.memoText) {
       els.memoText.value =
-        typeof saved.memo ===
-        'string'
-          ? saved.memo
-          : '';
+        saved.memo || '';
     }
-
-    saveLastId(
-      currentId
-    );
 
     updateUrl(
       currentId
@@ -432,7 +415,7 @@
 
     updateProgress();
 
-    listSignatureCache = '';
+    listCache = '';
 
     if (scroll) {
       window.scrollTo(
@@ -443,7 +426,7 @@
   }
 
   /* =========================================================
-     저장
+     임시 저장
   ========================================================= */
 
   function saveDraftNow() {
@@ -459,7 +442,9 @@
       currentContent();
 
     const old =
-      getSaved(currentId);
+      getSaved(
+        currentId
+      );
 
     const data = {
       ...old,
@@ -486,8 +471,12 @@
 
     try {
       localStorage.setItem(
-        storageKey(currentId),
-        JSON.stringify(data)
+        storageKey(
+          currentId
+        ),
+        JSON.stringify(
+          data
+        )
       );
 
       saveLastId(
@@ -511,15 +500,61 @@
     saveTimer =
       setTimeout(
         saveDraftNow,
-        400
+        350
       );
   }
 
   /* =========================================================
-     완료
+     다음 필사
+  ========================================================= */
+
+  function goNext() {
+    const index =
+      contents.findIndex(
+        item =>
+          Number(item.id) ===
+          Number(currentId)
+      );
+
+    if (
+      index >= 0 &&
+      index <
+      contents.length - 1
+    ) {
+      const nextId =
+        Number(
+          contents[
+            index + 1
+          ].id
+        );
+
+      setCurrentId(
+        nextId
+      );
+
+      renderContent({
+        scroll: true
+      });
+
+      return true;
+    }
+
+    alert(
+      '108 마음필사를 모두 마쳤습니다. 🙏'
+    );
+
+    return false;
+  }
+
+  /* =========================================================
+     완료 처리
   ========================================================= */
 
   function completeCurrent() {
+
+    /*
+      1. 현재 입력 즉시 저장
+    */
 
     saveDraftNow();
 
@@ -527,7 +562,9 @@
       currentContent();
 
     const old =
-      getSaved(currentId);
+      getSaved(
+        currentId
+      );
 
     const data = {
       ...old,
@@ -561,12 +598,12 @@
 
     try {
       localStorage.setItem(
-        storageKey(currentId),
-        JSON.stringify(data)
-      );
-
-      saveLastId(
-        currentId
+        storageKey(
+          currentId
+        ),
+        JSON.stringify(
+          data
+        )
       );
     } catch (error) {
       console.warn(
@@ -575,18 +612,38 @@
       );
     }
 
+    /*
+      2. 진행률 갱신
+    */
+
     updateProgress();
 
-    listSignatureCache = '';
+    listCache = '';
+
+    /*
+      3. 팝업은 사용하지 않고
+         곧바로 다음 필사로 이동
+
+      이렇게 하면
+      PC / iPad / iPhone / Galaxy에서
+      동작이 가장 안정적입니다.
+    */
 
     if (els.completeOverlay) {
       els.completeOverlay.hidden =
-        false;
+        true;
     }
+
+    setTimeout(
+      () => {
+        goNext();
+      },
+      180
+    );
   }
 
   /* =========================================================
-     현재 작성 내용 삭제
+     작성 내용 비우기
   ========================================================= */
 
   function clearCurrent() {
@@ -600,7 +657,9 @@
 
     try {
       localStorage.removeItem(
-        storageKey(currentId)
+        storageKey(
+          currentId
+        )
       );
     } catch (error) {}
 
@@ -614,14 +673,14 @@
 
     updateProgress();
 
-    listSignatureCache = '';
+    listCache = '';
   }
 
   /* =========================================================
-     108 목록
+     108 전체 목록
   ========================================================= */
 
-  function makeListSignature() {
+  function listSignature() {
     return (
       `${currentId}|` +
       getCompletedIds().join(',')
@@ -634,11 +693,11 @@
     }
 
     const signature =
-      makeListSignature();
+      listSignature();
 
     if (
       signature ===
-      listSignatureCache
+      listCache
     ) {
       return;
     }
@@ -648,10 +707,13 @@
         getCompletedIds()
       );
 
-    const fragment =
+    const frag =
       document.createDocumentFragment();
 
-    for (const item of contents) {
+    for (
+      const item
+      of contents
+    ) {
 
       const button =
         document.createElement(
@@ -679,11 +741,12 @@
         'content-num';
 
       num.textContent =
-        String(item.id)
-          .padStart(
-            3,
-            '0'
-          );
+        String(
+          item.id
+        ).padStart(
+          3,
+          '0'
+        );
 
       const main =
         document.createElement(
@@ -742,12 +805,6 @@
         'click',
         () => {
 
-          /*
-            중요:
-            기존 필사 먼저 저장하고
-            번호 이동
-          */
-
           saveDraftNow();
 
           setCurrentId(
@@ -762,26 +819,26 @@
                 scroll: true
               });
             },
-            30
+            20
           );
         }
       );
 
-      fragment.appendChild(
+      frag.appendChild(
         button
       );
     }
 
     els.contentList.replaceChildren(
-      fragment
+      frag
     );
 
-    listSignatureCache =
+    listCache =
       signature;
   }
 
   /* =========================================================
-     전체보기 열기/닫기
+     전체보기
   ========================================================= */
 
   function openSheet() {
@@ -790,9 +847,7 @@
 
     renderList();
 
-    if (
-      els.sheetBackdrop
-    ) {
+    if (els.sheetBackdrop) {
       els.sheetBackdrop.hidden =
         false;
     }
@@ -830,70 +885,12 @@
 
     setTimeout(
       () => {
-        if (
-          els.sheetBackdrop
-        ) {
+        if (els.sheetBackdrop) {
           els.sheetBackdrop.hidden =
             true;
         }
       },
-      220
-    );
-  }
-
-  /* =========================================================
-     다음 필사
-  ========================================================= */
-
-  function goNext() {
-
-    /*
-      현재 작성내용을
-      먼저 확실하게 저장
-    */
-
-    saveDraftNow();
-
-    if (
-      els.completeOverlay
-    ) {
-      els.completeOverlay.hidden =
-        true;
-    }
-
-    const index =
-      contents.findIndex(
-        item =>
-          Number(item.id) ===
-          Number(currentId)
-      );
-
-    if (
-      index >= 0 &&
-      index <
-      contents.length - 1
-    ) {
-
-      const nextId =
-        Number(
-          contents[
-            index + 1
-          ].id
-        );
-
-      setCurrentId(
-        nextId
-      );
-
-      renderContent({
-        scroll: true
-      });
-
-      return;
-    }
-
-    alert(
-      '108 마음필사를 모두 마쳤습니다. 🙏'
+      200
     );
   }
 
@@ -909,12 +906,12 @@
     );
 
     els.copyText.addEventListener(
-      'change',
+      'blur',
       saveDraftNow
     );
 
     els.copyText.addEventListener(
-      'blur',
+      'change',
       saveDraftNow
     );
   }
@@ -927,15 +924,20 @@
     );
 
     els.memoText.addEventListener(
-      'change',
+      'blur',
       saveDraftNow
     );
 
     els.memoText.addEventListener(
-      'blur',
+      'change',
       saveDraftNow
     );
   }
+
+  /*
+    핵심
+    필사 완료 버튼 → 바로 다음 필사
+  */
 
   $('#completeBtn')
     ?.addEventListener(
@@ -967,31 +969,46 @@
       closeSheet
     );
 
-  if (
-    els.sheetBackdrop
-  ) {
-    els.sheetBackdrop
-      .addEventListener(
-        'click',
-        closeSheet
-      );
-  }
+  els.sheetBackdrop
+    ?.addEventListener(
+      'click',
+      closeSheet
+    );
+
+  /*
+    예전 완료 팝업 버튼이 남아 있어도
+    둘 다 다음 필사로 연결
+  */
 
   $('#closeCompleteBtn')
     ?.addEventListener(
       'click',
-      goNext
+      () => {
+        if (els.completeOverlay) {
+          els.completeOverlay.hidden =
+            true;
+        }
+
+        goNext();
+      }
     );
 
   $('#nextContentBtn')
     ?.addEventListener(
       'click',
-      goNext
+      () => {
+        if (els.completeOverlay) {
+          els.completeOverlay.hidden =
+            true;
+        }
+
+        goNext();
+      }
     );
 
-  /*
-    iPhone / iPad Safari 대응
-  */
+  /* =========================================================
+     iOS / Android 저장 안정화
+  ========================================================= */
 
   document.addEventListener(
     'visibilitychange',
@@ -1011,7 +1028,7 @@
   );
 
   /* =========================================================
-     최초 실행
+     시작
   ========================================================= */
 
   saveLastId(
