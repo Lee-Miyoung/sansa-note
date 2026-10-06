@@ -9526,6 +9526,399 @@ header.hero::before{
   }
 }
 
+
+/* =====================================================================
+   SANSA NOTE · DESIGN CONTINUATION
+   Extends the approved "modern temple archive" design below the hero
+   and across remaining feature overlays.
+   Function logic is intentionally untouched.
+   ===================================================================== */
+
+/* ---------- BELOW-THE-FOLD ARCHIVE SYSTEM ---------- */
+#explain108Wrap,
+#homeGalleryWrap,
+#funBannerWrap,
+#triviaBannerWrap,
+#quizBannerWrap,
+#suggestBannerWrap,
+#seedBannerWrap,
+#seasonBannerWrap,
+#almostBannerWrap{
+  width:min(1120px,calc(100% - 28px))!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+}
+
+/* 108 explanation */
+.explain108-banner{
+  position:relative!important;
+  overflow:hidden!important;
+  max-width:none!important;
+  margin:18px 0 0!important;
+  padding:15px 18px!important;
+  border-radius:17px!important;
+  border:1px solid #e5d9c9!important;
+  background:
+    linear-gradient(90deg,rgba(255,253,248,.97),rgba(250,242,228,.92)),
+    url('./lotus-soft.png') right -6px bottom -24px/100px auto no-repeat!important;
+  color:#655b50!important;
+  box-shadow:0 8px 22px rgba(68,49,31,.045)!important;
+}
+.explain108-banner b{color:#9b6928!important}
+
+/* Home gallery becomes a paper album strip */
+.home-gallery{
+  max-width:none!important;
+  margin:14px 0 0!important;
+  padding:12px!important;
+  border-radius:20px!important;
+  border:1px solid #e5dbcf!important;
+  background:
+    linear-gradient(rgba(255,253,249,.94),rgba(255,253,249,.94)),
+    url('./window-pattern-soft.png') right center/360px auto no-repeat!important;
+  box-shadow:0 10px 28px rgba(64,48,34,.045)!important;
+}
+.home-gallery::before{
+  content:'나의 순례앨범'!important;
+  display:block!important;
+  margin:1px 4px 10px!important;
+  color:#302a24!important;
+  font-size:13px!important;
+  font-weight:900!important;
+}
+.home-gallery-strip{gap:9px!important}
+.home-gallery-strip .hg-item{
+  border-radius:14px!important;
+  border:1px solid rgba(73,56,40,.10)!important;
+  box-shadow:0 5px 14px rgba(45,33,23,.055)!important;
+}
+
+/* Fun features: quiet illustrated archive cards */
+.fun-banner-row{
+  max-width:none!important;
+  margin:14px 0 0!important;
+  padding:0!important;
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  gap:10px!important;
+}
+.fun-banner-btn{
+  position:relative!important;
+  overflow:hidden!important;
+  min-width:0!important;
+  min-height:102px!important;
+  padding:15px!important;
+  border:1px solid #e5dbcf!important;
+  border-radius:17px!important;
+  background:#fffdf9!important;
+  color:#39322c!important;
+  box-shadow:0 8px 18px rgba(64,48,34,.035)!important;
+  transform:none!important;
+}
+.fun-banner-btn::after{
+  content:''!important;
+  position:absolute!important;
+  right:-14px!important;
+  bottom:-15px!important;
+  width:90px!important;
+  height:72px!important;
+  background-repeat:no-repeat!important;
+  background-position:center!important;
+  background-size:contain!important;
+  opacity:.15!important;
+  pointer-events:none!important;
+}
+.fun-banner-btn.roulette::after,
+.fun-banner-btn.vow::after{
+  background-image:url('./lotus-soft.png')!important;
+}
+.fun-banner-btn.worry::after,
+.fun-banner-btn.mantra::after{
+  background-image:url('./ink-wash-blob.png')!important;
+}
+.fun-banner-btn.moktak::after{
+  background-image:url('./temple-silhouette.png')!important;
+  width:120px!important;
+}
+.fun-banner-btn.amulet::after{
+  background-image:url('./window-pattern-soft.png')!important;
+}
+.fun-banner-btn.playlist::after{
+  background-image:url('./hero-mountain.png')!important;
+  width:118px!important;
+}
+.fun-banner-btn .fb-title{
+  position:relative!important;
+  z-index:2!important;
+  color:#2e2822!important;
+  font-size:13.5px!important;
+  font-weight:900!important;
+}
+.fun-banner-btn .fb-sub{
+  position:relative!important;
+  z-index:2!important;
+  color:#80756b!important;
+  font-size:10px!important;
+  opacity:1!important;
+  line-height:1.45!important;
+}
+
+/* News/info banners all use same quiet editorial language */
+.trivia-banner,
+.quiz-banner,
+.suggest-banner,
+.season-banner,
+.almost-banner{
+  position:relative!important;
+  overflow:hidden!important;
+  max-width:none!important;
+  margin:10px 0 0!important;
+  padding:14px 16px!important;
+  border-radius:16px!important;
+  border:1px solid #e4dacd!important;
+  color:#51483f!important;
+  box-shadow:none!important;
+}
+.trivia-banner{
+  background:
+    linear-gradient(90deg,#fffdf9,#f8f2e9),
+    url('./ink-wash-blob.png') right center/170px auto no-repeat!important;
+}
+.quiz-banner{
+  background:
+    linear-gradient(90deg,#fbfdfb,#eef5f1),
+    url('./hero-mountain.png') right -50px center/260px auto no-repeat!important;
+}
+.suggest-banner{
+  background:
+    linear-gradient(90deg,#f3eee5,#ece5d9),
+    url('./temple-silhouette.png') right bottom/310px auto no-repeat!important;
+  color:#51483f!important;
+}
+.season-banner{
+  background:
+    linear-gradient(90deg,#fff9ef,#f8ecd5),
+    url('./lotus-soft.png') right -5px bottom -24px/95px auto no-repeat!important;
+}
+.almost-banner{
+  background:
+    linear-gradient(90deg,#fff8f7,#f8eceb),
+    url('./lotus-soft.png') right -8px bottom -26px/92px auto no-repeat!important;
+}
+
+/* Temple / mountain mode selector */
+.content-type-row{
+  max-width:1120px!important;
+  margin:18px auto 0!important;
+  padding:0 14px!important;
+  gap:9px!important;
+}
+.content-type-btn{
+  min-height:54px!important;
+  padding:10px 15px!important;
+  border-radius:16px!important;
+  border:1px solid #e2d7c9!important;
+  background:#fffdf9!important;
+  color:#655a50!important;
+  box-shadow:0 5px 14px rgba(64,48,34,.035)!important;
+}
+.content-type-btn.active{
+  background:linear-gradient(135deg,#f4e2bd,#e4bf7e)!important;
+  color:#4b351a!important;
+  border-color:#d7ae69!important;
+  box-shadow:0 7px 16px rgba(151,101,40,.08)!important;
+}
+
+/* Main destination grid */
+#grid{
+  width:min(1120px,calc(100% - 28px))!important;
+  margin:15px auto 0!important;
+  gap:14px!important;
+}
+#grid .card{
+  overflow:hidden!important;
+  border:1px solid #e4dacd!important;
+  border-radius:19px!important;
+  background:#fffdf9!important;
+  box-shadow:0 10px 24px rgba(62,46,32,.05)!important;
+}
+#grid .card-photo{
+  min-height:160px!important;
+  background-color:#eee7dc!important;
+}
+#grid .card-body{
+  padding:14px 14px 13px!important;
+}
+#grid .card-title{
+  color:#2b2621!important;
+  font-size:18px!important;
+  line-height:1.25!important;
+}
+#grid .card-desc{
+  color:#756b61!important;
+  line-height:1.65!important;
+}
+#grid .card-region,
+#grid .card-tag-text{
+  color:#907a62!important;
+}
+#grid .stagepill{
+  border-radius:999px!important;
+  border:1px solid #dfd2c0!important;
+  background:#faf6ef!important;
+  color:#65594c!important;
+}
+#grid .visited-temple-card,
+#grid .visited-mountain-card{
+  border-color:#d4b372!important;
+  box-shadow:0 11px 26px rgba(145,100,37,.07)!important;
+}
+
+/* Footer */
+.site-footer{
+  max-width:1120px!important;
+  margin:34px auto 100px!important;
+  padding:0 14px!important;
+}
+.site-footer-inner{
+  position:relative!important;
+  overflow:hidden!important;
+  padding:24px 18px 18px!important;
+  border:1px solid #e5dbcf!important;
+  border-radius:20px!important;
+  background:
+    linear-gradient(rgba(255,253,249,.95),rgba(255,253,249,.95)),
+    url('./temple-silhouette.png') right bottom/360px auto no-repeat!important;
+  color:#766b60!important;
+}
+.site-footer-brand{color:#302920!important}
+
+/* ---------- REMAINING FEATURE OVERLAYS: ADD ARTWORK, KEEP MECHANICS ---------- */
+#mapOverlay .modal-head,
+#detailOverlay .modal-head,
+#mDetailOverlay .modal-head,
+#courseOverlay .modal-head,
+#courseProgressOverlay .modal-head{
+  background:
+    linear-gradient(90deg,rgba(255,252,247,.99),rgba(255,252,247,.91) 60%,rgba(255,252,247,.48)),
+    url('./hero-mountain.png') right -30px bottom/360px auto no-repeat!important;
+}
+
+#rouletteOverlay .modal-head,
+#oracleOverlay .modal-head,
+#beatLabOverlay .modal-head{
+  background:
+    linear-gradient(90deg,rgba(255,252,247,.99),rgba(255,252,247,.91) 60%,rgba(255,252,247,.48)),
+    url('./ink-wash-blob.png') right 24px center/180px auto no-repeat!important;
+}
+
+#mantraOverlay .modal-head,
+#bowCounterOverlay .modal-head,
+#moktakOverlay .modal-head,
+#playlistOverlay .modal-head,
+#amuletOverlay .modal-head{
+  background:
+    linear-gradient(90deg,rgba(255,252,247,.99),rgba(255,252,247,.91) 60%,rgba(255,252,247,.48)),
+    url('./lotus-soft.png') right 30px bottom -32px/125px auto no-repeat!important;
+}
+
+#storyCardOverlay .modal-head,
+#communityWriteOverlay .modal-head,
+#communityDetailOverlay .modal-head{
+  background:
+    linear-gradient(90deg,rgba(255,252,247,.99),rgba(255,252,247,.91) 60%,rgba(255,252,247,.48)),
+    url('./window-pattern-soft.png') right 12px center/210px auto no-repeat!important;
+}
+
+/* ---------- TABLET ---------- */
+@media (min-width:621px) and (max-width:1100px){
+  .fun-banner-row{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+  #grid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+  #grid .card-photo{min-height:150px!important}
+}
+
+/* ---------- MOBILE ---------- */
+@media(max-width:620px){
+  #explain108Wrap,
+  #homeGalleryWrap,
+  #funBannerWrap,
+  #triviaBannerWrap,
+  #quizBannerWrap,
+  #suggestBannerWrap,
+  #seedBannerWrap,
+  #seasonBannerWrap,
+  #almostBannerWrap{
+    width:calc(100% - 20px)!important;
+  }
+
+  .fun-banner-row{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:8px!important;
+  }
+  .fun-banner-btn{
+    min-height:96px!important;
+    padding:13px!important;
+  }
+  .fun-banner-btn .fb-title{font-size:12.5px!important}
+  .fun-banner-btn .fb-sub{font-size:9.2px!important}
+
+  .content-type-row{
+    padding:0 10px!important;
+  }
+  .content-type-btn{
+    min-height:49px!important;
+    font-size:12px!important;
+  }
+
+  #grid{
+    width:calc(100% - 20px)!important;
+    gap:12px!important;
+    grid-template-columns:1fr!important;
+  }
+  #grid .card-photo{
+    min-height:190px!important;
+  }
+
+  .site-footer{
+    padding:0 10px!important;
+    margin-bottom:88px!important;
+  }
+  .site-footer-inner{
+    flex-direction:column!important;
+    gap:12px!important;
+    padding:20px 16px!important;
+    background-size:260px auto!important;
+  }
+}
+
+/* ---------- TOUCH PERFORMANCE ---------- */
+@media (hover:none), (pointer:coarse){
+  .home-gallery,
+  .fun-banner-btn,
+  #grid .card,
+  .site-footer-inner{
+    box-shadow:0 6px 16px rgba(60,45,31,.045)!important;
+  }
+  .fun-banner-btn::after,
+  #settingsOverlay .settings-feature::after{
+    opacity:.11!important;
+  }
+}
+
+/* Avoid animation churn on lower-power devices */
+@media(prefers-reduced-motion:reduce){
+  .fun-banner-btn,
+  #grid .card,
+  .content-type-btn{
+    transition:none!important;
+    animation:none!important;
+  }
+}
+
 </style>
 </head>
 <body>
