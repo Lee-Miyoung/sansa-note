@@ -12814,6 +12814,294 @@ body::before{
   .beat-purify-track{height:6px !important;}
 }
 
+
+
+/* =====================================================================
+   FINAL HOTFIX · 홈 카드 정렬 / 붓그림 / 목탁그림 / 기능탭 한줄 제목
+   ===================================================================== */
+
+/* 상단 마음 쉬어가기 4개 카드: 오늘의 필사도 나머지 3개와 같은 배치 */
+.hero-experience .hip-quick-row{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:14px!important;
+  max-width:none!important;
+  width:100%!important;
+}
+.hero-experience .hip-quick-btn,
+.hero-experience .hip-quick-btn.copy-q{
+  position:relative!important;
+  overflow:hidden!important;
+  isolation:isolate!important;
+  display:grid!important;
+  grid-template-columns:52px minmax(0,1fr) 18px!important;
+  align-items:center!important;
+  column-gap:12px!important;
+  row-gap:0!important;
+  min-height:122px!important;
+  height:122px!important;
+  padding:16px!important;
+  border-radius:20px!important;
+  text-align:left!important;
+}
+.hero-experience .hip-quick-btn .hq-index{display:none!important;}
+.hero-experience .hip-quick-btn .hq-icon{
+  grid-column:1!important;
+  width:48px!important;height:48px!important;flex-basis:48px!important;
+  border-radius:15px!important;
+  display:flex!important;align-items:center!important;justify-content:center!important;
+  font-size:22px!important;
+  position:relative!important;z-index:3!important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.22)!important;
+}
+.hero-experience .hip-quick-btn .hq-copy{
+  grid-column:2!important;
+  min-width:0!important;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:center!important;
+  gap:4px!important;
+  padding-right:0!important;
+  position:relative!important;z-index:3!important;
+}
+.hero-experience .hip-quick-btn .hq-copy b{
+  display:block!important;
+  margin:0!important;
+  font-size:16px!important;
+  line-height:1.16!important;
+  font-weight:900!important;
+  letter-spacing:-0.03em!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+}
+.hero-experience .hip-quick-btn .hq-copy small{
+  display:-webkit-box!important;
+  -webkit-box-orient:vertical!important;
+  -webkit-line-clamp:2!important;
+  overflow:hidden!important;
+  margin:0!important;
+  font-size:12.8px!important;
+  line-height:1.38!important;
+  opacity:.95!important;
+  white-space:normal!important;
+  color:inherit!important;
+}
+.hero-experience .hip-quick-btn .hq-arrow{
+  grid-column:3!important;
+  align-self:start!important;
+  justify-self:end!important;
+  position:relative!important;z-index:3!important;
+  font-size:22px!important;
+  line-height:1!important;
+}
+.hero-experience .hip-quick-btn::after{
+  content:''!important;
+  position:absolute!important;
+  right:0!important;bottom:0!important;
+  width:44%!important;height:100%!important;
+  background-repeat:no-repeat!important;
+  background-position:right bottom!important;
+  background-size:contain!important;
+  opacity:.45!important;
+  pointer-events:none!important;
+  z-index:1!important;
+}
+.hero-experience .worry-q::after{background-image:url('./card-worry-lotus.png')!important;}
+.hero-experience .breath-q::after{background-image:url('./card-breath-mountain.png')!important;opacity:.46!important;}
+.hero-experience .moktak-q::after{background-image:url('./card-moktak.png')!important;opacity:.50!important;}
+.hero-experience .copy-q::after{background-image:url('./card-copy-brush.png')!important;opacity:.50!important;}
+.hero-experience .hip-quick-btn::before{
+  content:''!important;
+  position:absolute!important;
+  inset:0!important;
+  background:linear-gradient(90deg,rgba(255,251,246,.00) 0%,rgba(255,251,246,.00) 40%,rgba(255,251,246,.18) 100%)!important;
+  pointer-events:none!important;
+  z-index:2!important;
+}
+.hero-experience .hip-quick-btn > *{position:relative!important;z-index:3!important;}
+
+/* 하단 6개 기능탭: 제목은 한 줄, 설명은 최대 두 줄 */
+#funBannerWrap .fun-banner-row{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:12px!important;
+  align-items:stretch!important;
+}
+#funBannerWrap .fun-banner-btn:not(.playlist){
+  position:relative!important;
+  overflow:hidden!important;
+  isolation:isolate!important;
+  display:grid!important;
+  grid-template-columns:46px minmax(0,1fr)!important;
+  align-items:center!important;
+  column-gap:12px!important;
+  height:106px!important;
+  min-height:106px!important;
+  padding:14px 14px!important;
+  border-radius:18px!important;
+  text-align:left!important;
+}
+#funBannerWrap .fun-banner-btn:not(.playlist) .fb-icon{
+  width:42px!important;height:42px!important;
+  border-radius:13px!important;
+  display:flex!important;align-items:center!important;justify-content:center!important;
+  font-size:19px!important;
+  position:relative!important;z-index:3!important;
+}
+#funBannerWrap .fun-banner-btn:not(.playlist) .fb-copy{
+  min-width:0!important;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:center!important;
+  gap:4px!important;
+  position:relative!important;z-index:3!important;
+}
+#funBannerWrap .fun-banner-btn:not(.playlist) .fb-title{
+  display:block!important;
+  margin:0!important;
+  font-size:15px!important;
+  line-height:1.15!important;
+  font-weight:900!important;
+  letter-spacing:-0.03em!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+}
+#funBannerWrap .fun-banner-btn.moktak .fb-title{font-size:12px!important;letter-spacing:-0.05em!important;}
+#funBannerWrap .fun-banner-btn:not(.playlist) .fb-sub{
+  display:-webkit-box!important;
+  -webkit-box-orient:vertical!important;
+  -webkit-line-clamp:2!important;
+  overflow:hidden!important;
+  margin:0!important;
+  font-size:12px!important;
+  line-height:1.35!important;
+  max-height:calc(1.35em * 2)!important;
+  color:rgba(56,53,49,.92)!important;
+}
+#funBannerWrap .fun-banner-btn:not(.playlist)::before{
+  content:''!important;
+  position:absolute!important;
+  inset:0!important;
+  background:linear-gradient(90deg,rgba(255,251,245,.96) 0%,rgba(255,251,245,.92) 48%,rgba(255,251,245,.40) 100%)!important;
+  pointer-events:none!important;
+  z-index:1!important;
+}
+#funBannerWrap .fun-banner-btn:not(.playlist)::after{
+  content:''!important;
+  position:absolute!important;
+  right:-2px!important;bottom:-2px!important;
+  width:44%!important;height:100%!important;
+  background-repeat:no-repeat!important;
+  background-position:right bottom!important;
+  background-size:contain!important;
+  opacity:.46!important;
+  pointer-events:none!important;
+  z-index:2!important;
+}
+#funBannerWrap .fun-banner-btn.roulette::after{background-image:url('./card-random-temple.png')!important;}
+#funBannerWrap .fun-banner-btn.worry::after{background-image:url('./card-comfort-lotus.png')!important;}
+#funBannerWrap .fun-banner-btn.vow::after{background-image:url('./card-vow-brush.png')!important;}
+#funBannerWrap .fun-banner-btn.mantra::after{background-image:url('./card-chant-beads.png')!important;}
+#funBannerWrap .fun-banner-btn.amulet::after{background-image:url('./card-amulet-paper.png')!important;}
+#funBannerWrap .fun-banner-btn.moktak::after{background-image:url('./card-shooter-ink.png')!important;opacity:.40!important;}
+
+/* 플레이리스트는 세로로 길지 않게, 가로형 유지 */
+#funBannerWrap .fun-banner-btn.playlist{
+  position:relative!important;
+  overflow:hidden!important;
+  isolation:isolate!important;
+  display:grid!important;
+  grid-template-columns:46px minmax(0,1fr)!important;
+  align-items:center!important;
+  column-gap:12px!important;
+  min-height:112px!important;
+  height:112px!important;
+  padding:15px 16px!important;
+  border-radius:20px!important;
+  text-align:left!important;
+}
+#funBannerWrap .fun-banner-btn.playlist::before{
+  content:''!important;
+  position:absolute!important;inset:0!important;
+  background:linear-gradient(90deg,rgba(19,90,73,.96) 0%,rgba(33,99,80,.93) 55%,rgba(33,99,80,.72) 100%)!important;
+  z-index:1!important;border-radius:inherit!important;
+}
+#funBannerWrap .fun-banner-btn.playlist::after{
+  content:''!important;
+  position:absolute!important;right:0!important;bottom:0!important;
+  width:41%!important;height:100%!important;
+  background:url('./card-playlist-mountain.png') right bottom/contain no-repeat!important;
+  opacity:.33!important;z-index:2!important;pointer-events:none!important;
+}
+#funBannerWrap .fun-banner-btn.playlist > *{position:relative!important;z-index:3!important;}
+#funBannerWrap .fun-banner-btn.playlist .fb-copy{min-width:0!important;display:flex!important;flex-direction:column!important;gap:5px!important;}
+#funBannerWrap .fun-banner-btn.playlist .fb-title{
+  margin:0!important;
+  font-size:15px!important;
+  line-height:1.15!important;
+  font-weight:900!important;
+  color:#fff!important;
+}
+#funBannerWrap .fun-banner-btn.playlist .fb-sub{
+  font-size:12px!important;
+  line-height:1.35!important;
+  color:rgba(255,255,255,.88)!important;
+  white-space:normal!important;
+}
+#funBannerWrap .fun-banner-btn.playlist .fb-music-meta{
+  display:flex!important;
+  flex-wrap:wrap!important;
+  gap:6px!important;
+}
+#funBannerWrap .fun-banner-btn.playlist .fb-music-meta span{
+  font-size:11px!important;
+  padding:6px 10px!important;
+  border-radius:999px!important;
+  background:rgba(255,255,255,.14)!important;
+  color:#fff!important;
+  border:1px solid rgba(255,255,255,.20)!important;
+}
+
+/* temple album small note */
+.album-head .album-sub,
+#homeAlbumCount{
+  line-height:1.4!important;
+}
+
+/* 모바일 세부 조정 */
+@media(max-width:620px){
+  .hero-experience .hip-quick-row{gap:12px!important;}
+  .hero-experience .hip-quick-btn,
+  .hero-experience .hip-quick-btn.copy-q{
+    grid-template-columns:46px minmax(0,1fr) 16px!important;
+    min-height:118px!important;height:118px!important;
+    padding:14px 13px!important;
+    column-gap:10px!important;
+  }
+  .hero-experience .hip-quick-btn .hq-icon{width:44px!important;height:44px!important;flex-basis:44px!important;font-size:20px!important;}
+  .hero-experience .hip-quick-btn .hq-copy b{font-size:15px!important;}
+  .hero-experience .hip-quick-btn .hq-copy small{font-size:12.2px!important;line-height:1.32!important;}
+  .hero-experience .hip-quick-btn .hq-arrow{font-size:20px!important;}
+  .hero-experience .hip-quick-btn::after{width:42%!important;opacity:.46!important;}
+
+  #funBannerWrap .fun-banner-row{width:calc(100% - 28px)!important;margin:14px auto 0!important;gap:10px!important;padding:0!important;}
+  #funBannerWrap .fun-banner-btn:not(.playlist){
+    grid-template-columns:40px minmax(0,1fr)!important;
+    column-gap:10px!important;
+    height:100px!important;min-height:100px!important;
+    padding:12px 11px!important;
+  }
+  #funBannerWrap .fun-banner-btn:not(.playlist) .fb-icon{width:36px!important;height:36px!important;font-size:17px!important;border-radius:12px!important;}
+  #funBannerWrap .fun-banner-btn:not(.playlist) .fb-title{font-size:13.5px!important;}
+  #funBannerWrap .fun-banner-btn.moktak .fb-title{font-size:10.8px!important;}
+  #funBannerWrap .fun-banner-btn:not(.playlist) .fb-sub{font-size:11px!important;line-height:1.28!important;}
+  #funBannerWrap .fun-banner-btn.playlist{min-height:108px!important;height:108px!important;grid-template-columns:40px minmax(0,1fr)!important;column-gap:10px!important;padding:13px 14px!important;}
+  #funBannerWrap .fun-banner-btn.playlist .fb-title{font-size:14px!important;}
+  #funBannerWrap .fun-banner-btn.playlist .fb-sub{font-size:11.6px!important;}
+}
+
 </style>
 </head>
 <body>
@@ -15274,7 +15562,7 @@ function renderFunBanner(){
     </button>
     <button class="fun-banner-btn moktak" onclick="openBeatLab()">
       <div class="fb-icon">🚀</div>
-      <div class="fb-copy"><div class="fb-title">번뇌 타파 BEAT SHOOTER</div><div class="fb-sub">맞는 패드로 번뇌를 날리는 리듬 아케이드</div></div>
+      <div class="fb-copy"><div class="fb-title">번뇌타파 비트슈터</div><div class="fb-sub">맞는 패드로 번뇌를 날리는 리듬 아케이드</div></div>
     </button>
     <button class="fun-banner-btn playlist" onclick="openPlaylistOverlay()">
       <div class="fb-icon">🎧</div>
