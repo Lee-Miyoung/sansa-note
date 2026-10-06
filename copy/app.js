@@ -3,15 +3,63 @@
 
   const $ = (s) => document.querySelector(s);
 
+  /* =========================================================
+     CONTENTS.JS 호환
+     const COPY_CONTENTS / window.COPY_CONTENTS 둘 다 지원
+  ========================================================= */
+
+  const contentSource =
+    (
+      typeof COPY_CONTENTS !== 'undefined' &&
+      Array.isArray(COPY_CONTENTS)
+    )
+      ? COPY_CONTENTS
+      : (
+          Array.isArray(window.COPY_CONTENTS)
+            ? window.COPY_CONTENTS
+            : []
+        );
+
+  if (!contentSource.length) {
+    console.error('COPY_CONTENTS를 불러오지 못했습니다.');
+
+    document.body.insertAdjacentHTML(
+      'afterbegin',
+      `
+      <div style="
+        padding:14px 16px;
+        background:#fff3cd;
+        color:#5b4615;
+        text-align:center;
+        font-size:13px;
+        line-height:1.6;
+      ">
+        필사 콘텐츠를 불러오지 못했습니다.<br>
+        contents.js 파일을 확인해주세요.
+      </div>
+      `
+    );
+
+    return;
+  }
+
+  const contents = contentSource;
+
+  /* =========================================================
+     DOM
+  ========================================================= */
+
   const els = {
     titleHanja: $('#titleHanja'),
     titleKo: $('#titleKo'),
     subtitle: $('#subtitle'),
+
     mainQuote: $('#mainQuote'),
     explanation: $('#explanation'),
     copyGuide: $('#copyGuide'),
     question: $('#question'),
     source: $('#source'),
+
     verticalHanja: $('#verticalHanja'),
     currentNumber: $('#currentNumber'),
 
@@ -29,46 +77,30 @@
     completeOverlay: $('#completeOverlay')
   };
 
-  if (!Array.isArray(window.COPY_CONTENTS) || !window.COPY_CONTENTS.length) {
-    console.error('COPY_CONTENTS를 불러오지 못했습니다.');
-
-    document.body.insertAdjacentHTML(
-      'afterbegin',
-      `
-      <div style="
-        padding:16px;
-        background:#fff3cd;
-        color:#5b4615;
-        text-align:center;
-        font-size:14px;
-      ">
-        필사 콘텐츠를 불러오지 못했습니다. contents.js를 확인해주세요.
-      </div>
-      `
-    );
-
-    return;
-  }
-
-  const contents = window.COPY_CONTENTS;
+  /* =========================================================
+     현재 번호
+  ========================================================= */
 
   const validIds = new Set(
     contents.map(item => Number(item.id))
   );
 
-  const queryId = Number(
-    new URLSearchParams(location.search).get('id')
-  );
+  const params =
+    new URLSearchParams(location.search);
 
-  let currentId = validIds.has(queryId)
-    ? queryId
-    : Number(contents[0].id);
+  const queryId =
+    Number(params.get('id'));
 
-  let listRenderedForSignature = '';
-  let saveTimer = 0;
+  let currentId =
+    validIds.has(queryId)
+      ? queryId
+      : Number(contents[0].id);
+
+  let saveTimer = null;
+  let listSignatureCache = '';
 
   /* =========================================================
-     기본 유틸
+     유틸
   ========================================================= */
 
   function safeParse(raw) {
@@ -81,128 +113,182 @@
     }
   }
 
-  function currentContent() {
-    return (
-      contents.find(
-        item => Number(item.id) === Number(currentId)
-      ) || contents[0]
-    );
-  }
-
   function storageKey(id) {
     return `sansanote_copy_${id}`;
   }
 
   function getSaved(id) {
-    return safeParse(
-      localStorage.getItem(storageKey(id))
+    try {
+      return safeParse(
+        localStorage.getItem(
+          storageKey(id)
+        )
+      );
+    } catch (error) {
+      return {};
+    }
+  }
+
+  function currentContent() {
+    return (
+      contents.find(
+        item =>
+          Number(item.id) ===
+          Number(currentId)
+      ) || contents[0]
     );
   }
+
+  function updateUrl(id) {
+    try {
+      const url =
+        new URL(location.href);
+
+      url.searchParams.set(
+        'id',
+        String(id)
+      );
+
+      history.replaceState(
+        { id },
+        '',
+        url.pathname + url.search
+      );
+    } catch (error) {
+      // 구형 브라우저에서도 필사는 계속 작동
+    }
+  }
+
+  /* =========================================================
+     완료 기록
+  ========================================================= */
 
   function getCompletedIds() {
     const result = [];
 
-    for (const content of contents) {
-      const saved = getSaved(content.id);
+    for (const item of contents) {
+      const saved =
+        getSaved(item.id);
 
-      if (saved.completed) {
-        result.push(Number(content.id));
+      if (saved.completed === true) {
+        result.push(
+          Number(item.id)
+        );
       }
     }
 
     return result;
   }
 
-  function updateUrl(id) {
-    const url = new URL(location.href);
-
-    url.searchParams.set('id', String(id));
-
-    history.replaceState(
-      { id },
-      '',
-      url.pathname + url.search
-    );
-  }
-
   /* =========================================================
-     진행률 표시
+     진행률
   ========================================================= */
 
-  function updateVisualProgress() {
-    const completed = getCompletedIds();
+  function updateProgress() {
+    const completed =
+      getCompletedIds();
 
-    const done = completed.length;
-    const total = contents.length;
+    const done =
+      completed.length;
+
+    const total =
+      contents.length || 108;
 
     if (els.doneCount) {
-      els.doneCount.textContent = String(done);
+      els.doneCount.textContent =
+        String(done);
     }
 
     if (els.progressBar) {
-      const percent = Math.max(
-        0,
+      const percent =
         Math.min(
           100,
-          (done / total) * 100
-        )
-      );
+          Math.max(
+            0,
+            done / total * 100
+          )
+        );
 
-      els.progressBar.style.width = `${percent}%`;
+      els.progressBar.style.width =
+        `${percent}%`;
     }
+
+    /*
+      연꽃 108개를 모두 그리지 않고
+      진행 표시용 14개만 사용
+      → 아이폰/아이패드 렌더링 부담 감소
+    */
 
     if (els.lotusRow) {
       const totalDots = 14;
 
-      const filled = Math.round(
-        (done / total) * totalDots
-      );
+      const filled =
+        Math.round(
+          done / total * totalDots
+        );
 
-      const frag = document.createDocumentFragment();
+      const fragment =
+        document.createDocumentFragment();
 
-      for (let i = 0; i < totalDots; i++) {
-        const span = document.createElement('span');
+      for (
+        let i = 0;
+        i < totalDots;
+        i++
+      ) {
+        const dot =
+          document.createElement('span');
 
-        span.className =
+        dot.className =
           'lotus-dot' +
-          (i < filled ? ' done' : '');
+          (
+            i < filled
+              ? ' done'
+              : ''
+          );
 
-        span.textContent = '🪷';
+        dot.textContent = '🪷';
 
-        frag.appendChild(span);
+        fragment.appendChild(dot);
       }
 
-      els.lotusRow.replaceChildren(frag);
+      els.lotusRow.replaceChildren(
+        fragment
+      );
     }
   }
 
   /* =========================================================
-     현재 필사 렌더링
+     필사 화면 렌더링
   ========================================================= */
 
-  function renderContent({ scroll = false } = {}) {
-    const content = currentContent();
+  function renderContent({
+    scroll = false
+  } = {}) {
 
-    currentId = Number(content.id);
+    const item =
+      currentContent();
+
+    currentId =
+      Number(item.id);
 
     if (els.titleHanja) {
       els.titleHanja.textContent =
-        content.hanja || '';
+        item.hanja || '';
     }
 
     if (els.titleKo) {
       els.titleKo.textContent =
-        content.title || '';
+        item.title || '';
     }
 
     if (els.subtitle) {
       els.subtitle.textContent =
-        content.subtitle || '';
+        item.subtitle || '';
     }
 
     if (els.mainQuote) {
       els.mainQuote.textContent =
-        content.quote || '';
+        item.quote || '';
 
       els.mainQuote.style.whiteSpace =
         'pre-line';
@@ -210,41 +296,40 @@
 
     if (els.explanation) {
       els.explanation.textContent =
-        content.explanation || '';
+        item.explanation || '';
     }
 
     if (els.copyGuide) {
       els.copyGuide.textContent =
-        Array.isArray(content.copyLines)
-          ? content.copyLines.join('\n')
+        Array.isArray(item.copyLines)
+          ? item.copyLines.join('\n')
           : '';
     }
 
     if (els.question) {
       els.question.textContent =
-        content.question || '';
+        item.question || '';
     }
 
     if (els.source) {
       els.source.textContent =
-        content.source || '';
-    }
-
-    if (els.verticalHanja) {
-      els.verticalHanja.textContent =
-        (content.hanja || '')
-          .split('')
-          .join('\n');
+        item.source || '';
     }
 
     if (els.currentNumber) {
       els.currentNumber.textContent =
-        String(content.id);
+        String(item.id);
     }
 
-    /* 저장된 작성 내용 불러오기 */
+    if (els.verticalHanja) {
+      els.verticalHanja.textContent =
+        (item.hanja || '')
+          .split('')
+          .join('\n');
+    }
 
-    const saved = getSaved(content.id);
+    const saved =
+      getSaved(item.id);
 
     if (els.copyText) {
       els.copyText.value =
@@ -256,21 +341,17 @@
         saved.memo || '';
     }
 
-    updateUrl(content.id);
+    updateUrl(item.id);
+    updateProgress();
 
-    updateVisualProgress();
-
-    /*
-      필사 번호가 바뀌면
-      108 전체보기 목록은 다음에 열 때 다시 생성
-    */
-    listRenderedForSignature = '';
+    listSignatureCache = '';
 
     if (scroll) {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
+      /*
+        iOS Safari에서 smooth 스크롤이
+        버벅이는 경우가 있어 즉시 이동
+      */
+      window.scrollTo(0, 0);
     }
   }
 
@@ -279,24 +360,35 @@
   ========================================================= */
 
   function saveDraftNow() {
-    clearTimeout(saveTimer);
+    if (saveTimer) {
+      clearTimeout(saveTimer);
+      saveTimer = null;
+    }
 
-    const old = getSaved(currentId);
-    const content = currentContent();
+    const old =
+      getSaved(currentId);
+
+    const item =
+      currentContent();
 
     const data = {
       ...old,
 
-      id: Number(currentId),
+      id:
+        Number(currentId),
 
       title:
-        content.title || '',
+        item.title || '',
 
       copyText:
-        els.copyText?.value || '',
+        els.copyText
+          ? els.copyText.value
+          : '',
 
       memo:
-        els.memoText?.value || '',
+        els.memoText
+          ? els.memoText.value
+          : '',
 
       updatedAt:
         Date.now()
@@ -309,36 +401,45 @@
       );
     } catch (error) {
       console.warn(
-        '필사 임시 저장 실패',
+        '필사 저장 실패',
         error
       );
     }
   }
 
   /*
-    매 글자를 칠 때마다 localStorage 저장하면
-    모바일에서 버벅일 수 있어서
-    0.25초 후에 한 번만 저장
+    키 입력마다 저장하면
+    iOS에서 매우 느려질 수 있음.
+    350ms 멈췄을 때만 저장.
   */
 
   function scheduleSave() {
-    clearTimeout(saveTimer);
+    if (saveTimer) {
+      clearTimeout(saveTimer);
+    }
 
-    saveTimer = setTimeout(
-      saveDraftNow,
-      250
-    );
+    saveTimer =
+      setTimeout(
+        saveDraftNow,
+        350
+      );
   }
 
   /* =========================================================
-     필사 완료
+     완료
   ========================================================= */
 
   function completeCurrent() {
-    clearTimeout(saveTimer);
+    if (saveTimer) {
+      clearTimeout(saveTimer);
+      saveTimer = null;
+    }
 
-    const content = currentContent();
-    const old = getSaved(currentId);
+    const old =
+      getSaved(currentId);
+
+    const item =
+      currentContent();
 
     const data = {
       ...old,
@@ -347,13 +448,17 @@
         Number(currentId),
 
       title:
-        content.title || '',
+        item.title || '',
 
       copyText:
-        els.copyText?.value || '',
+        els.copyText
+          ? els.copyText.value
+          : '',
 
       memo:
-        els.memoText?.value || '',
+        els.memoText
+          ? els.memoText.value
+          : '',
 
       completed:
         true,
@@ -378,29 +483,33 @@
       );
     }
 
-    updateVisualProgress();
+    updateProgress();
 
-    listRenderedForSignature = '';
+    listSignatureCache = '';
 
     if (els.completeOverlay) {
-      els.completeOverlay.hidden = false;
+      els.completeOverlay.hidden =
+        false;
     }
   }
 
   /* =========================================================
-     작성 내용 비우기
+     작성 내용 삭제
   ========================================================= */
 
   function clearCurrent() {
-    const ok = confirm(
-      '이 필사의 작성 내용을 비울까요?'
-    );
+    const ok =
+      confirm(
+        '이 필사의 작성 내용을 비울까요?'
+      );
 
     if (!ok) return;
 
-    localStorage.removeItem(
-      storageKey(currentId)
-    );
+    try {
+      localStorage.removeItem(
+        storageKey(currentId)
+      );
+    } catch (error) {}
 
     if (els.copyText) {
       els.copyText.value = '';
@@ -410,57 +519,57 @@
       els.memoText.value = '';
     }
 
-    updateVisualProgress();
+    updateProgress();
 
-    listRenderedForSignature = '';
+    listSignatureCache = '';
   }
 
   /* =========================================================
      108 전체 목록
   ========================================================= */
 
-  function listSignature() {
+  function makeListSignature() {
     return (
       `${currentId}|` +
       getCompletedIds().join(',')
     );
   }
 
-  function renderListIfNeeded() {
+  function renderList() {
     if (!els.contentList) return;
 
     const signature =
-      listSignature();
-
-    /*
-      내용이 바뀐 게 없으면
-      108개 DOM을 다시 만들지 않음
-    */
+      makeListSignature();
 
     if (
       signature ===
-      listRenderedForSignature
+      listSignatureCache
     ) {
       return;
     }
 
-    const completed = new Set(
-      getCompletedIds()
-    );
+    const completed =
+      new Set(
+        getCompletedIds()
+      );
 
-    const frag =
+    const fragment =
       document.createDocumentFragment();
 
-    for (const content of contents) {
-      const btn =
-        document.createElement('button');
+    for (const item of contents) {
 
-      btn.type = 'button';
+      const button =
+        document.createElement(
+          'button'
+        );
 
-      btn.className =
+      button.type =
+        'button';
+
+      button.className =
         'content-item' +
         (
-          Number(content.id) ===
+          Number(item.id) ===
           Number(currentId)
             ? ' current'
             : ''
@@ -473,7 +582,7 @@
         'content-num';
 
       num.textContent =
-        String(content.id)
+        String(item.id)
           .padStart(3, '0');
 
       const main =
@@ -486,10 +595,10 @@
         document.createElement('b');
 
       title.textContent =
-        content.title +
+        item.title +
         (
           completed.has(
-            Number(content.id)
+            Number(item.id)
           )
             ? ' · 완료'
             : ''
@@ -499,7 +608,7 @@
         document.createElement('small');
 
       sub.textContent =
-        content.subtitle || '';
+        item.subtitle || '';
 
       const arrow =
         document.createElement('span');
@@ -507,55 +616,73 @@
       arrow.className =
         'content-arrow';
 
-      arrow.textContent = '›';
+      arrow.textContent =
+        '›';
 
       main.append(
         title,
         sub
       );
 
-      btn.append(
+      button.append(
         num,
         main,
         arrow
       );
 
-      btn.addEventListener(
+      button.addEventListener(
         'click',
         () => {
+
           currentId =
-            Number(content.id);
+            Number(item.id);
 
           closeSheet();
 
-          renderContent({
-            scroll: true
-          });
+          /*
+            닫히는 애니메이션과
+            렌더링이 동시에 겹치지 않게
+            약간 늦춰 iPad 성능 개선
+          */
+
+          setTimeout(
+            () => {
+              renderContent({
+                scroll: true
+              });
+            },
+            30
+          );
         }
       );
 
-      frag.appendChild(btn);
+      fragment.appendChild(
+        button
+      );
     }
 
     els.contentList.replaceChildren(
-      frag
+      fragment
     );
 
-    listRenderedForSignature =
+    listSignatureCache =
       signature;
   }
 
   /* =========================================================
-     전체보기 열기
+     전체보기
   ========================================================= */
 
   function openSheet() {
     /*
-      여기서 처음 108개 목록 생성
-      초기 페이지 진입 속도 개선
+      처음 페이지 열 때는
+      108개 목록을 만들지 않음.
+
+      사용자가 '전체보기'를 눌렀을 때만
+      108개 생성.
     */
 
-    renderListIfNeeded();
+    renderList();
 
     if (els.sheetBackdrop) {
       els.sheetBackdrop.hidden =
@@ -563,16 +690,16 @@
     }
 
     requestAnimationFrame(() => {
-      if (els.listSheet) {
-        els.listSheet.classList.add(
-          'open'
-        );
+      if (!els.listSheet) return;
 
-        els.listSheet.setAttribute(
-          'aria-hidden',
-          'false'
-        );
-      }
+      els.listSheet.classList.add(
+        'open'
+      );
+
+      els.listSheet.setAttribute(
+        'aria-hidden',
+        'false'
+      );
     });
   }
 
@@ -593,7 +720,7 @@
         els.sheetBackdrop.hidden =
           true;
       }
-    }, 240);
+    }, 220);
   }
 
   /* =========================================================
@@ -601,6 +728,11 @@
   ========================================================= */
 
   function goNext() {
+    if (els.completeOverlay) {
+      els.completeOverlay.hidden =
+        true;
+    }
+
     const index =
       contents.findIndex(
         item =>
@@ -608,18 +740,10 @@
           Number(currentId)
       );
 
-    if (els.completeOverlay) {
-      els.completeOverlay.hidden =
-        true;
-    }
-
-    /*
-      현재 항목 다음 항목으로 이동
-    */
-
     if (
       index >= 0 &&
-      index < contents.length - 1
+      index <
+        contents.length - 1
     ) {
       currentId =
         Number(
@@ -633,31 +757,30 @@
       return;
     }
 
-    /*
-      108번까지 완료하면
-      1번으로 자동 회귀하지 않음
-    */
-
     alert(
       '108 마음필사를 모두 마쳤습니다. 🙏'
     );
-
-    updateVisualProgress();
   }
 
   /* =========================================================
      이벤트
   ========================================================= */
 
-  els.copyText?.addEventListener(
-    'input',
-    scheduleSave
-  );
+  if (els.copyText) {
+    els.copyText.addEventListener(
+      'input',
+      scheduleSave,
+      { passive: true }
+    );
+  }
 
-  els.memoText?.addEventListener(
-    'input',
-    scheduleSave
-  );
+  if (els.memoText) {
+    els.memoText.addEventListener(
+      'input',
+      scheduleSave,
+      { passive: true }
+    );
+  }
 
   $('#completeBtn')
     ?.addEventListener(
@@ -689,16 +812,12 @@
       closeSheet
     );
 
-  els.sheetBackdrop
-    ?.addEventListener(
+  if (els.sheetBackdrop) {
+    els.sheetBackdrop.addEventListener(
       'click',
       closeSheet
     );
-
-  /*
-    완료 팝업의 두 버튼 모두
-    다음 필사로 이동
-  */
+  }
 
   $('#closeCompleteBtn')
     ?.addEventListener(
@@ -713,17 +832,27 @@
     );
 
   /*
-    페이지를 나가기 직전
-    마지막 입력 저장
+    iOS에서는 beforeunload가
+    항상 안정적으로 실행되지 않아서
+    visibilitychange도 같이 사용
   */
 
+  document.addEventListener(
+    'visibilitychange',
+    () => {
+      if (document.hidden) {
+        saveDraftNow();
+      }
+    }
+  );
+
   window.addEventListener(
-    'beforeunload',
+    'pagehide',
     saveDraftNow
   );
 
   /* =========================================================
-     시작
+     최초 실행
   ========================================================= */
 
   renderContent();
