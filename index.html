@@ -11102,6 +11102,139 @@ header.hero::before{
   }
 }
 
+
+/* =====================================================================
+   SANSA NOTE · DESKTOP POLISH
+   Fixes: hero image seam/offset, 108 visibility, desktop typography
+   ===================================================================== */
+
+/* 1) Desktop typography: clean Korean UI text, strong serif only where it matters */
+html,body,button,input,textarea,select{
+  font-family:"Pretendard","SUIT","Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif!important;
+}
+.hero-title-row h1,
+.hero-tagline,
+.hero-pilgrim-feature .pc-title,
+.pg-collection-hero h2,
+.copy-title h2,
+.serif{
+  font-family:"Noto Serif KR","Nanum Myeongjo","AppleMyungjo",serif!important;
+}
+
+/* 2) Desktop hero artwork: fill the full banner so the rectangular edge disappears */
+@media(min-width:1101px){
+  header.hero{
+    background-image:url('./hero-mountain.png')!important;
+    background-repeat:no-repeat!important;
+    background-size:cover!important;
+    background-position:center center!important;
+  }
+
+  header.hero::after{
+    background:
+      linear-gradient(90deg,
+        rgba(251,248,242,.995) 0%,
+        rgba(251,248,242,.985) 31%,
+        rgba(251,248,242,.88) 46%,
+        rgba(251,248,242,.46) 61%,
+        rgba(251,248,242,.10) 79%,
+        rgba(251,248,242,.02) 100%)!important;
+  }
+
+  .hero-inner{
+    max-width:1260px!important;
+    padding-left:34px!important;
+    padding-right:34px!important;
+  }
+
+  .hero-main-grid{
+    grid-template-columns:minmax(0,700px) minmax(280px,1fr)!important;
+    min-height:330px!important;
+  }
+
+  /* bring monk slightly toward the center to avoid the right-heavy look */
+  header.hero::before{
+    right:max(72px,calc((100vw - 1260px)/2 + 70px))!important;
+    top:150px!important;
+    width:225px!important;
+    height:345px!important;
+  }
+
+  .hero-top-actions{
+    right:max(34px,calc((100vw - 1260px)/2 + 34px))!important;
+  }
+}
+
+/* 3) 108 number: always clearly visible */
+.hero-pilgrim-feature .pilgrim-collection-chip{
+  isolation:isolate!important;
+}
+.hero-pilgrim-feature .pilgrim-collection-chip::after{
+  content:'108'!important;
+  z-index:2!important;
+  right:22px!important;
+  bottom:-10px!important;
+  font-size:82px!important;
+  font-weight:800!important;
+  line-height:1!important;
+  color:rgba(177,116,35,.20)!important;
+  opacity:1!important;
+  text-shadow:none!important;
+}
+.hero-pilgrim-feature .pc-copy,
+.hero-pilgrim-feature .pc-arrow{
+  position:relative!important;
+  z-index:4!important;
+}
+.hero-pilgrim-feature .pc-lotus{
+  position:relative!important;
+  z-index:3!important;
+}
+
+/* Larger desktop 108 card typography for the approved mockup feel */
+@media(min-width:1101px){
+  .hero-pilgrim-feature .pilgrim-collection-chip{
+    min-height:118px!important;
+    grid-template-columns:150px minmax(0,1fr) 54px!important;
+    padding:12px 18px!important;
+  }
+  .hero-pilgrim-feature .pc-title{
+    font-size:30px!important;
+  }
+  .hero-pilgrim-feature .pc-label{
+    font-size:11px!important;
+  }
+  .hero-pilgrim-feature .pc-progress{
+    font-size:11.5px!important;
+  }
+}
+
+/* Tablet keeps a centered panoramic image without seams */
+@media (min-width:621px) and (max-width:1100px){
+  header.hero{
+    background-image:url('./hero-mountain.png')!important;
+    background-repeat:no-repeat!important;
+    background-size:cover!important;
+    background-position:center top!important;
+  }
+  header.hero::before{
+    right:4px!important;
+  }
+}
+
+/* Mobile font stays clean and readable */
+@media(max-width:620px){
+  html,body,button,input,textarea,select{
+    font-family:"Pretendard","SUIT","Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif!important;
+  }
+  .hero-title-row h1,
+  .hero-tagline,
+  .hero-pilgrim-feature .pc-title,
+  .serif{
+    font-family:"Noto Serif KR","Nanum Myeongjo","AppleMyungjo",serif!important;
+  }
+}
+
 </style>
 </head>
 <body>
