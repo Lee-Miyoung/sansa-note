@@ -8981,6 +8981,551 @@ header.hero{
   }
 }
 
+
+/* =====================================================================
+   SANSA NOTE · FINAL VISUAL MATCH
+   Goal: match approved mobile mockup while keeping all existing functions.
+   Desktop + iPad/iPhone + Galaxy
+   ===================================================================== */
+
+/* ---------- HOME HERO ---------- */
+header.hero{
+  overflow:hidden!important;
+  background-color:#fbf7ef!important;
+  background-image:url('./hero-mountain.png')!important;
+  background-repeat:no-repeat!important;
+  background-position:right 3% top 18px!important;
+  background-size:min(820px,58vw) auto!important;
+}
+
+header.hero::after{
+  background:
+    linear-gradient(90deg,
+      rgba(251,248,242,.99) 0%,
+      rgba(251,248,242,.97) 34%,
+      rgba(251,248,242,.84) 52%,
+      rgba(251,248,242,.34) 72%,
+      rgba(251,248,242,.04) 100%)!important;
+}
+
+/* Main monk stays in upper hero area, not near the bottom cards */
+header.hero::before{
+  width:270px!important;
+  height:410px!important;
+  right:max(18px,calc((100vw - 1180px)/2 + 6px))!important;
+  bottom:auto!important;
+  top:185px!important;
+  opacity:.97!important;
+  z-index:1!important;
+}
+
+/* utility card decorative artwork */
+.hero-util-btn::after{
+  content:''!important;
+  position:absolute!important;
+  right:-8px!important;
+  bottom:-14px!important;
+  width:125px!important;
+  height:78px!important;
+  background-repeat:no-repeat!important;
+  background-position:right bottom!important;
+  background-size:contain!important;
+  opacity:.23!important;
+  pointer-events:none!important;
+  z-index:1!important;
+}
+.hero-util-btn.util-course::after{
+  background-image:url('./temple-silhouette.png')!important;
+  width:150px!important;
+}
+.hero-util-btn.util-features::after{
+  background-image:url('./lotus-soft.png')!important;
+  width:92px!important;
+  height:92px!important;
+  right:3px!important;
+  bottom:-17px!important;
+  opacity:.20!important;
+}
+.hero-util-btn>*{position:relative!important;z-index:2!important}
+
+/* Mind cards get small illustrative accents */
+.hero-experience .hip-quick-btn::after{
+  content:''!important;
+  position:absolute!important;
+  right:-12px!important;
+  bottom:-14px!important;
+  width:82px!important;
+  height:70px!important;
+  background-repeat:no-repeat!important;
+  background-position:center!important;
+  background-size:contain!important;
+  opacity:.17!important;
+  pointer-events:none!important;
+}
+.hero-experience .hip-quick-btn.worry-q::after{
+  background-image:url('./lotus-soft.png')!important;
+}
+.hero-experience .hip-quick-btn.breath-q::after{
+  background-image:url('./hero-mountain.png')!important;
+  width:110px!important;
+}
+.hero-experience .hip-quick-btn.moktak-q::after{
+  background-image:url('./ink-wash-blob.png')!important;
+}
+.hero-experience .hip-quick-btn.copy-q::after{
+  background-image:url('./window-pattern-soft.png')!important;
+}
+
+/* ---------- STANDALONE 108 COLLECTION CARD ---------- */
+.hero-pilgrim-feature{
+  margin-top:18px!important;
+  width:100%!important;
+}
+.hero-pilgrim-feature .pilgrim-collection-chip{
+  width:100%!important;
+  min-width:0!important;
+  min-height:132px!important;
+  padding:18px 22px!important;
+  display:grid!important;
+  grid-template-columns:150px minmax(0,1fr) 58px!important;
+  gap:18px!important;
+  align-items:center!important;
+  border-radius:23px!important;
+  overflow:hidden!important;
+  position:relative!important;
+  background:
+    linear-gradient(90deg,rgba(255,250,238,.98),rgba(250,232,192,.92)),
+    url('./temple-silhouette.png') right bottom/48% auto no-repeat!important;
+  border:1px solid rgba(196,145,66,.34)!important;
+  box-shadow:0 11px 26px rgba(86,62,36,.055)!important;
+}
+.hero-pilgrim-feature .pilgrim-collection-chip::after{
+  content:'108'!important;
+  position:absolute!important;
+  right:80px!important;
+  bottom:-20px!important;
+  font-family:"Nanum Myeongjo","Noto Serif KR",serif!important;
+  font-size:94px!important;
+  line-height:1!important;
+  font-weight:800!important;
+  color:rgba(184,126,44,.12)!important;
+  pointer-events:none!important;
+}
+.hero-pilgrim-feature .pc-lotus{
+  width:140px!important;
+  height:100px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  position:relative!important;
+  z-index:2!important;
+}
+.hero-pilgrim-feature .pc-lotus img{
+  width:128px!important;
+  height:96px!important;
+  object-fit:contain!important;
+  display:block!important;
+}
+.hero-pilgrim-feature .pc-copy{
+  position:relative!important;
+  z-index:3!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:flex-start!important;
+}
+.hero-pilgrim-feature .pc-label{
+  color:#725325!important;
+  font-size:12px!important;
+  font-weight:900!important;
+  letter-spacing:.03em!important;
+}
+.hero-pilgrim-feature .pc-title{
+  margin-top:2px!important;
+  color:#241c15!important;
+  font-family:"Nanum Myeongjo","Noto Serif KR",serif!important;
+  font-size:31px!important;
+  font-weight:800!important;
+  line-height:1.12!important;
+}
+.hero-pilgrim-feature .pc-progress{
+  margin-top:5px!important;
+  color:#66533d!important;
+  font-size:12px!important;
+  font-weight:700!important;
+}
+.hero-pilgrim-feature .pc-arrow{
+  width:50px!important;
+  height:50px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  position:relative!important;
+  z-index:4!important;
+  border-radius:50%!important;
+  background:#c98d34!important;
+  color:#fff!important;
+  font-size:27px!important;
+  box-shadow:0 7px 15px rgba(161,103,32,.16)!important;
+}
+
+/* journey panel now contains only journey information + stats */
+.hero-journey-panel{
+  margin-top:16px!important;
+  padding:18px!important;
+  border-radius:24px!important;
+}
+.hero-journey-top{
+  display:block!important;
+}
+.hero-stats{
+  margin-top:14px!important;
+}
+
+/* ---------- FEATURE MENU: ADD REAL ILLUSTRATIONS ---------- */
+#settingsOverlay .settings-feature{
+  position:relative!important;
+  overflow:hidden!important;
+  isolation:isolate!important;
+  padding-right:48px!important;
+}
+#settingsOverlay .settings-feature::after{
+  content:''!important;
+  position:absolute!important;
+  z-index:-1!important;
+  right:-13px!important;
+  bottom:-13px!important;
+  width:80px!important;
+  height:70px!important;
+  background-repeat:no-repeat!important;
+  background-position:center!important;
+  background-size:contain!important;
+  opacity:.17!important;
+  pointer-events:none!important;
+}
+
+#settingsOverlay .sf-album::after,
+#settingsOverlay .sf-photo::after{
+  background-image:url('./hero-mountain.png')!important;
+  width:105px!important;
+}
+#settingsOverlay .sf-badge::after,
+#settingsOverlay .sf-passport::after,
+#settingsOverlay .sf-book::after{
+  background-image:url('./temple-silhouette.png')!important;
+  width:110px!important;
+}
+#settingsOverlay .sf-prayer::after,
+#settingsOverlay .sf-etiquette::after,
+#settingsOverlay .sf-vow::after{
+  background-image:url('./lotus-soft.png')!important;
+}
+#settingsOverlay .sf-glossary::after,
+#settingsOverlay .sf-copy::after{
+  background-image:url('./window-pattern-soft.png')!important;
+}
+#settingsOverlay .sf-quiz::after,
+#settingsOverlay .sf-contact::after,
+#settingsOverlay .sf-dark::after{
+  background-image:url('./ink-wash-blob.png')!important;
+}
+
+/* ---------- ILLUSTRATIONS INSIDE OPENED FEATURE TABS ---------- */
+#albumOverlay .modal-head,
+#badgeOverlay .modal-head,
+#passportOverlay .modal-head,
+#photobookOverlay .modal-head{
+  background:
+    linear-gradient(90deg,rgba(255,252,247,.99),rgba(255,252,247,.91) 58%,rgba(255,252,247,.52)),
+    url('./temple-silhouette.png') right -10px bottom -10px/390px auto no-repeat!important;
+}
+
+#prayersOverlay .modal-head,
+#etiquetteOverlay .modal-head,
+#vowOverlay .modal-head{
+  background:
+    linear-gradient(90deg,rgba(255,252,247,.99),rgba(255,252,247,.91) 60%,rgba(255,252,247,.50)),
+    url('./lotus-soft.png') right 40px bottom -30px/128px auto no-repeat!important;
+}
+
+#glossaryOverlay .modal-head{
+  background:
+    linear-gradient(90deg,rgba(255,252,247,.99),rgba(255,252,247,.91) 60%,rgba(255,252,247,.50)),
+    url('./window-pattern-soft.png') right 20px center/210px auto no-repeat!important;
+}
+
+#quizOverlay .modal-head,
+#contactOverlay .modal-head,
+#photoPolicyOverlay .modal-head{
+  background:
+    linear-gradient(90deg,rgba(255,252,247,.99),rgba(255,252,247,.91) 62%,rgba(255,252,247,.54)),
+    url('./ink-wash-blob.png') right 22px center/170px auto no-repeat!important;
+}
+
+/* copy feature in settings remains a link, but looks illustrated */
+#settingsOverlay .sf-copy{
+  background:
+    linear-gradient(145deg,#fffdf9,#f7f0f8)!important;
+}
+
+/* ---------- TABLET ---------- */
+@media (min-width:621px) and (max-width:1100px){
+  header.hero{
+    background-position:right -70px top 28px!important;
+    background-size:720px auto!important;
+  }
+  header.hero::before{
+    width:225px!important;
+    height:350px!important;
+    right:-8px!important;
+    top:210px!important;
+    bottom:auto!important;
+  }
+  .hero-main-grid{
+    min-height:390px!important;
+    grid-template-columns:1fr!important;
+  }
+  .hero-copy{
+    max-width:72%!important;
+  }
+  .hero-experience .hip-quick-row{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+  .hero-pilgrim-feature .pilgrim-collection-chip{
+    grid-template-columns:125px minmax(0,1fr) 52px!important;
+  }
+}
+
+/* ---------- MOBILE: MATCH APPROVED MOCKUP ---------- */
+@media(max-width:620px){
+  header.hero{
+    padding:20px 14px 22px!important;
+    border-radius:0 0 24px 24px!important;
+    background-position:right -160px top 48px!important;
+    background-size:620px auto!important;
+  }
+
+  header.hero::after{
+    background:
+      linear-gradient(90deg,
+        rgba(251,248,242,.99) 0%,
+        rgba(251,248,242,.95) 58%,
+        rgba(251,248,242,.54) 76%,
+        rgba(251,248,242,.08) 100%)!important;
+  }
+
+  .hero-main-grid{
+    display:block!important;
+    min-height:500px!important;
+  }
+
+  .hero-copy{
+    max-width:86%!important;
+  }
+
+  .hero-title-row h1{
+    font-size:41px!important;
+  }
+
+  .hero-tagline{
+    max-width:285px!important;
+    font-size:20px!important;
+    line-height:1.45!important;
+  }
+
+  .hero-copy p{
+    max-width:292px!important;
+    font-size:12.6px!important;
+    line-height:1.85!important;
+  }
+
+  header.hero::before{
+    width:183px!important;
+    height:304px!important;
+    right:-21px!important;
+    top:248px!important;
+    bottom:auto!important;
+    opacity:.95!important;
+  }
+
+  .hero-top-actions{
+    top:12px!important;
+    right:9px!important;
+  }
+
+  .hero-top-action{
+    min-height:34px!important;
+    padding:5px 9px!important;
+    font-size:10px!important;
+  }
+
+  .hero-utility{
+    grid-template-columns:1fr 1fr!important;
+    gap:10px!important;
+    margin-top:4px!important;
+  }
+
+  .hero-util-btn{
+    min-height:118px!important;
+    padding:15px 12px!important;
+    grid-template-columns:45px minmax(0,1fr) 28px!important;
+    border-radius:19px!important;
+  }
+
+  .hero-util-btn .hero-util-icon{
+    width:45px!important;
+    height:45px!important;
+  }
+
+  .hero-util-copy b{
+    font-size:16px!important;
+  }
+
+  .hero-util-copy small{
+    font-size:9.8px!important;
+    line-height:1.4!important;
+  }
+
+  .hero-util-btn::after{
+    width:98px!important;
+    height:65px!important;
+  }
+
+  .hero-experience{
+    margin-top:19px!important;
+  }
+
+  .hero-section-kicker{
+    font-size:16px!important;
+    margin-bottom:10px!important;
+  }
+
+  .hero-experience .hip-quick-row{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:10px!important;
+  }
+
+  .hero-experience .hip-quick-btn{
+    min-height:124px!important;
+    padding:15px 11px!important;
+    grid-template-columns:46px minmax(0,1fr) 17px!important;
+    border-radius:18px!important;
+  }
+
+  .hero-experience .hip-quick-btn .hq-icon{
+    width:46px!important;
+    height:46px!important;
+    font-size:21px!important;
+  }
+
+  .hero-experience .hip-quick-btn .hq-copy b{
+    font-size:14px!important;
+  }
+
+  .hero-experience .hip-quick-btn .hq-copy small{
+    font-size:10.2px!important;
+    line-height:1.45!important;
+  }
+
+  .hero-pilgrim-feature{
+    margin-top:17px!important;
+  }
+
+  .hero-pilgrim-feature .pilgrim-collection-chip{
+    min-height:142px!important;
+    grid-template-columns:118px minmax(0,1fr) 44px!important;
+    gap:8px!important;
+    padding:14px 13px!important;
+    border-radius:21px!important;
+    background:
+      linear-gradient(90deg,rgba(255,250,238,.98),rgba(250,232,192,.92)),
+      url('./temple-silhouette.png') right bottom/58% auto no-repeat!important;
+  }
+
+  .hero-pilgrim-feature .pc-lotus{
+    width:110px!important;
+    height:92px!important;
+  }
+
+  .hero-pilgrim-feature .pc-lotus img{
+    width:106px!important;
+    height:86px!important;
+  }
+
+  .hero-pilgrim-feature .pc-label{
+    font-size:10.5px!important;
+  }
+
+  .hero-pilgrim-feature .pc-title{
+    font-size:24px!important;
+  }
+
+  .hero-pilgrim-feature .pc-progress{
+    font-size:10.5px!important;
+    line-height:1.4!important;
+  }
+
+  .hero-pilgrim-feature .pc-arrow{
+    width:42px!important;
+    height:42px!important;
+    font-size:22px!important;
+  }
+
+  .hero-pilgrim-feature .pilgrim-collection-chip::after{
+    right:45px!important;
+    bottom:-12px!important;
+    font-size:70px!important;
+  }
+
+  .hero-journey-panel{
+    margin-top:16px!important;
+    padding:16px 13px!important;
+    border-radius:21px!important;
+  }
+
+  .hero-journey-top{
+    display:block!important;
+  }
+
+  .hero-badge-row{
+    display:grid!important;
+    grid-template-columns:1fr 1fr!important;
+    gap:8px!important;
+  }
+
+  .hero-stats{
+    margin-top:13px!important;
+  }
+
+  #settingsOverlay .settings-feature{
+    min-height:98px!important;
+    padding-right:42px!important;
+  }
+  #settingsOverlay .settings-feature::after{
+    width:66px!important;
+    height:56px!important;
+    opacity:.14!important;
+  }
+}
+
+/* ---------- TOUCH PERFORMANCE ---------- */
+@media (hover:none), (pointer:coarse){
+  #settingsOverlay,
+  #albumOverlay,
+  #badgeOverlay,
+  #passportOverlay,
+  #photobookOverlay,
+  #prayersOverlay,
+  #etiquetteOverlay,
+  #glossaryOverlay,
+  #vowOverlay,
+  #quizOverlay,
+  #contactOverlay,
+  #photoPolicyOverlay{
+    backdrop-filter:none!important;
+    -webkit-backdrop-filter:none!important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -9112,6 +9657,18 @@ header.hero{
         </div>
       </div>
 
+      <section class="hero-pilgrim-feature" aria-label="108 순례 컬렉션">
+        <button class="pilgrim-collection-chip pilgrim-collection-main" type="button" onclick="openPilgrimCollection()">
+          <span class="pc-lotus"><img src="./lotus-soft.png" alt="" aria-hidden="true"></span>
+          <span class="pc-copy">
+            <span class="pc-label">108 순례</span>
+            <span class="pc-title">순례 컬렉션</span>
+            <span class="pc-progress" id="heroLotusProgress">연꽃을 하나씩 피워보세요</span>
+          </span>
+          <span class="pc-arrow">→</span>
+        </button>
+      </section>
+
       <div class="hero-journey-panel">
         <div class="hero-journey-top">
           <div>
@@ -9126,11 +9683,6 @@ header.hero{
               <span>산사노트에서 절과 길을 다니며 마음을 돌보는 순례자를 부르는 별도 호칭이에요. 방문 수에 따라 오르는 레벨은 ‘초심자 → 구도자 → 행자 → 수행자 → 선지식 → 대덕’ 순서예요.</span>
             </div>
           </div>
-          <button class="pilgrim-collection-chip" type="button" onclick="openPilgrimCollection()">
-            <span class="pc-lotus">🪷</span>
-            <span class="pc-copy"><span class="pc-label">108 순례</span><span class="pc-title">순례 컬렉션</span><span class="pc-progress" id="heroLotusProgress">연꽃을 하나씩 피워보세요</span></span>
-            <span class="pc-arrow">→</span>
-          </button>
         </div>
         <div class="hero-stats" id="heroStats"></div>
       </div>
