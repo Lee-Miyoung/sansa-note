@@ -1,1 +1,199 @@
-*{box-sizing:border-box}:root{--ink:#2f2a22;--muted:#766e61;--paper:#f6f0e4;--line:#d8ccb7;--olive-dark:#56523d;--shadow:0 16px 36px rgba(66,52,31,.10)}html,body{margin:0;padding:0;background:#ece4d6;color:var(--ink);font-family:"Noto Serif KR","Nanum Myeongjo",serif}body{min-height:100vh;background:radial-gradient(circle at 15% 10%,rgba(255,255,255,.75),transparent 28%),linear-gradient(180deg,#f0e8da,#e7dfd0)}.paper-noise{position:fixed;inset:0;pointer-events:none;opacity:.18;background-image:repeating-linear-gradient(0deg,rgba(80,60,35,.035) 0 1px,transparent 1px 5px)}.topbar{position:sticky;top:0;z-index:20;height:58px;display:grid;grid-template-columns:48px 1fr 48px;align-items:center;padding:0 8px;background:rgba(247,242,232,.92);backdrop-filter:blur(10px);border-bottom:1px solid rgba(130,110,80,.15)}.topbar-title{text-align:center;font-family:"Nanum Myeongjo";font-weight:800;font-size:18px}.icon-btn,.sheet-close{border:0;background:transparent;color:var(--ink);font-size:24px;text-decoration:none;text-align:center;cursor:pointer}.page-shell{width:min(720px,100%);margin:0 auto;padding:18px 14px 54px}.hero-card,.content-card,.progress-card{position:relative;overflow:hidden;background:rgba(255,252,245,.84);border:1px solid rgba(155,129,92,.20);border-radius:24px;box-shadow:var(--shadow)}.hero-card{min-height:520px;background:radial-gradient(circle at 80% 18%,rgba(177,149,103,.13),transparent 28%),linear-gradient(180deg,rgba(255,252,245,.96),rgba(246,239,225,.93))}.hero-card:after{content:"";position:absolute;left:-10%;right:-10%;bottom:-18px;height:150px;opacity:.15;background:radial-gradient(80% 75% at 20% 100%,#7f8b77 0 42%,transparent 43%),radial-gradient(70% 65% at 58% 100%,#6f7968 0 45%,transparent 46%),radial-gradient(65% 55% at 92% 100%,#849080 0 47%,transparent 48%)}.hero-inner{position:relative;z-index:2;padding:56px 34px 62px;text-align:center}.eyebrow{font-size:12px;letter-spacing:.16em;color:#8a7a61;margin-bottom:18px}.eyebrow.dark{color:#7c6b51;margin-bottom:4px}.hero-inner h1{font-family:"Nanum Myeongjo";font-size:38px;margin:0 0 8px;letter-spacing:.08em}.hero-inner h2{font-family:"Nanum Myeongjo";font-size:24px;margin:0 0 10px}.subtitle{margin:0;color:var(--muted);font-size:14px}.vertical-hanja{position:absolute;left:18px;top:100px;z-index:1;color:rgba(100,88,68,.08);font-size:42px;line-height:1.5;font-family:"Nanum Myeongjo";white-space:pre-line}.mountain-line{display:flex;justify-content:center;gap:5px;align-items:end;height:26px;margin:35px 0 18px}.mountain-line span{display:block;width:42px;border-top:1px solid rgba(92,82,66,.25);transform:rotate(-10deg)}.mountain-line span:nth-child(2){width:55px;transform:rotate(8deg)}.mountain-line span:nth-child(3){width:34px;transform:rotate(-5deg)}blockquote{margin:0 auto;max-width:480px;font-size:21px;line-height:1.9;font-weight:600;word-break:keep-all}.source{margin-top:26px;font-size:11px;color:#887d6d;line-height:1.7}.content-card{margin-top:16px;padding:26px 22px}.section-kicker{font-weight:700;font-size:16px;margin-bottom:14px}.explain{font-size:14.5px;line-height:2;color:#4b443a;white-space:pre-line}.copy-guide{padding:16px 17px;border-radius:16px;background:#f1e7d6;border:1px solid rgba(139,110,73,.16);font-size:15px;line-height:1.9;white-space:pre-line;margin-bottom:14px}.writing-area,.memo-area{width:100%;resize:vertical;border:1px solid #d6c9b4;border-radius:16px;background:repeating-linear-gradient(180deg,rgba(255,253,248,.95) 0 39px,rgba(181,157,123,.14) 40px);padding:15px 16px;font-family:inherit;font-size:16px;line-height:2.45;color:var(--ink);outline:none}.writing-area:focus,.memo-area:focus{border-color:#a98d65;box-shadow:0 0 0 3px rgba(169,141,101,.10)}.question-kicker{margin-top:28px}.question{font-size:16px;line-height:1.9;margin:0 0 14px;word-break:keep-all}.memo-area{background:rgba(255,253,248,.88);line-height:1.8}.primary-btn,.ghost-btn{width:100%;height:52px;border-radius:14px;font-family:inherit;font-size:15px;font-weight:700;cursor:pointer}.primary-btn{margin-top:18px;border:0;background:var(--olive-dark);color:#fffaf0;box-shadow:0 8px 20px rgba(80,75,53,.16)}.ghost-btn{margin-top:10px;border:1px solid #cfc1a9;background:transparent;color:#5a5143}.save-hint{text-align:center;color:#928572;font-size:11px;margin:14px 0 0}.progress-card{margin-top:16px;padding:22px;display:flex;gap:18px;align-items:center;justify-content:space-between}.progress-label{font-size:12px;color:#8d806c;margin-bottom:6px}.progress-title{font-size:14px;line-height:1.6}.progress-title strong{font-size:24px}.lotus-row{display:flex;gap:4px;flex-wrap:wrap;max-width:125px;justify-content:flex-end}.lotus-dot{font-size:17px;opacity:.22;filter:grayscale(1)}.lotus-dot.done{opacity:1;filter:none}.sheet-backdrop{position:fixed;inset:0;z-index:29;background:rgba(42,35,27,.35)}.sheet{position:fixed;z-index:30;left:50%;bottom:0;width:min(720px,100%);max-height:80vh;transform:translate(-50%,105%);transition:transform .28s ease;background:#f8f2e7;border-radius:24px 24px 0 0;box-shadow:0 -20px 50px rgba(41,31,19,.18);padding:10px 18px 26px;overflow:auto}.sheet.open{transform:translate(-50%,0)}.sheet-handle{width:46px;height:5px;background:#d3c5af;border-radius:99px;margin:2px auto 14px}.sheet-head{display:flex;justify-content:space-between;align-items:start}.sheet-head h3{font-family:"Nanum Myeongjo";font-size:26px;margin:0}.sheet-desc{font-size:13px;color:#867966}.content-list{display:flex;flex-direction:column;gap:8px;margin-top:18px}.content-item{width:100%;display:grid;grid-template-columns:42px 1fr 22px;gap:10px;align-items:center;border:1px solid #dfd2bd;background:#fffaf1;border-radius:15px;padding:12px;text-align:left;font-family:inherit;color:inherit;cursor:pointer}.content-num{width:34px;height:34px;display:grid;place-items:center;border-radius:50%;background:#f0e5d1;font-size:12px}.content-main b{display:block;font-size:15px;margin-bottom:3px}.content-main small{display:block;color:#8b7c68;font-size:11px}.content-arrow{font-size:18px;color:#8d7c63}.complete-overlay{position:fixed;inset:0;z-index:50;display:grid;place-items:center;padding:24px;background:rgba(42,35,27,.48);backdrop-filter:blur(5px)}.complete-card{width:min(390px,100%);background:#fbf5ea;border-radius:26px;padding:34px 24px 26px;text-align:center;box-shadow:0 26px 70px rgba(38,29,18,.25)}.lotus-mark{font-size:56px;margin-bottom:10px}.complete-card h3{font-family:"Nanum Myeongjo";font-size:25px;line-height:1.55;margin:0 0 14px}.complete-card p{color:#746a5c;line-height:1.8;font-size:14px}[hidden]{display:none!important}@media(max-width:520px){.page-shell{padding:12px 10px 42px}.hero-card{min-height:470px;border-radius:20px}.hero-inner{padding:46px 22px 52px}.hero-inner h1{font-size:32px}blockquote{font-size:18px}.content-card{padding:22px 17px}.progress-card{align-items:flex-start;flex-direction:column}.lotus-row{max-width:none;justify-content:flex-start}}
+*{box-sizing:border-box}
+:root{
+  --ink:#211d19;
+  --body:#4f4942;
+  --muted:#7b7166;
+  --paper:#f8f4ed;
+  --card:#fffdf9;
+  --line:#e6dccf;
+  --gold:#c78b36;
+  --gold2:#a96f24;
+  --lav:#9c82aa;
+  --green:#315e53;
+  --shadow:0 14px 34px rgba(72,55,38,.07);
+}
+html,body{margin:0;min-height:100%;color:var(--ink);font-family:"Noto Serif KR","Nanum Myeongjo",serif}
+body{background:#f7f3ec}
+.paper-layer{
+  position:fixed;inset:0;z-index:-3;pointer-events:none;
+  background:
+    linear-gradient(rgba(250,248,244,.84),rgba(250,248,244,.84)),
+    url("../paper-texture-ready.webp") center top/cover no-repeat fixed;
+}
+.paper-layer:after{
+  content:"";position:absolute;inset:0;
+  background:repeating-linear-gradient(0deg,rgba(70,54,36,.012) 0 1px,transparent 1px 5px)
+}
+button,a,textarea{font:inherit}
+button{cursor:pointer}
+
+.site-head{
+  height:64px;padding:0 max(24px,calc((100vw - 1440px)/2));
+  display:flex;align-items:center;gap:18px;
+  background:rgba(255,253,249,.90);border-bottom:1px solid rgba(130,104,72,.11);
+  backdrop-filter:blur(12px);position:sticky;top:0;z-index:30
+}
+.brand{display:flex;align-items:center;gap:9px;color:#1e1a17;text-decoration:none;font-size:21px}
+.brand-mark{
+  width:28px;height:28px;border-radius:50%;display:grid;place-items:center;
+  background:#24211d;color:#d7a24c;font-size:12px;box-shadow:0 3px 8px rgba(0,0,0,.14)
+}
+.crumb{color:#8a7f74;font-size:13px}
+.head-actions{margin-left:auto;display:flex;gap:8px}
+.head-pill{
+  border:1px solid #e2d8cb;background:#fffdfa;color:#3a342e;text-decoration:none;
+  border-radius:999px;padding:8px 14px;font-size:12px;font-weight:700
+}
+
+.copy-hero{
+  min-height:270px;position:relative;overflow:hidden;
+  background:
+    linear-gradient(90deg,rgba(250,247,241,.99) 0%,rgba(250,247,241,.92) 45%,rgba(250,247,241,.18) 78%,rgba(250,247,241,.03) 100%),
+    url("../hero-sun-wash.png") 70% 0/220px auto no-repeat,
+    url("../hero-mountain.png") right 18% top 0/760px auto no-repeat;
+  border-bottom:1px solid rgba(139,108,69,.10)
+}
+.copy-hero-text{width:min(1440px,calc(100% - 48px));margin:auto;padding:46px 0 38px}
+.hero-kicker{font-size:13px;color:#a76e24;letter-spacing:.13em;font-weight:800;margin-bottom:12px}
+.copy-hero h1{font-family:"Nanum Myeongjo";font-size:50px;line-height:1.05;margin:0 0 12px;letter-spacing:-1px}
+.copy-hero h2{font-size:20px;margin:0 0 12px;font-weight:700}
+.copy-hero p{font-size:13.5px;line-height:1.9;color:#5d554d;margin:0;max-width:650px}
+
+.copy-layout{
+  width:min(1440px,calc(100% - 48px));margin:-6px auto 60px;
+  display:grid;grid-template-columns:minmax(0,1fr) 390px;gap:18px;align-items:start
+}
+.copy-main-card,.side-card{
+  background:rgba(255,253,249,.94);border:1px solid var(--line);box-shadow:var(--shadow)
+}
+.copy-main-card{border-radius:24px;padding:22px}
+.copy-side{display:flex;flex-direction:column;gap:14px}
+.side-card{border-radius:20px;padding:20px}
+
+.copy-title-row{display:grid;grid-template-columns:145px 1fr;gap:20px;align-items:center}
+.number-card{
+  min-height:105px;border-radius:18px;padding:16px 18px;
+  background:linear-gradient(145deg,#fff5df,#f6ddb0);border:1px solid #eccd94;color:#80551d
+}
+.number-card small{display:block;font-size:11px;font-weight:700;margin-bottom:6px}
+.number-card strong{font-family:"Nanum Myeongjo";font-size:42px;line-height:1}
+.number-card span{font-size:18px;margin-left:3px}
+.copy-title-main{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap}
+.copy-title h2{font-family:"Nanum Myeongjo";font-size:34px;margin:0}
+.hanja-inline{font-size:21px;color:#7f7469}
+.copy-title p{margin:7px 0 0;color:#635a51;font-size:14px}
+
+.quote-panel{
+  position:relative;overflow:hidden;margin-top:16px;border:1px solid #ead8b8;border-radius:18px;
+  min-height:150px;padding:28px 180px 24px 165px;
+  background:
+    url("../temple-silhouette.png") right bottom/48% auto no-repeat,
+    linear-gradient(135deg,#fffaf0,#f9edd9)
+}
+.quote-lotus{position:absolute;left:16px;bottom:-8px;width:140px;opacity:.72}
+.quote-panel blockquote{
+  margin:0;font-family:"Nanum Myeongjo";font-size:24px;line-height:1.7;font-weight:700;white-space:pre-line
+}
+.source{text-align:center;margin-top:10px;color:#927e65;font-size:10.5px}
+
+.read-panel{margin-top:16px;padding:18px 4px 2px}
+.section-title{display:flex;align-items:center;gap:8px;font-size:16px}
+.section-icon{color:#a77028}
+.explain{margin-top:10px;color:#514a43;font-size:14px;line-height:1.9;white-space:pre-line}
+
+.write-section{margin-top:18px}
+.write-head{display:flex;justify-content:space-between;gap:14px;align-items:center;margin-bottom:9px}
+.write-head>span{font-size:11px;color:#8b8075}
+.copy-guide{
+  border:1px solid #eadfce;border-radius:14px 14px 0 0;padding:13px 16px;
+  background:#fffaf2;color:#524940;font-size:13px;line-height:1.8;white-space:pre-line
+}
+.writing-area,.memo-area{
+  display:block;width:100%;resize:vertical;outline:0;color:#302b26;
+  border:1px solid #dfd4c5;background:rgba(255,254,251,.94);
+  padding:16px 18px;font-size:15px
+}
+.writing-area{
+  border-top:0;border-radius:0 0 14px 14px;line-height:2.5;
+  background:
+    repeating-linear-gradient(180deg,rgba(255,254,251,.96) 0 39px,rgba(181,151,110,.15) 40px)
+}
+.memo-area{border-radius:14px;line-height:1.8}
+.writing-area:focus,.memo-area:focus{border-color:#c9a468;box-shadow:0 0 0 3px rgba(199,139,54,.09)}
+.question{font-size:14px;line-height:1.8;color:#514a43;margin:0 0 9px}
+.action-row{display:flex;gap:10px;justify-content:flex-end;margin-top:18px}
+.primary-btn,.ghost-btn{
+  min-height:48px;border-radius:999px;padding:0 24px;font-weight:800;font-size:13px
+}
+.primary-btn{
+  border:0;background:linear-gradient(135deg,#d39a47,#b87625);color:#fff;box-shadow:0 8px 18px rgba(165,106,34,.16)
+}
+.ghost-btn{border:1px solid #ded3c5;background:#fffdfa;color:#61584f}
+.save-hint{text-align:right;color:#93877a;font-size:10px;margin:9px 4px 0}
+
+.side-head{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.side-head h3{margin:0;font-size:15px}
+.text-btn{border:0;background:transparent;color:#7a6c5f;font-size:11px}
+.progress-big{margin-top:18px;color:#b2772d}.progress-big strong{font-family:"Nanum Myeongjo";font-size:36px}.progress-big span{font-size:18px}
+.progress-track{height:10px;border-radius:999px;background:#eee8e0;margin:10px 0 14px;overflow:hidden}
+.progress-track i{display:block;width:0;height:100%;border-radius:inherit;background:linear-gradient(90deg,#d29a48,#b87928);transition:width .25s}
+.lotus-row{display:flex;gap:3px;flex-wrap:wrap}.lotus-dot{font-size:15px;opacity:.20;filter:grayscale(1)}.lotus-dot.done{opacity:1;filter:none}
+.side-title{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:800}
+.side-title span{color:#9678a4}
+.keyword-card{background:linear-gradient(145deg,#fffdfa,#f7f1fa)}
+.keyword-list{display:flex;gap:6px;flex-wrap:wrap;margin-top:13px}
+.keyword-list span{padding:6px 9px;border-radius:999px;background:#f1ecf4;color:#6e6076;font-size:10px}
+.insight-card{position:relative;overflow:hidden;display:flex;gap:12px;background:linear-gradient(145deg,#fffdfa,#f4edf7)}
+.insight-card img{position:absolute;right:-10px;bottom:-20px;width:110px;opacity:.18}
+.insight-card p{position:relative;margin:9px 0 0;color:#5b5350;font-size:12px;line-height:1.8}
+
+.vertical-hanja{position:fixed;left:-9999px}
+
+.sheet-backdrop{position:fixed;inset:0;z-index:40;background:rgba(42,35,27,.30);backdrop-filter:blur(3px)}
+.sheet{
+  position:fixed;z-index:41;left:50%;bottom:0;width:min(720px,100%);max-height:84vh;
+  transform:translate(-50%,105%);transition:transform .28s ease;background:#fbf8f2;
+  border-radius:26px 26px 0 0;box-shadow:0 -22px 60px rgba(42,31,20,.18);padding:10px 18px 28px;overflow:auto
+}
+.sheet.open{transform:translate(-50%,0)}
+.sheet-handle{width:48px;height:5px;background:#d8ccbd;border-radius:999px;margin:2px auto 15px}
+.sheet-head{display:flex;justify-content:space-between;align-items:start}.sheet-head h3{font-family:"Nanum Myeongjo";font-size:28px;margin:2px 0 0}
+.sheet-kicker{font-size:11px;color:#a6722b}.sheet-close{border:0;background:transparent;font-size:22px;color:#50473f}
+.sheet-desc{font-size:12px;color:#83776c}
+.content-list{display:flex;flex-direction:column;gap:8px;margin-top:16px}
+.content-item{
+  width:100%;display:grid;grid-template-columns:44px 1fr 22px;gap:10px;align-items:center;
+  border:1px solid #e5dacb;background:#fffdfa;border-radius:15px;padding:11px;text-align:left;color:#332d27
+}
+.content-item.current{border-color:#c99954;background:#fff8e9}
+.content-num{width:34px;height:34px;display:grid;place-items:center;border-radius:50%;background:#f2e7d4;font-size:10px}
+.content-main b{display:block;font-size:14px}.content-main small{display:block;margin-top:3px;color:#887c70;font-size:10px}.content-arrow{font-size:18px;color:#9a856e}
+
+.complete-overlay{position:fixed;inset:0;z-index:60;display:grid;place-items:center;padding:22px;background:rgba(39,31,24,.38);backdrop-filter:blur(5px)}
+.complete-card{width:min(400px,100%);background:#fffaf2;border:1px solid #eadbc4;border-radius:26px;padding:32px 24px 24px;text-align:center;box-shadow:0 28px 70px rgba(38,28,18,.22)}
+.complete-lotus{width:100px;height:100px;object-fit:contain}.complete-card h3{font-family:"Nanum Myeongjo";font-size:25px;line-height:1.55;margin:5px 0 10px}.complete-card p{color:#746a60;font-size:13px;line-height:1.8}.complete-card .primary-btn,.complete-card .ghost-btn{width:100%;margin-top:9px}
+[hidden]{display:none!important}
+
+@media(max-width:980px){
+  .copy-layout{grid-template-columns:1fr;width:min(800px,calc(100% - 30px))}
+  .copy-side{display:grid;grid-template-columns:1fr 1fr}.progress-side{grid-row:span 2}
+}
+@media(max-width:620px){
+  .site-head{height:58px;padding:0 12px;gap:9px}.brand{font-size:17px}.crumb{display:none}.head-pill{padding:7px 10px;font-size:10px}
+  .copy-hero{
+    min-height:350px;
+    background:
+      linear-gradient(90deg,rgba(250,247,241,.99) 0%,rgba(250,247,241,.90) 64%,rgba(250,247,241,.12) 100%),
+      url("../hero-sun-wash.png") 79% 20px/170px auto no-repeat,
+      url("../hero-mountain.png") right -120px bottom/620px auto no-repeat
+  }
+  .copy-hero-text{width:calc(100% - 28px);padding:35px 0}.copy-hero h1{font-size:37px}.copy-hero h2{font-size:18px;max-width:280px}.copy-hero p{font-size:12px;max-width:310px}
+  .copy-layout{width:calc(100% - 20px);margin:12px auto 42px}
+  .copy-main-card{padding:14px;border-radius:20px}
+  .copy-title-row{grid-template-columns:96px 1fr;gap:12px}.number-card{min-height:86px;padding:13px}.number-card strong{font-size:32px}.copy-title h2{font-size:25px}.hanja-inline{font-size:16px}.copy-title p{font-size:11px}
+  .quote-panel{padding:22px 16px 24px 95px;min-height:150px;background-size:75% auto,cover}.quote-lotus{width:90px;left:3px;bottom:-1px}.quote-panel blockquote{font-size:18px;line-height:1.7}.source{text-align:left;margin-left:0}
+  .write-head{align-items:flex-start;flex-direction:column;gap:4px}.write-head>span{font-size:9.5px}
+  .copy-guide{font-size:12px}.writing-area,.memo-area{font-size:14px}
+  .action-row{flex-direction:column-reverse}.primary-btn,.ghost-btn{width:100%}
+  .copy-side{display:flex}.side-card{padding:16px;border-radius:18px}
+}
