@@ -8798,305 +8798,165 @@ header.hero::before{
 }
 
 
-/* =====================================================================
-   SANSA NOTE · FINAL UI UNIFICATION
-   Applies the approved modern temple archive concept to remaining modals.
-   ===================================================================== */
-
-.overlay{
-  background:rgba(38,31,25,.34)!important;
-  backdrop-filter:blur(7px)!important;
-  -webkit-backdrop-filter:blur(7px)!important;
+/* ===== SAFE REPAIR · FEATURE PANEL ONLY =====
+   Shared overlay/modal mechanics are intentionally untouched. */
+#settingsOverlay .features-modal{
+  background:
+    linear-gradient(rgba(252,249,243,.97),rgba(252,249,243,.97)),
+    url('./paper-texture-ready.webp') center/cover no-repeat!important;
+  border:1px solid rgba(132,103,67,.15)!important;
+  border-radius:22px!important;
+  box-shadow:0 26px 70px rgba(45,33,23,.17)!important;
 }
-.overlay .modal{
+#settingsOverlay .modal-head{
+  background:
+    linear-gradient(90deg,rgba(255,252,247,.99),rgba(255,252,247,.91) 68%,rgba(255,252,247,.56)),
+    url('./lotus-soft.png') right 42px bottom -24px/120px auto no-repeat!important;
+  border-bottom:1px solid #e8ded1!important;
+}
+#settingsOverlay .modal-head h2{color:#231f1b!important}
+#settingsOverlay .modal-head .sub{color:#756b61!important}
+#settingsOverlay .settings-section-title{color:#302a25!important}
+#settingsOverlay .settings-feature{
+  background:#fffdf9!important;
+  border:1px solid #e6ddd1!important;
+  box-shadow:0 7px 18px rgba(64,48,34,.035)!important;
+}
+#settingsOverlay .settings-feature b{color:#2a2520!important}
+#settingsOverlay .settings-feature small{color:#81776d!important;opacity:1!important}
+#settingsOverlay .settings-account-card{
+  background:#fffdf9!important;
+  border:1px solid #e6ddd1!important;
+  box-shadow:none!important;
+}
+@media(max-width:560px){
+  #settingsOverlay .features-modal{
+    border-radius:20px!important;
+  }
+}
+
+
+/* SAFE FINAL PASS — scoped only to target features */
+#settingsOverlay .features-modal{
+  background:
+    linear-gradient(rgba(252,249,243,.97),rgba(252,249,243,.97)),
+    url('./paper-texture-ready.webp') center/cover no-repeat!important;
+  border:1px solid rgba(132,103,67,.15)!important;
+  border-radius:22px!important;
+  box-shadow:0 22px 60px rgba(45,33,23,.16)!important;
+}
+#settingsOverlay .modal-head{
+  background:
+    linear-gradient(90deg,rgba(255,252,247,.99),rgba(255,252,247,.92) 68%,rgba(255,252,247,.58)),
+    url('./lotus-soft.png') right 42px bottom -25px/118px auto no-repeat!important;
+  border-bottom:1px solid #e8ded1!important;
+}
+#settingsOverlay .modal-head h2{color:#231f1b!important}
+#settingsOverlay .modal-head .sub{color:#756b61!important}
+#settingsOverlay .settings-account-card{
+  background:#fffdf9!important;
+  border:1px solid #e6ddd1!important;
+  box-shadow:none!important;
+  border-radius:16px!important;
+}
+#settingsOverlay .settings-feature-grid{gap:9px!important}
+#settingsOverlay .settings-feature{
+  min-height:104px!important;
+  background:#fffdf9!important;
+  border:1px solid #e6ddd1!important;
+  box-shadow:0 7px 18px rgba(64,48,34,.035)!important;
+  border-radius:16px!important;
+}
+#settingsOverlay .settings-feature b{color:#2a2520!important}
+#settingsOverlay .settings-feature small{color:#81776d!important;opacity:1!important}
+
+#worryOverlay .modal,
+#breathOverlay .modal,
+#moktakOverlay .modal{
   background:
     linear-gradient(rgba(252,249,243,.965),rgba(252,249,243,.965)),
     url('./paper-texture-ready.webp') center/cover no-repeat!important;
   border:1px solid rgba(132,103,67,.15)!important;
-  border-radius:24px!important;
-  box-shadow:0 28px 80px rgba(45,33,23,.18)!important;
-  color:#26211d!important;
+  box-shadow:0 22px 60px rgba(45,33,23,.15)!important;
 }
-.overlay .modal.wide{
-  max-width:min(1080px,calc(100vw - 40px))!important;
-}
-.overlay .modal-head{
-  position:relative!important;
-  overflow:hidden!important;
-  min-height:92px!important;
-  padding:20px 24px 18px!important;
-  border-bottom:1px solid rgba(135,105,68,.11)!important;
+#worryOverlay .modal-head,
+#breathOverlay .modal-head,
+#moktakOverlay .modal-head{
+  border-bottom:1px solid #e8ded1!important;
   background:
-    linear-gradient(90deg,rgba(255,252,247,.98) 0%,rgba(255,252,247,.93) 55%,rgba(255,252,247,.52) 100%),
-    url('./hero-mountain.png') right -20px center/390px auto no-repeat!important;
+    linear-gradient(90deg,rgba(255,252,247,.99),rgba(255,252,247,.91) 66%,rgba(255,252,247,.54)),
+    url('./hero-mountain.png') right -55px center/340px auto no-repeat!important;
 }
-.overlay .modal-head::before{
-  content:''!important;
-  position:absolute!important;
-  right:68px!important;
-  top:-35px!important;
-  width:125px!important;
-  height:125px!important;
-  border-radius:50%!important;
-  background:url('./hero-sun-wash.png') center/contain no-repeat!important;
-  opacity:.28!important;
-  pointer-events:none!important;
-}
-.overlay .modal-head>div{position:relative!important;z-index:2!important}
-.overlay .modal-head h2{
-  margin:0 0 5px!important;
-  color:#201b17!important;
-  font-family:"Nanum Myeongjo","Noto Serif KR",serif!important;
-  font-size:24px!important;
-  line-height:1.25!important;
-  font-weight:800!important;
-  letter-spacing:-.4px!important;
-}
-.overlay .modal-head .sub{
-  color:#73685e!important;
-  font-size:11.5px!important;
-  line-height:1.55!important;
-  opacity:1!important;
-}
-.overlay .close-x{
-  position:relative!important;
-  z-index:4!important;
-  width:36px!important;
-  height:36px!important;
-  border-radius:50%!important;
-  border:1px solid #e1d6c8!important;
-  background:rgba(255,255,255,.88)!important;
-  color:#4b4239!important;
-  box-shadow:0 6px 16px rgba(60,45,31,.07)!important;
-}
-.overlay .modal-body{
-  padding:20px 22px 24px!important;
-  color:#4d463f!important;
+#worryOverlay .modal-head h2,
+#breathOverlay .modal-head h2,
+#moktakOverlay .modal-head h2{color:#231f1b!important}
+#worryOverlay .modal-head .sub,
+#breathOverlay .modal-head .sub,
+#moktakOverlay .modal-head .sub{color:#756b61!important}
+
+#pilgrimCollectionOverlay .pilgrim-collection-modal{
+  background:
+    linear-gradient(rgba(252,249,243,.97),rgba(252,249,243,.97)),
+    url('./paper-texture-ready.webp') center/cover no-repeat!important;
 }
 
-.overlay input:not([type="file"]),
-.overlay textarea,
-.overlay select,
-.overlay .searchbox{
-  color:#302a25!important;
-  background:#fffdfa!important;
-  border:1px solid #ddd2c4!important;
-  border-radius:13px!important;
-  box-shadow:none!important;
-}
-.overlay input:focus,
-.overlay textarea:focus,
-.overlay select:focus{
-  outline:none!important;
-  border-color:#c89a58!important;
-  box-shadow:0 0 0 3px rgba(200,154,88,.10)!important;
-}
-.overlay .btn,
-.overlay button.btn{
-  border-radius:999px!important;
-  font-weight:800!important;
-}
-.overlay .btn-primary{
-  background:linear-gradient(135deg,#d09a4c,#b67828)!important;
-  color:#fff!important;
-  border:0!important;
-  box-shadow:0 7px 16px rgba(167,106,36,.12)!important;
-}
-.overlay .btn-ghost{
-  background:#fffdfa!important;
-  color:#5d5349!important;
-  border:1px solid #ddd2c4!important;
-}
-
-#settingsOverlay .features-modal{
-  max-width:760px!important;
-}
-#settingsOverlay .modal-head{
-  min-height:118px!important;
-  background:
-    linear-gradient(90deg,rgba(255,252,247,.98),rgba(255,252,247,.88) 62%,rgba(255,252,247,.40)),
-    url('./lotus-soft.png') right 50px bottom -28px/145px auto no-repeat,
-    url('./hero-mountain.png') right -30px bottom/420px auto no-repeat!important;
-}
-.settings-account-card{
-  border-radius:18px!important;
-  background:linear-gradient(135deg,#fffdf9,#f8f2e8)!important;
-  border:1px solid #e6dbce!important;
-  box-shadow:none!important;
-  padding:16px!important;
-}
-.settings-account-card b{
-  color:#2a2520!important;
-  font-size:15px!important;
-}
-.settings-account-card p{
-  color:#7b7065!important;
-  font-size:10.5px!important;
-  margin-top:4px!important;
-}
-.settings-login-btn{
-  border:0!important;
-  border-radius:999px!important;
-  background:#315d52!important;
-  color:#fff!important;
-  min-height:38px!important;
-  padding:0 16px!important;
-  font-weight:900!important;
-}
-.settings-logout-btn{
-  border-radius:999px!important;
-  border:1px solid #ded3c6!important;
-  background:#fff!important;
-  color:#5d5248!important;
-}
-.settings-reset-link{
-  color:#9a7b59!important;
-  font-size:10px!important;
-}
-.settings-section-title{
-  position:relative!important;
-  margin:20px 0 9px!important;
-  padding-left:11px!important;
-  color:#2c2722!important;
-  font-size:12px!important;
-  font-weight:900!important;
-  letter-spacing:.02em!important;
-}
-.settings-section-title::before{
-  content:''!important;
-  position:absolute!important;
-  left:0!important;top:2px!important;bottom:2px!important;
-  width:3px!important;
-  border-radius:99px!important;
-  background:#b87b29!important;
-}
-.settings-feature-grid{
-  grid-template-columns:repeat(4,minmax(0,1fr))!important;
-  gap:9px!important;
-}
-.settings-feature{
-  min-height:112px!important;
-  padding:14px 10px!important;
-  display:flex!important;
-  flex-direction:column!important;
-  align-items:flex-start!important;
-  justify-content:center!important;
-  gap:7px!important;
-  text-align:left!important;
-  border-radius:16px!important;
-  border:1px solid #e6ddd1!important;
-  background:#fffdf9!important;
-  color:#302a25!important;
-  box-shadow:0 8px 18px rgba(64,48,34,.035)!important;
-  transition:transform .15s ease,box-shadow .15s ease,border-color .15s ease!important;
-}
-.settings-feature:hover{
-  transform:translateY(-2px)!important;
-  border-color:#d5c2a7!important;
-  box-shadow:0 12px 24px rgba(64,48,34,.06)!important;
-}
-.settings-feature>span{
-  width:39px!important;height:39px!important;
-  display:flex!important;align-items:center!important;justify-content:center!important;
-  border-radius:13px!important;
-  font-size:18px!important;
-  border:0!important;
-  box-shadow:none!important;
-}
-.settings-feature>b{
-  color:#2a2520!important;
-  font-size:12.5px!important;
-  line-height:1.25!important;
-}
-.settings-feature>small{
-  color:#81776d!important;
-  font-size:9.5px!important;
-  line-height:1.35!important;
-  opacity:1!important;
-}
-.sf-album>span,.sf-photo>span{background:#eaf2f6!important;color:#658ba2!important}
-.sf-badge>span,.sf-passport>span,.sf-book>span{background:#fff2dc!important;color:#b77c2d!important}
-.sf-prayer>span,.sf-etiquette>span{background:#f7ede2!important;color:#9f7041!important}
-.sf-glossary>span,.sf-dark>span{background:#edf0f6!important;color:#72829a!important}
-.sf-vow>span{background:#f8e9ec!important;color:#b07080!important}
-.sf-copy>span{background:#f2eaf4!important;color:#8a7195!important}
-.sf-quiz>span{background:#edf5ef!important;color:#65856e!important}
-.sf-contact>span{background:#f2eee8!important;color:#776c60!important}
-.settings-admin-link{
-  margin-top:18px!important;
-  min-height:42px!important;
-  border-radius:999px!important;
-  border:1px solid #ddd2c4!important;
-  background:#fff!important;
-  color:#6b6056!important;
-}
-
-#prayersOverlay .modal-head,
-#etiquetteOverlay .modal-head,
-#glossaryOverlay .modal-head,
-#vowOverlay .modal-head{
-  background:
-    linear-gradient(90deg,rgba(255,252,247,.99),rgba(255,252,247,.90) 56%,rgba(255,252,247,.38)),
-    url('./lotus-soft.png') right 54px bottom -22px/120px auto no-repeat,
-    url('./hero-mountain.png') right -20px bottom/370px auto no-repeat!important;
-}
-#albumOverlay .modal-head,
-#badgeOverlay .modal-head,
-#passportOverlay .modal-head,
-#photobookOverlay .modal-head{
-  background:
-    linear-gradient(90deg,rgba(255,252,247,.99),rgba(255,252,247,.88) 60%,rgba(255,252,247,.36)),
-    url('./temple-silhouette.png') right -12px bottom -14px/420px auto no-repeat!important;
-}
-#contactOverlay .modal-head,
-#photoPolicyOverlay .modal-head{
-  background:
-    linear-gradient(90deg,rgba(255,252,247,.99),rgba(255,252,247,.90) 60%,rgba(255,252,247,.44)),
-    url('./ink-wash-blob.png') right 30px center/210px auto no-repeat!important;
-}
-.prayer-card,.etiquette-card,.glossary-card,.vow-card,
-.prayer-section,.etiquette-section,.glossary-item,
-.album-card,.badge-card,.passport-card,.photobook-card,
-.course-card,.streak-card,.contact-card,.photo-policy-card,
-.modal .card,.modal .info-card,.modal .guide-card,.modal .notice-card{
-  background:#fffdf9!important;
-  border:1px solid #e5dbcf!important;
-  border-radius:16px!important;
-  box-shadow:0 8px 20px rgba(67,50,35,.035)!important;
-}
-
-@media(max-width:900px){
-  .settings-feature-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
-  .settings-feature{min-height:96px!important;padding:12px!important}
-  .overlay .modal.wide{max-width:calc(100vw - 18px)!important}
-}
-@media(max-width:560px){
-  .overlay{align-items:flex-end!important;padding:0!important}
-  .overlay .modal,.overlay .modal.wide{
-    width:100%!important;max-width:none!important;max-height:94vh!important;
-    border-radius:24px 24px 0 0!important;border-left:0!important;border-right:0!important;border-bottom:0!important;
+@media (hover:none), (pointer:coarse){
+  #pilgrimCollectionOverlay,
+  #settingsOverlay,
+  #worryOverlay,
+  #breathOverlay,
+  #moktakOverlay{
+    backdrop-filter:none!important;
+    -webkit-backdrop-filter:none!important;
   }
-  .overlay .modal-head{
-    min-height:84px!important;padding:17px 16px 14px!important;
-    background:
-      linear-gradient(90deg,rgba(255,252,247,.99),rgba(255,252,247,.92) 64%,rgba(255,252,247,.54)),
-      url('./hero-mountain.png') right -80px center/310px auto no-repeat!important;
+  #settingsOverlay .features-modal,
+  #worryOverlay .modal,
+  #breathOverlay .modal,
+  #moktakOverlay .modal,
+  #pilgrimCollectionOverlay .pilgrim-collection-modal{
+    box-shadow:0 8px 24px rgba(45,33,23,.10)!important;
   }
-  .overlay .modal-head h2{font-size:20px!important}
-  .overlay .modal-head .sub{font-size:10px!important}
-  .overlay .modal-body{padding:15px 14px calc(22px + env(safe-area-inset-bottom))!important}
-  #settingsOverlay .features-modal{max-height:95vh!important}
-  #settingsOverlay .modal-head{
-    min-height:92px!important;
-    background:
-      linear-gradient(90deg,rgba(255,252,247,.99),rgba(255,252,247,.90) 66%,rgba(255,252,247,.52)),
-      url('./lotus-soft.png') right 30px bottom -28px/105px auto no-repeat!important;
+}
+
+@media (min-width:621px) and (max-width:1100px){
+  #settingsOverlay .settings-feature-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
   }
-  .settings-feature-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important}
-  .settings-feature{min-height:90px!important;padding:10px!important;gap:5px!important}
-  .settings-feature>span{width:34px!important;height:34px!important;font-size:16px!important}
-  .settings-feature>b{font-size:12px!important}
-  .settings-feature>small{font-size:9px!important}
+  #settingsOverlay .settings-feature{min-height:92px!important}
+  #pilgrimCollectionOverlay .pg-lotus-grid{
+    grid-template-columns:repeat(9,minmax(0,1fr))!important;
+  }
+}
+
+@media(max-width:620px){
+  #settingsOverlay .settings-feature-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:8px!important;
+  }
+  #settingsOverlay .settings-feature{
+    min-height:88px!important;
+    padding:10px!important;
+  }
+  #worryOverlay .modal,
+  #breathOverlay .modal,
+  #moktakOverlay .modal{
+    max-height:92vh!important;
+  }
+  #pilgrimCollectionOverlay .pg-lotus-grid{
+    grid-template-columns:repeat(6,minmax(0,1fr))!important;
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  #settingsOverlay *,
+  #worryOverlay *,
+  #breathOverlay *,
+  #moktakOverlay *,
+  #pilgrimCollectionOverlay *{
+    animation:none!important;
+    transition:none!important;
+    scroll-behavior:auto!important;
+  }
 }
 
 </style>
