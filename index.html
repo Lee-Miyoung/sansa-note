@@ -8235,6 +8235,153 @@ header.hero::after{
   .hero-journey-panel::after{width:220px!important;opacity:.09!important}
 }
 
+
+/* =====================================================================
+   SANSA NOTE · FINAL MAIN POLISH 2026-10
+   Fixes: paper seams, contrast, hero balance, asset scale.
+   ===================================================================== */
+
+/* Do not tile the cropped paper asset — it creates visible grid seams. */
+html,body,#app{
+  background-color:#f7f4ee!important;
+  background-image:
+    linear-gradient(rgba(250,248,244,.76),rgba(250,248,244,.76)),
+    url('./paper-texture-ready.webp')!important;
+  background-repeat:no-repeat!important;
+  background-position:center top!important;
+  background-size:cover!important;
+  background-attachment:fixed!important;
+  background-blend-mode:normal!important;
+}
+
+/* Hero: keep actual artwork in the upper-right, not across the whole page. */
+header.hero{
+  background-color:#fbf8f2!important;
+  background-image:
+    url('./hero-sun-wash.png'),
+    url('./hero-mountain.png')!important;
+  background-repeat:no-repeat,no-repeat!important;
+  background-position:76% 1%,right 18% top 20px!important;
+  background-size:230px auto,min(760px,55vw) auto!important;
+  background-blend-mode:normal,normal!important;
+}
+header.hero::after{
+  background:
+    linear-gradient(90deg,
+      rgba(251,248,242,.99) 0%,
+      rgba(251,248,242,.97) 36%,
+      rgba(251,248,242,.80) 54%,
+      rgba(251,248,242,.18) 78%,
+      rgba(251,248,242,.02) 100%)!important;
+}
+
+/* Monk: keep it as one deliberate brand illustration. */
+header.hero::before{
+  width:265px!important;
+  height:405px!important;
+  right:max(24px,calc((100vw - 1180px)/2 + 4px))!important;
+  bottom:8px!important;
+  opacity:.97!important;
+}
+
+/* Primary utility cards: dark text on pale cards for reliable readability. */
+.hero-util-btn.util-course,
+.hero-util-btn.util-course *,
+.hero-util-btn.util-features,
+.hero-util-btn.util-features *{
+  text-shadow:none!important;
+}
+.hero-util-btn.util-course .hero-util-copy b,
+.hero-util-btn.util-features .hero-util-copy b{
+  color:#211d19!important;
+}
+.hero-util-btn.util-course .hero-util-copy small,
+.hero-util-btn.util-features .hero-util-copy small{
+  color:#5e5751!important;
+  opacity:1!important;
+}
+.hero-util-btn.util-features .hero-util-arrow{
+  color:#836a91!important;
+}
+
+/* Four mind cards: ensure symbols are visible (not white-on-white). */
+.hero-experience .hip-quick-btn .hq-icon{
+  color:#fff!important;
+}
+.hero-experience .hip-quick-btn.worry-q .hq-icon{background:#cf8e88!important}
+.hero-experience .hip-quick-btn.breath-q .hq-icon{background:#729bb2!important}
+.hero-experience .hip-quick-btn.moktak-q .hq-icon{background:#c58a35!important}
+.hero-experience .hip-quick-btn.copy-q .hq-icon{background:#937c9c!important}
+
+/* Keep the real asset decoration subtle. */
+.hero-util-btn::before{opacity:.08!important}
+.hero-experience .hip-quick-btn::before{opacity:.055!important}
+.hero-experience::after{opacity:.04!important}
+
+/* 108 card: lotus should sit at left without covering copy. */
+.pilgrim-collection-chip{
+  padding-left:92px!important;
+  background-size:50% auto,cover!important;
+}
+.pilgrim-collection-chip::before{
+  left:7px!important;
+  bottom:3px!important;
+  width:78px!important;
+  height:70px!important;
+  opacity:.92!important;
+}
+.pilgrim-collection-chip .pc-lotus{display:none!important}
+
+/* Journey panel should stay clean; pattern is barely visible. */
+.hero-journey-panel::after{opacity:.045!important}
+
+/* Typography: stronger contrast everywhere in the hero. */
+.hero-title-row h1{color:#191714!important}
+.hero-tagline{color:#2a2520!important}
+.hero-copy p{color:#4d4741!important}
+.hero-copy p b{color:#211d19!important}
+.hero-section-kicker{color:#2b2723!important}
+
+/* Desktop spacing similar to approved mockup. */
+@media(min-width:901px){
+  .hero-inner{max-width:1240px!important}
+  .hero-main-grid{grid-template-columns:minmax(0,680px) minmax(300px,1fr)!important}
+  .hero-utility{max-width:790px!important}
+  .hero-experience{max-width:100%!important}
+}
+
+/* Mobile: art remains behind the upper hero only, cards become 2x2. */
+@media(max-width:620px){
+  html,body,#app{
+    background-attachment:scroll!important;
+    background-size:auto 100vh!important;
+  }
+  header.hero{
+    background-position:76% 55px,right -85px top 95px!important;
+    background-size:185px auto,580px auto!important;
+  }
+  header.hero::after{
+    background:linear-gradient(90deg,
+      rgba(251,248,242,.99) 0%,
+      rgba(251,248,242,.94) 62%,
+      rgba(251,248,242,.40) 83%,
+      rgba(251,248,242,.06) 100%)!important;
+  }
+  header.hero::before{
+    width:168px!important;
+    height:278px!important;
+    right:-18px!important;
+    bottom:auto!important;
+    top:260px!important;
+    opacity:.92!important;
+  }
+  .hero-copy{max-width:90%!important}
+  .pilgrim-collection-chip{padding-left:78px!important}
+  .pilgrim-collection-chip::before{
+    width:67px!important;height:60px!important;left:5px!important;bottom:8px!important
+  }
+}
+
 </style>
 </head>
 <body>
