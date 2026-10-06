@@ -295,3 +295,59 @@ button{cursor:pointer}
     animation:none!important;
   }
 }
+
+
+/* =========================================================
+   COPY TYPOGRAPHY POLISH
+   Cleaner desktop Korean typography; serif only for key titles/quotes.
+========================================================= */
+html,body,button,input,textarea,select{
+  font-family:"Pretendard","SUIT","Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif!important;
+}
+.brand,
+.copy-hero p,
+.copy-title p,
+.explain,
+.write-head,
+.write-head>span,
+.copy-guide,
+.writing-area,
+.memo-area,
+.question,
+.side-card,
+.content-list,
+.head-pill,
+.crumb{
+  font-family:"Pretendard","SUIT","Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif!important;
+}
+.copy-hero h1,
+.copy-hero h2,
+.copy-title h2,
+.number-card strong,
+.quote-panel blockquote,
+.complete-card h3,
+.sheet-head h3{
+  font-family:"Noto Serif KR","Nanum Myeongjo","AppleMyungjo",serif!important;
+}
+.copy-hero h1{
+  font-weight:700!important;
+  letter-spacing:-1.5px!important;
+}
+.quote-panel blockquote{
+  font-weight:700!important;
+}
+.explain,
+.copy-guide,
+.writing-area,
+.memo-area{
+  color:#413b35!important;
+}
+
+/* Desktop layout text proportions */
+@media(min-width:1101px){
+  .copy-hero h1{font-size:48px!important}
+  .copy-hero h2{font-size:19px!important}
+  .copy-hero p{font-size:13.5px!important}
+  .copy-title h2{font-size:32px!important}
+  .quote-panel blockquote{font-size:22px!important}
+}
