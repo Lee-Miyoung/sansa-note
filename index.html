@@ -8258,12 +8258,11 @@ html,body,#app{
 header.hero{
   background-color:#fbf8f2!important;
   background-image:
-    url('./hero-sun-wash.png'),
     url('./hero-mountain.png')!important;
-  background-repeat:no-repeat,no-repeat!important;
-  background-position:76% 1%,right 18% top 20px!important;
-  background-size:230px auto,min(760px,55vw) auto!important;
-  background-blend-mode:normal,normal!important;
+  background-repeat:no-repeat!important;
+  background-position:right 18% top 20px!important;
+  background-size:min(760px,55vw) auto!important;
+  background-blend-mode:normal!important;
 }
 header.hero::after{
   background:
@@ -8357,8 +8356,8 @@ header.hero::before{
     background-size:auto 100vh!important;
   }
   header.hero{
-    background-position:76% 55px,right -85px top 95px!important;
-    background-size:185px auto,580px auto!important;
+    background-position:right -85px top 95px!important;
+    background-size:580px auto!important;
   }
   header.hero::after{
     background:linear-gradient(90deg,
@@ -8956,6 +8955,29 @@ header.hero::before{
     animation:none!important;
     transition:none!important;
     scroll-behavior:auto!important;
+  }
+}
+
+
+/* ===== MAIN HERO SINGLE-SUN FIX =====
+   hero-mountain.png already includes the painted sun.
+   Do not layer hero-sun-wash.png on the main banner. */
+header.hero{
+  background-image:url('./hero-mountain.png')!important;
+  background-repeat:no-repeat!important;
+  background-position:right 18% top 20px!important;
+  background-size:min(760px,55vw) auto!important;
+}
+@media (min-width:621px) and (max-width:1100px){
+  header.hero{
+    background-position:right -60px top 35px!important;
+    background-size:690px auto!important;
+  }
+}
+@media(max-width:620px){
+  header.hero{
+    background-position:right -85px top 95px!important;
+    background-size:580px auto!important;
   }
 }
 
