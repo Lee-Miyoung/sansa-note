@@ -11996,6 +11996,164 @@ a.hip-quick-btn{
   }
 }
 
+
+/* =====================================================================
+   FINAL FIX · 오늘의 필사 이동 + 하단 6개 기능카드 가독성 강화
+   ===================================================================== */
+
+a.hip-quick-btn{ text-decoration:none !important; color:inherit !important; }
+#todayCopyLink{ position:relative; z-index:9; touch-action:manipulation; }
+
+/* 6개 기능카드 공통 */
+.fun-banner-row{
+  display:grid !important;
+  grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  gap:14px !important;
+  align-items:stretch !important;
+}
+.fun-banner-btn:not(.playlist){
+  position:relative !important;
+  overflow:hidden !important;
+  min-height:132px !important;
+  padding:18px 16px !important;
+  display:grid !important;
+  grid-template-columns:58px minmax(0,1fr) !important;
+  grid-template-rows:auto auto !important;
+  column-gap:14px !important;
+  row-gap:6px !important;
+  align-content:center !important;
+  align-items:center !important;
+  text-align:left !important;
+  border-radius:20px !important;
+}
+.fun-banner-btn:not(.playlist) .fb-icon{
+  grid-row:1 / span 2 !important;
+  width:52px !important;
+  height:52px !important;
+  border-radius:16px !important;
+  font-size:23px !important;
+  z-index:2 !important;
+}
+.fun-banner-btn:not(.playlist) .fb-title{
+  position:relative !important;
+  z-index:2 !important;
+  font-size:18px !important;
+  line-height:1.22 !important;
+  font-weight:900 !important;
+  letter-spacing:-0.02em !important;
+  display:block !important;
+  -webkit-line-clamp:2 !important;
+}
+.fun-banner-btn:not(.playlist) .fb-sub{
+  position:relative !important;
+  z-index:2 !important;
+  font-size:13.5px !important;
+  line-height:1.45 !important;
+  opacity:.96 !important;
+  display:block !important;
+  -webkit-line-clamp:2 !important;
+  max-width:100% !important;
+}
+.fun-banner-btn:not(.playlist)::after{
+  width:132px !important;
+  height:92px !important;
+  right:-6px !important;
+  bottom:-4px !important;
+  top:auto !important;
+  border-radius:0 !important;
+  background-position:right bottom !important;
+  background-size:contain !important;
+  background-repeat:no-repeat !important;
+  opacity:.42 !important;
+  filter:none !important;
+}
+
+/* 카드별 배경 이미지 유지하되 더 잘 보이게 */
+.fun-banner-btn.roulette::after{ background-image:url('./card-random-temple.png') !important; }
+.fun-banner-btn.worry::after{ background-image:url('./card-comfort-lotus.png') !important; }
+.fun-banner-btn.vow::after{ background-image:url('./card-vow-brush.png') !important; }
+.fun-banner-btn.mantra::after{ background-image:url('./card-chant-beads.png') !important; }
+.fun-banner-btn.amulet::after{ background-image:url('./card-amulet-paper.png') !important; }
+.fun-banner-btn.moktak::after{ background-image:url('./card-shooter-ink.png') !important; }
+
+@media (max-width: 900px){
+  .fun-banner-row{
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    gap:12px !important;
+    padding:0 14px !important;
+  }
+  .fun-banner-btn:not(.playlist){
+    min-height:126px !important;
+    padding:16px 14px !important;
+    grid-template-columns:54px minmax(0,1fr) !important;
+    column-gap:12px !important;
+  }
+  .fun-banner-btn:not(.playlist) .fb-title{
+    font-size:16px !important;
+  }
+  .fun-banner-btn:not(.playlist) .fb-sub{
+    font-size:12.6px !important;
+    line-height:1.42 !important;
+  }
+  .fun-banner-btn:not(.playlist)::after{
+    width:118px !important;
+    height:82px !important;
+    opacity:.40 !important;
+  }
+}
+
+@media (max-width: 620px){
+  .fun-banner-row{
+    width:calc(100% - 28px) !important;
+    margin:14px auto 0 !important;
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    gap:12px !important;
+    padding:0 !important;
+  }
+  .fun-banner-btn:not(.playlist){
+    min-height:122px !important;
+    padding:14px 12px !important;
+    grid-template-columns:50px minmax(0,1fr) !important;
+    column-gap:11px !important;
+    row-gap:5px !important;
+    border-radius:18px !important;
+  }
+  .fun-banner-btn:not(.playlist) .fb-icon{
+    width:46px !important;
+    height:46px !important;
+    border-radius:14px !important;
+    font-size:21px !important;
+  }
+  .fun-banner-btn:not(.playlist) .fb-title{
+    font-size:15px !important;
+    line-height:1.2 !important;
+  }
+  .fun-banner-btn:not(.playlist) .fb-sub{
+    font-size:12px !important;
+    line-height:1.36 !important;
+  }
+  .fun-banner-btn:not(.playlist)::after{
+    width:108px !important;
+    height:74px !important;
+    right:-8px !important;
+    bottom:-2px !important;
+    opacity:.43 !important;
+  }
+}
+
+/* 플레이리스트는 단독 배너라 글자만 조금 키움 */
+.fun-banner-btn.playlist .fb-title{ font-size:18px !important; }
+.fun-banner-btn.playlist .fb-sub{ font-size:14px !important; line-height:1.38 !important; }
+
+/* Today's copy card itself - avoid any overlay/tap miss */
+.hip-quick-btn.copy-q{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:flex-start !important;
+  cursor:pointer !important;
+  -webkit-tap-highlight-color:transparent !important;
+}
+
 </style>
 </head>
 <body>
@@ -12120,7 +12278,7 @@ a.hip-quick-btn{
             <span class="hq-index">03</span><span class="hq-icon">木</span>
             <span class="hq-copy"><b>무한 목탁</b><small>마음을 다스리는 나만의 리듬</small></span><span class="hq-arrow">↗</span>
           </button>
-          <a class="hip-quick-btn copy-q" href="/copy/index.html" aria-label="오늘의 필사 열기">
+          <a class="hip-quick-btn copy-q" id="todayCopyLink" href="./copy/index.html" aria-label="오늘의 필사 열기" onclick="event.preventDefault();event.stopPropagation();window.location.assign('./copy/index.html');return false;">
             <span class="hq-index">04</span><span class="hq-icon">書</span>
             <span class="hq-copy"><b>오늘의 필사</b><small>한 문장이 오늘을 바꿉니다.</small></span><span class="hq-arrow">↗</span>
           </a>
@@ -24433,5 +24591,26 @@ function spawnMicroBurst(x,y,icon){const el=document.createElement('div');el.cla
 document.addEventListener('click',e=>{const btn=e.target.closest('button');if(btn && !btn.classList.contains('beat-pad') && Math.random()>.55){const r=btn.getBoundingClientRect();spawnMicroBurst(r.left+r.width/2,r.top+5);}});
 
 </script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  var copyLink = document.getElementById('todayCopyLink');
+  if(copyLink){
+    copyLink.addEventListener('click', function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      window.location.assign('./copy/index.html');
+      return false;
+    }, {capture:true});
+    copyLink.addEventListener('touchend', function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      window.location.assign('./copy/index.html');
+      return false;
+    }, {passive:false, capture:true});
+  }
+});
+</script>
+
 </body>
 </html>
