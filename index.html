@@ -15480,339 +15480,329 @@ header.hero{
 }
 
 
-/* ======================================================================
-   2026-10-07 · LATEST CONTINUATION
-   HERO 정리 + 작은 수행·재미 3×2 완전 동일 규격
-   ====================================================================== */
 
-/* ===== 1. HERO: 불필요한 중복 장식 제거 ===== */
-.hero-clean-lantern,
-.hero-clean-blossom{
-  display:none !important;
-}
-
-/* ===== 2. PC HERO 재배치 ===== */
+/* =====================================================================
+   2026-10-07 HERO REBALANCE PATCH
+   - remove duplicate lantern
+   - move signboard/lantern combo lower-left
+   - enlarge temple at right with more breathing room
+   - separate background layers so they do not clash with text
+   ===================================================================== */
 @media(min-width:901px){
+  .hero-inner{max-width:1240px!important;padding:26px 28px 24px!important;overflow:hidden!important}
   .hero-main-grid{
-    grid-template-columns:minmax(0,.95fr) minmax(520px,1.05fr) !important;
-    column-gap:32px !important;
-    align-items:start !important;
+    grid-template-columns:minmax(0,.9fr) minmax(600px,1.1fr)!important;
+    gap:34px!important;
+    align-items:start!important;
+    min-height:430px!important;
   }
-
   .hero-copy{
-    padding-top:24px !important;
-    padding-right:0 !important;
+    max-width:none!important;
+    width:100%!important;
+    padding-top:10px!important;
+    z-index:12!important;
   }
+  .hero-copy p{max-width:620px!important}
 
   .hero-clean-art{
-    position:relative !important;
-    inset:auto !important;
-    width:100% !important;
-    height:410px !important;
-    min-height:410px !important;
-    overflow:hidden !important;
-    border-radius:0 !important;
+    height:430px!important;
+    min-height:430px!important;
+    overflow:hidden!important;
+    isolation:isolate!important;
   }
+  .hero-clean-art::before{
+    content:""!important;
+    position:absolute!important;
+    inset:0!important;
+    background:
+      linear-gradient(90deg, rgba(247,242,232,0) 0%, rgba(247,242,232,0) 10%, rgba(247,242,232,.08) 18%, rgba(247,242,232,.28) 32%, rgba(247,242,232,.04) 50%, rgba(247,242,232,0) 100%)!important;
+    z-index:0!important;
+    pointer-events:none!important;
+  }
+  .hero-clean-art img{position:absolute!important;display:block!important;max-width:none!important;object-fit:contain!important}
 
-  /* 산 배경은 넓고 낮게 — 캐릭터/간판 뒤의 한 장면 역할만 */
   .hero-clean-bg{
-    left:-10% !important;
-    right:auto !important;
-    top:28px !important;
-    width:118% !important;
-    height:330px !important;
-    object-fit:cover !important;
-    object-position:center 56% !important;
-    opacity:.55 !important;
-    z-index:1 !important;
-    -webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.48) 14%,#000 34%,#000 100%) !important;
-    mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.48) 14%,#000 34%,#000 100%) !important;
+    left:2%!important;
+    top:34px!important;
+    width:72%!important;
+    height:320px!important;
+    object-fit:cover!important;
+    object-position:center center!important;
+    opacity:.7!important;
+    filter:saturate(.96)!important;
+    -webkit-mask-image:radial-gradient(circle at 45% 52%, #000 0%, #000 63%, rgba(0,0,0,.45) 79%, transparent 97%)!important;
+    mask-image:radial-gradient(circle at 45% 52%, #000 0%, #000 63%, rgba(0,0,0,.45) 79%, transparent 97%)!important;
+    z-index:1!important;
   }
-
-  /* 간판+등불은 왼쪽 아래 쪽 */
+  .hero-clean-blossom{
+    right:-1%!important;
+    top:0!important;
+    width:25%!important;
+    opacity:.94!important;
+    z-index:7!important;
+  }
   .hero-clean-signboard{
-    left:3% !important;
-    right:auto !important;
-    top:auto !important;
-    bottom:26px !important;
-    width:32% !important;
-    opacity:.98 !important;
-    z-index:6 !important;
-    filter:drop-shadow(0 8px 14px rgba(66,45,29,.10)) !important;
+    left:9%!important;
+    right:auto!important;
+    top:98px!important;
+    width:31%!important;
+    opacity:1!important;
+    z-index:8!important;
   }
-
-  /* 절은 오른쪽을 크게 차지 */
+  .hero-clean-lantern{display:none!important}
   .hero-clean-temple{
-    right:-2% !important;
-    left:auto !important;
-    top:auto !important;
-    bottom:-4px !important;
-    width:42% !important;
-    opacity:.94 !important;
-    z-index:3 !important;
+    right:-2%!important;
+    bottom:-8px!important;
+    width:41%!important;
+    opacity:.98!important;
+    z-index:4!important;
   }
-
-  /* 캐릭터는 절 앞쪽, 작고 안정적으로 */
   .hero-clean-monk{
-    right:20% !important;
-    left:auto !important;
-    top:auto !important;
-    bottom:2px !important;
-    width:18% !important;
-    z-index:8 !important;
+    right:9%!important;
+    bottom:10px!important;
+    width:17%!important;
+    z-index:9!important;
   }
   .hero-clean-mouse{
-    right:34% !important;
-    left:auto !important;
-    top:auto !important;
-    bottom:7px !important;
-    width:9% !important;
-    z-index:9 !important;
+    right:25%!important;
+    bottom:14px!important;
+    width:7.5%!important;
+    z-index:10!important;
   }
+  .hero-top-actions{top:14px!important;right:18px!important;z-index:15!important}
 }
 
-/* ===== 3. 모바일 HERO ===== */
 @media(max-width:900px){
-  .hero-copy{
-    padding-right:34% !important;
-  }
-
+  .hero-inner{overflow:hidden!important}
+  .hero-clean-art{overflow:hidden!important}
   .hero-clean-bg{
-    right:-34% !important;
-    left:auto !important;
-    top:7% !important;
-    width:126% !important;
-    height:62% !important;
-    object-fit:cover !important;
-    object-position:center 56% !important;
-    opacity:.30 !important;
+    right:-8%!important;
+    left:auto!important;
+    top:16%!important;
+    width:88%!important;
+    height:44%!important;
+    object-fit:cover!important;
+    object-position:center center!important;
+    opacity:.28!important;
+    -webkit-mask-image:radial-gradient(circle at 54% 50%, #000 0%, #000 55%, rgba(0,0,0,.45) 78%, transparent 98%)!important;
+    mask-image:radial-gradient(circle at 54% 50%, #000 0%, #000 55%, rgba(0,0,0,.45) 78%, transparent 98%)!important;
   }
-
   .hero-clean-signboard{
-    left:auto !important;
-    right:18% !important;
-    top:auto !important;
-    bottom:39% !important;
-    width:25% !important;
-    z-index:5 !important;
+    right:7%!important;
+    left:auto!important;
+    top:7%!important;
+    width:26%!important;
+    z-index:6!important;
   }
-
+  .hero-clean-lantern{display:none!important}
   .hero-clean-temple{
-    right:-15% !important;
-    left:auto !important;
-    top:auto !important;
-    bottom:36% !important;
-    width:40% !important;
-    opacity:.66 !important;
+    right:-8%!important;
+    bottom:39%!important;
+    width:34%!important;
+    opacity:.62!important;
   }
-
   .hero-clean-monk{
-    right:4% !important;
-    left:auto !important;
-    top:auto !important;
-    bottom:39% !important;
-    width:18% !important;
-    z-index:7 !important;
+    right:5%!important;
+    bottom:40.5%!important;
+    width:16%!important;
   }
-
   .hero-clean-mouse{
-    right:18% !important;
-    left:auto !important;
-    top:auto !important;
-    bottom:39% !important;
-    width:9.5% !important;
-    z-index:8 !important;
+    right:19%!important;
+    bottom:40.5%!important;
+    width:8.5%!important;
   }
 }
 
-/* ===== 4. 작은 수행 · 재미: 위 카드와 좌우 라인 정확히 맞춤 ===== */
-.home-tools-section{
-  width:100% !important;
-  max-width:none !important;
-  margin:18px 0 0 !important;
-  padding:0 !important;
-  box-sizing:border-box !important;
-}
 
-#funBannerWrap{
-  width:100% !important;
-  max-width:none !important;
-  margin:0 !important;
-  padding:0 !important;
-}
 
-#funBannerWrap .fun-banner-row{
-  width:100% !important;
-  max-width:none !important;
-  margin:0 !important;
-  padding:0 !important;
-  display:grid !important;
-  grid-template-columns:repeat(3,minmax(0,1fr)) !important;
-  grid-auto-rows:84px !important;
-  gap:10px !important;
-  align-items:stretch !important;
-  box-sizing:border-box !important;
-}
+/* =====================================================================
+   2026-10-07 utility + playlist cleanup patch
+   - remove guest callout
+   - shrink/move 코스추가 & 기능모음 into hero lower-right
+   - fix playlist title clipping
+   ===================================================================== */
+.guest-save-callout{display:none!important}
 
-/* 6개 기능 카드 모두 가로/세로 완전 동일 */
-#funBannerWrap .fun-banner-btn:not(.playlist){
-  width:100% !important;
-  min-width:0 !important;
-  max-width:none !important;
-  height:84px !important;
-  min-height:84px !important;
-  max-height:84px !important;
-  margin:0 !important;
-  padding:10px 11px !important;
-  box-sizing:border-box !important;
-  border-radius:15px !important;
-  display:grid !important;
-  grid-template-columns:34px minmax(0,1fr) !important;
-  grid-template-rows:1fr !important;
-  column-gap:8px !important;
-  align-items:center !important;
-  justify-items:stretch !important;
-  overflow:hidden !important;
-}
-
-/* 아이콘 동일 */
-#funBannerWrap .fun-banner-btn:not(.playlist) .fb-icon{
-  width:32px !important;
-  min-width:32px !important;
-  max-width:32px !important;
-  height:32px !important;
-  min-height:32px !important;
-  max-height:32px !important;
-  margin:0 !important;
-  padding:0 !important;
-  border-radius:10px !important;
-  display:flex !important;
-  align-items:center !important;
-  justify-content:center !important;
-  font-size:15px !important;
-  line-height:1 !important;
-}
-
-/* 글 영역 동일 */
-#funBannerWrap .fun-banner-btn:not(.playlist) .fb-copy{
-  min-width:0 !important;
-  width:100% !important;
-  height:auto !important;
-  margin:0 !important;
-  padding:0 !important;
-  display:flex !important;
-  flex-direction:column !important;
-  justify-content:center !important;
-  gap:3px !important;
-}
-
-#funBannerWrap .fun-banner-btn:not(.playlist) .fb-title{
-  width:100% !important;
-  margin:0 !important;
-  padding:0 !important;
-  font-size:12.8px !important;
-  line-height:1.18 !important;
-  font-weight:900 !important;
-  letter-spacing:-.035em !important;
-  white-space:nowrap !important;
-  overflow:hidden !important;
-  text-overflow:ellipsis !important;
-}
-
-#funBannerWrap .fun-banner-btn:not(.playlist) .fb-sub{
-  width:100% !important;
-  margin:0 !important;
-  padding:0 !important;
-  font-size:9.8px !important;
-  line-height:1.28 !important;
-  display:-webkit-box !important;
-  -webkit-box-orient:vertical !important;
-  -webkit-line-clamp:2 !important;
-  overflow:hidden !important;
-  max-height:2.56em !important;
-}
-
-/* 긴 제목도 박스 크기는 절대 바꾸지 않음 */
-#funBannerWrap .fun-banner-btn.moktak .fb-title{
-  font-size:10.8px !important;
-}
-
-/* 카드 우측 그림도 동일 영역 */
-#funBannerWrap .fun-banner-btn:not(.playlist)::after{
-  right:0 !important;
-  bottom:0 !important;
-  width:40% !important;
-  height:88% !important;
-  background-position:right bottom !important;
-  background-size:contain !important;
-  opacity:.46 !important;
-}
-
-/* 플레이리스트는 별도 전체폭 */
+/* playlist card readability */
 #funBannerWrap .fun-banner-btn.playlist{
-  grid-column:1 / -1 !important;
-  width:100% !important;
-  height:82px !important;
-  min-height:82px !important;
-  max-height:82px !important;
-  margin:0 !important;
-  box-sizing:border-box !important;
+  min-height:108px!important;
+  padding:18px 22px 18px 22px!important;
+  align-items:flex-start!important;
+  overflow:hidden!important;
+}
+#funBannerWrap .fun-banner-btn.playlist .fb-icon{
+  align-self:flex-start!important;
+  margin-top:4px!important;
+}
+#funBannerWrap .fun-banner-btn.playlist .fb-title{
+  font-size:27px!important;
+  line-height:1.12!important;
+  margin:0 0 6px!important;
+  padding-top:0!important;
+  white-space:nowrap!important;
+}
+#funBannerWrap .fun-banner-btn.playlist .fb-sub{
+  font-size:14px!important;
+  line-height:1.3!important;
+  margin:0!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+}
+#funBannerWrap .fun-banner-btn.playlist .fb-music-meta{
+  margin-top:10px!important;
+  gap:8px!important;
+}
+#funBannerWrap .fun-banner-btn.playlist::after{
+  opacity:.6!important;
+  background-position:right center!important;
 }
 
-/* ===== 5. 모바일에서도 3열 폭 정확히 동일 ===== */
-@media(max-width:620px){
-  .home-tools-section{
-    width:100% !important;
-    margin:18px 0 0 !important;
+/* hero quick utilities become small utility pills on the banner */
+header.hero,.hero-inner{position:relative!important}
+@media(min-width:901px){
+  .hero-inner{padding-bottom:26px!important}
+  .hero-utility{
+    position:absolute!important;
+    right:34px!important;
+    bottom:20px!important;
+    width:360px!important;
+    max-width:360px!important;
+    margin:0!important;
+    display:grid!important;
+    grid-template-columns:1fr 1fr!important;
+    gap:12px!important;
+    z-index:18!important;
   }
-
-  #funBannerWrap .fun-banner-row{
-    grid-template-columns:repeat(3,minmax(0,1fr)) !important;
-    grid-auto-rows:80px !important;
-    gap:8px !important;
+  .hero-util-btn{
+    min-height:72px!important;
+    padding:12px 14px!important;
+    border-radius:18px!important;
+    grid-template-columns:40px minmax(0,1fr) 28px!important;
+    box-shadow:0 10px 22px rgba(78,58,33,.09)!important;
+    background:rgba(255,255,255,.88)!important;
+    backdrop-filter:blur(3px)!important;
   }
-
-  #funBannerWrap .fun-banner-btn:not(.playlist){
-    width:100% !important;
-    min-width:0 !important;
-    height:80px !important;
-    min-height:80px !important;
-    max-height:80px !important;
-    padding:8px 7px !important;
-    grid-template-columns:28px minmax(0,1fr) !important;
-    column-gap:6px !important;
-    border-radius:13px !important;
+  .hero-util-btn .hero-util-icon{
+    width:40px!important;
+    height:40px!important;
+    border-radius:12px!important;
+    font-size:20px!important;
   }
-
-  #funBannerWrap .fun-banner-btn:not(.playlist) .fb-icon{
-    width:27px !important;
-    min-width:27px !important;
-    max-width:27px !important;
-    height:27px !important;
-    min-height:27px !important;
-    max-height:27px !important;
-    border-radius:9px !important;
-    font-size:13px !important;
+  .hero-util-copy b{
+    font-size:15px!important;
+    line-height:1.1!important;
+    display:block!important;
+    margin-bottom:3px!important;
   }
-
-  #funBannerWrap .fun-banner-btn:not(.playlist) .fb-title{
-    font-size:10.4px !important;
-    line-height:1.16 !important;
+  .hero-util-copy small{
+    font-size:10px!important;
+    line-height:1.25!important;
+    display:block!important;
   }
-
-  #funBannerWrap .fun-banner-btn:not(.playlist) .fb-sub{
-    font-size:8.3px !important;
-    line-height:1.22 !important;
+  .hero-util-arrow{
+    width:28px!important;
+    height:28px!important;
+    font-size:17px!important;
   }
+  .hero-experience{margin-top:8px!important}
+}
 
-  #funBannerWrap .fun-banner-btn.moktak .fb-title{
-    font-size:8.9px !important;
+@media(max-width:900px){
+  /* keep under hero on mobile, but slightly cleaner */
+  .hero-utility{
+    margin-top:12px!important;
+    gap:10px!important;
   }
+  .hero-util-btn{
+    min-height:82px!important;
+  }
+}
 
-  #funBannerWrap .fun-banner-btn.playlist{
-    height:78px !important;
-    min-height:78px !important;
-    max-height:78px !important;
+
+
+/* =====================================================================
+   2026-10-07 compact banner arrangement patch
+   - quiz + season banners in one row
+   - almost-complete banner placed beside stage filter
+   ===================================================================== */
+#bannerDuplexRow{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:12px;
+  margin:0 0 12px;
+  position:relative;
+  z-index:1;
+}
+#bannerDuplexRow > div{min-width:0}
+#bannerDuplexRow > div:empty{display:none!important}
+#bannerDuplexRow .quiz-banner,
+#bannerDuplexRow .season-banner{
+  min-height:66px!important;
+  padding:14px 18px!important;
+  border-radius:18px!important;
+  margin:0!important;
+}
+#bannerDuplexRow .quiz-banner-main,
+#bannerDuplexRow .season-banner > span{
+  font-size:14px!important;
+  line-height:1.42!important;
+}
+#bannerDuplexRow .quiz-banner .btn,
+#bannerDuplexRow .season-banner .btn{
+  padding:10px 16px!important;
+  font-size:12px!important;
+  white-space:nowrap!important;
+}
+
+.filterbar-inner{
+  position:relative;
+}
+.filterbar-inner #almostBannerWrap{
+  flex:1 1 320px;
+  min-width:260px;
+  margin:0!important;
+  order:5;
+}
+.filterbar-inner #almostBannerWrap:empty{display:none!important}
+.filterbar-inner #almostBannerWrap .seedbanner{
+  min-height:40px!important;
+  margin:0!important;
+  padding:10px 14px!important;
+  border-radius:14px!important;
+  display:flex!important;
+  align-items:center!important;
+}
+.filterbar-inner #almostBannerWrap .seedbanner span{
+  display:block!important;
+  width:100%!important;
+  font-size:12.5px!important;
+  line-height:1.35!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+}
+
+/* keep other banner area tidy */
+#triviaBannerWrap,
+#quizBannerWrap,
+#seasonBannerWrap,
+#almostBannerWrap{margin-bottom:0!important}
+
+@media (max-width: 900px){
+  #bannerDuplexRow{
+    grid-template-columns:1fr!important;
+    gap:10px!important;
+  }
+  .filterbar-inner #almostBannerWrap{
+    order:99;
+    min-width:100%;
+    flex:1 1 100%;
+  }
+  .filterbar-inner #almostBannerWrap .seedbanner span{
+    white-space:normal!important;
+    overflow:visible!important;
+    text-overflow:initial!important;
   }
 }
 
@@ -28359,6 +28349,47 @@ document.addEventListener('click',e=>{const btn=e.target.closest('button');if(bt
 </script>
 
 <script>
+
+
+/* compact banner layout arranger */
+(function(){
+  function arrangeInlineBanners(){
+    const homeGallery = document.getElementById('homeGalleryWrap');
+    const quizWrap = document.getElementById('quizBannerWrap');
+    const seasonWrap = document.getElementById('seasonBannerWrap');
+    const almostWrap = document.getElementById('almostBannerWrap');
+    const stageFilter = document.getElementById('stageFilter');
+    if(homeGallery && quizWrap && seasonWrap){
+      let row = document.getElementById('bannerDuplexRow');
+      if(!row){
+        row = document.createElement('div');
+        row.id = 'bannerDuplexRow';
+        homeGallery.insertAdjacentElement('afterend', row);
+      }
+      if(quizWrap.parentElement !== row) row.appendChild(quizWrap);
+      if(seasonWrap.parentElement !== row) row.appendChild(seasonWrap);
+    }
+    if(stageFilter && stageFilter.parentElement && almostWrap){
+      const filterInner = stageFilter.parentElement;
+      if(almostWrap.parentElement !== filterInner){
+        if(stageFilter.nextSibling){
+          filterInner.insertBefore(almostWrap, stageFilter.nextSibling);
+        }else{
+          filterInner.appendChild(almostWrap);
+        }
+      }
+    }
+  }
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', arrangeInlineBanners);
+  } else {
+    arrangeInlineBanners();
+  }
+  window.addEventListener('load', arrangeInlineBanners);
+  setTimeout(arrangeInlineBanners, 300);
+  setTimeout(arrangeInlineBanners, 1200);
+})();
+
 </script>
 
 </body>
