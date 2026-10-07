@@ -15806,6 +15806,375 @@ header.hero,.hero-inner{position:relative!important}
   }
 }
 
+
+
+/* =====================================================================
+   2026-10-07 RESPONSIVE REPAIR
+   Fix accidental tall columns on tablet/mobile while preserving
+   desktop bottom-right utility placement and latest banner layout.
+   ===================================================================== */
+
+/* Desktop: utility cards remain small in the lower-right of hero */
+@media(min-width:1101px){
+  .hero-utility{
+    position:absolute!important;
+    right:34px!important;
+    bottom:22px!important;
+    top:auto!important;
+    left:auto!important;
+    width:360px!important;
+    max-width:360px!important;
+    height:auto!important;
+    margin:0!important;
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:10px!important;
+    align-items:stretch!important;
+    z-index:30!important;
+  }
+  .hero-util-btn{
+    width:100%!important;
+    height:70px!important;
+    min-height:70px!important;
+    max-height:70px!important;
+    padding:10px 11px!important;
+    display:grid!important;
+    grid-template-columns:38px minmax(0,1fr) 26px!important;
+    align-items:center!important;
+    gap:8px!important;
+    border-radius:17px!important;
+  }
+  .hero-util-btn .hero-util-icon{width:38px!important;height:38px!important;font-size:19px!important}
+  .hero-util-copy b{font-size:14px!important;line-height:1.12!important}
+  .hero-util-copy small{font-size:9.3px!important;line-height:1.25!important}
+  .hero-util-arrow{width:26px!important;height:26px!important;font-size:16px!important}
+}
+
+/* Tablet / mobile: utility cards return to normal document flow */
+@media(max-width:1100px){
+  .hero-utility{
+    position:relative!important;
+    inset:auto!important;
+    top:auto!important;
+    right:auto!important;
+    bottom:auto!important;
+    left:auto!important;
+    width:100%!important;
+    max-width:none!important;
+    min-width:0!important;
+    height:auto!important;
+    min-height:0!important;
+    max-height:none!important;
+    margin:14px 0 0!important;
+    padding:0!important;
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    grid-auto-rows:auto!important;
+    gap:10px!important;
+    align-items:stretch!important;
+    align-self:auto!important;
+    z-index:15!important;
+  }
+  .hero-util-btn{
+    position:relative!important;
+    inset:auto!important;
+    width:100%!important;
+    min-width:0!important;
+    height:78px!important;
+    min-height:78px!important;
+    max-height:78px!important;
+    padding:11px 12px!important;
+    display:grid!important;
+    grid-template-columns:40px minmax(0,1fr) 27px!important;
+    grid-template-rows:1fr!important;
+    align-items:center!important;
+    gap:9px!important;
+    border-radius:17px!important;
+    overflow:hidden!important;
+    box-sizing:border-box!important;
+  }
+  .hero-util-btn .hero-util-icon{width:40px!important;height:40px!important;font-size:20px!important}
+  .hero-util-copy{min-width:0!important}
+  .hero-util-copy b{display:block!important;font-size:14.5px!important;line-height:1.15!important;white-space:nowrap!important}
+  .hero-util-copy small{display:block!important;font-size:9.6px!important;line-height:1.25!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+  .hero-util-arrow{width:27px!important;height:27px!important;font-size:17px!important}
+
+  /* Hero illustration uses one coherent scene instead of scattered strips */
+  .hero-main-grid{
+    position:relative!important;
+    display:block!important;
+    min-height:500px!important;
+    overflow:hidden!important;
+  }
+  .hero-clean-art{
+    position:absolute!important;
+    inset:0!important;
+    width:100%!important;
+    height:100%!important;
+    min-height:0!important;
+    overflow:hidden!important;
+    border-radius:0!important;
+    z-index:1!important;
+    pointer-events:none!important;
+  }
+  .hero-clean-art::before{
+    content:""!important;
+    position:absolute!important;
+    inset:0!important;
+    background:linear-gradient(90deg,rgba(248,244,236,.98) 0%,rgba(248,244,236,.86) 35%,rgba(248,244,236,.34) 62%,rgba(248,244,236,.04) 100%)!important;
+    z-index:2!important;
+    pointer-events:none!important;
+  }
+  .hero-clean-bg{
+    position:absolute!important;
+    left:0!important;
+    right:auto!important;
+    top:0!important;
+    bottom:auto!important;
+    width:100%!important;
+    height:100%!important;
+    object-fit:cover!important;
+    object-position:center 58%!important;
+    opacity:.56!important;
+    filter:none!important;
+    -webkit-mask-image:none!important;
+    mask-image:none!important;
+    z-index:1!important;
+  }
+  .hero-clean-blossom{
+    position:absolute!important;
+    right:-3%!important;
+    left:auto!important;
+    top:-1%!important;
+    bottom:auto!important;
+    width:34%!important;
+    height:auto!important;
+    opacity:.92!important;
+    z-index:4!important;
+  }
+  .hero-clean-signboard{
+    position:absolute!important;
+    right:7%!important;
+    left:auto!important;
+    top:12%!important;
+    bottom:auto!important;
+    width:29%!important;
+    height:auto!important;
+    opacity:1!important;
+    z-index:6!important;
+  }
+  .hero-clean-lantern{display:none!important}
+  .hero-clean-temple{
+    position:absolute!important;
+    right:-5%!important;
+    left:auto!important;
+    bottom:-2%!important;
+    top:auto!important;
+    width:42%!important;
+    height:auto!important;
+    opacity:.96!important;
+    z-index:4!important;
+  }
+  .hero-clean-monk{
+    position:absolute!important;
+    right:11%!important;
+    left:auto!important;
+    bottom:3%!important;
+    top:auto!important;
+    width:19%!important;
+    height:auto!important;
+    z-index:8!important;
+  }
+  .hero-clean-mouse{
+    position:absolute!important;
+    right:27%!important;
+    left:auto!important;
+    bottom:4%!important;
+    top:auto!important;
+    width:9%!important;
+    height:auto!important;
+    z-index:9!important;
+  }
+  .hero-copy{
+    position:relative!important;
+    z-index:10!important;
+    width:66%!important;
+    max-width:66%!important;
+    padding:22px 0 0!important;
+  }
+}
+
+@media(max-width:620px){
+  .hero-main-grid{min-height:520px!important}
+  .hero-copy{width:72%!important;max-width:72%!important;padding-top:18px!important}
+  .hero-clean-art::before{
+    background:linear-gradient(90deg,rgba(248,244,236,.98) 0%,rgba(248,244,236,.9) 43%,rgba(248,244,236,.28) 72%,rgba(248,244,236,.02) 100%)!important;
+  }
+  .hero-clean-signboard{right:3%!important;top:8%!important;width:31%!important}
+  .hero-clean-temple{right:-10%!important;bottom:-1%!important;width:48%!important}
+  .hero-clean-monk{right:8%!important;bottom:3%!important;width:23%!important}
+  .hero-clean-mouse{right:27%!important;bottom:4%!important;width:11%!important}
+  .hero-clean-blossom{right:-7%!important;width:43%!important}
+  .hero-utility{margin-top:10px!important;gap:8px!important}
+  .hero-util-btn{height:72px!important;min-height:72px!important;max-height:72px!important;padding:9px 9px!important;grid-template-columns:35px minmax(0,1fr) 24px!important;gap:7px!important}
+  .hero-util-btn .hero-util-icon{width:35px!important;height:35px!important;font-size:17px!important}
+  .hero-util-copy b{font-size:13px!important}
+  .hero-util-copy small{font-size:8.7px!important}
+  .hero-util-arrow{width:24px!important;height:24px!important;font-size:15px!important}
+}
+
+
+/* ======================================================================
+   MOBILE FINAL · 탭 비율 + 사진 중앙정렬
+   최신 responsive_fix index에서만 이어서 수정
+   ====================================================================== */
+
+@media(max-width:620px){
+
+  /* 작은 수행 · 재미 — 3개씩 유지하되 PC 카드 비율처럼 여유 있게 */
+  .home-tools-section{
+    width:calc(100% - 24px) !important;
+    margin-left:auto !important;
+    margin-right:auto !important;
+  }
+
+  #funBannerWrap .fun-banner-row{
+    grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+    gap:9px !important;
+    width:100% !important;
+  }
+
+  #funBannerWrap .fun-banner-btn:not(.playlist){
+    position:relative !important;
+    height:96px !important;
+    min-height:96px !important;
+    padding:11px 9px 10px !important;
+    border-radius:15px !important;
+    display:grid !important;
+    grid-template-columns:30px minmax(0,1fr) !important;
+    column-gap:7px !important;
+    align-items:center !important;
+    overflow:hidden !important;
+  }
+
+  #funBannerWrap .fun-banner-btn:not(.playlist) .fb-icon{
+    width:30px !important;
+    height:30px !important;
+    border-radius:9px !important;
+    font-size:14px !important;
+    flex:none !important;
+    z-index:4 !important;
+  }
+
+  #funBannerWrap .fun-banner-btn:not(.playlist) .fb-title{
+    font-size:11.3px !important;
+    line-height:1.15 !important;
+    font-weight:900 !important;
+    margin:0 0 4px !important;
+    white-space:nowrap !important;
+    overflow:hidden !important;
+    text-overflow:ellipsis !important;
+    z-index:4 !important;
+  }
+
+  #funBannerWrap .fun-banner-btn:not(.playlist) .fb-sub{
+    font-size:9px !important;
+    line-height:1.28 !important;
+    -webkit-line-clamp:2 !important;
+    max-height:2.56em !important;
+    z-index:4 !important;
+  }
+
+  #funBannerWrap .fun-banner-btn.moktak .fb-title{
+    font-size:9.8px !important;
+  }
+
+  /* 카드 그림은 무조건 오른쪽에 고정 — 왼쪽 쏠림 방지 */
+  #funBannerWrap .fun-banner-btn:not(.playlist)::after{
+    right:-2px !important;
+    left:auto !important;
+    top:auto !important;
+    bottom:0 !important;
+    width:45% !important;
+    height:76% !important;
+    background-position:right bottom !important;
+    background-size:contain !important;
+    background-repeat:no-repeat !important;
+    transform:none !important;
+    opacity:.48 !important;
+    z-index:1 !important;
+  }
+
+  #funBannerWrap .fun-banner-btn:not(.playlist)::before{
+    background:linear-gradient(
+      90deg,
+      rgba(255,252,247,.97) 0%,
+      rgba(255,252,247,.88) 52%,
+      rgba(255,252,247,.28) 76%,
+      rgba(255,252,247,0) 100%
+    ) !important;
+    z-index:2 !important;
+  }
+
+  /* 플레이리스트도 모바일에서 PC처럼 한 줄 배너 비율 */
+  #funBannerWrap .fun-banner-btn.playlist{
+    height:94px !important;
+    min-height:94px !important;
+    padding:13px 15px !important;
+    border-radius:17px !important;
+  }
+
+  #funBannerWrap .fun-banner-btn.playlist .fb-title{
+    font-size:16px !important;
+    line-height:1.15 !important;
+    white-space:nowrap !important;
+  }
+
+  #funBannerWrap .fun-banner-btn.playlist .fb-sub{
+    font-size:10.5px !important;
+    line-height:1.3 !important;
+  }
+
+  /* 절 카드 사진 — 모바일에서도 PC처럼 중앙 기준 crop */
+  #grid .card-photo,
+  .card-photo,
+  .home-gallery-strip .hg-item,
+  .album-thumb,
+  .auto-photo-item .slide,
+  .photo-slide,
+  .slide{
+    background-position:50% 50% !important;
+    background-size:cover !important;
+  }
+
+  #grid .card-photo img,
+  .card-photo img,
+  .home-gallery-strip .hg-item img,
+  .album-thumb img,
+  .auto-photo-item .slide img,
+  .photo-slide img,
+  .slide img{
+    width:100% !important;
+    height:100% !important;
+    object-fit:cover !important;
+    object-position:50% 50% !important;
+    transform:none !important;
+    margin:0 !important;
+  }
+
+  /* 절 카드 자체 비율도 PC와 비슷하게 */
+  #grid{
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    gap:10px !important;
+  }
+
+  #grid .card-photo{
+    height:auto !important;
+    min-height:112px !important;
+    aspect-ratio:4/3 !important;
+  }
+}
+
 </style>
 </head>
 <body>
