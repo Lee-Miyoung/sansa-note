@@ -13775,6 +13775,623 @@ header.hero,
   }
 }
 
+
+/* ======================================================================
+   2026-10-07 USER-UPLOADED INDEX ONLY · FINAL REQUESTED OVERRIDES
+   - 모바일 절 사진 중앙 정렬
+   - 게임 화면/글씨 가독성
+   - shooter 그림 연결
+   - 마음 쉬어가기 4개 = 큰 감성 카드 2×2
+   - 작은 수행·재미 6개 = 낮은 도구 카드 2열
+   - 순례앨범은 두 기능 영역 뒤로
+   ====================================================================== */
+
+/* ---------- 0. 새 기능 섹션 ---------- */
+.home-tools-section{
+  max-width:1080px !important;
+  width:calc(100% - 48px) !important;
+  margin:18px auto 0 !important;
+}
+.home-tools-heading{
+  display:flex !important;
+  align-items:center !important;
+  gap:10px !important;
+  margin:0 0 10px !important;
+  padding:0 2px !important;
+}
+.home-tools-bar{
+  width:4px !important;
+  height:28px !important;
+  border-radius:999px !important;
+  background:#c8912e !important;
+  flex:0 0 4px !important;
+}
+.home-tools-copy{
+  min-width:0 !important;
+  display:flex !important;
+  align-items:baseline !important;
+  gap:10px !important;
+}
+.home-tools-copy b{
+  color:#29251f !important;
+  font-size:20px !important;
+  line-height:1.15 !important;
+  font-weight:900 !important;
+  letter-spacing:-.045em !important;
+}
+.home-tools-copy small{
+  color:#81766b !important;
+  font-size:11.5px !important;
+  line-height:1.3 !important;
+  font-weight:650 !important;
+}
+
+/* ---------- 1. 마음 쉬어가기: 큰 감성 카드 2×2 ---------- */
+.hero-experience{
+  width:100% !important;
+  max-width:none !important;
+}
+.hero-experience .hip-quick-row{
+  display:grid !important;
+  grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  grid-auto-flow:row !important;
+  gap:12px !important;
+  width:100% !important;
+  max-width:none !important;
+  margin:14px 0 0 !important;
+}
+.hero-experience .hip-quick-btn{
+  position:relative !important;
+  overflow:hidden !important;
+  isolation:isolate !important;
+  min-height:112px !important;
+  height:112px !important;
+  padding:14px 15px !important;
+  border-radius:19px !important;
+  display:grid !important;
+  grid-template-columns:48px minmax(0,1fr) 18px !important;
+  column-gap:12px !important;
+  align-items:center !important;
+  text-align:left !important;
+}
+.hero-experience .hip-quick-btn .hq-index{display:none !important;}
+.hero-experience .hip-quick-btn .hq-icon{
+  width:46px !important;
+  height:46px !important;
+  flex-basis:46px !important;
+  border-radius:14px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  font-size:21px !important;
+  position:relative !important;
+  z-index:3 !important;
+}
+.hero-experience .hip-quick-btn .hq-copy{
+  width:auto !important;
+  min-width:0 !important;
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:flex-start !important;
+  justify-content:center !important;
+  gap:5px !important;
+  position:relative !important;
+  z-index:3 !important;
+}
+.hero-experience .hip-quick-btn .hq-copy b{
+  font-size:16px !important;
+  line-height:1.18 !important;
+  font-weight:900 !important;
+  letter-spacing:-.035em !important;
+  white-space:nowrap !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+}
+.hero-experience .hip-quick-btn .hq-copy small{
+  display:-webkit-box !important;
+  -webkit-box-orient:vertical !important;
+  -webkit-line-clamp:2 !important;
+  overflow:hidden !important;
+  font-size:12.2px !important;
+  line-height:1.36 !important;
+  max-height:2.72em !important;
+}
+.hero-experience .hip-quick-btn .hq-arrow{
+  display:block !important;
+  grid-column:3 !important;
+  align-self:start !important;
+  justify-self:end !important;
+  font-size:20px !important;
+  position:relative !important;
+  z-index:4 !important;
+}
+
+/* 우측 그림은 카드의 35~40% 정도를 감성 배경처럼 */
+.hero-experience .hip-quick-btn::after{
+  content:"" !important;
+  position:absolute !important;
+  right:-2px !important;
+  bottom:-2px !important;
+  top:auto !important;
+  width:40% !important;
+  height:96% !important;
+  background-repeat:no-repeat !important;
+  background-position:right bottom !important;
+  background-size:contain !important;
+  opacity:.64 !important;
+  filter:none !important;
+  transform:none !important;
+  border-radius:0 !important;
+  pointer-events:none !important;
+  z-index:1 !important;
+}
+.hero-experience .worry-q::after{background-image:url('./card-worry-lotus.png') !important;}
+.hero-experience .breath-q::after{background-image:url('./card-breath-mountain.png') !important;}
+.hero-experience .moktak-q::after{background-image:url('./card-moktak.png') !important;}
+.hero-experience .copy-q::after{background-image:url('./card-copy-brush.png') !important;}
+.hero-experience .hip-quick-btn > *{position:relative !important;z-index:3 !important;}
+
+/* ---------- 2. 작은 수행 · 재미: 낮은 동일 규격 2열 카드 ---------- */
+#funBannerWrap .fun-banner-row{
+  display:grid !important;
+  grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  gap:10px !important;
+  width:100% !important;
+  max-width:none !important;
+  margin:0 !important;
+  padding:0 !important;
+  align-items:stretch !important;
+}
+
+#funBannerWrap .fun-banner-btn:not(.playlist){
+  position:relative !important;
+  overflow:hidden !important;
+  isolation:isolate !important;
+  width:100% !important;
+  height:84px !important;
+  min-height:84px !important;
+  padding:11px 12px !important;
+  border-radius:16px !important;
+  display:grid !important;
+  grid-template-columns:38px minmax(0,1fr) !important;
+  column-gap:10px !important;
+  align-items:center !important;
+  text-align:left !important;
+  box-sizing:border-box !important;
+}
+#funBannerWrap .fun-banner-btn:not(.playlist) .fb-icon{
+  width:36px !important;
+  height:36px !important;
+  border-radius:11px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  font-size:17px !important;
+  position:relative !important;
+  z-index:4 !important;
+}
+#funBannerWrap .fun-banner-btn:not(.playlist) .fb-copy{
+  min-width:0 !important;
+  display:flex !important;
+  flex-direction:column !important;
+  justify-content:center !important;
+  gap:3px !important;
+  position:relative !important;
+  z-index:4 !important;
+}
+#funBannerWrap .fun-banner-btn:not(.playlist) .fb-title{
+  display:block !important;
+  margin:0 !important;
+  font-size:14px !important;
+  line-height:1.16 !important;
+  font-weight:900 !important;
+  letter-spacing:-.035em !important;
+  white-space:nowrap !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+}
+#funBannerWrap .fun-banner-btn:not(.playlist) .fb-sub{
+  display:-webkit-box !important;
+  -webkit-box-orient:vertical !important;
+  -webkit-line-clamp:2 !important;
+  overflow:hidden !important;
+  margin:0 !important;
+  max-height:2.62em !important;
+  font-size:10.8px !important;
+  line-height:1.31 !important;
+  opacity:.94 !important;
+}
+
+/* 각 기능 그림은 오른쪽 배경처럼 연하게 */
+#funBannerWrap .fun-banner-btn:not(.playlist)::after{
+  content:"" !important;
+  position:absolute !important;
+  right:0 !important;
+  bottom:0 !important;
+  top:auto !important;
+  width:34% !important;
+  height:92% !important;
+  border-radius:0 !important;
+  background-repeat:no-repeat !important;
+  background-position:right bottom !important;
+  background-size:contain !important;
+  filter:none !important;
+  transform:none !important;
+  opacity:.52 !important;
+  pointer-events:none !important;
+  z-index:1 !important;
+}
+#funBannerWrap .fun-banner-btn:not(.playlist)::before{
+  content:"" !important;
+  position:absolute !important;
+  inset:0 !important;
+  z-index:2 !important;
+  pointer-events:none !important;
+  border-radius:inherit !important;
+  background:linear-gradient(90deg,rgba(255,252,247,.92) 0%,rgba(255,252,247,.68) 58%,rgba(255,252,247,.08) 100%) !important;
+}
+#funBannerWrap .roulette::after{background-image:url('./card-random-temple.png') !important;}
+#funBannerWrap .worry::after{background-image:url('./card-comfort-lotus.png') !important;}
+#funBannerWrap .vow::after{background-image:url('./card-vow-brush.png') !important;}
+#funBannerWrap .mantra::after{background-image:url('./card-chant-beads.png') !important;}
+#funBannerWrap .amulet::after{background-image:url('./card-amulet-paper.png') !important;}
+
+/* 비트슈터는 초록-먹빛 계열 + shooter 이미지 직접 연결 */
+#funBannerWrap .fun-banner-btn.moktak{
+  color:#173a31 !important;
+  background:linear-gradient(135deg,#e7f4ee 0%,#d7ebe2 100%) !important;
+  border:1px solid rgba(43,101,82,.20) !important;
+  box-shadow:0 8px 18px rgba(32,82,66,.08) !important;
+}
+#funBannerWrap .fun-banner-btn.moktak::before{
+  background:linear-gradient(90deg,rgba(240,250,245,.96) 0%,rgba(231,246,239,.76) 58%,rgba(231,246,239,.08) 100%) !important;
+}
+#funBannerWrap .fun-banner-btn.moktak::after{
+  background-image:url('./card-shooter-ink.png') !important;
+  width:38% !important;
+  opacity:.72 !important;
+}
+#funBannerWrap .fun-banner-btn.moktak .fb-title{
+  font-size:13.4px !important;
+}
+
+/* 플레이리스트는 6개 아래 한 줄, 낮은 배너 */
+#funBannerWrap .fun-banner-btn.playlist{
+  grid-column:1 / -1 !important;
+  position:relative !important;
+  overflow:hidden !important;
+  min-height:86px !important;
+  height:86px !important;
+  border-radius:17px !important;
+  padding:11px 14px !important;
+}
+#funBannerWrap .fun-banner-btn.playlist .fb-title{
+  font-size:14px !important;
+  line-height:1.15 !important;
+}
+#funBannerWrap .fun-banner-btn.playlist .fb-sub{
+  font-size:10.8px !important;
+  line-height:1.3 !important;
+}
+#funBannerWrap .fun-banner-btn.playlist::after{
+  background-image:url('./card-playlist-mountain.png') !important;
+  background-repeat:no-repeat !important;
+  background-position:right bottom !important;
+  background-size:contain !important;
+  border-radius:0 !important;
+}
+
+/* 순례앨범은 두 기능 영역 뒤에 독립 기록 영역으로 */
+#homeGalleryWrap{
+  margin-top:20px !important;
+}
+
+/* ---------- 3. 모바일 절 사진: 데스크톱과 동일하게 중앙 기준 ---------- */
+.card-photo,
+.home-gallery-strip .hg-item,
+.album-thumb,
+.auto-photo-item .slide,
+.photo-slide,
+.slide{
+  background-position:center center !important;
+  background-size:cover !important;
+}
+.card-photo img,
+.home-gallery-strip .hg-item img,
+.album-thumb img,
+.auto-photo-item .slide img,
+.photo-slide img,
+.slide img{
+  width:100% !important;
+  height:100% !important;
+  object-fit:cover !important;
+  object-position:50% 50% !important;
+  display:block !important;
+  transform:none !important;
+}
+@media(max-width:640px){
+  .card-photo{
+    height:104px !important;
+    background-position:center center !important;
+  }
+}
+
+/* ---------- 4. BEAT SHOOTER: 화면/글씨/바탕 가독성 ---------- */
+#beatLabOverlay{
+  z-index:280 !important;
+  background:rgba(20,15,12,.58) !important;
+}
+#beatLabOverlay .modal{
+  background:#f7f2e8 !important;
+  color:#29231e !important;
+  box-shadow:0 28px 70px rgba(0,0,0,.30) !important;
+}
+#beatLabOverlay .modal-head{
+  position:relative !important;
+  overflow:hidden !important;
+  background:linear-gradient(90deg,#fffdfa 0%,#f7f0e5 100%) !important;
+  border-bottom:1px solid rgba(92,70,43,.14) !important;
+}
+#beatLabOverlay .modal-head::after{
+  content:"" !important;
+  position:absolute !important;
+  right:48px !important;
+  top:0 !important;
+  width:170px !important;
+  height:100% !important;
+  background:url('./card-shooter-ink.png') no-repeat right center / contain !important;
+  opacity:.20 !important;
+  pointer-events:none !important;
+}
+#beatLabOverlay .modal-head > *{
+  position:relative !important;
+  z-index:2 !important;
+}
+#beatLabOverlay .modal-head h2{
+  color:#241f1a !important;
+  font-size:24px !important;
+  line-height:1.2 !important;
+}
+#beatLabOverlay .modal-head .sub{
+  color:#695e53 !important;
+  font-size:12px !important;
+  line-height:1.45 !important;
+}
+#beatLabOverlay .close-x{
+  color:#3c342d !important;
+}
+
+/* 밝은 정보 영역 */
+#beatLabOverlay .modal-body{
+  background:#f7f2e8 !important;
+  color:#2c251f !important;
+}
+.beat-top-controls,
+.beat-game-head,
+.beat-progression,
+.beat-track,
+.release-banner,
+.beat-right-panel,
+.beat-purify-box{
+  background:rgba(255,253,248,.96) !important;
+  border:1px solid rgba(89,67,41,.13) !important;
+  color:#302820 !important;
+  box-shadow:0 5px 15px rgba(65,47,29,.05) !important;
+}
+.beat-mission,
+.beat-life-row,
+.beat-side-tip{
+  color:#44362b !important;
+}
+.beat-streak{color:#477c4c !important;}
+.beat-audio-status,
+.bpm-row{
+  color:#493b30 !important;
+}
+#beatLabOverlay input[type="range"]{
+  accent-color:#39725f !important;
+}
+
+/* 숫자 박스는 짙게 */
+.beat-score-box,
+.beat-rank-box,
+.beat-level-box{
+  background:#26352f !important;
+  color:#fff !important;
+  border-color:rgba(255,255,255,.10) !important;
+}
+.beat-score-box b,
+.beat-rank-box b,
+.beat-level-box b{
+  color:#fff !important;
+}
+.beat-score-box span,
+.beat-rank-box span,
+.beat-level-box span{
+  color:rgba(255,255,255,.76) !important;
+}
+
+/* 게임판 자체는 선명한 짙은 먹빛 */
+.worry-smash-zone{
+  min-height:350px !important;
+  overflow:hidden !important;
+  border-radius:20px !important;
+  background:
+    radial-gradient(circle at 50% 0%,rgba(65,119,99,.18),transparent 34%),
+    linear-gradient(180deg,#0e1815 0%,#08110f 100%) !important;
+  border:1px solid rgba(255,255,255,.09) !important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.02),0 10px 24px rgba(18,25,21,.12) !important;
+}
+.worry-smash-zone,
+.worry-smash-zone *{
+  color:#f7f4ec;
+}
+.worry-smash-title,
+.worry-game-hint{
+  color:#f6f2ea !important;
+  text-shadow:0 1px 5px rgba(0,0,0,.42) !important;
+}
+.worry-lane{
+  border-left:1px solid rgba(255,255,255,.09) !important;
+}
+.beat-pad{
+  box-shadow:0 7px 15px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.13) !important;
+}
+.beat-pad b{color:#fff !important;}
+.beat-pad small{color:rgba(255,255,255,.70) !important;}
+
+/* ---------- 5. 모바일 최종 크기 ---------- */
+@media(max-width:620px){
+  .home-tools-section{
+    width:calc(100% - 28px) !important;
+    margin-top:16px !important;
+  }
+  .home-tools-heading{margin-bottom:9px !important;}
+  .home-tools-copy b{font-size:18px !important;}
+  .home-tools-copy small{display:none !important;}
+
+  .hero-experience .hip-quick-row{
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    gap:10px !important;
+  }
+  .hero-experience .hip-quick-btn{
+    min-height:104px !important;
+    height:104px !important;
+    padding:12px 11px !important;
+    grid-template-columns:40px minmax(0,1fr) 15px !important;
+    column-gap:9px !important;
+    border-radius:17px !important;
+  }
+  .hero-experience .hip-quick-btn .hq-icon{
+    width:38px !important;
+    height:38px !important;
+    flex-basis:38px !important;
+    font-size:18px !important;
+  }
+  .hero-experience .hip-quick-btn .hq-copy b{
+    font-size:14px !important;
+  }
+  .hero-experience .hip-quick-btn .hq-copy small{
+    font-size:10.7px !important;
+    line-height:1.3 !important;
+  }
+  .hero-experience .hip-quick-btn::after{
+    width:42% !important;
+    height:92% !important;
+  }
+
+  #funBannerWrap .fun-banner-row{
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    gap:9px !important;
+  }
+  #funBannerWrap .fun-banner-btn:not(.playlist){
+    height:82px !important;
+    min-height:82px !important;
+    padding:10px 10px !important;
+    grid-template-columns:34px minmax(0,1fr) !important;
+    column-gap:8px !important;
+    border-radius:15px !important;
+  }
+  #funBannerWrap .fun-banner-btn:not(.playlist) .fb-icon{
+    width:32px !important;
+    height:32px !important;
+    font-size:15px !important;
+  }
+  #funBannerWrap .fun-banner-btn:not(.playlist) .fb-title{
+    font-size:12.4px !important;
+  }
+  #funBannerWrap .fun-banner-btn:not(.playlist) .fb-sub{
+    font-size:9.9px !important;
+    line-height:1.27 !important;
+  }
+  #funBannerWrap .fun-banner-btn.moktak .fb-title{
+    font-size:10.7px !important;
+  }
+  #funBannerWrap .fun-banner-btn:not(.playlist)::after{
+    width:38% !important;
+    height:88% !important;
+  }
+  #funBannerWrap .fun-banner-btn.playlist{
+    min-height:82px !important;
+    height:82px !important;
+    padding:10px 12px !important;
+  }
+
+  /* 모바일 게임은 화면 전체를 쓰되 내부 스크롤 가능 */
+  #beatLabOverlay{
+    padding:0 !important;
+    align-items:flex-end !important;
+  }
+  #beatLabOverlay .modal{
+    width:100% !important;
+    max-width:none !important;
+    height:100dvh !important;
+    max-height:100dvh !important;
+    border-radius:0 !important;
+    display:flex !important;
+    flex-direction:column !important;
+    overflow:hidden !important;
+  }
+  #beatLabOverlay .modal-head{
+    flex:0 0 auto !important;
+    padding:12px 14px 10px !important;
+  }
+  #beatLabOverlay .modal-head h2{
+    font-size:20px !important;
+  }
+  #beatLabOverlay .modal-head .sub{
+    font-size:10.8px !important;
+  }
+  #beatLabOverlay .modal-head::after{
+    width:110px !important;
+    right:34px !important;
+    opacity:.13 !important;
+  }
+  #beatLabOverlay .modal-body{
+    flex:1 1 auto !important;
+    min-height:0 !important;
+    overflow-y:auto !important;
+    -webkit-overflow-scrolling:touch !important;
+    padding:10px 12px calc(22px + env(safe-area-inset-bottom)) !important;
+  }
+  .beat-desktop-layout{
+    display:flex !important;
+    flex-direction:column !important;
+    gap:10px !important;
+  }
+  .beat-left-panel,
+  .beat-right-panel{
+    width:100% !important;
+    min-width:0 !important;
+  }
+  .beat-game-head{
+    display:grid !important;
+    grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+    gap:6px !important;
+    padding:8px !important;
+  }
+  .beat-mission{
+    grid-column:1 / -1 !important;
+    font-size:10.5px !important;
+    line-height:1.35 !important;
+  }
+  .worry-smash-zone{
+    min-height:300px !important;
+    height:300px !important;
+    margin-bottom:9px !important;
+  }
+  #beatLabOverlay .beat-grid{
+    display:grid !important;
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    gap:8px !important;
+  }
+  #beatLabOverlay .beat-pad{
+    min-height:80px !important;
+    padding:9px 7px !important;
+    border-radius:14px !important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -13960,8 +14577,19 @@ header.hero,
   <div id="iconRowHintWrap"></div>
   <div id="guestAddHintWrap"></div>
   <div id="explain108Wrap"></div>
+
+  <section class="home-tools-section" aria-labelledby="homeToolsTitle">
+    <div class="home-tools-heading" id="homeToolsTitle">
+      <span class="home-tools-bar"></span>
+      <div class="home-tools-copy">
+        <b>작은 수행 · 재미</b>
+        <small>잠깐 머물며 해보는 산사노트 기능</small>
+      </div>
+    </div>
+    <div id="funBannerWrap"></div>
+  </section>
+
   <div id="homeGalleryWrap"></div>
-  <div id="funBannerWrap"></div>
   <div id="triviaBannerWrap"></div>
   <div id="quizBannerWrap"></div>
   <div id="suggestBannerWrap"></div>
