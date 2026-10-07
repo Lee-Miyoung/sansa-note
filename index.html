@@ -16572,6 +16572,41 @@ header.hero,.hero-inner{position:relative!important}
   .hero-clean-temple{z-index:4!important;}
   .hero-clean-monk,.hero-clean-mouse{z-index:6!important;}
 }
+
+/* === HERO HANJI SCENE FINAL OVERRIDE ===
+   No separate mountain background. Copy and art live on one hanji banner. */
+.hero-clean-bg{display:none!important;}
+
+@media (min-width:901px){
+  .hero-main-grid{display:grid!important;grid-template-columns:minmax(0,47%) minmax(0,53%)!important;gap:0!important;min-height:430px!important;position:relative!important;overflow:hidden!important;}
+  .hero-copy{grid-column:1!important;position:relative!important;z-index:10!important;width:100%!important;max-width:none!important;padding:22px 8px 34px 0!important;}
+  .hero-clean-art{grid-column:2!important;position:relative!important;inset:auto!important;width:100%!important;height:430px!important;min-height:430px!important;margin:0!important;overflow:visible!important;z-index:2!important;}
+  .hero-clean-temple{display:block!important;right:-7%!important;bottom:-2%!important;width:68%!important;max-height:92%!important;opacity:1!important;z-index:3!important;}
+  .hero-clean-blossom{display:block!important;right:-5%!important;top:-5%!important;width:52%!important;opacity:.92!important;z-index:4!important;}
+  .hero-clean-monk{display:block!important;left:14%!important;right:auto!important;bottom:4px!important;width:31%!important;z-index:6!important;}
+  .hero-clean-mouse{display:block!important;left:7%!important;right:auto!important;bottom:7px!important;width:15%!important;z-index:7!important;}
+}
+
+@media (max-width:900px){
+  .hero-main-grid{display:block!important;position:relative!important;min-height:610px!important;overflow:hidden!important;}
+  .hero-copy{position:relative!important;z-index:10!important;width:100%!important;max-width:none!important;min-height:610px!important;padding:0 0 245px!important;}
+  .hero-copy p{position:relative!important;z-index:11!important;width:100%!important;max-width:100%!important;}
+  .hero-clean-art{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;min-height:0!important;margin:0!important;overflow:hidden!important;z-index:2!important;pointer-events:none!important;}
+  .hero-clean-temple{display:block!important;right:-13%!important;left:auto!important;bottom:-4px!important;top:auto!important;width:67%!important;opacity:1!important;z-index:3!important;}
+  .hero-clean-blossom{display:block!important;right:-9%!important;left:auto!important;top:47%!important;width:53%!important;opacity:.93!important;z-index:4!important;}
+  .hero-clean-monk{display:block!important;left:37%!important;right:auto!important;bottom:3px!important;top:auto!important;width:27%!important;z-index:6!important;}
+  .hero-clean-mouse{display:block!important;left:29.5%!important;right:auto!important;bottom:5px!important;top:auto!important;width:10.5%!important;z-index:7!important;}
+}
+
+@media (max-width:620px){
+  .hero-main-grid{min-height:590px!important;}
+  .hero-copy{min-height:590px!important;padding-bottom:230px!important;}
+  .hero-clean-temple{right:-16%!important;bottom:-3px!important;width:72%!important;}
+  .hero-clean-blossom{right:-12%!important;top:48%!important;width:58%!important;}
+  .hero-clean-monk{left:35%!important;bottom:2px!important;width:29%!important;}
+  .hero-clean-mouse{left:27.5%!important;bottom:5px!important;width:11.5%!important;}
+}
+
 </style>
 </head>
 <body>
