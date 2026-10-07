@@ -15088,6 +15088,397 @@ header.hero,
   }
 }
 
+
+/* ======================================================================
+   2026-10-07 · LATEST INDEX CONTINUATION ONLY
+   1) 메인 배너 그림을 예시처럼 한 장면으로 자연스럽게 배치
+   2) 모바일 모달 닫기 X가 주소창/상단 안전영역과 겹치지 않게
+   3) 작은 수행 · 재미 = 한 줄 3개 × 2줄
+   4) 섹션 간격/카드 간격 통일
+   ====================================================================== */
+
+/* ---------- A. HERO: 그림을 한 장면처럼 넓게, 텍스트는 왼쪽 ---------- */
+header.hero{
+  overflow:hidden !important;
+}
+
+@media(min-width:901px){
+  .hero-inner{
+    max-width:1180px !important;
+    margin:0 auto !important;
+    padding:30px 30px 26px !important;
+  }
+
+  .hero-main-grid{
+    display:grid !important;
+    grid-template-columns:minmax(0, .92fr) minmax(500px, 1.08fr) !important;
+    gap:26px !important;
+    align-items:start !important;
+    position:relative !important;
+  }
+
+  .hero-copy{
+    grid-column:1 !important;
+    grid-row:1 !important;
+    position:relative !important;
+    z-index:10 !important;
+    max-width:none !important;
+    width:100% !important;
+    padding:20px 0 12px !important;
+  }
+
+  /* 오른쪽은 액자처럼 보이지 않고 한 장면처럼 */
+  .hero-clean-art{
+    grid-column:2 !important;
+    grid-row:1 !important;
+    position:relative !important;
+    inset:auto !important;
+    width:100% !important;
+    height:390px !important;
+    min-height:390px !important;
+    overflow:visible !important;
+    border-radius:0 !important;
+    background:transparent !important;
+    box-shadow:none !important;
+    z-index:2 !important;
+  }
+
+  .hero-clean-art::before{
+    content:"" !important;
+    position:absolute !important;
+    inset:8px -8% 0 -18% !important;
+    background:
+      linear-gradient(90deg,rgba(247,242,232,1) 0%,rgba(247,242,232,.62) 17%,rgba(247,242,232,0) 42%),
+      radial-gradient(circle at 60% 32%,rgba(255,248,232,.35),transparent 42%) !important;
+    z-index:0 !important;
+    pointer-events:none !important;
+  }
+
+  .hero-clean-art img{
+    position:absolute !important;
+    display:block !important;
+    max-width:none !important;
+    object-fit:contain !important;
+  }
+
+  /* 산수 배경을 넓게 깔아 '한 장의 풍경'처럼 */
+  .hero-clean-bg{
+    left:-18% !important;
+    top:26px !important;
+    width:128% !important;
+    height:340px !important;
+    object-fit:cover !important;
+    object-position:center 58% !important;
+    opacity:.62 !important;
+    -webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.56) 16%,#000 36%,#000 100%) !important;
+    mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.56) 16%,#000 36%,#000 100%) !important;
+    z-index:1 !important;
+  }
+
+  .hero-clean-blossom{
+    right:-1% !important;
+    top:-8px !important;
+    width:34% !important;
+    opacity:.96 !important;
+    z-index:4 !important;
+  }
+
+  .hero-clean-signboard{
+    right:9% !important;
+    top:46px !important;
+    width:31% !important;
+    opacity:.98 !important;
+    z-index:6 !important;
+  }
+
+  /* signboard 자체에 기둥/등불이 있으므로 별도 랜턴은 숨김 */
+  .hero-clean-lantern{
+    display:none !important;
+  }
+
+  .hero-clean-temple{
+    right:-2% !important;
+    bottom:0 !important;
+    width:31% !important;
+    opacity:.92 !important;
+    z-index:3 !important;
+  }
+
+  .hero-clean-monk{
+    right:11% !important;
+    bottom:2px !important;
+    width:20% !important;
+    z-index:8 !important;
+  }
+
+  .hero-clean-mouse{
+    right:28% !important;
+    bottom:7px !important;
+    width:10% !important;
+    z-index:9 !important;
+  }
+
+  /* 지도/내 계정은 그림 상단 우측에 정돈 */
+  .hero-top-actions,
+  .hero-utility{
+    top:16px !important;
+    right:28px !important;
+    z-index:20 !important;
+  }
+}
+
+/* 모바일도 같은 구성: 배경은 넓고, 캐릭터/간판은 작게 우측 */
+@media(max-width:900px){
+  .hero-main-grid{
+    display:block !important;
+    position:relative !important;
+  }
+
+  .hero-copy{
+    position:relative !important;
+    z-index:10 !important;
+    width:100% !important;
+    max-width:none !important;
+    padding-right:35% !important;
+  }
+
+  .hero-clean-art{
+    position:absolute !important;
+    inset:0 !important;
+    overflow:hidden !important;
+    pointer-events:none !important;
+    z-index:1 !important;
+  }
+
+  .hero-clean-bg{
+    right:-38% !important;
+    left:auto !important;
+    top:8% !important;
+    width:130% !important;
+    height:65% !important;
+    object-fit:cover !important;
+    object-position:center 58% !important;
+    opacity:.33 !important;
+    -webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.42) 20%,#000 52%,#000 100%) !important;
+    mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.42) 20%,#000 52%,#000 100%) !important;
+  }
+
+  .hero-clean-blossom{
+    right:-6% !important;
+    top:-1% !important;
+    width:41% !important;
+    opacity:.82 !important;
+  }
+
+  .hero-clean-signboard{
+    right:2% !important;
+    top:7% !important;
+    width:27% !important;
+    z-index:5 !important;
+  }
+
+  .hero-clean-lantern{display:none !important;}
+
+  .hero-clean-temple{
+    right:-13% !important;
+    bottom:38% !important;
+    width:36% !important;
+    opacity:.60 !important;
+  }
+
+  .hero-clean-monk{
+    right:4% !important;
+    bottom:40% !important;
+    width:18.5% !important;
+    z-index:7 !important;
+  }
+
+  .hero-clean-mouse{
+    right:19% !important;
+    bottom:40% !important;
+    width:10% !important;
+    z-index:8 !important;
+  }
+}
+
+/* ---------- B. 섹션 간격 통일 ---------- */
+.hero-experience,
+.home-tools-section,
+.hero-pilgrim-feature,
+.hero-journey-panel,
+#homeGalleryWrap{
+  margin-top:18px !important;
+}
+
+.hero-section-kicker,
+.home-tools-heading{
+  margin-bottom:10px !important;
+}
+
+/* ---------- C. 작은 수행 · 재미: 3개씩 × 2줄 ---------- */
+#funBannerWrap .fun-banner-row{
+  display:grid !important;
+  grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+  gap:10px !important;
+  width:100% !important;
+  max-width:none !important;
+  margin:0 !important;
+  padding:0 !important;
+}
+
+#funBannerWrap .fun-banner-btn:not(.playlist){
+  height:82px !important;
+  min-height:82px !important;
+  border-radius:15px !important;
+  padding:10px 11px !important;
+  grid-template-columns:34px minmax(0,1fr) !important;
+  column-gap:8px !important;
+}
+
+#funBannerWrap .fun-banner-btn:not(.playlist) .fb-icon{
+  width:32px !important;
+  height:32px !important;
+  border-radius:10px !important;
+  font-size:15px !important;
+}
+
+#funBannerWrap .fun-banner-btn:not(.playlist) .fb-title{
+  font-size:12.8px !important;
+  line-height:1.16 !important;
+  white-space:nowrap !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+  margin-bottom:3px !important;
+}
+
+#funBannerWrap .fun-banner-btn:not(.playlist) .fb-sub{
+  font-size:9.8px !important;
+  line-height:1.28 !important;
+  display:-webkit-box !important;
+  -webkit-box-orient:vertical !important;
+  -webkit-line-clamp:2 !important;
+  overflow:hidden !important;
+}
+
+/* 비트슈터 긴 제목 */
+#funBannerWrap .fun-banner-btn.moktak .fb-title{
+  font-size:11px !important;
+}
+
+/* 플레이리스트는 세 칸 전체 한 줄 */
+#funBannerWrap .fun-banner-btn.playlist{
+  grid-column:1 / -1 !important;
+  height:82px !important;
+  min-height:82px !important;
+  margin-top:0 !important;
+}
+
+/* 모바일도 3열 유지: 너무 빽빽하지 않게 더 단순화 */
+@media(max-width:620px){
+  .home-tools-section{
+    width:calc(100% - 28px) !important;
+  }
+
+  #funBannerWrap .fun-banner-row{
+    grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+    gap:7px !important;
+  }
+
+  #funBannerWrap .fun-banner-btn:not(.playlist){
+    height:78px !important;
+    min-height:78px !important;
+    padding:8px 7px !important;
+    border-radius:13px !important;
+    grid-template-columns:28px minmax(0,1fr) !important;
+    column-gap:6px !important;
+  }
+
+  #funBannerWrap .fun-banner-btn:not(.playlist) .fb-icon{
+    width:27px !important;
+    height:27px !important;
+    border-radius:9px !important;
+    font-size:13px !important;
+  }
+
+  #funBannerWrap .fun-banner-btn:not(.playlist) .fb-title{
+    font-size:10.5px !important;
+    letter-spacing:-.04em !important;
+  }
+
+  #funBannerWrap .fun-banner-btn:not(.playlist) .fb-sub{
+    font-size:8.5px !important;
+    line-height:1.25 !important;
+  }
+
+  #funBannerWrap .fun-banner-btn.moktak .fb-title{
+    font-size:9.2px !important;
+  }
+
+  #funBannerWrap .fun-banner-btn:not(.playlist)::after{
+    width:42% !important;
+    opacity:.45 !important;
+  }
+
+  #funBannerWrap .fun-banner-btn.playlist{
+    height:76px !important;
+    min-height:76px !important;
+  }
+}
+
+/* ---------- D. 모바일 모달 X: 주소창/상단 안전영역과 절대 겹치지 않게 ---------- */
+@media(max-width:900px){
+  .overlay{
+    padding-top:0 !important;
+  }
+
+  .overlay.show .modal,
+  #beatLabOverlay .modal{
+    padding-top:max(14px, env(safe-area-inset-top)) !important;
+  }
+
+  .modal-head,
+  #beatLabOverlay .modal-head{
+    position:sticky !important;
+    top:0 !important;
+    z-index:50 !important;
+    padding-top:14px !important;
+    padding-right:64px !important;
+    background:rgba(255,253,248,.97) !important;
+    backdrop-filter:blur(12px) !important;
+    -webkit-backdrop-filter:blur(12px) !important;
+  }
+
+  .close-x,
+  #beatLabOverlay .close-x{
+    position:absolute !important;
+    right:16px !important;
+    top:14px !important;
+    width:40px !important;
+    height:40px !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    border-radius:50% !important;
+    background:rgba(255,255,255,.92) !important;
+    border:1px solid rgba(55,44,34,.12) !important;
+    color:#302820 !important;
+    font-size:24px !important;
+    line-height:1 !important;
+    box-shadow:0 4px 12px rgba(0,0,0,.08) !important;
+    z-index:100 !important;
+  }
+}
+
+/* iPhone Safari/PWA: dynamic toolbar에서도 X 여유 */
+@supports(padding:max(0px)){
+  @media(max-width:900px){
+    .close-x,
+    #beatLabOverlay .close-x{
+      top:max(14px, env(safe-area-inset-top)) !important;
+    }
+  }
+}
+
 </style>
 </head>
 <body>
