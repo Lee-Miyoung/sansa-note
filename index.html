@@ -13227,6 +13227,269 @@ header.hero::before{display:none!important;}
   .hero-copy{max-width:67%!important;}
 }
 
+
+/* ===== HERO BALANCE FIX · smaller characters / wider scenery / signboard ===== */
+.hero-clean-bg{
+  right:-8%!important;
+  top:7%!important;
+  width:94%!important;
+  height:86%!important;
+  opacity:.42!important;
+  object-fit:cover!important;
+  object-position:center 58%!important;
+  -webkit-mask-image:linear-gradient(90deg,rgba(0,0,0,.18) 0%,rgba(0,0,0,.72) 28%,#000 58%,#000 100%)!important;
+  mask-image:linear-gradient(90deg,rgba(0,0,0,.18) 0%,rgba(0,0,0,.72) 28%,#000 58%,#000 100%)!important;
+}
+.hero-clean-temple{
+  right:-3%!important;
+  bottom:2%!important;
+  width:27%!important;
+  opacity:.82!important;
+}
+.hero-clean-blossom{
+  right:-2%!important;
+  top:-2%!important;
+  width:29%!important;
+  opacity:.82!important;
+}
+.hero-clean-lantern{
+  right:29%!important;
+  top:20%!important;
+  width:8%!important;
+  opacity:.82!important;
+}
+.hero-clean-signboard{
+  position:absolute!important;
+  right:4%!important;
+  top:8%!important;
+  width:23%!important;
+  z-index:4!important;
+  opacity:.96!important;
+  object-fit:contain!important;
+  filter:drop-shadow(0 7px 12px rgba(66,45,29,.12))!important;
+}
+.hero-clean-monk{
+  right:9%!important;
+  bottom:3%!important;
+  width:20%!important;
+  z-index:5!important;
+}
+.hero-clean-mouse{
+  right:24%!important;
+  bottom:3%!important;
+  width:10.5%!important;
+  z-index:6!important;
+}
+.hero-copy{
+  max-width:54%!important;
+  padding-bottom:32px!important;
+}
+
+/* mobile: background extends behind/under the copy, while characters stay small */
+@media(max-width:620px){
+  .hero-clean-bg{
+    right:-44%!important;
+    top:5%!important;
+    width:145%!important;
+    height:76%!important;
+    opacity:.34!important;
+    object-position:center 56%!important;
+    -webkit-mask-image:linear-gradient(90deg,rgba(0,0,0,.12) 0%,rgba(0,0,0,.52) 28%,#000 62%,#000 100%)!important;
+    mask-image:linear-gradient(90deg,rgba(0,0,0,.12) 0%,rgba(0,0,0,.52) 28%,#000 62%,#000 100%)!important;
+  }
+  .hero-clean-temple{
+    right:-20%!important;
+    bottom:38%!important;
+    width:43%!important;
+    opacity:.55!important;
+  }
+  .hero-clean-blossom{
+    right:-12%!important;
+    top:-1%!important;
+    width:42%!important;
+    opacity:.70!important;
+  }
+  .hero-clean-lantern{
+    right:35%!important;
+    top:17%!important;
+    width:10%!important;
+    display:block!important;
+  }
+  .hero-clean-signboard{
+    right:2%!important;
+    top:5%!important;
+    width:30%!important;
+  }
+  .hero-clean-monk{
+    right:4%!important;
+    bottom:41%!important;
+    width:24%!important;
+  }
+  .hero-clean-mouse{
+    right:22%!important;
+    bottom:41%!important;
+    width:13%!important;
+  }
+  .hero-copy{
+    max-width:72%!important;
+    padding-bottom:72px!important;
+  }
+}
+
+
+/* =========================================================
+   FINAL FIX · 상단 4개 카드 그림 연결 + 한지 배경 경계 제거
+   ========================================================= */
+
+/* 1) 한지 배경은 페이지 전체를 하나의 연속 배경으로 사용 */
+html,
+body{
+  background:#f7f1e6 !important;
+  background-image:none !important;
+}
+
+body{
+  position:relative !important;
+  min-height:100vh !important;
+}
+
+/* 기존 반복 한지 이미지 때문에 생기던 타일/사각 경계 제거 */
+body::before{
+  content:"" !important;
+  position:fixed !important;
+  inset:0 !important;
+  z-index:-1 !important;
+  pointer-events:none !important;
+  background:
+    linear-gradient(rgba(250,247,240,.64),rgba(250,247,240,.64)),
+    url('./paper-texture-ready.webp') center center / cover no-repeat !important;
+  opacity:1 !important;
+  mix-blend-mode:normal !important;
+}
+
+/* 섹션별로 한지 배경을 다시 깔지 않도록 투명 처리 */
+header.hero,
+.hero-inner,
+.hero-main-grid,
+main,
+#mainListArea,
+.home-main,
+.page-shell,
+.page-wrap{
+  background-color:transparent !important;
+  background-image:none !important;
+}
+
+/* 헤더 아래/옆에 생기는 사각형 경계도 제거 */
+header.hero::after,
+.hero-main-grid::after{
+  box-shadow:none !important;
+}
+
+/* 2) 마음 쉬어가기 카드 4개: 정확한 PNG 강제 연결 */
+.hero-experience .hip-quick-btn{
+  position:relative !important;
+  overflow:hidden !important;
+  isolation:isolate !important;
+}
+
+/* 고민 처방 */
+.hero-experience .hip-quick-btn.worry-q::after{
+  content:"" !important;
+  position:absolute !important;
+  inset:auto -2px -2px auto !important;
+  width:48% !important;
+  height:100% !important;
+  background-image:url('./card-worry-lotus.png') !important;
+  background-repeat:no-repeat !important;
+  background-position:right bottom !important;
+  background-size:contain !important;
+  opacity:.66 !important;
+  filter:none !important;
+  transform:none !important;
+  z-index:1 !important;
+  pointer-events:none !important;
+}
+
+/* 1분 호흡 */
+.hero-experience .hip-quick-btn.breath-q::after{
+  content:"" !important;
+  position:absolute !important;
+  inset:auto -2px -2px auto !important;
+  width:52% !important;
+  height:100% !important;
+  background-image:url('./card-breath-mountain.png') !important;
+  background-repeat:no-repeat !important;
+  background-position:right bottom !important;
+  background-size:contain !important;
+  opacity:.64 !important;
+  filter:none !important;
+  transform:none !important;
+  z-index:1 !important;
+  pointer-events:none !important;
+}
+
+/* 무한 목탁 — 반드시 목탁 그림 */
+.hero-experience .hip-quick-btn.moktak-q::after{
+  content:"" !important;
+  position:absolute !important;
+  inset:auto -2px -2px auto !important;
+  width:52% !important;
+  height:100% !important;
+  background-image:url('./card-moktak.png') !important;
+  background-repeat:no-repeat !important;
+  background-position:right bottom !important;
+  background-size:contain !important;
+  opacity:.72 !important;
+  filter:none !important;
+  transform:none !important;
+  z-index:1 !important;
+  pointer-events:none !important;
+}
+
+/* 오늘의 필사 — 반드시 붓 그림 */
+.hero-experience .hip-quick-btn.copy-q::after{
+  content:"" !important;
+  position:absolute !important;
+  inset:auto -2px -2px auto !important;
+  width:52% !important;
+  height:100% !important;
+  background-image:url('./card-copy-brush.png') !important;
+  background-repeat:no-repeat !important;
+  background-position:right bottom !important;
+  background-size:contain !important;
+  opacity:.72 !important;
+  filter:none !important;
+  transform:none !important;
+  z-index:1 !important;
+  pointer-events:none !important;
+}
+
+/* 카드 텍스트는 그림보다 위 */
+.hero-experience .hip-quick-btn > *{
+  position:relative !important;
+  z-index:3 !important;
+}
+
+/* 필사 카드 터치 오동작 방지 */
+#todayCopyLink{
+  touch-action:pan-y manipulation !important;
+  -webkit-tap-highlight-color:rgba(0,0,0,.04) !important;
+}
+
+/* 모바일에서도 그림을 너무 크게 하지 않음 */
+@media(max-width:620px){
+  .hero-experience .hip-quick-btn.worry-q::after,
+  .hero-experience .hip-quick-btn.breath-q::after,
+  .hero-experience .hip-quick-btn.moktak-q::after,
+  .hero-experience .hip-quick-btn.copy-q::after{
+    width:46% !important;
+    height:92% !important;
+    right:-3px !important;
+    bottom:-1px !important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -13288,6 +13551,7 @@ header.hero::before{display:none!important;}
           <img class="hero-clean-bg" src="./hero-bg.png" alt="">
           <img class="hero-clean-temple" src="./hero-temple.png" alt="">
           <img class="hero-clean-blossom" src="./hero-blossom.png" alt="">
+          <img class="hero-clean-signboard" src="./hero-signboard.png" alt="">
           <img class="hero-clean-lantern" src="./hero-lantern.png" alt="">
           <img class="hero-clean-monk" src="./hero-monk.png" alt="">
           <img class="hero-clean-mouse" src="./hero-mouse.png" alt="">
