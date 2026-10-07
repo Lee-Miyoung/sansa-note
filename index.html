@@ -14392,6 +14392,702 @@ header.hero,
   }
 }
 
+
+/* ======================================================================
+   2026-10-07 · LATEST INDEX CONTINUATION
+   - 작은 수행·재미를 마음 쉬어가기 바로 아래로 이동
+   - 대문 이미지 레이어 정리 (중복/겹침 제거)
+   - 나의 순례/호칭/통계 글씨 확대
+   - 나의 레벨 한 줄 유지
+   ====================================================================== */
+
+/* ---------- A. 대문 그림: 겹치지 않는 2열 구조 ---------- */
+@media(min-width:901px){
+  .hero-inner{
+    max-width:1180px !important;
+    margin:0 auto !important;
+    padding:30px 30px 26px !important;
+  }
+
+  .hero-main-grid{
+    display:grid !important;
+    grid-template-columns:minmax(0,1fr) minmax(410px,0.86fr) !important;
+    column-gap:32px !important;
+    row-gap:16px !important;
+    align-items:start !important;
+    position:relative !important;
+  }
+
+  .hero-copy{
+    grid-column:1 !important;
+    grid-row:1 !important;
+    width:100% !important;
+    max-width:none !important;
+    padding:8px 0 0 !important;
+    z-index:8 !important;
+  }
+
+  .hero-character-space{display:none !important;}
+
+  /* 오른쪽 그림은 자기 칸 안에서만 배치 */
+  .hero-clean-art{
+    grid-column:2 !important;
+    grid-row:1 !important;
+    position:relative !important;
+    inset:auto !important;
+    width:100% !important;
+    height:350px !important;
+    min-height:350px !important;
+    overflow:hidden !important;
+    border-radius:28px !important;
+    z-index:2 !important;
+    pointer-events:none !important;
+  }
+
+  .hero-clean-art img{
+    position:absolute !important;
+    max-width:none !important;
+    display:block !important;
+    object-fit:contain !important;
+  }
+
+  /* 산수 배경은 한 장처럼 넓게 */
+  .hero-clean-bg{
+    left:-12% !important;
+    right:auto !important;
+    top:18px !important;
+    bottom:auto !important;
+    width:122% !important;
+    height:305px !important;
+    object-fit:cover !important;
+    object-position:center 54% !important;
+    opacity:.58 !important;
+    -webkit-mask-image:linear-gradient(90deg,rgba(0,0,0,.28) 0%,#000 28%,#000 100%) !important;
+    mask-image:linear-gradient(90deg,rgba(0,0,0,.28) 0%,#000 28%,#000 100%) !important;
+    z-index:1 !important;
+  }
+
+  /* 절은 오른쪽 아래 한 번만 */
+  .hero-clean-temple{
+    right:-1% !important;
+    left:auto !important;
+    bottom:-2px !important;
+    top:auto !important;
+    width:29% !important;
+    opacity:.90 !important;
+    z-index:3 !important;
+  }
+
+  /* 벚꽃은 오른쪽 위 */
+  .hero-clean-blossom{
+    right:-1% !important;
+    left:auto !important;
+    top:-2px !important;
+    bottom:auto !important;
+    width:33% !important;
+    opacity:.90 !important;
+    z-index:4 !important;
+  }
+
+  /* 새 hero-signboard.png 자체에 기둥+등불이 포함되어 있으므로
+     별도 lantern은 숨겨 중복을 없앰 */
+  .hero-clean-lantern{
+    display:none !important;
+  }
+
+  .hero-clean-signboard{
+    right:7% !important;
+    left:auto !important;
+    top:30px !important;
+    bottom:auto !important;
+    width:31% !important;
+    opacity:.98 !important;
+    z-index:5 !important;
+    filter:drop-shadow(0 7px 12px rgba(66,45,29,.10)) !important;
+  }
+
+  /* 캐릭터는 작고 아래에 */
+  .hero-clean-monk{
+    right:10% !important;
+    left:auto !important;
+    bottom:1px !important;
+    top:auto !important;
+    width:21% !important;
+    z-index:7 !important;
+  }
+
+  .hero-clean-mouse{
+    right:28% !important;
+    left:auto !important;
+    bottom:4px !important;
+    top:auto !important;
+    width:10.5% !important;
+    z-index:8 !important;
+  }
+
+  /* 지도/계정은 그림 위가 아니라 대문 우측 상단 */
+  .hero-top-actions{
+    right:32px !important;
+    top:20px !important;
+    z-index:20 !important;
+  }
+
+  /* 빠른 기능 이후는 전부 가로 전체 폭 */
+  .hero-utility,
+  .hero-experience,
+  .home-tools-section,
+  .hero-pilgrim-feature,
+  .hero-journey-panel{
+    grid-column:1 / -1 !important;
+    width:100% !important;
+    max-width:none !important;
+    position:relative !important;
+    z-index:10 !important;
+  }
+
+  .hero-utility{grid-row:2 !important;}
+  .hero-experience{grid-row:3 !important;}
+  .home-tools-section{grid-row:4 !important;}
+  .hero-pilgrim-feature{grid-row:5 !important;}
+  .hero-journey-panel{grid-row:6 !important;}
+}
+
+/* ---------- B. 작은 수행·재미는 마음 쉬어가기 바로 아래 ---------- */
+.home-tools-section{
+  margin:14px 0 0 !important;
+  padding:0 !important;
+  width:100% !important;
+}
+.home-tools-heading{
+  display:flex !important;
+  align-items:center !important;
+  gap:9px !important;
+  margin:0 0 9px !important;
+  padding:0 !important;
+}
+.home-tools-bar{
+  width:4px !important;
+  height:23px !important;
+  border-radius:999px !important;
+  background:#c8912e !important;
+}
+.home-tools-copy{
+  display:flex !important;
+  align-items:baseline !important;
+  gap:9px !important;
+}
+.home-tools-copy b{
+  font-size:18px !important;
+  line-height:1.15 !important;
+  font-weight:900 !important;
+  letter-spacing:-.04em !important;
+  color:#2b261f !important;
+}
+.home-tools-copy small{
+  font-size:11px !important;
+  color:#82776d !important;
+}
+
+/* 6개는 동일한 높이/글씨 */
+#funBannerWrap .fun-banner-row{
+  display:grid !important;
+  grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  gap:10px !important;
+  width:100% !important;
+  padding:0 !important;
+  margin:0 !important;
+}
+#funBannerWrap .fun-banner-btn:not(.playlist){
+  height:84px !important;
+  min-height:84px !important;
+  border-radius:16px !important;
+}
+#funBannerWrap .fun-banner-btn:not(.playlist) .fb-title{
+  font-size:14px !important;
+  line-height:1.16 !important;
+  font-weight:900 !important;
+  white-space:nowrap !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+}
+#funBannerWrap .fun-banner-btn:not(.playlist) .fb-sub{
+  font-size:10.8px !important;
+  line-height:1.31 !important;
+  display:-webkit-box !important;
+  -webkit-box-orient:vertical !important;
+  -webkit-line-clamp:2 !important;
+  overflow:hidden !important;
+}
+#funBannerWrap .fun-banner-btn.moktak .fb-title{
+  font-size:13.4px !important;
+}
+
+/* ---------- C. 나의 순례 정보 가독성 ---------- */
+.hero-journey-panel{
+  margin-top:16px !important;
+  padding:18px 19px 17px !important;
+  border-radius:20px !important;
+}
+.hero-section-kicker.journey{
+  font-size:16px !important;
+  line-height:1.2 !important;
+  font-weight:900 !important;
+  letter-spacing:-.03em !important;
+  color:#285646 !important;
+  margin-bottom:10px !important;
+}
+.hero-badge-row{
+  display:flex !important;
+  align-items:center !important;
+  gap:9px !important;
+  flex-wrap:wrap !important;
+  margin:0 !important;
+}
+#levelBadge{
+  display:block !important;
+  min-width:0 !important;
+}
+#levelBadge .level-pill{
+  display:inline-flex !important;
+  align-items:center !important;
+  white-space:nowrap !important;
+  max-width:none !important;
+  font-size:14px !important;
+  line-height:1 !important;
+  font-weight:900 !important;
+  padding:8px 13px !important;
+  border-radius:999px !important;
+}
+#specialTitlePill{
+  display:inline-flex !important;
+  align-items:center !important;
+  white-space:nowrap !important;
+  font-size:13px !important;
+  line-height:1 !important;
+  font-weight:850 !important;
+  padding:8px 13px !important;
+  border-radius:999px !important;
+}
+.hero-next-level,
+#nextLevelCaption{
+  margin-top:9px !important;
+  font-size:12.5px !important;
+  line-height:1.55 !important;
+  color:#5f554b !important;
+}
+.hero-next-level .level-desc{
+  font-size:12.5px !important;
+}
+.hero-next-level b{
+  font-size:12.5px !important;
+}
+.pilgrim-title-info{
+  margin-top:10px !important;
+  font-size:12.5px !important;
+  line-height:1.6 !important;
+}
+.pilgrim-title-info b{
+  font-size:13px !important;
+}
+.hero-stats{
+  display:grid !important;
+  grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+  gap:0 !important;
+  width:100% !important;
+  max-width:none !important;
+  margin-top:15px !important;
+  padding:0 !important;
+}
+.hero-stat-link,
+.hero-stats .stat{
+  min-width:0 !important;
+  padding:13px 10px !important;
+  border-right:1px solid rgba(71,91,80,.13) !important;
+}
+.hero-stat-link:last-child,
+.hero-stats .stat:last-child{
+  border-right:0 !important;
+}
+.hero-stats .num{
+  font-size:30px !important;
+  line-height:1 !important;
+  font-weight:800 !important;
+  color:#285646 !important;
+}
+.hero-stats .lbl{
+  margin-top:6px !important;
+  font-size:13px !important;
+  line-height:1.25 !important;
+  font-weight:850 !important;
+  color:#443c34 !important;
+  white-space:nowrap !important;
+}
+
+/* ---------- D. 모바일 대문도 겹치지 않게 ---------- */
+@media(max-width:900px){
+  .hero-main-grid{
+    display:block !important;
+    position:relative !important;
+  }
+
+  .hero-copy{
+    width:100% !important;
+    max-width:none !important;
+    padding-right:34% !important;
+    position:relative !important;
+    z-index:8 !important;
+  }
+
+  .hero-clean-art{
+    position:absolute !important;
+    inset:0 !important;
+    overflow:hidden !important;
+    pointer-events:none !important;
+    z-index:1 !important;
+  }
+
+  .hero-clean-bg{
+    right:-30% !important;
+    left:auto !important;
+    top:4% !important;
+    width:112% !important;
+    height:60% !important;
+    object-fit:cover !important;
+    object-position:center 54% !important;
+    opacity:.30 !important;
+  }
+
+  .hero-clean-temple{
+    right:-15% !important;
+    left:auto !important;
+    bottom:38% !important;
+    top:auto !important;
+    width:36% !important;
+    opacity:.56 !important;
+  }
+
+  .hero-clean-blossom{
+    right:-7% !important;
+    left:auto !important;
+    top:-1% !important;
+    width:38% !important;
+    opacity:.74 !important;
+  }
+
+  .hero-clean-lantern{
+    display:none !important;
+  }
+
+  .hero-clean-signboard{
+    right:2% !important;
+    left:auto !important;
+    top:5% !important;
+    width:24% !important;
+    z-index:5 !important;
+  }
+
+  .hero-clean-monk{
+    right:4% !important;
+    left:auto !important;
+    bottom:41% !important;
+    width:19% !important;
+    z-index:6 !important;
+  }
+
+  .hero-clean-mouse{
+    right:19% !important;
+    left:auto !important;
+    bottom:41% !important;
+    width:10.5% !important;
+    z-index:7 !important;
+  }
+
+  .hero-experience,
+  .home-tools-section,
+  .hero-pilgrim-feature,
+  .hero-journey-panel{
+    width:100% !important;
+    max-width:none !important;
+  }
+}
+
+/* ---------- E. 모바일 텍스트/통계 ---------- */
+@media(max-width:620px){
+  .home-tools-copy b{
+    font-size:17px !important;
+  }
+  .home-tools-copy small{
+    display:none !important;
+  }
+
+  .hero-journey-panel{
+    padding:15px 14px 14px !important;
+  }
+  .hero-section-kicker.journey{
+    font-size:15px !important;
+  }
+  .hero-badge-row{
+    gap:7px !important;
+  }
+  #levelBadge .level-pill{
+    font-size:12px !important;
+    padding:7px 10px !important;
+    white-space:nowrap !important;
+  }
+  #specialTitlePill{
+    font-size:11.5px !important;
+    padding:7px 10px !important;
+  }
+  .hero-next-level,
+  #nextLevelCaption,
+  .hero-next-level .level-desc,
+  .hero-next-level b{
+    font-size:11.5px !important;
+  }
+  .hero-stats .num{
+    font-size:25px !important;
+  }
+  .hero-stats .lbl{
+    font-size:11.5px !important;
+    white-space:nowrap !important;
+  }
+}
+
+
+/* ======================================================================
+   BEAT SHOOTER FINAL CONTROL FIX
+   - 떨어지는 번뇌 바로 아래 6개 패드 한 줄
+   - 밝은 바탕에서 모든 글씨 선명하게
+   - 정화 버튼 항상 표시 (충전 전에는 비활성 상태)
+   ====================================================================== */
+
+/* 밝은 정보 영역 글씨 */
+#beatLabOverlay .modal,
+#beatLabOverlay .modal-body,
+#beatLabOverlay .beat-left-panel,
+#beatLabOverlay .beat-top-controls,
+#beatLabOverlay .beat-game-head,
+#beatLabOverlay .beat-progression,
+#beatLabOverlay .beat-reward-row,
+#beatLabOverlay .beat-life-row,
+#beatLabOverlay .beat-purify-box,
+#beatLabOverlay .beat-track,
+#beatLabOverlay .release-banner{
+  color:#322920 !important;
+}
+
+#beatLabOverlay .beat-audio-status,
+#beatLabOverlay .beat-audio-status span,
+#beatLabOverlay .bpm-row,
+#beatLabOverlay .bpm-row b,
+#beatLabOverlay .beat-mission,
+#beatLabOverlay .beat-xp-top,
+#beatLabOverlay .beat-coin,
+#beatLabOverlay .beat-reward,
+#beatLabOverlay .beat-life-row,
+#beatLabOverlay .release-banner,
+#beatLabOverlay .release-banner span,
+#beatLabOverlay .release-banner b{
+  color:#322920 !important;
+  opacity:1 !important;
+  text-shadow:none !important;
+}
+
+#beatLabOverlay .beat-streak{
+  color:#3f7f46 !important;
+  font-weight:900 !important;
+}
+
+#beatLabOverlay .beat-reward{
+  background:#f2eee6 !important;
+  border:1px solid rgba(75,59,42,.14) !important;
+}
+#beatLabOverlay .beat-reward.on{
+  background:#315e4d !important;
+  color:#fff !important;
+}
+
+/* 정화 게이지/버튼 복구 */
+#beatLabOverlay .beat-purify-box{
+  display:block !important;
+  margin:7px 0 8px !important;
+  padding:10px 11px !important;
+  border:1px solid rgba(196,145,44,.22) !important;
+  border-radius:15px !important;
+  background:linear-gradient(135deg,#fff9e9 0%,#f8f5e9 100%) !important;
+}
+#beatLabOverlay .beat-purify-top{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+  gap:10px !important;
+  margin:0 0 8px !important;
+  color:#6a5424 !important;
+}
+#beatLabOverlay .beat-purify-top > span,
+#beatLabOverlay .beat-purify-top > span b{
+  color:#9a6b12 !important;
+  font-size:12px !important;
+  font-weight:900 !important;
+}
+#beatLabOverlay .beat-purify-btn{
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  visibility:visible !important;
+  opacity:1 !important;
+  min-width:126px !important;
+  min-height:34px !important;
+  padding:7px 11px !important;
+  border:0 !important;
+  border-radius:999px !important;
+  background:#a65f4f !important;
+  color:#fff !important;
+  font-size:10.5px !important;
+  font-weight:900 !important;
+  white-space:nowrap !important;
+  box-shadow:0 3px 0 rgba(91,47,38,.28) !important;
+}
+#beatLabOverlay .beat-purify-btn:disabled{
+  display:inline-flex !important;
+  visibility:visible !important;
+  opacity:.58 !important;
+  background:#a99f91 !important;
+  color:#fff !important;
+  filter:none !important;
+  cursor:not-allowed !important;
+}
+#beatLabOverlay .beat-purify-track{
+  display:block !important;
+  height:8px !important;
+  border-radius:999px !important;
+  background:#e6dfd2 !important;
+  overflow:hidden !important;
+}
+#beatLabOverlay .beat-purify-track i{
+  display:block !important;
+  height:100% !important;
+  border-radius:999px !important;
+  background:linear-gradient(90deg,#dc9b36,#ffd56a 58%,#84df63) !important;
+}
+
+/* 게임판 내부 글씨만 밝게 */
+#beatLabOverlay .worry-smash-zone,
+#beatLabOverlay .worry-smash-zone *{
+  color:#f8f5ef !important;
+}
+#beatLabOverlay .worry-smash-title{
+  color:#e7e2d9 !important;
+  font-size:11px !important;
+  font-weight:900 !important;
+}
+#beatLabOverlay .worry-game-hint{
+  color:#dad5cc !important;
+}
+#beatLabOverlay .worry-wave{
+  color:#ffd56a !important;
+}
+#beatLabOverlay .beat-defense-line span,
+#beatLabOverlay .beat-defense-line b{
+  color:#fff4ee !important;
+}
+#beatLabOverlay .beat-gameover b{
+  color:#ffd56a !important;
+}
+#beatLabOverlay .beat-gameover span{
+  color:#eee7ef !important;
+}
+
+/* 떨어지는 게임판 바로 아래 6개 버튼 */
+#beatLabOverlay .beat-grid{
+  display:grid !important;
+  grid-template-columns:repeat(6,minmax(0,1fr)) !important;
+  gap:7px !important;
+  width:100% !important;
+  margin:8px 0 8px !important;
+}
+#beatLabOverlay .beat-pad{
+  width:100% !important;
+  min-width:0 !important;
+  height:70px !important;
+  min-height:70px !important;
+  aspect-ratio:auto !important;
+  padding:7px 3px !important;
+  border-radius:12px !important;
+  font-size:15px !important;
+  line-height:1.05 !important;
+  overflow:hidden !important;
+}
+#beatLabOverlay .beat-pad b{
+  display:block !important;
+  margin-top:3px !important;
+  color:#fff !important;
+  font-size:10px !important;
+  line-height:1.05 !important;
+  white-space:nowrap !important;
+}
+#beatLabOverlay .beat-pad small{
+  display:none !important;
+}
+
+/* 패드 아래 결과 안내 */
+#beatLabOverlay .release-banner{
+  margin:0 0 8px !important;
+  padding:7px 9px !important;
+  min-height:32px !important;
+  background:#fffdf8 !important;
+  border:1px solid rgba(78,62,43,.14) !important;
+  border-radius:10px !important;
+  font-size:10.5px !important;
+}
+
+/* 모바일 */
+@media(max-width:620px){
+  #beatLabOverlay .beat-purify-box{
+    padding:9px 10px !important;
+  }
+  #beatLabOverlay .beat-purify-top{
+    gap:7px !important;
+  }
+  #beatLabOverlay .beat-purify-top > span,
+  #beatLabOverlay .beat-purify-top > span b{
+    font-size:10.5px !important;
+  }
+  #beatLabOverlay .beat-purify-btn{
+    min-width:112px !important;
+    min-height:32px !important;
+    padding:6px 8px !important;
+    font-size:9.3px !important;
+  }
+
+  #beatLabOverlay .worry-smash-zone{
+    height:300px !important;
+    min-height:300px !important;
+    margin-bottom:6px !important;
+  }
+
+  #beatLabOverlay .beat-grid{
+    grid-template-columns:repeat(6,minmax(0,1fr)) !important;
+    gap:4px !important;
+    margin:5px 0 6px !important;
+  }
+  #beatLabOverlay .beat-pad{
+    height:62px !important;
+    min-height:62px !important;
+    padding:6px 1px !important;
+    border-radius:9px !important;
+    font-size:13px !important;
+  }
+  #beatLabOverlay .beat-pad b{
+    font-size:8px !important;
+    letter-spacing:-.04em !important;
+  }
+  #beatLabOverlay .release-banner{
+    font-size:9.5px !important;
+    padding:6px 7px !important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -14532,6 +15228,17 @@ header.hero,
         </div>
       </div>
 
+      <section class="home-tools-section" aria-labelledby="homeToolsTitle">
+    <div class="home-tools-heading" id="homeToolsTitle">
+      <span class="home-tools-bar"></span>
+      <div class="home-tools-copy">
+        <b>작은 수행 · 재미</b>
+        <small>잠깐 머물며 해보는 산사노트 기능</small>
+      </div>
+    </div>
+    <div id="funBannerWrap"></div>
+  </section>
+
       <section class="hero-pilgrim-feature" aria-label="108 순례 컬렉션">
         <button class="pilgrim-collection-chip pilgrim-collection-main" type="button" onclick="openPilgrimCollection()">
           <span class="pc-lotus"><img src="./lotus-soft.png" alt="" aria-hidden="true"></span>
@@ -14577,17 +15284,6 @@ header.hero,
   <div id="iconRowHintWrap"></div>
   <div id="guestAddHintWrap"></div>
   <div id="explain108Wrap"></div>
-
-  <section class="home-tools-section" aria-labelledby="homeToolsTitle">
-    <div class="home-tools-heading" id="homeToolsTitle">
-      <span class="home-tools-bar"></span>
-      <div class="home-tools-copy">
-        <b>작은 수행 · 재미</b>
-        <small>잠깐 머물며 해보는 산사노트 기능</small>
-      </div>
-    </div>
-    <div id="funBannerWrap"></div>
-  </section>
 
   <div id="homeGalleryWrap"></div>
   <div id="triviaBannerWrap"></div>
@@ -15809,7 +16505,6 @@ header.hero,
             </div>
             <div class="beat-gameover" id="beatGameOver"><b>GAME OVER</b><span style="margin:8px 0 4px;color:#d8c9df;">번뇌가 DEFENSE LINE을 3번 통과했습니다</span><span style="margin:0 0 14px;color:#9ee88b;font-size:11px;">한 번 통과한 직후에는 잠깐 보호막이 생겨 연속 실점하지 않아요.</span><button class="club-btn hot" type="button" onclick="restartWorryGame()">🪷 다시 출격</button></div>
           </div>
-          <div class="release-banner"><span>정확 격추 <b id="worrySmashCount">0</b></span><span id="releaseMsg">🎯 맞는 패드를 골라 직선으로 쏘세요</span></div>
           <div class="beat-grid">
             <button class="beat-pad" data-weapon="mok" onclick="playBeat('mok',this)">🥢<br><b>목탁</b><small>걱정·불안</small></button>
             <button class="beat-pad" data-weapon="kick" onclick="playBeat('kick',this)">💥<br><b>KICK</b><small>분노·미움</small></button>
@@ -15818,6 +16513,7 @@ header.hero,
             <button class="beat-pad" data-weapon="bass" onclick="playBeat('bass',this)">🪷<br><b>BASS</b><small>집착·미련</small></button>
             <button class="beat-pad" data-weapon="air" onclick="playBeat('air',this)">✨<br><b>극락 FX</b><small>두려움·외로움</small></button>
           </div>
+          <div class="release-banner"><span>정확 격추 <b id="worrySmashCount">0</b></span><span id="releaseMsg">🎯 맞는 패드를 골라 직선으로 쏘세요</span></div>
           
           <div class="beat-leaderboard" id="beatLeaderboard">
             <div class="beat-leader-head"><b>🏆 번뇌 타파 실시간 TOP 10</b><button type="button" onclick="closeBeatLeaderboard()">✕</button></div>
