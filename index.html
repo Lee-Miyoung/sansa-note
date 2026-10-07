@@ -16218,6 +16218,180 @@ header.hero,.hero-inner{position:relative!important}
   .hero-clean-mouse{right:46%!important;bottom:4.8%!important;width:12.5%!important;}
 }
 
+
+/* ======================================================================
+   MOBILE HERO CORRECTION · latest file continuation
+   - 소개글과 그림을 겹치지 않고 위/아래 흐름으로 분리
+   - 풍경은 아트 영역 전체에 자연스럽게
+   - 절은 오른쪽 크게
+   - 스님/쥐는 절 왼쪽
+   - signboard / separate lantern removed from HTML
+   ====================================================================== */
+
+@media(max-width:900px){
+  .hero-main-grid{
+    display:flex !important;
+    flex-direction:column !important;
+    min-height:0 !important;
+    gap:0 !important;
+    position:relative !important;
+  }
+
+  .hero-copy{
+    order:1 !important;
+    position:relative !important;
+    width:100% !important;
+    max-width:none !important;
+    padding:0 !important;
+    z-index:5 !important;
+  }
+
+  .hero-character-space{
+    display:none !important;
+  }
+
+  .hero-clean-art{
+    order:2 !important;
+    position:relative !important;
+    inset:auto !important;
+    width:100% !important;
+    height:330px !important;
+    min-height:330px !important;
+    margin-top:8px !important;
+    overflow:hidden !important;
+    pointer-events:none !important;
+    z-index:2 !important;
+  }
+
+  .hero-clean-art img{
+    position:absolute !important;
+    display:block !important;
+    max-width:none !important;
+    object-fit:contain !important;
+  }
+
+  /* 풍경 전체: 사각 경계가 드러나지 않게 가장자리 페이드 */
+  .hero-clean-bg{
+    left:-5% !important;
+    right:auto !important;
+    top:0 !important;
+    width:110% !important;
+    height:100% !important;
+    object-fit:cover !important;
+    object-position:center 57% !important;
+    opacity:.45 !important;
+    -webkit-mask-image:radial-gradient(ellipse at 52% 54%,#000 0%,#000 60%,rgba(0,0,0,.75) 78%,transparent 100%) !important;
+    mask-image:radial-gradient(ellipse at 52% 54%,#000 0%,#000 60%,rgba(0,0,0,.75) 78%,transparent 100%) !important;
+    z-index:1 !important;
+  }
+
+  /* 절을 우측에 크게 */
+  .hero-clean-temple{
+    right:-5% !important;
+    left:auto !important;
+    bottom:-4px !important;
+    top:auto !important;
+    width:49% !important;
+    opacity:.98 !important;
+    z-index:3 !important;
+  }
+
+  /* 벚꽃은 절 위에만 */
+  .hero-clean-blossom{
+    right:-5% !important;
+    left:auto !important;
+    top:4px !important;
+    width:31% !important;
+    opacity:.72 !important;
+    z-index:4 !important;
+  }
+
+  /* 캐릭터는 절의 왼쪽 */
+  .hero-clean-monk{
+    left:43% !important;
+    right:auto !important;
+    bottom:6px !important;
+    top:auto !important;
+    width:22% !important;
+    z-index:6 !important;
+  }
+
+  .hero-clean-mouse{
+    left:32% !important;
+    right:auto !important;
+    bottom:9px !important;
+    top:auto !important;
+    width:11% !important;
+    z-index:7 !important;
+  }
+
+  .hero-copy p{
+    max-width:100% !important;
+  }
+}
+
+@media(max-width:620px){
+  header.hero{
+    padding-bottom:18px !important;
+  }
+
+  .hero-copy{
+    padding-right:0 !important;
+  }
+
+  .hero-title-row h1{
+    max-width:none !important;
+  }
+
+  .hero-tagline{
+    max-width:94% !important;
+  }
+
+  .hero-copy p{
+    max-width:100% !important;
+    font-size:12.8px !important;
+    line-height:1.82 !important;
+  }
+
+  .hero-clean-art{
+    height:300px !important;
+    min-height:300px !important;
+    margin-top:10px !important;
+  }
+
+  .hero-clean-bg{
+    left:-8% !important;
+    width:116% !important;
+    height:100% !important;
+    opacity:.43 !important;
+    object-position:center 58% !important;
+  }
+
+  .hero-clean-temple{
+    right:-8% !important;
+    width:53% !important;
+    bottom:-2px !important;
+  }
+
+  .hero-clean-blossom{
+    right:-7% !important;
+    top:4px !important;
+    width:31% !important;
+  }
+
+  .hero-clean-monk{
+    left:39% !important;
+    bottom:4px !important;
+    width:24% !important;
+  }
+
+  .hero-clean-mouse{
+    left:27% !important;
+    bottom:7px !important;
+    width:12.5% !important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -16279,8 +16453,6 @@ header.hero,.hero-inner{position:relative!important}
           <img class="hero-clean-bg" src="./hero-bg.png" alt="">
           <img class="hero-clean-temple" src="./hero-temple.png" alt="">
           <img class="hero-clean-blossom" src="./hero-blossom.png" alt="">
-          <img class="hero-clean-signboard" src="./hero-signboard.png" alt="">
-          <img class="hero-clean-lantern" src="./hero-lantern.png" alt="">
           <img class="hero-clean-monk" src="./hero-monk.png" alt="">
           <img class="hero-clean-mouse" src="./hero-mouse.png" alt="">
         </div>
