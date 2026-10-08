@@ -17286,6 +17286,111 @@ header.hero,.hero-inner{position:relative!important}
   #triviaBannerWrap,.content-type-row,#mainFilterbar{width:calc(100% - 28px)!important}
 }
 
+
+/* ======================================================================
+   FINAL TOP NAV + STAT ART
+   - top navigation stays visible while scrolling
+   - login removed because 마이페이지 already covers the account function
+   - stat illustrations use explicit PNG filenames
+   ====================================================================== */
+
+.site-global-nav{
+  position:sticky !important;
+  top:0 !important;
+  z-index:9999 !important;
+  width:100% !important;
+}
+
+.site-global-nav-inner{
+  position:relative !important;
+}
+
+.site-global-nav-actions{
+  margin-left:auto !important;
+}
+
+.site-global-nav-links{
+  flex:1 1 auto !important;
+}
+
+header.hero,
+.hero-experience,
+.home-tools-section,
+.hero-journey-panel,
+#approvedActionRow,
+#triviaBannerWrap,
+.content-type-row,
+#mainFilterbar,
+#mainListArea{
+  scroll-margin-top:74px !important;
+}
+
+/* Decorative art in the 0 / 0 / 108 stats */
+.hero-stats .stat,
+.hero-stats .hero-stat-link{
+  position:relative !important;
+  overflow:hidden !important;
+  padding-bottom:42px !important;
+}
+
+.hero-stats .stat-art{
+  position:absolute !important;
+  left:50% !important;
+  bottom:3px !important;
+  transform:translateX(-50%) !important;
+  width:72px !important;
+  height:38px !important;
+  object-fit:contain !important;
+  object-position:center !important;
+  opacity:.32 !important;
+  pointer-events:none !important;
+  z-index:0 !important;
+}
+
+.hero-stats .num,
+.hero-stats .lbl{
+  position:relative !important;
+  z-index:2 !important;
+}
+
+.hero-stats .stat-recorded .stat-art{
+  width:62px !important;
+  opacity:.29 !important;
+}
+
+.hero-stats .stat-unvisited .stat-art{
+  width:86px !important;
+  opacity:.34 !important;
+}
+
+/* Mobile keeps menu on one line; user can swipe it horizontally */
+@media(max-width:700px){
+  .site-global-nav{
+    top:0 !important;
+  }
+  .site-global-nav-inner{
+    padding-right:10px !important;
+  }
+  .site-global-nav-links{
+    overflow-x:auto !important;
+    white-space:nowrap !important;
+  }
+  .site-global-nav-actions{
+    flex:0 0 auto !important;
+  }
+  .hero-stats .stat,
+  .hero-stats .hero-stat-link{
+    padding-bottom:34px !important;
+  }
+  .hero-stats .stat-art{
+    width:55px !important;
+    height:29px !important;
+    bottom:2px !important;
+  }
+  .hero-stats .stat-recorded .stat-art{width:48px !important;}
+  .hero-stats .stat-unvisited .stat-art{width:66px !important;}
+}
+
 </style>
 </head>
 <body>
@@ -17354,9 +17459,6 @@ header.hero,.hero-inner{position:relative!important}
       <div class="hero-top-actions site-global-nav-actions" aria-label="계정과 지도">
         <button class="hero-top-action map-action" type="button" onclick="openMapOverlay()">
           <span class="hta-icon">⌖</span><span>지도</span>
-        </button>
-        <button class="hero-top-action login-action guest-login-icon" id="heroLoginBtn" type="button" onclick="openHeroAccountAction()">
-          <span class="hta-icon">人</span><span id="heroLoginLabel">로그인</span>
         </button>
       </div>
     </div>
@@ -24791,9 +24893,18 @@ function render(){
   }
 
   document.getElementById('heroStats').innerHTML = `
-    <button class="stat hero-stat-link stat-visited" type="button" onclick="openHeroStatList('visited')" aria-label="다녀온 절 목록 보기"><div class="num serif">${stats.visited}</div><div class="lbl">다녀온 절</div></button>
-    <button class="stat hero-stat-link stat-recorded" type="button" onclick="openHeroStatList('recorded')" aria-label="순례 기록 완료 목록 보기"><div class="num serif">${stats.shot}</div><div class="lbl">기록 완료</div></button>
-    <button class="stat hero-stat-link stat-unvisited" type="button" onclick="openHeroStatList('unvisited')" aria-label="아직 안 가본 곳 목록 보기"><div class="num serif">${stats.unvisited}</div><div class="lbl">가보고 싶은 곳</div></button>
+    <button class="stat hero-stat-link stat-visited" type="button" onclick="openHeroStatList('visited')" aria-label="다녀온 절 목록 보기">
+      <div class="num serif">${stats.visited}</div><div class="lbl">다녀온 절</div>
+      <img class="stat-art" src="./stat-temple.png" alt="">
+    </button>
+    <button class="stat hero-stat-link stat-recorded" type="button" onclick="openHeroStatList('recorded')" aria-label="순례 기록 완료 목록 보기">
+      <div class="num serif">${stats.shot}</div><div class="lbl">기록 완료</div>
+      <img class="stat-art" src="./stat-record.png" alt="">
+    </button>
+    <button class="stat hero-stat-link stat-unvisited" type="button" onclick="openHeroStatList('unvisited')" aria-label="아직 안 가본 곳 목록 보기">
+      <div class="num serif">${stats.unvisited}</div><div class="lbl">가보고 싶은 곳</div>
+      <img class="stat-art" src="./stat-mountain.png" alt="">
+    </button>
   `;
 
   const list = getFilteredList();
@@ -29917,6 +30028,56 @@ function goSiteNav(target){
     setTimeout(scrollSiteTarget,100);
   }
 }
+
+
+/* final nav behavior: close overlays first, then move */
+(function(){
+  const originalGoSiteNav = window.goSiteNav;
+  window.goSiteNav = function(target){
+    try{
+      if(typeof closeSiteNavBlockingOverlays === 'function'){
+        closeSiteNavBlockingOverlays();
+      }else{
+        document.querySelectorAll('.overlay.show').forEach(function(el){el.classList.remove('show');});
+      }
+    }catch(e){}
+
+    if(target === 'home'){
+      window.scrollTo({top:0,behavior:'smooth'});
+      return;
+    }
+
+    if(target === 'course'){
+      setTimeout(function(){
+        if(typeof openPackOverlay === 'function') openPackOverlay();
+      },70);
+      return;
+    }
+
+    if(target === 'mypage'){
+      setTimeout(function(){
+        if(typeof openHeroAccountAction === 'function') openHeroAccountAction();
+        else if(typeof openSettings === 'function') openSettings();
+      },70);
+      return;
+    }
+
+    if(target === 'temple' || target === 'mountain' || target === 'community'){
+      try{
+        if(typeof switchContentType === 'function') switchContentType(target);
+      }catch(e){}
+      setTimeout(function(){
+        const el = document.querySelector('.content-type-row')
+          || document.getElementById('mainFilterbar')
+          || document.getElementById('mainListArea');
+        if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+      },110);
+      return;
+    }
+
+    if(typeof originalGoSiteNav === 'function') originalGoSiteNav(target);
+  };
+})();
 
 </script>
 
