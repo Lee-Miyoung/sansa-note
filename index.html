@@ -19159,6 +19159,76 @@ body{scroll-padding-top:calc(var(--global-nav-h) + 12px)!important}
 .pilgrim-petal{position:fixed;top:-10%;z-index:2147483002;pointer-events:none;font-size:18px;animation:petalFall var(--dur) linear forwards;opacity:.9}@keyframes petalFall{to{transform:translate3d(var(--drift),115vh,0) rotate(540deg);opacity:.12}}
 @media(max-width:620px){.pilgrim-achievement-card{padding:22px 14px 17px;border-radius:25px}.pilgrim-achievement-card h2{font-size:25px}.pilgrim-ach-lotus{width:88px;height:88px;font-size:54px}.pilgrim-ach-stats{gap:6px}.pilgrim-ach-stat{padding:10px 4px}.pilgrim-ach-stat b{font-size:21px}.pilgrim-ach-stat span{font-size:9px}.pilgrim-ach-actions button{font-size:12px}.pilgrim-gps-card{padding:24px 18px}}
 
+
+/* ============================================================
+   FIELD REWARD TEASER · 현장 인증 기능을 평소에도 발견 가능하게
+   ============================================================ */
+.field-reward-badge{
+  position:absolute;left:8px;top:8px;z-index:6;
+  padding:5px 9px;border-radius:999px;
+  background:rgba(31,76,65,.92);color:#fff;
+  border:1px solid rgba(255,255,255,.78);
+  box-shadow:0 4px 12px rgba(28,61,52,.18);
+  font-size:10px;font-weight:900;line-height:1;letter-spacing:-.02em;
+  pointer-events:none;
+}
+.card-photo .lotus-visited-mark + .visit-flag + .field-reward-badge,
+.card-photo .lotus-visited-mark ~ .field-reward-badge{top:auto;bottom:8px;}
+
+.field-reward-preview{
+  margin:18px 0 16px;padding:18px;border-radius:22px;position:relative;overflow:hidden;
+  border:1px solid #e4d2aa;
+  background:
+    radial-gradient(circle at 92% 12%,rgba(255,211,100,.28),transparent 25%),
+    linear-gradient(135deg,#fffaf0 0%,#f7ead0 100%);
+  box-shadow:0 10px 24px rgba(95,68,30,.07);
+}
+.field-reward-preview::after{content:'✦';position:absolute;right:16px;bottom:-28px;font-size:100px;color:rgba(178,122,35,.08);font-weight:900;pointer-events:none;}
+.field-reward-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;position:relative;z-index:2;}
+.field-reward-kicker{display:inline-block;margin-bottom:5px;color:#8b6122;font-size:11px;font-weight:900;letter-spacing:.05em;}
+.field-reward-head h3{margin:0;color:#241d16;font-size:19px;line-height:1.25;font-family:'Nanum Myeongjo','Noto Serif KR',serif;}
+.field-reward-head p{margin:6px 0 0;color:#65594b;font-size:12px;line-height:1.55;font-weight:650;}
+.field-reward-lock{flex:0 0 auto;padding:6px 9px;border-radius:999px;background:#2e6557;color:#fff;font-size:9px;font-weight:900;letter-spacing:.11em;box-shadow:0 5px 12px rgba(46,101,87,.18);}
+.field-reward-preview.is-repeat .field-reward-lock{background:#9a7736;}
+.field-reward-items{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:15px 0 10px;position:relative;z-index:2;}
+.field-reward-items>span{min-height:68px;padding:9px 5px;border-radius:15px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(255,255,255,.72);border:1px solid rgba(196,158,93,.25);}
+.field-reward-items b{font-size:16px;line-height:1.15;color:#2b564c;white-space:nowrap;}
+.field-reward-items small{margin-top:4px;font-size:9.5px;color:#756858;font-weight:750;white-space:nowrap;}
+.field-reward-special{position:relative;z-index:2;margin:5px 0 12px;padding:9px 12px;border-radius:13px;background:rgba(53,107,88,.09);color:#315d50;font-size:12px;font-weight:900;text-align:center;}
+.field-reward-actions{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1.15fr;gap:8px;}
+.field-reward-actions button{min-height:44px;border-radius:14px;font-family:inherit;font-size:12px;font-weight:900;cursor:pointer;}
+.field-reward-preview-btn{border:1px solid #dac8a8;background:#fffdf9;color:#6d5a3d;}
+.field-reward-go-btn{border:0;background:#356b58;color:#fff;box-shadow:0 5px 0 #285244;}
+.field-reward-note{display:block;position:relative;z-index:2;margin-top:9px;color:#8b7e6d;font-size:9.5px;line-height:1.4;text-align:center;}
+.pilgrim-verify-btn{border-color:#a7cabe!important;background:#eff8f4!important;color:#295e50!important;font-weight:900!important;box-shadow:0 4px 0 #c9ddd5!important;}
+.pilgrim-verify-btn small{display:block;margin-top:2px;font-size:9px;font-weight:750;opacity:.75;}
+.pilgrim-verify-btn.pulse-now{animation:fieldVerifyPulse .65s ease-in-out 2!important;}
+@keyframes fieldVerifyPulse{0%,100%{transform:scale(1);box-shadow:0 4px 0 #c9ddd5}50%{transform:scale(1.025);box-shadow:0 0 0 6px rgba(53,107,88,.13),0 4px 0 #c9ddd5}}
+
+.field-reward-demo{position:fixed;inset:0;z-index:10080;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(34,29,23,.55);backdrop-filter:blur(7px);}
+.field-reward-demo-card{width:min(440px,100%);position:relative;padding:27px 23px 22px;border-radius:28px;text-align:center;background:linear-gradient(160deg,#fffdf8,#f8e9c9);border:1px solid #e8d1a0;box-shadow:0 28px 80px rgba(45,33,19,.32);overflow:hidden;}
+.field-reward-demo-card::after{content:'認證';position:absolute;right:-9px;bottom:-14px;font-size:80px;font-weight:900;color:rgba(180,119,27,.07);transform:rotate(-9deg);pointer-events:none;}
+.field-reward-demo-close{position:absolute;right:12px;top:11px;width:34px;height:34px;border:0;border-radius:50%;background:rgba(60,49,36,.08);font-size:23px;color:#554a3d;cursor:pointer;}
+.demo-lotus{font-size:58px;line-height:1;margin-bottom:8px;filter:drop-shadow(0 8px 8px rgba(151,103,34,.13));}
+.demo-kicker{font-size:9px;letter-spacing:.15em;color:#946724;font-weight:900;}
+.field-reward-demo-card h2{margin:7px 0 13px;font-size:28px;line-height:1.18;color:#211a14;font-family:'Nanum Myeongjo','Noto Serif KR',serif;}
+.demo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:0 0 11px;}
+.demo-grid span{padding:11px 5px;border-radius:15px;background:rgba(255,255,255,.72);border:1px solid rgba(199,158,89,.28);}
+.demo-grid b{display:block;font-size:20px;color:#346759;}.demo-grid small{display:block;margin-top:3px;font-size:10px;color:#6f6254;font-weight:800;}
+.demo-badge{padding:10px 12px;border-radius:14px;background:#386d5d;color:#fff;font-size:13px;font-weight:900;}
+.field-reward-demo-card p{margin:13px 0;color:#6d6256;font-size:12px;line-height:1.65;}
+.field-reward-demo-card>button:last-child{width:100%;min-height:45px;border:0;border-radius:14px;background:#d89d38;color:#fff;font-family:inherit;font-size:13px;font-weight:900;cursor:pointer;box-shadow:0 5px 0 #ae7924;}
+
+@media(max-width:620px){
+  .field-reward-preview{padding:14px;border-radius:18px;}
+  .field-reward-head h3{font-size:17px;}.field-reward-head p{font-size:11px;}
+  .field-reward-items{gap:5px;}.field-reward-items>span{min-height:61px;padding:7px 2px;border-radius:12px;}
+  .field-reward-items b{font-size:13px;}.field-reward-items small{font-size:8.5px;}
+  .field-reward-actions button{font-size:11px;min-height:42px;}
+  .field-reward-badge{font-size:8.5px;padding:4px 6px;left:6px;top:6px;}
+  .field-reward-demo-card{padding:24px 17px 18px;border-radius:24px;}.field-reward-demo-card h2{font-size:25px;}
+}
+
 </style>
 
 </head>
@@ -19616,12 +19686,15 @@ body{scroll-padding-top:calc(var(--global-nav-h) + 12px)!important}
       <a id="dFoodLink" class="maplink" target="_blank" rel="noopener" style="color:var(--gold);">🍚 근처 맛집·카페 실시간 검색 ↗</a>
 
       <div id="repeatChallengeWrap" style="display:none;margin-bottom:12px;"></div>
+
+      <div id="pilgrimRewardPreview"></div>
+
       <div class="section-label">방문 기록 <span id="visitCountLabel"></span></div>
       <div id="visitList"></div>
       <textarea class="notes" id="visitNoteInput" placeholder="이번엔 어땠는지 소감을 남겨보세요 (날씨, 분위기, 다음엔 이렇게 해볼 것 등)"></textarea>
       <div style="display:flex;gap:8px;margin-top:8px;">
         <button class="btn btn-primary" style="padding:9px 16px;font-size:13px;flex:1;" onclick="addVisitRecord(false)">+ 방문 기록 추가</button>
-        <button class="btn btn-ghost" style="padding:9px 16px;font-size:13px;flex:1;white-space:pre-line;line-height:1.4;" onclick="addVisitRecord(true)">📍 지금 여기예요!&#10;(위치 인증)</button>
+        <button class="btn btn-ghost pilgrim-verify-btn" id="pilgrimVerifyBtn" style="padding:9px 16px;font-size:13px;flex:1;white-space:pre-line;line-height:1.4;" onclick="addVisitRecord(true)">📍 현장 인증하기&#10;<small>도착 후 보상 열기</small></button>
       </div>
 
       <div class="section-label">할 일 / 콘텐츠 아이디어</div>
@@ -27714,6 +27787,7 @@ function renderCard(id,d){
       ${cardCoverMedia(photo,'temple',d.name)}
       ${visited?`<span class="lotus-visited-mark" title="다녀온 절">🪷 <b>${recorded?'기록 완료':'다녀온 곳'}</b></span>`:''}
       ${vc>0?`<span class="visit-flag">${vc}회 방문</span>`:''}
+      <span class="field-reward-badge">📍 현장보상</span>
       <button class="drag-handle" type="button" aria-label="순서 바꾸기" title="길게 눌러 순서 바꾸기" onclick="event.stopPropagation()">☰</button>
     </div>
     <div class="card-body">
@@ -27798,6 +27872,7 @@ function openDetail(id){
   }
   renderVisits(d.visits||{});
   renderRepeatChallenge(d);
+  renderPilgrimRewardPreview(d);
   document.getElementById('visitNoteInput').value = '';
   document.getElementById('dMapLink').href = 'https://map.kakao.com/link/search/' + encodeURIComponent(d.name + ' ' + (d.locationHint || d.region));
   document.getElementById('dFoodLink').href = 'https://map.kakao.com/link/search/' + encodeURIComponent(d.name + ' ' + (d.locationHint || d.region) + ' 맛집');
@@ -32005,6 +32080,75 @@ function goSiteNav(target){
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',bind,{once:true});
   else bind();
 })();
+
+
+/* ============================================================
+   FIELD REWARD PREVIEW · 평소에도 현장 인증 기대감 보여주기
+   ============================================================ */
+function templeHasVerifiedVisit(d){
+  return !!(d && Object.values(d.visits||{}).some(v=>v&&v.verified));
+}
+function currentFieldRewardText(d){
+  if(!d) return {title:'현장 인증 보상', badge:'현장 인증 도장'};
+  const first=!templeHasVerifiedVisit(d);
+  if(first && d.name==='화엄사') return {title:'화엄사 현장 인증 보상',badge:'🏔 지리산 첫 발걸음'};
+  if(first) return {title:`${d.name} 현장 인증 보상`,badge:'✨ 첫 현장 인증 도장'};
+  return {title:`${d.name} 재방문 보상`,badge:'🔁 재방문 인증 기록'};
+}
+function renderPilgrimRewardPreview(d){
+  const wrap=document.getElementById('pilgrimRewardPreview');
+  if(!wrap||!d) return;
+  const first=!templeHasVerifiedVisit(d);
+  const reward=currentFieldRewardText(d);
+  const region=escapeHtml(d.region||'지역');
+  wrap.innerHTML=`
+    <section class="field-reward-preview ${first?'is-new':'is-repeat'}">
+      <div class="field-reward-head">
+        <div>
+          <span class="field-reward-kicker">📍 현장에 가면 열려요</span>
+          <h3>${escapeHtml(reward.title)}</h3>
+          <p>${first?'사찰 근처에서 위치 인증하면 순례 기록이 특별하게 완성됩니다.':'이미 인증한 곳이에요. 다시 방문하면 재방문 기록으로 남길 수 있어요.'}</p>
+        </div>
+        <span class="field-reward-lock">${first?'LOCKED':'OPEN'}</span>
+      </div>
+      <div class="field-reward-items">
+        <span><b>🪷 ${first?'+1':'✓'}</b><small>${first?'연꽃':'재방문'}</small></span>
+        <span><b>印</b><small>현장 도장</small></span>
+        <span><b>📜</b><small>인증서</small></span>
+        <span><b>${region}</b><small>지역 기록</small></span>
+      </div>
+      <div class="field-reward-special">${reward.badge}</div>
+      <div class="field-reward-actions">
+        <button type="button" class="field-reward-preview-btn" onclick="showFieldRewardPreviewOnly()">보상 미리보기</button>
+        <button type="button" class="field-reward-go-btn" onclick="document.getElementById('pilgrimVerifyBtn')?.scrollIntoView({behavior:'smooth',block:'center'});setTimeout(()=>document.getElementById('pilgrimVerifyBtn')?.classList.add('pulse-now'),260);setTimeout(()=>document.getElementById('pilgrimVerifyBtn')?.classList.remove('pulse-now'),1700);">현장 인증하기 →</button>
+      </div>
+      <small class="field-reward-note">※ 실제 사찰 근처에서 위치 인증이 성공해야 획득됩니다.</small>
+    </section>`;
+}
+function showFieldRewardPreviewOnly(){
+  const d=destinations&&currentDetailId?destinations[currentDetailId]:null;
+  if(!d) return;
+  document.getElementById('fieldRewardDemo')?.remove();
+  const reward=currentFieldRewardText(d);
+  const first=!templeHasVerifiedVisit(d);
+  const el=document.createElement('div');el.id='fieldRewardDemo';el.className='field-reward-demo';
+  el.innerHTML=`<div class="field-reward-demo-card">
+    <button type="button" class="field-reward-demo-close" onclick="document.getElementById('fieldRewardDemo')?.remove()">×</button>
+    <div class="demo-lotus">🪷</div>
+    <div class="demo-kicker">SANSA NOTE · FIELD REWARD</div>
+    <h2>${escapeHtml(d.name)}<br>현장 인증 보상</h2>
+    <div class="demo-grid">
+      <span><b>${first?'+1':'✓'}</b><small>${first?'연꽃':'재방문'}</small></span>
+      <span><b>印</b><small>현장 도장</small></span>
+      <span><b>📜</b><small>인증서</small></span>
+    </div>
+    <div class="demo-badge">${reward.badge}</div>
+    <p>이 화면은 미리보기입니다.<br><b>실제 현장 위치 인증 성공 시</b> 보상이 기록됩니다.</p>
+    <button type="button" onclick="document.getElementById('fieldRewardDemo')?.remove();document.getElementById('pilgrimVerifyBtn')?.scrollIntoView({behavior:'smooth',block:'center'});">확인</button>
+  </div>`;
+  el.addEventListener('click',e=>{if(e.target===el)el.remove();});
+  document.body.appendChild(el);
+}
 
 /* ============================================================
    PILGRIMAGE GPS ACHIEVEMENT · isolated helpers
