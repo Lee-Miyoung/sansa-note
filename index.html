@@ -17712,6 +17712,415 @@ body{scroll-padding-top:calc(var(--global-nav-h) + 12px)!important}
  #approvedActionRow .season-banner::after{width:110px!important;height:82px!important;opacity:.62!important;}
 }
 
+
+/* ======================================================================
+   MOBILE BALANCE FINAL
+   - 마음 쉬어가기 4개 완전 동일 높이
+   - 나의 순례 통계 3칸 선명/명확 분리
+   - 코스추가/기능모음 색감 강화
+   - 퀴즈/단풍코스 초록 버튼 제거, 카드 전체 클릭
+   - 모바일 절/산/커뮤니티 축소
+   - 모바일 필터: 태그 + 단계 + 검색 한 줄, 가로 스크롤 제거
+   ====================================================================== */
+
+/* 마음 쉬어가기: 버튼/링크 요소 차이 제거 */
+.hero-experience .hip-quick-row{
+  align-items:stretch !important;
+}
+.hero-experience .hip-quick-btn{
+  box-sizing:border-box !important;
+  height:118px !important;
+  min-height:118px !important;
+  max-height:118px !important;
+  margin:0 !important;
+  text-decoration:none !important;
+}
+.hero-experience a.hip-quick-btn,
+.hero-experience button.hip-quick-btn{
+  display:grid !important;
+}
+.hero-experience .hip-quick-btn .hq-copy{
+  min-width:0 !important;
+}
+.hero-experience .hip-quick-btn .hq-copy b{
+  font-size:15px !important;
+  line-height:1.2 !important;
+}
+.hero-experience .hip-quick-btn .hq-copy small{
+  font-size:11px !important;
+  line-height:1.4 !important;
+  display:-webkit-box !important;
+  -webkit-box-orient:vertical !important;
+  -webkit-line-clamp:2 !important;
+  overflow:hidden !important;
+}
+
+/* 나의 순례 3칸 */
+.hero-stats{
+  display:grid !important;
+  grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+  padding:0 !important;
+  overflow:hidden !important;
+  border:1px solid #e5ddd2 !important;
+  border-radius:20px !important;
+  background:#fffdfa !important;
+}
+.hero-stats .stat,
+.hero-stats .hero-stat-link{
+  position:relative !important;
+  min-width:0 !important;
+  min-height:142px !important;
+  padding:17px 8px 54px !important;
+  border:0 !important;
+  border-right:1px solid #e9e0d5 !important;
+  border-radius:0 !important;
+  background:transparent !important;
+  text-align:center !important;
+  overflow:hidden !important;
+}
+.hero-stats .stat:last-child,
+.hero-stats .hero-stat-link:last-child{
+  border-right:0 !important;
+}
+.hero-stats .num{
+  font-size:36px !important;
+  line-height:1 !important;
+  color:#24594d !important;
+  font-weight:800 !important;
+}
+.hero-stats .lbl{
+  margin-top:8px !important;
+  font-size:14px !important;
+  line-height:1.2 !important;
+  font-weight:900 !important;
+  color:#40382f !important;
+  white-space:nowrap !important;
+}
+.hero-stats .stat-art{
+  position:absolute !important;
+  left:50% !important;
+  bottom:7px !important;
+  transform:translateX(-50%) !important;
+  width:96px !important;
+  height:48px !important;
+  object-fit:contain !important;
+  opacity:.72 !important;
+  filter:saturate(.94) contrast(1.03) !important;
+  pointer-events:none !important;
+}
+.hero-stats .stat-recorded .stat-art{width:80px !important;}
+.hero-stats .stat-unvisited .stat-art{width:110px !important;}
+
+/* 코스 추가 / 기능 모음: 더 잘 보이게 */
+.hero-journey-panel .hero-util-btn:first-child{
+  background:linear-gradient(135deg,#f4b94f 0%,#e9a432 100%) !important;
+  border:1px solid #d89627 !important;
+  box-shadow:0 8px 18px rgba(199,132,31,.18) !important;
+}
+.hero-journey-panel .hero-util-btn:first-child .hero-util-copy b,
+.hero-journey-panel .hero-util-btn:first-child .hero-util-arrow{
+  color:#3f2b12 !important;
+}
+.hero-journey-panel .hero-util-btn:nth-child(2){
+  background:linear-gradient(135deg,#e7d9f7 0%,#d7c1ee 100%) !important;
+  border:1px solid #c9aee5 !important;
+  box-shadow:0 8px 18px rgba(131,90,169,.14) !important;
+}
+.hero-journey-panel .hero-util-btn:nth-child(2) .hero-util-copy b,
+.hero-journey-panel .hero-util-btn:nth-child(2) .hero-util-arrow{
+  color:#4c3564 !important;
+}
+
+/* 퀴즈/계절 코스: 카드 전체 클릭, 별도 초록 버튼 없음 */
+#approvedActionRow{
+  align-items:stretch !important;
+}
+#approvedActionRow .whole-action-card{
+  appearance:none !important;
+  -webkit-appearance:none !important;
+  width:100% !important;
+  min-width:0 !important;
+  height:94px !important;
+  min-height:94px !important;
+  padding:16px 54px 16px 18px !important;
+  border-radius:19px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:flex-start !important;
+  text-align:left !important;
+  cursor:pointer !important;
+  position:relative !important;
+  overflow:hidden !important;
+  box-sizing:border-box !important;
+}
+#approvedActionRow .quiz-banner.whole-action-card{
+  border:1px solid #cfe1dc !important;
+  background:linear-gradient(135deg,#f4fbf8 0%,#edf7f3 100%) !important;
+}
+#approvedActionRow .season-banner.whole-action-card{
+  border:1px solid #ead9ba !important;
+  background:linear-gradient(135deg,#fff9ee 0%,#fff1d9 100%) !important;
+}
+#approvedActionRow .balanced-action-copy{
+  position:relative !important;
+  z-index:3 !important;
+  min-width:0 !important;
+  max-width:76% !important;
+}
+#approvedActionRow .balanced-action-copy b{
+  display:block !important;
+  margin:0 0 5px !important;
+  font-size:16px !important;
+  line-height:1.22 !important;
+  color:#20332d !important;
+  font-weight:900 !important;
+}
+#approvedActionRow .balanced-action-copy small{
+  display:block !important;
+  font-size:11.5px !important;
+  line-height:1.35 !important;
+  color:#665d53 !important;
+  white-space:normal !important;
+}
+#approvedActionRow .whole-action-arrow{
+  position:absolute !important;
+  right:15px !important;
+  top:50% !important;
+  transform:translateY(-50%) !important;
+  z-index:4 !important;
+  width:31px !important;
+  height:31px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  border-radius:50% !important;
+  background:rgba(255,255,255,.72) !important;
+  border:1px solid rgba(61,83,73,.14) !important;
+  color:#315f52 !important;
+  font-size:18px !important;
+  font-weight:900 !important;
+}
+#approvedActionRow .season-banner::after{
+  width:138px !important;
+  height:94px !important;
+  right:-10px !important;
+  bottom:-4px !important;
+  opacity:.64 !important;
+}
+#approvedActionRow .quiz-banner::after{
+  opacity:.48 !important;
+}
+
+/* 모바일 */
+@media(max-width:700px){
+  /* 마음 쉬어가기 2x2, 네 개 정확히 같은 크기 */
+  .hero-experience .hip-quick-row{
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    gap:10px !important;
+  }
+  .hero-experience .hip-quick-btn{
+    height:122px !important;
+    min-height:122px !important;
+    max-height:122px !important;
+    padding:14px 11px !important;
+    grid-template-columns:42px minmax(0,1fr) 17px !important;
+  }
+  .hero-experience .hip-quick-btn .hq-icon{
+    width:42px !important;
+    height:42px !important;
+    flex-basis:42px !important;
+  }
+  .hero-experience .hip-quick-btn .hq-copy b{
+    font-size:13.2px !important;
+  }
+  .hero-experience .hip-quick-btn .hq-copy small{
+    font-size:10px !important;
+    line-height:1.35 !important;
+  }
+
+  /* 나의 순례 3칸 */
+  .hero-stats .stat,
+  .hero-stats .hero-stat-link{
+    min-height:126px !important;
+    padding:14px 4px 49px !important;
+  }
+  .hero-stats .num{font-size:30px !important;}
+  .hero-stats .lbl{font-size:11.5px !important;}
+  .hero-stats .stat-art{
+    width:78px !important;
+    height:39px !important;
+    bottom:6px !important;
+    opacity:.76 !important;
+  }
+  .hero-stats .stat-recorded .stat-art{width:66px !important;}
+  .hero-stats .stat-unvisited .stat-art{width:88px !important;}
+
+  /* 코스 추가/기능 모음 */
+  .hero-journey-panel .hero-utility{
+    gap:9px !important;
+  }
+  .hero-journey-panel .hero-util-btn{
+    height:56px !important;
+    min-height:56px !important;
+    padding:8px 10px !important;
+  }
+  .hero-journey-panel .hero-util-copy b{
+    font-size:14px !important;
+  }
+
+  /* 퀴즈/단풍: 두 장 균형 */
+  #approvedActionRow{
+    width:calc(100% - 28px) !important;
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    gap:9px !important;
+  }
+  #approvedActionRow .whole-action-card{
+    height:104px !important;
+    min-height:104px !important;
+    padding:13px 36px 13px 12px !important;
+    border-radius:17px !important;
+  }
+  #approvedActionRow .balanced-action-copy{
+    max-width:88% !important;
+  }
+  #approvedActionRow .balanced-action-copy b{
+    font-size:13.5px !important;
+    line-height:1.2 !important;
+  }
+  #approvedActionRow .balanced-action-copy small{
+    font-size:10px !important;
+    line-height:1.3 !important;
+  }
+  #approvedActionRow .whole-action-arrow{
+    right:8px !important;
+    width:27px !important;
+    height:27px !important;
+    font-size:16px !important;
+  }
+  #approvedActionRow .season-banner::after{
+    width:92px !important;
+    height:70px !important;
+    opacity:.48 !important;
+  }
+
+  /* 절/산/커뮤니티를 작게 */
+  .content-type-row{
+    width:calc(100% - 28px) !important;
+    margin:12px auto 0 !important;
+    gap:6px !important;
+    justify-content:stretch !important;
+  }
+  .content-type-btn{
+    flex:1 1 0 !important;
+    min-width:0 !important;
+    height:46px !important;
+    padding:5px 7px !important;
+    border-radius:13px !important;
+    gap:6px !important;
+  }
+  .content-type-btn .ctype-icon{
+    width:30px !important;
+    height:30px !important;
+    min-width:30px !important;
+  }
+  .content-type-btn .ctype-copy b{
+    font-size:13px !important;
+    white-space:nowrap !important;
+  }
+  .content-type-btn .ctype-copy small{
+    display:none !important;
+  }
+
+  /* 모바일 필터 전체는 화면 밖으로 안 나가게 */
+  #mainFilterbar{
+    width:calc(100% - 28px) !important;
+    margin:9px auto 0 !important;
+    overflow:visible !important;
+  }
+  #mainFilterbar .filterbar-inner{
+    display:grid !important;
+    grid-template-columns:auto 102px minmax(0,1fr) !important;
+    gap:8px !important;
+    align-items:center !important;
+    width:100% !important;
+    overflow:visible !important;
+    padding:10px !important;
+    box-sizing:border-box !important;
+  }
+
+  /* 지역 탭은 첫 줄 전체폭, 가로스크롤 대신 줄바꿈 */
+  #regionTabs{
+    grid-column:1 / -1 !important;
+    display:flex !important;
+    flex-wrap:wrap !important;
+    gap:6px !important;
+    overflow:visible !important;
+    width:100% !important;
+  }
+  #regionTabs button{
+    flex:0 0 auto !important;
+    min-width:0 !important;
+    padding:7px 10px !important;
+    font-size:10.5px !important;
+    border-radius:999px !important;
+  }
+
+  #mainFilterbar .spacer{display:none !important;}
+
+  /* 태그 + 단계 + 검색을 한 줄 */
+  #tagToggle{
+    grid-column:1 !important;
+    display:flex !important;
+    min-width:0 !important;
+    height:42px !important;
+  }
+  #tagToggle button{
+    min-width:0 !important;
+    padding:0 8px !important;
+    font-size:10.5px !important;
+  }
+  #stageFilter{
+    grid-column:2 !important;
+    width:100% !important;
+    min-width:0 !important;
+    height:42px !important;
+    padding:0 8px !important;
+    font-size:11px !important;
+  }
+  #searchBox{
+    grid-column:3 !important;
+    width:100% !important;
+    min-width:0 !important;
+    height:42px !important;
+    padding:0 10px !important;
+    font-size:11px !important;
+  }
+
+  /* 보조 버튼은 다음 줄 */
+  #hiddenTempleBtn{
+    grid-column:1 / 2 !important;
+    width:100% !important;
+    min-width:0 !important;
+    height:42px !important;
+    font-size:10px !important;
+    padding:0 7px !important;
+  }
+  #mainFilterbar .btn-primary{
+    grid-column:2 / 4 !important;
+    width:100% !important;
+    height:42px !important;
+    font-size:11px !important;
+    padding:0 10px !important;
+  }
+
+  /* 이전에 삽입된 almostBanner가 필터 안으로 들어왔을 때 레이아웃 파괴 방지 */
+  .filterbar-inner #almostBannerWrap{
+    grid-column:1 / -1 !important;
+    width:100% !important;
+    min-width:0 !important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -20117,13 +20526,13 @@ function getAlmostDonePackInfo(){
 
 function renderQuizBanner(){
   const wrap = document.getElementById('quizBannerWrap');
-  wrap.innerHTML = `<div class="quiz-banner compact balanced-action-card">
+  wrap.innerHTML = `<button type="button" class="quiz-banner compact balanced-action-card whole-action-card" onclick="openQuizOverlay()" aria-label="이 절 어디게 퀴즈 열기">
     <div class="balanced-action-copy">
       <b>🧩 이 절 어디게?</b>
       <small>퀴즈로 재밌게 절 상식을 테스트해보세요</small>
     </div>
-    <button class="btn btn-primary balanced-action-btn" onclick="openQuizOverlay()">퀴즈 풀기</button>
-  </div>`;
+    <span class="whole-action-arrow" aria-hidden="true">→</span>
+  </button>`;
 }
 
 function updateStreak(){
@@ -24198,13 +24607,13 @@ function checkSeasonBanner(){
   const wrap = document.getElementById('seasonBannerWrap');
   if(!key){ wrap.innerHTML=''; return; }
   const pack = PACKS.find(p=>p.key===key);
-  wrap.innerHTML = `<div class="season-banner balanced-action-card">
+  wrap.innerHTML = `<button type="button" class="season-banner balanced-action-card whole-action-card" onclick="openPackOverlay();openPackDetail('${key}');" aria-label="${label} 코스 보기">
     <div class="balanced-action-copy">
       <b>${label}</b>
       <small>"${pack.label}" 코스 어때요?</small>
     </div>
-    <button class="btn btn-primary balanced-action-btn" onclick="openPackOverlay();openPackDetail('${key}');">코스 보기</button>
-  </div>`;
+    <span class="whole-action-arrow" aria-hidden="true">→</span>
+  </button>`;
 }
 
 /* ============================================================
