@@ -18665,6 +18665,235 @@ body{scroll-padding-top:calc(var(--global-nav-h) + 12px)!important}
 #beatLabOverlay .beat-pad:hover{filter:brightness(1.15)!important;transform:translateY(-1px)!important;}
 </style>
 
+
+<style id="beat-neon-game-final">
+/* Beat Shooter — compact neon arcade, overlay always above fixed site nav */
+#beatLabOverlay{
+  z-index:30000!important;
+  position:fixed!important;inset:0!important;
+  padding:10px!important;
+  background:rgba(4,6,12,.84)!important;
+  backdrop-filter:blur(10px) saturate(1.2)!important;
+  -webkit-backdrop-filter:blur(10px) saturate(1.2)!important;
+  align-items:center!important;justify-content:center!important;
+  overflow:hidden!important;
+}
+#beatLabOverlay .modal{
+  width:min(1220px,calc(100vw - 20px))!important;
+  max-width:1220px!important;
+  height:min(820px,calc(100dvh - 20px))!important;
+  max-height:calc(100dvh - 20px)!important;
+  min-height:0!important;
+  border-radius:24px!important;
+  overflow:hidden!important;
+  display:flex!important;flex-direction:column!important;
+  color:#eef8ff!important;
+  background:
+    radial-gradient(circle at 12% 0%,rgba(0,236,255,.14),transparent 23%),
+    radial-gradient(circle at 90% 0%,rgba(255,55,193,.16),transparent 25%),
+    linear-gradient(180deg,#0b0e18 0%,#101827 48%,#080b13 100%)!important;
+  border:1px solid rgba(100,223,255,.25)!important;
+  box-shadow:0 0 0 1px rgba(255,59,205,.08),0 28px 90px rgba(0,0,0,.62),0 0 54px rgba(34,190,255,.08)!important;
+}
+#beatLabOverlay .modal::after{
+  content:'';position:absolute;inset:0;pointer-events:none;z-index:0;
+  background:repeating-linear-gradient(180deg,rgba(255,255,255,.018) 0 1px,transparent 1px 5px);
+  mix-blend-mode:screen;opacity:.55;
+}
+#beatLabOverlay .modal>*{position:relative;z-index:1!important;}
+#beatLabOverlay .modal-head{
+  flex:0 0 auto!important;min-height:54px!important;
+  padding:10px 16px 8px!important;
+  display:flex!important;align-items:center!important;justify-content:space-between!important;gap:12px!important;
+  background:linear-gradient(90deg,rgba(8,232,255,.10),rgba(168,70,255,.12),rgba(255,52,177,.08))!important;
+  border-bottom:1px solid rgba(104,219,255,.18)!important;
+}
+#beatLabOverlay .modal-head h2{
+  margin:0!important;font-size:21px!important;line-height:1.08!important;letter-spacing:-.02em!important;
+  color:#fff!important;text-shadow:0 0 16px rgba(67,220,255,.30)!important;
+}
+#beatLabOverlay .modal-head .sub{margin-top:3px!important;font-size:10.5px!important;line-height:1.35!important;color:#aebdd0!important;}
+#beatLabOverlay .close-x{
+  flex:0 0 38px!important;width:38px!important;height:38px!important;border-radius:12px!important;
+  border:1px solid rgba(255,255,255,.15)!important;background:rgba(255,255,255,.07)!important;color:#fff!important;font-size:19px!important;
+}
+#beatLabOverlay .modal-body{
+  flex:1 1 auto!important;min-height:0!important;overflow:hidden!important;
+  padding:8px 10px 10px!important;
+}
+#beatLabOverlay .beat-desktop-layout,#beatLabOverlay .beat-left-panel{height:100%!important;min-height:0!important;}
+#beatLabOverlay .beat-left-panel{
+  display:grid!important;
+  grid-template-rows:42px 54px 30px 48px 32px 48px 7px minmax(210px,1fr) 64px 32px!important;
+  gap:6px!important;
+}
+#beatLabOverlay .beat-top-controls{display:grid!important;grid-template-columns:260px minmax(360px,1fr)!important;gap:8px!important;margin:0!important;}
+#beatLabOverlay .beat-audio-status,#beatLabOverlay .bpm-row{
+  height:42px!important;min-height:42px!important;margin:0!important;padding:5px 8px!important;
+  border-radius:13px!important;border:1px solid rgba(85,221,255,.18)!important;
+  background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.035))!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05)!important;
+}
+#beatLabOverlay .beat-audio-simple #beatAudioState{
+  color:#d6fff2!important;font-size:12px!important;font-weight:900!important;text-shadow:0 0 10px rgba(72,255,185,.22)!important;
+}
+#beatLabOverlay #beatSoundToggle{
+  min-width:72px!important;height:32px!important;padding:0 15px!important;
+  border:1px solid #75ffd0!important;border-radius:999px!important;
+  background:linear-gradient(135deg,#62ffc1 0%,#0fcf96 100%)!important;
+  color:#04130e!important;font-size:14px!important;font-weight:1000!important;
+  box-shadow:0 0 18px rgba(65,255,188,.34),inset 0 1px 0 rgba(255,255,255,.65)!important;
+}
+#beatLabOverlay #beatSoundToggle.off{
+  border-color:#ff718d!important;background:linear-gradient(135deg,#ff708d,#b73256)!important;color:#fff!important;
+  box-shadow:0 0 18px rgba(255,72,111,.26)!important;
+}
+#beatLabOverlay .bpm-row{display:grid!important;grid-template-columns:auto minmax(120px,1fr) 88px!important;gap:10px!important;align-items:center!important;}
+#beatLabOverlay .bpm-row b{font-size:12px!important;color:#bfffe9!important;text-shadow:0 0 12px rgba(30,255,210,.20)!important;}
+#beatLabOverlay #loopBtn{
+  height:32px!important;padding:0 11px!important;border-radius:999px!important;border:1px solid rgba(255,224,101,.48)!important;
+  background:linear-gradient(135deg,#ffcf45,#ff8f3d)!important;color:#271300!important;font-size:11px!important;font-weight:1000!important;
+  box-shadow:0 0 18px rgba(255,159,56,.22)!important;
+}
+#beatLabOverlay input[type=range]{accent-color:#38e8d0!important;}
+#beatLabOverlay .beat-game-head{display:grid!important;grid-template-columns:minmax(0,1fr) 86px 86px 92px!important;gap:6px!important;margin:0!important;}
+#beatLabOverlay .beat-mission{
+  min-height:54px!important;height:54px!important;padding:8px 12px!important;border-radius:13px!important;
+  display:flex!important;align-items:center!important;overflow:hidden!important;
+  background:linear-gradient(90deg,rgba(255,200,55,.17),rgba(255,62,163,.10))!important;
+  border:1px solid rgba(255,205,72,.24)!important;color:#fff1ad!important;
+  font-size:11px!important;line-height:1.25!important;font-weight:1000!important;
+  text-shadow:0 0 12px rgba(255,205,72,.16)!important;
+}
+#beatLabOverlay .beat-score-box,#beatLabOverlay .beat-rank-chip{
+  min-height:54px!important;height:54px!important;padding:5px!important;border-radius:13px!important;
+  display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;
+  border:1px solid rgba(89,218,255,.15)!important;background:linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.035))!important;
+  box-shadow:inset 0 0 18px rgba(45,200,255,.03)!important;
+}
+#beatLabOverlay .beat-score-box b{font-size:22px!important;line-height:1!important;color:#fff!important;text-shadow:0 0 12px rgba(63,215,255,.25)!important;}
+#beatLabOverlay .beat-rank-chip b{font-size:19px!important;color:#ffe871!important;line-height:1!important;}
+#beatLabOverlay .beat-score-box span,#beatLabOverlay .beat-rank-chip span{font-size:6.8px!important;letter-spacing:.13em!important;color:#8798ac!important;}
+#beatLabOverlay .beat-mult-row{
+  height:30px!important;min-height:30px!important;margin:0!important;padding:3px 6px!important;border-radius:12px!important;
+  display:flex!important;align-items:center!important;gap:5px!important;border:1px solid rgba(94,195,255,.10)!important;background:rgba(255,255,255,.035)!important;
+}
+#beatLabOverlay .beat-mult-row>span{height:22px!important;padding:0 8px!important;display:flex!important;align-items:center!important;border-radius:999px!important;background:#162235!important;border:1px solid rgba(255,255,255,.08)!important;color:#dbeaff!important;font-size:8px!important;font-weight:900!important;}
+#beatLabOverlay .beat-mult-row button{margin-left:auto!important;height:24px!important;padding:0 10px!important;border-radius:999px!important;border:1px solid rgba(255,211,86,.28)!important;background:rgba(255,193,46,.08)!important;color:#ffd75d!important;font-size:8px!important;font-weight:1000!important;}
+#beatLabOverlay .beat-progression{
+  height:48px!important;min-height:48px!important;margin:0!important;padding:4px 6px!important;border-radius:13px!important;
+  display:grid!important;grid-template-columns:58px minmax(0,1fr) 54px!important;gap:7px!important;align-items:center!important;
+  border:1px solid rgba(79,215,255,.10)!important;background:rgba(255,255,255,.035)!important;
+}
+#beatLabOverlay .beat-level-badge{height:40px!important;border-radius:11px!important;background:linear-gradient(180deg,#195f71,#2f9b9d)!important;color:#fff!important;box-shadow:0 0 14px rgba(27,214,208,.16)!important;}
+#beatLabOverlay .beat-level-badge b{font-size:20px!important;line-height:1!important;}
+#beatLabOverlay .beat-level-badge{font-size:6.5px!important;}
+#beatLabOverlay .beat-xp-wrap{padding:2px 4px!important;min-width:0!important;}
+#beatLabOverlay .beat-xp-top{font-size:7.5px!important;line-height:1.2!important;color:#d5e8f0!important;}
+#beatLabOverlay .beat-xp{height:8px!important;border-radius:999px!important;background:#293240!important;overflow:hidden!important;}
+#beatLabOverlay .beat-xp i{background:linear-gradient(90deg,#60ff9c,#37e4e8,#ff61cb)!important;box-shadow:0 0 14px rgba(84,255,198,.30)!important;}
+#beatLabOverlay .beat-coin{font-size:10px!important;color:#ffe574!important;font-weight:900!important;}
+#beatLabOverlay .beat-reward-row{height:32px!important;min-height:32px!important;margin:0!important;display:flex!important;align-items:center!important;gap:4px!important;overflow:hidden!important;}
+#beatLabOverlay .beat-reward{height:24px!important;padding:0 7px!important;display:flex!important;align-items:center!important;border-radius:999px!important;background:#151e2c!important;border:1px solid rgba(255,255,255,.09)!important;color:#9fb0c2!important;font-size:7px!important;white-space:nowrap!important;}
+#beatLabOverlay .beat-reward.on{background:linear-gradient(135deg,#d7ff58,#7fffba)!important;color:#102014!important;border-color:#b7ff7a!important;box-shadow:0 0 12px rgba(161,255,91,.22)!important;}
+#beatLabOverlay .beat-life-row{
+  height:32px!important;min-height:32px!important;margin:0!important;padding:4px 8px!important;border-radius:12px!important;
+  display:flex!important;align-items:center!important;justify-content:space-between!important;gap:8px!important;background:rgba(255,255,255,.035)!important;border:1px solid rgba(255,255,255,.07)!important;color:#d8e5ee!important;font-size:8px!important;
+}
+#beatLabOverlay .beat-lives{font-size:15px!important;letter-spacing:2px!important;}
+#beatLabOverlay .beat-streak{color:#6dff9c!important;font-size:7px!important;font-weight:900!important;}
+#beatLabOverlay .beat-purify-box{
+  height:48px!important;min-height:48px!important;margin:0!important;padding:5px 8px!important;border-radius:13px!important;
+  border:1px solid rgba(255,199,73,.18)!important;background:linear-gradient(90deg,rgba(255,187,42,.09),rgba(38,234,207,.06))!important;
+}
+#beatLabOverlay .beat-purify-top{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:8px!important;margin-bottom:5px!important;font-size:9px!important;color:#ffe091!important;font-weight:900!important;}
+#beatLabOverlay .beat-purify-btn{height:28px!important;min-width:118px!important;padding:0 10px!important;border-radius:999px!important;background:linear-gradient(135deg,#ffcf4b,#ff688f)!important;color:#24100d!important;border:none!important;font-size:8px!important;font-weight:1000!important;}
+#beatLabOverlay .beat-purify-track{height:8px!important;border-radius:999px!important;background:#2b3038!important;overflow:hidden!important;}
+#beatLabOverlay .beat-purify-track i{background:linear-gradient(90deg,#ffd34e,#5affb9,#39ddff,#ff55c8)!important;box-shadow:0 0 16px rgba(99,255,196,.35)!important;}
+#beatLabOverlay .beat-track{height:7px!important;min-height:7px!important;margin:0!important;border-radius:999px!important;background:#18202d!important;overflow:hidden!important;}
+#beatLabOverlay .beat-step{height:100%!important;border-radius:999px!important;}
+#beatLabOverlay .beat-step.on{background:#73ffd5!important;box-shadow:0 0 12px #4bffd0!important;}
+#beatLabOverlay .worry-smash-zone{
+  position:relative!important;min-height:210px!important;height:100%!important;margin:0!important;border-radius:18px!important;overflow:hidden!important;
+  border:1px solid rgba(0,223,255,.24)!important;
+  background:
+    radial-gradient(circle at 50% 12%,rgba(0,215,255,.12),transparent 34%),
+    linear-gradient(rgba(65,226,255,.055) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(65,226,255,.055) 1px,transparent 1px),
+    linear-gradient(180deg,#02131b 0%,#04101a 72%,#090b12 100%)!important;
+  background-size:auto,36px 36px,36px 36px,auto!important;
+  box-shadow:inset 0 0 60px rgba(0,199,255,.05),0 0 24px rgba(0,204,255,.06)!important;
+}
+#beatLabOverlay .worry-smash-zone::after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,transparent 0 48%,rgba(43,230,255,.08) 50%,transparent 52%);animation:beatScan 2.8s linear infinite;}
+@keyframes beatScan{0%{transform:translateY(-55%)}100%{transform:translateY(55%)}}
+#beatLabOverlay .worry-smash-title{top:8px!important;left:50%!important;transform:translateX(-50%)!important;width:80%!important;text-align:center!important;color:#ffe26c!important;font-size:10px!important;font-weight:1000!important;letter-spacing:.05em!important;text-shadow:0 0 12px rgba(255,218,86,.28)!important;}
+#beatLabOverlay .worry-wave{top:7px!important;right:8px!important;min-height:24px!important;padding:0 8px!important;border-radius:999px!important;background:#0e1722!important;border:1px solid rgba(255,213,83,.26)!important;color:#ffe16d!important;font-size:7px!important;font-weight:1000!important;}
+#beatLabOverlay .beat-event-rail{top:37px!important;left:50%!important;transform:translateX(-50%)!important;width:min(360px,55%)!important;padding:6px 12px!important;border-radius:999px!important;background:rgba(7,15,23,.78)!important;border:1px solid rgba(94,224,255,.13)!important;}
+#beatLabOverlay .beat-event-rail b{font-size:9px!important;color:#e9fbff!important;}
+#beatLabOverlay .beat-event-rail span{font-size:6px!important;color:#8fa7b7!important;}
+#beatLabOverlay .beat-defense-line{left:10px!important;right:10px!important;bottom:24px!important;height:4px!important;background:linear-gradient(90deg,#ff493d,#ff8462,#ff493d)!important;box-shadow:0 0 14px rgba(255,72,55,.48)!important;}
+#beatLabOverlay .beat-defense-line span{font-size:7px!important;padding:5px 8px!important;border-radius:6px!important;background:#da4038!important;color:#fff!important;}
+#beatLabOverlay .beat-defense-line b{font-size:6.5px!important;color:#fff5e9!important;}
+#beatLabOverlay .worry-game-hint{left:10px!important;bottom:5px!important;font-size:6px!important;color:#c7dce6!important;}
+#beatLabOverlay .worry-lane-launchers{bottom:3px!important;}
+#beatLabOverlay .beat-grid{
+  height:64px!important;min-height:64px!important;margin:0!important;
+  display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr))!important;gap:7px!important;
+}
+#beatLabOverlay .beat-pad{
+  min-height:64px!important;height:64px!important;padding:5px 3px!important;border-radius:13px!important;
+  border:1px solid rgba(255,255,255,.14)!important;color:#fff!important;font-size:11px!important;font-weight:1000!important;
+  box-shadow:0 7px 0 rgba(0,0,0,.30),inset 0 1px 0 rgba(255,255,255,.20),0 0 16px rgba(0,0,0,.14)!important;
+  transition:transform .10s ease,filter .10s ease,box-shadow .10s ease!important;
+}
+#beatLabOverlay .beat-pad:nth-child(1){background:linear-gradient(135deg,#00b878,#1f6f59)!important;box-shadow:0 7px 0 #075440,0 0 20px rgba(0,255,175,.15)!important;}
+#beatLabOverlay .beat-pad:nth-child(2){background:linear-gradient(135deg,#ff386b,#a42467)!important;box-shadow:0 7px 0 #681541,0 0 20px rgba(255,50,130,.16)!important;}
+#beatLabOverlay .beat-pad:nth-child(3){background:linear-gradient(135deg,#2a9dff,#315ba8)!important;box-shadow:0 7px 0 #1f3972,0 0 20px rgba(48,164,255,.16)!important;}
+#beatLabOverlay .beat-pad:nth-child(4){background:linear-gradient(135deg,#ffb51f,#a46c17)!important;box-shadow:0 7px 0 #6e4810,0 0 20px rgba(255,184,34,.16)!important;}
+#beatLabOverlay .beat-pad:nth-child(5){background:linear-gradient(135deg,#9a4dff,#5b33a2)!important;box-shadow:0 7px 0 #3b226a,0 0 20px rgba(159,82,255,.17)!important;}
+#beatLabOverlay .beat-pad:nth-child(6){background:linear-gradient(135deg,#15ddcf,#157f83)!important;box-shadow:0 7px 0 #0d5559,0 0 20px rgba(34,240,222,.17)!important;}
+#beatLabOverlay .beat-pad:hover{filter:brightness(1.14) saturate(1.12)!important;transform:translateY(-1px)!important;}
+#beatLabOverlay .beat-pad:active,#beatLabOverlay .beat-pad.hit{transform:translateY(5px) scale(.985)!important;box-shadow:0 2px 0 rgba(0,0,0,.35),0 0 28px rgba(255,255,255,.20)!important;filter:brightness(1.28)!important;}
+#beatLabOverlay .beat-pad b{display:block!important;font-size:9px!important;line-height:1.05!important;margin-top:2px!important;color:#fff!important;text-shadow:0 1px 2px rgba(0,0,0,.35)!important;}
+#beatLabOverlay .beat-pad small{display:none!important;}
+#beatLabOverlay .release-banner{
+  height:32px!important;min-height:32px!important;margin:0!important;padding:3px 8px!important;border-radius:11px!important;
+  display:flex!important;align-items:center!important;justify-content:space-between!important;gap:8px!important;
+  border:1px solid rgba(89,219,255,.10)!important;background:rgba(255,255,255,.035)!important;color:#d7e9ef!important;font-size:7.5px!important;
+}
+#beatLabOverlay .release-banner b{color:#77ffc7!important;font-size:11px!important;}
+#beatLabOverlay .beat-leaderboard{max-height:calc(100% - 16px)!important;overflow:auto!important;background:#101723!important;border:1px solid rgba(83,220,255,.14)!important;color:#eaf6ff!important;}
+#beatLabOverlay .beat-gameover{background:rgba(4,7,12,.94)!important;backdrop-filter:blur(5px)!important;}
+#beatLabOverlay .beat-gameover>b{color:#ffdd64!important;text-shadow:0 0 18px rgba(255,203,73,.28)!important;}
+
+@media(max-width:900px){
+  #beatLabOverlay{padding:0!important;}
+  #beatLabOverlay .modal{width:100%!important;height:100dvh!important;max-height:100dvh!important;border-radius:0!important;}
+  #beatLabOverlay .modal-head{min-height:50px!important;padding:8px 10px 7px!important;}
+  #beatLabOverlay .modal-head h2{font-size:17px!important;}
+  #beatLabOverlay .modal-head .sub{font-size:8px!important;}
+  #beatLabOverlay .modal-body{padding:6px 7px 8px!important;overflow:hidden!important;}
+  #beatLabOverlay .beat-left-panel{grid-template-rows:38px 50px 27px 44px 28px 46px 6px minmax(180px,1fr) 104px 29px!important;gap:5px!important;}
+  #beatLabOverlay .beat-top-controls{grid-template-columns:1fr 1.35fr!important;gap:5px!important;}
+  #beatLabOverlay .beat-audio-status,#beatLabOverlay .bpm-row{height:38px!important;min-height:38px!important;padding:3px 5px!important;}
+  #beatLabOverlay #beatSoundToggle{min-width:54px!important;height:29px!important;padding:0 9px!important;font-size:11px!important;}
+  #beatLabOverlay .bpm-row{grid-template-columns:auto 1fr 62px!important;gap:5px!important;}
+  #beatLabOverlay #loopBtn{height:29px!important;padding:0 7px!important;font-size:8px!important;}
+  #beatLabOverlay .beat-game-head{grid-template-columns:minmax(0,1fr) 64px 64px 68px!important;gap:4px!important;}
+  #beatLabOverlay .beat-mission{height:50px!important;min-height:50px!important;font-size:8px!important;padding:5px 7px!important;}
+  #beatLabOverlay .beat-score-box,#beatLabOverlay .beat-rank-chip{height:50px!important;min-height:50px!important;}
+  #beatLabOverlay .beat-score-box b{font-size:17px!important;}
+  #beatLabOverlay .beat-progression{height:44px!important;min-height:44px!important;grid-template-columns:50px 1fr 40px!important;gap:4px!important;}
+  #beatLabOverlay .beat-reward-row{height:28px!important;min-height:28px!important;overflow-x:auto!important;}
+  #beatLabOverlay .beat-life-row{height:28px!important;min-height:28px!important;}
+  #beatLabOverlay .beat-purify-box{height:46px!important;min-height:46px!important;}
+  #beatLabOverlay .worry-smash-zone{min-height:180px!important;}
+  #beatLabOverlay .beat-grid{height:104px!important;min-height:104px!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;grid-template-rows:repeat(2,1fr)!important;gap:5px!important;}
+  #beatLabOverlay .beat-pad{height:auto!important;min-height:0!important;padding:3px!important;border-radius:11px!important;font-size:10px!important;box-shadow:0 4px 0 rgba(0,0,0,.30)!important;}
+  #beatLabOverlay .beat-pad b{font-size:8px!important;}
+}
+</style>
+
 </head>
 <body>
 
@@ -31134,6 +31363,23 @@ function openBeatLab(forceFresh=false){
   });
   updateBeatAudioState();loadBeatLeaderboard();saveBeatRun(true);
 }
+function hardStopBeatAudio(){
+  try{stopTempleLoop();}catch(_){ }
+  try{
+    Object.values(iosBeatPool||{}).flat().forEach(a=>{
+      try{a.pause();a.currentTime=0;}catch(_){ }
+    });
+  }catch(_){ }
+  try{
+    if(iosUnlockAudio){iosUnlockAudio.pause();iosUnlockAudio.currentTime=0;}
+  }catch(_){ }
+  try{
+    if(hipAudioCtx&&hipAudioCtx.state==='running'&&hipAudioCtx.suspend){
+      hipAudioCtx.suspend().catch(()=>{});
+    }
+  }catch(_){ }
+  hipAudioUnlocked=false;
+}
 function closeBeatLab(){
   beatFxParticles.length=0;beatFxTexts.length=0;
   if(beatFxRaf){cancelAnimationFrame(beatFxRaf);beatFxRaf=0;}
@@ -31141,18 +31387,25 @@ function closeBeatLab(){
   saveBeatLeaderboardScore(true);
   document.getElementById('beatLeaderboard')?.classList.remove('show');
   document.getElementById('beatLabOverlay')?.classList.remove('show');
-  stopTempleLoop();stopWorryShooter();releaseBeatViewport();
+  hardStopBeatAudio();
+  stopWorryShooter();releaseBeatViewport();
   syncMiniPlayerVisibility();
 }
 function updateBeatBpm(v){document.getElementById('beatBpmLabel').textContent=v;if(templeLoopTimer){stopTempleLoop();startTempleLoop();}}
 function startTempleLoop(){
-  if(!beatSoundOn){stopTempleLoop();return;}
+  const overlay=document.getElementById('beatLabOverlay');
+  if(!beatSoundOn||!overlay?.classList.contains('show')){stopTempleLoop();return;}
   unlockHipAudio().then(ok=>{
-    if(!beatSoundOn||!ok||templeLoopTimer)return;
+    const stillOpen=document.getElementById('beatLabOverlay')?.classList.contains('show');
+    if(!beatSoundOn||!ok||templeLoopTimer||!stillOpen){
+      if(!stillOpen) hardStopBeatAudio();
+      return;
+    }
     const bpm=parseInt(document.getElementById('beatBpm')?.value||96,10),ms=60000/bpm/2;
     templeLoopStep=0;
     const tick=()=>{
-      if(!beatSoundOn){stopTempleLoop();return;}
+      const open=document.getElementById('beatLabOverlay')?.classList.contains('show');
+      if(!beatSoundOn||!open){hardStopBeatAudio();return;}
       const st=templeLoopStep++%8;
       document.querySelectorAll('#beatTrack .beat-step').forEach((el,i)=>el.classList.toggle('on',i===st));
       if(st%2===0)playBeat('mok',null,true);
@@ -31366,6 +31619,23 @@ function goSiteNav(target){
   };
 })();
 
+
+(function installBeatCloseGuard(){
+  const ov=document.getElementById('beatLabOverlay');
+  if(!ov||ov.dataset.audioGuard==='1') return;
+  ov.dataset.audioGuard='1';
+  new MutationObserver(()=>{
+    if(!ov.classList.contains('show')){
+      try{hardStopBeatAudio();}catch(_){ }
+      try{stopWorryShooter();}catch(_){ }
+    }
+  }).observe(ov,{attributes:true,attributeFilter:['class']});
+  document.addEventListener('visibilitychange',()=>{
+    if(document.hidden && ov.classList.contains('show')){
+      try{hardStopBeatAudio();}catch(_){ }
+    }
+  });
+})();
 </script>
 
 </body>
