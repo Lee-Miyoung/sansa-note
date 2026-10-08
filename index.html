@@ -19107,6 +19107,58 @@ body{scroll-padding-top:calc(var(--global-nav-h) + 12px)!important}
   #beatLabOverlay .beat-audio-simple #beatAudioState{min-width:76px!important;font-size:12px!important;}
   #beatLabOverlay #beatSoundToggle{min-width:58px!important;height:34px!important;padding:0 12px!important;font-size:13px!important;}
 }
+
+/* ============================================================
+   PILGRIMAGE GPS ACHIEVEMENT · isolated component
+   ============================================================ */
+.pilgrim-gps-toast{
+  position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;justify-content:center;
+  padding:18px;background:rgba(25,22,18,.44);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+}
+.pilgrim-gps-card{
+  width:min(430px,calc(100vw - 36px));padding:28px 24px 24px;border-radius:28px;text-align:center;
+  color:#2d2822;background:linear-gradient(155deg,#fffdfa 0%,#fff7e8 100%);
+  border:1px solid rgba(194,148,65,.30);box-shadow:0 28px 80px rgba(42,31,18,.22);position:relative;overflow:hidden;
+}
+.pilgrim-gps-card::before{content:'';position:absolute;inset:auto -40px -70px -40px;height:180px;background:radial-gradient(ellipse at center,#f1d99d66 0%,transparent 68%);pointer-events:none}
+.pilgrim-gps-ring{width:78px;height:78px;margin:0 auto 16px;border-radius:50%;display:grid;place-items:center;background:#fff;border:2px solid #d9b066;box-shadow:0 0 0 8px rgba(217,176,102,.14);font-size:34px;animation:pilgrimPulse 1.15s ease-in-out infinite}
+.pilgrim-gps-card h3{font-family:'Noto Serif KR','Nanum Myeongjo',serif;font-size:24px;margin:0 0 7px;color:#32261b}
+.pilgrim-gps-card p{margin:0;color:#75695c;font-size:13px;line-height:1.6}
+.pilgrim-gps-meter{height:9px;border-radius:999px;background:#eee5d8;margin:20px 0 9px;overflow:hidden}.pilgrim-gps-meter i{display:block;height:100%;width:18%;border-radius:inherit;background:linear-gradient(90deg,#c99845,#5b8f79);animation:pilgrimScan 1.15s ease-in-out infinite alternate}
+.pilgrim-gps-status{font-size:11px;color:#8a7d6d;font-weight:700}
+@keyframes pilgrimPulse{50%{transform:scale(1.06);box-shadow:0 0 0 14px rgba(217,176,102,.06)}}
+@keyframes pilgrimScan{to{width:92%}}
+
+.pilgrim-achievement{
+  position:fixed;inset:0;z-index:2147483001;display:flex;align-items:center;justify-content:center;padding:18px;
+  background:radial-gradient(circle at 50% 30%,rgba(244,220,168,.22),rgba(26,23,20,.70));
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);overflow:hidden;
+}
+.pilgrim-achievement-card{
+  width:min(520px,calc(100vw - 30px));max-height:calc(100dvh - 30px);overflow:auto;position:relative;text-align:center;
+  border-radius:32px;padding:26px 24px 22px;background:linear-gradient(160deg,#fffefb 0%,#fff7e4 55%,#f6e4b9 100%);
+  border:1px solid rgba(190,139,48,.42);box-shadow:0 34px 110px rgba(0,0,0,.34),inset 0 1px 0 #fff;
+}
+.pilgrim-achievement-card::after{content:'巡禮';position:absolute;right:-4px;bottom:38px;font-family:serif;font-size:90px;font-weight:900;color:rgba(142,88,27,.055);pointer-events:none}
+.pilgrim-ach-close{position:absolute;right:14px;top:14px;width:36px;height:36px;border-radius:50%;border:1px solid #e7d6b7;background:#fffaf0;color:#6a5844;font-size:18px;z-index:5}
+.pilgrim-ach-lotus{width:106px;height:106px;margin:4px auto 7px;display:grid;place-items:center;position:relative;font-size:64px;filter:drop-shadow(0 10px 18px rgba(185,116,55,.18));animation:lotusBloom .72s cubic-bezier(.2,.8,.2,1) both}
+.pilgrim-ach-lotus::before{content:'';position:absolute;inset:12px;border-radius:50%;background:radial-gradient(circle,#fff6bd 0%,rgba(255,231,136,.46) 34%,transparent 70%);z-index:-1;animation:achGlow 1.7s ease-out infinite}
+@keyframes lotusBloom{0%{transform:scale(.35) rotate(-14deg);opacity:0}70%{transform:scale(1.09) rotate(2deg)}100%{transform:scale(1)}}
+@keyframes achGlow{0%,100%{transform:scale(.8);opacity:.3}50%{transform:scale(1.4);opacity:.7}}
+.pilgrim-ach-kicker{font-size:11px;letter-spacing:.18em;font-weight:900;color:#a16d25;margin-bottom:4px}
+.pilgrim-achievement-card h2{font-family:'Noto Serif KR','Nanum Myeongjo',serif;font-size:30px;line-height:1.2;margin:0;color:#261f18;letter-spacing:-.04em}
+.pilgrim-ach-message{font-size:14px;color:#6a5d50;line-height:1.6;margin:10px auto 17px;max-width:390px}
+.pilgrim-ach-stamp{width:78px;height:78px;margin:0 auto 17px;border:4px double #b94837;border-radius:18px;display:grid;place-items:center;transform:rotate(-6deg);color:#b94837;font-weight:900;font-family:serif;font-size:18px;line-height:1.05;box-shadow:inset 0 0 0 3px rgba(185,72,55,.09);animation:stampDrop .44s .42s cubic-bezier(.18,.9,.28,1.4) both}
+@keyframes stampDrop{0%{transform:scale(2.1) rotate(-15deg);opacity:0}100%{transform:scale(1) rotate(-6deg);opacity:1}}
+.pilgrim-ach-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:0 0 15px}
+.pilgrim-ach-stat{padding:12px 7px;border-radius:17px;background:rgba(255,255,255,.72);border:1px solid rgba(205,175,128,.40)}
+.pilgrim-ach-stat b{display:block;font-family:'Noto Serif KR','Nanum Myeongjo',serif;font-size:25px;color:#35695a;line-height:1.05}.pilgrim-ach-stat span{display:block;font-size:10.5px;color:#796c5c;font-weight:800;margin-top:5px;line-height:1.3}
+.pilgrim-ach-badge{margin:0 auto 14px;padding:10px 13px;border-radius:15px;background:linear-gradient(90deg,#f7ead0,#fff8e7);border:1px solid #e7ca90;color:#6a4b1f;font-size:12px;font-weight:900}
+.pilgrim-ach-meta{font-size:10.5px;color:#887c6c;margin-bottom:16px}
+.pilgrim-ach-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;position:relative;z-index:3}.pilgrim-ach-actions button{min-height:47px;border-radius:15px;font-size:13px;font-weight:900}.pilgrim-ach-actions .primary{border:0;background:#356b58;color:white;box-shadow:0 7px 0 #285243}.pilgrim-ach-actions .ghost{border:1px solid #dcc9aa;background:#fffaf0;color:#5c4c3d}
+.pilgrim-petal{position:fixed;top:-10%;z-index:2147483002;pointer-events:none;font-size:18px;animation:petalFall var(--dur) linear forwards;opacity:.9}@keyframes petalFall{to{transform:translate3d(var(--drift),115vh,0) rotate(540deg);opacity:.12}}
+@media(max-width:620px){.pilgrim-achievement-card{padding:22px 14px 17px;border-radius:25px}.pilgrim-achievement-card h2{font-size:25px}.pilgrim-ach-lotus{width:88px;height:88px;font-size:54px}.pilgrim-ach-stats{gap:6px}.pilgrim-ach-stat{padding:10px 4px}.pilgrim-ach-stat b{font-size:21px}.pilgrim-ach-stat span{font-size:9px}.pilgrim-ach-actions button{font-size:12px}.pilgrim-gps-card{padding:24px 18px}}
+
 </style>
 
 </head>
@@ -20878,7 +20930,7 @@ const GYEONGJU_SEED = [
 ];
 
 const JIRISAN_SEED = [
-  {region:"전라", name:"화엄사", tag:"유명", desc:"지리산 자락, 봄 홍매화와 가을 단풍이 아름다운 절.", activity:"각황전 배경 인물샷, 홍매화 클로즈업", season:"3월 말~4월 초 (홍매화), 11월 초 (단풍)", visitorTip:"각황전이 대웅전보다 훨씬 커서 절 배치가 독특하다는 점이 재미있다는 후기가 많아요. 보제루를 정면으로 못 지나고 옆으로 돌아가게 만든 동선에 숨은 의도가 있다는 이야기도 흥미로운 포인트예요.", nearbySight:"지리산 노고단(첫 일출 명소), 구례 산수유마을이 근처예요.", tagline:"각황전이 대웅전보다 큰, 배치부터 다른 절", difficulty:{level:"easy",icon:"🟢",label:"쉬움 · 지리산 초입"}, bestFor:["홍매화 헌터","단풍 헌터","건축 덕후"]},
+  {region:"전라", name:"화엄사", tag:"유명", desc:"지리산 자락, 봄 홍매화와 가을 단풍이 아름다운 절.", activity:"각황전 배경 인물샷, 홍매화 클로즈업", season:"3월 말~4월 초 (홍매화), 11월 초 (단풍)", visitorTip:"각황전이 대웅전보다 훨씬 커서 절 배치가 독특하다는 점이 재미있다는 후기가 많아요. 보제루를 정면으로 못 지나고 옆으로 돌아가게 만든 동선에 숨은 의도가 있다는 이야기도 흥미로운 포인트예요.", nearbySight:"지리산 노고단(첫 일출 명소), 구례 산수유마을이 근처예요.", tagline:"각황전이 대웅전보다 큰, 배치부터 다른 절", difficulty:{level:"easy",icon:"🟢",label:"쉬움 · 지리산 초입"}, bestFor:["홍매화 헌터","단풍 헌터","건축 덕후"], locationHint:"구례 화엄사", fixedLat:35.25796, fixedLng:127.49781},
   {region:"경상", name:"쌍계사", tag:"숨은", desc:"쌍계총림, 봄이면 십리벚꽃길로 유명한 지리산 자락 산사.", activity:"벚꽃길 드론샷, 계곡물 소리 브이로그", season:"4월 초중순 (십리벚꽃길)", visitorTip:"절 이름부터 재밌는 사연이 있어요 — 두 계곡 사이에 있어 '쌍계사'라 불렸대요. 진감선사가 섬진강에서 헤엄치는 물고기를 보고 우리나라 불교음악 '범패'를 만들었다는 일화도 전해져요.", nearbySight:"화개장터, 십리벚꽃길이 절 진입로 자체예요.", tagline:"십리 벚꽃길의 종착지", difficulty:{level:"easy",icon:"🟢",label:"쉬움"}, bestFor:["봄꽃 헌터","드라이브족"]},
   {region:"전라", name:"연곡사", tag:"숨은", desc:"지리산 자락, 국보급 승탑(부도)이 여러 기 모여 있어 '승탑의 보고'로 불리는 조용한 절.", activity:"동부도·서부도 등 국보 승탑 감상, 계곡 산책", visitorTip:"이 절에 모인 승탑(부도)들은 조각이 매우 화려해서 우리나라 승탑 예술의 걸작으로 꼽혀요. 여러 차례 전란을 겪으면서도 이 승탑들만은 살아남아 지금까지 자리를 지키고 있어요.", nearbySight:"구례 피아골(단풍 명소), 화엄사가 이어져요.", tagline:"전란도 못 건드린 화려한 승탑들", difficulty:{level:"medium",icon:"🟡",label:"보통"}, bestFor:["조용한 산책러","문화재 덕후"]},
   {region:"경상", name:"벽송사", tag:"숨은", desc:"지리산 깊은 곳, 조선시대 선불교 최고 수행처로 꼽히는 참선 도량. 수백 년 된 미인송·도인송 소나무로도 유명.", activity:"미인송·도인송 소나무 사진", visitorTip:"특이하게도 정확한 창건 설화가 전혀 전해지지 않는 절이에요. 서산대사의 스승인 벽송 지엄대사가 1520년 중창한 뒤로 조선 불교 최고의 수행처로 이름났고, 지금도 매년 추모법회가 열려요.", nearbySight:"지리산 둘레길, 함양 오도재 전망대가 근처예요.", tagline:"창건 설화조차 없는 신비한 수행처", difficulty:{level:"medium",icon:"🟡",label:"보통 · 지리산 자락"}, bestFor:["명상 좋아하는 사람","고목 사진러"]},
@@ -27906,13 +27958,23 @@ function addVisitRecord(withLocation){
   if(localMode){ promptGuestLoginRequired(); return; }
   const id = currentDetailId;
   const d = destinations[id];
-  const note = document.getElementById('visitNoteInput').value.trim();
+  const noteEl = document.getElementById('visitNoteInput');
+  const note = noteEl ? noteEl.value.trim() : '';
 
-  function save(verified, distKm){
+  function save(verified, distKm, accuracyM){
     const vid = newId();
     const wasUnvisited = (destinations[id].stage||0) < 1;
-    const visits = Object.assign({}, destinations[id].visits || {});
-    visits[vid] = {ts: Date.now(), note, verified: !!verified};
+    const oldVisits = Object.assign({}, destinations[id].visits || {});
+    const hadVerifiedBefore = Object.values(oldVisits).some(v=>v && v.verified);
+    const visits = Object.assign({}, oldVisits);
+    visits[vid] = {
+      ts: Date.now(),
+      note,
+      verified: !!verified,
+      // raw GPS coordinates are deliberately not stored.
+      verifiedDistanceM: verified && typeof distKm==='number' ? Math.max(0,Math.round(distKm*1000)) : null,
+      gpsAccuracyM: verified && typeof accuracyM==='number' ? Math.round(accuracyM) : null
+    };
     const patch = {visits};
     if((destinations[id].stage||0) < 1) patch.stage = 1;
     updateDestination(id, patch);
@@ -27921,33 +27983,61 @@ function addVisitRecord(withLocation){
     renderRepeatChallenge(destinations[id]);
     renderStepper(destinations[id].stage||0);
     if(wasUnvisited || verified) playStampAnimation();
-    document.getElementById('visitNoteInput').value = '';
+    if(noteEl) noteEl.value = '';
     const newCount = visitCount(destinations[id]);
     const distNote = (typeof distKm === 'number') ? ` (거리 약 ${distKm < 1 ? Math.round(distKm*1000)+'m' : distKm.toFixed(1)+'km'})` : '';
-    if(REPEAT_MILESTONES.includes(newCount)){
+
+    // Render once before calculating achievement totals so the new visit is reflected everywhere.
+    render();
+
+    if(verified){
+      showPilgrimageAchievement({
+        templeId:id,
+        templeName:destinations[id].name,
+        region:destinations[id].region,
+        distKm,
+        accuracyM,
+        firstVerified:!hadVerifiedBefore,
+        repeatCount:newCount
+      });
+    } else if(REPEAT_MILESTONES.includes(newCount)){
       showCelebration(`🏔 ${newCount}회 순례 달성!`, `${destinations[id].name}, 진짜 단골이 되셨네요`);
     } else {
-      showCelebration(verified ? `📍 위치 인증 완료!${distNote}` : '방문 기록 저장!', verified ? '진짜 여기 다녀오셨네요' : '오늘의 순례, 잘 남겨뒀어요');
+      showCelebration('방문 기록 저장!', '오늘의 순례, 잘 남겨뒀어요');
     }
-    render();
   }
 
   if(!withLocation){ save(false); return; }
 
-  if(!navigator.geolocation){ showToast('이 브라우저는 위치 인증을 지원하지 않아요.'); save(false); return; }
-  if(!d.lat || !d.lng){ showToast('이 절의 위치 정보가 아직 없어서 인증이 어려워요. 그냥 기록할게요.'); save(false); return; }
+  const targetLat = Number(d.fixedLat || d.lat);
+  const targetLng = Number(d.fixedLng || d.lng);
+  if(!navigator.geolocation){ showToast('이 브라우저는 위치 인증을 지원하지 않아요.'); return; }
+  if(!Number.isFinite(targetLat) || !Number.isFinite(targetLng)){
+    showToast('이 절의 위치 정보가 아직 준비되지 않았어요. 지도에서 위치를 확인한 뒤 다시 시도해주세요.');
+    return;
+  }
 
-  showToast('현재 위치 확인 중...');
-  navigator.geolocation.getCurrentPosition(pos=>{
-    const dist = haversineKm(pos.coords.latitude, pos.coords.longitude, d.lat, d.lng);
-    if(dist <= 0.5){
-      save(true, dist);
-    } else {
-      showToast(`절에서 약 ${dist < 1 ? Math.round(dist*1000)+'m' : dist.toFixed(1)+'km'} 떨어져 있어서 인증이 안 됐어요. 여기 계실 때 다시 눌러주세요. (기록은 저장 안 됐어요)`);
+  startPilgrimageGpsCheck(d.name);
+  verifyTemplePosition(targetLat,targetLng,{
+    radiusM:500,
+    timeoutMs:14000,
+    onProgress(info){ updatePilgrimageGpsCheck(info); }
+  }).then(info=>{
+    finishPilgrimageGpsCheck();
+    if(info.ok){
+      save(true, info.distanceM/1000, info.accuracyM);
+    }else{
+      const m = Math.round(info.distanceM || 0);
+      const acc = Math.round(info.accuracyM || 0);
+      showToast(`현장 인증 거리가 아직 멀어요 · 약 ${m>=1000?(m/1000).toFixed(1)+'km':m+'m'}${acc?` · GPS ±${acc}m`:''}`);
     }
-  }, err=>{
-    showToast('위치 권한을 허용해주셔야 인증할 수 있어요. (기록은 저장 안 됐어요)');
-  }, {timeout:8000});
+  }).catch(err=>{
+    finishPilgrimageGpsCheck();
+    const msg = err && err.code===1
+      ? '위치 권한이 꺼져 있어요. Safari 설정에서 위치 접근을 허용한 뒤 다시 눌러주세요.'
+      : '현재 위치를 정확히 잡지 못했어요. 하늘이 보이는 곳에서 5~10초 뒤 다시 눌러주세요.';
+    showToast(msg);
+  });
 }
 
 const REPEAT_MILESTONES = [10, 33, 50, 100];
@@ -31915,6 +32005,122 @@ function goSiteNav(target){
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',bind,{once:true});
   else bind();
 })();
+
+/* ============================================================
+   PILGRIMAGE GPS ACHIEVEMENT · isolated helpers
+   ============================================================ */
+let pilgrimGpsWatchId=null;
+function verifyTemplePosition(targetLat,targetLng,opts={}){
+  const radiusM=Number(opts.radiusM||500);
+  const timeoutMs=Number(opts.timeoutMs||14000);
+  return new Promise((resolve,reject)=>{
+    let done=false,best=null;
+    const finish=(value,error)=>{
+      if(done)return; done=true;
+      if(pilgrimGpsWatchId!==null){try{navigator.geolocation.clearWatch(pilgrimGpsWatchId);}catch(e){} pilgrimGpsWatchId=null;}
+      clearTimeout(timer);
+      error?reject(error):resolve(value);
+    };
+    const timer=setTimeout(()=>{
+      if(best){
+        // A GPS circle overlapping the 500 m boundary is accepted up to a strict 120 m cushion.
+        const cushion=Math.min(120,Math.max(0,best.accuracyM||0));
+        best.ok=best.distanceM<=radiusM+cushion;
+        finish(best);
+      }else finish(null,{code:3,message:'timeout'});
+    },timeoutMs);
+    pilgrimGpsWatchId=navigator.geolocation.watchPosition(pos=>{
+      const accuracyM=Math.max(0,Number(pos.coords.accuracy)||0);
+      const distanceM=haversineKm(pos.coords.latitude,pos.coords.longitude,targetLat,targetLng)*1000;
+      const info={distanceM,accuracyM,ok:false};
+      if(!best || distanceM<best.distanceM || accuracyM<best.accuracyM) best=info;
+      if(typeof opts.onProgress==='function') opts.onProgress(info);
+      const cushion=Math.min(120,accuracyM);
+      if(distanceM<=radiusM+cushion){ info.ok=true; finish(info); }
+    },err=>finish(null,err),{enableHighAccuracy:true,maximumAge:0,timeout:timeoutMs});
+  });
+}
+function startPilgrimageGpsCheck(name){
+  finishPilgrimageGpsCheck();
+  const el=document.createElement('div');
+  el.id='pilgrimGpsCheck'; el.className='pilgrim-gps-toast';
+  el.innerHTML=`<div class="pilgrim-gps-card"><div class="pilgrim-gps-ring">📍</div><h3>${escapeHtml(name)} 현장 확인 중</h3><p>GPS 신호를 잡고 있어요.<br>잠시만 그대로 있어주세요.</p><div class="pilgrim-gps-meter"><i></i></div><div class="pilgrim-gps-status" id="pilgrimGpsStatus">정확한 위치를 찾는 중…</div></div>`;
+  document.body.appendChild(el);
+}
+function updatePilgrimageGpsCheck(info){
+  const el=document.getElementById('pilgrimGpsStatus'); if(!el||!info)return;
+  const d=Math.round(info.distanceM||0), a=Math.round(info.accuracyM||0);
+  el.textContent=`사찰 중심까지 약 ${d<1000?d+'m':(d/1000).toFixed(1)+'km'} · GPS 정확도 ±${a}m`;
+}
+function finishPilgrimageGpsCheck(){
+  if(pilgrimGpsWatchId!==null && navigator.geolocation){try{navigator.geolocation.clearWatch(pilgrimGpsWatchId);}catch(e){} pilgrimGpsWatchId=null;}
+  document.getElementById('pilgrimGpsCheck')?.remove();
+}
+function verifiedTempleCount(){
+  return Object.values(destinations||{}).filter(d=>Object.values(d.visits||{}).some(v=>v&&v.verified)).length;
+}
+function verifiedRegionCount(region){
+  return Object.values(destinations||{}).filter(d=>d.region===region && Object.values(d.visits||{}).some(v=>v&&v.verified)).length;
+}
+function currentJourneyTierInfo(){
+  const n=computeVisitedCount();
+  let tier=LEVEL_TIERS[0]; LEVEL_TIERS.forEach(t=>{if(n>=t.min)tier=t;});
+  const next=LEVEL_TIERS.find(t=>t.min>n);
+  return {n,tier,next};
+}
+function launchPilgrimPetals(){
+  const icons=['🌸','🍂','✨','🪷'];
+  for(let i=0;i<34;i++){
+    const p=document.createElement('span'); p.className='pilgrim-petal'; p.textContent=icons[i%icons.length];
+    p.style.left=(Math.random()*100)+'vw'; p.style.setProperty('--dur',(2.8+Math.random()*2.4)+'s'); p.style.setProperty('--drift',(-90+Math.random()*180)+'px'); p.style.animationDelay=(Math.random()*.7)+'s';
+    document.body.appendChild(p); setTimeout(()=>p.remove(),6200);
+  }
+}
+function softPilgrimageBell(){
+  try{
+    const AC=window.AudioContext||window.webkitAudioContext; if(!AC)return;
+    const c=new AC(), now=c.currentTime;
+    [523.25,784.88,1046.5].forEach((f,i)=>{const o=c.createOscillator(),g=c.createGain();o.type='sine';o.frequency.value=f;g.gain.setValueAtTime(0,now+i*.06);g.gain.linearRampToValueAtTime(.055/(i+1),now+.03+i*.06);g.gain.exponentialRampToValueAtTime(.0001,now+1.35+i*.08);o.connect(g).connect(c.destination);o.start(now+i*.06);o.stop(now+1.5+i*.08);});
+    setTimeout(()=>c.close().catch(()=>{}),1900);
+  }catch(e){}
+}
+function closePilgrimageAchievement(){document.getElementById('pilgrimAchievement')?.remove();}
+function openAchievementCertificate(){closePilgrimageAchievement();setTimeout(()=>{if(typeof openStoryCardOverlay==='function')openStoryCardOverlay();},80);}
+function showPilgrimageAchievement(info){
+  closePilgrimageAchievement(); launchPilgrimPetals(); softPilgrimageBell();
+  try{navigator.vibrate&&navigator.vibrate([70,45,120]);}catch(e){}
+  const verified=verifiedTempleCount();
+  const regionCount=verifiedRegionCount(info.region);
+  const level=currentJourneyTierInfo();
+  const first=!!info.firstVerified;
+  let badge='현장 인증 도장 획득';
+  if(first && info.templeName==='화엄사') badge='🏔 새 기록 · 지리산 첫 발걸음';
+  else if(first) badge=`✨ 새 현장 인증 · ${escapeHtml(info.templeName)}`;
+  else badge=`🔁 ${escapeHtml(info.templeName)} ${info.repeatCount}번째 방문`;
+  const nextText=level.next?`다음 ${escapeHtml(level.next.title)}까지 ${level.next.min-level.n}곳`:`현재 최고 순례 단계`;
+  const distance=typeof info.distKm==='number'?Math.round(info.distKm*1000):null;
+  const accuracy=typeof info.accuracyM==='number'?Math.round(info.accuracyM):null;
+  const el=document.createElement('div');el.id='pilgrimAchievement';el.className='pilgrim-achievement';
+  el.innerHTML=`<div class="pilgrim-achievement-card">
+    <button class="pilgrim-ach-close" type="button" onclick="closePilgrimageAchievement()">×</button>
+    <div class="pilgrim-ach-lotus">🪷</div>
+    <div class="pilgrim-ach-kicker">SANSA NOTE · PILGRIMAGE</div>
+    <h2>${escapeHtml(info.templeName)}<br>현장 인증 완료</h2>
+    <p class="pilgrim-ach-message">오늘 한 곳을 더 직접 걸어 도착했습니다.<br>이 기록이 나의 순례에 오래 남습니다.</p>
+    <div class="pilgrim-ach-stamp">現場<br>認證</div>
+    <div class="pilgrim-ach-stats">
+      <div class="pilgrim-ach-stat"><b>${first?'+1':'✓'}</b><span>${first?'연꽃':'재방문 인증'}</span></div>
+      <div class="pilgrim-ach-stat"><b>${verified}</b><span>현장 인증 / 108</span></div>
+      <div class="pilgrim-ach-stat"><b>${regionCount}</b><span>${escapeHtml(info.region)} 인증</span></div>
+    </div>
+    <div class="pilgrim-ach-badge">${badge}<br><small style="font-weight:700;opacity:.72">${nextText}</small></div>
+    <div class="pilgrim-ach-meta">${distance!==null?`사찰 중심 약 ${distance}m · `:''}${accuracy!==null?`GPS ±${accuracy}m · `:''}${new Date().toLocaleDateString('ko-KR')}</div>
+    <div class="pilgrim-ach-actions"><button class="ghost" type="button" onclick="closePilgrimageAchievement()">기록 계속하기</button><button class="primary" type="button" onclick="openAchievementCertificate()">📸 인증서 보기</button></div>
+  </div>`;
+  el.addEventListener('click',e=>{if(e.target===el)closePilgrimageAchievement();});
+  document.body.appendChild(el);
+}
+
 </script>
 
 </body>
