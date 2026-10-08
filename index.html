@@ -18296,305 +18296,375 @@ body{scroll-padding-top:calc(var(--global-nav-h) + 12px)!important}
   z-index:2!important;
 }
 
+</style>
 
-/* ======================================================================
-   BEAT SHOOTER · ONE SCREEN ARCADE FINAL
-   - overlay always above fixed global nav
-   - no clipped title / no internal page scroll on desktop
-   - all essential info + playfield + six pads visible at once
-   ====================================================================== */
-#beatLabOverlay{
-  z-index:30000!important;
-  position:fixed!important;
-  inset:0!important;
-  display:none;
+<style id="sansa-surgical-fix">
+/* ==========================================================
+   산사노트 요청사항만 최소 수정 — 전체 디자인/구조 유지
+   ========================================================== */
+
+/* 1) 로그인 버튼: 기존 배치 유지, 글씨 정확히 중앙 + 존재감만 강화 */
+#guestSettingsLoginBtn,
+#googleLoginBtn{
+  display:flex!important;
   align-items:center!important;
   justify-content:center!important;
-  padding:10px!important;
-  background:rgba(7,10,9,.78)!important;
-  backdrop-filter:blur(5px)!important;
-  -webkit-backdrop-filter:blur(5px)!important;
+  text-align:center!important;
+  min-height:48px!important;
+  padding:12px 18px!important;
+  line-height:1.15!important;
+  font-size:15px!important;
+  font-weight:900!important;
+  letter-spacing:-.02em!important;
+  border-radius:14px!important;
+  background:#3f705f!important;
+  color:#fff!important;
+  box-shadow:0 4px 0 #2e5648,0 8px 18px rgba(50,91,76,.12)!important;
 }
-#beatLabOverlay.show{display:flex!important;}
 
-#beatLabOverlay .modal.hip-sheet{
+/* 2) 마이페이지 기능 카드: 카드 모양은 그대로, 글씨만 키움 */
+#settingsOverlay .settings-feature>b{
+  font-size:15px!important;
+  line-height:1.25!important;
+  font-weight:900!important;
+  letter-spacing:-.02em!important;
+}
+#settingsOverlay .settings-feature>small{
+  font-size:11.5px!important;
+  line-height:1.4!important;
+  color:#776e65!important;
+  opacity:1!important;
+}
+#settingsOverlay .settings-section-title{
+  font-size:17px!important;
+  font-weight:900!important;
+}
+
+/* 3) 108 순례: 기존 카드 유지, 108과 산 배경만 더 또렷하게 */
+.hero-pilgrim-feature .pilgrim-collection-chip{
+  background:
+    url('./lotus-soft.png') left 8px center/132px auto no-repeat,
+    url('./hero-mountain.png') center bottom/cover no-repeat,
+    linear-gradient(90deg,#fff8e8 0%,#f4ddaa 100%)!important;
+  overflow:hidden!important;
+}
+.hero-pilgrim-feature .pilgrim-collection-chip::before{
+  content:''!important;
+  display:block!important;
+  position:absolute!important;
+  inset:0!important;
+  background:linear-gradient(90deg,rgba(255,248,232,.94) 0%,rgba(255,248,232,.74) 38%,rgba(255,248,232,.14) 78%,rgba(255,248,232,.06) 100%)!important;
+  z-index:1!important;
+  pointer-events:none!important;
+}
+.hero-pilgrim-feature .pilgrim-collection-chip::after{
+  content:'108'!important;
+  position:absolute!important;
+  right:18px!important;
+  bottom:-16px!important;
+  font-size:108px!important;
+  line-height:1!important;
+  font-weight:900!important;
+  color:rgba(171,111,25,.30)!important;
+  opacity:1!important;
+  z-index:2!important;
+  pointer-events:none!important;
+}
+.hero-pilgrim-feature .pc-copy,
+.hero-pilgrim-feature .pc-arrow,
+.hero-pilgrim-feature .pc-lotus{
+  position:relative!important;
+  z-index:3!important;
+}
+.hero-pilgrim-feature .pc-title{font-size:27px!important;font-weight:900!important;}
+.hero-pilgrim-feature .pc-label{font-size:11px!important;font-weight:900!important;}
+.hero-pilgrim-feature .pc-progress{font-size:12px!important;font-weight:700!important;}
+
+/* 4) 대문 산 배경: 배치 자체는 유지, 더 넓고 가장자리만 자연스럽게 페이드 */
+.hero-clean-bg{
+  width:104%!important;
+  max-width:none!important;
+  -webkit-mask-image:radial-gradient(ellipse 78% 78% at 62% 54%,#000 62%,rgba(0,0,0,.86) 74%,transparent 100%)!important;
+  mask-image:radial-gradient(ellipse 78% 78% at 62% 54%,#000 62%,rgba(0,0,0,.86) 74%,transparent 100%)!important;
+}
+.hero-clean-blossom{
+  background:transparent!important;
+  filter:drop-shadow(0 6px 8px rgba(68,48,34,.05))!important;
+}
+
+/* 5) 번뇌타파 — 구조/기능은 그대로, 게임 UI만 힙하게 + 겹침 방지 */
+#beatLabOverlay{
+  z-index:20000!important;
+  background:rgba(7,9,14,.78)!important;
+  backdrop-filter:blur(7px)!important;
+  padding:10px!important;
+}
+#beatLabOverlay .modal{
   width:min(1180px,calc(100vw - 20px))!important;
   max-width:1180px!important;
-  height:min(780px,calc(100dvh - 20px))!important;
+  height:min(860px,calc(100dvh - 20px))!important;
   max-height:calc(100dvh - 20px)!important;
-  min-height:0!important;
-  border-radius:20px!important;
+  border-radius:24px!important;
   overflow:hidden!important;
-  display:flex!important;
-  flex-direction:column!important;
-  background:#0d1411!important;
-  border:1px solid rgba(219,198,147,.22)!important;
-  box-shadow:0 28px 90px rgba(0,0,0,.58),0 0 0 1px rgba(255,255,255,.03) inset!important;
+  background:
+    radial-gradient(circle at 85% 8%,rgba(145,74,255,.18),transparent 24%),
+    radial-gradient(circle at 12% 5%,rgba(30,224,197,.12),transparent 24%),
+    linear-gradient(180deg,#0d1119 0%,#111925 54%,#080c13 100%)!important;
+  border:1px solid rgba(255,255,255,.12)!important;
+  box-shadow:0 24px 70px rgba(0,0,0,.48)!important;
 }
 #beatLabOverlay .modal-head{
-  flex:0 0 58px!important;
-  min-height:58px!important;
-  padding:9px 16px!important;
-  display:flex!important;
-  align-items:center!important;
-  justify-content:space-between!important;
-  background:linear-gradient(90deg,#17221d 0%,#101713 55%,#172019 100%)!important;
-  border-bottom:1px solid rgba(218,195,140,.20)!important;
-  box-sizing:border-box!important;
+  padding:12px 18px 10px!important;
+  min-height:0!important;
+  background:linear-gradient(90deg,rgba(126,70,186,.22),rgba(31,185,174,.10),transparent)!important;
+  border-bottom:1px solid rgba(255,255,255,.10)!important;
 }
 #beatLabOverlay .modal-head h2{
-  margin:0!important;
-  color:#fff6df!important;
-  font-size:20px!important;
-  line-height:1.1!important;
-  font-weight:950!important;
+  font-size:24px!important;
+  line-height:1.08!important;
+  color:#fff!important;
   letter-spacing:-.03em!important;
-  text-shadow:0 1px 12px rgba(220,183,96,.12)!important;
 }
 #beatLabOverlay .modal-head .sub{
-  margin-top:3px!important;
-  color:#b9c6bf!important;
-  font-size:10.5px!important;
-  line-height:1.2!important;
+  margin-top:4px!important;
+  font-size:11px!important;
+  line-height:1.35!important;
+  color:#bac8d8!important;
 }
 #beatLabOverlay .close-x{
   flex:0 0 38px!important;
   width:38px!important;
   height:38px!important;
-  border-radius:50%!important;
-  background:rgba(255,255,255,.07)!important;
-  color:#fff7e6!important;
-  font-size:22px!important;
-  border:1px solid rgba(255,255,255,.10)!important;
+  border-radius:12px!important;
+  background:rgba(255,255,255,.08)!important;
+  border:1px solid rgba(255,255,255,.12)!important;
+  color:#fff!important;
 }
 #beatLabOverlay .modal-body{
-  flex:1 1 auto!important;
-  min-height:0!important;
+  padding:8px 12px 12px!important;
   overflow:hidden!important;
-  padding:8px 12px 10px!important;
-  background:linear-gradient(180deg,#111814 0%,#0e1512 100%)!important;
-  box-sizing:border-box!important;
+  min-height:0!important;
+  background:linear-gradient(180deg,#111724 0%,#0b111a 100%)!important;
+  color:#eef6ff!important;
 }
 #beatLabOverlay .beat-desktop-layout,
-#beatLabOverlay .beat-left-panel{
-  height:100%!important;
-  min-height:0!important;
-}
+#beatLabOverlay .beat-left-panel{height:100%!important;min-height:0!important;}
 #beatLabOverlay .beat-left-panel{
   display:flex!important;
   flex-direction:column!important;
-  gap:5px!important;
+  gap:6px!important;
 }
-
-/* top controls */
 #beatLabOverlay .beat-top-controls{
   display:grid!important;
-  grid-template-columns:210px 1fr!important;
+  grid-template-columns:minmax(220px,.72fr) minmax(360px,1.28fr)!important;
   gap:7px!important;
-  align-items:center!important;
-  margin:0!important;
 }
 #beatLabOverlay .beat-audio-status,
 #beatLabOverlay .bpm-row{
-  min-height:38px!important;
-  height:38px!important;
-  margin:0!important;
-  padding:5px 8px!important;
-  border-radius:10px!important;
-  box-sizing:border-box!important;
-  background:#18221d!important;
-  border:1px solid rgba(255,255,255,.08)!important;
-  color:#eef3ef!important;
+  min-height:44px!important;
+  padding:6px 10px!important;
+  border-radius:13px!important;
+  background:rgba(255,255,255,.055)!important;
+  border:1px solid rgba(255,255,255,.10)!important;
 }
-#beatLabOverlay .beat-audio-status{
-  display:flex!important;
-  align-items:center!important;
-  justify-content:space-between!important;
-  gap:8px!important;
-  font-size:10px!important;
-}
-#beatLabOverlay #beatAudioState{color:#dce8e1!important;opacity:1!important;}
-#beatLabOverlay #beatSoundToggle{
-  min-width:52px!important;height:28px!important;border:0!important;border-radius:999px!important;
-  background:#3d745f!important;color:#fff!important;font-weight:900!important;
-}
-#beatLabOverlay .bpm-row{display:flex!important;align-items:center!important;gap:8px!important;}
-#beatLabOverlay .bpm-row b{color:#f2d47f!important;font-size:11px!important;white-space:nowrap!important;}
-#beatLabOverlay .bpm-row input{height:18px!important;min-width:90px!important;}
-#beatLabOverlay #loopBtn{height:28px!important;padding:4px 9px!important;font-size:10px!important;}
-
-/* score bar */
+#beatLabOverlay .beat-audio-status span,
+#beatLabOverlay .bpm-row b{font-size:12px!important;color:#dcfff4!important;font-weight:900!important;}
 #beatLabOverlay .beat-game-head{
   display:grid!important;
-  grid-template-columns:minmax(0,1fr) 86px 78px 78px!important;
-  gap:5px!important;
+  grid-template-columns:minmax(0,1fr) 92px 92px 98px!important;
+  gap:6px!important;
   align-items:stretch!important;
-  margin:0!important;
-  min-height:54px!important;
-  height:54px!important;
 }
 #beatLabOverlay .beat-mission{
-  display:flex!important;align-items:center!important;
-  min-width:0!important;padding:0 10px!important;
-  background:#18211d!important;border:1px solid rgba(255,255,255,.07)!important;border-radius:11px!important;
-  color:#f0eee6!important;font-size:10px!important;font-weight:850!important;
-  white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;
+  min-height:54px!important;
+  padding:9px 12px!important;
+  border-radius:14px!important;
+  display:flex!important;
+  align-items:center!important;
+  background:linear-gradient(90deg,rgba(255,194,70,.15),rgba(255,73,166,.10))!important;
+  border:1px solid rgba(255,216,105,.18)!important;
+  color:#fff0bd!important;
+  font-size:11px!important;
+  line-height:1.35!important;
+  font-weight:900!important;
 }
 #beatLabOverlay .beat-score-box,
 #beatLabOverlay .beat-rank-chip{
-  min-width:0!important;height:54px!important;padding:5px 5px!important;
-  background:#1a241f!important;border:1px solid rgba(255,255,255,.08)!important;border-radius:11px!important;
-  display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;
+  min-height:54px!important;
+  border-radius:14px!important;
+  padding:6px!important;
+  background:rgba(255,255,255,.055)!important;
+  border:1px solid rgba(255,255,255,.10)!important;
 }
-#beatLabOverlay .beat-score-box b,#beatLabOverlay .beat-rank-chip b{color:#fff!important;font-size:20px!important;line-height:1!important;}
-#beatLabOverlay .beat-score-box span,#beatLabOverlay .beat-rank-chip span{color:#9eaaa4!important;font-size:7.5px!important;margin-top:4px!important;letter-spacing:.5px!important;}
-
+#beatLabOverlay .beat-score-box b,#beatLabOverlay .beat-rank-chip b{font-size:22px!important;line-height:1!important;color:#fff!important;}
+#beatLabOverlay .beat-score-box span,#beatLabOverlay .beat-rank-chip span{font-size:7px!important;letter-spacing:.12em!important;color:#97a6b5!important;}
 #beatLabOverlay .beat-mult-row{
-  min-height:24px!important;height:24px!important;display:flex!important;align-items:center!important;gap:5px!important;margin:0!important;overflow:hidden!important;
+  min-height:34px!important;
+  margin:0!important;
+  padding:4px 6px!important;
+  display:flex!important;
+  align-items:center!important;
+  gap:5px!important;
+  flex-wrap:nowrap!important;
+  border-radius:12px!important;
+  background:rgba(255,255,255,.045)!important;
+  border:1px solid rgba(255,255,255,.08)!important;
+  overflow:hidden!important;
 }
-#beatLabOverlay .beat-mult-row>span,#beatLabOverlay .beat-mult-row>button{
-  height:22px!important;display:inline-flex!important;align-items:center!important;padding:0 7px!important;
-  font-size:8px!important;border-radius:999px!important;white-space:nowrap!important;
+#beatLabOverlay .beat-mult-row>span{
+  white-space:nowrap!important;
+  padding:5px 8px!important;
+  border-radius:999px!important;
+  background:rgba(255,255,255,.07)!important;
+  color:#eaf5ff!important;
+  font-size:9px!important;
+  font-weight:900!important;
 }
-
-/* level + life + purification compressed */
+#beatLabOverlay .beat-mult-row button{margin-left:auto!important;white-space:nowrap!important;padding:5px 9px!important;font-size:9px!important;}
 #beatLabOverlay .beat-progression{
-  min-height:42px!important;height:42px!important;
-  display:grid!important;grid-template-columns:54px 1fr 60px!important;gap:7px!important;align-items:center!important;
-  margin:0!important;padding:4px 7px!important;border-radius:11px!important;background:#151d19!important;border:1px solid rgba(255,255,255,.07)!important;
+  min-height:48px!important;
+  margin:0!important;
+  padding:5px 8px!important;
+  display:grid!important;
+  grid-template-columns:56px 1fr 58px!important;
+  gap:7px!important;
+  align-items:center!important;
+  border-radius:13px!important;
+  background:rgba(255,255,255,.045)!important;
+  border:1px solid rgba(255,255,255,.08)!important;
 }
-#beatLabOverlay .beat-level-badge{height:34px!important;min-width:46px!important;padding:3px 5px!important;border-radius:9px!important;}
-#beatLabOverlay .beat-level-badge b{font-size:17px!important;line-height:1!important;}
-#beatLabOverlay .beat-level-badge{font-size:7px!important;}
-#beatLabOverlay .beat-xp-top{font-size:8px!important;color:#d6ddd9!important;margin-bottom:3px!important;}
-#beatLabOverlay .beat-xp{height:6px!important;background:#27322d!important;}
-#beatLabOverlay .beat-coin{font-size:10px!important;color:#f1d17b!important;text-align:right!important;}
-#beatLabOverlay .beat-reward-row{display:none!important;}
+#beatLabOverlay .beat-level-badge{height:38px!important;border-radius:10px!important;background:linear-gradient(180deg,#285d64,#367b80)!important;color:#fff!important;}
+#beatLabOverlay .beat-level-badge b{font-size:20px!important;}
+#beatLabOverlay .beat-xp-top{font-size:8px!important;color:#dce8ee!important;}
+#beatLabOverlay .beat-xp{height:6px!important;margin-top:4px!important;}
+#beatLabOverlay .beat-reward-row{
+  min-height:26px!important;
+  display:flex!important;
+  gap:4px!important;
+  margin:0!important;
+  overflow:hidden!important;
+}
+#beatLabOverlay .beat-reward{padding:4px 7px!important;font-size:8px!important;border-radius:999px!important;white-space:nowrap!important;}
 #beatLabOverlay .beat-life-row{
-  min-height:25px!important;height:25px!important;margin:0!important;display:flex!important;align-items:center!important;justify-content:space-between!important;
-  padding:0 4px!important;color:#dfe6e2!important;font-size:9px!important;
+  min-height:34px!important;
+  margin:0!important;
+  padding:5px 8px!important;
+  border-radius:12px!important;
+  background:rgba(255,255,255,.045)!important;
+  border:1px solid rgba(255,255,255,.08)!important;
+  font-size:9px!important;
+  color:#dbe7ef!important;
 }
-#beatLabOverlay .beat-lives{font-size:14px!important;letter-spacing:1px!important;}
-#beatLabOverlay .beat-streak{color:#91d59b!important;font-size:8.5px!important;font-weight:900!important;white-space:nowrap!important;}
 #beatLabOverlay .beat-purify-box{
-  min-height:39px!important;height:39px!important;margin:0!important;padding:4px 6px!important;
-  border:1px solid rgba(218,170,73,.20)!important;border-radius:10px!important;background:#1a1d17!important;box-sizing:border-box!important;
+  margin:0!important;
+  padding:6px 8px 7px!important;
+  border-radius:13px!important;
+  background:linear-gradient(90deg,rgba(255,192,57,.10),rgba(63,225,162,.07))!important;
+  border:1px solid rgba(255,211,98,.16)!important;
 }
-#beatLabOverlay .beat-purify-top{height:21px!important;margin:0 0 3px!important;display:flex!important;align-items:center!important;justify-content:space-between!important;}
-#beatLabOverlay .beat-purify-top>span,#beatLabOverlay .beat-purify-top>span b{font-size:9px!important;color:#f2c964!important;}
-#beatLabOverlay .beat-purify-btn{min-width:100px!important;min-height:22px!important;height:22px!important;padding:2px 8px!important;font-size:7.5px!important;border-radius:999px!important;}
-#beatLabOverlay .beat-purify-track{height:5px!important;}
-#beatLabOverlay .beat-track{height:7px!important;margin:0!important;}
-
-/* playfield: the visual focus */
+#beatLabOverlay .beat-purify-top{margin-bottom:5px!important;font-size:9px!important;color:#ffe49c!important;}
+#beatLabOverlay .beat-purify-btn{min-height:28px!important;padding:4px 9px!important;font-size:8px!important;}
+#beatLabOverlay .beat-purify-track{height:7px!important;}
+#beatLabOverlay .beat-track{height:8px!important;min-height:8px!important;margin:0!important;}
 #beatLabOverlay .worry-smash-zone{
   flex:1 1 auto!important;
-  min-height:230px!important;
+  min-height:220px!important;
   height:auto!important;
-  max-height:none!important;
   margin:0!important;
-  border-radius:15px!important;
+  border-radius:18px!important;
+  overflow:hidden!important;
   background:
-    radial-gradient(circle at 50% 115%,rgba(104,196,145,.10),transparent 38%),
-    repeating-linear-gradient(90deg,transparent 0,transparent calc(16.666% - 1px),rgba(255,255,255,.045) calc(16.666% - 1px),rgba(255,255,255,.045) 16.666%),
-    linear-gradient(180deg,#08100d,#0b1410 60%,#080e0c)!important;
-  border:1px solid rgba(114,154,132,.22)!important;
-  box-shadow:inset 0 0 42px rgba(0,0,0,.40),0 0 0 1px rgba(255,255,255,.02)!important;
+    radial-gradient(circle at 50% 0%,rgba(37,223,203,.14),transparent 31%),
+    linear-gradient(180deg,#031017 0%,#06141d 64%,#0c0d14 100%)!important;
+  border:1px solid rgba(90,232,255,.16)!important;
+  box-shadow:inset 0 0 45px rgba(44,209,211,.04),0 10px 24px rgba(0,0,0,.20)!important;
 }
-#beatLabOverlay .worry-smash-title{top:8px!important;color:#dce7e1!important;font-size:10px!important;letter-spacing:.6px!important;}
-#beatLabOverlay .worry-wave{top:7px!important;right:8px!important;color:#f2ce6f!important;font-size:9px!important;}
-#beatLabOverlay .worry-game-hint{bottom:5px!important;color:#bcc7c1!important;font-size:7.5px!important;}
-#beatLabOverlay .beat-defense-line{bottom:27px!important;}
-
-/* six pads always visible in one row on desktop */
+#beatLabOverlay .worry-smash-title{top:9px!important;font-size:11px!important;color:#ffe08a!important;font-weight:900!important;}
+#beatLabOverlay .worry-wave{top:8px!important;right:8px!important;font-size:8px!important;padding:4px 7px!important;border-radius:999px!important;background:rgba(0,0,0,.45)!important;color:#fff8c3!important;}
+#beatLabOverlay .beat-event-rail{top:38px!important;min-width:250px!important;width:min(340px,60%)!important;}
+#beatLabOverlay .worry-game-hint{bottom:7px!important;font-size:7px!important;color:#d1dbe2!important;}
+#beatLabOverlay .beat-defense-line{bottom:10px!important;left:10px!important;right:10px!important;}
 #beatLabOverlay .beat-grid{
-  flex:0 0 58px!important;height:58px!important;
-  display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr))!important;gap:6px!important;margin:0!important;
+  display:grid!important;
+  grid-template-columns:repeat(6,minmax(0,1fr))!important;
+  gap:6px!important;
+  margin:0!important;
+  flex:0 0 auto!important;
 }
 #beatLabOverlay .beat-pad{
-  height:58px!important;min-height:58px!important;padding:5px 2px!important;border-radius:11px!important;
-  font-size:16px!important;line-height:1!important;color:#fff!important;overflow:hidden!important;
-  box-shadow:inset 0 0 18px rgba(255,255,255,.025),0 3px 0 rgba(0,0,0,.25)!important;
+  height:62px!important;
+  min-height:62px!important;
+  padding:5px 3px!important;
+  border-radius:13px!important;
+  border:1px solid rgba(255,255,255,.13)!important;
+  color:#fff!important;
+  box-shadow:0 5px 0 rgba(0,0,0,.32),inset 0 0 18px rgba(255,255,255,.05)!important;
 }
-#beatLabOverlay .beat-pad b{display:block!important;margin-top:2px!important;color:#fff!important;font-size:9px!important;line-height:1!important;white-space:nowrap!important;}
-#beatLabOverlay .beat-pad small{display:block!important;margin-top:2px!important;color:rgba(255,255,255,.68)!important;font-size:6px!important;line-height:1!important;white-space:nowrap!important;}
+#beatLabOverlay .beat-pad:nth-child(1){background:linear-gradient(145deg,#1d513f,#2c8b67)!important;}
+#beatLabOverlay .beat-pad:nth-child(2){background:linear-gradient(145deg,#5b243d,#a73967)!important;}
+#beatLabOverlay .beat-pad:nth-child(3){background:linear-gradient(145deg,#233d5a,#3878ab)!important;}
+#beatLabOverlay .beat-pad:nth-child(4){background:linear-gradient(145deg,#59451c,#b0832c)!important;}
+#beatLabOverlay .beat-pad:nth-child(5){background:linear-gradient(145deg,#422b61,#7a49b1)!important;}
+#beatLabOverlay .beat-pad:nth-child(6){background:linear-gradient(145deg,#194f4b,#298c80)!important;}
+#beatLabOverlay .beat-pad b{font-size:9px!important;line-height:1!important;}
+#beatLabOverlay .beat-pad small{font-size:6px!important;line-height:1.1!important;margin-top:2px!important;}
 #beatLabOverlay .release-banner{
-  flex:0 0 26px!important;height:26px!important;min-height:26px!important;margin:0!important;padding:3px 7px!important;
-  display:flex!important;align-items:center!important;justify-content:space-between!important;gap:8px!important;
-  border-radius:8px!important;background:#18211d!important;border:1px solid rgba(255,255,255,.07)!important;color:#dbe4df!important;font-size:8px!important;
+  min-height:30px!important;
+  margin:0!important;
+  padding:5px 8px!important;
+  border-radius:10px!important;
+  background:rgba(255,255,255,.045)!important;
+  border:1px solid rgba(255,255,255,.08)!important;
+  font-size:8px!important;
+  color:#e8eff4!important;
 }
-#beatLabOverlay .release-banner *{color:inherit!important;}
+#beatLabOverlay .beat-leaderboard{max-height:170px!important;overflow:auto!important;background:#0c121b!important;color:#fff!important;}
 
-/* MOBILE: fit all core game content in one viewport */
 @media(max-width:700px){
-  #beatLabOverlay{padding:0!important;align-items:stretch!important;}
-  #beatLabOverlay .modal.hip-sheet{
-    width:100%!important;max-width:none!important;height:100dvh!important;max-height:100dvh!important;border-radius:0!important;
-    padding-top:env(safe-area-inset-top)!important;
-  }
-  #beatLabOverlay .modal-head{flex-basis:52px!important;min-height:52px!important;padding:6px 10px!important;}
-  #beatLabOverlay .modal-head h2{font-size:16px!important;}
-  #beatLabOverlay .modal-head .sub{font-size:8px!important;max-width:88vw!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;}
-  #beatLabOverlay .close-x{width:34px!important;height:34px!important;font-size:20px!important;}
-  #beatLabOverlay .modal-body{padding:5px 7px calc(6px + env(safe-area-inset-bottom))!important;}
-  #beatLabOverlay .beat-left-panel{gap:3px!important;}
-  #beatLabOverlay .beat-top-controls{grid-template-columns:120px 1fr!important;gap:4px!important;}
-  #beatLabOverlay .beat-audio-status,#beatLabOverlay .bpm-row{height:31px!important;min-height:31px!important;padding:3px 5px!important;border-radius:8px!important;}
-  #beatLabOverlay #beatSoundToggle{height:23px!important;min-width:42px!important;font-size:9px!important;}
-  #beatLabOverlay .bpm-row b{font-size:8px!important;}
-  #beatLabOverlay #loopBtn{height:23px!important;padding:2px 5px!important;font-size:8px!important;}
-  #beatLabOverlay .beat-game-head{height:45px!important;min-height:45px!important;grid-template-columns:minmax(0,1fr) 58px 54px!important;gap:3px!important;}
+  #settingsOverlay .settings-feature>b{font-size:14px!important;}
+  #settingsOverlay .settings-feature>small{font-size:10.5px!important;}
+  .hero-pilgrim-feature .pilgrim-collection-chip::after{font-size:80px!important;right:12px!important;bottom:-10px!important;}
+  .hero-pilgrim-feature .pc-title{font-size:22px!important;}
+  .hero-clean-bg{width:112%!important;}
+
+  #beatLabOverlay{padding:0!important;}
+  #beatLabOverlay .modal{width:100%!important;max-width:none!important;height:100dvh!important;max-height:100dvh!important;border-radius:0!important;}
+  #beatLabOverlay .modal-head{padding:9px 11px 7px!important;}
+  #beatLabOverlay .modal-head h2{font-size:18px!important;}
+  #beatLabOverlay .modal-head .sub{font-size:9px!important;}
+  #beatLabOverlay .modal-body{padding:6px 8px 8px!important;overflow:auto!important;}
+  #beatLabOverlay .beat-top-controls{grid-template-columns:1fr 1fr!important;}
+  #beatLabOverlay .beat-game-head{grid-template-columns:1fr 72px 72px!important;}
+  #beatLabOverlay .beat-mission{grid-column:1/-1!important;min-height:38px!important;font-size:9px!important;}
   #beatLabOverlay .beat-rank-chip{display:none!important;}
-  #beatLabOverlay .beat-mission{font-size:8px!important;padding:0 6px!important;}
-  #beatLabOverlay .beat-score-box{height:45px!important;padding:3px!important;border-radius:8px!important;}
-  #beatLabOverlay .beat-score-box b{font-size:16px!important;}
-  #beatLabOverlay .beat-score-box span{font-size:6px!important;}
-  #beatLabOverlay .beat-mult-row{height:20px!important;min-height:20px!important;gap:3px!important;}
-  #beatLabOverlay .beat-mult-row>span,#beatLabOverlay .beat-mult-row>button{height:18px!important;padding:0 5px!important;font-size:6.8px!important;}
-  #beatLabOverlay .beat-progression{height:36px!important;min-height:36px!important;grid-template-columns:43px 1fr!important;padding:3px 5px!important;}
-  #beatLabOverlay .beat-coin{display:none!important;}
-  #beatLabOverlay .beat-level-badge{height:29px!important;min-width:38px!important;}
-  #beatLabOverlay .beat-level-badge b{font-size:14px!important;}
-  #beatLabOverlay .beat-life-row{height:21px!important;min-height:21px!important;font-size:7px!important;}
-  #beatLabOverlay .beat-lives{font-size:12px!important;}
-  #beatLabOverlay .beat-streak{font-size:6.5px!important;max-width:55%!important;overflow:hidden!important;text-overflow:ellipsis!important;}
-  #beatLabOverlay .beat-purify-box{height:33px!important;min-height:33px!important;padding:3px 5px!important;}
-  #beatLabOverlay .beat-purify-top{height:18px!important;margin-bottom:2px!important;}
-  #beatLabOverlay .beat-purify-top>span,#beatLabOverlay .beat-purify-top>span b{font-size:7px!important;}
-  #beatLabOverlay .beat-purify-btn{min-width:82px!important;height:19px!important;min-height:19px!important;font-size:6.5px!important;padding:1px 5px!important;}
-  #beatLabOverlay .beat-track{height:5px!important;}
-  #beatLabOverlay .worry-smash-zone{min-height:190px!important;flex:1 1 auto!important;border-radius:12px!important;}
-  #beatLabOverlay .worry-smash-title{font-size:7.5px!important;top:5px!important;}
-  #beatLabOverlay .worry-wave{font-size:7px!important;top:5px!important;}
-  #beatLabOverlay .worry-game-hint{font-size:6px!important;bottom:3px!important;}
-  #beatLabOverlay .beat-defense-line{bottom:21px!important;}
-  #beatLabOverlay .beat-grid{height:48px!important;flex-basis:48px!important;gap:3px!important;}
-  #beatLabOverlay .beat-pad{height:48px!important;min-height:48px!important;padding:3px 1px!important;border-radius:8px!important;font-size:13px!important;}
-  #beatLabOverlay .beat-pad b{font-size:7px!important;}
-  #beatLabOverlay .beat-pad small{display:none!important;}
-  #beatLabOverlay .release-banner{height:21px!important;min-height:21px!important;flex-basis:21px!important;padding:2px 5px!important;font-size:6.8px!important;}
+  #beatLabOverlay .beat-score-box{min-height:44px!important;}
+  #beatLabOverlay .beat-score-box b{font-size:18px!important;}
+  #beatLabOverlay .beat-progression{grid-template-columns:48px 1fr 46px!important;}
+  #beatLabOverlay .beat-reward-row{overflow-x:auto!important;}
+  #beatLabOverlay .worry-smash-zone{flex:0 0 280px!important;height:280px!important;min-height:280px!important;}
+  #beatLabOverlay .beat-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;}
+  #beatLabOverlay .beat-pad{height:58px!important;min-height:58px!important;}
 }
-
-/* Very short laptop windows */
-@media(min-width:701px) and (max-height:760px){
-  #beatLabOverlay .modal.hip-sheet{height:calc(100dvh - 12px)!important;max-height:calc(100dvh - 12px)!important;}
-  #beatLabOverlay .modal-head{flex-basis:50px!important;min-height:50px!important;padding:6px 12px!important;}
-  #beatLabOverlay .modal-head h2{font-size:17px!important;}
-  #beatLabOverlay .modal-head .sub{font-size:8px!important;}
-  #beatLabOverlay .beat-top-controls{grid-template-columns:180px 1fr!important;}
-  #beatLabOverlay .beat-audio-status,#beatLabOverlay .bpm-row{height:32px!important;min-height:32px!important;}
-  #beatLabOverlay .beat-game-head{height:46px!important;min-height:46px!important;grid-template-columns:minmax(0,1fr) 72px 66px 66px!important;}
-  #beatLabOverlay .beat-score-box,#beatLabOverlay .beat-rank-chip{height:46px!important;}
-  #beatLabOverlay .beat-score-box b,#beatLabOverlay .beat-rank-chip b{font-size:17px!important;}
-  #beatLabOverlay .beat-progression{height:36px!important;min-height:36px!important;}
-  #beatLabOverlay .beat-life-row{height:21px!important;min-height:21px!important;}
-  #beatLabOverlay .beat-purify-box{height:34px!important;min-height:34px!important;}
-  #beatLabOverlay .beat-grid{height:50px!important;flex-basis:50px!important;}
-  #beatLabOverlay .beat-pad{height:50px!important;min-height:50px!important;}
-  #beatLabOverlay .release-banner{height:22px!important;min-height:22px!important;flex-basis:22px!important;}
-}
-
 </style>
+
+
+<style id="sansa-shooter-contrast-fix">
+#beatLabOverlay .beat-progression,
+#beatLabOverlay .beat-life-row,
+#beatLabOverlay .beat-purify-box,
+#beatLabOverlay .beat-mult-row{color:#eef6ff!important;}
+#beatLabOverlay .beat-xp-wrap{background:rgba(255,255,255,.055)!important;border:1px solid rgba(255,255,255,.08)!important;border-radius:12px!important;padding:5px 8px!important;}
+#beatLabOverlay .beat-xp-top,#beatLabOverlay #beatRankName,#beatLabOverlay .beat-coin{color:#eef6ff!important;font-weight:800!important;}
+#beatLabOverlay .beat-reward{color:#dfe8f5!important;background:rgba(255,255,255,.07)!important;border:1px solid rgba(255,255,255,.08)!important;}
+#beatLabOverlay .beat-reward.on{color:#09120f!important;background:linear-gradient(135deg,#7cffb1,#e9ff80)!important;border-color:transparent!important;}
+#beatLabOverlay .beat-life-row .beat-lives{filter:none!important;}
+#beatLabOverlay .beat-streak{color:#8ff5a7!important;font-weight:800!important;}
+#beatLabOverlay .beat-purify-top span{color:#ffe58c!important;font-weight:900!important;}
+#beatLabOverlay #beatPurifyBtn:not(:disabled){background:linear-gradient(135deg,#ffd75d,#ff7a75)!important;color:#25150b!important;box-shadow:0 0 22px rgba(255,142,84,.22)!important;}
+#beatLabOverlay .worry-smash-zone{box-shadow:inset 0 0 55px rgba(0,220,255,.045),0 0 24px rgba(79,85,255,.10)!important;}
+#beatLabOverlay .beat-pad:hover{filter:brightness(1.15)!important;transform:translateY(-1px)!important;}
+</style>
+
 </head>
 <body>
 
