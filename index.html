@@ -19266,6 +19266,54 @@ body{scroll-padding-top:calc(var(--global-nav-h) + 12px)!important}
 }
 </style>
 
+
+<style id="mountain-field-verify-and-lightbox-fix">
+/* 산 탭 현장 인증 — 절 탭과 같은 발견성/성취감, 산 화면에만 추가 */
+.mountain-visit-actions{
+  display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px;
+}
+.mountain-visit-actions .btn{
+  min-height:48px;padding:9px 12px!important;font-size:12px!important;font-weight:900;
+}
+.mountain-verify-btn{
+  white-space:normal!important;line-height:1.25!important;
+  border-color:#aacbb6!important;background:#eff8f2!important;color:#285c49!important;
+  box-shadow:0 4px 0 #c8ddd0!important;
+}
+.mountain-verify-btn small{
+  display:block;font-size:9px;margin-top:2px;opacity:.75;font-weight:750;
+}
+.mountain-verify-btn.pulse-now{animation:fieldVerifyPulse .65s ease-in-out 2!important;}
+.mountain-field-badge{background:rgba(42,97,72,.94)!important;}
+#mountainRewardPreview .field-reward-preview{
+  border-color:#cbd9c6;
+  background:
+    radial-gradient(circle at 92% 12%,rgba(150,203,150,.25),transparent 25%),
+    linear-gradient(135deg,#f7fbf3 0%,#e8f1df 100%);
+}
+#mountainRewardPreview .field-reward-special{background:rgba(54,111,79,.10);color:#315f48}
+#mountainRewardPreview .field-reward-go-btn{background:#356e52;box-shadow:0 5px 0 #285440}
+
+/* iPhone/Safari 사진 확대 안정화 — 라이트박스가 열렸을 때만 */
+#lightboxOverlay.show,
+#lightboxOverlay.show #lightboxStage,
+#lightboxOverlay.show #lightboxImg{
+  touch-action:none!important;
+  -ms-touch-action:none!important;
+}
+#lightboxOverlay.show #lightboxImg{
+  will-change:transform;
+  transform-origin:center center!important;
+}
+@media(max-width:640px){
+  .mountain-visit-actions{grid-template-columns:1fr 1fr}
+  .mountain-visit-actions .btn{min-height:50px;font-size:11.5px!important}
+  #lightboxOverlay.show #lightboxImg{max-width:96vw!important;max-height:86dvh!important}
+  #lbZoomControls{top:calc(12px + env(safe-area-inset-top))!important}
+  #lbZoomControls button{width:44px!important;height:44px!important;font-size:22px!important}
+}
+</style>
+
 </head>
 <body>
 
@@ -19797,10 +19845,15 @@ body{scroll-padding-top:calc(var(--global-nav-h) + 12px)!important}
       <div id="mMap"></div>
       <a id="mMapLink" class="maplink" target="_blank" rel="noopener">카카오맵에서 크게 보기 ↗</a>
 
+      <div id="mountainRewardPreview"></div>
+
       <div class="section-label">방문 기록 <span id="mVisitCountLabel"></span></div>
       <div id="mVisitList"></div>
       <textarea class="notes" id="mVisitNoteInput" placeholder="이번 등반은 어땠는지 소감을 남겨보세요 (코스, 날씨, 컨디션 등)"></textarea>
-      <button class="btn btn-primary" style="margin-top:8px;padding:9px 16px;font-size:13px;" onclick="addMountainVisit()">+ 등반 기록 추가</button>
+      <div class="mountain-visit-actions">
+        <button class="btn btn-primary" type="button" onclick="addMountainVisit(false)">+ 등반 기록 추가</button>
+        <button class="btn btn-ghost mountain-verify-btn" id="mountainVerifyBtn" type="button" onclick="addMountainVisit(true)">📍 현장 인증하기<small>도착 후 보상 열기</small></button>
+      </div>
 
       <div class="section-label">할 일 / 콘텐츠 아이디어</div>
       <textarea class="notes" id="mNotes" placeholder="예: 등산로 정보, 준비물, 가고 싶은 코스 등" onblur="saveMountainNotes()"></textarea>
@@ -26994,6 +27047,7 @@ function renderMountainCard(id,d){
       ${cardCoverMedia(photo,'mountain',d.name)}
       <span class="tagbadge famous">${escapeHtml(d.height||'')}</span>
       ${visited?`<span class="lotus-visited-mark mountain-mark">🌿 <b>오른 산</b></span>`:''}
+      <span class="field-reward-badge mountain-field-badge">📍 현장보상</span>
       ${progressSealHtml(stageIdx)}
       <button class="drag-handle" type="button" aria-label="순서 바꾸기" onclick="event.stopPropagation()">☰</button>
     </div>
@@ -27098,6 +27152,7 @@ function openMountainDetail(id){
   }
   renderMountainPhotos(d.photos||{});
   renderMountainVisits(d.visits||{});
+  renderMountainRewardPreview(d);
   document.getElementById('mVisitNoteInput').value = '';
   document.getElementById('mDetailOverlay').classList.add('show');
   requestAnimationFrame(()=> setupMountainMap(d, id));
@@ -32343,6 +32398,242 @@ function showPilgrimageAchievement(info){
   document.body.appendChild(el);
 }
 
+</script>
+
+
+<script id="mountain-field-verify-and-lightbox-js">
+/* ============================================================
+   MOUNTAIN FIELD VERIFY · isolated from temple logic
+   ============================================================ */
+function mountainHasVerifiedVisit(d){
+  return !!(d && Object.values(d.visits||{}).some(v=>v&&v.verified));
+}
+function verifiedMountainCount(){
+  return Object.values(mountainDestinations||{}).filter(mountainHasVerifiedVisit).length;
+}
+function verifiedMountainRegionCount(region){
+  return Object.values(mountainDestinations||{}).filter(d=>d&&d.region===region&&mountainHasVerifiedVisit(d)).length;
+}
+function currentMountainRewardText(d){
+  if(!d) return {title:'산 현장 인증 보상',badge:'⛰️ 현장 등반 도장'};
+  const first=!mountainHasVerifiedVisit(d);
+  if(first) return {title:`${d.name} 현장 인증 보상`,badge:`🏔 ${d.name} 첫 현장 등반`};
+  return {title:`${d.name} 재등반 보상`,badge:'🔁 재등반 인증 기록'};
+}
+function renderMountainRewardPreview(d){
+  const wrap=document.getElementById('mountainRewardPreview');
+  if(!wrap||!d) return;
+  const first=!mountainHasVerifiedVisit(d);
+  const reward=currentMountainRewardText(d);
+  wrap.innerHTML=`
+    <section class="field-reward-preview ${first?'is-new':'is-repeat'}">
+      <div class="field-reward-head">
+        <div>
+          <span class="field-reward-kicker">📍 현장에 가면 열려요</span>
+          <h3>${escapeHtml(reward.title)}</h3>
+          <p>${first?'산 근처에서 위치 인증하면 등반 기록이 특별하게 완성됩니다.':'이미 현장 인증한 산이에요. 다시 오르면 재등반 기록으로 남길 수 있어요.'}</p>
+        </div>
+        <span class="field-reward-lock">${first?'LOCKED':'OPEN'}</span>
+      </div>
+      <div class="field-reward-items">
+        <span><b>🌿 ${first?'+1':'✓'}</b><small>${first?'등반 인증':'재등반'}</small></span>
+        <span><b>印</b><small>현장 도장</small></span>
+        <span><b>📜</b><small>인증서</small></span>
+        <span><b>${escapeHtml(d.region||'지역')}</b><small>지역 기록</small></span>
+      </div>
+      <div class="field-reward-special">${escapeHtml(reward.badge)}</div>
+      <div class="field-reward-actions">
+        <button type="button" class="field-reward-preview-btn" onclick="showMountainRewardPreviewOnly()">보상 미리보기</button>
+        <button type="button" class="field-reward-go-btn" onclick="document.getElementById('mountainVerifyBtn')?.scrollIntoView({behavior:'smooth',block:'center'});setTimeout(()=>document.getElementById('mountainVerifyBtn')?.classList.add('pulse-now'),260);setTimeout(()=>document.getElementById('mountainVerifyBtn')?.classList.remove('pulse-now'),1700);">현장 인증하기 →</button>
+      </div>
+      <small class="field-reward-note">※ 실제 산 근처에서 위치 인증이 성공해야 기록됩니다.</small>
+    </section>`;
+}
+function showMountainRewardPreviewOnly(){
+  const d=mountainDestinations&&currentMountainDetailId?mountainDestinations[currentMountainDetailId]:null;
+  if(!d) return;
+  document.getElementById('fieldRewardDemo')?.remove();
+  const reward=currentMountainRewardText(d);
+  const first=!mountainHasVerifiedVisit(d);
+  const el=document.createElement('div');el.id='fieldRewardDemo';el.className='field-reward-demo';
+  el.innerHTML=`<div class="field-reward-demo-card">
+    <button type="button" class="field-reward-demo-close" onclick="document.getElementById('fieldRewardDemo')?.remove()">×</button>
+    <div class="demo-lotus">⛰️</div>
+    <div class="demo-kicker">SANSA NOTE · MOUNTAIN FIELD REWARD</div>
+    <h2>${escapeHtml(d.name)}<br>현장 인증 보상</h2>
+    <div class="demo-grid">
+      <span><b>${first?'+1':'✓'}</b><small>${first?'등반 인증':'재등반'}</small></span>
+      <span><b>印</b><small>현장 도장</small></span>
+      <span><b>📜</b><small>인증서</small></span>
+    </div>
+    <div class="demo-badge">${escapeHtml(reward.badge)}</div>
+    <p>이 화면은 미리보기입니다.<br><b>실제 현장 위치 인증 성공 시</b> 보상이 기록됩니다.</p>
+    <button type="button" onclick="document.getElementById('fieldRewardDemo')?.remove();document.getElementById('mountainVerifyBtn')?.scrollIntoView({behavior:'smooth',block:'center'});">확인</button>
+  </div>`;
+  el.addEventListener('click',e=>{if(e.target===el)el.remove();});
+  document.body.appendChild(el);
+}
+function resolveMountainVerifyTarget(d,id){
+  return new Promise((resolve,reject)=>{
+    const lat=Number(d.fixedLat||d.lat), lng=Number(d.fixedLng||d.lng);
+    if(Number.isFinite(lat)&&Number.isFinite(lng)){resolve({lat,lng});return;}
+    ensureKakao(ready=>{
+      if(!ready){reject(new Error('map-not-ready'));return;}
+      const places=new kakao.maps.services.Places();
+      const finishSearch=(q,fallback)=>{
+        places.keywordSearch(q,(data,status)=>{
+          if(status===kakao.maps.services.Status.OK&&data&&data[0]){
+            const lat=parseFloat(data[0].y),lng=parseFloat(data[0].x);
+            if(Number.isFinite(lat)&&Number.isFinite(lng)){
+              updateMountainDestination(id,{lat,lng});
+              if(mountainDestinations[id]) mountainDestinations[id]=Object.assign({},mountainDestinations[id],{lat,lng});
+              resolve({lat,lng});
+            }else reject(new Error('coords'));
+          }else if(fallback){
+            finishSearch(d.name,false);
+          }else reject(new Error('not-found'));
+        });
+      };
+      finishSearch(d.name+' '+(d.locationHint||d.region||''),true);
+    });
+  });
+}
+function closeMountainAchievement(){document.getElementById('mountainAchievement')?.remove();}
+function openMountainCertificate(){
+  const d=currentMountainDetailId?mountainDestinations[currentMountainDetailId]:null;
+  closeMountainAchievement();
+  if(!d)return;
+  document.getElementById('mountainCertificate')?.remove();
+  const n=verifiedMountainCount();
+  const el=document.createElement('div');el.id='mountainCertificate';el.className='field-reward-demo';
+  el.innerHTML=`<div class="field-reward-demo-card" style="background:linear-gradient(160deg,#fbfff7,#e8f0df);border-color:#c8d8bd">
+    <button type="button" class="field-reward-demo-close" onclick="document.getElementById('mountainCertificate')?.remove()">×</button>
+    <div class="demo-lotus">🏔️</div>
+    <div class="demo-kicker">SANSA NOTE · MOUNTAIN CERTIFICATE</div>
+    <h2>${escapeHtml(d.name)}<br>현장 등반 인증서</h2>
+    <div class="demo-badge" style="background:#356e52">📍 위치 인증 완료 · ${new Date().toLocaleDateString('ko-KR')}</div>
+    <p><b>${escapeHtml(d.region||'')}</b>${d.height?` · ${escapeHtml(d.height)}`:''}<br>산사노트 현장 인증 산 ${n}곳</p>
+    <button type="button" onclick="document.getElementById('mountainCertificate')?.remove()">확인</button>
+  </div>`;
+  el.addEventListener('click',e=>{if(e.target===el)el.remove();});
+  document.body.appendChild(el);
+}
+function showMountainAchievement(info){
+  closeMountainAchievement();
+  if(typeof launchPilgrimPetals==='function') launchPilgrimPetals();
+  if(typeof softPilgrimageBell==='function') softPilgrimageBell();
+  try{navigator.vibrate&&navigator.vibrate([70,45,120]);}catch(e){}
+  const verified=verifiedMountainCount();
+  const regionCount=verifiedMountainRegionCount(info.region);
+  const first=!!info.firstVerified;
+  const distance=typeof info.distKm==='number'?Math.round(info.distKm*1000):null;
+  const accuracy=typeof info.accuracyM==='number'?Math.round(info.accuracyM):null;
+  const el=document.createElement('div');el.id='mountainAchievement';el.className='pilgrim-achievement';
+  el.innerHTML=`<div class="pilgrim-achievement-card">
+    <button class="pilgrim-ach-close" type="button" onclick="closeMountainAchievement()">×</button>
+    <div class="pilgrim-ach-lotus">🏔️</div>
+    <div class="pilgrim-ach-kicker">SANSA NOTE · MOUNTAIN</div>
+    <h2>${escapeHtml(info.name)}<br>현장 인증 완료</h2>
+    <p class="pilgrim-ach-message">오늘 직접 올라 도착한 산을 현장에서 인증했습니다.<br>이 등반이 나의 산 기록에 남습니다.</p>
+    <div class="pilgrim-ach-stamp">現場<br>認證</div>
+    <div class="pilgrim-ach-stats">
+      <div class="pilgrim-ach-stat"><b>${first?'+1':'✓'}</b><span>${first?'첫 현장 등반':'재등반 인증'}</span></div>
+      <div class="pilgrim-ach-stat"><b>${verified}</b><span>현장 인증 산</span></div>
+      <div class="pilgrim-ach-stat"><b>${regionCount}</b><span>${escapeHtml(info.region||'지역')} 인증</span></div>
+    </div>
+    <div class="pilgrim-ach-badge">${first?`🏔 새 기록 · ${escapeHtml(info.name)} 첫 현장 등반`:`🔁 ${escapeHtml(info.name)} ${info.repeatCount}번째 등반`}</div>
+    <div class="pilgrim-ach-meta">${distance!==null?`기준 지점 약 ${distance}m · `:''}${accuracy!==null?`GPS ±${accuracy}m · `:''}${new Date().toLocaleDateString('ko-KR')}</div>
+    <div class="pilgrim-ach-actions"><button class="ghost" type="button" onclick="closeMountainAchievement()">기록 계속하기</button><button class="primary" type="button" onclick="openMountainCertificate()">📸 인증서 보기</button></div>
+  </div>`;
+  el.addEventListener('click',e=>{if(e.target===el)closeMountainAchievement();});
+  document.body.appendChild(el);
+}
+
+/* 기존 함수와 이름은 같게 두되, 산 기록 로직만 확장 */
+function addMountainVisit(withLocation=false){
+  if(!currentMountainDetailId) return;
+  if(localMode){ promptGuestLoginRequired(); return; }
+  const id=currentMountainDetailId;
+  const d=mountainDestinations[id];
+  const noteEl=document.getElementById('mVisitNoteInput');
+  const note=noteEl?noteEl.value.trim():'';
+
+  function saveMountainRecord(verified,distKm,accuracyM){
+    const vid=newId();
+    const oldVisits=Object.assign({},mountainDestinations[id].visits||{});
+    const hadVerifiedBefore=Object.values(oldVisits).some(v=>v&&v.verified);
+    const visits=Object.assign({},oldVisits);
+    visits[vid]={
+      ts:Date.now(),note,verified:!!verified,
+      verifiedDistanceM:verified&&typeof distKm==='number'?Math.max(0,Math.round(distKm*1000)):null,
+      gpsAccuracyM:verified&&typeof accuracyM==='number'?Math.round(accuracyM):null
+    };
+    const patch={visits};
+    if((mountainDestinations[id].stage||0)<1)patch.stage=1;
+    updateMountainDestination(id,patch);
+    mountainDestinations[id]=Object.assign({},mountainDestinations[id],patch);
+    renderMountainVisits(visits);
+    renderMountainStepper(mountainDestinations[id].stage||0);
+    renderMountainRewardPreview(mountainDestinations[id]);
+    if(noteEl)noteEl.value='';
+    render();
+    const repeatCount=Object.keys(visits).length;
+    if(verified){
+      showMountainAchievement({
+        name:mountainDestinations[id].name,
+        region:mountainDestinations[id].region,
+        distKm,accuracyM,
+        firstVerified:!hadVerifiedBefore,
+        repeatCount
+      });
+    }else{
+      showCelebration('⛰️ 등반 기록 저장!','오늘의 산행, 잘 남겨뒀어요');
+    }
+  }
+
+  if(!withLocation){saveMountainRecord(false);return;}
+  if(!navigator.geolocation){showToast('이 브라우저는 위치 인증을 지원하지 않아요.');return;}
+
+  const verifyBtn=document.getElementById('mountainVerifyBtn');
+  if(verifyBtn){verifyBtn.disabled=true;verifyBtn.innerHTML='📡 위치 확인 중...<small>잠시만 기다려주세요</small>';}
+  resolveMountainVerifyTarget(d,id).then(target=>{
+    if(typeof startPilgrimageGpsCheck==='function')startPilgrimageGpsCheck(d.name);
+    return verifyTemplePosition(target.lat,target.lng,{
+      radiusM:700,
+      timeoutMs:14000,
+      onProgress(info){if(typeof updatePilgrimageGpsCheck==='function')updatePilgrimageGpsCheck(info);}
+    });
+  }).then(info=>{
+    if(typeof finishPilgrimageGpsCheck==='function')finishPilgrimageGpsCheck();
+    if(info.ok){
+      saveMountainRecord(true,info.distanceM/1000,info.accuracyM);
+    }else{
+      const m=Math.round(info.distanceM||0),acc=Math.round(info.accuracyM||0);
+      showToast(`현장 인증 거리가 아직 멀어요 · 약 ${m>=1000?(m/1000).toFixed(1)+'km':m+'m'}${acc?` · GPS ±${acc}m`:''}`);
+    }
+  }).catch(err=>{
+    if(typeof finishPilgrimageGpsCheck==='function')finishPilgrimageGpsCheck();
+    const msg=err&&err.code===1
+      ?'위치 권한이 꺼져 있어요. Safari 설정에서 위치 접근을 허용한 뒤 다시 눌러주세요.'
+      :(String(err&&err.message||'').includes('map')||String(err&&err.message||'').includes('not-found'))
+        ?'이 산의 기준 위치를 아직 찾지 못했어요. 지도를 한 번 연 뒤 다시 시도해주세요.'
+        :'현재 위치를 정확히 잡지 못했어요. 하늘이 보이는 곳에서 잠시 뒤 다시 눌러주세요.';
+    showToast(msg);
+  }).finally(()=>{
+    if(verifyBtn){verifyBtn.disabled=false;verifyBtn.innerHTML='📍 현장 인증하기<small>도착 후 보상 열기</small>';}
+  });
+}
+
+/* iOS Safari의 기본 pinch 제스처가 커스텀 사진 확대를 가로채지 않게 라이트박스에서만 차단 */
+(function installLightboxSafariZoomFix(){
+  function active(){
+    const o=document.getElementById('lightboxOverlay');
+    return !!(o&&o.classList.contains('show'));
+  }
+  ['gesturestart','gesturechange','gestureend'].forEach(type=>{
+    document.addEventListener(type,e=>{if(active())e.preventDefault();},{passive:false,capture:true});
+  });
+})();
 </script>
 
 </body>
