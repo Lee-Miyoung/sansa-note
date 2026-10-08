@@ -25087,7 +25087,10 @@ const LEVEL_TIERS = [
 ];
 
 function computeVisitedCount(){
-  return Object.values(destinations).filter(d=>(d.stage||0)>=1).length;
+  // 108 순례 컬렉션과 메인 '다녀온 절'이 반드시 같은 기준을 사용합니다.
+  return (typeof getVisitedTempleRecords==='function')
+    ? getVisitedTempleRecords().length
+    : Object.values(destinations||{}).filter(d=>(Number(d.stage)||0)>=1).length;
 }
 
 function renderLevelBadge(){
@@ -26269,12 +26272,23 @@ function getVisibleTempleEntries(){
 }
 
 function computeStats(){
-  const list = getVisibleTempleEntries().map(([id,d])=>d);
-  const visited = list.filter(d=>(Number(d.stage)||0)>=1).length;
-  const shot = list.filter(d=>(Number(d.stage)||0)>=2).length;
-  const unvisited = list.filter(d=>(Number(d.stage)||0)===0).length;
+  const visibleList = getVisibleTempleEntries().map(([id,d])=>d);
+
+  // 방문/기록 숫자는 108 순례 컬렉션과 같은 '사찰명 기준 1곳'으로 통일합니다.
+  // hiddenFromList 처리된 과거 방문 기록도 순례 실적에서는 사라지지 않습니다.
+  const bestByName = new Map();
+  Object.values(destinations||{}).forEach(d=>{
+    if(!d || !d.name) return;
+    const prev=bestByName.get(d.name);
+    const score=(Number(d.stage)||0)*100000 + Number(d.updatedAt||d.createdAt||0);
+    if(!prev || score>prev.score) bestByName.set(d.name,{d,score});
+  });
+  const canonical=[...bestByName.values()].map(x=>x.d);
+  const visited = canonical.filter(d=>(Number(d.stage)||0)>=1).length;
+  const shot = canonical.filter(d=>(Number(d.stage)||0)>=2).length;
+  const unvisited = visibleList.filter(d=>(Number(d.stage)||0)===0).length;
   return {
-    total:list.length,
+    total:canonical.length,
     visited,
     shot,
     unvisited
@@ -27120,10 +27134,10 @@ function renderMountainPhotos(photos){
 
   const storageReady = isFirebaseStorageReady();
   const info=getPhotoUsageInfo();
-  const uploadAllowed = storageReady && !globalPhotoUploadPaused && info.remaining>0;
+  const uploadAllowed = storageReady && !globalPhotoUploadPaused && (info.unlimited || info.remaining>0);
   html += uploadAllowed
     ? `<div class="upload-tile" onclick="document.getElementById('mPhotoInput').click()">+</div>`
-    : `<div class="upload-tile" style="opacity:.5;font-size:10px;line-height:1.3;text-align:center;padding:6px;" onclick="canStartPhotoUpload(true)&&document.getElementById('mPhotoInput').click()" title="${escapeAttr(photoUploadGuardMessage()||'사진 저장소를 확인해주세요')}">사진 추가<br>${globalPhotoUploadPaused?'일시정지':info.remaining<=0?'50장 사용':'설정 필요'}</div>`;
+    : `<div class="upload-tile" style="opacity:.5;font-size:10px;line-height:1.3;text-align:center;padding:6px;" onclick="canStartPhotoUpload(true)&&document.getElementById('mPhotoInput').click()" title="${escapeAttr(photoUploadGuardMessage()||'사진 저장소를 확인해주세요')}">사진 추가<br>${globalPhotoUploadPaused?'일시정지':(!info.unlimited&&info.remaining<=0)?'50장 사용':'설정 필요'}</div>`;
 
   wrap.innerHTML = html;
   if(window.Sortable){
@@ -27146,17 +27160,18 @@ async function uploadMountainPhotos(event){
   if(files.length===0 || !currentMountainDetailId) return;
   if(!canStartPhotoUpload(true)){ event.target.value=''; return; }
 
+  const adminUnlimited=isAdminUser();
   const currentCount = countMyLoadedPhotos();
-  const remaining = Math.max(0, FREE_PHOTO_LIMIT - currentCount);
-  if(remaining <= 0){
+  const remaining = adminUnlimited ? Number.POSITIVE_INFINITY : Math.max(0, FREE_PHOTO_LIMIT - currentCount);
+  if(!adminUnlimited && remaining <= 0){
     event.target.value='';
     showToast(`무료 사진 ${FREE_PHOTO_LIMIT}장을 모두 사용했어요.`);
     refreshVisiblePhotoUploadStatus();
     return;
   }
 
-  const selected=files.slice(0,remaining);
-  if(files.length > remaining){
+  const selected=adminUnlimited ? files : files.slice(0,remaining);
+  if(!adminUnlimited && files.length > remaining){
     showToast(`무료회원은 사찰·산 사진을 합쳐 ${FREE_PHOTO_LIMIT}장까지 저장할 수 있어요. 이번에는 ${remaining}장만 올릴게요.`);
   }
 
@@ -27170,7 +27185,7 @@ async function uploadMountainPhotos(event){
       showToast(globalPhotoUploadPauseMessage);
       break;
     }
-    if(countMyLoadedPhotos() >= FREE_PHOTO_LIMIT){
+    if(!adminUnlimited && countMyLoadedPhotos() >= FREE_PHOTO_LIMIT){
       showToast(`무료 사진 ${FREE_PHOTO_LIMIT}장을 모두 사용했어요.`);
       break;
     }
@@ -28164,10 +28179,10 @@ function renderPhotos(photos){
 
   const storageReady = isFirebaseStorageReady();
   const info=getPhotoUsageInfo();
-  const uploadAllowed = storageReady && !globalPhotoUploadPaused && info.remaining>0;
+  const uploadAllowed = storageReady && !globalPhotoUploadPaused && (info.unlimited || info.remaining>0);
   html += uploadAllowed
     ? `<div class="upload-tile" onclick="triggerUpload()">+</div>`
-    : `<div class="upload-tile" style="opacity:.5;font-size:10px;line-height:1.3;text-align:center;padding:6px;" onclick="triggerUpload()" title="${escapeAttr(photoUploadGuardMessage()||'사진 저장소를 확인해주세요')}">사진 추가<br>${globalPhotoUploadPaused?'일시정지':info.remaining<=0?'50장 사용':'설정 필요'}</div>`;
+    : `<div class="upload-tile" style="opacity:.5;font-size:10px;line-height:1.3;text-align:center;padding:6px;" onclick="triggerUpload()" title="${escapeAttr(photoUploadGuardMessage()||'사진 저장소를 확인해주세요')}">사진 추가<br>${globalPhotoUploadPaused?'일시정지':(!info.unlimited&&info.remaining<=0)?'50장 사용':'설정 필요'}</div>`;
 
   wrap.innerHTML = html;
   if(window.Sortable){
@@ -28606,17 +28621,18 @@ async function uploadPhotos(evt){
   if(!files.length || !currentDetailId) return;
   if(!canStartPhotoUpload(true)){ evt.target.value=''; return; }
 
+  const adminUnlimited=isAdminUser();
   const currentCount = countMyLoadedPhotos();
-  const remaining = Math.max(0, FREE_PHOTO_LIMIT - currentCount);
-  if(remaining <= 0){
+  const remaining = adminUnlimited ? Number.POSITIVE_INFINITY : Math.max(0, FREE_PHOTO_LIMIT - currentCount);
+  if(!adminUnlimited && remaining <= 0){
     evt.target.value='';
     showToast(`무료 사진 ${FREE_PHOTO_LIMIT}장을 모두 사용했어요.`);
     refreshVisiblePhotoUploadStatus();
     return;
   }
 
-  const selected = files.slice(0, remaining);
-  if(files.length > remaining){
+  const selected = adminUnlimited ? files : files.slice(0, remaining);
+  if(!adminUnlimited && files.length > remaining){
     showToast(`무료회원은 사찰·산 사진을 합쳐 ${FREE_PHOTO_LIMIT}장까지 저장할 수 있어요. 이번에는 ${remaining}장만 올릴게요.`);
   }
 
@@ -28630,7 +28646,7 @@ async function uploadPhotos(evt){
       showToast(globalPhotoUploadPauseMessage);
       break;
     }
-    if(countMyLoadedPhotos() >= FREE_PHOTO_LIMIT){
+    if(!adminUnlimited && countMyLoadedPhotos() >= FREE_PHOTO_LIMIT){
       showToast(`무료 사진 ${FREE_PHOTO_LIMIT}장을 모두 사용했어요.`);
       break;
     }
@@ -29046,14 +29062,17 @@ function photoUploadControlRef(){
 }
 function getPhotoUsageInfo(){
   const used=countMyLoadedPhotos();
-  return {used, limit:FREE_PHOTO_LIMIT, remaining:Math.max(0, FREE_PHOTO_LIMIT-used)};
+  if(isAdminUser()){
+    return {used, limit:null, remaining:Number.POSITIVE_INFINITY, unlimited:true};
+  }
+  return {used, limit:FREE_PHOTO_LIMIT, remaining:Math.max(0, FREE_PHOTO_LIMIT-used), unlimited:false};
 }
 function photoUploadGuardMessage(){
   if(globalPhotoUploadPaused){
     return globalPhotoUploadPauseMessage || '현재 사진 업로드가 잠시 중단되어 있어요. 잠시 후 다시 이용해주세요.';
   }
   const info=getPhotoUsageInfo();
-  if(info.remaining<=0){
+  if(!info.unlimited && info.remaining<=0){
     return `무료회원 사진 ${info.limit}장을 모두 사용했어요. 기존 사진을 삭제하면 다시 올릴 수 있어요.`;
   }
   return '';
@@ -29079,6 +29098,12 @@ function photoUploadStatusHtml(){
     return `<div class="photo-upload-status">🔐 사진 저장은 Google 로그인 후 이용할 수 있어요.</div>`;
   }
   const info=getPhotoUsageInfo();
+  if(info.unlimited){
+    if(globalPhotoUploadPaused){
+      return `<div class="photo-upload-status paused"><strong>⏸ 전체 사진 업로드가 일시정지 중이에요.</strong><br>${escapeHtml(globalPhotoUploadPauseMessage)}<br><small>관리자 사진 ${info.used}장 저장 중 · 수량 제한 없음</small></div>`;
+    }
+    return `<div class="photo-upload-status"><strong>👑 관리자 사진 업로드 · 수량 제한 없음</strong><br>사진은 자동으로 웹용 크기로 줄여 저장해요.<br><small>현재 ${info.used}장 저장 중</small></div>`;
+  }
   const pct=Math.min(100, Math.round((info.used/info.limit)*100));
   if(globalPhotoUploadPaused){
     return `<div class="photo-upload-status paused"><strong>⏸ 사진 업로드가 잠시 쉬는 중이에요.</strong><br>${escapeHtml(globalPhotoUploadPauseMessage)}<div class="photo-usage-meter"><span style="width:${pct}%"></span></div><small>내 사진 ${info.used}/${info.limit}장</small></div>`;
@@ -29100,7 +29125,7 @@ function refreshVisiblePhotoUploadStatus(){
   const myEl=document.getElementById('adminMyPhotoCount');
   if(myEl){
     const info=getPhotoUsageInfo();
-    myEl.textContent=`${info.used} / ${info.limit}`;
+    myEl.textContent=info.unlimited ? `${info.used}장 · 무제한` : `${info.used} / ${info.limit}`;
   }
 }
 function startPhotoUploadControlListener(){
@@ -29204,7 +29229,9 @@ function updatePhotoStoragePlanStatus(){
     return;
   }
   if(isFirebaseStorageReady()){
-    el.innerHTML=`Firebase Storage에 연결되어 있어요.<br>• 무료회원: 사찰·산 사진 합계 <b>${FREE_PHOTO_LIMIT}장</b><br>• 현재 사용: <b>${info.used}/${FREE_PHOTO_LIMIT}장</b><br>• 큰 사진은 저장 전에 자동 압축<br>• 원본 사진은 휴대폰에 별도 보관`;
+    el.innerHTML=info.unlimited
+      ? `Firebase Storage에 연결되어 있어요.<br>• <b>관리자 계정: 사진 수량 제한 없음</b><br>• 현재 저장: <b>${info.used}장</b><br>• 큰 사진은 저장 전에 자동 압축<br>• 원본 사진은 휴대폰에 별도 보관`
+      : `Firebase Storage에 연결되어 있어요.<br>• 무료회원: 사찰·산 사진 합계 <b>${FREE_PHOTO_LIMIT}장</b><br>• 현재 사용: <b>${info.used}/${FREE_PHOTO_LIMIT}장</b><br>• 큰 사진은 저장 전에 자동 압축<br>• 원본 사진은 휴대폰에 별도 보관`;
   }else{
     el.textContent='Firebase Storage 연결을 확인하고 있어요.';
   }
@@ -29243,7 +29270,7 @@ async function refreshAdminStats(){
   if(!isAdminUser()) return;
   const my=countMyLoadedPhotos();
   const myEl=document.getElementById('adminMyPhotoCount');
-  if(myEl) myEl.textContent=`${my} / ${FREE_PHOTO_LIMIT}`;
+  if(myEl) myEl.textContent=isAdminUser()?`${my}장 · 무제한`:`${my} / ${FREE_PHOTO_LIMIT}`;
 
   const storageBadge=document.getElementById('adminStorageBadge');
   if(storageBadge){
@@ -29300,7 +29327,7 @@ async function refreshAdminStats(){
             ${r.email && r.email!==r.label ? `<br><small>${escapeHtml(r.email)}</small>` : ''}
             <br><small>가입 ${formatAdminDate(r.joinedAt)} · 최근 ${formatAdminDate(r.lastSeenAt)}</small>
           </span>
-          <span style="text-align:right;"><b>${r.c}/${FREE_PHOTO_LIMIT}장</b><br><small>${r.uid===currentUid?'관리자':'회원'}</small></span>
+          <span style="text-align:right;"><b>${r.uid===currentUid&&isAdminUser()?`${r.c}장 · 무제한`:`${r.c}/${FREE_PHOTO_LIMIT}장`}</b><br><small>${r.uid===currentUid&&isAdminUser()?'관리자':'회원'}</small></span>
         </div>`).join('')
         : '<div style="font-size:11px;color:var(--ink-soft);padding:8px 0;">아직 회원 데이터가 없어요.</div>';
     }
