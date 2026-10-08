@@ -19038,6 +19038,77 @@ body{scroll-padding-top:calc(var(--global-nav-h) + 12px)!important}
 }
 </style>
 
+
+<style id="beat-rapid-tap-fix-css">
+/* BEAT SHOOTER ONLY — rapid tap/audio visibility/overlay fix */
+#beatLabOverlay{
+  z-index:20000!important;
+  inset:0!important;
+  touch-action:manipulation!important;
+  overscroll-behavior:none!important;
+}
+#beatLabOverlay .modal{
+  position:relative!important;
+  z-index:1!important;
+  max-height:100dvh!important;
+}
+#beatLabOverlay .modal-head{
+  position:relative!important;
+  z-index:30!important;
+}
+#beatLabOverlay .beat-pad{
+  touch-action:manipulation!important;
+  -webkit-tap-highlight-color:transparent!important;
+  user-select:none!important;
+  -webkit-user-select:none!important;
+}
+#beatLabOverlay .beat-audio-simple{
+  min-width:0!important;
+  gap:10px!important;
+}
+#beatLabOverlay .beat-audio-simple #beatAudioState{
+  display:flex!important;
+  align-items:center!important;
+  min-width:92px!important;
+  color:#effff8!important;
+  font-size:14px!important;
+  line-height:1!important;
+  font-weight:900!important;
+  letter-spacing:-.01em!important;
+  text-shadow:0 1px 8px rgba(0,0,0,.65)!important;
+  opacity:1!important;
+}
+#beatLabOverlay #beatSoundToggle{
+  min-width:70px!important;
+  height:38px!important;
+  padding:0 18px!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  border-radius:999px!important;
+  background:linear-gradient(135deg,#65ff9e,#18e6b4)!important;
+  border:1px solid rgba(255,255,255,.72)!important;
+  color:#062d23!important;
+  font-size:15px!important;
+  font-weight:1000!important;
+  letter-spacing:.04em!important;
+  opacity:1!important;
+  text-shadow:none!important;
+  box-shadow:0 0 0 2px rgba(73,255,167,.12),0 0 20px rgba(47,255,164,.32)!important;
+}
+#beatLabOverlay #beatSoundToggle.off{
+  background:linear-gradient(135deg,#ffb0b0,#ff7272)!important;
+  color:#4a1111!important;
+  box-shadow:0 0 0 2px rgba(255,90,90,.10),0 0 16px rgba(255,90,90,.20)!important;
+}
+@media(max-width:700px){
+  #beatLabOverlay{padding:0!important;}
+  #beatLabOverlay .modal{height:100dvh!important;max-height:100dvh!important;}
+  #beatLabOverlay .beat-audio-simple #beatAudioState{min-width:76px!important;font-size:12px!important;}
+  #beatLabOverlay #beatSoundToggle{min-width:58px!important;height:34px!important;padding:0 12px!important;font-size:13px!important;}
+}
+</style>
+
 </head>
 <body>
 
@@ -31784,21 +31855,66 @@ function goSiteNav(target){
       }
     }, {passive:false});
 
-    // 게임 안에서 빠른 더블탭 확대 방지
-    let lastTouchEnd = 0;
-    overlay.addEventListener('touchend', function(e){
-      if(!overlay.classList.contains('show')) return;
-      const now = Date.now();
-      if(now - lastTouchEnd <= 320){
-        e.preventDefault();
-      }
-      lastTouchEnd = now;
-    }, {passive:false});
+    // 빠른 연타를 막지 않도록 touchend 자체는 취소하지 않습니다.
   }
   if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, {once:true});
   else init();
 })();
 
+</script>
+
+
+<script id="beat-rapid-tap-fix-js">
+/* BEAT SHOOTER ONLY — fast consecutive taps must fire immediately. */
+(function installBeatRapidTapFix(){
+  function bind(){
+    const overlay=document.getElementById('beatLabOverlay');
+    if(!overlay || overlay.dataset.rapidTapFix==='1') return;
+    overlay.dataset.rapidTapFix='1';
+
+    overlay.querySelectorAll('.beat-pad').forEach(function(btn){
+      const weapon=btn.dataset.weapon;
+      if(!weapon) return;
+
+      // Remove the delayed synthetic click path. Pointer-down is immediate on iOS/Android/desktop.
+      btn.removeAttribute('onclick');
+      btn.dataset.lastBeatPointer='0';
+
+      btn.addEventListener('pointerdown',function(e){
+        if(!overlay.classList.contains('show')) return;
+        if(e.pointerType==='mouse' && e.button!==0) return;
+        e.preventDefault();
+        btn.dataset.lastBeatPointer=String(Date.now());
+        try{
+          if(typeof directBeatGestureTone==='function') directBeatGestureTone();
+          playBeat(weapon,btn);
+        }catch(err){console.error(err);}
+      },{passive:false});
+
+      // Keyboard accessibility only. Pointer-generated click is intentionally ignored.
+      btn.addEventListener('click',function(e){
+        const elapsed=Date.now()-Number(btn.dataset.lastBeatPointer||0);
+        if(elapsed<700){e.preventDefault();e.stopPropagation();return;}
+        if(e.detail===0){
+          e.preventDefault();
+          try{playBeat(weapon,btn);}catch(err){console.error(err);}
+        }
+      },true);
+    });
+
+    // Prevent pinch zoom, but DO NOT cancel touchend: cancelling touchend was eating fast taps.
+    ['gesturestart','gesturechange','gestureend'].forEach(function(type){
+      overlay.addEventListener(type,function(e){
+        if(overlay.classList.contains('show')) e.preventDefault();
+      },{passive:false});
+    });
+    overlay.addEventListener('touchmove',function(e){
+      if(overlay.classList.contains('show') && e.touches && e.touches.length>1) e.preventDefault();
+    },{passive:false});
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',bind,{once:true});
+  else bind();
+})();
 </script>
 
 </body>
