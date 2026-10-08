@@ -17681,6 +17681,37 @@ body{scroll-padding-top:calc(var(--global-nav-h) + 12px)!important}
   #triviaBannerWrap .trivia-banner b{font-size:15px!important}
 }
 
+
+/* READY-UPLOAD FINAL PATCH */
+.hero-stats .stat-art{opacity:.62!important;filter:saturate(1.05) contrast(1.02)!important;}
+.hero-stats .stat-recorded .stat-art{opacity:.60!important;}
+.hero-stats .stat-unvisited .stat-art{opacity:.64!important;}
+.hero-journey-panel .hero-util-btn.util-course{background:#f3c66d!important;border-color:#d9a84a!important;color:#4c3316!important;}
+.hero-journey-panel .hero-util-btn.util-features{background:#e9def6!important;border-color:#cdb5e5!important;color:#4d3567!important;}
+/* 마음 쉬어가기 4개 완전 동일 높이 */
+.hero-experience .hip-quick-btn{height:154px!important;min-height:154px!important;}
+@media(max-width:700px){.hero-experience .hip-quick-btn{height:154px!important;min-height:154px!important;}}
+/* 필터 컨트롤 한 줄 */
+#mainFilterbar .filterbar-inner{display:flex!important;flex-wrap:nowrap!important;align-items:center!important;gap:8px!important;overflow-x:auto!important;scrollbar-width:none!important;}
+#mainFilterbar .filterbar-inner::-webkit-scrollbar{display:none!important;}
+#mainFilterbar .filterbar-inner>*{flex:0 0 auto!important;}
+#mainFilterbar #stageFilter{min-width:160px!important;max-width:190px!important;}
+/* 퀴즈 + 단풍 코스 카드 균형 */
+#approvedActionRow{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important;}
+#approvedActionRow .quiz-banner,#approvedActionRow .season-banner{height:88px!important;min-height:88px!important;padding:12px 14px!important;border-radius:16px!important;overflow:hidden!important;}
+#approvedActionRow .quiz-banner-main,#approvedActionRow .season-banner>span{font-size:13px!important;line-height:1.35!important;max-width:72%!important;}
+#approvedActionRow .btn{min-width:76px!important;padding:9px 11px!important;font-size:11px!important;}
+#approvedActionRow .season-banner{position:relative!important;background:linear-gradient(90deg,#fff8eb 0%,#fff6e8 60%,rgba(255,246,232,.82) 100%)!important;}
+#approvedActionRow .season-banner::after{content:''!important;position:absolute!important;right:-8px!important;bottom:-8px!important;width:150px!important;height:100px!important;background:url('./season-autumn-temple.png') no-repeat right bottom/contain!important;opacity:.72!important;pointer-events:none!important;}
+#approvedActionRow .season-banner>*{position:relative!important;z-index:2!important;}
+@media(max-width:700px){
+ #approvedActionRow{gap:9px!important;}
+ #approvedActionRow .quiz-banner,#approvedActionRow .season-banner{height:92px!important;min-height:92px!important;padding:10px!important;}
+ #approvedActionRow .quiz-banner-main,#approvedActionRow .season-banner>span{font-size:11px!important;max-width:68%!important;}
+ #approvedActionRow .btn{min-width:62px!important;padding:8px 8px!important;font-size:10px!important;}
+ #approvedActionRow .season-banner::after{width:110px!important;height:82px!important;opacity:.62!important;}
+}
+
 </style>
 </head>
 <body>
