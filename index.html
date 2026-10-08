@@ -17702,7 +17702,7 @@ body{scroll-padding-top:calc(var(--global-nav-h) + 12px)!important}
 #approvedActionRow .quiz-banner-main,#approvedActionRow .season-banner>span{font-size:13px!important;line-height:1.35!important;max-width:72%!important;}
 #approvedActionRow .btn{min-width:76px!important;padding:9px 11px!important;font-size:11px!important;}
 #approvedActionRow .season-banner{position:relative!important;background:linear-gradient(90deg,#fff8eb 0%,#fff6e8 60%,rgba(255,246,232,.82) 100%)!important;}
-#approvedActionRow .season-banner::after{content:''!important;position:absolute!important;right:-8px!important;bottom:-8px!important;width:150px!important;height:100px!important;background:url('./season-autumn-temple.png') no-repeat right bottom/contain!important;opacity:.72!important;pointer-events:none!important;}
+#approvedActionRow .season-banner::after{content:''!important;position:absolute!important;right:-8px!important;bottom:-8px!important;width:150px!important;height:100px!important;background:url('./season-autumn.png') no-repeat right bottom/contain!important;opacity:.72!important;pointer-events:none!important;}
 #approvedActionRow .season-banner>*{position:relative!important;z-index:2!important;}
 @media(max-width:700px){
  #approvedActionRow{gap:9px!important;}
@@ -18120,6 +18120,112 @@ body{scroll-padding-top:calc(var(--global-nav-h) + 12px)!important}
     min-width:0 !important;
   }
 }
+
+
+/* ======================================================================
+   MY PAGE INLINE LOGIN + MONTHLY SEASON + SEMANTIC FEATURE ART
+   ====================================================================== */
+
+/* My Page: guest login lives inside the feature page, no blocking modal */
+#settingsOverlay .settings-account-card{
+  position:relative!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) auto!important;
+  gap:10px 16px!important;
+  align-items:center!important;
+  padding:18px 18px!important;
+  border-radius:18px!important;
+  background:linear-gradient(135deg,#fffdf8 0%,#f8f5ed 100%)!important;
+}
+#settingsOverlay .settings-account-card>div{min-width:0!important;}
+#settingsOverlay #settingsAccountTitle{
+  font-family:'Noto Serif KR','Nanum Myeongjo',serif!important;
+  font-size:20px!important;
+  line-height:1.15!important;
+  color:#1e312b!important;
+}
+#settingsOverlay #accountInfo{
+  margin:7px 0 0!important;
+  max-width:620px!important;
+  font-size:12.5px!important;
+  line-height:1.6!important;
+  color:#665f56!important;
+}
+#settingsOverlay #guestSettingsLoginBtn{
+  min-width:190px!important;
+  height:44px!important;
+  padding:0 18px!important;
+  border:0!important;
+  border-radius:13px!important;
+  background:#3f6e5e!important;
+  color:#fff!important;
+  font-size:13px!important;
+  font-weight:900!important;
+  box-shadow:0 5px 0 #315849!important;
+}
+#settingsOverlay .settings-guest-browse{
+  grid-column:1 / -1!important;
+  justify-self:start!important;
+  border:0!important;
+  padding:2px 0!important;
+  background:transparent!important;
+  color:#66726c!important;
+  font-size:11.5px!important;
+  font-weight:750!important;
+  cursor:pointer!important;
+}
+@media(max-width:620px){
+  #settingsOverlay .settings-account-card{
+    grid-template-columns:1fr!important;
+    padding:15px!important;
+  }
+  #settingsOverlay #guestSettingsLoginBtn{
+    width:100%!important;
+    min-width:0!important;
+  }
+}
+
+/* seasonal card uses the PNG selected by month */
+#approvedActionRow .season-banner::after{
+  background:var(--season-art) no-repeat right bottom/contain!important;
+  width:148px!important;
+  height:100px!important;
+  opacity:.72!important;
+}
+@media(max-width:620px){
+  #approvedActionRow .season-banner::after{
+    width:100px!important;
+    height:78px!important;
+    opacity:.58!important;
+  }
+}
+
+/* My Page feature art: match the meaning of each feature */
+#settingsOverlay .sf-album::after{background-image:url('./card-random-temple.png')!important;}
+#settingsOverlay .sf-badge::after{background-image:url('./card-course-temple.png')!important;}
+#settingsOverlay .sf-passport::after{background-image:url('./card-quiz-map.png')!important;}
+#settingsOverlay .sf-book::after{background-image:url('./card-copy-brush.png')!important;}
+#settingsOverlay .sf-prayer::after{background-image:url('./card-chant-beads.png')!important;}
+#settingsOverlay .sf-etiquette::after{background-image:url('./hero-monk.png')!important;}
+#settingsOverlay .sf-glossary::after{background-image:url('./card-copy-brush.png')!important;}
+#settingsOverlay .sf-vow::after{background-image:url('./card-vow-brush.png')!important;}
+#settingsOverlay .sf-copy::after{background-image:url('./card-copy-brush.png')!important;}
+#settingsOverlay .sf-quiz::after{background-image:url('./card-quiz-map.png')!important;}
+#settingsOverlay .sf-photo::after{background-image:none!important;}
+#settingsOverlay .sf-contact::after{background-image:none!important;}
+#settingsOverlay .sf-dark::after{background-image:none!important;}
+
+#settingsOverlay .settings-feature::after{
+  width:88px!important;
+  height:72px!important;
+  right:-7px!important;
+  bottom:-7px!important;
+  opacity:.68!important;
+}
+#settingsOverlay .sf-etiquette::after{width:68px!important;height:76px!important;opacity:.62!important;}
+#settingsOverlay .sf-prayer::after{width:86px!important;height:68px!important;}
+#settingsOverlay .sf-passport::after{width:90px!important;height:70px!important;}
+#settingsOverlay .sf-book::after{width:92px!important;height:72px!important;}
 
 </style>
 </head>
@@ -18728,8 +18834,9 @@ body{scroll-padding-top:calc(var(--global-nav-h) + 12px)!important}
           <b id="settingsAccountTitle">계정</b>
           <p id="accountInfo">로그인 정보를 불러오는 중...</p>
         </div>
-        <button class="settings-login-btn" id="guestSettingsLoginBtn" type="button" onclick="closeSettings();openLoginOverlay();">Google 로그인</button>
+        <button class="settings-login-btn" id="guestSettingsLoginBtn" type="button" onclick="googleLogin()">G&nbsp;&nbsp;Google로 시작하기</button>
         <button class="settings-logout-btn" id="settingsLogoutBtn" type="button" onclick="doLogout()" style="display:none;">로그아웃</button>
+        <button class="settings-guest-browse" id="guestBrowseHint" type="button" onclick="document.querySelector('.settings-section-title')?.scrollIntoView({behavior:'smooth',block:'start'});">로그인하지 않고 계속 둘러보기 ↓</button>
       </div>
 
       <button class="settings-reset-link" id="resetGuestBtn" type="button" onclick="resetGuestData()" style="display:none;">↻ 이 기기의 게스트 목록 초기화</button>
@@ -20841,11 +20948,7 @@ function mergeAllWithMaster(destObj){
 
 
 function openHeroAccountAction(){
-  if(auth && auth.currentUser && !localMode){
-    openSettings();
-  }else{
-    openLoginOverlay();
-  }
+  openSettings();
 }
 function syncHeroAccountButton(){
   const label=document.getElementById('heroLoginLabel');
@@ -20861,18 +20964,20 @@ function updateAccountInfo(){
   const resetBtn=document.getElementById('resetGuestBtn');
   const loginBtn=document.getElementById('guestSettingsLoginBtn');
   const logoutBtn=document.getElementById('settingsLogoutBtn');
+  const browseHint=document.getElementById('guestBrowseHint');
   const loggedIn=!!(auth && auth.currentUser && !localMode);
 
   if(resetBtn) resetBtn.style.display=localMode?'block':'none';
   if(loginBtn) loginBtn.style.display=loggedIn?'none':'inline-flex';
   if(logoutBtn) logoutBtn.style.display=loggedIn?'inline-flex':'none';
+  if(browseHint) browseHint.style.display=loggedIn?'none':'inline-flex';
 
   if(loggedIn){
     if(title) title.textContent='내 계정';
     if(el) el.textContent=`${auth.currentUser.email} 계정으로 기록을 안전하게 저장하고 있어요.`;
   }else{
-    if(title) title.textContent='둘러보기 모드';
-    if(el) el.textContent='로그인하면 방문기록·메모·사진을 계정에 저장하고 다른 기기에서도 이어볼 수 있어요.';
+    if(title) title.textContent='산사노트';
+    if(el) el.textContent='전국의 절을 기록하는 나만의 순례 노트. 로그인하면 어느 기기에서든 방문기록·메모·사진을 이어서 볼 수 있어요.';
   }
   syncHeroAccountButton();
 }
@@ -24601,16 +24706,27 @@ function openCertificate(key){
 
 function checkSeasonBanner(){
   const month = new Date().getMonth()+1;
-  let key = null, label = null;
-  if(month>=3 && month<=4){ key='cherry'; label='지금이 딱 벚꽃철이에요 🌸'; }
-  else if(month>=10 && month<=11){ key='autumn'; label='지금이 딱 단풍철이에요 🍁'; }
+  const monthly = {
+    1:{title:'새해, 마음을 새로 여는 산사 🌅', sub:'"새해 마음정리 산사" 코스 어때요?', key:'forest', img:'season-winter.png'},
+    2:{title:'겨울 끝자락, 조용히 머물기 좋은 절 ❄️', sub:'"고요한 겨울 산사" 코스 어때요?', key:'gangwon', img:'season-winter.png'},
+    3:{title:'봄기운이 올라오는 산사 🌱', sub:'"봄꽃 따라 걷는 산사" 코스 어때요?', key:'jirisan', img:'season-spring.png'},
+    4:{title:'지금이 딱 벚꽃철이에요 🌸', sub:'"벚꽃 아래 걷기 좋은 산사" 코스 어때요?', key:'cherry', img:'season-spring.png'},
+    5:{title:'연등과 신록이 가장 예쁜 달 🪷', sub:'"초록빛 산사와 연등" 코스 어때요?', key:'unesco', img:'season-spring.png'},
+    6:{title:'초여름 숲길 따라 걷는 산사 🌿', sub:'"나무 그늘 좋은 산사" 코스 어때요?', key:'forest', img:'season-summer.png'},
+    7:{title:'한여름엔 계곡 산사 💧', sub:'"시원한 물소리 따라 걷는 절" 코스 어때요?', key:'gangwon', img:'season-summer.png'},
+    8:{title:'여름 끝, 시원한 산중 사찰 ⛰️', sub:'"바람 좋은 산사" 코스 어때요?', key:'forest', img:'season-summer.png'},
+    9:{title:'가을이 시작되는 산길 🍂', sub:'"초가을 산사 산책" 코스 어때요?', key:'gyeongbuk', img:'season-autumn.png'},
+    10:{title:'지금이 딱 단풍철이에요 🍁', sub:'"가을 단풍 명소 사찰" 코스 어때요?', key:'autumn', img:'season-autumn.png'},
+    11:{title:'늦가을, 고즈넉한 절이 좋은 때 🍁', sub:'"늦단풍과 고요한 산사" 코스 어때요?', key:'autumn', img:'season-autumn.png'},
+    12:{title:'한 해를 정리하며 찾는 산사 ❄️', sub:'"마음을 정리하기 좋은 겨울 절" 코스 어때요?', key:'gangwon', img:'season-winter.png'}
+  };
+  const item = monthly[month];
   const wrap = document.getElementById('seasonBannerWrap');
-  if(!key){ wrap.innerHTML=''; return; }
-  const pack = PACKS.find(p=>p.key===key);
-  wrap.innerHTML = `<button type="button" class="season-banner balanced-action-card whole-action-card" onclick="openPackOverlay();openPackDetail('${key}');" aria-label="${label} 코스 보기">
+  if(!wrap || !item) return;
+  wrap.innerHTML = `<button type="button" class="season-banner balanced-action-card whole-action-card" style="--season-art:url('./${item.img}')" onclick="openPackOverlay();openPackDetail('${item.key}');" aria-label="${item.title} 코스 보기">
     <div class="balanced-action-copy">
-      <b>${label}</b>
-      <small>"${pack.label}" 코스 어때요?</small>
+      <b>${item.title}</b>
+      <small>${item.sub}</small>
     </div>
     <span class="whole-action-arrow" aria-hidden="true">→</span>
   </button>`;
