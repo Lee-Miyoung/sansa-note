@@ -19231,6 +19231,41 @@ body{scroll-padding-top:calc(var(--global-nav-h) + 12px)!important}
 
 </style>
 
+
+<style>
+/* master search panel close control — scoped only to this inline result panel */
+#masterSearchPanel{position:relative;}
+#masterSearchPanel .master-search-close{
+  position:sticky;
+  top:calc(78px + env(safe-area-inset-top));
+  float:right;
+  z-index:50;
+  margin:8px 2px 4px 8px;
+  width:38px;
+  height:38px;
+  border-radius:999px;
+  border:1px solid #d9dfda;
+  background:rgba(255,255,255,.96);
+  color:#29483c;
+  font-size:20px;
+  font-weight:800;
+  line-height:1;
+  display:grid;
+  place-items:center;
+  box-shadow:0 4px 14px rgba(28,49,40,.12);
+  -webkit-tap-highlight-color:transparent;
+}
+#masterSearchPanel .master-search-close:active{transform:scale(.96);}
+@media(max-width:640px){
+  #masterSearchPanel .master-search-close{
+    top:calc(70px + env(safe-area-inset-top));
+    width:40px;
+    height:40px;
+    margin-right:2px;
+  }
+}
+</style>
+
 </head>
 <body>
 
@@ -26219,6 +26254,21 @@ async function addTempleToMainByName(name,evt){
     showToast('메인에 추가하지 못했어요.');
   }
 }
+function closeMasterSearchPanel(event){
+  if(event){ event.preventDefault(); event.stopPropagation(); }
+  const input=document.getElementById('searchBox');
+  const panel=document.getElementById('masterSearchPanel');
+  if(input) input.value='';
+  if(panel){
+    panel.style.display='none';
+    panel.innerHTML='';
+  }
+  heroQuickFilter='all';
+  const note=document.getElementById('heroListFilterNote');
+  if(note) note.style.display='none';
+  try{ render(); }catch(e){ console.warn(e); }
+}
+
 function renderMasterSearchResults(){
   const panel=document.getElementById('masterSearchPanel');
   const input=document.getElementById('searchBox');
@@ -26239,12 +26289,13 @@ function renderMasterSearchResults(){
 
   if(!matches.length){
     panel.style.display='block';
-    panel.innerHTML='<div class="master-search-empty">108개 기본 사찰에서도 검색 결과가 없어요.</div>';
+    panel.innerHTML='<button type="button" class="master-search-close" aria-label="108 사찰 전체 검색 닫기" onclick="closeMasterSearchPanel(event)">✕</button><div class="master-search-empty">108개 기본 사찰에서도 검색 결과가 없어요.</div>';
     return;
   }
 
   panel.style.display='block';
   panel.innerHTML=`
+    <button type="button" class="master-search-close" aria-label="108 사찰 전체 검색 닫기" onclick="closeMasterSearchPanel(event)">✕</button>
     <div class="master-search-head">
       <div><b>108 사찰 전체 검색</b><span>메인에 없는 절도 여기서 바로 추가할 수 있어요.</span></div>
       <span>${matches.length}곳</span>
