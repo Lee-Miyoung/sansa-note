@@ -16683,6 +16683,18 @@ header.hero,.hero-inner{position:relative!important}
 #bannerDuplexRow .btn{flex:0 0 auto!important;white-space:nowrap!important;padding:9px 12px!important;font-size:12px!important}
 @media(max-width:620px){#bannerDuplexRow{width:calc(100% - 20px)!important;gap:8px!important}#bannerDuplexRow .quiz-banner,#bannerDuplexRow .season-banner{height:92px!important;min-height:92px!important;padding:8px!important;gap:5px!important;flex-wrap:nowrap!important}#bannerDuplexRow .quiz-banner>span,#bannerDuplexRow .season-banner>span{font-size:10.5px!important;line-height:1.35!important}#bannerDuplexRow .btn{padding:7px 8px!important;font-size:10px!important}}
 
+
+/* 2026-10-08: hero artwork blend and readable compact function titles */
+#suggestBannerWrap{display:none!important}
+.hero-clean-art{background:transparent!important;overflow:visible!important}
+.hero-clean-bg{mask-image:radial-gradient(ellipse 78% 78% at 58% 58%,#000 43%,rgba(0,0,0,.82) 64%,transparent 100%)!important;-webkit-mask-image:radial-gradient(ellipse 78% 78% at 58% 58%,#000 43%,rgba(0,0,0,.82) 64%,transparent 100%)!important}
+#funBannerWrap .fun-banner-btn:not(.playlist) .fb-title{font-size:clamp(15px,1.3vw,18px)!important;line-height:1.25!important;letter-spacing:-.045em!important;font-weight:850!important;overflow:visible!important;text-overflow:clip!important;white-space:normal!important;word-break:keep-all!important}
+#funBannerWrap .fun-banner-btn:not(.playlist) .fb-sub{font-size:clamp(11px,1vw,13px)!important;line-height:1.3!important}
+@media(max-width:650px){
+ .hero-clean-bg{inset:0!important;width:100%!important;height:100%!important;object-fit:cover!important;opacity:.48!important;mask-image:linear-gradient(180deg,transparent 0%,rgba(0,0,0,.4) 12%,#000 34%,#000 75%,transparent 100%)!important;-webkit-mask-image:linear-gradient(180deg,transparent 0%,rgba(0,0,0,.4) 12%,#000 34%,#000 75%,transparent 100%)!important}
+ #funBannerWrap .fun-banner-btn:not(.playlist) .fb-title{font-size:clamp(13px,3.3vw,16px)!important;line-height:1.28!important}
+ #funBannerWrap .fun-banner-btn:not(.playlist) .fb-sub{font-size:11px!important}
+}
 </style>
 </head>
 <body>
@@ -19038,18 +19050,8 @@ function streakRef(){
    DATA LAYER (Firebase or LocalStorage fallback)
 ============================================================ */
 function renderSuggestBanner(){
-  const haveNames = new Set(Object.values(destinations).map(d=>d.name));
-  const pool = Object.values(MASTER_BY_NAME).filter(item=>!haveNames.has(item.name));
-  const wrap = document.getElementById('suggestBannerWrap');
-  if(pool.length===0){ wrap.innerHTML=''; return; }
-  const pick = pool[Math.floor(Math.random()*pool.length)];
-  wrap.innerHTML = `<div class="suggest-banner">
-    <div>
-      <div class="stitle">오늘 이런 곳은 어때요? — ${escapeHtml(pick.name)}</div>
-      <div class="sdesc">${escapeHtml(pick.desc||'')}</div>
-    </div>
-    <button class="btn btn-primary" style="padding:9px 16px;font-size:12.5px;flex-shrink:0;" onclick="addSuggested('${escapeHtml(pick.name).replace(/'/g,"\\'")}')">가보고 싶다에 추가</button>
-  </div>`;
+  const wrap=document.getElementById('suggestBannerWrap');
+  if(wrap){wrap.innerHTML='';wrap.style.display='none';}
 }
 
 function addSuggested(name){
@@ -29235,7 +29237,7 @@ document.addEventListener('click',e=>{const btn=e.target.closest('button');if(bt
     const suggestWrap = document.getElementById('suggestBannerWrap');
     const almostWrap = document.getElementById('almostBannerWrap');
     const stageFilter = document.getElementById('stageFilter');
-    if(homeGallery && quizWrap && suggestWrap){
+    if(homeGallery && quizWrap){
       let row = document.getElementById('bannerDuplexRow');
       if(!row){
         row = document.createElement('div');
@@ -29243,7 +29245,7 @@ document.addEventListener('click',e=>{const btn=e.target.closest('button');if(bt
         homeGallery.insertAdjacentElement('afterend', row);
       }
       if(quizWrap.parentElement !== row) row.appendChild(quizWrap);
-      if(suggestWrap && suggestWrap.parentElement !== row) row.appendChild(suggestWrap);
+      if(suggestWrap){suggestWrap.remove();}
       if(seasonWrap.parentElement === row) row.insertAdjacentElement('afterend',seasonWrap);
     }
     if(stageFilter && stageFilter.parentElement && almostWrap){
