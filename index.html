@@ -19792,6 +19792,25 @@ body{scroll-padding-top:calc(var(--global-nav-h) + 12px)!important}
 }
 </style>
 
+
+<style id="sansa-home-simple-v1">
+/* 홈을 단순하게: 코스 추가 / 기능 모음은 홈에서 제거
+   기능 자체는 '기능 찾기' 안에서 계속 접근 가능 */
+header.hero .hero-utility{
+  display:none !important;
+}
+
+/* 버튼이 빠진 자리의 불필요한 여백 정리 */
+header.hero .hero-experience{
+  margin-top:18px !important;
+}
+@media(max-width:700px){
+  header.hero .hero-experience{
+    margin-top:12px !important;
+  }
+}
+</style>
+
 </head>
 <body>
 
@@ -33798,7 +33817,8 @@ document.getElementById('allVisitRecordsOverlay')?.addEventListener('click',func
 const SANSA_GUIDE_ITEMS = [
   {icon:'寺',title:'절 둘러보기',desc:'지역·유명/숨은 절을 찾아보기',tags:'절 사찰 검색 여행 찾기',action:"goSiteNav('temple')"},
   {icon:'山',title:'산 둘러보기',desc:'산 목록과 등반 기록 보기',tags:'산 등산 검색 찾기',action:"goSiteNav('mountain')"},
-  {icon:'旅',title:'추천 코스',desc:'순례 코스와 진행률 보기',tags:'코스 여행 일정 순례',action:"goSiteNav('course')"},
+  {icon:'旅',title:'코스 추가',desc:'추천 순례길을 불러오거나 코스를 확인해요',tags:'코스 추가 추천 여행 일정 순례',action:"openPackOverlay()"},
+  {icon:'路',title:'코스 보기',desc:'내 코스와 진행률을 확인해요',tags:'코스 진행률 완주 여행',action:"goSiteNav('course')"},
   {icon:'⌖',title:'현장 인증 기록',desc:'절·산에서 성공한 인증 모아보기',tags:'현장 위치 gps 인증 도장 보상',action:"openPassportOverlay()"},
   {icon:'▤',title:'기록 모아보기',desc:'절 방문·산 등반 기록 한곳에서 보기',tags:'기록 방문 등반 삭제 수정 모아보기',action:"openAllVisitRecords('all')"},
   {icon:'▣',title:'순례 앨범',desc:'내가 올린 사진만 모아보기',tags:'사진 앨범 이미지',action:"openAlbumOverlay()"},
