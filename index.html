@@ -28216,7 +28216,7 @@ function addVisitRecord(withLocation){
   startPilgrimageGpsCheck(d.name);
   verifyTemplePosition(targetLat,targetLng,{
     radiusM:500,
-    timeoutMs:14000,
+    timeoutMs:35000,
     onProgress(info){ updatePilgrimageGpsCheck(info); }
   }).then(info=>{
     finishPilgrimageGpsCheck();
@@ -32289,32 +32289,98 @@ function showFieldRewardPreviewOnly(){
 let pilgrimGpsWatchId=null;
 function verifyTemplePosition(targetLat,targetLng,opts={}){
   const radiusM=Number(opts.radiusM||500);
-  const timeoutMs=Number(opts.timeoutMs||14000);
+  const timeoutMs=Number(opts.timeoutMs||35000);
   return new Promise((resolve,reject)=>{
-    let done=false,best=null;
+    let done=false,best=null,lastError=null;
+    const started=Date.now();
+
     const finish=(value,error)=>{
-      if(done)return; done=true;
-      if(pilgrimGpsWatchId!==null){try{navigator.geolocation.clearWatch(pilgrimGpsWatchId);}catch(e){} pilgrimGpsWatchId=null;}
+      if(done)return;
+      done=true;
+      if(pilgrimGpsWatchId!==null){
+        try{navigator.geolocation.clearWatch(pilgrimGpsWatchId);}catch(e){}
+        pilgrimGpsWatchId=null;
+      }
       clearTimeout(timer);
       error?reject(error):resolve(value);
     };
+
+    const acceptPosition=pos=>{
+      if(done || !pos || !pos.coords)return;
+      const accuracyM=Math.max(0,Number(pos.coords.accuracy)||0);
+      const distanceM=haversineKm(
+        Number(pos.coords.latitude),
+        Number(pos.coords.longitude),
+        Number(targetLat),
+        Number(targetLng)
+      )*1000;
+
+      const info={
+        distanceM,
+        accuracyM,
+        ok:false,
+        latitude:Number(pos.coords.latitude),
+        longitude:Number(pos.coords.longitude),
+        ageMs:Math.max(0,Date.now()-(Number(pos.timestamp)||Date.now()))
+      };
+
+      // 거리와 정확도를 함께 보고 가장 믿을 만한 값을 유지
+      if(
+        !best ||
+        accuracyM < best.accuracyM ||
+        (accuracyM <= best.accuracyM + 35 && distanceM < best.distanceM)
+      ){
+        best=info;
+      }
+
+      if(typeof opts.onProgress==='function') opts.onProgress(info);
+
+      // 산에서는 GPS 오차가 커질 수 있어 실제 오차원과 인증 반경이 겹치면 허용.
+      // 단, 무한정 넓어지지 않도록 최대 180m까지만 보정.
+      const cushion=Math.min(180,accuracyM);
+      if(distanceM<=radiusM+cushion){
+        info.ok=true;
+        finish(info);
+      }
+    };
+
+    const onError=err=>{
+      lastError=err||lastError;
+      // iOS Safari는 산/계곡에서 일시적 POSITION_UNAVAILABLE 또는 TIMEOUT을
+      // 먼저 내보내는 경우가 있어 전체 제한시간까지는 바로 실패시키지 않는다.
+      if(err && err.code===1) finish(null,err); // 권한 거부만 즉시 종료
+    };
+
     const timer=setTimeout(()=>{
       if(best){
-        // A GPS circle overlapping the 500 m boundary is accepted up to a strict 120 m cushion.
-        const cushion=Math.min(120,Math.max(0,best.accuracyM||0));
+        const cushion=Math.min(180,Math.max(0,best.accuracyM||0));
         best.ok=best.distanceM<=radiusM+cushion;
         finish(best);
-      }else finish(null,{code:3,message:'timeout'});
+      }else{
+        finish(null,lastError||{code:3,message:'timeout'});
+      }
     },timeoutMs);
-    pilgrimGpsWatchId=navigator.geolocation.watchPosition(pos=>{
-      const accuracyM=Math.max(0,Number(pos.coords.accuracy)||0);
-      const distanceM=haversineKm(pos.coords.latitude,pos.coords.longitude,targetLat,targetLng)*1000;
-      const info={distanceM,accuracyM,ok:false};
-      if(!best || distanceM<best.distanceM || accuracyM<best.accuracyM) best=info;
-      if(typeof opts.onProgress==='function') opts.onProgress(info);
-      const cushion=Math.min(120,accuracyM);
-      if(distanceM<=radiusM+cushion){ info.ok=true; finish(info); }
-    },err=>finish(null,err),{enableHighAccuracy:true,maximumAge:0,timeout:timeoutMs});
+
+    // 1차: 최근 위치도 최대 15초까지 허용해 빠르게 화면에 좌표를 띄움
+    try{
+      navigator.geolocation.getCurrentPosition(
+        acceptPosition,
+        onError,
+        {enableHighAccuracy:false,maximumAge:15000,timeout:7000}
+      );
+    }catch(e){ lastError=e; }
+
+    // 2차: 동시에 고정밀 위치를 계속 받아 더 정확한 값으로 교체
+    try{
+      pilgrimGpsWatchId=navigator.geolocation.watchPosition(
+        acceptPosition,
+        onError,
+        {enableHighAccuracy:true,maximumAge:3000,timeout:12000}
+      );
+    }catch(e){
+      lastError=e;
+      if(!best) finish(null,e);
+    }
   });
 }
 function startPilgrimageGpsCheck(name){
@@ -32327,7 +32393,8 @@ function startPilgrimageGpsCheck(name){
 function updatePilgrimageGpsCheck(info){
   const el=document.getElementById('pilgrimGpsStatus'); if(!el||!info)return;
   const d=Math.round(info.distanceM||0), a=Math.round(info.accuracyM||0);
-  el.textContent=`사찰 중심까지 약 ${d<1000?d+'m':(d/1000).toFixed(1)+'km'} · GPS 정확도 ±${a}m`;
+  const label = a<=30 ? 'GPS 좋음' : a<=80 ? 'GPS 잡는 중' : 'GPS 신호 약함';
+  el.textContent=`${label} · 기준점까지 ${d<1000?d+'m':(d/1000).toFixed(1)+'km'} · 오차 ±${a}m`;
 }
 function finishPilgrimageGpsCheck(){
   if(pilgrimGpsWatchId!==null && navigator.geolocation){try{navigator.geolocation.clearWatch(pilgrimGpsWatchId);}catch(e){} pilgrimGpsWatchId=null;}
@@ -32617,7 +32684,7 @@ function addMountainVisit(withLocation=false){
       ?'위치 권한이 꺼져 있어요. Safari 설정에서 위치 접근을 허용한 뒤 다시 눌러주세요.'
       :(String(err&&err.message||'').includes('map')||String(err&&err.message||'').includes('not-found'))
         ?'이 산의 기준 위치를 아직 찾지 못했어요. 지도를 한 번 연 뒤 다시 시도해주세요.'
-        :'현재 위치를 정확히 잡지 못했어요. 하늘이 보이는 곳에서 잠시 뒤 다시 눌러주세요.';
+        :'GPS 신호를 아직 못 잡았어요. 아이폰의 정확한 위치를 켜고, 하늘이 보이는 곳에서 20~30초 머문 뒤 다시 눌러주세요.';
     showToast(msg);
   }).finally(()=>{
     if(verifyBtn){verifyBtn.disabled=false;verifyBtn.innerHTML='📍 현장 인증하기<small>도착 후 보상 열기</small>';}
