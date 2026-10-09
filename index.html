@@ -19482,6 +19482,148 @@ body{scroll-padding-top:calc(var(--global-nav-h) + 12px)!important}
 }
 </style>
 
+
+<style id="sansa-description-readability">
+/* =========================================================
+   설명글 가독성 확대
+   - 제목/숫자/버튼 크기는 유지
+   - 카드 높이를 해치지 않도록 1~2px 중심으로만 확대
+   ========================================================= */
+
+/* 공통 보조 설명 */
+.modal .sub,
+.map-note,
+.empty-note,
+.hero-next-level,
+.guest-save-callout,
+.home-tools-copy small,
+.sansa-easy-start-title small,
+.sansa-guide-item small,
+.settings-feature small,
+.hero-util-copy small,
+.hq-copy small,
+.fun-banner-btn .fb-sub,
+.card-desc,
+.photo-credit,
+.community-head p,
+.photo-policy-card p,
+.photo-policy-note,
+.contact-card p,
+.field-reward-preview p,
+.field-reward-note,
+.field-verified-date,
+.all-record-note,
+.all-record-date{
+  font-size:12px !important;
+  line-height:1.55 !important;
+}
+
+/* 카드 내부 설명은 공간을 넘지 않게 */
+.card-desc{
+  font-size:11.5px !important;
+  line-height:1.48 !important;
+  min-height:0 !important;
+}
+.fun-banner-btn .fb-sub{
+  font-size:11px !important;
+  line-height:1.4 !important;
+}
+.hq-copy small{
+  font-size:10.5px !important;
+  line-height:1.35 !important;
+}
+.hero-util-copy small{
+  font-size:11px !important;
+  line-height:1.35 !important;
+}
+.settings-feature small{
+  font-size:12px !important;
+  line-height:1.35 !important;
+}
+.sansa-easy-start-title small{
+  font-size:11px !important;
+}
+.sansa-guide-item small{
+  font-size:11px !important;
+}
+
+/* 홈의 설명형 배너 */
+.trivia-banner,
+.quiz-banner,
+.season-banner,
+.seedbanner,
+.explain108-banner{
+  font-size:12px !important;
+  line-height:1.5 !important;
+}
+
+/* 상세화면의 일반 설명문 */
+.detail-desc,
+.detail-copy,
+.detail-info,
+.visitor-tip,
+.nearby-sight,
+.activity-text,
+#detailDesc,
+#mountainDesc{
+  font-size:13px !important;
+  line-height:1.7 !important;
+}
+
+/* 모바일: 공간은 유지하면서 읽기만 편하게 */
+@media(max-width:700px){
+  .modal .sub,
+  .map-note,
+  .empty-note,
+  .guest-save-callout,
+  .home-tools-copy small,
+  .sansa-easy-start-title small,
+  .sansa-guide-item small,
+  .settings-feature small,
+  .hero-util-copy small,
+  .hq-copy small,
+  .fun-banner-btn .fb-sub,
+  .photo-policy-card p,
+  .contact-card p,
+  .field-reward-preview p,
+  .field-reward-note{
+    font-size:11.5px !important;
+    line-height:1.5 !important;
+  }
+
+  .card-desc{
+    font-size:11px !important;
+    line-height:1.45 !important;
+  }
+  .hq-copy small{font-size:10px !important;}
+  .fun-banner-btn .fb-sub{font-size:10.5px !important;}
+  .hero-util-copy small{font-size:10.5px !important;}
+  .settings-feature small{font-size:11.5px !important;}
+  .sansa-guide-item small{font-size:10.8px !important;}
+
+  .trivia-banner,
+  .quiz-banner,
+  .season-banner,
+  .seedbanner,
+  .explain108-banner{
+    font-size:11.5px !important;
+    line-height:1.45 !important;
+  }
+
+  .detail-desc,
+  .detail-copy,
+  .detail-info,
+  .visitor-tip,
+  .nearby-sight,
+  .activity-text,
+  #detailDesc,
+  #mountainDesc{
+    font-size:12.5px !important;
+    line-height:1.65 !important;
+  }
+}
+</style>
+
 </head>
 <body>
 
