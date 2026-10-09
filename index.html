@@ -32609,11 +32609,121 @@ function showMountainAchievement(info){
       <div class="pilgrim-ach-stat"><b>${regionCount}</b><span>${escapeHtml(info.region||'지역')} 인증</span></div>
     </div>
     <div class="pilgrim-ach-badge">${first?`🏔 새 기록 · ${escapeHtml(info.name)} 첫 현장 등반`:`🔁 ${escapeHtml(info.name)} ${info.repeatCount}번째 등반`}</div>
-    <div class="pilgrim-ach-meta">${distance!==null?`기준 지점 약 ${distance}m · `:''}${accuracy!==null?`GPS ±${accuracy}m · `:''}${new Date().toLocaleDateString('ko-KR')}</div>
+    <div class="pilgrim-ach-meta">${info.name==='지리산'?'지리산 현장권역 확인 · ':distance!==null?`기준 지점 약 ${distance}m · `:''}${accuracy!==null?`GPS ±${accuracy}m · `:''}${new Date().toLocaleDateString('ko-KR')}</div>
     <div class="pilgrim-ach-actions"><button class="ghost" type="button" onclick="closeMountainAchievement()">기록 계속하기</button><button class="primary" type="button" onclick="openMountainCertificate()">📸 인증서 보기</button></div>
   </div>`;
   el.addEventListener('click',e=>{if(e.target===el)closeMountainAchievement();});
   document.body.appendChild(el);
+}
+
+
+/* ============================================================
+   LARGE MOUNTAIN FIELD ZONES
+   큰 산은 '정상 한 점'이 아니라 실제 산권역으로 인증한다.
+   지리산은 전남·전북·경남에 걸쳐 있어 단일 기준점 방식이 부정확함.
+   ============================================================ */
+const MOUNTAIN_FIELD_ZONES = {
+  "지리산": {
+    label: "지리산 현장권역",
+    // 화엄사·성삼재·노고단·피아골·쌍계사·백무동·중산리·대원사 등
+    // 주요 지리산 탐방권역을 포함하는 보수적인 현장 범위
+    south: 35.215,
+    north: 35.465,
+    west: 127.465,
+    east: 127.835
+  }
+};
+
+function pointInsideMountainZone(lat,lng,zone){
+  return !!zone &&
+    lat >= zone.south && lat <= zone.north &&
+    lng >= zone.west && lng <= zone.east;
+}
+
+function distanceToMountainZoneMeters(lat,lng,zone){
+  if(pointInsideMountainZone(lat,lng,zone)) return 0;
+  const clampedLat=Math.max(zone.south,Math.min(zone.north,lat));
+  const clampedLng=Math.max(zone.west,Math.min(zone.east,lng));
+  return haversineKm(lat,lng,clampedLat,clampedLng)*1000;
+}
+
+function verifyMountainFieldPosition(d, target, opts={}){
+  const zone=MOUNTAIN_FIELD_ZONES[d?.name];
+  if(!zone){
+    return verifyTemplePosition(target.lat,target.lng,opts);
+  }
+
+  const timeoutMs=Number(opts.timeoutMs||35000);
+  return new Promise((resolve,reject)=>{
+    let done=false,best=null,lastError=null,watchId=null;
+
+    const finish=(value,error)=>{
+      if(done)return;
+      done=true;
+      if(watchId!==null){try{navigator.geolocation.clearWatch(watchId);}catch(e){}}
+      clearTimeout(timer);
+      error?reject(error):resolve(value);
+    };
+
+    const accept=pos=>{
+      if(done||!pos?.coords)return;
+      const lat=Number(pos.coords.latitude);
+      const lng=Number(pos.coords.longitude);
+      const accuracyM=Math.max(0,Number(pos.coords.accuracy)||0);
+      const inside=pointInsideMountainZone(lat,lng,zone);
+      const distanceM=distanceToMountainZoneMeters(lat,lng,zone);
+      const info={
+        ok:inside,
+        insideZone:inside,
+        zoneLabel:zone.label,
+        distanceM,
+        accuracyM,
+        latitude:lat,
+        longitude:lng
+      };
+
+      if(!best || accuracyM < best.accuracyM) best=info;
+
+      // 지리산 권역에서는 '기준점까지 거리' 대신 권역 안/밖을 표시
+      const status=document.getElementById('pilgrimGpsStatus');
+      if(status){
+        const a=Math.round(accuracyM);
+        status.textContent = inside
+          ? `지리산 현장권역 확인 · GPS 오차 ±${a}m`
+          : `지리산 권역 확인 중 · GPS 오차 ±${a}m`;
+      }
+
+      if(inside) finish(info);
+    };
+
+    const onError=err=>{
+      lastError=err||lastError;
+      if(err&&err.code===1) finish(null,err);
+    };
+
+    const timer=setTimeout(()=>{
+      if(best) finish(best);
+      else finish(null,lastError||{code:3,message:'timeout'});
+    },timeoutMs);
+
+    // 빠른 최근 위치 + 고정밀 위치를 동시에 사용
+    try{
+      navigator.geolocation.getCurrentPosition(
+        accept,onError,
+        {enableHighAccuracy:false,maximumAge:15000,timeout:7000}
+      );
+    }catch(e){lastError=e;}
+
+    try{
+      watchId=navigator.geolocation.watchPosition(
+        accept,onError,
+        {enableHighAccuracy:true,maximumAge:3000,timeout:12000}
+      );
+    }catch(e){
+      lastError=e;
+      if(!best) finish(null,e);
+    }
+  });
 }
 
 /* 기존 함수와 이름은 같게 두되, 산 기록 로직만 확장 */
@@ -32665,9 +32775,9 @@ function addMountainVisit(withLocation=false){
   if(verifyBtn){verifyBtn.disabled=true;verifyBtn.innerHTML='📡 위치 확인 중...<small>잠시만 기다려주세요</small>';}
   resolveMountainVerifyTarget(d,id).then(target=>{
     if(typeof startPilgrimageGpsCheck==='function')startPilgrimageGpsCheck(d.name);
-    return verifyTemplePosition(target.lat,target.lng,{
+    return verifyMountainFieldPosition(d,target,{
       radiusM:700,
-      timeoutMs:14000,
+      timeoutMs:35000,
       onProgress(info){if(typeof updatePilgrimageGpsCheck==='function')updatePilgrimageGpsCheck(info);}
     });
   }).then(info=>{
@@ -32676,7 +32786,11 @@ function addMountainVisit(withLocation=false){
       saveMountainRecord(true,info.distanceM/1000,info.accuracyM);
     }else{
       const m=Math.round(info.distanceM||0),acc=Math.round(info.accuracyM||0);
-      showToast(`현장 인증 거리가 아직 멀어요 · 약 ${m>=1000?(m/1000).toFixed(1)+'km':m+'m'}${acc?` · GPS ±${acc}m`:''}`);
+      if(MOUNTAIN_FIELD_ZONES[d?.name]){
+        showToast(`지리산 현장권역 밖으로 확인돼요${m?` · 권역까지 약 ${m>=1000?(m/1000).toFixed(1)+'km':m+'m'}`:''}${acc?` · GPS ±${acc}m`:''}`);
+      }else{
+        showToast(`현장 인증 거리가 아직 멀어요 · 약 ${m>=1000?(m/1000).toFixed(1)+'km':m+'m'}${acc?` · GPS ±${acc}m`:''}`);
+      }
     }
   }).catch(err=>{
     if(typeof finishPilgrimageGpsCheck==='function')finishPilgrimageGpsCheck();
