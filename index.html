@@ -20257,6 +20257,64 @@ header.hero .hero-experience{
 @media(max-width:700px){.catalog-list{grid-template-columns:1fr}.catalog-card{padding:11px}.catalog-copy b{font-size:13px}.catalog-copy small{font-size:10.5px}}
 </style>
 
+
+<style id="main-pinned-cards-style">
+.main-pinned-area{
+  max-width:1080px;
+  width:calc(100% - 48px);
+  margin:14px auto 10px;
+  padding:14px;
+  border:1px solid #ded5c8;
+  border-radius:18px;
+  background:linear-gradient(145deg,#fffdf8,#f8f4ec);
+  box-shadow:0 7px 18px rgba(52,43,34,.05);
+}
+.main-pinned-head{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:11px;
+}
+.main-pinned-head b{
+  display:block;
+  font-size:15px;
+  color:#2e5e4e;
+}
+.main-pinned-head small{
+  display:block;
+  margin-top:3px;
+  font-size:11px;
+  line-height:1.45;
+  color:#857b6f;
+}
+.main-pinned-grid{
+  margin:0!important;
+  padding:0!important;
+}
+.main-pinned-grid .card{
+  border-color:#d5c7ad;
+}
+.main-pinned-grid .card.just-added-main{
+  outline:3px solid rgba(201,150,69,.28);
+  animation:sansaMainAddedPulse 1.3s ease;
+}
+@keyframes sansaMainAddedPulse{
+  0%{transform:scale(.985);box-shadow:0 0 0 0 rgba(201,150,69,.35)}
+  55%{transform:scale(1.01);box-shadow:0 0 0 9px rgba(201,150,69,0)}
+  100%{transform:scale(1)}
+}
+@media(max-width:700px){
+  .main-pinned-area{
+    width:calc(100% - 28px);
+    margin:12px auto 8px;
+    padding:10px;
+  }
+  .main-pinned-head b{font-size:14px}
+  .main-pinned-head small{font-size:10.5px}
+}
+</style>
+
 </head>
 <body>
 
@@ -20523,6 +20581,17 @@ header.hero .hero-experience{
   <div class="hero-list-filter-note" id="heroListFilterNote" style="display:none;"></div>
   <div class="temple-catalog-panel" id="templeCatalogPanel" style="display:none;" aria-label="108 사찰 전체 목록"></div>
   <div class="master-search-panel" id="masterSearchPanel" style="display:none;"></div>
+
+  <section id="mainPinnedArea" class="main-pinned-area" style="display:none;">
+    <div class="main-pinned-head">
+      <div>
+        <b id="mainPinnedTitle">메인에 추가한 곳</b>
+        <small id="mainPinnedSub">전체 목록에서 추가한 곳이 여기에 바로 보여요.</small>
+      </div>
+    </div>
+    <div class="grid main-pinned-grid" id="mainPinnedGrid"></div>
+  </section>
+
   <main id="mainListArea">
     <div class="grid" id="grid"></div>
     <div class="empty-note" id="emptyNote" style="display:none;text-align:center;">
@@ -35918,6 +35987,218 @@ function renderCatalogOverlay(){
       history.replaceState({sansaHome:true,sansaInternal:false},'',location.href);
     }catch(e){}
   });
+})();
+</script>
+
+
+<script id="main-pinned-cards-fix-v7">
+(function(){
+  const TEMPLE_KEY='sansanote_main_pinned_temples_v7';
+  const MOUNTAIN_KEY='sansanote_main_pinned_mountains_v7';
+  let pinnedViewMode='temple';
+  let lastAddedName='';
+
+  function readNames(key){
+    try{
+      const a=JSON.parse(localStorage.getItem(key)||'[]');
+      return Array.isArray(a)?a.filter(Boolean):[];
+    }catch(e){return [];}
+  }
+  function writeNames(key,names){
+    try{localStorage.setItem(key,JSON.stringify([...new Set(names)]));}catch(e){}
+  }
+  function addName(key,name){
+    const a=readNames(key);
+    if(!a.includes(name))a.unshift(name);
+    else{
+      a.splice(a.indexOf(name),1);
+      a.unshift(name);
+    }
+    writeNames(key,a);
+  }
+
+  function bestTempleEntry(name){
+    const all=Object.entries(destinations||{}).filter(([id,d])=>d&&d.name===name);
+    if(!all.length)return null;
+    all.sort((a,b)=>{
+      const A=a[1],B=b[1];
+      const sa=(Number(A.stage)||0)*10000+Object.keys(A.visits||{}).length*100+Object.keys(A.photos||{}).length;
+      const sb=(Number(B.stage)||0)*10000+Object.keys(B.visits||{}).length*100+Object.keys(B.photos||{}).length;
+      return sb-sa;
+    });
+    return all[0];
+  }
+
+  function ensureTempleEntry(name){
+    let entry=bestTempleEntry(name);
+    if(entry){
+      const [id,d]=entry;
+      destinations[id]=Object.assign({},d,{
+        hiddenFromList:false,
+        hiddenAt:null,
+        hiddenTrayDismissed:false,
+        hiddenTrayDismissedAt:null
+      });
+      return [id,destinations[id]];
+    }
+
+    const master=(MASTER_BY_NAME||{})[name];
+    if(!master)return null;
+    const id='pin_t_'+Date.now()+'_'+Math.random().toString(36).slice(2,6);
+    destinations[id]=Object.assign({},master,{
+      stage:0,notes:'',photos:{},visits:{},
+      hiddenFromList:false,
+      hiddenAt:null,
+      hiddenTrayDismissed:false,
+      createdAt:Date.now()
+    });
+    return [id,destinations[id]];
+  }
+
+  function ensureMountainEntry(name){
+    try{if(typeof ensureMountainsSeeded==='function')ensureMountainsSeeded();}catch(e){}
+    let entry=Object.entries(mountainDestinations||{}).find(([id,d])=>d&&d.name===name);
+    if(entry)return entry;
+
+    const seed=(MOUNTAIN_SEED||[]).find(d=>d&&d.name===name);
+    if(!seed)return null;
+    const id='pin_m_'+Date.now()+'_'+Math.random().toString(36).slice(2,6);
+    mountainDestinations[id]=Object.assign({},seed,{
+      stage:0,notes:'',photos:{},visits:{},createdAt:Date.now()
+    });
+    return [id,mountainDestinations[id]];
+  }
+
+  window.renderMainPinnedCards=function(){
+    const area=document.getElementById('mainPinnedArea');
+    const grid=document.getElementById('mainPinnedGrid');
+    const title=document.getElementById('mainPinnedTitle');
+    const sub=document.getElementById('mainPinnedSub');
+    if(!area||!grid)return;
+
+    if(pinnedViewMode==='mountain'){
+      const names=readNames(MOUNTAIN_KEY);
+      const items=names.map(ensureMountainEntry).filter(Boolean);
+      if(!items.length){
+        area.style.display='none';
+        grid.innerHTML='';
+        return;
+      }
+      area.style.display='block';
+      if(title)title.textContent='⛰ 메인에 추가한 산';
+      if(sub)sub.textContent='산 전체 목록에서 선택한 산이 사진 카드로 여기에 표시돼요.';
+      grid.innerHTML=items.map(([id,d])=>renderMountainCard(id,d)).join('');
+      grid.querySelectorAll('.card').forEach(card=>{
+        card.onclick=()=>openMountainDetail(card.dataset.id);
+        const d=mountainDestinations[card.dataset.id];
+        if(d?.name===lastAddedName)card.classList.add('just-added-main');
+      });
+      try{schedulePhotoHydration('mountain',items);}catch(e){}
+      return;
+    }
+
+    const names=readNames(TEMPLE_KEY);
+    const items=names.map(ensureTempleEntry).filter(Boolean);
+    if(!items.length){
+      area.style.display='none';
+      grid.innerHTML='';
+      return;
+    }
+    area.style.display='block';
+    if(title)title.textContent='🛕 메인에 추가한 절';
+    if(sub)sub.textContent='108 사찰 목록에서 선택한 절이 사진 카드로 여기에 표시돼요.';
+    grid.innerHTML=items.map(([id,d])=>renderCard(id,d)).join('');
+    grid.querySelectorAll('.card').forEach(card=>{
+      card.onclick=()=>openDetail(card.dataset.id);
+      const d=destinations[card.dataset.id];
+      if(d?.name===lastAddedName)card.classList.add('just-added-main');
+    });
+    try{schedulePhotoHydration('temple',items);}catch(e){}
+  };
+
+  async function persistTempleVisible(id){
+    try{
+      if(localMode){
+        if(typeof persistLocal==='function')persistLocal();
+      }else if(currentUid && typeof destinationRef==='function'){
+        await destinationRef(id).update({
+          hiddenFromList:false,
+          hiddenAt:null,
+          hiddenTrayDismissed:false,
+          hiddenTrayDismissedAt:null
+        });
+      }
+    }catch(e){console.warn('pinned temple save deferred',e);}
+  }
+
+  window.showTempleOnMainFromCatalog=async function(name,evt){
+    if(evt){evt.preventDefault();evt.stopPropagation();}
+    const entry=ensureTempleEntry(name);
+    if(!entry){
+      showToast('사찰 정보를 찾지 못했어요.');
+      return;
+    }
+    addName(TEMPLE_KEY,name);
+    pinnedViewMode='temple';
+    lastAddedName=name;
+    closeCatalogOverlay();
+    await persistTempleVisible(entry[0]);
+    renderMainPinnedCards();
+
+    const area=document.getElementById('mainPinnedArea');
+    area?.scrollIntoView({behavior:'smooth',block:'start'});
+    showToast(`"${name}"이(가) 메인 사진 목록에 추가됐어요.`);
+  };
+
+  window.showMountainOnMainFromCatalog=function(name,evt){
+    if(evt){evt.preventDefault();evt.stopPropagation();}
+    const entry=ensureMountainEntry(name);
+    if(!entry){
+      showToast('산 정보를 찾지 못했어요.');
+      return;
+    }
+    addName(MOUNTAIN_KEY,name);
+    pinnedViewMode='mountain';
+    lastAddedName=name;
+    closeCatalogOverlay();
+    try{if(localMode&&typeof persistLocalMountains==='function')persistLocalMountains();}catch(e){}
+    renderMainPinnedCards();
+
+    const area=document.getElementById('mainPinnedArea');
+    area?.scrollIntoView({behavior:'smooth',block:'start'});
+    showToast(`"${name}"이(가) 메인 사진 목록에 추가됐어요.`);
+  };
+
+  /* 목록 창의 버튼을 이 확실한 메인 영역으로 연결 */
+  const oldRenderCatalog=window.renderCatalogOverlay;
+  window.renderCatalogOverlay=function(){
+    if(typeof oldRenderCatalog==='function')oldRenderCatalog();
+
+    const list=document.getElementById('catalogList');
+    if(!list)return;
+
+    // 기존 렌더 후 버튼만 안전하게 재연결하는 대신 전체 HTML은
+    // 기존 최신 renderCatalogOverlay가 이미 show...FromCatalog 함수를 호출하므로
+    // 함수 정의를 위에서 덮어쓴 것만으로 충분하다.
+  };
+
+  /* 홈 진입 시 마지막으로 본 메인 추가 영역도 보이게 */
+  const oldGoSiteNav=window.goSiteNav;
+  if(typeof oldGoSiteNav==='function'){
+    window.goSiteNav=function(target){
+      const r=oldGoSiteNav.apply(this,arguments);
+      if(target==='home'){
+        setTimeout(()=>renderMainPinnedCards(),80);
+      }
+      return r;
+    };
+  }
+
+  /* 페이지 로드시 절 메인 추가목록을 기본으로 표시 */
+  setTimeout(()=>{
+    pinnedViewMode='temple';
+    renderMainPinnedCards();
+  },250);
 })();
 </script>
 
