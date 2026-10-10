@@ -20529,6 +20529,107 @@ header.hero .hero-experience{
 }
 </style>
 
+
+<style id="catalog-layout-remove-fix-v9">
+/* =========================================================
+   1) 절/산 전체목록 사진을 무조건 왼쪽 고정
+   ========================================================= */
+#catalogOverlay .catalog-card{
+  display:grid !important;
+  grid-template-columns:72px minmax(0,1fr) auto !important;
+  grid-template-areas:"thumb copy actions" !important;
+  align-items:center !important;
+}
+#catalogOverlay .catalog-thumb{
+  grid-area:thumb !important;
+  width:72px !important;
+  height:66px !important;
+  min-width:72px !important;
+  min-height:66px !important;
+  margin:0 !important;
+  align-self:center !important;
+  overflow:hidden !important;
+  border-radius:11px !important;
+  position:relative !important;
+}
+#catalogOverlay .catalog-thumb > *{
+  position:static !important;
+  inset:auto !important;
+  width:100% !important;
+  height:100% !important;
+  min-height:0 !important;
+  max-height:none !important;
+  margin:0 !important;
+  object-fit:cover !important;
+  border-radius:0 !important;
+}
+#catalogOverlay .catalog-copy{
+  grid-area:copy !important;
+  min-width:0 !important;
+  align-self:center !important;
+}
+#catalogOverlay .catalog-actions{
+  grid-area:actions !important;
+  align-self:center !important;
+}
+
+/* =========================================================
+   2) 고정 상단 메뉴 아래에서 목록창 시작
+   - 제목/닫기 버튼이 가려지지 않게
+   ========================================================= */
+#catalogOverlay{
+  align-items:flex-start !important;
+  justify-content:center !important;
+  overflow-y:auto !important;
+  padding-top:92px !important;
+  padding-bottom:24px !important;
+  box-sizing:border-box !important;
+}
+#catalogOverlay .catalog-modal{
+  margin:0 auto !important;
+  max-height:calc(100dvh - 116px) !important;
+}
+#catalogOverlay .modal-head{
+  position:sticky !important;
+  top:0 !important;
+  z-index:8 !important;
+  background:#fcfaf6 !important;
+}
+#catalogOverlay .modal-body{
+  max-height:calc(100dvh - 190px) !important;
+}
+
+/* 더보기 메뉴 안의 빼기 버튼 */
+#catalogOverlay .catalog-more-menu .remove-main{
+  color:#9b4e43 !important;
+  font-weight:900 !important;
+}
+
+@media(max-width:700px){
+  #catalogOverlay{
+    padding-top:84px !important;
+    padding-left:8px !important;
+    padding-right:8px !important;
+  }
+  #catalogOverlay .catalog-modal{
+    width:100% !important;
+    max-height:calc(100dvh - 100px) !important;
+  }
+  #catalogOverlay .modal-body{
+    max-height:calc(100dvh - 174px) !important;
+  }
+  #catalogOverlay .catalog-card{
+    grid-template-columns:66px minmax(0,1fr) auto !important;
+  }
+  #catalogOverlay .catalog-thumb{
+    width:66px !important;
+    height:62px !important;
+    min-width:66px !important;
+    min-height:62px !important;
+  }
+}
+</style>
+
 </head>
 <body>
 
@@ -36548,6 +36649,155 @@ renderCatalogOverlay = function(){
     </div>`;
   }).join(''):'<div class="catalog-empty">검색 결과가 없어요.</div>';
 };
+</script>
+
+
+<script id="catalog-remove-main-fix-v9">
+(function(){
+  const TKEY='sansanote_main_pinned_temples_v7';
+  const MKEY='sansanote_main_pinned_mountains_v7';
+  const TVISIBLE='sansanote_main_visible_v4';
+
+  function readNames(key){
+    try{
+      const a=JSON.parse(localStorage.getItem(key)||'[]');
+      return Array.isArray(a)?a:[];
+    }catch(e){return [];}
+  }
+  function writeNames(key,a){
+    try{localStorage.setItem(key,JSON.stringify([...new Set(a)]));}catch(e){}
+  }
+  function removeName(key,name){
+    writeNames(key,readNames(key).filter(n=>n!==name));
+  }
+
+  window.removeTempleFromMainCatalog=async function(name,evt){
+    if(evt){evt.preventDefault();evt.stopPropagation();}
+
+    removeName(TKEY,name);
+    removeName(TVISIBLE,name);
+
+    const entries=Object.entries(destinations||{}).filter(([id,d])=>d&&d.name===name);
+    entries.forEach(([id,d])=>{
+      destinations[id]=Object.assign({},d,{
+        hiddenFromList:true,
+        hiddenAt:Date.now()
+      });
+    });
+
+    try{
+      if(localMode){
+        if(typeof persistLocal==='function')persistLocal();
+      }else if(currentUid && typeof destinationRef==='function'){
+        for(const [id] of entries){
+          try{await destinationRef(id).update({hiddenFromList:true,hiddenAt:Date.now()});}catch(e){}
+        }
+      }
+    }catch(e){console.warn(e);}
+
+    if(typeof renderMainPinnedCards==='function')renderMainPinnedCards();
+    if(typeof render==='function')render();
+    renderCatalogOverlay();
+    showToast(`"${name}"을(를) 메인 목록에서 뺐어요.`);
+  };
+
+  window.removeMountainFromMainCatalog=function(name,evt){
+    if(evt){evt.preventDefault();evt.stopPropagation();}
+
+    removeName(MKEY,name);
+
+    if(typeof renderMainPinnedCards==='function')renderMainPinnedCards();
+    renderCatalogOverlay();
+    showToast(`"${name}"을(를) 메인 목록에서 뺐어요.`);
+  };
+
+  function mountainPinned(name){
+    return readNames(MKEY).includes(name);
+  }
+  function templePinned(name){
+    return readNames(TKEY).includes(name) || (typeof isTempleOnMain==='function' && isTempleOnMain(name));
+  }
+
+  /* 최신 목록 렌더를 다시 정의:
+     사진은 왼쪽 / 보기 / ⋯ 안에 메인 추가·빼기 */
+  window.renderCatalogOverlay=function(){
+    const title=document.getElementById('catalogTitle');
+    const sub=document.getElementById('catalogSub');
+    const list=document.getElementById('catalogList');
+    const count=document.getElementById('catalogCount');
+    if(!list)return;
+
+    const q=(document.getElementById('catalogSearch')?.value||'').trim().toLowerCase();
+
+    if(catalogMode==='mountain'){
+      try{if(typeof ensureMountainsSeeded==='function')ensureMountainsSeeded();}catch(e){}
+      const all=getMountainCatalogData();
+      const filtered=all.filter(d=>{
+        const hay=[d.name,d.region,d.height,d.desc,d.tagline].filter(Boolean).join(' ').toLowerCase();
+        return !q||hay.includes(q);
+      });
+
+      if(title)title.textContent='⛰ 산 전체 목록';
+      if(sub)sub.textContent='사진과 지역만 보고 빠르게 찾아보세요.';
+      if(count)count.textContent=`${filtered.length}곳`;
+
+      list.innerHTML=filtered.length?filtered.map(d=>{
+        const visited=mountainVisitedByName(d.name);
+        const pinned=mountainPinned(d.name);
+        return `<div class="catalog-card ${visited?'visited':''}">
+          ${catalogThumbHtml(d,'mountain')}
+          <div class="catalog-copy">
+            <b>${escapeHtml(d.name)}</b>
+            <small>${escapeHtml(d.region||'')}${d.height?' · '+escapeHtml(String(d.height)):''}</small>
+            ${visited?'<span class="catalog-visited-chip">✓ 다녀온 산</span>':''}
+          </div>
+          <div class="catalog-actions">
+            <button class="catalog-view-btn" type="button" onclick="openMountainFromCatalog('${escapeAttr(d.name)}')">보기</button>
+            <button class="catalog-more-btn" type="button" onclick="toggleCatalogMore(this,event)">⋯</button>
+            <div class="catalog-more-menu">
+              ${pinned
+                ? `<button class="remove-main" type="button" onclick="removeMountainFromMainCatalog('${escapeAttr(d.name)}',event)">메인 목록에서 빼기</button>`
+                : `<button type="button" onclick="showMountainOnMainFromCatalog('${escapeAttr(d.name)}',event)">메인에 추가</button>`}
+            </div>
+          </div>
+        </div>`;
+      }).join(''):'<div class="catalog-empty">검색 결과가 없어요.</div>';
+      return;
+    }
+
+    const all=getTempleCatalogData();
+    const filtered=all.filter(d=>{
+      const hay=[d.name,d.region,d.desc,d.tagline].filter(Boolean).join(' ').toLowerCase();
+      return !q||hay.includes(q);
+    });
+
+    if(title)title.textContent='🛕 108 사찰 전체 목록';
+    if(sub)sub.textContent='사진과 지역만 보고 빠르게 찾아보세요.';
+    if(count)count.textContent=`${filtered.length}곳`;
+
+    list.innerHTML=filtered.length?filtered.map(d=>{
+      const visited=templeVisitedByName(d.name);
+      const pinned=templePinned(d.name);
+      return `<div class="catalog-card ${visited?'visited':''}">
+        ${catalogThumbHtml(d,'temple')}
+        <div class="catalog-copy">
+          <b>${escapeHtml(d.name)}</b>
+          <small>${escapeHtml(d.region||'')}</small>
+          ${visited?'<span class="catalog-visited-chip">✓ 다녀온 절</span>':''}
+        </div>
+        <div class="catalog-actions">
+          <button class="catalog-view-btn" type="button" onclick="openTempleFromCatalog('${escapeAttr(d.name)}')">보기</button>
+          <button class="catalog-more-btn" type="button" onclick="toggleCatalogMore(this,event)">⋯</button>
+          <div class="catalog-more-menu">
+            ${pinned
+              ? `<button class="remove-main" type="button" onclick="removeTempleFromMainCatalog('${escapeAttr(d.name)}',event)">메인 목록에서 빼기</button>`
+              : `<button type="button" onclick="showTempleOnMainFromCatalog('${escapeAttr(d.name)}',event)">메인에 추가</button>`}
+          </div>
+        </div>
+      </div>`;
+    }).join(''):'<div class="catalog-empty">검색 결과가 없어요.</div>';
+  };
+})();
 </script>
 
 </body>
