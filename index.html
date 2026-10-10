@@ -19811,6 +19811,26 @@ header.hero .hero-experience{
 }
 </style>
 
+
+<style id="pilgrim-collection-home-position-style">
+.pilgrim-collection-home-position{
+  max-width:1080px;
+  width:calc(100% - 48px);
+  margin:18px auto 12px;
+}
+.pilgrim-collection-home-position .hero-pilgrim-feature{
+  width:100% !important;
+  max-width:none !important;
+  margin:0 !important;
+}
+@media(max-width:700px){
+  .pilgrim-collection-home-position{
+    width:calc(100% - 28px);
+    margin:16px auto 10px;
+  }
+}
+</style>
+
 </head>
 <body>
 
@@ -19970,17 +19990,6 @@ header.hero .hero-experience{
     <div id="funBannerWrap"></div>
   </section>
 
-      <section class="hero-pilgrim-feature" aria-label="108 순례 컬렉션">
-        <button class="pilgrim-collection-chip pilgrim-collection-main" type="button" onclick="openPilgrimCollection()">
-          <span class="pc-lotus"><img src="./lotus-soft.png" alt="" aria-hidden="true"></span>
-          <span class="pc-copy">
-            <span class="pc-label">108 순례</span>
-            <span class="pc-title">순례 컬렉션</span>
-            <span class="pc-progress" id="heroLotusProgress">연꽃을 하나씩 피워보세요</span>
-          </span>
-          <span class="pc-arrow">→</span>
-        </button>
-      </section>
     </div>
   </header>
 
@@ -20018,6 +20027,20 @@ header.hero .hero-experience{
   <div id="suggestBannerWrap"></div>
   <div id="seasonBannerWrap"></div>
   <div id="almostBannerWrap"></div>
+
+  <div class="pilgrim-collection-home-position">
+    <section class="hero-pilgrim-feature" aria-label="108 순례 컬렉션">
+        <button class="pilgrim-collection-chip pilgrim-collection-main" type="button" onclick="openPilgrimCollection()">
+          <span class="pc-lotus"><img src="./lotus-soft.png" alt="" aria-hidden="true"></span>
+          <span class="pc-copy">
+            <span class="pc-label">108 순례</span>
+            <span class="pc-title">순례 컬렉션</span>
+            <span class="pc-progress" id="heroLotusProgress">연꽃을 하나씩 피워보세요</span>
+          </span>
+          <span class="pc-arrow">→</span>
+        </button>
+      </section>
+  </div>
 
   <div class="content-type-row" aria-label="콘텐츠 선택">
     <button class="content-type-btn active temple-tab" id="ctypeTemple" onclick="switchContentType('temple')">
