@@ -19831,6 +19831,28 @@ header.hero .hero-experience{
 }
 </style>
 
+
+<style id="visited-gold-border-fix">
+/* 다녀온 절 / 오른 산은 항상 금색 테두리 */
+#grid .card.visited-temple-card,
+#grid .card.visited-mountain-card{
+  border:2px solid #C99645 !important;
+  box-shadow:0 5px 16px rgba(201,150,69,.18) !important;
+}
+#grid .card.visited-temple-card:hover,
+#grid .card.visited-mountain-card:hover{
+  border-color:#B78534 !important;
+}
+</style>
+
+
+<style id="search-visited-gold-cue">
+#masterSearchPanel .master-search-row.search-visited{
+  border:1.5px solid #C99645 !important;
+  background:linear-gradient(90deg,#fffdf7,#fff9ea) !important;
+}
+</style>
+
 </head>
 <body>
 
@@ -26839,50 +26861,143 @@ function closeMasterSearchPanel(event){
   try{ render(); }catch(e){ console.warn(e); }
 }
 
+function getMountainEntriesByName(name){
+  return Object.entries(mountainDestinations||{}).filter(([id,d])=>d&&d.name===name);
+}
+function getMountainSeedByName(name){
+  return (MOUNTAIN_SEED||[]).find(d=>d&&d.name===name) || null;
+}
+async function openSearchTempleByName(name,evt){
+  if(evt){evt.preventDefault();evt.stopPropagation();}
+  const best=getBestTempleEntryByName(name);
+  if(best){
+    const [id]=best;
+    closeMasterSearchPanel();
+    openDetail(id);
+    return;
+  }
+  // 아직 개인 목록에 없는 기본 사찰이면 먼저 추가한 뒤 상세를 연다.
+  await addTempleToMainByName(name,evt);
+  const added=getBestTempleEntryByName(name);
+  if(added){
+    closeMasterSearchPanel();
+    openDetail(added[0]);
+  }
+}
+async function openSearchMountainByName(name,evt){
+  if(evt){evt.preventDefault();evt.stopPropagation();}
+  let entries=getMountainEntriesByName(name);
+  if(entries.length){
+    closeMasterSearchPanel();
+    openMountainDetail(entries[0][0]);
+    return;
+  }
+  const seed=getMountainSeedByName(name);
+  if(!seed){showToast('산 목록에서 찾지 못했어요.');return;}
+  const id=newId();
+  const data=Object.assign({},seed,{stage:0,notes:'',photos:{},visits:{},createdAt:Date.now()});
+  mountainDestinations[id]=data;
+  try{
+    if(localMode) persistLocalMountains();
+    else await mountainRef(id).set(data);
+  }catch(e){console.warn(e);}
+  closeMasterSearchPanel();
+  openMountainDetail(id);
+}
+
 function renderMasterSearchResults(){
   const panel=document.getElementById('masterSearchPanel');
   const input=document.getElementById('searchBox');
-  if(!panel||!input||contentType!=='temple'){
+  if(!panel||!input||contentType==='community'){
     if(panel) panel.style.display='none';
     return;
   }
+
   const q=input.value.trim().toLowerCase();
   if(!q){
     panel.style.display='none';
     panel.innerHTML='';
     return;
   }
-  const matches=Object.values(MASTER_BY_NAME||{}).filter(d=>{
-    const hay=[d.name,d.region,d.desc,d.activity,d.visitorTip,d.locationHint].filter(Boolean).join(' ').toLowerCase();
-    return hay.includes(q);
-  }).slice(0,12);
 
-  if(!matches.length){
+  if(contentType==='mountain'){
+    const byName=new Map();
+    (MOUNTAIN_SEED||[]).forEach(d=>{if(d?.name)byName.set(d.name,d);});
+    Object.values(mountainDestinations||{}).forEach(d=>{if(d?.name)byName.set(d.name,Object.assign({},byName.get(d.name)||{},d));});
+
+    const matches=[...byName.values()].filter(d=>{
+      const hay=[d.name,d.region,d.desc,d.activity,d.tagline,d.locationHint]
+        .filter(Boolean).join(' ').toLowerCase();
+      return hay.includes(q);
+    }).slice(0,20);
+
     panel.style.display='block';
-    panel.innerHTML='<button type="button" class="master-search-close" aria-label="108 사찰 전체 검색 닫기" onclick="closeMasterSearchPanel(event)">✕</button><div class="master-search-empty">108개 기본 사찰에서도 검색 결과가 없어요.</div>';
+    if(!matches.length){
+      panel.innerHTML='<button type="button" class="master-search-close" aria-label="산 검색 닫기" onclick="closeMasterSearchPanel(event)">✕</button><div class="master-search-empty">산 전체 목록에서도 검색 결과가 없어요.</div>';
+      return;
+    }
+
+    panel.innerHTML=`
+      <button type="button" class="master-search-close" aria-label="산 검색 닫기" onclick="closeMasterSearchPanel(event)">✕</button>
+      <div class="master-search-head">
+        <div><b>산 전체 검색</b><span>메인에 보이지 않는 산도 검색해서 바로 열 수 있어요.</span></div>
+        <span>${matches.length}곳</span>
+      </div>
+      <div class="master-search-results">
+        ${matches.map(d=>{
+          const stored=getMountainEntriesByName(d.name);
+          const best=stored.sort((a,b)=>(Number(b[1].stage)||0)-(Number(a[1].stage)||0))[0];
+          const visited=!!(best && (Number(best[1].stage)||0)>=1);
+          return `<div class="master-search-row ${visited?'search-visited':''}">
+            <div class="master-search-copy">
+              <b>${escapeHtml(d.name)}</b>
+              <span>${escapeHtml(d.region||'')} ${d.height?'· '+escapeHtml(d.height):''}${visited?' · 다녀온 산':''}</span>
+            </div>
+            <button type="button" onclick="openSearchMountainByName('${escapeAttr(d.name)}',event)">보기</button>
+          </div>`;
+        }).join('')}
+      </div>`;
     return;
   }
 
+  // 절: 메인에서 뺀 절도 destinations / MASTER_BY_NAME 전체에서 검색
+  const byName=new Map();
+  Object.values(MASTER_BY_NAME||{}).forEach(d=>{if(d?.name)byName.set(d.name,d);});
+  Object.values(destinations||{}).forEach(d=>{if(d?.name)byName.set(d.name,Object.assign({},byName.get(d.name)||{},d));});
+
+  const matches=[...byName.values()].filter(d=>{
+    const hay=[d.name,d.region,d.desc,d.activity,d.visitorTip,d.locationHint,d.nearbySight]
+      .filter(Boolean).join(' ').toLowerCase();
+    return hay.includes(q);
+  }).slice(0,20);
+
   panel.style.display='block';
+  if(!matches.length){
+    panel.innerHTML='<button type="button" class="master-search-close" aria-label="사찰 검색 닫기" onclick="closeMasterSearchPanel(event)">✕</button><div class="master-search-empty">사찰 전체 목록에서도 검색 결과가 없어요.</div>';
+    return;
+  }
+
   panel.innerHTML=`
-    <button type="button" class="master-search-close" aria-label="108 사찰 전체 검색 닫기" onclick="closeMasterSearchPanel(event)">✕</button>
+    <button type="button" class="master-search-close" aria-label="사찰 검색 닫기" onclick="closeMasterSearchPanel(event)">✕</button>
     <div class="master-search-head">
-      <div><b>108 사찰 전체 검색</b><span>메인에 없는 절도 여기서 바로 추가할 수 있어요.</span></div>
+      <div><b>사찰 전체 검색</b><span>메인에서 뺀 절도 검색해서 바로 열 수 있어요.</span></div>
       <span>${matches.length}곳</span>
     </div>
     <div class="master-search-results">
       ${matches.map(d=>{
+        const best=getBestTempleEntryByName(d.name);
+        const stored=!!best;
         const onMain=isTempleOnMain(d.name);
-        const stored=getTempleEntriesByName(d.name).length>0;
-        return `<div class="master-search-row">
+        const visited=!!(best && (Number(best[1].stage)||0)>=1);
+        return `<div class="master-search-row ${visited?'search-visited':''}">
           <div class="master-search-copy">
             <b>${escapeHtml(d.name)}</b>
-            <span>${escapeHtml(d.region||'')} · ${d.tag==='유명'?'대표 산사':'숨은 산사'}</span>
+            <span>${escapeHtml(d.region||'')} · ${d.tag==='유명'?'대표 산사':'숨은 산사'}${visited?' · 다녀온 절':''}${stored&&!onMain?' · 메인에서 뺀 절':''}</span>
           </div>
-          <button type="button" class="${onMain?'is-on-main':''}" ${onMain?'disabled':''}
-            onclick="addTempleToMainByName('${escapeAttr(d.name)}',event)">
-            ${onMain?'메인에 있음':stored?'메인에 다시 추가':'＋ 메인에 추가'}
-          </button>
+          <div style="display:flex;gap:6px;align-items:center;">
+            <button type="button" onclick="openSearchTempleByName('${escapeAttr(d.name)}',event)">보기</button>
+            ${stored&&!onMain?`<button type="button" onclick="addTempleToMainByName('${escapeAttr(d.name)}',event)">메인에 다시 추가</button>`:''}
+          </div>
         </div>`;
       }).join('')}
     </div>`;
