@@ -20699,6 +20699,110 @@ header.hero .hero-experience{
 /* 절/산 전체목록의 메인 추가/빼기 기능은 그대로 유지 */
 </style>
 
+
+<style id="explore-hub-scroll-notice-style-v13">
+/* =========================================================
+   홈 핵심 영역: 순례 컬렉션 + 절/산/커뮤니티 + 필터를 하나의 탐색 허브로
+   ========================================================= */
+.home-explore-hub{
+  max-width:1080px;
+  width:calc(100% - 40px);
+  margin:18px auto 20px;
+  padding:16px 16px 18px;
+  border:1.5px solid #d7c7a8;
+  border-radius:24px;
+  background:linear-gradient(145deg,#fffdf8 0%,#f7f2e7 100%);
+  box-shadow:0 14px 34px rgba(75,59,38,.09);
+  position:relative;
+  overflow:visible;
+}
+.home-explore-hub::before{
+  content:'';
+  position:absolute;
+  left:22px;right:22px;top:0;
+  height:4px;
+  border-radius:0 0 6px 6px;
+  background:linear-gradient(90deg,#2f705d,#c99645);
+  opacity:.9;
+}
+.home-explore-hub-head{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:12px;
+  padding:4px 4px 12px;
+}
+.home-explore-hub-head b{
+  display:block;
+  font-size:18px;
+  line-height:1.2;
+  color:#244f43;
+  letter-spacing:-.035em;
+}
+.home-explore-hub-head small{
+  display:block;
+  margin-top:5px;
+  font-size:12px;
+  line-height:1.45;
+  color:#7a7064;
+}
+.home-explore-hub .pilgrim-collection-home-position,
+.home-explore-hub .content-type-row,
+.home-explore-hub #mainFilterbar{
+  width:100% !important;
+  max-width:none !important;
+  margin-left:0 !important;
+  margin-right:0 !important;
+}
+.home-explore-hub .content-type-row{
+  margin-top:12px !important;
+}
+.home-explore-hub #mainFilterbar{
+  margin-top:10px !important;
+  border-radius:16px !important;
+  border:1px solid #e0d7c9 !important;
+  background:rgba(255,255,255,.72) !important;
+  box-shadow:none !important;
+}
+@media(max-width:700px){
+  .home-explore-hub{
+    width:calc(100% - 22px);
+    padding:12px 10px 14px;
+    margin:14px auto 16px;
+    border-radius:20px;
+  }
+  .home-explore-hub-head{padding:3px 5px 10px;}
+  .home-explore-hub-head b{font-size:16px;}
+  .home-explore-hub-head small{font-size:11px;}
+}
+
+/* 목록에서 빼기 안내를 모달 안에서도 확실히 보이게 */
+.catalog-action-notice{
+  display:none;
+  margin:0 0 9px;
+  padding:9px 12px;
+  border-radius:11px;
+  background:#eef6f1;
+  border:1px solid #b8d3c7;
+  color:#2f6755;
+  font-size:11.5px;
+  font-weight:800;
+  line-height:1.45;
+}
+.catalog-action-notice.show{display:block;}
+
+/* 홈 복귀 뒤 남는 모든 대표 스크롤 잠금 상태를 무력화 */
+html.sansa-home-scroll-ok,
+body.sansa-home-scroll-ok{
+  overflow-y:auto !important;
+  overflow-x:hidden !important;
+  position:static !important;
+  height:auto !important;
+  max-height:none !important;
+  touch-action:pan-y !important;
+}
+</style>
+
 </head>
 <body>
 
@@ -20896,6 +21000,14 @@ header.hero .hero-experience{
   <div id="seasonBannerWrap"></div>
   <div id="almostBannerWrap"></div>
 
+  <section class="home-explore-hub" id="homeExploreHub" aria-label="산사노트 탐색 허브">
+    <div class="home-explore-hub-head">
+      <div>
+        <b>순례 · 절 · 산 둘러보기</b>
+        <small>순례 현황을 보고, 절과 산을 바로 찾아보세요.</small>
+      </div>
+    </div>
+
   <div class="pilgrim-collection-home-position">
     <section class="hero-pilgrim-feature" aria-label="108 순례 컬렉션">
         <button class="pilgrim-collection-chip pilgrim-collection-main" type="button" onclick="openPilgrimCollection()">
@@ -20961,6 +21073,8 @@ header.hero .hero-experience{
       <button class="btn btn-primary" style="padding:7px 14px;font-size:12.5px;flex-shrink:0;" onclick="openCourseBuilder()">🧭 코스 만들기</button>
     </div>
   </div>
+
+  </section>
 
   <div class="hero-list-filter-note" id="heroListFilterNote" style="display:none;"></div>
   <div class="temple-catalog-panel" id="templeCatalogPanel" style="display:none;" aria-label="108 사찰 전체 목록"></div>
@@ -35920,6 +36034,7 @@ setTimeout(()=>{
         <input id="catalogSearch" class="searchbox" type="search" placeholder="이름이나 지역으로 검색" oninput="renderCatalogOverlay()">
         <span class="catalog-count" id="catalogCount"></span>
       </div>
+      <div class="catalog-action-notice" id="catalogActionNotice"></div>
       <div id="catalogList" class="catalog-list"></div>
     </div>
   </div>
@@ -36974,6 +37089,93 @@ document.getElementById('todayTriviaOverlay')?.addEventListener('click',function
   const observer=new MutationObserver(()=>move108Button());
   const target=document.getElementById('mainFilterbar');
   if(target)observer.observe(target,{childList:true,subtree:true});
+})();
+</script>
+
+
+<script id="explore-hub-scroll-notice-fix-v13">
+(function(){
+  function forceUnlockPageScroll(){
+    const h=document.documentElement, b=document.body;
+    ['sansa-overlay-locked','pack-modal-open','modal-open','overlay-open','no-scroll','noscroll','scroll-lock','locked','body-lock']
+      .forEach(c=>{h.classList.remove(c);b.classList.remove(c);});
+
+    h.classList.add('sansa-home-scroll-ok');
+    b.classList.add('sansa-home-scroll-ok');
+
+    ['overflow','overflow-y','position','top','left','right','bottom','width','height','max-height','touch-action']
+      .forEach(p=>{h.style.removeProperty(p);b.style.removeProperty(p);});
+
+    try{
+      document.querySelectorAll('.beat-vh-locked').forEach(el=>el.classList.remove('beat-vh-locked'));
+    }catch(e){}
+  }
+
+  function recoverHomeScroll(){
+    forceUnlockPageScroll();
+    requestAnimationFrame(forceUnlockPageScroll);
+    setTimeout(forceUnlockPageScroll,80);
+    setTimeout(forceUnlockPageScroll,220);
+    setTimeout(forceUnlockPageScroll,500);
+  }
+
+  // 기존 popstate가 홈 화면을 만든 뒤 마지막에 스크롤 잠금을 확실히 제거
+  window.addEventListener('popstate',function(){
+    setTimeout(recoverHomeScroll,0);
+  });
+
+  // 상단 홈 버튼으로 돌아올 때도 동일
+  const oldGo=window.goSiteNav;
+  if(typeof oldGo==='function'){
+    window.goSiteNav=function(target){
+      const r=oldGo.apply(this,arguments);
+      if(target==='home')setTimeout(recoverHomeScroll,0);
+      return r;
+    };
+  }
+
+  // 모든 오버레이가 닫힌 순간에도 잠금 잔여물 제거
+  const obs=new MutationObserver(()=>{
+    if(!document.querySelector('.overlay.show')){
+      forceUnlockPageScroll();
+    }
+  });
+  if(document.body)obs.observe(document.body,{subtree:true,attributes:true,attributeFilter:['class','aria-hidden']});
+
+  window.showCatalogActionNotice=function(message){
+    const el=document.getElementById('catalogActionNotice');
+    if(!el)return;
+    el.textContent=message;
+    el.classList.add('show');
+    clearTimeout(el._noticeTimer);
+    el._noticeTimer=setTimeout(()=>el.classList.remove('show'),2600);
+  };
+
+  // 기존 빼기 함수의 안내가 토스트 뒤에 가려지는 경우를 대비해 모달 내부 안내도 함께 표시
+  const oldRemoveTemple=window.removeTempleFromMainCatalog;
+  if(typeof oldRemoveTemple==='function'){
+    window.removeTempleFromMainCatalog=async function(name,evt){
+      const r=await oldRemoveTemple.apply(this,arguments);
+      setTimeout(()=>{
+        showCatalogActionNotice(`“${name}”을(를) 메인 목록에서 뺐어요.`);
+        try{showToast(`“${name}”을(를) 메인 목록에서 뺐어요.`);}catch(e){}
+      },20);
+      return r;
+    };
+  }
+  const oldRemoveMountain=window.removeMountainFromMainCatalog;
+  if(typeof oldRemoveMountain==='function'){
+    window.removeMountainFromMainCatalog=function(name,evt){
+      const r=oldRemoveMountain.apply(this,arguments);
+      setTimeout(()=>{
+        showCatalogActionNotice(`“${name}”을(를) 메인 목록에서 뺐어요.`);
+        try{showToast(`“${name}”을(를) 메인 목록에서 뺐어요.`);}catch(e){}
+      },20);
+      return r;
+    };
+  }
+
+  setTimeout(forceUnlockPageScroll,100);
 })();
 </script>
 
