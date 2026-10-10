@@ -1,6 +1,20 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+
+<script id="sansa-force-secure-origin">
+(function(){
+  try{
+    const badProtocol = location.protocol === 'http:';
+    const badHost = location.hostname === 'www.sansanote.com';
+    if(badProtocol || badHost){
+      const target = 'https://sansanote.com' + location.pathname + location.search + location.hash;
+      location.replace(target);
+    }
+  }catch(e){}
+})();
+</script>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5, user-scalable=yes">
 <title>산사노트 | 사찰 순례·절 여행·마음 필사 기록</title>
@@ -27246,8 +27260,8 @@ function renderMasterSearchResults(){
           <div class="master-search-actions">
             <button type="button" onclick="openSearchTempleByName('${escapeAttr(d.name)}',event)">보기</button>
             ${onMain
-              ? `<button type="button" class="already-main" disabled>메인에 있음</button>`
-              : `<button type="button" class="add-main" onclick="addSearchTempleToMain('${escapeAttr(d.name)}',event)">${stored?'메인 다시 추가':'메인 추가'}</button>`}
+              ? `<button type="button" class="add-main" onclick="revealTempleOnMain('${escapeAttr(d.name)}',event)">메인에서 보기</button>`
+              : `<button type="button" class="add-main" onclick="revealTempleOnMain('${escapeAttr(d.name)}',event)">${stored?'메인 다시 추가':'메인 추가'}</button>`}
           </div>
         </div>`;
       }).join('')}
@@ -34402,23 +34416,40 @@ function requestFieldPositionNow(){
     }
 
     let settled=false;
+    let lastErr=null;
     const done=(fn,val)=>{
       if(settled)return;
       settled=true;
       fn(val);
     };
 
-    // 브라우저 종류와 상관없이 표준 Geolocation API를 바로 호출.
-    // iPhone Safari/Chrome/Naver, Galaxy Chrome/Samsung Internet 등 동일 처리.
+    const accept=pos=>{
+      if(!pos || !pos.coords)return;
+      const a=Number(pos.coords.accuracy)||9999;
+      // 250m 이하이면 즉시 사용. 더 나쁘면 2차 고정밀 위치를 한 번 더 기다림.
+      if(a<=250) done(resolve,pos);
+      else if(!settled){
+        setTimeout(()=>done(resolve,pos),2500);
+      }
+    };
+
+    const fail=err=>{
+      lastErr=err;
+      if(err && err.code===1) done(reject,err);
+    };
+
     try{
+      // 1차: 캐시 포함 빠르게 현재 위치 확인
+      navigator.geolocation.getCurrentPosition(
+        accept, fail,
+        {enableHighAccuracy:false,maximumAge:15000,timeout:8000}
+      );
+
+      // 2차: 실제 GPS를 강하게 요청
       navigator.geolocation.getCurrentPosition(
         pos=>done(resolve,pos),
-        err=>done(reject,err),
-        {
-          enableHighAccuracy:true,
-          maximumAge:0,
-          timeout:25000
-        }
+        err=>done(reject,lastErr||err),
+        {enableHighAccuracy:true,maximumAge:0,timeout:25000}
       );
     }catch(e){
       done(reject,{code:97,message:String(e&&e.message||e)});
@@ -34461,6 +34492,11 @@ function locationInfoFromPosition(pos,targetLat,targetLng,zone){
 function showLocationFailure(err,retryFn){
   if(typeof finishPilgrimageGpsCheck==='function')finishPilgrimageGpsCheck();
 
+  if(window.isSecureContext===false){
+    showToast('현재 페이지가 안전한 HTTPS 연결로 열리지 않아 위치가 차단됐어요. https://sansanote.com 으로 다시 열어주세요.');
+    return;
+  }
+
   if(err && err.code===98){
     showToast('현재 브라우저에서 위치 기능을 사용할 수 없어요. Chrome·Safari·Samsung Internet 같은 일반 브라우저에서 열어주세요.');
     return;
@@ -34483,7 +34519,6 @@ function showLocationFailure(err,retryFn){
 /* 절: 버튼 탭 직후 Safari 권한 요청 */
 function addVisitRecord(withLocation){
   if(!currentDetailId)return;
-  if(localMode){promptGuestLoginRequired();return;}
 
   const id=currentDetailId;
   const d=destinations[id];
@@ -34554,7 +34589,6 @@ function addVisitRecord(withLocation){
 /* 산: 위치 요청과 인증 기준점 계산을 동시에 시작 */
 function addMountainVisit(withLocation=false){
   if(!currentMountainDetailId)return;
-  if(localMode){promptGuestLoginRequired();return;}
 
   const id=currentMountainDetailId;
   const d=mountainDestinations[id];
@@ -34700,8 +34734,8 @@ function renderTempleCatalog(){
                 <div class="temple-catalog-actions">
                   <button type="button" onclick="openSearchTempleByName('${escapeAttr(d.name)}',event)">보기</button>
                   ${onMain
-                    ? `<button type="button" class="on-main" disabled>메인에 있음</button>`
-                    : `<button type="button" class="add" onclick="addTempleToMainByName('${escapeAttr(d.name)}',event).then(()=>renderTempleCatalog())">${stored?'메인 다시 추가':'메인 추가'}</button>`}
+                    ? `<button type="button" class="add" onclick="revealTempleOnMain('${escapeAttr(d.name)}',event)">메인에서 보기</button>`
+                    : `<button type="button" class="add" onclick="revealTempleOnMain('${escapeAttr(d.name)}',event)">${stored?'메인 다시 추가':'메인 추가'}</button>`}
                 </div>
               </div>`;
             }).join('')}
@@ -34739,6 +34773,55 @@ async function addSearchTempleToMain(name,evt){
   renderMasterSearchResults();
   const panel=document.getElementById('templeCatalogPanel');
   if(panel&&panel.style.display!=='none')renderTempleCatalog();
+}
+</script>
+
+
+<script id="temple-main-reveal-fix">
+async function revealTempleOnMain(name,evt){
+  if(evt){evt.preventDefault();evt.stopPropagation();}
+
+  // 실제 메인 상태로 강제 복구
+  await addTempleToMainByName(name,evt);
+
+  // 사용자가 못 찾는 원인이 되던 모든 필터/검색을 초기화
+  contentType='temple';
+  filterRegion='전체';
+  filterTag='all';
+  heroQuickFilter='all';
+
+  const stage=document.getElementById('stageFilter');
+  if(stage)stage.value='all';
+  const search=document.getElementById('searchBox');
+  if(search)search.value='';
+
+  document.querySelectorAll('#tagToggle button').forEach(b=>{
+    b.classList.toggle('active',b.dataset.tag==='all');
+  });
+  if(typeof buildRegionTabs==='function')buildRegionTabs();
+
+  const panel=document.getElementById('masterSearchPanel');
+  if(panel){panel.style.display='none';panel.innerHTML='';}
+  const catalog=document.getElementById('templeCatalogPanel');
+  if(catalog && catalog.style.display!=='none' && typeof renderTempleCatalog==='function'){
+    renderTempleCatalog();
+  }
+
+  render();
+
+  setTimeout(()=>{
+    const entry=getBestTempleEntryByName(name);
+    if(entry){
+      const card=document.querySelector(`#grid .card[data-id="${entry[0]}"]`);
+      if(card){
+        card.scrollIntoView({behavior:'smooth',block:'center'});
+        card.classList.add('pulse-now');
+        setTimeout(()=>card.classList.remove('pulse-now'),1600);
+      }else{
+        document.getElementById('grid')?.scrollIntoView({behavior:'smooth',block:'start'});
+      }
+    }
+  },180);
 }
 </script>
 
