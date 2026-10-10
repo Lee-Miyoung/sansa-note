@@ -20114,6 +20114,78 @@ header.hero .hero-experience{
 }
 </style>
 
+
+<style id="detail-field-cleanup-v3">
+/* 보상 카드의 중복 현장인증 버튼은 숨기고, 아래 실제 인증 버튼만 사용 */
+#pilgrimRewardPreview .field-reward-actions .field-reward-go-btn,
+#mountainRewardPreview .field-reward-actions .field-reward-go-btn{
+  display:none !important;
+}
+#pilgrimRewardPreview .field-reward-actions,
+#mountainRewardPreview .field-reward-actions{
+  grid-template-columns:1fr !important;
+}
+
+/* 인증 완료 카드의 '내 인증 기록 보기' 중복 제거 */
+#pilgrimRewardPreview .field-reward-preview.is-verified .field-reward-preview-btn,
+#mountainRewardPreview .field-reward-preview.is-verified .field-reward-preview-btn{
+  display:none !important;
+}
+
+/* 인증 날짜를 눈에 띄게 */
+.field-verified-date{
+  margin-top:10px !important;
+  font-size:16px !important;
+  line-height:1.5 !important;
+  font-weight:900 !important;
+  color:#2f6d58 !important;
+  letter-spacing:-.02em;
+}
+@media(max-width:700px){
+  .field-verified-date{
+    font-size:15px !important;
+  }
+}
+
+/* 방문/등반 기록의 수정·삭제는 기본 숨김 */
+.visitrow{
+  position:relative;
+  touch-action:pan-y;
+  user-select:none;
+  -webkit-user-select:none;
+}
+.visitrow .visit-row-actions{
+  display:none !important;
+  margin-top:8px;
+  gap:7px;
+}
+.visitrow.actions-open .visit-row-actions{
+  display:flex !important;
+}
+.visitrow.actions-open{
+  background:#fffaf0;
+  border-color:#d9bd7a;
+}
+.visitrow::after{
+  content:'길게 눌러 관리';
+  display:block;
+  margin-top:5px;
+  font-size:9.5px;
+  color:#aaa195;
+}
+.visitrow.actions-open::after{
+  content:'';
+  display:none;
+}
+</style>
+
+
+<style id="hide-duplicate-verification-list">
+.pilgrim-ach-actions .records{
+  display:none !important;
+}
+</style>
+
 </head>
 <body>
 
@@ -27060,54 +27132,102 @@ function getBestTempleEntryByName(name){
   });
   return entries[0];
 }
+const MAIN_TEMPLE_OVERRIDE_KEY='sansanoteMainTempleOverrides_v1';
+
+function getMainTempleOverrides(){
+  try{
+    const arr=JSON.parse(localStorage.getItem(MAIN_TEMPLE_OVERRIDE_KEY)||'[]');
+    return new Set(Array.isArray(arr)?arr:[]);
+  }catch(e){ return new Set(); }
+}
+function saveMainTempleOverride(name){
+  const set=getMainTempleOverrides();
+  set.add(name);
+  try{ localStorage.setItem(MAIN_TEMPLE_OVERRIDE_KEY,JSON.stringify([...set])); }catch(e){}
+}
+function ensureMainTempleOverrides(){
+  const set=getMainTempleOverrides();
+  if(!set.size)return;
+  set.forEach(name=>{
+    const master=MASTER_BY_NAME[name];
+    if(!master)return;
+    const entries=getTempleEntriesByName(name);
+    if(entries.length){
+      entries.forEach(([id,d])=>{
+        if(d.hiddenFromList){
+          destinations[id]=Object.assign({},d,{
+            hiddenFromList:false,
+            hiddenTrayDismissed:false
+          });
+        }
+      });
+    }else{
+      const id='local_main_'+String(name).replace(/[^0-9A-Za-z가-힣]/g,'_');
+      destinations[id]=Object.assign({},master,{
+        stage:0,notes:'',photos:{},visits:{},
+        hiddenFromList:false,
+        hiddenTrayDismissed:false,
+        createdAt:Date.now(),
+        localMainOverride:true
+      });
+    }
+  });
+}
 function isTempleOnMain(name){
+  if(getMainTempleOverrides().has(name)) return true;
   return getTempleEntriesByName(name).some(([id,d])=>!d.hiddenFromList);
 }
 async function addTempleToMainByName(name,evt){
   if(evt){evt.preventDefault();evt.stopPropagation();}
   const master=MASTER_BY_NAME[name];
-  if(!master){showToast('108 사찰 목록에서 찾지 못했어요.');return;}
+  if(!master){showToast('108 사찰 목록에서 찾지 못했어요.');return false;}
 
-  const existing=getTempleEntriesByName(name);
-  try{
-    if(existing.length){
-      // 중복 레코드가 있어도 모두 같은 메인 상태로 맞춰
-      // 코스에서 불러왔는데 안 보이는 현상을 없앱니다.
-      if(localMode){
-        existing.forEach(([id,d])=>{
-          destinations[id]=Object.assign({},d,{hiddenFromList:false,hiddenAt:null,hiddenTrayDismissed:false,hiddenTrayDismissedAt:null});
-        });
-        persistLocal();
-      }else{
-        const updates={};
-        existing.forEach(([id])=>{
-          updates[`users/${currentUid}/destinations/${id}/hiddenFromList`]=false;
-          updates[`users/${currentUid}/destinations/${id}/hiddenAt`]=null;
-          updates[`users/${currentUid}/destinations/${id}/hiddenTrayDismissed`]=false;
-          updates[`users/${currentUid}/destinations/${id}/hiddenTrayDismissedAt`]=null;
-          destinations[id]=Object.assign({},destinations[id],{hiddenFromList:false,hiddenAt:null,hiddenTrayDismissed:false,hiddenTrayDismissedAt:null});
-        });
-        await db.ref().update(updates);
-      }
-      showToast(`"${name}"을(를) 메인에 다시 넣었어요.`);
-    }else{
-      const id=newId();
-      const data=Object.assign({},master,{
-        stage:0,notes:'',photos:{},hiddenFromList:false,hiddenAt:null,createdAt:Date.now()
+  // 먼저 화면과 로컬 상태에 즉시 반영합니다.
+  saveMainTempleOverride(name);
+  let existing=getTempleEntriesByName(name);
+
+  if(existing.length){
+    existing.forEach(([id,d])=>{
+      destinations[id]=Object.assign({},d,{
+        hiddenFromList:false,
+        hiddenTrayDismissed:false
       });
-      destinations[id]=data;
-      if(localMode){
-        persistLocal();
-      }else{
-        await destinationRef(id).set(data);
-      }
-      showToast(`"${name}"을(를) 메인에 추가했어요.`);
-    }
-    render();
-  }catch(err){
-    console.error(err);
-    showToast('메인에 추가하지 못했어요.');
+    });
+  }else{
+    const id='local_main_'+String(name).replace(/[^0-9A-Za-z가-힣]/g,'_');
+    destinations[id]=Object.assign({},master,{
+      stage:0,notes:'',photos:{},visits:{},
+      hiddenFromList:false,
+      hiddenTrayDismissed:false,
+      createdAt:Date.now(),
+      localMainOverride:true
+    });
+    existing=[[id,destinations[id]]];
   }
+
+  // 로컬 모드면 그대로 저장.
+  if(localMode){
+    try{ persistLocal(); }catch(e){}
+  }else if(currentUid && db){
+    // 로그인 상태면 클라우드에도 저장하되, 실패해도 메인 추가 자체를 취소하지 않습니다.
+    try{
+      for(const [id,d] of existing){
+        const payload=Object.assign({},d,{
+          hiddenFromList:false,
+          hiddenTrayDismissed:false
+        });
+        delete payload.localMainOverride;
+        await destinationRef(id).set(payload);
+      }
+    }catch(err){
+      console.warn('main temple cloud save deferred',err);
+    }
+  }
+
+  ensureMainTempleOverrides();
+  render();
+  showToast(`"${name}"을(를) 메인에 추가했어요.`);
+  return true;
 }
 function closeMasterSearchPanel(event){
   if(event){ event.preventDefault(); event.stopPropagation(); }
@@ -27269,6 +27389,7 @@ function renderMasterSearchResults(){
 }
 
 function getVisibleTempleEntries(){
+  ensureMainTempleOverrides();
   return Object.entries(destinations||{}).filter(([id,d])=>d && !d.hiddenFromList);
 }
 
@@ -34783,6 +34904,7 @@ async function revealTempleOnMain(name,evt){
 
   // 실제 메인 상태로 강제 복구
   await addTempleToMainByName(name,evt);
+  ensureMainTempleOverrides();
 
   // 사용자가 못 찾는 원인이 되던 모든 필터/검색을 초기화
   contentType='temple';
@@ -34823,6 +34945,58 @@ async function revealTempleOnMain(name,evt){
     }
   },180);
 }
+</script>
+
+
+<script id="visit-longpress-actions-js">
+(function(){
+  let timer=null;
+  let startX=0,startY=0;
+  const HOLD_MS=560;
+
+  function closeOthers(except){
+    document.querySelectorAll('.visitrow.actions-open').forEach(row=>{
+      if(row!==except)row.classList.remove('actions-open');
+    });
+  }
+
+  function begin(e){
+    const row=e.target.closest('.visitrow');
+    if(!row || e.target.closest('button,textarea,input,a'))return;
+    const p=e.touches?e.touches[0]:e;
+    startX=p.clientX; startY=p.clientY;
+    clearTimeout(timer);
+    timer=setTimeout(()=>{
+      closeOthers(row);
+      row.classList.add('actions-open');
+      if(navigator.vibrate)navigator.vibrate(20);
+    },HOLD_MS);
+  }
+  function move(e){
+    if(!timer)return;
+    const p=e.touches?e.touches[0]:e;
+    if(Math.abs(p.clientX-startX)>12 || Math.abs(p.clientY-startY)>12){
+      clearTimeout(timer);timer=null;
+    }
+  }
+  function end(){
+    clearTimeout(timer);timer=null;
+  }
+
+  document.addEventListener('touchstart',begin,{passive:true});
+  document.addEventListener('touchmove',move,{passive:true});
+  document.addEventListener('touchend',end,{passive:true});
+  document.addEventListener('touchcancel',end,{passive:true});
+  document.addEventListener('mousedown',begin);
+  document.addEventListener('mousemove',move);
+  document.addEventListener('mouseup',end);
+
+  document.addEventListener('click',e=>{
+    if(e.target.closest('.visit-row-actions'))return;
+    const row=e.target.closest('.visitrow');
+    if(!row)closeOthers(null);
+  });
+})();
 </script>
 
 </body>
