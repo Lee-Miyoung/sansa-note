@@ -20186,6 +20186,58 @@ header.hero .hero-experience{
 }
 </style>
 
+
+<style id="verified-date-stamp-style">
+/* 인증 날짜를 더 크게, 도장을 함께 표시 */
+.visitrow .vdate{
+  display:flex !important;
+  align-items:center !important;
+  gap:9px !important;
+  flex-wrap:wrap;
+  font-size:15px !important;
+  line-height:1.45 !important;
+  font-weight:900 !important;
+  color:#2e4f43 !important;
+}
+.visitrow .verified-seal{
+  display:inline-flex;
+  width:42px;
+  height:42px;
+  align-items:center;
+  justify-content:center;
+  flex:0 0 42px;
+  border:2px solid #b45342;
+  border-radius:50%;
+  color:#a94738;
+  background:rgba(255,250,245,.95);
+  font-family:'Nanum Myeongjo','Noto Serif KR',serif;
+  font-size:10px;
+  font-weight:900;
+  line-height:1.08;
+  text-align:center;
+  transform:rotate(-7deg);
+  box-shadow:inset 0 0 0 2px rgba(180,83,66,.12);
+}
+.visitrow .verified-label{
+  display:inline-flex;
+  align-items:center;
+  min-height:27px;
+  padding:3px 9px;
+  border-radius:999px;
+  background:#edf6f1;
+  color:#2f6d58;
+  border:1px solid #a9cdbd;
+  font-size:11px;
+  font-weight:900;
+}
+@media(max-width:700px){
+  .visitrow .vdate{font-size:14.5px !important;}
+  .visitrow .verified-seal{
+    width:39px;height:39px;flex-basis:39px;font-size:9.5px;
+  }
+}
+</style>
+
 </head>
 <body>
 
@@ -34995,6 +35047,299 @@ async function revealTempleOnMain(name,evt){
     if(e.target.closest('.visit-row-actions'))return;
     const row=e.target.closest('.visitrow');
     if(!row)closeOthers(null);
+  });
+})();
+</script>
+
+
+<script id="final-main-restore-and-stamp-fix">
+/* =========================================================
+   메인에서 감춘 절을 검색 결과에서 확실하게 복구
+   - Firebase 저장 성공 여부와 무관하게 즉시 메인 복구
+   - 재접속 시에도 localStorage override로 복구
+   ========================================================= */
+const FORCE_MAIN_KEY='sansanote_force_main_names_v2';
+
+function getForcedMainNames(){
+  try{
+    const a=JSON.parse(localStorage.getItem(FORCE_MAIN_KEY)||'[]');
+    return new Set(Array.isArray(a)?a:[]);
+  }catch(e){return new Set();}
+}
+function saveForcedMainName(name){
+  const s=getForcedMainNames();
+  s.add(name);
+  try{localStorage.setItem(FORCE_MAIN_KEY,JSON.stringify([...s]));}catch(e){}
+}
+function forceApplyMainTemple(name){
+  const master=(MASTER_BY_NAME||{})[name];
+  if(!master)return null;
+
+  const entries=getTempleEntriesByName(name);
+  if(entries.length){
+    entries.forEach(([id,d])=>{
+      destinations[id]=Object.assign({},d,{
+        hiddenFromList:false,
+        hiddenAt:null,
+        hiddenTrayDismissed:false,
+        hiddenTrayDismissedAt:null
+      });
+    });
+    return entries[0][0];
+  }
+
+  const id='forced_main_'+String(name).replace(/[^0-9A-Za-z가-힣]/g,'_');
+  destinations[id]=Object.assign({},master,{
+    stage:0,
+    notes:'',
+    photos:{},
+    visits:{},
+    hiddenFromList:false,
+    hiddenAt:null,
+    hiddenTrayDismissed:false,
+    createdAt:Date.now()
+  });
+  return id;
+}
+function applyAllForcedMainTemples(){
+  getForcedMainNames().forEach(forceApplyMainTemple);
+}
+
+/* 기존 판정도 강제 메인 목록을 우선 인정 */
+function isTempleOnMain(name){
+  if(getForcedMainNames().has(name))return true;
+  return getTempleEntriesByName(name).some(([id,d])=>d&&!d.hiddenFromList);
+}
+
+/* 검색 결과 / 108목록에서 누르는 최종 복구 함수 */
+async function revealTempleOnMain(name,evt){
+  if(evt){evt.preventDefault();evt.stopPropagation();}
+  const master=(MASTER_BY_NAME||{})[name];
+  if(!master){
+    showToast('108 사찰 목록에서 찾지 못했어요.');
+    return false;
+  }
+
+  saveForcedMainName(name);
+  const id=forceApplyMainTemple(name);
+
+  /* 화면 필터를 풀어 실제 카드가 바로 보이게 */
+  contentType='temple';
+  filterRegion='전체';
+  filterTag='all';
+  heroQuickFilter='all';
+
+  const stage=document.getElementById('stageFilter');
+  if(stage)stage.value='all';
+  const search=document.getElementById('searchBox');
+  if(search)search.value='';
+  document.querySelectorAll('#tagToggle button').forEach(b=>{
+    b.classList.toggle('active',b.dataset.tag==='all');
+  });
+
+  try{ if(typeof persistLocal==='function') persistLocal(); }catch(e){}
+
+  /* 클라우드는 뒤에서 저장. 실패해도 메인 복구는 유지 */
+  if(!localMode && currentUid && typeof destinationRef==='function' && id){
+    try{
+      await destinationRef(id).update({
+        hiddenFromList:false,
+        hiddenAt:null,
+        hiddenTrayDismissed:false,
+        hiddenTrayDismissedAt:null
+      });
+    }catch(e){
+      console.warn('메인 복구 클라우드 저장 보류',e);
+    }
+  }
+
+  applyAllForcedMainTemples();
+  if(typeof buildRegionTabs==='function')buildRegionTabs();
+
+  const sp=document.getElementById('masterSearchPanel');
+  if(sp){sp.style.display='none';sp.innerHTML='';}
+  const cp=document.getElementById('templeCatalogPanel');
+  if(cp&&cp.style.display!=='none'&&typeof renderTempleCatalog==='function')renderTempleCatalog();
+
+  render();
+  showToast(`"${name}"을(를) 메인에 다시 넣었어요.`);
+
+  setTimeout(()=>{
+    const entry=getBestTempleEntryByName(name);
+    if(!entry)return;
+    const card=document.querySelector(`#grid .card[data-id="${entry[0]}"]`);
+    if(card){
+      card.scrollIntoView({behavior:'smooth',block:'center'});
+      card.classList.add('pulse-now');
+      setTimeout(()=>card.classList.remove('pulse-now'),1500);
+    }else{
+      document.getElementById('grid')?.scrollIntoView({behavior:'smooth',block:'start'});
+    }
+  },180);
+
+  return true;
+}
+
+/* 기존 add 함수도 이 확실한 복구 함수를 사용 */
+async function addTempleToMainByName(name,evt){
+  return revealTempleOnMain(name,evt);
+}
+
+/* 숨김 처리된 값이 Firebase에서 다시 들어와도 로컬 강제복구 유지 */
+const _sansaOriginalRender = window.render;
+if(typeof _sansaOriginalRender==='function'){
+  window.render=function(){
+    applyAllForcedMainTemples();
+    return _sansaOriginalRender.apply(this,arguments);
+  };
+}
+
+/* =========================================================
+   인증 기록: 날짜 확대 + 도장
+   수정/삭제는 기존처럼 길게 눌렀을 때만 표시
+   ========================================================= */
+function verifiedVisitHeading(v,dateStr,kind){
+  if(!v || !v.verified){
+    return `<div class="vdate"><span>${dateStr}</span></div>`;
+  }
+  return `<div class="vdate">
+    <span class="verified-seal">${kind==='mountain'?'登山':'現場'}<br>認證</span>
+    <span>${dateStr}</span>
+    <span class="verified-label">✓ 현장 인증</span>
+  </div>`;
+}
+
+function renderVisits(visits){
+  const entries=Object.entries(visits||{}).sort((a,b)=>(b[1].ts||0)-(a[1].ts||0));
+  const count=document.getElementById('visitCountLabel');
+  if(count)count.innerHTML=entries.length>0?`<span class="visitcount-badge">${entries.length}번째 방문 중</span>`:'';
+  const wrap=document.getElementById('visitList');
+  if(!wrap)return;
+  if(!entries.length){
+    wrap.innerHTML='<div class="map-note" style="padding:0;">아직 방문 기록이 없어요. 다녀오신 뒤 소감을 남겨보세요.</div>';
+    return;
+  }
+  wrap.innerHTML=entries.map(([vid,v])=>{
+    const dt=new Date(v.ts||Date.now());
+    const dateStr=`${dt.getFullYear()}.${dt.getMonth()+1}.${dt.getDate()}`;
+    return `<div class="visitrow" id="visitRow_${vid}">
+      ${verifiedVisitHeading(v,dateStr,'temple')}
+      <div id="visitNoteView_${vid}">${v.note?`<div class="vnote">${escapeHtml(v.note)}</div>`:''}</div>
+      <div class="visit-row-actions">
+        <button class="visit-row-action edit" type="button" onclick="startEditVisit('${vid}')">✏️ 수정</button>
+        <button class="visit-row-action delete" type="button" onclick="deleteVisitRecord('${vid}')">🗑 삭제</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function renderMountainVisits(visits){
+  const entries=Object.entries(visits||{}).sort((a,b)=>(b[1].ts||0)-(a[1].ts||0));
+  const count=document.getElementById('mVisitCountLabel');
+  if(count)count.innerHTML=entries.length>0?`<span class="visitcount-badge">${entries.length}번째 등반</span>`:'';
+  const wrap=document.getElementById('mVisitList');
+  if(!wrap)return;
+  if(!entries.length){
+    wrap.innerHTML='<div class="map-note" style="padding:0;">아직 등반 기록이 없어요.</div>';
+    return;
+  }
+  wrap.innerHTML=entries.map(([vid,v])=>{
+    const dt=new Date(v.ts||Date.now());
+    const dateStr=`${dt.getFullYear()}.${dt.getMonth()+1}.${dt.getDate()}`;
+    return `<div class="visitrow" id="mVisitRow_${vid}">
+      ${verifiedVisitHeading(v,dateStr,'mountain')}
+      <div id="mVisitNoteView_${vid}">${v.note?`<div class="vnote">${escapeHtml(v.note)}</div>`:''}</div>
+      <div class="visit-row-actions">
+        <button class="visit-row-action edit" type="button" onclick="startEditMountainVisit('${vid}')">✏️ 수정</button>
+        <button class="visit-row-action delete" type="button" onclick="deleteMountainVisitRecord('${vid}')">🗑 삭제</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+/* 현재 열린 상세화면도 즉시 새 형식으로 다시 그리기 */
+setTimeout(()=>{
+  try{
+    applyAllForcedMainTemples();
+    if(currentDetailId && destinations[currentDetailId])renderVisits(destinations[currentDetailId].visits||{});
+    if(currentMountainDetailId && mountainDestinations[currentMountainDetailId])renderMountainVisits(mountainDestinations[currentMountainDetailId].visits||{});
+  }catch(e){}
+},0);
+</script>
+
+
+<script id="sansa-browser-back-home-fix">
+/* =========================================================
+   모바일 브라우저 뒤로가기
+   - 산사노트 내부 화면에서 첫 뒤로가기는 사이트 이탈 대신 홈으로
+   - 상세/검색/열린 오버레이를 닫고 홈 상단으로 이동
+   - 홈에서 다시 뒤로가기를 누르면 브라우저의 원래 뒤로가기 동작
+   ========================================================= */
+(function(){
+  let backHandledOnce = false;
+
+  function closeForBrowserBack(){
+    try{
+      document.getElementById('detailOverlay')?.classList.remove('show');
+      document.getElementById('mDetailOverlay')?.classList.remove('show');
+      currentDetailId = null;
+      currentMountainDetailId = null;
+    }catch(e){}
+
+    try{
+      document.querySelectorAll('.overlay.show').forEach(el=>{
+        if(el.id!=='detailOverlay' && el.id!=='mDetailOverlay'){
+          el.classList.remove('show');
+          el.setAttribute('aria-hidden','true');
+        }
+      });
+    }catch(e){}
+
+    try{
+      const sp=document.getElementById('masterSearchPanel');
+      if(sp){sp.style.display='none';sp.innerHTML='';}
+      const cp=document.getElementById('templeCatalogPanel');
+      if(cp)cp.style.display='none';
+      const toggle=document.getElementById('templeCatalogToggle');
+      if(toggle)toggle.setAttribute('aria-expanded','false');
+      const search=document.getElementById('searchBox');
+      if(search)search.value='';
+    }catch(e){}
+
+    try{
+      if(typeof closeSiteNavBlockingOverlays==='function')closeSiteNavBlockingOverlays();
+    }catch(e){}
+
+    try{
+      if(typeof switchContentType==='function' && contentType!=='temple'){
+        switchContentType('temple');
+      }
+    }catch(e){}
+
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+
+  function armBackHome(){
+    try{
+      if(history.state && history.state.__sansaBackGuard)return;
+      history.pushState({__sansaBackGuard:true},'',location.href);
+    }catch(e){}
+  }
+
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',armBackHome,{once:true});
+  }else{
+    armBackHome();
+  }
+
+  window.addEventListener('popstate',function(e){
+    // 우리가 넣은 보호용 히스토리에서 빠져나왔을 때 한 번만 홈으로 보냄.
+    if(!backHandledOnce){
+      backHandledOnce=true;
+      closeForBrowserBack();
+      return;
+    }
+    // 두 번째 뒤로가기는 브라우저 원래 동작을 허용.
   });
 })();
 </script>
