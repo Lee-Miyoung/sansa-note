@@ -19900,6 +19900,206 @@ header.hero .hero-experience{
 }
 </style>
 
+
+<style id="temple-108-catalog-style">
+.temple-catalog-toggle{
+  flex:0 0 auto;
+  min-height:38px;
+  border:1px solid #d8cdbd;
+  border-radius:12px;
+  padding:7px 10px;
+  background:#fffaf2;
+  color:#554a3d;
+  font-family:inherit;
+  font-size:11.5px;
+  font-weight:900;
+  white-space:nowrap;
+  cursor:pointer;
+}
+.temple-catalog-toggle span{
+  display:inline-block;
+  margin-left:3px;
+  transition:transform .18s ease;
+}
+.temple-catalog-toggle[aria-expanded="true"] span{
+  transform:rotate(180deg);
+}
+.temple-catalog-panel{
+  max-width:1080px;
+  width:calc(100% - 48px);
+  margin:8px auto 14px;
+  padding:12px;
+  border:1px solid #ddd3c5;
+  border-radius:16px;
+  background:#fbf8f1;
+  box-shadow:0 7px 20px rgba(61,48,34,.06);
+}
+.temple-catalog-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:10px;
+}
+.temple-catalog-head b{
+  font-size:14px;
+  color:#312b25;
+}
+.temple-catalog-head span{
+  font-size:10.5px;
+  color:#877c70;
+}
+.temple-catalog-groups{
+  display:grid;
+  gap:8px;
+}
+.temple-catalog-region{
+  border:1px solid #e4dccf;
+  border-radius:13px;
+  background:#fff;
+  overflow:hidden;
+}
+.temple-catalog-region > button{
+  width:100%;
+  min-height:40px;
+  padding:9px 11px;
+  border:0;
+  background:#f7f3eb;
+  color:#493f35;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  font-family:inherit;
+  font-size:12px;
+  font-weight:900;
+  text-align:left;
+}
+.temple-catalog-region > button small{
+  color:#8b8174;
+  font-size:10px;
+}
+.temple-catalog-items{
+  display:none;
+  padding:7px;
+  gap:6px;
+}
+.temple-catalog-region.open .temple-catalog-items{
+  display:grid;
+}
+.temple-catalog-item{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:8px;
+  align-items:center;
+  padding:8px 9px;
+  border-radius:10px;
+  background:#fff;
+  border:1px solid #eee7dc;
+}
+.temple-catalog-item.visited{
+  border-color:#C99645;
+  background:#fffaf0;
+}
+.temple-catalog-copy{
+  min-width:0;
+}
+.temple-catalog-copy b{
+  display:block;
+  font-size:12px;
+  color:#302a24;
+}
+.temple-catalog-copy small{
+  display:block;
+  margin-top:2px;
+  color:#8a8074;
+  font-size:9.5px;
+  line-height:1.35;
+}
+.temple-catalog-actions{
+  display:flex;
+  gap:5px;
+  align-items:center;
+}
+.temple-catalog-actions button{
+  min-height:31px;
+  border:1px solid #d9d0c2;
+  border-radius:9px;
+  background:#fff;
+  color:#5b5044;
+  padding:0 8px;
+  font-family:inherit;
+  font-size:9.5px;
+  font-weight:900;
+  white-space:nowrap;
+}
+.temple-catalog-actions button.add{
+  background:#356b58;
+  border-color:#356b58;
+  color:#fff;
+}
+.temple-catalog-actions button.on-main{
+  background:#eee9e0;
+  color:#8a8175;
+  border-color:#e1d9cd;
+}
+
+/* 검색 결과에서 바로 메인 추가 버튼 */
+#masterSearchPanel .master-search-actions{
+  display:flex;
+  gap:6px;
+  align-items:center;
+  flex:0 0 auto;
+}
+#masterSearchPanel .master-search-actions button{
+  min-height:34px;
+  border:1px solid #d9d0c2;
+  border-radius:9px;
+  background:#fff;
+  color:#5b5044;
+  padding:0 9px;
+  font-family:inherit;
+  font-size:10px;
+  font-weight:900;
+  white-space:nowrap;
+}
+#masterSearchPanel .master-search-actions .add-main{
+  background:#356b58;
+  border-color:#356b58;
+  color:#fff;
+}
+#masterSearchPanel .master-search-actions .already-main{
+  background:#eee9e0;
+  color:#8b8175;
+  border-color:#e1d9cd;
+}
+
+@media(max-width:700px){
+  .temple-catalog-toggle{
+    min-height:36px;
+    font-size:10.5px;
+    padding:6px 8px;
+  }
+  .temple-catalog-panel{
+    width:calc(100% - 28px);
+    padding:9px;
+  }
+  .temple-catalog-item{
+    grid-template-columns:minmax(0,1fr);
+  }
+  .temple-catalog-actions{
+    justify-content:flex-end;
+  }
+  #masterSearchPanel .master-search-row{
+    align-items:flex-start;
+  }
+  #masterSearchPanel .master-search-actions{
+    flex-wrap:wrap;
+    justify-content:flex-end;
+  }
+}
+</style>
+
 </head>
 <body>
 
@@ -20157,12 +20357,14 @@ header.hero .hero-experience{
         <option value="2">순례 기록 완료</option>
       </select>
       <input class="searchbox" id="searchBox" placeholder="108개 사찰 전체에서 검색" oninput="heroQuickFilter='all';document.getElementById('heroListFilterNote').style.display='none';render()">
+      <button class="temple-catalog-toggle" id="templeCatalogToggle" type="button" onclick="toggleTempleCatalog(event)" aria-expanded="false">108 목록 <span>⌄</span></button>
       <button class="btn btn-ghost hidden-temple-btn" id="hiddenTempleBtn" type="button" onclick="openHiddenTempleOverlay()">🙈 숨긴 절 0</button>
       <button class="btn btn-primary" style="padding:7px 14px;font-size:12.5px;flex-shrink:0;" onclick="openCourseBuilder()">🧭 코스 만들기</button>
     </div>
   </div>
 
   <div class="hero-list-filter-note" id="heroListFilterNote" style="display:none;"></div>
+  <div class="temple-catalog-panel" id="templeCatalogPanel" style="display:none;" aria-label="108 사찰 전체 목록"></div>
   <div class="master-search-panel" id="masterSearchPanel" style="display:none;"></div>
   <main id="mainListArea">
     <div class="grid" id="grid"></div>
@@ -27041,9 +27243,11 @@ function renderMasterSearchResults(){
             <b>${escapeHtml(d.name)}</b>
             <span>${escapeHtml(d.region||'')} · ${d.tag==='유명'?'대표 산사':'숨은 산사'}${visited?' · 다녀온 절':''}${stored&&!onMain?' · 메인에서 뺀 절':''}</span>
           </div>
-          <div style="display:flex;gap:6px;align-items:center;">
+          <div class="master-search-actions">
             <button type="button" onclick="openSearchTempleByName('${escapeAttr(d.name)}',event)">보기</button>
-            ${stored&&!onMain?`<button type="button" onclick="addTempleToMainByName('${escapeAttr(d.name)}',event)">메인에 다시 추가</button>`:''}
+            ${onMain
+              ? `<button type="button" class="already-main" disabled>메인에 있음</button>`
+              : `<button type="button" class="add-main" onclick="addSearchTempleToMain('${escapeAttr(d.name)}',event)">${stored?'메인 다시 추가':'메인 추가'}</button>`}
           </div>
         </div>`;
       }).join('')}
@@ -27520,6 +27724,7 @@ async function reportCommunityPost(postId){
 
 
 function render(){
+  if(typeof syncTempleCatalogControl==='function')syncTempleCatalogControl();
   updateHiddenTempleButton();
   renderMasterSearchResults();
   if(contentType === 'community'){
@@ -27647,6 +27852,7 @@ function switchContentType(type){
   if(previous==='temple'||previous==='mountain') snapshotCurrentContentTab(previous);
 
   contentType=type;
+  if(typeof syncTempleCatalogControl==='function')syncTempleCatalogControl();
   const token=++tabSwitchToken;
   photoQueueGeneration++;
   if(photoHydrationObserver){try{photoHydrationObserver.disconnect();}catch(e){}}
@@ -34096,20 +34302,23 @@ showCelebration = function(title, sub){
     <div class="modal-head">
       <div>
         <h2 class="serif">📍 위치 권한이 필요해요</h2>
-        <div class="sub">권한을 한 번 거부하면 Safari가 다시 묻지 않을 수 있어요.</div>
+        <div class="sub">권한을 한 번 거부하면 브라우저가 다시 묻지 않을 수 있어요.</div>
       </div>
       <button class="close-x" type="button" onclick="closeLocationPermissionHelp()">✕</button>
     </div>
     <div class="modal-body">
       <div class="location-permission-card">
-        <b>아이폰 Safari에서 이렇게 해주세요</b>
+        <b>휴대폰 브라우저에서 위치 권한을 허용해주세요</b>
         <ol>
-          <li>주소창의 <strong>페이지 메뉴</strong>를 누르세요. <small>(aA · … · 사이트 아이콘처럼 보일 수 있어요)</small></li>
-          <li><strong>웹사이트 설정</strong> 또는 <strong>이 웹사이트 설정</strong>을 여세요.</li>
+          <li><strong>브라우저의 사이트 권한</strong> 또는 주소창 옆 메뉴를 여세요.</li>
           <li><strong>위치 → 허용</strong>으로 바꾸세요.</li>
+          <li>휴대폰의 <strong>위치 서비스(GPS)</strong>도 켜주세요.</li>
           <li>산사노트로 돌아와 아래 <strong>위치 권한 다시 확인</strong>을 누르세요.</li>
         </ol>
-        <div class="location-permission-note">그래도 안 되면 아이폰 <b>설정 → 개인정보 보호 및 보안 → 위치 서비스 → Safari 웹 사이트</b>에서 위치 접근과 <b>정확한 위치</b>를 켜주세요.</div>
+        <div class="location-permission-note">
+          <b>아이폰</b> : 설정 → 개인정보 보호 및 보안 → 위치 서비스 → 사용 중인 브라우저 → 앱을 사용하는 동안 허용 + 정확한 위치<br>
+          <b>갤럭시/안드로이드</b> : 설정 → 위치 → 앱 권한 → 사용 중인 브라우저(Chrome·Samsung Internet·Naver 등) → 앱 사용 중에만 허용 + 정확한 위치
+        </div>
       </div>
       <button class="btn btn-primary btn-block" type="button" onclick="retryLocationPermission()">📍 위치 권한 다시 확인</button>
       <button class="btn btn-ghost btn-block" type="button" style="margin-top:8px;" onclick="closeLocationPermissionHelp()">나중에 하기</button>
@@ -34157,7 +34366,7 @@ function retryLocationPermission(){
     },
     err=>{
       if(err&&err.code===1){
-        if(state)state.textContent='아직 위치 권한이 차단되어 있어요. 위 안내대로 Safari의 이 웹사이트 위치 권한을 허용해주세요.';
+        if(state)state.textContent='아직 위치 권한이 차단되어 있어요. 사용 중인 브라우저의 이 사이트 위치 권한을 허용해주세요.';
       }else{
         if(state)state.textContent='권한은 있지만 GPS 신호를 아직 못 잡았어요. 하늘이 보이는 곳에서 다시 눌러주세요.';
       }
@@ -34187,10 +34396,6 @@ async function getLocationPermissionState(){
    ============================================================ */
 function requestFieldPositionNow(){
   return new Promise((resolve,reject)=>{
-    if(!window.isSecureContext){
-      reject({code:99,message:'secure-context-required'});
-      return;
-    }
     if(!navigator.geolocation){
       reject({code:98,message:'geolocation-not-supported'});
       return;
@@ -34203,15 +34408,21 @@ function requestFieldPositionNow(){
       fn(val);
     };
 
-    navigator.geolocation.getCurrentPosition(
-      pos=>done(resolve,pos),
-      err=>done(reject,err),
-      {
-        enableHighAccuracy:true,
-        maximumAge:0,
-        timeout:20000
-      }
-    );
+    // 브라우저 종류와 상관없이 표준 Geolocation API를 바로 호출.
+    // iPhone Safari/Chrome/Naver, Galaxy Chrome/Samsung Internet 등 동일 처리.
+    try{
+      navigator.geolocation.getCurrentPosition(
+        pos=>done(resolve,pos),
+        err=>done(reject,err),
+        {
+          enableHighAccuracy:true,
+          maximumAge:0,
+          timeout:25000
+        }
+      );
+    }catch(e){
+      done(reject,{code:97,message:String(e&&e.message||e)});
+    }
   });
 }
 
@@ -34250,12 +34461,12 @@ function locationInfoFromPosition(pos,targetLat,targetLng,zone){
 function showLocationFailure(err,retryFn){
   if(typeof finishPilgrimageGpsCheck==='function')finishPilgrimageGpsCheck();
 
-  if(err && err.code===99){
-    showToast('Safari 보안 연결(https)에서만 위치 인증할 수 있어요. 주소가 https://sansanote.com 인지 확인해주세요.');
+  if(err && err.code===98){
+    showToast('현재 브라우저에서 위치 기능을 사용할 수 없어요. Chrome·Safari·Samsung Internet 같은 일반 브라우저에서 열어주세요.');
     return;
   }
-  if(err && err.code===98){
-    showToast('이 브라우저는 위치 기능을 지원하지 않아요.');
+  if(err && err.code===97){
+    showToast('위치 요청을 시작하지 못했어요. 브라우저의 위치 권한을 허용한 뒤 다시 눌러주세요.');
     return;
   }
   if(err && err.code===1){
@@ -34419,6 +34630,115 @@ function addMountainVisit(withLocation=false){
       verifyBtn.innerHTML='📍 현장 인증하기<small>도착 후 보상 열기</small>';
     }
   });
+}
+</script>
+
+
+<script id="temple-108-catalog-js">
+function syncTempleCatalogControl(){
+  const btn=document.getElementById('templeCatalogToggle');
+  const panel=document.getElementById('templeCatalogPanel');
+  if(!btn||!panel)return;
+  const show=contentType==='temple';
+  btn.style.display=show?'inline-flex':'none';
+  if(!show){
+    panel.style.display='none';
+    btn.setAttribute('aria-expanded','false');
+  }
+}
+
+function getMasterTempleList(){
+  const map=new Map();
+  Object.values(MASTER_BY_NAME||{}).forEach(d=>{
+    if(d&&d.name)map.set(d.name,d);
+  });
+  return [...map.values()].sort((a,b)=>{
+    const regionOrder=['수도권','강원','충청','전라','경상','제주'];
+    const ai=regionOrder.indexOf(a.region), bi=regionOrder.indexOf(b.region);
+    if(ai!==bi)return (ai<0?99:ai)-(bi<0?99:bi);
+    return String(a.name||'').localeCompare(String(b.name||''),'ko');
+  });
+}
+
+function renderTempleCatalog(){
+  const panel=document.getElementById('templeCatalogPanel');
+  if(!panel)return;
+
+  const list=getMasterTempleList();
+  const groups={};
+  list.forEach(d=>{
+    const r=d.region||'기타';
+    (groups[r]||(groups[r]=[])).push(d);
+  });
+
+  const preferred=['수도권','강원','충청','전라','경상','제주'];
+  const regions=[...preferred.filter(r=>groups[r]),...Object.keys(groups).filter(r=>!preferred.includes(r))];
+
+  panel.innerHTML=`
+    <div class="temple-catalog-head">
+      <div><b>108 사찰 전체 목록</b><span> · 메인에서 뺀 절도 여기에는 항상 보여요.</span></div>
+      <span>${list.length}곳</span>
+    </div>
+    <div class="temple-catalog-groups">
+      ${regions.map((region,idx)=>`
+        <div class="temple-catalog-region ${idx===0?'open':''}">
+          <button type="button" onclick="toggleTempleCatalogRegion(this)">
+            <span>${escapeHtml(region)}</span>
+            <small>${groups[region].length}곳 ▾</small>
+          </button>
+          <div class="temple-catalog-items">
+            ${groups[region].map(d=>{
+              const best=getBestTempleEntryByName(d.name);
+              const onMain=isTempleOnMain(d.name);
+              const visited=!!(best&&(Number(best[1].stage)||0)>=1);
+              const stored=!!best;
+              return `<div class="temple-catalog-item ${visited?'visited':''}">
+                <div class="temple-catalog-copy">
+                  <b>${escapeHtml(d.name)}${visited?' · ✓ 다녀옴':''}</b>
+                  <small>${escapeHtml(d.region||'')} · ${d.tag==='유명'?'대표 산사':'숨은 산사'}</small>
+                </div>
+                <div class="temple-catalog-actions">
+                  <button type="button" onclick="openSearchTempleByName('${escapeAttr(d.name)}',event)">보기</button>
+                  ${onMain
+                    ? `<button type="button" class="on-main" disabled>메인에 있음</button>`
+                    : `<button type="button" class="add" onclick="addTempleToMainByName('${escapeAttr(d.name)}',event).then(()=>renderTempleCatalog())">${stored?'메인 다시 추가':'메인 추가'}</button>`}
+                </div>
+              </div>`;
+            }).join('')}
+          </div>
+        </div>`).join('')}
+    </div>`;
+}
+
+function toggleTempleCatalog(event){
+  if(event){event.preventDefault();event.stopPropagation();}
+  if(contentType!=='temple')return;
+  const btn=document.getElementById('templeCatalogToggle');
+  const panel=document.getElementById('templeCatalogPanel');
+  if(!btn||!panel)return;
+
+  const open=panel.style.display!=='none';
+  if(open){
+    panel.style.display='none';
+    btn.setAttribute('aria-expanded','false');
+  }else{
+    renderTempleCatalog();
+    panel.style.display='block';
+    btn.setAttribute('aria-expanded','true');
+  }
+}
+
+function toggleTempleCatalogRegion(btn){
+  btn?.parentElement?.classList.toggle('open');
+}
+
+/* 검색 중 직접 메인 추가 */
+async function addSearchTempleToMain(name,evt){
+  if(evt){evt.preventDefault();evt.stopPropagation();}
+  await addTempleToMainByName(name,evt);
+  renderMasterSearchResults();
+  const panel=document.getElementById('templeCatalogPanel');
+  if(panel&&panel.style.display!=='none')renderTempleCatalog();
 }
 </script>
 
