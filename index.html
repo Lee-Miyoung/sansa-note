@@ -34178,5 +34178,249 @@ async function getLocationPermissionState(){
 }
 </script>
 
+
+<script id="location-auth-hotfix-v2">
+/* ============================================================
+   LOCATION AUTH HOTFIX
+   iPhone Safari: 인증 버튼을 누른 즉시 브라우저 위치 요청을 실행.
+   watchPosition/권한상태 API에 먼저 의존하지 않는다.
+   ============================================================ */
+function requestFieldPositionNow(){
+  return new Promise((resolve,reject)=>{
+    if(!window.isSecureContext){
+      reject({code:99,message:'secure-context-required'});
+      return;
+    }
+    if(!navigator.geolocation){
+      reject({code:98,message:'geolocation-not-supported'});
+      return;
+    }
+
+    let settled=false;
+    const done=(fn,val)=>{
+      if(settled)return;
+      settled=true;
+      fn(val);
+    };
+
+    navigator.geolocation.getCurrentPosition(
+      pos=>done(resolve,pos),
+      err=>done(reject,err),
+      {
+        enableHighAccuracy:true,
+        maximumAge:0,
+        timeout:20000
+      }
+    );
+  });
+}
+
+function locationInfoFromPosition(pos,targetLat,targetLng,zone){
+  const lat=Number(pos.coords.latitude);
+  const lng=Number(pos.coords.longitude);
+  const accuracyM=Math.max(0,Number(pos.coords.accuracy)||0);
+
+  if(zone){
+    const inside=pointInsideMountainZone(lat,lng,zone);
+    return {
+      ok:inside,
+      insideZone:inside,
+      zoneLabel:zone.label,
+      distanceM:distanceToMountainZoneMeters(lat,lng,zone),
+      accuracyM,
+      latitude:lat,
+      longitude:lng
+    };
+  }
+
+  const distanceM=haversineKm(lat,lng,Number(targetLat),Number(targetLng))*1000;
+  const radiusM=500;
+  const cushion=Math.min(180,accuracyM);
+  return {
+    ok:distanceM<=radiusM+cushion,
+    insideZone:distanceM<=radiusM+cushion,
+    zoneLabel:'사찰 현장권역',
+    distanceM,
+    accuracyM,
+    latitude:lat,
+    longitude:lng
+  };
+}
+
+function showLocationFailure(err,retryFn){
+  if(typeof finishPilgrimageGpsCheck==='function')finishPilgrimageGpsCheck();
+
+  if(err && err.code===99){
+    showToast('Safari 보안 연결(https)에서만 위치 인증할 수 있어요. 주소가 https://sansanote.com 인지 확인해주세요.');
+    return;
+  }
+  if(err && err.code===98){
+    showToast('이 브라우저는 위치 기능을 지원하지 않아요.');
+    return;
+  }
+  if(err && err.code===1){
+    openLocationPermissionHelp(retryFn);
+    return;
+  }
+  if(err && err.code===2){
+    showToast('현재 위치를 가져오지 못했어요. 위치 서비스와 정확한 위치를 켠 뒤 다시 눌러주세요.');
+    return;
+  }
+  showToast('GPS 확인 시간이 초과됐어요. 하늘이 보이는 곳에서 다시 눌러주세요.');
+}
+
+/* 절: 버튼 탭 직후 Safari 권한 요청 */
+function addVisitRecord(withLocation){
+  if(!currentDetailId)return;
+  if(localMode){promptGuestLoginRequired();return;}
+
+  const id=currentDetailId;
+  const d=destinations[id];
+  const noteEl=document.getElementById('visitNoteInput');
+  const note=noteEl?noteEl.value.trim():'';
+
+  function save(verified,distKm,accuracyM){
+    const vid=newId();
+    const wasUnvisited=(destinations[id].stage||0)<1;
+    const oldVisits=Object.assign({},destinations[id].visits||{});
+    const hadVerifiedBefore=Object.values(oldVisits).some(v=>v&&v.verified);
+    const visits=Object.assign({},oldVisits);
+    visits[vid]={
+      ts:Date.now(),note,verified:!!verified,
+      verifiedDistanceM:verified&&typeof distKm==='number'?Math.max(0,Math.round(distKm*1000)):null,
+      gpsAccuracyM:verified&&typeof accuracyM==='number'?Math.round(accuracyM):null
+    };
+    const patch={visits};
+    if((destinations[id].stage||0)<1)patch.stage=1;
+    updateDestination(id,patch);
+    destinations[id]=Object.assign({},destinations[id],patch);
+    renderVisits(destinations[id].visits);
+    renderRepeatChallenge(destinations[id]);
+    renderStepper(destinations[id].stage||0);
+    if(wasUnvisited||verified)playStampAnimation();
+    if(noteEl)noteEl.value='';
+    const newCount=visitCount(destinations[id]);
+    render();
+
+    if(verified){
+      showPilgrimageAchievement({
+        templeId:id,templeName:destinations[id].name,region:destinations[id].region,
+        distKm,accuracyM,firstVerified:!hadVerifiedBefore,repeatCount:newCount
+      });
+    }else if(REPEAT_MILESTONES.includes(newCount)){
+      showCelebration(`🏔 ${newCount}회 순례 달성!`,`${destinations[id].name}, 진짜 단골이 되셨네요`);
+    }else{
+      showCelebration('방문 기록 저장!','오늘의 순례, 잘 남겨뒀어요');
+    }
+  }
+
+  if(!withLocation){save(false);return;}
+
+  const targetLat=Number(d.fixedLat||d.lat);
+  const targetLng=Number(d.fixedLng||d.lng);
+  if(!Number.isFinite(targetLat)||!Number.isFinite(targetLng)){
+    showToast('이 절의 위치 정보가 아직 준비되지 않았어요.');
+    return;
+  }
+
+  startPilgrimageGpsCheck(d.name);
+
+  requestFieldPositionNow().then(pos=>{
+    const info=locationInfoFromPosition(pos,targetLat,targetLng,null);
+    updatePilgrimageGpsCheck(info);
+    finishPilgrimageGpsCheck();
+
+    if(info.ok){
+      save(true,info.distanceM/1000,info.accuracyM);
+    }else{
+      const m=Math.round(info.distanceM||0);
+      const a=Math.round(info.accuracyM||0);
+      showToast(`현장 범위 밖으로 확인돼요 · 약 ${m>=1000?(m/1000).toFixed(1)+'km':m+'m'} · GPS ±${a}m`);
+    }
+  }).catch(err=>showLocationFailure(err,()=>addVisitRecord(true)));
+}
+
+/* 산: 위치 요청과 인증 기준점 계산을 동시에 시작 */
+function addMountainVisit(withLocation=false){
+  if(!currentMountainDetailId)return;
+  if(localMode){promptGuestLoginRequired();return;}
+
+  const id=currentMountainDetailId;
+  const d=mountainDestinations[id];
+  const noteEl=document.getElementById('mVisitNoteInput');
+  const note=noteEl?noteEl.value.trim():'';
+
+  function saveMountainRecord(verified,distKm,accuracyM){
+    const vid=newId();
+    const oldVisits=Object.assign({},mountainDestinations[id].visits||{});
+    const hadVerifiedBefore=Object.values(oldVisits).some(v=>v&&v.verified);
+    const visits=Object.assign({},oldVisits);
+    visits[vid]={
+      ts:Date.now(),note,verified:!!verified,
+      verifiedDistanceM:verified&&typeof distKm==='number'?Math.max(0,Math.round(distKm*1000)):null,
+      gpsAccuracyM:verified&&typeof accuracyM==='number'?Math.round(accuracyM):null
+    };
+    const patch={visits};
+    if((mountainDestinations[id].stage||0)<1)patch.stage=1;
+    updateMountainDestination(id,patch);
+    mountainDestinations[id]=Object.assign({},mountainDestinations[id],patch);
+    renderMountainVisits(visits);
+    renderMountainStepper(mountainDestinations[id].stage||0);
+    renderMountainRewardPreview(mountainDestinations[id]);
+    if(noteEl)noteEl.value='';
+    render();
+
+    const repeatCount=Object.keys(visits).length;
+    if(verified){
+      showMountainAchievement({
+        name:mountainDestinations[id].name,region:mountainDestinations[id].region,
+        distKm,accuracyM,firstVerified:!hadVerifiedBefore,repeatCount
+      });
+    }else{
+      showCelebration('⛰️ 등반 기록 저장!','오늘의 산행, 잘 남겨뒀어요');
+    }
+  }
+
+  if(!withLocation){saveMountainRecord(false);return;}
+
+  const verifyBtn=document.getElementById('mountainVerifyBtn');
+  if(verifyBtn){
+    verifyBtn.disabled=true;
+    verifyBtn.innerHTML='📡 위치 확인 중...<small>잠시만 기다려주세요</small>';
+  }
+  startPilgrimageGpsCheck(d.name);
+
+  const posPromise=requestFieldPositionNow();
+  const targetPromise=resolveMountainVerifyTarget(d,id);
+
+  Promise.all([posPromise,targetPromise]).then(([pos,target])=>{
+    const zone=MOUNTAIN_FIELD_ZONES[d?.name]||null;
+    const info=locationInfoFromPosition(pos,target.lat,target.lng,zone);
+    updatePilgrimageGpsCheck(info);
+    finishPilgrimageGpsCheck();
+
+    if(info.ok){
+      saveMountainRecord(true,info.distanceM/1000,info.accuracyM);
+    }else{
+      const m=Math.round(info.distanceM||0);
+      const a=Math.round(info.accuracyM||0);
+      showToast(`${zone?'산 현장권역':'현장 범위'} 밖으로 확인돼요${m?` · 약 ${m>=1000?(m/1000).toFixed(1)+'km':m+'m'}`:''} · GPS ±${a}m`);
+    }
+  }).catch(err=>{
+    if(String(err&&err.message||'').includes('map')||String(err&&err.message||'').includes('not-found')){
+      finishPilgrimageGpsCheck();
+      showToast('이 산의 인증 기준 위치를 아직 찾지 못했어요.');
+    }else{
+      showLocationFailure(err,()=>addMountainVisit(true));
+    }
+  }).finally(()=>{
+    if(verifyBtn){
+      verifyBtn.disabled=false;
+      verifyBtn.innerHTML='📍 현장 인증하기<small>도착 후 보상 열기</small>';
+    }
+  });
+}
+</script>
+
 </body>
 </html>
