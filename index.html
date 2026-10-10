@@ -35454,103 +35454,6 @@ setTimeout(()=>{
 </script>
 
 
-<script id="browser-back-to-home-v5">
-(function(){
-  let handlingPop=false;
-
-  function isDetailOpen(){
-    return !!(
-      document.getElementById('detailOverlay')?.classList.contains('show') ||
-      document.getElementById('mDetailOverlay')?.classList.contains('show')
-    );
-  }
-
-  function goHomeFromBack(){
-    handlingPop=true;
-
-    try{
-      document.getElementById('detailOverlay')?.classList.remove('show');
-      document.getElementById('mDetailOverlay')?.classList.remove('show');
-      if(typeof currentDetailId!=='undefined')currentDetailId=null;
-      if(typeof currentMountainDetailId!=='undefined')currentMountainDetailId=null;
-    }catch(e){}
-
-    try{
-      document.querySelectorAll('.overlay.show').forEach(el=>{
-        el.classList.remove('show');
-        el.setAttribute('aria-hidden','true');
-      });
-    }catch(e){}
-
-    try{
-      const sp=document.getElementById('masterSearchPanel');
-      if(sp){sp.style.display='none';sp.innerHTML='';}
-      const cp=document.getElementById('templeCatalogPanel');
-      if(cp)cp.style.display='none';
-      const s=document.getElementById('searchBox');
-      if(s)s.value='';
-    }catch(e){}
-
-    try{
-      contentType='temple';
-      document.getElementById('ctypeTemple')?.classList.add('active');
-      document.getElementById('ctypeMountain')?.classList.remove('active');
-      document.getElementById('ctypeCommunity')?.classList.remove('active');
-      if(typeof setCommunityViewMode==='function')setCommunityViewMode(false);
-      if(typeof render==='function')render();
-    }catch(e){}
-
-    window.scrollTo({top:0,behavior:'smooth'});
-    setTimeout(()=>{handlingPop=false;},60);
-  }
-
-  // 현재 페이지를 홈 상태로 표기
-  try{
-    history.replaceState(Object.assign({},history.state||{},{sansaHome:true}),'',location.href);
-  }catch(e){}
-
-  // 상세를 열 때 내부 history를 한 칸 추가
-  const oldOpenDetail=window.openDetail;
-  if(typeof oldOpenDetail==='function'){
-    window.openDetail=function(){
-      if(!handlingPop){
-        try{history.pushState({sansaInternal:true,kind:'temple'},'',location.href);}catch(e){}
-      }
-      return oldOpenDetail.apply(this,arguments);
-    };
-  }
-
-  const oldOpenMountainDetail=window.openMountainDetail;
-  if(typeof oldOpenMountainDetail==='function'){
-    window.openMountainDetail=function(){
-      if(!handlingPop){
-        try{history.pushState({sansaInternal:true,kind:'mountain'},'',location.href);}catch(e){}
-      }
-      return oldOpenMountainDetail.apply(this,arguments);
-    };
-  }
-
-  // 산/커뮤니티 탭도 홈이 아닌 내부 화면으로 취급
-  const oldSwitchContentType=window.switchContentType;
-  if(typeof oldSwitchContentType==='function'){
-    window.switchContentType=function(type){
-      if(!handlingPop && type!=='temple' && typeof contentType!=='undefined' && contentType==='temple'){
-        try{history.pushState({sansaInternal:true,kind:type},'',location.href);}catch(e){}
-      }
-      return oldSwitchContentType.apply(this,arguments);
-    };
-  }
-
-  window.addEventListener('popstate',function(){
-    // 내부 상세/산/커뮤니티에서 뒤로가면 무조건 홈 화면으로 정리
-    if(isDetailOpen() || (typeof contentType!=='undefined' && contentType!=='temple')){
-      goHomeFromBack();
-    }
-  });
-})();
-</script>
-
-
 <div class="overlay" id="catalogOverlay" aria-hidden="true">
   <div class="modal catalog-modal">
     <div class="modal-head">
@@ -35639,6 +35542,382 @@ function renderCatalogOverlay(){
       return old.apply(this,arguments);
     };
   }
+})();
+</script>
+
+
+<script id="sansa-final-nav-main-fix-v6">
+/* =========================================================
+   1) 절/산 전체목록은 별도 창
+   2) 목록의 "메인에서 보기/메인 추가" -> 실제 사진 카드 메인 표시
+   3) 산도 동일
+   4) 홈에서 들어간 어떤 내부 화면이든 브라우저 뒤로가기 -> 홈
+   ========================================================= */
+(function(){
+  let sansaReturningHome = false;
+
+  function resetMainFilters(type){
+    try{
+      contentType = type;
+      filterRegion = '전체';
+      filterTag = 'all';
+      heroQuickFilter = 'all';
+    }catch(e){}
+
+    const stage = document.getElementById('stageFilter');
+    if(stage){
+      stage.innerHTML = type==='mountain'
+        ? `<option value="all">단계 전체</option><option value="0">가보고 싶다</option><option value="1">올랐어요</option><option value="2">등반 기록 완료</option>`
+        : `<option value="all">단계 전체</option><option value="0">가보고 싶다</option><option value="1">다녀왔어요</option><option value="2">순례 기록 완료</option>`;
+      stage.value='all';
+    }
+
+    const search = document.getElementById('searchBox');
+    if(search){
+      search.value='';
+      search.placeholder = type==='mountain' ? '산 이름, 지역으로 검색' : '108개 사찰 전체에서 검색';
+    }
+
+    const tagToggle=document.getElementById('tagToggle');
+    if(tagToggle) tagToggle.style.display = type==='mountain' ? 'none' : 'flex';
+
+    document.querySelectorAll('#tagToggle button').forEach(b=>{
+      b.classList.toggle('active', type==='temple' && b.dataset.tag==='all');
+    });
+
+    document.getElementById('ctypeTemple')?.classList.toggle('active',type==='temple');
+    document.getElementById('ctypeMountain')?.classList.toggle('active',type==='mountain');
+    document.getElementById('ctypeCommunity')?.classList.remove('active');
+
+    try{ if(typeof setCommunityViewMode==='function') setCommunityViewMode(false); }catch(e){}
+    try{ if(typeof buildRegionTabs==='function') buildRegionTabs(); }catch(e){}
+  }
+
+  function pushInternalState(kind){
+    try{
+      const st=history.state||{};
+      if(st.sansaInternal){
+        history.replaceState({...st,sansaInternal:true,sansaKind:kind},'',location.href);
+      }else{
+        history.pushState({sansaInternal:true,sansaKind:kind},'',location.href);
+      }
+    }catch(e){}
+  }
+
+  function closeAllInternalUI(){
+    try{ closeCatalogOverlay(); }catch(e){}
+    try{
+      document.querySelectorAll('.overlay.show').forEach(el=>{
+        el.classList.remove('show');
+        el.setAttribute('aria-hidden','true');
+      });
+    }catch(e){}
+    try{
+      document.getElementById('detailOverlay')?.classList.remove('show');
+      document.getElementById('mDetailOverlay')?.classList.remove('show');
+      if(typeof currentDetailId!=='undefined') currentDetailId=null;
+      if(typeof currentMountainDetailId!=='undefined') currentMountainDetailId=null;
+    }catch(e){}
+    try{
+      const sp=document.getElementById('masterSearchPanel');
+      if(sp){sp.style.display='none';sp.innerHTML='';}
+      const cp=document.getElementById('templeCatalogPanel');
+      if(cp)cp.style.display='none';
+    }catch(e){}
+  }
+
+  function returnToHome(){
+    if(sansaReturningHome)return;
+    sansaReturningHome=true;
+    closeAllInternalUI();
+
+    // 홈 기본 상태는 절 메인 카드 화면으로 복귀
+    resetMainFilters('temple');
+    try{ render(); }catch(e){ console.warn('home render',e); }
+    window.scrollTo({top:0,behavior:'smooth'});
+
+    setTimeout(()=>{sansaReturningHome=false;},80);
+  }
+
+  // 첫 페이지 상태를 홈으로 명확히 표시
+  try{
+    history.replaceState({...(history.state||{}),sansaHome:true,sansaInternal:false},'',location.href);
+  }catch(e){}
+
+  /* ---------- 절: 메인 카드에 확실히 복구 ---------- */
+  async function ensureTempleVisibleOnMain(name){
+    const master=(typeof MASTER_BY_NAME!=='undefined' && MASTER_BY_NAME) ? MASTER_BY_NAME[name] : null;
+    if(!master) return null;
+
+    let entries=Object.entries(destinations||{}).filter(([id,d])=>d&&d.name===name);
+    let id=null;
+
+    if(entries.length){
+      // 기록이 가장 많은 항목을 대표로 사용
+      entries.sort((a,b)=>{
+        const A=a[1], B=b[1];
+        const sa=(Number(A.stage)||0)*10000+Object.keys(A.visits||{}).length*100+Object.keys(A.photos||{}).length;
+        const sb=(Number(B.stage)||0)*10000+Object.keys(B.visits||{}).length*100+Object.keys(B.photos||{}).length;
+        return sb-sa;
+      });
+      id=entries[0][0];
+
+      entries.forEach(([eid,d])=>{
+        destinations[eid]=Object.assign({},d,{
+          hiddenFromList:false,
+          hiddenAt:null,
+          hiddenTrayDismissed:false,
+          hiddenTrayDismissedAt:null
+        });
+      });
+    }else{
+      id='main_t_'+Date.now()+'_'+Math.random().toString(36).slice(2,7);
+      destinations[id]=Object.assign({},master,{
+        stage:0,notes:'',photos:{},visits:{},
+        hiddenFromList:false,
+        hiddenAt:null,
+        hiddenTrayDismissed:false,
+        createdAt:Date.now()
+      });
+    }
+
+    // 기존 강제노출 키에도 기록해서 Firebase의 오래된 hidden=true가 다시 와도 보이게
+    try{
+      const key='sansanote_main_visible_v4';
+      const arr=JSON.parse(localStorage.getItem(key)||'[]');
+      const set=new Set(Array.isArray(arr)?arr:[]);
+      set.add(name);
+      localStorage.setItem(key,JSON.stringify([...set]));
+    }catch(e){}
+
+    // 저장은 실패해도 화면 표시를 취소하지 않음
+    try{
+      if(localMode){
+        if(typeof persistLocal==='function')persistLocal();
+      }else if(currentUid && typeof destinationRef==='function'){
+        await destinationRef(id).update({
+          hiddenFromList:false,
+          hiddenAt:null,
+          hiddenTrayDismissed:false,
+          hiddenTrayDismissedAt:null
+        });
+      }
+    }catch(e){ console.warn('temple main save deferred',e); }
+
+    return id;
+  }
+
+  window.showTempleOnMainFromCatalog=async function(name,evt){
+    if(evt){evt.preventDefault();evt.stopPropagation();}
+    closeCatalogOverlay();
+    const id=await ensureTempleVisibleOnMain(name);
+    if(!id){
+      showToast('사찰 정보를 찾지 못했어요.');
+      return;
+    }
+
+    resetMainFilters('temple');
+    try{ render(); }catch(e){console.warn(e);}
+    pushInternalState('main-temple');
+
+    setTimeout(()=>{
+      let card=document.querySelector(`#grid .card[data-id="${id}"]`);
+      if(!card){
+        const same=Object.entries(destinations||{}).find(([eid,d])=>d&&d.name===name&&!d.hiddenFromList);
+        if(same)card=document.querySelector(`#grid .card[data-id="${same[0]}"]`);
+      }
+      if(card){
+        card.scrollIntoView({behavior:'smooth',block:'center'});
+        card.classList.add('pulse-now');
+        setTimeout(()=>card.classList.remove('pulse-now'),1500);
+      }else{
+        document.getElementById('grid')?.scrollIntoView({behavior:'smooth',block:'start'});
+      }
+    },220);
+
+    showToast(`"${name}"을(를) 메인에 표시했어요.`);
+  };
+
+  /* ---------- 산: 메인 카드 화면으로 확실히 표시 ---------- */
+  function ensureMountainExists(name){
+    try{ if(typeof ensureMountainsSeeded==='function')ensureMountainsSeeded(); }catch(e){}
+    let found=Object.entries(mountainDestinations||{}).find(([id,d])=>d&&d.name===name);
+    if(found)return found[0];
+
+    const seed=(MOUNTAIN_SEED||[]).find(d=>d&&d.name===name);
+    if(!seed)return null;
+
+    const id='main_m_'+Date.now()+'_'+Math.random().toString(36).slice(2,7);
+    mountainDestinations[id]=Object.assign({},seed,{
+      stage:0,notes:'',photos:{},visits:{},createdAt:Date.now()
+    });
+    try{
+      if(localMode && typeof persistLocalMountains==='function')persistLocalMountains();
+    }catch(e){}
+    return id;
+  }
+
+  window.showMountainOnMainFromCatalog=function(name,evt){
+    if(evt){evt.preventDefault();evt.stopPropagation();}
+    closeCatalogOverlay();
+    const id=ensureMountainExists(name);
+    if(!id){
+      showToast('산 정보를 찾지 못했어요.');
+      return;
+    }
+
+    resetMainFilters('mountain');
+    try{ renderMountainView(); }catch(e){
+      try{ render(); }catch(err){console.warn(err);}
+    }
+    pushInternalState('main-mountain');
+
+    setTimeout(()=>{
+      const card=document.querySelector(`#grid .card[data-id="${id}"]`);
+      if(card){
+        card.scrollIntoView({behavior:'smooth',block:'center'});
+        card.classList.add('pulse-now');
+        setTimeout(()=>card.classList.remove('pulse-now'),1500);
+      }else{
+        document.getElementById('grid')?.scrollIntoView({behavior:'smooth',block:'start'});
+      }
+    },220);
+
+    showToast(`"${name}"을(를) 산 메인 목록에서 보여드려요.`);
+  };
+
+  /* ---------- 전체 목록 창 렌더: 절/산 모두 메인 버튼 ---------- */
+  window.renderCatalogOverlay=function(){
+    const title=document.getElementById('catalogTitle');
+    const sub=document.getElementById('catalogSub');
+    const list=document.getElementById('catalogList');
+    const count=document.getElementById('catalogCount');
+    if(!list)return;
+
+    const q=(document.getElementById('catalogSearch')?.value||'').trim().toLowerCase();
+
+    if(catalogMode==='mountain'){
+      try{ if(typeof ensureMountainsSeeded==='function')ensureMountainsSeeded(); }catch(e){}
+      const all=getMountainCatalogData();
+      const filtered=all.filter(d=>{
+        const hay=[d.name,d.region,d.height,d.desc,d.tagline].filter(Boolean).join(' ').toLowerCase();
+        return !q||hay.includes(q);
+      });
+
+      if(title)title.textContent='⛰ 산 전체 목록';
+      if(sub)sub.textContent='산 전체 목록에서 보고 싶은 산을 메인 사진 카드로 바로 열 수 있어요.';
+      if(count)count.textContent=`${filtered.length}곳`;
+
+      list.innerHTML=filtered.length?filtered.map(d=>{
+        const visited=mountainVisitedByName(d.name);
+        return `<div class="catalog-card ${visited?'visited':''}">
+          <div class="catalog-copy">
+            <b>${escapeHtml(d.name)}${visited?' · ✓ 다녀옴':''}</b>
+            <small>${escapeHtml(d.region||'')}${d.height?' · '+escapeHtml(String(d.height)):''}</small>
+          </div>
+          <div class="catalog-actions">
+            <button type="button" onclick="openMountainFromCatalog('${escapeAttr(d.name)}')">보기</button>
+            <button class="primary" type="button" onclick="showMountainOnMainFromCatalog('${escapeAttr(d.name)}',event)">메인에서 보기</button>
+          </div>
+        </div>`;
+      }).join(''):'<div class="catalog-empty">검색 결과가 없어요.</div>';
+      return;
+    }
+
+    const all=getTempleCatalogData();
+    const filtered=all.filter(d=>{
+      const hay=[d.name,d.region,d.desc,d.tagline].filter(Boolean).join(' ').toLowerCase();
+      return !q||hay.includes(q);
+    });
+
+    if(title)title.textContent='🛕 108 사찰 전체 목록';
+    if(sub)sub.textContent='108 사찰 전체 목록에서 메인에 보일 절을 바로 선택할 수 있어요.';
+    if(count)count.textContent=`${filtered.length}곳`;
+
+    list.innerHTML=filtered.length?filtered.map(d=>{
+      const visited=templeVisitedByName(d.name);
+      const onMain=isTempleOnMain(d.name);
+      return `<div class="catalog-card ${visited?'visited':''}">
+        <div class="catalog-copy">
+          <b>${escapeHtml(d.name)}${visited?' · ✓ 다녀옴':''}</b>
+          <small>${escapeHtml(d.region||'')} · ${d.tag==='유명'?'대표 산사':'숨은 산사'}</small>
+        </div>
+        <div class="catalog-actions">
+          <button type="button" onclick="openTempleFromCatalog('${escapeAttr(d.name)}')">보기</button>
+          <button class="primary" type="button" onclick="showTempleOnMainFromCatalog('${escapeAttr(d.name)}',event)">${onMain?'메인에서 보기':'메인 추가'}</button>
+        </div>
+      </div>`;
+    }).join(''):'<div class="catalog-empty">검색 결과가 없어요.</div>';
+  };
+
+  /* ---------- 절/산 탭: 무조건 전체목록 별도 창 ---------- */
+  const _catalogOpen = window.openCatalogOverlay;
+  window.openCatalogOverlay=function(mode){
+    pushInternalState(mode==='mountain'?'mountain-catalog':'temple-catalog');
+    return _catalogOpen(mode);
+  };
+
+  // 기존 마지막 switchContentType 래퍼를 확실하게 덮음
+  const realCommunitySwitch = window.switchContentType;
+  window.switchContentType=function(type){
+    if(type==='temple'){
+      openCatalogOverlay('temple');
+      return;
+    }
+    if(type==='mountain'){
+      openCatalogOverlay('mountain');
+      return;
+    }
+    if(type==='community'){
+      pushInternalState('community');
+      // 기존 함수가 현재 래퍼라 community는 정상적으로 원 함수까지 전달됨
+      return realCommunitySwitch.call(this,type);
+    }
+    return realCommunitySwitch.call(this,type);
+  };
+
+  /* ---------- 상세 보기에도 뒤로가기용 내부 상태 1칸 ---------- */
+  const _openDetail=window.openDetail;
+  if(typeof _openDetail==='function'){
+    window.openDetail=function(){
+      pushInternalState('temple-detail');
+      return _openDetail.apply(this,arguments);
+    };
+  }
+  const _openMountainDetail=window.openMountainDetail;
+  if(typeof _openMountainDetail==='function'){
+    window.openMountainDetail=function(){
+      pushInternalState('mountain-detail');
+      return _openMountainDetail.apply(this,arguments);
+    };
+  }
+
+  /* ---------- 상단 메뉴: 어떤 메뉴든 홈에서 들어가면 뒤로가기 -> 홈 ---------- */
+  const _goSiteNav=window.goSiteNav;
+  window.goSiteNav=function(target){
+    if(target==='home'){
+      returnToHome();
+      try{history.replaceState({sansaHome:true,sansaInternal:false},'',location.href);}catch(e){}
+      return;
+    }
+
+    if(target==='temple'){ openCatalogOverlay('temple'); return; }
+    if(target==='mountain'){ openCatalogOverlay('mountain'); return; }
+
+    if(target==='course' || target==='mypage' || target==='community'){
+      pushInternalState(target);
+    }
+    return _goSiteNav.call(this,target);
+  };
+
+  /* ---------- 브라우저/휴대폰 뒤로가기 ---------- */
+  window.addEventListener('popstate',function(){
+    // 산사노트 내부에서는 무엇을 보고 있었든 첫 뒤로가기는 홈
+    returnToHome();
+    try{
+      history.replaceState({sansaHome:true,sansaInternal:false},'',location.href);
+    }catch(e){}
+  });
 })();
 </script>
 
