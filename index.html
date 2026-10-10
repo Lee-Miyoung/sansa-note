@@ -20238,6 +20238,25 @@ header.hero .hero-experience{
 }
 </style>
 
+
+<style id="catalog-overlay-style">
+.catalog-modal{width:min(920px,calc(100vw - 22px))!important;max-height:90vh!important}
+.catalog-modal .modal-body{max-height:calc(90vh - 86px);overflow:auto}
+.catalog-toolbar{position:sticky;top:-1px;z-index:3;display:flex;gap:9px;align-items:center;padding:4px 0 10px;background:#fcfaf6}
+.catalog-toolbar .searchbox{flex:1 1 auto;min-width:0}
+.catalog-count{font-size:11px;font-weight:800;color:#7d746a}
+.catalog-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.catalog-card{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:center;padding:12px;border:1px solid #e5ddd1;border-radius:14px;background:#fff}
+.catalog-card.visited{border:2px solid #C99645;box-shadow:0 4px 14px rgba(201,150,69,.13)}
+.catalog-copy b{display:block;font-size:14px;color:#2f2924}
+.catalog-copy small{display:block;margin-top:4px;font-size:11px;line-height:1.45;color:#81776b}
+.catalog-actions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.catalog-actions button{min-height:34px;padding:0 10px;border-radius:10px;border:1px solid #d7cec1;background:#fff;color:#554b41;font-family:inherit;font-size:10px;font-weight:900}
+.catalog-actions button.primary{background:#356b58;border-color:#356b58;color:#fff}
+.catalog-empty{grid-column:1/-1;padding:30px 12px;text-align:center;color:#857a6f;font-size:13px}
+@media(max-width:700px){.catalog-list{grid-template-columns:1fr}.catalog-card{padding:11px}.catalog-copy b{font-size:13px}.catalog-copy small{font-size:10.5px}}
+</style>
+
 </head>
 <body>
 
@@ -35528,6 +35547,98 @@ setTimeout(()=>{
       goHomeFromBack();
     }
   });
+})();
+</script>
+
+
+<div class="overlay" id="catalogOverlay" aria-hidden="true">
+  <div class="modal catalog-modal">
+    <div class="modal-head">
+      <div><h2 class="serif" id="catalogTitle">전체 목록</h2><div class="sub" id="catalogSub"></div></div>
+      <button class="close-x" type="button" onclick="closeCatalogOverlay()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="catalog-toolbar">
+        <input id="catalogSearch" class="searchbox" type="search" placeholder="이름이나 지역으로 검색" oninput="renderCatalogOverlay()">
+        <span class="catalog-count" id="catalogCount"></span>
+      </div>
+      <div id="catalogList" class="catalog-list"></div>
+    </div>
+  </div>
+</div>
+
+
+<script id="catalog-overlay-js">
+let catalogMode='temple';
+function openCatalogOverlay(mode){
+  catalogMode=mode==='mountain'?'mountain':'temple';
+  const s=document.getElementById('catalogSearch'); if(s)s.value='';
+  renderCatalogOverlay();
+  const o=document.getElementById('catalogOverlay');
+  if(o){o.classList.add('show');o.setAttribute('aria-hidden','false');}
+}
+function closeCatalogOverlay(){
+  const o=document.getElementById('catalogOverlay');
+  if(o){o.classList.remove('show');o.setAttribute('aria-hidden','true');}
+}
+function getTempleCatalogData(){
+  const m=new Map();
+  Object.values(MASTER_BY_NAME||{}).forEach(d=>{if(d?.name)m.set(d.name,{...d})});
+  Object.values(destinations||{}).forEach(d=>{if(d?.name)m.set(d.name,{...(m.get(d.name)||{}),...d})});
+  return [...m.values()].sort((a,b)=>String(a.name||'').localeCompare(String(b.name||''),'ko'));
+}
+function getMountainCatalogData(){
+  const m=new Map();
+  (MOUNTAIN_SEED||[]).forEach(d=>{if(d?.name)m.set(d.name,{...d})});
+  Object.values(mountainDestinations||{}).forEach(d=>{if(d?.name)m.set(d.name,{...(m.get(d.name)||{}),...d})});
+  return [...m.values()].sort((a,b)=>String(a.name||'').localeCompare(String(b.name||''),'ko'));
+}
+function templeVisitedByName(name){
+  try{return getTempleEntriesByName(name).some(([id,d])=>(Number(d.stage)||0)>=1||Object.values(d.visits||{}).some(v=>v&&v.verified));}catch(e){return false;}
+}
+function mountainVisitedByName(name){
+  try{return Object.values(mountainDestinations||{}).some(d=>d&&d.name===name&&((Number(d.stage)||0)>=1||Object.values(d.visits||{}).some(v=>v&&v.verified)));}catch(e){return false;}
+}
+async function openTempleFromCatalog(name){
+  closeCatalogOverlay();
+  const best=getBestTempleEntryByName(name);
+  if(best){openDetail(best[0]);return;}
+  const master=(MASTER_BY_NAME||{})[name]; if(!master)return;
+  const id='catalog_'+Date.now();
+  destinations[id]={...master,stage:0,notes:'',photos:{},visits:{},hiddenFromList:true,createdAt:Date.now()};
+  openDetail(id);
+}
+async function openMountainFromCatalog(name){
+  closeCatalogOverlay();
+  const ex=Object.entries(mountainDestinations||{}).find(([id,d])=>d&&d.name===name);
+  if(ex){openMountainDetail(ex[0]);return;}
+  const seed=(MOUNTAIN_SEED||[]).find(d=>d&&d.name===name); if(!seed)return;
+  const id='catalog_m_'+Date.now();
+  mountainDestinations[id]={...seed,stage:0,notes:'',photos:{},visits:{},createdAt:Date.now()};
+  openMountainDetail(id);
+}
+function renderCatalogOverlay(){
+  const title=document.getElementById('catalogTitle'),sub=document.getElementById('catalogSub'),list=document.getElementById('catalogList'),count=document.getElementById('catalogCount');
+  const q=(document.getElementById('catalogSearch')?.value||'').trim().toLowerCase();
+  if(catalogMode==='mountain'){
+    const a=getMountainCatalogData().filter(d=>!q||[d.name,d.region,d.height,d.desc].filter(Boolean).join(' ').toLowerCase().includes(q));
+    title.textContent='⛰ 산 전체 목록'; sub.textContent='산 탭을 누르면 전체 산 목록이 별도 창으로 열려요.'; count.textContent=`${a.length}곳`;
+    list.innerHTML=a.length?a.map(d=>`<div class="catalog-card ${mountainVisitedByName(d.name)?'visited':''}"><div class="catalog-copy"><b>${escapeHtml(d.name)}${mountainVisitedByName(d.name)?' · ✓ 다녀옴':''}</b><small>${escapeHtml(d.region||'')}${d.height?' · '+escapeHtml(String(d.height)):''}</small></div><div class="catalog-actions"><button class="primary" onclick="openMountainFromCatalog('${escapeAttr(d.name)}')">보기</button></div></div>`).join(''):'<div class="catalog-empty">검색 결과가 없어요.</div>';
+  }else{
+    const a=getTempleCatalogData().filter(d=>!q||[d.name,d.region,d.desc].filter(Boolean).join(' ').toLowerCase().includes(q));
+    title.textContent='🛕 108 사찰 전체 목록'; sub.textContent='절 탭을 누르면 108 사찰 전체 목록이 별도 창으로 열려요.'; count.textContent=`${a.length}곳`;
+    list.innerHTML=a.length?a.map(d=>{const v=templeVisitedByName(d.name),on=isTempleOnMain(d.name);return `<div class="catalog-card ${v?'visited':''}"><div class="catalog-copy"><b>${escapeHtml(d.name)}${v?' · ✓ 다녀옴':''}</b><small>${escapeHtml(d.region||'')}</small></div><div class="catalog-actions"><button onclick="openTempleFromCatalog('${escapeAttr(d.name)}')">보기</button>${on?`<button onclick="closeCatalogOverlay();revealTempleOnMain('${escapeAttr(d.name)}',event)">메인에서 보기</button>`:`<button class="primary" onclick="closeCatalogOverlay();revealTempleOnMain('${escapeAttr(d.name)}',event)">메인 추가</button>`}</div></div>`}).join(''):'<div class="catalog-empty">검색 결과가 없어요.</div>';
+  }
+}
+(function(){
+  const old=window.switchContentType;
+  if(typeof old==='function'){
+    window.switchContentType=function(type){
+      if(type==='temple'){openCatalogOverlay('temple');return;}
+      if(type==='mountain'){openCatalogOverlay('mountain');return;}
+      return old.apply(this,arguments);
+    };
+  }
 })();
 </script>
 
