@@ -35344,5 +35344,221 @@ setTimeout(()=>{
 })();
 </script>
 
+
+<script id="main-view-hardfix-v3">
+/* =========================================================
+   메인 복구 최종 수정
+   - 예전 강제 메인 키 때문에 '메인에서 보기'라고 잘못 뜨던 문제 제거
+   - 실제 visible 상태만 기준으로 버튼 표시
+   - 메인 추가 시 즉시 카드 생성 + 숨김 해제 + 필터 초기화
+   ========================================================= */
+(function(){
+  const KEY='sansanote_restored_main_names_v3';
+
+  // 이전 임시 패치에서 남은 잘못된 판정값 제거
+  try{
+    localStorage.removeItem('sansanote_force_main_names_v2');
+    localStorage.removeItem('sansanoteMainTempleOverrides_v1');
+  }catch(e){}
+
+  function readSet(){
+    try{
+      const a=JSON.parse(localStorage.getItem(KEY)||'[]');
+      return new Set(Array.isArray(a)?a:[]);
+    }catch(e){ return new Set(); }
+  }
+  function writeSet(set){
+    try{ localStorage.setItem(KEY,JSON.stringify([...set])); }catch(e){}
+  }
+  function addRestored(name){
+    const s=readSet(); s.add(name); writeSet(s);
+  }
+  function removeRestored(name){
+    const s=readSet(); s.delete(name); writeSet(s);
+  }
+
+  function masterByNameSafe(name){
+    if(typeof MASTER_BY_NAME!=='undefined' && MASTER_BY_NAME && MASTER_BY_NAME[name]) return MASTER_BY_NAME[name];
+    return null;
+  }
+
+  function entriesByNameSafe(name){
+    try{
+      return Object.entries(destinations||{}).filter(([id,d])=>d&&d.name===name);
+    }catch(e){ return []; }
+  }
+
+  function ensureVisibleTemple(name){
+    const master=masterByNameSafe(name);
+    if(!master) return null;
+
+    let entries=entriesByNameSafe(name);
+    if(entries.length){
+      entries.forEach(([id,d])=>{
+        destinations[id]=Object.assign({},d,{
+          hiddenFromList:false,
+          hiddenAt:null,
+          hiddenTrayDismissed:false,
+          hiddenTrayDismissedAt:null
+        });
+      });
+      // 기록이 가장 많은 항목을 우선 반환
+      entries=entries.sort((a,b)=>{
+        const A=a[1],B=b[1];
+        const sa=(Number(A.stage)||0)*1000+Object.keys(A.visits||{}).length*50+Object.keys(A.photos||{}).length*20;
+        const sb=(Number(B.stage)||0)*1000+Object.keys(B.visits||{}).length*50+Object.keys(B.photos||{}).length*20;
+        return sb-sa;
+      });
+      return entries[0][0];
+    }
+
+    const id='restored_'+Date.now()+'_'+Math.random().toString(36).slice(2,7);
+    destinations[id]=Object.assign({},master,{
+      stage:0,
+      notes:'',
+      photos:{},
+      visits:{},
+      hiddenFromList:false,
+      hiddenAt:null,
+      hiddenTrayDismissed:false,
+      hiddenTrayDismissedAt:null,
+      createdAt:Date.now()
+    });
+    return id;
+  }
+
+  function applyRestoredNames(){
+    const s=readSet();
+    s.forEach(name=>ensureVisibleTemple(name));
+  }
+
+  // '메인에 있음' 판정은 실제 visible 데이터로만 판단
+  window.isTempleOnMain=function(name){
+    return entriesByNameSafe(name).some(([id,d])=>d && d.hiddenFromList!==true);
+  };
+
+  async function persistVisibleEntries(name){
+    const entries=entriesByNameSafe(name);
+    if(typeof localMode!=='undefined' && localMode){
+      try{ if(typeof persistLocal==='function') persistLocal(); }catch(e){}
+      return;
+    }
+    if(typeof currentUid==='undefined' || !currentUid || typeof destinationRef!=='function') return;
+    for(const [id,d] of entries){
+      try{
+        await destinationRef(id).update({
+          hiddenFromList:false,
+          hiddenAt:null,
+          hiddenTrayDismissed:false,
+          hiddenTrayDismissedAt:null
+        });
+      }catch(e){
+        console.warn('메인 복구 저장 보류',e);
+      }
+    }
+  }
+
+  window.revealTempleOnMain=async function(name,evt){
+    if(evt){evt.preventDefault();evt.stopPropagation();}
+    const master=masterByNameSafe(name);
+    if(!master){
+      showToast('108 사찰 목록에서 찾지 못했어요.');
+      return false;
+    }
+
+    addRestored(name);
+    const id=ensureVisibleTemple(name);
+
+    // 필터/검색을 완전히 해제
+    try{
+      contentType='temple';
+      filterRegion='전체';
+      filterTag='all';
+      heroQuickFilter='all';
+    }catch(e){}
+    const stage=document.getElementById('stageFilter');
+    if(stage)stage.value='all';
+    const search=document.getElementById('searchBox');
+    if(search)search.value='';
+    const panel=document.getElementById('masterSearchPanel');
+    if(panel){panel.style.display='none';panel.innerHTML='';}
+    const cat=document.getElementById('templeCatalogPanel');
+    if(cat)cat.style.display='none';
+    const catBtn=document.getElementById('templeCatalogToggle');
+    if(catBtn)catBtn.setAttribute('aria-expanded','false');
+
+    document.querySelectorAll('#tagToggle button').forEach(b=>{
+      b.classList.toggle('active',b.dataset.tag==='all');
+    });
+
+    try{ if(typeof buildRegionTabs==='function')buildRegionTabs(); }catch(e){}
+    try{ if(typeof render==='function')render(); }catch(e){console.warn(e);}
+
+    // 혹시 다른 기존 로직이 다시 숨겨도 즉시 한 번 더 복구
+    setTimeout(()=>{
+      ensureVisibleTemple(name);
+      try{ if(typeof render==='function')render(); }catch(e){}
+      setTimeout(()=>{
+        let card=id?document.querySelector(`#grid .card[data-id="${CSS.escape(id)}"]`):null;
+        if(!card){
+          // 같은 이름의 실제 표시 카드 찾기
+          const candidates=entriesByNameSafe(name).filter(([eid,d])=>d.hiddenFromList!==true);
+          for(const [eid] of candidates){
+            card=document.querySelector(`#grid .card[data-id="${CSS.escape(eid)}"]`);
+            if(card)break;
+          }
+        }
+        if(card){
+          card.scrollIntoView({behavior:'smooth',block:'center'});
+          card.classList.add('pulse-now');
+          setTimeout(()=>card.classList.remove('pulse-now'),1600);
+        }else{
+          document.getElementById('grid')?.scrollIntoView({behavior:'smooth',block:'start'});
+        }
+      },120);
+    },80);
+
+    persistVisibleEntries(name); // 화면 표시 후 백그라운드 저장
+    showToast(`"${name}"을(를) 메인에 넣었어요.`);
+    return true;
+  };
+
+  window.addTempleToMainByName=function(name,evt){
+    return window.revealTempleOnMain(name,evt);
+  };
+
+  // 기존 검색 보조 함수도 새 로직 사용
+  window.addSearchTempleToMain=async function(name,evt){
+    await window.revealTempleOnMain(name,evt);
+  };
+
+  // 사용자가 다시 '메인에서 빼기' 하면 복구 목록에서도 제거
+  const oldHide=window.hideDestinationFromMain;
+  if(typeof oldHide==='function'){
+    window.hideDestinationFromMain=async function(id,evt){
+      const name=destinations?.[id]?.name;
+      if(name)removeRestored(name);
+      return oldHide.call(this,id,evt);
+    };
+  }
+  const oldHideCurrent=window.hideCurrentDestination;
+  if(typeof oldHideCurrent==='function'){
+    window.hideCurrentDestination=async function(){
+      const name=(typeof currentDetailId!=='undefined' && destinations?.[currentDetailId])?destinations[currentDetailId].name:null;
+      if(name)removeRestored(name);
+      return oldHideCurrent.apply(this,arguments);
+    };
+  }
+
+  // 재접속 때 복구
+  const run=()=>{
+    applyRestoredNames();
+    try{ if(typeof render==='function')render(); }catch(e){}
+  };
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',()=>setTimeout(run,250),{once:true});
+  else setTimeout(run,250);
+})();
+</script>
+
 </body>
 </html>
