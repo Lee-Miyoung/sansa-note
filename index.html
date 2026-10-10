@@ -20630,6 +20630,30 @@ header.hero .hero-experience{
 }
 </style>
 
+
+<style id="home-simplify-feature-move-v11">
+/* 홈에서 기능성 배너 3개 제거 */
+#quizBannerWrap,
+#seasonBannerWrap,
+#triviaBannerWrap,
+#approvedActionRow{
+  display:none !important;
+}
+
+/* 메인 사진 카드에서는 '메인에서 빼기'를 노출하지 않음
+   추가/빼기는 절·산 전체목록의 ⋯ 메뉴에서만 처리 */
+#grid .card-hide-text,
+#mainPinnedGrid .card-hide-text{
+  display:none !important;
+}
+
+/* 버튼 빠진 뒤 카드 하단 정돈 */
+#grid .card-footer-actions,
+#mainPinnedGrid .card-footer-actions{
+  justify-content:flex-start !important;
+}
+</style>
+
 </head>
 <body>
 
@@ -34813,7 +34837,9 @@ const SANSA_GUIDE_ITEMS = [
   {icon:'息',title:'1분 호흡',desc:'잠깐 멈추고 숨 고르기',tags:'호흡 명상 쉼 마음',action:"openBreathOverlay('counting')"},
   {icon:'木',title:'무한 목탁',desc:'가볍게 두드리며 리듬 타기',tags:'목탁 소리 재미',action:"openMoktakOverlay()"},
   {icon:'遊',title:'번뇌 타파 게임',desc:'6레인 비트 슈팅 게임',tags:'게임 비트 번뇌 타파 슈팅',action:"openBeatLab(true)"},
-  {icon:'?',title:'절 퀴즈',desc:'사진과 힌트로 절 맞히기',tags:'퀴즈 절 재미',action:"openQuizOverlay()"},
+  {icon:'?',title:'이 절 어디게?',desc:'사진과 힌트로 절 맞히기',tags:'퀴즈 절 재미 이 절 어디게',action:"openQuizOverlay()"},
+  {icon:'🍁',title:'계절 추천 코스',desc:'지금 계절에 어울리는 산사 코스 보기',tags:'계절 추천 코스 단풍 봄 여름 겨울',action:"openCurrentSeasonCourse()"},
+  {icon:'📖',title:'오늘의 절 상식',desc:'하루에 하나씩 보는 산사 이야기',tags:'절 상식 오늘 이야기 재미',action:"openTodayTrivia()"},
   {icon:'🏅',title:'뱃지 · 코스 진행률',desc:'완주 기록과 보상 확인',tags:'뱃지 보상 진행률 완주',action:"openBadgeOverlay()"},
   {icon:'冊',title:'나의 순례집',desc:'내 기록을 PDF 순례집으로',tags:'순례집 pdf 기록 책',action:"openPhotobookOverlay()"},
   {icon:'⌖',title:'지도',desc:'절과 산을 지도에서 보기',tags:'지도 위치 절 산',action:"openMapOverlay()"},
@@ -36797,6 +36823,87 @@ renderCatalogOverlay = function(){
       </div>`;
     }).join(''):'<div class="catalog-empty">검색 결과가 없어요.</div>';
   };
+})();
+</script>
+
+
+<div class="overlay" id="todayTriviaOverlay" aria-hidden="true">
+  <div class="modal">
+    <div class="modal-head">
+      <div>
+        <h2 class="serif">📖 오늘의 절 상식</h2>
+        <div class="sub">하루에 하나씩 가볍게 보는 산사 이야기</div>
+      </div>
+      <button class="close-x" type="button" onclick="closeTodayTrivia()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div id="todayTriviaFeatureCard" style="padding:18px;border:1px solid #e2d8ca;border-radius:16px;background:#fffdf8;line-height:1.75;"></div>
+    </div>
+  </div>
+</div>
+
+
+<script id="moved-home-features-js-v11">
+function getTodayTriviaItem(){
+  const pool=Object.values(MASTER_BY_NAME||{}).filter(item=>item&&item.visitorTip);
+  if(!pool.length)return null;
+  const now=new Date();
+  const start=new Date(now.getFullYear(),0,0);
+  const dayOfYear=Math.floor((now-start)/86400000);
+  return pool[dayOfYear % pool.length];
+}
+
+function openTodayTrivia(){
+  const item=getTodayTriviaItem();
+  const card=document.getElementById('todayTriviaFeatureCard');
+  const overlay=document.getElementById('todayTriviaOverlay');
+  if(!item||!card||!overlay){
+    showToast('오늘의 절 상식을 불러오지 못했어요.');
+    return;
+  }
+  card.innerHTML=`
+    <div style="font-size:18px;font-weight:900;color:#235b4e;margin-bottom:10px;">${escapeHtml(item.name)}</div>
+    <div style="font-size:14px;color:#4e463e;">${escapeHtml(item.visitorTip||item.desc||'')}</div>
+  `;
+  overlay.classList.add('show');
+  overlay.setAttribute('aria-hidden','false');
+}
+function closeTodayTrivia(){
+  const overlay=document.getElementById('todayTriviaOverlay');
+  if(overlay){
+    overlay.classList.remove('show');
+    overlay.setAttribute('aria-hidden','true');
+  }
+}
+
+function openCurrentSeasonCourse(){
+  const month=new Date().getMonth()+1;
+  const monthly={
+    1:'forest',2:'gangwon',3:'jirisan',4:'cherry',
+    5:'unesco',6:'forest',7:'gangwon',8:'forest',
+    9:'gyeongbuk',10:'autumn',11:'autumn',12:'gangwon'
+  };
+  const key=monthly[month]||'forest';
+  openPackOverlay();
+  setTimeout(()=>openPackDetail(key),80);
+}
+
+document.getElementById('todayTriviaOverlay')?.addEventListener('click',function(e){
+  if(e.target===this)closeTodayTrivia();
+});
+</script>
+
+
+<script id="home-banner-arranger-guard-v11">
+(function(){
+  const ids=['quizBannerWrap','seasonBannerWrap','triviaBannerWrap'];
+  ids.forEach(id=>{
+    const el=document.getElementById(id);
+    if(el){
+      el.style.display='none';
+      el.setAttribute('aria-hidden','true');
+    }
+  });
 })();
 </script>
 
