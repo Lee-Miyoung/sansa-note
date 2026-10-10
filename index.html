@@ -20699,6 +20699,270 @@ header.hero .hero-experience{
 /* 절/산 전체목록의 메인 추가/빼기 기능은 그대로 유지 */
 </style>
 
+
+<style id="sansa-focus-scroll-notice-safe-v1">
+/* =========================================================
+   홈 핵심 탐색 영역 강조
+   DOM 구조는 건드리지 않고 3개 블록을 하나의 허브처럼 보이게 함
+   ========================================================= */
+.pilgrim-collection-home-position{
+  position:relative !important;
+  width:calc(100% - 40px) !important;
+  max-width:1080px !important;
+  margin:20px auto 0 !important;
+  padding:46px 14px 10px !important;
+  border:1.5px solid #d5c6a6 !important;
+  border-bottom:0 !important;
+  border-radius:24px 24px 0 0 !important;
+  background:linear-gradient(145deg,#fffdf8,#f7f1e6) !important;
+  box-shadow:0 -2px 18px rgba(70,55,36,.05) !important;
+}
+.pilgrim-collection-home-position::before{
+  content:'순례 · 절 · 산 둘러보기';
+  position:absolute;
+  left:20px;
+  top:15px;
+  font-size:18px;
+  line-height:1.2;
+  font-weight:900;
+  letter-spacing:-.035em;
+  color:#24594a;
+}
+.pilgrim-collection-home-position::after{
+  content:'순례 현황을 보고, 절과 산을 바로 찾아보세요.';
+  position:absolute;
+  left:20px;
+  top:38px;
+  font-size:11px;
+  line-height:1.3;
+  color:#7b7165;
+}
+.content-type-row{
+  width:calc(100% - 40px) !important;
+  max-width:1080px !important;
+  margin:0 auto !important;
+  padding:12px 14px !important;
+  border-left:1.5px solid #d5c6a6 !important;
+  border-right:1.5px solid #d5c6a6 !important;
+  background:linear-gradient(145deg,#fffdf8,#f7f1e6) !important;
+}
+#mainFilterbar{
+  width:calc(100% - 40px) !important;
+  max-width:1080px !important;
+  margin:0 auto 22px !important;
+  padding:10px 14px 15px !important;
+  border:1.5px solid #d5c6a6 !important;
+  border-top:0 !important;
+  border-radius:0 0 24px 24px !important;
+  background:linear-gradient(145deg,#fffdf8,#f7f1e6) !important;
+  box-shadow:0 12px 28px rgba(70,55,36,.08) !important;
+}
+#mainFilterbar .filterbar-inner{
+  background:rgba(255,255,255,.72) !important;
+  border:1px solid #e5dccd !important;
+  border-radius:16px !important;
+  padding:10px !important;
+}
+
+@media(max-width:700px){
+  .pilgrim-collection-home-position,
+  .content-type-row,
+  #mainFilterbar{
+    width:calc(100% - 22px) !important;
+  }
+  .pilgrim-collection-home-position{
+    padding:44px 9px 9px !important;
+    border-radius:20px 20px 0 0 !important;
+  }
+  .pilgrim-collection-home-position::before{
+    left:14px;
+    top:13px;
+    font-size:16px;
+  }
+  .pilgrim-collection-home-position::after{
+    left:14px;
+    top:34px;
+    font-size:10px;
+  }
+  .content-type-row{
+    padding:10px 9px !important;
+  }
+  #mainFilterbar{
+    padding:8px 9px 12px !important;
+    border-radius:0 0 20px 20px !important;
+  }
+}
+
+/* 절/산 목록에서 '빼기' 완료 안내를 모달보다 위에 확실히 표시 */
+.sansa-action-toast{
+  position:fixed;
+  left:50%;
+  bottom:calc(26px + env(safe-area-inset-bottom));
+  transform:translateX(-50%) translateY(12px);
+  z-index:999999;
+  max-width:calc(100vw - 32px);
+  padding:11px 16px;
+  border-radius:999px;
+  background:#244f43;
+  color:#fff;
+  font-size:13px;
+  font-weight:900;
+  line-height:1.35;
+  text-align:center;
+  box-shadow:0 10px 30px rgba(0,0,0,.2);
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .18s ease, transform .18s ease;
+}
+.sansa-action-toast.show{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
+}
+</style>
+
+
+<style id="pilgrim-collection-font-draw-fix-v14">
+/* 108 순례 컬렉션 — 글씨를 확실히 크게 */
+#pilgrimCollectionOverlay .pilgrim-game-tabs button{
+  font-size:15px !important;
+  min-height:52px !important;
+  font-weight:900 !important;
+}
+#pilgrimCollectionOverlay .pilgrim-today-card{
+  min-height:148px !important;
+  padding:20px !important;
+  gap:14px !important;
+}
+#pilgrimCollectionOverlay .pilgrim-today-card small{
+  font-size:14px !important;
+  font-weight:900 !important;
+}
+#pilgrimCollectionOverlay .pilgrim-today-card b{
+  font-size:22px !important;
+  line-height:1.3 !important;
+  margin-top:7px !important;
+}
+#pilgrimCollectionOverlay .pilgrim-today-card span{
+  font-size:14px !important;
+  line-height:1.6 !important;
+  margin-top:7px !important;
+}
+#pilgrimCollectionOverlay .pilgrim-today-card button{
+  min-height:48px !important;
+  padding:0 18px !important;
+  font-size:14px !important;
+  font-weight:900 !important;
+}
+
+#pilgrimCollectionOverlay .pg-summary-copy strong{
+  font-size:19px !important;
+}
+#pilgrimCollectionOverlay .pg-summary-copy small{
+  font-size:13px !important;
+  line-height:1.5 !important;
+}
+#pilgrimCollectionOverlay .pg-section-head b{
+  font-size:18px !important;
+}
+#pilgrimCollectionOverlay .pg-section-head span{
+  font-size:13px !important;
+}
+#pilgrimCollectionOverlay .pg-region-top b{
+  font-size:18px !important;
+}
+#pilgrimCollectionOverlay .pg-region-top span{
+  font-size:15px !important;
+  font-weight:900 !important;
+}
+#pilgrimCollectionOverlay .pg-region-row small{
+  font-size:13px !important;
+  line-height:1.45 !important;
+}
+#pilgrimCollectionOverlay .pg-hanja-card strong{
+  font-size:31px !important;
+}
+#pilgrimCollectionOverlay .pg-hanja-card b{
+  font-size:14px !important;
+}
+#pilgrimCollectionOverlay .pg-hanja-card small{
+  font-size:12px !important;
+}
+#pilgrimCollectionOverlay .pg-note{
+  font-size:13px !important;
+  line-height:1.5 !important;
+}
+#pilgrimCollectionOverlay .pg-level-guide-head b{
+  font-size:17px !important;
+}
+#pilgrimCollectionOverlay .pg-level-guide-head span{
+  font-size:13px !important;
+}
+#pilgrimCollectionOverlay .pg-current-level b{
+  font-size:16px !important;
+}
+#pilgrimCollectionOverlay .pg-current-level span,
+#pilgrimCollectionOverlay .pg-current-level small,
+#pilgrimCollectionOverlay .pg-level-step small{
+  font-size:12px !important;
+  line-height:1.45 !important;
+}
+#pilgrimCollectionOverlay .pg-level-step b{
+  font-size:14px !important;
+}
+
+/* 모바일 108칸은 4열, 이름은 읽히는 크기로 */
+@media(max-width:700px){
+  #pilgrimCollectionOverlay .pilgrim-game-tabs button{
+    font-size:14px !important;
+    min-height:48px !important;
+  }
+  #pilgrimCollectionOverlay .pilgrim-today-card{
+    min-height:156px !important;
+    padding:17px !important;
+  }
+  #pilgrimCollectionOverlay .pilgrim-today-card small{
+    font-size:13px !important;
+  }
+  #pilgrimCollectionOverlay .pilgrim-today-card b{
+    font-size:20px !important;
+  }
+  #pilgrimCollectionOverlay .pilgrim-today-card span{
+    font-size:13.5px !important;
+  }
+  #pilgrimCollectionOverlay .pilgrim-today-card button{
+    min-height:46px !important;
+    font-size:13.5px !important;
+  }
+
+  #pilgrimCollectionOverlay .pg-lotus-grid{
+    grid-template-columns:repeat(4,minmax(0,1fr)) !important;
+    gap:8px !important;
+  }
+  #pilgrimCollectionOverlay .pg-lotus{
+    min-height:94px !important;
+    padding:8px 5px !important;
+  }
+  #pilgrimCollectionOverlay .pg-lotus-number{
+    font-size:14px !important;
+  }
+  #pilgrimCollectionOverlay .pg-lotus-name{
+    font-size:13px !important;
+    line-height:1.25 !important;
+    font-weight:900 !important;
+  }
+
+  #pilgrimCollectionOverlay .pg-region-top b{
+    font-size:17px !important;
+  }
+  #pilgrimCollectionOverlay .pg-region-top span{
+    font-size:14px !important;
+  }
+  #pilgrimCollectionOverlay .pg-region-row small{
+    font-size:12.5px !important;
+  }
+}
+</style>
+
 </head>
 <body>
 
@@ -36975,6 +37239,186 @@ document.getElementById('todayTriviaOverlay')?.addEventListener('click',function
   const target=document.getElementById('mainFilterbar');
   if(target)observer.observe(target,{childList:true,subtree:true});
 })();
+</script>
+
+
+<script id="sansa-scroll-and-remove-notice-safe-v1">
+(function(){
+  function hardUnlockScroll(){
+    const b=document.body;
+    const h=document.documentElement;
+    if(!b || !h) return;
+
+    // 산사노트에서 실제 사용하는 잠금 상태부터 해제
+    b.classList.remove('sansa-overlay-locked');
+    b.classList.remove('pack-modal-open');
+
+    // 혹시 다른 모달이 남긴 잠금도 정리
+    ['modal-open','overlay-open','no-scroll','noscroll','scroll-lock','body-lock'].forEach(c=>{
+      b.classList.remove(c);
+      h.classList.remove(c);
+    });
+
+    b.style.removeProperty('top');
+    b.style.removeProperty('position');
+    b.style.removeProperty('overflow');
+    b.style.removeProperty('overflow-y');
+    b.style.removeProperty('height');
+    b.style.removeProperty('max-height');
+    h.style.removeProperty('overflow');
+    h.style.removeProperty('overflow-y');
+    h.style.removeProperty('height');
+    h.style.removeProperty('max-height');
+
+    try{
+      document.getElementById('beatLabOverlay')?.classList.remove('beat-vh-locked');
+    }catch(e){}
+  }
+
+  function recoverScrollAfterHome(){
+    hardUnlockScroll();
+    requestAnimationFrame(hardUnlockScroll);
+    setTimeout(hardUnlockScroll,80);
+    setTimeout(hardUnlockScroll,220);
+  }
+
+  // 기존 홈 이동 함수가 실행된 뒤 잠금만 확실히 해제
+  if(typeof window.goSiteNav==='function'){
+    const oldGoSiteNav=window.goSiteNav;
+    window.goSiteNav=function(target){
+      const result=oldGoSiteNav.apply(this,arguments);
+      if(target==='home'){
+        setTimeout(recoverScrollAfterHome,0);
+      }
+      return result;
+    };
+  }
+
+  // 브라우저 뒤로가기의 기존 동작은 그대로 두고, 홈 복귀 뒤 스크롤 잠금만 제거
+  window.addEventListener('popstate',function(){
+    setTimeout(recoverScrollAfterHome,0);
+  });
+
+  // 마지막 오버레이가 닫힐 때도 잠금 해제
+  const obs=new MutationObserver(function(){
+    if(!document.querySelector('.overlay.show')){
+      hardUnlockScroll();
+    }
+  });
+  document.querySelectorAll('.overlay').forEach(el=>{
+    obs.observe(el,{attributes:true,attributeFilter:['class']});
+  });
+
+  function showActionToast(message){
+    let el=document.getElementById('sansaActionToast');
+    if(!el){
+      el=document.createElement('div');
+      el.id='sansaActionToast';
+      el.className='sansa-action-toast';
+      document.body.appendChild(el);
+    }
+    el.textContent=message;
+    el.classList.add('show');
+    clearTimeout(el._timer);
+    el._timer=setTimeout(()=>el.classList.remove('show'),2400);
+  }
+
+  // 절 목록에서 메인에서 빼기 완료 안내
+  if(typeof window.removeTempleFromMainCatalog==='function'){
+    const oldRemoveTemple=window.removeTempleFromMainCatalog;
+    window.removeTempleFromMainCatalog=async function(name,evt){
+      const result=await oldRemoveTemple.apply(this,arguments);
+      showActionToast(`“${name}”을(를) 메인 목록에서 뺐어요.`);
+      return result;
+    };
+  }
+
+  // 산도 동일한 피드백
+  if(typeof window.removeMountainFromMainCatalog==='function'){
+    const oldRemoveMountain=window.removeMountainFromMainCatalog;
+    window.removeMountainFromMainCatalog=function(name,evt){
+      const result=oldRemoveMountain.apply(this,arguments);
+      showActionToast(`“${name}”을(를) 메인 목록에서 뺐어요.`);
+      return result;
+    };
+  }
+
+  setTimeout(hardUnlockScroll,80);
+})();
+</script>
+
+
+<script id="pilgrim-draw-fix-v14">
+/* 오늘의 한 절:
+   메인에 현재 보이는 카드만 대상으로 뽑던 기존 방식 대신
+   108 사찰 전체에서 '아직 안 간 절'을 뽑습니다. */
+function getTempleEntryForDraw(name){
+  try{
+    const entries=Object.entries(destinations||{}).filter(([id,d])=>d&&d.name===name);
+    if(entries.length){
+      entries.sort((a,b)=>(Number(b[1].stage)||0)-(Number(a[1].stage)||0));
+      return entries[0];
+    }
+  }catch(e){}
+  return null;
+}
+
+window.drawTodayTemple=function(){
+  const title=document.getElementById('pilgrimTodayTitle');
+  const desc=document.getElementById('pilgrimTodayDesc');
+  const card=document.querySelector('#pilgrimCollectionOverlay .pilgrim-today-card');
+
+  const visitedNames=new Set(
+    (typeof getVisitedTempleRecords==='function' ? getVisitedTempleRecords() : [])
+      .map(([id,d])=>d&&d.name)
+      .filter(Boolean)
+  );
+
+  const all=[];
+  try{
+    Object.values(MASTER_BY_NAME||{}).forEach(d=>{
+      if(d&&d.name&&!visitedNames.has(d.name))all.push(d);
+    });
+  }catch(e){}
+
+  if(!all.length){
+    if(title)title.textContent='108곳을 모두 다녀왔어요';
+    if(desc)desc.textContent='순례 완주를 축하해요.';
+    return;
+  }
+
+  const d=all[Math.floor(Math.random()*all.length)];
+
+  if(title)title.textContent=d.name;
+  if(desc)desc.textContent=[d.region,d.desc||'오늘의 한 절로 골랐어요.'].filter(Boolean).join(' · ');
+
+  if(card){
+    card.classList.add('picked');
+    card.dataset.templeName=d.name;
+    card.onclick=function(e){
+      if(e.target.closest('button'))return;
+      closePilgrimCollection();
+
+      const entry=getTempleEntryForDraw(d.name);
+      if(entry){
+        setTimeout(()=>openDetail(entry[0]),80);
+        return;
+      }
+
+      // 아직 사용자 데이터에 없는 절도 바로 상세로 열 수 있게 임시 엔트리 생성
+      const id='draw_'+Date.now()+'_'+Math.random().toString(36).slice(2,6);
+      destinations[id]=Object.assign({},d,{
+        stage:0,
+        notes:'',
+        photos:{},
+        visits:{},
+        hiddenFromList:true,
+        createdAt:Date.now()
+      });
+      setTimeout(()=>openDetail(id),80);
+    };
+  }
+};
 </script>
 
 </body>
