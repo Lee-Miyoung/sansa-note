@@ -20790,6 +20790,33 @@ header.hero .hero-experience{
 .personal-places-heading span{font-size:.82em;color:#7c827c;font-weight:600;margin-left:5px}
 @media(max-width:480px){#pilgrimCollectionOverlay .pg-collection-hero p{max-width:90%!important}#pilgrimCollectionOverlay .pilgrim-today-card{align-items:center!important;gap:8px!important}#pilgrimCollectionOverlay .pilgrim-today-card>div{flex:1;min-width:0}}
 </style>
+<style id="sansa-album-region-refinement">
+/* 2026-10-11: 홈 제목 통일, 앨범 소감, 지역 진행률 펼침 */
+.home-gallery > div:first-child b{font-size:clamp(16px,3.9vw,19px)!important;font-weight:800!important;letter-spacing:-.035em}
+.home-gallery > div:first-child span{font-size:clamp(12px,3vw,14px)!important;line-height:1.45}
+.sansa-hub-eyebrow{font-size:clamp(13px,3.3vw,16px)!important;line-height:1.5!important}
+.sansa-discovery-hub h2{font-size:clamp(27px,6vw,36px)!important;line-height:1.25!important}
+.sansa-discovery-hub h2 span{font-size:.65em!important;opacity:.65}
+.sansa-discovery-hub .sansa-hub-hero p{font-size:clamp(14px,3.4vw,17px)!important;line-height:1.55!important}
+#lightboxOverlay.album-slide-mode #lbPhotoInfo{max-width:min(92vw,620px);width:max-content;box-sizing:border-box;white-space:normal;text-align:center;line-height:1.55;padding:12px 16px!important;font-size:14px!important;overflow-wrap:anywhere}
+.album-caption-place{font-size:16px;font-weight:800}
+.album-caption-date{font-size:13px;opacity:.85;margin-top:3px}
+.album-caption-note{font-size:14px;margin-top:7px;max-height:22vh;overflow-y:auto;white-space:pre-wrap}
+.pg-region-expand{overflow:hidden}
+.pg-region-expand summary{list-style:none;cursor:pointer;touch-action:manipulation}
+.pg-region-expand summary::-webkit-details-marker{display:none}
+.pg-region-expand summary::after{content:'목록 펼치기 ▾';display:block;text-align:right;color:#936a30;font-size:12px;font-weight:750;margin-top:5px}
+.pg-region-expand[open] summary::after{content:'목록 접기 ▴'}
+.pg-region-places{border-top:1px solid #e9e2d6;margin-top:12px;padding-top:7px;display:flex;flex-direction:column;gap:5px}
+.pg-region-place{display:flex;justify-content:space-between;align-items:center;text-align:left;gap:12px;width:100%;padding:11px 8px;border:0;border-radius:10px;background:#faf8f3;color:#3b3b33;cursor:pointer}
+.pg-region-place span{min-width:0;flex:1}
+.pg-region-place b{display:block;font-size:15px}
+.pg-region-place small{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-size:12px;line-height:1.5;margin-top:3px;color:#6c706a}
+.pg-region-place em{font-size:12px;font-style:normal;color:#946c35;white-space:nowrap}
+.pg-region-top b{font-size:clamp(15px,3.5vw,18px)!important}
+.pg-region-top span{font-size:clamp(13px,3vw,15px)!important}
+.pg-region-row summary>small{font-size:clamp(12px,2.8vw,14px)!important;line-height:1.5}
+</style>
 </head>
 <body>
 
@@ -27106,13 +27133,26 @@ function renderRegionCollection(body){
       const total=all.filter(d=>d.region===region).length;
       const done=visited.filter(d=>d.region===region).length;
       const pct=total?Math.round(done/total*100):0;
-      return `<div class="pg-region-row">
-        <div class="pg-region-top"><b>${escapeHtml(region)}</b><span>${done} / ${total}</span></div>
-        <div class="pg-progress"><i style="width:${pct}%"></i></div>
-        <small>${pct===100&&total>0?'완료 · 지역 도장 획득':'다녀온 절이 늘수록 채워져요'}</small>
-      </div>`;
+      const rows=all.filter(d=>d.region===region).sort((a,b)=>(Number(b.stage)||0)-(Number(a.stage)||0));
+      return `<details class="pg-region-row pg-region-expand">
+        <summary class="pg-region-summary">
+          <div class="pg-region-top"><b>${escapeHtml(region)}</b><span>${done} / ${total}</span></div>
+          <div class="pg-progress"><i style="width:${pct}%"></i></div>
+          <small>${total===0?'이 지역의 선정 사찰이 없어요':pct===100?'완료 · 지역 도장 획득':'다녀온 절이 늘수록 채워져요'} · 눌러서 사찰 목록 보기</small>
+        </summary>
+        <div class="pg-region-places">${rows.length?rows.map(d=>{
+          const found=Object.entries(destinations||{}).find(([id,x])=>x===d);
+          const id=found?found[0]:'';
+          return `<button type="button" class="pg-region-place" onclick="openPilgrimRegionPlace('${escapeAttr(id)}')"><span><b>${escapeHtml(d.name)}</b><small>${escapeHtml(d.desc||d.activity||'사찰 상세 설명 보기')}</small></span><em>${(Number(d.stage)||0)>=1?'🪷 방문':'상세 보기 →'}</em></button>`;
+        }).join(''):'<p class="pg-region-empty">등록된 사찰이 없습니다.</p>'}</div>
+      </details>`;
     }).join('')}
   </div>`;
+}
+function openPilgrimRegionPlace(id){
+  if(!id||!destinations[id])return;
+  closePilgrimCollection();
+  openDetail(id);
 }
 function drawTodayTemple(){
   const candidates=Object.entries(destinations||{}).filter(([id,d])=>
@@ -28087,6 +28127,8 @@ function buildPilgrimageAlbumItems(){
         url:p.url,
         place:d.name||'사찰',
         kind:'temple',
+        note: String(d.notes||Object.values(d.visits||{}).sort((a,b)=>Number(b.ts||0)-Number(a.ts||0))[0]?.note||''),
+        visitTs: Number(Object.values(d.visits||{}).sort((a,b)=>Number(b.ts||0)-Number(a.ts||0))[0]?.ts||0),
         ts:Number(p.createdAt||d.updatedAt||d.createdAt||0)
       });
     });
@@ -28098,6 +28140,8 @@ function buildPilgrimageAlbumItems(){
         url:p.url,
         place:d.name||'산',
         kind:'mountain',
+        note: String(d.notes||Object.values(d.visits||{}).sort((a,b)=>Number(b.ts||0)-Number(a.ts||0))[0]?.note||''),
+        visitTs: Number(Object.values(d.visits||{}).sort((a,b)=>Number(b.ts||0)-Number(a.ts||0))[0]?.ts||0),
         ts:Number(p.createdAt||d.updatedAt||d.createdAt||0)
       });
     });
@@ -28112,7 +28156,7 @@ function openPilgrimageAlbum(index){
   if(!pilgrimageAlbumItems.length) return;
   pilgrimageAlbumMode=true;
   const urls=pilgrimageAlbumItems.map(x=>x.url);
-  const meta=pilgrimageAlbumItems.map(x=>({albumPlace:x.place, albumKind:x.kind}));
+  const meta=pilgrimageAlbumItems.map(x=>({albumPlace:x.place, albumKind:x.kind, albumNote:x.note, albumDate:x.visitTs||x.ts}));
   openLightbox(urls, Math.max(0,Math.min(index||0,urls.length-1)), meta);
 }
 
@@ -30091,8 +30135,12 @@ function renderLightbox(){
     if(tip) tip.style.display='none';
 
     if(info){
-      info.textContent = m && m.albumPlace ? `📍 ${m.albumPlace}` : '';
-      info.style.display = m && m.albumPlace ? 'block' : 'none';
+      if(m && m.albumPlace){
+        const dt=Number(m.albumDate||0);
+        const date=dt ? new Date(dt).toLocaleDateString('ko-KR',{year:'numeric',month:'long',day:'numeric'}) : '';
+        info.innerHTML=`<div class="album-caption-place">📍 ${escapeHtml(m.albumPlace)}</div>${date?`<div class="album-caption-date">${escapeHtml(date)}</div>`:''}${m.albumNote?`<div class="album-caption-note">${escapeHtml(m.albumNote)}</div>`:''}`;
+        info.style.display='block';
+      }else{info.innerHTML='';info.style.display='none';}
     }
     return;
   }
