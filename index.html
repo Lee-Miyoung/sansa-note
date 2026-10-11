@@ -21024,6 +21024,31 @@ button.site-footer-link{font-size:clamp(15px,2vw,17px)!important;font-weight:750
 }
 @media(prefers-reduced-motion:reduce){#mainPinnedGrid .card{animation:none!important}}
 </style>
+<style id="lotus-guardian-collection-css">
+.pilgrim-game-tabs{display:flex;flex-wrap:wrap;gap:6px}.pilgrim-game-tabs button{flex:1 1 42%;min-width:0;font-size:clamp(14px,2.4vw,17px)}
+.guardian-intro{display:grid;gap:7px;margin:15px 0;padding:16px;border:1px solid #e6d6b6;border-radius:17px;background:#fffbf3;color:#4e4034;font-size:15px;line-height:1.5}.guardian-intro b{font-size:20px}.guardian-intro strong{color:#a8792e;font-size:17px}
+.guardian-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:16px 0}.guardian-card{min-width:0;border:2px solid #e4ded3;border-radius:16px;padding:9px;background:#f6f4ef;color:#4e453e;text-align:center}.guardian-card.unlocked{border-color:#cda352;background:linear-gradient(140deg,#fffdf5,#f6e7bf);box-shadow:0 2px 10px #b58b4230;cursor:pointer}.guardian-art{height:145px;display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:12px;background:radial-gradient(circle at 50% 40%,#fffdf5,#eadbc4)}.guardian-card.locked .guardian-art{background:#e9e7e1}.guardian-silhouette{font-size:43px;filter:grayscale(1);opacity:.6}.guardian-name{font-size:16px;font-weight:800;margin-top:9px;word-break:keep-all}.guardian-state{font-size:13px;margin-top:4px;color:#7c7164}.guardian-card.unlocked .guardian-state{color:#92631f;font-weight:700}
+.guardian-figure{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;isolation:isolate}.guardian-halo{position:absolute;width:95px;height:95px;top:12px;border-radius:50%;background:radial-gradient(circle,#fff8d3 15%,var(--guardian-accent) 65%,transparent 72%);opacity:.75;z-index:-1}.guardian-head{width:67px;height:65px;border-radius:48% 48% 45% 45%;background:#f8d8b9;border:2px solid #b88f72;color:#754e3d;font-size:19px;display:flex;align-items:center;justify-content:center;font-weight:900;box-shadow:inset 0 -7px #e9bfa2}.guardian-body{font-size:37px;background:var(--guardian-accent);border-radius:18px 18px 8px 8px;padding:2px 12px;margin-top:-4px}.guardian-lotus{position:absolute;right:12px;bottom:9px;font-size:30px;filter:drop-shadow(0 2px 3px #876a3a55)}
+.guardian-detail-backdrop{position:fixed;inset:0;z-index:999999;background:#19150fbb;display:flex;align-items:center;justify-content:center;padding:22px}.guardian-detail{position:relative;max-width:390px;width:100%;padding:28px 20px 22px;border:4px solid #cda352;border-radius:23px;background:linear-gradient(145deg,#fffdf4,#f2dfb4);text-align:center;box-shadow:0 12px 50px #0005}.guardian-detail .guardian-figure{height:250px;margin:12px auto}.guardian-detail .guardian-head{transform:scale(1.45)}.guardian-detail .guardian-body{transform:scale(1.3);margin-top:13px}.guardian-detail .guardian-lotus{font-size:52px}.guardian-detail h3{font-size:23px;margin:12px 0}.guardian-detail p{font-size:15px;line-height:1.6}.guardian-detail-close{position:absolute;right:10px;top:10px;border:0;background:#fff;border-radius:50%;font-size:22px;width:40px;height:40px}.guardian-detail-ok{border:0;background:#886126;color:white;padding:12px 20px;border-radius:20px;font-size:16px;font-weight:800}
+@media(min-width:700px){.guardian-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.pilgrim-game-tabs button{flex:1 1 0}}
+@media(prefers-reduced-motion:no-preference){.guardian-card.unlocked .guardian-art{animation:guardianShine 3.5s ease-in-out infinite alternate}@keyframes guardianShine{from{filter:brightness(1)}to{filter:brightness(1.12)}}}
+</style>
+<style id="guardian-png-assets-v1">
+.guardian-art{height:auto!important;aspect-ratio:540/760;background:#f7f1e7!important}
+.guardian-card-image{width:100%;height:100%;object-fit:contain;display:block;border-radius:10px}
+.guardian-detail-art{width:min(100%,270px);margin:16px auto 6px}
+.guardian-detail-art .guardian-card-image{width:100%;height:auto;max-height:52vh;object-fit:contain;box-shadow:0 6px 22px #6e502d33}
+.guardian-detail{max-height:92dvh;overflow-y:auto}
+@media(max-width:480px){.guardian-grid{gap:9px}.guardian-card{padding:6px}.guardian-name{font-size:15px}.guardian-state{font-size:12px}}
+</style>
+<style id="guardian-png-assets-v1">
+.guardian-art{height:auto!important;aspect-ratio:540/760;background:#f7f1e7!important}
+.guardian-card-image{width:100%;height:100%;object-fit:contain;display:block;border-radius:10px}
+.guardian-detail-art{width:min(100%,270px);margin:16px auto 6px}
+.guardian-detail-art .guardian-card-image{width:100%;height:auto;max-height:52vh;object-fit:contain;box-shadow:0 6px 22px #6e502d33}
+.guardian-detail{max-height:92dvh;overflow-y:auto}
+@media(max-width:480px){.guardian-grid{gap:9px}.guardian-card{padding:6px}.guardian-name{font-size:15px}.guardian-state{font-size:12px}}
+</style>
 </head>
 <body>
 
@@ -22336,6 +22361,7 @@ button.site-footer-link{font-size:clamp(15px,2vw,17px)!important;font-weight:750
         <button class="active" data-pg-tab="map" onclick="setPilgrimGameTab('map',this)">108 순례</button>
         <button data-pg-tab="hanja" onclick="setPilgrimGameTab('hanja',this)">한자 수집</button>
         <button data-pg-tab="region" onclick="setPilgrimGameTab('region',this)">지역 컬렉션</button>
+        <button data-pg-tab="guardian" onclick="setPilgrimGameTab('guardian',this)">연꽃 수호 카드</button>
       </div>
 
       <div class="pilgrim-today-card">
@@ -27240,9 +27266,40 @@ function renderPilgrimGame(){
   if(!body) return;
   if(pilgrimGameTab==='hanja') renderHanjaCollection(body);
   else if(pilgrimGameTab==='region') renderRegionCollection(body);
+  else if(pilgrimGameTab==='guardian') renderLotusGuardianCollection(body);
   else render108Pilgrimage(body);
 }
 
+/* 현장 인증에만 열리는 산사노트 고유 수호 카드 도감 */
+function guardianVerified(d){return !!(d&&Object.values(d.visits||{}).some(v=>v&&v.verified));}
+function guardianCatalog(){
+  const names=(typeof MASTER_TEMPLES!=='undefined'&&Array.isArray(MASTER_TEMPLES))?MASTER_TEMPLES.map(x=>typeof x==='string'?x:x.name):Object.keys(MASTER_BY_NAME||{});
+  const uniq=[...new Set(names.filter(Boolean))].slice(0,108);
+  return uniq.map((name,i)=>{
+    const records=Object.entries(destinations||{}).filter(([id,d])=>d&&d.name===name);
+    const verified=records.some(([id,d])=>guardianVerified(d));
+    return {name,i,verified,record:records.find(([id,d])=>guardianVerified(d))||records[0]};
+  });
+}
+function guardianCharacter(item){
+  const path='images/lotus-cards/'+String(item.i+1).padStart(3,'0')+'.png';
+  return `<img class="guardian-card-image" src="${path}" alt="${escapeAttr(item.name)} 연꽃 수호 카드" loading="lazy" decoding="async" onerror="this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=guardian-silhouette>🪷</span>')">`;
+}
+function renderLotusGuardianCollection(body){
+  const items=guardianCatalog();
+  const earned=items.filter(x=>x.verified).length;
+  body.innerHTML=`<div class="guardian-intro"><b>🪷 108 연꽃 수호 카드</b><span>사찰 현장에서 위치 인증하면 해당 사찰의 동자승 그림 카드가 열려요. 방문 기록만으로는 열리지 않습니다.</span><strong>${earned} / ${items.length}장 획득</strong></div>
+  <div class="guardian-grid">${items.map(item=>`<button type="button" class="guardian-card ${item.verified?'unlocked':'locked'}" ${item.verified?`onclick="openLotusGuardianCard(${item.i})"`:'disabled'} aria-label="${escapeAttr(item.name)} ${item.verified?'획득 카드 보기':'미획득'}">
+  <div class="guardian-art">${item.verified?guardianCharacter(item):'<span class="guardian-silhouette">🔒</span>'}</div>
+  <div class="guardian-name">${escapeHtml(item.name)}</div><div class="guardian-state">${item.verified?'✨ 현장 인증 완료':'현장 인증 후 공개'}</div></button>`).join('')}</div>`;
+}
+function openLotusGuardianCard(i){
+  const item=guardianCatalog()[i];if(!item||!item.verified)return;
+  document.getElementById('guardianCardDetail')?.remove();
+  const wrap=document.createElement('div');wrap.id='guardianCardDetail';wrap.className='guardian-detail-backdrop';
+  wrap.innerHTML=`<div class="guardian-detail" role="dialog" aria-modal="true" aria-label="${escapeAttr(item.name)} 수호 카드"><button type="button" class="guardian-detail-close" onclick="document.getElementById('guardianCardDetail')?.remove()">✕</button><small>산사노트 · 연꽃 수호 카드 ${String(i+1).padStart(3,'0')}</small><div class="guardian-detail-art">${guardianCharacter(item)}</div><h3>${escapeHtml(item.name)}의 연꽃 동자</h3><p>현장 인증으로 획득한 나만의 순례 수호 카드</p><button type="button" class="guardian-detail-ok" onclick="document.getElementById('guardianCardDetail')?.remove()">도감으로 돌아가기</button></div>`;
+  wrap.addEventListener('click',e=>{if(e.target===wrap)wrap.remove();});document.body.appendChild(wrap);
+}
 function lotusShapeHtml(){
   return `<span class="lotus-css" aria-hidden="true">
     <i class="lp p1"></i><i class="lp p2"></i><i class="lp p3"></i><i class="lp p4"></i><i class="lp p5"></i>
