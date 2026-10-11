@@ -20699,6 +20699,46 @@ header.hero .hero-experience{
 /* 절/산 전체목록의 메인 추가/빼기 기능은 그대로 유지 */
 </style>
 
+
+<style id="sansa-discovery-hub-20261011">
+/* 기존 버튼·ID·이벤트·필터 로직은 그대로 두고 탐색 구역만 한 장의 패널로 통합 */
+.sansa-discovery-hub{max-width:1080px;width:calc(100% - 36px);margin:20px auto 18px;padding:22px 24px 24px;box-sizing:border-box;border:1px solid #dcded4;border-radius:28px;background:linear-gradient(145deg,#fffefa 0%,#f5f6ef 70%,#f8f5ed 100%);box-shadow:0 12px 35px rgba(39,67,54,.075);overflow:visible;}
+.sansa-hub-heading{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:15px;}
+.sansa-hub-eyebrow{font-size:12px;font-weight:800;color:#728b7b;letter-spacing:.03em;}
+.sansa-hub-heading h2{margin:4px 0 5px;font-size:25px;line-height:1.2;letter-spacing:-.06em;color:#2e5948;font-weight:900;}
+.sansa-hub-heading h2 span{font-size:13px;letter-spacing:.1em;color:#a0a999;font-weight:600;vertical-align:middle;margin-left:5px;}
+.sansa-hub-heading p{margin:0;font-size:13px;color:#89877c;}
+.sansa-hub-mark{width:44px;height:44px;display:grid;place-items:center;border-radius:50%;background:#e9f0e8;color:#3d755c;font-size:27px;flex:none;}
+.sansa-discovery-hub .pilgrim-collection-home-position{max-width:none!important;width:100%!important;margin:0 0 15px!important;}
+.sansa-discovery-hub .hero-pilgrim-feature{width:100%!important;max-width:none!important;margin:0!important;}
+.sansa-discovery-hub .content-type-row{max-width:none!important;width:100%!important;margin:0 0 12px!important;gap:10px!important;justify-content:stretch!important;}
+.sansa-discovery-hub .content-type-btn{flex:1 1 0!important;min-width:0!important;}
+.sansa-discovery-hub #mainFilterbar{max-width:none!important;width:100%!important;margin:0!important;padding:14px!important;border:1px solid #e4e4da!important;border-radius:20px!important;background:#fffefa!important;box-shadow:none!important;position:relative!important;top:auto!important;backdrop-filter:none!important;box-sizing:border-box!important;}
+.sansa-discovery-hub #mainFilterbar .filterbar-inner{max-width:none!important;width:100%!important;box-sizing:border-box!important;}
+.sansa-discovery-hub #regionTabs{min-width:0!important;}
+.sansa-discovery-hub #regionTabs button{transition:background .18s,border-color .18s,transform .18s;}
+.sansa-discovery-hub #regionTabs button:active{transform:scale(.97);}
+.sansa-discovery-hub :is(button,input,select):focus-visible{outline:3px solid #7db59a!important;outline-offset:2px!important;}
+@media(max-width:700px){
+ .sansa-discovery-hub{width:calc(100% - 28px);margin:15px auto 14px;padding:15px 12px 14px;border-radius:23px;}
+ .sansa-hub-heading{margin:0 4px 13px;}
+ .sansa-hub-heading h2{font-size:21px;}
+ .sansa-hub-heading p{font-size:11.5px;}
+ .sansa-hub-mark{width:37px;height:37px;font-size:23px;}
+ .sansa-discovery-hub .pilgrim-collection-home-position{margin-bottom:12px!important;}
+ .sansa-discovery-hub .content-type-row{gap:7px!important;margin:0 0 11px!important;}
+ .sansa-discovery-hub #mainFilterbar{padding:8px!important;border-radius:17px!important;}
+ .sansa-discovery-hub #mainFilterbar .filterbar-inner{padding:6px!important;gap:7px!important;}
+ .sansa-discovery-hub #regionTabs{gap:5px!important;}
+ .sansa-discovery-hub #regionTabs button{padding:7px 9px!important;}
+}
+@media(max-width:380px){
+ .sansa-discovery-hub{width:calc(100% - 20px);padding:12px 9px;}
+ .sansa-discovery-hub #mainFilterbar{padding:5px!important;}
+ .sansa-discovery-hub #mainFilterbar .filterbar-inner{gap:5px!important;padding:5px!important;}
+ .sansa-discovery-hub #regionTabs button{font-size:10px!important;padding:6px 8px!important;}
+}
+</style>
 </head>
 <body>
 
@@ -20896,6 +20936,11 @@ header.hero .hero-experience{
   <div id="seasonBannerWrap"></div>
   <div id="almostBannerWrap"></div>
 
+  <section class="sansa-discovery-hub" aria-label="산사 탐색 허브">
+    <div class="sansa-hub-heading">
+      <div><span class="sansa-hub-eyebrow">나만의 산사 여행</span><h2>산사 탐색 <span>山寺</span></h2><p>108 사찰과 산, 그리고 사람들의 이야기</p></div>
+      <span class="sansa-hub-mark" aria-hidden="true">✺</span>
+    </div>
   <div class="pilgrim-collection-home-position">
     <section class="hero-pilgrim-feature" aria-label="108 순례 컬렉션">
         <button class="pilgrim-collection-chip pilgrim-collection-main" type="button" onclick="openPilgrimCollection()">
@@ -20961,6 +21006,8 @@ header.hero .hero-experience{
       <button class="btn btn-primary" style="padding:7px 14px;font-size:12.5px;flex-shrink:0;" onclick="openCourseBuilder()">🧭 코스 만들기</button>
     </div>
   </div>
+
+  </section><!-- /sansa-discovery-hub -->
 
   <div class="hero-list-filter-note" id="heroListFilterNote" style="display:none;"></div>
   <div class="temple-catalog-panel" id="templeCatalogPanel" style="display:none;" aria-label="108 사찰 전체 목록"></div>
