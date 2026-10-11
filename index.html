@@ -20739,6 +20739,17 @@ header.hero .hero-experience{
  .sansa-discovery-hub #regionTabs button{font-size:10px!important;padding:6px 8px!important;}
 }
 </style>
+<style id="home-explore-simplify-css">
+/* 홈 탐색 중복 UI 정리 — 기존 검색/필터 요소와 이벤트는 보존 */
+.sansa-discovery-hub #mainFilterbar,
+#heroListFilterNote,
+#templeCatalogPanel,
+#masterSearchPanel{display:none!important;}
+.home-explore-hint{display:flex;align-items:flex-start;gap:10px;margin:13px 0 2px;padding:13px 15px;border:1px solid #e3e5dc;border-radius:15px;background:#fafaf6;color:#385448;font-size:clamp(14px,2.2vw,16px);line-height:1.55;letter-spacing:-.025em;word-break:keep-all;}
+.home-explore-hint strong{font-weight:750;color:#285642;}
+.home-explore-hint-icon{flex:none;font-size:19px;line-height:1.2;color:#477b63;}
+@media(max-width:480px){.home-explore-hint{padding:12px 13px;font-size:14px;line-height:1.55;}}
+</style>
 </head>
 <body>
 
@@ -20983,6 +20994,11 @@ header.hero .hero-experience{
       </span>
       <span class="ctype-copy"><b>커뮤니티</b><small>COMMUNITY</small></span>
     </button>
+  </div>
+
+  <div class="home-explore-hint" role="note">
+    <span class="home-explore-hint-icon" aria-hidden="true">ⓘ</span>
+    <span><strong>절·산 탭</strong>에서 원하는 장소를 검색하고, 마음에 드는 곳을 <strong>메인에 추가</strong>해 보세요.</span>
   </div>
 
   <div class="filterbar" id="mainFilterbar">
