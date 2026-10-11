@@ -26993,7 +26993,7 @@ function setPilgrimGameTab(tab,btn){
 function getVisitedTempleRecords(){
   const bestByName=new Map();
   Object.entries(destinations||{}).forEach(([id,d])=>{
-    if(!d || (Number(d.stage)||0)<1 || !d.name) return;
+    if(!d || (Number(d.stage)||0)<1 || !d.name || !Object.prototype.hasOwnProperty.call(MASTER_BY_NAME,d.name)) return;
     const prev=bestByName.get(d.name);
     const score=(Number(d.stage)||0)*100000 + Number(d.updatedAt||d.createdAt||0);
     if(!prev || score>prev.score) bestByName.set(d.name,{id,d,score});
@@ -27036,7 +27036,7 @@ function render108Pilgrimage(body){
       <div><b>${count}</b><span>/ 108</span></div>
       <div class="pg-summary-copy">
         <strong>${next}</strong>
-        <small><span class="pg-mini-lotus-shape">${lotusShapeHtml()}</span> 다녀온 절마다 연꽃이 한 송이씩 피어요.</small>
+        <small><span class="pg-mini-lotus-shape">${lotusShapeHtml()}</span> 선정된 108 순례 사찰을 방문하면 연꽃이 피어요.</small>
         <div class="pg-progress"><i style="width:${pct}%"></i></div>
       </div>
     </div>
@@ -27098,7 +27098,7 @@ function showHanjaTemples(ch){
   </div>`;
 }
 function renderRegionCollection(body){
-  const all=Object.values(destinations||{}).filter(d=>d&&!d.hiddenFromList);
+  const all=Object.values(destinations||{}).filter(d=>d&&!d.hiddenFromList&&Object.prototype.hasOwnProperty.call(MASTER_BY_NAME,d.name));
   const visited=all.filter(d=>(Number(d.stage)||0)>=1);
   const regions=(typeof REGIONS!=='undefined'&&REGIONS.length)?REGIONS:[...new Set(all.map(d=>d.region).filter(Boolean))];
   body.innerHTML=`<div class="pg-region-list">
@@ -28502,11 +28502,11 @@ function renderSeparatedPlaceCards(entries,kind){
   entries.forEach(entry=>{
     const d=entry[1];
     // 기존 공식 목록에 없는 사용자 생성 장소만 별도 영역으로 분리합니다.
-    (d && d.name && !known.has(d.name)?mine:regular).push(entry);
+    (d && d.name && (d.userAdded===true || !known.has(d.name))?mine:regular).push(entry);
   });
   const card=(entry)=>isTemple?renderCard(entry[0],entry[1]):renderMountainCard(entry[0],entry[1]);
   if(!mine.length)return regular.map(card).join('');
-  return regular.map(card).join('')+`<div class="personal-places-heading" role="heading" aria-level="3">✍️ 내가 직접 추가한 ${isTemple?'절':'산'} <span>${mine.length}곳</span></div>`+mine.map(card).join('');
+  return `<div class="personal-places-heading" role="heading" aria-level="3">📚 ${isTemple?'기본 사찰':'기본 산'} 목록 <span>${regular.length}곳</span></div>`+regular.map(card).join('')+`<div class="personal-places-heading" role="heading" aria-level="3">✍️ 내가 직접 추가한 ${isTemple?'절':'산'} <span>${mine.length}곳</span></div>`+mine.map(card).join('');
 }
 
 function render(){
@@ -30812,7 +30812,7 @@ function addMountainDestinationCustom(){
     height: document.getElementById('nmHeight').value.trim(),
     desc: document.getElementById('nmDesc').value.trim(),
     activity: document.getElementById('nmActivity').value.trim(),
-    stage:0, notes:'', photos:{}, createdAt: Date.now()
+    stage:0, notes:'', photos:{}, userAdded:true, createdAt: Date.now()
   };
   writeMountainDestination(id, data);
   closeAddMountain();
@@ -30830,7 +30830,7 @@ function addDestination(){
     tag: document.getElementById('nTag').value,
     desc: document.getElementById('nDesc').value.trim(),
     activity: document.getElementById('nActivity').value.trim(),
-    stage:0, notes:'', photos:{}, createdAt: Date.now()
+    stage:0, notes:'', photos:{}, userAdded:true, createdAt: Date.now()
   };
   writeDestination(id, data);
   closeAdd();
