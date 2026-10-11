@@ -37707,14 +37707,14 @@ document.getElementById('todayTriviaOverlay')?.addEventListener('click',function
   .guardian-art{height:auto!important;aspect-ratio:540/760!important;border-radius:11px!important;overflow:hidden!important;display:flex!important;align-items:center!important;justify-content:center!important;background:#efede8!important;position:relative}
   .guardian-card-image{width:100%!important;height:100%!important;object-fit:cover!important;display:block!important;border-radius:10px!important}
   .guardian-card.is-visited .guardian-card-image{filter:grayscale(1) contrast(.92) brightness(1.04)!important;opacity:.72!important}
-  .guardian-card.is-unvisited .guardian-card-image{filter:grayscale(1) brightness(0) blur(1.3px)!important;opacity:.24!important;transform:scale(1.015)}
+  .guardian-card.is-unvisited .guardian-card-image{filter:grayscale(1) brightness(.32) contrast(1.3)!important;opacity:.75!important;transform:scale(1.015)}
   .guardian-card.is-unvisited .guardian-art{background:linear-gradient(145deg,#f1efe9,#e7e4dc)!important}
   .guardian-card.is-unvisited .guardian-art:not(.guardian-missing-image):after{content:'🔒';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.8);font-size:17px;pointer-events:none}
   .guardian-card.is-unvisited .guardian-art.guardian-missing-image:after{display:none}
 
   .guardian-card.is-verified .guardian-card-image{filter:none!important;opacity:1!important}
   .guardian-shadow-card{width:100%;height:100%;display:flex;align-items:center;justify-content:center;position:relative;background:linear-gradient(145deg,#f1efe9,#e7e4dc)}
-  .guardian-shadow-monk{position:relative;width:66%;height:70%;opacity:.24;filter:grayscale(1)}
+  .guardian-shadow-monk{position:relative;width:66%;height:70%;opacity:.48;filter:grayscale(1)}
   .guardian-shadow-monk::before{content:'';position:absolute;left:50%;top:7%;width:40%;aspect-ratio:1;border-radius:50%;transform:translateX(-50%);background:#6f6c67}
   .guardian-shadow-monk::after{content:'';position:absolute;left:50%;bottom:5%;width:68%;height:52%;border-radius:46% 46% 18% 18%;transform:translateX(-50%);background:#6f6c67}
   .guardian-shadow-lotus{position:absolute;left:50%;bottom:22%;transform:translateX(-50%);font-size:28px;opacity:.22;filter:grayscale(1)}
@@ -37747,7 +37747,7 @@ document.getElementById('todayTriviaOverlay')?.addEventListener('click',function
   @media(max-width:420px){.guardian-dojo{padding:12px}.guardian-dojo-title b{font-size:18px}.guardian-filter-btn{font-size:10px;padding:7px 3px}.guardian-grid{gap:8px!important}.guardian-card{padding:5px!important}.guardian-name{font-size:13px!important}.guardian-state{font-size:9.5px!important}}
   @media(prefers-reduced-motion:no-preference){.guardian-card.is-verified{transition:transform .14s ease,box-shadow .14s ease}.guardian-card.is-verified:active{transform:scale(.985)}}
 </style>
-<script id="guardian-catalog-final-v10-js">
+<script id="guardian-catalog-final-v11-js">
 (function(){
   const FINAL_GUARDIAN_CARDS={
     '해인사':{file:'008.png',symbol:'팔만대장경'},
@@ -37810,7 +37810,7 @@ document.getElementById('todayTriviaOverlay')?.addEventListener('click',function
   function cardImage(item,mode){
     if(!item.asset) return shadowArt(mode==='visited');
     const cls=mode==='visited'?'guardian-card-image guardian-gray':'guardian-card-image';
-    return `<img class="${cls}" src="images/lotus-cards/${item.asset.file}" alt="${escapeAttr(item.name)} 연꽃 수호 카드" loading="lazy" decoding="async" onerror="this.style.display='none';this.parentElement.classList.add('guardian-missing-image');this.parentElement.insertAdjacentHTML('beforeend','<div class=guardian-shadow-card><span class=guardian-shadow-monk></span><span class=guardian-shadow-lotus>🪷</span><span class=guardian-lock-mini>🔒</span></div>')">`;
+    return `<img class="${cls}" src="./images/lotus-cards/${item.asset.file}?v=20261011b" alt="${escapeAttr(item.name)} 연꽃 수호 카드" loading="lazy" decoding="async" onerror="if(!this.dataset.retried){this.dataset.retried='1';this.src='./images/lotus-cards/${item.asset.file}?retry=20261011c';return;}this.onerror=null;this.style.display='none';this.parentElement.classList.add('guardian-missing-image');this.parentElement.insertAdjacentHTML('beforeend','<div class=guardian-shadow-card><span class=guardian-shadow-monk></span><span class=guardian-shadow-lotus>🪷</span><span class=guardian-lock-mini>🔒</span></div>')">`;
   }
   function shadowArt(visited){
     return `<div class="guardian-shadow-card ${visited?'visited-shadow':''}" aria-hidden="true"><span class="guardian-shadow-monk"></span><span class="guardian-shadow-lotus">🪷</span>${visited?'':'<span class="guardian-lock-mini">🔒</span>'}</div>`;
