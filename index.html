@@ -20950,6 +20950,37 @@ button.site-footer-link{font-size:clamp(15px,2vw,17px)!important;font-weight:750
  .hero-clean-art::before{background:linear-gradient(to bottom,rgba(250,248,242,.72) 0%,rgba(250,248,242,.40) 29%,rgba(250,248,242,.07) 58%,transparent 82%)!important}
 }
 </style>
+
+<style id="sansa-landscape-soft-continuation-20261011">
+/* 모바일: 풍경을 동자승 발끝까지 자연스럽게 연장. 원본 캐릭터·사찰은 그대로. */
+@media (max-width:900px) {
+  .hero-main-grid { background:#faf8f2!important; }
+  .hero-clean-art { isolation:isolate!important; }
+  .hero-clean-art::after {
+    content:"";
+    position:absolute;
+    z-index:0;
+    pointer-events:none;
+    left:-9%;
+    right:-9%;
+    top:42%;
+    bottom:-2%;
+    background-image:url("./hero-bg.png");
+    background-repeat:no-repeat;
+    background-size:100% 125%;
+    background-position:center bottom;
+    opacity:.44;
+    -webkit-mask-image:linear-gradient(to bottom,transparent 0%,rgba(0,0,0,.24) 12%,rgba(0,0,0,.85) 38%,rgba(0,0,0,.70) 76%,transparent 100%);
+    mask-image:linear-gradient(to bottom,transparent 0%,rgba(0,0,0,.24) 12%,rgba(0,0,0,.85) 38%,rgba(0,0,0,.70) 76%,transparent 100%);
+  }
+  .hero-clean-bg {
+    -webkit-mask-image:linear-gradient(to bottom,rgba(0,0,0,.25) 0%,#000 25%,#000 50%,rgba(0,0,0,.78) 64%,rgba(0,0,0,.24) 79%,transparent 92%)!important;
+    mask-image:linear-gradient(to bottom,rgba(0,0,0,.25) 0%,#000 25%,#000 50%,rgba(0,0,0,.78) 64%,rgba(0,0,0,.24) 79%,transparent 92%)!important;
+  }
+  .hero-clean-temple,.hero-clean-monk,.hero-clean-mouse,.hero-clean-blossom { z-index:3!important; }
+  .hero-clean-art::before { z-index:2!important;pointer-events:none!important; }
+}
+</style>
 </head>
 <body>
 
