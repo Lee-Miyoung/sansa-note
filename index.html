@@ -21594,12 +21594,13 @@ header.hero .hero-experience{
     <div class="modal-body">
       <div class="sansa-map-legend" aria-label="지도 표시 안내">
         <span><i style="background:#b05d83"></i>🪷 다녀온 절</span>
+        <span><i style="background:#b77a26"></i>✨ 현장 위치 인증 완료</span>
         <span><i style="background:#337f6a"></i>메인에 추가한 절</span>
         <span><i style="background:#5b6b45"></i>그 밖의 장소</span>
       </div>
       <label style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--ink-soft);margin-bottom:8px;cursor:pointer;">
         <input type="checkbox" id="mapWishOnly" onchange="openMapOverlay()" style="width:16px;height:16px;accent-color:var(--stamp);">
-        ⭐ "가보고 싶다" 목록만 지도에 표시
+        🪷 내가 다녀온 곳만 보기
       </label>
       <div id="allMap"></div>
       <div class="map-note" id="allMapNote"></div>
@@ -25007,15 +25008,13 @@ function spinRoulette(){
       clearInterval(rouletteInterval);
       const [finalId, finalD] = candidates[Math.floor(Math.random()*candidates.length)];
       const nameEl=document.getElementById('rouletteName'); if(nameEl) nameEl.textContent = finalD.name || '이름 없는 절';
-      showCelebration('🎡 오늘의 절은...', finalD.name+'!');
-      setTimeout(()=>{
-        body.innerHTML = `
+      body.innerHTML = `
           <div class="serif" style="font-size:28px;margin:20px 0 6px;color:var(--stamp);">${escapeHtml(finalD.name)}</div>
           <div style="color:var(--ink-soft);font-size:12.5px;margin-bottom:18px;">${escapeHtml(finalD.region)} · ${finalD.tagline?('"'+escapeHtml(finalD.tagline)+'"'):''}</div>
           <button class="btn btn-primary btn-block" style="margin-bottom:8px;" onclick="closeRouletteOverlay();openDetail('${finalId}');">이 절 보러가기</button>
           <button class="btn btn-ghost btn-block" onclick="spinRoulette()">다시 돌리기</button>
         `;
-      }, 600);
+      showCelebration('🎡 오늘의 절은...', finalD.name+'!');
     }
   }, 90);
 }
@@ -31267,15 +31266,16 @@ function markerImageFor(tag){
 
 function sansaMapMarkerImage(d, isMountain){
   if(isMountain) return markerImageFor(d.tag);
-  const visited=(Number(d.stage)||0)>=1 || Object.values(d.visits||{}).some(v=>v&&v.verified);
+  const verified=Object.values(d.visits||{}).some(v=>v&&v.verified);
+  const visited=(Number(d.stage)||0)>=1 || Object.values(d.visits||{}).length>0;
   let added=false;
   try{added=typeof isTempleOnMain==='function'&&isTempleOnMain(d.name);}catch(e){}
-  if(!added) added=(Number(d.stage)||0)===0;
-  const fill=visited?'#b05d83':added?'#337f6a':(d.tag==='유명'?'#5b6b45':'#a97c34');
+  const fill=verified?'#b77a26':visited?'#b05d83':added?'#337f6a':'#5b6b45';
+  const size=29, center=14.5;
   const svg=visited
-    ? `<svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 38 38"><circle cx="19" cy="19" r="17" fill="white" stroke="${fill}" stroke-width="2"/><g fill="${fill}"><ellipse cx="19" cy="19" rx="4" ry="11"/><ellipse cx="13" cy="22" rx="4" ry="9" transform="rotate(-35 13 22)"/><ellipse cx="25" cy="22" rx="4" ry="9" transform="rotate(35 25 22)"/></g><circle cx="19" cy="16" r="2" fill="#ffe8a4"/></svg>`
-    : `<svg xmlns="http://www.w3.org/2000/svg" width="38" height="38"><circle cx="19" cy="19" r="15" fill="${fill}" stroke="white" stroke-width="3"/><circle cx="19" cy="19" r="5" fill="white" opacity=".9"/></svg>`;
-  return new kakao.maps.MarkerImage('data:image/svg+xml;charset=UTF-8,'+encodeURIComponent(svg),new kakao.maps.Size(38,38),{offset:new kakao.maps.Point(19,19)});
+    ? `<svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 29"><circle cx="14.5" cy="14.5" r="13" fill="${verified?'#fff1d5':'white'}" stroke="${fill}" stroke-width="2"/><g fill="${fill}"><ellipse cx="14.5" cy="15" rx="3" ry="8"/><ellipse cx="10" cy="17" rx="3" ry="6.5" transform="rotate(-35 10 17)"/><ellipse cx="19" cy="17" rx="3" ry="6.5" transform="rotate(35 19 17)"/></g><circle cx="14.5" cy="12" r="1.6" fill="${verified?'#fff':'#ffe8a4'}"/>${verified?'<path d="M21 4l1.1 2.5L25 7.5l-2.9 1-1.1 2.5-1.1-2.5-2.9-1 2.9-1z" fill="#e5a52c"/>':''}</svg>`
+    : `<svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 29"><circle cx="14.5" cy="14.5" r="11.5" fill="${fill}" stroke="white" stroke-width="2.5"/><circle cx="14.5" cy="14.5" r="3.8" fill="white" opacity=".9"/></svg>`;
+  return new kakao.maps.MarkerImage('data:image/svg+xml;charset=UTF-8,'+encodeURIComponent(svg),new kakao.maps.Size(size,size),{offset:new kakao.maps.Point(center,center)});
 }
 
 function setupDetailMap(d, id, opts){
@@ -31381,7 +31381,7 @@ function openMapOverlay(){
     const toResolve = [];
     const wishOnly = document.getElementById('mapWishOnly').checked;
     const filteredSource = wishOnly
-      ? Object.fromEntries(Object.entries(sourceObj).filter(([id,d])=>(d.stage||0)===0))
+      ? Object.fromEntries(Object.entries(sourceObj).filter(([id,d])=>((Number(d.stage)||0)>=1 || Object.values(d.visits||{}).length>0)))
       : sourceObj;
     Object.entries(filteredSource).forEach(([id,d])=>{
       if(d.fixedLat && d.fixedLng){
