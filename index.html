@@ -37227,5 +37227,106 @@ document.getElementById('todayTriviaOverlay')?.addEventListener('click',function
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
 </script>
+
+<style id="sansa-catalog-navigation-fix-20261011">
+.catalog-section-heading{font-size:clamp(16px,3.8vw,19px);font-weight:800;color:#285a4a;margin:19px 2px 11px;padding:11px 12px;background:#edf5f0;border-radius:12px;line-height:1.5}
+.catalog-section-heading small{font-size:clamp(12px,3vw,14px);font-weight:600;color:#61736a;margin-left:6px}
+.catalog-section-heading.extra{background:#fff4e7;color:#865a2f}
+#pilgrimCollectionOverlay .pilgrim-today-card.picked #pilgrimTodayTitle{font-size:clamp(21px,5vw,27px)!important;line-height:1.4!important;display:block!important;color:#754b24!important}
+#pilgrimCollectionOverlay .pilgrim-today-card.picked{min-height:132px!important}
+</style>
+<script id="sansa-catalog-navigation-fix-20261011">
+(function(){
+  // 108곳은 오직 편집자가 선정한 기본 사찰로만 계산한다. 사용자 장소와 절터는 별도.
+  const isOfficialTemple=(name)=>!!name && name!=='감은사지' && Object.prototype.hasOwnProperty.call(MASTER_BY_NAME||{},name);
+  const oldTempleData=window.getTempleCatalogData;
+  if(typeof oldTempleData==='function'){
+    window.getTempleCatalogData=function(){return oldTempleData().filter(d=>d&&d.name!=='감은사지');};
+  }
+  const originalCatalogRender=window.renderCatalogOverlay;
+  if(typeof originalCatalogRender==='function'){
+    window.renderCatalogOverlay=function(){
+      originalCatalogRender();
+      const list=document.getElementById('catalogList'),count=document.getElementById('catalogCount'),title=document.getElementById('catalogTitle');
+      if(!list)return;
+      const q=(document.getElementById('catalogSearch')?.value||'').trim().toLowerCase();
+      const temple=catalogMode!=='mountain';
+      const all=temple?getTempleCatalogData():getMountainCatalogData();
+      const official=temple?new Set(Object.keys(MASTER_BY_NAME||{}).filter(n=>n!=='감은사지')):new Set((MOUNTAIN_SEED||[]).map(d=>d.name));
+      const extra=all.filter(d=>d?.name&&!official.has(d.name));
+      const matches=d=>!q||[d.name,d.region,d.desc,d.tagline,d.height].filter(Boolean).join(' ').toLowerCase().includes(q);
+      const officialCount=all.filter(d=>official.has(d.name)&&matches(d)).length;
+      const extraCount=extra.filter(matches).length;
+      const cards=[...list.querySelectorAll('.catalog-card')];
+      const normal=[],mine=[];
+      cards.forEach(card=>{
+        const b=card.querySelector('.catalog-copy b');
+        const name=(b?.textContent||'').replace(/\s*·\s*✓\s*다녀옴\s*$/,'').trim();
+        (official.has(name)?normal:mine).push(card);
+      });
+      const makeHeading=(label,n,extraClass)=>{const h=document.createElement('div');h.className='catalog-section-heading '+(extraClass||'');h.innerHTML=label+' <small>'+n+'곳</small>';return h;};
+      list.replaceChildren();
+      list.appendChild(makeHeading(temple?'🪷 선정 108 순례 사찰':'⛰ 기본 산 목록',officialCount,''));
+      normal.forEach(el=>list.appendChild(el));
+      list.appendChild(makeHeading(temple?'✍️ 내가 추가한 절 · 기타 순례지':'✍️ 내가 추가한 산',extraCount,'extra'));
+      mine.forEach(el=>list.appendChild(el));
+      // 감은사지는 사용자가 이전에 등록한 경우에만 '기타 순례지'에 보여준다.
+      if(temple && Object.values(destinations||{}).some(d=>d?.name==='감은사지') && matches({name:'감은사지'})){
+        const card=document.createElement('div');card.className='catalog-card';
+        card.innerHTML='<div class="catalog-copy"><b>감은사지</b><small>경주 · 사찰터 (108 순례 제외)</small></div><div class="catalog-actions"><button type="button">보기</button></div>';
+        card.querySelector('button').onclick=()=>openTempleFromCatalog('감은사지');
+        list.appendChild(card);
+      }
+      if(count)count.textContent=`기본 ${officialCount}곳 · 추가 ${extraCount}곳`;
+      if(title)title.textContent=temple?'🛕 순례 사찰 목록':'⛰ 산 전체 목록';
+    };
+  }
+  // 목록에서 상세를 열 때 목록으로 돌아갈 문맥을 보존한다.
+  let fromCatalog=false;
+  const openTemple=window.openTempleFromCatalog,openMountain=window.openMountainFromCatalog;
+  if(typeof openTemple==='function')window.openTempleFromCatalog=function(){fromCatalog=true;return openTemple.apply(this,arguments);};
+  if(typeof openMountain==='function')window.openMountainFromCatalog=function(){fromCatalog=true;return openMountain.apply(this,arguments);};
+  function returnToList(){
+    if(!fromCatalog)return false;
+    const templeOpen=!!document.getElementById('detailOverlay')?.classList.contains('show');
+    const mountainOpen=!!document.getElementById('mDetailOverlay')?.classList.contains('show');
+    if(!templeOpen&&!mountainOpen)return false;
+    const close=templeOpen?window.closeDetail:window.closeMountainDetail;
+    close();
+    if((templeOpen&&document.getElementById('detailOverlay')?.classList.contains('show'))||(mountainOpen&&document.getElementById('mDetailOverlay')?.classList.contains('show')))return true;
+    fromCatalog=false;
+    openCatalogOverlay(templeOpen?'temple':'mountain');
+    return true;
+  }
+  const oldCloseDetail=window.closeDetail,oldCloseMountain=window.closeMountainDetail;
+  // X 버튼은 원래 close 함수로 연결되어 있으므로 닫은 뒤 목록 복원.
+  if(typeof oldCloseDetail==='function')window.closeDetail=function(){
+    const back=fromCatalog&&document.getElementById('detailOverlay')?.classList.contains('show');
+    const result=oldCloseDetail.apply(this,arguments);
+    if(back&&!document.getElementById('detailOverlay')?.classList.contains('show')){fromCatalog=false;openCatalogOverlay('temple');}
+    return result;
+  };
+  if(typeof oldCloseMountain==='function')window.closeMountainDetail=function(){
+    const back=fromCatalog&&document.getElementById('mDetailOverlay')?.classList.contains('show');
+    const result=oldCloseMountain.apply(this,arguments);
+    if(back&&!document.getElementById('mDetailOverlay')?.classList.contains('show')){fromCatalog=false;openCatalogOverlay('mountain');}
+    return result;
+  };
+  // 모바일 브라우저 뒤로가기는 기존 '무조건 홈' 리스너보다 먼저 처리.
+  window.addEventListener('popstate',function(e){
+    if(fromCatalog && (document.getElementById('detailOverlay')?.classList.contains('show')||document.getElementById('mDetailOverlay')?.classList.contains('show'))){
+      e.stopImmediatePropagation();returnToList();
+    }
+  },true);
+  // 뽑힌 절 이름을 즉시 숨기지 않고 다음 추첨 전까지 유지.
+  const originalDraw=window.drawTodayTemple;
+  if(typeof originalDraw==='function')window.drawTodayTemple=function(){
+    originalDraw.apply(this,arguments);
+    const card=document.querySelector('#pilgrimCollectionOverlay .pilgrim-today-card');
+    if(card){card.classList.add('picked');card.style.transition='background-color .5s ease';}
+  };
+})();
+</script>
+
 </body>
 </html>
