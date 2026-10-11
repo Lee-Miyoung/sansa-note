@@ -20772,6 +20772,24 @@ header.hero .hero-experience{
 .home-explore-hint-icon{flex:none;font-size:19px;line-height:1.2;color:#477b63;}
 @media(max-width:480px){.home-explore-hint{padding:12px 13px;font-size:14px;line-height:1.55;}}
 </style>
+<style id="sansa-collection-readability-20261011">
+/* 108 순례 컬렉션: 기존 색과 배치는 유지하고 글씨만 읽기 쉽게 */
+#pilgrimCollectionOverlay .pg-collection-kicker{font-size:clamp(13px,2.8vw,15px)!important;letter-spacing:.045em!important}
+#pilgrimCollectionOverlay .pg-collection-hero p{font-size:clamp(14px,3.1vw,16px)!important;line-height:1.55!important;max-width:80%!important}
+#pilgrimCollectionOverlay .pilgrim-game-tabs button{font-size:clamp(13px,3vw,16px)!important;line-height:1.35!important;min-height:45px!important}
+#pilgrimCollectionOverlay .pilgrim-today-card small{font-size:13px!important}
+#pilgrimCollectionOverlay .pilgrim-today-card b{font-size:clamp(17px,4vw,21px)!important;line-height:1.4!important}
+#pilgrimCollectionOverlay .pilgrim-today-card span{font-size:clamp(13px,2.8vw,15px)!important;line-height:1.5!important}
+#pilgrimCollectionOverlay .pilgrim-today-card button{font-size:clamp(12px,2.8vw,14px)!important;min-height:43px!important;white-space:nowrap!important}
+#pilgrimCollectionOverlay .pg-summary-copy strong{font-size:clamp(16px,3.8vw,20px)!important}
+#pilgrimCollectionOverlay .pg-summary-copy small{font-size:clamp(13px,2.8vw,15px)!important}
+#pilgrimCollectionOverlay .pg-lotus-name{font-size:clamp(10px,2.6vw,13px)!important;line-height:1.3!important;overflow-wrap:anywhere!important}
+#pilgrimCollectionOverlay .pg-section-head b,#pilgrimCollectionOverlay .pg-region-top b{font-size:15px!important}
+#pilgrimCollectionOverlay .pg-section-head span,#pilgrimCollectionOverlay .pg-region-top span{font-size:13px!important}
+.personal-places-heading{grid-column:1/-1;width:100%;font-size:clamp(16px,3.6vw,19px);font-weight:800;color:#315f50;margin:18px 0 3px;padding:13px 4px 9px;border-top:1px solid #ddd8cb}
+.personal-places-heading span{font-size:.82em;color:#7c827c;font-weight:600;margin-left:5px}
+@media(max-width:480px){#pilgrimCollectionOverlay .pg-collection-hero p{max-width:90%!important}#pilgrimCollectionOverlay .pilgrim-today-card{align-items:center!important;gap:8px!important}#pilgrimCollectionOverlay .pilgrim-today-card>div{flex:1;min-width:0}}
+</style>
 </head>
 <body>
 
@@ -27097,29 +27115,32 @@ function renderRegionCollection(body){
   </div>`;
 }
 function drawTodayTemple(){
-  const candidates=Object.entries(destinations||{})
-    .filter(([id,d])=>d&&!d.hiddenFromList&&(Number(d.stage)||0)===0);
+  const candidates=Object.entries(destinations||{}).filter(([id,d])=>
+    d && !d.hiddenFromList && typeof d.name==='string' && d.name.trim() && (Number(d.stage)||0)===0);
   const title=document.getElementById('pilgrimTodayTitle');
   const desc=document.getElementById('pilgrimTodayDesc');
   if(!candidates.length){
-    if(title) title.textContent='모두 다녀왔어요';
-    if(desc) desc.textContent='지금 목록의 절을 모두 방문했어요. 새 코스를 불러와보세요.';
+    if(title)title.textContent='모두 다녀왔어요';
+    if(desc)desc.textContent='아직 방문하지 않은 절이 없어요.';
     return;
   }
   const [id,d]=candidates[Math.floor(Math.random()*candidates.length)];
-  if(title) title.textContent=d.name;
-  if(desc) desc.innerHTML=`${escapeHtml(d.region||'')} · ${escapeHtml(d.desc||'오늘의 한 절로 골랐어요.')}`;
+  if(title)title.textContent=d.name.trim();
+  if(desc)desc.textContent=[d.region,d.desc||'오늘의 한 절로 골랐어요.'].filter(Boolean).join(' · ');
   const card=document.querySelector('.pilgrim-today-card');
   if(card){
     card.dataset.templeId=id;
     card.classList.add('picked');
     card.onclick=(e)=>{
-      if(e.target.closest('button')) return;
+      if(e.target.closest('button'))return;
       closePilgrimCollection();
       setTimeout(()=>openDetail(id),80);
     };
   }
+  // 이름을 화면에 먼저 반영한 뒤 동일 프레임에 축하 효과를 시작합니다.
+  requestAnimationFrame(()=>{if(typeof launchFireworks==='function')launchFireworks();});
 }
+
 function openPilgrimTempleFromCollection(id){
   closePilgrimCollection();
   setTimeout(()=>openDetail(id),80);
@@ -28472,6 +28493,22 @@ async function reportCommunityPost(postId){
 }
 
 
+function renderSeparatedPlaceCards(entries,kind){
+  const isTemple=kind==='temple';
+  const known=isTemple
+    ? new Set(Object.values(typeof MASTER_BY_NAME!=='undefined'?MASTER_BY_NAME:{}).map(x=>x&&x.name).filter(Boolean))
+    : new Set((typeof MOUNTAIN_SEED!=='undefined'?MOUNTAIN_SEED:[]).map(x=>x&&x.name).filter(Boolean));
+  const regular=[],mine=[];
+  entries.forEach(entry=>{
+    const d=entry[1];
+    // 기존 공식 목록에 없는 사용자 생성 장소만 별도 영역으로 분리합니다.
+    (d && d.name && !known.has(d.name)?mine:regular).push(entry);
+  });
+  const card=(entry)=>isTemple?renderCard(entry[0],entry[1]):renderMountainCard(entry[0],entry[1]);
+  if(!mine.length)return regular.map(card).join('');
+  return regular.map(card).join('')+`<div class="personal-places-heading" role="heading" aria-level="3">✍️ 내가 직접 추가한 ${isTemple?'절':'산'} <span>${mine.length}곳</span></div>`+mine.map(card).join('');
+}
+
 function render(){
   if(typeof syncTempleCatalogControl==='function')syncTempleCatalogControl();
   updateHiddenTempleButton();
@@ -28521,7 +28558,7 @@ function render(){
     grid.innerHTML=''; emptyNote.style.display='block';
   } else {
     emptyNote.style.display='none';
-    grid.innerHTML = list.map(([id,d])=>renderCard(id,d)).join('');
+    grid.innerHTML = renderSeparatedPlaceCards(list,'temple');
     grid.querySelectorAll('.card').forEach(card=>{
       card.onclick = ()=> openDetail(card.dataset.id);
     });
@@ -28710,7 +28747,7 @@ function renderMountainView(){
     grid.innerHTML=''; emptyNote.style.display='block';
   } else {
     emptyNote.style.display='none';
-    grid.innerHTML = filtered.map(([id,d])=>renderMountainCard(id,d)).join('');
+    grid.innerHTML = renderSeparatedPlaceCards(filtered,'mountain');
     grid.querySelectorAll('.card').forEach(card=>{
       card.onclick = ()=> openMountainDetail(card.dataset.id);
     });
