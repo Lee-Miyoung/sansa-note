@@ -37070,8 +37070,8 @@ function renderCatalogOverlay(){
 /* 업로드한 파일명 그대로 사용 — 사찰별 현장인증 카드 */
 const PILGRIM_SPECIAL_CARDS = {
   '해인사': {file:'008.png',symbol:'팔만대장경'},
-  '진관사': {file:'020.png',symbol:'진관사 태극기'},
-  '화엄사': {file:'041.png',symbol:'각황전'}
+  '진관사': {file:'041.png',symbol:'진관사 태극기'},
+  '화엄사': {file:'020.png',symbol:'각황전'}
 };
 /* ---------- 108 순례: 진행상황만 선명하게 ---------- */
 render108Pilgrimage = function(body){
@@ -37090,15 +37090,6 @@ render108Pilgrimage = function(body){
       </div>
     </div>
 
-    <div class="pilgrim-verified-gallery" aria-label="현장인증 순례 카드">
-      ${visited.filter(([id,d])=>Object.values(d.visits||{}).some(v=>v&&v.verified===true) && Object.prototype.hasOwnProperty.call(PILGRIM_SPECIAL_CARDS,d.name)).map(([id,d])=>{
-        const info=PILGRIM_SPECIAL_CARDS[d.name];
-        return `<button class="pilgrim-verified-card" type="button" onclick="openPilgrimTempleFromCollection('${id}')" aria-label="${escapeAttr(d.name)} 현장인증 카드 보기">
-          <img src="images/lotus-cards/${info.file}" alt="${escapeAttr(d.name)} 동자승 순례 카드" loading="lazy" onerror="this.closest('.pilgrim-verified-card').style.display='none'">
-          <span class="pilgrim-verified-caption"><b>✦ 현장인증 · ${escapeHtml(d.name)}</b><small>${info.symbol}</small></span>
-        </button>`;
-      }).join('')}
-    </div>
 
     <div class="pg-lotus-grid">
       ${Array.from({length:108},(_,i)=>{
@@ -37681,6 +37672,204 @@ document.getElementById('todayTriviaOverlay')?.addEventListener('click',function
     const card=document.querySelector('#pilgrimCollectionOverlay .pilgrim-today-card');
     if(card){card.classList.add('picked');card.style.transition='background-color .5s ease';}
   };
+})();
+</script>
+
+
+
+<!-- ===== SANSA NOTE · 108 LOTUS GUARDIAN CATALOG · final three-state rules ===== -->
+<style id="guardian-catalog-final-v10">
+  .guardian-dojo{margin:14px 0 6px;padding:14px;border:1px solid #e8dcc8;border-radius:18px;background:linear-gradient(145deg,#fffdf9,#fbf5ea)}
+  .guardian-dojo-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+  .guardian-dojo-title{display:flex;gap:10px;align-items:center;min-width:0}
+  .guardian-dojo-title .lotus-mark{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:#fff0f1;font-size:24px;flex:0 0 auto}
+  .guardian-dojo-title b{display:block;font-family:'Nanum Myeongjo','Noto Serif KR',serif;font-size:20px;line-height:1.22;color:#2f2923}
+  .guardian-dojo-title span{display:block;margin-top:4px;font-size:12px;line-height:1.45;color:#857765}
+  .guardian-dojo-count{flex:0 0 auto;text-align:right;color:#a97727;font-weight:900;font-size:15px;white-space:nowrap}
+  .guardian-dojo-count small{display:block;font-size:9px;color:#9d8f7d;font-weight:700;margin-top:2px}
+  .guardian-filter-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin:12px 0 2px}
+  .guardian-filter-btn{border:1px solid #e6ddcf;background:#f4f0e8;color:#6e6255;border-radius:999px;padding:8px 5px;font-family:inherit;font-size:11px;font-weight:800;cursor:pointer;white-space:nowrap}
+  .guardian-filter-btn.active{background:#3f816b;border-color:#3f816b;color:white;box-shadow:0 3px 8px rgba(63,129,107,.18)}
+  .guardian-legend{display:flex;gap:8px;flex-wrap:wrap;margin:9px 0 2px;font-size:10px;color:#857765}
+  .guardian-legend span{display:inline-flex;align-items:center;gap:4px;background:#fff;border:1px solid #ece3d7;border-radius:999px;padding:4px 7px}
+
+  .guardian-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important;margin:13px 0 8px!important}
+  .guardian-card{appearance:none;width:100%;min-width:0;border:1.5px solid #e2dacc!important;border-radius:15px!important;padding:6px!important;background:#f7f4ee!important;color:#4e453e!important;text-align:center!important;overflow:hidden;position:relative;box-shadow:none!important}
+  .guardian-card.is-verified{border-color:#d3a445!important;background:linear-gradient(145deg,#fffdf5,#fff4cc)!important;box-shadow:0 5px 14px rgba(179,133,50,.16)!important;cursor:pointer}
+  .guardian-card.is-visited{border-color:#d7d1c8!important;background:#f5f3ef!important;cursor:default}
+  .guardian-card.is-unvisited{opacity:.96;cursor:default}
+  .guardian-art{height:auto!important;aspect-ratio:540/760!important;border-radius:11px!important;overflow:hidden!important;display:flex!important;align-items:center!important;justify-content:center!important;background:#efede8!important;position:relative}
+  .guardian-card-image{width:100%!important;height:100%!important;object-fit:cover!important;display:block!important;border-radius:10px!important}
+  .guardian-card.is-visited .guardian-card-image{filter:grayscale(1) contrast(.92) brightness(1.04)!important;opacity:.72!important}
+  .guardian-card.is-verified .guardian-card-image{filter:none!important;opacity:1!important}
+  .guardian-shadow-card{width:100%;height:100%;display:flex;align-items:center;justify-content:center;position:relative;background:linear-gradient(145deg,#f1efe9,#e7e4dc)}
+  .guardian-shadow-monk{position:relative;width:66%;height:70%;opacity:.24;filter:grayscale(1)}
+  .guardian-shadow-monk::before{content:'';position:absolute;left:50%;top:7%;width:40%;aspect-ratio:1;border-radius:50%;transform:translateX(-50%);background:#6f6c67}
+  .guardian-shadow-monk::after{content:'';position:absolute;left:50%;bottom:5%;width:68%;height:52%;border-radius:46% 46% 18% 18%;transform:translateX(-50%);background:#6f6c67}
+  .guardian-shadow-lotus{position:absolute;left:50%;bottom:22%;transform:translateX(-50%);font-size:28px;opacity:.22;filter:grayscale(1)}
+  .guardian-lock-mini{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:31px;height:31px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.72);font-size:16px;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+  .guardian-card-badge{position:absolute;top:9px;right:9px;z-index:2;min-width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:900;background:rgba(255,255,255,.92);box-shadow:0 2px 8px rgba(0,0,0,.10)}
+  .guardian-card.is-verified .guardian-card-badge{background:#d8aa45;color:#fff}
+  .guardian-card.is-visited .guardian-card-badge{background:#eeeae4;color:#777}
+  .guardian-name{font-size:14px!important;font-weight:900!important;margin-top:7px!important;word-break:keep-all;line-height:1.2}
+  .guardian-state{font-size:10px!important;margin-top:3px!important;color:#8c8173!important;line-height:1.25;min-height:25px}
+  .guardian-card.is-verified .guardian-state{color:#9a6820!important;font-weight:800}
+  .guardian-card.is-visited .guardian-state{color:#777!important;font-weight:700}
+  .guardian-empty-filter{grid-column:1/-1;padding:36px 10px;text-align:center;color:#8f8170;font-size:13px}
+
+  .guardian-detail-backdrop{position:fixed;inset:0;z-index:999999;background:rgba(25,21,15,.72);display:flex;align-items:center;justify-content:center;padding:16px}
+  .guardian-detail{position:relative;width:min(100%,410px);max-height:92dvh;overflow-y:auto;padding:22px 18px 18px;border:2px solid #d2a34b;border-radius:22px;background:linear-gradient(145deg,#fffdf7,#f8edd4);text-align:center;box-shadow:0 18px 60px rgba(0,0,0,.30)}
+  .guardian-detail-kicker{font-size:10px;font-weight:900;letter-spacing:1.1px;color:#a87627}
+  .guardian-detail-art{width:min(100%,280px)!important;margin:12px auto 8px!important;border-radius:14px;overflow:hidden;background:#f1eadf}
+  .guardian-detail-art .guardian-card-image{width:100%!important;height:auto!important;max-height:none!important;object-fit:contain!important;border-radius:0!important;box-shadow:none!important}
+  .guardian-detail h3{margin:9px 0 4px;font-size:22px}
+  .guardian-detail p{margin:0 0 10px;font-size:13px;line-height:1.55;color:#766957}
+  .guardian-detail-meta{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:12px 0}
+  .guardian-detail-meta span{padding:9px;border-radius:11px;background:rgba(255,255,255,.65);border:1px solid #eadbc1;font-size:10px;color:#766957}
+  .guardian-detail-meta b{display:block;font-size:12px;color:#3c342c;margin-bottom:2px}
+  .guardian-detail-actions{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:12px}
+  .guardian-detail-actions button{border:0;border-radius:12px;padding:11px 8px;font-family:inherit;font-size:12px;font-weight:900;cursor:pointer}
+  .guardian-detail-actions .open-temple{background:#3f816b;color:#fff}.guardian-detail-actions .close-detail{background:#eee6d9;color:#5d5144}
+  .guardian-detail-close{position:absolute;right:9px;top:9px;border:0;background:#fff;border-radius:50%;font-size:20px;width:36px;height:36px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+
+  @media(min-width:700px){.guardian-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important}}
+  @media(max-width:420px){.guardian-dojo{padding:12px}.guardian-dojo-title b{font-size:18px}.guardian-filter-btn{font-size:10px;padding:7px 3px}.guardian-grid{gap:8px!important}.guardian-card{padding:5px!important}.guardian-name{font-size:13px!important}.guardian-state{font-size:9.5px!important}}
+  @media(prefers-reduced-motion:no-preference){.guardian-card.is-verified{transition:transform .14s ease,box-shadow .14s ease}.guardian-card.is-verified:active{transform:scale(.985)}}
+</style>
+<script id="guardian-catalog-final-v10-js">
+(function(){
+  const FINAL_GUARDIAN_CARDS={
+    '해인사':{file:'008.png',symbol:'팔만대장경'},
+    '진관사':{file:'041.png',symbol:'진관사 태극기'},
+    '화엄사':{file:'020.png',symbol:'각황전'}
+  };
+  let guardianFilter='all';
+
+  function hasVisitRecord(d){
+    if(!d) return false;
+    if((Number(d.stage)||0)>=1) return true;
+    return Object.keys(d.visits||{}).length>0;
+  }
+  function hasVerifiedVisit(d){
+    return !!(d&&Object.values(d.visits||{}).some(v=>v&&v.verified===true));
+  }
+  function latestVerifiedVisit(d){
+    const arr=Object.values(d?.visits||{}).filter(v=>v&&v.verified===true);
+    arr.sort((a,b)=>Number(b.ts||b.createdAt||0)-Number(a.ts||a.createdAt||0));
+    return arr[0]||null;
+  }
+  function allGuardianTempleNames(){
+    const src=(typeof MASTER_TEMPLES!=='undefined'&&Array.isArray(MASTER_TEMPLES))
+      ? MASTER_TEMPLES.map(x=>typeof x==='string'?x:x?.name)
+      : Object.keys(typeof MASTER_BY_NAME!=='undefined'&&MASTER_BY_NAME?MASTER_BY_NAME:{});
+    return [...new Set(src.filter(Boolean))].slice(0,108);
+  }
+  function recordsForTemple(name){
+    return Object.entries(typeof destinations!=='undefined'&&destinations?destinations:{})
+      .filter(([id,d])=>d&&d.name===name)
+      .sort((a,b)=>{
+        const av=hasVerifiedVisit(a[1])?1:0,bv=hasVerifiedVisit(b[1])?1:0;
+        if(av!==bv)return bv-av;
+        return Number(b[1].updatedAt||b[1].createdAt||0)-Number(a[1].updatedAt||a[1].createdAt||0);
+      });
+  }
+  function buildGuardianCatalog(){
+    return allGuardianTempleNames().map((name,i)=>{
+      const records=recordsForTemple(name);
+      const visited=records.some(([,d])=>hasVisitRecord(d));
+      const verified=records.some(([,d])=>hasVerifiedVisit(d));
+      const record=records.find(([,d])=>hasVerifiedVisit(d))||records.find(([,d])=>hasVisitRecord(d))||records[0]||null;
+      return {name,i,visited,verified,record,asset:FINAL_GUARDIAN_CARDS[name]||null};
+    });
+  }
+  function cardImage(item,mode){
+    if(!item.asset) return shadowArt(mode==='visited');
+    const cls=mode==='visited'?'guardian-card-image guardian-gray':'guardian-card-image';
+    return `<img class="${cls}" src="images/lotus-cards/${item.asset.file}" alt="${escapeAttr(item.name)} 연꽃 수호 카드" loading="lazy" decoding="async" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'guardian-shadow-monk'}))">`;
+  }
+  function shadowArt(visited){
+    return `<div class="guardian-shadow-card ${visited?'visited-shadow':''}" aria-hidden="true"><span class="guardian-shadow-monk"></span><span class="guardian-shadow-lotus">🪷</span>${visited?'':'<span class="guardian-lock-mini">🔒</span>'}</div>`;
+  }
+  function stateOf(item){return item.verified?'verified':item.visited?'visited':'unvisited'}
+  function stateLabel(item){
+    if(item.verified)return '✨ 현장 인증 완료';
+    if(item.visited)return '방문 기록 · 현장 인증 전';
+    return '미방문 · 그림자 카드';
+  }
+  function artFor(item){
+    const state=stateOf(item);
+    if(state==='unvisited') return shadowArt(false);
+    if(state==='visited') return cardImage(item,'visited');
+    return cardImage(item,'verified');
+  }
+  function filterItems(items){
+    if(guardianFilter==='visited')return items.filter(x=>x.visited&&!x.verified);
+    if(guardianFilter==='verified')return items.filter(x=>x.verified);
+    if(guardianFilter==='locked')return items.filter(x=>!x.visited);
+    return items;
+  }
+  function render(body){
+    const items=buildGuardianCatalog();
+    const shown=filterItems(items);
+    const visited=items.filter(x=>x.visited).length;
+    const verified=items.filter(x=>x.verified).length;
+    body.innerHTML=`
+      <section class="guardian-dojo">
+        <div class="guardian-dojo-head">
+          <div class="guardian-dojo-title"><span class="lotus-mark">🪷</span><div><b>108 순례 카드 도감</b><span>방문하면 흑백으로, 현장 위치 인증하면 컬러 수호카드로 완성돼요.</span></div></div>
+          <div class="guardian-dojo-count">${verified} / ${items.length}<small>컬러 카드 획득</small></div>
+        </div>
+        <div class="guardian-filter-row">
+          <button type="button" class="guardian-filter-btn ${guardianFilter==='all'?'active':''}" data-gf="all">전체</button>
+          <button type="button" class="guardian-filter-btn ${guardianFilter==='visited'?'active':''}" data-gf="visited">방문</button>
+          <button type="button" class="guardian-filter-btn ${guardianFilter==='verified'?'active':''}" data-gf="verified">📍 현장 인증</button>
+          <button type="button" class="guardian-filter-btn ${guardianFilter==='locked'?'active':''}" data-gf="locked">미획득</button>
+        </div>
+        <div class="guardian-legend"><span>◐ 방문 ${visited}곳 · 흑백</span><span>📍 인증 ${verified}곳 · 컬러</span><span>🔒 미방문 · 그림자</span></div>
+      </section>
+      <div class="guardian-grid">
+        ${shown.length?shown.map(item=>{
+          const state=stateOf(item);
+          const click=state==='verified'?`onclick="openLotusGuardianCard(${item.i})"`:'';
+          return `<button type="button" class="guardian-card is-${state}" ${click} aria-label="${escapeAttr(item.name)} ${escapeAttr(stateLabel(item))}">
+            <span class="guardian-card-badge">${state==='verified'?'✦':state==='visited'?'◐':'🔒'}</span>
+            <div class="guardian-art">${artFor(item)}</div>
+            <div class="guardian-name">${escapeHtml(item.name)}</div>
+            <div class="guardian-state">${stateLabel(item)}</div>
+          </button>`;
+        }).join(''):'<div class="guardian-empty-filter">이 조건에 해당하는 카드가 아직 없어요.</div>'}
+      </div>`;
+    body.querySelectorAll('[data-gf]').forEach(btn=>btn.addEventListener('click',()=>{guardianFilter=btn.dataset.gf;render(body)}));
+  }
+  function formatVisitDate(v){
+    const t=Number(v?.ts||v?.createdAt||0);if(!t)return '인증 날짜 기록됨';
+    try{return new Date(t).toLocaleDateString('ko-KR');}catch(_){return '인증 완료'}
+  }
+  function openDetail(i){
+    const item=buildGuardianCatalog()[i];if(!item||!item.verified)return;
+    document.getElementById('guardianCardDetail')?.remove();
+    const visit=item.record?latestVerifiedVisit(item.record[1]):null;
+    const recordId=item.record?.[0]||'';
+    const symbol=item.asset?.symbol||'연꽃 수호카드';
+    const wrap=document.createElement('div');wrap.id='guardianCardDetail';wrap.className='guardian-detail-backdrop';
+    wrap.innerHTML=`<div class="guardian-detail" role="dialog" aria-modal="true" aria-label="${escapeAttr(item.name)} 수호 카드">
+      <button type="button" class="guardian-detail-close" aria-label="닫기">✕</button>
+      <div class="guardian-detail-kicker">SANSA NOTE · LOTUS GUARDIAN ${String(i+1).padStart(3,'0')}</div>
+      <div class="guardian-detail-art">${cardImage(item,'verified')}</div>
+      <h3>${escapeHtml(item.name)}</h3>
+      <p>현장 위치 인증으로 컬러가 열린 나만의 연꽃 수호카드입니다.</p>
+      <div class="guardian-detail-meta"><span><b>📍 현장 인증</b>${escapeHtml(formatVisitDate(visit))}</span><span><b>상징</b>${escapeHtml(symbol)}</span></div>
+      <div class="guardian-detail-actions">${recordId?`<button type="button" class="open-temple">방문 기록 보기 →</button>`:''}<button type="button" class="close-detail">도감으로 돌아가기</button></div>
+    </div>`;
+    wrap.querySelector('.guardian-detail-close')?.addEventListener('click',()=>wrap.remove());
+    wrap.querySelector('.close-detail')?.addEventListener('click',()=>wrap.remove());
+    wrap.querySelector('.open-temple')?.addEventListener('click',()=>{wrap.remove();try{openPilgrimTempleFromCollection(recordId)}catch(_){}});
+    wrap.addEventListener('click',e=>{if(e.target===wrap)wrap.remove()});
+    document.body.appendChild(wrap);
+  }
+  window.guardianCatalog=buildGuardianCatalog;
+  window.renderLotusGuardianCollection=render;
+  window.openLotusGuardianCard=openDetail;
 })();
 </script>
 
