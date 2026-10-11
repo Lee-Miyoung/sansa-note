@@ -20941,6 +20941,15 @@ button.site-footer-link{font-size:clamp(15px,2vw,17px)!important;font-weight:750
  button.site-footer-link{font-size:16px!important}
 }
 </style>
+<style id="sansa-record-delete-landscape-fix-20261011">
+/* 배경 풍경이 동자승 발끝까지 이어지고 끝부분은 자연스럽게 사라짐 */
+@media(max-width:900px){
+ .hero-main-grid{position:relative!important;isolation:isolate!important}
+ .hero-clean-art{position:absolute!important;inset:0!important;height:100%!important;overflow:hidden!important}
+ .hero-clean-bg{position:absolute!important;left:-22%!important;top:0!important;width:144%!important;height:105%!important;max-width:none!important;object-fit:cover!important;object-position:center 56%!important;opacity:.77!important;-webkit-mask-image:linear-gradient(to bottom,rgba(0,0,0,.35) 0%,#000 24%,#000 76%,rgba(0,0,0,.82) 91%,transparent 100%)!important;mask-image:linear-gradient(to bottom,rgba(0,0,0,.35) 0%,#000 24%,#000 76%,rgba(0,0,0,.82) 91%,transparent 100%)!important}
+ .hero-clean-art::before{background:linear-gradient(to bottom,rgba(250,248,242,.72) 0%,rgba(250,248,242,.40) 29%,rgba(250,248,242,.07) 58%,transparent 82%)!important}
+}
+</style>
 </head>
 <body>
 
@@ -35135,38 +35144,42 @@ function initRecordDeleteGestures(wrap){
     card.addEventListener('contextmenu',e=>{e.preventDefault();clear();reveal();});
   });
 }
-function deleteAnyVisitRecord(type,id,vid){
-  if(localMode){promptGuestLoginRequired();return;}
+async function deleteAnyVisitRecord(type,id,vid){
+  if(localMode || !auth?.currentUser){promptGuestLoginRequired();return;}
   const store=type==='mountain'?mountainDestinations:destinations;
-  const d=store?.[id],v=(d?.visits||{})[vid];
-  if(!d||!v)return;
+  const d=store?.[id],v=d?.visits?.[vid];
+  if(!d||!v){showToast('기록을 다시 불러온 뒤 시도해 주세요.');return;}
   const msg=v.verified
-    ? `${d.name}의 현장 인증 기록입니다.\n한 번 삭제하면 현장 인증은 복구할 수 없습니다.\n인증 도장·인증 횟수·보상 기록에서도 사라집니다.\n정말 영구 삭제할까요?`
-    : `${d.name}의 ${type==='mountain'?'등반':'방문'} 기록을 삭제할까요?`;
-  if(!confirm(msg))return;
-  const visits=Object.assign({},d.visits||{});
-  delete visits[vid];
-  if(type==='mountain'){
-    updateMountainDestination(id,{visits});
-    mountainDestinations[id]=Object.assign({},mountainDestinations[id],{visits});
-    if(currentMountainDetailId===id){
+    ? `${d.name}의 현장 인증 기록을 영구 삭제할까요?\n\n한 번 삭제하면 현장 인증은 복구할 수 없습니다. 인증 도장·인증 횟수·보상 기록에서도 사라집니다.`
+    : `${d.name}의 ${type==='mountain'?'등반':'방문'} 기록을 삭제할까요?\n삭제한 기록은 복구할 수 없습니다.`;
+  if(!window.confirm(msg))return;
+  const key=type+':'+id+':'+vid;
+  if(!deleteAnyVisitRecord.pending)deleteAnyVisitRecord.pending=new Set();
+  if(deleteAnyVisitRecord.pending.has(key))return;
+  deleteAnyVisitRecord.pending.add(key);
+  try{
+    // visits 전체 갱신 대신 Firebase에서 이 기록 하나만 제거
+    const parent=type==='mountain'?mountainRef(id):destinationRef(id);
+    await parent.child('visits').child(vid).remove();
+    const visits={...(store[id]?.visits||{})};
+    delete visits[vid];
+    store[id]={...store[id],visits};
+    if(type==='mountain' && currentMountainDetailId===id){
       renderMountainVisits(visits);
-      if(typeof renderMountainRewardPreview==='function')renderMountainRewardPreview(mountainDestinations[id]);
-    }
-  }else{
-    updateDestination(id,{visits});
-    destinations[id]=Object.assign({},destinations[id],{visits});
-    if(currentDetailId===id){
+      if(typeof renderMountainRewardPreview==='function')renderMountainRewardPreview(store[id]);
+    }else if(type==='temple' && currentDetailId===id){
       renderVisits(visits);
-      if(typeof renderRepeatChallenge==='function')renderRepeatChallenge(destinations[id]);
-      if(typeof renderPilgrimRewardPreview==='function')renderPilgrimRewardPreview(destinations[id]);
+      if(typeof renderRepeatChallenge==='function')renderRepeatChallenge(store[id]);
+      if(typeof renderPilgrimRewardPreview==='function')renderPilgrimRewardPreview(store[id]);
     }
-  }
-  if(typeof updateFieldVerifyMenuCount==='function')updateFieldVerifyMenuCount();
-  renderAllVisitRecords();
-  render();
-  showToast('잘못된 기록을 삭제했어요');
+    if(typeof updateFieldVerifyMenuCount==='function')updateFieldVerifyMenuCount();
+    renderAllVisitRecords();render();showToast('기록을 삭제했어요');
+  }catch(err){
+    console.error('기록 삭제 실패:',err);
+    showToast('삭제하지 못했어요. 인터넷 연결과 로그인 상태를 확인해 주세요.');
+  }finally{deleteAnyVisitRecord.pending.delete(key);}
 }
+
 document.getElementById('allVisitRecordsOverlay')?.addEventListener('click',function(e){if(e.target===this)closeAllVisitRecords();});
 </script>
 
