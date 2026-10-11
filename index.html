@@ -20917,6 +20917,30 @@ header.hero .hero-experience{
  .hero-copy p{font-size:clamp(18px,4.2vw,21px)!important;line-height:1.72!important}
 }
 </style>
+<style id="sansa-home-footer-polish-20261011">
+/* 홈 배경을 계단 끝까지 이어서 보여주되 인물·전각은 그대로 유지 */
+@media(max-width:900px){
+ .hero-main-grid{position:relative!important;isolation:isolate!important;background:#faf8f2!important}
+ .hero-clean-art{position:absolute!important;inset:0!important;height:100%!important;overflow:hidden!important}
+ .hero-clean-bg{position:absolute!important;left:-12%!important;top:0!important;width:124%!important;height:100%!important;max-width:none!important;object-fit:fill!important;opacity:.68!important;mask-image:linear-gradient(90deg,rgba(0,0,0,.84),#000 12%,#000 88%,rgba(0,0,0,.86))!important;-webkit-mask-image:linear-gradient(90deg,rgba(0,0,0,.84),#000 12%,#000 88%,rgba(0,0,0,.86))!important}
+ .hero-clean-art::before{background:linear-gradient(180deg,rgba(250,248,242,.60) 0%,rgba(250,248,242,.24) 34%,transparent 65%)!important}
+}
+/* 사이트 소개 및 문의 영역: 가독성, 간격, 타이포그래피 통일 */
+.seo-intro{margin-top:36px!important;margin-bottom:42px!important}
+.seo-intro-inner{padding-top:26px!important}
+.seo-intro h2{font-size:clamp(21px,3.4vw,27px)!important;line-height:1.5!important;letter-spacing:-.035em!important;word-break:keep-all!important}
+.seo-intro p{font-size:clamp(16px,2.2vw,18px)!important;line-height:1.85!important;color:#615f59!important;word-break:keep-all!important}
+.site-footer-brand{font-size:clamp(22px,3vw,27px)!important;font-weight:800!important;letter-spacing:-.035em!important}
+.site-footer-copy{font-size:clamp(15px,2vw,17px)!important;line-height:1.85!important;color:#66645e!important}
+button.site-footer-link{font-size:clamp(15px,2vw,17px)!important;font-weight:750!important;min-height:48px!important;padding:11px 16px!important;line-height:1.45!important}
+@media(max-width:640px){
+ .seo-intro{padding:0 20px!important;margin-top:28px!important;margin-bottom:44px!important}
+ .seo-intro h2{font-size:21px!important}
+ .seo-intro p{font-size:16px!important;line-height:1.85!important}
+ .site-footer-copy{font-size:15px!important}
+ button.site-footer-link{font-size:16px!important}
+}
+</style>
 </head>
 <body>
 
@@ -31126,18 +31150,10 @@ function openSansaMail(kind){
   const email='sansanote.help@gmail.com';
   const subject=kind==='collab' ? '[산사노트 협업 문의]' : '[산사노트 문의]';
   const body=kind==='collab'
-    ? '안녕하세요, 산사노트 협업 관련 문의드립니다.%0A%0A'
-    : '안녕하세요, 산사노트에 문의드립니다.%0A%0A';
-
-  const gmailUrl='https://mail.google.com/mail/?view=cm&fs=1'
-    +'&to='+encodeURIComponent(email)
-    +'&su='+encodeURIComponent(subject)
-    +'&body='+body;
-
-  const win=window.open(gmailUrl,'_blank','noopener,noreferrer');
-  if(!win){
-    window.location.href='mailto:'+email+'?subject='+encodeURIComponent(subject);
-  }
+    ? '안녕하세요. 산사노트 협업 관련 문의드립니다.\n\n'
+    : '안녕하세요. 산사노트에 문의드립니다.\n\n';
+  // 기기의 기본 메일 앱으로 받는 사람과 제목을 바로 전달합니다.
+  window.location.href='mailto:'+email+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
 }
 
 function openContactOverlay(){
