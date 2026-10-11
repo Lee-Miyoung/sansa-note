@@ -21049,6 +21049,17 @@ button.site-footer-link{font-size:clamp(15px,2vw,17px)!important;font-weight:750
 .guardian-detail{max-height:92dvh;overflow-y:auto}
 @media(max-width:480px){.guardian-grid{gap:9px}.guardian-card{padding:6px}.guardian-name{font-size:15px}.guardian-state{font-size:12px}}
 </style>
+<style id="pilgrim-verified-card-gallery-css">
+#pilgrimCollectionOverlay .pilgrim-verified-gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:16px 0 20px}
+#pilgrimCollectionOverlay .pilgrim-verified-gallery:empty{display:none}
+#pilgrimCollectionOverlay .pilgrim-verified-card{display:block;min-width:0;padding:0;border:2px solid #d7b16d;border-radius:16px;overflow:hidden;background:#fffaf0;text-align:left;box-shadow:0 5px 17px rgba(106,75,34,.13);cursor:pointer}
+#pilgrimCollectionOverlay .pilgrim-verified-card img{display:block;width:100%;aspect-ratio:3/4;object-fit:cover;background:#f8f1e4}
+#pilgrimCollectionOverlay .pilgrim-verified-caption{display:flex;flex-direction:column;gap:3px;padding:10px 11px;color:#65451f;line-height:1.4}
+#pilgrimCollectionOverlay .pilgrim-verified-caption b{font-size:clamp(14px,2.6vw,17px)}
+#pilgrimCollectionOverlay .pilgrim-verified-caption small{font-size:clamp(13px,2.2vw,15px);color:#756550}
+@media(max-width:620px){#pilgrimCollectionOverlay .pilgrim-verified-gallery{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}#pilgrimCollectionOverlay .pilgrim-verified-caption{padding:9px}}
+@media(prefers-reduced-motion:no-preference){#pilgrimCollectionOverlay .pilgrim-verified-card{animation:pilgrimCardGlow 3s ease-in-out infinite alternate}@keyframes pilgrimCardGlow{from{box-shadow:0 4px 12px rgba(166,119,47,.13)}to{box-shadow:0 3px 19px rgba(214,162,65,.42)}}}
+</style>
 </head>
 <body>
 
@@ -27282,7 +27293,8 @@ function guardianCatalog(){
   });
 }
 function guardianCharacter(item){
-  const path='images/lotus-cards/'+String(item.i+1).padStart(3,'0')+'.png';
+  const namedCards={'해인사':'해인사_수호카드.png','진관사':'진관사_수호카드.png','화엄사':'화엄사_수호카드.png'};
+  const path='images/lotus-cards/'+(namedCards[item.name]||String(item.i+1).padStart(3,'0')+'.png');
   return `<img class="guardian-card-image" src="${path}" alt="${escapeAttr(item.name)} 연꽃 수호 카드" loading="lazy" decoding="async" onerror="this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=guardian-silhouette>🪷</span>')">`;
 }
 function renderLotusGuardianCollection(body){
@@ -37055,6 +37067,12 @@ function renderCatalogOverlay(){
 
 
 <script id="simple-catalog-collection-js-v8">
+/* 업로드한 파일명 그대로 사용 — 사찰별 현장인증 카드 */
+const PILGRIM_SPECIAL_CARDS = {
+  '해인사': {file:'008.png',symbol:'팔만대장경'},
+  '진관사': {file:'020.png',symbol:'진관사 태극기'},
+  '화엄사': {file:'041.png',symbol:'각황전'}
+};
 /* ---------- 108 순례: 진행상황만 선명하게 ---------- */
 render108Pilgrimage = function(body){
   const visited=getVisitedTempleRecords();
@@ -37070,6 +37088,16 @@ render108Pilgrimage = function(body){
         <small>${count?'다녀온 곳에는 연꽃과 절 이름이 남아요.':'첫 순례를 기록하면 첫 연꽃이 피어요.'}</small>
         <div class="pg-progress"><i style="width:${pct}%"></i></div>
       </div>
+    </div>
+
+    <div class="pilgrim-verified-gallery" aria-label="현장인증 순례 카드">
+      ${visited.filter(([id,d])=>Object.values(d.visits||{}).some(v=>v&&v.verified===true) && Object.prototype.hasOwnProperty.call(PILGRIM_SPECIAL_CARDS,d.name)).map(([id,d])=>{
+        const info=PILGRIM_SPECIAL_CARDS[d.name];
+        return `<button class="pilgrim-verified-card" type="button" onclick="openPilgrimTempleFromCollection('${id}')" aria-label="${escapeAttr(d.name)} 현장인증 카드 보기">
+          <img src="images/lotus-cards/${info.file}" alt="${escapeAttr(d.name)} 동자승 순례 카드" loading="lazy" onerror="this.closest('.pilgrim-verified-card').style.display='none'">
+          <span class="pilgrim-verified-caption"><b>✦ 현장인증 · ${escapeHtml(d.name)}</b><small>${info.symbol}</small></span>
+        </button>`;
+      }).join('')}
     </div>
 
     <div class="pg-lotus-grid">
