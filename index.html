@@ -18310,6 +18310,23 @@ body{scroll-padding-top:calc(var(--global-nav-h) + 12px)!important}
   z-index:2!important;
 }
 
+
+/* 2026-10-11: overlay readability / fixed header collision repair */
+body.sansa-modal-open .site-global-nav{visibility:hidden!important;pointer-events:none!important;}
+body.sansa-modal-open #app{padding-top:0!important;}
+.overlay.show{z-index:2147480100!important;}
+.overlay.show .modal{box-sizing:border-box!important;max-height:calc(100dvh - 16px)!important;}
+.overlay.show .modal-head{position:relative;flex-shrink:0;min-width:0;}
+.overlay.show .modal-head h2{font-size:clamp(19px,4.6vw,25px)!important;line-height:1.35!important;overflow-wrap:anywhere;}
+.overlay.show .modal-head .sub{font-size:clamp(13px,3.3vw,15px)!important;line-height:1.55!important;}
+.overlay.show .modal-body{font-size:clamp(14px,3.5vw,16px);line-height:1.65;overflow-wrap:break-word;}
+.overlay.show .close-x{flex-shrink:0;min-width:40px;min-height:40px;}
+@media(max-width:700px){.overlay.show{padding:0!important;align-items:stretch!important}.overlay.show .modal{max-height:100dvh!important;height:100dvh!important;border-radius:0!important;overflow-y:auto!important;overscroll-behavior:contain!important}.overlay.show .modal-head{padding-top:max(14px,env(safe-area-inset-top))!important}}
+#rouletteName{color:#704a35!important;opacity:1!important;visibility:visible!important;min-height:1.5em;}
+.sansa-map-legend{display:flex;flex-wrap:wrap;gap:8px 15px;font-size:14px;line-height:1.5;margin:0 0 12px;color:var(--ink-soft);}
+.sansa-map-legend span{display:inline-flex;align-items:center;gap:5px;}
+.sansa-map-legend i{width:14px;height:14px;border-radius:50%;display:inline-block;border:1px solid #d0c8b8;}
+
 </style>
 
 <style id="sansa-surgical-fix">
@@ -21575,9 +21592,10 @@ header.hero .hero-experience{
       <button class="close-x" onclick="closeMapOverlay()">✕</button>
     </div>
     <div class="modal-body">
-      <div class="map-legend">
-        <span><span class="dot famous"></span>유명한 곳</span>
-        <span><span class="dot hidden"></span>숨은 곳</span>
+      <div class="sansa-map-legend" aria-label="지도 표시 안내">
+        <span><i style="background:#b05d83"></i>🪷 다녀온 절</span>
+        <span><i style="background:#337f6a"></i>메인에 추가한 절</span>
+        <span><i style="background:#5b6b45"></i>그 밖의 장소</span>
       </div>
       <label style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--ink-soft);margin-bottom:8px;cursor:pointer;">
         <input type="checkbox" id="mapWishOnly" onchange="openMapOverlay()" style="width:16px;height:16px;accent-color:var(--stamp);">
@@ -24971,7 +24989,7 @@ function closeRouletteOverlay(){
   clearInterval(rouletteInterval);
 }
 function spinRoulette(){
-  const candidates = Object.entries(destinations).filter(([id,d])=>(d.stage||0)===0);
+  const candidates = Object.entries(destinations).filter(([id,d])=>d&&String(d.name||'').trim()&&(d.stage||0)===0);
   const body = document.getElementById('rouletteBody');
   if(candidates.length===0){
     body.innerHTML = '<div class="map-note" style="padding:20px 0;">"가보고 싶다" 상태인 절이 없어요. 순례 코스를 먼저 불러와보세요.</div>';
@@ -24983,12 +25001,12 @@ function spinRoulette(){
   clearInterval(rouletteInterval);
   rouletteInterval = setInterval(()=>{
     const [,d] = candidates[Math.floor(Math.random()*candidates.length)];
-    document.getElementById('rouletteName').textContent = d.name;
+    const nameEl=document.getElementById('rouletteName'); if(nameEl) nameEl.textContent = d.name || '절 이름 확인 중';
     ticks++;
     if(ticks >= maxTicks){
       clearInterval(rouletteInterval);
       const [finalId, finalD] = candidates[Math.floor(Math.random()*candidates.length)];
-      document.getElementById('rouletteName').textContent = finalD.name;
+      const nameEl=document.getElementById('rouletteName'); if(nameEl) nameEl.textContent = finalD.name || '이름 없는 절';
       showCelebration('🎡 오늘의 절은...', finalD.name+'!');
       setTimeout(()=>{
         body.innerHTML = `
@@ -31247,6 +31265,19 @@ function markerImageFor(tag){
   return new kakao.maps.MarkerImage(url, new kakao.maps.Size(26,26), {offset:new kakao.maps.Point(13,13)});
 }
 
+function sansaMapMarkerImage(d, isMountain){
+  if(isMountain) return markerImageFor(d.tag);
+  const visited=(Number(d.stage)||0)>=1 || Object.values(d.visits||{}).some(v=>v&&v.verified);
+  let added=false;
+  try{added=typeof isTempleOnMain==='function'&&isTempleOnMain(d.name);}catch(e){}
+  if(!added) added=(Number(d.stage)||0)===0;
+  const fill=visited?'#b05d83':added?'#337f6a':(d.tag==='유명'?'#5b6b45':'#a97c34');
+  const svg=visited
+    ? `<svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 38 38"><circle cx="19" cy="19" r="17" fill="white" stroke="${fill}" stroke-width="2"/><g fill="${fill}"><ellipse cx="19" cy="19" rx="4" ry="11"/><ellipse cx="13" cy="22" rx="4" ry="9" transform="rotate(-35 13 22)"/><ellipse cx="25" cy="22" rx="4" ry="9" transform="rotate(35 25 22)"/></g><circle cx="19" cy="16" r="2" fill="#ffe8a4"/></svg>`
+    : `<svg xmlns="http://www.w3.org/2000/svg" width="38" height="38"><circle cx="19" cy="19" r="15" fill="${fill}" stroke="white" stroke-width="3"/><circle cx="19" cy="19" r="5" fill="white" opacity=".9"/></svg>`;
+  return new kakao.maps.MarkerImage('data:image/svg+xml;charset=UTF-8,'+encodeURIComponent(svg),new kakao.maps.Size(38,38),{offset:new kakao.maps.Point(19,19)});
+}
+
 function setupDetailMap(d, id, opts){
   opts = opts || {};
   const mapElId = opts.mapElId || 'dMap';
@@ -31331,7 +31362,7 @@ function openMapOverlay(){
 
     function plot(id, d, lat, lng){
       const pos = new kakao.maps.LatLng(lat, lng);
-      const marker = new kakao.maps.Marker({map, position:pos, image: markerImageFor(d.tag)});
+      const marker = new kakao.maps.Marker({map, position:pos, image: sansaMapMarkerImage(d,contentType==='mountain')});
       const iw = new kakao.maps.InfoWindow({content:`<div style="padding:6px 10px;font-size:12px;">${escapeHtml(d.name)}</div>`});
       kakao.maps.event.addListener(marker,'click',()=>{ closeMapOverlay(); openDetailFn(id); });
       kakao.maps.event.addListener(marker,'mouseover',()=>iw.open(map,marker));
@@ -37121,5 +37152,12 @@ document.getElementById('todayTriviaOverlay')?.addEventListener('click',function
 })();
 </script>
 
+<script id="sansa-overlay-header-fix">
+(function(){
+ function sync(){document.body.classList.toggle('sansa-modal-open',!!document.querySelector('.overlay.show'));}
+ function init(){if(!document.body)return;new MutationObserver(sync).observe(document.body,{subtree:true,attributes:true,attributeFilter:['class']});sync();}
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
 </body>
 </html>
