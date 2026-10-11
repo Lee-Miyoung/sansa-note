@@ -20817,6 +20817,47 @@ header.hero .hero-experience{
 .pg-region-top span{font-size:clamp(13px,3vw,15px)!important}
 .pg-region-row summary>small{font-size:clamp(12px,2.8vw,14px)!important;line-height:1.5}
 </style>
+<style id="sansa-hero-readability-20261011-final">
+/* 홈: 원래 그림·벚꽃·동자승은 그대로, 설명문 아래에 배치 */
+.hero-eyebrow{font-size:clamp(15px,2.2vw,19px)!important;font-weight:800!important;line-height:1.5!important}
+.hero-tagline{font-size:clamp(22px,3vw,28px)!important;line-height:1.42!important;max-width:100%!important}
+.hero-copy p{font-size:clamp(17px,2vw,20px)!important;line-height:1.85!important;max-width:100%!important;overflow-wrap:break-word}
+/* 순례 카드: 글씨 선명하게, 배경화는 한 톤 연하게 */
+.hero-pilgrim-feature .pc-label{font-size:clamp(15px,2.2vw,19px)!important;line-height:1.35!important}
+.hero-pilgrim-feature .pc-title{font-size:clamp(29px,4.2vw,38px)!important;line-height:1.25!important;letter-spacing:-.035em!important}
+.hero-pilgrim-feature .pc-progress{font-size:clamp(14px,2vw,17px)!important;line-height:1.45!important}
+.hero-pilgrim-feature .pilgrim-collection-chip::before{background:linear-gradient(90deg,rgba(255,249,239,.86),rgba(255,249,239,.60) 53%,rgba(255,249,239,.43))!important}
+.hero-pilgrim-feature .pilgrim-collection-chip::after{font-size:clamp(112px,15vw,164px)!important;color:rgba(169,109,33,.18)!important;right:13px!important;bottom:-18px!important}
+#communityWindowTitle{font-size:clamp(23px,4vw,30px)!important;line-height:1.35!important}
+@media(max-width:900px){
+ .hero-main-grid{display:flex!important;flex-direction:column!important;min-height:0!important;height:auto!important;overflow:visible!important;gap:0!important}
+ .hero-copy{order:1!important;position:relative!important;min-height:0!important;height:auto!important;width:100%!important;max-width:100%!important;padding:0 0 14px!important;z-index:2!important}
+ .hero-copy p{width:100%!important;max-width:100%!important;font-size:clamp(17px,3.5vw,19px)!important;line-height:1.8!important}
+ .hero-clean-art{order:2!important;position:relative!important;inset:auto!important;width:100%!important;height:clamp(330px,92vw,550px)!important;min-height:0!important;overflow:hidden!important;z-index:1!important;pointer-events:none!important}
+ .hero-clean-bg{inset:0!important;width:100%!important;height:100%!important;left:0!important;top:0!important;object-fit:cover!important}
+ .hero-clean-blossom{top:8%!important}
+ .hero-tagline{max-width:100%!important;font-size:clamp(21px,4.4vw,25px)!important}
+ .hero-eyebrow{font-size:16px!important}
+ .hero-pilgrim-feature .pc-title{font-size:clamp(25px,5.3vw,33px)!important}
+ .hero-pilgrim-feature .pc-label{font-size:15px!important}
+ .hero-pilgrim-feature .pc-progress{font-size:14px!important}
+ .hero-pilgrim-feature .pilgrim-collection-chip::after{font-size:clamp(102px,20vw,140px)!important}
+}
+</style>
+<style id="sansa-hero-overlay-correction-20261011">
+/* 설명문을 풍경 위에 겹쳐 배치합니다. 동자승·쥐·벚꽃 원본은 그대로 둡니다. */
+@media (max-width:900px){
+ .hero-main-grid{display:block!important;position:relative!important;min-height:clamp(600px,145vw,750px)!important;height:auto!important;overflow:hidden!important;isolation:isolate!important}
+ .hero-clean-art{display:block!important;position:absolute!important;inset:0!important;order:initial!important;width:100%!important;height:100%!important;min-height:0!important;overflow:hidden!important;z-index:1!important;pointer-events:none!important}
+ .hero-copy{display:block!important;position:relative!important;order:initial!important;z-index:10!important;min-height:0!important;height:auto!important;padding:8px 0 0!important;width:100%!important;max-width:100%!important}
+ .hero-copy p{position:relative!important;z-index:11!important;max-width:100%!important}
+ .hero-clean-bg{position:absolute!important;inset:0!important;left:0!important;top:0!important;width:100%!important;height:100%!important;object-fit:cover!important}
+ .hero-clean-blossom{top:47%!important}
+}
+@media (max-width:480px){
+ .hero-main-grid{min-height:clamp(590px,151vw,690px)!important}
+}
+</style>
 </head>
 <body>
 
@@ -37205,7 +37246,7 @@ document.getElementById('todayTriviaOverlay')?.addEventListener('click',function
 <div class="overlay" id="communityWindowOverlay" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="communityWindowTitle">
   <div class="modal catalog-modal">
     <div class="modal-head">
-      <div><h2 class="serif" id="communityWindowTitle">💬 산사노트 커뮤니티</h2><div class="sub">질문 · 꿀팁 · 후기, 산사에서 나누는 이야기</div></div>
+      <div><h2 class="serif" id="communityWindowTitle">산사노트 커뮤니티</h2><div class="sub">질문 · 꿀팁 · 후기, 산사에서 나누는 이야기</div></div>
       <button class="close-x" type="button" onclick="closeCommunityWindow()" aria-label="커뮤니티 닫고 홈으로">✕</button>
     </div>
     <div class="modal-body" id="communityWindowBody"></div>
