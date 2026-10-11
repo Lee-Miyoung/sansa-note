@@ -37704,7 +37704,7 @@ document.getElementById('todayTriviaOverlay')?.addEventListener('click',function
   .guardian-card.is-verified{border-color:#d3a445!important;background:linear-gradient(145deg,#fffdf5,#fff4cc)!important;box-shadow:0 5px 14px rgba(179,133,50,.16)!important;cursor:pointer}
   .guardian-card.is-visited{border-color:#d7d1c8!important;background:#f5f3ef!important;cursor:default}
   .guardian-card.is-unvisited{opacity:.96;cursor:default}
-  .guardian-art{height:auto!important;aspect-ratio:297/809!important;border-radius:11px!important;overflow:hidden!important;display:flex!important;align-items:center!important;justify-content:center!important;background:#efede8!important;position:relative}
+  .guardian-art{height:auto!important;aspect-ratio:3/5!important;border-radius:11px!important;overflow:hidden!important;display:flex!important;align-items:center!important;justify-content:center!important;background:#efede8!important;position:relative}
   .guardian-card-image{width:100%!important;height:100%!important;object-fit:contain!important;object-position:center center!important;display:block!important;border-radius:10px!important}
   .guardian-card.is-visited .guardian-card-image{filter:grayscale(1) contrast(.92) brightness(1.04)!important;opacity:.72!important}
   .guardian-card.is-unvisited .guardian-card-image{filter:grayscale(1) brightness(.32) contrast(1.3)!important;opacity:.75!important;transform:scale(1.015)}
@@ -37726,6 +37726,10 @@ document.getElementById('todayTriviaOverlay')?.addEventListener('click',function
   .guardian-state{font-size:10px!important;margin-top:3px!important;color:#8c8173!important;line-height:1.25;min-height:25px}
   .guardian-card.is-verified .guardian-state{color:#9a6820!important;font-weight:800}
   .guardian-card.is-visited .guardian-state{color:#777!important;font-weight:700}
+  .guardian-lotus-name{font-size:12px;font-weight:850;color:#97651f;margin:6px 2px 2px;line-height:1.4;word-break:keep-all}
+  .guardian-lotus-phrase{font-size:10px;color:#736553;line-height:1.5;margin:2px 4px 5px;word-break:keep-all;overflow-wrap:anywhere}
+  .guardian-detail .guardian-lotus-name{font-size:16px;margin:6px 0}
+  .guardian-detail .guardian-lotus-phrase{font-size:13px;margin:3px 8px 12px}
   .guardian-empty-filter{grid-column:1/-1;padding:36px 10px;text-align:center;color:#8f8170;font-size:13px}
 
   .guardian-detail-backdrop{position:fixed;inset:0;z-index:999999;background:rgba(25,21,15,.72);display:flex;align-items:center;justify-content:center;padding:16px}
@@ -37754,6 +37758,19 @@ document.getElementById('todayTriviaOverlay')?.addEventListener('click',function
     '진관사':{file:'041.png',symbol:'진관사 태극기'},
     '화엄사':{file:'020.png',symbol:'각황전'}
   };
+  // 연꽃 이름과 감성 문구는 PNG에 굽지 않고 HTML 글자로 표시합니다.
+  const GUARDIAN_LOTUS_TEXT={
+    '통도사':['자비의 연꽃','부처님의 자비가 오늘도 마음을 밝힙니다.'],
+    '부석사':['지혜의 연꽃','높은 곳에서 세상을 비추는 지혜의 빛.'],
+    '봉정사':['청정의 연꽃','오래된 나무처럼 맑은 마음을 지킵니다.'],
+    '법주사':['화합의 연꽃','모든 인연이 하나 되어 큰 세상을 이룹니다.'],
+    '마곡사':['공덕의 연꽃','천년의 시간을 품은 마음에 선한 인연이 피어납니다.'],
+    '선암사':['평온의 연꽃','흐르는 물처럼 마음도 맑아지는 곳.'],
+    '대흥사':['수행의 연꽃','한 걸음 한 걸음 마음이 쉬어갑니다.'],
+    '해인사':['지혜의 연꽃','팔만대장경의 지혜가 마음에 피어납니다.'],
+    '송광사':['무량의 연꽃','맑은 물이 모이듯 인연도 깊어집니다.'],
+    '수덕사':['해탈의 연꽃','고요한 산사에서 마음을 비우고 채웁니다.']
+  };
   let guardianFilter='all';
 
   function hasVisitRecord(d){
@@ -37773,7 +37790,7 @@ document.getElementById('todayTriviaOverlay')?.addEventListener('click',function
     const src=(typeof MASTER_TEMPLES!=='undefined'&&Array.isArray(MASTER_TEMPLES))
       ? MASTER_TEMPLES.map(x=>typeof x==='string'?x:x?.name)
       : Object.keys(typeof MASTER_BY_NAME!=='undefined'&&MASTER_BY_NAME?MASTER_BY_NAME:{});
-    const fixed=['통도사','부석사','봉정사','법주사','마곡사'];
+    const fixed=['통도사','부석사','봉정사','법주사','마곡사','선암사','대흥사','해인사','송광사','수덕사'];
     const names=[...new Set([...fixed,...src.filter(Boolean)])];
     for(const special of ['해인사','화엄사','진관사']) if(!names.includes(special))names.push(special);
     return names.slice(0,108);
@@ -37810,7 +37827,7 @@ document.getElementById('todayTriviaOverlay')?.addEventListener('click',function
   function cardImage(item,mode){
     if(!item.asset) return shadowArt(mode==='visited');
     const cls=mode==='visited'?'guardian-card-image guardian-gray':'guardian-card-image';
-    return `<img class="${cls}" src="./images/lotus-cards/${item.asset.file}?v=20261011b" alt="${escapeAttr(item.name)} 연꽃 수호 카드" loading="lazy" decoding="async" onerror="if(!this.dataset.retried){this.dataset.retried='1';this.src='./images/lotus-cards/${item.asset.file}?retry=20261011c';return;}this.onerror=null;this.style.display='none';this.parentElement.classList.add('guardian-missing-image');this.parentElement.insertAdjacentHTML('beforeend','<div class=guardian-shadow-card><span class=guardian-shadow-monk></span><span class=guardian-shadow-lotus>🪷</span><span class=guardian-lock-mini>🔒</span></div>')">`;
+    return `<img class="${cls}" src="./images/lotus-cards/${item.asset.file}?v=20261012a" alt="${escapeAttr(item.name)} 연꽃 수호 카드" loading="lazy" decoding="async" onerror="if(!this.dataset.retried){this.dataset.retried='1';this.src='./images/lotus-cards/${item.asset.file}?retry=20261012b';return;}this.onerror=null;this.style.display='none';this.parentElement.classList.add('guardian-missing-image');this.parentElement.insertAdjacentHTML('beforeend','<div class=guardian-shadow-card><span class=guardian-shadow-monk></span><span class=guardian-shadow-lotus>🪷</span><span class=guardian-lock-mini>🔒</span></div>')">`;
   }
   function shadowArt(visited){
     return `<div class="guardian-shadow-card ${visited?'visited-shadow':''}" aria-hidden="true"><span class="guardian-shadow-monk"></span><span class="guardian-shadow-lotus">🪷</span>${visited?'':'<span class="guardian-lock-mini">🔒</span>'}</div>`;
@@ -37860,6 +37877,7 @@ document.getElementById('todayTriviaOverlay')?.addEventListener('click',function
             <span class="guardian-card-badge">${state==='verified'?'✦':state==='visited'?'◐':'🔒'}</span>
             <div class="guardian-art">${artFor(item)}</div>
             <div class="guardian-name">${escapeHtml(item.name)}</div>
+            ${`<div class="guardian-lotus-name">🪷 ${escapeHtml((GUARDIAN_LOTUS_TEXT[item.name]||['마음의 연꽃','한 걸음마다 마음에 연꽃이 피어납니다.'])[0])}</div><div class="guardian-lotus-phrase">${escapeHtml((GUARDIAN_LOTUS_TEXT[item.name]||['마음의 연꽃','한 걸음마다 마음에 연꽃이 피어납니다.'])[1])}</div>`}
             <div class="guardian-state">${stateLabel(item)}</div>
           </button>`;
         }).join(''):'<div class="guardian-empty-filter">이 조건에 해당하는 카드가 아직 없어요.</div>'}
@@ -37882,6 +37900,7 @@ document.getElementById('todayTriviaOverlay')?.addEventListener('click',function
       <div class="guardian-detail-kicker">SANSA NOTE · LOTUS GUARDIAN ${String(item.number).padStart(3,'0')}</div>
       <div class="guardian-detail-art">${cardImage(item,'verified')}</div>
       <h3>${escapeHtml(item.name)}</h3>
+      ${`<div class="guardian-lotus-name">🪷 ${escapeHtml((GUARDIAN_LOTUS_TEXT[item.name]||['마음의 연꽃','한 걸음마다 마음에 연꽃이 피어납니다.'])[0])}</div><div class="guardian-lotus-phrase">${escapeHtml((GUARDIAN_LOTUS_TEXT[item.name]||['마음의 연꽃','한 걸음마다 마음에 연꽃이 피어납니다.'])[1])}</div>`}
       <p>현장 위치 인증으로 컬러가 열린 나만의 연꽃 수호카드입니다.</p>
       <div class="guardian-detail-meta"><span><b>📍 현장 인증</b>${escapeHtml(formatVisitDate(visit))}</span><span><b>상징</b>${escapeHtml(symbol)}</span></div>
       <div class="guardian-detail-actions">${recordId?`<button type="button" class="open-temple">방문 기록 보기 →</button>`:''}<button type="button" class="close-detail">도감으로 돌아가기</button></div>
