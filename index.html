@@ -20858,6 +20858,23 @@ header.hero .hero-experience{
  .hero-main-grid{min-height:clamp(590px,151vw,690px)!important}
 }
 </style>
+
+<style id="sansa-hero-fade-and-catalog-label-fix-20261011">
+/* 풍경 그림 가장자리가 사각형으로 드러나지 않도록 배경과 자연스럽게 연결 */
+@media(max-width:900px){
+ .hero-main-grid{background:#faf8f2!important;}
+ .hero-clean-art{background:transparent!important;overflow:hidden!important;}
+ .hero-clean-bg{
+   -webkit-mask-image:radial-gradient(ellipse 92% 85% at 58% 58%,#000 44%,rgba(0,0,0,.83) 69%,transparent 100%)!important;
+   mask-image:radial-gradient(ellipse 92% 85% at 58% 58%,#000 44%,rgba(0,0,0,.83) 69%,transparent 100%)!important;
+ }
+ .hero-clean-art::before{background:linear-gradient(180deg,rgba(250,248,242,.64) 0%,rgba(250,248,242,.22) 43%,transparent 75%)!important;}
+ .hero-tagline{font-size:clamp(20px,4.5vw,25px)!important;line-height:1.35!important;letter-spacing:-.055em!important;word-break:keep-all!important;}
+ .hero-copy p{color:#302b26!important;font-weight:580!important;font-size:clamp(17px,3.7vw,19px)!important;line-height:1.76!important;text-shadow:0 1px 12px rgba(255,253,246,.9)!important;}
+ .hero-copy p b{font-weight:850!important;}
+}
+@media(min-width:430px) and (max-width:900px){.hero-tagline{white-space:nowrap!important;font-size:clamp(20px,3.9vw,25px)!important;}}
+</style>
 </head>
 <body>
 
@@ -36998,6 +37015,21 @@ renderCatalogOverlay = function(){
 
     removeName(TKEY,name);
     removeName(TVISIBLE,name);
+    // 이전 버전에서 저장한 강제 메인 표시 목록도 함께 해제
+    try{
+      if(typeof getForcedMainNames==='function'){
+        const forced=getForcedMainNames();
+        if(forced && forced.has(name)){
+          for(const key of Object.keys(localStorage)){
+            if(!/main|pinned|forced/i.test(key))continue;
+            try{
+              const data=JSON.parse(localStorage.getItem(key));
+              if(Array.isArray(data)&&data.includes(name))localStorage.setItem(key,JSON.stringify(data.filter(v=>v!==name)));
+            }catch(e){}
+          }
+        }
+      }
+    }catch(e){}
 
     const entries=Object.entries(destinations||{}).filter(([id,d])=>d&&d.name===name);
     entries.forEach(([id,d])=>{
@@ -37017,6 +37049,12 @@ renderCatalogOverlay = function(){
       }
     }catch(e){console.warn(e);}
 
+    if(evt){
+      const card=evt.target.closest('.catalog-card');
+      const menu=evt.target.closest('.catalog-more-menu');
+      if(menu)menu.innerHTML=`<button type="button" onclick="showTempleOnMainFromCatalog('${escapeAttr(name)}',event)">메인에 추가</button>`;
+      if(card)card.classList.remove('menu-open');
+    }
     if(typeof renderMainPinnedCards==='function')renderMainPinnedCards();
     if(typeof render==='function')render();
     renderCatalogOverlay();
@@ -37037,6 +37075,9 @@ renderCatalogOverlay = function(){
     return readNames(MKEY).includes(name);
   }
   function templePinned(name){
+    // 명시적으로 메인에서 숨긴 기록은 과거 강제표시 목록보다 우선합니다.
+    const records=Object.values(typeof destinations==='object'&&destinations?destinations:{}).filter(d=>d&&d.name===name);
+    if(records.length && records.every(d=>d.hiddenFromList===true))return false;
     return readNames(TKEY).includes(name) || (typeof isTempleOnMain==='function' && isTempleOnMain(name));
   }
 
