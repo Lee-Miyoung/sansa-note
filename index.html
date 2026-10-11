@@ -37024,5 +37024,86 @@ document.getElementById('todayTriviaOverlay')?.addEventListener('click',function
 })();
 </script>
 
+
+<!-- Community as a standalone window, matching the temple/mountain catalog -->
+<style id="sansa-community-window-v1">
+#communityWindowOverlay{align-items:flex-start!important;justify-content:center!important;overflow-y:auto!important;padding:92px 11px 24px!important;box-sizing:border-box!important;z-index:99999!important}
+#communityWindowOverlay .catalog-modal{width:min(920px,100%)!important;margin:0 auto!important;max-height:calc(100dvh - 116px)!important;display:flex!important;flex-direction:column!important;min-width:0!important;overflow:hidden!important}
+#communityWindowOverlay .modal-head{position:relative!important;flex:0 0 auto!important;z-index:3!important;background:#fcfaf6!important;min-width:0!important}
+#communityWindowOverlay .modal-head>div{min-width:0!important}
+#communityWindowOverlay .modal-head h2{font-size:clamp(19px,4.5vw,25px)!important;overflow-wrap:anywhere!important}
+#communityWindowOverlay .modal-body{flex:1 1 auto!important;min-height:0!important;overflow-y:auto!important;overscroll-behavior:contain!important;padding:14px!important}
+#communityWindowOverlay #communityView{display:block!important;max-width:none!important;width:100%!important;box-sizing:border-box!important;margin:0!important;padding:0!important}
+#communityWindowOverlay .community-toolbar{flex-wrap:wrap!important;min-width:0!important}
+#communityWindowOverlay .community-search{max-width:100%!important;min-width:0!important;box-sizing:border-box!important}
+#communityWindowOverlay .community-head{flex-wrap:wrap!important}
+@media(max-width:700px){#communityWindowOverlay{padding:84px 8px 12px!important}#communityWindowOverlay .catalog-modal{max-height:calc(100dvh - 100px)!important}#communityWindowOverlay .modal-body{padding:12px!important}#communityWindowOverlay .community-head h2{font-size:19px!important}#communityWindowOverlay .community-head p{font-size:12px!important}}
+</style>
+<div class="overlay" id="communityWindowOverlay" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="communityWindowTitle">
+  <div class="modal catalog-modal">
+    <div class="modal-head">
+      <div><h2 class="serif" id="communityWindowTitle">💬 산사노트 커뮤니티</h2><div class="sub">질문 · 꿀팁 · 후기, 산사에서 나누는 이야기</div></div>
+      <button class="close-x" type="button" onclick="closeCommunityWindow()" aria-label="커뮤니티 닫고 홈으로">✕</button>
+    </div>
+    <div class="modal-body" id="communityWindowBody"></div>
+  </div>
+</div>
+<script id="sansa-community-window-js-v1">
+(function(){
+  function ensureCommunityInWindow(){
+    var view=document.getElementById('communityView');
+    var body=document.getElementById('communityWindowBody');
+    if(view&&body&&view.parentElement!==body)body.appendChild(view);
+  }
+  function hideCommunityWindow(){
+    var el=document.getElementById('communityWindowOverlay');
+    if(el){el.classList.remove('show');el.setAttribute('aria-hidden','true');}
+    document.getElementById('ctypeCommunity')?.classList.remove('active');
+  }
+  window.closeCommunityWindow=function(){
+    hideCommunityWindow();
+    try{if(typeof setCommunityViewMode==='function')setCommunityViewMode(false);}catch(e){}
+    try{if(typeof contentType!=='undefined'&&contentType==='community')contentType='temple';}catch(e){}
+    try{document.getElementById('ctypeTemple')?.classList.add('active');}catch(e){}
+    try{history.replaceState({sansaHome:true,sansaInternal:false},'',location.href);}catch(e){}
+    window.scrollTo({top:0,behavior:'smooth'});
+  };
+  window.openCommunityWindow=function(){
+    ensureCommunityInWindow();
+    try{if(typeof setCommunityViewMode==='function')setCommunityViewMode(false);}catch(e){}
+    var el=document.getElementById('communityWindowOverlay');
+    if(!el)return;
+    el.classList.add('show');el.setAttribute('aria-hidden','false');
+    try{if(typeof renderCommunity==='function')renderCommunity();}catch(e){console.warn(e)}
+    try{if(typeof renderCommunityHero==='function')renderCommunityHero();}catch(e){}
+    try{
+      if(!(history.state||{}).sansaInternal)history.pushState({sansaInternal:true,sansaKind:'community-window'},'',location.href);
+      else history.replaceState({...history.state,sansaInternal:true,sansaKind:'community-window'},'',location.href);
+    }catch(e){}
+    el.querySelector('.modal-body')?.scrollTo(0,0);
+  };
+  var previousSwitch=window.switchContentType;
+  window.switchContentType=function(type){
+    if(type==='community'){window.openCommunityWindow();return;}
+    hideCommunityWindow();
+    return previousSwitch.apply(this,arguments);
+  };
+  var previousNav=window.goSiteNav;
+  window.goSiteNav=function(target){
+    if(target==='community'){window.openCommunityWindow();return;}
+    hideCommunityWindow();
+    return previousNav.apply(this,arguments);
+  };
+  window.addEventListener('popstate',function(){
+    hideCommunityWindow();
+    try{if(typeof setCommunityViewMode==='function')setCommunityViewMode(false);}catch(e){}
+    try{if(typeof contentType!=='undefined'&&contentType==='community')contentType='temple';}catch(e){}
+  });
+  document.getElementById('communityWindowOverlay')?.addEventListener('click',function(e){if(e.target===this)window.closeCommunityWindow();});
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',ensureCommunityInWindow,{once:true});
+  else ensureCommunityInWindow();
+})();
+</script>
+
 </body>
 </html>
