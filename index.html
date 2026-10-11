@@ -21647,8 +21647,7 @@ button.site-footer-link{font-size:clamp(15px,2vw,17px)!important;font-weight:750
       <div class="settings-feature-grid">
         <button class="settings-feature sf-quiz" onclick="closeSettings();openQuizOverlay();"><span>🧩</span><b>절 퀴즈</b><small>이 절 어디게?</small></button>
         <button class="settings-feature sf-photo" onclick="closeSettings();openPhotoPolicyOverlay();"><span>📷</span><b>사진 저장 안내</b><small>용량 · 무료 이용</small></button>
-        <button class="settings-feature sf-contact" onclick="closeSettings();openContactOverlay();"><span>✉️</span><b>문의 · 협업</b><small>오류 제보 포함</small></button>
-        <button class="settings-feature sf-dark" id="darkModeBtn" onclick="toggleDarkMode()"><span>🌙</span><b>야간 모드</b><small>템플스테이 분위기</small></button>
+        <button class="settings-feature sf-contact" onclick="closeSettings();openContactOverlay();"><span>✉️</span><b>문의 · 협업</b><small>오류 제보 · 협업 제안</small></button>
         <button class="settings-feature sf-guide" onclick="closeSettings();openSansaGuide();"><span>?</span><b>이용 가이드</b><small>원하는 기능 바로 찾기</small></button>
       </div>
 
@@ -25554,19 +25553,10 @@ function playBowPoseCycle(){
   next();
 }
 
-function toggleDarkMode(){
-  const on = document.body.classList.toggle('dark-mode');
-  localStorage.setItem('sansanoteDarkMode', on ? '1' : '0');
-  document.getElementById('darkModeBtn').textContent = on ? '☀️ 야간 모드 끄기' : '🌙 야간/템플스테이 모드 켜기';
-}
-(function initDarkMode(){
-  if(localStorage.getItem('sansanoteDarkMode') === '1'){
-    document.body.classList.add('dark-mode');
-    document.addEventListener('DOMContentLoaded', ()=>{
-      const btn = document.getElementById('darkModeBtn');
-      if(btn) btn.textContent = '☀️ 야간 모드 끄기';
-    });
-  }
+// 야간 모드 메뉴 제거: 과거에 저장된 야간 설정도 해제합니다.
+(function resetLegacyDarkMode(){
+  try { localStorage.removeItem('sansanoteDarkMode'); } catch(e) {}
+  document.body.classList.remove('dark-mode');
 })();
 
 let storyCardDetailId = null;
@@ -35143,7 +35133,7 @@ function renderAllVisitRecords(){
           <b>${escapeHtml(r.name)}</b><span class="all-record-type">${r.type==='temple'?'절':'산'}</span>
           <span class="all-record-date">${formatArchiveDate(r.ts)}${r.region?` · ${escapeHtml(r.region)}`:''}</span>
         </div>
-        <button class="all-record-delete" type="button" onclick="deleteAnyVisitRecord('${r.type}','${r.id}','${r.vid}')">🗑 잘못된 기록 삭제</button>
+        <button class="all-record-delete" type="button" onclick="deleteAnyVisitRecord('${r.type}','${r.id}','${r.vid}')">🗑 삭제</button>
       </div>
       <div class="all-record-badges">
         ${r.verified?'<span class="all-record-badge verified">✓ 현장 인증</span>':'<span class="all-record-badge">일반 기록</span>'}
@@ -35176,22 +35166,24 @@ function initRecordDeleteGestures(wrap){
   });
 }
 async function deleteAnyVisitRecord(type,id,vid){
-  if(localMode || !auth?.currentUser){promptGuestLoginRequired();return;}
+  if(localMode || !auth?.currentUser || !currentUid){promptGuestLoginRequired();return;}
   const store=type==='mountain'?mountainDestinations:destinations;
   const d=store?.[id],v=d?.visits?.[vid];
   if(!d||!v){showToast('기록을 다시 불러온 뒤 시도해 주세요.');return;}
-  const msg=v.verified
-    ? `${d.name}의 현장 인증 기록을 영구 삭제할까요?\n\n한 번 삭제하면 현장 인증은 복구할 수 없습니다. 인증 도장·인증 횟수·보상 기록에서도 사라집니다.`
-    : `${d.name}의 ${type==='mountain'?'등반':'방문'} 기록을 삭제할까요?\n삭제한 기록은 복구할 수 없습니다.`;
-  if(!window.confirm(msg))return;
+  const warning=v.verified
+    ? `${d.name}의 현장 인증 기록을 삭제할까요?\n\n한 번 삭제하면 현장 인증은 복구할 수 없습니다. 인증 도장과 보상 기록에서도 사라집니다.`
+    : `${d.name}의 기록을 삭제할까요?\n삭제한 기록은 복구할 수 없습니다.`;
+  if(!window.confirm(warning))return;
   const key=type+':'+id+':'+vid;
   if(!deleteAnyVisitRecord.pending)deleteAnyVisitRecord.pending=new Set();
   if(deleteAnyVisitRecord.pending.has(key))return;
   deleteAnyVisitRecord.pending.add(key);
   try{
-    // visits 전체 갱신 대신 Firebase에서 이 기록 하나만 제거
     const parent=type==='mountain'?mountainRef(id):destinationRef(id);
-    await parent.child('visits').child(vid).remove();
+    const ref=parent.child('visits').child(vid);
+    await ref.remove();
+    const check=await ref.once('value');
+    if(check.exists())throw new Error('Firebase에서 삭제가 확인되지 않았습니다.');
     const visits={...(store[id]?.visits||{})};
     delete visits[vid];
     store[id]={...store[id],visits};
@@ -35204,10 +35196,12 @@ async function deleteAnyVisitRecord(type,id,vid){
       if(typeof renderPilgrimRewardPreview==='function')renderPilgrimRewardPreview(store[id]);
     }
     if(typeof updateFieldVerifyMenuCount==='function')updateFieldVerifyMenuCount();
-    renderAllVisitRecords();render();showToast('기록을 삭제했어요');
+    renderAllVisitRecords();
+    render();
+    showToast('기록을 삭제했어요.');
   }catch(err){
     console.error('기록 삭제 실패:',err);
-    showToast('삭제하지 못했어요. 인터넷 연결과 로그인 상태를 확인해 주세요.');
+    showToast('삭제 실패: 로그인 상태와 Firebase 권한을 확인해 주세요.');
   }finally{deleteAnyVisitRecord.pending.delete(key);}
 }
 
