@@ -20981,6 +20981,49 @@ button.site-footer-link{font-size:clamp(15px,2vw,17px)!important;font-weight:750
   .hero-clean-art::before { z-index:2!important;pointer-events:none!important; }
 }
 </style>
+<style id="sansa-readable-copy-and-verified-lotus-20261011">
+/* 작은 설명 문구: 기존 디자인 유지, 모바일에서도 14px 이상 */
+.sansa-easy-start-title small{font-size:clamp(14px,3.2vw,16px)!important;line-height:1.5!important}
+.sansa-hub-heading p{font-size:clamp(14px,3.25vw,16px)!important;line-height:1.5!important}
+.home-gallery > div:first-child span{font-size:clamp(14px,3.15vw,16px)!important;line-height:1.45!important}
+#pilgrimCollectionOverlay .pg-summary-copy small{font-size:clamp(14px,3.25vw,16px)!important;line-height:1.5!important}
+#pilgrimCollectionOverlay .pg-note{font-size:clamp(14px,3.25vw,16px)!important;line-height:1.55!important}
+#pilgrimCollectionOverlay .pg-lotus.done .pg-lotus-name{font-size:clamp(12px,2.95vw,15px)!important;line-height:1.25!important}
+#pilgrimCollectionOverlay .pg-lotus.field-verified-lotus{position:relative;isolation:isolate;border-color:#d6ac52!important;background:linear-gradient(135deg,#fffaf0,#ffe9c2 65%,#fff8eb)!important;box-shadow:0 0 0 1px rgba(218,166,69,.22),0 0 15px rgba(245,193,84,.24)!important}
+#pilgrimCollectionOverlay .pg-lotus.field-verified-lotus:before{content:"";position:absolute;inset:-2px;border-radius:inherit;pointer-events:none;background:linear-gradient(115deg,transparent 28%,rgba(255,255,255,.78) 47%,transparent 65%);background-size:230% 100%;animation:sansaVerifiedLotusShimmer 3.8s ease-in-out infinite;z-index:-1}
+#pilgrimCollectionOverlay .pg-lotus.field-verified-lotus .pg-lotus-flower{filter:drop-shadow(0 0 6px rgba(246,185,52,.9)) drop-shadow(0 0 3px rgba(255,255,255,.95));animation:sansaVerifiedLotusGlow 2.8s ease-in-out infinite}
+#pilgrimCollectionOverlay .pg-lotus.field-verified-lotus:after{content:"✦";position:absolute;right:8px;top:5px;color:#b78b2e;font-size:15px;animation:sansaVerifiedLotusGlow 2.8s ease-in-out infinite}
+@keyframes sansaVerifiedLotusShimmer{0%,15%{background-position:200% 0}55%,100%{background-position:-120% 0}}
+@keyframes sansaVerifiedLotusGlow{0%,100%{opacity:.65}50%{opacity:1;filter:drop-shadow(0 0 7px rgba(255,186,45,.95))}}
+@media(prefers-reduced-motion:reduce){#pilgrimCollectionOverlay .pg-lotus.field-verified-lotus:before,#pilgrimCollectionOverlay .pg-lotus.field-verified-lotus .pg-lotus-flower,#pilgrimCollectionOverlay .pg-lotus.field-verified-lotus:after{animation:none!important}}
+</style>
+<style id="main-pilgrimage-status-visible-v1">
+/* 메인 고정 카드에도 절/산 탭과 같은 방문·기록 완료 상태를 표시 */
+#mainPinnedGrid .card.visited-temple-card,
+#mainPinnedGrid .card.visited-mountain-card{
+  border:2px solid #c99645!important;
+  box-shadow:0 5px 18px rgba(171,118,36,.19)!important;
+}
+#mainPinnedGrid .card.recorded-temple-card{
+  border:2.5px solid #b98228!important;
+  background:linear-gradient(180deg,#fffefa,#fff8e8)!important;
+  box-shadow:0 0 0 2px rgba(244,210,139,.45),0 8px 22px rgba(171,118,36,.19)!important;
+}
+#mainPinnedGrid .card.recorded-temple-card .lotus-visited-mark{
+  background:#fff1cc!important;color:#76501c!important;
+  border:1px solid #c99645!important;
+  font-size:clamp(12px,2.5vw,14px)!important;
+  font-weight:800!important;
+}
+#mainPinnedGrid .card.recorded-temple-card .stagepill{
+  background:#f4e2b6!important;color:#704a13!important;
+  border:1px solid #c99645!important;font-weight:800!important;
+}
+#mainPinnedGrid .card.visited-temple-card:not(.recorded-temple-card) .lotus-visited-mark{
+  font-size:clamp(12px,2.5vw,14px)!important;
+}
+@media(prefers-reduced-motion:reduce){#mainPinnedGrid .card{animation:none!important}}
+</style>
 </head>
 <body>
 
@@ -36977,7 +37020,8 @@ render108Pilgrimage = function(body){
         const done=i<count;
         const rec=done?visited[i]:null;
         const name=rec?rec[1].name:'';
-        return `<button class="pg-lotus ${done?'done':'empty'}" type="button"
+        const fieldVerified=!!(rec && Object.values(rec[1].visits||{}).some(v=>v&&v.verified===true));
+        return `<button class="pg-lotus ${done?'done':''} ${fieldVerified?'field-verified-lotus':''} ${done?'':'empty'}" type="button"
           ${done
             ? `title="${escapeAttr(name)}" aria-label="${escapeAttr(name)} 방문 완료" onclick="openPilgrimTempleFromCollection('${rec[0]}')"`
             : `aria-label="${i+1}번째 순례 칸" disabled`}>
