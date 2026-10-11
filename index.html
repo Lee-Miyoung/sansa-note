@@ -21066,6 +21066,12 @@ button.site-footer-link{font-size:clamp(15px,2vw,17px)!important;font-weight:750
 .guardian-art.guardian-missing-image{background:#eeeae4!important;position:relative}
 .guardian-art.guardian-missing-image:after{content:'🪷\a 그림 준비 중';white-space:pre;position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;font-size:13px;color:#8b8076}
 </style>
+<style id="sansa108-course-style">
+.sansa108-course-mark{display:inline-block;vertical-align:middle;white-space:nowrap;font-size:10px;font-weight:700;color:#52684c;background:#eef3e9;border:1px solid #dce6d4;border-radius:999px;padding:2px 7px;margin-left:4px;line-height:1.5}
+.sansa108-course-summary{font-size:11px;color:#62765c;margin-top:4px;line-height:1.5}
+.pack-detail-place-head,.course-progress-place-copy{min-width:0}
+@media(max-width:600px){.sansa108-course-mark{font-size:9px;padding:2px 5px}.sansa108-course-summary{font-size:10px}}
+</style>
 </head>
 <body>
 
@@ -23032,6 +23038,13 @@ function buildMasterByName(){
     .forEach(arr=> arr.forEach(item=>{
       if(!m[item.name]) m[item.name] = Object.assign({}, item);
     }));
+  // 108선 추가 사찰: 국가유산청·지자체·한국관광공사 자료에 근거한 상세 안내.
+  const guardianAdditions = [
+    {region:"수도권",name:"수종사",tag:"문화유산",desc:"경기도 남양주시 조안면 운길산에 자리한 조선 왕실과 인연 깊은 사찰. 북한강과 남한강이 만나는 두물머리 전망을 품은 '남양주 운길산 수종사 일원'은 국가 명승입니다. 세조가 물방울 소리를 종소리로 듣고 절 이름을 지었다는 전설이 전해집니다.",activity:"두물머리 조망 → 수종사 팔각오층석탑(보물) → 수종사 사리탑(보물) → 삼정헌 다실·오래된 은행나무 살펴보기",tagline:"두 강이 만나는 풍경을 품은 산사",visitorTip:"주소: 경기 남양주시 조안면 북한강로433번길 186. 산길을 올라 수종사 주차장에 도착해도 경내까지 약 400m, 도보 약 15분이 필요합니다. 오르막이 있어 편한 신발을 권합니다. 다실 운영 여부는 현장 확인하세요.",nearbySight:"두물머리·세미원(양평), 운길산 숲길. 용문사(양평)까지는 별도의 차량 이동이 필요한 두 번째 방문지입니다.",locationHint:"남양주 조안면 운길산",sourceUrl:"https://www.nyj.go.kr/culture/viewTnResrceU.do?cpn=55&key=308&resrceNo=500"},
+    {region:"충청",name:"대조사",tag:"문화유산",desc:"충청남도 부여군 임천면에 있는 사찰. 고려시대의 거대한 '부여 대조사 석조미륵보살입상'(보물)이 대표 문화유산입니다. 논산 관촉사 석조미륵보살입상과 비교하며 고려 석불의 특징을 살펴보기 좋습니다.",activity:"대조사 경내 → 석조미륵보살입상(보물) → 임천 지역의 백제 역사 유적 둘러보기",tagline:"돌에 새긴 오래된 미륵의 미소",visitorTip:"주소: 충남 부여군 임천면 성흥로197번길 112. 사찰 진입도로와 주차 가능 여부는 출발 전에 확인하세요. 석불 앞에서는 안전선과 종교시설 예절을 지켜 관람하세요.",nearbySight:"임천 성흥산성·사랑나무, 부여 궁남지와 백제문화단지. 무량사·관촉사까지 이동하는 경우 차량 순례를 권합니다.",locationHint:"부여 임천면",sourceUrl:"https://m.khs.go.kr/public/commentary/culSelectDetail.do?ccbaAsno=02170000&ccbaCpno=&ccbaCtcd=34&ccbaKdcd=12&menuId=03"},
+    {region:"경상",name:"장안사(부산)",tag:"문화유산",desc:"부산광역시 기장군 장안읍 불광산 기슭에 있는 사찰. 조선 후기 건축의 특징을 간직한 기장 장안사 대웅전은 국가 보물입니다. 명부전·응진전과 계곡 주변의 숲 풍경을 함께 감상할 수 있습니다.",activity:"장안사 대웅전(보물) → 명부전·응진전 → 불광산 계곡과 숲길 산책",tagline:"기장 산자락에서 만나는 고요",visitorTip:"주소: 부산 기장군 장안읍 장안로 482. 사찰 주차장 이용 가능. 부산 관광 안내에 따르면 상시 관람·무료 입장으로 소개되지만 행사·공사 시 변경될 수 있습니다. 기장군9 마을버스 상장안 하차 후 도보 약 17분입니다.",nearbySight:"장안사계곡·불광산 숲길. 해동용궁사는 기장 해안 쪽에 있어 차량으로 이동하는 별도 방문지입니다.",locationHint:"부산 기장 장안읍",sourceUrl:"https://www.visitbusan.net/index.do?lang_cd=ko"}
+  ];
+  guardianAdditions.forEach(item=>{if(!m[item.name])m[item.name]=item;});
   Object.values(m).forEach(item=>{
     if(VERIFIED_FAMOUS_TEMPLES.has(item.name)) item.tag = "유명";
     if(VERIFIED_LOCATION_HINTS[item.name]) item.locationHint = VERIFIED_LOCATION_HINTS[item.name];
@@ -23062,9 +23075,15 @@ const DOCENT_HIGHLIGHTS = {
   "월정사": ["팔각구층석탑의 단정한 비례", "적광전 앞뜰의 고요함", "일주문부터 이어지는 전나무숲길"],
 };
 
+// 새 108선 사찰의 현장 관람 포인트(국가유산·지자체 자료 검토).
+Object.assign(DOCENT_HIGHLIGHTS, {
+  "수종사": ["국가 명승 '남양주 운길산 수종사 일원'에서 두물머리 합수 경관 바라보기", "조선 왕실과 관련된 수종사 팔각오층석탑과 사리탑(각각 보물)", "세조의 물방울 종소리 전설과 삼정헌 차 문화 이야기"],
+  "대조사": ["국가 보물 '부여 대조사 석조미륵보살입상'의 크기와 얼굴 표현 살펴보기", "논산 관촉사 석조미륵보살입상과 비교해 보는 고려시대 미륵 신앙", "부여 임천 지역의 역사와 함께 이해하기"],
+  "장안사(부산)": ["국가 보물 '기장 장안사 대웅전'의 조선 후기 불전 건축 살펴보기", "명부전·응진전 등 전각을 차례로 돌아보기", "불광산과 장안사계곡의 숲 풍경 감상"]
+});
 const PRACTICAL_TIPS = {
   "불국사": "일주문 앞 대형 주차장 있음(유료). 경내 대부분 평지·계단 혼재라 휠체어는 일부 구간 우회 필요.",
-  "석굴암": "주차장에서 석굴암까지 셔틀버스 운행. 유모차·휠체어는 오르막이 있어 다소 힘들 수 있어요.",
+  "석굴암": "석굴암 주차장에서 경내까지 도보 이동 구간이 있습니다. 경사와 계단이 있으므로 접근성을 출발 전에 확인하세요.",
   "해인사": "일주문 훨씬 못 미쳐 큰 주차장 있고, 거기서 절까지 도보 15~20분 걸리니 편한 신발 필수.",
   "송광사": "매표소 앞 주차장에서 절까지 평탄한 숲길 도보 10분, 유모차도 무난해요.",
   "통도사": "무풍한송로 소나무숲길이 길어서, 주차 후 절까지 도보 15분 정도 걸려요.",
@@ -23074,7 +23093,10 @@ const PRACTICAL_TIPS = {
   "낙산사": "의상대까지 가는 길에 오르막이 있어, 어르신 동반 시 천천히 이동을 권해요.",
   "월정사": "전나무숲길이 평탄해서 유모차·휠체어 모두 무난하게 다닐 수 있어요.",
   "봉정암": "설악산 깊은 곳이라 왕복 10시간 가까이 걸리는 등산 코스라, 일반 관광 접근은 사실상 불가능해요.",
-  "미황사": "주차장에서 대웅보전까지 완만한 오르막, 편한 신발 정도면 충분해요."
+  "미황사": "주차장에서 대웅보전까지 완만한 오르막, 편한 신발 정도면 충분해요.",
+  "수종사": "경기 남양주시 조안면 북한강로433번길 186. 수종사 주차장에서 경내까지 약 400m, 도보 약 15분의 오르막이 있어 편한 신발을 권해요. (한국관광공사 관광정보)",
+  "대조사": "충남 부여군 임천면 성흥로197번길 112. 석조미륵보살입상은 국가 보물입니다. 주차 및 진입도로 사정은 출발 전 확인하세요.",
+  "장안사(부산)": "부산 기장군 장안읍 장안로 482. 장안사 주차장 이용 가능. 부산관광 안내상 상시 관람·무료 입장이나 현장 상황에 따라 달라질 수 있어요."
 };
 const JEOKMYEOL_SEED_NAMES = ["통도사","정암사","법흥사","상원사","봉정암"];
 const CHERRY_SEED_NAMES = ["화엄사","쌍계사","마곡사","개심사","동학사"];
@@ -23082,7 +23104,7 @@ const AUTUMN_SEED_NAMES = ["내소사","법주사","갑사","해인사","동화�
 
 // 시·군 단위로 더 세밀하게 묶은 코스 20개 (기존 107곳 재조합, 새 데이터 조사 없이 동선만 재구성)
 const SUB_COURSES = [
-  {key:"andong", label:"안동·예천 코스", route:"안동↔예천 차로 30분 거리. 고운사(의성)까지 40분.", nearby:"안동 하회마을, 월영교(달빛 야경으로 유명)를 저녁에 함께 걸어보세요.", names:["봉정사","용문사(예천)","고운사"]},
+  {key:"andong", label:"안동·예천 코스", route:"봉정사(안동)·용문사(예천)·고운사(의성)를 잇는 차량 순례. 산간도로를 포함하므로 구간별 실제 이동시간은 카카오 길찾기로 확인하세요.", nearby:"안동 하회마을, 월영교(달빛 야경으로 유명)를 저녁에 함께 걸어보세요.", names:["봉정사","용문사(예천)","고운사"]},
   {key:"mungyeong", label:"문경 코스", route:"세 곳 모두 문경 시내 기준 20~30분 이내.", nearby:"문경새재도립공원(옛 과거길, 드라마 세트장)이 세 절 모두와 가까워요.", names:["대승사","김룡사","봉암사"]},
   {key:"yeongju", label:"영주·봉화 코스", route:"부석사↔청량사 차로 50분, 봉화 소백산 자락으로 이어짐.", nearby:"소백산 자락길 트레킹, 영주 무섬마을 외나무다리와 함께 즐기기 좋아요.", names:["부석사","청량사"]},
   {key:"miryang", label:"밀양 코스", route:"표충사↔만어사 차로 40분, 밀양 시내 경유.", nearby:"밀양 얼음골(여름 피서지), 표충사 인근 재약산 케이블카도 함께 즐길 만해요.", names:["표충사","만어사"]},
@@ -23100,7 +23122,11 @@ const SUB_COURSES = [
   {key:"seosan", label:"서산 코스", route:"개심사↔문수사 차로 20분, 가야산 자락으로 연결.", nearby:"서산 해미읍성(조선시대 읍성), 간월암(밀물 때 섬이 되는 절)과 함께 즐기기 좋아요.", names:["개심사","문수사"]},
   {key:"gongju_nonsan", label:"공주·논산 코스", route:"마곡사↔관촉사 차로 40분, 공주 시내 경유.", nearby:"공주 무령왕릉, 계백장군 유적지(논산)와 백제 역사 여행으로 이어보세요.", names:["마곡사","관촉사"]},
   {key:"gyeryongsan", label:"계룡산 3사 코스", route:"갑사↔동학사 등산로 8km(5시간), 신원사까지 차로 20분.", nearby:"계룡산 자락길, 유성온천에서 하루 마무리하기 좋아요.", names:["갑사","동학사","신원사"]},
-  {key:"ganghwa", label:"강화 코스", route:"전등사↔보문사(석모도) 배 또는 연도교로 40분.", nearby:"강화 고인돌 유적(유네스코), 석모도 미네랄온천과 함께 즐기기 좋아요.", names:["전등사","보문사"]},
+  {key:"ganghwa", label:"강화 코스", route:"전등사(강화도)에서 보문사(석모도)까지 석모대교를 이용하는 차량 순례. 실제 소요시간은 길찾기로 확인하세요.", nearby:"강화 고인돌 유적(유네스코), 석모도 미네랄온천과 함께 즐기기 좋아요.", names:["전등사","보문사"]},
+  // 기존 38개 코스는 보존하고, 108선에서 누락됐던 3곳을 인근 사찰과 묶어 보완합니다.
+  {key:"namyangju_yangpyeong_108", label:"남양주·양평 108선 코스", route:"추천 순서: 수종사(운길산 전망·팔각오층석탑·사리탑) → 용문사(용문산 은행나무·대웅전). 수종사는 주차장에서 경내까지 오르막 도보 약 15분. 두 절은 서로 다른 산에 있어 자동차로 이동하는 당일 순례이며, 도로 이동시간은 당일 지도에서 확인하세요.", nearby:"두물머리·세미원, 양평 용문산 관광지. 오전 수종사 전망을 보고 오후 용문사 숲길을 걷는 구성을 권합니다.", names:["수종사","용문사(양평)"]},
+  {key:"buyeo_nonsan_108", label:"부여·논산 108선 코스", route:"추천 순서: 대조사(보물 석조미륵보살입상) → 무량사(부여 외산면) → 관촉사(논산 은진미륵). 고려시대 석불을 비교하는 역사 순례입니다. 부여 임천·외산·논산을 잇는 차량 코스로, 하루 일정에 여유를 두고 이동시간을 당일 지도에서 확인하세요.", nearby:"임천 성흥산성, 부여 궁남지·백제문화단지, 논산 탑정호. 석불과 문화유산 관람에 시간을 넉넉히 배정하세요.", names:["대조사","무량사","관촉사"]},
+  {key:"gijang_108", label:"부산 기장 108선 코스", route:"추천 순서: 장안사(보물 대웅전·불광산 숲길) → 해동용궁사(해안 절경·관음 신앙). 산속 사찰과 바닷가 사찰을 대비해 감상하는 기장 차량 순례입니다. 장안사에는 주차장이 있고 해동용궁사는 주말 혼잡이 잦으니 이동시간을 당일 지도에서 확인하세요.", nearby:"장안사계곡·불광산, 기장 해안 산책로·오시리아 관광단지. 산사에서는 조용히 머물고 해안에서는 계단과 인파에 유의하세요.", names:["장안사(부산)","해동용궁사"]},
   {key:"jeongseon_yeongwol", label:"정선·영월 코스", route:"정암사↔법흥사 차로 40분, 태백산 자락으로 연결.", nearby:"정선 아리랑시장, 영월 동강 래프팅과 이어서 즐기기 좋아요.", names:["정암사","법흥사"]}
 ];
 
@@ -23110,12 +23136,12 @@ const PACKS = [
   {key:"chongnim", label:"조계종 8대 총림", route:"역시 전국 각지 본사라 지역별 코스(경주/지리산/경남 등)와 겹쳐서 도는 게 효율적이에요.", data: CHONGNIM_SEED},
   {key:"haesu", label:"3대 해수관음 성지", route:"강원(낙산사)·수도권(보문사)·경남(보리암)에 하나씩 있어 전국 코스로 묶어보기 좋아요. 셋 다 바닷가/절벽 절경으로 유명해요.", names: HAESU_SEED_NAMES},
   {key:"sambo", label:"삼보사찰", route:"통도사(경남 양산, 불보)·해인사(경남 합천, 법보)·송광사(전남 순천, 승보)로, 불교의 세 가지 보물을 상징하는 사찰이에요.", names: SAMBO_SEED_NAMES},
-  {key:"jeokmyeol", label:"5대 적멸보궁", route:"통도사(경남)·상원사·봉정암(오대산~설악산)·정암사·법흥사(정선~영월)로, 진신사리를 모신 다섯 곳. 봉정암은 왕복 10시간 걷는 난이도 최상 코스예요.", names: JEOKMYEOL_SEED_NAMES},
+  {key:"jeokmyeol", label:"5대 적멸보궁", route:"통도사(양산)·상원사(평창 오대산)·봉정암(인제 설악산)·정암사(정선)·법흥사(영월)의 다섯 성지입니다. 서로 다른 산에 있으므로 각각 방문 계획을 세우세요. 봉정암은 고난도 산행입니다.", names: JEOKMYEOL_SEED_NAMES},
   {key:"cherry", label:"봄 벚꽃 명소 사찰", route:"화엄사(구례)·쌍계사(하동)는 차로 40분, 마곡사(공주)·개심사(서산)·동학사(공주 계룡산)는 충청권끼리 묶기 좋아요. 4월 초중순이 절정.", names: CHERRY_SEED_NAMES},
   {key:"autumn", label:"가을 단풍 명소 사찰", route:"내소사(부안)·법주사(보은)·갑사(공주)는 전북~충청 라인, 해인사(합천)·동화사(대구)·불국사(경주)는 경상권끼리 묶어서. 10월 말~11월 초가 절정.", names: AUTUMN_SEED_NAMES},
   {key:"gyeongju", label:"경주 사찰 순례 코스", route:"경주 동부 해안과 시내를 잇는 자동차 순례 코스. 추천 순서: 불국사→석굴암→기림사→골굴사→분황사. 이동 시간은 출발 전 지도에서 확인", nearby:"황리단길(대릉원 옆 한옥 카페거리)에서 쉬어가거나, 동궁과 월지 야경까지 묶으면 딱 좋은 하루 코스가 돼요.", data: GYEONGJU_SEED},
   {key:"jirisan", label:"지리산 자락 사찰 코스", route:"지리산을 빙 둘러 흩어져 있어 전남·경남 넘나드는 1박2일 코스로 적당. 화엄사(구례)↔쌍계사(하동) 차로 40분, 실상사(남원)↔벽송사(함양) 차로 30분", nearby:"구례 산수유마을(3월 노란 꽃), 화개장터(십리벚꽃길과 이어짐)를 함께 들르면 좋아요.", data: JIRISAN_SEED},
-  {key:"gangwon", label:"강원 사찰 코스", route:"영동(동해안)과 영서(내륙)로 나뉘어요. 영동: 낙산사-신흥사-백담사(설악산권, 서로 30~40분). 영서: 월정사-상원사-봉정암(오대산~설악산 종주), 정암사-법흥사(정선~영월, 40분)", nearby:"속초 아바이마을(코다리 냉면), 정동진 모래시계공원과 묶어서 동해안 여행으로 확장하기 좋아요.", data: GANGWON_SEED},
+  {key:"gangwon", label:"강원 사찰 코스", route:"영동(동해안)과 영서(내륙)로 나뉘어요. 영동: 낙산사-신흥사-백담사(설악산권, 서로 30~40분). 오대산: 월정사-상원사, 정선·영월: 정암사-법흥사. 봉정암은 설악산 깊은 산중의 별도 고난도 산행으로 분리", nearby:"속초 아바이마을(코다리 냉면), 정동진 모래시계공원과 묶어서 동해안 여행으로 확장하기 좋아요.", data: GANGWON_SEED},
   {key:"sudokwon", label:"수도권 사찰 코스", route:"서울 도심(조계사-봉은사-화계사, 대중교통 가능)과 근교(전등사-보문사 강화, 용주사 화성, 신륵사 여주)로 나눠서 도는 걸 추천", nearby:"인사동 전통찻집, 여주라면 신륵사 옆 프리미엄 아울렛도 같이 들르기 좋아요.", data: SUDOKWON_SEED},
   {key:"jeju", label:"제주 사찰 코스", route:"제주시권(관음사-원당사, 차로 20분)과 서귀포권(약천사-산방굴사-법화사, 서로 20~30분)으로 나눠서 도는 게 효율적", nearby:"정방폭포, 서귀포 매일올레시장에서 갈치조림 먹기 코스로 이어가 보세요.", data: JEJU_SEED},
   {key:"chungcheong", label:"충청 사찰 코스", route:"계룡산 3사(갑사-동학사-신원사, 서로 20~30분)와 속리산 법주사, 서산 개심사·문수사(30분)로 나눠서 방문", nearby:"공주 공산성, 부여 궁남지(백제 정원)까지 백제 역사 여행으로 확장할 수 있어요.", data: CHUNGCHEONG_SEED},
@@ -27180,7 +27206,7 @@ function openCourseProgressDetail(packKey){
     return `<button class="course-progress-place ${cls}" type="button" ${clickable?`onclick="openCourseProgressTemple('${escapeAttr(item.name)}')"`:'disabled'}>
       <span class="course-progress-order">${idx+1}</span>
       <span class="course-progress-place-copy">
-        <b>${escapeHtml(item.name)}</b>
+        <b>${escapeHtml(item.name)} ${sansa108Mark(item.name)}</b>
         <small>${region?escapeHtml(region)+' · ':''}${state}${clickable?' · 눌러서 기록 보기':''}</small>
       </span>
       <span class="course-progress-state">${stage>=2?'✓✓':stage>=1?'✓':'○'}</span>
@@ -27844,11 +27870,23 @@ async function cancelPack(key){
     showToast('메인에서 빼지 못했어요.');
   }
 }
+// 산사노트 명찰 108선 표시는 순례코스의 기존 구성·기록을 변경하지 않습니다.
+function sansa108Number(name){
+  if(typeof SANSA_GUARDIAN_108==='undefined') return 0;
+  const idx=SANSA_GUARDIAN_108.findIndex(canonical=>canonical===name ||
+    (typeof GUARDIAN_NAME_ALIASES!=='undefined' && (GUARDIAN_NAME_ALIASES[canonical]||[]).includes(name)));
+  return idx<0?0:idx+1;
+}
+function sansa108Mark(name){
+  const number=sansa108Number(name);
+  return number?`<span class="sansa108-course-mark" title="산사노트 한국 명찰 108선 ${String(number).padStart(3,'0')}번">🪷 108선 ${String(number).padStart(3,'0')}</span>`:'';
+}
 function renderPackOverlay(){
   const wrap=document.getElementById('packList');
 
   wrap.innerHTML=PACKS.map(p=>{
     const packData=resolvePackData(p);
+    const featuredCount=packData.filter(item=>sansa108Number(item.name)>0).length;
     const registered=packData.filter(item=>getTempleEntriesByName(item.name).length>0).length;
     const mainItems=packData.filter(item=>isTempleOnMain(item.name));
     const mainCount=mainItems.length;
@@ -27864,6 +27902,7 @@ function renderPackOverlay(){
     return `<div class="packrow">
       <div class="packrow-main">
         <div class="packrow-title">${earned?'🏅 ':''}${escapeHtml(p.label)}</div>
+        <div class="sansa108-course-summary">🪷 한국 명찰 108선 ${featuredCount}곳 포함${featuredCount<packData.length?` · 그 외 사찰 ${packData.length-featuredCount}곳도 순례 가능`:''}</div>
 
         <button class="pack-progress-summary" type="button" onclick="openCourseProgressDetail('${p.key}')">
           <span>${packData.length}곳 중 <b>${mainCount}곳 메인</b></span>
@@ -27922,7 +27961,7 @@ function openPackDetail(key){
       return `
       <div class="visitrow pack-detail-place ${cls}" onclick="openPackItemDetail('${item.name.replace(/'/g,"\\'")}')">
         <div class="pack-detail-place-head">
-          <div style="font-weight:700;font-family:'Nanum Myeongjo','Noto Serif KR',serif;font-size:15px;">${i+1}. ${escapeHtml(item.name)}</div>
+          <div style="font-weight:700;font-family:'Nanum Myeongjo','Noto Serif KR',serif;font-size:15px;">${i+1}. ${escapeHtml(item.name)} ${sansa108Mark(item.name)}</div>
           <span class="pack-place-status ${cls}">${label}</span>
         </div>
         <div style="font-size:11px;color:var(--ink-soft);margin-bottom:4px;">${escapeHtml(item.region||'')} · ${item.tag==='유명'?'유명한 곳':'숨은 곳'}</div>
@@ -29124,7 +29163,7 @@ function openMountainDetail(id){
     document.getElementById('mSightWrap').style.display = 'block';
     document.getElementById('mSight').textContent = d.nearbySight;
   } else { document.getElementById('mSightWrap').style.display = 'none'; }
-  document.getElementById('mMapLink').href = 'https://map.kakao.com/link/search/' + encodeURIComponent(d.name + ' ' + (d.locationHint || d.region));
+  document.getElementById('mMapLink').href = 'https://map.kakao.com/link/search/' + encodeURIComponent(sansaKakaoPlaceQuery(d));
   document.getElementById('mNotes').value = d.notes || '';
   renderMountainStepper(d.stage||0);
   renderMountainCoverPhotos(d);
@@ -29989,7 +30028,7 @@ function openDetail(id){
   renderRepeatChallenge(d);
   renderPilgrimRewardPreview(d);
   document.getElementById('visitNoteInput').value = '';
-  document.getElementById('dMapLink').href = 'https://map.kakao.com/link/search/' + encodeURIComponent(d.name + ' ' + (d.locationHint || d.region));
+  document.getElementById('dMapLink').href = 'https://map.kakao.com/link/search/' + encodeURIComponent(sansaKakaoPlaceQuery(d));
   document.getElementById('dFoodLink').href = 'https://map.kakao.com/link/search/' + encodeURIComponent(d.name + ' ' + (d.locationHint || d.region) + ' 맛집');
   document.getElementById('detailOverlay').classList.add('show');
   renderVisitTips(d);
@@ -31635,6 +31674,52 @@ function sansaMapMarkerImage(d, isMountain){
   return new kakao.maps.MarkerImage('data:image/svg+xml;charset=UTF-8,'+encodeURIComponent(svg),new kakao.maps.Size(size,size),{offset:new kakao.maps.Point(center,center)});
 }
 
+// 지역이 다른 동명이찰을 첫 번째 검색 결과로 잘못 저장하지 않도록 검증합니다.
+const SANSA_KAKAO_DISAMBIGUATION = Object.freeze({
+  '장안사(부산)': {name:'장안사', area:'부산 기장', address:'부산 기장군 장안읍 장안로 482'},
+  '용문사(양평)': {name:'용문사', area:'경기 양평', address:'경기 양평군 용문면'},
+  '용문사(예천)': {name:'용문사', area:'경북 예천', address:'경북 예천군 용문면'},
+  '흥국사(여수)': {name:'흥국사', area:'전남 여수', address:'전남 여수시'},
+  '완주 송광사': {name:'송광사', area:'전북 완주', address:'전북 완주군'},
+  '갓바위(선본사)': {name:'선본사', area:'경북 경산', address:'경북 경산시'},
+  '수종사': {name:'수종사', area:'경기 남양주', address:'경기 남양주시 조안면 북한강로433번길 186'},
+  '대조사': {name:'대조사', area:'충남 부여', address:'충남 부여군 임천면 성흥로197번길 112'}
+});
+function sansaKakaoPlaceQuery(d){
+  const spec=SANSA_KAKAO_DISAMBIGUATION[d.name];
+  return spec ? spec.area+' '+spec.name : d.name+' '+(d.locationHint||d.region||'');
+}
+function sansaKakaoBestPlace(d, data){
+  if(!Array.isArray(data)||!data.length)return null;
+  const spec=SANSA_KAKAO_DISAMBIGUATION[d.name];
+  const normalize=v=>String(v||'').replace(/\s|[()]/g,'').toLowerCase();
+  const expected=normalize(spec?.name||d.name.replace(/\([^)]*\)/g,''));
+  const hint=normalize(spec?.area||d.locationHint||'');
+  const candidates=data.filter(p=>{
+    const title=normalize(p.place_name), addr=normalize((p.road_address_name||'')+' '+(p.address_name||''));
+    if(!title.includes(expected))return false;
+    if(!Number.isFinite(Number(p.y))||!Number.isFinite(Number(p.x)))return false;
+    if(spec){
+      const segments=spec.area.split(' ');
+      return segments.every((segment,i)=>{
+        const variants=i===0?({'경기':['경기','경기도'],'경북':['경북','경상북도'],'전북':['전북','전라북도','전북특별자치도'],'전남':['전남','전라남도'],'충남':['충남','충청남도'],'부산':['부산','부산광역시']}[segment]||[segment]):[segment];
+        return variants.some(v=>addr.includes(normalize(v)));
+      });
+    }
+    // 일반 사찰도 검색 결과가 다수라면 위치 힌트를 우선합니다.
+    const firstHint=normalize(String(d.locationHint||'').split(/\s+/)[0]);
+    return !hint || addr.includes(hint) || (firstHint&&addr.includes(firstHint)) || (d.region&&addr.includes(normalize(d.region)));
+  });
+  if(candidates.length===1)return candidates[0];
+  // 동명이찰의 위치를 확정할 수 없으면 자동 선택/저장을 금지합니다.
+  return null;
+}
+function sansaKakaoFindPlace(places,d,cb){
+  places.keywordSearch(sansaKakaoPlaceQuery(d),(data,status)=>{
+    const hit=status===kakao.maps.services.Status.OK?sansaKakaoBestPlace(d,data):null;
+    cb(hit);
+  });
+}
 function setupDetailMap(d, id, opts){
   opts = opts || {};
   const mapElId = opts.mapElId || 'dMap';
@@ -31655,28 +31740,17 @@ function setupDetailMap(d, id, opts){
     mapEl.innerHTML='';
     if(d.fixedLat && d.fixedLng){
       renderPin(mapEl, d, d.fixedLat, d.fixedLng, weatherElId);
-    } else if(d.lat && d.lng){
+    } else if(d.lat && d.lng && !SANSA_KAKAO_DISAMBIGUATION[d.name]){
       renderPin(mapEl, d, d.lat, d.lng, weatherElId);
     } else {
       const places = new kakao.maps.services.Places();
-      const tryName = () => {
-        places.keywordSearch(d.name, (data2, status2)=>{
-          if(status2 === kakao.maps.services.Status.OK && data2[0]){
-            const lat = parseFloat(data2[0].y), lng = parseFloat(data2[0].x);
-            updateFn(id, {lat, lng});
-            if(getCurrentId() === id) renderPin(mapEl, d, lat, lng, weatherElId);
-          } else {
-            mapEl.innerHTML = '<div class="map-note" style="padding:0 14px;">이 장소의 위치를 자동으로 찾지 못했어요. 위 링크로 카카오맵에서 확인해주세요.</div>';
-          }
-        });
-      };
-      places.keywordSearch(d.name + ' ' + (d.locationHint || d.region), (data, status)=>{
-        if(status === kakao.maps.services.Status.OK && data[0]){
-          const lat = parseFloat(data[0].y), lng = parseFloat(data[0].x);
-          updateFn(id, {lat, lng});
-          if(getCurrentId() === id) renderPin(mapEl, d, lat, lng, weatherElId);
-        } else {
-          tryName();
+      sansaKakaoFindPlace(places,d,place=>{
+        if(place){
+          const lat=parseFloat(place.y),lng=parseFloat(place.x);
+          updateFn(id,{lat,lng});
+          if(getCurrentId()===id)renderPin(mapEl,d,lat,lng,weatherElId);
+        }else{
+          mapEl.innerHTML='<div class="map-note" style="padding:0 14px;">정확한 지역의 사찰 위치를 확인하지 못했어요. 카카오맵 검색 링크에서 직접 확인해주세요.</div>';
         }
       });
     }
@@ -31743,7 +31817,7 @@ function openMapOverlay(){
     Object.entries(filteredSource).forEach(([id,d])=>{
       if(d.fixedLat && d.fixedLng){
         plot(id, d, d.fixedLat, d.fixedLng);
-      } else if(d.lat && d.lng){
+      } else if(d.lat && d.lng && !SANSA_KAKAO_DISAMBIGUATION[d.name]){
         plot(id, d, d.lat, d.lng);
       } else {
         pending++;
@@ -31756,26 +31830,12 @@ function openMapOverlay(){
     function processNext(){
       if(queueIdx >= toResolve.length) return;
       const [id, d] = toResolve[queueIdx++];
-      places.keywordSearch(d.name + ' ' + (d.locationHint || d.region), (data, status)=>{
-        if(status === kakao.maps.services.Status.OK && data[0]){
-          const lat = parseFloat(data[0].y), lng = parseFloat(data[0].x);
-          updateFn(id, {lat, lng});
-          plot(id, d, lat, lng);
-          pending--; updateNote();
-          setTimeout(processNext, 120);
-        } else {
-          places.keywordSearch(d.name, (data2, status2)=>{
-            if(status2 === kakao.maps.services.Status.OK && data2[0]){
-              const lat = parseFloat(data2[0].y), lng = parseFloat(data2[0].x);
-              updateFn(id, {lat, lng});
-              plot(id, d, lat, lng);
-            } else {
-              missing++;
-            }
-            pending--; updateNote();
-            setTimeout(processNext, 120);
-          });
-        }
+      sansaKakaoFindPlace(places,d,place=>{
+        if(place){
+          const lat=parseFloat(place.y),lng=parseFloat(place.x);
+          updateFn(id,{lat,lng});plot(id,d,lat,lng);
+        }else missing++;
+        pending--;updateNote();setTimeout(processNext,120);
       });
     }
     // 카카오 API 과다 호출을 막기 위해 3개씩만 동시에 진행
@@ -31822,15 +31882,12 @@ function openCourseBuilder(){
 
     function resolveOne([id,d], cb){
       if(d.fixedLat && d.fixedLng){ cb({id, ...d, lat:d.fixedLat, lng:d.fixedLng}); return; }
-      if(d.lat && d.lng){ cb({id, ...d}); return; }
-      places.keywordSearch(d.name + ' ' + (d.locationHint || d.region), (data,status)=>{
-        if(status===kakao.maps.services.Status.OK && data[0]){
-          const lat=parseFloat(data[0].y), lng=parseFloat(data[0].x);
-          updateDestination(id, {lat,lng});
-          cb({id, ...d, lat, lng});
-        } else {
-          cb({id, ...d, lat:null, lng:null});
-        }
+      if(d.lat && d.lng && !SANSA_KAKAO_DISAMBIGUATION[d.name]){ cb({id, ...d}); return; }
+      sansaKakaoFindPlace(places,d,place=>{
+        if(place){
+          const lat=parseFloat(place.y),lng=parseFloat(place.x);
+          updateDestination(id,{lat,lng});cb({id,...d,lat,lng});
+        }else cb({id,...d,lat:null,lng:null});
       });
     }
 
@@ -37962,8 +38019,10 @@ document.getElementById('todayTriviaOverlay')?.addEventListener('click',function
       return {name,i,number,visited,verified,record,asset:{file,symbol:FINAL_GUARDIAN_CARDS[name]?.symbol||'사찰 대표 문화유산'}};
     });
   }
+  // 047/067/099번은 기존 배포 이미지의 사찰명이 새 108선과 달라 잘못된 그림 노출을 막습니다.
+  const GUARDIAN_PENDING_REPLACEMENT = new Set([47,67,99]);
   function cardImage(item,mode){
-    if(!item.asset) return shadowArt(mode==='visited');
+    if(!item.asset || GUARDIAN_PENDING_REPLACEMENT.has(item.number)) return shadowArt(mode==='visited');
     const cls=mode==='visited'?'guardian-card-image guardian-gray':'guardian-card-image';
     return `<img class="${cls}" src="./images/lotus-cards/${item.asset.file}?v=20261012a" alt="${escapeAttr(item.name)} 연꽃 수호 카드" loading="lazy" decoding="async" onerror="if(!this.dataset.retried){this.dataset.retried='1';this.src='./images/lotus-cards/${item.asset.file}?retry=20261012b';return;}this.onerror=null;this.style.display='none';this.parentElement.classList.add('guardian-missing-image');this.parentElement.insertAdjacentHTML('beforeend','<div class=guardian-shadow-card><span class=guardian-shadow-monk></span><span class=guardian-shadow-lotus>🪷</span><span class=guardian-lock-mini>🔒</span></div>')">`;
   }
