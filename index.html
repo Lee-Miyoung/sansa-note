@@ -20898,6 +20898,25 @@ header.hero .hero-experience{
 #pilgrimCollectionOverlay .pg-manhang-note span{font-size:13px!important;line-height:1.5!important}
 @media(max-width:640px){#pilgrimCollectionOverlay .pg-level-track{grid-template-columns:repeat(3,minmax(0,1fr))!important}#pilgrimCollectionOverlay .pg-hanja-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
 </style>
+<style id="sansa-readability-guest-20261011">
+/* 순례 진행 현황: 작은 설명을 모바일에서도 쉽게 읽을 수 있도록 */
+#pilgrimCollectionOverlay .pg-region-row summary>small{font-size:clamp(15px,3.4vw,17px)!important;line-height:1.6!important;color:#655e53!important}
+#pilgrimCollectionOverlay .pg-region-expand summary::after{font-size:clamp(15px,3.4vw,17px)!important;line-height:1.55!important;margin-top:8px!important}
+#pilgrimCollectionOverlay .pg-region-place small{font-size:clamp(14px,3.1vw,16px)!important;line-height:1.55!important}
+#pilgrimCollectionOverlay .pg-region-place em{font-size:14px!important}
+#pilgrimCollectionOverlay .pg-region-top b{font-size:clamp(18px,4vw,21px)!important}
+#pilgrimCollectionOverlay .pg-region-top span{font-size:clamp(16px,3.5vw,19px)!important}
+/* 순례 컬렉션 배경 108: 은은한 금빛 그림자 */
+.hero-pilgrim-feature .pilgrim-collection-chip{overflow:hidden!important;isolation:isolate!important}
+.hero-pilgrim-feature .pilgrim-collection-chip::after{font-size:clamp(160px,33vw,260px)!important;color:rgba(153,102,39,.29)!important;text-shadow:0 2px 3px rgba(255,245,219,.45),0 0 22px rgba(192,141,56,.20)!important;right:3%!important;bottom:-44px!important;line-height:1!important;pointer-events:none!important}
+.hero-pilgrim-feature .pc-copy,.hero-pilgrim-feature .pc-arrow,.hero-pilgrim-feature .pc-lotus{position:relative;z-index:2}
+/* 메인 풍경: 한 장의 산수화가 동자승 뒤까지 이어지도록 확대 */
+@media(max-width:900px){
+ .hero-main-grid{background:#faf8f2!important}
+ .hero-clean-bg{width:138%!important;height:112%!important;max-width:none!important;left:-19%!important;top:-5%!important;object-fit:cover!important;opacity:.67!important;-webkit-mask-image:radial-gradient(ellipse 95% 90% at 53% 54%,#000 47%,rgba(0,0,0,.80) 72%,transparent 100%)!important;mask-image:radial-gradient(ellipse 95% 90% at 53% 54%,#000 47%,rgba(0,0,0,.80) 72%,transparent 100%)!important}
+ .hero-copy p{font-size:clamp(18px,4.2vw,21px)!important;line-height:1.72!important}
+}
+</style>
 </head>
 <body>
 
@@ -35459,6 +35478,7 @@ function showLocationFailure(err,retryFn){
 /* 절: 버튼 탭 직후 Safari 권한 요청 */
 function addVisitRecord(withLocation){
   if(!currentDetailId)return;
+  if(localMode || !auth || !auth.currentUser){ promptGuestLoginRequired(); return; }
 
   const id=currentDetailId;
   const d=destinations[id];
