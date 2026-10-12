@@ -21549,10 +21549,7 @@ button.site-footer-link{font-size:clamp(15px,2vw,17px)!important;font-weight:750
         <div id="dDocent" style="background:#f0ecff;border-left:3px solid #8a6fd6;padding:10px 12px;border-radius:8px;font-size:12.5px;line-height:1.9;"></div>
       </div>
 
-      <div id="dTipWrap" style="display:none;">
-        <div class="section-label">다녀온 사람들이 꼽는 점</div>
-        <div class="desc-block" id="dTip" style="background:#fff8e6;border-left:3px solid var(--gold);padding:10px 12px;border-radius:8px;"></div>
-      </div>
+      <div id="dTipWrap" style="display:none!important;"><div id="dTip"></div></div>
 
       <div id="dSightWrap" style="display:none;">
         <div class="section-label">📍 근처 볼거리</div>
@@ -30078,13 +30075,8 @@ function openDetail(id){
   } else {
     document.getElementById('dSeasonWrap').style.display = 'none';
   }
-  // '다녀온 사람들이 꼽는 점'은 절마다 다른 핵심 관람 포인트라 유지합니다.
-  if(d.visitorTip){
-    document.getElementById('dTipWrap').style.display = 'block';
-    document.getElementById('dTip').textContent = d.visitorTip;
-  } else {
-    document.getElementById('dTipWrap').style.display = 'none';
-  }
+  // 절 상세의 개별 방문 팁은 중복 정보라 화면에 표시하지 않습니다.
+  document.getElementById('dTipWrap').style.display = 'none';
   if(d.nearbySight){
     document.getElementById('dSightWrap').style.display = 'block';
     document.getElementById('dSight').textContent = d.nearbySight;
