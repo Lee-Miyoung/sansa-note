@@ -21299,9 +21299,10 @@ button.site-footer-link{font-size:clamp(15px,2vw,17px)!important;font-weight:750
         <button class="pilgrim-collection-chip pilgrim-collection-main" type="button" onclick="openPilgrimCollection()">
           <span class="pc-lotus"><img src="./lotus-soft.png" alt="" aria-hidden="true"></span>
           <span class="pc-copy">
-            <span class="pc-label">108 순례</span>
-            <span class="pc-title">순례 컬렉션</span>
-            <span class="pc-progress" id="heroLotusProgress">연꽃을 하나씩 피워보세요</span>
+            <span class="pc-label">산사노트 핵심 여정</span>
+            <span class="pc-title">108 순례 · 수호카드</span>
+            <span class="pc-progress" id="heroLotusProgress">연꽃과 수호카드를 하나씩 모아보세요</span>
+            <span class="pc-guide">방문하면 연꽃 · 현장 인증하면 컬러 수호카드</span>
           </span>
           <span class="pc-arrow">→</span>
         </button>
@@ -22392,8 +22393,8 @@ button.site-footer-link{font-size:clamp(15px,2vw,17px)!important;font-weight:750
     <div class="pg-collection-hero">
       <div class="pg-collection-hero-copy">
         <div class="pg-collection-kicker">산사노트 · 순례 아카이브</div>
-        <h2 class="serif">108 순례 컬렉션</h2>
-        <p>한 걸음, 한 마음이 모여 108곳의 이야기가 됩니다.<br>다녀온 절마다 연꽃 한 송이를 피워보세요.</p>
+        <h2 class="serif">108 순례 · 수호카드 컬렉션</h2>
+        <p><b>108곳을 순례하며 연꽃을 피우고, 현장 인증으로 컬러 수호카드를 완성해보세요.</b><br>내가 걸어간 산사의 기록이 한 장씩 나만의 도감이 됩니다.</p>
       </div>
       <img src="./lotus-gold.png" alt="" class="pg-collection-lotus" aria-hidden="true">
       <button class="close-x pg-collection-close" onclick="closePilgrimCollection()">✕</button>
@@ -22401,10 +22402,10 @@ button.site-footer-link{font-size:clamp(15px,2vw,17px)!important;font-weight:750
 
     <div class="modal-body pg-collection-body">
       <div class="pilgrim-game-tabs">
-        <button class="active" data-pg-tab="map" onclick="setPilgrimGameTab('map',this)">108 순례</button>
-        <button data-pg-tab="hanja" onclick="setPilgrimGameTab('hanja',this)">한자 수집</button>
-        <button data-pg-tab="region" onclick="setPilgrimGameTab('region',this)">지역 컬렉션</button>
-        <button data-pg-tab="guardian" onclick="setPilgrimGameTab('guardian',this)">연꽃 수호 카드</button>
+        <button class="active" data-pg-tab="map" onclick="setPilgrimGameTab('map',this)">🪷 108 순례</button>
+        <button class="guardian-main-tab" data-pg-tab="guardian" onclick="setPilgrimGameTab('guardian',this)">🎴 수호카드</button>
+        <button data-pg-tab="region" onclick="setPilgrimGameTab('region',this)">지역</button>
+        <button data-pg-tab="hanja" onclick="setPilgrimGameTab('hanja',this)">한자</button>
       </div>
 
       <div class="pilgrim-today-card">
@@ -27425,6 +27426,7 @@ function render108Pilgrimage(body){
         <div class="pg-progress"><i style="width:${pct}%"></i></div>
       </div>
     </div>
+    <button type="button" class="pg-guardian-cta" onclick="openPilgrimGuardianCollection()"><span>🎴</span><b>나의 수호카드 보기</b><small>현장 인증하면 컬러 카드가 열려요 →</small></button>
     <div class="pg-lotus-legend">
       <span><i class="pg-mini-lotus-shape">${lotusShapeHtml()}</i> 다녀온 절</span>
       <span><i class="legend-empty"></i> 아직</span>
@@ -28960,9 +28962,12 @@ function render(){
   const allVisited = (typeof getVisitedTempleRecords==='function') ? Math.min(108,getVisitedTempleRecords().length) : stats.visited;
   const lotusProgress=document.getElementById('heroLotusProgress');
   if(lotusProgress){
+    const verifiedCards=(typeof window.guardianCatalog==='function')
+      ? window.guardianCatalog().filter(x=>x&&x.verified).length
+      : (typeof verifiedTempleCount==='function'?Math.min(108,verifiedTempleCount()):0);
     lotusProgress.textContent=allVisited>=108
-      ? '연꽃 108송이 · 완주했어요'
-      : `연꽃 ${allVisited}송이 · ${108-allVisited}곳 남음`;
+      ? `연꽃 108송이 · 컬러카드 ${verifiedCards}장`
+      : `연꽃 ${allVisited}송이 · 컬러카드 ${verifiedCards}장 · ${108-allVisited}곳 남음`;
   }
 
   document.getElementById('heroStats').innerHTML = `
@@ -34385,30 +34390,27 @@ function renderPilgrimRewardPreview(d){
   const wrap=document.getElementById('pilgrimRewardPreview');
   if(!wrap||!d) return;
   const first=!templeHasVerifiedVisit(d);
-  const reward=currentFieldRewardText(d);
-  const region=escapeHtml(d.region||'지역');
   wrap.innerHTML=`
-    <section class="field-reward-preview ${first?'is-new':'is-repeat'}">
+    <section class="field-reward-preview ${first?'is-new':'is-repeat'} field-card-focus">
       <div class="field-reward-head">
         <div>
           <span class="field-reward-kicker">📍 현장에 가면 열려요</span>
-          <h3>${escapeHtml(reward.title)}</h3>
-          <p>${first?'사찰 근처에서 위치 인증하면 순례 기록이 특별하게 완성됩니다.':'이미 인증한 곳이에요. 다시 방문하면 재방문 기록으로 남길 수 있어요.'}</p>
+          <h3>${first?`${escapeHtml(d.name)} 컬러 수호카드`:`${escapeHtml(d.name)} 수호카드 획득 완료`}</h3>
+          <p>${first?'이 절에 직접 도착해 위치 인증하면 <b>연꽃이 피고 컬러 수호카드가 열립니다.</b>':'이미 현장 인증한 곳이에요. 수호카드는 108 순례 카드 도감에서 다시 볼 수 있어요.'}</p>
         </div>
         <span class="field-reward-lock">${first?'LOCKED':'OPEN'}</span>
       </div>
-      <div class="field-reward-items">
-        <span><b>🪷 ${first?'+1':'✓'}</b><small>${first?'연꽃':'재방문'}</small></span>
-        <span><b>印</b><small>현장 도장</small></span>
-        <span><b>📜</b><small>인증서</small></span>
-        <span><b>${region}</b><small>지역 기록</small></span>
+      <div class="field-card-reward-flow" aria-label="현장 인증 보상 흐름">
+        <span><b>🪷 연꽃 +1</b><small>방문 기록</small></span>
+        <i aria-hidden="true">→</i>
+        <span><b>🎴 컬러 수호카드</b><small>현장 인증으로 공개</small></span>
       </div>
-      <div class="field-reward-special">${reward.badge}</div>
+      <div class="field-reward-special">108 순례 카드 도감에 자동으로 모여요</div>
       <div class="field-reward-actions">
-        <button type="button" class="field-reward-preview-btn" onclick="showFieldRewardPreviewOnly()">보상 미리보기</button>
-        <button type="button" class="field-reward-go-btn" onclick="document.getElementById('pilgrimVerifyBtn')?.scrollIntoView({behavior:'smooth',block:'center'});setTimeout(()=>document.getElementById('pilgrimVerifyBtn')?.classList.add('pulse-now'),260);setTimeout(()=>document.getElementById('pilgrimVerifyBtn')?.classList.remove('pulse-now'),1700);">현장 인증하기 →</button>
+        <button type="button" class="field-reward-preview-btn" onclick="openPilgrimGuardianCollection()">🎴 수호카드 보기</button>
+        <button type="button" class="field-reward-go-btn" onclick="document.getElementById('pilgrimVerifyBtn')?.scrollIntoView({behavior:'smooth',block:'center'});setTimeout(()=>document.getElementById('pilgrimVerifyBtn')?.classList.add('pulse-now'),260);setTimeout(()=>document.getElementById('pilgrimVerifyBtn')?.classList.remove('pulse-now'),1700);">📍 현장 인증하기 →</button>
       </div>
-      <small class="field-reward-note">※ 실제 사찰 근처에서 위치 인증이 성공해야 획득됩니다.</small>
+      <small class="field-reward-note">※ 실제 사찰 근처에서 위치 인증에 성공해야 컬러 수호카드가 열립니다.</small>
     </section>`;
 }
 function showFieldRewardPreviewOnly(){
@@ -34616,7 +34618,7 @@ function showPilgrimageAchievement(info){
     <div class="pilgrim-ach-lotus">🪷</div>
     <div class="pilgrim-ach-kicker">SANSA NOTE · PILGRIMAGE</div>
     <h2>${escapeHtml(info.templeName)}<br>현장 인증 완료</h2>
-    <p class="pilgrim-ach-message">오늘 한 곳을 더 직접 걸어 도착했습니다.<br>이 기록이 나의 순례에 오래 남습니다.</p>
+    <p class="pilgrim-ach-message">현장 인증 완료! <b>${first?'새 컬러 수호카드가 열렸습니다.':'이 절의 수호카드가 이미 컬러로 열려 있어요.'}</b><br>108 순례 도감에 오늘의 기록이 함께 남습니다.</p>
     <div class="pilgrim-ach-stamp">現場<br>認證</div>
     <div class="pilgrim-ach-stats">
       <div class="pilgrim-ach-stat"><b>${first?'+1':'✓'}</b><span>${first?'연꽃':'재방문 인증'}</span></div>
@@ -34625,7 +34627,7 @@ function showPilgrimageAchievement(info){
     </div>
     <div class="pilgrim-ach-badge">${badge}<br><small style="font-weight:700;opacity:.72">${nextText}</small></div>
     <div class="pilgrim-ach-meta">${escapeHtml(info.templeName)} 현장권역 확인 · ${accuracy!==null?`GPS ±${accuracy}m · `:''}${new Date().toLocaleDateString('ko-KR')}</div>
-    <div class="pilgrim-ach-actions"><button class="ghost" type="button" onclick="closePilgrimageAchievement()">기록 계속하기</button><button class="primary" type="button" onclick="openAchievementCertificate()">📸 인증서 보기</button></div>
+    <div class="pilgrim-ach-actions"><button class="primary guardian-open" type="button" onclick="closePilgrimageAchievement();openPilgrimGuardianCollection()">🎴 획득한 수호카드 보기</button><button class="ghost" type="button" onclick="closePilgrimageAchievement()">기록 계속하기</button><button class="primary certificate-open" type="button" onclick="openAchievementCertificate()">📸 인증서 보기</button></div>
   </div>`;
   el.addEventListener('click',e=>{if(e.target===el)closePilgrimageAchievement();});
   document.body.appendChild(el);
@@ -38213,6 +38215,56 @@ document.getElementById('todayTriviaOverlay')?.addEventListener('click',function
 })();
 </script>
 
+
+
+<style id="sansa-core-108-guardian-focus-20261012">
+/* 핵심 기능은 유지하고 시각적 우선순위만 강화: 108 순례 + 수호카드 */
+.hero-pilgrim-feature .pilgrim-collection-chip{min-height:132px!important;padding-top:18px!important;padding-bottom:18px!important}
+.hero-pilgrim-feature .pc-label{font-size:12px!important;letter-spacing:.04em!important;color:#7e5720!important}
+.hero-pilgrim-feature .pc-title{font-size:28px!important;line-height:1.18!important;letter-spacing:-.035em!important}
+.hero-pilgrim-feature .pc-progress{font-size:13px!important;line-height:1.5!important;font-weight:850!important;color:#4e4538!important;margin-top:6px!important}
+.hero-pilgrim-feature .pc-guide{display:block;margin-top:4px;font-size:12px;line-height:1.45;font-weight:800;color:#28705e;word-break:keep-all}
+#pilgrimCollectionOverlay .pg-collection-hero-copy h2{font-size:clamp(31px,6vw,45px)!important;line-height:1.15!important;letter-spacing:-.045em!important}
+#pilgrimCollectionOverlay .pg-collection-hero-copy p{font-size:15px!important;line-height:1.72!important;color:#5d554c!important;word-break:keep-all!important}
+#pilgrimCollectionOverlay .pg-collection-hero-copy p b{color:#2f5f53!important;font-weight:900!important}
+#pilgrimCollectionOverlay .pilgrim-game-tabs{gap:8px!important}
+#pilgrimCollectionOverlay .pilgrim-game-tabs button{min-height:48px!important;font-size:14px!important;font-weight:900!important;line-height:1.15!important;padding:0 10px!important}
+#pilgrimCollectionOverlay .pilgrim-game-tabs .guardian-main-tab{border-color:#d3a64c!important;box-shadow:inset 0 0 0 1px rgba(211,166,76,.18)!important}
+#pilgrimCollectionOverlay .pilgrim-game-tabs .guardian-main-tab:not(.active){background:#fff9ea!important;color:#885d1f!important}
+.pg-guardian-cta{width:100%;border:1px solid #dfc589;background:linear-gradient(135deg,#fffaf0,#f8e7bd);border-radius:16px;min-height:62px;padding:10px 14px;margin:12px 0 14px;display:grid;grid-template-columns:34px 1fr;grid-template-rows:auto auto;text-align:left;column-gap:10px;align-items:center;color:#3f352b;font-family:inherit;box-shadow:0 5px 14px rgba(155,109,38,.08)}
+.pg-guardian-cta>span{grid-row:1/3;font-size:26px}.pg-guardian-cta>b{font-size:15px;line-height:1.3}.pg-guardian-cta>small{font-size:12px;line-height:1.4;color:#7d6543;font-weight:750}
+.guardian-dojo-title b{font-size:22px!important}.guardian-dojo-title span{font-size:13px!important;line-height:1.55!important}.guardian-dojo-count{font-size:18px!important}.guardian-dojo-count small{font-size:11px!important}
+.guardian-filter-btn{font-size:12.5px!important;min-height:42px!important;font-weight:850!important}.guardian-legend{font-size:11.5px!important;line-height:1.4!important}
+.guardian-name{font-size:15.5px!important}.guardian-lotus-name{font-size:14px!important}.guardian-lotus-phrase{font-size:11.5px!important}.guardian-state{font-size:11.5px!important}
+.field-reward-preview.field-card-focus{padding:18px!important}.field-card-focus .field-reward-head h3{font-size:22px!important}.field-card-focus .field-reward-head p{font-size:13.5px!important;line-height:1.65!important}.field-card-focus .field-reward-kicker{font-size:12px!important}
+.field-card-reward-flow{display:grid;grid-template-columns:1fr 24px 1fr;gap:6px;align-items:center;margin:15px 0 10px;position:relative;z-index:2}.field-card-reward-flow>span{min-height:70px;border:1px solid rgba(196,158,93,.28);background:rgba(255,255,255,.78);border-radius:15px;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:9px 7px;text-align:center}.field-card-reward-flow b{font-size:14px;line-height:1.35;color:#2d5c50;word-break:keep-all}.field-card-reward-flow small{font-size:10.5px;margin-top:4px;color:#776a59;font-weight:750}.field-card-reward-flow i{font-style:normal;font-size:18px;color:#b68739;text-align:center}
+.field-card-focus .field-reward-special{font-size:13px!important;line-height:1.45!important}.field-card-focus .field-reward-actions button{font-size:13px!important;min-height:48px!important}.field-card-focus .field-reward-note{font-size:10.5px!important;line-height:1.5!important}
+.pilgrim-ach-message b{color:#95651e}.pilgrim-ach-actions{grid-template-columns:1fr 1fr!important}.pilgrim-ach-actions .guardian-open{grid-column:1/-1!important;min-height:48px!important;font-size:13px!important}.pilgrim-ach-actions .certificate-open{grid-column:auto!important}
+@media(max-width:620px){
+  .hero-pilgrim-feature .pilgrim-collection-chip{min-height:126px!important;padding:15px 13px!important}
+  .hero-pilgrim-feature .pc-label{font-size:11px!important}.hero-pilgrim-feature .pc-title{font-size:24px!important}.hero-pilgrim-feature .pc-progress{font-size:12px!important}.hero-pilgrim-feature .pc-guide{font-size:11.5px!important;max-width:290px}
+  #pilgrimCollectionOverlay .pg-collection-hero-copy h2{font-size:34px!important}
+  #pilgrimCollectionOverlay .pg-collection-hero-copy p{font-size:14px!important;line-height:1.68!important;padding-right:10px!important}
+  #pilgrimCollectionOverlay .pilgrim-game-tabs{grid-template-columns:repeat(2,minmax(0,1fr))!important;display:grid!important}
+  #pilgrimCollectionOverlay .pilgrim-game-tabs button{font-size:13px!important;min-height:47px!important;padding:0 7px!important}
+  .guardian-dojo-title b{font-size:19px!important}.guardian-dojo-title span{font-size:12px!important}.guardian-dojo-count{font-size:16px!important}.guardian-dojo-count small{font-size:10px!important}
+  .guardian-filter-btn{font-size:11.5px!important}.guardian-legend{font-size:10.5px!important}
+  .guardian-name{font-size:14.5px!important}.guardian-lotus-name{font-size:13px!important}.guardian-lotus-phrase{font-size:10.8px!important;line-height:1.5!important}.guardian-state{font-size:10.5px!important}
+  .field-card-focus .field-reward-head h3{font-size:20px!important}.field-card-focus .field-reward-head p{font-size:13px!important}.field-card-reward-flow b{font-size:12.5px}.field-card-reward-flow small{font-size:10px}
+}
+</style>
+<script id="sansa-core-108-guardian-focus-js-20261012">
+(function(){
+  window.openPilgrimGuardianCollection=function(){
+    try{document.getElementById('pilgrimAchievement')?.remove();}catch(e){}
+    pilgrimGameTab='guardian';
+    document.querySelectorAll('[data-pg-tab]').forEach(btn=>btn.classList.toggle('active',btn.dataset.pgTab==='guardian'));
+    renderPilgrimGame();
+    renderPilgrimLevelGuide(false);
+    document.getElementById('pilgrimCollectionOverlay')?.classList.add('show');
+  };
+})();
+</script>
 
 <style id="sansa-mobile-passport-guide-fix-20261012">
 /* iPhone/Android: 현장 인증 기록·기능 찾기 화면이 주소창/화면 가장자리에 잘리지 않게 */
