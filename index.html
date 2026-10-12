@@ -23051,6 +23051,29 @@ function buildMasterByName(){
   });
   return m;
 }
+
+// 산사노트 한국 명찰 108선: 사이트 전체의 공식 108 기준입니다.
+// 로그인/비로그인, 지역별 수, 전체 목록, 수호카드가 모두 이 배열을 사용합니다.
+const SANSA_GUARDIAN_108 = [
+    '통도사', '부석사', '봉정사', '법주사', '마곡사', '선암사',
+    '대흥사', '해인사', '송광사', '수덕사', '백양사', '동화사',
+    '쌍계사', '범어사', '불국사', '석굴암', '기림사', '분황사',
+    '골굴사', '화엄사', '연곡사', '벽송사', '실상사', '천은사',
+    '낙산사', '신흥사', '백담사', '월정사', '상원사', '청평사',
+    '건봉사', '휴휴암', '법흥사', '정암사', '봉정암', '도피안사',
+    '봉원사', '봉은사', '조계사', '화계사', '진관사', '도선사',
+    '용주사', '전등사', '신륵사', '보문사', '수종사', '용문사(양평)',
+    '봉선사', '보광사', '칠장사', '회암사', '관음사', '약천사',
+    '산방굴사', '법화사', '원당사', '존자암', '관촉사', '개심사',
+    '무량사', '신원사', '각연사', '갑사', '동학사', '구인사',
+    '대조사', '미황사', '도갑사', '불갑사', '향일암', '쌍봉사',
+    '운주사', '백련사', '무위사', '태안사', '흥국사(여수)', '금산사',
+    '내소사', '개암사', '선운사', '화암사', '완주 송광사', '직지사',
+    '고운사', '은해사', '청량사', '청암사', '대승사', '김룡사',
+    '불영사', '갓바위(선본사)', '오어사', '봉암사', '용문사(예천)', '도리사',
+    '파계사', '운문사', '장안사(부산)', '표충사', '옥천사', '다솔사',
+    '보리암', '대원사', '관룡사', '은하사', '해동용궁사', '만어사'
+  ];
 const MASTER_BY_NAME = buildMasterByName();
 
 function resolvePackData(pack){
@@ -23917,7 +23940,11 @@ function ensureDestinationsSeeded(){
     return;
   }
   const existingNames = new Set(Object.values(destinations).map(d=>d.name));
-  const missing = Object.values(MASTER_BY_NAME).filter(item=>!existingNames.has(item.name));
+  // 게스트도 로그인 사용자와 같은 '선정 108' 기준만 사용합니다.
+  // MASTER_BY_NAME에는 참고용 추가 사찰이 더 있어도 기본 목록에는 자동 삽입하지 않습니다.
+  const missing = SANSA_GUARDIAN_108
+    .map(name=>MASTER_BY_NAME[name])
+    .filter(item=>item && !existingNames.has(item.name));
   if(missing.length===0) return;
   const batch={};
   missing.forEach((item,idx)=>{
@@ -27285,8 +27312,9 @@ function setPilgrimGameTab(tab,btn){
 }
 function getVisitedTempleRecords(){
   const bestByName=new Map();
+  const official108=new Set(SANSA_GUARDIAN_108);
   Object.entries(destinations||{}).forEach(([id,d])=>{
-    if(!d || (Number(d.stage)||0)<1 || !d.name || !Object.prototype.hasOwnProperty.call(MASTER_BY_NAME,d.name)) return;
+    if(!d || (Number(d.stage)||0)<1 || !d.name || !official108.has(d.name)) return;
     const prev=bestByName.get(d.name);
     const score=(Number(d.stage)||0)*100000 + Number(d.updatedAt||d.createdAt||0);
     if(!prev || score>prev.score) bestByName.set(d.name,{id,d,score});
@@ -27423,30 +27451,44 @@ function showHanjaTemples(ch){
   </div>`;
 }
 function renderRegionCollection(body){
-  const all=Object.values(destinations||{}).filter(d=>d&&!d.hiddenFromList&&Object.prototype.hasOwnProperty.call(MASTER_BY_NAME,d.name));
-  const visited=all.filter(d=>(Number(d.stage)||0)>=1);
-  const regions=(typeof REGIONS!=='undefined'&&REGIONS.length)?REGIONS:[...new Set(all.map(d=>d.region).filter(Boolean))];
+  // 지역별 숫자는 로그인 여부와 관계없이 '선정 108' 고정 목록만 집계합니다.
+  const officialRows=SANSA_GUARDIAN_108.map(name=>{
+    const master=MASTER_BY_NAME[name];
+    if(!master) return null;
+    const aliases=(typeof GUARDIAN_NAME_ALIASES!=='undefined' && GUARDIAN_NAME_ALIASES[name]) || [];
+    const allowed=new Set([name,...aliases]);
+    const found=Object.entries(destinations||{})
+      .filter(([id,d])=>d && allowed.has(d.name))
+      .sort((a,b)=>(Number(b[1].stage)||0)-(Number(a[1].stage)||0))[0] || null;
+    const data={...master,...(found?found[1]:{}),name};
+    return {name,id:found?found[0]:'',data};
+  }).filter(Boolean);
+  const regions=(typeof REGIONS!=='undefined'&&REGIONS.length)?REGIONS:[...new Set(officialRows.map(x=>x.data.region).filter(Boolean))];
   body.innerHTML=`<div class="pg-region-list">
     ${regions.map(region=>{
-      const total=all.filter(d=>d.region===region).length;
-      const done=visited.filter(d=>d.region===region).length;
+      const regionRows=officialRows.filter(x=>x.data.region===region);
+      const total=regionRows.length;
+      const done=regionRows.filter(x=>(Number(x.data.stage)||0)>=1).length;
       const pct=total?Math.round(done/total*100):0;
-      const rows=all.filter(d=>d.region===region).sort((a,b)=>(Number(b.stage)||0)-(Number(a.stage)||0));
+      const rows=regionRows.sort((a,b)=>(Number(b.data.stage)||0)-(Number(a.data.stage)||0));
       return `<details class="pg-region-row pg-region-expand">
         <summary class="pg-region-summary">
           <div class="pg-region-top"><b>${escapeHtml(region)}</b><span>${done} / ${total}</span></div>
           <div class="pg-progress"><i style="width:${pct}%"></i></div>
           <small>${total===0?'이 지역의 선정 사찰이 없어요':pct===100?'완료 · 지역 도장 획득':'다녀온 절이 늘수록 채워져요'} · 눌러서 사찰 목록 보기</small>
         </summary>
-        <div class="pg-region-places">${rows.length?rows.map(d=>{
-          const found=Object.entries(destinations||{}).find(([id,x])=>x===d);
-          const id=found?found[0]:'';
-          return `<button type="button" class="pg-region-place" onclick="openPilgrimRegionPlace('${escapeAttr(id)}')"><span><b>${escapeHtml(d.name)}</b><small>${escapeHtml(d.desc||d.activity||'사찰 상세 설명 보기')}</small></span><em>${(Number(d.stage)||0)>=1?'🪷 방문':'상세 보기 →'}</em></button>`;
-        }).join(''):'<p class="pg-region-empty">등록된 사찰이 없습니다.</p>'}</div>
+        <div class="pg-region-places">${rows.length?rows.map(row=>{
+          const d=row.data;
+          const action=row.id
+            ? `openPilgrimRegionPlace('${escapeAttr(row.id)}')`
+            : `closePilgrimCollection();openTempleFromCatalog('${escapeAttr(row.name)}')`;
+          return `<button type="button" class="pg-region-place" onclick="${action}"><span><b>${escapeHtml(row.name)}</b><small>${escapeHtml(d.desc||d.activity||'사찰 상세 설명 보기')}</small></span><em>${(Number(d.stage)||0)>=1?'🪷 방문':'상세 보기 →'}</em></button>`;
+        }).join(''):'<p class="pg-region-empty">선정 사찰이 없습니다.</p>'}</div>
       </details>`;
     }).join('')}
   </div>`;
 }
+
 function openPilgrimRegionPlace(id){
   if(!id||!destinations[id])return;
   closePilgrimCollection();
@@ -37648,7 +37690,7 @@ document.getElementById('todayTriviaOverlay')?.addEventListener('click',function
 <script id="sansa-catalog-navigation-fix-20261011">
 (function(){
   // 108곳은 오직 편집자가 선정한 기본 사찰로만 계산한다. 사용자 장소와 절터는 별도.
-  const isOfficialTemple=(name)=>!!name && name!=='감은사지' && Object.prototype.hasOwnProperty.call(MASTER_BY_NAME||{},name);
+  const isOfficialTemple=(name)=>!!name && SANSA_GUARDIAN_108.includes(name);
   const oldTempleData=window.getTempleCatalogData;
   if(typeof oldTempleData==='function'){
     window.getTempleCatalogData=function(){return oldTempleData().filter(d=>d&&d.name!=='감은사지');};
@@ -37662,7 +37704,7 @@ document.getElementById('todayTriviaOverlay')?.addEventListener('click',function
       const q=(document.getElementById('catalogSearch')?.value||'').trim().toLowerCase();
       const temple=catalogMode!=='mountain';
       const all=temple?getTempleCatalogData():getMountainCatalogData();
-      const official=temple?new Set(Object.keys(MASTER_BY_NAME||{}).filter(n=>n!=='감은사지')):new Set((MOUNTAIN_SEED||[]).map(d=>d.name));
+      const official=temple?new Set(SANSA_GUARDIAN_108):new Set((MOUNTAIN_SEED||[]).map(d=>d.name));
       const extra=all.filter(d=>d?.name&&!official.has(d.name));
       const matches=d=>!q||[d.name,d.region,d.desc,d.tagline,d.height].filter(Boolean).join(' ').toLowerCase().includes(q);
       const officialCount=all.filter(d=>official.has(d.name)&&matches(d)).length;
@@ -37687,7 +37729,7 @@ document.getElementById('todayTriviaOverlay')?.addEventListener('click',function
         card.querySelector('button').onclick=()=>openTempleFromCatalog('감은사지');
         list.appendChild(card);
       }
-      if(count)count.textContent=`기본 ${officialCount}곳 · 추가 ${extraCount}곳`;
+      if(count)count.textContent=`선정 ${officialCount}곳 · 추가 ${extraCount}곳`;
       if(title)title.textContent=temple?'🛕 순례 사찰 목록':'⛰ 산 전체 목록';
     };
   }
@@ -37943,28 +37985,7 @@ document.getElementById('todayTriviaOverlay')?.addEventListener('click',function
     arr.sort((a,b)=>Number(b.ts||b.createdAt||0)-Number(a.ts||a.createdAt||0));
     return arr[0]||null;
   }
-  // 산사노트 한국 명찰 108선: 번호는 영구 고정합니다.
-  // 기존 방문 기록과 수호카드 이미지 파일 번호를 보호하기 위해 자동 정렬하지 않습니다.
-  const SANSA_GUARDIAN_108 = [
-    '통도사', '부석사', '봉정사', '법주사', '마곡사', '선암사',
-    '대흥사', '해인사', '송광사', '수덕사', '백양사', '동화사',
-    '쌍계사', '범어사', '불국사', '석굴암', '기림사', '분황사',
-    '골굴사', '화엄사', '연곡사', '벽송사', '실상사', '천은사',
-    '낙산사', '신흥사', '백담사', '월정사', '상원사', '청평사',
-    '건봉사', '휴휴암', '법흥사', '정암사', '봉정암', '도피안사',
-    '봉원사', '봉은사', '조계사', '화계사', '진관사', '도선사',
-    '용주사', '전등사', '신륵사', '보문사', '수종사', '용문사(양평)',
-    '봉선사', '보광사', '칠장사', '회암사', '관음사', '약천사',
-    '산방굴사', '법화사', '원당사', '존자암', '관촉사', '개심사',
-    '무량사', '신원사', '각연사', '갑사', '동학사', '구인사',
-    '대조사', '미황사', '도갑사', '불갑사', '향일암', '쌍봉사',
-    '운주사', '백련사', '무위사', '태안사', '흥국사(여수)', '금산사',
-    '내소사', '개암사', '선운사', '화암사', '완주 송광사', '직지사',
-    '고운사', '은해사', '청량사', '청암사', '대승사', '김룡사',
-    '불영사', '갓바위(선본사)', '오어사', '봉암사', '용문사(예천)', '도리사',
-    '파계사', '운문사', '장안사(부산)', '표충사', '옥천사', '다솔사',
-    '보리암', '대원사', '관룡사', '은하사', '해동용궁사', '만어사'
-  ];
+  // SANSA_GUARDIAN_108은 MASTER_BY_NAME 생성 직전에 한 번만 정의합니다.
   // 표기 별칭은 명확한 동일 사찰에만 적용합니다. 동명이찰은 자동 병합하지 않습니다.
   const GUARDIAN_NAME_ALIASES = {
     "용문사(양평)": [
