@@ -37779,14 +37779,16 @@ document.getElementById('todayTriviaOverlay')?.addEventListener('click',function
   .guardian-card-badge{position:absolute;top:9px;right:9px;z-index:2;min-width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:900;background:rgba(255,255,255,.92);box-shadow:0 2px 8px rgba(0,0,0,.10)}
   .guardian-card.is-verified .guardian-card-badge{background:#d8aa45;color:#fff}
   .guardian-card.is-visited .guardian-card-badge{background:#eeeae4;color:#777}
-  .guardian-name{font-size:14px!important;font-weight:900!important;margin-top:7px!important;word-break:keep-all;line-height:1.2}
-  .guardian-state{font-size:10px!important;margin-top:3px!important;color:#8c8173!important;line-height:1.25;min-height:25px}
+  .guardian-name{font-size:15.5px!important;font-weight:900!important;margin-top:8px!important;word-break:keep-all;line-height:1.28}
+  .guardian-state{font-size:11.5px!important;margin-top:4px!important;color:#8c8173!important;line-height:1.35;min-height:28px}
   .guardian-card.is-verified .guardian-state{color:#9a6820!important;font-weight:800}
   .guardian-card.is-visited .guardian-state{color:#777!important;font-weight:700}
-  .guardian-lotus-name{font-size:12px;font-weight:850;color:#97651f;margin:6px 2px 2px;line-height:1.4;word-break:keep-all}
-  .guardian-lotus-phrase{font-size:10px;color:#736553;line-height:1.5;margin:2px 4px 5px;word-break:keep-all;overflow-wrap:anywhere}
-  .guardian-detail .guardian-lotus-name{font-size:16px;margin:6px 0}
-  .guardian-detail .guardian-lotus-phrase{font-size:13px;margin:3px 8px 12px}
+  .guardian-lotus-name{display:flex;align-items:center;justify-content:center;gap:5px;font-size:14px;font-weight:850;color:#97651f;margin:7px 2px 3px;line-height:1.45;word-break:keep-all}
+  .guardian-lotus-inline-icon{width:16px;height:16px;flex:0 0 16px;object-fit:contain;vertical-align:middle}
+  .guardian-lotus-phrase{font-size:11.5px;color:#736553;line-height:1.55;margin:3px 6px 6px;word-break:keep-all;overflow-wrap:anywhere}
+  .guardian-detail .guardian-lotus-name{font-size:18px;margin:8px 0 4px}
+  .guardian-detail .guardian-lotus-inline-icon{width:18px;height:18px;flex-basis:18px}
+  .guardian-detail .guardian-lotus-phrase{font-size:14px;margin:4px 8px 12px}
   .guardian-empty-filter{grid-column:1/-1;padding:36px 10px;text-align:center;color:#8f8170;font-size:13px}
 
   .guardian-detail-backdrop{position:fixed;inset:0;z-index:999999;background:rgba(25,21,15,.72);display:flex;align-items:center;justify-content:center;padding:16px}
@@ -37805,7 +37807,7 @@ document.getElementById('todayTriviaOverlay')?.addEventListener('click',function
   .guardian-detail-close{position:absolute;right:9px;top:9px;border:0;background:#fff;border-radius:50%;font-size:20px;width:36px;height:36px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.08)}
 
   @media(min-width:700px){.guardian-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important}}
-  @media(max-width:420px){.guardian-dojo{padding:12px}.guardian-dojo-title b{font-size:18px}.guardian-filter-btn{font-size:10px;padding:7px 3px}.guardian-grid{gap:8px!important}.guardian-card{padding:5px!important}.guardian-name{font-size:13px!important}.guardian-state{font-size:9.5px!important}}
+  @media(max-width:420px){.guardian-dojo{padding:12px}.guardian-dojo-title b{font-size:18px}.guardian-filter-btn{font-size:10px;padding:7px 3px}.guardian-grid{gap:8px!important}.guardian-card{padding:5px!important}.guardian-name{font-size:14px!important}.guardian-lotus-name{font-size:12.8px!important}.guardian-lotus-inline-icon{width:15px!important;height:15px!important}.guardian-lotus-phrase{font-size:10.8px!important}.guardian-state{font-size:10.2px!important}}
   @media(prefers-reduced-motion:no-preference){.guardian-card.is-verified{transition:transform .14s ease,box-shadow .14s ease}.guardian-card.is-verified:active{transform:scale(.985)}}
 </style>
 <script id="guardian-catalog-final-v11-js">
@@ -38074,7 +38076,7 @@ document.getElementById('todayTriviaOverlay')?.addEventListener('click',function
             <span class="guardian-card-badge">${state==='verified'?'✦':state==='visited'?'◐':'🔒'}</span>
             <div class="guardian-art">${artFor(item)}</div>
             <div class="guardian-name">${escapeHtml(item.name)}</div>
-            ${`<div class="guardian-lotus-name">🪷 ${escapeHtml((GUARDIAN_LOTUS_TEXT[item.name]||['마음의 연꽃','한 걸음마다 마음에 연꽃이 피어납니다.'])[0])}</div><div class="guardian-lotus-phrase">${escapeHtml((GUARDIAN_LOTUS_TEXT[item.name]||['마음의 연꽃','한 걸음마다 마음에 연꽃이 피어납니다.'])[1])}</div>`}
+            ${`<div class="guardian-lotus-name"><img src="./lotus-soft.png" alt="" aria-hidden="true" class="guardian-lotus-inline-icon"> <span>${escapeHtml((GUARDIAN_LOTUS_TEXT[item.name]||['마음의 연꽃','한 걸음마다 마음에 연꽃이 피어납니다.'])[0])}</span></div><div class="guardian-lotus-phrase">${escapeHtml((GUARDIAN_LOTUS_TEXT[item.name]||['마음의 연꽃','한 걸음마다 마음에 연꽃이 피어납니다.'])[1])}</div>`}
             <div class="guardian-state">${stateLabel(item)}</div>
           </button>`;
         }).join(''):'<div class="guardian-empty-filter">이 조건에 해당하는 카드가 아직 없어요.</div>'}
@@ -38097,7 +38099,7 @@ document.getElementById('todayTriviaOverlay')?.addEventListener('click',function
       <div class="guardian-detail-kicker">SANSA NOTE · LOTUS GUARDIAN ${String(item.number).padStart(3,'0')}</div>
       <div class="guardian-detail-art">${cardImage(item,'verified')}</div>
       <h3>${escapeHtml(item.name)}</h3>
-      ${`<div class="guardian-lotus-name">🪷 ${escapeHtml((GUARDIAN_LOTUS_TEXT[item.name]||['마음의 연꽃','한 걸음마다 마음에 연꽃이 피어납니다.'])[0])}</div><div class="guardian-lotus-phrase">${escapeHtml((GUARDIAN_LOTUS_TEXT[item.name]||['마음의 연꽃','한 걸음마다 마음에 연꽃이 피어납니다.'])[1])}</div>`}
+      ${`<div class="guardian-lotus-name"><img src="./lotus-soft.png" alt="" aria-hidden="true" class="guardian-lotus-inline-icon"> <span>${escapeHtml((GUARDIAN_LOTUS_TEXT[item.name]||['마음의 연꽃','한 걸음마다 마음에 연꽃이 피어납니다.'])[0])}</span></div><div class="guardian-lotus-phrase">${escapeHtml((GUARDIAN_LOTUS_TEXT[item.name]||['마음의 연꽃','한 걸음마다 마음에 연꽃이 피어납니다.'])[1])}</div>`}
       <p>현장 위치 인증으로 컬러가 열린 나만의 연꽃 수호카드입니다.</p>
       <div class="guardian-detail-meta"><span><b>📍 현장 인증</b>${escapeHtml(formatVisitDate(visit))}</span><span><b>상징</b>${escapeHtml(symbol)}</span></div>
       <div class="guardian-detail-actions">${recordId?`<button type="button" class="open-temple">방문 기록 보기 →</button>`:''}<button type="button" class="close-detail">도감으로 돌아가기</button></div>
