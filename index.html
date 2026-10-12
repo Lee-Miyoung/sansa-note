@@ -38019,12 +38019,12 @@ document.getElementById('todayTriviaOverlay')?.addEventListener('click',function
       return {name,i,number,visited,verified,record,asset:{file,symbol:FINAL_GUARDIAN_CARDS[name]?.symbol||'사찰 대표 문화유산'}};
     });
   }
-  // 047/067/099번은 기존 배포 이미지의 사찰명이 새 108선과 달라 잘못된 그림 노출을 막습니다.
-  const GUARDIAN_PENDING_REPLACEMENT = new Set([47,67,99]);
+  // 교체 수호카드 업로드 완료: 모든 고정 번호 PNG를 정상 노출합니다.
+  const GUARDIAN_PENDING_REPLACEMENT = new Set([]);
   function cardImage(item,mode){
     if(!item.asset || GUARDIAN_PENDING_REPLACEMENT.has(item.number)) return shadowArt(mode==='visited');
     const cls=mode==='visited'?'guardian-card-image guardian-gray':'guardian-card-image';
-    return `<img class="${cls}" src="./images/lotus-cards/${item.asset.file}?v=20261012a" alt="${escapeAttr(item.name)} 연꽃 수호 카드" loading="lazy" decoding="async" onerror="if(!this.dataset.retried){this.dataset.retried='1';this.src='./images/lotus-cards/${item.asset.file}?retry=20261012b';return;}this.onerror=null;this.style.display='none';this.parentElement.classList.add('guardian-missing-image');this.parentElement.insertAdjacentHTML('beforeend','<div class=guardian-shadow-card><span class=guardian-shadow-monk></span><span class=guardian-shadow-lotus>🪷</span><span class=guardian-lock-mini>🔒</span></div>')">`;
+    return `<img class="${cls}" src="./images/lotus-cards/${item.asset.file}?v=20261012c" alt="${escapeAttr(item.name)} 연꽃 수호 카드" loading="lazy" decoding="async" onerror="if(!this.dataset.retried){this.dataset.retried='1';this.src='./images/lotus-cards/${item.asset.file}?retry=20261012d';return;}this.onerror=null;this.style.display='none';this.parentElement.classList.add('guardian-missing-image');this.parentElement.insertAdjacentHTML('beforeend','<div class=guardian-shadow-card><span class=guardian-shadow-monk></span><span class=guardian-shadow-lotus>🪷</span><span class=guardian-lock-mini>🔒</span></div>')">`;
   }
   function shadowArt(visited){
     return `<div class="guardian-shadow-card ${visited?'visited-shadow':''}" aria-hidden="true"><span class="guardian-shadow-monk"></span><span class="guardian-shadow-lotus">🪷</span>${visited?'':'<span class="guardian-lock-mini">🔒</span>'}</div>`;
