@@ -21072,6 +21072,26 @@ button.site-footer-link{font-size:clamp(15px,2vw,17px)!important;font-weight:750
 .pack-detail-place-head,.course-progress-place-copy{min-width:0}
 @media(max-width:600px){.sansa108-course-mark{font-size:9px;padding:2px 5px}.sansa108-course-summary{font-size:10px}}
 </style>
+
+<style id="sansa-108-criteria-note-20261012">
+.sansa-108-criteria{
+  display:flex!important;align-items:center!important;gap:12px!important;
+  padding:13px 16px!important;border:1px solid #eadcc7!important;border-radius:16px!important;
+  background:linear-gradient(135deg,#fffdf8,#fbf4e7)!important;color:#625546!important;
+  box-shadow:none!important;
+}
+.sansa-108-criteria-lotus{width:38px;height:38px;object-fit:contain;flex:0 0 38px;opacity:.92}
+.sansa-108-criteria-copy{min-width:0;display:flex;flex-direction:column;gap:3px}
+.sansa-108-criteria-copy b{font-family:'Nanum Myeongjo','Noto Serif KR',serif!important;font-size:15px!important;line-height:1.35;color:#5d4121!important}
+.sansa-108-criteria-copy span{font-size:12px!important;line-height:1.55!important;color:#75695b!important;word-break:keep-all}
+.sansa-108-criteria-copy strong{color:#9b6725;font-weight:800}
+@media(max-width:560px){
+  .sansa-108-criteria{margin:10px 12px 0!important;padding:11px 12px!important;gap:9px!important;align-items:flex-start!important}
+  .sansa-108-criteria-lotus{width:31px;height:31px;flex-basis:31px;margin-top:1px}
+  .sansa-108-criteria-copy b{font-size:13.5px!important}
+  .sansa-108-criteria-copy span{font-size:11px!important;line-height:1.5!important}
+}
+</style>
 </head>
 <body>
 
@@ -23675,7 +23695,19 @@ function dismissGuestAddHint(){
 }
 function renderExplain108(){
   const wrap=document.getElementById('explain108Wrap');
-  if(wrap) wrap.innerHTML='';
+  if(!wrap) return;
+  if(typeof contentType!=='undefined' && contentType!=='temple'){
+    wrap.innerHTML='';
+    return;
+  }
+  wrap.innerHTML=`
+    <div class="explain108-banner sansa-108-criteria" role="note" aria-label="산사노트 108 순례 사찰 선정 기준">
+      <img src="./lotus-soft.png" alt="" aria-hidden="true" class="sansa-108-criteria-lotus">
+      <div class="sansa-108-criteria-copy">
+        <b>산사노트 108 순례 사찰은 이렇게 골랐어요</b>
+        <span>유네스코 산사·삼보사찰과 총림, 대표 기도성지, 지역별 문화유산과 산사의 매력을 두루 살펴 108곳을 선정했습니다. 인기 순위가 아닌 <strong>산사노트만의 순례 목록</strong>입니다.</span>
+      </div>
+    </div>`;
 }
 function dismissExplain108(){
   explain108DismissedThisLoad = true;
