@@ -21559,7 +21559,8 @@ button.site-footer-link{font-size:clamp(15px,2vw,17px)!important;font-weight:750
         <div class="desc-block" id="dSight" style="background:#eef7f3;border-left:3px solid var(--moss);padding:10px 12px;border-radius:8px;"></div>
       </div>
 
-      <div id="dVisitTips" style="display:none!important;"></div>
+      <div class="section-label">🌅 방문 팁</div>
+      <div id="dVisitTips" style="background:#fff8e6;border-left:3px solid var(--gold);padding:10px 12px;border-radius:8px;font-size:12.5px;line-height:1.7;"></div>
 
       <div class="section-label">위치</div>
       <div id="dWeather" style="margin-bottom:8px;"></div>
@@ -30043,22 +30044,8 @@ function escapeHtml(s){
 function openDetail(id){
   document.body.appendChild(document.getElementById('detailOverlay'));
   currentDetailId = id;
-  const stored = destinations[id] || {};
-  const master = (stored.name && MASTER_BY_NAME && MASTER_BY_NAME[stored.name]) ? MASTER_BY_NAME[stored.name] : {};
-  // 로그인 계정에 예전 형식의 간단한 기록만 남아 있어도 상세 설명은 항상 최신 마스터 데이터로 복원합니다.
-  const d = Object.assign({}, master, stored);
-  ['region','tag','desc','activity','season','visitorTip','nearbySight','tagline','difficulty','bestFor','locationHint','sourceUrl'].forEach(k=>{
-    if(master && master[k] !== undefined && master[k] !== null && master[k] !== '') d[k] = master[k];
-  });
-  // 사용자 기록/사진/좌표는 계정에 저장된 값을 우선합니다.
-  d.stage = stored.stage ?? d.stage ?? 0;
-  d.notes = stored.notes ?? d.notes ?? '';
-  d.photos = stored.photos || d.photos || {};
-  d.visits = stored.visits || d.visits || {};
-  if(stored.lat != null) d.lat = stored.lat;
-  if(stored.lng != null) d.lng = stored.lng;
-  destinations[id] = Object.assign({}, stored, d);
-  document.getElementById('dRegion').textContent = d.region || '';
+  const d = destinations[id];
+  document.getElementById('dRegion').textContent = d.region;
   document.getElementById('dName').textContent = d.name;
   document.getElementById('dTag').textContent = d.tag==='유명' ? '유명한 곳' : '숨은 곳';
   document.getElementById('dDesc').textContent = d.desc || '';
@@ -30092,7 +30079,6 @@ function openDetail(id){
   } else {
     document.getElementById('dSeasonWrap').style.display = 'none';
   }
-  // '다녀온 사람들이 꼽는 점'은 절마다 다른 핵심 관람 포인트라 유지합니다.
   if(d.visitorTip){
     document.getElementById('dTipWrap').style.display = 'block';
     document.getElementById('dTip').textContent = d.visitorTip;
@@ -34385,50 +34371,787 @@ function currentFieldRewardText(d){
   if(first) return {title:`${d.name} 현장 인증 보상`,badge:'✨ 첫 현장 인증 도장'};
   return {title:`${d.name} 재방문 보상`,badge:'🔁 재방문 인증 기록'};
 }
-function openGuardianCollectionFromTemple(){
-  openPilgrimCollection();
-  const btn=document.querySelector('[data-pg-tab="guardian"]');
-  if(btn) setPilgrimGameTab('guardian',btn);
+function renderPilgrimRewardPreview(d){
+  const wrap=document.getElementById('pilgrimRewardPreview');
+  if(!wrap||!d) return;
+  const first=!templeHasVerifiedVisit(d);
+  const reward=currentFieldRewardText(d);
+  const region=escapeHtml(d.region||'지역');
+  wrap.innerHTML=`
+    <section class="field-reward-preview ${first?'is-new':'is-repeat'}">
+      <div class="field-reward-head">
+        <div>
+          <span class="field-reward-kicker">📍 현장에 가면 열려요</span>
+          <h3>${escapeHtml(reward.title)}</h3>
+          <p>${first?'사찰 근처에서 위치 인증하면 순례 기록이 특별하게 완성됩니다.':'이미 인증한 곳이에요. 다시 방문하면 재방문 기록으로 남길 수 있어요.'}</p>
+        </div>
+        <span class="field-reward-lock">${first?'LOCKED':'OPEN'}</span>
+      </div>
+      <div class="field-reward-items">
+        <span><b>🪷 ${first?'+1':'✓'}</b><small>${first?'연꽃':'재방문'}</small></span>
+        <span><b>印</b><small>현장 도장</small></span>
+        <span><b>📜</b><small>인증서</small></span>
+        <span><b>${region}</b><small>지역 기록</small></span>
+      </div>
+      <div class="field-reward-special">${reward.badge}</div>
+      <div class="field-reward-actions">
+        <button type="button" class="field-reward-preview-btn" onclick="showFieldRewardPreviewOnly()">보상 미리보기</button>
+        <button type="button" class="field-reward-go-btn" onclick="document.getElementById('pilgrimVerifyBtn')?.scrollIntoView({behavior:'smooth',block:'center'});setTimeout(()=>document.getElementById('pilgrimVerifyBtn')?.classList.add('pulse-now'),260);setTimeout(()=>document.getElementById('pilgrimVerifyBtn')?.classList.remove('pulse-now'),1700);">현장 인증하기 →</button>
+      </div>
+      <small class="field-reward-note">※ 실제 사찰 근처에서 위치 인증이 성공해야 획득됩니다.</small>
+    </section>`;
 }
+function showFieldRewardPreviewOnly(){
+  const d=destinations&&currentDetailId?destinations[currentDetailId]:null;
+  if(!d) return;
+  document.getElementById('fieldRewardDemo')?.remove();
+  const reward=currentFieldRewardText(d);
+  const first=!templeHasVerifiedVisit(d);
+  const el=document.createElement('div');el.id='fieldRewardDemo';el.className='field-reward-demo';
+  el.innerHTML=`<div class="field-reward-demo-card">
+    <button type="button" class="field-reward-demo-close" onclick="document.getElementById('fieldRewardDemo')?.remove()">×</button>
+    <div class="demo-lotus">🪷</div>
+    <div class="demo-kicker">SANSA NOTE · FIELD REWARD</div>
+    <h2>${escapeHtml(d.name)}<br>현장 인증 보상</h2>
+    <div class="demo-grid">
+      <span><b>${first?'+1':'✓'}</b><small>${first?'연꽃':'재방문'}</small></span>
+      <span><b>印</b><small>현장 도장</small></span>
+      <span><b>📜</b><small>인증서</small></span>
+    </div>
+    <div class="demo-badge">${reward.badge}</div>
+    <p>이 화면은 미리보기입니다.<br><b>실제 현장 위치 인증 성공 시</b> 보상이 기록됩니다.</p>
+    <button type="button" onclick="document.getElementById('fieldRewardDemo')?.remove();document.getElementById('pilgrimVerifyBtn')?.scrollIntoView({behavior:'smooth',block:'center'});">확인</button>
+  </div>`;
+  el.addEventListener('click',e=>{if(e.target===el)el.remove();});
+  document.body.appendChild(el);
+}
+
+/* ============================================================
+   PILGRIMAGE GPS ACHIEVEMENT · isolated helpers
+   ============================================================ */
+let pilgrimGpsWatchId=null;
+function verifyTemplePosition(targetLat,targetLng,opts={}){
+  const radiusM=Number(opts.radiusM||500);
+  const timeoutMs=Number(opts.timeoutMs||35000);
+  return new Promise((resolve,reject)=>{
+    let done=false,best=null,lastError=null;
+    const started=Date.now();
+
+    const finish=(value,error)=>{
+      if(done)return;
+      done=true;
+      if(pilgrimGpsWatchId!==null){
+        try{navigator.geolocation.clearWatch(pilgrimGpsWatchId);}catch(e){}
+        pilgrimGpsWatchId=null;
+      }
+      clearTimeout(timer);
+      error?reject(error):resolve(value);
+    };
+
+    const acceptPosition=pos=>{
+      if(done || !pos || !pos.coords)return;
+      const accuracyM=Math.max(0,Number(pos.coords.accuracy)||0);
+      const distanceM=haversineKm(
+        Number(pos.coords.latitude),
+        Number(pos.coords.longitude),
+        Number(targetLat),
+        Number(targetLng)
+      )*1000;
+
+      const info={
+        distanceM,
+        accuracyM,
+        ok:false,
+        zoneLabel:opts.zoneLabel||'',
+        insideZone:false,
+        latitude:Number(pos.coords.latitude),
+        longitude:Number(pos.coords.longitude),
+        ageMs:Math.max(0,Date.now()-(Number(pos.timestamp)||Date.now()))
+      };
+
+      // 거리와 정확도를 함께 보고 가장 믿을 만한 값을 유지
+      if(
+        !best ||
+        accuracyM < best.accuracyM ||
+        (accuracyM <= best.accuracyM + 35 && distanceM < best.distanceM)
+      ){
+        best=info;
+      }
+
+      if(typeof opts.onProgress==='function') opts.onProgress(info);
+
+      // 산에서는 GPS 오차가 커질 수 있어 실제 오차원과 인증 반경이 겹치면 허용.
+      // 단, 무한정 넓어지지 않도록 최대 180m까지만 보정.
+      const cushion=Math.min(180,accuracyM);
+      if(distanceM<=radiusM+cushion){
+        info.ok=true;
+        info.insideZone=true;
+        finish(info);
+      }
+    };
+
+    const onError=err=>{
+      lastError=err||lastError;
+      // iOS Safari는 산/계곡에서 일시적 POSITION_UNAVAILABLE 또는 TIMEOUT을
+      // 먼저 내보내는 경우가 있어 전체 제한시간까지는 바로 실패시키지 않는다.
+      if(err && err.code===1) finish(null,err); // 권한 거부만 즉시 종료
+    };
+
+    const timer=setTimeout(()=>{
+      if(best){
+        const cushion=Math.min(180,Math.max(0,best.accuracyM||0));
+        best.ok=best.distanceM<=radiusM+cushion;
+        best.insideZone=best.ok;
+        finish(best);
+      }else{
+        finish(null,lastError||{code:3,message:'timeout'});
+      }
+    },timeoutMs);
+
+    // 1차: 최근 위치도 최대 15초까지 허용해 빠르게 화면에 좌표를 띄움
+    try{
+      navigator.geolocation.getCurrentPosition(
+        acceptPosition,
+        onError,
+        {enableHighAccuracy:false,maximumAge:15000,timeout:7000}
+      );
+    }catch(e){ lastError=e; }
+
+    // 2차: 동시에 고정밀 위치를 계속 받아 더 정확한 값으로 교체
+    try{
+      pilgrimGpsWatchId=navigator.geolocation.watchPosition(
+        acceptPosition,
+        onError,
+        {enableHighAccuracy:true,maximumAge:3000,timeout:12000}
+      );
+    }catch(e){
+      lastError=e;
+      if(!best) finish(null,e);
+    }
+  });
+}
+function startPilgrimageGpsCheck(name){
+  finishPilgrimageGpsCheck();
+  const el=document.createElement('div');
+  el.id='pilgrimGpsCheck'; el.className='pilgrim-gps-toast';
+  el.innerHTML=`<div class="pilgrim-gps-card"><div class="pilgrim-gps-ring">📍</div><h3>${escapeHtml(name)} 현장 확인 중</h3><p>GPS 신호를 잡고 있어요.<br>잠시만 그대로 있어주세요.</p><div class="pilgrim-gps-meter"><i></i></div><div class="pilgrim-gps-status" id="pilgrimGpsStatus">정확한 위치를 찾는 중…</div></div>`;
+  document.body.appendChild(el);
+}
+function updatePilgrimageGpsCheck(info){
+  const el=document.getElementById('pilgrimGpsStatus'); if(!el||!info)return;
+  const a=Math.round(info.accuracyM||0);
+
+  // 산과 절 모두 단일 좌표의 '기준점 거리' 대신 현장권역으로 표시한다.
+  if(info.zoneLabel){
+    el.textContent = info.insideZone
+      ? `${info.zoneLabel} 확인 · GPS 오차 ±${a}m`
+      : `${info.zoneLabel} 확인 중 · GPS 오차 ±${a}m`;
+    return;
+  }
+
+  const label = a<=30 ? 'GPS 좋음' : a<=80 ? 'GPS 잡는 중' : 'GPS 신호 약함';
+  el.textContent=`${label} · 현장 위치 확인 중 · GPS 오차 ±${a}m`;
+}
+function finishPilgrimageGpsCheck(){
+  if(pilgrimGpsWatchId!==null && navigator.geolocation){try{navigator.geolocation.clearWatch(pilgrimGpsWatchId);}catch(e){} pilgrimGpsWatchId=null;}
+  document.getElementById('pilgrimGpsCheck')?.remove();
+}
+function verifiedTempleCount(){
+  return Object.values(destinations||{}).filter(d=>Object.values(d.visits||{}).some(v=>v&&v.verified)).length;
+}
+function verifiedRegionCount(region){
+  return Object.values(destinations||{}).filter(d=>d.region===region && Object.values(d.visits||{}).some(v=>v&&v.verified)).length;
+}
+function currentJourneyTierInfo(){
+  const n=computeVisitedCount();
+  let tier=LEVEL_TIERS[0]; LEVEL_TIERS.forEach(t=>{if(n>=t.min)tier=t;});
+  const next=LEVEL_TIERS.find(t=>t.min>n);
+  return {n,tier,next};
+}
+function launchPilgrimPetals(){
+  const icons=['🌸','🍂','✨','🪷'];
+  for(let i=0;i<34;i++){
+    const p=document.createElement('span'); p.className='pilgrim-petal'; p.textContent=icons[i%icons.length];
+    p.style.left=(Math.random()*100)+'vw'; p.style.setProperty('--dur',(2.8+Math.random()*2.4)+'s'); p.style.setProperty('--drift',(-90+Math.random()*180)+'px'); p.style.animationDelay=(Math.random()*.7)+'s';
+    document.body.appendChild(p); setTimeout(()=>p.remove(),6200);
+  }
+}
+function softPilgrimageBell(){
+  try{
+    const AC=window.AudioContext||window.webkitAudioContext; if(!AC)return;
+    const c=new AC(), now=c.currentTime;
+    [523.25,784.88,1046.5].forEach((f,i)=>{const o=c.createOscillator(),g=c.createGain();o.type='sine';o.frequency.value=f;g.gain.setValueAtTime(0,now+i*.06);g.gain.linearRampToValueAtTime(.055/(i+1),now+.03+i*.06);g.gain.exponentialRampToValueAtTime(.0001,now+1.35+i*.08);o.connect(g).connect(c.destination);o.start(now+i*.06);o.stop(now+1.5+i*.08);});
+    setTimeout(()=>c.close().catch(()=>{}),1900);
+  }catch(e){}
+}
+function closePilgrimageAchievement(){document.getElementById('pilgrimAchievement')?.remove();}
+function openAchievementCertificate(){closePilgrimageAchievement();setTimeout(()=>{if(typeof openStoryCardOverlay==='function')openStoryCardOverlay();},80);}
+function showPilgrimageAchievement(info){
+  closePilgrimageAchievement(); launchPilgrimPetals(); softPilgrimageBell();
+  try{navigator.vibrate&&navigator.vibrate([70,45,120]);}catch(e){}
+  const verified=verifiedTempleCount();
+  const regionCount=verifiedRegionCount(info.region);
+  const level=currentJourneyTierInfo();
+  const first=!!info.firstVerified;
+  let badge='현장 인증 도장 획득';
+  if(first && info.templeName==='화엄사') badge='🏔 새 기록 · 지리산 첫 발걸음';
+  else if(first) badge=`✨ 새 현장 인증 · ${escapeHtml(info.templeName)}`;
+  else badge=`🔁 ${escapeHtml(info.templeName)} ${info.repeatCount}번째 방문`;
+  const nextText=level.next?`다음 ${escapeHtml(level.next.title)}까지 ${level.next.min-level.n}곳`:`현재 최고 순례 단계`;
+  const distance=typeof info.distKm==='number'?Math.round(info.distKm*1000):null;
+  const accuracy=typeof info.accuracyM==='number'?Math.round(info.accuracyM):null;
+  const el=document.createElement('div');el.id='pilgrimAchievement';el.className='pilgrim-achievement';
+  el.innerHTML=`<div class="pilgrim-achievement-card">
+    <button class="pilgrim-ach-close" type="button" onclick="closePilgrimageAchievement()">×</button>
+    <div class="pilgrim-ach-lotus">🪷</div>
+    <div class="pilgrim-ach-kicker">SANSA NOTE · PILGRIMAGE</div>
+    <h2>${escapeHtml(info.templeName)}<br>현장 인증 완료</h2>
+    <p class="pilgrim-ach-message">오늘 한 곳을 더 직접 걸어 도착했습니다.<br>이 기록이 나의 순례에 오래 남습니다.</p>
+    <div class="pilgrim-ach-stamp">現場<br>認證</div>
+    <div class="pilgrim-ach-stats">
+      <div class="pilgrim-ach-stat"><b>${first?'+1':'✓'}</b><span>${first?'연꽃':'재방문 인증'}</span></div>
+      <div class="pilgrim-ach-stat"><b>${verified}</b><span>현장 인증 / 108</span></div>
+      <div class="pilgrim-ach-stat"><b>${regionCount}</b><span>${escapeHtml(info.region)} 인증</span></div>
+    </div>
+    <div class="pilgrim-ach-badge">${badge}<br><small style="font-weight:700;opacity:.72">${nextText}</small></div>
+    <div class="pilgrim-ach-meta">${escapeHtml(info.templeName)} 현장권역 확인 · ${accuracy!==null?`GPS ±${accuracy}m · `:''}${new Date().toLocaleDateString('ko-KR')}</div>
+    <div class="pilgrim-ach-actions"><button class="ghost" type="button" onclick="closePilgrimageAchievement()">기록 계속하기</button><button class="primary" type="button" onclick="openAchievementCertificate()">📸 인증서 보기</button></div>
+  </div>`;
+  el.addEventListener('click',e=>{if(e.target===el)closePilgrimageAchievement();});
+  document.body.appendChild(el);
+}
+
+</script>
+
+
+<script id="mountain-field-verify-and-lightbox-js">
+/* ============================================================
+   MOUNTAIN FIELD VERIFY · isolated from temple logic
+   ============================================================ */
+function mountainHasVerifiedVisit(d){
+  return !!(d && Object.values(d.visits||{}).some(v=>v&&v.verified));
+}
+function verifiedMountainCount(){
+  return Object.values(mountainDestinations||{}).filter(mountainHasVerifiedVisit).length;
+}
+function verifiedMountainRegionCount(region){
+  return Object.values(mountainDestinations||{}).filter(d=>d&&d.region===region&&mountainHasVerifiedVisit(d)).length;
+}
+function currentMountainRewardText(d){
+  if(!d) return {title:'산 현장 인증 보상',badge:'⛰️ 현장 등반 도장'};
+  const first=!mountainHasVerifiedVisit(d);
+  if(first) return {title:`${d.name} 현장 인증 보상`,badge:`🏔 ${d.name} 첫 현장 등반`};
+  return {title:`${d.name} 재등반 보상`,badge:'🔁 재등반 인증 기록'};
+}
+function renderMountainRewardPreview(d){
+  const wrap=document.getElementById('mountainRewardPreview');
+  if(!wrap||!d) return;
+  const first=!mountainHasVerifiedVisit(d);
+  const reward=currentMountainRewardText(d);
+  wrap.innerHTML=`
+    <section class="field-reward-preview ${first?'is-new':'is-repeat'}">
+      <div class="field-reward-head">
+        <div>
+          <span class="field-reward-kicker">📍 현장에 가면 열려요</span>
+          <h3>${escapeHtml(reward.title)}</h3>
+          <p>${first?'산 근처에서 위치 인증하면 등반 기록이 특별하게 완성됩니다.':'이미 현장 인증한 산이에요. 다시 오르면 재등반 기록으로 남길 수 있어요.'}</p>
+        </div>
+        <span class="field-reward-lock">${first?'LOCKED':'OPEN'}</span>
+      </div>
+      <div class="field-reward-items">
+        <span><b>🌿 ${first?'+1':'✓'}</b><small>${first?'등반 인증':'재등반'}</small></span>
+        <span><b>印</b><small>현장 도장</small></span>
+        <span><b>📜</b><small>인증서</small></span>
+        <span><b>${escapeHtml(d.region||'지역')}</b><small>지역 기록</small></span>
+      </div>
+      <div class="field-reward-special">${escapeHtml(reward.badge)}</div>
+      <div class="field-reward-actions">
+        <button type="button" class="field-reward-preview-btn" onclick="showMountainRewardPreviewOnly()">보상 미리보기</button>
+        <button type="button" class="field-reward-go-btn" onclick="document.getElementById('mountainVerifyBtn')?.scrollIntoView({behavior:'smooth',block:'center'});setTimeout(()=>document.getElementById('mountainVerifyBtn')?.classList.add('pulse-now'),260);setTimeout(()=>document.getElementById('mountainVerifyBtn')?.classList.remove('pulse-now'),1700);">현장 인증하기 →</button>
+      </div>
+      <small class="field-reward-note">※ 실제 산 근처에서 위치 인증이 성공해야 기록됩니다.</small>
+    </section>`;
+}
+function showMountainRewardPreviewOnly(){
+  const d=mountainDestinations&&currentMountainDetailId?mountainDestinations[currentMountainDetailId]:null;
+  if(!d) return;
+  document.getElementById('fieldRewardDemo')?.remove();
+  const reward=currentMountainRewardText(d);
+  const first=!mountainHasVerifiedVisit(d);
+  const el=document.createElement('div');el.id='fieldRewardDemo';el.className='field-reward-demo';
+  el.innerHTML=`<div class="field-reward-demo-card">
+    <button type="button" class="field-reward-demo-close" onclick="document.getElementById('fieldRewardDemo')?.remove()">×</button>
+    <div class="demo-lotus">⛰️</div>
+    <div class="demo-kicker">SANSA NOTE · MOUNTAIN FIELD REWARD</div>
+    <h2>${escapeHtml(d.name)}<br>현장 인증 보상</h2>
+    <div class="demo-grid">
+      <span><b>${first?'+1':'✓'}</b><small>${first?'등반 인증':'재등반'}</small></span>
+      <span><b>印</b><small>현장 도장</small></span>
+      <span><b>📜</b><small>인증서</small></span>
+    </div>
+    <div class="demo-badge">${escapeHtml(reward.badge)}</div>
+    <p>이 화면은 미리보기입니다.<br><b>실제 현장 위치 인증 성공 시</b> 보상이 기록됩니다.</p>
+    <button type="button" onclick="document.getElementById('fieldRewardDemo')?.remove();document.getElementById('mountainVerifyBtn')?.scrollIntoView({behavior:'smooth',block:'center'});">확인</button>
+  </div>`;
+  el.addEventListener('click',e=>{if(e.target===el)el.remove();});
+  document.body.appendChild(el);
+}
+function resolveMountainVerifyTarget(d,id){
+  return new Promise((resolve,reject)=>{
+    const lat=Number(d.fixedLat||d.lat), lng=Number(d.fixedLng||d.lng);
+    if(Number.isFinite(lat)&&Number.isFinite(lng)){resolve({lat,lng});return;}
+    ensureKakao(ready=>{
+      if(!ready){reject(new Error('map-not-ready'));return;}
+      const places=new kakao.maps.services.Places();
+      const finishSearch=(q,fallback)=>{
+        places.keywordSearch(q,(data,status)=>{
+          if(status===kakao.maps.services.Status.OK&&data&&data[0]){
+            const lat=parseFloat(data[0].y),lng=parseFloat(data[0].x);
+            if(Number.isFinite(lat)&&Number.isFinite(lng)){
+              updateMountainDestination(id,{lat,lng});
+              if(mountainDestinations[id]) mountainDestinations[id]=Object.assign({},mountainDestinations[id],{lat,lng});
+              resolve({lat,lng});
+            }else reject(new Error('coords'));
+          }else if(fallback){
+            finishSearch(d.name,false);
+          }else reject(new Error('not-found'));
+        });
+      };
+      finishSearch(d.name+' '+(d.locationHint||d.region||''),true);
+    });
+  });
+}
+function closeMountainAchievement(){document.getElementById('mountainAchievement')?.remove();}
+function openMountainCertificate(){
+  const d=currentMountainDetailId?mountainDestinations[currentMountainDetailId]:null;
+  closeMountainAchievement();
+  if(!d)return;
+  document.getElementById('mountainCertificate')?.remove();
+  const n=verifiedMountainCount();
+  const el=document.createElement('div');el.id='mountainCertificate';el.className='field-reward-demo';
+  el.innerHTML=`<div class="field-reward-demo-card" style="background:linear-gradient(160deg,#fbfff7,#e8f0df);border-color:#c8d8bd">
+    <button type="button" class="field-reward-demo-close" onclick="document.getElementById('mountainCertificate')?.remove()">×</button>
+    <div class="demo-lotus">🏔️</div>
+    <div class="demo-kicker">SANSA NOTE · MOUNTAIN CERTIFICATE</div>
+    <h2>${escapeHtml(d.name)}<br>현장 등반 인증서</h2>
+    <div class="demo-badge" style="background:#356e52">📍 위치 인증 완료 · ${new Date().toLocaleDateString('ko-KR')}</div>
+    <p><b>${escapeHtml(d.region||'')}</b>${d.height?` · ${escapeHtml(d.height)}`:''}<br>산사노트 현장 인증 산 ${n}곳</p>
+    <button type="button" onclick="document.getElementById('mountainCertificate')?.remove()">확인</button>
+  </div>`;
+  el.addEventListener('click',e=>{if(e.target===el)el.remove();});
+  document.body.appendChild(el);
+}
+function showMountainAchievement(info){
+  closeMountainAchievement();
+  if(typeof launchPilgrimPetals==='function') launchPilgrimPetals();
+  if(typeof softPilgrimageBell==='function') softPilgrimageBell();
+  try{navigator.vibrate&&navigator.vibrate([70,45,120]);}catch(e){}
+  const verified=verifiedMountainCount();
+  const regionCount=verifiedMountainRegionCount(info.region);
+  const first=!!info.firstVerified;
+  const distance=typeof info.distKm==='number'?Math.round(info.distKm*1000):null;
+  const accuracy=typeof info.accuracyM==='number'?Math.round(info.accuracyM):null;
+  const el=document.createElement('div');el.id='mountainAchievement';el.className='pilgrim-achievement';
+  el.innerHTML=`<div class="pilgrim-achievement-card">
+    <button class="pilgrim-ach-close" type="button" onclick="closeMountainAchievement()">×</button>
+    <div class="pilgrim-ach-lotus">🏔️</div>
+    <div class="pilgrim-ach-kicker">SANSA NOTE · MOUNTAIN</div>
+    <h2>${escapeHtml(info.name)}<br>현장 인증 완료</h2>
+    <p class="pilgrim-ach-message">오늘 직접 올라 도착한 산을 현장에서 인증했습니다.<br>이 등반이 나의 산 기록에 남습니다.</p>
+    <div class="pilgrim-ach-stamp">現場<br>認證</div>
+    <div class="pilgrim-ach-stats">
+      <div class="pilgrim-ach-stat"><b>${first?'+1':'✓'}</b><span>${first?'첫 현장 등반':'재등반 인증'}</span></div>
+      <div class="pilgrim-ach-stat"><b>${verified}</b><span>현장 인증 산</span></div>
+      <div class="pilgrim-ach-stat"><b>${regionCount}</b><span>${escapeHtml(info.region||'지역')} 인증</span></div>
+    </div>
+    <div class="pilgrim-ach-badge">${first?`🏔 새 기록 · ${escapeHtml(info.name)} 첫 현장 등반`:`🔁 ${escapeHtml(info.name)} ${info.repeatCount}번째 등반`}</div>
+    <div class="pilgrim-ach-meta">${info.name==='지리산'?'지리산 현장권역 확인 · ':distance!==null?`기준 지점 약 ${distance}m · `:''}${accuracy!==null?`GPS ±${accuracy}m · `:''}${new Date().toLocaleDateString('ko-KR')}</div>
+    <div class="pilgrim-ach-actions"><button class="ghost" type="button" onclick="closeMountainAchievement()">기록 계속하기</button><button class="primary" type="button" onclick="openMountainCertificate()">📸 인증서 보기</button></div>
+  </div>`;
+  el.addEventListener('click',e=>{if(e.target===el)closeMountainAchievement();});
+  document.body.appendChild(el);
+}
+
+
+/* ============================================================
+   LARGE MOUNTAIN FIELD ZONES
+   큰 산은 '정상 한 점'이 아니라 실제 산권역으로 인증한다.
+   지리산은 전남·전북·경남에 걸쳐 있어 단일 기준점 방식이 부정확함.
+   ============================================================ */
+const MOUNTAIN_FIELD_ZONES = {
+  "지리산": {
+    label: "지리산 현장권역",
+    // 화엄사·성삼재·노고단·피아골·쌍계사·백무동·중산리·대원사 등
+    // 주요 지리산 탐방권역을 포함하는 보수적인 현장 범위
+    south: 35.215,
+    north: 35.465,
+    west: 127.465,
+    east: 127.835
+  }
+};
+
+function pointInsideMountainZone(lat,lng,zone){
+  return !!zone &&
+    lat >= zone.south && lat <= zone.north &&
+    lng >= zone.west && lng <= zone.east;
+}
+
+function distanceToMountainZoneMeters(lat,lng,zone){
+  if(pointInsideMountainZone(lat,lng,zone)) return 0;
+  const clampedLat=Math.max(zone.south,Math.min(zone.north,lat));
+  const clampedLng=Math.max(zone.west,Math.min(zone.east,lng));
+  return haversineKm(lat,lng,clampedLat,clampedLng)*1000;
+}
+
+function verifyMountainFieldPosition(d, target, opts={}){
+  const zone=MOUNTAIN_FIELD_ZONES[d?.name];
+  if(!zone){
+    return verifyTemplePosition(target.lat,target.lng,opts);
+  }
+
+  const timeoutMs=Number(opts.timeoutMs||35000);
+  return new Promise((resolve,reject)=>{
+    let done=false,best=null,lastError=null,watchId=null;
+
+    const finish=(value,error)=>{
+      if(done)return;
+      done=true;
+      if(watchId!==null){try{navigator.geolocation.clearWatch(watchId);}catch(e){}}
+      clearTimeout(timer);
+      error?reject(error):resolve(value);
+    };
+
+    const accept=pos=>{
+      if(done||!pos?.coords)return;
+      const lat=Number(pos.coords.latitude);
+      const lng=Number(pos.coords.longitude);
+      const accuracyM=Math.max(0,Number(pos.coords.accuracy)||0);
+      const inside=pointInsideMountainZone(lat,lng,zone);
+      const distanceM=distanceToMountainZoneMeters(lat,lng,zone);
+      const info={
+        ok:inside,
+        insideZone:inside,
+        zoneLabel:zone.label,
+        distanceM,
+        accuracyM,
+        latitude:lat,
+        longitude:lng
+      };
+
+      if(!best || accuracyM < best.accuracyM) best=info;
+
+      // 지리산 권역에서는 '기준점까지 거리' 대신 권역 안/밖을 표시
+      const status=document.getElementById('pilgrimGpsStatus');
+      if(status){
+        const a=Math.round(accuracyM);
+        status.textContent = inside
+          ? `지리산 현장권역 확인 · GPS 오차 ±${a}m`
+          : `지리산 권역 확인 중 · GPS 오차 ±${a}m`;
+      }
+
+      if(inside) finish(info);
+    };
+
+    const onError=err=>{
+      lastError=err||lastError;
+      if(err&&err.code===1) finish(null,err);
+    };
+
+    const timer=setTimeout(()=>{
+      if(best) finish(best);
+      else finish(null,lastError||{code:3,message:'timeout'});
+    },timeoutMs);
+
+    // 빠른 최근 위치 + 고정밀 위치를 동시에 사용
+    try{
+      navigator.geolocation.getCurrentPosition(
+        accept,onError,
+        {enableHighAccuracy:false,maximumAge:15000,timeout:7000}
+      );
+    }catch(e){lastError=e;}
+
+    try{
+      watchId=navigator.geolocation.watchPosition(
+        accept,onError,
+        {enableHighAccuracy:true,maximumAge:3000,timeout:12000}
+      );
+    }catch(e){
+      lastError=e;
+      if(!best) finish(null,e);
+    }
+  });
+}
+
+/* 기존 함수와 이름은 같게 두되, 산 기록 로직만 확장 */
+function addMountainVisit(withLocation=false){
+  if(!currentMountainDetailId) return;
+  if(localMode){ promptGuestLoginRequired(); return; }
+  const id=currentMountainDetailId;
+  const d=mountainDestinations[id];
+  const noteEl=document.getElementById('mVisitNoteInput');
+  const note=noteEl?noteEl.value.trim():'';
+
+  function saveMountainRecord(verified,distKm,accuracyM){
+    const vid=newId();
+    const oldVisits=Object.assign({},mountainDestinations[id].visits||{});
+    const hadVerifiedBefore=Object.values(oldVisits).some(v=>v&&v.verified);
+    const visits=Object.assign({},oldVisits);
+    visits[vid]={
+      ts:Date.now(),note,verified:!!verified,
+      verifiedDistanceM:verified&&typeof distKm==='number'?Math.max(0,Math.round(distKm*1000)):null,
+      gpsAccuracyM:verified&&typeof accuracyM==='number'?Math.round(accuracyM):null
+    };
+    const patch={visits};
+    if((mountainDestinations[id].stage||0)<1)patch.stage=1;
+    updateMountainDestination(id,patch);
+    mountainDestinations[id]=Object.assign({},mountainDestinations[id],patch);
+    renderMountainVisits(visits);
+    renderMountainStepper(mountainDestinations[id].stage||0);
+    renderMountainRewardPreview(mountainDestinations[id]);
+    if(noteEl)noteEl.value='';
+    render();
+    const repeatCount=Object.keys(visits).length;
+    if(verified){
+      showMountainAchievement({
+        name:mountainDestinations[id].name,
+        region:mountainDestinations[id].region,
+        distKm,accuracyM,
+        firstVerified:!hadVerifiedBefore,
+        repeatCount
+      });
+    }else{
+      showCelebration('⛰️ 등반 기록 저장!','오늘의 산행, 잘 남겨뒀어요');
+    }
+  }
+
+  if(!withLocation){saveMountainRecord(false);return;}
+  if(!navigator.geolocation){showToast('이 브라우저는 위치 인증을 지원하지 않아요.');return;}
+
+  const verifyBtn=document.getElementById('mountainVerifyBtn');
+  if(verifyBtn){verifyBtn.disabled=true;verifyBtn.innerHTML='📡 위치 확인 중...<small>잠시만 기다려주세요</small>';}
+  resolveMountainVerifyTarget(d,id).then(target=>{
+    if(typeof startPilgrimageGpsCheck==='function')startPilgrimageGpsCheck(d.name);
+    return verifyMountainFieldPosition(d,target,{
+      radiusM:700,
+      timeoutMs:35000,
+      onProgress(info){if(typeof updatePilgrimageGpsCheck==='function')updatePilgrimageGpsCheck(info);}
+    });
+  }).then(info=>{
+    if(typeof finishPilgrimageGpsCheck==='function')finishPilgrimageGpsCheck();
+    if(info.ok){
+      saveMountainRecord(true,info.distanceM/1000,info.accuracyM);
+    }else{
+      const m=Math.round(info.distanceM||0),acc=Math.round(info.accuracyM||0);
+      if(MOUNTAIN_FIELD_ZONES[d?.name]){
+        showToast(`지리산 현장권역 밖으로 확인돼요${m?` · 권역까지 약 ${m>=1000?(m/1000).toFixed(1)+'km':m+'m'}`:''}${acc?` · GPS ±${acc}m`:''}`);
+      }else{
+        showToast(`현장 인증 거리가 아직 멀어요 · 약 ${m>=1000?(m/1000).toFixed(1)+'km':m+'m'}${acc?` · GPS ±${acc}m`:''}`);
+      }
+    }
+  }).catch(err=>{
+    if(typeof finishPilgrimageGpsCheck==='function')finishPilgrimageGpsCheck();
+    if(err&&err.code===1){
+      openLocationPermissionHelp(()=>addMountainVisit(true));
+      return;
+    }
+    const msg=(String(err&&err.message||'').includes('map')||String(err&&err.message||'').includes('not-found'))
+      ?'이 산의 기준 위치를 아직 찾지 못했어요. 지도를 한 번 연 뒤 다시 시도해주세요.'
+      :'GPS 신호를 아직 못 잡았어요. 아이폰의 정확한 위치를 켜고, 하늘이 보이는 곳에서 20~30초 머문 뒤 다시 눌러주세요.';
+    showToast(msg);
+  }).finally(()=>{
+    if(verifyBtn){verifyBtn.disabled=false;verifyBtn.innerHTML='📍 현장 인증하기<small>도착 후 보상 열기</small>';}
+  });
+}
+
+/* iOS Safari의 기본 pinch 제스처가 커스텀 사진 확대를 가로채지 않게 라이트박스에서만 차단 */
+(function installLightboxSafariZoomFix(){
+  function active(){
+    const o=document.getElementById('lightboxOverlay');
+    return !!(o&&o.classList.contains('show'));
+  }
+  ['gesturestart','gesturechange','gestureend'].forEach(type=>{
+    document.addEventListener(type,e=>{if(active())e.preventDefault();},{passive:false,capture:true});
+  });
+})();
+</script>
+
+
+<script id="field-verify-history-js">
+/* ============================================================
+   FIELD VERIFICATION HISTORY
+   성공한 현장 인증은 기존 visits[].verified 데이터를 단일 진실원천으로 사용.
+   절/산 모두 같은 방식으로 조회하며 별도 가짜 카운트를 만들지 않는다.
+   ============================================================ */
+function verifiedVisitsOf(d){
+  return Object.values((d&&d.visits)||{})
+    .filter(v=>v&&v.verified)
+    .sort((a,b)=>(Number(b.ts)||0)-(Number(a.ts)||0));
+}
+function firstVerifiedVisitOf(d){
+  const arr=verifiedVisitsOf(d);
+  return arr.length?arr[arr.length-1]:null;
+}
+function latestVerifiedVisitOf(d){
+  const arr=verifiedVisitsOf(d);
+  return arr.length?arr[0]:null;
+}
+function formatFieldVerifyDate(ts){
+  if(!ts)return '';
+  try{
+    return new Date(Number(ts)).toLocaleDateString('ko-KR',{
+      year:'numeric',month:'2-digit',day:'2-digit'
+    });
+  }catch(e){return '';}
+}
+function allVerifiedFieldRecords(){
+  const rows=[];
+  Object.entries(destinations||{}).forEach(([id,d])=>{
+    verifiedVisitsOf(d).forEach(v=>rows.push({
+      type:'temple',id,name:d.name,region:d.region||'',ts:Number(v.ts)||0,
+      accuracy:v.gpsAccuracyM
+    }));
+  });
+  Object.entries(mountainDestinations||{}).forEach(([id,d])=>{
+    verifiedVisitsOf(d).forEach(v=>rows.push({
+      type:'mountain',id,name:d.name,region:d.region||'',ts:Number(v.ts)||0,
+      accuracy:v.gpsAccuracyM
+    }));
+  });
+  return rows.sort((a,b)=>b.ts-a.ts);
+}
+function uniqueVerifiedTempleCount(){
+  return Object.values(destinations||{}).filter(d=>verifiedVisitsOf(d).length>0).length;
+}
+function uniqueVerifiedMountainCount(){
+  return Object.values(mountainDestinations||{}).filter(d=>verifiedVisitsOf(d).length>0).length;
+}
+function updateFieldVerifyMenuCount(){
+  const el=document.getElementById('fieldVerifyMenuCount');
+  if(!el)return;
+  const t=uniqueVerifiedTempleCount(),m=uniqueVerifiedMountainCount();
+  el.textContent=(t||m)?`절 ${t} · 산 ${m} 인증`:'절·산 인증 모아보기';
+}
+function openVerifiedRecord(type,id){
+  closePassportOverlay();
+  setTimeout(()=>{
+    if(type==='mountain'){
+      if(typeof switchView==='function')switchView('mountain');
+      if(typeof openMountainDetail==='function')openMountainDetail(id);
+    }else{
+      if(typeof switchView==='function')switchView('temple');
+      if(typeof openDetail==='function')openDetail(id);
+    }
+  },80);
+}
+
+/* 기존 순례여권 모달을 '절+산 현장 인증 기록'으로 확장 */
+function openPassportOverlay(){
+  const wrap=document.getElementById('passportBody');
+  if(!wrap)return;
+  const title=document.getElementById('passportTitle');
+  const sub=document.getElementById('passportSubtitle');
+  if(title)title.textContent='📍 현장 인증 기록';
+  if(sub)sub.textContent='현장에서 직접 인증한 절과 산의 도장·날짜를 한곳에서 확인해요.';
+
+  const temples=Object.entries(destinations||{})
+    .map(([id,d])=>({id,d,visits:verifiedVisitsOf(d)}))
+    .filter(x=>x.visits.length)
+    .sort((a,b)=>(b.visits[0]?.ts||0)-(a.visits[0]?.ts||0));
+  const mountains=Object.entries(mountainDestinations||{})
+    .map(([id,d])=>({id,d,visits:verifiedVisitsOf(d)}))
+    .filter(x=>x.visits.length)
+    .sort((a,b)=>(b.visits[0]?.ts||0)-(a.visits[0]?.ts||0));
+
+  const totalRuns=allVerifiedFieldRecords().length;
+  const renderRows=(items,type)=>items.length?`
+    <div class="field-history-list">
+      ${items.map(({id,d,visits})=>{
+        const last=visits[0]||{};
+        const label=type==='mountain'?'산':'절';
+        const icon=type==='mountain'?'⛰':'🪷';
+        const repeat=visits.length>1?` · ${visits.length}회 인증`:'';
+        const acc=last.gpsAccuracyM?` · GPS ±${Math.round(last.gpsAccuracyM)}m`:'';
+        return `<div class="field-history-item ${type}">
+          <div class="field-history-stamp">${icon}<br>認證</div>
+          <div class="field-history-main">
+            <b>${escapeHtml(d.name)} <small style="font-size:9px;color:#43806a">${label}</small></b>
+            <span>${escapeHtml(d.region||'')} · ${formatFieldVerifyDate(last.ts)}${repeat}${acc}</span>
+          </div>
+          <button class="field-history-open" type="button" onclick="openVerifiedRecord('${type}','${id}')">보기</button>
+        </div>`;
+      }).join('')}
+    </div>`:`<div class="field-history-empty">아직 현장 인증 기록이 없어요.<br>현장에 도착해 위치 인증을 완료하면 여기에 도장이 남습니다.</div>`;
+
+  wrap.innerHTML=`
+    <div class="field-verify-history-summary">
+      <div><b>${temples.length}</b><span>인증한 절</span></div>
+      <div><b>${mountains.length}</b><span>인증한 산</span></div>
+      <div><b>${totalRuns}</b><span>전체 현장 인증</span></div>
+    </div>
+    <div class="field-history-section-title"><span>🪷 절 현장 인증</span><small>${temples.length}곳</small></div>
+    ${renderRows(temples,'temple')}
+    <div class="field-history-section-title"><span>⛰ 산 현장 인증</span><small>${mountains.length}곳</small></div>
+    ${renderRows(mountains,'mountain')}
+  `;
+  document.getElementById('passportOverlay')?.classList.add('show');
+}
+
+/* 절 상세: 인증 전에는 보상 예고, 인증 후에는 획득한 보상/기록을 확실히 보여준다. */
 function renderPilgrimRewardPreview(d){
   const wrap=document.getElementById('pilgrimRewardPreview');
   if(!wrap||!d)return;
   const verified=verifiedVisitsOf(d);
   if(!verified.length){
+    const reward=currentFieldRewardText(d);
+    const region=escapeHtml(d.region||'지역');
     wrap.innerHTML=`
       <section class="field-reward-preview is-new">
         <div class="field-reward-head">
-          <div>
-            <span class="field-reward-kicker">📍 현장에 가면 열려요</span>
-            <h3>${escapeHtml(d.name)} 현장 인증</h3>
-            <p>이 절에 직접 도착해 위치 인증하면 <b>108 순례 연꽃 수호카드</b>가 열립니다.</p>
-            <div class="field-verify-emphasis">🪷 현장 인증은 실제 방문을 확인하는 산사노트의 핵심 기록이에요.</div>
-          </div>
+          <div><span class="field-reward-kicker">📍 현장에 가면 열려요</span>
+          <h3>${escapeHtml(reward.title)}</h3>
+          <p>사찰 현장에서 위치 인증하면 도장·연꽃·인증 기록이 실제로 남습니다.</p></div>
           <span class="field-reward-lock">LOCKED</span>
         </div>
-        <div class="field-reward-actions">
-          <button type="button" class="field-reward-preview-btn" onclick="openGuardianCollectionFromTemple()">🪷 108 수호카드 보기</button>
-          <button type="button" class="field-reward-go-btn" onclick="document.getElementById('pilgrimVerifyBtn')?.scrollIntoView({behavior:'smooth',block:'center'})">📍 현장 인증하기</button>
+        <div class="field-reward-items">
+          <span><b>🪷 +1</b><small>현장 연꽃</small></span>
+          <span><b>印</b><small>현장 도장</small></span>
+          <span><b>📜</b><small>인증서</small></span>
+          <span><b>${region}</b><small>지역 기록</small></span>
         </div>
+        <div class="field-reward-special">${reward.badge}</div>
+        <div class="field-reward-actions">
+          <button type="button" class="field-reward-preview-btn" onclick="showFieldRewardPreviewOnly()">보상 미리보기</button>
+          <button type="button" class="field-reward-go-btn" onclick="document.getElementById('pilgrimVerifyBtn')?.scrollIntoView({behavior:'smooth',block:'center'})">현장 인증하기 →</button>
+        </div>
+        <small class="field-reward-note">※ 실제 현장에서 위치 인증에 성공해야 기록됩니다.</small>
       </section>`;
     return;
   }
+
   const latest=verified[0];
   wrap.innerHTML=`
     <section class="field-reward-preview is-verified">
       <div class="field-reward-head">
         <div>
           <span class="field-reward-kicker">✓ 현장 인증 완료</span>
-          <h3>${escapeHtml(d.name)} 수호카드가 열렸어요</h3>
-          <p>108 순례 도감에 컬러 카드로 보관됩니다.</p>
-          <div class="field-verify-emphasis">📍 ${formatFieldVerifyDate(latest.ts)} 현장 인증${verified.length>1?` · 총 ${verified.length}회`:''}</div>
+          <h3>${escapeHtml(d.name)} 인증 도장이 남아 있어요</h3>
+          <p>이 인증은 나의 현장 인증 기록과 순례 보상에 계속 보관됩니다.</p>
+          <div class="field-verified-date">📍 ${formatFieldVerifyDate(latest.ts)} 인증${verified.length>1?` · 총 ${verified.length}회 현장 인증`:''}${latest.gpsAccuracyM?` · GPS ±${Math.round(latest.gpsAccuracyM)}m`:''}</div>
         </div>
-        <span class="field-reward-lock">OPEN</span>
+        <span class="field-reward-lock">VERIFIED</span>
       </div>
+      <div class="field-reward-items">
+        <span><b>🪷 ✓</b><small>연꽃 획득</small></span>
+        <span><b>印 ✓</b><small>현장 도장</small></span>
+        <span><b>📜 ✓</b><small>인증서 열림</small></span>
+        <span><b>${uniqueVerifiedTempleCount()}</b><small>인증한 절</small></span>
+      </div>
+      <div class="field-reward-special">🏅 ${escapeHtml(d.name)} 현장 인증 보유</div>
       <div class="field-reward-actions">
-        <button type="button" class="field-reward-preview-btn" onclick="openGuardianCollectionFromTemple()">🪷 내 수호카드 보기</button>
+        <button type="button" class="field-reward-preview-btn" onclick="openPassportOverlay()">내 인증 기록 보기</button>
         <button type="button" class="field-reward-go-btn" onclick="openStoryCardOverlay()">📜 인증서 보기</button>
       </div>
+      <small class="field-reward-note">재방문하면 현장 인증 횟수도 계속 쌓입니다.</small>
     </section>`;
 }
 
@@ -35850,28 +36573,9 @@ function mountainVisitedByName(name){
 }
 async function openTempleFromCatalog(name){
   closeCatalogOverlay();
-  const master=(MASTER_BY_NAME||{})[name] || null;
   const best=getBestTempleEntryByName(name);
-  if(best){
-    const id=best[0], saved=best[1]||{};
-    // 목록의 '보기'는 로그인 여부와 관계없이 반드시 전체 상세 데이터를 보여줍니다.
-    destinations[id]=Object.assign({}, master||{}, saved, {
-      region:master?.region ?? saved.region ?? '',
-      tag:master?.tag ?? saved.tag ?? '',
-      desc:master?.desc ?? saved.desc ?? '',
-      activity:master?.activity ?? saved.activity ?? '',
-      season:master?.season ?? saved.season ?? null,
-      visitorTip:master?.visitorTip ?? saved.visitorTip ?? null,
-      nearbySight:master?.nearbySight ?? saved.nearbySight ?? null,
-      tagline:master?.tagline ?? saved.tagline ?? null,
-      difficulty:master?.difficulty ?? saved.difficulty ?? null,
-      bestFor:master?.bestFor ?? saved.bestFor ?? null,
-      locationHint:master?.locationHint ?? saved.locationHint ?? null
-    });
-    openDetail(id);
-    return;
-  }
-  if(!master)return;
+  if(best){openDetail(best[0]);return;}
+  const master=(MASTER_BY_NAME||{})[name]; if(!master)return;
   const id='catalog_'+Date.now();
   destinations[id]={...master,stage:0,notes:'',photos:{},visits:{},hiddenFromList:true,createdAt:Date.now()};
   openDetail(id);
