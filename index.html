@@ -21119,6 +21119,12 @@ button.site-footer-link{font-size:clamp(15px,2vw,17px)!important;font-weight:750
 .journey-card-preview.is-empty::after{content:'108 수호카드'}
 .journey-preview-badge{display:none!important}
 .journey-preview-img{position:absolute;bottom:7px;width:73px;height:122px;object-fit:contain;object-position:center;border-radius:9px;border:0;background:transparent;box-shadow:0 10px 19px rgba(61,43,23,.17);padding:0;transform-origin:50% 100%;transition:transform .2s ease,filter .2s ease}.journey-preview-img.preview-left{right:102px;transform:rotate(-6deg) translateY(5px);filter:saturate(.96)}.journey-preview-img.preview-center{right:54px;z-index:3;transform:translateY(-4px) scale(1.04)}.journey-preview-img.preview-right{right:6px;z-index:2;transform:rotate(6deg) translateY(5px);filter:saturate(.96)}
+.journey-preview-fallback{position:absolute;bottom:7px;width:73px;height:122px;border-radius:10px;border:2px solid rgba(173,133,69,.48);background:linear-gradient(160deg,#fffef8,#f5e8c8 68%,#edd5a5);box-shadow:0 10px 19px rgba(61,43,23,.13);display:flex;flex-direction:column;justify-content:space-between;padding:8px 7px 9px;text-align:left;color:#5f482b;overflow:hidden}
+.journey-preview-fallback:before{content:'';position:absolute;left:8px;top:8px;width:20px;height:20px;border-radius:6px;background:rgba(255,255,255,.72);box-shadow:inset 0 0 0 1px rgba(184,148,84,.25)}
+.journey-preview-fallback.preview-left{right:102px;transform:rotate(-6deg) translateY(5px)}.journey-preview-fallback.preview-center{right:54px;z-index:3;transform:translateY(-4px) scale(1.04)}.journey-preview-fallback.preview-right{right:6px;z-index:2;transform:rotate(6deg) translateY(5px)}
+.journey-preview-fallback-no{position:relative;display:block;margin-top:17px;font-size:10px;font-weight:900;letter-spacing:.06em;color:#a17330}
+.journey-preview-fallback-title{display:block;font-size:11px;font-weight:900;line-height:1.24;word-break:keep-all;color:#2c5246}
+.journey-preview-fallback-mark{display:inline-flex;align-self:flex-start;padding:3px 6px;border-radius:999px;background:rgba(255,255,255,.85);border:1px solid rgba(181,145,82,.26);font-size:8px;font-weight:900;letter-spacing:.08em;color:#8b632c}
 .journey-main-cta:active .journey-preview-img.preview-center{transform:translateY(-7px) scale(1.055)}
 .journey-reward-row{display:flex;align-items:center;gap:10px;margin-top:13px;padding:11px 12px;border-radius:17px;background:rgba(255,255,255,.76);border:1px solid rgba(203,177,132,.29)}
 .journey-reward-row>span{display:flex;align-items:center;gap:6px;white-space:nowrap}
@@ -21145,10 +21151,11 @@ button.site-footer-link{font-size:clamp(15px,2vw,17px)!important;font-weight:750
   .journey-card-preview{grid-column:1/-1;height:132px;margin-top:4px}
   .journey-card-preview::before{left:72px;right:14px;bottom:0;height:16px}.journey-card-preview::after{top:0;right:2px;font-size:9px;padding:4px 8px}
   .journey-preview-img{width:68px;height:113px;bottom:5px}.journey-preview-img.preview-left{right:104px;transform:rotate(-5deg) translateY(6px)}.journey-preview-img.preview-center{right:56px;transform:translateY(-3px) scale(1.04)}.journey-preview-img.preview-right{right:8px;transform:rotate(5deg) translateY(6px)}
+  .journey-preview-fallback{width:68px;height:113px;bottom:5px}.journey-preview-fallback.preview-left{right:104px;transform:rotate(-5deg) translateY(6px)}.journey-preview-fallback.preview-center{right:56px;transform:translateY(-3px) scale(1.04)}.journey-preview-fallback.preview-right{right:8px;transform:rotate(5deg) translateY(6px)}
   .journey-reward-row{display:grid;grid-template-columns:1fr 1px 1fr;padding:10px;gap:8px}.journey-reward-row>span{justify-content:center}.journey-reward-row b{font-size:18px}.journey-reward-row small{font-size:10.8px}.journey-reward-row button{grid-column:1/-1;margin:3px 0 0;width:100%;min-height:43px;font-size:12.5px}
   .journey-flow{gap:2px;padding:11px 1px 2px}.journey-flow i{width:35px;height:35px;font-size:16px}.journey-flow b{font-size:10px}
 }
-@media(max-width:370px){.journey-core-head h3{font-size:25px}.journey-mini-link{display:none}.journey-main-cta{grid-template-columns:76px minmax(0,1fr)}.journey-count b{font-size:45px}.journey-copy>b{font-size:18px}.journey-copy small{font-size:11.5px}.journey-card-preview{height:119px}.journey-preview-img{width:61px;height:102px}.journey-preview-img.preview-left{right:92px}.journey-preview-img.preview-center{right:50px}.journey-preview-img.preview-right{right:8px}}
+@media(max-width:370px){.journey-core-head h3{font-size:25px}.journey-mini-link{display:none}.journey-main-cta{grid-template-columns:76px minmax(0,1fr)}.journey-count b{font-size:45px}.journey-copy>b{font-size:18px}.journey-copy small{font-size:11.5px}.journey-card-preview{height:119px}.journey-preview-img{width:61px;height:102px}.journey-preview-img.preview-left{right:92px}.journey-preview-img.preview-center{right:50px}.journey-preview-img.preview-right{right:8px}.journey-preview-fallback{width:61px;height:102px}.journey-preview-fallback.preview-left{right:92px}.journey-preview-fallback.preview-center{right:50px}.journey-preview-fallback.preview-right{right:8px}}
 </style>
 
 </head>
@@ -29040,10 +29047,10 @@ function render(){
   renderHomeGallery();
 
   const stats = computeStats();
-  const allVisited = (typeof getVisitedTempleRecords==='function') ? Math.min(108,getVisitedTempleRecords().length) : stats.visited;
+  const allVisited = Math.min(108, Number((stats&&stats.visited)||0));
   const lotusProgress=document.getElementById('heroLotusProgress');
   const verifiedCards=(typeof window.guardianCatalog==='function')
-    ? window.guardianCatalog().filter(x=>x&&x.verified).length
+    ? Math.min(108, window.guardianCatalog().filter(x=>x&&x.verified).length)
     : (typeof verifiedTempleCount==='function'?Math.min(108,verifiedTempleCount()):0);
   if(lotusProgress){
     lotusProgress.textContent=allVisited>=108
@@ -29058,15 +29065,26 @@ function render(){
   if(heroGuardianCount)heroGuardianCount.textContent=String(verifiedCards);
   const heroGuardianPreview=document.getElementById('heroGuardianPreview');
   if(heroGuardianPreview){
-    const fallbackPreviewNumbers=[9,10,16];
+    const fallbackPreview=[
+      {number:9,name:'수덕사'},
+      {number:10,name:'백양사'},
+      {number:16,name:'석굴암'}
+    ];
     const unlocked=(typeof window.guardianCatalog==='function')
       ? window.guardianCatalog().filter(x=>x&&x.verified).slice(0,3)
       : [];
-    const previewSource=unlocked.length ? unlocked.map(x=>x.number).slice(0,3) : fallbackPreviewNumbers;
+    const previewSource=unlocked.length
+      ? unlocked.map(x=>({number:x.number,name:x.name})).slice(0,3)
+      : fallbackPreview;
     const previewBadge=unlocked.length ? '획득 카드 미리보기' : '대표 수호카드';
     const cls=['preview-left','preview-center','preview-right'];
     heroGuardianPreview.classList.remove('is-empty');
-    heroGuardianPreview.innerHTML=`<span class="journey-preview-badge">${previewBadge}</span>` + previewSource.map((num,idx)=>`<img class="journey-preview-img ${cls[idx]||'preview-right'}" src="./images/lotus-cards/${String(num).padStart(3,'0')}.png?v=20261012hero2" alt="" aria-hidden="true" onerror="this.remove(); if(!this.parentElement.querySelector('img.journey-preview-img')) this.parentElement.classList.add('is-empty');">`).join('');
+    heroGuardianPreview.innerHTML=`<span class="journey-preview-badge">${previewBadge}</span>` + previewSource.map((item,idx)=>{
+      const file=String(item.number).padStart(3,'0');
+      const pos=cls[idx]||'preview-right';
+      const label=escapeHtml(item.name||'수호카드');
+      return `<img class="journey-preview-img ${pos}" src="./images/lotus-cards/${file}.png?v=20261012hero3" alt="" aria-hidden="true" onerror="this.outerHTML='<span class=&quot;journey-preview-fallback ${pos}&quot; aria-hidden=&quot;true&quot;><span class=&quot;journey-preview-fallback-no&quot;>${file}</span><span class=&quot;journey-preview-fallback-title&quot;>${label}</span><span class=&quot;journey-preview-fallback-mark&quot;>LOTUS</span></span>'">`;
+    }).join('');
   }
 
   document.getElementById('heroStats').innerHTML = `
