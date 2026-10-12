@@ -21094,67 +21094,61 @@ button.site-footer-link{font-size:clamp(15px,2vw,17px)!important;font-weight:750
 </style>
 
 <style id="sansa-home-108-core-redesign-20261012">
-/* 홈 핵심 기능: 108 순례 + 연꽃 + 컬러 수호카드 */
+/* 홈 핵심 기능: 108 순례 + 연꽃 + 실제 수호카드 미리보기 */
 .hero-108-journey{width:100%!important;margin:0!important}
-.hero-108-journey .journey-core-card{position:relative;overflow:hidden;border:1px solid #dfc792;border-radius:25px;padding:22px;background:linear-gradient(145deg,#fffdf7 0%,#fff6df 57%,#f6e6bd 100%);box-shadow:0 10px 26px rgba(108,77,39,.08);isolation:isolate}
-.hero-108-journey .journey-core-card:before{content:"";position:absolute;inset:0;background:url('./lotus-soft.png') -36px 74px/175px auto no-repeat,url('./temple-silhouette.png') right -18px bottom -5px/48% auto no-repeat;opacity:.25;pointer-events:none;z-index:-1}
-.hero-108-journey .journey-core-card:after{content:'108';position:absolute;right:16px;top:34px;font-family:'Nanum Myeongjo','Noto Serif KR',serif;font-size:clamp(105px,17vw,170px);font-weight:800;line-height:1;color:rgba(162,110,42,.09);pointer-events:none;z-index:-1}
+.hero-108-journey .journey-core-card{position:relative;overflow:hidden;border:1px solid #ddc797;border-radius:26px;padding:22px;background:linear-gradient(145deg,#fffef9 0%,#fff9ea 58%,#f4e3bc 100%);box-shadow:0 12px 30px rgba(92,65,31,.08);isolation:isolate}
+.hero-108-journey .journey-core-card:before{content:"";position:absolute;inset:0;background:url('./lotus-soft.png') -48px 58px/205px auto no-repeat,url('./temple-silhouette.png') right -28px bottom -8px/52% auto no-repeat;opacity:.22;pointer-events:none;z-index:-1}
+.hero-108-journey .journey-core-card:after{content:'108';position:absolute;right:12px;top:22px;font-family:'Nanum Myeongjo','Noto Serif KR',serif;font-size:clamp(110px,18vw,178px);font-weight:800;line-height:1;color:rgba(154,105,37,.075);pointer-events:none;z-index:-1}
 .journey-core-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:14px}
-.journey-eyebrow{display:block;color:#9a6725;font-size:12px;font-weight:900;letter-spacing:.04em;margin-bottom:3px}
-.journey-core-head h3{margin:0;font-family:'Nanum Myeongjo','Noto Serif KR',serif;font-size:30px;line-height:1.15;color:#243d35;letter-spacing:-.04em}
-.journey-mini-link{border:1px solid rgba(153,105,38,.24);background:rgba(255,255,255,.72);color:#815a25;border-radius:999px;padding:8px 11px;font-family:inherit;font-size:11.5px;font-weight:850;white-space:nowrap}
-.journey-main-cta{width:100%;position:relative;display:grid;grid-template-columns:auto minmax(0,1fr) 116px;gap:15px;align-items:center;border:0;border-radius:21px;padding:19px 18px;background:linear-gradient(118deg,rgba(255,255,255,.90),rgba(255,248,230,.92));box-shadow:inset 0 0 0 1px rgba(191,151,80,.24),0 7px 18px rgba(120,87,42,.07);text-align:left;color:#2e2923;font-family:inherit;cursor:pointer}
-.journey-count{display:flex;align-items:baseline;white-space:nowrap}
-.journey-count b{font-family:'Nanum Myeongjo','Noto Serif KR',serif;font-size:54px;line-height:1;color:#265f50;letter-spacing:-.06em}
-.journey-count i{font-style:normal;font-family:'Nanum Myeongjo','Noto Serif KR',serif;font-size:24px;font-weight:800;color:#986822;margin-left:4px}
+.journey-eyebrow{display:block;color:#9a6725;font-size:12.5px;font-weight:900;letter-spacing:.04em;margin-bottom:4px}
+.journey-core-head h3{margin:0;font-family:'Nanum Myeongjo','Noto Serif KR',serif;font-size:31px;line-height:1.14;color:#21483d;letter-spacing:-.04em}
+.journey-mini-link{border:1px solid rgba(153,105,38,.24);background:rgba(255,255,255,.78);color:#77511d;border-radius:999px;padding:9px 12px;font-family:inherit;font-size:12px;font-weight:900;white-space:nowrap}
+.journey-main-cta{width:100%;position:relative;display:grid;grid-template-columns:108px minmax(0,1fr) 195px;gap:17px;align-items:center;border:1px solid rgba(194,155,88,.25);border-radius:22px;padding:20px 19px;background:linear-gradient(118deg,rgba(255,255,255,.94),rgba(255,249,233,.93));box-shadow:0 7px 20px rgba(96,69,33,.055),inset 0 1px 0 rgba(255,255,255,.9);text-align:left;color:#2e2923;font-family:inherit;cursor:pointer;overflow:hidden}
+.journey-main-cta:after{content:'수호카드 COLLECTION';position:absolute;left:18px;bottom:9px;color:rgba(132,91,34,.38);font-size:8px;font-weight:900;letter-spacing:.13em;pointer-events:none}
+.journey-count{display:flex;align-items:baseline;white-space:nowrap;align-self:start;padding-top:10px}
+.journey-count b{font-family:'Nanum Myeongjo','Noto Serif KR',serif;font-size:62px;line-height:.92;color:#225b4c;letter-spacing:-.07em}
+.journey-count i{font-style:normal;font-family:'Nanum Myeongjo','Noto Serif KR',serif;font-size:25px;font-weight:800;color:#9a6a27;margin-left:5px}
 .journey-copy{display:flex;flex-direction:column;min-width:0}
-.journey-copy>b{font-family:'Nanum Myeongjo','Noto Serif KR',serif;font-size:24px;line-height:1.38;color:#2d2a25;letter-spacing:-.035em;word-break:keep-all}
-.journey-copy small{margin-top:7px;font-size:13px;line-height:1.6;color:#74685a;font-weight:700;word-break:keep-all}
-.journey-copy small strong{color:#24705d;font-weight:900}
-.journey-card-preview{height:102px;position:relative;display:block}
-.journey-preview-card{position:absolute;right:9px;top:5px;width:67px;height:92px;border-radius:9px;border:2px solid #c9a35c;background:linear-gradient(150deg,#fff8dc,#e5bd63);display:grid;place-items:center;font-size:28px;box-shadow:0 7px 15px rgba(70,48,22,.18)}
-.journey-preview-card.preview-back{right:43px;top:9px;transform:rotate(-9deg);background:linear-gradient(150deg,#385d52,#9a6b36);color:#fff}
-.journey-preview-card.preview-front{transform:rotate(8deg);background:linear-gradient(150deg,#f7e6ae,#b45b3e)}
-.journey-preview-img{position:absolute;right:8px;top:2px;width:67px;height:98px;object-fit:cover;border-radius:9px;border:2px solid #c9a35c;box-shadow:0 7px 15px rgba(70,48,22,.18);background:#f6ecd1}.journey-preview-img.preview-back-img{right:42px;top:7px;transform:rotate(-9deg)}.journey-preview-img.preview-front-img{transform:rotate(8deg)}
-.journey-reward-row{display:flex;align-items:center;gap:9px;margin-top:13px;padding:10px 12px;border-radius:16px;background:rgba(255,255,255,.72);border:1px solid rgba(203,177,132,.28)}
-.journey-reward-row>span{display:flex;align-items:center;gap:5px;white-space:nowrap}
-.journey-reward-row img{width:24px;height:24px;object-fit:contain}
-.journey-reward-row em{font-style:normal;font-size:20px}
-.journey-reward-row b{font-size:18px;color:#2c594d}
-.journey-reward-row small{font-size:11px;color:#786b5b;font-weight:800}
-.journey-divider{width:1px!important;height:25px;background:#dfd3c1;display:block!important;flex:0 0 1px}
-.journey-reward-row button{margin-left:auto;border:0;border-radius:999px;background:#bd754d;color:#fff;padding:9px 13px;font-family:inherit;font-size:11.5px;font-weight:900;white-space:nowrap;box-shadow:0 4px 9px rgba(141,78,48,.14)}
-.journey-flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr auto 1fr;align-items:center;gap:5px;margin-top:12px;padding:11px 9px 5px}
-.journey-flow>span{display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center;min-width:0}
-.journey-flow i{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:#fffaf0;border:1px solid #eadbc1;font-style:normal;font-size:19px}
-.journey-flow b{font-size:11px;line-height:1.25;color:#5c5145;word-break:keep-all}
+.journey-copy>b{font-family:'Nanum Myeongjo','Noto Serif KR',serif;font-size:25px;line-height:1.34;color:#272722;letter-spacing:-.04em;word-break:keep-all}
+.journey-copy small{margin-top:8px;font-size:13.5px;line-height:1.62;color:#6d6255;font-weight:700;word-break:keep-all}
+.journey-copy small strong{color:#1f6a58;font-weight:950}
+/* 실제 600×1000 수호카드를 그대로 보여주는 미니 도감 */
+.journey-card-preview{height:146px;position:relative;display:block;min-width:0;isolation:isolate}
+.journey-card-preview::before{content:'';position:absolute;right:3px;left:18px;bottom:2px;height:22px;border-radius:50%;background:radial-gradient(circle,rgba(91,64,30,.20),rgba(91,64,30,0) 72%);filter:blur(9px)}
+.journey-card-preview::after{content:'실제 108 수호카드';position:absolute;right:7px;top:1px;padding:5px 9px;border-radius:999px;background:rgba(255,253,246,.92);border:1px solid rgba(194,163,100,.34);color:#805c28;font-size:9.5px;font-weight:900;letter-spacing:-.02em;box-shadow:0 3px 8px rgba(95,69,39,.06)}
+.journey-card-preview.is-empty::after{content:'108 수호카드'}
+.journey-preview-badge{display:none!important}
+.journey-preview-img{position:absolute;bottom:7px;width:73px;height:122px;object-fit:contain;object-position:center;border-radius:9px;border:0;background:transparent;box-shadow:0 10px 19px rgba(61,43,23,.17);padding:0;transform-origin:50% 100%;transition:transform .2s ease,filter .2s ease}.journey-preview-img.preview-left{right:102px;transform:rotate(-6deg) translateY(5px);filter:saturate(.96)}.journey-preview-img.preview-center{right:54px;z-index:3;transform:translateY(-4px) scale(1.04)}.journey-preview-img.preview-right{right:6px;z-index:2;transform:rotate(6deg) translateY(5px);filter:saturate(.96)}
+.journey-main-cta:active .journey-preview-img.preview-center{transform:translateY(-7px) scale(1.055)}
+.journey-reward-row{display:flex;align-items:center;gap:10px;margin-top:13px;padding:11px 12px;border-radius:17px;background:rgba(255,255,255,.76);border:1px solid rgba(203,177,132,.29)}
+.journey-reward-row>span{display:flex;align-items:center;gap:6px;white-space:nowrap}
+.journey-reward-row img{width:27px;height:27px;object-fit:contain}
+.journey-card-glyph{width:21px;height:29px;border:1.5px solid #a97734;border-radius:4px;background:linear-gradient(155deg,#fffaf0,#efd9a9);position:relative;display:inline-block;box-shadow:2px 2px 0 rgba(121,83,34,.12);transform:rotate(-3deg)}
+.journey-card-glyph:after{content:'✦';position:absolute;inset:0;display:grid;place-items:center;color:#8c632c;font-size:10px}
+.journey-reward-row b{font-size:19px;color:#28594d}
+.journey-reward-row small{font-size:11.5px;color:#706556;font-weight:850}
+.journey-divider{width:1px!important;height:27px;background:#dfd3c1;display:block!important;flex:0 0 1px}
+.journey-reward-row button{margin-left:auto;border:0;border-radius:999px;background:#2c6758;color:#fff;padding:10px 15px;font-family:inherit;font-size:12px;font-weight:950;white-space:nowrap;box-shadow:0 4px 10px rgba(44,103,88,.18)}
+.journey-flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr auto 1fr;align-items:center;gap:5px;margin-top:12px;padding:11px 9px 4px}
+.journey-flow>span{display:flex;flex-direction:column;align-items:center;gap:5px;text-align:center;min-width:0}
+.journey-flow i{width:39px;height:39px;border-radius:50%;display:grid;place-items:center;background:#fffaf0;border:1px solid #eadbc1;font-style:normal;font-size:18px;box-shadow:0 3px 8px rgba(118,85,42,.05)}
+.journey-flow b{font-size:11.3px;line-height:1.25;color:#574d42;word-break:keep-all}
 .journey-flow>strong{font-size:15px;color:#b58b48}
-
 @media(max-width:620px){
-  .hero-108-journey .journey-core-card{padding:16px 13px 14px;border-radius:22px}
-  .hero-108-journey .journey-core-card:before{background-size:130px auto,58% auto;background-position:-30px 78px,right -28px bottom -2px}
-  .hero-108-journey .journey-core-card:after{font-size:112px;right:5px;top:50px}
-  .journey-core-head{margin-bottom:11px}
-  .journey-eyebrow{font-size:11px}
-  .journey-core-head h3{font-size:27px}
-  .journey-mini-link{font-size:10.5px;padding:7px 9px}
-  .journey-main-cta{grid-template-columns:86px minmax(0,1fr);gap:11px;padding:15px 12px;border-radius:18px}
-  .journey-count b{font-size:48px}.journey-count i{font-size:20px}
-  .journey-copy>b{font-size:20px;line-height:1.37}
-  .journey-copy small{font-size:12px;line-height:1.55;margin-top:6px}
-  .journey-card-preview{grid-column:1/-1;height:58px;margin-top:-2px}
-  .journey-preview-card{width:42px;height:57px;font-size:20px;right:11px;top:0}
-  .journey-preview-card.preview-back{right:43px;top:1px}
-  .journey-preview-img{width:42px;height:60px;right:10px;top:0}.journey-preview-img.preview-back-img{right:42px;top:1px}
-  .journey-reward-row{display:grid;grid-template-columns:1fr 1px 1fr;padding:10px;gap:8px}
-  .journey-reward-row>span{justify-content:center}
-  .journey-reward-row b{font-size:17px}.journey-reward-row small{font-size:10.5px}
-  .journey-reward-row button{grid-column:1/-1;margin:2px 0 0;width:100%;min-height:42px;font-size:12px}
-  .journey-flow{gap:2px;padding:10px 2px 2px}
-  .journey-flow i{width:34px;height:34px;font-size:17px}
-  .journey-flow b{font-size:9.8px}
-  .journey-flow>strong{font-size:12px}
+  .hero-108-journey .journey-core-card{padding:17px 13px 14px;border-radius:23px}
+  .hero-108-journey .journey-core-card:before{background-size:150px auto,61% auto;background-position:-38px 80px,right -38px bottom -1px}
+  .hero-108-journey .journey-core-card:after{font-size:116px;right:1px;top:53px}
+  .journey-core-head{margin-bottom:11px}.journey-eyebrow{font-size:11.5px}.journey-core-head h3{font-size:28px}.journey-mini-link{font-size:10.8px;padding:8px 10px}
+  .journey-main-cta{grid-template-columns:83px minmax(0,1fr);gap:11px;padding:15px 12px 13px;border-radius:19px}
+  .journey-main-cta:after{display:none}.journey-count{padding-top:7px}.journey-count b{font-size:50px}.journey-count i{font-size:20px}
+  .journey-copy>b{font-size:20px;line-height:1.38}.journey-copy small{font-size:12.4px;line-height:1.58;margin-top:6px}
+  .journey-card-preview{grid-column:1/-1;height:132px;margin-top:4px}
+  .journey-card-preview::before{left:72px;right:14px;bottom:0;height:16px}.journey-card-preview::after{top:0;right:2px;font-size:9px;padding:4px 8px}
+  .journey-preview-img{width:68px;height:113px;bottom:5px}.journey-preview-img.preview-left{right:104px;transform:rotate(-5deg) translateY(6px)}.journey-preview-img.preview-center{right:56px;transform:translateY(-3px) scale(1.04)}.journey-preview-img.preview-right{right:8px;transform:rotate(5deg) translateY(6px)}
+  .journey-reward-row{display:grid;grid-template-columns:1fr 1px 1fr;padding:10px;gap:8px}.journey-reward-row>span{justify-content:center}.journey-reward-row b{font-size:18px}.journey-reward-row small{font-size:10.8px}.journey-reward-row button{grid-column:1/-1;margin:3px 0 0;width:100%;min-height:43px;font-size:12.5px}
+  .journey-flow{gap:2px;padding:11px 1px 2px}.journey-flow i{width:35px;height:35px;font-size:16px}.journey-flow b{font-size:10px}
 }
+@media(max-width:370px){.journey-core-head h3{font-size:25px}.journey-mini-link{display:none}.journey-main-cta{grid-template-columns:76px minmax(0,1fr)}.journey-count b{font-size:45px}.journey-copy>b{font-size:18px}.journey-copy small{font-size:11.5px}.journey-card-preview{height:119px}.journey-preview-img{width:61px;height:102px}.journey-preview-img.preview-left{right:92px}.journey-preview-img.preview-center{right:50px}.journey-preview-img.preview-right{right:8px}}
 </style>
 
 </head>
@@ -21376,16 +21370,13 @@ button.site-footer-link{font-size:clamp(15px,2vw,17px)!important;font-weight:750
             <b>108곳을 걸으며<br>나만의 수호카드를 모아보세요</b>
             <small>절을 방문하면 연꽃이 피고, <strong>현장에서 인증하면 컬러 수호카드가 열려요.</strong></small>
           </span>
-          <span class="journey-card-preview" id="heroGuardianPreview" aria-hidden="true">
-            <span class="journey-preview-card preview-back">🪷</span>
-            <span class="journey-preview-card preview-front">🎴</span>
-          </span>
+          <span class="journey-card-preview is-empty" id="heroGuardianPreview" aria-hidden="true"></span>
         </button>
 
         <div class="journey-reward-row" aria-label="108 순례 진행 상황">
           <span><img src="./lotus-soft.png" alt="" aria-hidden="true"><b id="heroLotusCount">0</b><small>연꽃</small></span>
           <span class="journey-divider"></span>
-          <span><em>🎴</em><b id="heroGuardianCount">0</b><small>컬러 수호카드</small></span>
+          <span><i class="journey-card-glyph" aria-hidden="true"></i><b id="heroGuardianCount">0</b><small>컬러 수호카드</small></span>
           <button type="button" onclick="openPilgrimGuardianCollection()">수호카드 도감 보기 →</button>
         </div>
 
@@ -29066,12 +29057,16 @@ function render(){
   if(heroLotusCount)heroLotusCount.textContent=String(allVisited);
   if(heroGuardianCount)heroGuardianCount.textContent=String(verifiedCards);
   const heroGuardianPreview=document.getElementById('heroGuardianPreview');
-  if(heroGuardianPreview && typeof window.guardianCatalog==='function'){
-    const unlocked=window.guardianCatalog().filter(x=>x&&x.verified).slice(0,2);
-    if(unlocked.length){
-      const cards=unlocked.map((item,idx)=>`<img class="journey-preview-img ${idx===0?'preview-back-img':'preview-front-img'}" src="./images/lotus-cards/${String(item.number).padStart(3,'0')}.png?v=20261012hero" alt="" aria-hidden="true" onerror="this.style.display='none'">`).join('');
-      heroGuardianPreview.innerHTML=cards;
-    }
+  if(heroGuardianPreview){
+    const fallbackPreviewNumbers=[9,10,16];
+    const unlocked=(typeof window.guardianCatalog==='function')
+      ? window.guardianCatalog().filter(x=>x&&x.verified).slice(0,3)
+      : [];
+    const previewSource=unlocked.length ? unlocked.map(x=>x.number).slice(0,3) : fallbackPreviewNumbers;
+    const previewBadge=unlocked.length ? '획득 카드 미리보기' : '대표 수호카드';
+    const cls=['preview-left','preview-center','preview-right'];
+    heroGuardianPreview.classList.remove('is-empty');
+    heroGuardianPreview.innerHTML=`<span class="journey-preview-badge">${previewBadge}</span>` + previewSource.map((num,idx)=>`<img class="journey-preview-img ${cls[idx]||'preview-right'}" src="./images/lotus-cards/${String(num).padStart(3,'0')}.png?v=20261012hero2" alt="" aria-hidden="true" onerror="this.remove(); if(!this.parentElement.querySelector('img.journey-preview-img')) this.parentElement.classList.add('is-empty');">`).join('');
   }
 
   document.getElementById('heroStats').innerHTML = `
@@ -29675,7 +29670,7 @@ let photoFetchQueue = [];
 let photoQueueGeneration = 0;
 let photoHydrationObserver = null;
 let activePhotoFetches = 0;
-const MAX_CONCURRENT_PHOTO_FETCHES = 5;
+const MAX_CONCURRENT_PHOTO_FETCHES = 8;
 
 function queuePhotoFetch(id, name, locationHint, opts){
   if(coverFetching.has(id)) return;
@@ -29713,7 +29708,18 @@ function schedulePhotoHydration(type, entries){
     queuePhotoFetch(id,d.name,d.locationHint||'',opts);
   };
 
-  const cards=[...document.querySelectorAll('#grid .card[data-id]')];
+  const cards=[...document.querySelectorAll('#grid .card[data-id], #mainPinnedGrid .card[data-id]')];
+
+  // 이미 대표사진 URL이 있는 첫 화면 카드들은 브라우저의 lazy 판단을 기다리지 않고 즉시 요청합니다.
+  // 나머지 카드는 그대로 lazy 로딩해서 전체 네트워크 부담은 늘리지 않습니다.
+  cards.slice(0,8).forEach(card=>{
+    const img=card.querySelector('.card-cover-img');
+    if(img){
+      img.loading='eager';
+      try{img.fetchPriority='high';}catch(_){ }
+    }
+  });
+
   if('IntersectionObserver' in window){
     photoHydrationObserver=new IntersectionObserver(items=>{
       items.forEach(it=>{
@@ -29722,20 +29728,20 @@ function schedulePhotoHydration(type, entries){
           photoHydrationObserver.unobserve(it.target);
         }
       });
-    },{rootMargin:'500px 0px'});
+    },{rootMargin:'1000px 0px'});
     cards.forEach(c=>photoHydrationObserver.observe(c));
   }else{
-    cards.slice(0,8).forEach(c=>queueOne(c.dataset.id));
+    cards.slice(0,10).forEach(c=>queueOne(c.dataset.id));
   }
 
-  // 탭 전환 직후 네트워크 검색을 몰아넣지 않음. 화면이 안정된 뒤 앞쪽 4개만 보강.
-  const priority=(entries||[]).filter(([id,d])=>!firstPhotoUrl(d)).slice(0,4);
+  // 사진이 아직 없는 앞쪽 카드는 idle 시간까지 기다리지 않고 바로 검색을 시작합니다.
+  // 첫 화면 체감 속도를 높이되 10곳까지만 우선 처리합니다.
+  const priority=(entries||[]).filter(([id,d])=>!firstPhotoUrl(d)).slice(0,10);
   const kick=()=>{
     if(gen!==photoQueueGeneration||contentType!==type) return;
     priority.forEach(([id])=>queueOne(id));
   };
-  if(window.requestIdleCallback) requestIdleCallback(kick,{timeout:1200});
-  else setTimeout(kick,420);
+  setTimeout(kick,0);
 }
 
 function patchVisibleCover(id,url,kind,name){
@@ -29748,7 +29754,7 @@ function patchVisibleCover(id,url,kind,name){
   const ph=photo.querySelector('.cover-placeholder');
   const img=document.createElement('img');
   img.className='card-cover-img loaded stable-cover';
-  img.src=url;img.alt=name||'';img.loading='lazy';img.decoding='async';
+  img.src=url;img.alt=name||'';img.loading='eager';img.decoding='async';try{img.fetchPriority='high';}catch(_){ }
   img.draggable=false;
   img.oncontextmenu=()=>false;
   img.style.webkitTouchCallout='none';
@@ -31880,38 +31886,78 @@ const SANSA_KAKAO_DISAMBIGUATION = Object.freeze({
 });
 function sansaKakaoPlaceQuery(d){
   const spec=SANSA_KAKAO_DISAMBIGUATION[d.name];
-  return spec ? spec.area+' '+spec.name : d.name+' '+(d.locationHint||d.region||'');
+  const base=spec?.name||String(d.name||'').replace(/\([^)]*\)/g,'').trim();
+  if(spec?.address) return `${spec.address} ${base}`;
+  const where=(d.locationHint||d.region||'').trim();
+  return [where,base,'사찰'].filter(Boolean).join(' ');
 }
 function sansaKakaoBestPlace(d, data){
   if(!Array.isArray(data)||!data.length)return null;
   const spec=SANSA_KAKAO_DISAMBIGUATION[d.name];
-  const normalize=v=>String(v||'').replace(/\s|[()]/g,'').toLowerCase();
-  const expected=normalize(spec?.name||d.name.replace(/\([^)]*\)/g,''));
-  const hint=normalize(spec?.area||d.locationHint||'');
-  const candidates=data.filter(p=>{
-    const title=normalize(p.place_name), addr=normalize((p.road_address_name||'')+' '+(p.address_name||''));
-    if(!title.includes(expected))return false;
-    if(!Number.isFinite(Number(p.y))||!Number.isFinite(Number(p.x)))return false;
-    if(spec){
-      const segments=spec.area.split(' ');
-      return segments.every((segment,i)=>{
-        const variants=i===0?({'경기':['경기','경기도'],'경북':['경북','경상북도'],'전북':['전북','전라북도','전북특별자치도'],'전남':['전남','전라남도'],'충남':['충남','충청남도'],'부산':['부산','부산광역시']}[segment]||[segment]):[segment];
-        return variants.some(v=>addr.includes(normalize(v)));
-      });
+  const normalize=v=>String(v||'').replace(/\s|[()·ㆍ,._-]/g,'').toLowerCase();
+  const expected=normalize(spec?.name||String(d.name||'').replace(/\([^)]*\)/g,''));
+  const regionVariants={
+    '서울':['서울','서울특별시'],'부산':['부산','부산광역시'],'대구':['대구','대구광역시'],'인천':['인천','인천광역시'],
+    '광주':['광주','광주광역시'],'대전':['대전','대전광역시'],'울산':['울산','울산광역시'],'세종':['세종','세종특별자치시'],
+    '경기':['경기','경기도'],'강원':['강원','강원특별자치도'],'충북':['충북','충청북도'],'충남':['충남','충청남도'],
+    '전북':['전북','전라북도','전북특별자치도'],'전남':['전남','전라남도'],'경북':['경북','경상북도'],'경남':['경남','경상남도'],
+    '제주':['제주','제주특별자치도']
+  };
+  const hintText=[spec?.area,spec?.address,d.locationHint,d.region].filter(Boolean).join(' ');
+  const hintTokens=String(hintText).split(/\s+/).map(x=>x.trim()).filter(x=>x.length>=2);
+  const scored=data.map((p,idx)=>{
+    const title=normalize(p.place_name), addrRaw=(p.road_address_name||'')+' '+(p.address_name||''), addr=normalize(addrRaw);
+    if(!Number.isFinite(Number(p.y))||!Number.isFinite(Number(p.x)))return null;
+    let score=0;
+    if(title===expected)score+=50;
+    else if(title.includes(expected)||expected.includes(title))score+=32;
+    else return null;
+    if(/사찰|절|불교/.test(String(p.category_name||'')))score+=8;
+    hintTokens.forEach((tok,i)=>{
+      const vars=i===0?(regionVariants[tok]||[tok]):[tok];
+      if(vars.some(v=>addr.includes(normalize(v)))) score+=i===0?12:5;
+    });
+    if(spec?.address && addr.includes(normalize(spec.address)))score+=35;
+    if(spec?.area){
+      const segs=spec.area.split(/\s+/).filter(Boolean);
+      const areaMatches=segs.filter((seg,i)=>{
+        const vars=i===0?(regionVariants[seg]||[seg]):[seg];
+        return vars.some(v=>addr.includes(normalize(v)));
+      }).length;
+      if(areaMatches===0)score-=35;
+      else score+=areaMatches*12;
     }
-    // 일반 사찰도 검색 결과가 다수라면 위치 힌트를 우선합니다.
-    const firstHint=normalize(String(d.locationHint||'').split(/\s+/)[0]);
-    return !hint || addr.includes(hint) || (firstHint&&addr.includes(firstHint)) || (d.region&&addr.includes(normalize(d.region)));
-  });
-  if(candidates.length===1)return candidates[0];
-  // 동명이찰의 위치를 확정할 수 없으면 자동 선택/저장을 금지합니다.
+    return {p,score,idx};
+  }).filter(Boolean).sort((a,b)=>b.score-a.score||a.idx-b.idx);
+  if(!scored.length)return null;
+  // 이름이 맞고 지역 단서가 하나라도 맞으면 최상위 결과를 사용합니다.
+  // 같은 이름 결과가 여러 개여도 점수 차가 명확하면 연결하고, 애매하면 보수적으로 중단합니다.
+  if(scored.length===1)return scored[0].p;
+  if(scored[0].score>=50 && scored[0].score-scored[1].score>=6)return scored[0].p;
+  if(spec && scored[0].score>=60)return scored[0].p;
   return null;
 }
 function sansaKakaoFindPlace(places,d,cb){
-  places.keywordSearch(sansaKakaoPlaceQuery(d),(data,status)=>{
-    const hit=status===kakao.maps.services.Status.OK?sansaKakaoBestPlace(d,data):null;
-    cb(hit);
-  });
+  const spec=SANSA_KAKAO_DISAMBIGUATION[d.name];
+  const base=spec?.name||String(d.name||'').replace(/\([^)]*\)/g,'').trim();
+  const queries=[
+    spec?.address ? `${spec.address} ${base}` : '',
+    spec?.area ? `${spec.area} ${base}` : '',
+    d.locationHint ? `${d.locationHint} ${base} 사찰` : '',
+    d.region ? `${d.region} ${base} 사찰` : '',
+    `${base} 사찰`
+  ].filter(Boolean).filter((q,i,a)=>a.indexOf(q)===i);
+  let i=0;
+  const next=()=>{
+    if(i>=queries.length){cb(null);return;}
+    const q=queries[i++];
+    places.keywordSearch(q,(data,status)=>{
+      const hit=status===kakao.maps.services.Status.OK?sansaKakaoBestPlace(d,data):null;
+      if(hit){cb(hit);return;}
+      next();
+    });
+  };
+  next();
 }
 function setupDetailMap(d, id, opts){
   opts = opts || {};
@@ -31933,17 +31979,20 @@ function setupDetailMap(d, id, opts){
     mapEl.innerHTML='';
     if(d.fixedLat && d.fixedLng){
       renderPin(mapEl, d, d.fixedLat, d.fixedLng, weatherElId);
-    } else if(d.lat && d.lng && !SANSA_KAKAO_DISAMBIGUATION[d.name]){
+    } else if(d.lat && d.lng && (d.kakaoPlaceVerified===true || !SANSA_KAKAO_DISAMBIGUATION[d.name])){
       renderPin(mapEl, d, d.lat, d.lng, weatherElId);
     } else {
       const places = new kakao.maps.services.Places();
       sansaKakaoFindPlace(places,d,place=>{
         if(place){
           const lat=parseFloat(place.y),lng=parseFloat(place.x);
-          updateFn(id,{lat,lng});
+          const patch={lat,lng,kakaoPlaceVerified:true,kakaoPlaceCheckedAt:Date.now()};
+          updateFn(id,patch);
+          Object.assign(d,patch);
           if(getCurrentId()===id)renderPin(mapEl,d,lat,lng,weatherElId);
         }else{
-          mapEl.innerHTML='<div class="map-note" style="padding:0 14px;">정확한 지역의 사찰 위치를 확인하지 못했어요. 카카오맵 검색 링크에서 직접 확인해주세요.</div>';
+          mapEl.style.background='var(--paper)';
+          mapEl.innerHTML=kakaoFallbackHtml(sansaKakaoPlaceQuery(d));
         }
       });
     }
