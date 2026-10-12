@@ -4391,7 +4391,7 @@ button.contact-email{display:block;}
 .pack-remove-btn{color:var(--stamp)!important}
 .pack-detail-place{cursor:pointer}
 .pack-detail-place-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:4px}
-.pack-place-status{flex-shrink:0;border-radius:999px;padding:5px 8px;font-size:9.5px;font-weight:900}
+.pack-place-status{flex-shrink:0;border-radius:999px;padding:5px 8px;font-size:10.5px;font-weight:900}
 .pack-place-status.visited{background:#eaf3ee;color:#315f50}
 .pack-place-status.recorded{background:#315f50;color:#fff}
 .pack-place-status.pending{background:#f4efe9;color:#8b725e}
@@ -21116,7 +21116,7 @@ button.site-footer-link{font-size:clamp(15px,2vw,17px)!important;font-weight:750
 .journey-card-preview{height:166px;position:relative;display:block;min-width:0;isolation:isolate}
 .journey-card-preview:before{content:'';position:absolute;right:0;left:22px;bottom:0;height:24px;border-radius:50%;background:radial-gradient(circle,rgba(80,55,26,.22),rgba(80,55,26,0) 72%);filter:blur(10px)}
 .journey-card-preview:after{content:''}
-.journey-preview-badge{position:absolute;right:4px;top:0;z-index:10;padding:5px 9px;border-radius:999px;background:rgba(255,253,246,.94);border:1px solid rgba(194,163,100,.36);color:#805c28;font-size:9.5px;font-weight:900;box-shadow:0 3px 8px rgba(95,69,39,.06)}
+.journey-preview-badge{position:absolute;right:4px;top:0;z-index:10;padding:6px 10px;border-radius:999px;background:rgba(255,253,246,.94);border:1px solid rgba(194,163,100,.36);color:#805c28;font-size:9.5px;font-weight:900;box-shadow:0 3px 8px rgba(95,69,39,.06)}
 .journey-mini-card{position:absolute;bottom:7px;width:78px;height:130px;border-radius:11px;overflow:hidden;background:#f8eed6;box-shadow:0 11px 22px rgba(61,43,23,.18);transform-origin:50% 100%;border:1px solid rgba(158,118,55,.22)}
 .journey-mini-card.preview-left{right:108px;transform:rotate(-7deg) translateY(7px);z-index:1}.journey-mini-card.preview-center{right:56px;transform:translateY(-4px) scale(1.06);z-index:4}.journey-mini-card.preview-right{right:4px;transform:rotate(7deg) translateY(7px);z-index:2}
 .journey-mini-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;background:#f8eed6}
@@ -21153,6 +21153,9 @@ button.site-footer-link{font-size:clamp(15px,2vw,17px)!important;font-weight:750
   .journey-flow{gap:2px;padding:11px 1px 2px}.journey-flow i{width:35px;height:35px;font-size:16px}.journey-flow b{font-size:10px}
 }
 @media(max-width:370px){.journey-core-head h3{font-size:25px}.journey-mini-link{display:none}.journey-main-cta{grid-template-columns:76px minmax(0,1fr)}.journey-count b{font-size:45px}.journey-copy>b{font-size:18px}.journey-copy small{font-size:11.5px}.journey-card-preview{height:140px}.journey-mini-card{width:65px;height:108px}.journey-mini-card.preview-left{right:94px}.journey-mini-card.preview-center{right:50px}.journey-mini-card.preview-right{right:7px}.journey-preview-img{width:61px;height:102px}.journey-preview-img.preview-left{right:92px}.journey-preview-img.preview-center{right:50px}.journey-preview-img.preview-right{right:8px}.journey-preview-stack{width:61px;height:106px}.journey-preview-stack.preview-left{right:92px}.journey-preview-stack.preview-center{right:50px}.journey-preview-stack.preview-right{right:8px}.journey-preview-fallback{width:61px;height:102px}.journey-preview-fallback.preview-left{right:92px}.journey-preview-fallback.preview-center{right:50px}.journey-preview-fallback.preview-right{right:8px}}
+
+.journey-card-preview .journey-preview-note{display:none}
+@media(max-width:620px){.journey-card-preview{border-top:1px dashed rgba(171,132,70,.18);padding-top:8px}.journey-preview-badge{left:4px;right:auto;top:5px;font-size:10.5px!important}}
 </style>
 
 </head>
@@ -21374,7 +21377,12 @@ button.site-footer-link{font-size:clamp(15px,2vw,17px)!important;font-weight:750
             <b>108곳을 걸으며<br>나만의 수호카드를 모아보세요</b>
             <small>절을 방문하면 연꽃이 피고, <strong>현장에서 인증하면 컬러 수호카드가 열려요.</strong></small>
           </span>
-          <span class="journey-card-preview is-empty" id="heroGuardianPreview" aria-hidden="true"></span>
+          <span class="journey-card-preview" id="heroGuardianPreview" aria-hidden="true">
+            <span class="journey-preview-badge">108 수호카드 미리보기</span>
+            <span class="journey-mini-card preview-left"><span class="journey-mini-card-fallback"><b>009</b><strong>수덕사</strong><small>LOTUS GUARDIAN</small></span><img src="./images/lotus-cards/009.png?v=20261012static" alt="" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" loading="eager" decoding="async"></span>
+            <span class="journey-mini-card preview-center"><span class="journey-mini-card-fallback"><b>010</b><strong>백양사</strong><small>LOTUS GUARDIAN</small></span><img src="./images/lotus-cards/010.png?v=20261012static" alt="" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" loading="eager" decoding="async"></span>
+            <span class="journey-mini-card preview-right"><span class="journey-mini-card-fallback"><b>016</b><strong>석굴암</strong><small>LOTUS GUARDIAN</small></span><img src="./images/lotus-cards/016.png?v=20261012static" alt="" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" loading="eager" decoding="async"></span>
+          </span>
         </button>
 
         <div class="journey-reward-row" aria-label="108 순례 진행 상황">
@@ -29033,6 +29041,54 @@ function renderSeparatedPlaceCards(entries,kind){
   return `<div class="personal-places-heading" role="heading" aria-level="3">📚 ${isTemple?'기본 사찰':'기본 산'} 목록 <span>${regular.length}곳</span></div>`+regular.map(card).join('')+`<div class="personal-places-heading" role="heading" aria-level="3">✍️ 내가 직접 추가한 ${isTemple?'절':'산'} <span>${mine.length}곳</span></div>`+mine.map(card).join('');
 }
 
+function updateHero108Journey(){
+  try{
+    const official=(typeof SANSA_GUARDIAN_108!=='undefined'&&Array.isArray(SANSA_GUARDIAN_108))?SANSA_GUARDIAN_108:[];
+    const officialSet=new Set(official);
+    const visitedNames=new Set();
+    const verifiedNames=new Set();
+    Object.values(destinations||{}).forEach(d=>{
+      if(!d||!d.name) return;
+      const name=String(d.name).trim();
+      if(officialSet.size && !officialSet.has(name)) return;
+      const visits=Object.values(d.visits||{}).filter(Boolean);
+      const verified=visits.some(v=>v&&v.verified===true);
+      const visited=(Number(d.stage)||0)>=1 || visits.length>0 || Object.keys(d.photos||{}).length>0 || verified;
+      if(visited) visitedNames.add(name);
+      if(verified) verifiedNames.add(name);
+    });
+    let officialVisited=0;
+    try{ officialVisited=(typeof getVisitedTempleRecords==='function')?getVisitedTempleRecords().length:0; }catch(_){ }
+    let guardianItems=[];
+    try{ guardianItems=(typeof window.guardianCatalog==='function')?window.guardianCatalog():[]; }catch(_){ }
+    const catalogVisited=guardianItems.filter(x=>x&&x.visited).length;
+    const catalogVerified=guardianItems.filter(x=>x&&x.verified).length;
+    const visited=Math.min(108,Math.max(visitedNames.size,officialVisited,catalogVisited));
+    const verified=Math.min(108,Math.max(verifiedNames.size,catalogVerified));
+    const v1=document.getElementById('hero108Visited'),v2=document.getElementById('heroLotusCount'),v3=document.getElementById('heroGuardianCount');
+    if(v1)v1.textContent=String(visited);
+    if(v2)v2.textContent=String(visited);
+    if(v3)v3.textContent=String(verified);
+    const lp=document.getElementById('heroLotusProgress');
+    if(lp)lp.textContent=visited>=108?`연꽃 108송이 · 컬러카드 ${verified}장`:`연꽃 ${visited}송이 · 컬러카드 ${verified}장 · ${108-visited}곳 남음`;
+
+    const preview=document.getElementById('heroGuardianPreview');
+    if(preview){
+      const samples=[{number:9,name:'수덕사'},{number:10,name:'백양사'},{number:16,name:'석굴암'}];
+      const earned=guardianItems.filter(x=>x&&x.verified).slice(0,3);
+      const source=earned.length?earned.map(x=>({number:x.number||x.i+1,name:x.name})):samples;
+      const cls=['preview-left','preview-center','preview-right'];
+      const badge=earned.length?'내가 획득한 수호카드':'이런 수호카드를 모아요';
+      preview.innerHTML=`<span class="journey-preview-badge">${badge}</span>`+source.map((item,idx)=>{
+        const no=String(item.number||idx+1).padStart(3,'0');
+        const pos=cls[idx]||'preview-right';
+        const label=escapeHtml(item.name||'수호카드');
+        return `<span class="journey-mini-card ${pos}"><span class="journey-mini-card-fallback"><b>${no}</b><strong>${label}</strong><small>LOTUS GUARDIAN</small></span><img src="./images/lotus-cards/${no}.png?v=20261012hero6" alt="${label} 수호카드" loading="eager" decoding="async" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'"></span>`;
+      }).join('');
+    }
+  }catch(e){console.warn('updateHero108Journey failed',e);}
+}
+
 function render(){
   if(typeof syncTempleCatalogControl==='function')syncTempleCatalogControl();
   updateHiddenTempleButton();
@@ -29052,64 +29108,7 @@ function render(){
   renderHomeGallery();
 
   const stats = computeStats();
-  const guardianItems=(typeof window.guardianCatalog==='function') ? window.guardianCatalog() : [];
-  const officialList=(typeof SANSA_GUARDIAN_108!=='undefined'&&Array.isArray(SANSA_GUARDIAN_108)&&SANSA_GUARDIAN_108.length)
-    ? SANSA_GUARDIAN_108
-    : ((guardianItems||[]).map(x=>x&&x.name).filter(Boolean));
-  const officialNames=new Set(officialList);
-  const visitedNames=new Set();
-  const verifiedNames=new Set();
-  Object.values(destinations||{}).forEach(d=>{
-    if(!d||!d.name||!officialNames.has(d.name)) return;
-    const visits=Object.values(d.visits||{}).filter(Boolean);
-    const hasVerified=visits.some(v=>v&&v.verified);
-    const hasVisit=visits.length>0 || (Number(d.stage)||0)>=1 || Object.keys(d.photos||{}).length>0 || hasVerified;
-    if(hasVisit) visitedNames.add(d.name);
-    if(hasVerified) verifiedNames.add(d.name);
-  });
-  const catalogVisited = guardianItems.filter(x=>x&&x.visited).length;
-  const statsVisited=Number((stats&&stats.visited)||0);
-  const officialVisited=(typeof getVisitedTempleRecords==='function')?Number(getVisitedTempleRecords().length||0):0;
-  const allVisited = Math.min(108, Math.max(visitedNames.size, catalogVisited, statsVisited, officialVisited));
-  const lotusProgress=document.getElementById('heroLotusProgress');
-  const verifiedFromCatalog=guardianItems.filter(x=>x&&x.verified).length;
-  const verifiedFallback=(typeof verifiedTempleCount==='function')?Number(verifiedTempleCount()||0):0;
-  const verifiedCards=Math.min(108, Math.max(verifiedNames.size, verifiedFromCatalog, verifiedFallback));
-  if(lotusProgress){
-    lotusProgress.textContent=allVisited>=108
-      ? `연꽃 108송이 · 컬러카드 ${verifiedCards}장`
-      : `연꽃 ${allVisited}송이 · 컬러카드 ${verifiedCards}장 · ${108-allVisited}곳 남음`;
-  }
-  const hero108Visited=document.getElementById('hero108Visited');
-  const heroLotusCount=document.getElementById('heroLotusCount');
-  const heroGuardianCount=document.getElementById('heroGuardianCount');
-  if(hero108Visited)hero108Visited.textContent=String(allVisited);
-  if(heroLotusCount)heroLotusCount.textContent=String(allVisited);
-  if(heroGuardianCount)heroGuardianCount.textContent=String(verifiedCards);
-  const heroGuardianPreview=document.getElementById('heroGuardianPreview');
-  if(heroGuardianPreview){
-    const fallbackPreview=[
-      {number:9,name:'수덕사'},
-      {number:10,name:'백양사'},
-      {number:16,name:'석굴암'}
-    ];
-    const unlocked=(guardianItems||[]).filter(x=>x&&x.verified).slice(0,3);
-    const previewSource=unlocked.length
-      ? unlocked.map(x=>({number:x.number,name:x.name})).slice(0,3)
-      : fallbackPreview;
-    const previewBadge=unlocked.length ? '내가 획득한 수호카드' : '108 수호카드 미리보기';
-    const cls=['preview-left','preview-center','preview-right'];
-    heroGuardianPreview.classList.remove('is-empty');
-    heroGuardianPreview.innerHTML=`<span class="journey-preview-badge">${previewBadge}</span>` + previewSource.map((item,idx)=>{
-      const file=String(item.number).padStart(3,'0');
-      const pos=cls[idx]||'preview-right';
-      const label=escapeHtml(item.name||'수호카드');
-      return `<span class="journey-mini-card ${pos}">
-        <span class="journey-mini-card-fallback"><b>${file}</b><strong>${label}</strong><small>LOTUS GUARDIAN</small></span>
-        <img src="./images/lotus-cards/${file}.png?v=20261012hero5" alt="${label} 수호카드" loading="eager" decoding="async" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'">
-      </span>`;
-    }).join('');
-  }
+  updateHero108Journey();
 
   document.getElementById('heroStats').innerHTML = `
     <button class="stat hero-stat-link stat-visited" type="button" onclick="openHeroStatList('visited')" aria-label="다녀온 절 목록 보기">
@@ -38636,5 +38635,14 @@ document.getElementById('todayTriviaOverlay')?.addEventListener('click',function
 })();
 </script>
 
+
+<script id="hero-108-async-refresh-fix-20261013">
+(function(){
+  function refresh(){ try{ if(typeof updateHero108Journey==='function') updateHero108Journey(); }catch(_){} }
+  window.addEventListener('load',()=>{ refresh(); setTimeout(refresh,250); setTimeout(refresh,900); setTimeout(refresh,2200); });
+  document.addEventListener('visibilitychange',()=>{ if(!document.hidden) refresh(); });
+  window.addEventListener('focus',refresh);
+})();
+</script>
 </body>
 </html>
