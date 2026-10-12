@@ -30042,9 +30042,19 @@ function escapeHtml(s){
    DETAIL MODAL
 ============================================================ */
 function openDetail(id){
-  document.body.appendChild(document.getElementById('detailOverlay'));
+  const raw=destinations[id];
+  if(!raw){showToast('사찰 정보를 다시 불러오는 중이에요. 잠시 후 다시 눌러주세요.');return;}
+  // 로그인 계정의 오래된/간단한 저장 레코드라도 최신 기본 사찰 정보와 합쳐
+  // 설명·활동·방문 포인트 등 상세 항목이 비지 않게 한다.
+  const master=(MASTER_BY_NAME&&raw.name)?MASTER_BY_NAME[raw.name]:null;
+  const d=master?Object.assign({},master,raw):raw;
+  destinations[id]=d;
+  const detailOverlay=document.getElementById('detailOverlay');
+  if(!detailOverlay)return;
+  document.body.appendChild(detailOverlay);
   currentDetailId = id;
-  const d = destinations[id];
+  // 뒤쪽의 부가 렌더 중 하나가 실패해도 모달 자체는 열린 상태가 되게 먼저 표시한다.
+  detailOverlay.classList.add('show');
   document.getElementById('dRegion').textContent = d.region;
   document.getElementById('dName').textContent = d.name;
   document.getElementById('dTag').textContent = d.tag==='유명' ? '유명한 곳' : '숨은 곳';
@@ -30104,7 +30114,7 @@ function openDetail(id){
   document.getElementById('visitNoteInput').value = '';
   document.getElementById('dMapLink').href = 'https://map.kakao.com/link/search/' + encodeURIComponent(sansaKakaoPlaceQuery(d));
   document.getElementById('dFoodLink').href = 'https://map.kakao.com/link/search/' + encodeURIComponent(d.name + ' ' + (d.locationHint || d.region) + ' 맛집');
-  document.getElementById('detailOverlay').classList.add('show');
+  /* detailOverlay는 함수 시작 시 먼저 표시 */
   renderVisitTips(d);
   requestAnimationFrame(()=> setupDetailMap(d, id));
   renderWeather(d);
@@ -35520,12 +35530,20 @@ function renderSansaGuide(query=''){
   if(empty)empty.style.display=items.length?'none':'block';
 }
 function filterSansaGuide(v){renderSansaGuide(v)}
-function openSansaGuide(initial=''){
+function openSansaGuide(initial='',options={}){
   renderSansaGuide(initial);
   const overlay=document.getElementById('sansaGuideOverlay');
   if(overlay){overlay.classList.add('show');overlay.setAttribute('aria-hidden','false')}
   const input=document.getElementById('sansaGuideSearch');
   if(input){input.value=initial||'';setTimeout(()=>input.focus(),120)}
+  if(!options.skipHistory){
+    try{
+      const st=history.state||{};
+      if(!(st.sansaInternal && st.sansaKind==='guide')){
+        history.pushState({...st,sansaInternal:true,sansaKind:'guide'},'',location.href);
+      }
+    }catch(e){}
+  }
 }
 function closeSansaGuide(){
   const overlay=document.getElementById('sansaGuideOverlay');
@@ -35534,6 +35552,16 @@ function closeSansaGuide(){
 function runSansaGuideAction(index){
   const item=SANSA_GUIDE_ITEMS[index];
   if(!item)return;
+  const guideQuery=document.getElementById('sansaGuideSearch')?.value||'';
+  if(item.action==='openPassportOverlay()'){
+    window.__sansaPassportReturn={type:'guide',query:guideQuery};
+    closeSansaGuide();
+    try{
+      history.pushState({...(history.state||{}),sansaInternal:true,sansaKind:'passport',sansaReturn:'guide'},'',location.href);
+    }catch(e){}
+    setTimeout(()=>{try{openPassportOverlay()}catch(e){console.warn('guide passport action',e);showToast('현장 인증 기록을 여는 중 문제가 생겼어요.')}} ,70);
+    return;
+  }
   closeSansaGuide();
   setTimeout(()=>{try{Function(item.action)()}catch(e){console.warn('guide action',e);showToast('이 기능을 여는 중 문제가 생겼어요.')}} ,70);
 }
@@ -36764,12 +36792,16 @@ function renderCatalogOverlay(){
       if(localMode){
         if(typeof persistLocal==='function')persistLocal();
       }else if(currentUid && typeof destinationRef==='function'){
-        await destinationRef(id).update({
+        // 새로 만든 메인 고정 사찰도 이름/지역/설명까지 온전히 저장한다.
+        // 플래그만 update하면 Firebase 재동기화 후 이름 없는 레코드가 되어
+        // 메인 카드의 상세 열기가 끊길 수 있다.
+        const d=destinations[id]||{};
+        await destinationRef(id).set(Object.assign({},d,{
           hiddenFromList:false,
           hiddenAt:null,
           hiddenTrayDismissed:false,
           hiddenTrayDismissedAt:null
-        });
+        }));
       }
     }catch(e){ console.warn('temple main save deferred',e); }
 
@@ -36981,7 +37013,11 @@ function renderCatalogOverlay(){
 
   /* ---------- 브라우저/휴대폰 뒤로가기 ---------- */
   window.addEventListener('popstate',function(){
-    // 산사노트 내부에서는 무엇을 보고 있었든 첫 뒤로가기는 홈
+    // 모달/기능 안에서 열린 화면은 먼저 '바로 전 단계'로 돌아간다.
+    try{
+      if(typeof window.sansaHandleBackStep==='function' && window.sansaHandleBackStep()) return;
+    }catch(e){}
+    // 더 이상 내부 단계가 없을 때만 홈으로 복귀한다.
     returnToHome();
     try{
       history.replaceState({sansaHome:true,sansaInternal:false},'',location.href);
@@ -37108,9 +37144,17 @@ function renderCatalogOverlay(){
     if(title)title.textContent='🛕 메인에 추가한 절';
     if(sub)sub.textContent='108 사찰 목록에서 선택한 절이 사진 카드로 여기에 표시돼요.';
     grid.innerHTML=items.map(([id,d])=>renderCard(id,d)).join('');
-    grid.querySelectorAll('.card').forEach(card=>{
-      card.onclick=()=>openDetail(card.dataset.id);
-      const d=destinations[card.dataset.id];
+    grid.querySelectorAll('.card').forEach((card,idx)=>{
+      const pinnedName=items[idx]?.[1]?.name||'';
+      card.dataset.pinnedName=pinnedName;
+      card.onclick=()=>{
+        // 메인 고정 카드는 Firebase 재동기화 뒤 기존 data-id가 사라질 수 있으므로
+        // 클릭 순간 사찰명으로 최신 레코드를 다시 찾아 상세를 연다.
+        const fresh=bestTempleEntry(pinnedName)||ensureTempleEntry(pinnedName);
+        if(!fresh){showToast('사찰 정보를 다시 불러오지 못했어요.');return;}
+        openDetail(fresh[0]);
+      };
+      const d=items[idx]?.[1];
       if(d?.name===lastAddedName)card.classList.add('just-added-main');
     });
     try{schedulePhotoHydration('temple',items);}catch(e){}
@@ -38166,6 +38210,111 @@ document.getElementById('todayTriviaOverlay')?.addEventListener('click',function
   window.guardianCatalog=buildGuardianCatalog;
   window.renderLotusGuardianCollection=render;
   window.openLotusGuardianCard=openDetail;
+})();
+</script>
+
+
+<style id="sansa-mobile-passport-guide-fix-20261012">
+/* iPhone/Android: 현장 인증 기록·기능 찾기 화면이 주소창/화면 가장자리에 잘리지 않게 */
+@media(max-width:900px){
+  #passportOverlay,
+  #sansaGuideOverlay{
+    position:fixed!important;
+    inset:0!important;
+    width:100%!important;
+    height:100dvh!important;
+    padding:0!important;
+    margin:0!important;
+    align-items:stretch!important;
+    justify-content:stretch!important;
+    overflow:hidden!important;
+    box-sizing:border-box!important;
+  }
+  #passportOverlay .modal,
+  #sansaGuideOverlay .modal{
+    width:100%!important;
+    max-width:100%!important;
+    height:100dvh!important;
+    max-height:100dvh!important;
+    margin:0!important;
+    border-radius:0!important;
+    padding:0!important;
+    overflow:hidden!important;
+    display:flex!important;
+    flex-direction:column!important;
+    box-sizing:border-box!important;
+  }
+  #passportOverlay .modal-head,
+  #sansaGuideOverlay .modal-head{
+    position:relative!important;
+    top:auto!important;
+    flex:0 0 auto!important;
+    width:100%!important;
+    box-sizing:border-box!important;
+    padding-top:max(16px,calc(env(safe-area-inset-top) + 10px))!important;
+    padding-left:max(16px,calc(env(safe-area-inset-left) + 16px))!important;
+    padding-right:max(64px,calc(env(safe-area-inset-right) + 64px))!important;
+    padding-bottom:13px!important;
+    background:rgba(255,253,248,.985)!important;
+    z-index:60!important;
+  }
+  #passportOverlay .close-x,
+  #sansaGuideOverlay .close-x{
+    top:max(15px,calc(env(safe-area-inset-top) + 9px))!important;
+    right:max(12px,calc(env(safe-area-inset-right) + 12px))!important;
+  }
+  #passportOverlay .modal-body,
+  #sansaGuideOverlay .modal-body{
+    flex:1 1 auto!important;
+    min-width:0!important;
+    min-height:0!important;
+    width:100%!important;
+    box-sizing:border-box!important;
+    overflow-x:hidden!important;
+    overflow-y:auto!important;
+    -webkit-overflow-scrolling:touch!important;
+    padding-left:max(16px,calc(env(safe-area-inset-left) + 16px))!important;
+    padding-right:max(16px,calc(env(safe-area-inset-right) + 16px))!important;
+    padding-bottom:max(28px,calc(env(safe-area-inset-bottom) + 22px))!important;
+  }
+  #passportOverlay .field-verify-history-summary,
+  #passportOverlay .field-history-list,
+  #passportOverlay .field-history-item,
+  #sansaGuideOverlay .sansa-guide-search-wrap,
+  #sansaGuideOverlay .sansa-guide-hint,
+  #sansaGuideOverlay .sansa-guide-grid,
+  #sansaGuideOverlay .sansa-guide-item{
+    max-width:100%!important;
+    min-width:0!important;
+    box-sizing:border-box!important;
+  }
+  #passportOverlay .field-history-main{min-width:0!important;overflow:hidden!important}
+  #passportOverlay .field-history-main b,
+  #passportOverlay .field-history-main span{overflow-wrap:anywhere!important;word-break:keep-all!important}
+}
+</style>
+<script id="sansa-mobile-back-step-fix-20261012">
+(function(){
+  window.sansaHandleBackStep=function(){
+    const passport=document.getElementById('passportOverlay');
+    if(passport?.classList.contains('show')){
+      try{closePassportOverlay();}catch(e){passport.classList.remove('show');}
+      const ret=window.__sansaPassportReturn;
+      window.__sansaPassportReturn=null;
+      if(ret?.type==='guide'){
+        setTimeout(()=>{
+          try{openSansaGuide(ret.query||'',{skipHistory:true});}catch(e){}
+        },30);
+      }
+      return true;
+    }
+    const guide=document.getElementById('sansaGuideOverlay');
+    if(guide?.classList.contains('show')){
+      try{closeSansaGuide();}catch(e){guide.classList.remove('show');}
+      return true;
+    }
+    return false;
+  };
 })();
 </script>
 
