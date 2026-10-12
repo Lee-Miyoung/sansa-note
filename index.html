@@ -21164,10 +21164,10 @@ button.site-footer-link{font-size:clamp(15px,2vw,17px)!important;font-weight:750
 .guardian-grid{align-items:stretch!important;}
 .guardian-card{height:100%!important;display:flex!important;flex-direction:column!important;align-items:stretch!important;}
 .guardian-card .guardian-art{flex:0 0 auto!important;width:100%!important;aspect-ratio:3/5!important;position:relative!important;overflow:hidden!important;}
-.guardian-card .guardian-name{min-height:40px!important;display:flex!important;align-items:center!important;justify-content:center!important;margin:8px 2px 0!important;}
-.guardian-card .guardian-lotus-name{min-height:42px!important;display:flex!important;align-items:center!important;justify-content:center!important;margin:4px 2px 0!important;}
-.guardian-card .guardian-lotus-phrase{min-height:54px!important;display:flex!important;align-items:flex-start!important;justify-content:center!important;margin:2px 6px 0!important;}
-.guardian-card .guardian-state{min-height:32px!important;margin-top:auto!important;padding-top:6px!important;display:flex!important;align-items:center!important;justify-content:center!important;}
+.guardian-card .guardian-name{min-height:30px!important;display:flex!important;align-items:center!important;justify-content:center!important;margin:7px 3px 1px!important;font-size:17px!important;line-height:1.18!important;font-weight:900!important;word-break:keep-all!important;overflow-wrap:break-word!important;}
+.guardian-card .guardian-lotus-name{min-height:28px!important;display:flex!important;align-items:center!important;justify-content:center!important;margin:2px 3px 1px!important;font-size:15px!important;line-height:1.18!important;font-weight:900!important;word-break:keep-all!important;overflow-wrap:break-word!important;}
+.guardian-card .guardian-lotus-phrase{min-height:40px!important;display:flex!important;align-items:flex-start!important;justify-content:center!important;margin:2px 8px 2px!important;font-size:12.4px!important;line-height:1.34!important;word-break:keep-all!important;overflow-wrap:break-word!important;text-wrap:pretty!important;}
+.guardian-card .guardian-state{min-height:26px!important;margin-top:2px!important;padding:3px 4px 4px!important;display:flex!important;align-items:center!important;justify-content:center!important;gap:5px!important;flex-wrap:wrap!important;font-size:11.8px!important;line-height:1.2!important;word-break:keep-all!important;overflow-wrap:break-word!important;}
 .guardian-card .guardian-bond-line{min-height:28px!important;height:28px!important;display:flex!important;align-items:center!important;justify-content:center!important;margin-top:4px!important;}
 
 /* 상단 메뉴: 한 줄은 유지하되 더 또렷하게. 화면 밖으로 넘기지 않음 */
@@ -38196,13 +38196,13 @@ document.getElementById('todayTriviaOverlay')?.addEventListener('click',function
   .guardian-card-badge{position:absolute;top:9px;right:9px;z-index:2;min-width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:900;background:rgba(255,255,255,.92);box-shadow:0 2px 8px rgba(0,0,0,.10)}
   .guardian-card.is-verified .guardian-card-badge{background:#d8aa45;color:#fff}
   .guardian-card.is-visited .guardian-card-badge{background:#eeeae4;color:#777}
-  .guardian-name{font-size:15.5px!important;font-weight:900!important;margin-top:8px!important;word-break:keep-all;line-height:1.28}
-  .guardian-state{font-size:11.5px!important;margin-top:4px!important;color:#8c8173!important;line-height:1.35;min-height:28px}
+  .guardian-name{font-size:17px!important;font-weight:900!important;margin-top:7px!important;word-break:keep-all!important;overflow-wrap:break-word!important;line-height:1.18!important}
+  .guardian-state{font-size:11.8px!important;margin-top:2px!important;color:#8c8173!important;line-height:1.2!important;min-height:26px!important;word-break:keep-all!important;overflow-wrap:break-word!important}
   .guardian-card.is-verified .guardian-state{color:#9a6820!important;font-weight:800}
   .guardian-card.is-visited .guardian-state{color:#777!important;font-weight:700}
-  .guardian-lotus-name{display:flex;align-items:center;justify-content:center;gap:5px;font-size:14px;font-weight:850;color:#97651f;margin:7px 2px 3px;line-height:1.45;word-break:keep-all}
+  .guardian-lotus-name{display:flex;align-items:center;justify-content:center;gap:5px;font-size:15px;font-weight:900;color:#97651f;margin:3px 3px 2px;line-height:1.18;word-break:keep-all!important;overflow-wrap:break-word!important}
   .guardian-lotus-inline-icon{width:16px;height:16px;flex:0 0 16px;object-fit:contain;vertical-align:middle}
-  .guardian-lotus-phrase{font-size:11.5px;color:#736553;line-height:1.55;margin:3px 6px 6px;word-break:keep-all;overflow-wrap:anywhere}
+  .guardian-lotus-phrase{font-size:12.4px;color:#736553;line-height:1.34;margin:2px 8px 3px;word-break:keep-all!important;overflow-wrap:break-word!important;text-wrap:pretty}
   .guardian-detail .guardian-lotus-name{font-size:18px;margin:8px 0 4px}
   .guardian-detail .guardian-lotus-inline-icon{width:18px;height:18px;flex-basis:18px}
   .guardian-detail .guardian-lotus-phrase{font-size:14px;margin:4px 8px 12px}
@@ -38223,7 +38223,7 @@ document.getElementById('todayTriviaOverlay')?.addEventListener('click',function
   .guardian-detail-actions .open-temple{background:#3f816b;color:#fff}.guardian-detail-actions .close-detail{background:#eee6d9;color:#5d5144}
   .guardian-detail-close{position:absolute;right:9px;top:9px;border:0;background:#fff;border-radius:50%;font-size:20px;width:36px;height:36px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.08)}
   .guardian-bond-line{min-height:28px!important;height:28px!important;margin:4px 4px 1px!important;display:flex!important;align-items:center!important;justify-content:center!important}
-  .guardian-bond-mini{display:inline-flex;align-items:center;justify-content:center;max-width:100%;padding:5px 8px;border-radius:999px;background:#fff8e6;border:1px solid #e3c98e;color:#855e23;font-size:10.5px;font-weight:900;line-height:1.15;white-space:nowrap}
+  .guardian-bond-mini{display:inline-flex;align-items:center;justify-content:center;max-width:100%;padding:3px 7px;border-radius:999px;background:#fff8e6;border:1px solid #e3c98e;color:#855e23;font-size:10.8px;font-weight:900;line-height:1.1;white-space:nowrap}
   .guardian-bond-line.is-empty{visibility:hidden}
   .guardian-card.bond-level-3{border-color:#c9aa70!important;box-shadow:inset 0 0 0 1px rgba(184,145,75,.16)!important}
   .guardian-card.bond-level-4{border-color:#c99a45!important;box-shadow:0 0 0 2px rgba(220,181,94,.16),0 6px 18px rgba(145,99,32,.12)!important}
@@ -38233,7 +38233,7 @@ document.getElementById('todayTriviaOverlay')?.addEventListener('click',function
   .guardian-bond-panel{display:grid;gap:3px;margin:12px 0;padding:11px 12px;border-radius:14px;background:#fffaf0;border:1px solid #ead6a8;text-align:center}.guardian-bond-panel b{font-size:15px;color:#7b5520}.guardian-bond-panel span{font-size:13px;font-weight:900;color:#2f5e51}.guardian-bond-panel small{font-size:11px;color:#786a59;line-height:1.4}
 
   @media(min-width:700px){.guardian-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important}}
-  @media(max-width:420px){.guardian-dojo{padding:12px}.guardian-dojo-title b{font-size:18px}.guardian-filter-btn{font-size:10px;padding:7px 3px}.guardian-grid{gap:8px!important}.guardian-card{padding:5px!important}.guardian-name{font-size:14px!important}.guardian-lotus-name{font-size:12.8px!important}.guardian-lotus-inline-icon{width:15px!important;height:15px!important}.guardian-lotus-phrase{font-size:10.8px!important}.guardian-state{font-size:10.2px!important}}
+  @media(max-width:420px){.guardian-dojo{padding:12px}.guardian-dojo-title b{font-size:18px}.guardian-filter-btn{font-size:10px;padding:7px 3px}.guardian-grid{gap:8px!important}.guardian-card{padding:5px!important}.guardian-name{font-size:16px!important;line-height:1.16!important}.guardian-lotus-name{font-size:14px!important;line-height:1.16!important}.guardian-lotus-inline-icon{width:15px!important;height:15px!important}.guardian-lotus-phrase{font-size:11.8px!important;line-height:1.32!important}.guardian-state{font-size:11px!important;line-height:1.16!important}.guardian-bond-mini{font-size:10px!important;padding:3px 6px!important}}
   @media(prefers-reduced-motion:no-preference){.guardian-card.is-verified{transition:transform .14s ease,box-shadow .14s ease}.guardian-card.is-verified:active{transform:scale(.985)}}
 </style>
 <script id="guardian-catalog-final-v11-js">
@@ -38484,8 +38484,7 @@ document.getElementById('todayTriviaOverlay')?.addEventListener('click',function
             <div class="guardian-art">${artFor(item)}</div>
             <div class="guardian-name">${escapeHtml(item.name)}</div>
             ${`<div class="guardian-lotus-name"><img src="./lotus-soft.png" alt="" aria-hidden="true" class="guardian-lotus-inline-icon"> <span>${escapeHtml((GUARDIAN_LOTUS_TEXT[item.name]||['마음의 연꽃','한 걸음마다 마음에 연꽃이 피어납니다.'])[0])}</span></div><div class="guardian-lotus-phrase">${escapeHtml((GUARDIAN_LOTUS_TEXT[item.name]||['마음의 연꽃','한 걸음마다 마음에 연꽃이 피어납니다.'])[1])}</div>`}
-            <div class="guardian-state">${stateLabel(item)}${item.verified&&item.verifyCount>1?` · 인증 ${item.verifyCount}회`:''}</div>
-            <div class="guardian-bond-line ${item.verified?'':'is-empty'}">${item.verified?`<span class="guardian-bond-mini">${item.bond.icon} ${escapeHtml(templeBondMilestoneLabel(item.verifyCount))}</span>`:'<span class="guardian-bond-mini">자리 맞춤</span>'}</div>
+            <div class="guardian-state"><span>${stateLabel(item)}${item.verified&&item.verifyCount>1?` · 인증 ${item.verifyCount}회`:''}</span>${item.verified?`<span class="guardian-bond-mini">${item.bond.icon} ${escapeHtml(templeBondMilestoneLabel(item.verifyCount))}</span>`:''}</div>
           </button>`;
         }).join(''):'<div class="guardian-empty-filter">이 조건에 해당하는 카드가 아직 없어요.</div>'}
       </div>`;
@@ -38546,7 +38545,7 @@ document.getElementById('todayTriviaOverlay')?.addEventListener('click',function
 .pg-guardian-cta>span{grid-row:1/3;font-size:26px}.pg-guardian-cta>b{font-size:15px;line-height:1.3}.pg-guardian-cta>small{font-size:12px;line-height:1.4;color:#7d6543;font-weight:750}
 .guardian-dojo-title b{font-size:22px!important}.guardian-dojo-title span{font-size:13px!important;line-height:1.55!important}.guardian-dojo-count{font-size:18px!important}.guardian-dojo-count small{font-size:11px!important}
 .guardian-filter-btn{font-size:12.5px!important;min-height:42px!important;font-weight:850!important}.guardian-legend{font-size:11.5px!important;line-height:1.4!important}
-.guardian-name{font-size:15.5px!important}.guardian-lotus-name{font-size:14px!important}.guardian-lotus-phrase{font-size:11.5px!important}.guardian-state{font-size:11.5px!important}
+.guardian-name{font-size:17px!important;line-height:1.18!important}.guardian-lotus-name{font-size:15px!important;line-height:1.18!important}.guardian-lotus-phrase{font-size:12.4px!important;line-height:1.34!important}.guardian-state{font-size:11.8px!important;line-height:1.2!important}
 .field-reward-preview.field-card-focus{padding:18px!important}.field-card-focus .field-reward-head h3{font-size:22px!important}.field-card-focus .field-reward-head p{font-size:13.5px!important;line-height:1.65!important}.field-card-focus .field-reward-kicker{font-size:12px!important}
 .field-card-reward-flow{display:grid;grid-template-columns:1fr 24px 1fr;gap:6px;align-items:center;margin:15px 0 10px;position:relative;z-index:2}.field-card-reward-flow>span{min-height:70px;border:1px solid rgba(196,158,93,.28);background:rgba(255,255,255,.78);border-radius:15px;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:9px 7px;text-align:center}.field-card-reward-flow b{font-size:14px;line-height:1.35;color:#2d5c50;word-break:keep-all}.field-card-reward-flow small{font-size:10.5px;margin-top:4px;color:#776a59;font-weight:750}.field-card-reward-flow i{font-style:normal;font-size:18px;color:#b68739;text-align:center}
 .field-card-focus .field-reward-special{font-size:13px!important;line-height:1.45!important}.field-card-focus .field-reward-actions button{font-size:13px!important;min-height:48px!important}.field-card-focus .field-reward-note{font-size:10.5px!important;line-height:1.5!important}
@@ -38560,7 +38559,7 @@ document.getElementById('todayTriviaOverlay')?.addEventListener('click',function
   #pilgrimCollectionOverlay .pilgrim-game-tabs button{font-size:13px!important;min-height:47px!important;padding:0 7px!important}
   .guardian-dojo-title b{font-size:19px!important}.guardian-dojo-title span{font-size:12px!important}.guardian-dojo-count{font-size:16px!important}.guardian-dojo-count small{font-size:10px!important}
   .guardian-filter-btn{font-size:11.5px!important}.guardian-legend{font-size:10.5px!important}
-  .guardian-name{font-size:14.5px!important}.guardian-lotus-name{font-size:13px!important}.guardian-lotus-phrase{font-size:10.8px!important;line-height:1.5!important}.guardian-state{font-size:10.5px!important}
+  .guardian-name{font-size:16px!important;line-height:1.16!important}.guardian-lotus-name{font-size:14px!important;line-height:1.16!important}.guardian-lotus-phrase{font-size:11.8px!important;line-height:1.32!important}.guardian-state{font-size:11px!important;line-height:1.16!important}
   .field-card-focus .field-reward-head h3{font-size:20px!important}.field-card-focus .field-reward-head p{font-size:13px!important}.field-card-reward-flow b{font-size:12.5px}.field-card-reward-flow small{font-size:10px}
 }
 </style>
