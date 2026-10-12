@@ -21158,6 +21158,50 @@ button.site-footer-link{font-size:clamp(15px,2vw,17px)!important;font-weight:750
 @media(max-width:620px){.journey-card-preview{border-top:1px dashed rgba(171,132,70,.18);padding-top:8px}.journey-preview-badge{left:4px;right:auto;top:5px;font-size:10.5px!important}}
 </style>
 
+
+<style id="sansa-guardian-equal-height-nav-20261013">
+/* 수호카드: 같은 행의 모든 카드가 같은 높이와 같은 텍스트 기준선을 갖도록 고정 */
+.guardian-grid{align-items:stretch!important;}
+.guardian-card{height:100%!important;display:flex!important;flex-direction:column!important;align-items:stretch!important;}
+.guardian-card .guardian-art{flex:0 0 auto!important;width:100%!important;aspect-ratio:3/5!important;}
+.guardian-card .guardian-name{min-height:40px!important;display:flex!important;align-items:center!important;justify-content:center!important;margin:8px 2px 0!important;}
+.guardian-card .guardian-lotus-name{min-height:42px!important;display:flex!important;align-items:center!important;justify-content:center!important;margin:4px 2px 0!important;}
+.guardian-card .guardian-lotus-phrase{min-height:54px!important;display:flex!important;align-items:flex-start!important;justify-content:center!important;margin:2px 6px 0!important;}
+.guardian-card .guardian-state{min-height:32px!important;margin-top:auto!important;padding-top:6px!important;display:flex!important;align-items:center!important;justify-content:center!important;}
+.guardian-card .guardian-bond-line{min-height:28px!important;display:flex!important;align-items:center!important;justify-content:center!important;}
+
+/* 상단 메뉴: 한 줄은 유지하되 더 또렷하게. 화면 밖으로 넘기지 않음 */
+.site-global-nav-inner{gap:6px!important;padding-left:10px!important;padding-right:10px!important;}
+.site-global-nav-links{flex:1 1 auto!important;min-width:0!important;display:flex!important;align-items:center!important;justify-content:space-between!important;gap:0!important;overflow:visible!important;}
+.site-global-nav-links>button{
+  flex:0 1 auto!important;min-width:0!important;
+  padding:7px 5px!important;
+  font-size:clamp(11px,1.9vw,14px)!important;
+  line-height:1!important;font-weight:900!important;letter-spacing:-.06em!important;
+  color:#2d2a25!important;white-space:nowrap!important;
+  border-radius:13px!important;
+  text-shadow:0 1px 0 rgba(255,255,255,.85)!important;
+}
+.site-global-nav-links>button.is-active{
+  color:#175647!important;
+  background:linear-gradient(180deg,rgba(239,247,242,.96),rgba(229,241,234,.96))!important;
+  box-shadow:inset 0 0 0 1px rgba(40,105,86,.13),0 2px 8px rgba(44,74,64,.06)!important;
+}
+.site-global-nav .site-global-nav-actions{margin-left:2px!important;}
+.site-global-nav .hero-top-action{font-weight:900!important;}
+@media(max-width:700px){
+  .site-global-nav-inner{padding:0 7px!important;gap:3px!important;overflow:hidden!important;}
+  .site-global-nav-links{overflow:visible!important;flex:1 1 auto!important;}
+  .site-global-nav-links>button{padding:7px 3px!important;font-size:clamp(10.2px,2.7vw,12.7px)!important;min-height:36px!important;}
+  .site-global-nav .hero-top-action{padding:5px 7px!important;min-height:36px!important;font-size:11.5px!important;}
+}
+@media(max-width:390px){
+  .site-global-nav-inner{padding:0 5px!important;gap:2px!important;}
+  .site-global-nav-links>button{font-size:10.2px!important;padding:7px 2px!important;letter-spacing:-.075em!important;}
+  .site-global-nav .hero-top-action{padding:5px 5px!important;font-size:10.8px!important;}
+  .site-global-nav .hero-top-action .hta-icon{width:20px!important;height:20px!important;font-size:10px!important;}
+}
+</style>
 </head>
 <body>
 
@@ -21215,12 +21259,12 @@ button.site-footer-link{font-size:clamp(15px,2vw,17px)!important;font-weight:750
   <nav class="site-global-nav" aria-label="산사노트 주요 메뉴">
     <div class="site-global-nav-inner">
       <div class="site-global-nav-links">
-        <button type="button" onclick="goSiteNav('home')">홈</button>
-        <button type="button" onclick="goSiteNav('temple')">절 둘러보기</button>
-        <button type="button" onclick="goSiteNav('mountain')">산 둘러보기</button>
-        <button type="button" onclick="goSiteNav('course')">코스</button>
-        <button type="button" onclick="goSiteNav('community')">커뮤니티</button>
-        <button type="button" onclick="goSiteNav('mypage')">마이페이지</button>
+        <button type="button" data-nav-target="home" class="is-active" onclick="goSiteNav('home')">홈</button>
+        <button type="button" data-nav-target="temple" onclick="goSiteNav('temple')">절 둘러보기</button>
+        <button type="button" data-nav-target="mountain" onclick="goSiteNav('mountain')">산 둘러보기</button>
+        <button type="button" data-nav-target="course" onclick="goSiteNav('course')">코스</button>
+        <button type="button" data-nav-target="community" onclick="goSiteNav('community')">커뮤니티</button>
+        <button type="button" data-nav-target="mypage" onclick="goSiteNav('mypage')">마이페이지</button>
       </div>
       <div class="hero-top-actions site-global-nav-actions" aria-label="계정과 지도">
         <button class="hero-top-action map-action" type="button" onclick="openMapOverlay()">
@@ -38642,6 +38686,22 @@ document.getElementById('todayTriviaOverlay')?.addEventListener('click',function
   window.addEventListener('load',()=>{ refresh(); setTimeout(refresh,250); setTimeout(refresh,900); setTimeout(refresh,2200); });
   document.addEventListener('visibilitychange',()=>{ if(!document.hidden) refresh(); });
   window.addEventListener('focus',refresh);
+})();
+</script>
+
+<script id="sansa-nav-active-20261013">
+(function(){
+  function mark(target){
+    document.querySelectorAll('.site-global-nav-links [data-nav-target]').forEach(function(btn){
+      btn.classList.toggle('is-active',btn.dataset.navTarget===target);
+    });
+  }
+  document.addEventListener('click',function(e){
+    var btn=e.target.closest('.site-global-nav-links [data-nav-target]');
+    if(btn) mark(btn.dataset.navTarget);
+  },true);
+  window.addEventListener('load',function(){ mark('home'); });
+  window.sansaMarkTopNav=mark;
 })();
 </script>
 </body>
