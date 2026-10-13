@@ -21235,6 +21235,68 @@ button.site-footer-link{font-size:clamp(15px,2vw,17px)!important;font-weight:750
 }
 </style>
 
+
+<style id="sansa-108-visibility-cardicon-fix-20261013">
+/* 108 숫자와 배경 장식을 더 또렷하게 */
+.hero-108-journey .journey-core-card::before{
+  opacity:.30 !important;
+  background-size:230px auto,58% auto !important;
+  background-position:-38px 62px,right -18px bottom -6px !important;
+  z-index:3 !important;
+}
+.hero-108-journey .journey-core-card::after{
+  color:rgba(154,105,37,.14) !important;
+  opacity:1 !important;
+  right:10px !important;
+  top:18px !important;
+  z-index:3 !important;
+}
+/* 흰 카드가 장식을 너무 덮지 않도록 */
+.hero-108-journey .journey-main-cta{
+  background:linear-gradient(118deg,rgba(255,255,255,.72),rgba(255,249,233,.66)) !important;
+  backdrop-filter:saturate(1.02) !important;
+}
+/* 안쪽 카드에는 중복 108/배경 금지 */
+.hero-108-journey .journey-main-cta::before,
+.hero-108-journey .journey-main-cta::after{
+  content:none !important;
+  display:none !important;
+}
+/* 내용은 가장 위 */
+.hero-108-journey .journey-main-cta > *,
+.hero-108-journey .journey-core-head,
+.hero-108-journey .journey-reward-row,
+.hero-108-journey .journey-flow{z-index:4 !important;position:relative !important;}
+
+/* 별표 아이콘 대신 진짜 수호카드 썸네일 */
+.journey-card-glyph{
+  width:24px !important;
+  height:34px !important;
+  border-radius:5px !important;
+  border:1.4px solid rgba(167,119,52,.45) !important;
+  background:#fff7ea url('./images/lotus-cards/009.png?v=20261012static') center/cover no-repeat !important;
+  box-shadow:0 3px 8px rgba(121,83,34,.16) !important;
+  transform:rotate(-2deg) !important;
+  overflow:hidden !important;
+}
+.journey-card-glyph::after{content:'' !important;display:none !important;}
+
+@media (max-width: 768px){
+  .hero-108-journey .journey-core-card::before{
+    opacity:.27 !important;
+    background-size:180px auto,67% auto !important;
+    background-position:-28px 78px,right -20px bottom -4px !important;
+  }
+  .hero-108-journey .journey-core-card::after{
+    font-size:112px !important;
+    color:rgba(154,105,37,.125) !important;
+    right:2px !important;
+    top:46px !important;
+  }
+  .journey-card-glyph{width:22px !important;height:32px !important;}
+}
+</style>
+
 </head>
 <body>
 
