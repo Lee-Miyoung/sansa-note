@@ -21097,14 +21097,15 @@ button.site-footer-link{font-size:clamp(15px,2vw,17px)!important;font-weight:750
 /* 홈 핵심 기능: 108 순례 + 연꽃 + 실제 수호카드 미리보기 */
 .hero-108-journey{width:100%!important;margin:0!important}
 .hero-108-journey .journey-core-card{position:relative;overflow:hidden;border:1px solid #ddc797;border-radius:26px;padding:22px;background:linear-gradient(145deg,#fffef9 0%,#fff9ea 58%,#f4e3bc 100%);box-shadow:0 12px 30px rgba(92,65,31,.08);isolation:isolate}
-.hero-108-journey .journey-core-card:before{content:"";position:absolute;inset:0;background:url('./lotus-soft.png') -48px 58px/205px auto no-repeat,url('./temple-silhouette.png') right -28px bottom -8px/52% auto no-repeat;opacity:.22;pointer-events:none;z-index:-1}
-.hero-108-journey .journey-core-card:after{content:'108';position:absolute;right:12px;top:22px;font-family:'Nanum Myeongjo','Noto Serif KR',serif;font-size:clamp(110px,18vw,178px);font-weight:800;line-height:1;color:rgba(154,105,37,.075);pointer-events:none;z-index:-1}
+.hero-108-journey .journey-core-card:before{content:"";position:absolute;inset:0;background:url('./lotus-soft.png') -48px 58px/205px auto no-repeat,url('./temple-silhouette.png') right -28px bottom -8px/52% auto no-repeat;opacity:.18;pointer-events:none;z-index:0}
+.hero-108-journey .journey-core-card:after{content:'108';position:absolute;right:12px;top:22px;font-family:'Nanum Myeongjo','Noto Serif KR',serif;font-size:clamp(110px,18vw,178px);font-weight:800;line-height:1;color:rgba(154,105,37,.065);pointer-events:none;z-index:0}
 .journey-core-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:14px}
+.journey-core-head,.journey-reward-row,.journey-flow{position:relative;z-index:2}
 .journey-eyebrow{display:block;color:#9a6725;font-size:12.5px;font-weight:900;letter-spacing:.04em;margin-bottom:4px}
 .journey-core-head h3{margin:0;font-family:'Nanum Myeongjo','Noto Serif KR',serif;font-size:31px;line-height:1.14;color:#21483d;letter-spacing:-.04em}
 .journey-mini-link{border:1px solid rgba(153,105,38,.24);background:rgba(255,255,255,.78);color:#77511d;border-radius:999px;padding:9px 12px;font-family:inherit;font-size:12px;font-weight:900;white-space:nowrap}
-.journey-main-cta{width:100%;position:relative;display:grid;grid-template-columns:108px minmax(0,1fr) 195px;gap:17px;align-items:center;border:1px solid rgba(194,155,88,.25);border-radius:22px;padding:20px 19px;background:linear-gradient(118deg,rgba(255,255,255,.94),rgba(255,249,233,.93));box-shadow:0 7px 20px rgba(96,69,33,.055),inset 0 1px 0 rgba(255,255,255,.9);text-align:left;color:#2e2923;font-family:inherit;cursor:pointer;overflow:hidden}
-.journey-main-cta:after{content:'수호카드 COLLECTION';position:absolute;left:18px;bottom:9px;color:rgba(132,91,34,.38);font-size:8px;font-weight:900;letter-spacing:.13em;pointer-events:none}
+.journey-main-cta{width:100%;position:relative;z-index:1;display:grid;grid-template-columns:108px minmax(0,1fr) 195px;gap:17px;align-items:center;border:1px solid rgba(194,155,88,.25);border-radius:22px;padding:20px 19px;background:linear-gradient(118deg,rgba(255,255,255,.84),rgba(255,249,233,.78));box-shadow:0 7px 20px rgba(96,69,33,.055),inset 0 1px 0 rgba(255,255,255,.82);text-align:left;color:#2e2923;font-family:inherit;cursor:pointer;overflow:hidden;isolation:isolate}
+.journey-main-cta:before{content:'';position:absolute;inset:0;background:url('./lotus-soft.png') -62px 68px/190px auto no-repeat,url('./temple-silhouette.png') right -34px bottom -18px/58% auto no-repeat;opacity:.12;pointer-events:none;z-index:0}.journey-main-cta:after{content:'108';position:absolute;right:14px;top:16px;font-family:'Nanum Myeongjo','Noto Serif KR',serif;font-size:clamp(92px,16vw,156px);font-weight:800;line-height:.95;color:rgba(151,104,36,.09);pointer-events:none;z-index:0}.journey-main-cta>*{position:relative;z-index:2}
 .journey-count{display:flex;align-items:baseline;white-space:nowrap;align-self:start;padding-top:10px}
 .journey-count b{font-family:'Nanum Myeongjo','Noto Serif KR',serif;font-size:62px;line-height:.92;color:#225b4c;letter-spacing:-.07em}
 .journey-count i{font-style:normal;font-family:'Nanum Myeongjo','Noto Serif KR',serif;font-size:25px;font-weight:800;color:#9a6a27;margin-left:5px}
@@ -21144,7 +21145,7 @@ button.site-footer-link{font-size:clamp(15px,2vw,17px)!important;font-weight:750
   .hero-108-journey .journey-core-card:after{font-size:116px;right:1px;top:53px}
   .journey-core-head{margin-bottom:11px}.journey-eyebrow{font-size:11.5px}.journey-core-head h3{font-size:28px}.journey-mini-link{font-size:10.8px;padding:8px 10px}
   .journey-main-cta{grid-template-columns:83px minmax(0,1fr);gap:11px;padding:15px 12px 13px;border-radius:19px}
-  .journey-main-cta:after{display:none}.journey-count{padding-top:7px}.journey-count b{font-size:50px}.journey-count i{font-size:20px}
+  .journey-main-cta:before{background-position:-58px 74px,right -44px bottom -8px;background-size:165px auto,67% auto;opacity:.11}.journey-main-cta:after{display:block;font-size:106px;right:-3px;top:18px;color:rgba(151,104,36,.085)}.journey-count{padding-top:7px}.journey-count b{font-size:50px}.journey-count i{font-size:20px}
   .journey-copy>b{font-size:20px;line-height:1.38}.journey-copy small{font-size:12.4px;line-height:1.58;margin-top:6px}
   .journey-card-preview{grid-column:1/-1;height:154px;margin-top:5px}
   .journey-mini-card{width:74px;height:123px;bottom:6px}.journey-mini-card.preview-left{right:110px}.journey-mini-card.preview-center{right:58px}.journey-mini-card.preview-right{right:6px}
