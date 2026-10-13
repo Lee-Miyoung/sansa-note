@@ -16,7 +16,7 @@
 </script>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=yes, maximum-scale=5">
 <title>산사노트 | 사찰 순례·절 여행·마음 필사 기록</title>
 <link rel="canonical" href="https://sansanote.com/">
 <meta name="description" content="산사노트는 전국 사찰을 찾아보고, 다녀온 절과 사진을 기록하며, 오늘의 필사와 마음 쉬어가기 기능으로 나를 돌아보는 기록 공간입니다. 종교를 떠나 조용한 산사와 한 줄의 글 속에서 잠시 쉬고 다시 일상으로 나아갈 힘을 찾을 수 있습니다.">
@@ -38882,6 +38882,142 @@ body:not(.sansa-overlay-locked):not(.pack-modal-open){overflow-y:auto!important;
   window.addEventListener('pageshow',unlockIfSafe);
   document.addEventListener('visibilitychange',()=>{if(!document.hidden)unlockIfSafe()});
   setInterval(unlockIfSafe,1200);
+})();
+</script>
+
+
+<style id="sansa-ios-focus-zoom-scroll-hardfix-20261013">
+/* iOS Safari input-focus zoom 방지: 실제 computed font-size를 17px 이상으로 고정 */
+@media (max-width: 1000px){
+  html{-webkit-text-size-adjust:100%!important;text-size-adjust:100%!important;}
+  input:not([type="range"]):not([type="checkbox"]):not([type="radio"]),
+  textarea,select,
+  .searchbox,
+  #searchBox,#catalogSearch,#sansaGuideSearch,
+  #beatLabOverlay input,#beatLabOverlay textarea,#beatLabOverlay select{
+    font-size:17px!important;
+    line-height:1.35!important;
+    transform:none!important;
+    zoom:1!important;
+  }
+  #catalogOverlay .catalog-modal{
+    width:calc(100vw - 16px)!important;
+    max-width:calc(100vw - 16px)!important;
+    min-width:0!important;
+    margin-left:auto!important;
+    margin-right:auto!important;
+    overflow-x:hidden!important;
+  }
+  #catalogOverlay .modal-body,
+  #catalogOverlay .catalog-toolbar,
+  #catalogOverlay .catalog-list{
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+    box-sizing:border-box!important;
+    overflow-x:hidden!important;
+  }
+  #catalogOverlay .catalog-toolbar{display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;gap:8px!important;}
+  #catalogOverlay .catalog-count{white-space:nowrap!important;max-width:92px!important;overflow:hidden!important;text-overflow:ellipsis!important;}
+  #catalogSearch{width:100%!important;min-width:0!important;max-width:100%!important;box-sizing:border-box!important;}
+}
+/* 버튼/게임은 더블탭 확대 없이 즉시 반응, 페이지 스크롤은 유지 */
+button,a,[role="button"],#beatLabOverlay .beat-pad,#beatLabOverlay .worry-fire-btn{touch-action:manipulation!important;}
+html,body{max-width:100%!important;overflow-x:hidden!important;}
+body{overscroll-behavior-y:auto!important;}
+</style>
+<script id="sansa-ios-focus-zoom-scroll-hardfix-js-20261013">
+(function(){
+  const baseViewport='width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=yes, maximum-scale=5';
+  function vp(){return document.querySelector('meta[name="viewport"]')}
+  function resetViewport(){
+    const m=vp(); if(!m)return;
+    /* Safari가 포커스 확대를 남기는 경우 viewport를 한 프레임 재적용해 원래 폭으로 복귀 */
+    m.setAttribute('content','width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover');
+    requestAnimationFrame(()=>requestAnimationFrame(()=>m.setAttribute('content',baseViewport)));
+  }
+  function overlayActuallyOpen(){
+    return !!document.querySelector('.overlay.show, #guardianCardDetail, #lightboxOverlay.show');
+  }
+  function hardUnlockIfNoOverlay(){
+    if(overlayActuallyOpen())return;
+    const b=document.body, h=document.documentElement;
+    const saved=Math.max(0,Number(window.sansaOverlayScrollY||0),Number(b.dataset.packScrollY||0));
+    b.classList.remove('sansa-overlay-locked','pack-modal-open','sansa-modal-open','modal-open','no-scroll');
+    ['position','top','left','right','width','height','overflow','overflowY','touchAction'].forEach(k=>b.style[k]='');
+    ['overflow','overflowY','height','touchAction'].forEach(k=>h.style[k]='');
+    delete b.dataset.packScrollY;
+    if(saved>0 && window.scrollY===0) requestAnimationFrame(()=>window.scrollTo(0,saved));
+  }
+  function isTextField(el){
+    if(!el||!el.matches)return false;
+    return el.matches('input:not([type="range"]):not([type="checkbox"]):not([type="radio"]),textarea,select');
+  }
+  document.addEventListener('focusin',e=>{
+    if(!isTextField(e.target))return;
+    const m=vp(); if(m)m.setAttribute('content',baseViewport);
+  },true);
+  document.addEventListener('focusout',e=>{
+    if(!isTextField(e.target))return;
+    setTimeout(()=>{resetViewport();hardUnlockIfNoOverlay();},60);
+    setTimeout(hardUnlockIfNoOverlay,350);
+  },true);
+  window.addEventListener('pageshow',()=>{resetViewport();setTimeout(hardUnlockIfNoOverlay,80)});
+  window.addEventListener('orientationchange',()=>setTimeout(resetViewport,120));
+  if(window.visualViewport){
+    let t=0;
+    visualViewport.addEventListener('resize',()=>{
+      clearTimeout(t);t=setTimeout(()=>{
+        if(!isTextField(document.activeElement)) hardUnlockIfNoOverlay();
+      },180);
+    });
+  }
+  /* Safari에서 input이 블러된 뒤 화면이 멈춘 것처럼 남는 경우를 복구 */
+  document.addEventListener('touchstart',()=>{
+    if(!isTextField(document.activeElement)) hardUnlockIfNoOverlay();
+  },{passive:true});
+  setInterval(hardUnlockIfNoOverlay,1500);
+})();
+</script>
+
+
+<style id="sansa-visual-viewport-catalog-fix-20261013">
+@media(max-width:1000px){
+  #catalogOverlay.show{
+    height:var(--sansa-vvh,100dvh)!important;
+    max-height:var(--sansa-vvh,100dvh)!important;
+    top:var(--sansa-vvtop,0px)!important;
+    bottom:auto!important;
+    overflow:hidden!important;
+  }
+  #catalogOverlay.show .catalog-modal{
+    height:calc(var(--sansa-vvh,100dvh) - 92px)!important;
+    max-height:calc(var(--sansa-vvh,100dvh) - 92px)!important;
+    display:flex!important;
+    flex-direction:column!important;
+  }
+  #catalogOverlay.show .modal-body{
+    flex:1 1 auto!important;
+    min-height:0!important;
+    max-height:none!important;
+    overflow-y:auto!important;
+    -webkit-overflow-scrolling:touch!important;
+    touch-action:pan-y!important;
+  }
+}
+</style>
+<script id="sansa-visual-viewport-catalog-fix-js-20261013">
+(function(){
+  function syncVisualViewport(){
+    const vv=window.visualViewport;
+    const root=document.documentElement;
+    root.style.setProperty('--sansa-vvh',Math.round(vv?vv.height:window.innerHeight)+'px');
+    root.style.setProperty('--sansa-vvtop',Math.round(vv?vv.offsetTop:0)+'px');
+  }
+  syncVisualViewport();
+  window.addEventListener('resize',syncVisualViewport,{passive:true});
+  window.visualViewport?.addEventListener('resize',syncVisualViewport,{passive:true});
+  window.visualViewport?.addEventListener('scroll',syncVisualViewport,{passive:true});
 })();
 </script>
 
