@@ -16,7 +16,7 @@
 </script>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5, user-scalable=yes">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>산사노트 | 사찰 순례·절 여행·마음 필사 기록</title>
 <link rel="canonical" href="https://sansanote.com/">
 <meta name="description" content="산사노트는 전국 사찰을 찾아보고, 다녀온 절과 사진을 기록하며, 오늘의 필사와 마음 쉬어가기 기능으로 나를 돌아보는 기록 공간입니다. 종교를 떠나 조용한 산사와 한 줄의 글 속에서 잠시 쉬고 다시 일상으로 나아갈 힘을 찾을 수 있습니다.">
@@ -37084,14 +37084,9 @@ function renderCatalogOverlay(){
     try{ if(typeof buildRegionTabs==='function') buildRegionTabs(); }catch(e){}
   }
 
-  function pushInternalState(kind){
+  function pushInternalState(kind,extra={}){
     try{
-      const st=history.state||{};
-      if(st.sansaInternal){
-        history.replaceState({...st,sansaInternal:true,sansaKind:kind},'',location.href);
-      }else{
-        history.pushState({sansaInternal:true,sansaKind:kind},'',location.href);
-      }
+      history.pushState({sansaInternal:true,sansaKind:kind,...extra},'',location.href);
     }catch(e){}
   }
 
@@ -37347,8 +37342,8 @@ function renderCatalogOverlay(){
 
   /* ---------- 절/산 탭: 무조건 전체목록 별도 창 ---------- */
   const _catalogOpen = window.openCatalogOverlay;
-  window.openCatalogOverlay=function(mode){
-    pushInternalState(mode==='mountain'?'mountain-catalog':'temple-catalog');
+  window.openCatalogOverlay=function(mode,options={}){
+    if(!options.skipHistory) pushInternalState(mode==='mountain'?'mountain-catalog':'temple-catalog',{mode:mode==='mountain'?'mountain':'temple'});
     return _catalogOpen(mode);
   };
 
@@ -37374,16 +37369,16 @@ function renderCatalogOverlay(){
   /* ---------- 상세 보기에도 뒤로가기용 내부 상태 1칸 ---------- */
   const _openDetail=window.openDetail;
   if(typeof _openDetail==='function'){
-    window.openDetail=function(){
-      pushInternalState('temple-detail');
-      return _openDetail.apply(this,arguments);
+    window.openDetail=function(id,options={}){
+      if(!options.skipHistory) pushInternalState('temple-detail',{detailId:id});
+      return _openDetail.call(this,id);
     };
   }
   const _openMountainDetail=window.openMountainDetail;
   if(typeof _openMountainDetail==='function'){
-    window.openMountainDetail=function(){
-      pushInternalState('mountain-detail');
-      return _openMountainDetail.apply(this,arguments);
+    window.openMountainDetail=function(id,options={}){
+      if(!options.skipHistory) pushInternalState('mountain-detail',{detailId:id});
+      return _openMountainDetail.call(this,id);
     };
   }
 
@@ -37391,8 +37386,8 @@ function renderCatalogOverlay(){
   const _goSiteNav=window.goSiteNav;
   window.goSiteNav=function(target){
     if(target==='home'){
+      try{history.pushState({sansaHome:true,sansaInternal:false,sansaKind:'home'},'',location.href);}catch(e){}
       returnToHome();
-      try{history.replaceState({sansaHome:true,sansaInternal:false},'',location.href);}catch(e){}
       return;
     }
 
@@ -37406,16 +37401,47 @@ function renderCatalogOverlay(){
   };
 
   /* ---------- 브라우저/휴대폰 뒤로가기 ---------- */
-  window.addEventListener('popstate',function(){
-    // 모달/기능 안에서 열린 화면은 먼저 '바로 전 단계'로 돌아간다.
+  window.addEventListener('popstate',function(e){
+    const st=e.state||{};
+    try{ closeAllInternalUI(); }catch(_){}
     try{
-      if(typeof window.sansaHandleBackStep==='function' && window.sansaHandleBackStep()) return;
-    }catch(e){}
-    // 더 이상 내부 단계가 없을 때만 홈으로 복귀한다.
+      document.body.classList.remove('sansa-overlay-locked','pack-modal-open','sansa-modal-open');
+      document.body.style.position='';document.body.style.top='';document.body.style.overflow='';document.body.style.touchAction='';
+    }catch(_){}
+
+    const kind=st.sansaKind||'';
+    if(st.sansaHome || !kind || kind==='home'){
+      returnToHome();
+      return;
+    }
+    if(kind==='temple-catalog'){
+      setTimeout(()=>openCatalogOverlay('temple',{skipHistory:true}),0);return;
+    }
+    if(kind==='mountain-catalog'){
+      setTimeout(()=>openCatalogOverlay('mountain',{skipHistory:true}),0);return;
+    }
+    if(kind==='temple-detail' && st.detailId){
+      setTimeout(()=>window.openDetail?.(st.detailId,{skipHistory:true}),0);return;
+    }
+    if(kind==='mountain-detail' && st.detailId){
+      setTimeout(()=>window.openMountainDetail?.(st.detailId,{skipHistory:true}),0);return;
+    }
+    if(kind==='course'){
+      setTimeout(()=>openPackOverlay?.(),0);return;
+    }
+    if(kind==='mypage'){
+      setTimeout(()=>{ if(typeof openHeroAccountAction==='function')openHeroAccountAction(); else openSettings?.(); },0);return;
+    }
+    if(kind==='community' || kind==='community-window'){
+      setTimeout(()=>window.openCommunityWindow?.({skipHistory:true}),0);return;
+    }
+    if(kind==='guide'){
+      setTimeout(()=>openSansaGuide?.('',{skipHistory:true}),0);return;
+    }
+    if(kind==='passport'){
+      setTimeout(()=>openPassportOverlay?.(),0);return;
+    }
     returnToHome();
-    try{
-      history.replaceState({sansaHome:true,sansaInternal:false},'',location.href);
-    }catch(e){}
   });
 })();
 </script>
@@ -38105,7 +38131,7 @@ document.getElementById('todayTriviaOverlay')?.addEventListener('click',function
     try{history.replaceState({sansaHome:true,sansaInternal:false},'',location.href);}catch(e){}
     window.scrollTo({top:0,behavior:'smooth'});
   };
-  window.openCommunityWindow=function(){
+  window.openCommunityWindow=function(options={}){
     ensureCommunityInWindow();
     try{if(typeof setCommunityViewMode==='function')setCommunityViewMode(false);}catch(e){}
     var el=document.getElementById('communityWindowOverlay');
@@ -38113,10 +38139,9 @@ document.getElementById('todayTriviaOverlay')?.addEventListener('click',function
     el.classList.add('show');el.setAttribute('aria-hidden','false');
     try{if(typeof renderCommunity==='function')renderCommunity();}catch(e){console.warn(e)}
     try{if(typeof renderCommunityHero==='function')renderCommunityHero();}catch(e){}
-    try{
-      if(!(history.state||{}).sansaInternal)history.pushState({sansaInternal:true,sansaKind:'community-window'},'',location.href);
-      else history.replaceState({...history.state,sansaInternal:true,sansaKind:'community-window'},'',location.href);
-    }catch(e){}
+    if(!options.skipHistory){
+      try{history.pushState({sansaInternal:true,sansaKind:'community-window'},'',location.href);}catch(e){}
+    }
     el.querySelector('.modal-body')?.scrollTo(0,0);
   };
   var previousSwitch=window.switchContentType;
@@ -38800,5 +38825,65 @@ document.getElementById('todayTriviaOverlay')?.addEventListener('click',function
   window.sansaMarkTopNav=mark;
 })();
 </script>
+
+<style id="sansa-ios-nozoom-scroll-history-fix-20261013">
+/* iPhone Safari: input focus must not auto zoom. */
+@media (max-width: 900px){
+  input, select, textarea,
+  .searchbox,
+  #searchBox,#catalogSearch,#sansaGuideSearch,
+  #beatLabOverlay input,#beatLabOverlay select,#beatLabOverlay textarea{
+    font-size:16px !important;
+  }
+}
+/* Games/buttons should react without double-tap zoom. */
+#beatLabOverlay,#beatLabOverlay *,
+.overlay button,.site-global-nav button{
+  touch-action:manipulation;
+}
+html,body{min-height:100%;}
+body:not(.sansa-overlay-locked):not(.pack-modal-open){overflow-y:auto!important;touch-action:pan-y!important;}
+</style>
+<script id="sansa-ios-scroll-unlock-watchdog-20261013">
+(function(){
+  function noBlockingOverlay(){
+    return !document.querySelector('.overlay.show') && !document.getElementById('guardianCardDetail');
+  }
+  function unlockIfSafe(){
+    if(!noBlockingOverlay()) return;
+    const wasFixed=document.body.style.position==='fixed' || document.body.classList.contains('sansa-overlay-locked') || document.body.classList.contains('pack-modal-open');
+    const y=Math.max(0, Number(window.sansaOverlayScrollY||0), Number(document.body.dataset.packScrollY||0));
+    document.body.classList.remove('sansa-overlay-locked','pack-modal-open','sansa-modal-open');
+    document.body.style.position='';
+    document.body.style.top='';
+    document.body.style.left='';
+    document.body.style.right='';
+    document.body.style.width='';
+    document.body.style.overflow='';
+    document.body.style.touchAction='';
+    delete document.body.dataset.packScrollY;
+    if(wasFixed && y>0 && window.scrollY===0) requestAnimationFrame(()=>window.scrollTo(0,y));
+  }
+  const prevNav=window.goSiteNav;
+  if(typeof prevNav==='function'){
+    window.goSiteNav=function(target){
+      if(target==='home'){
+        try{document.querySelectorAll('.overlay.show').forEach(el=>{el.classList.remove('show');el.setAttribute('aria-hidden','true')});}catch(_){}
+        document.body.classList.remove('sansa-overlay-locked','pack-modal-open','sansa-modal-open');
+        document.body.style.position='';document.body.style.top='';document.body.style.overflow='';document.body.style.touchAction='';
+      }
+      const r=prevNav.apply(this,arguments);
+      setTimeout(unlockIfSafe,80);
+      setTimeout(unlockIfSafe,350);
+      return r;
+    };
+  }
+  new MutationObserver(()=>requestAnimationFrame(unlockIfSafe)).observe(document.body,{subtree:true,attributes:true,attributeFilter:['class']});
+  window.addEventListener('pageshow',unlockIfSafe);
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden)unlockIfSafe()});
+  setInterval(unlockIfSafe,1200);
+})();
+</script>
+
 </body>
 </html>
