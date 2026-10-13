@@ -21203,6 +21203,38 @@ button.site-footer-link{font-size:clamp(15px,2vw,17px)!important;font-weight:750
   .site-global-nav .hero-top-action .hta-icon{width:20px!important;height:20px!important;font-size:10px!important;}
 }
 </style>
+
+<style id="sansa-108-single-foreground-layer-fix-20261013">
+/* 108/연꽃·산사 장식은 한 벌만 사용. 바깥 장식을 내용 카드보다 앞으로, 실제 글자/카드는 그보다 위로. */
+.hero-108-journey .journey-core-card::before{
+  z-index:3 !important;
+  opacity:.15 !important;
+}
+.hero-108-journey .journey-core-card::after{
+  z-index:3 !important;
+  color:rgba(154,105,37,.075) !important;
+}
+/* 이전 수정에서 안쪽 카드에 한 번 더 생긴 108/배경 제거 */
+.hero-108-journey .journey-main-cta::before,
+.hero-108-journey .journey-main-cta::after{
+  content:none !important;
+  display:none !important;
+}
+/* 흰 내용 카드가 바깥 장식을 가리지 않게 하고, 실제 내용은 가장 위에 */
+.hero-108-journey .journey-main-cta{
+  z-index:auto !important;
+  isolation:auto !important;
+  background:linear-gradient(118deg,rgba(255,255,255,.82),rgba(255,249,233,.73)) !important;
+}
+.hero-108-journey .journey-main-cta > *,
+.hero-108-journey .journey-core-head,
+.hero-108-journey .journey-reward-row,
+.hero-108-journey .journey-flow{
+  position:relative !important;
+  z-index:4 !important;
+}
+</style>
+
 </head>
 <body>
 
