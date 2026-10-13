@@ -21297,6 +21297,18 @@ button.site-footer-link{font-size:clamp(15px,2vw,17px)!important;font-weight:750
 }
 </style>
 
+
+<style id="sansa-nickname-profile-20261013">
+#settingsOverlay .settings-account-main{min-width:0;flex:1 1 100%;}
+#settingsOverlay .nickname-editor{margin-top:12px;padding:12px;border-radius:15px;background:rgba(255,255,255,.72);border:1px solid #e1d8c9;}
+#settingsOverlay .nickname-editor label{display:block;margin-bottom:7px;font-size:13px;font-weight:900;color:#2f574c;}
+#settingsOverlay .nickname-editor-row{display:grid;grid-template-columns:minmax(0,1fr) 72px;gap:7px;align-items:center;}
+#settingsOverlay .nickname-editor input{width:100%;min-width:0;height:44px;box-sizing:border-box;border:1px solid #d5ccbd;border-radius:12px;background:#fff;padding:0 12px;font-family:inherit;font-size:16px!important;color:#2d2925;outline:none;}
+#settingsOverlay .nickname-editor input:focus{border-color:#4a826f;box-shadow:0 0 0 3px rgba(74,130,111,.11);}
+#settingsOverlay .nickname-editor button{height:44px;border:0;border-radius:12px;background:#2f715f;color:#fff;font-family:inherit;font-size:14px;font-weight:900;cursor:pointer;}
+#settingsOverlay .nickname-editor small{display:block;margin-top:7px;font-size:11.5px;line-height:1.45;color:#776f66;word-break:keep-all;}
+@media(max-width:480px){#settingsOverlay .nickname-editor{padding:11px}.nickname-editor-row{grid-template-columns:minmax(0,1fr) 66px!important}}
+</style>
 </head>
 <body>
 
@@ -21959,9 +21971,17 @@ button.site-footer-link{font-size:clamp(15px,2vw,17px)!important;font-weight:750
     </div>
     <div class="modal-body">
       <div class="settings-account-card">
-        <div>
+        <div class="settings-account-main">
           <b id="settingsAccountTitle">계정</b>
           <p id="accountInfo">로그인 정보를 불러오는 중...</p>
+          <div class="nickname-editor" id="nicknameEditor" style="display:none;">
+            <label for="nicknameInput">산사노트 닉네임</label>
+            <div class="nickname-editor-row">
+              <input id="nicknameInput" type="text" maxlength="12" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="2~12자로 입력" aria-label="산사노트 닉네임">
+              <button type="button" onclick="saveUserNickname()">저장</button>
+            </div>
+            <small>커뮤니티와 게임 순위에는 Google 이름이나 이메일 대신 이 닉네임이 보여요.</small>
+          </div>
         </div>
         <button class="settings-login-btn" id="guestSettingsLoginBtn" type="button" onclick="googleLogin()">G&nbsp;&nbsp;Google로 시작하기</button>
         <button class="settings-logout-btn" id="settingsLogoutBtn" type="button" onclick="doLogout()" style="display:none;">로그아웃</button>
@@ -23439,6 +23459,7 @@ let kakaoReadyCallbacks=[];
    AUTH
 ============================================================ */
 let currentUid = null;
+let currentUserNickname = '';
 
 (function setupSwipeToClose(){
   let startY = null;
@@ -23502,18 +23523,18 @@ window.addEventListener('DOMContentLoaded', ()=>{
   // Firebase가 실제 로그인 상태를 확인한 뒤, 로그인되어 있으면 계정 모드,
   // 아니면 바로 둘러보기(게스트)로 앱을 엽니다.
   let authInitialHandled = false;
-  auth.onAuthStateChanged(user=>{
+  auth.onAuthStateChanged(async user=>{
     if(user){
       localStorage.removeItem('travelDiaryGuestMode');
       localMode = false;
       currentUid = user.uid;
       document.body.classList.remove('guest-browsing');
       document.getElementById('authScreen').style.display = 'none';
-      ensureUserProfile(user);
+      await ensureUserProfile(user);
       if(!authInitialHandled || document.getElementById('app').style.display!=='block'){
         launchApp();
       }else{
-        location.reload();
+        updateAccountInfo();
       }
       authInitialHandled = true;
     }else if(!authInitialHandled){
@@ -23671,6 +23692,7 @@ function friendlyAuthError(err){
 function startLocalMode(){
   localMode = true;
   currentUid = null;
+  currentUserNickname = '';
   localStorage.setItem('travelDiaryGuestMode', '1');
   document.body.classList.add('guest-browsing');
   document.getElementById('authScreen').style.display = 'none';
@@ -23707,6 +23729,7 @@ async function ensureUserProfile(user){
   try{
     const snap=await ref.once('value');
     const old=snap.val()||{};
+    currentUserNickname=String(old.nickname||'').trim().slice(0,12);
     const patch={
       email:user.email||old.email||'',
       displayName:user.displayName||old.displayName||'',
@@ -23715,8 +23738,35 @@ async function ensureUserProfile(user){
     };
     if(!old.joinedAt) patch.joinedAt=firebase.database.ServerValue.TIMESTAMP;
     await ref.update(patch);
+    syncNicknameEditor();
   }catch(err){
     console.warn('profile save failed',err&&err.code);
+  }
+}
+function cleanNickname(value){
+  return String(value||'').replace(/\s+/g,' ').trim().slice(0,12);
+}
+function syncNicknameEditor(){
+  const editor=document.getElementById('nicknameEditor');
+  const input=document.getElementById('nicknameInput');
+  const loggedIn=!!(auth&&auth.currentUser&&!localMode);
+  if(editor)editor.style.display=loggedIn?'block':'none';
+  if(input && document.activeElement!==input)input.value=currentUserNickname||'';
+}
+async function saveUserNickname(){
+  if(localMode||!auth?.currentUser||!currentUid){showToast('로그인 후 닉네임을 설정할 수 있어요.');return;}
+  const input=document.getElementById('nicknameInput');
+  const nickname=cleanNickname(input?.value);
+  if(nickname.length<2){showToast('닉네임은 2자 이상 입력해 주세요.');input?.focus();return;}
+  try{
+    await db.ref('users/'+currentUid+'/profile').update({nickname, nicknameUpdatedAt:firebase.database.ServerValue.TIMESTAMP});
+    currentUserNickname=nickname;
+    if(input)input.value=nickname;
+    updateAccountInfo();
+    showToast('닉네임을 저장했어요.');
+  }catch(err){
+    console.warn('nickname save failed',err&&err.code);
+    showToast('닉네임을 저장하지 못했어요. 잠시 후 다시 시도해 주세요.');
   }
 }
 function formatAdminDate(ts){
@@ -24163,12 +24213,16 @@ function updateAccountInfo(){
   if(browseHint) browseHint.style.display=loggedIn?'none':'inline-flex';
 
   if(loggedIn){
-    if(title) title.textContent='내 계정';
-    if(el) el.textContent=`${auth.currentUser.email} 계정으로 기록을 안전하게 저장하고 있어요.`;
+    if(title) title.textContent=currentUserNickname?`${currentUserNickname}님의 계정`:'내 계정';
+    if(el) el.textContent=currentUserNickname
+      ? `${currentUserNickname}님으로 산사노트 기록을 안전하게 저장하고 있어요.`
+      : '닉네임을 정하면 커뮤니티와 게임에서 Google 이름·이메일 대신 닉네임이 표시돼요.';
+    syncNicknameEditor();
   }else{
     if(title) title.textContent='산사노트';
     if(el) el.textContent='전국의 절을 기록하는 나만의 순례 노트. 로그인하면 어느 기기에서든 방문기록·메모·사진을 이어서 볼 수 있어요.';
   }
+  syncNicknameEditor();
   syncHeroAccountButton();
 }
 function resetGuestData(){
@@ -28840,12 +28894,8 @@ let communityFilter = 'all';
 let currentCommunityPostId = null;
 
 function communityUserName(){
-  const u=auth && auth.currentUser;
-  if(!u) return '산사노트 회원';
-  const name=(u.displayName||'').trim();
-  if(name) return name.slice(0,20);
-  const email=(u.email||'').trim();
-  if(email) return email.split('@')[0].slice(0,20);
+  const nick=cleanNickname(currentUserNickname);
+  if(nick) return nick;
   return '산사노트 회원';
 }
 function communityCategoryLabel(cat){
@@ -31828,8 +31878,9 @@ async function refreshAdminStats(){
       totalPhotos+=c;
       const profile=(u&&u.profile)||{};
       const email=profile.email || (uid===currentUid ? (auth?.currentUser?.email||'') : '');
+      const nickname=String(profile.nickname||'').trim();
       const displayName=profile.displayName || '';
-      const label=displayName || email || `회원 ${uid.slice(0,6)}…`;
+      const label=nickname || displayName || email || `회원 ${uid.slice(0,6)}…`;
       return {
         uid,label,email,c,
         joinedAt:Number(profile.joinedAt||0),
@@ -34093,7 +34144,7 @@ function updateBeatArcadeHud(){
   const m=document.getElementById('beatMultiplier'),a=document.getElementById('beatAccuracy'),b=document.getElementById('beatBestText');
   if(m)m.textContent='×'+mult;if(a)a.textContent='ACC '+acc+'%';if(b)b.textContent='BEST '+beatLocalBest.toLocaleString();const sp=document.getElementById('beatSpeed');if(sp)sp.textContent='SPEED ×'+beatSpeedLabel();const ov=document.getElementById('beatLabOverlay');if(ov)ov.dataset.speedTier=String(beatLevelTuning().tier);
 }
-function beatPlayerName(){const u=auth?.currentUser,raw=(u?.displayName||'순례자').trim()||'순례자';return raw.slice(0,14);}
+function beatPlayerName(){const raw=cleanNickname(currentUserNickname)||'순례자';return raw.slice(0,12);}
 function saveBeatLeaderboardScore(force=false){
   if(localMode||!db||!auth?.currentUser||beatScore<=0)return Promise.resolve(false);
   if(!force&&beatScore<=beatLastSavedScore)return Promise.resolve(false);
