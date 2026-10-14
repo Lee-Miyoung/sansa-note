@@ -21820,6 +21820,180 @@ body.catalog-screen-open #catalogOverlay,
 }
 </style>
 
+
+<style id="sansa-108-sanctuary-v1-css">
+/* 산사노트 핵심: 108 순례 박스를 주변 카드와 확실히 분리 */
+.hero-108-journey .journey-core-card{
+  --bloom-size:230px;
+  --bloom-opacity:.30;
+  --sanctuary-glow:rgba(174,130,53,.13);
+  border:1.5px solid transparent!important;
+  background:
+    linear-gradient(145deg,rgba(255,253,246,.98),rgba(255,247,226,.96) 48%,rgba(239,247,239,.96)) padding-box,
+    linear-gradient(120deg,#d2a75c,#f4dfad,#78a58f,#d4a45a) border-box!important;
+  background-size:auto,220% 220%!important;
+  box-shadow:
+    0 16px 36px rgba(64,78,58,.10),
+    0 0 28px var(--sanctuary-glow),
+    inset 0 1px 0 rgba(255,255,255,.88)!important;
+  animation:sansaSanctuaryBorder 9s ease-in-out infinite;
+}
+
+/* 기존 연꽃/산사 배경 한 벌만 유지하면서 방문 수에 따라 연꽃 존재감 증가 */
+.hero-108-journey .journey-core-card::before{
+  opacity:var(--bloom-opacity)!important;
+  background-size:var(--bloom-size) auto,60% auto!important;
+  filter:drop-shadow(0 0 12px rgba(221,180,91,.16));
+  transition:opacity .7s ease,background-size .8s ease,filter .8s ease!important;
+}
+.hero-108-journey .journey-core-card::after{
+  color:rgba(155,111,38,.14)!important;
+  text-shadow:0 0 28px rgba(219,181,105,.10);
+}
+
+/* 진행 숫자를 메달처럼 */
+.hero-108-journey .journey-count{
+  min-width:106px;
+  min-height:106px;
+  padding:9px 8px!important;
+  border-radius:50%;
+  align-self:center!important;
+  justify-content:center;
+  background:
+    radial-gradient(circle at 50% 38%,rgba(255,255,255,.98),rgba(255,247,223,.92) 58%,rgba(230,210,160,.60) 100%);
+  border:1.5px solid rgba(190,146,66,.50);
+  box-shadow:
+    0 0 0 8px rgba(226,198,135,.10),
+    0 8px 20px rgba(111,78,35,.10),
+    inset 0 1px 0 #fff;
+}
+.hero-108-journey .journey-count b{
+  text-shadow:0 3px 12px rgba(38,91,76,.10);
+}
+.hero-108-journey .journey-count i{
+  margin-left:4px!important;
+}
+
+/* 실제 내용 카드는 투명도를 조금 높여 배경 연꽃이 살아나게 */
+.hero-108-journey .journey-main-cta{
+  border-color:rgba(199,159,88,.34)!important;
+  background:linear-gradient(118deg,rgba(255,255,255,.76),rgba(255,249,232,.66))!important;
+  box-shadow:
+    0 9px 24px rgba(92,69,36,.07),
+    inset 0 1px 0 rgba(255,255,255,.92)!important;
+}
+
+/* 수호카드 3장이 '보상'처럼 은은하게 빛남 */
+.hero-108-journey .journey-mini-card{
+  box-shadow:
+    0 10px 18px rgba(75,54,31,.19),
+    0 0 0 1px rgba(218,173,82,.24),
+    0 0 18px rgba(224,184,94,.13)!important;
+}
+.hero-108-journey .journey-mini-card.preview-center{
+  animation:sansaGuardianBreath 3.8s ease-in-out infinite;
+}
+
+/* 진행현황 영역 */
+.hero-108-journey .journey-reward-row{
+  border:1px solid rgba(211,185,127,.38)!important;
+  border-radius:17px!important;
+  background:linear-gradient(90deg,rgba(255,255,255,.88),rgba(250,246,230,.84),rgba(241,249,243,.84))!important;
+  box-shadow:0 7px 18px rgba(88,75,48,.055)!important;
+}
+
+/* 절 방문→연꽃→현장인증→카드오픈은 금빛 순례길처럼 */
+.hero-108-journey .journey-flow{
+  position:relative!important;
+  border:1px solid rgba(211,183,125,.35)!important;
+  border-radius:17px!important;
+  background:linear-gradient(90deg,rgba(255,250,237,.91),rgba(247,251,243,.90))!important;
+  padding:12px 10px 8px!important;
+}
+.hero-108-journey .journey-flow i{
+  border-color:rgba(202,163,91,.42)!important;
+  box-shadow:
+    0 3px 9px rgba(111,81,37,.06),
+    0 0 0 5px rgba(220,190,126,.07)!important;
+}
+.hero-108-journey .journey-flow>strong{
+  color:#b47e31!important;
+  text-shadow:0 0 9px rgba(204,157,75,.15);
+}
+
+/* 방문 수에 따라 연꽃이 조금씩 더 피어나는 느낌 */
+.hero-108-journey .journey-core-card.bloom-seed{
+  --bloom-size:168px;
+  --bloom-opacity:.18;
+}
+.hero-108-journey .journey-core-card.bloom-bud{
+  --bloom-size:198px;
+  --bloom-opacity:.24;
+}
+.hero-108-journey .journey-core-card.bloom-half{
+  --bloom-size:226px;
+  --bloom-opacity:.31;
+  --sanctuary-glow:rgba(177,135,56,.16);
+}
+.hero-108-journey .journey-core-card.bloom-near{
+  --bloom-size:252px;
+  --bloom-opacity:.38;
+  --sanctuary-glow:rgba(189,144,48,.20);
+}
+.hero-108-journey .journey-core-card.bloom-full{
+  --bloom-size:278px;
+  --bloom-opacity:.47;
+  --sanctuary-glow:rgba(210,158,41,.28);
+  box-shadow:
+    0 18px 42px rgba(68,85,59,.12),
+    0 0 34px rgba(210,158,41,.24),
+    inset 0 1px 0 rgba(255,255,255,.90)!important;
+}
+.hero-108-journey .journey-core-card.bloom-full::before{
+  filter:drop-shadow(0 0 18px rgba(220,172,55,.28));
+}
+
+@keyframes sansaSanctuaryBorder{
+  0%,100%{background-position:0 0,0% 50%}
+  50%{background-position:0 0,100% 50%}
+}
+@keyframes sansaGuardianBreath{
+  0%,100%{
+    filter:drop-shadow(0 0 0 rgba(226,182,87,0));
+  }
+  50%{
+    filter:drop-shadow(0 0 8px rgba(226,182,87,.26));
+  }
+}
+
+@media(max-width:700px){
+  .hero-108-journey .journey-count{
+    min-width:86px;
+    min-height:86px;
+    padding:6px!important;
+    box-shadow:
+      0 0 0 6px rgba(226,198,135,.09),
+      0 6px 16px rgba(111,78,35,.09),
+      inset 0 1px 0 #fff;
+  }
+  .hero-108-journey .journey-core-card{
+    border-radius:25px!important;
+  }
+  .hero-108-journey .journey-core-card.bloom-seed{--bloom-size:145px;}
+  .hero-108-journey .journey-core-card.bloom-bud{--bloom-size:165px;}
+  .hero-108-journey .journey-core-card.bloom-half{--bloom-size:188px;}
+  .hero-108-journey .journey-core-card.bloom-near{--bloom-size:210px;}
+  .hero-108-journey .journey-core-card.bloom-full{--bloom-size:232px;}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .hero-108-journey .journey-core-card,
+  .hero-108-journey .journey-mini-card.preview-center{
+    animation:none!important;
+  }
+}
+</style>
+
 </head>
 <body>
 
@@ -30029,6 +30203,18 @@ function updateHero108Journey(){
     if(v1)v1.textContent=String(visited);
     if(v2)v2.textContent=String(visited);
     if(v3)v3.textContent=String(verified);
+
+    const sanctuary=document.querySelector('.hero-108-journey .journey-core-card');
+    if(sanctuary){
+      sanctuary.classList.remove('bloom-seed','bloom-bud','bloom-half','bloom-near','bloom-full');
+      const bloomClass=visited>=108?'bloom-full'
+        :visited>=61?'bloom-near'
+        :visited>=31?'bloom-half'
+        :visited>=11?'bloom-bud'
+        :'bloom-seed';
+      sanctuary.classList.add(bloomClass);
+      sanctuary.setAttribute('data-visited',String(visited));
+    }
     const lp=document.getElementById('heroLotusProgress');
     if(lp)lp.textContent=visited>=108?`연꽃 108송이 · 컬러카드 ${verified}장`:`연꽃 ${visited}송이 · 컬러카드 ${verified}장 · ${108-visited}곳 남음`;
 
