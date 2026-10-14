@@ -39638,15 +39638,92 @@ body.sansa-catalog-active{
     return null;
   }
   function fmtDist(m){m=Math.max(0,Number(m)||0);return m<1000?`${Math.round(m)}m`:`${(m/1000).toFixed(1)}km`;}
-  function templeEntries(){
-    return Object.entries(destinations||{}).map(([id,d])=>{
-      const lat=Number(d&& (d.fixedLat||d.lat));
-      const lng=Number(d&& (d.fixedLng||d.lng));
-      return {id,d,lat,lng};
-    }).filter(x=>x.d&&x.d.name&&Number.isFinite(x.lat)&&Number.isFinite(x.lng));
+  /* 주변 절 찾기에서는 예전에 DB에 저장된 d.lat/d.lng를 신뢰하지 않는다.
+     과거 동명이 사찰 자동매칭으로 잘못 저장된 좌표가 있을 수 있기 때문.
+     관리자 확정좌표 → 검증 캐시 → 카카오 검색으로 다시 찾은 기준점만 사용한다. */
+  function broadRegionFromKakaoName(name){
+    const s=String(name||'');
+    if(/서울|인천|경기/.test(s))return '수도권';
+    if(/강원/.test(s))return '강원';
+    if(/충북|충남|충청|대전|세종/.test(s))return '충청';
+    if(/전북|전남|전라|광주/.test(s))return '전라';
+    if(/경북|경남|경상|대구|부산|울산/.test(s))return '경상';
+    if(/제주/.test(s))return '제주';
+    return '';
   }
-  function distanceM(pos,t){return haversineKm(Number(pos.coords.latitude),Number(pos.coords.longitude),t.lat,t.lng)*1000;}
-  function nearestTemples(pos){return templeEntries().map(t=>({...t,distanceM:distanceM(pos,t)})).sort((a,b)=>a.distanceM-b.distanceM).slice(0,5);}
+  function currentBroadRegion(pos){
+    return new Promise(resolve=>{
+      try{
+        ensureKakao(ok=>{
+          if(!ok||!window.kakao?.maps?.services){resolve('');return;}
+          const geocoder=new kakao.maps.services.Geocoder();
+          geocoder.coord2RegionCode(
+            Number(pos.coords.longitude),
+            Number(pos.coords.latitude),
+            (rows,status)=>{
+              if(status!==kakao.maps.services.Status.OK||!Array.isArray(rows)||!rows.length){resolve('');return;}
+              const row=rows.find(x=>x.region_type==='H')||rows[0];
+              resolve(broadRegionFromKakaoName(row.region_1depth_name||row.address_name||''));
+            }
+          );
+        });
+      }catch(e){resolve('');}
+    });
+  }
+  function destinationCandidates(region){
+    const all=Object.entries(destinations||{}).filter(([id,d])=>d&&d.name&&TEMPLE_VERIFY_PROFILES[d.name]);
+    if(!region)return all;
+    const same=all.filter(([id,d])=>String(d.region||'')===region);
+    return same.length?same:all;
+  }
+  async function resolveNearbyEntry(id,d){
+    try{
+      const p=await resolveTempleVerifyPoint(id,d);
+      if(!p)return null;
+      const lat=Number(p.lat),lng=Number(p.lng);
+      if(!Number.isFinite(lat)||!Number.isFinite(lng))return null;
+      return {id,d,lat,lng,verifyLabel:p.label||'',verifySource:p.source||''};
+    }catch(e){return null;}
+  }
+  async function nearestTemples(pos){
+    const region=await currentBroadRegion(pos);
+    const candidates=destinationCandidates(region);
+    const resolved=[];
+    const concurrency=5;
+    let cursor=0;
+    async function worker(){
+      while(cursor<candidates.length){
+        const i=cursor++;
+        const [id,d]=candidates[i];
+        const item=await resolveNearbyEntry(id,d);
+        if(item)resolved.push(item);
+      }
+    }
+    await Promise.all(Array.from({length:Math.min(concurrency,candidates.length||1)},worker));
+    const ranked=resolved.map(t=>({...t,distanceM:distanceM(pos,t)}))
+      .filter(t=>Number.isFinite(t.distanceM))
+      .sort((a,b)=>a.distanceM-b.distanceM);
+    /* 같은 권역에서 결과가 부족한 경우에만 전체 108 중 미해결 사찰을 추가 탐색 */
+    if(ranked.length<5 && region){
+      const used=new Set(candidates.map(([id])=>id));
+      const extra=Object.entries(destinations||{}).filter(([id,d])=>!used.has(id)&&d&&d.name&&TEMPLE_VERIFY_PROFILES[d.name]);
+      let j=0;
+      async function extraWorker(){
+        while(j<extra.length && ranked.length<8){
+          const k=j++;
+          const [id,d]=extra[k];
+          const item=await resolveNearbyEntry(id,d);
+          if(item){
+            item.distanceM=distanceM(pos,item);
+            if(Number.isFinite(item.distanceM))ranked.push(item);
+          }
+        }
+      }
+      await Promise.all(Array.from({length:Math.min(4,extra.length||1)},extraWorker));
+      ranked.sort((a,b)=>a.distanceM-b.distanceM);
+    }
+    return {region,list:ranked.slice(0,5)};
+  }
   function openOverlay(){const o=document.getElementById('nearbyTempleOverlay');if(o){o.classList.add('show');o.setAttribute('aria-hidden','false');}}
   function closeOverlay(){stopNearbyWatch();const o=document.getElementById('nearbyTempleOverlay');if(o){o.classList.remove('show');o.setAttribute('aria-hidden','true');}}
   window.closeNearbyTempleFinder=closeOverlay;
@@ -39656,16 +39733,19 @@ body.sansa-catalog-active{
     b.innerHTML=`<div class="nearby-hero"><div class="nh-kicker">SANSA NOTE · NEARBY</div><h3>가까운 산사를 찾고 있어요</h3><p>현재 위치는 절을 찾고 현장 인증을 판정하는 데만 사용하며, 실제 위도·경도는 방문 기록에 저장하지 않습니다.</p></div>
     <div class="nearby-scan"><div class="nearby-step on"><i>1</i><span><b>현재 위치 확인</b><small>휴대폰 GPS 신호 확인</small></span><strong>•••</strong></div><div class="nearby-step"><i>2</i><span><b>주변 사찰 비교</b><small>산사노트 사찰 좌표와 거리 계산</small></span></div><div class="nearby-step"><i>3</i><span><b>현장 인증 가능 여부</b><small>가까운 절은 더 엄격하게 재확인</small></span></div></div>`;
   }
-  function renderFound(pos){
+  async function renderFound(pos){
     nearbyLatestPosition=pos;
-    const list=nearestTemples(pos); const b=document.getElementById('nearbyTempleBody'); if(!b)return;
-    if(!list.length){b.innerHTML='<div class="nearby-statusbox">위치 정보가 준비된 사찰을 찾지 못했어요.</div>';return;}
-    b.innerHTML=`<div class="nearby-hero"><div class="nh-kicker">가까운 산사 발견</div><h3>${escapeHtml(list[0].d.name)}이(가) 가장 가까워요</h3><p>가까운 절을 찾는 것과 현장 인증은 별개예요. 인증은 사찰별 100~200m 경내 기준에서 GPS 정확도·머무름·이동속도를 다시 확인합니다.</p></div><div class="nearby-results">${list.map((t,i)=>{
+    const b=document.getElementById('nearbyTempleBody'); if(!b)return;
+    b.innerHTML=`<div class="nearby-hero"><div class="nh-kicker">정확한 사찰 좌표 확인</div><h3>현재 권역의 산사를 다시 확인하고 있어요</h3><p>예전에 저장된 임시 좌표는 사용하지 않고, 관리자 확정좌표와 실제 지도 검색 기준점으로 거리를 다시 계산합니다.</p></div><div class="nearby-statusbox">사찰 위치를 확인하는 중… 잠시만 기다려주세요.</div>`;
+    const result=await nearestTemples(pos);
+    const list=result.list||[];
+    if(!list.length){b.innerHTML='<div class="nearby-statusbox">정확한 위치를 확인한 사찰을 찾지 못했어요. 잠시 후 다시 시도해주세요.</div>';return;}
+    b.innerHTML=`<div class="nearby-hero"><div class="nh-kicker">${result.region?escapeHtml(result.region)+' · ':''}가까운 산사 발견</div><h3>${escapeHtml(list[0].d.name)}이(가) 가장 가까워요</h3><p>현재 위치와 실제 사찰 기준점으로 다시 계산했어요. 인증은 사찰별 100~200m 경내 기준에서 GPS 정확도·머무름·이동속도를 다시 확인합니다.</p></div><div class="nearby-results">${list.map((t,i)=>{
       const radius=profileRadius(t.d);
       const can=t.distanceM<=Math.max(300,radius+120);
       const status=t.distanceM<=radius?'현장 인증 거리':t.distanceM<=500?'조금 더 가까이':'주변 절';
       return `<div class="nearby-card"><div><b>${i===0?'🪷 ':''}${escapeHtml(t.d.name)}</b><small>${escapeHtml(t.d.region||'')} · ${status}</small></div><div class="nearby-distance">${fmtDist(t.distanceM)}<em>${t.distanceM<=radius?'인증 도전 가능':''}</em></div><div class="nearby-card-actions"><button type="button" onclick="openNearbyTempleDetail('${escapeAttr(t.id)}')">절 보기</button><button type="button" class="primary" ${can?'':'disabled'} onclick="startNearbyTempleStrictVerify('${escapeAttr(t.id)}')">${t.distanceM<=radius?'현장 인증 도전':'가까이 가서 인증'}</button></div></div>`;
-    }).join('')}</div><div class="nearby-statusbox">※ 이 기능은 기존의 <b>절 상세 → 현장 인증하기</b>를 바꾸지 않습니다. 기존 인증은 그대로 사용할 수 있어요.</div>`;
+    }).join('')}</div><div class="nearby-statusbox">※ 기존 <b>절 상세 → 현장 인증하기</b> 기능은 그대로 유지됩니다.</div>`;
   }
   window.openNearbyTempleDetail=function(id){closeOverlay();setTimeout(()=>{try{openDetail(id);}catch(e){showToast('절 상세를 열지 못했어요.');}},80);};
 
