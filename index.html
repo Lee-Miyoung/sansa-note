@@ -21567,6 +21567,20 @@ body.catalog-screen-open #catalogOverlay,
 }
 </style>
 
+
+<style id="sansa-detail-functional-fix-v1-css">
+#pilgrimCollectionOverlay.show{
+  z-index:2147483646!important;
+}
+#pilgrimCollectionOverlay.show .pilgrim-collection-modal{
+  position:relative!important;
+  z-index:1!important;
+}
+#pilgrimGpsCheck{
+  z-index:2147483647!important;
+}
+</style>
+
 </head>
 <body>
 
@@ -27921,7 +27935,11 @@ function openPilgrimCollection(){
   document.getElementById('pilgrimCollectionOverlay')?.classList.add('show');
 }
 function closePilgrimCollection(){
-  document.getElementById('pilgrimCollectionOverlay')?.classList.remove('show');
+  const overlay=document.getElementById('pilgrimCollectionOverlay');
+  if(!overlay)return;
+  overlay.classList.remove('show');
+  overlay.setAttribute('aria-hidden','true');
+  overlay.style.removeProperty('z-index');
 }
 function setPilgrimGameTab(tab,btn){
   pilgrimGameTab=tab;
@@ -30972,36 +30990,102 @@ function addVisitRecord(withLocation){
 
   if(!withLocation){ save(false); return; }
 
-  const targetLat = Number(d.fixedLat || d.lat);
-  const targetLng = Number(d.fixedLng || d.lng);
-  if(!navigator.geolocation){ showToast('이 브라우저는 위치 인증을 지원하지 않아요.'); return; }
-  if(!Number.isFinite(targetLat) || !Number.isFinite(targetLng)){
-    showToast('이 절의 위치 정보가 아직 준비되지 않았어요. 지도에서 위치를 확인한 뒤 다시 시도해주세요.');
+  if(!navigator.geolocation){
+    showToast('이 브라우저는 위치 인증을 지원하지 않아요.');
     return;
   }
 
-  startPilgrimageGpsCheck(d.name);
-  verifyTemplePosition(targetLat,targetLng,{
-    radiusM:500,
-    timeoutMs:35000,
-    zoneLabel:`${d.name} 현장권역`,
-    onProgress(info){ updatePilgrimageGpsCheck(info); }
-  }).then(info=>{
-    finishPilgrimageGpsCheck();
-    if(info.ok){
-      save(true, info.distanceM/1000, info.accuracyM);
-    }else{
-      const m = Math.round(info.distanceM || 0);
-      const acc = Math.round(info.accuracyM || 0);
-      showToast(`현장 인증 거리가 아직 멀어요 · 약 ${m>=1000?(m/1000).toFixed(1)+'km':m+'m'}${acc?` · GPS ±${acc}m`:''}`);
+  const templeName=String(
+    d?.name ||
+    document.getElementById('dName')?.textContent ||
+    '사찰'
+  ).trim() || '사찰';
+
+  const verifyBtn=document.getElementById('pilgrimVerifyBtn');
+  if(verifyBtn){
+    verifyBtn.disabled=true;
+    verifyBtn.innerHTML='📡 현장 확인 중...<small>GPS 위치를 확인하고 있어요</small>';
+  }
+
+  startPilgrimageGpsCheck(templeName);
+
+  async function resolveDetailTarget(){
+    /* 관리자 확정 좌표/검증된 카카오 기준점이 있으면 최우선.
+       없을 때만 기존 좌표를 마지막 fallback으로 사용한다. */
+    if(typeof window.resolveTempleVerifyPointForField==='function'){
+      try{
+        const p=await window.resolveTempleVerifyPointForField(id,d);
+        const lat=Number(p?.lat),lng=Number(p?.lng);
+        if(Number.isFinite(lat)&&Number.isFinite(lng)){
+          return {lat,lng,label:String(p.label||`${templeName} 기준점`),source:String(p.source||'verified-resolver')};
+        }
+      }catch(e){}
     }
-  }).catch(err=>{
-    finishPilgrimageGpsCheck();
-    if(err && err.code===1){
-      openLocationPermissionHelp(()=>addVisitRecord(true));
+    const confirmed=(typeof window.getConfirmedTempleVerifyPoint==='function')
+      ? window.getConfirmedTempleVerifyPoint(templeName)
+      : null;
+    if(confirmed && Number.isFinite(Number(confirmed.lat)) && Number.isFinite(Number(confirmed.lng))){
+      return {lat:Number(confirmed.lat),lng:Number(confirmed.lng),label:String(confirmed.label||`${templeName} 확정 기준점`),source:'admin-confirmed'};
+    }
+    const lat=Number(d.fixedLat||d.lat),lng=Number(d.fixedLng||d.lng);
+    if(Number.isFinite(lat)&&Number.isFinite(lng)){
+      return {lat,lng,label:`${templeName} 현장권역`,source:'legacy-fallback'};
+    }
+    return null;
+  }
+
+  Promise.resolve(resolveDetailTarget()).then(target=>{
+    if(!target) throw {code:96,message:'temple-target-not-found'};
+
+    return verifyTemplePosition(target.lat,target.lng,{
+      radiusM:500,              // 기존 상세 현장인증 범위 유지
+      timeoutMs:20000,
+      zoneLabel:`${templeName} 현장권역`,
+      onProgress(info){
+        /* target 라벨이 undefined로 번지지 않도록 사찰명 기준으로 고정 */
+        info.zoneLabel=`${templeName} 현장권역`;
+        updatePilgrimageGpsCheck(info);
+      }
+    });
+  }).then(info=>{
+    if(info.ok){
+      finishPilgrimageGpsCheck();
+      save(true,info.distanceM/1000,info.accuracyM);
       return;
     }
-    showToast('현재 위치를 정확히 잡지 못했어요. 하늘이 보이는 곳에서 5~10초 뒤 다시 눌러주세요.');
+
+    const m=Math.max(0,Math.round(info.distanceM||0));
+    const acc=Math.max(0,Math.round(info.accuracyM||0));
+    const distText=m>=1000?`${(m/1000).toFixed(1)}km`:`${m}m`;
+    showPilgrimageGpsFailure(
+      templeName,
+      '아직 현장 인증 범위 밖이에요',
+      `현재 기준점까지 약 ${distText}${acc?` · GPS 오차 ±${acc}m`:''}`
+    );
+  }).catch(err=>{
+    if(err&&err.code===1){
+      finishPilgrimageGpsCheck();
+      openLocationPermissionHelp(()=>addVisitRecord(true),err);
+      return;
+    }
+    if(err&&err.code===96){
+      showPilgrimageGpsFailure(
+        templeName,
+        '사찰 인증 기준점을 찾지 못했어요',
+        '지도 기준점을 다시 확인한 뒤 재시도해주세요.'
+      );
+      return;
+    }
+    showPilgrimageGpsFailure(
+      templeName,
+      'GPS 위치를 아직 확인하지 못했어요',
+      '위치 서비스와 정확한 위치를 켜고 하늘이 보이는 곳에서 다시 확인해주세요.'
+    );
+  }).finally(()=>{
+    if(verifyBtn){
+      verifyBtn.disabled=false;
+      verifyBtn.innerHTML='📍 현장 인증하기<small>도착 후 보상 열기</small>';
+    }
   });
 }
 
@@ -35229,12 +35313,19 @@ function verifyTemplePosition(targetLat,targetLng,opts={}){
 
       if(typeof opts.onProgress==='function') opts.onProgress(info);
 
-      // 산에서는 GPS 오차가 커질 수 있어 실제 오차원과 인증 반경이 겹치면 허용.
-      // 단, 무한정 넓어지지 않도록 최대 180m까지만 보정.
       const cushion=Math.min(180,accuracyM);
       if(distanceM<=radiusM+cushion){
         info.ok=true;
         info.insideZone=true;
+        finish(info);
+        return;
+      }
+
+      /* GPS가 매우 정확한데 기준점과 확실히 멀다면 오래 기다릴 이유가 없다.
+         잘못된 '무한 확인 중' 체감을 막고 즉시 범위 밖 결과를 보여준다. */
+      if(accuracyM<=45 && distanceM>radiusM+Math.max(250,cushion+120)){
+        info.ok=false;
+        info.insideZone=false;
         finish(info);
       }
     };
@@ -35289,12 +35380,15 @@ function startPilgrimageGpsCheck(name){
 function updatePilgrimageGpsCheck(info){
   const el=document.getElementById('pilgrimGpsStatus'); if(!el||!info)return;
   const a=Math.round(info.accuracyM||0);
+  const rawZone=String(info.zoneLabel||'').trim();
+  const zone=(rawZone && rawZone!=='undefined' && !/^undefined\b/i.test(rawZone))
+    ? rawZone
+    : '';
 
-  // 산과 절 모두 단일 좌표의 '기준점 거리' 대신 현장권역으로 표시한다.
-  if(info.zoneLabel){
+  if(zone){
     el.textContent = info.insideZone
-      ? `${info.zoneLabel} 확인 · GPS 오차 ±${a}m`
-      : `${info.zoneLabel} 확인 중 · GPS 오차 ±${a}m`;
+      ? `${zone} 확인 · GPS 오차 ±${a}m`
+      : `${zone} 확인 중 · GPS 오차 ±${a}m`;
     return;
   }
 
@@ -35305,6 +35399,26 @@ function finishPilgrimageGpsCheck(){
   if(pilgrimGpsWatchId!==null && navigator.geolocation){try{navigator.geolocation.clearWatch(pilgrimGpsWatchId);}catch(e){} pilgrimGpsWatchId=null;}
   document.getElementById('pilgrimGpsCheck')?.remove();
 }
+
+function showPilgrimageGpsFailure(name,title,detail){
+  let el=document.getElementById('pilgrimGpsCheck');
+  if(!el){
+    startPilgrimageGpsCheck(name||'사찰');
+    el=document.getElementById('pilgrimGpsCheck');
+  }
+  if(!el)return;
+  const card=el.querySelector('.pilgrim-gps-card');
+  if(!card)return;
+  card.innerHTML=`
+    <div class="pilgrim-gps-ring" style="font-size:25px">📍</div>
+    <h3>${escapeHtml(title||'현장 인증을 완료하지 못했어요')}</h3>
+    <p>${escapeHtml(detail||'위치를 다시 확인해주세요.')}</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:16px;">
+      <button type="button" class="btn btn-ghost" onclick="finishPilgrimageGpsCheck()">닫기</button>
+      <button type="button" class="btn btn-primary" onclick="finishPilgrimageGpsCheck();setTimeout(()=>addVisitRecord(true),120)">다시 확인</button>
+    </div>`;
+}
+
 function verifiedTempleCount(){
   return Object.values(destinations||{}).filter(d=>Object.values(d.visits||{}).some(v=>v&&v.verified)).length;
 }
@@ -39112,11 +39226,24 @@ document.getElementById('todayTriviaOverlay')?.addEventListener('click',function
 (function(){
   window.openPilgrimGuardianCollection=function(){
     try{document.getElementById('pilgrimAchievement')?.remove();}catch(e){}
-    pilgrimGameTab='guardian';
-    document.querySelectorAll('[data-pg-tab]').forEach(btn=>btn.classList.toggle('active',btn.dataset.pgTab==='guardian'));
-    renderPilgrimGame();
-    renderPilgrimLevelGuide(false);
-    document.getElementById('pilgrimCollectionOverlay')?.classList.add('show');
+    const overlay=document.getElementById('pilgrimCollectionOverlay');
+    if(!overlay){showToast('수호카드 도감을 불러오지 못했어요.');return;}
+
+    /* 상세 모달과 같은 z-index를 쓰면 뒤에 가려질 수 있으므로
+       도감은 body의 마지막 자식 + 더 높은 z-index로 올린다. */
+    try{document.body.appendChild(overlay);}catch(e){}
+    overlay.style.setProperty('z-index','2147483646','important');
+    overlay.classList.add('show');
+    overlay.setAttribute('aria-hidden','false');
+
+    try{
+      pilgrimGameTab='guardian';
+      document.querySelectorAll('[data-pg-tab]').forEach(btn=>{
+        btn.classList.toggle('active',btn.dataset.pgTab==='guardian');
+      });
+    }catch(e){}
+    try{renderPilgrimGame();}catch(e){console.error('guardian catalog render failed',e);}
+    try{renderPilgrimLevelGuide(false);}catch(e){}
   };
 })();
 </script>
@@ -40166,6 +40293,10 @@ body.sansa-catalog-active{
     if(body)body.innerHTML=`<div class="nearby-success"><div class="lotus">🪷</div><h3>${escapeHtml(d.name)} 현장 인증 완료</h3><p>거리 ${fmtDist(info.distanceM)} · GPS ±${Math.round(info.accuracyM)}m<br>12초 동안 현장에 머문 것을 확인했어요.</p><button class="btn btn-primary" onclick="closeNearbyTempleFinder();setTimeout(()=>openDetail('${escapeAttr(id)}'),80)">수호카드와 기록 보기</button></div>`;
     try{showPilgrimageAchievement({templeId:id,templeName:d.name,region:d.region,distKm:info.distanceM/1000,accuracyM:info.accuracyM,firstVerified:!hadVerifiedBefore,repeatCount:count});}catch(e){}
   }
+
+  /* 상세 화면 현장 인증에서도 동일한 '검증된 사찰 기준점'을 사용할 수 있게 공개 */
+  window.resolveTempleVerifyPointForField=resolveTempleVerifyPoint;
+  window.templeVerifyRadiusForField=profileRadius;
 
   window.startNearbyTempleStrictVerify=async function(id){
     const d=destinations&&destinations[id]; if(!d)return;
