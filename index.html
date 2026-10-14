@@ -21336,6 +21336,56 @@ body.catalog-screen-open #catalogOverlay,
 #catalogSearch{font-size:17px!important;}
 </style>
 
+
+<style id="sansa-admin-verify-points-v1-css">
+.admin-verify-card{
+  margin:14px 0;
+  border:1px solid rgba(23,53,46,.14);
+  border-radius:18px;
+  padding:14px;
+  background:linear-gradient(180deg,#fffefb,#faf7ef);
+}
+.admin-verify-card h3{margin:0 0 5px;font-size:15px;color:#17352e}
+.admin-verify-card p{margin:0;color:var(--ink-soft);font-size:11px;line-height:1.55}
+.admin-verify-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:12px 0}
+.admin-verify-summary div{background:#fff;border:1px solid rgba(23,53,46,.09);border-radius:12px;padding:9px;text-align:center}
+.admin-verify-summary b{display:block;font-size:18px;color:#17352e}
+.admin-verify-summary small{font-size:9.5px;color:var(--ink-soft)}
+.admin-verify-tools{display:grid;grid-template-columns:1fr auto;gap:8px;margin:10px 0}
+.admin-verify-tools input,
+.admin-verify-editor input,
+.admin-verify-editor select{
+  width:100%;box-sizing:border-box;border:1px solid rgba(23,53,46,.16);border-radius:11px;
+  background:#fff;padding:10px 11px;font-size:16px;color:#26312d;
+}
+.admin-verify-list{max-height:260px;overflow:auto;border-top:1px solid rgba(0,0,0,.06);margin-top:8px}
+.admin-verify-row{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;padding:9px 2px;border-bottom:1px solid rgba(0,0,0,.055)}
+.admin-verify-row b{font-size:11.5px}
+.admin-verify-row small{display:block;font-size:9.5px;color:var(--ink-soft);margin-top:3px}
+.admin-verify-status{font-size:9.5px;font-weight:900;padding:4px 7px;border-radius:999px;white-space:nowrap;background:#eee;color:#666}
+.admin-verify-status.fixed{background:#e5f2e9;color:#1f6843}
+.admin-verify-status.auto{background:#fff0d4;color:#8a6419}
+.admin-verify-editor{display:none;margin-top:12px;padding:12px;border-radius:14px;background:#fff;border:1px solid rgba(23,53,46,.1)}
+.admin-verify-editor.show{display:block}
+.admin-verify-editor-head{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;margin-bottom:10px}
+.admin-verify-editor-head b{font-size:14px;color:#17352e}
+.admin-verify-editor-head small{display:block;color:var(--ink-soft);font-size:9.5px;margin-top:3px}
+.admin-verify-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.admin-verify-actions{display:flex;flex-wrap:wrap;gap:7px;margin-top:9px}
+.admin-verify-actions button,.admin-verify-tools button,.admin-verify-row button{
+  border:0;border-radius:10px;padding:9px 11px;font-size:10px;font-weight:900;cursor:pointer
+}
+.admin-verify-actions .primary,.admin-verify-tools button{background:#17352e;color:#fff}
+.admin-verify-actions .soft,.admin-verify-row button{background:#edf3ef;color:#244f3f}
+.admin-verify-actions .danger{background:#fff0ed;color:#923d32}
+.admin-verify-note{margin-top:8px;padding:9px;border-radius:11px;background:#f4efe3;font-size:10px;line-height:1.5;color:#665f55}
+@media(max-width:600px){
+  .admin-verify-summary{grid-template-columns:repeat(3,1fr)}
+  .admin-verify-tools{grid-template-columns:1fr}
+  .admin-verify-grid{grid-template-columns:1fr}
+}
+</style>
+
 </head>
 <body>
 
@@ -21508,6 +21558,7 @@ body.catalog-screen-open #catalogOverlay,
       <div class="sansa-easy-start-actions">
         <button type="button" onclick="guideBrowsePlaces()"><span>⌕</span><b>절·산 찾기</b></button>
         <button type="button" onclick="guideFieldVerify()"><span>⌖</span><b>현장 인증</b></button>
+        <button type="button" class="ses-nearby-temple" onclick="openNearbyTempleFinder()"><span>📍</span><b>내 주변 절 찾기</b></button>
         <button type="button" onclick="guideOpenRecords()"><span>▤</span><b>내 기록</b></button>
         <button type="button" class="ses-all" onclick="openSansaGuide()"><span>✦</span><b>기능 찾기</b></button>
       </div>
@@ -22162,6 +22213,45 @@ body.catalog-screen-open #catalogOverlay,
         <div class="photo-pause-help" id="photoPauseAdminHelp">일시정지하면 산사노트 화면에서 모든 회원의 새 사진 업로드 버튼이 막히고 같은 안내문이 표시됩니다. 기존 사진은 그대로 볼 수 있어요.</div>
       </div>
       <button class="btn btn-primary btn-block" onclick="refreshAdminStats()" style="margin-bottom:10px;">↻ 운영 현황 새로고침</button>
+
+      <div class="admin-verify-card" id="adminVerifyPointCard">
+        <h3>📍 108 사찰 현장인증 기준점</h3>
+        <p>자동으로 찾은 지도 좌표는 그대로 두고, 현장에서 확인한 좌표만 <b>확정 좌표</b>로 저장할 수 있어요. 확정 좌표가 있으면 새 ‘내 주변 절 찾기’ 인증은 그 좌표를 최우선으로 사용합니다. 기존 절 상세 위치인증은 변경하지 않습니다.</p>
+
+        <div class="admin-verify-summary">
+          <div><b id="adminVerifyTotal">108</b><small>전체 사찰</small></div>
+          <div><b id="adminVerifyFixed">0</b><small>확정 좌표</small></div>
+          <div><b id="adminVerifyRemain">108</b><small>미확정</small></div>
+        </div>
+
+        <div class="admin-verify-tools">
+          <input id="adminVerifySearch" type="search" placeholder="사찰명 검색" oninput="renderAdminVerifyPointList()" autocomplete="off">
+          <button type="button" onclick="refreshAdminVerifyPoints()">↻ 새로고침</button>
+        </div>
+
+        <div class="admin-verify-editor" id="adminVerifyEditor">
+          <div class="admin-verify-editor-head">
+            <div><b id="adminVerifyEditorName">사찰 선택</b><small id="adminVerifyEditorState">목록에서 사찰을 선택하세요.</small></div>
+            <button type="button" class="close-x" onclick="closeAdminVerifyEditor()" style="position:static;width:30px;height:30px;">✕</button>
+          </div>
+          <div class="admin-verify-grid">
+            <input id="adminVerifyLat" inputmode="decimal" placeholder="위도">
+            <input id="adminVerifyLng" inputmode="decimal" placeholder="경도">
+            <input id="adminVerifyLabel" placeholder="기준점 설명 (예: 일주문 안쪽)">
+            <input id="adminVerifyRadius" inputmode="numeric" placeholder="인증 반경(m)">
+          </div>
+          <div class="admin-verify-actions">
+            <button type="button" class="primary" onclick="captureAdminVerifyCurrentLocation()">📍 현재 위치 넣기</button>
+            <button type="button" class="soft" onclick="useAdminVerifyAutoPoint()">지도 자동 기준점 불러오기</button>
+            <button type="button" class="primary" onclick="saveAdminVerifyPoint()">확정 좌표 저장</button>
+            <button type="button" class="danger" onclick="deleteAdminVerifyPoint()">확정 해제</button>
+          </div>
+          <div class="admin-verify-note" id="adminVerifyEditorNote">현장에서 ‘현재 위치 넣기’를 누른 뒤 GPS 정확도를 확인하고 저장하는 방식을 권장해요.</div>
+        </div>
+
+        <div class="admin-verify-list" id="adminVerifyList"></div>
+      </div>
+
 
       <div class="photo-policy-card">
         <h3>회원별 사진 사용량</h3>
@@ -24136,6 +24226,7 @@ function launchApp(){
   document.getElementById('app').style.display='block';
   startSharedLyricSyncListener();
   startPhotoUploadControlListener();
+  if(typeof startTempleVerifyPointListener==='function') startTempleVerifyPointListener();
   startCommunityListener();
   buildRegionTabs();
   updateAccountInfo();
@@ -39407,6 +39498,538 @@ body.sansa-catalog-active{
     document.addEventListener('DOMContentLoaded',init,{once:true});
   }else{
     init();
+  }
+})();
+</script>
+
+
+<style id="sansa-nearby-temple-v1-css">
+.sansa-easy-start-actions button.ses-nearby-temple{background:linear-gradient(135deg,#f5fbf7,#fff8e8);border-color:#cbdccf;color:#2f5e4d}
+#nearbyTempleOverlay{z-index:2147483000}
+.nearby-temple-modal{width:min(620px,calc(100vw - 20px))!important;max-height:min(820px,calc(100dvh - 20px))!important}
+.nearby-hero{padding:16px;border:1px solid #e1d9cb;border-radius:18px;background:linear-gradient(145deg,#f4faf6,#fff9ee);margin-bottom:12px}
+.nearby-hero .nh-kicker{font-size:10px;font-weight:900;color:#4e7767;letter-spacing:.08em}
+.nearby-hero h3{margin:5px 0 6px;font-size:22px;letter-spacing:-.04em;color:#2e493f}
+.nearby-hero p{margin:0;font-size:11px;line-height:1.55;color:#766d61}
+.nearby-scan{display:grid;gap:9px;margin-top:12px}
+.nearby-step{display:grid;grid-template-columns:28px 1fr auto;gap:9px;align-items:center;padding:9px 10px;border-radius:12px;background:#f7f5f0;color:#8a8176;font-size:11px}
+.nearby-step i{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:#ebe6dc;font-style:normal;font-weight:900}
+.nearby-step b{font-size:11.5px;color:#5e584f}.nearby-step small{font-size:9.5px;color:#9a9185}
+.nearby-step.on{background:#eef7f1}.nearby-step.on i{background:#3e725f;color:white}.nearby-step.on b{color:#315d4d}.nearby-step.done{background:#f3f8f4}.nearby-step.done i{background:#d8eadf;color:#2f654f}
+.nearby-results{display:grid;gap:8px;margin-top:12px}
+.nearby-card{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:center;padding:12px;border:1px solid #ded7cc;border-radius:15px;background:#fff}
+.nearby-card b{display:block;font-size:14px;color:#37332f}.nearby-card small{display:block;margin-top:3px;font-size:10px;color:#837b70;line-height:1.45}
+.nearby-distance{font-size:12px;font-weight:950;color:#3f6f5e;text-align:right;white-space:nowrap}.nearby-distance em{display:block;font-size:9px;font-style:normal;color:#958b7f;margin-top:2px}
+.nearby-card-actions{grid-column:1/-1;display:flex;gap:7px;flex-wrap:wrap}.nearby-card-actions button{border:1px solid #d8d0c4;border-radius:999px;background:#fff;padding:7px 11px;font:inherit;font-size:10.5px;font-weight:900;color:#554f47;cursor:pointer}
+.nearby-card-actions button.primary{background:#376b58;border-color:#376b58;color:#fff}.nearby-card-actions button:disabled{opacity:.45;cursor:not-allowed}
+.nearby-statusbox{margin-top:10px;padding:10px 12px;border-radius:12px;background:#f6f3ed;font-size:10.5px;line-height:1.55;color:#6f675d}
+.nearby-progress{height:7px;border-radius:999px;background:#e9e5dd;overflow:hidden;margin-top:9px}.nearby-progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,#7aae93,#d5ae58);transition:width .35s ease}
+.nearby-countdown{font-size:27px;font-weight:950;color:#356b58;margin:5px 0 1px;letter-spacing:-.04em}
+.nearby-success{text-align:center;padding:18px 10px}.nearby-success .lotus{font-size:52px}.nearby-success h3{margin:5px 0;font-size:22px;color:#315b4c}.nearby-success p{font-size:11px;line-height:1.6;color:#776f64}
+@media(max-width:700px){.nearby-temple-modal{width:100vw!important;max-height:100dvh!important;height:100dvh!important;border-radius:0!important}.nearby-card{grid-template-columns:minmax(0,1fr) auto}.sansa-easy-start-actions button.ses-nearby-temple{grid-column:span 2}}
+</style>
+
+<div class="overlay" id="nearbyTempleOverlay" aria-hidden="true">
+  <div class="modal nearby-temple-modal">
+    <div class="modal-head">
+      <div><h2 class="serif">📍 내 주변 절 찾기</h2><div class="sub">절 이름을 몰라도 현재 위치에서 가까운 산사를 찾아드려요.</div></div>
+      <button class="close-x" type="button" onclick="closeNearbyTempleFinder()">✕</button>
+    </div>
+    <div class="modal-body" id="nearbyTempleBody"></div>
+  </div>
+</div>
+
+<script id="sansa-nearby-temple-v1-js">
+(function(){
+  let nearbyLatestPosition=null;
+  let nearbySelected=null;
+  let nearbyWatchId=null;
+  let nearbyTimer=null;
+  let nearbyVerifyDone=false;
+  const STRICT_RADIUS=160;
+  /* 108개 사찰 모두를 위한 현장인증 프로필.
+     - query: 동명이사찰 오인식을 줄이기 위한 지도 검색어
+     - radius: 새 '내 주변 절 찾기'의 엄격 인증 반경(기존 상세 현장인증에는 영향 없음)
+     실제 인증점은 카카오 Places에서 일주문/입구/사찰 POI 순으로 찾고 로컬 캐시에 보관합니다. */
+  const TEMPLE_VERIFY_PROFILES={"통도사":{"query":"통도사 양산","radius":150},"부석사":{"query":"부석사 영주","radius":130},"봉정사":{"query":"봉정사 안동","radius":130},"법주사":{"query":"법주사 보은","radius":160},"마곡사":{"query":"마곡사 공주","radius":150},"선암사":{"query":"선암사 순천","radius":140},"대흥사":{"query":"대흥사 해남","radius":160},"해인사":{"query":"해인사 합천","radius":160},"송광사":{"query":"송광사 순천","radius":150},"수덕사":{"query":"수덕사 예산","radius":150},"백양사":{"query":"백양사 장성","radius":150},"동화사":{"query":"동화사 대구","radius":150},"쌍계사":{"query":"쌍계사 하동","radius":150},"범어사":{"query":"범어사 부산","radius":140},"불국사":{"query":"불국사 경주","radius":150},"석굴암":{"query":"석굴암 경주","radius":120},"기림사":{"query":"기림사 경주","radius":130},"분황사":{"query":"분황사 경주","radius":110},"골굴사":{"query":"골굴사 경주","radius":130},"화엄사":{"query":"화엄사 구례","radius":150},"연곡사":{"query":"연곡사 구례","radius":130},"벽송사":{"query":"벽송사 함양","radius":120},"실상사":{"query":"실상사 남원","radius":130},"천은사":{"query":"천은사 구례","radius":140},"낙산사":{"query":"낙산사 양양","radius":150},"신흥사":{"query":"신흥사 속초","radius":150},"백담사":{"query":"백담사 인제","radius":140},"월정사":{"query":"월정사 평창","radius":150},"상원사":{"query":"상원사 평창 오대산","radius":130},"청평사":{"query":"청평사 춘천","radius":130},"건봉사":{"query":"건봉사 고성 강원","radius":140},"휴휴암":{"query":"휴휴암 양양","radius":120},"법흥사":{"query":"법흥사 영월","radius":130},"정암사":{"query":"정암사 정선","radius":120},"봉정암":{"query":"봉정암 인제 설악산","radius":110},"도피안사":{"query":"도피안사 철원","radius":120},"봉원사":{"query":"봉원사 서울","radius":110},"봉은사":{"query":"봉은사 서울 강남","radius":110},"조계사":{"query":"조계사 서울 종로","radius":100},"화계사":{"query":"화계사 서울 강북","radius":110},"진관사":{"query":"진관사 서울 은평","radius":120},"도선사":{"query":"도선사 서울 북한산","radius":120},"용주사":{"query":"용주사 화성","radius":130},"전등사":{"query":"전등사 강화","radius":130},"신륵사":{"query":"신륵사 여주","radius":130},"보문사":{"query":"보문사 강화 석모도","radius":130},"수종사":{"query":"수종사 남양주 운길산","radius":110},"용문사(양평)":{"query":"용문사 양평","radius":140},"봉선사":{"query":"봉선사 남양주","radius":130},"보광사":{"query":"보광사 파주","radius":120},"칠장사":{"query":"칠장사 안성","radius":120},"회암사":{"query":"회암사 양주","radius":120},"관음사":{"query":"관음사 제주 한라산","radius":120},"약천사":{"query":"약천사 제주","radius":130},"산방굴사":{"query":"산방굴사 제주","radius":100},"법화사":{"query":"법화사 제주","radius":120},"원당사":{"query":"원당사 제주","radius":120},"존자암":{"query":"존자암 제주 한라산","radius":100},"관촉사":{"query":"관촉사 논산","radius":120},"개심사":{"query":"개심사 서산","radius":120},"무량사":{"query":"무량사 부여","radius":130},"신원사":{"query":"신원사 공주 계룡산","radius":130},"각연사":{"query":"각연사 괴산","radius":120},"갑사":{"query":"갑사 공주 계룡산","radius":140},"동학사":{"query":"동학사 공주 계룡산","radius":140},"구인사":{"query":"구인사 단양","radius":160},"대조사":{"query":"대조사 부여","radius":120},"미황사":{"query":"미황사 해남","radius":130},"도갑사":{"query":"도갑사 영암","radius":130},"불갑사":{"query":"불갑사 영광","radius":130},"향일암":{"query":"향일암 여수","radius":110},"쌍봉사":{"query":"쌍봉사 화순","radius":120},"운주사":{"query":"운주사 화순","radius":140},"백련사":{"query":"백련사 강진","radius":120},"무위사":{"query":"무위사 강진","radius":120},"태안사":{"query":"태안사 곡성","radius":130},"흥국사(여수)":{"query":"흥국사 여수","radius":130},"금산사":{"query":"금산사 김제","radius":150},"내소사":{"query":"내소사 부안","radius":140},"개암사":{"query":"개암사 부안","radius":120},"선운사":{"query":"선운사 고창","radius":150},"화암사":{"query":"화암사 완주","radius":110},"완주 송광사":{"query":"송광사 완주","radius":130},"직지사":{"query":"직지사 김천","radius":150},"고운사":{"query":"고운사 의성","radius":140},"은해사":{"query":"은해사 영천","radius":150},"청량사":{"query":"청량사 봉화","radius":110},"청암사":{"query":"청암사 김천","radius":120},"대승사":{"query":"대승사 문경","radius":120},"김룡사":{"query":"김룡사 문경","radius":130},"불영사":{"query":"불영사 울진","radius":130},"갓바위(선본사)":{"query":"선본사 갓바위 경산","radius":110},"오어사":{"query":"오어사 포항","radius":130},"봉암사":{"query":"봉암사 문경","radius":120},"용문사(예천)":{"query":"용문사 예천","radius":120},"도리사":{"query":"도리사 구미","radius":120},"파계사":{"query":"파계사 대구","radius":130},"운문사":{"query":"운문사 청도","radius":150},"장안사(부산)":{"query":"장안사 부산 기장","radius":130},"표충사":{"query":"표충사 밀양","radius":140},"옥천사":{"query":"옥천사 고성 경남","radius":130},"다솔사":{"query":"다솔사 사천","radius":120},"보리암":{"query":"보리암 남해 금산","radius":110},"대원사":{"query":"대원사 산청","radius":130},"관룡사":{"query":"관룡사 창녕","radius":120},"은하사":{"query":"은하사 김해","radius":120},"해동용궁사":{"query":"해동용궁사 부산 기장","radius":130},"만어사":{"query":"만어사 밀양","radius":120}};
+  window.SANSA_TEMPLE_VERIFY_PROFILES=TEMPLE_VERIFY_PROFILES;
+  const VERIFY_POINT_CACHE_KEY='sansaTempleVerifyPoints_v2';
+  let verifyPointCache={};
+  try{verifyPointCache=JSON.parse(localStorage.getItem(VERIFY_POINT_CACHE_KEY)||'{}')||{};}catch(e){verifyPointCache={};}
+
+  const MAX_ACCURACY=70;
+  const MAX_SPEED=5.5; // m/s, 약 20km/h
+  const DWELL_MS=12000;
+  const VERIFY_TIMEOUT=35000;
+
+  function profileFor(d){
+    const name=String(d&&d.name||'');
+    return TEMPLE_VERIFY_PROFILES[name]||{query:name,radius:STRICT_RADIUS};
+  }
+  function profileRadius(d){
+    const name=String(d&&d.name||'');
+    const confirmed=(typeof window.getConfirmedTempleVerifyPoint==='function')?window.getConfirmedTempleVerifyPoint(name):null;
+    const r=confirmed&&Number(confirmed.radius);
+    return Math.max(90,Math.min(200,Number.isFinite(r)?r:(Number(profileFor(d).radius)||STRICT_RADIUS)));
+  }
+  function cachedVerifyPoint(name){
+    const c=verifyPointCache&&verifyPointCache[name];
+    if(!c)return null;
+    const lat=Number(c.lat),lng=Number(c.lng);
+    if(!Number.isFinite(lat)||!Number.isFinite(lng))return null;
+    return {lat,lng,label:c.label||'저장된 경내 기준점',source:c.source||'cache'};
+  }
+  function storeVerifyPoint(name,p){
+    try{
+      verifyPointCache[name]={lat:Number(p.lat),lng:Number(p.lng),label:p.label||'',source:p.source||'kakao',ts:Date.now()};
+      localStorage.setItem(VERIFY_POINT_CACHE_KEY,JSON.stringify(verifyPointCache));
+    }catch(e){}
+  }
+  function placeSearchOnce(query){
+    return new Promise(resolve=>{
+      try{
+        ensureKakao(ok=>{
+          if(!ok||!window.kakao?.maps?.services){resolve(null);return;}
+          const ps=new kakao.maps.services.Places();
+          ps.keywordSearch(query,(data,status)=>{
+            if(status!==kakao.maps.services.Status.OK||!Array.isArray(data)||!data.length){resolve(null);return;}
+            resolve(data);
+          });
+        });
+      }catch(e){resolve(null);}
+    });
+  }
+  async function resolveTempleVerifyPoint(id,d){
+    const name=String(d&&d.name||'');
+    const confirmed=(typeof window.getConfirmedTempleVerifyPoint==='function')?window.getConfirmedTempleVerifyPoint(name):null;
+    if(confirmed)return confirmed;
+    const cached=cachedVerifyPoint(name);
+    if(cached)return cached;
+    const prof=profileFor(d);
+    const baseLat=Number(d&& (d.fixedLat||d.lat)), baseLng=Number(d&& (d.fixedLng||d.lng));
+    const baseName=name.replace(/\([^)]*\)/g,'').trim();
+    const queries=[`${prof.query} 일주문`,`${prof.query} 입구`,`${prof.query} 사찰`,prof.query];
+    for(const q of queries){
+      const rows=await placeSearchOnce(q);
+      if(!rows)continue;
+      const candidates=rows.map(x=>({
+        lat:Number(x.y),lng:Number(x.x),name:String(x.place_name||''),cat:String(x.category_name||''),addr:String(x.road_address_name||x.address_name||'')
+      })).filter(x=>Number.isFinite(x.lat)&&Number.isFinite(x.lng));
+      let best=null,bestScore=-1e9;
+      for(const x of candidates){
+        let score=0;
+        const nm=x.name.replace(/\s+/g,'');
+        const bn=baseName.replace(/\s+/g,'');
+        if(nm.includes(bn))score+=100;
+        if(/일주문|입구|천왕문|불이문/.test(x.name))score+=60;
+        if(/사찰|불교/.test(x.cat))score+=20;
+        if(Number.isFinite(baseLat)&&Number.isFinite(baseLng)){
+          const dm=haversineKm(baseLat,baseLng,x.lat,x.lng)*1000;
+          if(dm<1000)score+=40; else if(dm<2500)score+=10; else score-=80;
+        }
+        if(score>bestScore){bestScore=score;best=x;}
+      }
+      if(best&&bestScore>=50){
+        const p={lat:best.lat,lng:best.lng,label:best.name||'경내 기준점',source:/일주문|입구|천왕문|불이문/.test(best.name)?'kakao-entrance':'kakao-place'};
+        storeVerifyPoint(name,p);return p;
+      }
+    }
+    if(Number.isFinite(baseLat)&&Number.isFinite(baseLng))return {lat:baseLat,lng:baseLng,label:'기존 사찰 기준점',source:'fallback'};
+    return null;
+  }
+  function fmtDist(m){m=Math.max(0,Number(m)||0);return m<1000?`${Math.round(m)}m`:`${(m/1000).toFixed(1)}km`;}
+  function templeEntries(){
+    return Object.entries(destinations||{}).map(([id,d])=>{
+      const lat=Number(d&& (d.fixedLat||d.lat));
+      const lng=Number(d&& (d.fixedLng||d.lng));
+      return {id,d,lat,lng};
+    }).filter(x=>x.d&&x.d.name&&Number.isFinite(x.lat)&&Number.isFinite(x.lng));
+  }
+  function distanceM(pos,t){return haversineKm(Number(pos.coords.latitude),Number(pos.coords.longitude),t.lat,t.lng)*1000;}
+  function nearestTemples(pos){return templeEntries().map(t=>({...t,distanceM:distanceM(pos,t)})).sort((a,b)=>a.distanceM-b.distanceM).slice(0,5);}
+  function openOverlay(){const o=document.getElementById('nearbyTempleOverlay');if(o){o.classList.add('show');o.setAttribute('aria-hidden','false');}}
+  function closeOverlay(){stopNearbyWatch();const o=document.getElementById('nearbyTempleOverlay');if(o){o.classList.remove('show');o.setAttribute('aria-hidden','true');}}
+  window.closeNearbyTempleFinder=closeOverlay;
+
+  function renderSearching(){
+    const b=document.getElementById('nearbyTempleBody'); if(!b)return;
+    b.innerHTML=`<div class="nearby-hero"><div class="nh-kicker">SANSA NOTE · NEARBY</div><h3>가까운 산사를 찾고 있어요</h3><p>현재 위치는 절을 찾고 현장 인증을 판정하는 데만 사용하며, 실제 위도·경도는 방문 기록에 저장하지 않습니다.</p></div>
+    <div class="nearby-scan"><div class="nearby-step on"><i>1</i><span><b>현재 위치 확인</b><small>휴대폰 GPS 신호 확인</small></span><strong>•••</strong></div><div class="nearby-step"><i>2</i><span><b>주변 사찰 비교</b><small>산사노트 사찰 좌표와 거리 계산</small></span></div><div class="nearby-step"><i>3</i><span><b>현장 인증 가능 여부</b><small>가까운 절은 더 엄격하게 재확인</small></span></div></div>`;
+  }
+  function renderFound(pos){
+    nearbyLatestPosition=pos;
+    const list=nearestTemples(pos); const b=document.getElementById('nearbyTempleBody'); if(!b)return;
+    if(!list.length){b.innerHTML='<div class="nearby-statusbox">위치 정보가 준비된 사찰을 찾지 못했어요.</div>';return;}
+    b.innerHTML=`<div class="nearby-hero"><div class="nh-kicker">가까운 산사 발견</div><h3>${escapeHtml(list[0].d.name)}이(가) 가장 가까워요</h3><p>가까운 절을 찾는 것과 현장 인증은 별개예요. 인증은 사찰별 100~200m 경내 기준에서 GPS 정확도·머무름·이동속도를 다시 확인합니다.</p></div><div class="nearby-results">${list.map((t,i)=>{
+      const radius=profileRadius(t.d);
+      const can=t.distanceM<=Math.max(300,radius+120);
+      const status=t.distanceM<=radius?'현장 인증 거리':t.distanceM<=500?'조금 더 가까이':'주변 절';
+      return `<div class="nearby-card"><div><b>${i===0?'🪷 ':''}${escapeHtml(t.d.name)}</b><small>${escapeHtml(t.d.region||'')} · ${status}</small></div><div class="nearby-distance">${fmtDist(t.distanceM)}<em>${t.distanceM<=radius?'인증 도전 가능':''}</em></div><div class="nearby-card-actions"><button type="button" onclick="openNearbyTempleDetail('${escapeAttr(t.id)}')">절 보기</button><button type="button" class="primary" ${can?'':'disabled'} onclick="startNearbyTempleStrictVerify('${escapeAttr(t.id)}')">${t.distanceM<=radius?'현장 인증 도전':'가까이 가서 인증'}</button></div></div>`;
+    }).join('')}</div><div class="nearby-statusbox">※ 이 기능은 기존의 <b>절 상세 → 현장 인증하기</b>를 바꾸지 않습니다. 기존 인증은 그대로 사용할 수 있어요.</div>`;
+  }
+  window.openNearbyTempleDetail=function(id){closeOverlay();setTimeout(()=>{try{openDetail(id);}catch(e){showToast('절 상세를 열지 못했어요.');}},80);};
+
+  window.openNearbyTempleFinder=function(){
+    if(!navigator.geolocation){showToast('이 브라우저는 위치 기능을 지원하지 않아요.');return;}
+    openOverlay();renderSearching();
+    requestFieldPositionNow().then(renderFound).catch(err=>{
+      if(err&&err.code===1){closeOverlay();openLocationPermissionHelp(()=>openNearbyTempleFinder());return;}
+      const b=document.getElementById('nearbyTempleBody');if(b)b.innerHTML=`<div class="nearby-hero"><h3>위치를 아직 못 찾았어요</h3><p>하늘이 보이는 곳에서 위치 서비스와 정확한 위치를 켠 뒤 다시 시도해주세요.</p></div><button class="btn btn-primary btn-block" onclick="openNearbyTempleFinder()">다시 찾기</button>`;
+    });
+  };
+
+  function stopNearbyWatch(){
+    nearbyVerifyDone=true;
+    if(nearbyWatchId!==null&&navigator.geolocation){try{navigator.geolocation.clearWatch(nearbyWatchId);}catch(e){}nearbyWatchId=null;}
+    if(nearbyTimer){clearTimeout(nearbyTimer);nearbyTimer=null;}
+  }
+
+  function saveStrictVerified(t,info){
+    if(localMode || !auth || !auth.currentUser){closeOverlay();promptGuestLoginRequired();return;}
+    const id=t.id,d=destinations[id]; if(!d)return;
+    const oldVisits=Object.assign({},d.visits||{});
+    const hadVerifiedBefore=Object.values(oldVisits).some(v=>v&&v.verified);
+    const vid=newId();
+    oldVisits[vid]={ts:Date.now(),note:'',verified:true,verifiedDistanceM:Math.round(info.distanceM),gpsAccuracyM:Math.round(info.accuracyM),nearbyFinder:true,strictNearby:true,verifyPointLabel:String(t.verifyLabel||''),verifyPointSource:String(t.verifySource||''),verifyRadiusM:profileRadius(d)};
+    const patch={visits:oldVisits}; if((d.stage||0)<1)patch.stage=1;
+    updateDestination(id,patch); destinations[id]=Object.assign({},d,patch);
+    try{render();}catch(e){}
+    try{playStampAnimation();}catch(e){}
+    const count=visitCount(destinations[id]);
+    const body=document.getElementById('nearbyTempleBody');
+    if(body)body.innerHTML=`<div class="nearby-success"><div class="lotus">🪷</div><h3>${escapeHtml(d.name)} 현장 인증 완료</h3><p>거리 ${fmtDist(info.distanceM)} · GPS ±${Math.round(info.accuracyM)}m<br>12초 동안 현장에 머문 것을 확인했어요.</p><button class="btn btn-primary" onclick="closeNearbyTempleFinder();setTimeout(()=>openDetail('${escapeAttr(id)}'),80)">수호카드와 기록 보기</button></div>`;
+    try{showPilgrimageAchievement({templeId:id,templeName:d.name,region:d.region,distKm:info.distanceM/1000,accuracyM:info.accuracyM,firstVerified:!hadVerifiedBefore,repeatCount:count});}catch(e){}
+  }
+
+  window.startNearbyTempleStrictVerify=async function(id){
+    const d=destinations&&destinations[id]; if(!d)return;
+    if(localMode || !auth || !auth.currentUser){closeOverlay();promptGuestLoginRequired();return;}
+    const body0=document.getElementById('nearbyTempleBody');
+    if(body0)body0.innerHTML=`<div class="nearby-hero"><div class="nh-kicker">인증 기준점 준비</div><h3>${escapeHtml(d.name)} 경내 기준점을 확인하고 있어요</h3><p>일주문·주출입구·경내 POI를 우선 확인하고, 찾지 못하면 기존 사찰 좌표를 안전하게 사용합니다.</p></div><div class="nearby-statusbox">지도 기준점을 확인하는 중…</div>`;
+    const p=await resolveTempleVerifyPoint(id,d);
+    if(!p){showToast('이 절의 위치 기준점이 아직 준비되지 않았어요.');return;}
+    const t={id,d,lat:Number(p.lat),lng:Number(p.lng),verifyLabel:p.label||'경내 기준점',verifySource:p.source||'fallback'};
+    const VERIFY_RADIUS=profileRadius(d);
+    stopNearbyWatch(); nearbyVerifyDone=false; nearbySelected=t;
+    let dwellStart=null,lastGood=null,lastSample=null,goodSamples=0;
+    const started=Date.now(); const body=document.getElementById('nearbyTempleBody');
+    function renderState(info,msg,progress){
+      if(!body)return;
+      const remain=dwellStart?Math.max(0,Math.ceil((DWELL_MS-(Date.now()-dwellStart))/1000)):12;
+      body.innerHTML=`<div class="nearby-hero"><div class="nh-kicker">현장 인증 도전</div><h3>${escapeHtml(d.name)} 경내를 확인하고 있어요</h3><p>${escapeHtml(t.verifyLabel)} 기준 · 반경 ${VERIFY_RADIUS}m<br>GPS 정확도와 머무름, 이동 속도를 함께 확인합니다.</p><div class="nearby-countdown">${dwellStart?remain:'—'}<small style="font-size:11px;font-weight:800;color:#8a8176"> 초</small></div><div class="nearby-progress"><i style="width:${Math.max(0,Math.min(100,progress||0))}%"></i></div></div>
+      <div class="nearby-scan"><div class="nearby-step ${info&&info.distanceM<=VERIFY_RADIUS?'done':'on'}"><i>1</i><span><b>경내 거리</b><small>${info?fmtDist(info.distanceM):'확인 중'} · 기준 ${VERIFY_RADIUS}m 이내</small></span><strong>${info&&info.distanceM<=VERIFY_RADIUS?'✓':'•••'}</strong></div><div class="nearby-step ${info&&info.accuracyM<=MAX_ACCURACY?'done':'on'}"><i>2</i><span><b>GPS 정확도</b><small>${info?'±'+Math.round(info.accuracyM)+'m':'확인 중'} · ${MAX_ACCURACY}m 이내 권장</small></span><strong>${info&&info.accuracyM<=MAX_ACCURACY?'✓':'•••'}</strong></div><div class="nearby-step ${info&&info.speedOk?'done':'on'}"><i>3</i><span><b>이동 상태</b><small>${info&&Number.isFinite(info.speed)?Math.round(info.speed*3.6)+'km/h':'정지/도보 여부 확인'} · 빠른 차량 이동은 보류</small></span><strong>${info&&info.speedOk?'✓':'•••'}</strong></div><div class="nearby-step ${dwellStart?'on':''}"><i>4</i><span><b>잠시 머무름</b><small>조건이 맞으면 12초 동안 재확인</small></span><strong>${dwellStart?remain+'s':'—'}</strong></div></div><div class="nearby-statusbox">${escapeHtml(msg||'정확한 위치를 잡는 중…')}</div>`;
+    }
+    renderState(null,'GPS 신호를 잡고 있어요.',0);
+    nearbyTimer=setTimeout(()=>{if(nearbyVerifyDone)return;stopNearbyWatch();renderState(lastGood,'인증 시간이 초과됐어요. 하늘이 보이는 곳에서 다시 시도해주세요.',0);},VERIFY_TIMEOUT);
+
+    try{
+      nearbyWatchId=navigator.geolocation.watchPosition(pos=>{
+        if(nearbyVerifyDone||!pos||!pos.coords)return;
+        const now=Date.now(),lat=Number(pos.coords.latitude),lng=Number(pos.coords.longitude),accuracyM=Math.max(0,Number(pos.coords.accuracy)||9999);
+        const dm=haversineKm(lat,lng,t.lat,t.lng)*1000;
+        let speed=Number(pos.coords.speed);
+        if(!Number.isFinite(speed)&&lastSample){const dt=(now-lastSample.ts)/1000;if(dt>0.8){const moved=haversineKm(lastSample.lat,lastSample.lng,lat,lng)*1000;speed=moved/dt;}}
+        const speedOk=!Number.isFinite(speed)||speed<=MAX_SPEED;
+        const info={distanceM:dm,accuracyM,speed,speedOk}; lastSample={lat,lng,ts:now};
+        const qualified=dm<=VERIFY_RADIUS&&accuracyM<=MAX_ACCURACY&&speedOk;
+        if(qualified){goodSamples++;lastGood=info;if(!dwellStart)dwellStart=now;}else{dwellStart=null;goodSamples=0;}
+        const elapsed=dwellStart?now-dwellStart:0;
+        const progress=dwellStart?elapsed/DWELL_MS*100:0;
+        let msg='';
+        if(dm>VERIFY_RADIUS)msg=`조금 더 가까이 가볼까요? 현재 ${fmtDist(dm)}예요.`;
+        else if(accuracyM>MAX_ACCURACY)msg=`위치 신호가 흔들려요. 잠시 서서 기다려주세요. GPS ±${Math.round(accuracyM)}m`;
+        else if(!speedOk)msg='이동 속도가 빨라요. 차량 이동 중에는 인증을 잠시 보류해요.';
+        else msg='좋아요. 현장에 머무르고 있는지 잠시 더 확인할게요.';
+        renderState(info,msg,progress);
+        if(qualified&&goodSamples>=2&&elapsed>=DWELL_MS){nearbyVerifyDone=true;if(nearbyWatchId!==null){try{navigator.geolocation.clearWatch(nearbyWatchId);}catch(e){}nearbyWatchId=null;}if(nearbyTimer){clearTimeout(nearbyTimer);nearbyTimer=null;}saveStrictVerified(t,info);}
+      },err=>{
+        if(err&&err.code===1){stopNearbyWatch();closeOverlay();openLocationPermissionHelp(()=>{openNearbyTempleFinder();setTimeout(()=>startNearbyTempleStrictVerify(id),500);});}
+      },{enableHighAccuracy:true,maximumAge:0,timeout:15000});
+    }catch(e){stopNearbyWatch();showToast('위치 확인을 시작하지 못했어요.');}
+  };
+})();
+</script>
+
+
+<script id="sansa-admin-confirmed-verify-points-v1-js">
+/* ============================================================
+   관리자 확정 현장인증 좌표
+   - shared/templeVerifyPoints 에 저장
+   - 새 '내 주변 절 찾기'의 엄격 인증에서만 최우선 사용
+   - 기존 '절 상세 → 현장 인증하기' 로직은 수정하지 않음
+============================================================ */
+(function(){
+  const VERIFY_SHARED_PATH='shared/templeVerifyPoints';
+  let confirmedPoints={};
+  let verifyPointListening=false;
+  let selectedTempleName='';
+
+  function cleanName(v){return String(v||'').trim();}
+  function encodeKey(name){
+    /* Firebase key 금지문자 제거. 108 사찰명에는 거의 없지만 안전 처리 */
+    return cleanName(name).replace(/[.#$\[\]\/]/g,'_');
+  }
+  function profiles(){
+    return window.SANSA_TEMPLE_VERIFY_PROFILES||{};
+  }
+  function allNames(){
+    return Object.keys(profiles());
+  }
+  function refRoot(){
+    return (typeof db!=='undefined' && db) ? db.ref(VERIFY_SHARED_PATH) : null;
+  }
+  function normalizePoint(v){
+    if(!v)return null;
+    const lat=Number(v.lat),lng=Number(v.lng),radius=Number(v.radius);
+    if(!Number.isFinite(lat)||!Number.isFinite(lng))return null;
+    return {
+      lat,lng,
+      radius:Number.isFinite(radius)?Math.max(90,Math.min(200,radius)):null,
+      label:String(v.label||'관리자 확정 기준점'),
+      source:'admin-confirmed',
+      updatedAt:Number(v.updatedAt||0),
+      updatedBy:String(v.updatedBy||''),
+      accuracyM:Number(v.accuracyM||0)
+    };
+  }
+
+  window.getConfirmedTempleVerifyPoint=function(name){
+    const p=normalizePoint(confirmedPoints[cleanName(name)]);
+    if(!p)return null;
+    return p;
+  };
+
+  window.startTempleVerifyPointListener=function(){
+    if(verifyPointListening || typeof localMode==='undefined' || localMode || typeof db==='undefined' || !db) return;
+    verifyPointListening=true;
+    const r=refRoot();
+    if(!r){verifyPointListening=false;return;}
+    r.on('value',snap=>{
+      const raw=snap.val()||{};
+      const next={};
+      Object.values(raw).forEach(v=>{
+        if(v&&v.name){
+          const p=normalizePoint(v);
+          if(p)next[String(v.name)]=Object.assign({name:String(v.name)},p);
+        }
+      });
+      confirmedPoints=next;
+      renderAdminVerifyPointList();
+    },err=>{
+      verifyPointListening=false;
+      console.warn('temple verify points read failed',err&&err.code);
+    });
+  };
+
+  window.refreshAdminVerifyPoints=async function(){
+    if(!isAdminUser()){showToast('관리자 계정에서만 사용할 수 있어요.');return;}
+    if(!db){showToast('Firebase 연결을 확인해주세요.');return;}
+    try{
+      const snap=await refRoot().once('value');
+      const raw=snap.val()||{},next={};
+      Object.values(raw).forEach(v=>{
+        if(v&&v.name){
+          const p=normalizePoint(v);
+          if(p)next[String(v.name)]=Object.assign({name:String(v.name)},p);
+        }
+      });
+      confirmedPoints=next;
+      renderAdminVerifyPointList();
+      showToast('확정 좌표를 새로고침했어요.');
+    }catch(err){
+      showToast('확정 좌표를 읽을 권한을 확인해주세요.');
+    }
+  };
+
+  function pointStatus(name){
+    const p=window.getConfirmedTempleVerifyPoint(name);
+    return p?{fixed:true,p}:{fixed:false,p:null};
+  }
+  function fmtCoord(n){return Number.isFinite(Number(n))?Number(n).toFixed(6):'—';}
+
+  window.renderAdminVerifyPointList=function(){
+    const wrap=document.getElementById('adminVerifyList');
+    if(!wrap)return;
+    const names=allNames();
+    const q=cleanName(document.getElementById('adminVerifySearch')?.value).toLowerCase();
+    const filtered=names.filter(n=>!q||n.toLowerCase().includes(q));
+    const fixedCount=names.filter(n=>!!window.getConfirmedTempleVerifyPoint(n)).length;
+    const totalEl=document.getElementById('adminVerifyTotal');
+    const fixedEl=document.getElementById('adminVerifyFixed');
+    const remainEl=document.getElementById('adminVerifyRemain');
+    if(totalEl)totalEl.textContent=String(names.length||108);
+    if(fixedEl)fixedEl.textContent=String(fixedCount);
+    if(remainEl)remainEl.textContent=String(Math.max(0,names.length-fixedCount));
+
+    wrap.innerHTML=filtered.map(name=>{
+      const st=pointStatus(name),p=st.p,prof=profiles()[name]||{};
+      const sub=st.fixed
+        ? `${p.label||'확정 기준점'} · ${fmtCoord(p.lat)}, ${fmtCoord(p.lng)} · ${p.radius||prof.radius||160}m`
+        : `자동 기준점 사용 · 기본 반경 ${prof.radius||160}m`;
+      return `<div class="admin-verify-row">
+        <span><b>${escapeHtml(name)}</b><small>${escapeHtml(sub)}</small></span>
+        <span style="display:flex;gap:6px;align-items:center;">
+          <span class="admin-verify-status ${st.fixed?'fixed':'auto'}">${st.fixed?'확정':'자동'}</span>
+          <button type="button" onclick="openAdminVerifyEditor('${escapeAttr(name)}')">관리</button>
+        </span>
+      </div>`;
+    }).join('') || '<div style="padding:12px;font-size:11px;color:var(--ink-soft)">검색 결과가 없어요.</div>';
+  };
+
+  function findDestinationByName(name){
+    const arr=Object.entries(destinations||{});
+    let hit=arr.find(([id,d])=>d&&d.name===name);
+    if(!hit){
+      const base=name.replace(/\([^)]*\)/g,'').trim();
+      hit=arr.find(([id,d])=>d&&String(d.name||'').replace(/\([^)]*\)/g,'').trim()===base);
+    }
+    return hit?{id:hit[0],d:hit[1]}:null;
+  }
+
+  window.openAdminVerifyEditor=function(name){
+    if(!isAdminUser())return;
+    selectedTempleName=cleanName(name);
+    const ed=document.getElementById('adminVerifyEditor');
+    if(ed)ed.classList.add('show');
+    const p=window.getConfirmedTempleVerifyPoint(selectedTempleName);
+    const prof=profiles()[selectedTempleName]||{};
+    document.getElementById('adminVerifyEditorName').textContent=selectedTempleName;
+    document.getElementById('adminVerifyEditorState').textContent=p
+      ? `현재 확정 좌표 · ${p.label||'관리자 확정 기준점'}`
+      : '아직 확정하지 않음 · 현재는 지도 자동 기준점을 사용';
+    document.getElementById('adminVerifyLat').value=p?String(p.lat):'';
+    document.getElementById('adminVerifyLng').value=p?String(p.lng):'';
+    document.getElementById('adminVerifyLabel').value=p?String(p.label||''):'';
+    document.getElementById('adminVerifyRadius').value=String((p&&p.radius)||prof.radius||160);
+    const note=document.getElementById('adminVerifyEditorNote');
+    if(note)note.textContent=p&&p.accuracyM
+      ? `마지막 저장 당시 GPS 정확도 ±${Math.round(p.accuracyM)}m · 확정 좌표가 새 주변절 인증에 우선 적용됩니다.`
+      : '현장에서 ‘현재 위치 넣기’를 누른 뒤 GPS 정확도를 확인하고 저장하는 방식을 권장해요.';
+    ed?.scrollIntoView({behavior:'smooth',block:'nearest'});
+  };
+  window.closeAdminVerifyEditor=function(){
+    selectedTempleName='';
+    document.getElementById('adminVerifyEditor')?.classList.remove('show');
+  };
+
+  window.captureAdminVerifyCurrentLocation=async function(){
+    if(!isAdminUser()||!selectedTempleName)return;
+    const note=document.getElementById('adminVerifyEditorNote');
+    if(note)note.textContent='현재 위치를 정밀하게 잡고 있어요…';
+    try{
+      const pos=await requestFieldPositionNow();
+      const c=pos&&pos.coords;
+      if(!c)throw new Error('no_coords');
+      document.getElementById('adminVerifyLat').value=Number(c.latitude).toFixed(7);
+      document.getElementById('adminVerifyLng').value=Number(c.longitude).toFixed(7);
+      const acc=Math.round(Number(c.accuracy)||0);
+      if(note){
+        note.dataset.accuracy=String(acc);
+        note.textContent=`현재 위치를 넣었어요 · GPS 정확도 ±${acc}m${acc>50?' · 신호가 조금 흔들립니다. 가능하면 더 정확할 때 저장하세요.':''}`;
+      }
+    }catch(err){
+      if(err&&err.code===1){
+        if(note)note.textContent='위치 권한이 필요해요.';
+        openLocationPermissionHelp(()=>captureAdminVerifyCurrentLocation());
+      }else{
+        if(note)note.textContent='현재 위치를 잡지 못했어요. 하늘이 보이는 곳에서 다시 시도해주세요.';
+      }
+    }
+  };
+
+  window.useAdminVerifyAutoPoint=async function(){
+    if(!isAdminUser()||!selectedTempleName)return;
+    const note=document.getElementById('adminVerifyEditorNote');
+    if(note)note.textContent='지도 자동 기준점을 찾고 있어요…';
+    try{
+      const hit=findDestinationByName(selectedTempleName);
+      if(!hit){throw new Error('no_destination');}
+      /* 이 함수는 nearby IIFE 내부라 직접 접근 불가. 기존 캐시가 있으면 우선 활용,
+         없으면 사찰의 fixedLat/fixedLng 또는 lat/lng를 편집기에 불러온다. */
+      let p=null;
+      try{
+        const raw=JSON.parse(localStorage.getItem('sansaTempleVerifyPoints_v2')||'{}');
+        p=raw&&raw[selectedTempleName];
+      }catch(e){}
+      const lat=Number(p?.lat ?? hit.d.fixedLat ?? hit.d.lat);
+      const lng=Number(p?.lng ?? hit.d.fixedLng ?? hit.d.lng);
+      if(!Number.isFinite(lat)||!Number.isFinite(lng))throw new Error('no_coords');
+      document.getElementById('adminVerifyLat').value=lat.toFixed(7);
+      document.getElementById('adminVerifyLng').value=lng.toFixed(7);
+      if(!document.getElementById('adminVerifyLabel').value){
+        document.getElementById('adminVerifyLabel').value=String(p?.label||'지도 자동 기준점');
+      }
+      if(note)note.textContent='자동 기준점을 불러왔어요. 지도/현장에서 맞는 위치인지 확인한 뒤 ‘확정 좌표 저장’을 눌러주세요.';
+    }catch(err){
+      if(note)note.textContent='자동 기준점을 아직 찾지 못했어요. 현장에서 현재 위치를 넣거나 좌표를 직접 입력해주세요.';
+    }
+  };
+
+  window.saveAdminVerifyPoint=async function(){
+    if(!isAdminUser()){showToast('관리자 계정에서만 저장할 수 있어요.');return;}
+    if(!selectedTempleName){showToast('사찰을 먼저 선택해주세요.');return;}
+    if(!db){showToast('Firebase 연결을 확인해주세요.');return;}
+    const lat=Number(document.getElementById('adminVerifyLat')?.value);
+    const lng=Number(document.getElementById('adminVerifyLng')?.value);
+    const radius=Math.max(90,Math.min(200,Number(document.getElementById('adminVerifyRadius')?.value)||160));
+    const label=cleanName(document.getElementById('adminVerifyLabel')?.value)||'관리자 확정 기준점';
+    if(!Number.isFinite(lat)||lat<-90||lat>90||!Number.isFinite(lng)||lng<-180||lng>180){
+      showToast('위도·경도 값을 확인해주세요.');return;
+    }
+    const note=document.getElementById('adminVerifyEditorNote');
+    const accuracyM=Math.max(0,Number(note?.dataset?.accuracy)||0);
+    const payload={
+      name:selectedTempleName,lat,lng,radius,label,
+      accuracyM:accuracyM||null,
+      source:'admin-confirmed',
+      updatedAt:firebase.database.ServerValue.TIMESTAMP,
+      updatedBy:auth?.currentUser?.uid||''
+    };
+    try{
+      await refRoot().child(encodeKey(selectedTempleName)).set(payload);
+      confirmedPoints[selectedTempleName]=Object.assign({},payload,{updatedAt:Date.now()});
+      renderAdminVerifyPointList();
+      openAdminVerifyEditor(selectedTempleName);
+      showToast(`${selectedTempleName} 확정 좌표를 저장했어요.`);
+    }catch(err){
+      console.warn('verify point save failed',err&&err.code);
+      if(note)note.textContent='Firebase 쓰기 권한이 필요해요. shared/templeVerifyPoints 경로를 관리자만 쓸 수 있게 규칙을 추가해주세요.';
+      showToast('확정 좌표 저장 권한을 확인해주세요.');
+    }
+  };
+
+  window.deleteAdminVerifyPoint=async function(){
+    if(!isAdminUser()||!selectedTempleName)return;
+    if(!db){showToast('Firebase 연결을 확인해주세요.');return;}
+    const name=selectedTempleName;
+    try{
+      await refRoot().child(encodeKey(name)).remove();
+      delete confirmedPoints[name];
+      renderAdminVerifyPointList();
+      openAdminVerifyEditor(name);
+      showToast(`${name} 확정 좌표를 해제했어요. 다시 자동 기준점을 사용합니다.`);
+    }catch(err){
+      showToast('확정 좌표 해제 권한을 확인해주세요.');
+    }
+  };
+
+  /* 관리자 화면을 열 때 좌표 목록도 함께 표시 */
+  const oldOpenAdmin=window.openAdminOverlay;
+  if(typeof oldOpenAdmin==='function'){
+    window.openAdminOverlay=async function(){
+      const r=await oldOpenAdmin.apply(this,arguments);
+      startTempleVerifyPointListener();
+      renderAdminVerifyPointList();
+      return r;
+    };
+  }
+
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',()=>{
+      setTimeout(()=>{startTempleVerifyPointListener();renderAdminVerifyPointList();},0);
+    },{once:true});
+  }else{
+    setTimeout(()=>{startTempleVerifyPointListener();renderAdminVerifyPointList();},0);
   }
 })();
 </script>
