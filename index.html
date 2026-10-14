@@ -28561,18 +28561,16 @@ function renderHanjaCollection(body){
     <div class="pg-section-head pg-hanja-head">
       <div>
         <b>모은 한자 ${items.length} / 108</b>
-        <span>108곳마다 서로 다른 한 글자예요. 큰 글자 아래에서 <b>훈음과 의미</b>를 확인해보세요.</span>
+        <span>한자를 눌러 <b>읽는 법과 뜻</b>을 확인해보세요.</span>
       </div>
     </div>
     ${items.length?`<div class="pg-hanja-grid">
       ${items.map(item=>`
-        <button class="pg-hanja-card" type="button" onclick="showHanjaTemples('${escapeAttr(item.ch)}')">
+        <button class="pg-hanja-card pg-hanja-simple" type="button" onclick="showHanjaTemples('${escapeAttr(item.ch)}')" aria-label="${escapeAttr(item.ch)} ${escapeAttr(item.mean||'')} 자세히 보기">
           <strong>${escapeHtml(item.ch)}</strong>
-          <span class="pg-hanja-huneum">${escapeHtml(hanjaHuneum(item.ch))}</span>
-          <b class="pg-hanja-meaning">${escapeHtml(item.mean||'')}</b>
-          <small>${item.temples.length}곳</small>
+          <b class="pg-hanja-keyword">${escapeHtml(item.mean||'')}</b>
         </button>`).join('')}
-    </div>`:'<div class="community-empty">아직 모은 한자가 없어요.<br>절을 다녀왔다고 기록하면 첫 글자와 뜻이 함께 열려요.</div>'}
+    </div>`:'<div class="community-empty">아직 모은 한자가 없어요.<br>절을 다녀왔다고 기록하면 첫 글자가 열려요.</div>'}
     <div id="pgHanjaDetail"></div>
   `;
 }
@@ -28585,8 +28583,10 @@ function showHanjaTemples(ch){
   wrap.innerHTML=`<div class="pg-hanja-detail">
     <div class="pg-hanja-big">${escapeHtml(h.ch)}</div>
     <div class="pg-hanja-detail-copy">
+      <span class="pg-hanja-detail-label">읽는 법</span>
       <strong>${escapeHtml(hanjaHuneum(h.ch))}</strong>
-      <b>의미 · ${escapeHtml(h.mean||'')}</b>
+      <span class="pg-hanja-detail-label">뜻</span>
+      <b>${escapeHtml(h.mean||'')}</b>
       <div>${rows.map(([id,d])=>`<button type="button" onclick="openPilgrimTempleFromCollection('${id}')">${escapeHtml(d.name)}</button>`).join('')}</div>
     </div>
   </div>`;
@@ -41272,6 +41272,179 @@ body.sansa-catalog-active{
   }
 })();
 </script>
+
+
+<style id="sansa-tabs-hanja-cleanup-v1">
+/* ===== 컬렉션 탭: 튀어나오는 바탕 제거 ===== */
+#pilgrimCollectionOverlay .pilgrim-game-tabs{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  gap:10px!important;
+  margin:0 0 16px!important;
+  padding:0!important;
+  overflow:visible!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+#pilgrimCollectionOverlay .pilgrim-game-tabs button{
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  min-height:54px!important;
+  margin:0!important;
+  padding:0 10px!important;
+  box-sizing:border-box!important;
+  border:1px solid #ded5c9!important;
+  border-radius:18px!important;
+  background:#fffdfa!important;
+  color:#62584e!important;
+  font-size:15px!important;
+  font-weight:900!important;
+  line-height:1.1!important;
+  white-space:nowrap!important;
+  box-shadow:0 3px 10px rgba(83,65,42,.055)!important;
+}
+#pilgrimCollectionOverlay .pilgrim-game-tabs button.active{
+  border-color:#c9bca9!important;
+  background:#fff!important;
+  color:#29241f!important;
+  box-shadow:0 7px 16px rgba(82,63,40,.09)!important;
+}
+
+/* 수호카드 탭: 기본 상태부터 한눈에 들어오게 */
+#pilgrimCollectionOverlay .pilgrim-game-tabs .guardian-main-tab{
+  position:relative!important;
+  border:2px solid #ce9838!important;
+  background:linear-gradient(135deg,#fff5d4 0%,#ffe8aa 100%)!important;
+  color:#73490d!important;
+  box-shadow:
+    0 8px 19px rgba(187,132,38,.18),
+    inset 0 1px 0 rgba(255,255,255,.75)!important;
+}
+#pilgrimCollectionOverlay .pilgrim-game-tabs .guardian-main-tab::after{
+  content:"핵심";
+  position:absolute;
+  right:8px;
+  top:7px;
+  padding:2px 6px;
+  border-radius:999px;
+  background:#2f705b;
+  color:#fff;
+  font-size:8px;
+  line-height:1.35;
+  font-weight:900;
+  letter-spacing:.04em;
+}
+#pilgrimCollectionOverlay .pilgrim-game-tabs .guardian-main-tab.active{
+  border-color:#b8781d!important;
+  background:linear-gradient(135deg,#edce76 0%,#dca23d 100%)!important;
+  color:#3d280b!important;
+  box-shadow:
+    0 11px 24px rgba(179,119,27,.26),
+    inset 0 1px 0 rgba(255,255,255,.40)!important;
+}
+#pilgrimCollectionOverlay .pilgrim-game-tabs .guardian-main-tab.active::after{
+  background:#275f4f;
+}
+
+/* ===== 한자 목록: 한자 + 핵심단어만 ===== */
+#pilgrimCollectionOverlay .pg-hanja-card.pg-hanja-simple{
+  min-height:138px!important;
+  padding:16px 8px 14px!important;
+  gap:8px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+}
+#pilgrimCollectionOverlay .pg-hanja-card.pg-hanja-simple>strong{
+  display:block!important;
+  margin:0 0 8px!important;
+  font-size:46px!important;
+  line-height:1!important;
+  color:#2d2924!important;
+}
+#pilgrimCollectionOverlay .pg-hanja-card .pg-hanja-keyword{
+  display:block!important;
+  margin:0!important;
+  font-size:18px!important;
+  line-height:1.22!important;
+  font-weight:950!important;
+  color:#8a5520!important;
+  word-break:keep-all!important;
+}
+/* 목록에서는 훈음/뜻/방문수 숨김 — 상세 클릭 후에만 공개 */
+#pilgrimCollectionOverlay .pg-hanja-card .pg-hanja-huneum,
+#pilgrimCollectionOverlay .pg-hanja-card .pg-hanja-meaning,
+#pilgrimCollectionOverlay .pg-hanja-card>small{
+  display:none!important;
+}
+
+/* 클릭 후 상세 */
+#pilgrimCollectionOverlay .pg-hanja-detail{
+  margin-top:14px!important;
+}
+#pilgrimCollectionOverlay .pg-hanja-detail-copy .pg-hanja-detail-label{
+  display:block;
+  margin:7px 0 2px;
+  color:#958574;
+  font-size:10px;
+  font-weight:850;
+}
+#pilgrimCollectionOverlay .pg-hanja-detail-copy>strong{
+  display:block!important;
+  margin:0 0 4px!important;
+  color:#805020!important;
+  font-size:18px!important;
+  line-height:1.25!important;
+}
+#pilgrimCollectionOverlay .pg-hanja-detail-copy>b{
+  display:block!important;
+  margin:0 0 9px!important;
+  color:#356758!important;
+  font-size:16px!important;
+  line-height:1.3!important;
+}
+
+/* 이전 패치의 '뜻 ·' 자동 접두어는 상세/목록 모두 방해하지 않게 제거 */
+#pilgrimCollectionOverlay .pg-hanja-meaning::before{
+  content:none!important;
+}
+
+@media(min-width:760px){
+  #pilgrimCollectionOverlay .pilgrim-game-tabs{
+    grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  }
+}
+@media(max-width:620px){
+  #pilgrimCollectionOverlay .pilgrim-game-tabs{
+    gap:9px!important;
+  }
+  #pilgrimCollectionOverlay .pilgrim-game-tabs button{
+    min-height:52px!important;
+    font-size:14px!important;
+    border-radius:17px!important;
+  }
+  #pilgrimCollectionOverlay .pilgrim-game-tabs .guardian-main-tab::after{
+    right:6px;top:6px;font-size:7.5px;
+  }
+  #pilgrimCollectionOverlay .pg-hanja-card.pg-hanja-simple{
+    min-height:132px!important;
+    padding:14px 5px!important;
+  }
+  #pilgrimCollectionOverlay .pg-hanja-card.pg-hanja-simple>strong{
+    font-size:42px!important;
+  }
+  #pilgrimCollectionOverlay .pg-hanja-card .pg-hanja-keyword{
+    font-size:17px!important;
+  }
+}
+</style>
 
 </body>
 </html>
