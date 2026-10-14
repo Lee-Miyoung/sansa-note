@@ -21581,6 +21581,79 @@ body.catalog-screen-open #catalogOverlay,
 }
 </style>
 
+
+<style id="sansa-home-search-cleanup-v1">
+/* 홈 빠른길잡이에는 절·산 검색과 내 주변 절 찾기만 남긴다. */
+.sansa-easy-start-actions.sansa-easy-start-actions-clean{
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+}
+.sansa-easy-start-actions-clean button{
+  min-height:62px!important;
+  flex-wrap:wrap;
+  align-content:center;
+  row-gap:3px!important;
+}
+.sansa-easy-start-actions-clean button b{
+  font-size:13px;
+}
+.sansa-easy-start-actions-clean button small{
+  flex-basis:100%;
+  display:block;
+  font-size:9.5px;
+  line-height:1.25;
+  color:#81786d;
+  font-weight:700;
+}
+.sansa-easy-start-actions-clean .ses-nearby-temple{
+  background:#eef7f2;
+  border-color:#b9d5c8;
+  color:#315f51;
+}
+
+/* 아래쪽 절/산/커뮤니티 전환 및 중복 검색 필터는 홈에서 숨김.
+   내부 함수/기능은 남겨 기존 상세·상단 탭 기능을 해치지 않는다. */
+.sansa-discovery-hub > .content-type-row,
+.sansa-discovery-hub > .home-explore-hint,
+.sansa-discovery-hub > #mainFilterbar{
+  display:none!important;
+}
+
+/* 절·산 찾기 모달 안에서만 절/산을 선택해 검색 */
+#catalogOverlay .catalog-kind-tabs{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  margin:0 0 10px;
+}
+#catalogOverlay .catalog-kind-tabs button{
+  min-height:43px;
+  border:1px solid #ddd5c8;
+  border-radius:12px;
+  background:#fff;
+  color:#635a50;
+  font-family:inherit;
+  font-size:13px;
+  font-weight:900;
+}
+#catalogOverlay .catalog-kind-tabs button.active{
+  border-color:#85af9e;
+  background:#eaf4ef;
+  color:#2d6653;
+  box-shadow:inset 0 0 0 1px rgba(63,117,99,.08);
+}
+@media(max-width:700px){
+  .sansa-easy-start-actions.sansa-easy-start-actions-clean{
+    grid-template-columns:1fr 1fr!important;
+  }
+  .sansa-easy-start-actions-clean button{
+    min-height:66px!important;
+    padding:9px 6px!important;
+  }
+  .sansa-easy-start-actions-clean button b{font-size:12px}
+  .sansa-easy-start-actions-clean button small{font-size:9px}
+}
+</style>
+
 </head>
 <body>
 
@@ -21748,14 +21821,11 @@ body.catalog-screen-open #catalogOverlay,
     <div class="sansa-easy-start-inner">
       <div class="sansa-easy-start-title">
         <span class="ses-dot">?</span>
-        <span><b>뭘 하러 오셨나요?</b><small>자주 쓰는 기능부터 바로 찾아가세요.</small></span>
+        <span><b>어디를 찾아볼까요?</b><small>절·산 검색 또는 현재 위치로 가까운 절을 찾아보세요.</small></span>
       </div>
-      <div class="sansa-easy-start-actions">
-        <button type="button" onclick="guideBrowsePlaces()"><span>⌕</span><b>절·산 찾기</b></button>
-        <button type="button" onclick="guideFieldVerify()"><span>⌖</span><b>현장 인증</b></button>
-        <button type="button" class="ses-nearby-temple" onclick="openNearbyTempleFinder()"><span>📍</span><b>내 주변 절 찾기</b></button>
-        <button type="button" onclick="guideOpenRecords()"><span>▤</span><b>내 기록</b></button>
-        <button type="button" class="ses-all" onclick="openSansaGuide()"><span>✦</span><b>기능 찾기</b></button>
+      <div class="sansa-easy-start-actions sansa-easy-start-actions-clean">
+        <button type="button" class="ses-place-search" onclick="guideBrowsePlaces()"><span>⌕</span><b>절·산 찾기</b><small>이름·지역으로 검색</small></button>
+        <button type="button" class="ses-nearby-temple" onclick="openNearbyTempleFinder()"><span>📍</span><b>내 주변 절 찾기</b><small>현재 위치로 가까운 절 찾기</small></button>
       </div>
     </div>
   </section>
@@ -36479,9 +36549,8 @@ function runSansaGuideAction(index){
   setTimeout(()=>{try{Function(item.action)()}catch(e){console.warn('guide action',e);showToast('이 기능을 여는 중 문제가 생겼어요.')}} ,70);
 }
 function guideBrowsePlaces(){
-  const row=document.querySelector('.content-type-row');
-  if(row)row.scrollIntoView({behavior:'smooth',block:'start'});
-  setTimeout(()=>showToast('절 또는 산을 고른 뒤, 검색·지역 필터로 찾으면 쉬워요.'),350);
+  openCatalogOverlay('temple');
+  setTimeout(()=>document.getElementById('catalogSearch')?.focus(),140);
 }
 function guideFieldVerify(){
   openSansaGuide('인증');
@@ -37469,8 +37538,12 @@ setTimeout(()=>{
       <button class="close-x" type="button" onclick="closeCatalogOverlay()">✕</button>
     </div>
     <div class="modal-body">
+      <div class="catalog-kind-tabs" role="tablist" aria-label="절 또는 산 선택">
+        <button type="button" id="catalogTempleTab" role="tab" onclick="setCatalogMode('temple')">🛕 절</button>
+        <button type="button" id="catalogMountainTab" role="tab" onclick="setCatalogMode('mountain')">⛰ 산</button>
+      </div>
       <div class="catalog-toolbar">
-        <input id="catalogSearch" class="searchbox" type="search" placeholder="이름이나 지역으로 검색" oninput="renderCatalogOverlay()">
+        <input id="catalogSearch" class="searchbox" type="search" placeholder="절 이름이나 지역으로 검색" oninput="renderCatalogOverlay()">
         <span class="catalog-count" id="catalogCount"></span>
       </div>
       <div id="catalogList" class="catalog-list"></div>
@@ -37481,8 +37554,33 @@ setTimeout(()=>{
 
 <script id="catalog-overlay-js">
 let catalogMode='temple';
+function syncCatalogModeTabs(){
+  const t=document.getElementById('catalogTempleTab');
+  const m=document.getElementById('catalogMountainTab');
+  if(t){
+    const on=catalogMode==='temple';
+    t.classList.toggle('active',on);
+    t.setAttribute('aria-selected',on?'true':'false');
+  }
+  if(m){
+    const on=catalogMode==='mountain';
+    m.classList.toggle('active',on);
+    m.setAttribute('aria-selected',on?'true':'false');
+  }
+  const s=document.getElementById('catalogSearch');
+  if(s)s.placeholder=catalogMode==='mountain'?'산 이름이나 지역으로 검색':'절 이름이나 지역으로 검색';
+}
+function setCatalogMode(mode){
+  catalogMode=mode==='mountain'?'mountain':'temple';
+  const s=document.getElementById('catalogSearch');
+  if(s)s.value='';
+  syncCatalogModeTabs();
+  renderCatalogOverlay();
+  setTimeout(()=>s?.focus(),80);
+}
 function openCatalogOverlay(mode){
   catalogMode=mode==='mountain'?'mountain':'temple';
+  syncCatalogModeTabs();
   const app=document.getElementById('app');
   if(app){
     if(!app.dataset.catalogPrevDisplay) app.dataset.catalogPrevDisplay=app.style.display||'block';
@@ -37551,15 +37649,16 @@ async function openMountainFromCatalog(name){
   openMountainDetail(id);
 }
 function renderCatalogOverlay(){
+  syncCatalogModeTabs();
   const title=document.getElementById('catalogTitle'),sub=document.getElementById('catalogSub'),list=document.getElementById('catalogList'),count=document.getElementById('catalogCount');
   const q=(document.getElementById('catalogSearch')?.value||'').trim().toLowerCase();
   if(catalogMode==='mountain'){
     const a=getMountainCatalogData().filter(d=>!q||[d.name,d.region,d.height,d.desc].filter(Boolean).join(' ').toLowerCase().includes(q));
-    title.textContent='⛰ 산 전체 목록'; sub.textContent='산 탭을 누르면 전체 산 목록이 별도 창으로 열려요.'; count.textContent=`${a.length}곳`;
+    title.textContent='🔎 절·산 찾기'; sub.textContent='산을 선택했어요. 이름이나 지역으로 검색하세요.'; count.textContent=`산 ${a.length}곳`;
     list.innerHTML=a.length?a.map(d=>`<div class="catalog-card ${mountainVisitedByName(d.name)?'visited':''}"><div class="catalog-copy"><b>${escapeHtml(d.name)}${mountainVisitedByName(d.name)?' · ✓ 다녀옴':''}</b><small>${escapeHtml(d.region||'')}${d.height?' · '+escapeHtml(String(d.height)):''}</small></div><div class="catalog-actions"><button class="primary" onclick="openMountainFromCatalog('${escapeAttr(d.name)}')">보기</button></div></div>`).join(''):'<div class="catalog-empty">검색 결과가 없어요.</div>';
   }else{
     const a=getTempleCatalogData().filter(d=>!q||[d.name,d.region,d.desc].filter(Boolean).join(' ').toLowerCase().includes(q));
-    title.textContent='🛕 108 사찰 전체 목록'; sub.textContent='절 탭을 누르면 108 사찰 전체 목록이 별도 창으로 열려요.'; count.textContent=`${a.length}곳`;
+    title.textContent='🔎 절·산 찾기'; sub.textContent='절을 선택했어요. 이름이나 지역으로 검색하세요.'; count.textContent=`절 ${a.length}곳`;
     list.innerHTML=a.length?a.map(d=>{const v=templeVisitedByName(d.name),on=isTempleOnMain(d.name);return `<div class="catalog-card ${v?'visited':''}"><div class="catalog-copy"><b>${escapeHtml(d.name)}${v?' · ✓ 다녀옴':''}</b><small>${escapeHtml(d.region||'')}</small></div><div class="catalog-actions"><button onclick="openTempleFromCatalog('${escapeAttr(d.name)}')">보기</button>${on?`<button onclick="closeCatalogOverlay();revealTempleOnMain('${escapeAttr(d.name)}',event)">메인에서 보기</button>`:`<button class="primary" onclick="closeCatalogOverlay();revealTempleOnMain('${escapeAttr(d.name)}',event)">메인 추가</button>`}</div></div>`}).join(''):'<div class="catalog-empty">검색 결과가 없어요.</div>';
   }
 }
