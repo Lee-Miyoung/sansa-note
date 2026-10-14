@@ -21386,6 +21386,177 @@ body.catalog-screen-open #catalogOverlay,
 }
 </style>
 
+
+<style id="temple-collection-guide-v1-css">
+#pilgrimRewardPreview .temple-collection-guide{
+  position:relative;
+  overflow:hidden;
+  margin:0;
+  padding:18px;
+  border:1px solid rgba(181,145,82,.28);
+  border-radius:22px;
+  background:
+    radial-gradient(circle at 88% 12%,rgba(245,213,145,.28),transparent 32%),
+    radial-gradient(circle at 10% 95%,rgba(132,174,156,.15),transparent 34%),
+    linear-gradient(145deg,#fffdf8 0%,#fbf4e6 58%,#f8eed7 100%);
+  box-shadow:0 10px 28px rgba(82,64,36,.07);
+}
+#pilgrimRewardPreview .temple-collection-guide::after{
+  content:'';
+  position:absolute;
+  right:-42px;bottom:-54px;
+  width:150px;height:150px;
+  border-radius:50%;
+  border:1px solid rgba(189,151,84,.12);
+  box-shadow:0 0 0 22px rgba(189,151,84,.04),0 0 0 44px rgba(189,151,84,.025);
+  pointer-events:none;
+}
+.tcg-head{
+  position:relative;z-index:2;
+  display:flex;align-items:flex-start;justify-content:space-between;gap:12px;
+}
+.tcg-kicker{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:11px;font-weight:900;letter-spacing:.02em;color:#9a6d2e;
+  margin-bottom:5px;
+}
+.tcg-head h3{
+  margin:0;
+  font-family:'Nanum Myeongjo','Noto Serif KR',serif;
+  font-size:22px;line-height:1.28;color:#241d17;
+}
+.tcg-head p{
+  margin:7px 0 0;
+  max-width:510px;
+  color:#685d50;font-size:13px;line-height:1.65;font-weight:650;
+  word-break:keep-all;
+}
+.tcg-state{
+  flex:0 0 auto;
+  display:inline-flex;align-items:center;justify-content:center;
+  min-width:62px;padding:7px 10px;border-radius:999px;
+  background:#315f51;color:#fff;font-size:9.5px;font-weight:900;letter-spacing:.09em;
+  box-shadow:0 5px 13px rgba(49,95,81,.17);
+}
+.tcg-state.is-open{background:#9a7130}
+.tcg-path{
+  position:relative;z-index:2;
+  display:grid;
+  grid-template-columns:1fr 20px 1fr 20px 1.15fr;
+  align-items:stretch;
+  gap:6px;
+  margin:16px 0 12px;
+}
+.tcg-arrow{
+  display:grid;place-items:center;
+  color:#b88a42;font-size:17px;font-weight:900;
+}
+.tcg-step{
+  min-width:0;
+  border:1px solid rgba(178,145,90,.22);
+  background:rgba(255,255,255,.72);
+  border-radius:16px;
+  padding:12px 8px 11px;
+  text-align:center;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  min-height:112px;
+}
+.tcg-step .tcg-icon{
+  width:36px;height:36px;border-radius:50%;
+  display:grid;place-items:center;
+  background:#f3ecdd;color:#7c5a27;
+  font-size:19px;font-weight:900;
+  margin-bottom:7px;
+}
+.tcg-step.done .tcg-icon{background:#e4f0e9;color:#2f6755}
+.tcg-step b{
+  color:#315f51;font-size:13px;line-height:1.3;
+  word-break:keep-all;
+}
+.tcg-step small{
+  display:block;margin-top:5px;
+  color:#7a6d5f;font-size:10.5px;line-height:1.35;font-weight:700;
+  word-break:keep-all;
+}
+.tcg-hanja{
+  font-family:'Nanum Myeongjo','Noto Serif KR',serif!important;
+  font-size:24px!important;
+  line-height:1!important;
+}
+.tcg-card-step{padding:9px 7px 10px}
+.tcg-mini-card{
+  position:relative;
+  width:48px;height:78px;
+  margin:0 auto 7px;
+  border-radius:7px;
+  overflow:hidden;
+  background:#e9e3d8;
+  box-shadow:0 4px 10px rgba(54,45,31,.13);
+  border:1px solid rgba(157,123,68,.24);
+}
+.tcg-mini-card img{
+  width:100%;height:100%;object-fit:cover;display:block;
+}
+.tcg-mini-card.locked img{
+  filter:grayscale(1) brightness(.78) opacity(.62);
+}
+.tcg-mini-card.visited img{
+  filter:grayscale(1) contrast(.9) brightness(.92);
+}
+.tcg-mini-card .tcg-lock{
+  position:absolute;inset:0;
+  display:grid;place-items:center;
+  background:rgba(44,49,45,.18);
+  font-size:17px;
+}
+.tcg-mini-card.open .tcg-lock{display:none}
+.tcg-bottom{
+  position:relative;z-index:2;
+  display:flex;align-items:center;justify-content:space-between;gap:9px;
+  padding:10px 12px;border-radius:14px;
+  background:rgba(236,230,207,.72);
+  color:#405f55;
+}
+.tcg-bottom strong{font-size:12px;line-height:1.35}
+.tcg-bottom span{font-size:10.5px;color:#746857;line-height:1.35}
+.tcg-actions{
+  position:relative;z-index:2;
+  display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;
+}
+.tcg-actions button{
+  border-radius:13px;padding:11px 8px;
+  font-family:inherit;font-size:11.5px;font-weight:900;cursor:pointer;
+}
+.tcg-actions .outline{
+  border:1px solid #d8c6a6;background:#fffdf9;color:#68583e;
+}
+.tcg-actions .primary{
+  border:0;background:#3f7563;color:#fff;
+}
+.tcg-note{
+  position:relative;z-index:2;
+  display:block;margin-top:9px;text-align:center;
+  color:#8b7c69;font-size:10.5px;line-height:1.45;
+}
+@media(max-width:430px){
+  #pilgrimRewardPreview .temple-collection-guide{padding:15px;border-radius:19px}
+  .tcg-head h3{font-size:20px}
+  .tcg-head p{font-size:12.2px;line-height:1.6}
+  .tcg-state{min-width:56px;padding:6px 8px}
+  .tcg-path{grid-template-columns:1fr 13px 1fr 13px 1.08fr;gap:4px;margin-top:14px}
+  .tcg-step{min-height:105px;padding:10px 5px;border-radius:14px}
+  .tcg-step .tcg-icon{width:32px;height:32px;font-size:17px;margin-bottom:6px}
+  .tcg-step b{font-size:11.8px}
+  .tcg-step small{font-size:9.6px}
+  .tcg-hanja{font-size:21px!important}
+  .tcg-mini-card{width:42px;height:70px}
+  .tcg-arrow{font-size:14px}
+  .tcg-bottom{padding:9px 10px}
+  .tcg-bottom strong{font-size:11px}
+  .tcg-bottom span{font-size:9.8px}
+}
+</style>
+
 </head>
 <body>
 
@@ -35670,63 +35841,121 @@ function openPassportOverlay(){
 }
 
 /* 절 상세: 인증 전에는 보상 예고, 인증 후에는 획득한 보상/기록을 확실히 보여준다. */
+function detailGuardianCardInfo(d){
+  const name=String(d?.name||'');
+  try{
+    if(typeof window.guardianCatalog==='function'){
+      const item=(window.guardianCatalog()||[]).find(x=>{
+        if(!x)return false;
+        if(x.name===name)return true;
+        return Array.isArray(window.GUARDIAN_NAME_ALIASES?.[x.name]) &&
+          window.GUARDIAN_NAME_ALIASES[x.name].includes(name);
+      });
+      if(item)return item;
+    }
+  }catch(e){}
+  let idx=-1;
+  try{idx=(typeof SANSA_GUARDIAN_108!=='undefined'?SANSA_GUARDIAN_108:[]).indexOf(name);}catch(e){}
+  return idx>=0?{name,number:idx+1,asset:{file:String(idx+1).padStart(3,'0')+'.png'}}:null;
+}
+function detailHasVisitRecord(d){
+  return !!(d && (
+    (Number(d.stage)||0)>=1 ||
+    Object.keys(d.visits||{}).length ||
+    Object.keys(d.photos||{}).length
+  ));
+}
 function renderPilgrimRewardPreview(d){
   const wrap=document.getElementById('pilgrimRewardPreview');
   if(!wrap||!d)return;
-  const verified=verifiedVisitsOf(d);
-  if(!verified.length){
-    const reward=currentFieldRewardText(d);
-    const region=escapeHtml(d.region||'지역');
-    wrap.innerHTML=`
-      <section class="field-reward-preview is-new">
-        <div class="field-reward-head">
-          <div><span class="field-reward-kicker">📍 현장에 가면 열려요</span>
-          <h3>${escapeHtml(reward.title)}</h3>
-          <p>사찰 현장에서 위치 인증하면 도장·연꽃·인증 기록이 실제로 남습니다.</p></div>
-          <span class="field-reward-lock">LOCKED</span>
-        </div>
-        <div class="field-reward-items">
-          <span><b>🪷 +1</b><small>현장 연꽃</small></span>
-          <span><b>印</b><small>현장 도장</small></span>
-          <span><b>📜</b><small>인증서</small></span>
-          <span><b>${region}</b><small>지역 기록</small></span>
-        </div>
-        <div class="field-reward-special">${reward.badge}</div>
-        <div class="field-reward-actions">
-          <button type="button" class="field-reward-preview-btn" onclick="showFieldRewardPreviewOnly()">보상 미리보기</button>
-          <button type="button" class="field-reward-go-btn" onclick="document.getElementById('pilgrimVerifyBtn')?.scrollIntoView({behavior:'smooth',block:'center'})">현장 인증하기 →</button>
-        </div>
-        <small class="field-reward-note">※ 실제 현장에서 위치 인증에 성공해야 기록됩니다.</small>
-      </section>`;
-    return;
-  }
 
-  const latest=verified[0];
+  const verified=verifiedVisitsOf(d);
+  const verifyCount=verified.length;
+  const visited=detailHasVisitRecord(d);
+  const hanja=typeof stableHanjaForTemple==='function'
+    ? stableHanjaForTemple(d.name)
+    : {ch:'字',mean:'순례의 글자'};
+  const item=detailGuardianCardInfo(d);
+  const file=item?.asset?.file || (item?.number?String(item.number).padStart(3,'0')+'.png':'');
+  const cardState=verifyCount?'open':(visited?'visited':'locked');
+  const bond=templeBondReward(verifyCount);
+
+  const hanjaMain=visited?escapeHtml(hanja.ch||'字'):'字';
+  const hanjaSub=visited
+    ? `${escapeHtml(hanja.mean||'')} · 획득`
+    : '방문 기록 후 공개';
+
+  const lotusSub=visited?'나의 108 순례에 피어남':'다녀오면 연꽃이 피어요';
+  const cardSub=verifyCount
+    ? `컬러 카드 열림${verifyCount>1?` · 인증 ${verifyCount}회`:''}`
+    : (visited?'현장 인증하면 컬러로 열려요':'마지막은 현장 인증');
+
+  const img=file
+    ? `<img src="./images/lotus-cards/${escapeAttr(file)}?v=20261012c" alt="${escapeAttr(d.name)} 수호카드" onerror="this.style.display='none'">`
+    : `<span style="font-size:24px">🎴</span>`;
+
+  const statusText=verifyCount
+    ? `${bond.icon} ${escapeHtml(templeBondMilestoneLabel(verifyCount))}`
+    : (visited?'이제 현장 인증만 남았어요':'이 절과의 첫 인연을 시작해보세요');
+
+  const statusDesc=verifyCount
+    ? `${escapeHtml(d.name)} 현장 인증 ${verifyCount}회 · 재방문할수록 인연 기록이 쌓여요.`
+    : (visited
+        ? `연꽃과 한자는 이미 모였어요. 실제 사찰에서 위치 인증하면 최종 컬러 수호카드가 열립니다.`
+        : `방문 기록으로 연꽃과 한자를 모으고, 실제 현장 위치 인증으로 수호카드를 완성합니다.`);
+
   wrap.innerHTML=`
-    <section class="field-reward-preview is-verified">
-      <div class="field-reward-head">
+    <section class="temple-collection-guide">
+      <div class="tcg-head">
         <div>
-          <span class="field-reward-kicker">✓ 현장 인증 완료</span>
-          <h3>${escapeHtml(d.name)} 인증 도장이 남아 있어요</h3>
-          <p>이 인증은 나의 현장 인증 기록과 순례 보상에 계속 보관됩니다.</p>
-          <div class="field-verified-date">📍 ${formatFieldVerifyDate(latest.ts)} 인증${verified.length>1?` · 총 ${verified.length}회 현장 인증`:''}${latest.gpsAccuracyM?` · GPS ±${Math.round(latest.gpsAccuracyM)}m`:''}</div>
+          <span class="tcg-kicker">🪷 산사노트 순례 수집</span>
+          <h3>${escapeHtml(d.name)}에서 모으는 세 가지</h3>
+          <p><b>연꽃 → 한자 → 수호카드</b>로 이어져요. 절을 다녀온 기록이 쌓이고, 마지막 현장 인증에서 컬러 수호카드가 열립니다.</p>
         </div>
-        <span class="field-reward-lock">VERIFIED</span>
+        <span class="tcg-state ${verifyCount?'is-open':''}">${verifyCount?'OPEN':'LOCKED'}</span>
       </div>
-      <div class="field-reward-items">
-        <span><b>🪷 ✓</b><small>연꽃 획득</small></span>
-        <span><b>印 ✓</b><small>현장 도장</small></span>
-        <span><b>📜 ✓</b><small>인증서 열림</small></span>
-        <span><b>${uniqueVerifiedTempleCount()}</b><small>인증한 절</small></span>
+
+      <div class="tcg-path" aria-label="연꽃, 한자, 수호카드 수집 흐름">
+        <div class="tcg-step ${visited?'done':''}">
+          <span class="tcg-icon">🪷</span>
+          <b>연꽃 피우기</b>
+          <small>${lotusSub}</small>
+        </div>
+
+        <span class="tcg-arrow" aria-hidden="true">→</span>
+
+        <div class="tcg-step ${visited?'done':''}">
+          <span class="tcg-icon tcg-hanja">${hanjaMain}</span>
+          <b>한자 모으기</b>
+          <small>${hanjaSub}</small>
+        </div>
+
+        <span class="tcg-arrow" aria-hidden="true">→</span>
+
+        <div class="tcg-step tcg-card-step ${verifyCount?'done':''}">
+          <div class="tcg-mini-card ${cardState}">
+            ${img}
+            <span class="tcg-lock">🔒</span>
+          </div>
+          <b>수호카드 열기</b>
+          <small>${cardSub}</small>
+        </div>
       </div>
-      <div class="field-reward-special">🏅 ${escapeHtml(d.name)} 현장 인증 보유</div>
-      <div class="field-reward-actions">
-        <button type="button" class="field-reward-preview-btn" onclick="openPassportOverlay()">내 인증 기록 보기</button>
-        <button type="button" class="field-reward-go-btn" onclick="openStoryCardOverlay()">📜 인증서 보기</button>
+
+      <div class="tcg-bottom">
+        <strong>${statusText}</strong>
+        <span>${statusDesc}</span>
       </div>
-      <small class="field-reward-note">재방문하면 현장 인증 횟수도 계속 쌓입니다.</small>
+
+      <div class="tcg-actions">
+        <button type="button" class="outline" onclick="openPilgrimGuardianCollection()">🎴 수호카드 도감 보기</button>
+        <button type="button" class="primary" onclick="document.getElementById('pilgrimVerifyBtn')?.scrollIntoView({behavior:'smooth',block:'center'});setTimeout(()=>document.getElementById('pilgrimVerifyBtn')?.classList.add('pulse-now'),250);setTimeout(()=>document.getElementById('pilgrimVerifyBtn')?.classList.remove('pulse-now'),1600);">📍 ${verifyCount?'다시 현장 인증':'현장 인증으로 카드 열기'}</button>
+      </div>
+
+      <small class="tcg-note">※ 기존 방문 기록과 현장 위치 인증 방식은 그대로 유지됩니다.</small>
     </section>`;
 }
+
 
 /* 산 상세도 절과 같은 구조 */
 function renderMountainRewardPreview(d){
