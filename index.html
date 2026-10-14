@@ -21700,6 +21700,126 @@ body.catalog-screen-open #catalogOverlay,
 }
 </style>
 
+
+<style id="sansa-hanja-lotus-draw-v1-css">
+/* 한자: 무슨 한자인지 바로 읽히게 */
+#pilgrimCollectionOverlay .pg-hanja-card{
+  min-height:150px!important;
+}
+#pilgrimCollectionOverlay .pg-hanja-card .pg-hanja-huneum{
+  display:block;
+  font-size:13px!important;
+  line-height:1.25!important;
+  font-weight:900!important;
+  color:#72502d!important;
+}
+#pilgrimCollectionOverlay .pg-hanja-card .pg-hanja-meaning{
+  display:block;
+  font-size:12px!important;
+  line-height:1.3!important;
+  color:#5f756b!important;
+}
+#pilgrimCollectionOverlay .pg-hanja-head span{
+  line-height:1.55!important;
+}
+#pilgrimCollectionOverlay .pg-hanja-detail-copy>strong{
+  display:block;
+  color:#7a492c;
+  font-size:18px;
+  margin-bottom:4px;
+}
+#pilgrimCollectionOverlay .pg-hanja-detail-copy>b{
+  display:block;
+  color:#50695e;
+  font-size:13px;
+  margin-bottom:8px;
+}
+
+/* 현장 인증 연꽃 = 빛나는 연꽃 */
+#pilgrimCollectionOverlay .verified-lotus-legend{
+  color:#9a6a18!important;
+  font-weight:900!important;
+}
+#pilgrimCollectionOverlay .pg-lotus-verified-label{
+  position:absolute;
+  left:50%;
+  bottom:3px;
+  transform:translateX(-50%);
+  padding:1px 4px;
+  border-radius:999px;
+  background:rgba(255,248,221,.94);
+  color:#9b6b17;
+  font-size:7px;
+  font-weight:900;
+  line-height:1.25;
+  white-space:nowrap;
+}
+#pilgrimCollectionOverlay .pg-lotus.field-verified-lotus{
+  overflow:visible!important;
+}
+
+/* 절 뽑기: 바로 결과가 나오지 않고 짧은 룰렛처럼 점점 느려짐 */
+#pilgrimCollectionOverlay .pilgrim-today-card.drawing{
+  border-color:#d7ab5a!important;
+  box-shadow:0 0 0 2px rgba(208,160,67,.10),0 12px 26px rgba(139,95,36,.11)!important;
+}
+#pilgrimCollectionOverlay .pilgrim-today-card.drawing::after{
+  content:"108";
+  position:absolute;
+  right:16px;
+  bottom:-18px;
+  font-family:"Nanum Myeongjo","Noto Serif KR",serif;
+  font-size:64px;
+  font-weight:900;
+  color:rgba(170,118,42,.07);
+  pointer-events:none;
+}
+#pilgrimCollectionOverlay #pilgrimTodayTitle.draw-pop{
+  animation:sansaTempleDrawPop .12s ease-out;
+}
+#pilgrimCollectionOverlay #pilgrimTodayTitle.draw-final{
+  animation:sansaTempleDrawFinal .55s cubic-bezier(.2,.8,.2,1);
+  color:#8b5923!important;
+}
+#pilgrimCollectionOverlay .pilgrim-today-card.draw-winner{
+  background:linear-gradient(135deg,#fff8e8,#f6ead2)!important;
+  box-shadow:0 0 0 2px rgba(212,166,77,.13),0 12px 28px rgba(121,86,35,.12)!important;
+}
+#pilgrimCollectionOverlay .pilgrim-today-card>button:disabled{
+  opacity:.72;
+  cursor:wait;
+}
+@keyframes sansaTempleDrawPop{
+  0%{opacity:.2;transform:translateY(5px) scale(.98)}
+  100%{opacity:1;transform:none}
+}
+@keyframes sansaTempleDrawFinal{
+  0%{opacity:.15;transform:scale(.92)}
+  55%{opacity:1;transform:scale(1.07)}
+  100%{transform:scale(1)}
+}
+@media(max-width:700px){
+  #pilgrimCollectionOverlay .pg-hanja-card{
+    min-height:144px!important;
+    padding:10px 4px!important;
+  }
+  #pilgrimCollectionOverlay .pg-hanja-card .pg-hanja-huneum{
+    font-size:12px!important;
+  }
+  #pilgrimCollectionOverlay .pg-hanja-card .pg-hanja-meaning{
+    font-size:11px!important;
+  }
+  #pilgrimCollectionOverlay .pg-lotus-legend{
+    flex-wrap:wrap!important;
+    row-gap:5px!important;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  #pilgrimCollectionOverlay #pilgrimTodayTitle.draw-pop,
+  #pilgrimCollectionOverlay #pilgrimTodayTitle.draw-final{animation:none!important}
+}
+</style>
+
 </head>
 <body>
 
@@ -26759,6 +26879,11 @@ const CARD_HANJA = [
   {ch:"海", mean:"바다"},
   {ch:"響", mean:"울림"}
 ];
+const HANJA_HUNEUM = {"慈":"사랑 자","智":"슬기 지","淨":"깨끗할 정","和":"화할 화","功":"공로 공","寧":"편안할 녕","修":"닦을 수","觀":"볼 관","弘":"넓을 홍","解":"풀 해","潔":"깨끗할 결","癒":"병 나을 유","察":"살필 찰","覺":"깨달을 각","福":"복 복","明":"밝을 명","緣":"인연 연","望":"바랄 망","勇":"날랠 용","諧":"화할 해","進":"나아갈 진","毅":"굳셀 의","常":"항상 상","穩":"평온할 온","釋":"풀 석","願":"원할 원","省":"살필 성","月":"달 월","聽":"들을 청","循":"좇을 순","融":"녹을 융","休":"쉴 휴","寂":"고요할 적","信":"믿을 신","懇":"간절할 간","安":"편안 안","傳":"전할 전","溫":"따뜻할 온","連":"이을 련","禪":"참선 선","自":"스스로 자","祈":"빌 기","孝":"효도 효","守":"지킬 수","柔":"부드러울 유","音":"소리 음","香":"향기 향","生":"날 생","習":"익힐 습","平":"평평할 평","結":"맺을 결","復":"돌아올 복","容":"받아들일 용","抱":"안을 포","靜":"고요할 정","恒":"항상 항","希":"바랄 희","淸":"맑을 청","笑":"웃을 소","開":"열 개","豊":"풍년 풍","顧":"돌아볼 고","眞":"참 진","節":"절개 절","慰":"위로할 위","行":"다닐 행","祝":"빌 축","霞":"노을 하","曉":"새벽 효","悅":"기쁠 열","旭":"아침 해 욱","衡":"저울대 형","異":"다를 이","芳":"꽃다울 방","無":"없을 무","貞":"곧을 정","護":"보호할 호","彌":"두루 미","正":"바를 정","裕":"넉넉할 유","慕":"그리워할 모","素":"본디 소","靖":"편안할 정","悟":"깨달을 오","輕":"가벼울 경","淡":"담담할 담","涼":"서늘할 량","心":"마음 심","思":"생각 사","深":"깊을 심","映":"비칠 영","念":"생각 념","澄":"맑을 징","定":"정할 정","記":"기록할 기","始":"비로소 시","戒":"경계할 계","學":"배울 학","息":"쉴 식","忠":"충성 충","泉":"샘 천","餘":"남을 여","菩":"보살 보","再":"두 재","剛":"굳셀 강","星":"별 성","海":"바다 해","響":"울릴 향"};
+function hanjaHuneum(ch){
+  return HANJA_HUNEUM[String(ch||'')] || '뜻을 확인해보세요';
+}
+
 
 function collectStoryCardPhotoCandidatesFromRecord(record, bag){
   if(!record || !record.photos) return;
@@ -28246,13 +28371,14 @@ function render108Pilgrimage(body){
       <div><b>${count}</b><span>/ 108</span></div>
       <div class="pg-summary-copy">
         <strong>${next}</strong>
-        <small><span class="pg-mini-lotus-shape">${lotusShapeHtml()}</span> 선정된 108 순례 사찰을 방문하면 연꽃이 피어요.</small>
+        <small><span class="pg-mini-lotus-shape">${lotusShapeHtml()}</span> 방문하면 연꽃이 피고, <b>현장 인증하면 그 연꽃이 금빛으로 빛나요 ✨</b></small>
         <div class="pg-progress"><i style="width:${pct}%"></i></div>
       </div>
     </div>
-    <button type="button" class="pg-guardian-cta" onclick="openPilgrimGuardianCollection()"><span>🎴</span><b>나의 수호카드 보기</b><small>현장 인증하면 컬러 카드가 열려요 →</small></button>
+    <button type="button" class="pg-guardian-cta" onclick="openPilgrimGuardianCollection()"><span>🎴</span><b>나의 수호카드 보기</b><small>빛나는 연꽃의 현장 인증으로 컬러 카드가 열려요 →</small></button>
     <div class="pg-lotus-legend">
-      <span><i class="pg-mini-lotus-shape">${lotusShapeHtml()}</i> 다녀온 절</span>
+      <span><i class="pg-mini-lotus-shape">${lotusShapeHtml()}</i> 방문 · 연꽃 피어남</span>
+      <span class="verified-lotus-legend">✨ 현장 인증 · 연꽃 빛남</span>
       <span><i class="legend-empty"></i> 아직</span>
     </div>
     <div class="pg-lotus-grid">
@@ -28260,14 +28386,15 @@ function render108Pilgrimage(body){
         const done=i<count;
         const rec=done?visited[i]:null;
         const name=rec?rec[1].name:'';
-        return `<button class="pg-lotus ${done?'done':''}" type="button" ${done?`title="${escapeAttr(name)}" aria-label="${escapeAttr(name)} 방문 완료" onclick="openPilgrimTempleFromCollection('${rec[0]}')"`:`aria-label="${i+1}번째 순례 칸" disabled`}>
+        const verified=done && Object.values(destinations||{}).some(d=>d&&d.name===name&&guardianVerified(d));
+        return `<button class="pg-lotus ${done?'done':''} ${verified?'field-verified-lotus':''}" type="button" ${done?`title="${escapeAttr(name)}${verified?' · 현장 인증 완료 · 빛나는 연꽃':''}" aria-label="${escapeAttr(name)} ${verified?'현장 인증 완료, 빛나는 연꽃':'방문 완료'}" onclick="openPilgrimTempleFromCollection('${rec[0]}')"`:`aria-label="${i+1}번째 순례 칸" disabled`}>
           ${done
-            ? `<span class="pg-lotus-flower">${lotusShapeHtml()}</span><span class="pg-lotus-name">${escapeHtml(name)}</span>`
+            ? `<span class="pg-lotus-flower">${lotusShapeHtml()}</span><span class="pg-lotus-name">${escapeHtml(name)}</span>${verified?'<span class="pg-lotus-verified-label">빛남</span>':''}`
             : `<span class="pg-lotus-number">${i+1}</span><span class="pg-lotus-name empty-name">아직</span>`}
         </button>`;
       }).join('')}
     </div>
-    <div class="pg-note">${count?`최근 피어난 연꽃 · <b>${escapeHtml(visited[count-1][1].name)}</b>`:'첫 순례를 기록하면 첫 연꽃이 피어요.'}</div>
+    <div class="pg-note">${count?`최근 피어난 연꽃 · <b>${escapeHtml(visited[count-1][1].name)}</b> · 현장 인증한 연꽃에는 ✨ 빛이 들어옵니다.`:'첫 순례를 기록하면 첫 연꽃이 피어나고, 현장 인증하면 빛나는 연꽃이 됩니다.'}</div>
   `;
 }
 function renderHanjaCollection(body){
@@ -28280,17 +28407,21 @@ function renderHanjaCollection(body){
   });
   const items=[...byChar.values()];
   body.innerHTML=`
-    <div class="pg-section-head">
-      <div><b>모은 한자 ${items.length}개</b><span>같은 한자가 나와도 절은 계속 기록돼요.</span></div>
+    <div class="pg-section-head pg-hanja-head">
+      <div>
+        <b>모은 한자 ${items.length} / 108</b>
+        <span>108곳마다 서로 다른 한 글자예요. 큰 글자 아래에서 <b>훈음과 의미</b>를 확인해보세요.</span>
+      </div>
     </div>
     ${items.length?`<div class="pg-hanja-grid">
       ${items.map(item=>`
         <button class="pg-hanja-card" type="button" onclick="showHanjaTemples('${escapeAttr(item.ch)}')">
           <strong>${escapeHtml(item.ch)}</strong>
-          <b>${escapeHtml(item.mean||'')}</b>
+          <span class="pg-hanja-huneum">${escapeHtml(hanjaHuneum(item.ch))}</span>
+          <b class="pg-hanja-meaning">${escapeHtml(item.mean||'')}</b>
           <small>${item.temples.length}곳</small>
         </button>`).join('')}
-    </div>`:'<div class="community-empty">아직 모은 한자가 없어요.<br>절을 다녀왔다고 기록하면 첫 글자가 열려요.</div>'}
+    </div>`:'<div class="community-empty">아직 모은 한자가 없어요.<br>절을 다녀왔다고 기록하면 첫 글자와 뜻이 함께 열려요.</div>'}
     <div id="pgHanjaDetail"></div>
   `;
 }
@@ -28302,8 +28433,9 @@ function showHanjaTemples(ch){
   if(!wrap) return;
   wrap.innerHTML=`<div class="pg-hanja-detail">
     <div class="pg-hanja-big">${escapeHtml(h.ch)}</div>
-    <div>
-      <b>${escapeHtml(h.mean||'')}</b>
+    <div class="pg-hanja-detail-copy">
+      <strong>${escapeHtml(hanjaHuneum(h.ch))}</strong>
+      <b>의미 · ${escapeHtml(h.mean||'')}</b>
       <div>${rows.map(([id,d])=>`<button type="button" onclick="openPilgrimTempleFromCollection('${id}')">${escapeHtml(d.name)}</button>`).join('')}</div>
     </div>
   </div>`;
@@ -28352,31 +28484,140 @@ function openPilgrimRegionPlace(id){
   closePilgrimCollection();
   openDetail(id);
 }
+const TODAY_TEMPLE_BAG_KEY='sansa_today_temple_bag_v3';
+const TODAY_TEMPLE_LAST_KEY='sansa_today_temple_last_v3';
+let todayTempleDrawing=false;
+
+function shuffleTodayTemples(arr){
+  const a=arr.slice();
+  for(let i=a.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+function todayTempleEligibleNames(){
+  const visitedNames=new Set(getVisitedTempleRecords().map(([,d])=>d.name));
+  return SANSA_GUARDIAN_108.filter(name=>!visitedNames.has(name));
+}
+function nextTodayTempleName(){
+  const eligible=todayTempleEligibleNames();
+  if(!eligible.length)return '';
+  const eligibleSet=new Set(eligible);
+  let bag=[];
+  try{bag=JSON.parse(localStorage.getItem(TODAY_TEMPLE_BAG_KEY)||'[]');}catch(e){}
+  bag=(Array.isArray(bag)?bag:[]).filter(name=>eligibleSet.has(name));
+
+  if(!bag.length){
+    bag=shuffleTodayTemples(eligible);
+    let last='';
+    try{last=localStorage.getItem(TODAY_TEMPLE_LAST_KEY)||'';}catch(e){}
+    if(bag.length>1 && bag[0]===last){
+      [bag[0],bag[1]]=[bag[1],bag[0]];
+    }
+  }
+
+  const name=bag.shift();
+  try{
+    localStorage.setItem(TODAY_TEMPLE_BAG_KEY,JSON.stringify(bag));
+    localStorage.setItem(TODAY_TEMPLE_LAST_KEY,name);
+  }catch(e){}
+  return name;
+}
+function drawTempleDataByName(name){
+  const rows=Object.entries(destinations||{}).filter(([id,d])=>d&&d.name===name);
+  if(rows.length){
+    rows.sort((a,b)=>(Number(b[1].stage)||0)-(Number(a[1].stage)||0));
+    return {id:rows[0][0],d:rows[0][1]};
+  }
+  const master=(typeof MASTER_BY_NAME!=='undefined'&&MASTER_BY_NAME)?MASTER_BY_NAME[name]:null;
+  return {id:'',d:master||{name,region:'',desc:'오늘의 한 절로 골랐어요.'}};
+}
 function drawTodayTemple(){
-  const candidates=Object.entries(destinations||{}).filter(([id,d])=>
-    d && !d.hiddenFromList && typeof d.name==='string' && d.name.trim() && (Number(d.stage)||0)===0);
+  if(todayTempleDrawing)return;
+
+  const eligible=todayTempleEligibleNames();
   const title=document.getElementById('pilgrimTodayTitle');
   const desc=document.getElementById('pilgrimTodayDesc');
-  if(!candidates.length){
-    if(title)title.textContent='모두 다녀왔어요';
-    if(desc)desc.textContent='아직 방문하지 않은 절이 없어요.';
+  const card=document.querySelector('#pilgrimCollectionOverlay .pilgrim-today-card');
+  const btn=card?.querySelector(':scope > button');
+
+  if(!eligible.length){
+    if(title)title.textContent='108곳을 모두 다녀왔어요';
+    if(desc)desc.textContent='이제 완주한 순례를 천천히 다시 돌아보세요.';
     return;
   }
-  const [id,d]=candidates[Math.floor(Math.random()*candidates.length)];
-  if(title)title.textContent=d.name.trim();
-  if(desc)desc.textContent=[d.region,d.desc||'오늘의 한 절로 골랐어요.'].filter(Boolean).join(' · ');
-  const card=document.querySelector('.pilgrim-today-card');
+
+  const finalName=nextTodayTempleName();
+  const finalData=drawTempleDataByName(finalName);
+  if(!finalName)return;
+
+  todayTempleDrawing=true;
   if(card){
-    card.dataset.templeId=id;
-    card.classList.add('picked');
-    card.onclick=(e)=>{
-      if(e.target.closest('button'))return;
-      closePilgrimCollection();
-      setTimeout(()=>openDetail(id),80);
-    };
+    card.classList.remove('picked');
+    card.classList.add('drawing');
+    card.onclick=null;
+    delete card.dataset.templeId;
   }
-  // 이름을 화면에 먼저 반영한 뒤 동일 프레임에 축하 효과를 시작합니다.
-  requestAnimationFrame(()=>{if(typeof launchFireworks==='function')launchFireworks();});
+  if(btn){
+    btn.disabled=true;
+    btn.textContent='두근두근…';
+  }
+  if(desc)desc.textContent=`남은 ${eligible.length}곳 중 오늘의 인연을 고르고 있어요.`;
+
+  const preview=shuffleTodayTemples(eligible.filter(n=>n!==finalName));
+  let step=0;
+  const totalSteps=15;
+
+  function tick(){
+    if(step<totalSteps){
+      const previewName=preview.length
+        ? preview[step%preview.length]
+        : finalName;
+      if(title){
+        title.textContent=previewName;
+        title.classList.remove('draw-pop');
+        void title.offsetWidth;
+        title.classList.add('draw-pop');
+      }
+      step++;
+      const delay=55 + Math.round(step*7.5); // 점점 느려지는 추첨
+      setTimeout(tick,delay);
+      return;
+    }
+
+    if(title){
+      title.textContent=finalName;
+      title.classList.remove('draw-pop');
+      void title.offsetWidth;
+      title.classList.add('draw-final');
+    }
+    if(desc){
+      desc.textContent=[
+        finalData.d?.region,
+        finalData.d?.desc||'오늘의 인연으로 이 절을 만나보세요.'
+      ].filter(Boolean).join(' · ');
+    }
+    if(card){
+      card.classList.remove('drawing');
+      card.classList.add('picked','draw-winner');
+      card.dataset.templeName=finalName;
+      card.onclick=(e)=>{
+        if(e.target.closest('button'))return;
+        closePilgrimCollection();
+        setTimeout(()=>openTempleFromCatalog(finalName),80);
+      };
+      setTimeout(()=>card.classList.remove('draw-winner'),900);
+    }
+    if(btn){
+      btn.disabled=false;
+      btn.textContent='다른 절 뽑기 ↻';
+    }
+    todayTempleDrawing=false;
+    requestAnimationFrame(()=>{if(typeof launchFireworks==='function')launchFireworks();});
+  }
+
+  tick();
 }
 
 function openPilgrimTempleFromCollection(id){
@@ -39048,13 +39289,7 @@ document.getElementById('todayTriviaOverlay')?.addEventListener('click',function
       e.stopImmediatePropagation();returnToList();
     }
   },true);
-  // 뽑힌 절 이름을 즉시 숨기지 않고 다음 추첨 전까지 유지.
-  const originalDraw=window.drawTodayTemple;
-  if(typeof originalDraw==='function')window.drawTodayTemple=function(){
-    originalDraw.apply(this,arguments);
-    const card=document.querySelector('#pilgrimCollectionOverlay .pilgrim-today-card');
-    if(card){card.classList.add('picked');card.style.transition='background-color .5s ease';}
-  };
+  // 절 뽑기는 drawTodayTemple() 내부의 중복 방지 추첨함과 애니메이션을 그대로 사용합니다.
 })();
 </script>
 
