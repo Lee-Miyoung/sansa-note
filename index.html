@@ -21309,6 +21309,33 @@ button.site-footer-link{font-size:clamp(15px,2vw,17px)!important;font-weight:750
 #settingsOverlay .nickname-editor small{display:block;margin-top:7px;font-size:11.5px;line-height:1.45;color:#776f66;word-break:keep-all;}
 @media(max-width:480px){#settingsOverlay .nickname-editor{padding:11px}.nickname-editor-row{grid-template-columns:minmax(0,1fr) 66px!important}}
 </style>
+
+<style id="catalog-structural-fullscreen-fix-20261014">
+body.catalog-screen-open{background:#fcfaf6!important;overflow:hidden!important;overscroll-behavior:none!important;}
+body.catalog-screen-open #catalogOverlay,
+#catalogOverlay.show{
+  position:fixed!important;inset:0!important;z-index:2147483647!important;
+  width:100vw!important;height:100vh!important;height:100dvh!important;
+  min-height:100vh!important;min-height:100dvh!important;max-height:none!important;
+  margin:0!important;padding:0!important;background:#fcfaf6!important;
+  overflow:hidden!important;display:flex!important;align-items:stretch!important;justify-content:stretch!important;
+}
+#catalogOverlay.show .catalog-modal{
+  position:absolute!important;inset:0!important;width:100%!important;height:100%!important;
+  min-width:0!important;min-height:0!important;max-width:none!important;max-height:none!important;
+  margin:0!important;border-radius:0!important;background:#fcfaf6!important;
+  display:flex!important;flex-direction:column!important;overflow:hidden!important;transform:none!important;
+}
+#catalogOverlay.show .modal-head{flex:0 0 auto!important;background:#fcfaf6!important;}
+#catalogOverlay.show .modal-body{
+  flex:1 1 0!important;min-height:0!important;height:0!important;max-height:none!important;
+  overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scrolling:touch!important;
+  background:#fcfaf6!important;padding-bottom:max(32px,env(safe-area-inset-bottom))!important;
+}
+#catalogOverlay.show .catalog-list{padding-bottom:45vh!important;}
+#catalogSearch{font-size:17px!important;}
+</style>
+
 </head>
 <body>
 
@@ -37017,14 +37044,36 @@ setTimeout(()=>{
 let catalogMode='temple';
 function openCatalogOverlay(mode){
   catalogMode=mode==='mountain'?'mountain':'temple';
+  const app=document.getElementById('app');
+  if(app){
+    if(!app.dataset.catalogPrevDisplay) app.dataset.catalogPrevDisplay=app.style.display||'block';
+    app.style.setProperty('display','none','important');
+  }
+  document.body.classList.add('catalog-screen-open');
   const s=document.getElementById('catalogSearch'); if(s)s.value='';
   renderCatalogOverlay();
   const o=document.getElementById('catalogOverlay');
-  if(o){o.classList.add('show');o.setAttribute('aria-hidden','false');}
+  if(o){
+    o.classList.add('show');
+    o.setAttribute('aria-hidden','false');
+    o.style.setProperty('display','flex','important');
+  }
 }
 function closeCatalogOverlay(){
   const o=document.getElementById('catalogOverlay');
-  if(o){o.classList.remove('show');o.setAttribute('aria-hidden','true');}
+  if(o){
+    o.classList.remove('show');
+    o.setAttribute('aria-hidden','true');
+    o.style.removeProperty('display');
+  }
+  document.body.classList.remove('catalog-screen-open');
+  const app=document.getElementById('app');
+  if(app){
+    const prev=app.dataset.catalogPrevDisplay||'block';
+    app.style.removeProperty('display');
+    app.style.display=prev;
+    delete app.dataset.catalogPrevDisplay;
+  }
 }
 function getTempleCatalogData(){
   const m=new Map();
@@ -39072,221 +39121,295 @@ body{overscroll-behavior-y:auto!important;}
 })();
 </script>
 
-</body>
-</html>
 
-<style id="sansa-catalog-keyboard-viewport-fix-20261014">
-/* iPhone 키보드가 올라와도 사찰/산 검색 모달이 홈 화면 위에 꽉 차고 목록은 내부에서 스크롤 */
-#catalogOverlay.show{
-  position:fixed!important;inset:0!important;height:var(--sansa-vv-height,100dvh)!important;
-  min-height:0!important;max-height:var(--sansa-vv-height,100dvh)!important;
-  padding:8px 8px 8px!important;box-sizing:border-box!important;
-  align-items:stretch!important;justify-content:flex-start!important;overflow:hidden!important;
+<style id="sansa-catalog-absolute-cover-final-20261014">
+/* 절/산 목록을 열면 아래 홈 화면 자체를 숨겨 배경 노출을 원천 차단 */
+body.sansa-catalog-active #app{
+  visibility:hidden !important;
+  pointer-events:none !important;
 }
-#catalogOverlay .catalog-modal{
-  display:flex!important;flex-direction:column!important;flex:1 1 auto!important;
-  min-height:0!important;height:100%!important;max-height:100%!important;
-  width:100%!important;margin:0 auto!important;overflow:hidden!important;
-}
-#catalogOverlay .modal-head{position:relative!important;top:auto!important;flex:0 0 auto!important;}
-#catalogOverlay .modal-body{
-  display:flex!important;flex:1 1 auto!important;flex-direction:column!important;
-  min-height:0!important;height:auto!important;max-height:none!important;
-  overflow-y:auto!important;overflow-x:hidden!important;
-  -webkit-overflow-scrolling:touch!important;overscroll-behavior:contain!important;
-}
-#catalogOverlay .catalog-toolbar{flex:0 0 auto!important;}
-#catalogOverlay .catalog-list{flex:0 0 auto!important;min-height:0!important;padding-bottom:24px!important;}
-@media(max-width:700px){
-  #catalogOverlay.show{padding:6px!important;}
-  #catalogOverlay .catalog-modal{max-height:100%!important;}
-  #catalogOverlay .modal-body{padding:12px!important;}
-}
-</style>
-<script id="sansa-catalog-keyboard-viewport-fix-20261014-js">
-(function(){
-  function syncCatalogViewport(){
-    var vv=window.visualViewport;
-    var h=vv&&vv.height?vv.height:window.innerHeight;
-    if(h>0)document.documentElement.style.setProperty('--sansa-vv-height',Math.round(h)+'px');
-  }
-  syncCatalogViewport();
-  window.addEventListener('resize',syncCatalogViewport,{passive:true});
-  window.addEventListener('orientationchange',function(){setTimeout(syncCatalogViewport,120);},{passive:true});
-  if(window.visualViewport){
-    window.visualViewport.addEventListener('resize',syncCatalogViewport,{passive:true});
-    window.visualViewport.addEventListener('scroll',syncCatalogViewport,{passive:true});
-  }
-  document.addEventListener('focusin',function(e){
-    if(e.target&&e.target.id==='catalogSearch'){
-      syncCatalogViewport();
-      setTimeout(function(){
-        syncCatalogViewport();
-        var body=document.querySelector('#catalogOverlay .modal-body');
-        if(body)body.scrollTop=0;
-      },180);
-    }
-  });
-})();
-</script>
 
-
-<style id="sansa-catalog-no-home-exposure-20261014">
-/* 절/산 검색 중에는 홈 화면이 절대 비치지 않도록
-   검색 레이어 자체가 키보드 위의 보이는 화면 전체를 덮는다. */
+/* 목록 레이어는 항상 브라우저의 전체 페이지 영역을 덮음.
+   키보드는 그 위에 올라오므로, 키보드 위쪽에 홈이 비칠 수 없음. */
 html body #catalogOverlay.show{
-  display:flex!important;
-  position:fixed!important;
-  z-index:2147483647!important;
-  left:0!important;
-  right:0!important;
-  top:var(--catalog-vv-top,0px)!important;
-  bottom:auto!important;
-  width:100vw!important;
-  height:var(--catalog-vv-height,100dvh)!important;
-  min-height:var(--catalog-vv-height,100dvh)!important;
-  max-height:var(--catalog-vv-height,100dvh)!important;
-  margin:0!important;
-  padding:0!important;
-  align-items:stretch!important;
-  justify-content:stretch!important;
-  overflow:hidden!important;
-  background:#fcfaf6!important; /* 홈 화면 완전 차단 */
-  overscroll-behavior:none!important;
-  box-sizing:border-box!important;
+  display:flex !important;
+  position:fixed !important;
+  inset:0 !important;
+  width:100vw !important;
+  height:100vh !important;
+  height:100dvh !important;
+  min-height:100vh !important;
+  min-height:100dvh !important;
+  max-height:none !important;
+  margin:0 !important;
+  padding:0 !important;
+  z-index:2147483647 !important;
+  align-items:stretch !important;
+  justify-content:stretch !important;
+  overflow:hidden !important;
+  background:#fcfaf6 !important;
+  overscroll-behavior:none !important;
+  touch-action:pan-y !important;
+  box-sizing:border-box !important;
 }
 
-html body #catalogOverlay.show .catalog-modal{
-  position:relative!important;
-  inset:auto!important;
-  display:flex!important;
-  flex-direction:column!important;
-  flex:1 1 100%!important;
-  width:100%!important;
-  height:100%!important;
-  min-width:0!important;
-  min-height:100%!important;
-  max-width:none!important;
-  max-height:none!important;
-  margin:0!important;
-  padding:0!important;
-  border:0!important;
-  border-radius:0!important;
-  background:#fcfaf6!important;
-  overflow:hidden!important;
-  transform:none!important;
-  box-sizing:border-box!important;
+html body #catalogOverlay.show > .catalog-modal{
+  position:fixed !important;
+  inset:0 !important;
+  display:flex !important;
+  flex-direction:column !important;
+  width:100vw !important;
+  height:100vh !important;
+  height:100dvh !important;
+  min-width:0 !important;
+  min-height:100vh !important;
+  min-height:100dvh !important;
+  max-width:none !important;
+  max-height:none !important;
+  margin:0 !important;
+  padding:0 !important;
+  border:0 !important;
+  border-radius:0 !important;
+  transform:none !important;
+  overflow:hidden !important;
+  background:#fcfaf6 !important;
+  box-shadow:none !important;
 }
 
 html body #catalogOverlay.show .modal-head{
-  position:relative!important;
-  top:auto!important;
-  flex:0 0 auto!important;
-  z-index:3!important;
-  background:#fcfaf6!important;
-  padding-top:max(16px,env(safe-area-inset-top))!important;
+  position:relative !important;
+  top:auto !important;
+  flex:0 0 auto !important;
+  z-index:5 !important;
+  background:#fcfaf6 !important;
+  padding-top:max(16px,env(safe-area-inset-top)) !important;
 }
 
 html body #catalogOverlay.show .modal-body{
-  display:flex!important;
-  flex:1 1 0!important;
-  flex-direction:column!important;
-  width:100%!important;
-  height:auto!important;
-  min-height:0!important;
-  max-height:none!important;
-  overflow-y:auto!important;
-  overflow-x:hidden!important;
-  -webkit-overflow-scrolling:touch!important;
-  overscroll-behavior:contain!important;
-  background:#fcfaf6!important;
-  padding-bottom:max(24px,env(safe-area-inset-bottom))!important;
-  box-sizing:border-box!important;
+  display:flex !important;
+  flex:1 1 0 !important;
+  flex-direction:column !important;
+  width:100% !important;
+  height:auto !important;
+  min-height:0 !important;
+  max-height:none !important;
+  overflow-y:auto !important;
+  overflow-x:hidden !important;
+  -webkit-overflow-scrolling:touch !important;
+  overscroll-behavior:contain !important;
+  background:#fcfaf6 !important;
+  box-sizing:border-box !important;
+  padding-bottom:max(36px,env(safe-area-inset-bottom)) !important;
 }
 
 html body #catalogOverlay.show .catalog-toolbar{
-  flex:0 0 auto!important;
-  background:#fcfaf6!important;
-  position:sticky!important;
-  top:0!important;
-  z-index:2!important;
+  position:sticky !important;
+  top:0 !important;
+  z-index:4 !important;
+  flex:0 0 auto !important;
+  background:#fcfaf6 !important;
 }
 
 html body #catalogOverlay.show .catalog-list{
-  flex:0 0 auto!important;
-  min-height:100px!important;
-  overflow:visible!important;
-  padding-bottom:40px!important;
+  flex:0 0 auto !important;
+  min-height:180px !important;
+  overflow:visible !important;
+  padding-bottom:45vh !important; /* 키보드가 떠도 마지막 결과까지 스크롤 가능 */
 }
 
-/* 키보드가 열린 동안 배경 페이지가 손가락에 따라 움직이지 않게 */
-body.sansa-catalog-open{
-  overflow:hidden!important;
-  overscroll-behavior:none!important;
+body.sansa-catalog-active{
+  overflow:hidden !important;
+  overscroll-behavior:none !important;
 }
 
 @media(max-width:700px){
   html body #catalogOverlay.show .modal-head{
-    padding-left:18px!important;
-    padding-right:18px!important;
+    padding-left:18px !important;
+    padding-right:18px !important;
   }
   html body #catalogOverlay.show .modal-body{
-    padding-left:18px!important;
-    padding-right:18px!important;
+    padding-left:18px !important;
+    padding-right:18px !important;
+  }
+  #catalogSearch{
+    font-size:17px !important; /* iPhone 입력 확대 방지 */
   }
 }
 </style>
 
-<script id="sansa-catalog-no-home-exposure-js-20261014">
+<script id="sansa-catalog-absolute-cover-final-js-20261014">
 (function(){
-  function syncCatalogViewport(){
-    var vv=window.visualViewport;
-    var h=(vv && vv.height>0) ? vv.height : window.innerHeight;
-    var top=(vv && Number.isFinite(vv.offsetTop)) ? vv.offsetTop : 0;
-    document.documentElement.style.setProperty('--catalog-vv-height', Math.max(1,Math.round(h))+'px');
-    document.documentElement.style.setProperty('--catalog-vv-top', Math.max(0,Math.round(top))+'px');
+  function syncCatalogState(){
+    var overlay=document.getElementById('catalogOverlay');
+    var open=!!(overlay && overlay.classList.contains('show'));
+    document.body.classList.toggle('sansa-catalog-active',open);
+
+    if(open){
+      /* 이전 실험 코드가 남긴 위치/높이 inline style도 제거 */
+      overlay.style.removeProperty('top');
+      overlay.style.removeProperty('bottom');
+      overlay.style.removeProperty('height');
+      overlay.style.removeProperty('max-height');
+      overlay.style.removeProperty('min-height');
+    }
   }
 
-  function syncCatalogOpenClass(){
-    var o=document.getElementById('catalogOverlay');
-    var open=!!(o && o.classList.contains('show'));
-    document.body.classList.toggle('sansa-catalog-open',open);
-    if(open) syncCatalogViewport();
-  }
-
-  syncCatalogViewport();
-  window.addEventListener('resize',syncCatalogViewport,{passive:true});
-  window.addEventListener('orientationchange',function(){setTimeout(syncCatalogViewport,120);},{passive:true});
-
-  if(window.visualViewport){
-    window.visualViewport.addEventListener('resize',syncCatalogViewport,{passive:true});
-    window.visualViewport.addEventListener('scroll',syncCatalogViewport,{passive:true});
-  }
-
-  var observer=new MutationObserver(syncCatalogOpenClass);
   function bind(){
-    var o=document.getElementById('catalogOverlay');
-    if(!o){setTimeout(bind,100);return;}
-    observer.observe(o,{attributes:true,attributeFilter:['class','aria-hidden']});
-    syncCatalogOpenClass();
+    var overlay=document.getElementById('catalogOverlay');
+    if(!overlay){ setTimeout(bind,80); return; }
+
+    new MutationObserver(syncCatalogState).observe(
+      overlay,
+      {attributes:true,attributeFilter:['class','aria-hidden','style']}
+    );
+
+    syncCatalogState();
+
+    /* 기존 함수 호출 뒤에도 즉시 상태 보정 */
+    var oldOpen=window.openCatalogOverlay;
+    if(typeof oldOpen==='function' && !oldOpen.__sansaCoverWrapped){
+      var wrappedOpen=function(){
+        var r=oldOpen.apply(this,arguments);
+        requestAnimationFrame(syncCatalogState);
+        return r;
+      };
+      wrappedOpen.__sansaCoverWrapped=true;
+      window.openCatalogOverlay=wrappedOpen;
+    }
+
+    var oldClose=window.closeCatalogOverlay;
+    if(typeof oldClose==='function' && !oldClose.__sansaCoverWrapped){
+      var wrappedClose=function(){
+        var r=oldClose.apply(this,arguments);
+        document.body.classList.remove('sansa-catalog-active');
+        return r;
+      };
+      wrappedClose.__sansaCoverWrapped=true;
+      window.closeCatalogOverlay=wrappedClose;
+    }
   }
-  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',bind,{once:true});
-  else bind();
+
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',bind,{once:true});
+  }else{
+    bind();
+  }
 
   document.addEventListener('focusin',function(e){
     if(e.target && e.target.id==='catalogSearch'){
-      syncCatalogViewport();
-      setTimeout(syncCatalogViewport,60);
-      setTimeout(syncCatalogViewport,220);
-    }
-  },true);
-
-  document.addEventListener('focusout',function(e){
-    if(e.target && e.target.id==='catalogSearch'){
-      setTimeout(syncCatalogViewport,80);
-      setTimeout(syncCatalogOpenClass,180);
+      document.body.classList.add('sansa-catalog-active');
     }
   },true);
 })();
 </script>
 
+
+<style id="sansa-catalog-solid-backdrop-final-20261014">
+#sansaCatalogSolidBackdrop{
+  position:fixed !important;
+  inset:0 !important;
+  width:100vw !important;
+  height:100vh !important;
+  height:100dvh !important;
+  margin:0 !important;
+  padding:0 !important;
+  background:#fcfaf6 !important;
+  z-index:2147483640 !important;
+  pointer-events:auto !important;
+  touch-action:none !important;
+}
+#catalogOverlay.show{
+  z-index:2147483646 !important;
+}
+@media(max-width:1000px){
+  #catalogSearch{
+    font-size:17px !important;
+    line-height:1.35 !important;
+  }
+}
+</style>
+
+<script id="sansa-catalog-solid-backdrop-final-js-20261014">
+(function(){
+  const BACKDROP_ID='sansaCatalogSolidBackdrop';
+
+  function ensureBackdrop(){
+    let bg=document.getElementById(BACKDROP_ID);
+    if(!bg){
+      bg=document.createElement('div');
+      bg.id=BACKDROP_ID;
+      bg.setAttribute('aria-hidden','true');
+      document.body.appendChild(bg);
+    }
+    return bg;
+  }
+
+  function removeBackdrop(){
+    document.getElementById(BACKDROP_ID)?.remove();
+  }
+
+  function catalogIsOpen(){
+    const o=document.getElementById('catalogOverlay');
+    if(!o) return false;
+    return o.classList.contains('show') || o.getAttribute('aria-hidden')==='false';
+  }
+
+  function syncBackdrop(){
+    if(catalogIsOpen()) ensureBackdrop();
+    else removeBackdrop();
+  }
+
+  function wrapFunctions(){
+    const open=window.openCatalogOverlay;
+    if(typeof open==='function' && !open.__solidBackdropWrapped){
+      const wrapped=function(){
+        ensureBackdrop();
+        const r=open.apply(this,arguments);
+        requestAnimationFrame(syncBackdrop);
+        setTimeout(syncBackdrop,80);
+        return r;
+      };
+      wrapped.__solidBackdropWrapped=true;
+      window.openCatalogOverlay=wrapped;
+    }
+
+    const close=window.closeCatalogOverlay;
+    if(typeof close==='function' && !close.__solidBackdropWrapped){
+      const wrapped=function(){
+        const r=close.apply(this,arguments);
+        removeBackdrop();
+        return r;
+      };
+      wrapped.__solidBackdropWrapped=true;
+      window.closeCatalogOverlay=wrapped;
+    }
+  }
+
+  function init(){
+    wrapFunctions();
+
+    const overlay=document.getElementById('catalogOverlay');
+    if(overlay){
+      new MutationObserver(syncBackdrop).observe(
+        overlay,
+        {attributes:true,attributeFilter:['class','aria-hidden','style']}
+      );
+    }
+
+    document.addEventListener('focusin',function(e){
+      if(e.target && e.target.id==='catalogSearch') ensureBackdrop();
+    },true);
+
+    syncBackdrop();
+  }
+
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',init,{once:true});
+  }else{
+    init();
+  }
+})();
+</script>
+
+</body>
+</html>
