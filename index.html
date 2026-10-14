@@ -21557,6 +21557,16 @@ body.catalog-screen-open #catalogOverlay,
 }
 </style>
 
+
+<style id="temple-detail-cleanup-v1-css">
+#pilgrimRewardPreview .tcg-actions.tcg-actions-single{
+  grid-template-columns:1fr;
+}
+#pilgrimRewardPreview .tcg-actions.tcg-actions-single .outline{
+  width:100%;
+}
+</style>
+
 </head>
 <body>
 
@@ -22068,7 +22078,7 @@ body.catalog-screen-open #catalogOverlay,
 
       <div id="pilgrimRewardPreview"></div>
 
-      <div class="section-label visit-section-head"><span>방문 기록 <span id="visitCountLabel"></span></span><button type="button" class="visit-archive-btn" onclick="openAllVisitRecords('temple')">📚 기록 모아보기</button></div>
+      <div class="section-label visit-section-head"><span>방문 기록 <span id="visitCountLabel"></span></span></div>
       <div id="visitList"></div>
       <textarea class="notes" id="visitNoteInput" placeholder="이번엔 어땠는지 소감을 남겨보세요 (날씨, 분위기, 다음엔 이렇게 해볼 것 등)"></textarea>
       <div style="display:flex;gap:8px;margin-top:8px;">
@@ -22143,7 +22153,7 @@ body.catalog-screen-open #catalogOverlay,
 
       <div id="mountainRewardPreview"></div>
 
-      <div class="section-label visit-section-head"><span>방문 기록 <span id="mVisitCountLabel"></span></span><button type="button" class="visit-archive-btn" onclick="openAllVisitRecords('mountain')">📚 기록 모아보기</button></div>
+      <div class="section-label visit-section-head"><span>방문 기록 <span id="mVisitCountLabel"></span></span></div>
       <div id="mVisitList"></div>
       <textarea class="notes" id="mVisitNoteInput" placeholder="이번 등반은 어땠는지 소감을 남겨보세요 (코스, 날씨, 컨디션 등)"></textarea>
       <div class="mountain-visit-actions">
@@ -35947,12 +35957,9 @@ function renderPilgrimRewardPreview(d){
         <span>${statusDesc}</span>
       </div>
 
-      <div class="tcg-actions">
+      <div class="tcg-actions tcg-actions-single">
         <button type="button" class="outline" onclick="openPilgrimGuardianCollection()">🎴 수호카드 도감 보기</button>
-        <button type="button" class="primary" onclick="document.getElementById('pilgrimVerifyBtn')?.scrollIntoView({behavior:'smooth',block:'center'});setTimeout(()=>document.getElementById('pilgrimVerifyBtn')?.classList.add('pulse-now'),250);setTimeout(()=>document.getElementById('pilgrimVerifyBtn')?.classList.remove('pulse-now'),1600);">📍 ${verifyCount?'다시 현장 인증':'현장 인증으로 카드 열기'}</button>
       </div>
-
-      <small class="tcg-note">※ 기존 방문 기록과 현장 위치 인증 방식은 그대로 유지됩니다.</small>
     </section>`;
 }
 
