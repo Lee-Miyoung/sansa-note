@@ -36190,6 +36190,7 @@ showCelebration = function(title, sub){
       <button class="btn btn-primary btn-block" type="button" onclick="retryLocationPermission()">📍 위치 권한 다시 확인</button>
       <button class="btn btn-ghost btn-block" type="button" style="margin-top:8px;" onclick="closeLocationPermissionHelp()">나중에 하기</button>
       <div class="location-permission-state" id="locationPermissionState"></div>
+      <div id="locationBrowserGuide" class="location-permission-note" style="margin-top:10px;display:none;"></div>
     </div>
   </div>
 </div>
@@ -36197,16 +36198,71 @@ showCelebration = function(title, sub){
 
 <script id="location-permission-recovery-js">
 let pendingLocationRetry = null;
+let lastLocationPermissionError = null;
 
-function openLocationPermissionHelp(retryFn){
+function detectLocationBrowser(){
+  const ua=navigator.userAgent||'';
+  const ios=/iPhone|iPad|iPod/i.test(ua);
+  const android=/Android/i.test(ua);
+  const samsung=/SamsungBrowser/i.test(ua);
+  const crios=/CriOS/i.test(ua);
+  const chrome=!ios && /Chrome|CriOS/i.test(ua) && !samsung;
+  const safari=ios && /Safari/i.test(ua) && !crios;
+  return {ios,android,samsung,crios,chrome,safari};
+}
+
+function renderLocationBrowserGuide(err){
+  const box=document.getElementById('locationBrowserGuide');
+  if(!box)return;
+  const b=detectLocationBrowser();
+  let title='위치 권한 설정 방법';
+  let steps='';
+  if(b.ios){
+    const browser=b.crios?'Chrome':(b.safari?'Safari':'현재 브라우저');
+    steps=`<b>${browser} · iPhone</b><br>
+      ① 아이폰 <b>설정 → 개인정보 보호 및 보안 → 위치 서비스</b><br>
+      ② <b>${browser}</b> 선택 → <b>앱을 사용하는 동안</b><br>
+      ③ <b>정확한 위치</b> 켜기<br>
+      ④ 산사노트로 돌아와 <b>위치 권한 다시 확인</b>`;
+  }else if(b.android){
+    const browser=b.samsung?'Samsung Internet':(b.chrome?'Chrome':'현재 브라우저');
+    steps=`<b>${browser} · Android</b><br>
+      ① 휴대폰 <b>설정 → 위치 → 앱 권한</b><br>
+      ② <b>${browser}</b> 선택 → <b>앱 사용 중에만 허용</b><br>
+      ③ 가능하면 <b>정확한 위치</b> 켜기<br>
+      ④ 산사노트로 돌아와 <b>위치 권한 다시 확인</b>`;
+  }else{
+    steps=`주소창의 사이트 정보/권한 메뉴에서 <b>위치 → 허용</b>으로 바꾼 뒤 다시 시도해주세요.`;
+  }
+  box.style.display='block';
+  box.innerHTML=`<b>${title}</b><br>${steps}`;
+}
+
+function openLocationPermissionHelp(retryFn,err){
   pendingLocationRetry = typeof retryFn==='function' ? retryFn : null;
+  lastLocationPermissionError = err || null;
   const state=document.getElementById('locationPermissionState');
-  if(state)state.textContent='';
+  if(state){
+    if(err&&err.code===1) state.textContent='위치 권한이 차단되어 있어요.';
+    else if(err&&err.code===2) state.textContent='휴대폰이 현재 위치를 계산하지 못했어요.';
+    else if(err&&err.code===3) state.textContent='위치 확인 시간이 초과됐어요.';
+    else state.textContent='위치 권한을 확인해볼게요.';
+  }
+  renderLocationBrowserGuide(err);
   const overlay=document.getElementById('locationPermissionOverlay');
   if(overlay){
     overlay.classList.add('show');
     overlay.setAttribute('aria-hidden','false');
   }
+
+  /* 아직 브라우저가 권한을 묻지 않은 상태라면 이 호출로
+     Safari/Chrome의 기본 "위치 허용" 팝업을 즉시 띄운다. */
+  setTimeout(async()=>{
+    const ps=await getLocationPermissionState();
+    if(ps==='prompt' || ps==='unknown'){
+      try{ retryLocationPermission(true); }catch(e){}
+    }
+  },180);
 }
 function closeLocationPermissionHelp(){
   const overlay=document.getElementById('locationPermissionOverlay');
@@ -36215,34 +36271,41 @@ function closeLocationPermissionHelp(){
     overlay.setAttribute('aria-hidden','true');
   }
 }
-function retryLocationPermission(){
+function retryLocationPermission(autoMode){
   const state=document.getElementById('locationPermissionState');
   if(!navigator.geolocation){
     if(state)state.textContent='이 브라우저에서는 위치 기능을 사용할 수 없어요.';
     return;
   }
-  if(state)state.textContent='위치 권한을 확인하고 있어요…';
+  if(state)state.textContent='휴대폰 위치 권한을 요청하고 있어요…';
 
   navigator.geolocation.getCurrentPosition(
     pos=>{
-      if(state)state.textContent=`위치 권한 확인 완료 · GPS ±${Math.round(pos.coords.accuracy||0)}m`;
+      if(state)state.textContent=`위치 확인 완료 · GPS ±${Math.round(pos.coords.accuracy||0)}m`;
       closeLocationPermissionHelp();
       const fn=pendingLocationRetry;
       pendingLocationRetry=null;
+      lastLocationPermissionError=null;
       setTimeout(()=>{ if(fn) fn(); },120);
     },
     err=>{
+      lastLocationPermissionError=err||null;
+      renderLocationBrowserGuide(err);
       if(err&&err.code===1){
-        if(state)state.textContent='아직 위치 권한이 차단되어 있어요. 사용 중인 브라우저의 이 사이트 위치 권한을 허용해주세요.';
+        if(state)state.textContent='위치 권한이 이미 차단되어 있어요. 아래 안내대로 브라우저/휴대폰 설정에서 허용해주세요.';
+      }else if(err&&err.code===2){
+        if(state)state.textContent='권한은 있지만 현재 위치를 계산하지 못했어요. 위치 서비스를 켜고 다시 눌러주세요.';
+      }else if(err&&err.code===3){
+        if(state)state.textContent='위치 확인 시간이 초과됐어요. 실외나 창가에서 다시 눌러주세요.';
       }else{
-        if(state)state.textContent='권한은 있지만 GPS 신호를 아직 못 잡았어요. 하늘이 보이는 곳에서 다시 눌러주세요.';
+        if(state)state.textContent='현재 위치를 가져오지 못했어요. 아래 설정을 확인해주세요.';
       }
     },
-    {enableHighAccuracy:true,maximumAge:0,timeout:12000}
+    {enableHighAccuracy:true,maximumAge:60000,timeout:autoMode?7000:15000}
   );
 }
 
-/* Safari에서 권한 상태를 미리 확인할 수 있는 환경이면 활용 */
+/* 지원 브라우저에서는 현재 권한 상태도 확인 */
 async function getLocationPermissionState(){
   try{
     if(navigator.permissions && navigator.permissions.query){
@@ -39787,11 +39850,10 @@ body.sansa-catalog-active{
     if(!navigator.geolocation){showToast('이 브라우저는 위치 기능을 지원하지 않아요.');return;}
     openOverlay();renderSearching();
     requestNearbyPosition().then(renderFound).catch(err=>{
-      if(err&&err.code===1){closeOverlay();openLocationPermissionHelp(()=>openNearbyTempleFinder());return;}
-      const b=document.getElementById('nearbyTempleBody');
-      if(!b)return;
-      const reason=(err&&err.code===3)?'위치 확인 시간이 초과됐어요.':(err&&err.code===2)?'휴대폰이 현재 위치를 계산하지 못했어요.':'현재 위치를 불러오지 못했어요.';
-      b.innerHTML=`<div class="nearby-hero"><h3>${reason}</h3><p>주변 절 찾기는 대략적인 위치만 있어도 됩니다. 브라우저 위치 권한과 휴대폰의 정확한 위치를 켠 뒤 다시 눌러주세요.</p></div><div class="nearby-statusbox">현장 인증할 때는 다시 고정밀 GPS를 따로 확인합니다.</div><button class="btn btn-primary btn-block" onclick="openNearbyTempleFinder()">다시 찾기</button>`;
+      /* 권한 거부뿐 아니라 위치 불가/시간초과도 안내창으로 연결.
+         아직 권한을 묻지 않은 브라우저라면 안내창이 열린 직후 기본 권한 팝업도 요청한다. */
+      closeOverlay();
+      openLocationPermissionHelp(()=>openNearbyTempleFinder(),err);
     });
   };
 
