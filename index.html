@@ -36433,75 +36433,10 @@ function showLocationFailure(err,retryFn){
 }
 
 /* 절: 버튼 탭 직후 Safari 권한 요청 */
-function addVisitRecord(withLocation){
-  if(!currentDetailId)return;
-  if(localMode || !auth || !auth.currentUser){ promptGuestLoginRequired(); return; }
 
-  const id=currentDetailId;
-  const d=destinations[id];
-  const noteEl=document.getElementById('visitNoteInput');
-  const note=noteEl?noteEl.value.trim():'';
+/* 상세 화면의 기존 현장 인증은 앞쪽의 원래 addVisitRecord()를 그대로 사용합니다.
+   주변 절 찾기용 위치 권한 개선과 분리하여 기존 인증 흐름을 침범하지 않습니다. */
 
-  function save(verified,distKm,accuracyM){
-    const vid=newId();
-    const wasUnvisited=(destinations[id].stage||0)<1;
-    const oldVisits=Object.assign({},destinations[id].visits||{});
-    const hadVerifiedBefore=Object.values(oldVisits).some(v=>v&&v.verified);
-    const visits=Object.assign({},oldVisits);
-    visits[vid]={
-      ts:Date.now(),note,verified:!!verified,
-      verifiedDistanceM:verified&&typeof distKm==='number'?Math.max(0,Math.round(distKm*1000)):null,
-      gpsAccuracyM:verified&&typeof accuracyM==='number'?Math.round(accuracyM):null
-    };
-    const patch={visits};
-    if((destinations[id].stage||0)<1)patch.stage=1;
-    updateDestination(id,patch);
-    destinations[id]=Object.assign({},destinations[id],patch);
-    renderVisits(destinations[id].visits);
-    renderRepeatChallenge(destinations[id]);
-    renderStepper(destinations[id].stage||0);
-    if(wasUnvisited||verified)playStampAnimation();
-    if(noteEl)noteEl.value='';
-    const newCount=visitCount(destinations[id]);
-    render();
-
-    if(verified){
-      showPilgrimageAchievement({
-        templeId:id,templeName:destinations[id].name,region:destinations[id].region,
-        distKm,accuracyM,firstVerified:!hadVerifiedBefore,repeatCount:newCount
-      });
-    }else if(REPEAT_MILESTONES.includes(newCount)){
-      showCelebration(`🏔 ${newCount}회 순례 달성!`,`${destinations[id].name}, 진짜 단골이 되셨네요`);
-    }else{
-      showCelebration('방문 기록 저장!','오늘의 순례, 잘 남겨뒀어요');
-    }
-  }
-
-  if(!withLocation){save(false);return;}
-
-  const targetLat=Number(d.fixedLat||d.lat);
-  const targetLng=Number(d.fixedLng||d.lng);
-  if(!Number.isFinite(targetLat)||!Number.isFinite(targetLng)){
-    showToast('이 절의 위치 정보가 아직 준비되지 않았어요.');
-    return;
-  }
-
-  startPilgrimageGpsCheck(d.name);
-
-  requestFieldPositionNow().then(pos=>{
-    const info=locationInfoFromPosition(pos,targetLat,targetLng,null);
-    updatePilgrimageGpsCheck(info);
-    finishPilgrimageGpsCheck();
-
-    if(info.ok){
-      save(true,info.distanceM/1000,info.accuracyM);
-    }else{
-      const m=Math.round(info.distanceM||0);
-      const a=Math.round(info.accuracyM||0);
-      showToast(`현장 범위 밖으로 확인돼요 · 약 ${m>=1000?(m/1000).toFixed(1)+'km':m+'m'} · GPS ±${a}m`);
-    }
-  }).catch(err=>showLocationFailure(err,()=>addVisitRecord(true)));
-}
 
 /* 산: 위치 요청과 인증 기준점 계산을 동시에 시작 */
 function addMountainVisit(withLocation=false){
@@ -39714,23 +39649,36 @@ body.sansa-catalog-active{
     if(/제주/.test(s))return '제주';
     return '';
   }
+  function roughBroadRegionFromCoords(lat,lng){
+    lat=Number(lat);lng=Number(lng);
+    if(!Number.isFinite(lat)||!Number.isFinite(lng))return '';
+    if(lat<34.05)return '제주';
+    if(lng>=128.0)return '경상';
+    if(lat>=37.0 && lng>=127.65)return '강원';
+    if(lat>=36.75 && lat<=38.35 && lng<127.65)return '수도권';
+    if(lat<36.1 && lng<127.8)return '전라';
+    return '충청';
+  }
   function currentBroadRegion(pos){
     return new Promise(resolve=>{
+      const lat=Number(pos?.coords?.latitude),lng=Number(pos?.coords?.longitude);
+      const fallback=roughBroadRegionFromCoords(lat,lng);
       try{
         ensureKakao(ok=>{
-          if(!ok||!window.kakao?.maps?.services){resolve('');return;}
+          if(!ok||!window.kakao?.maps?.services){resolve(fallback);return;}
           const geocoder=new kakao.maps.services.Geocoder();
           geocoder.coord2RegionCode(
-            Number(pos.coords.longitude),
-            Number(pos.coords.latitude),
+            lng,lat,
             (rows,status)=>{
-              if(status!==kakao.maps.services.Status.OK||!Array.isArray(rows)||!rows.length){resolve('');return;}
+              if(status!==kakao.maps.services.Status.OK||!Array.isArray(rows)||!rows.length){
+                resolve(fallback);return;
+              }
               const row=rows.find(x=>x.region_type==='H')||rows[0];
-              resolve(broadRegionFromKakaoName(row.region_1depth_name||row.address_name||''));
+              resolve(broadRegionFromKakaoName(row.region_1depth_name||row.address_name||'')||fallback);
             }
           );
         });
-      }catch(e){resolve('');}
+      }catch(e){resolve(fallback);}
     });
   }
   function destinationCandidates(region){
@@ -39794,7 +39742,7 @@ body.sansa-catalog-active{
   function renderSearching(){
     const b=document.getElementById('nearbyTempleBody'); if(!b)return;
     b.innerHTML=`<div class="nearby-hero"><div class="nh-kicker">SANSA NOTE · NEARBY</div><h3>가까운 산사를 찾고 있어요</h3><p>현재 위치는 절을 찾고 현장 인증을 판정하는 데만 사용하며, 실제 위도·경도는 방문 기록에 저장하지 않습니다.</p></div>
-    <div class="nearby-scan"><div class="nearby-step on"><i>1</i><span><b>현재 위치 확인</b><small>휴대폰 GPS 신호 확인</small></span><strong>•••</strong></div><div class="nearby-step"><i>2</i><span><b>주변 사찰 비교</b><small>산사노트 사찰 좌표와 거리 계산</small></span></div><div class="nearby-step"><i>3</i><span><b>현장 인증 가능 여부</b><small>가까운 절은 더 엄격하게 재확인</small></span></div></div>`;
+    <div class="nearby-scan"><div class="nearby-step on"><i>1</i><span><b>현재 위치 확인</b><small>Safari·Chrome 위치 신호 확인</small></span><strong>•••</strong></div><div class="nearby-step"><i>2</i><span><b>주변 사찰 비교</b><small>산사노트 사찰 좌표와 거리 계산</small></span></div><div class="nearby-step"><i>3</i><span><b>현장 인증 가능 여부</b><small>가까운 절은 더 엄격하게 재확인</small></span></div></div>`;
   }
   async function renderFound(pos){
     nearbyLatestPosition=pos;
@@ -39812,46 +39760,149 @@ body.sansa-catalog-active{
   }
   window.openNearbyTempleDetail=function(id){closeOverlay();setTimeout(()=>{try{openDetail(id);}catch(e){showToast('절 상세를 열지 못했어요.');}},80);};
 
+  const NEARBY_LAST_POS_KEY='sansaNearbyLastPosition_v3';
+
+  function saveNearbyLastPosition(pos){
+    try{
+      if(!pos||!pos.coords)return;
+      const lat=Number(pos.coords.latitude),lng=Number(pos.coords.longitude);
+      if(!Number.isFinite(lat)||!Number.isFinite(lng))return;
+      localStorage.setItem(NEARBY_LAST_POS_KEY,JSON.stringify({
+        lat,lng,
+        accuracy:Number(pos.coords.accuracy)||99999,
+        ts:Date.now()
+      }));
+    }catch(e){}
+  }
+
+  function readNearbyLastPosition(maxAgeMs){
+    try{
+      const x=JSON.parse(localStorage.getItem(NEARBY_LAST_POS_KEY)||'null');
+      if(!x||!Number.isFinite(Number(x.lat))||!Number.isFinite(Number(x.lng)))return null;
+      if(Date.now()-Number(x.ts||0)>maxAgeMs)return null;
+      return {
+        coords:{
+          latitude:Number(x.lat),
+          longitude:Number(x.lng),
+          accuracy:Number(x.accuracy)||99999,
+          speed:null
+        },
+        timestamp:Number(x.ts||Date.now()),
+        __fromCache:true
+      };
+    }catch(e){return null;}
+  }
+
   function requestNearbyPosition(){
     return new Promise((resolve,reject)=>{
-      if(!navigator.geolocation){reject({code:98,message:'geolocation-not-supported'});return;}
-      let done=false, best=null, errors=[];
-      const finish=(fn,val)=>{if(done)return;done=true;try{if(watchId!=null)navigator.geolocation.clearWatch(watchId);}catch(e){};fn(val);};
-      const consider=pos=>{
+      if(!navigator.geolocation){
+        reject({code:98,message:'geolocation-not-supported'});
+        return;
+      }
+
+      let finished=false;
+      let best=null;
+      let deniedCount=0;
+      let errorCount=0;
+      const watchIds=[];
+      const timers=[];
+
+      const cleanup=()=>{
+        watchIds.forEach(id=>{try{navigator.geolocation.clearWatch(id);}catch(e){}});
+        timers.forEach(t=>clearTimeout(t));
+      };
+      const finish=(fn,val)=>{
+        if(finished)return;
+        finished=true;
+        cleanup();
+        fn(val);
+      };
+      const accept=pos=>{
         if(!pos||!pos.coords)return;
-        const acc=Number(pos.coords.accuracy)||99999;
+        const lat=Number(pos.coords.latitude);
+        const lng=Number(pos.coords.longitude);
+        const acc=Math.max(0,Number(pos.coords.accuracy)||99999);
+        if(!Number.isFinite(lat)||!Number.isFinite(lng))return;
+
         if(!best || acc < (Number(best.coords?.accuracy)||99999)) best=pos;
-        // 주변 절 찾기는 현장 인증보다 느슨하게: 1500m 이하면 바로 사용
-        if(acc<=1500) finish(resolve,pos);
+        saveNearbyLastPosition(pos);
+
+        /* 주변 절 '찾기'는 인증이 아니다.
+           수 km 수준의 대략 위치도 후보 절을 찾는 데 충분하므로 첫 정상 좌표를 바로 사용한다.
+           현장 인증 버튼을 누를 때는 기존 고정밀 검사를 다시 한다. */
+        if(acc<=5000) finish(resolve,pos);
       };
-      const onErr=err=>{
-        errors.push(err);
-        if(err&&err.code===1) finish(reject,err);
+      const fail=err=>{
+        errorCount++;
+        if(err&&err.code===1) deniedCount++;
+        /* 여러 방식 중 하나가 실패해도 다른 요청은 계속 기다린다. */
       };
-      let watchId=null;
+
       try{
-        // 1차: 캐시 허용, 빠른 위치
-        navigator.geolocation.getCurrentPosition(consider,onErr,{enableHighAccuracy:false,maximumAge:120000,timeout:6000});
-        // 2차: 고정밀 시도
-        navigator.geolocation.getCurrentPosition(consider,onErr,{enableHighAccuracy:true,maximumAge:30000,timeout:12000});
-        // 3차: 짧은 watch로 한두 번 더 개선
-        watchId=navigator.geolocation.watchPosition(consider,onErr,{enableHighAccuracy:true,maximumAge:30000,timeout:15000});
-      }catch(e){finish(reject,{code:97,message:String(e&&e.message||e)});return;}
-      // 15초 내 정밀도가 충분치 않아도 best가 있으면 주변 절 찾기에는 사용
-      setTimeout(()=>{
-        if(done)return;
-        if(best) finish(resolve,best);
-        else finish(reject, errors[errors.length-1]||{code:3,message:'position-timeout'});
-      },15000);
+        /* 사용자 탭 이벤트 안에서 즉시 실행되어 Safari/Chrome 시스템 권한 팝업을 유도한다. */
+        navigator.geolocation.getCurrentPosition(
+          accept,fail,
+          {enableHighAccuracy:false,maximumAge:300000,timeout:7000}
+        );
+        navigator.geolocation.getCurrentPosition(
+          accept,fail,
+          {enableHighAccuracy:true,maximumAge:60000,timeout:16000}
+        );
+
+        const w1=navigator.geolocation.watchPosition(
+          accept,fail,
+          {enableHighAccuracy:false,maximumAge:300000,timeout:12000}
+        );
+        watchIds.push(w1);
+
+        const w2=navigator.geolocation.watchPosition(
+          accept,fail,
+          {enableHighAccuracy:true,maximumAge:60000,timeout:18000}
+        );
+        watchIds.push(w2);
+      }catch(e){
+        const cached=readNearbyLastPosition(30*60*1000);
+        if(cached){ finish(resolve,cached); return; }
+        finish(reject,{code:97,message:String(e&&e.message||e)});
+        return;
+      }
+
+      /* 4초 뒤 위치가 하나라도 들어왔으면 정확도가 낮아도 주변 절 찾기에 사용 */
+      timers.push(setTimeout(()=>{
+        if(finished)return;
+        if(best){finish(resolve,best);return;}
+      },4000));
+
+      /* 최종적으로도 새 위치가 없으면 최근 30분 위치를 보조적으로 사용.
+         단, 이것은 주변 절 '찾기' 전용이며 현장 인증에는 사용하지 않는다. */
+      timers.push(setTimeout(()=>{
+        if(finished)return;
+        if(best){finish(resolve,best);return;}
+        const cached=readNearbyLastPosition(30*60*1000);
+        if(cached){finish(resolve,cached);return;}
+        if(deniedCount>0 && deniedCount>=errorCount){
+          finish(reject,{code:1,message:'permission-denied'});
+        }else{
+          finish(reject,{code:3,message:'position-timeout'});
+        }
+      },18000));
     });
   }
 
   window.openNearbyTempleFinder=function(){
-    if(!navigator.geolocation){showToast('이 브라우저는 위치 기능을 지원하지 않아요.');return;}
-    openOverlay();renderSearching();
-    requestNearbyPosition().then(renderFound).catch(err=>{
-      /* 권한 거부뿐 아니라 위치 불가/시간초과도 안내창으로 연결.
-         아직 권한을 묻지 않은 브라우저라면 안내창이 열린 직후 기본 권한 팝업도 요청한다. */
+    if(!navigator.geolocation){
+      showToast('이 브라우저는 위치 기능을 지원하지 않아요.');
+      return;
+    }
+
+    /* 설명창보다 먼저 실제 위치 요청을 시작한다.
+       이 호출 자체가 Safari/Chrome의 위치 허용 시스템 팝업을 띄운다. */
+    openOverlay();
+    renderSearching();
+
+    requestNearbyPosition().then(pos=>{
+      return Promise.resolve(renderFound(pos));
+    }).catch(err=>{
       closeOverlay();
       openLocationPermissionHelp(()=>openNearbyTempleFinder(),err);
     });
