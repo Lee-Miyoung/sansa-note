@@ -22264,6 +22264,55 @@ body.catalog-screen-open #catalogOverlay,
 }
 </style>
 
+
+<style id="rio-hero-screenshot-fix-20261015">
+/* Screenshot correction: move the brand lockup left, remove the faint extra mascot, enlarge traveler monk. */
+.hero-brand-mascot,
+.hero-clean-mouse{
+  display:none!important;
+  visibility:hidden!important;
+  opacity:0!important;
+  width:0!important;
+  height:0!important;
+  pointer-events:none!important;
+}
+.hero-title-row.brand-title-row{
+  position:relative!important;
+  left:-38px!important;
+  transform:none!important;
+  margin-left:0!important;
+  justify-content:flex-start!important;
+}
+.hero-clean-monk{
+  width:min(286px,30vw)!important;
+  max-width:34%!important;
+}
+@media (max-width:720px){
+  .hero-title-row.brand-title-row{
+    left:-112px!important;
+    margin-left:0!important;
+  }
+  .hero-clean-monk{
+    right:1%!important;
+    bottom:5.5%!important;
+    width:152px!important;
+    max-width:none!important;
+  }
+}
+@media (max-width:470px){
+  .hero-title-row.brand-title-row{
+    left:-118px!important;
+    margin-left:0!important;
+  }
+  .hero-clean-monk{
+    right:-2px!important;
+    bottom:6%!important;
+    width:138px!important;
+    max-width:none!important;
+  }
+}
+</style>
+
 </head>
 <body>
 
@@ -22344,7 +22393,6 @@ body.catalog-screen-open #catalogOverlay,
           <img class="hero-clean-temple" src="./hero-temple.png" alt="">
           <img class="hero-clean-blossom" src="./hero-blossom.png" alt="">
           <img class="hero-clean-monk" src="./images/brand/monks/monk-walking.png" alt="">
-          <img class="hero-clean-mouse" src="./hero-mouse.png" alt="">
         </div>
 <div class="hero-copy">
           <div class="hero-eyebrow"><span></span>산사 · 쉼 · 기록</div>
