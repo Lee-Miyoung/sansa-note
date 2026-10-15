@@ -22213,18 +22213,25 @@ body.catalog-screen-open #catalogOverlay,
 
 
 <style id="rio-hero-banner-fix">
-/* Rio final hero tweak: logo left + traveler monk */
+/* Rio final hero tweak: logo left + grounded traveler monk */
 .hero-title-row.brand-title-row{
   display:flex!important;
   justify-content:flex-start!important;
   align-items:center!important;
   width:fit-content!important;
-  max-width:calc(100% + 22px)!important;
-  margin:0 0 0 -22px!important;
+  max-width:100%!important;
+  margin:0!important;
   padding:0!important;
   gap:10px!important;
 }
-.hero-copy{padding-left:0!important;}
+.hero-copy{
+  padding-left:0!important;
+  align-items:flex-start!important;
+}
+.hero-copy > *{
+  text-align:left!important;
+  align-self:flex-start!important;
+}
 .sansa-brand-wordmark{
   margin:0!important;
   display:block!important;
@@ -22235,81 +22242,33 @@ body.catalog-screen-open #catalogOverlay,
 }
 .hero-clean-monk{
   display:block!important;
-  left:auto!important;
-  right:3%!important;
-  bottom:5%!important;
+  left:57.5%!important;
+  right:auto!important;
+  bottom:2.4%!important;
   top:auto!important;
-  width:min(262px,28vw)!important;
-  max-width:32%!important;
+  width:min(278px,29vw)!important;
+  max-width:35%!important;
   opacity:1!important;
   z-index:8!important;
-  filter:drop-shadow(0 14px 24px rgba(70,76,58,.22)) drop-shadow(0 0 18px rgba(255,250,242,.98))!important;
+  object-fit:contain!important;
+  object-position:center bottom!important;
+  filter:drop-shadow(0 14px 18px rgba(70,76,58,.22)) drop-shadow(0 3px 0 rgba(102,120,95,.18))!important;
 }
 .hero-clean-mouse{display:none!important;}
 .hero-clean-temple{z-index:3!important;}
 .hero-clean-bg,.hero-clean-blossom{z-index:2!important;}
 .hero-copy,.hero-title-row,.hero-tagline,.hero-copy p{position:relative!important;z-index:10!important;}
 @media (max-width:720px){
-  .hero-title-row.brand-title-row{gap:8px!important;margin-left:-14px!important;max-width:calc(100% + 14px)!important;}
+  .hero-title-row.brand-title-row{gap:8px!important;}
   .sansa-brand-wordmark{width:220px!important;max-width:62vw!important;}
   .brand-symbol-badge{width:54px!important;height:54px!important;}
   .hero-copy{max-width:100%!important;padding-right:0!important;}
-  .hero-clean-monk{right:3%!important;bottom:6%!important;width:132px!important;max-width:none!important;}
+  .hero-clean-monk{left:58%!important;right:auto!important;bottom:3.1%!important;width:136px!important;max-width:none!important;}
 }
 @media (max-width:470px){
   .sansa-brand-wordmark{width:200px!important;max-width:58vw!important;}
   .brand-symbol-badge{width:48px!important;height:48px!important;}
-  .hero-title-row.brand-title-row{margin-left:-10px!important;max-width:calc(100% + 10px)!important;}
-  .hero-clean-monk{right:2px!important;bottom:7%!important;width:116px!important;}
-}
-</style>
-
-
-<style id="rio-hero-screenshot-fix-20261015">
-/* Screenshot correction: move the brand lockup left, remove the faint extra mascot, enlarge traveler monk. */
-.hero-brand-mascot,
-.hero-clean-mouse{
-  display:none!important;
-  visibility:hidden!important;
-  opacity:0!important;
-  width:0!important;
-  height:0!important;
-  pointer-events:none!important;
-}
-.hero-title-row.brand-title-row{
-  position:relative!important;
-  left:-38px!important;
-  transform:none!important;
-  margin-left:0!important;
-  justify-content:flex-start!important;
-}
-.hero-clean-monk{
-  width:min(286px,30vw)!important;
-  max-width:34%!important;
-}
-@media (max-width:720px){
-  .hero-title-row.brand-title-row{
-    left:-112px!important;
-    margin-left:0!important;
-  }
-  .hero-clean-monk{
-    right:1%!important;
-    bottom:5.5%!important;
-    width:152px!important;
-    max-width:none!important;
-  }
-}
-@media (max-width:470px){
-  .hero-title-row.brand-title-row{
-    left:-118px!important;
-    margin-left:0!important;
-  }
-  .hero-clean-monk{
-    right:-2px!important;
-    bottom:6%!important;
-    width:138px!important;
-    max-width:none!important;
-  }
+  .hero-clean-monk{left:57%!important;right:auto!important;bottom:3.2%!important;width:126px!important;}
 }
 </style>
 
@@ -22393,6 +22352,8 @@ body.catalog-screen-open #catalogOverlay,
           <img class="hero-clean-temple" src="./hero-temple.png" alt="">
           <img class="hero-clean-blossom" src="./hero-blossom.png" alt="">
           <img class="hero-clean-monk" src="./images/brand/monks/monk-walking.png" alt="">
+          <img class="hero-clean-mouse" src="./hero-mouse.png" alt="">
+          <img class="hero-brand-mascot" src="./images/brand/logos/symbol-logo-color.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
         </div>
 <div class="hero-copy">
           <div class="hero-eyebrow"><span></span>산사 · 쉼 · 기록</div>
