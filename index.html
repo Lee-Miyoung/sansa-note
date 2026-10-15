@@ -22219,8 +22219,8 @@ body.catalog-screen-open #catalogOverlay,
   justify-content:flex-start!important;
   align-items:center!important;
   width:fit-content!important;
-  max-width:100%!important;
-  margin:0!important;
+  max-width:calc(100% + 22px)!important;
+  margin:0 0 0 -22px!important;
   padding:0!important;
   gap:10px!important;
 }
@@ -22239,8 +22239,8 @@ body.catalog-screen-open #catalogOverlay,
   right:3%!important;
   bottom:5%!important;
   top:auto!important;
-  width:min(235px,25vw)!important;
-  max-width:29%!important;
+  width:min(262px,28vw)!important;
+  max-width:32%!important;
   opacity:1!important;
   z-index:8!important;
   filter:drop-shadow(0 14px 24px rgba(70,76,58,.22)) drop-shadow(0 0 18px rgba(255,250,242,.98))!important;
@@ -22250,16 +22250,17 @@ body.catalog-screen-open #catalogOverlay,
 .hero-clean-bg,.hero-clean-blossom{z-index:2!important;}
 .hero-copy,.hero-title-row,.hero-tagline,.hero-copy p{position:relative!important;z-index:10!important;}
 @media (max-width:720px){
-  .hero-title-row.brand-title-row{gap:8px!important;}
+  .hero-title-row.brand-title-row{gap:8px!important;margin-left:-14px!important;max-width:calc(100% + 14px)!important;}
   .sansa-brand-wordmark{width:220px!important;max-width:62vw!important;}
   .brand-symbol-badge{width:54px!important;height:54px!important;}
   .hero-copy{max-width:100%!important;padding-right:0!important;}
-  .hero-clean-monk{right:4%!important;bottom:7%!important;width:118px!important;max-width:none!important;}
+  .hero-clean-monk{right:3%!important;bottom:6%!important;width:132px!important;max-width:none!important;}
 }
 @media (max-width:470px){
   .sansa-brand-wordmark{width:200px!important;max-width:58vw!important;}
   .brand-symbol-badge{width:48px!important;height:48px!important;}
-  .hero-clean-monk{right:4px!important;bottom:8%!important;width:104px!important;}
+  .hero-title-row.brand-title-row{margin-left:-10px!important;max-width:calc(100% + 10px)!important;}
+  .hero-clean-monk{right:2px!important;bottom:7%!important;width:116px!important;}
 }
 </style>
 
@@ -22344,7 +22345,6 @@ body.catalog-screen-open #catalogOverlay,
           <img class="hero-clean-blossom" src="./hero-blossom.png" alt="">
           <img class="hero-clean-monk" src="./images/brand/monks/monk-walking.png" alt="">
           <img class="hero-clean-mouse" src="./hero-mouse.png" alt="">
-          <img class="hero-brand-mascot" src="./images/brand/logos/symbol-logo-color.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
         </div>
 <div class="hero-copy">
           <div class="hero-eyebrow"><span></span>산사 · 쉼 · 기록</div>
