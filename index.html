@@ -22213,62 +22213,141 @@ body.catalog-screen-open #catalogOverlay,
 
 
 <style id="rio-hero-banner-fix">
-/* Rio final hero tweak: logo left + grounded traveler monk */
+/* FINAL HERO ONLY — 기능은 건드리지 않고 로고/동자승 배치만 고정 */
+
+/* 1) 산사노트 워드마크 + 회전 심볼을 왼쪽 끝으로 */
+.hero-copy{
+  position:relative!important;
+  z-index:10!important;
+  width:100%!important;
+  max-width:100%!important;
+  padding-left:0!important;
+  padding-right:0!important;
+  text-align:left!important;
+}
 .hero-title-row.brand-title-row{
+  position:relative!important;
+  left:0!important;
+  right:auto!important;
+  transform:none!important;
   display:flex!important;
   justify-content:flex-start!important;
   align-items:center!important;
-  width:fit-content!important;
-  max-width:100%!important;
+  width:100%!important;
+  max-width:none!important;
   margin:0!important;
   padding:0!important;
-  gap:10px!important;
-}
-.hero-copy{
-  padding-left:0!important;
-  align-items:flex-start!important;
-}
-.hero-copy > *{
+  gap:4px!important;
   text-align:left!important;
-  align-self:flex-start!important;
 }
 .sansa-brand-wordmark{
-  margin:0!important;
   display:block!important;
+  flex:0 0 auto!important;
+  width:clamp(230px,37vw,430px)!important;
+  max-height:126px!important;
+  margin:0 0 0 -11%!important; /* 원본 PNG의 왼쪽 투명 여백 상쇄 */
+  padding:0!important;
+  object-fit:contain!important;
   object-position:left center!important;
+  transform:none!important;
+  filter:drop-shadow(0 6px 13px rgba(49,61,48,.10))!important;
 }
 .brand-symbol-badge{
   flex:0 0 auto!important;
+  width:66px!important;
+  height:66px!important;
+  margin-left:-5px!important;
+  border-radius:50%!important;
+  overflow:hidden!important;
+  background:rgba(255,253,247,.84)!important;
+  border:1px solid rgba(182,142,75,.35)!important;
+  box-shadow:0 8px 20px rgba(62,71,56,.10)!important;
+  animation:none!important;
 }
+.brand-symbol-badge img{
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:contain!important;
+  animation:sansaBrandDiscSpin 11s linear infinite!important;
+  transform-origin:50% 50%!important;
+  will-change:transform!important;
+}
+@keyframes sansaBrandDiscSpin{
+  from{transform:rotate(0deg)}
+  to{transform:rotate(360deg)}
+}
+
+/* 2) 다시 살아난 중복 장식은 확실히 제거 */
+.hero-brand-mascot,
+.hero-clean-mouse{display:none!important;}
+
+/* 3) 가방 멘 동자승 — 계단 왼쪽 옆 바닥에 붙이고 더 크게 */
 .hero-clean-monk{
   display:block!important;
-  left:57.5%!important;
+  position:absolute!important;
+  left:53%!important;
   right:auto!important;
-  bottom:2.4%!important;
   top:auto!important;
-  width:min(278px,29vw)!important;
-  max-width:35%!important;
+  bottom:1.5%!important;
+  width:min(300px,30vw)!important;
+  max-width:36%!important;
+  height:auto!important;
+  max-height:52%!important;
   opacity:1!important;
   z-index:8!important;
   object-fit:contain!important;
   object-position:center bottom!important;
-  filter:drop-shadow(0 14px 18px rgba(70,76,58,.22)) drop-shadow(0 3px 0 rgba(102,120,95,.18))!important;
+  transform:none!important;
+  filter:drop-shadow(0 11px 14px rgba(54,61,48,.22))!important;
+  pointer-events:none!important;
 }
-.hero-clean-mouse{display:none!important;}
 .hero-clean-temple{z-index:3!important;}
 .hero-clean-bg,.hero-clean-blossom{z-index:2!important;}
 .hero-copy,.hero-title-row,.hero-tagline,.hero-copy p{position:relative!important;z-index:10!important;}
-@media (max-width:720px){
-  .hero-title-row.brand-title-row{gap:8px!important;}
-  .sansa-brand-wordmark{width:220px!important;max-width:62vw!important;}
-  .brand-symbol-badge{width:54px!important;height:54px!important;}
-  .hero-copy{max-width:100%!important;padding-right:0!important;}
-  .hero-clean-monk{left:58%!important;right:auto!important;bottom:3.1%!important;width:136px!important;max-width:none!important;}
+
+/* iPad / phone */
+@media(max-width:900px){
+  .hero-title-row.brand-title-row{
+    width:100%!important;
+    justify-content:flex-start!important;
+    gap:1px!important;
+  }
+  .sansa-brand-wordmark{
+    width:245px!important;
+    max-width:65vw!important;
+    margin-left:-27px!important;
+  }
+  .brand-symbol-badge{
+    width:56px!important;
+    height:56px!important;
+    margin-left:-5px!important;
+  }
+  .hero-clean-monk{
+    left:52%!important;
+    bottom:1.2%!important;
+    width:155px!important;
+    max-width:none!important;
+    max-height:34%!important;
+  }
 }
-@media (max-width:470px){
-  .sansa-brand-wordmark{width:200px!important;max-width:58vw!important;}
-  .brand-symbol-badge{width:48px!important;height:48px!important;}
-  .hero-clean-monk{left:57%!important;right:auto!important;bottom:3.2%!important;width:126px!important;}
+@media(max-width:470px){
+  .sansa-brand-wordmark{
+    width:225px!important;
+    max-width:64vw!important;
+    margin-left:-25px!important;
+  }
+  .brand-symbol-badge{
+    width:50px!important;
+    height:50px!important;
+    margin-left:-4px!important;
+  }
+  .hero-clean-monk{
+    left:50.5%!important;
+    bottom:1.2%!important;
+    width:148px!important;
+    max-height:35%!important;
+  }
 }
 </style>
 
@@ -22352,9 +22431,7 @@ body.catalog-screen-open #catalogOverlay,
           <img class="hero-clean-temple" src="./hero-temple.png" alt="">
           <img class="hero-clean-blossom" src="./hero-blossom.png" alt="">
           <img class="hero-clean-monk" src="./images/brand/monks/monk-walking.png" alt="">
-          <img class="hero-clean-mouse" src="./hero-mouse.png" alt="">
-          <img class="hero-brand-mascot" src="./images/brand/logos/symbol-logo-color.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
-        </div>
+</div>
 <div class="hero-copy">
           <div class="hero-eyebrow"><span></span>산사 · 쉼 · 기록</div>
           <div class="hero-title-row brand-title-row">
