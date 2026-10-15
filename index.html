@@ -22211,6 +22211,58 @@ body.catalog-screen-open #catalogOverlay,
 }
 </style>
 
+
+<style id="rio-hero-banner-fix">
+/* Rio final hero tweak: logo left + traveler monk */
+.hero-title-row.brand-title-row{
+  display:flex!important;
+  justify-content:flex-start!important;
+  align-items:center!important;
+  width:fit-content!important;
+  max-width:100%!important;
+  margin:0!important;
+  padding:0!important;
+  gap:10px!important;
+}
+.hero-copy{padding-left:0!important;}
+.sansa-brand-wordmark{
+  margin:0!important;
+  display:block!important;
+  object-position:left center!important;
+}
+.brand-symbol-badge{
+  flex:0 0 auto!important;
+}
+.hero-clean-monk{
+  display:block!important;
+  left:auto!important;
+  right:3%!important;
+  bottom:5%!important;
+  top:auto!important;
+  width:min(235px,25vw)!important;
+  max-width:29%!important;
+  opacity:1!important;
+  z-index:8!important;
+  filter:drop-shadow(0 14px 24px rgba(70,76,58,.22)) drop-shadow(0 0 18px rgba(255,250,242,.98))!important;
+}
+.hero-clean-mouse{display:none!important;}
+.hero-clean-temple{z-index:3!important;}
+.hero-clean-bg,.hero-clean-blossom{z-index:2!important;}
+.hero-copy,.hero-title-row,.hero-tagline,.hero-copy p{position:relative!important;z-index:10!important;}
+@media (max-width:720px){
+  .hero-title-row.brand-title-row{gap:8px!important;}
+  .sansa-brand-wordmark{width:220px!important;max-width:62vw!important;}
+  .brand-symbol-badge{width:54px!important;height:54px!important;}
+  .hero-copy{max-width:100%!important;padding-right:0!important;}
+  .hero-clean-monk{right:4%!important;bottom:7%!important;width:118px!important;max-width:none!important;}
+}
+@media (max-width:470px){
+  .sansa-brand-wordmark{width:200px!important;max-width:58vw!important;}
+  .brand-symbol-badge{width:48px!important;height:48px!important;}
+  .hero-clean-monk{right:4px!important;bottom:8%!important;width:104px!important;}
+}
+</style>
+
 </head>
 <body>
 
@@ -22290,7 +22342,7 @@ body.catalog-screen-open #catalogOverlay,
           <img class="hero-clean-bg" src="./hero-bg.png" alt="">
           <img class="hero-clean-temple" src="./hero-temple.png" alt="">
           <img class="hero-clean-blossom" src="./hero-blossom.png" alt="">
-          <img class="hero-clean-monk" src="./hero-monk.png" alt="">
+          <img class="hero-clean-monk" src="./images/brand/monks/monk-walking.png" alt="">
           <img class="hero-clean-mouse" src="./hero-mouse.png" alt="">
           <img class="hero-brand-mascot" src="./images/brand/logos/symbol-logo-color.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
         </div>
@@ -22361,12 +22413,16 @@ body.catalog-screen-open #catalogOverlay,
   </header>
 
   <!-- ===================== EASY START GUIDE ===================== -->
-  <section class="sansa-easy-start sansa-easy-start-single" id="sansaEasyStart" aria-label="절·산 찾기">
+  <section class="sansa-easy-start sansa-easy-start-single" id="sansaEasyStart" aria-label="절·산 찾기와 내 주변 절 찾기">
     <div class="sansa-easy-start-inner">
       <div class="sansa-easy-start-actions sansa-easy-start-actions-clean">
         <button type="button" class="ses-place-search" onclick="guideBrowsePlaces()">
           <span>⌕</span><b>절·산 찾기</b><small>이름·지역으로 검색</small>
-          <img class="ses-brand-monk" src="./images/brand/monks/monk-walking.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
+          <img class="ses-brand-monk ses-monk-walking" src="./images/brand/monks/monk-walking.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
+        </button>
+        <button type="button" class="ses-nearby-temple" onclick="openNearbyTempleFinder()">
+          <span>⌖</span><b>내 주변 절 찾기</b><small>현재 위치에서 가까운 절</small>
+          <img class="ses-brand-monk ses-monk-nearby" src="./images/brand/monks/monk-wink.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
         </button>
       </div>
     </div>
@@ -41674,5 +41730,20 @@ body.sansa-catalog-active{
 }
 </style>
 
+<style id="sansa-easy-start-brand-grid-final">
+#sansaEasyStart.sansa-easy-start-single .sansa-easy-start-inner{grid-template-columns:1fr!important;padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important}
+#sansaEasyStart.sansa-easy-start-single .sansa-easy-start-actions.sansa-easy-start-actions-clean{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:14px!important;width:100%!important}
+#sansaEasyStart .sansa-easy-start-actions-clean button{position:relative!important;display:grid!important;grid-template-columns:28px minmax(0,1fr)!important;grid-template-rows:auto auto!important;column-gap:9px!important;row-gap:2px!important;align-items:center!important;min-height:96px!important;width:100%!important;padding:18px 112px 16px 22px!important;margin:0!important;overflow:hidden!important;border-radius:20px!important;text-align:left!important;box-sizing:border-box!important;box-shadow:0 8px 22px rgba(58,74,65,.075)!important}
+#sansaEasyStart .sansa-easy-start-actions-clean button>span{grid-column:1!important;grid-row:1 / span 2!important;align-self:center!important;font-size:21px!important;line-height:1!important}
+#sansaEasyStart .sansa-easy-start-actions-clean button>b{grid-column:2!important;grid-row:1!important;align-self:end!important;font-size:18px!important;line-height:1.18!important;letter-spacing:-.03em!important}
+#sansaEasyStart .sansa-easy-start-actions-clean button>small{grid-column:2!important;grid-row:2!important;align-self:start!important;margin:2px 0 0!important;font-size:11px!important;line-height:1.3!important;white-space:nowrap!important}
+#sansaEasyStart .ses-place-search{border:1px solid rgba(200,184,155,.62)!important;background:radial-gradient(circle at 88% 50%,rgba(217,230,214,.45),transparent 34%),linear-gradient(120deg,#fffdf7 0%,#fff9ed 100%)!important;color:#334f45!important}
+#sansaEasyStart .ses-nearby-temple{grid-column:auto!important;border:1px solid rgba(132,170,150,.44)!important;background:radial-gradient(circle at 88% 50%,rgba(233,207,147,.22),transparent 34%),linear-gradient(120deg,#f3faf5 0%,#edf5ee 100%)!important;color:#315f51!important}
+#sansaEasyStart .ses-place-search::before,#sansaEasyStart .ses-nearby-temple::before{content:""!important;position:absolute!important;right:44px!important;bottom:-34px!important;width:108px!important;height:108px!important;background:url('./images/brand/symbols/mountain.png') center/contain no-repeat!important;opacity:.075!important;pointer-events:none!important}
+#sansaEasyStart .ses-brand-monk{position:absolute!important;right:10px!important;top:7px!important;bottom:auto!important;width:94px!important;height:82px!important;max-width:none!important;max-height:none!important;object-fit:contain!important;object-position:center!important;opacity:1!important;filter:drop-shadow(0 7px 12px rgba(64,75,59,.16))!important;pointer-events:none!important;z-index:2!important}
+#sansaEasyStart .ses-monk-nearby{width:86px!important;height:80px!important;right:13px!important;top:8px!important}
+@media(max-width:720px){#sansaEasyStart.sansa-easy-start-single .sansa-easy-start-actions.sansa-easy-start-actions-clean{grid-template-columns:1fr!important;gap:10px!important}#sansaEasyStart .sansa-easy-start-actions-clean button,#sansaEasyStart .sansa-easy-start-actions-clean button.ses-nearby-temple{grid-column:auto!important;min-height:88px!important;padding:15px 96px 14px 18px!important;border-radius:18px!important}#sansaEasyStart .sansa-easy-start-actions-clean button>b{font-size:17px!important}#sansaEasyStart .sansa-easy-start-actions-clean button>small{font-size:10.5px!important}#sansaEasyStart .ses-brand-monk{right:9px!important;top:7px!important;width:78px!important;height:74px!important}#sansaEasyStart .ses-monk-nearby{right:11px!important;width:72px!important;height:72px!important}#sansaEasyStart .ses-place-search::before,#sansaEasyStart .ses-nearby-temple::before{right:34px!important;width:88px!important;height:88px!important}}
+@media(max-width:390px){#sansaEasyStart .sansa-easy-start-actions-clean button,#sansaEasyStart .sansa-easy-start-actions-clean button.ses-nearby-temple{min-height:84px!important;padding-right:86px!important}#sansaEasyStart .ses-brand-monk{width:70px!important;height:68px!important}#sansaEasyStart .sansa-easy-start-actions-clean button>b{font-size:16px!important}#sansaEasyStart .sansa-easy-start-actions-clean button>small{font-size:10px!important}}
+</style>
 </body>
 </html>
