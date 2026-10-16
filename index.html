@@ -31421,7 +31421,7 @@ function progressSealHtml(stageIdx){
   </span>`;
 }
 
-const PHOTO_SCHEMA_VERSION = 9; // v9: 대표사진 오매칭 방지 + 모든 사찰의 오래된 자동사진 재검증
+const PHOTO_SCHEMA_VERSION = 10; // v10: 실제 이미지 로드 검증, 시간 제한, 실패한 주소 복구
 const PHOTO_RETRY_COOLDOWN_MS = 6*60*60*1000; // 사진을 못 찾은 곳은 6시간 지나야 다시 시도 (매 렌더마다 재시도해서 화면이 깜빡이는 것을 막기 위함)
 function shouldSkipPhotoRetry(d){
   if(d?.coverPhotoStatus==='temporary-error')return Date.now()-(d.coverPhotoLastChecked||0)<60000;
@@ -31708,7 +31708,7 @@ function fetchCoverPhotoNow(id, name, locationHint, opts, done){
     // 이전 버전에서 잘못 매칭된 자동 사진은 계속 남겨 두지 않고 비워서
     // 엉뚱한 사진 대신 안전한 플레이스홀더가 보이게 합니다.
     if(store[id]){
-      const oldWasVerifiedCurrent = place.coverPhotoVersion===PHOTO_SCHEMA_VERSION && oldUrls.some(usableCoverUrl);
+      const oldWasVerifiedCurrent = place.coverPhotoVersion>=9 && oldUrls.some(usableCoverUrl);
       const patch={
         coverPhotoVersion:PHOTO_SCHEMA_VERSION,
         coverPhotoStatus:oldWasVerifiedCurrent?'kept-old':networkFailed?'temporary-error':'not-found',
