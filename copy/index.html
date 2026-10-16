@@ -145,6 +145,16 @@
 }
 
 </style>
+<style id="sansa-copy-companion-theme">
+:root{--ink:#294f41;--body:#526a58;--muted:#778570;--line:#dce3d3;--gold:#71875a;--gold2:#486d4e;--paper:#faf8f1;--green:#315d49}
+.quote-panel{position:relative;padding-right:110px!important}
+.copy-companion{display:block;position:absolute;right:20px;top:10px;width:90px;height:90px;background:url('../images/brand/wellness/companion-poses.webp') 0% 33.333333%/300% 400% no-repeat}
+.copy-main-card,.side-card{border-color:#dce3d3!important;border-radius:20px!important;background:#fffdf7!important}
+.quote-panel{background:linear-gradient(135deg,#edf3e7,#f7f2df)!important}
+textarea{border-color:#d5dfce!important;border-radius:14px!important;background:#fffdf7!important}
+.hero-kicker{color:#748563!important}
+@media(max-width:640px){.quote-panel{padding-right:82px!important}.copy-companion{width:66px;height:66px;right:12px;top:15px}.copy-hero h1{font-size:24px!important}}
+</style>
 </head>
 <body>
   <div class="paper-layer" aria-hidden="true"></div>
@@ -162,6 +172,7 @@
   </header>
 
   <section class="copy-hero">
+
     <div class="copy-hero-text">
       <div class="hero-kicker">산사노트 · 마음 필사</div>
       <h1>오늘의 마음 필사</h1>
@@ -188,6 +199,7 @@
       </div>
 
       <section class="quote-panel">
+        <span class="copy-companion" aria-hidden="true"></span>
         <img src="../lotus-soft.png" alt="" aria-hidden="true" class="quote-lotus">
         <blockquote id="mainQuote"></blockquote>
         <div class="source" id="source"></div>

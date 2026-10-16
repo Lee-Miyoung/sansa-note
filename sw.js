@@ -2,11 +2,17 @@
 // index.html은 온라인일 때 항상 최신 버전을 먼저 가져오고,
 // 오프라인일 때만 캐시를 사용합니다.
 
-const CACHE_VERSION = 'sansanote-v4';
+const CACHE_VERSION = 'sansanote-v5-storybook';
 
 const CORE_ASSETS = [
   './',
   './index.html',
+  './styles/wellness.css?v=20261016-storybook',
+  './scripts/wellness-effects.js?v=20261016-storybook',
+  './images/brand/wellness/companion-poses.webp',
+  './images/brand/wellness/props/card-moktak.webp',
+  './copy/index.html',
+  './copy/style.css',
   './hero.jpg',
   './IMG_4423.png',
   './IMG_4425.png',
@@ -100,7 +106,7 @@ self.addEventListener('activate', event => {
 
             .filter(
               key =>
-                key !== CACHE_VERSION
+                key.startsWith('sansanote-') && key !== CACHE_VERSION
             )
 
             .map(

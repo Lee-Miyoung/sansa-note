@@ -1,0 +1,218 @@
+/* Storybook companion UI. Presentation only: existing IDs, handlers and storage remain authoritative. */
+.sansa-mascot{position:absolute!important;display:block!important;background:url('../images/brand/wellness/companion-poses.webp') no-repeat!important;background-size:300% 400%!important;pointer-events:none!important;z-index:2!important}
+.sansa-mascot[data-pose=worry]{background-position:0% 0%!important}.sansa-mascot[data-pose=breathe]{background-position:50% 0%!important}.sansa-mascot[data-pose=rhythm]{background-position:100% 0%!important}
+.sansa-mascot[data-pose=write]{background-position:0% 33.333333%!important}.sansa-mascot[data-pose=explore]{background-position:50% 33.333333%!important}.sansa-mascot[data-pose=comfort]{background-position:100% 33.333333%!important}
+.sansa-mascot[data-pose=wish]{background-position:0% 66.666667%!important}.sansa-mascot[data-pose=count]{background-position:50% 66.666667%!important}.sansa-mascot[data-pose=pouch]{background-position:100% 66.666667%!important}
+.sansa-mascot[data-pose=dance],.sansa-mascot[data-pose=music]{background-size:270% 360%!important;background-position-y:100%!important;clip-path:inset(5% 0 0)}.sansa-mascot[data-pose=dance]{background-position-x:0%!important}.sansa-mascot[data-pose=music]{background-position-x:50%!important}
+.sansa-mascot[data-pose=count],.sansa-mascot[data-pose=pouch],.sansa-mascot[data-pose=wish]{clip-path:inset(0 0 5% 0)}
+.hero-utility .hero-util-icon img{width:36px;height:36px;object-fit:contain}
+.hero-experience .hip-quick-row,#funBannerWrap .fun-banner-row{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:12px!important}
+.hero-experience .hip-quick-row .hip-quick-btn,#funBannerWrap .fun-banner-row button.fun-banner-btn{--scene-color:#e9f0de;--scene-accent:#78996e;position:relative!important;display:flex!important;flex-flow:column nowrap!important;align-items:flex-start!important;justify-content:center!important;box-sizing:border-box!important;min-width:0!important;aspect-ratio:auto!important;height:148px!important;min-height:148px!important;padding:16px 110px 16px 15px!important;border:1px solid #d5dfcc!important;border-radius:18px 22px 17px 21px!important;background:linear-gradient(130deg,#fffdf5,var(--scene-color))!important;overflow:hidden!important;box-shadow:0 3px 0 #7c8b5c0c!important;text-align:left!important;color:#294f41!important;transition:transform .18s ease,box-shadow .18s ease!important}
+.hero-experience .hip-quick-row .hip-quick-btn.breath-q,#funBannerWrap .fun-banner-row button.fun-banner-btn.worry{--scene-color:#e3f1f4;--scene-accent:#6ca8b5;border-color:#c6dfe2!important}
+.hero-experience .hip-quick-row .hip-quick-btn.moktak-q,#funBannerWrap .fun-banner-row button.fun-banner-btn.amulet{--scene-color:#fbebc9;--scene-accent:#c19448;border-color:#ebd6ac!important}
+.hero-experience .hip-quick-row .hip-quick-btn.copy-q,#funBannerWrap .fun-banner-row button.fun-banner-btn.mantra{--scene-color:#f9e2de;--scene-accent:#c88680;border-color:#e9cfc6!important}
+#funBannerWrap .fun-banner-row button.fun-banner-btn.vow{--scene-color:#e6e4f2;--scene-accent:#8e82ae;border-color:#d8d1e5!important}
+#funBannerWrap .fun-banner-row button.fun-banner-btn.moktak{--scene-color:#f2def2;--scene-accent:#bb7cac;border-color:#e6c8de!important}
+.hero-experience .hip-quick-row .hq-copy,#funBannerWrap .fun-banner-row .fb-copy{position:relative!important;display:block!important;z-index:4!important;width:100%!important;max-width:100%!important;min-width:0!important;flex:none!important;text-align:left!important}
+.hero-experience .hip-quick-row .hq-copy b,#funBannerWrap .fun-banner-row .fb-copy .fb-title{display:block!important;font-family:'Nanum Myeongjo','Noto Serif KR',serif!important;font-size:19px!important;font-weight:800!important;line-height:1.45!important;letter-spacing:-.045em!important;word-break:keep-all!important;color:#294f41!important}
+.hero-experience .hip-quick-row .hq-copy small,#funBannerWrap .fun-banner-row .fb-copy .fb-sub{display:block!important;font-size:11px!important;font-weight:500!important;line-height:1.65!important;color:#69806f!important;margin-top:7px!important;word-break:keep-all!important}
+.hero-experience .hip-quick-row :is(.hq-index,.hq-icon,.hq-arrow),#funBannerWrap .fun-banner-row .fb-icon{display:none!important}
+.hero-experience .hip-quick-row .hip-quick-btn::before,#funBannerWrap .fun-banner-row button.fun-banner-btn::before{content:none!important;display:none!important}
+.hero-experience .hip-quick-row .hip-quick-btn::after,#funBannerWrap .fun-banner-row button.fun-banner-btn::after{content:'↗'!important;display:flex!important;position:absolute!important;inset:auto 9px 8px auto!important;align-items:center!important;justify-content:center!important;width:23px!important;height:23px!important;border:1px solid #fff8!important;border-radius:50%!important;background:var(--scene-accent)!important;color:#fff!important;font-size:15px!important;z-index:5!important}
+.wellness-scene{position:absolute;inset:0 0 0 auto;width:130px;overflow:hidden;pointer-events:none;z-index:0;background:linear-gradient(90deg,transparent,#fff7 75%),url('../images/brand/wellness/props/card-breath-mountain.webp') center bottom/200px auto no-repeat;mask-image:linear-gradient(90deg,transparent,#000 25%);-webkit-mask-image:linear-gradient(90deg,transparent,#000 25%)}
+.wellness-scene .scene-prop{position:absolute;inset:0;background:url('../images/brand/wellness/props/hero-blossom.webp') right top/140px auto no-repeat;opacity:.85}
+.scene-worry .scene-prop{background-image:url('../images/brand/wellness/props/card-comfort-lotus.webp');background-position:right bottom;background-size:95px}
+.scene-breathe{background-color:#d6edf1}.scene-breathe .scene-prop{background-image:url('../images/brand/wellness/props/card-feature-lotus.webp');background-position:right bottom;background-size:105px}
+.scene-rhythm{background-color:#f8e7c9}.scene-rhythm .scene-prop{background-image:url('../images/brand/wellness/props/card-moktak.webp');background-position:right bottom;background-size:98px}
+.scene-write .scene-prop{background-image:url('../images/brand/wellness/props/card-copy-brush.webp');background-size:100px;background-position:right bottom}
+.scene-explore .scene-prop{background-image:url('../images/brand/wellness/props/card-quiz-map.webp');background-size:130px;background-position:right bottom}
+.scene-comfort .scene-prop{background-image:url('../images/brand/wellness/props/card-worry-lotus.webp');background-size:100px;background-position:right bottom}
+.scene-wish{background-color:#e0dced;background-image:radial-gradient(circle at 70% 20%,#ffedb7 0 13px,transparent 14px),url('../images/brand/wellness/props/card-playlist-mountain.webp')}.scene-wish .scene-prop{background-image:url('../images/brand/wellness/props/card-vow-brush.webp');background-position:right bottom;background-size:100px}
+.scene-count .scene-prop{background-image:url('../images/brand/wellness/props/card-chant-beads.webp');background-position:right bottom;background-size:115px}
+.scene-pouch .scene-prop{background-image:url('../images/brand/wellness/props/card-amulet-paper.webp');background-position:right bottom;background-size:110px}
+.scene-dance{background-color:#e8d7f0}.scene-dance .scene-prop{background-image:url('../images/brand/wellness/props/card-shooter-ink.webp');background-size:125px;background-position:right bottom}
+.scene-music{width:55%;background-image:url('../images/brand/wellness/props/card-playlist-mountain.webp');background-size:cover}.scene-music .scene-prop{background:none;border:18px double #fff4;border-radius:50%;width:100px;height:100px;inset:18px 10px auto auto}
+.hero-experience .hip-quick-row .hip-quick-btn .sansa-mascot,#funBannerWrap .fun-banner-row .fun-banner-btn .sansa-mascot{position:absolute!important;display:block!important;flex:none!important;min-height:0!important;max-height:none!important;width:88px!important;height:88px!important;right:12px!important;top:26px!important;bottom:auto!important;left:auto!important;margin:0!important}
+#funBannerWrap .fun-banner-row button.fun-banner-btn.playlist{grid-column:span 2!important;padding-right:120px!important;background:linear-gradient(110deg,#234f43,#678575)!important;border-color:#63816a!important}
+#funBannerWrap .fun-banner-row .fun-banner-btn.playlist .fb-copy .fb-title{color:#fff5d9!important;font-size:22px!important}
+#funBannerWrap .fun-banner-row .fun-banner-btn.playlist .fb-copy .fb-sub{color:#dce7d7!important}
+#funBannerWrap .fun-banner-btn.playlist .fb-music-meta{display:flex!important;gap:7px!important;margin-top:10px!important}
+#funBannerWrap .fun-banner-btn.playlist .fb-music-meta span{background:#ffffff20!important;border:1px solid #ffffff40!important;border-radius:20px!important;padding:3px 8px!important;font-size:9px!important;color:#fff8db!important}
+.music-kicker{display:block;font-size:9px;font-weight:800;letter-spacing:.14em;color:#eed797;margin-bottom:5px}
+.music-play{display:none}
+.hero-experience .hip-quick-row .hip-quick-btn:active,#funBannerWrap .fun-banner-row button.fun-banner-btn:active{transform:scale(.98)!important}
+.hero-experience .hip-quick-row .hip-quick-btn:focus-visible,#funBannerWrap .fun-banner-row button.fun-banner-btn:focus-visible{outline:3px solid #bd9958!important;outline-offset:3px}
+@media(hover:hover){.hero-experience .hip-quick-row .hip-quick-btn:hover,#funBannerWrap .fun-banner-row button.fun-banner-btn:hover{transform:translateY(-3px)!important;box-shadow:0 7px 14px #44604412!important}}
+@media(min-width:701px) and (max-width:1050px){.hero-experience .hip-quick-row,#funBannerWrap .fun-banner-row{grid-template-columns:repeat(3,minmax(0,1fr))!important}.hero-experience .hip-quick-row{grid-template-columns:repeat(4,minmax(0,1fr))!important}.hero-experience .hip-quick-row .hip-quick-btn{padding:12px 8px 70px!important;justify-content:flex-start!important}.hero-experience .hip-quick-row .hip-quick-btn .sansa-mascot{top:auto!important;bottom:3px!important;width:60px!important;height:60px!important}.hero-experience .hip-quick-row .hq-copy b{font-size:16px!important}.hero-experience .hip-quick-row .hq-copy small{display:none!important}#funBannerWrap .fun-banner-row button.fun-banner-btn{padding-right:85px!important}#funBannerWrap .fun-banner-row .fun-banner-btn .sansa-mascot{width:65px!important;height:65px!important;right:8px!important;top:40px!important}#funBannerWrap .fun-banner-row .fb-copy .fb-title{font-size:17px!important}#funBannerWrap .fun-banner-row button.fun-banner-btn.playlist{grid-column:1/-1!important}}
+@media(max-width:700px){
+ .hero-experience .hip-quick-row{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:6px!important}
+ .hero-experience .hip-quick-row .hip-quick-btn{height:88px!important;min-height:88px!important;padding:49px 3px 5px!important;justify-content:center!important;border-radius:12px!important}
+ .hero-experience .hip-quick-row .hq-copy{width:100%!important;text-align:center!important}
+ .hero-experience .hip-quick-row .hq-copy b{font-size:12px!important;line-height:1.35!important}
+ .hero-experience .hip-quick-row .hq-copy small{display:none!important}
+ .hero-experience .hip-quick-row .hip-quick-btn .sansa-mascot{width:44px!important;height:44px!important;right:calc(50% - 22px)!important;top:4px!important}
+ .hero-experience .hip-quick-row .wellness-scene{width:100%;height:48px;background-size:110px auto}
+ .hero-experience .hip-quick-row .scene-prop{background-size:65px!important;opacity:.45}
+ #funBannerWrap .fun-banner-row{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:6px!important}
+ #funBannerWrap .fun-banner-row button.fun-banner-btn:not(.playlist){height:72px!important;min-height:72px!important;padding:9px 60px 9px 10px!important;border-radius:12px!important}
+ #funBannerWrap .fun-banner-row .fb-copy .fb-title{font-size:13px!important;line-height:1.4!important}
+ #funBannerWrap .fun-banner-row .fun-banner-btn:not(.playlist) .fb-sub{display:none!important}
+ #funBannerWrap .fun-banner-row .fun-banner-btn .wellness-scene{width:64px;background-size:100px auto}
+ #funBannerWrap .fun-banner-row .fun-banner-btn .scene-prop{background-size:65px!important;opacity:.6}
+ #funBannerWrap .fun-banner-row button.fun-banner-btn:not(.playlist) .sansa-mascot{width:44px!important;height:44px!important;right:9px!important;top:14px!important}
+ .hero-experience .hip-quick-row .hip-quick-btn::after{display:none!important}
+ #funBannerWrap .fun-banner-row button.fun-banner-btn::after{width:14px!important;height:14px!important;right:3px!important;bottom:3px!important;font-size:10px!important}
+ #funBannerWrap .fun-banner-row button.fun-banner-btn.playlist{grid-column:1/-1!important;height:64px!important;min-height:64px!important;padding:8px 68px 8px 12px!important;border-radius:12px!important}
+ #funBannerWrap .fun-banner-row .fun-banner-btn.playlist .fb-title{font-size:15px!important}
+ #funBannerWrap .fun-banner-row .fun-banner-btn.playlist :is(.fb-sub,.fb-music-meta){display:none!important}
+ #funBannerWrap .fun-banner-row .fun-banner-btn.playlist .sansa-mascot{width:52px!important;height:52px!important;right:9px!important;top:6px!important}
+ #funBannerWrap .fun-banner-row .fun-banner-btn.playlist .wellness-scene{width:44%;background-size:cover}
+ .music-kicker{font-size:8px;margin-bottom:3px}
+}
+
+/* Shared paper, sage and companion details connect each activity to its home shortcut. */
+.wellness-room{--ink:#294f41;--ink-soft:#6c7e70;--paper:#faf8f1;--moss:#477b65;--moss-dark:#244e40;--stamp:#426c54;--gold:#c69c55;--room-tint:#edf3e9;background:rgba(26,48,39,.48)!important;backdrop-filter:blur(8px)}
+#breathOverlay{--room-tint:#e9f2ee}#moktakOverlay{--room-tint:#f6efdd}#vowOverlay{--room-tint:#f6ece5}#mantraOverlay{--room-tint:#edf0f5}#amuletOverlay{--room-tint:#f3efdf}
+.wellness-room>.modal{background:#faf8f1!important;color:#294f41!important;border:1px solid #d8dfd0!important;border-radius:24px!important;box-shadow:0 24px 80px #102f3933!important;overflow-x:hidden!important;max-width:calc(100vw - 24px)!important}
+.wellness-room .modal-head{position:relative!important;display:flex!important;align-items:center!important;min-height:114px!important;padding:22px 70px 22px 108px!important;background:var(--room-tint)!important;border-bottom:1px solid #dce2d5!important;text-align:left!important;gap:10px!important}
+.wellness-room .modal-head>div{min-width:0}
+.wellness-room .modal-head h2{color:#294f41!important;font-family:inherit!important;font-size:23px!important;line-height:1.4!important;letter-spacing:-.04em!important;margin:0!important}
+.wellness-room .modal-head .sub{color:#6c7e70!important;font-size:12px!important;line-height:1.7!important;margin-top:6px!important}
+.wellness-room .modal-head .room-companion{width:76px!important;height:76px!important;left:20px!important;right:auto!important;top:20px!important;bottom:auto!important}
+.wellness-room .modal-head .close-x{position:absolute!important;right:12px!important;top:14px!important;width:44px!important;height:44px!important;border-radius:50%!important;background:#ffffff80!important;color:#315542!important;flex:none!important}
+.wellness-room .modal-body{padding:22px!important;background:#faf8f1!important;color:#294f41!important}
+.wellness-room :is(.btn,.club-btn){border-radius:12px!important;font-family:inherit!important;min-height:44px;box-shadow:none!important}
+.wellness-room :is(.btn-primary,.club-btn.primary){background:#315d49!important;color:#fffaf0!important;border-color:#315d49!important}
+.wellness-room :is(.btn-ghost,.club-btn.secondary){background:#eef1e7!important;color:#355d48!important;border:1px solid #d6dfcf!important}
+.wellness-room :is(textarea,input:not([type=range])){background:#fffdf7!important;border:1px solid #d5dfd1!important;border-radius:14px!important;color:#294f41!important;box-sizing:border-box!important;max-width:100%!important}
+.wellness-room :is(textarea,input,button):focus-visible{outline:2px solid #9caa73;outline-offset:3px}
+.wellness-room .map-note{color:#6c7e70!important;line-height:1.75!important}
+#oracleOverlay :is(.oracle-monk,.oracle-answer){background:#edf2e8!important;border:1px solid #d9e1d1!important;border-radius:16px!important;color:#315542!important}
+#oracleOverlay .oracle-avatar{position:relative;background:none!important;flex:0 0 58px;width:58px;height:58px}
+#oracleOverlay .oracle-avatar .sansa-mascot{width:58px!important;height:58px!important;inset:0!important}
+#oracleOverlay .oracle-answer :is(.big,.small){color:#315542!important}
+#breathOverlay #breathBreathBody{background:#e6eee4!important;padding:14px!important;border-radius:20px!important}
+#breathOverlay #breathBreathBody video{opacity:.12!important}
+#mantraOverlay #mantraBeadCircle{background:radial-gradient(circle at 35% 25%,#92aa80,#3a6851)!important;box-shadow:0 8px 28px #335d4920}
+#mantraOverlay #mantraAutoPanel{background:#edf1e6!important}
+#playlistOverlay{--room-tint:#214c40}
+#playlistOverlay .modal-head{background:radial-gradient(circle at 95% 10%,#63784f,#214c40 65%)!important;min-height:142px!important}
+#playlistOverlay .modal-head h2{color:#fff5da!important}
+#playlistOverlay .modal-head .sub{color:#c5dbc4!important}
+.room-eyebrow,.music-kicker{display:block;font-size:9px;font-weight:800;letter-spacing:.15em;color:#e5cc85;margin-bottom:6px}
+#playlistOverlay .modal-head .room-companion{top:32px!important;border-radius:50%;background-color:#b7c09830!important;box-shadow:0 0 0 6px #d8de9f12,0 0 0 13px #d8de9f0a}
+#playlistOverlay #lyricsWrap{background:#edf1e7!important;border:1px solid #d6dfce;border-radius:18px!important}
+#playlistOverlay .song-sort-item .song-pick{background:#eef2e7!important;color:#365b45!important;border:1px solid #d8e0cf!important;border-radius:12px!important}
+#playlistOverlay .song-sort-item .song-pick.active{background:#315d49!important;color:#fff4d4!important}
+#playlistOverlay input[type=range]{accent-color:#54764d}
+#funBannerWrap .fun-banner-row button.fun-banner-btn.playlist{background:radial-gradient(ellipse at 90% 10%,#526c44,#204b3e 65%)!important}
+#funBannerWrap .fun-banner-row .fun-banner-btn.playlist .fb-copy{width:100%!important;max-width:100%!important;flex:1 1 auto!important}
+.music-play{display:inline-flex;margin-left:6px;color:#ead28d}
+#funBannerWrap .fun-banner-btn.playlist .music-kicker{color:#ecd495;font-size:9px}
+#funBannerWrap .fun-banner-btn:not(.playlist):hover .sansa-mascot,.hip-quick-btn:hover .sansa-mascot{transform:rotate(-5deg) translateY(-2px)}
+#funBannerWrap .sansa-mascot,.hip-quick-btn .sansa-mascot{transition:transform .2s ease}
+#beatLabOverlay .modal-body{background:#244d40!important;color:#f5efda!important}
+#beatLabOverlay.wellness-room .modal-head{background:#e9eddf!important;padding:18px 70px 18px 100px!important;min-height:104px!important}
+#beatLabOverlay.wellness-room .modal-head h2{color:#294f41!important;white-space:normal!important;font-size:20px!important;line-height:1.4!important;text-shadow:none!important}
+#beatLabOverlay.wellness-room .modal-head .sub{color:#6c7e70!important}
+#beatLabOverlay.wellness-room .modal-head .room-companion{position:absolute!important;flex:none!important}
+#beatLabOverlay.wellness-room .modal-head .close-x{position:absolute!important;width:44px!important;height:44px!important;right:12px!important;top:14px!important;background:#fff8!important;color:#315542!important}
+@media(max-width:700px){
+ #beatLabOverlay.wellness-room .modal-head{padding:14px 64px 14px 78px!important;min-height:102px!important}
+ #beatLabOverlay.wellness-room .modal-head h2{font-size:16px!important}
+ .wellness-room .modal-head{min-height:100px!important;padding:18px 64px 18px 78px!important}
+ .wellness-room .modal-head h2{font-size:18px!important}
+ .wellness-room .modal-head .sub{font-size:11px!important}
+ .wellness-room .modal-head .room-companion{width:54px!important;height:54px!important;left:12px!important;top:22px!important}
+ .wellness-room .modal-body{padding:16px!important}
+ #playlistOverlay .modal-head{min-height:124px!important}
+ #funBannerWrap .fun-banner-row button.fun-banner-btn.playlist{height:64px!important;min-height:64px!important;padding-right:64px!important;}
+ #funBannerWrap .fun-banner-row button.fun-banner-btn.playlist .sansa-mascot{width:52px!important;height:52px!important;top:6px!important}
+ #funBannerWrap .fun-banner-btn.playlist .music-kicker{font-size:8px;margin-bottom:4px}
+ #funBannerWrap .fun-banner-row button.fun-banner-btn:not(.playlist) .fb-title{font-size:12px!important}
+}
+@media(prefers-reduced-motion:reduce){#funBannerWrap .sansa-mascot,.hip-quick-btn .sansa-mascot{transition:none!important;transform:none!important}}
+/* A continuous hero landscape and independent temple/companion layers avoid seams. */
+.hero-main-grid .hero-clean-art{background:#faf8f2 url('../images/brand/wellness/props/hero-bg.webp') center bottom/cover no-repeat!important}
+.hero-main-grid .hero-clean-art::before{background:linear-gradient(90deg,#faf8f2d9 0%,#faf8f2a8 35%,transparent 75%)!important}
+.hero-main-grid .hero-clean-temple{width:49%!important;right:-1%!important;bottom:0!important}
+.hero-main-grid .hero-clean-monk{left:67%!important;bottom:1.8%!important;width:220px!important;max-width:26%!important;max-height:43%!important}
+.hero-main-grid .hero-copy{max-width:66%!important;padding:30px 24px 0!important}
+.hero-main-grid{min-height:650px!important}
+.hero-main-grid .hero-copy p{font-size:18px!important;line-height:1.8!important}
+.brand-symbol-badge img{transform-origin:50% 50%!important;animation-duration:12s!important}
+.wellness-room .modal-head{background-image:linear-gradient(90deg,var(--room-tint) 35%,transparent),url('../images/brand/wellness/props/hero-blossom.webp')!important;background-repeat:no-repeat!important;background-size:cover,190px auto!important;background-position:center,right top!important}
+#oracleOverlay .modal-body{background:linear-gradient(#faf8f1e8,#faf8f1ee),url('../images/brand/wellness/props/card-suggest-temple.webp') right bottom/300px auto no-repeat!important}
+#oracleOverlay .oracle-monk{position:relative;padding:16px!important;background:#eff2e2!important}
+#oracleOverlay .oracle-answer{position:relative;border-radius:3px 3px 16px 16px!important;border-top:4px solid #c1a476!important;padding:22px!important}
+#oracleOverlay .oracle-answer.show{animation:wellness-letter .4s ease-out}
+#breathOverlay #breathBreathBody{background:linear-gradient(#ecf7f2a0,#daeeefb0),url('../images/brand/wellness/props/card-breath-mountain.webp') center bottom/100% auto no-repeat!important;min-height:290px}
+#breathOverlay #breathCircle{background:radial-gradient(circle,#91b9a6c9,#467b6590)!important;isolation:isolate;box-shadow:0 0 0 12px #fff5,0 0 0 24px #b2d0c329}
+#breathOverlay #breathCircle::before{content:'';position:absolute;inset:-24px;z-index:-1;background:url('../images/brand/wellness/props/card-feature-lotus.webp') center/contain no-repeat;opacity:.44;pointer-events:none}
+#breathOverlay #breathStartBtn{margin-top:26px}
+#moktakOverlay .modal-body{background:radial-gradient(ellipse at 50% 45%,#fff8e2,#f8eedc 65%,#faf8f1)!important}
+#moktakOverlay #moktakWrap{position:relative!important;width:min(290px,88%)!important;padding:8px 8px 28px!important;touch-action:manipulation;outline-offset:6px}
+#moktakOverlay #moktakWrap::before{content:'';position:absolute;left:9%;right:9%;bottom:7px;height:52px;border-radius:50%;background:repeating-linear-gradient(90deg,#bd7e69 0 5px,#ce9a7b 5px 10px);border:5px solid #e4c17d;box-shadow:0 10px 16px #84643e25;z-index:0}
+#moktakOverlay #moktakWrap::after{content:'';position:absolute;inset:10%;border:2px solid #c9a353;border-radius:50%;opacity:0;pointer-events:none}
+#moktakOverlay #moktakSvg{position:relative;width:100%!important;max-width:100%!important;z-index:1;filter:drop-shadow(0 6px 6px #74532626)!important}
+#moktakOverlay #moktakWrap.wellness-feedback::after{animation:wellness-ripple .55s ease-out}
+#moktakOverlay #moktakWrap.wellness-milestone::before{box-shadow:0 0 25px #f0c36c}
+#rouletteOverlay .modal-body{background:#edf3e5 url('../images/brand/wellness/props/card-quiz-map.webp') center bottom/310px auto no-repeat!important;padding-bottom:60px!important}
+#rouletteOverlay #rouletteName{background:#fff9e9d9;border:1px solid #dfcba8;border-radius:10px;padding:16px;animation:wellness-letter .35s ease-out}
+#worryOverlay .modal-body{background:linear-gradient(#faf8f1e6,#eaf3e5ed),url('../images/brand/wellness/props/card-comfort-lotus.webp') right bottom/230px auto no-repeat!important}
+#worryOverlay .modal-head{background-color:#e8f1f1!important}
+#vowOverlay .modal-head{background-color:#e9e5f2!important;background-image:radial-gradient(circle at 85% 35%,#ffedbc 0 18px,transparent 19px),linear-gradient(90deg,#ece7f3,#e0e1ef)!important}
+#vowOverlay .modal-body{background:#faf7ef url('../images/brand/wellness/props/card-vow-brush.webp') right bottom/190px auto no-repeat!important;min-height:210px}
+#vowOverlay .visitrow{background:#fffdf5ed;border:1px solid #e3dccb;border-left:3px solid #c6a26d;border-radius:14px;padding:14px}
+#vowOverlay textarea{background:#fffdf2f5!important;line-height:1.9!important}
+#vowOverlay .modal-body.wellness-feedback{animation:wellness-letter .5s ease-out}
+#mantraOverlay .modal-body{background:linear-gradient(#faf8f1de,#faf8f1ec),url('../images/brand/wellness/props/card-chant-beads.webp') center bottom/280px auto no-repeat!important}
+#mantraOverlay #mantraBeadCircle{border:9px dotted #d6b78b!important;box-shadow:0 0 0 6px #e5dbc6!important}
+#mantraOverlay #mantraBeadCircle.wellness-feedback{animation:wellness-count .35s ease-out}
+#mantraOverlay #mantraBeadCircle.wellness-milestone{box-shadow:0 0 25px #e4bf6d!important}
+#amuletOverlay .modal-head{background-color:#f5e7d1!important}
+#amuletOverlay .modal-body{background:linear-gradient(#fffbf3e6,#fffbf3ec),url('../images/brand/wellness/props/card-amulet-paper.webp') right bottom/240px auto no-repeat!important}
+#playlistOverlay .modal-head{background:radial-gradient(circle at 90% 30%,#668370,#224b42 70%)!important}
+#playlistOverlay .modal-head .room-companion{background-color:#1a352d!important;border:9px double #bba97345;box-sizing:content-box;left:12px!important;top:24px!important}
+#playlistOverlay .song-sort-list{gap:8px}
+#playlistOverlay #lyricsWrap{background:linear-gradient(#f0f4e8df,#edf2e7e6),url('../images/brand/wellness/props/card-playlist-mountain.webp') center bottom/cover!important}
+#playlistOverlay .room-companion::after{content:'';position:absolute;inset:-9px;border-radius:50%;border:2px dashed #e4d19190;pointer-events:none}
+#playlistOverlay.is-playing .room-companion::after{animation:wellness-vinyl 12s linear infinite}
+#playlistOverlay.is-playing .modal-head::after{content:'';position:absolute;bottom:0;left:0;height:3px;width:100%;background:linear-gradient(90deg,#dfbd6a,transparent,#86b4a3);animation:wellness-meter 1.2s ease-in-out infinite alternate}
+#beatLabOverlay.wellness-room .modal-head{background:linear-gradient(100deg,#e2f0e6,#e6def1,#f8e1de)!important}
+.cover-placeholder.cover-placeholder-lotus,.cover-placeholder.cover-placeholder-mountain{background:#f3f1e8 url('../images/brand/wellness/props/card-breath-mountain.webp') center/cover no-repeat!important}
+.cover-placeholder.cover-placeholder-lotus{background-image:linear-gradient(#fbf8ef60,#fbf8ef60),url('../images/brand/wellness/props/card-suggest-temple.webp')!important}
+.cover-placeholder>svg{display:none!important}
+.cover-placeholder .place-fallback-name{display:block;padding:4px 9px;background:#fffdf3df;border-radius:8px;font-size:13px;color:#315947}
+.cover-placeholder .place-fallback-status{background:#fffdf3c9;border-radius:6px;padding:2px 6px;font-size:10px;color:#6c7e70}
+@keyframes wellness-ripple{from{opacity:.8;transform:scale(.5)}to{opacity:0;transform:scale(1.3)}}
+@keyframes wellness-letter{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes wellness-count{50%{transform:scale(.96)}}
+@keyframes wellness-vinyl{to{transform:rotate(360deg)}}
+@keyframes wellness-meter{to{opacity:.35;transform:scaleX(.7)}}
+@media(max-width:1050px){.hero-main-grid .hero-copy{max-width:75%!important}}
+@media(max-width:700px){
+ .hero-main-grid{min-height:670px!important}
+ .hero-main-grid .hero-copy{max-width:100%!important;padding:18px 14px 0!important}
+ .hero-main-grid .hero-copy p{font-size:16px!important;line-height:1.75!important}
+ .hero-main-grid .hero-clean-art::before{background:linear-gradient(180deg,#faf8f2eb,#faf8f2ad 46%,transparent 75%)!important}
+ .hero-main-grid .hero-clean-temple{width:78%!important;right:-8%!important}
+ .hero-main-grid .hero-clean-monk{left:53%!important;max-width:34%!important;width:170px!important;bottom:1.5%!important}
+ #playlistOverlay .modal-head .room-companion{border-width:5px;left:7px!important;top:25px!important;width:54px!important;height:54px!important}
+ .wellness-room :is(textarea,input:not([type=range])){font-size:16px!important}
+}
+@media(prefers-reduced-motion:reduce){.brand-symbol-badge img,.wellness-room *,#funBannerWrap *, .hip-quick-row *{animation:none!important;transition:none!important}.wellness-room{backdrop-filter:none}}
+
+.hero-experience .hip-quick-row .hip-quick-btn .wellness-scene,#funBannerWrap .fun-banner-row .fun-banner-btn .wellness-scene{position:absolute!important;display:block!important;top:0!important;bottom:0!important;right:0!important;left:auto!important;height:100%!important;margin:0!important;padding:0!important;pointer-events:none!important;z-index:0!important}
+.hero-experience .hip-quick-row .hip-quick-btn .scene-prop,#funBannerWrap .fun-banner-row .fun-banner-btn .scene-prop{position:absolute!important;display:block!important;inset:0!important;width:100%!important;height:100%!important;pointer-events:none!important}
+@media(max-width:700px){#funBannerWrap .fun-banner-row .fun-banner-btn.playlist .fb-copy .fb-title{font-size:15px!important;line-height:1.4!important}#funBannerWrap .fun-banner-row .fun-banner-btn.playlist .fb-copy .music-kicker{font-size:8px!important;margin-bottom:3px!important}.hero-experience .hip-quick-row .hip-quick-btn .wellness-scene{height:48px!important}}
+
+#worryOverlay.wellness-cleared .modal-body{background:linear-gradient(#f4faeab0,#f5f7e8cf),url('../images/brand/wellness/props/card-comfort-lotus.webp') right bottom/230px auto no-repeat!important;animation:wellness-letter .4s ease-out}
+.wellness-room .amulet-appearance label{display:flex;align-items:center;gap:6px;font-size:12px;color:#6c634d}
+.wellness-room .amulet-appearance select{font:inherit;font-size:16px;min-height:44px;border:1px solid #d9c9aa;background:#fff9ed;border-radius:10px;color:#665033;max-width:100%}
+@media(prefers-reduced-motion:reduce){#playlistOverlay .room-companion::after{animation:none!important}}
+/* Retire both legacy mountain layers, including the old mobile-only pseudo layer. */
+.hero-main-grid .hero-clean-art img.hero-clean-bg{display:none!important}
+.hero-main-grid .hero-clean-art::after{display:none!important;content:none!important;background:none!important}
+.hero-main-grid .hero-title-row .sansa-brand-wordmark{margin-left:-26px!important;margin-right:-12px!important}
+@media(max-width:700px){.hero-main-grid .hero-clean-art .hero-clean-blossom{top:-2%!important;right:-11%!important;width:49%!important}}
