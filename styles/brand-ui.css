@@ -1,0 +1,100 @@
+/* One shared brand layer for the whole app. Game canvas and photo viewer keep their own geometry. */
+:root{--brand-paper:#faf8f0;--brand-ink:#294f41;--brand-muted:#637665;--brand-line:#d9e1d1;--brand-sage:#edf3e7;--brand-rose:#fae8df;--brand-blue:#e7f2f4}
+@keyframes sansaBrandDiscSpin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.hero-title-row .brand-symbol-badge img{animation:sansaBrandDiscSpin 16s linear infinite!important;transform-origin:50% 50%!important}
+.hero-title-row .brand-symbol-badge{overflow:visible!important;isolation:isolate}
+.overlay:not(#beatLabOverlay):not(#lightboxOverlay){--ink:#294f41;--ink-soft:#657966;--paper:#faf8f0;--paper-soft:#fffdf6;--paper-line:#d9e1d1;--moss:#55775c;--moss-dark:#315741;--stamp:#426b53;color:var(--brand-ink);background-color:#243f355e!important}
+.overlay:not(#beatLabOverlay):not(#lightboxOverlay)>.modal{background:var(--brand-paper)!important;border:1px solid var(--brand-line)!important;border-radius:22px!important;box-shadow:0 20px 60px #1f40302b!important}
+.overlay:not(#beatLabOverlay):not(#lightboxOverlay) .modal-head{background-color:#eef3e7!important;border-bottom:1px solid var(--brand-line)!important;position:relative!important}
+.overlay:not(#beatLabOverlay):not(#lightboxOverlay):not(#playlistOverlay) .modal-head h2{font-family:'Nanum Myeongjo','Noto Serif KR',serif!important;color:var(--brand-ink)!important;font-size:26px!important;line-height:1.45!important;letter-spacing:-.045em!important;white-space:normal!important;word-break:keep-all!important}
+.overlay:not(#beatLabOverlay):not(#lightboxOverlay) .modal-body{font-size:16px!important;line-height:1.7!important}
+.overlay:not(#beatLabOverlay):not(#lightboxOverlay) :is(.modal-head .sub,.map-note,.vdate,.catalog-copy small,.catalog-section-heading small,.nickname-editor small,.settings-feature small){font-size:15px!important;line-height:1.7!important;color:#657966!important;word-break:keep-all}
+.overlay:not(#beatLabOverlay):not(#lightboxOverlay) .modal-body :is(p,small,[style*="font-size:10"],[style*="font-size:11"],[style*="font-size:12"],[style*="font-size:13"]){font-size:15px!important;line-height:1.7!important}
+.overlay:not(#beatLabOverlay):not(#lightboxOverlay) :is(.btn,.club-btn,.catalog-view-btn,.settings-login-btn,.settings-logout-btn){font-size:16px!important;line-height:1.45!important;min-height:44px!important;border-radius:12px!important}
+.overlay:not(#beatLabOverlay):not(#lightboxOverlay) .btn-primary{background:#355f49!important;color:#fffaf0!important;border-color:#355f49!important}
+.overlay:not(#beatLabOverlay):not(#lightboxOverlay) .btn-ghost{background:#eef3e8!important;color:#315741!important;border-color:#d7e1cf!important}
+.overlay:not(#beatLabOverlay):not(#lightboxOverlay) :is(textarea,input:not([type=range]),select){font-size:16px!important;line-height:1.6!important;border-color:#d7e0cf!important;border-radius:12px!important;max-width:100%!important;box-sizing:border-box!important}
+.overlay:not(#beatLabOverlay):not(#lightboxOverlay) .close-x{min-width:44px!important;min-height:44px!important;color:#315741!important;border-radius:50%!important;background:#fff9!important}
+#app :is(.map-note,.journey-copy small,.journey-flow b,.sansa-hub-heading p){font-size:15px!important;line-height:1.7!important}
+.site-global-nav .site-global-nav-links>button{font-size:16px!important}
+/* Replace old per-feature bitmap pseudo decorations with the current companion collection. */
+#settingsOverlay .modal-head{padding:24px 60px 24px 24px!important;background:#eaf1e3 url('../images/brand/wellness/props/hero-blossom.webp') right top/190px auto no-repeat!important}
+#settingsOverlay .settings-feature::before,#settingsOverlay .settings-feature::after{content:none!important;display:none!important;background-image:none!important}
+#settingsOverlay .settings-feature-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}
+#settingsOverlay .settings-feature{display:grid!important;grid-template-columns:58px minmax(0,1fr)!important;grid-template-rows:auto auto!important;align-content:center!important;column-gap:12px!important;min-height:106px!important;height:auto!important;padding:14px!important;background:linear-gradient(135deg,#fffdf6,#edf3e7)!important;border:1px solid #d9e2ce!important;border-radius:16px!important;text-align:left!important;overflow:hidden!important}
+#settingsOverlay .settings-feature>span{grid-row:1/3!important;width:58px!important;height:58px!important;background:none!important;display:grid!important;place-items:center!important;font-size:0!important}
+#settingsOverlay .settings-feature>span img{width:58px;height:58px;object-fit:contain}
+#settingsOverlay .settings-feature b{font-size:18px!important;line-height:1.4!important;min-width:0!important;white-space:normal!important;word-break:keep-all!important}
+#settingsOverlay .settings-feature small{margin-top:4px!important;white-space:normal!important}
+#settingsOverlay .settings-section-title{font-size:20px!important;color:#315741!important;margin-top:24px!important}
+#settingsOverlay .settings-account-card{background:#f4f1e5!important;border:1px solid #dedbc7!important;border-radius:18px!important}
+#catalogOverlay .modal-head{padding:24px 62px 22px 106px!important;background:#eef3e7!important;min-height:110px}
+#catalogOverlay .modal-head::before{content:''!important;position:absolute!important;left:18px!important;top:24px!important;transform:none!important;width:74px!important;height:64px!important;border-radius:0!important;background:url('../images/brand/wellness/props/card-suggest-temple.webp') center/contain no-repeat!important}
+#catalogOverlay[data-place-kind=mountain] .modal-head::before{background-image:url('../images/brand/wellness/props/card-breath-mountain.webp')!important}
+#catalogOverlay .catalog-kind-tabs{gap:8px!important;flex-wrap:nowrap!important}
+#catalogOverlay .catalog-kind-tabs>button{font-size:16px!important;min-height:44px!important;border-radius:12px!important;flex:1!important;background:#f5f3e9!important;color:#45634c!important}
+#catalogOverlay .catalog-kind-tabs>button.active{background:#dfead6!important;color:#294f41!important}
+#catalogOverlay .catalog-copy b{font-size:20px!important;line-height:1.4!important}
+#catalogOverlay .catalog-card{border:1px solid #dae2d1!important;border-radius:17px!important;background:#fffdf7!important}
+#catalogOverlay .catalog-thumb{background-color:#edf1e5!important;border-radius:12px!important;overflow:hidden!important}
+#catalogOverlay .cover-placeholder .place-fallback-name{font-size:15px!important}
+#catalogOverlay .cover-placeholder .place-fallback-status{font-size:14px!important;line-height:1.4!important}
+/* Face-led emotional choices. The image atlas contains nine unique expressions. */
+#worryOverlay #worryBody.emotion-grid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:12px!important}
+#worryOverlay #worryBody.emotion-grid .emotion-choice{--emotion:#edf3e5;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:flex-start!important;gap:8px!important;padding:12px 8px!important;margin:0!important;min-width:0!important;min-height:154px!important;background:linear-gradient(145deg,#fffdf5,var(--emotion))!important;border:1px solid #dce2d0!important;border-radius:18px!important;color:#31513f!important}
+#worryOverlay .emotion-face{display:block;width:100px;height:100px;max-width:100%;flex:none;background-image:url('../images/brand/wellness/emotion-faces.webp');background-repeat:no-repeat;background-size:300% 300%;pointer-events:none}
+#worryOverlay .emotion-choice b{font-size:18px!important;line-height:1.5!important;text-align:center!important;word-break:keep-all!important}
+#worryOverlay .emotion-choice:focus-visible{outline:3px solid #a9975f;outline-offset:2px}
+#worryOverlay .emotion-choice:active{transform:scale(.98)}
+#worryOverlay .emotion-choice[data-emotion=complex]{--emotion:#e8e9f2}#worryOverlay .emotion-choice[data-emotion=tired]{--emotion:#e8ecf0}#worryOverlay .emotion-choice[data-emotion=resolve]{--emotion:#f9e6c9}#worryOverlay .emotion-choice[data-emotion=comfort]{--emotion:#f8e3e0}#worryOverlay .emotion-choice[data-emotion=angry]{--emotion:#f5d8ce}#worryOverlay .emotion-choice[data-emotion=lonely]{--emotion:#e1e8f2}#worryOverlay .emotion-choice[data-emotion=grateful]{--emotion:#fbefcf}#worryOverlay .emotion-choice[data-emotion=anxious]{--emotion:#e7e0f2}#worryOverlay .emotion-choice[data-emotion=forgive]{--emotion:#e2efdf}
+/* Readable titles without returning to oversized illustration panels on phones. */
+.hero-experience .hip-quick-row .hq-copy b,#funBannerWrap .fun-banner-row .fb-copy .fb-title{font-size:20px!important;line-height:1.4!important}
+.hero-experience .hip-quick-row .hq-copy small,#funBannerWrap .fun-banner-row .fb-copy .fb-sub{font-size:15px!important;line-height:1.6!important}
+@media(max-width:700px){
+ .site-global-nav .site-global-nav-links>button{font-size:14px!important}
+ .overlay:not(#beatLabOverlay):not(#lightboxOverlay):not(#playlistOverlay) .modal-head h2{font-size:24px!important}
+ #settingsOverlay .settings-feature-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important}
+ #settingsOverlay .settings-feature{grid-template-columns:42px minmax(0,1fr)!important;column-gap:8px!important;padding:10px!important;min-height:108px!important}
+ #settingsOverlay .settings-feature>span,#settingsOverlay .settings-feature>span img{width:42px!important;height:42px!important}
+ #settingsOverlay .settings-feature b{font-size:18px!important}
+ #settingsOverlay .settings-feature small{font-size:14px!important}
+ #catalogOverlay .modal-head{padding:20px 58px 20px 80px!important}
+ #catalogOverlay .modal-head::before{width:55px!important;height:55px!important;left:14px!important;top:23px!important}
+ #catalogOverlay .catalog-copy b{font-size:18px!important}
+ #worryOverlay #worryBody.emotion-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:8px!important;padding:12px!important}
+ #worryOverlay #worryBody.emotion-grid .emotion-choice{padding:10px 3px!important;min-height:140px!important}
+ #worryOverlay .emotion-face{width:78px;height:78px}
+ #worryOverlay .emotion-choice b{font-size:18px!important}
+ .hero-experience .hip-quick-row{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ .hero-experience .hip-quick-row .hip-quick-btn{height:72px!important;min-height:72px!important;padding:8px 57px 8px 10px!important;justify-content:center!important}
+ .hero-experience .hip-quick-row .hq-copy{text-align:left!important}
+ .hero-experience .hip-quick-row .hq-copy b,#funBannerWrap .fun-banner-row .fb-copy .fb-title{font-size:18px!important;line-height:1.4!important}
+ .hero-experience .hip-quick-row .hip-quick-btn .sansa-mascot{right:7px!important;top:14px!important}
+ .hero-experience .hip-quick-row .hip-quick-btn .wellness-scene{left:auto!important;right:0!important;width:60px!important;height:100%!important}
+ #funBannerWrap .fun-banner-row .fun-banner-btn.playlist .fb-copy .fb-title{font-size:18px!important}
+ #funBannerWrap .fun-banner-row .fun-banner-btn.playlist .fb-copy .music-kicker{font-size:10px!important;letter-spacing:.08em!important}
+}
+@media(prefers-reduced-motion:reduce){.hero-title-row .brand-symbol-badge img{animation:none!important}#worryOverlay .emotion-choice:active{transform:none}}
+/* Photos must share the thumbnail box with the fallback, not flow below it. */
+#catalogOverlay .catalog-thumb>.card-cover-img{position:absolute!important;inset:0!important;z-index:2!important}
+#catalogOverlay .catalog-thumb>.cover-placeholder{position:absolute!important;inset:0!important;z-index:1!important}
+#catalogOverlay .catalog-thumb .place-fallback-name{display:none!important}
+#catalogOverlay .catalog-thumb .place-fallback-status{font-size:0!important;line-height:1!important;padding:3px!important}
+#catalogOverlay .catalog-thumb .place-fallback-status::after{content:'일러스트';font-size:14px;line-height:1.5}
+@media(max-width:430px){
+ #catalogOverlay .catalog-card{grid-template-columns:76px minmax(0,1fr)!important;grid-template-areas:'thumb copy' 'thumb actions'!important;gap:8px 12px!important;padding:12px!important}
+ #catalogOverlay .catalog-thumb{width:76px!important;height:100px!important;min-width:76px!important;min-height:100px!important}
+ #catalogOverlay .catalog-actions{justify-content:flex-start!important;width:auto!important;flex-wrap:nowrap!important}
+}
+html body #catalogOverlay.show .modal-head{padding:24px 62px 22px 106px!important}
+.overlay:not(#beatLabOverlay):not(#lightboxOverlay) .modal-head>div{min-width:0!important;flex:1 1 auto!important}
+.overlay:not(#beatLabOverlay):not(#lightboxOverlay) .modal-head .close-x{flex-shrink:0!important}
+@media(max-width:700px){html body #catalogOverlay.show .modal-head{padding:20px 58px 20px 80px!important}}
+#funBannerWrap .fun-banner-row button.fun-banner-btn:not(.playlist) .fb-copy .fb-title{font-size:20px!important;line-height:1.4!important}
+#funBannerWrap .fun-banner-row button.fun-banner-btn .fb-copy .fb-sub{font-size:15px!important;line-height:1.6!important}
+@media(max-width:700px){#funBannerWrap .fun-banner-row button.fun-banner-btn:not(.playlist) .fb-copy .fb-title{font-size:18px!important;line-height:1.4!important}}
+#packOverlay :is(.sansa108-course-summary,.pack-breakdown-label,.pack-breakdown-names,.pack-progress-summary,.pack-progress-arrow){font-size:14px!important;line-height:1.7!important}
+#packOverlay .packrow-title{font-size:20px!important;line-height:1.5!important}
+#packOverlay .packrow-sub{font-size:15px!important;line-height:1.7!important}
+#communityWindowOverlay :is(.community-empty,.community-meta){font-size:15px!important;line-height:1.7!important}
+.overlay:not(#beatLabOverlay):not(#lightboxOverlay) .modal-body button:not(.close-x){font-size:16px!important;min-height:44px!important;line-height:1.45!important}

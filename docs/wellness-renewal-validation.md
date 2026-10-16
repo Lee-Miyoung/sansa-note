@@ -1,5 +1,7 @@
 # 수채화 UI 리뉴얼 구현·검증 기록
 
+> 후속 전체 통합 상태는 [unified-brand-validation.md](unified-brand-validation.md)를 우선합니다.
+
 ## 기준과 변경 파일
 
 - 최신 `origin/main` e3aaf49에서 이어서 수정했다. 과거 index.html로 되돌리지 않았다.
