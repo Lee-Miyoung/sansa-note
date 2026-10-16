@@ -22625,12 +22625,12 @@ body.catalog-screen-open #catalogOverlay,
 
       <nav class="hero-utility" aria-label="산사노트 빠른 기능">
         <button class="hero-util-btn util-course" title="순례 코스 불러오기" onclick="openPackOverlay()">
-          <span class="hero-util-icon">旅</span>
+          <span class="hero-util-icon"><img src="./images/brand/symbols/mountain.png" alt="" aria-hidden="true"></span>
           <span class="hero-util-copy"><b>코스 추가</b><small>추천 순례길 불러오기</small></span>
           <span class="hero-util-arrow">→</span>
         </button>
         <button class="hero-util-btn util-features" title="산사노트 기능 모음" onclick="openSettings()">
-          <span class="hero-util-icon">✦</span>
+          <span class="hero-util-icon"><img src="./images/brand/logos/symbol-logo-color.png" alt="" aria-hidden="true"></span>
           <span class="hero-util-copy"><b>기능 모음</b><small>앨범 · 기도문 · 퀴즈 · 순례집</small></span>
           <span class="hero-util-arrow">→</span>
         </button>
@@ -22642,19 +22642,19 @@ body.catalog-screen-open #catalogOverlay,
           <button class="hip-quick-btn worry-q" onclick="openOracleOverlay()">
             <span class="hq-index">01</span><span class="hq-icon">心</span>
             <span class="hq-copy"><b>마음 고민 처방</b><small>지금 마음이 어떤가요?</small></span><span class="hq-arrow">↗</span>
-          </button>
+          <span class="sansa-mascot" data-pose="worry" aria-hidden="true"></span></button>
           <button class="hip-quick-btn breath-q" onclick="openBreathOverlay('counting')">
             <span class="hq-index">02</span><span class="hq-icon">息</span>
             <span class="hq-copy"><b>1분 호흡</b><small>지금, 여기에서 잠시 숨을 고르세요.</small></span><span class="hq-arrow">↗</span>
-          </button>
+          <span class="sansa-mascot" data-pose="breathe" aria-hidden="true"></span></button>
           <button class="hip-quick-btn moktak-q" onclick="openMoktakOverlay()">
             <span class="hq-index">03</span><span class="hq-icon">木</span>
             <span class="hq-copy"><b>무한 목탁</b><small>마음을 다스리는 나만의 리듬</small></span><span class="hq-arrow">↗</span>
-          </button>
+          <span class="sansa-mascot" data-pose="rhythm" aria-hidden="true"></span></button>
           <a class="hip-quick-btn copy-q" id="todayCopyLink" href="./copy/index.html" aria-label="오늘의 필사 열기">
             <span class="hq-index">04</span><span class="hq-icon">書</span>
             <span class="hq-copy"><b>오늘의 필사</b><small>한 문장이 오늘을 바꿉니다.</small></span><span class="hq-arrow">↗</span>
-          </a>
+          <span class="sansa-mascot" data-pose="write" aria-hidden="true"></span></a>
         </div>
       </div>
 
@@ -25157,37 +25157,30 @@ function renderFunBanner(){
   const wrap = document.getElementById('funBannerWrap');
   wrap.innerHTML = `<div class="fun-banner-row">
     <button class="fun-banner-btn roulette" onclick="openRouletteOverlay()">
-      <div class="fb-icon">🎡</div>
       <div class="fb-copy"><div class="fb-title">오늘은 여기!</div><div class="fb-sub">오늘의 순례지 추천</div></div>
-    </button>
+    <span class="sansa-mascot" data-pose="explore" aria-hidden="true"></span></button>
     <button class="fun-banner-btn worry" onclick="openWorryOverlay()">
-      <div class="fb-icon">🙏</div>
       <div class="fb-copy"><div class="fb-title">마음이 복잡할 때</div><div class="fb-sub">마음에 맞는 절 추천</div></div>
-    </button>
+    <span class="sansa-mascot" data-pose="comfort" aria-hidden="true"></span></button>
     <button class="fun-banner-btn vow" onclick="openVowOverlay()">
-      <div class="fb-icon">🌅</div>
       <div class="fb-copy"><div class="fb-title">발원문 쓰기</div><div class="fb-sub">미래의 나에게 다짐</div></div>
-    </button>
+    <span class="sansa-mascot" data-pose="wish" aria-hidden="true"></span></button>
     <button class="fun-banner-btn mantra" onclick="openMantraOverlay()">
-      <div class="fb-icon">📿</div>
       <div class="fb-copy"><div class="fb-title">염불 카운터</div><div class="fb-sub">염불하며 숫자 세기</div></div>
-    </button>
+    <span class="sansa-mascot" data-pose="count" aria-hidden="true"></span></button>
     <button class="fun-banner-btn amulet" onclick="openAmuletOverlay()">
-      <div class="fb-icon">🧧</div>
       <div class="fb-copy"><div class="fb-title">나만의 기원 부적</div><div class="fb-sub">소원을 담는 부적</div></div>
-    </button>
+    <span class="sansa-mascot" data-pose="pouch" aria-hidden="true"></span></button>
     <button class="fun-banner-btn moktak" onclick="openBeatLab()">
-      <div class="fb-icon">🚀</div>
       <div class="fb-copy"><div class="fb-title">번뇌타파 비트슈터</div><div class="fb-sub">번뇌를 날리는 리듬 게임</div></div>
-    </button>
+    <span class="sansa-mascot" data-pose="dance" aria-hidden="true"></span></button>
     <button class="fun-banner-btn playlist" onclick="openPlaylistOverlay()">
-      <div class="fb-icon">🎧</div>
       <div class="fb-copy">
         <div class="fb-title">극락왕생 플레이리스트</div>
         <div class="fb-sub">Temple Lofi · DJ Mix · 마음 비트 플레이</div>
         <div class="fb-music-meta"><span>▶ PLAY</span><span>♫ LOOP</span><span>DJ MODE</span></div>
       </div>
-    </button>
+    <span class="sansa-mascot" data-pose="music" aria-hidden="true"></span></button>
   </div>`;
 }
 
@@ -30774,7 +30767,8 @@ function render(){
   const stats = computeStats();
   updateHero108Journey();
 
-  document.getElementById('heroStats').innerHTML = `
+  const heroStats=document.getElementById('heroStats');
+  if(heroStats)heroStats.innerHTML = `
     <button class="stat hero-stat-link stat-visited" type="button" onclick="openHeroStatList('visited')" aria-label="다녀온 절 목록 보기">
       <div class="num serif">${stats.visited}</div><div class="lbl">다녀온 절</div>
       <img class="stat-art" src="./stat-temple.png" alt="">
@@ -30972,7 +30966,8 @@ function renderMountainCard(id,d){
 function renderMountainView(){
   const list = Object.values(mountainDestinations);
   const visited = list.filter(d=>(d.stage||0)>=1).length;
-  document.getElementById('heroStats').innerHTML = `
+  const heroStats=document.getElementById('heroStats');
+  if(heroStats)heroStats.innerHTML = `
     <div class="stat"><div class="num serif">${visited}</div><div class="lbl">오른 산 (전체 ${MOUNTAIN_SEED.length}곳 중)</div></div>
     <div class="stat"><div class="num serif">${list.filter(d=>(d.stage||0)>=2).length}</div><div class="lbl">등반 기록 완료</div></div>
     <div class="stat"><div class="num serif">${MOUNTAIN_SEED.length-visited}</div><div class="lbl">아직 안 오른 곳</div></div>
@@ -31352,10 +31347,11 @@ function handleCoverPhotoError(img,kind){
   clearTimeout(img.__coverTimeout);
   const failed=img.getAttribute('src');
   if(failed){failedCoverUrls.set(failed,Date.now());coverImageChecks.delete(failed);}
-  const card=img.closest('.card[data-id]');
+  const card=img.closest('.card[data-id], .catalog-thumb[data-photo-id]');
   const detailId=kind==='mountain'?currentMountainDetailId:currentDetailId;
-  const store=kind==='mountain'?mountainDestinations:destinations;
-  const id=card?.dataset.id||detailId;
+  const catalog=card?.matches('.catalog-thumb');
+  const store=catalog?catalogPhotoRecords[kind]:kind==='mountain'?mountainDestinations:destinations;
+  const id=card?.dataset.photoId||card?.dataset.id||detailId;
   const place=store[id];
   const next=card&&place&&coverPhotoCandidates(place)[0];
   if(next){img.src=next;watchCoverImage(img,kind);return;}
@@ -31366,7 +31362,7 @@ function handleCoverPhotoError(img,kind){
   if(placeholder){placeholder.setAttribute('aria-label','사진을 불러오지 못했어요');const label=placeholder.querySelector('span');if(label)label.textContent='사진을 불러오지 못했어요';if(!card){const retry=document.createElement('button');retry.type='button';retry.className='btn btn-ghost';retry.textContent='사진 다시 불러오기';retry.onclick=event=>{event.stopPropagation();retryDetailCoverPhotos(kind);};placeholder.appendChild(retry);}}
   if(place&&!coverFetching.has(id)){
     const last=Number(place.coverPhotoLastChecked)||0;
-    if(Date.now()-last>60000)queuePhotoFetch(id,place.name,place.locationHint||'',kind==='mountain'?{store,updateFn:updateMountainDestination,getCurrentId:()=>currentMountainDetailId,onDetailUpdate:renderMountainCoverPhotos}:{region:place.region});
+    if(Date.now()-last>60000)queuePhotoFetch(id,place.name,place.locationHint||'',catalog?{store,kind,transient:true,updateFn:()=>{},getCurrentId:()=>null,onDetailUpdate:()=>{}}:kind==='mountain'?{store,updateFn:updateMountainDestination,getCurrentId:()=>currentMountainDetailId,onDetailUpdate:renderMountainCoverPhotos}:{region:place.region});
   }
 }
 function retryDetailCoverPhotos(kind){
@@ -31478,7 +31474,7 @@ function schedulePhotoHydration(type, entries){
   const isMountain=type==='mountain';
   const store=isMountain?mountainDestinations:destinations;
   const queueOne=(id)=>{
-    if(gen!==photoQueueGeneration||contentType!==type) return;
+    if(gen!==photoQueueGeneration) return;
     const d=store[id]; if(!d)return;
     const photo=firstPhotoUrl(d);
     if(photo) return;
@@ -31489,7 +31485,7 @@ function schedulePhotoHydration(type, entries){
     queuePhotoFetch(id,d.name,d.locationHint||'',opts);
   };
 
-  const cards=[...document.querySelectorAll('#grid .card[data-id], #mainPinnedGrid .card[data-id]')];
+  const cards=[...document.querySelectorAll('#grid .card[data-id], #mainPinnedGrid .card[data-id]')].filter(card=>card.getClientRects().length>0);
 
   // 이미 대표사진 URL이 있는 첫 화면 카드들은 브라우저의 lazy 판단을 기다리지 않고 즉시 요청합니다.
   // 나머지 카드는 그대로 lazy 로딩해서 전체 네트워크 부담은 늘리지 않습니다.
@@ -31520,9 +31516,10 @@ function schedulePhotoHydration(type, entries){
 
   // 사진이 아직 없는 앞쪽 카드는 idle 시간까지 기다리지 않고 바로 검색을 시작합니다.
   // 첫 화면 체감 속도를 높이되 4곳까지만 우선 처리합니다.
-  const priority=(entries||[]).filter(([id,d])=>!firstPhotoUrl(d)).slice(0,4);
+  const visibleIds=new Set(cards.filter(card=>{const r=card.getBoundingClientRect();return r.top<innerHeight&&r.bottom>0;}).map(card=>card.dataset.id));
+  const priority=(entries||[]).filter(([id,d])=>visibleIds.has(String(id))&&!firstPhotoUrl(d)).slice(0,4);
   const kick=()=>{
-    if(gen!==photoQueueGeneration||contentType!==type) return;
+    if(gen!==photoQueueGeneration) return;
     priority.forEach(([id])=>queueOne(id));
   };
   setTimeout(kick,0);
@@ -31530,10 +31527,10 @@ function schedulePhotoHydration(type, entries){
 
 function patchVisibleCover(id,url,kind,name){
   if(!isLikelyValidPhotoUrl(url))return;
-  const cards=[...document.querySelectorAll('.card[data-id]')];
-  const matches=cards.filter(x=>x.dataset.id===String(id));
+  const cards=[...document.querySelectorAll('.card[data-id], .catalog-thumb[data-photo-id]')];
+  const matches=cards.filter(x=>(x.dataset.photoId||x.dataset.id)===String(id));
   for(const card of matches){
-  const photo=card?.querySelector('.card-photo');
+  const photo=card.matches('.catalog-thumb')?card:card.querySelector('.card-photo');
   if(!photo)continue;
   const oldImg=photo.querySelector('.card-cover-img');
   const ph=photo.querySelector('.cover-placeholder');
@@ -31579,7 +31576,7 @@ function fetchCoverPhotoNow(id, name, locationHint, opts, done){
   const updateFn = opts.updateFn || updateDestination;
   const getCurrentId = opts.getCurrentId || (()=>currentDetailId);
   const onDetailUpdate = opts.onDetailUpdate || renderCoverPhotos;
-  const isMountain = store === mountainDestinations;
+  const isMountain = opts.kind==='mountain' || store === mountainDestinations;
   const place = store[id] || {};
   const strictHint = (!isMountain && VERIFIED_LOCATION_HINTS[name]) || place.locationHint || '';
   const queryHint = strictHint || locationHint || place.region || '';
@@ -31611,7 +31608,8 @@ function fetchCoverPhotoNow(id, name, locationHint, opts, done){
     Object.assign(store[id],patch);
     try{
       // Hydrate existing cards instead of rebuilding every card for each image.
-      if(localMode){if(isMountain)persistLocalMountains();else persistLocal();}
+      if(opts.transient){/* Catalog results use the public browser cache, not personal records. */}
+      else if(localMode){if(isMountain)persistLocalMountains();else persistLocal();}
       else updateFn(id,patch);
     }catch(error){console.warn('사진 정보 저장을 다시 확인해주세요.',error);}
   }
@@ -32453,6 +32451,7 @@ function photoCreditHtml(m, i){
 function renderAutoCoverPhotos(wrapId,d){
   const wrap=document.getElementById(wrapId);if(!wrap)return;
   const kind=wrapId==='mCoverPhotos'?'mountain':'temple';
+  firstPhotoUrl(d);
   const urls=(d.coverPhotos||[]).filter(usableCoverUrl);
   if(urls.length===0){
     const q=encodeURIComponent((d.name||'')+' 국가유산');
@@ -39580,9 +39579,35 @@ document.addEventListener('click',function(e){
   }
 });
 
+const catalogPhotoRecords={temple:{},mountain:{}};
+let catalogPhotoObserver=null;
+function hydrateCatalogPhotos(){
+  if(catalogPhotoObserver)catalogPhotoObserver.disconnect();
+  const list=document.getElementById('catalogList');if(!list)return;
+  const load=thumb=>{
+    const kind=thumb.dataset.photoKind,id=thumb.dataset.photoId;
+    const store=catalogPhotoRecords[kind],place=store?.[id];if(!place)return;
+    const image=thumb.querySelector('img');
+    if(image){image.loading='eager';watchCoverImage(image,kind);return;}
+    if(firstPhotoUrl(place)||shouldSkipPhotoRetry(place)||coverFetching.has(id))return;
+    queuePhotoFetch(id,place.name,place.locationHint||'',{store,kind,updateFn:()=>{},getCurrentId:()=>null,onDetailUpdate:()=>{},transient:true});
+  };
+  const thumbs=[...list.querySelectorAll('.catalog-thumb[data-photo-id]')];
+  thumbs.slice(0,4).forEach(load);
+  if('IntersectionObserver' in window){
+    catalogPhotoObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{
+      if(entry.isIntersecting){load(entry.target);catalogPhotoObserver.unobserve(entry.target);}
+    }),{root:list.closest('.modal-body')||null,rootMargin:'250px 0px'});
+    thumbs.forEach(thumb=>catalogPhotoObserver.observe(thumb));
+  }else thumbs.slice(0,8).forEach(load);
+}
+
 function catalogThumbHtml(d,type){
-  const photo=firstPhotoUrl(d);
-  return `<div class="catalog-thumb">${cardCoverMedia(photo,type,d.name)}</div>`;
+  const id=type+':'+d.name;
+  const previous=catalogPhotoRecords[type][id];
+  const place=catalogPhotoRecords[type][id]={...d,...previous,photos:d.photos||previous?.photos};
+  const photo=firstPhotoUrl(place);
+  return `<div class="catalog-thumb" data-photo-id="${escapeAttr(id)}" data-photo-kind="${type}">${cardCoverMedia(photo,type,d.name)}</div>`;
 }
 
 renderCatalogOverlay = function(){
@@ -39624,6 +39649,7 @@ renderCatalogOverlay = function(){
         </div>
       </div>`;
     }).join(''):'<div class="catalog-empty">검색 결과가 없어요.</div>';
+    setTimeout(hydrateCatalogPhotos,0);
     return;
   }
 
@@ -39656,6 +39682,7 @@ renderCatalogOverlay = function(){
       </div>
     </div>`;
   }).join(''):'<div class="catalog-empty">검색 결과가 없어요.</div>';
+  setTimeout(hydrateCatalogPhotos,0);
 };
 </script>
 
@@ -39794,6 +39821,7 @@ renderCatalogOverlay = function(){
           </div>
         </div>`;
       }).join(''):'<div class="catalog-empty">검색 결과가 없어요.</div>';
+      setTimeout(hydrateCatalogPhotos,0);
       return;
     }
 
@@ -39828,6 +39856,7 @@ renderCatalogOverlay = function(){
         </div>
       </div>`;
     }).join(''):'<div class="catalog-empty">검색 결과가 없어요.</div>';
+    setTimeout(hydrateCatalogPhotos,0);
   };
 })();
 </script>
@@ -42316,6 +42345,79 @@ nav.site-global-nav{height:var(--global-nav-h)!important;box-sizing:border-box!i
  .site-global-nav .map-action .hta-icon{width:17px!important;height:20px!important;font-size:17px!important}
 }
 @media(prefers-reduced-motion:reduce){.site-global-nav .site-global-nav-links>button{transition:none!important}}
+</style>
+<style id="sansa-companion-illustrations-20261016">
+/* One twelve-pose watercolor companion sheet keeps identity and palette consistent. */
+.hero-utility .hero-util-icon img{display:block;width:36px;height:36px;object-fit:contain}
+.sansa-mascot[data-pose="count"],.sansa-mascot[data-pose="pouch"]{clip-path:inset(0 0 5% 0)}
+.hero-experience .hip-quick-row .hip-quick-btn .sansa-mascot,#funBannerWrap .fun-banner-row .fun-banner-btn .sansa-mascot{position:absolute!important;display:block!important;right:10px!important;bottom:0!important;top:auto!important;left:auto!important;width:148px!important;height:148px!important;margin:0!important;padding:0!important;border:0!important;background-color:transparent!important}
+#funBannerWrap .fun-banner-row button.fun-banner-btn{box-sizing:border-box!important;aspect-ratio:auto!important;height:240px!important;min-height:240px!important}
+#funBannerWrap .fun-banner-row button.fun-banner-btn.playlist{height:190px!important;min-height:190px!important}
+.sansa-mascot[data-pose="wish"]{clip-path:inset(0 0 5% 0)}
+
+.sansa-mascot{display:block!important;position:absolute!important;width:148px;height:148px;right:10px;bottom:0;background-image:url('./images/brand/wellness/companion-poses.png')!important;background-size:300% 400%!important;background-repeat:no-repeat!important;pointer-events:none!important;z-index:1!important}
+.sansa-mascot[data-pose="worry"]{background-position:0% 0%}
+.sansa-mascot[data-pose="breathe"]{background-position:50% 0%}
+.sansa-mascot[data-pose="rhythm"]{background-position:100% 0%}
+.sansa-mascot[data-pose="write"]{background-position:0% 33.333333%}
+.sansa-mascot[data-pose="explore"]{background-position:50% 33.333333%}
+.sansa-mascot[data-pose="comfort"]{background-position:100% 33.333333%}
+.sansa-mascot[data-pose="wish"]{background-position:0% 66.666667%}
+.sansa-mascot[data-pose="count"]{background-position:50% 66.666667%}
+.sansa-mascot[data-pose="pouch"]{background-position:100% 66.666667%}
+.sansa-mascot[data-pose="dance"]{background-position:0% 100%}
+.sansa-mascot[data-pose="music"]{background-position:50% 100%}
+.sansa-mascot[data-pose="puzzle"]{background-position:100% 100%}
+.hero-experience .hip-quick-row{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:14px!important}
+.hero-experience .hip-quick-row .hip-quick-btn{position:relative!important;display:flex!important;flex-flow:column nowrap!important;justify-content:flex-start!important;align-items:flex-start!important;align-content:flex-start!important;min-width:0!important;height:250px!important;min-height:250px!important;padding:20px!important;border:1px solid #dce1d4!important;border-radius:20px!important;background:#f0f3e8!important;text-align:left!important;overflow:hidden!important;box-shadow:none!important;color:#2c5141!important}
+.hero-experience .hip-quick-row .hip-quick-btn.breath-q{background:#eaf2ee!important}
+.hero-experience .hip-quick-row .hip-quick-btn.moktak-q{background:#f7efdf!important}
+.hero-experience .hip-quick-row .hip-quick-btn.copy-q{background:#f4ece7!important}
+.hero-experience .hip-quick-row .hip-quick-btn::before,.hero-experience .hip-quick-row .hip-quick-btn::after{content:none!important;display:none!important}
+.hero-experience .hip-quick-row .hq-index{display:block!important;position:static!important;margin:0 0 9px!important;color:#8e9e85!important;font-size:11px!important;letter-spacing:.1em!important}
+.hero-experience .hip-quick-row .hq-icon{display:none!important}
+.hero-experience .hip-quick-row .hq-copy{display:block!important;position:relative!important;z-index:2!important;text-align:left!important}
+.hero-experience .hip-quick-row .hq-copy b{display:block!important;font-size:20px!important;line-height:1.4!important;color:#31523f!important}
+.hero-experience .hip-quick-row .hq-copy small{display:block!important;max-width:210px!important;margin-top:5px!important;font-size:12px!important;line-height:1.6!important;color:#70806d!important}
+.hero-experience .hip-quick-row .hq-arrow{position:absolute!important;right:18px!important;top:18px!important;bottom:auto!important;color:#84927a!important;font-size:18px!important}
+#funBannerWrap .fun-banner-row{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:14px!important}
+#funBannerWrap .fun-banner-row .fun-banner-btn{display:block!important;position:relative!important;min-width:0!important;min-height:220px!important;height:auto!important;padding:20px 20px 140px!important;overflow:hidden!important;border:1px solid #dedfd3!important;border-radius:20px!important;background:#f4f1e7!important;box-shadow:none!important;text-align:left!important;color:#31513f!important}
+#funBannerWrap .fun-banner-row .fun-banner-btn::before,#funBannerWrap .fun-banner-row .fun-banner-btn::after{content:none!important;display:none!important}
+#funBannerWrap .fun-banner-row .fun-banner-btn.worry{background:#edf4ef!important}
+#funBannerWrap .fun-banner-row .fun-banner-btn.vow{background:#f6ede7!important}
+#funBannerWrap .fun-banner-row .fun-banner-btn.mantra{background:#edf0f5!important}
+#funBannerWrap .fun-banner-row .fun-banner-btn.amulet{background:#f4efdf!important}
+#funBannerWrap .fun-banner-row .fun-banner-btn.moktak{background:#f0edf6!important}
+#funBannerWrap .fun-banner-row .fb-icon{display:none!important}
+#funBannerWrap .fun-banner-row .fb-copy{display:block!important;position:relative!important;min-width:0!important;width:auto!important;z-index:2!important;text-align:left!important}
+#funBannerWrap .fun-banner-row .fun-banner-btn .fb-copy .fb-title{display:block!important;font-size:19px!important;line-height:1.4!important;color:#31513f!important;word-break:keep-all!important}
+#funBannerWrap .fun-banner-row .fun-banner-btn .fb-copy .fb-sub{display:block!important;margin-top:5px!important;font-size:12px!important;line-height:1.6!important;color:#75806e!important}
+#funBannerWrap .fun-banner-row .fun-banner-btn.playlist{grid-column:1/-1!important;min-height:180px!important;padding:30px 200px 30px 28px!important;background:#244e42!important;border:0!important}
+#funBannerWrap .fun-banner-row .playlist .fb-title{font-size:24px!important;color:#fff7e8!important}
+#funBannerWrap .fun-banner-row .playlist .fb-sub{color:#c6d8c8!important}
+#funBannerWrap .fun-banner-row .fun-banner-btn.playlist .sansa-mascot{width:180px!important;height:180px!important;right:18px!important;bottom:0!important}
+@media(max-width:700px){
+ .hero-experience .hip-quick-row{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}
+ .hero-experience .hip-quick-row .hip-quick-btn{height:250px!important;min-height:250px!important;padding:16px!important;border-radius:17px!important}
+ .hero-experience .hip-quick-row .hq-copy b{font-size:18px!important}
+ .hero-experience .hip-quick-row .hq-copy small{font-size:11px!important;max-width:150px!important}
+ .hero-experience .hip-quick-row .hq-arrow{right:12px!important;top:12px!important}
+ .hero-experience .hip-quick-row .hip-quick-btn .sansa-mascot{width:126px!important;height:126px!important;right:6px!important;bottom:3px!important}
+ #funBannerWrap .fun-banner-row{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}
+ #funBannerWrap .fun-banner-row .fun-banner-btn{min-height:235px!important;padding:16px 14px 145px!important;border-radius:17px!important}
+ #funBannerWrap .fun-banner-row .fun-banner-btn .fb-copy .fb-title{font-size:17px!important}
+ #funBannerWrap .fun-banner-row .fun-banner-btn .fb-copy .fb-sub{font-size:11px!important}
+ #funBannerWrap .fun-banner-row .fun-banner-btn.playlist{min-height:190px!important;padding:22px 130px 22px 18px!important}
+ #funBannerWrap .fun-banner-row .playlist .fb-title{font-size:21px!important}
+ #funBannerWrap .fun-banner-row .fun-banner-btn.playlist .sansa-mascot{width:134px!important;height:134px!important;right:0!important;bottom:3px!important}
+}
+@media(max-width:1000px){.hero-experience .hip-quick-row{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media(max-width:700px){#funBannerWrap .fun-banner-row button.fun-banner-btn:not(.playlist) .sansa-mascot{width:120px!important;height:120px!important;right:8px!important;bottom:6px!important}}
+@media(max-width:360px){
+ .hero-experience .hip-quick-row .hip-quick-btn{height:270px!important;min-height:270px!important}
+ .hero-experience .hip-quick-row .hq-copy b{font-size:17px!important}
+ #funBannerWrap .fun-banner-row button.fun-banner-btn:not(.playlist){height:260px!important;min-height:260px!important}
+}
 </style>
 </body>
 </html>
