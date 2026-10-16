@@ -42413,28 +42413,43 @@ nav.site-global-nav{height:var(--global-nav-h)!important;box-sizing:border-box!i
 }
 @media(max-width:1000px){.hero-experience .hip-quick-row{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
 @media(max-width:700px){#funBannerWrap .fun-banner-row button.fun-banner-btn:not(.playlist) .sansa-mascot{width:120px!important;height:120px!important;right:8px!important;bottom:6px!important}}
-/* Compact phone cards: readable labels above smaller companion illustrations. */
+/* Compact horizontal shortcuts on every screen size. */
+.hero-experience .hip-quick-row{gap:10px!important}
+.hero-experience .hip-quick-row .hip-quick-btn{height:112px!important;min-height:112px!important;padding:14px!important;justify-content:center!important;border-radius:14px!important}
+.hero-experience .hip-quick-row .hq-index{display:none!important}
+.hero-experience .hip-quick-row .hq-copy{width:calc(100% - 88px)!important}
+.hero-experience .hip-quick-row .hq-copy b{font-size:17px!important;line-height:1.35!important}
+.hero-experience .hip-quick-row .hq-copy small{font-size:11px!important;line-height:1.45!important;margin-top:4px!important}
+.hero-experience .hip-quick-row .hip-quick-btn .sansa-mascot{width:80px!important;height:80px!important;right:8px!important;top:16px!important;bottom:auto!important}
+.hero-experience .hip-quick-row .hq-arrow{display:none!important}
+#funBannerWrap .fun-banner-row{gap:10px!important}
+#funBannerWrap .fun-banner-row button.fun-banner-btn:not(.playlist){height:112px!important;min-height:112px!important;padding:14px!important;display:flex!important;flex-flow:row nowrap!important;align-items:center!important;justify-content:flex-start!important;border-radius:14px!important}
+#funBannerWrap .fun-banner-row .fun-banner-btn:not(.playlist) .fb-copy{width:calc(100% - 88px)!important;max-width:calc(100% - 88px)!important;flex:0 0 calc(100% - 88px)!important}
+#funBannerWrap .fun-banner-row .fun-banner-btn .fb-copy .fb-title{font-size:16px!important;line-height:1.35!important}
+#funBannerWrap .fun-banner-row .fun-banner-btn .fb-copy .fb-sub{font-size:11px!important;line-height:1.45!important;margin-top:4px!important}
+#funBannerWrap .fun-banner-row button.fun-banner-btn:not(.playlist) .sansa-mascot{width:80px!important;height:80px!important;right:8px!important;top:16px!important;bottom:auto!important}
+#funBannerWrap .fun-banner-row button.fun-banner-btn.playlist{height:120px!important;min-height:120px!important;padding:16px 128px 16px 18px!important;border-radius:14px!important}
+#funBannerWrap .fun-banner-row .fun-banner-btn.playlist .fb-copy .fb-title{font-size:20px!important;color:#fff7e8!important}
+#funBannerWrap .fun-banner-row .fun-banner-btn.playlist .fb-copy .fb-sub{color:#c6d8c8!important}
+#funBannerWrap .fun-banner-row button.fun-banner-btn.playlist .sansa-mascot{width:100px!important;height:100px!important;right:14px!important;bottom:6px!important}
+/* The final sprite row starts above the nominal grid boundary: retain the entire head. */
+.sansa-mascot[data-pose="dance"],.sansa-mascot[data-pose="music"],.sansa-mascot[data-pose="puzzle"]{background-size:270% 360%!important;background-position-y:100%!important;clip-path:inset(5% 0 0)}
 @media(max-width:700px){
- .hero-experience .hip-quick-row{gap:8px!important}
- .hero-experience .hip-quick-row .hip-quick-btn{height:160px!important;min-height:160px!important;padding:12px!important;border-radius:14px!important}
- .hero-experience .hip-quick-row .hq-index{display:none!important}
- .hero-experience .hip-quick-row .hq-copy b{font-size:16px!important;line-height:1.35!important}
- .hero-experience .hip-quick-row .hq-copy small{font-size:11px!important;line-height:1.45!important;margin-top:4px!important}
- .hero-experience .hip-quick-row .hip-quick-btn .sansa-mascot{width:76px!important;height:76px!important;right:8px!important;bottom:4px!important}
- .hero-experience .hip-quick-row .hq-arrow{font-size:14px!important;top:auto!important;bottom:12px!important;left:12px!important;right:auto!important}
- #funBannerWrap .fun-banner-row{gap:8px!important}
- #funBannerWrap .fun-banner-row button.fun-banner-btn:not(.playlist){height:160px!important;min-height:160px!important;padding:12px 12px 78px!important;border-radius:14px!important}
- #funBannerWrap .fun-banner-row .fun-banner-btn .fb-copy .fb-title{font-size:15px!important;line-height:1.35!important}
- #funBannerWrap .fun-banner-row .fun-banner-btn .fb-copy .fb-sub{font-size:11px!important;line-height:1.45!important;margin-top:4px!important}
- #funBannerWrap .fun-banner-row button.fun-banner-btn:not(.playlist) .sansa-mascot{width:72px!important;height:72px!important;right:8px!important;bottom:5px!important}
- #funBannerWrap .fun-banner-row button.fun-banner-btn.playlist{height:140px!important;min-height:140px!important;padding:14px 112px 14px 14px!important;border-radius:14px!important}
- #funBannerWrap .fun-banner-row .fun-banner-btn.playlist .fb-copy .fb-title{font-size:17px!important;color:#fff7e8!important}
- #funBannerWrap .fun-banner-row .fun-banner-btn.playlist .fb-copy .fb-sub{color:#c6d8c8!important}
- #funBannerWrap .fun-banner-row button.fun-banner-btn.playlist .sansa-mascot{width:100px!important;height:100px!important;right:6px!important;bottom:3px!important}
-}
-@media(max-width:360px){
- #funBannerWrap .fun-banner-row button.fun-banner-btn:not(.playlist){height:164px!important;min-height:164px!important}
- #funBannerWrap .fun-banner-row button.fun-banner-btn:not(.playlist) .sansa-mascot{width:60px!important;height:60px!important}
+ .hero-experience .hip-quick-row,#funBannerWrap .fun-banner-row{gap:8px!important}
+ .hero-experience .hip-quick-row .hip-quick-btn{height:88px!important;min-height:88px!important;padding:10px!important;border-radius:12px!important}
+ .hero-experience .hip-quick-row .hq-copy{width:calc(100% - 54px)!important}
+ .hero-experience .hip-quick-row .hq-copy b{font-size:14px!important;line-height:1.4!important}
+ .hero-experience .hip-quick-row .hq-copy small{display:none!important}
+ .hero-experience .hip-quick-row .hip-quick-btn .sansa-mascot{width:46px!important;height:46px!important;right:7px!important;top:21px!important;bottom:auto!important}
+ #funBannerWrap .fun-banner-row button.fun-banner-btn:not(.playlist){height:88px!important;min-height:88px!important;padding:10px!important;border-radius:12px!important}
+ #funBannerWrap .fun-banner-row .fun-banner-btn:not(.playlist) .fb-copy{width:calc(100% - 54px)!important;max-width:calc(100% - 54px)!important;flex:0 0 calc(100% - 54px)!important}
+ #funBannerWrap .fun-banner-row .fun-banner-btn .fb-copy .fb-title{font-size:14px!important;line-height:1.4!important}
+ #funBannerWrap .fun-banner-row .fun-banner-btn:not(.playlist) .fb-copy .fb-sub{display:none!important}
+ #funBannerWrap .fun-banner-row button.fun-banner-btn:not(.playlist) .sansa-mascot{width:46px!important;height:46px!important;right:7px!important;top:21px!important;bottom:auto!important}
+ #funBannerWrap .fun-banner-row button.fun-banner-btn.playlist{height:112px!important;min-height:112px!important;padding:12px 88px 12px 12px!important;border-radius:12px!important}
+ #funBannerWrap .fun-banner-row .fun-banner-btn.playlist .fb-copy .fb-title{font-size:16px!important}
+ #funBannerWrap .fun-banner-row .fun-banner-btn.playlist .fb-copy .fb-sub{display:none!important}
+ #funBannerWrap .fun-banner-row button.fun-banner-btn.playlist .sansa-mascot{width:76px!important;height:76px!important;right:5px!important;bottom:12px!important}
 }
 </style>
 </body>
