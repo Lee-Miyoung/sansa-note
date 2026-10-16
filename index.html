@@ -30201,7 +30201,7 @@ function renderMasterSearchResults(){
 function getVisibleTempleEntries(){
   const forced = (()=>{try{return new Set(JSON.parse(localStorage.getItem('sansanote_main_visible_v4')||'[]'));}catch(e){return new Set();}})();
   return Object.entries(destinations||{}).filter(([id,d])=>
-    d && (!d.hiddenFromList || forced.has(d.name))
+    d && typeof d.name==='string' && d.name.trim() && (!d.hiddenFromList || forced.has(d.name))
   );
 }
 
@@ -31315,7 +31315,7 @@ function coverPhotoCandidates(d){
   if(!d)return [];
   const photos=d.photos||{};
   const ordered=(d.photoOrder||[]).map(id=>photos[id]?.url);
-  return [...new Set([...ordered,...Object.values(photos).reverse().map(p=>p?.url),...(d.coverPhotos||[])])].filter(usableCoverUrl);
+  return [...new Set([...ordered,...Object.values(photos).reverse().map(p=>p?.url),...(d.coverPhotoVersion===PHOTO_SCHEMA_VERSION?(d.coverPhotos||[]):[])])].filter(usableCoverUrl);
 }
 function checkCoverImage(url){
   if(!usableCoverUrl(url))return Promise.resolve(false);
@@ -31376,7 +31376,7 @@ function retryDetailCoverPhotos(kind){
 
 function firstPhotoUrl(d){
   if(!d)return null;
-  if(!(d.coverPhotos||[]).some(usableCoverUrl)){
+  if(d.coverPhotoVersion!==PHOTO_SCHEMA_VERSION||!(d.coverPhotos||[]).some(usableCoverUrl)){
     const cached=readCoverPhotoCache(d).filter(item=>usableCoverUrl(item.url));
     if(cached.length){d.coverPhotos=cached.map(x=>x.url);d.coverPhotoMeta=cached;d.coverPhotoVersion=PHOTO_SCHEMA_VERSION;d.coverPhotoStatus='verified';}
   }
@@ -31429,7 +31429,7 @@ function progressSealHtml(stageIdx){
   </span>`;
 }
 
-const PHOTO_SCHEMA_VERSION = 10; // v10: 실제 이미지 로드 검증, 시간 제한, 실패한 주소 복구
+const PHOTO_SCHEMA_VERSION = 11; // v11: 장소 이름 일치 필수, 공개 사진 결과는 브라우저에만 저장
 const PHOTO_RETRY_COOLDOWN_MS = 6*60*60*1000; // 사진을 못 찾은 곳은 6시간 지나야 다시 시도 (매 렌더마다 재시도해서 화면이 깜빡이는 것을 막기 위함)
 function shouldSkipPhotoRetry(d){
   if(d?.coverPhotoStatus==='temporary-error')return Date.now()-(d.coverPhotoLastChecked||0)<60000;
@@ -31605,14 +31605,11 @@ function fetchCoverPhotoNow(id, name, locationHint, opts, done){
   }
 
   function persistPhotoPatch(patch){
+    // Public search metadata must never create/modify personal Firebase records.
+    // The validated results are retained by rememberCoverPhotos in this browser.
     Object.assign(store[id],patch);
-    try{
-      // Hydrate existing cards instead of rebuilding every card for each image.
-      if(opts.transient){/* Catalog results use the public browser cache, not personal records. */}
-      else if(localMode){if(isMountain)persistLocalMountains();else persistLocal();}
-      else updateFn(id,patch);
-    }catch(error){console.warn('사진 정보 저장을 다시 확인해주세요.',error);}
   }
+
   function refreshDetail(){
     if(getCurrentId()===id){try{onDetailUpdate(store[id]);}catch(error){console.warn('사진 화면 갱신 실패',error);}}
   }
@@ -31668,7 +31665,7 @@ function fetchCoverPhotoNow(id, name, locationHint, opts, done){
     let score;
     if(trustedArticle) score=34;
     else if(nameMatches) score=20;
-    else score=4;
+    else return -999;
     if(core && title.includes(core)) score+=18;
     if(visualWords.test(hay)) score+=14;
     if(/jpg|jpeg|png/i.test(ii.mime||'')) score+=3;
@@ -31723,7 +31720,7 @@ function fetchCoverPhotoNow(id, name, locationHint, opts, done){
     // 이전 버전에서 잘못 매칭된 자동 사진은 계속 남겨 두지 않고 비워서
     // 엉뚱한 사진 대신 안전한 플레이스홀더가 보이게 합니다.
     if(store[id]){
-      const oldWasVerifiedCurrent = place.coverPhotoVersion>=9 && oldUrls.some(usableCoverUrl);
+      const oldWasVerifiedCurrent = place.coverPhotoVersion===PHOTO_SCHEMA_VERSION && oldUrls.some(usableCoverUrl);
       const patch={
         coverPhotoVersion:PHOTO_SCHEMA_VERSION,
         coverPhotoStatus:oldWasVerifiedCurrent?'kept-old':networkFailed?'temporary-error':'not-found',
@@ -31831,7 +31828,7 @@ function fetchCoverPhotoNow(id, name, locationHint, opts, done){
           const hc=compact(hay);
           const nameMatch=!!(core && hc.includes(core));
           const visualMatch=visualWords.test(hay);
-          if(!nameMatch && !visualMatch) return null;
+          if(!nameMatch) return null;
 
           let score=(nameMatch?30:0)+(visualMatch?12:0);
           if(detailPenalty.test(hay)) score-=8;
@@ -42451,6 +42448,9 @@ nav.site-global-nav{height:var(--global-nav-h)!important;box-sizing:border-box!i
  #funBannerWrap .fun-banner-row .fun-banner-btn.playlist .fb-copy .fb-sub{display:none!important}
  #funBannerWrap .fun-banner-row button.fun-banner-btn.playlist .sansa-mascot{width:76px!important;height:76px!important;right:5px!important;bottom:12px!important}
 }
+</style>
+<style id="sansa-home-personal-cards-only">
+#mainListArea{display:none!important}
 </style>
 </body>
 </html>
