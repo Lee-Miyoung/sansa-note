@@ -22717,7 +22717,7 @@ body.catalog-screen-open #catalogOverlay,
       <div class="journey-core-card">
         <div class="journey-core-head">
           <div>
-            <span class="journey-eyebrow brand-journey-eyebrow"><img src="./images/brand/symbols/temple-seal.png" alt="" aria-hidden="true" onerror="this.style.display='none'">한 걸음씩, 나만의 순례</span>
+            <span class="journey-eyebrow brand-journey-eyebrow"><span class="journey-seal" aria-hidden="true"><img src="./images/brand/symbols/temple-seal.png" alt="" onerror="this.style.display='none'"></span>한 걸음씩, 나만의 순례</span>
             <h3>나의 108 순례</h3>
           </div>
           <button class="journey-mini-link" type="button" onclick="openPilgrimCollection()">전체 도감 →</button>
@@ -22748,7 +22748,7 @@ body.catalog-screen-open #catalogOverlay,
           <span><i><img src="./images/brand/symbols/temple-seal.png" alt="" aria-hidden="true"></i><b>절 방문</b></span><strong>→</strong>
           <span><i><img src="./images/brand/symbols/lotus.png" alt="" aria-hidden="true"></i><b>연꽃 피우기</b></span><strong>→</strong>
           <span><i><img src="./images/brand/monks/monk-walking.png" alt="" aria-hidden="true"></i><b>현장 인증</b></span><strong>→</strong>
-          <span><i><img src="./images/brand/logos/symbol-logo-color.png" alt="" aria-hidden="true"></i><b>카드 오픈</b></span>
+          <span><i class="journey-card-step"><img src="./images/lotus-cards/010.png" alt="" aria-hidden="true"></i><b>카드 오픈</b></span>
         </div>
       </div>
     </section>
@@ -42092,7 +42092,10 @@ body.sansa-catalog-active{
 .sansa-discovery-refresh .hero-108-journey .journey-core-card::before{background:url('./images/brand/symbols/mountain.png') right bottom/65% auto no-repeat!important;opacity:.13!important;filter:none!important;pointer-events:none!important}
 .sansa-discovery-refresh .hero-108-journey .journey-core-card::after{content:none!important}
 .sansa-discovery-refresh .journey-core-head{margin:0 0 12px!important;align-items:center!important}
-.sansa-discovery-refresh .journey-eyebrow{color:#c3d7bc!important;font-size:11px!important;letter-spacing:.08em!important}
+/* The uploaded seal has generous transparent margins; crop the display box, not the asset. */
+.sansa-discovery-refresh .journey-eyebrow{color:#c3d7bc!important;font-size:12px!important;letter-spacing:.04em!important;gap:10px!important}
+.sansa-discovery-refresh .journey-seal{position:relative;display:inline-block;width:38px;height:42px;flex:0 0 38px;overflow:hidden}
+.sansa-discovery-refresh .journey-seal img{position:absolute!important;left:50%!important;top:50%!important;width:84px!important;height:84px!important;max-width:none!important;transform:translate(-50%,-50%)!important;border-radius:0!important;box-shadow:none!important}
 .sansa-discovery-refresh .journey-core-head h3{color:#fff9e8!important;font-size:32px!important;line-height:1.4!important}
 .sansa-discovery-refresh .journey-mini-link{background:transparent!important;border:1px solid #ffffff50!important;color:#fff6df!important;padding:10px 16px!important}
 .sansa-discovery-refresh .hero-108-journey .journey-main-cta{display:grid!important;grid-template-columns:90px minmax(0,1fr) 250px!important;gap:24px!important;padding:16px 0 24px!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;overflow:visible!important;align-items:center!important}
@@ -42116,6 +42119,8 @@ body.sansa-catalog-active{
 .sansa-discovery-refresh .hero-108-journey .journey-flow{padding:18px 0 0!important;margin:0!important;border:0!important;border-top:1px solid #ffffff26!important;border-radius:0!important;background:none!important;box-shadow:none!important}
 .sansa-discovery-refresh .journey-flow i{width:38px!important;height:38px!important;border:0!important;background:none!important;box-shadow:none!important}
 .sansa-discovery-refresh .journey-flow i img{width:36px;height:36px;object-fit:contain}
+.sansa-discovery-refresh .journey-flow .journey-card-step{width:44px!important;height:44px!important}
+.sansa-discovery-refresh .journey-flow .journey-card-step img{width:26px!important;height:43px!important;object-fit:contain!important;border:1px solid #d7bb78;border-radius:3px;transform:rotate(-6deg);box-shadow:2px 3px 5px #102f2940}
 .sansa-discovery-refresh .journey-flow b{color:#d1ddcf!important;font-size:11px!important;font-weight:500!important}
 .sansa-discovery-refresh .journey-flow>strong{color:#92ad98!important;font-weight:400!important}
 .sansa-discovery-refresh .content-type-row{margin:26px 0 16px!important}
