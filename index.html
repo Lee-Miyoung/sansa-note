@@ -31337,7 +31337,19 @@ function checkCoverImage(url){
   check.then(ok=>{if(!ok)coverImageChecks.delete(url);});
   return check;
 }
+function coverPhotoLoaded(img){
+  clearTimeout(img.__coverTimeout);
+  img.classList.add('loaded');
+}
+function watchCoverImage(img,kind){
+  clearTimeout(img.__coverTimeout);
+  if(img.complete&&img.naturalWidth>0){coverPhotoLoaded(img);return;}
+  img.__coverTimeout=setTimeout(()=>{
+    if(img.isConnected&&(!img.complete||!img.naturalWidth))handleCoverPhotoError(img,kind);
+  },8000);
+}
 function handleCoverPhotoError(img,kind){
+  clearTimeout(img.__coverTimeout);
   const failed=img.getAttribute('src');
   if(failed){failedCoverUrls.set(failed,Date.now());coverImageChecks.delete(failed);}
   const card=img.closest('.card[data-id]');
@@ -31346,7 +31358,7 @@ function handleCoverPhotoError(img,kind){
   const id=card?.dataset.id||detailId;
   const place=store[id];
   const next=card&&place&&coverPhotoCandidates(place)[0];
-  if(next){img.src=next;return;}
+  if(next){img.src=next;watchCoverImage(img,kind);return;}
   const holder=img.parentElement;
   img.remove();
   let placeholder=holder?.querySelector('.cover-placeholder');
@@ -31411,7 +31423,7 @@ function cardCoverMedia(photo, kind, name){
   const placeholder = kind==='mountain' ? mountainPlaceholderHtml('산 풍경 준비 중') : lotusPlaceholderHtml('사찰 사진 준비 중');
   if(!photo) return placeholder;
   return placeholder+`<img class="card-cover-img stable-cover" src="${escapeAttr(photo)}" alt="${escapeAttr(name||'')}"
-    loading="lazy" decoding="async" draggable="false" oncontextmenu="return false" style="-webkit-touch-callout:none;-webkit-user-select:none;user-select:none;" onload="this.classList.add('loaded')" onerror="replaceBrokenCardCover(this,'${kind}')">`;
+    loading="lazy" decoding="async" draggable="false" oncontextmenu="return false" style="-webkit-touch-callout:none;-webkit-user-select:none;user-select:none;" onload="coverPhotoLoaded(this)" onerror="replaceBrokenCardCover(this,'${kind}')">`;
 }
 function progressSealHtml(stageIdx){
   if(stageIdx<1) return '';
@@ -31485,6 +31497,7 @@ function schedulePhotoHydration(type, entries){
     const img=card.querySelector('.card-cover-img');
     if(img){
       img.loading='eager';
+      watchCoverImage(img,isMountain?'mountain':'temple');
       try{img.fetchPriority='auto';}catch(_){ }
     }
   });
@@ -31493,6 +31506,8 @@ function schedulePhotoHydration(type, entries){
     photoHydrationObserver=new IntersectionObserver(items=>{
       items.forEach(it=>{
         if(it.isIntersecting){
+          const img=it.target.querySelector('.card-cover-img');
+          if(img){img.loading='eager';watchCoverImage(img,isMountain?'mountain':'temple');}
           queueOne(it.target.dataset.id);
           photoHydrationObserver.unobserve(it.target);
         }
@@ -31530,10 +31545,12 @@ function patchVisibleCover(id,url,kind,name){
   img.style.webkitTouchCallout='none';
   img.style.webkitUserSelect='none';
   img.style.userSelect='none';
+  img.onload=()=>coverPhotoLoaded(img);
   img.onerror=()=>replaceBrokenCardCover(img,kind);
   if(oldImg)oldImg.replaceWith(img);
   else if(ph)ph.replaceWith(img);
   else photo.prepend(img);
+  watchCoverImage(img,kind);
   }
 }
 function debouncedRender(){
@@ -32447,11 +32464,12 @@ function renderAutoCoverPhotos(wrapId,d){
     <div class="auto-photo-item">
       <div class="slide auto-photo-slide" onclick='openLightbox(${JSON.stringify(urls)},${i},${JSON.stringify(meta)})'>
         ${lotusPlaceholderHtml('사진 불러오는 중')}
-        <img src="${escapeAttr(url)}" alt="${escapeAttr(d.name||'사찰 사진')}" loading="lazy" draggable="false" oncontextmenu="return false" style="-webkit-touch-callout:none;-webkit-user-select:none;user-select:none;"
-          onload="this.classList.add('loaded')" onerror="handleCoverPhotoError(this,'${kind}')">
+        <img src="${escapeAttr(url)}" alt="${escapeAttr(d.name||'사찰 사진')}" loading="eager" draggable="false" oncontextmenu="return false" style="-webkit-touch-callout:none;-webkit-user-select:none;user-select:none;"
+          onload="coverPhotoLoaded(this)" onerror="handleCoverPhotoError(this,'${kind}')">
       </div>
       ${photoCreditHtml(meta[i],i)}
     </div>`).join('');
+  wrap.querySelectorAll('img').forEach(img=>watchCoverImage(img,kind));
 }
 function renderCoverPhotos(d){ renderAutoCoverPhotos('dCoverPhotos', d); }
 function renderMountainCoverPhotos(d){ renderAutoCoverPhotos('mCoverPhotos', d); }
