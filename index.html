@@ -31289,26 +31289,90 @@ function isLikelyValidPhotoUrl(u){
   if(!s) return false;
   return /^https?:\/\//i.test(s) || /^data:image\//i.test(s);
 }
+// Only successful images are cached; a failed URL is retried after a short cooldown.
+const failedCoverUrls=new Map();
+const coverImageChecks=new Map();
+function usableCoverUrl(url){
+  if(!isLikelyValidPhotoUrl(url))return false;
+  const failedAt=failedCoverUrls.get(url);
+  if(failedAt && Date.now()-failedAt<5*60*1000)return false;
+  failedCoverUrls.delete(url);
+  return true;
+}
+function coverPhotoCacheKey(d){return JSON.stringify([d.name||'',d.region||'',d.locationHint||'']);}
+function readCoverPhotoCache(d){
+  try{
+    const cache=JSON.parse(localStorage.getItem('sansaCoverPhotos_v1')||'{}');
+    const entry=cache[coverPhotoCacheKey(d)];
+    if(entry&&entry.version===PHOTO_SCHEMA_VERSION&&Date.now()-entry.at<7*24*60*60*1000)return entry.items;
+  }catch(_){}
+  return [];
+}
+function rememberCoverPhotos(d,items){
+  try{
+    const cache=JSON.parse(localStorage.getItem('sansaCoverPhotos_v1')||'{}');
+    cache[coverPhotoCacheKey(d)]={at:Date.now(),version:PHOTO_SCHEMA_VERSION,items};
+    const recent=Object.entries(cache).sort((a,b)=>b[1].at-a[1].at).slice(0,150);
+    localStorage.setItem('sansaCoverPhotos_v1',JSON.stringify(Object.fromEntries(recent)));
+  }catch(_){}
+}
+function coverPhotoCandidates(d){
+  if(!d)return [];
+  const photos=d.photos||{};
+  const ordered=(d.photoOrder||[]).map(id=>photos[id]?.url);
+  return [...new Set([...ordered,...Object.values(photos).reverse().map(p=>p?.url),...(d.coverPhotos||[])])].filter(usableCoverUrl);
+}
+function checkCoverImage(url){
+  if(!usableCoverUrl(url))return Promise.resolve(false);
+  if(coverImageChecks.has(url))return coverImageChecks.get(url);
+  const check=new Promise(resolve=>{
+    const image=new Image();let timer;
+    const finish=ok=>{clearTimeout(timer);image.onload=image.onerror=null;if(!ok)failedCoverUrls.set(url,Date.now());resolve(ok);};
+    image.onload=()=>finish(image.naturalWidth>0);
+    image.onerror=()=>finish(false);
+    timer=setTimeout(()=>finish(false),5000);
+    image.src=url;
+  });
+  coverImageChecks.set(url,check);
+  check.then(ok=>{if(!ok)coverImageChecks.delete(url);});
+  return check;
+}
+function handleCoverPhotoError(img,kind){
+  const failed=img.getAttribute('src');
+  if(failed){failedCoverUrls.set(failed,Date.now());coverImageChecks.delete(failed);}
+  const card=img.closest('.card[data-id]');
+  const detailId=kind==='mountain'?currentMountainDetailId:currentDetailId;
+  const store=kind==='mountain'?mountainDestinations:destinations;
+  const id=card?.dataset.id||detailId;
+  const place=store[id];
+  const next=card&&place&&coverPhotoCandidates(place)[0];
+  if(next){img.src=next;return;}
+  const holder=img.parentElement;
+  img.remove();
+  let placeholder=holder?.querySelector('.cover-placeholder');
+  if(holder&&!placeholder){holder.insertAdjacentHTML('afterbegin',kind==='mountain'?mountainPlaceholderHtml():lotusPlaceholderHtml());placeholder=holder.querySelector('.cover-placeholder');}
+  if(placeholder){placeholder.setAttribute('aria-label','사진을 불러오지 못했어요');const label=placeholder.querySelector('span');if(label)label.textContent='사진을 불러오지 못했어요';if(!card){const retry=document.createElement('button');retry.type='button';retry.className='btn btn-ghost';retry.textContent='사진 다시 불러오기';retry.onclick=event=>{event.stopPropagation();retryDetailCoverPhotos(kind);};placeholder.appendChild(retry);}}
+  if(place&&!coverFetching.has(id)){
+    const last=Number(place.coverPhotoLastChecked)||0;
+    if(Date.now()-last>60000)queuePhotoFetch(id,place.name,place.locationHint||'',kind==='mountain'?{store,updateFn:updateMountainDestination,getCurrentId:()=>currentMountainDetailId,onDetailUpdate:renderMountainCoverPhotos}:{region:place.region});
+  }
+}
+function retryDetailCoverPhotos(kind){
+  const mountain=kind==='mountain';
+  const store=mountain?mountainDestinations:destinations;
+  const id=mountain?currentMountainDetailId:currentDetailId;
+  const place=store[id];if(!place||coverFetching.has(id))return;
+  place.coverPhotoStatus='searching';
+  queuePhotoFetch(id,place.name,place.locationHint||'',mountain?{store,updateFn:updateMountainDestination,getCurrentId:()=>currentMountainDetailId,onDetailUpdate:renderMountainCoverPhotos}:{region:place.region});
+}
+
 function firstPhotoUrl(d){
-  if(d.photos){
-    // 사용자가 사진 순서를 직접 바꿔뒀다면(photoOrder), 맨 앞으로 옮긴 사진을
-    // 대표 사진으로 우선 사용합니다 — "이 사진을 대표로 하고 싶다"는 의도를 반영.
-    if(Array.isArray(d.photoOrder) && d.photoOrder.length){
-      const byOrder = d.photoOrder.map(pid=>d.photos[pid]).filter(p=>isLikelyValidPhotoUrl(p&&p.url));
-      if(byOrder.length) return byOrder[0].url;
-    }
-    // 순서를 안 바꿨다면 최근 것부터 살펴보되, 비어있거나 이상한 값(깨진 URL)이면 건너뛰고
-    // 그다음으로 최근인 사진이나 자동으로 찾아둔 대표 사진으로 대신합니다.
-    // (예전엔 마지막 사진의 url이 비어있으면 그 값을 그대로 반환해서
-    //  깨진 이미지 아이콘이 뜨는 원인이 됐습니다.)
-    const arr = Object.values(d.photos).filter(p=>isLikelyValidPhotoUrl(p&&p.url));
-    if(arr.length) return arr[arr.length-1].url;
+  if(!d)return null;
+  if(!(d.coverPhotos||[]).some(usableCoverUrl)){
+    const cached=readCoverPhotoCache(d).filter(item=>usableCoverUrl(item.url));
+    if(cached.length){d.coverPhotos=cached.map(x=>x.url);d.coverPhotoMeta=cached;d.coverPhotoVersion=PHOTO_SCHEMA_VERSION;d.coverPhotoStatus='verified';}
   }
-  if(d.coverPhotos && d.coverPhotos.length){
-    const valid = d.coverPhotos.find(isLikelyValidPhotoUrl);
-    if(valid) return valid;
-  }
-  return null;
+  return coverPhotoCandidates(d)[0]||null;
 }
 
 function lotusPlaceholderHtml(label='사진 확인 중'){
@@ -31341,14 +31405,13 @@ function mountainPlaceholderHtml(label='사진 확인 중'){
 }
 function replaceBrokenCardCover(img,kind){
   if(!img)return;
-  const html=kind==='mountain'?mountainPlaceholderHtml('산 풍경 준비 중'):lotusPlaceholderHtml('사찰 사진 준비 중');
-  img.outerHTML=html;
+  handleCoverPhotoError(img,kind);
 }
 function cardCoverMedia(photo, kind, name){
   const placeholder = kind==='mountain' ? mountainPlaceholderHtml('산 풍경 준비 중') : lotusPlaceholderHtml('사찰 사진 준비 중');
   if(!photo) return placeholder;
-  return `<img class="card-cover-img loaded stable-cover" src="${escapeAttr(photo)}" alt="${escapeAttr(name||'')}"
-    loading="lazy" decoding="async" draggable="false" oncontextmenu="return false" style="-webkit-touch-callout:none;-webkit-user-select:none;user-select:none;" onerror="replaceBrokenCardCover(this,'${kind}')">`;
+  return placeholder+`<img class="card-cover-img stable-cover" src="${escapeAttr(photo)}" alt="${escapeAttr(name||'')}"
+    loading="lazy" decoding="async" draggable="false" oncontextmenu="return false" style="-webkit-touch-callout:none;-webkit-user-select:none;user-select:none;" onload="this.classList.add('loaded')" onerror="replaceBrokenCardCover(this,'${kind}')">`;
 }
 function progressSealHtml(stageIdx){
   if(stageIdx<1) return '';
@@ -31359,8 +31422,9 @@ function progressSealHtml(stageIdx){
 }
 
 const PHOTO_SCHEMA_VERSION = 9; // v9: 대표사진 오매칭 방지 + 모든 사찰의 오래된 자동사진 재검증
-const PHOTO_RETRY_COOLDOWN_MS = 6*60*60*1000; // 사진을 못 찾은 곳은 사흘 지나야 다시 시도 (매 렌더마다 재시도해서 화면이 깜빡이는 것을 막기 위함)
+const PHOTO_RETRY_COOLDOWN_MS = 6*60*60*1000; // 사진을 못 찾은 곳은 6시간 지나야 다시 시도 (매 렌더마다 재시도해서 화면이 깜빡이는 것을 막기 위함)
 function shouldSkipPhotoRetry(d){
+  if(d?.coverPhotoStatus==='temporary-error')return Date.now()-(d.coverPhotoLastChecked||0)<60000;
   if(!d || d.coverPhotoStatus!=='not-found') return false;
   // 매칭 기준(PHOTO_SCHEMA_VERSION)이 바뀐 뒤라면, 예전 기준으로 "못 찾음" 판정을 받은
   // 것이어도 쿨다운을 무시하고 새 기준으로 다시 시도합니다. 같은 기준으로 이미
@@ -31375,7 +31439,7 @@ let photoFetchQueue = [];
 let photoQueueGeneration = 0;
 let photoHydrationObserver = null;
 let activePhotoFetches = 0;
-const MAX_CONCURRENT_PHOTO_FETCHES = 8;
+const MAX_CONCURRENT_PHOTO_FETCHES = 4;
 
 function queuePhotoFetch(id, name, locationHint, opts){
   if(coverFetching.has(id)) return;
@@ -31408,7 +31472,7 @@ function schedulePhotoHydration(type, entries){
     if(photo) return;
     if(coverFetching.has(id)||shouldSkipPhotoRetry(d))return;
     const opts=isMountain
-      ? {store:mountainDestinations,updateFn:updateMountainDestination,getCurrentId:()=>currentMountainDetailId,onDetailUpdate:()=>{},region:d.region,cancelOnTabChange:true,generation:gen}
+      ? {store:mountainDestinations,updateFn:updateMountainDestination,getCurrentId:()=>currentMountainDetailId,onDetailUpdate:renderMountainCoverPhotos,region:d.region,cancelOnTabChange:true,generation:gen}
       : {region:d.region,cancelOnTabChange:true,generation:gen};
     queuePhotoFetch(id,d.name,d.locationHint||'',opts);
   };
@@ -31417,11 +31481,11 @@ function schedulePhotoHydration(type, entries){
 
   // 이미 대표사진 URL이 있는 첫 화면 카드들은 브라우저의 lazy 판단을 기다리지 않고 즉시 요청합니다.
   // 나머지 카드는 그대로 lazy 로딩해서 전체 네트워크 부담은 늘리지 않습니다.
-  cards.slice(0,8).forEach(card=>{
+  cards.slice(0,4).forEach(card=>{
     const img=card.querySelector('.card-cover-img');
     if(img){
       img.loading='eager';
-      try{img.fetchPriority='high';}catch(_){ }
+      try{img.fetchPriority='auto';}catch(_){ }
     }
   });
 
@@ -31433,15 +31497,15 @@ function schedulePhotoHydration(type, entries){
           photoHydrationObserver.unobserve(it.target);
         }
       });
-    },{rootMargin:'1000px 0px'});
+    },{rootMargin:'350px 0px'});
     cards.forEach(c=>photoHydrationObserver.observe(c));
   }else{
     cards.slice(0,10).forEach(c=>queueOne(c.dataset.id));
   }
 
   // 사진이 아직 없는 앞쪽 카드는 idle 시간까지 기다리지 않고 바로 검색을 시작합니다.
-  // 첫 화면 체감 속도를 높이되 10곳까지만 우선 처리합니다.
-  const priority=(entries||[]).filter(([id,d])=>!firstPhotoUrl(d)).slice(0,10);
+  // 첫 화면 체감 속도를 높이되 4곳까지만 우선 처리합니다.
+  const priority=(entries||[]).filter(([id,d])=>!firstPhotoUrl(d)).slice(0,4);
   const kick=()=>{
     if(gen!==photoQueueGeneration||contentType!==type) return;
     priority.forEach(([id])=>queueOne(id));
@@ -31452,9 +31516,10 @@ function schedulePhotoHydration(type, entries){
 function patchVisibleCover(id,url,kind,name){
   if(!isLikelyValidPhotoUrl(url))return;
   const cards=[...document.querySelectorAll('.card[data-id]')];
-  const card=cards.find(x=>x.dataset.id===String(id));
+  const matches=cards.filter(x=>x.dataset.id===String(id));
+  for(const card of matches){
   const photo=card?.querySelector('.card-photo');
-  if(!photo)return;
+  if(!photo)continue;
   const oldImg=photo.querySelector('.card-cover-img');
   const ph=photo.querySelector('.cover-placeholder');
   const img=document.createElement('img');
@@ -31469,6 +31534,7 @@ function patchVisibleCover(id,url,kind,name){
   if(oldImg)oldImg.replaceWith(img);
   else if(ph)ph.replaceWith(img);
   else photo.prepend(img);
+  }
 }
 function debouncedRender(){
   clearTimeout(renderDebounceTimer);
@@ -31503,10 +31569,43 @@ function fetchCoverPhotoNow(id, name, locationHint, opts, done){
   const oldUrls = Array.isArray(place.coverPhotos) ? place.coverPhotos.slice() : [];
   const oldMeta = Array.isArray(place.coverPhotoMeta) ? place.coverPhotoMeta.slice() : [];
   let finished = false;
+  let networkFailed=false;
+  const controllers=new Set();
+  const searchDeadline=setTimeout(()=>saveResults([]),25000);
+  async function fetchPhotoJson(url,options={}){
+    const controller=new AbortController();controllers.add(controller);
+    const timer=setTimeout(()=>controller.abort(),5000);
+    try{
+      const response=await fetch(url,{...options,signal:controller.signal});
+      if(!response.ok)throw new Error('photo provider '+response.status);
+      return await response.json();
+    }catch(error){if(!finished)networkFailed=true;throw error;}
+    finally{clearTimeout(timer);controllers.delete(controller);}
+  }
+  async function loadableCandidates(items){
+    const candidates=(items||[]).filter(x=>x&&usableCoverUrl(x.url)).slice(0,3);
+    const valid=await Promise.all(candidates.map(async item=>await checkCoverImage(item.url)?item:null));
+    const loaded=valid.filter(Boolean);
+    if(candidates.length&&!loaded.length)networkFailed=true;
+    return loaded;
+  }
 
+  function persistPhotoPatch(patch){
+    Object.assign(store[id],patch);
+    try{
+      // Hydrate existing cards instead of rebuilding every card for each image.
+      if(localMode){if(isMountain)persistLocalMountains();else persistLocal();}
+      else updateFn(id,patch);
+    }catch(error){console.warn('사진 정보 저장을 다시 확인해주세요.',error);}
+  }
+  function refreshDetail(){
+    if(getCurrentId()===id){try{onDetailUpdate(store[id]);}catch(error){console.warn('사진 화면 갱신 실패',error);}}
+  }
   function finish(){
     if(finished) return;
     finished = true;
+    clearTimeout(searchDeadline);
+    controllers.forEach(controller=>controller.abort());
     coverFetching.delete(id);
     if(done) done();
   }
@@ -31592,14 +31691,16 @@ function fetchCoverPhotoNow(id, name, locationHint, opts, done){
     if(unique.length && store[id]){
       const urls=unique.map(x=>x.url);
       if(isMountain) suppressNextMountainRender=true; else suppressNextDestinationRender=true;
-      updateFn(id,{coverPhotos:urls,coverPhotoMeta:unique,coverPhotoVersion:PHOTO_SCHEMA_VERSION,coverPhotoStatus:'verified'});
+      persistPhotoPatch({coverPhotos:urls,coverPhotoMeta:unique,coverPhotoVersion:PHOTO_SCHEMA_VERSION,coverPhotoStatus:'verified',coverPhotoLastChecked:Date.now()});
       store[id].coverPhotos=urls;
       store[id].coverPhotoMeta=unique;
       store[id].coverPhotoVersion=PHOTO_SCHEMA_VERSION;
       store[id].coverPhotoStatus='verified';
+      store[id].coverPhotoLastChecked=Date.now();
+      rememberCoverPhotos(store[id],unique);
       patchVisibleCover(id,urls[0],isMountain?'mountain':'temple',name);
       debouncedRender();
-      if(getCurrentId()===id) onDetailUpdate(store[id]);
+      refreshDetail();
       finish(); return;
     }
 
@@ -31607,10 +31708,10 @@ function fetchCoverPhotoNow(id, name, locationHint, opts, done){
     // 이전 버전에서 잘못 매칭된 자동 사진은 계속 남겨 두지 않고 비워서
     // 엉뚱한 사진 대신 안전한 플레이스홀더가 보이게 합니다.
     if(store[id]){
-      const oldWasVerifiedCurrent = place.coverPhotoVersion===PHOTO_SCHEMA_VERSION && oldUrls.length>0;
+      const oldWasVerifiedCurrent = place.coverPhotoVersion===PHOTO_SCHEMA_VERSION && oldUrls.some(usableCoverUrl);
       const patch={
         coverPhotoVersion:PHOTO_SCHEMA_VERSION,
-        coverPhotoStatus:oldWasVerifiedCurrent?'kept-old':'not-found',
+        coverPhotoStatus:oldWasVerifiedCurrent?'kept-old':networkFailed?'temporary-error':'not-found',
         coverPhotoLastChecked:Date.now()
       };
       if(!oldWasVerifiedCurrent){
@@ -31618,9 +31719,8 @@ function fetchCoverPhotoNow(id, name, locationHint, opts, done){
         patch.coverPhotoMeta=[];
       }
       if(isMountain) suppressNextMountainRender=true; else suppressNextDestinationRender=true;
-      updateFn(id,patch);
-      Object.assign(store[id],patch);
-      if(getCurrentId()===id) onDetailUpdate(store[id]);
+      persistPhotoPatch(patch);
+      refreshDetail();
     }
     finish();
   }
@@ -31628,8 +31728,8 @@ function fetchCoverPhotoNow(id, name, locationHint, opts, done){
   function imageInfo(titles, cb, sourceType, trustedArticle=false){
     titles=(titles||[]).filter(Boolean).slice(0,50);
     if(!titles.length){cb([]);return;}
-    const url='https://commons.wikimedia.org/w/api.php?action=query&prop=imageinfo&iiprop=url|mime|extmetadata&iiurlwidth=900&format=json&origin=*&titles='+encodeURIComponent(titles.join('|'));
-    fetch(url).then(r=>r.json()).then(data=>{
+    const url='https://commons.wikimedia.org/w/api.php?action=query&prop=imageinfo&iiprop=url|mime|extmetadata&iiurlwidth=640&format=json&origin=*&titles='+encodeURIComponent(titles.join('|'));
+    fetchPhotoJson(url).then(data=>{
       const pages=Object.values(data?.query?.pages||{});
       const items=pages.map(p=>({p,s:scorePage(p,trustedArticle)}))
         .filter(x=>x.s>0).sort((a,b)=>b.s-a.s)
@@ -31641,8 +31741,8 @@ function fetchCoverPhotoNow(id, name, locationHint, opts, done){
   function exactWikipediaPage(cb){
     const base=coreName(name);
     const exactTitle=WIKI_TITLE_HINTS[name]||base;
-    const exactUrl=`https://ko.wikipedia.org/w/api.php?action=query&titles=${encodeURIComponent(exactTitle)}&prop=pageimages|images|info|pageprops&ppprop=disambiguation&imlimit=100&pithumbsize=900&piprop=thumbnail|original|name&inprop=url&redirects=1&format=json&origin=*`;
-    fetch(exactUrl).then(r=>r.json()).then(data=>{
+    const exactUrl=`https://ko.wikipedia.org/w/api.php?action=query&titles=${encodeURIComponent(exactTitle)}&prop=pageimages|images|info|pageprops&ppprop=disambiguation&imlimit=100&pithumbsize=640&piprop=thumbnail|original|name&inprop=url&redirects=1&format=json&origin=*`;
+    fetchPhotoJson(exactUrl).then(data=>{
       let pages=Object.values(data?.query?.pages||{}).filter(p=>!p.missing);
       const page=pages[0];
       // "갑사"처럼 절 이름이 흔한 단어와 겹쳐서 위키백과에서 동음이의어 문서로
@@ -31652,8 +31752,8 @@ function fetchCoverPhotoNow(id, name, locationHint, opts, done){
       const isDisambiguation = page && (page.pageprops && 'disambiguation' in page.pageprops) || /동음이의|목록|분류:/.test((page&&page.title)||'');
       if(page && !isDisambiguation && compact(page.title).includes(compact(base))){cb(page);return;}
       const q=`${base} ${queryHint||''} ${isMountain?'산':'사찰'}`.trim();
-      const searchUrl=`https://ko.wikipedia.org/w/api.php?action=query&generator=search&gsrsearch=${encodeURIComponent(q)}&gsrlimit=8&prop=pageimages|images|info&imlimit=80&pithumbsize=900&piprop=thumbnail|original|name&inprop=url&format=json&origin=*`;
-      return fetch(searchUrl).then(r=>r.json()).then(sd=>{
+      const searchUrl=`https://ko.wikipedia.org/w/api.php?action=query&generator=search&gsrsearch=${encodeURIComponent(q)}&gsrlimit=8&prop=pageimages|images|info&imlimit=80&pithumbsize=640&piprop=thumbnail|original|name&inprop=url&format=json&origin=*`;
+      return fetchPhotoJson(searchUrl).then(sd=>{
         const bc=compact(base);
         let candidates=Object.values(sd?.query?.pages||{}).filter(p=>bc&&compact(p.title).includes(bc)&&!/동음이의|목록|분류:/.test(p.title||''));
         const toks=meaningfulHintTokens(strictHint||queryHint);
@@ -31692,8 +31792,8 @@ function fetchCoverPhotoNow(id, name, locationHint, opts, done){
   }
 
   function commonsSearch(q, cb){
-    const url=`https://commons.wikimedia.org/w/api.php?action=query&generator=search&gsrsearch=${encodeURIComponent(q)}&gsrnamespace=6&gsrlimit=40&prop=imageinfo&iiprop=url|mime|extmetadata&iiurlwidth=900&format=json&origin=*`;
-    fetch(url).then(r=>r.json()).then(data=>{
+    const url=`https://commons.wikimedia.org/w/api.php?action=query&generator=search&gsrsearch=${encodeURIComponent(q)}&gsrnamespace=6&gsrlimit=40&prop=imageinfo&iiprop=url|mime|extmetadata&iiurlwidth=640&format=json&origin=*`;
+    fetchPhotoJson(url).then(data=>{
       const pages=Object.values(data?.query?.pages||{});
       const items=pages.map(p=>({p,s:scorePage(p,false)}))
         .filter(x=>x.s>0).sort((a,b)=>b.s-a.s)
@@ -31704,8 +31804,7 @@ function fetchCoverPhotoNow(id, name, locationHint, opts, done){
 
   function openverseSearch(q, cb){
     const url=`https://api.openverse.org/v1/images/?q=${encodeURIComponent(q)}&page_size=12`;
-    fetch(url,{headers:{'Accept':'application/json'}})
-      .then(r=>r.ok?r.json():Promise.reject(new Error('openverse '+r.status)))
+    fetchPhotoJson(url,{headers:{'Accept':'application/json'}})
       .then(data=>{
         const core=compact(coreName(name));
         const allowed=new Set(['cc0','by','by-sa','pdm']);
@@ -31763,7 +31862,8 @@ function fetchCoverPhotoNow(id, name, locationHint, opts, done){
   let firstRoundPending=3;
   let fallbackStarted=false;
 
-  function firstRoundDone(items){
+  async function firstRoundDone(items){
+    items=await loadableCandidates(items);
     if(finished) return;
     if(items && items.length){
       saveResults(items);
@@ -31780,7 +31880,8 @@ function fetchCoverPhotoNow(id, name, locationHint, opts, done){
     const q3=isMountain?`${base} landscape Korea`:`${base} temple architecture Korea`;
     let pending=2;
     let gathered=[];
-    const doneFallback=(items)=>{
+    const doneFallback=async(items)=>{
+      items=await loadableCandidates(items);
       if(finished) return;
       if(items && items.length){
         gathered=gathered.concat(items);
@@ -31809,7 +31910,7 @@ function fetchCoverPhotoNow(id, name, locationHint, opts, done){
         }
       : null;
     if(directHero){
-      saveResults([directHero]);
+      firstRoundDone([directHero]);
       return;
     }
     trustedArticlePhotos(page,firstRoundDone);
@@ -32334,19 +32435,20 @@ function photoCreditHtml(m, i){
 }
 function renderAutoCoverPhotos(wrapId,d){
   const wrap=document.getElementById(wrapId);if(!wrap)return;
-  const urls=d.coverPhotos||[];
+  const kind=wrapId==='mCoverPhotos'?'mountain':'temple';
+  const urls=(d.coverPhotos||[]).filter(usableCoverUrl);
   if(urls.length===0){
     const q=encodeURIComponent((d.name||'')+' 국가유산');
-    wrap.innerHTML=`<div class="auto-photo-empty">${lotusPlaceholderHtml('사진을 확인하고 있어요')}<div><b>정확한 사진을 우선 확인해요.</b><span>Wikipedia·Wikimedia Commons·Openverse의 재사용 가능한 사진을 빠르게 찾고 있어요.</span><a class="heritage-photo-link" href="https://www.heritage.go.kr/heri/cul/culSelectViewList.do?searchCondition=${q}" target="_blank" rel="noopener">국가유산포털에서도 사진 확인 ↗</a></div></div>`;
+    wrap.innerHTML=`<div class="auto-photo-empty">${kind==='mountain'?mountainPlaceholderHtml('산 사진 준비 중'):lotusPlaceholderHtml('사찰 사진 준비 중')}<div><b>사진을 준비하고 있어요.</b><span>연결이 느리거나 사진이 없을 수 있어요. 다시 불러올 수 있습니다.</span><button type="button" class="btn btn-ghost" onclick="retryDetailCoverPhotos('${kind}')">사진 다시 불러오기</button><a class="heritage-photo-link" href="https://www.heritage.go.kr/heri/cul/culSelectViewList.do?searchCondition=${q}" target="_blank" rel="noopener">국가유산포털에서도 사진 확인 ↗</a></div></div>`;
     return;
   }
-  const meta=d.coverPhotoMeta||[];
+  const meta=urls.map(url=>(d.coverPhotoMeta||[]).find(m=>m.url===url)||(d.coverPhotoMeta||[])[(d.coverPhotos||[]).indexOf(url)]||{});
   wrap.innerHTML=urls.map((url,i)=>`
     <div class="auto-photo-item">
       <div class="slide auto-photo-slide" onclick='openLightbox(${JSON.stringify(urls)},${i},${JSON.stringify(meta)})'>
         ${lotusPlaceholderHtml('사진 불러오는 중')}
         <img src="${escapeAttr(url)}" alt="${escapeAttr(d.name||'사찰 사진')}" loading="lazy" draggable="false" oncontextmenu="return false" style="-webkit-touch-callout:none;-webkit-user-select:none;user-select:none;"
-          onload="this.classList.add('loaded')" onerror="this.remove()">
+          onload="this.classList.add('loaded')" onerror="handleCoverPhotoError(this,'${kind}')">
       </div>
       ${photoCreditHtml(meta[i],i)}
     </div>`).join('');
