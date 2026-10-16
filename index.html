@@ -41184,6 +41184,12 @@ body.sansa-catalog-active{
     if(Number.isFinite(baseLat)&&Number.isFinite(baseLng))return {lat:baseLat,lng:baseLng,label:'기존 사찰 기준점',source:'fallback'};
     return null;
   }
+  function distanceM(pos,temple){
+    return haversineKm(
+      Number(pos.coords.latitude),Number(pos.coords.longitude),
+      Number(temple.lat),Number(temple.lng)
+    )*1000;
+  }
   function fmtDist(m){m=Math.max(0,Number(m)||0);return m<1000?`${Math.round(m)}m`:`${(m/1000).toFixed(1)}km`;}
   /* 주변 절 찾기에서는 예전에 DB에 저장된 d.lat/d.lng를 신뢰하지 않는다.
      과거 동명이 사찰 자동매칭으로 잘못 저장된 좌표가 있을 수 있기 때문.
@@ -41342,26 +41348,74 @@ body.sansa-catalog-active{
     }catch(e){return null;}
   }
 
+  const fieldRequest = typeof window.requestFieldPositionNow === 'function' ? window.requestFieldPositionNow : null;
+  function rememberPosition(pos){
+    try{
+      if(pos && pos.coords){
+        window.__sansaLastGeoPosition = pos;
+        window.__sansaLastGeoAt = Date.now();
+        if(typeof saveNearbyLastPosition === 'function') saveNearbyLastPosition(pos);
+      }
+    }catch(e){}
+    return pos;
+  }
   function requestNearbyPosition(){
     return new Promise((resolve,reject)=>{
-      if(!navigator.geolocation){reject({code:98,message:'geolocation-not-supported'});return;}
-      let settled=false, coarseBackup=null, lastErr=null;
-      const ok=pos=>{if(settled||!pos||!pos.coords)return;settled=true;try{saveNearbyLastPosition(pos);}catch(e){}window.__sansaLastGeoPosition=pos;window.__sansaLastGeoAt=Date.now();resolve(pos);};
-      const fail=err=>{if(settled)return;settled=true;reject(err||lastErr||{code:3,message:'timeout'});};
-      const mem=(window.__sansaLastGeoPosition&&Date.now()-Number(window.__sansaLastGeoAt||0)<30*60*1000)?window.__sansaLastGeoPosition:null;
-      if(mem&&mem.coords&&Number.isFinite(Number(mem.coords.latitude))&&Number.isFinite(Number(mem.coords.longitude))){ok(mem);return;}
+      if(!navigator.geolocation){ reject({code:98,message:'geolocation-not-supported'}); return; }
+      let settled=false;
+      let pending=2+(fieldRequest?1:0);
+      let lastErr=null;
+      const cached = (typeof readNearbyLastPosition === 'function') ? readNearbyLastPosition(6*60*60*1000) : null;
+      const finish = (fn,val)=>{ if(settled) return; settled=true; fn(val); };
+      const accept = pos => {
+        if(!pos || !pos.coords) return;
+        const lat=Number(pos.coords.latitude), lng=Number(pos.coords.longitude);
+        if(!Number.isFinite(lat) || !Number.isFinite(lng)) return;
+        finish(resolve, rememberPosition(pos));
+      };
+      const failOne = err => {
+        lastErr = err || lastErr;
+        pending = Math.max(0,pending-1);
+        if(err && Number(err.code)===1){ finish(reject,err); return; }
+        if(!settled && pending===0){
+          if(cached) accept(cached);
+          else finish(reject,lastErr || {code:3,message:'timeout'});
+        }
+      };
+
       try{
-        navigator.geolocation.getCurrentPosition(pos=>{if(settled||!pos||!pos.coords)return;coarseBackup=pos;const acc=Math.max(0,Number(pos.coords.accuracy)||99999);if(acc<=1500)ok(pos);},err=>{lastErr=err||lastErr;if(err&&err.code===1)fail(err);},{enableHighAccuracy:false,maximumAge:15*60*1000,timeout:10000});
-      }catch(e){lastErr=e;}
-      (async()=>{
-        try{if(typeof requestFieldPositionNow==='function'){const pos=await requestFieldPositionNow();if(!settled)ok(pos);return;}}catch(err){lastErr=err||lastErr;if(err&&err.code===1){fail(err);return;}}
-        if(!settled&&coarseBackup){ok(coarseBackup);return;}
-        const cached=readNearbyLastPosition(30*60*1000);if(!settled&&cached){ok(cached);return;}
-        if(!settled)fail(lastErr||{code:3,message:'timeout'});
-      })();
-      setTimeout(()=>{if(settled)return;if(coarseBackup){ok(coarseBackup);return;}const cached=readNearbyLastPosition(30*60*1000);if(cached){ok(cached);return;}fail(lastErr||{code:3,message:'timeout'});},30000);
+        const mem = window.__sansaLastGeoPosition;
+        if(mem && Date.now()-Number(window.__sansaLastGeoAt||0) < 60*60*1000){ accept(mem); return; }
+      }catch(e){}
+
+      try{
+        navigator.geolocation.getCurrentPosition(
+          pos=>accept(pos),
+          err=>failOne(err),
+          {enableHighAccuracy:false, maximumAge:60*60*1000, timeout:12000}
+        );
+      }catch(e){ failOne({code:97,message:String(e&&e.message||e)}); }
+
+      try{
+        navigator.geolocation.getCurrentPosition(
+          pos=>accept(pos),
+          err=>failOne(err),
+          {enableHighAccuracy:true, maximumAge:0, timeout:22000}
+        );
+      }catch(e){ failOne({code:97,message:String(e&&e.message||e)}); }
+
+      if(fieldRequest){
+        Promise.resolve().then(()=>fieldRequest()).then(pos=>accept(pos)).catch(err=>failOne(err));
+      }
+
+      setTimeout(()=>{
+        if(settled) return;
+        if(cached) accept(cached);
+        else finish(reject,lastErr || {code:3,message:'timeout'});
+      }, 24000);
     });
   }
+
 
   function renderNearbyPositionFailure(err){
     const b=document.getElementById('nearbyTempleBody');
@@ -41963,98 +42017,7 @@ body.sansa-catalog-active{
 
 
 
-<script id="sansa-nearby-gps-hard-fix-20261015">
-/* ===== USER FIX: nearby temple finder should reuse the same GPS style more robustly ===== */
-(function(){
-  const fieldRequest = typeof window.requestFieldPositionNow === 'function' ? window.requestFieldPositionNow : null;
-  function rememberPosition(pos){
-    try{
-      if(pos && pos.coords){
-        window.__sansaLastGeoPosition = pos;
-        window.__sansaLastGeoAt = Date.now();
-        if(typeof saveNearbyLastPosition === 'function') saveNearbyLastPosition(pos);
-      }
-    }catch(e){}
-    return pos;
-  }
-  window.requestNearbyPosition = function(){
-    return new Promise((resolve,reject)=>{
-      if(!navigator.geolocation){ reject({code:98,message:'geolocation-not-supported'}); return; }
-      let settled=false;
-      let pending=0;
-      let lastErr=null;
-      const cached = (typeof readNearbyLastPosition === 'function') ? readNearbyLastPosition(6*60*60*1000) : null;
-      const finish = (fn,val)=>{ if(settled) return; settled=true; fn(val); };
-      const accept = pos => {
-        if(!pos || !pos.coords) return;
-        const lat=Number(pos.coords.latitude), lng=Number(pos.coords.longitude);
-        if(!Number.isFinite(lat) || !Number.isFinite(lng)) return;
-        finish(resolve, rememberPosition(pos));
-      };
-      const failOne = err => {
-        lastErr = err || lastErr;
-        pending = Math.max(0,pending-1);
-        if(err && Number(err.code)===1){ finish(reject,err); return; }
-        if(!settled && pending===0){
-          if(cached) accept(cached);
-          else finish(reject,lastErr || {code:3,message:'timeout'});
-        }
-      };
 
-      try{
-        const mem = window.__sansaLastGeoPosition;
-        if(mem && Date.now()-Number(window.__sansaLastGeoAt||0) < 60*60*1000){ accept(mem); return; }
-      }catch(e){}
-
-      pending++;
-      try{
-        navigator.geolocation.getCurrentPosition(
-          pos=>accept(pos),
-          err=>failOne(err),
-          {enableHighAccuracy:false, maximumAge:60*60*1000, timeout:12000}
-        );
-      }catch(e){ failOne({code:97,message:String(e&&e.message||e)}); }
-
-      pending++;
-      try{
-        navigator.geolocation.getCurrentPosition(
-          pos=>accept(pos),
-          err=>failOne(err),
-          {enableHighAccuracy:true, maximumAge:0, timeout:22000}
-        );
-      }catch(e){ failOne({code:97,message:String(e&&e.message||e)}); }
-
-      if(fieldRequest){
-        pending++;
-        Promise.resolve().then(()=>fieldRequest()).then(pos=>accept(pos)).catch(err=>failOne(err));
-      }
-
-      setTimeout(()=>{
-        if(settled) return;
-        if(cached) accept(cached);
-        else finish(reject,lastErr || {code:3,message:'timeout'});
-      }, 24000);
-    });
-  };
-
-  window.openNearbyTempleFinder = function(){
-    if(!navigator.geolocation){
-      showToast('이 브라우저는 위치 기능을 지원하지 않아요.');
-      return;
-    }
-    openOverlay();
-    renderSearching();
-    window.requestNearbyPosition().then(pos=>Promise.resolve(renderFound(pos))).catch(err=>{
-      if(err && Number(err.code)===1){
-        closeOverlay();
-        openLocationPermissionHelp(()=>window.openNearbyTempleFinder(), err);
-        return;
-      }
-      renderNearbyPositionFailure(err);
-    });
-  };
-})();
-</script>
 
 <style id="sansa-home-hero-seamless-20261016">
 /* One authoritative home-hero layout: preserve existing features and handlers. */
