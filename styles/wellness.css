@@ -1,9 +1,9 @@
 /* Storybook companion UI. Presentation only: existing IDs, handlers and storage remain authoritative. */
-.sansa-mascot{position:absolute!important;display:block!important;background:url('../images/brand/wellness/companion-poses.webp') no-repeat!important;background-size:300% 400%!important;pointer-events:none!important;z-index:2!important}
+.sansa-mascot{position:absolute!important;display:block!important;background:url('../images/brand/wellness/companion-activities-v2.webp') no-repeat!important;background-size:300% 400%!important;pointer-events:none!important;z-index:2!important}
 .sansa-mascot[data-pose=worry]{background-position:0% 0%!important}.sansa-mascot[data-pose=breathe]{background-position:50% 0%!important}.sansa-mascot[data-pose=rhythm]{background-position:100% 0%!important}
 .sansa-mascot[data-pose=write]{background-position:0% 33.333333%!important}.sansa-mascot[data-pose=explore]{background-position:50% 33.333333%!important}.sansa-mascot[data-pose=comfort]{background-position:100% 33.333333%!important}
 .sansa-mascot[data-pose=wish]{background-position:0% 66.666667%!important}.sansa-mascot[data-pose=count]{background-position:50% 66.666667%!important}.sansa-mascot[data-pose=pouch]{background-position:100% 66.666667%!important}
-.sansa-mascot[data-pose=dance],.sansa-mascot[data-pose=music]{background-size:270% 360%!important;background-position-y:100%!important;clip-path:inset(5% 0 0)}.sansa-mascot[data-pose=dance]{background-position-x:0%!important}.sansa-mascot[data-pose=music]{background-position-x:50%!important}
+.sansa-mascot[data-pose=dance],.sansa-mascot[data-pose=music]{background-size:270% 360%!important;background-position-y:100%!important;clip-path:inset(5% 5% 0 5%)}.sansa-mascot[data-pose=dance]{background-position-x:0%!important}.sansa-mascot[data-pose=music]{background-position-x:50%!important}
 .sansa-mascot[data-pose=count],.sansa-mascot[data-pose=pouch],.sansa-mascot[data-pose=wish]{clip-path:inset(0 0 5% 0)}
 .hero-utility .hero-util-icon img{width:36px;height:36px;object-fit:contain}
 .hero-experience .hip-quick-row,#funBannerWrap .fun-banner-row{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:12px!important}
@@ -19,19 +19,22 @@
 .hero-experience .hip-quick-row :is(.hq-index,.hq-icon,.hq-arrow),#funBannerWrap .fun-banner-row .fb-icon{display:none!important}
 .hero-experience .hip-quick-row .hip-quick-btn::before,#funBannerWrap .fun-banner-row button.fun-banner-btn::before{content:none!important;display:none!important}
 .hero-experience .hip-quick-row .hip-quick-btn::after,#funBannerWrap .fun-banner-row button.fun-banner-btn::after{content:'↗'!important;display:flex!important;position:absolute!important;inset:auto 9px 8px auto!important;align-items:center!important;justify-content:center!important;width:23px!important;height:23px!important;border:1px solid #fff8!important;border-radius:50%!important;background:var(--scene-accent)!important;color:#fff!important;font-size:15px!important;z-index:5!important}
-.wellness-scene{position:absolute;inset:0 0 0 auto;width:130px;overflow:hidden;pointer-events:none;z-index:0;background:linear-gradient(90deg,transparent,#fff7 75%),url('../images/brand/wellness/props/card-breath-mountain.webp') center bottom/200px auto no-repeat;mask-image:linear-gradient(90deg,transparent,#000 25%);-webkit-mask-image:linear-gradient(90deg,transparent,#000 25%)}
-.wellness-scene .scene-prop{position:absolute;inset:0;background:url('../images/brand/wellness/props/hero-blossom.webp') right top/140px auto no-repeat;opacity:.85}
-.scene-worry .scene-prop{background-image:url('../images/brand/wellness/props/card-comfort-lotus.webp');background-position:right bottom;background-size:95px}
-.scene-breathe{background-color:#d6edf1}.scene-breathe .scene-prop{background-image:url('../images/brand/wellness/props/card-feature-lotus.webp');background-position:right bottom;background-size:105px}
-.scene-rhythm{background-color:#f8e7c9}.scene-rhythm .scene-prop{background-image:url('../images/brand/wellness/props/card-moktak.webp');background-position:right bottom;background-size:98px}
-.scene-write .scene-prop{background-image:url('../images/brand/wellness/props/card-copy-brush.webp');background-size:100px;background-position:right bottom}
-.scene-explore .scene-prop{background-image:url('../images/brand/wellness/props/card-quiz-map.webp');background-size:130px;background-position:right bottom}
-.scene-comfort .scene-prop{background-image:url('../images/brand/wellness/props/card-worry-lotus.webp');background-size:100px;background-position:right bottom}
-.scene-wish{background-color:#e0dced;background-image:radial-gradient(circle at 70% 20%,#ffedb7 0 13px,transparent 14px),url('../images/brand/wellness/props/card-playlist-mountain.webp')}.scene-wish .scene-prop{background-image:url('../images/brand/wellness/props/card-vow-brush.webp');background-position:right bottom;background-size:100px}
-.scene-count .scene-prop{background-image:url('../images/brand/wellness/props/card-chant-beads.webp');background-position:right bottom;background-size:115px}
-.scene-pouch .scene-prop{background-image:url('../images/brand/wellness/props/card-amulet-paper.webp');background-position:right bottom;background-size:110px}
-.scene-dance{background-color:#e8d7f0}.scene-dance .scene-prop{background-image:url('../images/brand/wellness/props/card-shooter-ink.webp');background-size:125px;background-position:right bottom}
-.scene-music{width:55%;background-image:url('../images/brand/wellness/props/card-playlist-mountain.webp');background-size:cover}.scene-music .scene-prop{background:none;border:18px double #fff4;border-radius:50%;width:100px;height:100px;inset:18px 10px auto auto}
+/* One restrained prop per card; no repeated landscape layer. */
+.wellness-scene{position:absolute;inset:0 0 0 auto;width:130px;overflow:hidden;pointer-events:none;z-index:0;background:none}
+.wellness-scene .scene-prop{position:absolute;inset:auto 9px 14px auto;width:96px;height:35px;opacity:.55;background:none;border:0;border-radius:50%}
+.scene-worry .scene-prop{background:#dbc29d;border-bottom:3px solid #ba9468}
+.scene-breathe .scene-prop{background:radial-gradient(ellipse,#cae6df 30%,transparent 31% 45%,#acd1d54d 46% 50%,transparent 51%);transform:scaleX(1.1)}
+.scene-rhythm .scene-prop{background:#d7b886;border:2px solid #e8d3a2}
+.scene-write .scene-prop{height:40px;border-radius:3px;background:repeating-linear-gradient(#fff9e5 0 10px,#c6be9b66 11px 12px);transform:rotate(-8deg)}
+.scene-explore .scene-prop{height:34px;border-bottom:2px dashed #a9a382;transform:rotate(-12deg);border-radius:50%}
+.scene-comfort .scene-prop{background:radial-gradient(ellipse,#c4d9af80,transparent 72%)}
+.scene-wish{background:radial-gradient(circle at 77% 22%,#ffedb6 0 13px,transparent 14px)}
+.scene-wish .scene-prop{background:#e0d2ef80}
+.scene-count .scene-prop{background:radial-gradient(ellipse,#f0dca877,transparent 70%)}
+.scene-pouch .scene-prop{height:70px;border:1px solid #cc9a6b44;border-radius:8px;background:repeating-linear-gradient(45deg,#c69c6820 0 1px,transparent 1px 10px)}
+.scene-dance .scene-prop{height:70px;border:2px solid #b58cc14d;box-shadow:0 0 0 9px #bc9bcf20,0 0 0 17px #b7b5d114;background:none}
+.scene-music{width:120px;background:none}
+.scene-music .scene-prop{position:absolute;width:98px;height:98px;inset:24px 10px auto auto;background:repeating-radial-gradient(circle,#254739 0 4px,#8d9c6a60 5px 6px);border:1px solid #c6d0a748;border-radius:50%;opacity:.6}
 .hero-experience .hip-quick-row .hip-quick-btn .sansa-mascot,#funBannerWrap .fun-banner-row .fun-banner-btn .sansa-mascot{position:absolute!important;display:block!important;flex:none!important;min-height:0!important;max-height:none!important;width:88px!important;height:88px!important;right:12px!important;top:26px!important;bottom:auto!important;left:auto!important;margin:0!important}
 #funBannerWrap .fun-banner-row button.fun-banner-btn.playlist{grid-column:span 2!important;padding-right:120px!important;background:linear-gradient(110deg,#234f43,#678575)!important;border-color:#63816a!important}
 #funBannerWrap .fun-banner-row .fun-banner-btn.playlist .fb-copy .fb-title{color:#fff5d9!important;font-size:22px!important}
@@ -204,7 +207,7 @@
 @media(prefers-reduced-motion:reduce){.brand-symbol-badge img,.wellness-room *,#funBannerWrap *, .hip-quick-row *{animation:none!important;transition:none!important}.wellness-room{backdrop-filter:none}}
 
 .hero-experience .hip-quick-row .hip-quick-btn .wellness-scene,#funBannerWrap .fun-banner-row .fun-banner-btn .wellness-scene{position:absolute!important;display:block!important;top:0!important;bottom:0!important;right:0!important;left:auto!important;height:100%!important;margin:0!important;padding:0!important;pointer-events:none!important;z-index:0!important}
-.hero-experience .hip-quick-row .hip-quick-btn .scene-prop,#funBannerWrap .fun-banner-row .fun-banner-btn .scene-prop{position:absolute!important;display:block!important;inset:0!important;width:100%!important;height:100%!important;pointer-events:none!important}
+.hero-experience .hip-quick-row .hip-quick-btn .scene-prop,#funBannerWrap .fun-banner-row .fun-banner-btn .scene-prop{position:absolute!important;display:block!important;pointer-events:none!important}
 @media(max-width:700px){#funBannerWrap .fun-banner-row .fun-banner-btn.playlist .fb-copy .fb-title{font-size:15px!important;line-height:1.4!important}#funBannerWrap .fun-banner-row .fun-banner-btn.playlist .fb-copy .music-kicker{font-size:8px!important;margin-bottom:3px!important}.hero-experience .hip-quick-row .hip-quick-btn .wellness-scene{height:48px!important}}
 
 #worryOverlay.wellness-cleared .modal-body{background:linear-gradient(#f4faeab0,#f5f7e8cf),url('../images/brand/wellness/props/card-comfort-lotus.webp') right bottom/230px auto no-repeat!important;animation:wellness-letter .4s ease-out}
@@ -216,3 +219,8 @@
 .hero-main-grid .hero-clean-art::after{display:none!important;content:none!important;background:none!important}
 .hero-main-grid .hero-title-row .sansa-brand-wordmark{margin-left:-26px!important;margin-right:-12px!important}
 @media(max-width:700px){.hero-main-grid .hero-clean-art .hero-clean-blossom{top:-2%!important;right:-11%!important;width:49%!important}}
+.sansa-mascot[data-pose=write]{background-size:285% 380%!important;background-position:-1.4% 33.333333%!important;clip-path:inset(3% 0 0)}
+/* The source atlas has tiny prop spillovers: keep each neighbor out of its cell. */
+.sansa-mascot[data-pose=explore]{background-size:300% 395%!important;background-position:50% 33.6%!important;clip-path:inset(2% 0 0 8%)}
+.sansa-mascot[data-pose=comfort]{clip-path:inset(2% 0 0)}
+.sansa-mascot[data-pose=count]{clip-path:inset(2% 0 5%)}

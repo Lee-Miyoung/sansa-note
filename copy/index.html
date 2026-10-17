@@ -155,7 +155,7 @@ textarea{border-color:#d5dfce!important;border-radius:14px!important;background:
 .hero-kicker{color:#748563!important}
 @media(max-width:640px){.quote-panel{padding-right:82px!important}.copy-companion{width:66px;height:66px;right:12px;top:15px}.copy-hero h1{font-size:24px!important}}
 </style>
-<link rel="stylesheet" href="../styles/copy-brand.css?v=20261016-unified">
+<link rel="stylesheet" href="../styles/copy-brand.css?v=20261017">
 </head>
 <body>
   <div class="paper-layer" aria-hidden="true"></div>
@@ -167,6 +167,7 @@ textarea{border-color:#d5dfce!important;border-radius:14px!important;background:
     </a>
     <div class="crumb">›&nbsp;&nbsp;오늘의 필사</div>
     <div class="head-actions">
+      <button type="button" class="head-pill" id="copyBackBtn" aria-label="이전 화면으로 돌아가기">← 뒤로</button>
       <a href="../" class="head-pill">홈</a>
       <button class="head-pill" id="openListBtn" type="button">108 전체보기</button>
     </div>
@@ -176,7 +177,7 @@ textarea{border-color:#d5dfce!important;border-radius:14px!important;background:
 
     <div class="copy-hero-text">
       <div class="hero-kicker">산사노트 · 마음 필사</div>
-      <h1>오늘의 마음 필사</h1>
+      <div class="copy-hero-heading"><h1>오늘의 마음 필사</h1><span class="copy-title-companion" role="img" aria-label="붓글씨에 집중하는 동자승"></span></div>
       <h2>한 줄의 글이, 오늘의 마음을 바꿉니다.</h2>
       <p>좋은 문장을 천천히 따라 쓰며 잠시 멈추어 나를 돌아보는 시간입니다.<br>108개의 마음 문장과 함께 잠시 숨을 고르고, 오늘의 나를 천천히 만나보세요.</p>
     </div>
@@ -429,5 +430,12 @@ const HEALING_CONTENTS = [{"id":1,"slug":"healing-001","title":"숨 고르기","
 })();
 </script>
 
+<script>
+document.getElementById('copyBackBtn').addEventListener('click',()=>{
+  document.activeElement?.blur();
+  window.dispatchEvent(new Event('pagehide'));
+  if(history.length>1)history.back();else location.assign('../');
+});
+</script>
 </body>
 </html>

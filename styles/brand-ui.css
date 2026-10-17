@@ -98,3 +98,15 @@ html body #catalogOverlay.show .modal-head{padding:24px 62px 22px 106px!importan
 #packOverlay .packrow-sub{font-size:15px!important;line-height:1.7!important}
 #communityWindowOverlay :is(.community-empty,.community-meta){font-size:15px!important;line-height:1.7!important}
 .overlay:not(#beatLabOverlay):not(#lightboxOverlay) .modal-body button:not(.close-x){font-size:16px!important;min-height:44px!important;line-height:1.45!important}
+.meditation-sound-panel{margin-top:18px;padding:16px;background:#edf3e6;border:1px solid #d7e0cd;border-radius:16px;text-align:left;font-size:15px}
+.meditation-sound-panel>label:first-child{display:block;font-size:18px;font-weight:700;margin-bottom:10px}
+.meditation-sound-row{display:flex;align-items:center;gap:8px}
+.meditation-sound-row select{min-width:0;flex:1;min-height:44px;background:#fffdf5;padding:6px}
+.meditation-volume{display:flex;align-items:center;gap:8px;margin:14px 0}
+.meditation-volume input{min-width:0;flex:1;accent-color:#547758}
+.meditation-volume output{min-width:34px;text-align:right}
+.meditation-bell-choice{display:flex;align-items:center;gap:8px}
+#meditationSoundStatus{font-size:15px;line-height:1.6;color:#677b65;margin-top:10px}
+/* A card detail must sit above its collection, including when restored with Forward. */
+#guardianCardDetail{z-index:2147483647!important}
+#guardianCardDetail .guardian-detail-close{min-width:44px;min-height:44px}

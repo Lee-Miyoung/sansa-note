@@ -1,0 +1,64 @@
+/* This is the final owner of game geometry; no page-wide scale/zoom restrictions. */
+html body #beatLabOverlay.show{position:fixed!important;inset:auto!important;top:var(--beat-visible-top,0px)!important;left:var(--beat-visible-left,0px)!important;width:var(--beat-visible-width,100vw)!important;height:var(--beat-fixed-vh,100dvh)!important;max-height:var(--beat-fixed-vh,100dvh)!important;padding:0!important;display:flex!important;align-items:stretch!important;justify-content:center!important;overflow:hidden!important;box-sizing:border-box!important;z-index:2147483647!important;touch-action:manipulation!important}
+html body #beatLabOverlay.show>.modal{display:flex!important;flex-direction:column!important;position:relative!important;width:100%!important;max-width:1160px!important;height:100%!important;max-height:100%!important;min-height:0!important;margin:0!important;padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px)!important;box-sizing:border-box!important;border-radius:0!important;overflow:hidden!important;transform:none!important;zoom:1!important;animation:none!important}
+html body #beatLabOverlay.show .modal-head{box-sizing:border-box!important;flex:0 0 66px!important;min-height:0!important;height:66px!important;padding:8px 100px 8px 66px!important;gap:6px!important;overflow:hidden!important}
+html body #beatLabOverlay.show .modal-head .room-companion{width:44px!important;height:44px!important;left:12px!important;top:10px!important}
+html body #beatLabOverlay.show .modal-head h2{font-size:17px!important;line-height:1.3!important;white-space:normal!important}
+html body #beatLabOverlay.show .modal-head .sub{display:none!important}
+html body #beatLabOverlay.show .modal-head .close-x{top:10px!important;right:8px!important;width:44px!important;height:44px!important}
+.game-rank-access{position:absolute;right:56px;top:12px;width:40px;height:40px;border:1px solid #cdd7c3;border-radius:12px;background:#fffb;color:#315741;font-size:20px}
+html body #beatLabOverlay.show .modal-body{display:flex!important;flex:1 1 auto!important;min-height:0!important;height:auto!important;max-height:none!important;overflow:hidden!important;padding:6px 8px 8px!important;box-sizing:border-box!important}
+html body #beatLabOverlay.show .beat-desktop-layout{display:block!important;flex:1!important;width:100%!important;height:100%!important;min-height:0!important;overflow:hidden!important}
+html body #beatLabOverlay.show .beat-left-panel{position:relative!important;display:grid!important;grid-template-columns:minmax(0,1fr)!important;grid-template-rows:44px 48px 24px 34px 18px 24px 32px 4px minmax(0,1fr) 60px 22px!important;gap:4px!important;width:100%!important;height:100%!important;min-height:0!important;overflow:hidden!important}
+html body #beatLabOverlay.show .beat-left-panel>*{box-sizing:border-box!important;min-height:0!important;min-width:0!important;margin:0!important}
+html body #beatLabOverlay.show .beat-top-controls{display:flex!important;flex-flow:row nowrap!important;gap:6px!important;padding:3px!important;overflow:hidden!important}
+html body #beatLabOverlay.show .beat-audio-status{flex:0 0 54px!important;min-width:0!important;width:54px!important;padding:0!important}
+html body #beatLabOverlay.show #beatAudioState{display:none!important}
+html body #beatLabOverlay.show #beatSoundToggle{min-width:48px!important;width:48px!important;height:34px!important;padding:0!important;font-size:14px!important}
+html body #beatLabOverlay.show .bpm-row{display:flex!important;flex:1!important;gap:6px!important;min-width:0!important}
+html body #beatLabOverlay.show #beatBpm{width:60px!important;min-width:0!important;flex:1!important}
+html body #beatLabOverlay.show .beat-game-head{display:grid!important;grid-template-columns:minmax(0,1fr) 60px 60px!important;gap:6px!important;padding:3px 6px!important;align-items:center!important;overflow:hidden!important}
+html body #beatLabOverlay.show .beat-game-head .beat-mission{font-size:11px!important;line-height:1.35!important;margin:0!important;padding:3px!important}
+html body #beatLabOverlay.show .beat-score-box{height:100%!important;padding:0!important;min-height:0!important}
+html body #beatLabOverlay.show .beat-score-box b{font-size:22px!important;line-height:1.05!important}
+html body #beatLabOverlay.show .beat-score-box span{font-size:8px!important}
+html body #beatLabOverlay.show .beat-rank-chip{display:none!important}
+html body #beatLabOverlay.show .beat-progression{padding:1px 6px!important;gap:8px!important;overflow:hidden!important}
+html body #beatLabOverlay.show .beat-level-badge{width:42px!important;height:30px!important;min-height:0!important;font-size:7px!important;padding:0!important}
+html body #beatLabOverlay.show .beat-level-badge b{font-size:17px!important}
+html body #beatLabOverlay.show .beat-reward-row{padding:0!important;overflow:hidden!important;align-items:center!important}
+html body #beatLabOverlay.show .beat-reward{font-size:8px!important;padding:1px 6px!important}
+html body #beatLabOverlay.show .beat-life-row{font-size:10px!important;line-height:1.2!important;padding:2px 7px!important;overflow:hidden!important}
+html body #beatLabOverlay.show .beat-lives{font-size:13px!important}
+html body #beatLabOverlay.show .beat-purify-box{padding:2px 6px!important}
+html body #beatLabOverlay.show .beat-purify-top{font-size:10px!important;line-height:1.2!important;margin:0!important}
+html body #beatLabOverlay.show .beat-purify-btn{font-size:10px!important;padding:3px 6px!important;min-height:0!important}
+html body #beatLabOverlay.show .beat-purify-track{height:3px!important;margin-top:2px!important}
+html body #beatLabOverlay.show .beat-track{height:4px!important;padding:0!important}
+html body #beatLabOverlay.show .worry-smash-zone{height:100%!important;min-height:0!important;max-height:none!important;margin:0!important;align-self:stretch!important;overflow:hidden!important}
+html body #beatLabOverlay.show .beat-grid{display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr))!important;align-items:center!important;height:60px!important;min-height:0!important;gap:4px!important;margin:0!important;padding:0!important}
+html body #beatLabOverlay.show .beat-pad{width:100%!important;max-width:64px!important;height:56px!important;min-height:44px!important;justify-self:center!important;border-radius:50%!important;margin:0!important;padding:4px 1px!important;font-size:17px!important;line-height:1!important;gap:1px!important;touch-action:none!important;transform:none!important}
+html body #beatLabOverlay.show .beat-pad b{font-size:10px!important;line-height:1.1!important;margin:1px 0 0!important}
+html body #beatLabOverlay.show .release-banner{height:22px!important;min-height:0!important;font-size:9px!important;line-height:1.1!important;padding:2px 7px!important;overflow:hidden!important}
+html body #beatLabOverlay.show .beat-leaderboard{position:absolute!important;inset:6px!important;width:auto!important;max-height:100%!important;z-index:100!important;overflow:auto!important}
+html body #beatLabOverlay.show .beat-gameover{inset:8px!important;font-size:14px!important;overflow:auto!important}
+html body #beatLabOverlay[data-game-size=short].show .beat-left-panel{grid-template-rows:40px 44px 30px 22px 30px 4px minmax(0,1fr) 56px 20px!important}
+html body #beatLabOverlay[data-game-size=short].show :is(.beat-mult-row,.beat-reward-row){display:none!important}
+html body #beatLabOverlay[data-game-size=short].show .beat-grid{height:56px!important}
+html body #beatLabOverlay[data-game-size=short].show .beat-pad{height:52px!important}
+html body #beatLabOverlay[data-game-size=tiny].show .modal-head{flex-basis:46px!important;height:46px!important;padding:4px 100px 4px 54px!important}
+html body #beatLabOverlay[data-game-size=tiny].show .modal-head h2{font-size:15px!important}
+html body #beatLabOverlay[data-game-size=tiny].show .modal-head .room-companion{width:34px!important;height:34px!important;top:5px!important;left:8px!important}
+html body #beatLabOverlay[data-game-size=tiny].show .modal-head .close-x{height:38px!important;width:38px!important;min-height:0!important;top:3px!important}
+html body #beatLabOverlay[data-game-size=tiny].show .game-rank-access{height:34px;top:6px}
+html body #beatLabOverlay[data-game-size=tiny].show .beat-left-panel{grid-template-rows:36px 20px minmax(0,1fr) 52px!important;gap:4px!important}
+html body #beatLabOverlay[data-game-size=tiny].show :is(.beat-top-controls,.beat-mult-row,.beat-progression,.beat-reward-row,.beat-track,.release-banner){display:none!important}
+html body #beatLabOverlay[data-game-size=tiny].show .beat-purify-box{position:absolute!important;top:62px!important;right:8px!important;width:140px!important;height:24px!important;z-index:15!important;background:transparent!important;border:0!important;padding:0!important}
+html body #beatLabOverlay[data-game-size=tiny].show .beat-purify-top>span,html body #beatLabOverlay[data-game-size=tiny].show .beat-purify-track{display:none!important}
+html body #beatLabOverlay[data-game-size=tiny].show .beat-purify-btn{margin-left:auto!important}
+html body #beatLabOverlay[data-game-size=tiny].show .beat-grid{height:52px!important}
+html body #beatLabOverlay[data-game-size=tiny].show .beat-pad{height:48px!important;max-width:54px!important}
+/* Normal pages keep pinch zoom; game pads retain their narrower gesture policy. */
+html body,html body:not(.sansa-overlay-locked):not(.pack-modal-open){touch-action:pan-y pinch-zoom!important}
+html body .overlay:not(#beatLabOverlay):not(#lightboxOverlay),html body #catalogOverlay.show{touch-action:pan-y pinch-zoom!important}
+html body .overlay:not(#beatLabOverlay):not(#lightboxOverlay) .modal,html body .overlay:not(#beatLabOverlay):not(#lightboxOverlay) .modal-body{touch-action:pan-y pinch-zoom!important}

@@ -41,3 +41,10 @@
 .progress-big{display:flex!important;align-items:baseline!important;flex-wrap:wrap!important;gap:8px!important;min-width:0!important}
 .progress-big strong{font-size:clamp(32px,5vw,46px)!important;line-height:1.2!important;font-variant-numeric:tabular-nums!important}
 .progress-big>span{font-size:16px!important;white-space:nowrap!important}
+
+.copy-hero-heading{display:grid;grid-template-columns:minmax(0,1fr) 130px;align-items:center;gap:12px;max-width:750px;min-height:130px}
+.copy-title-companion{display:block;width:130px;height:130px;background:url('../images/brand/wellness/companion-activities-v2.webp') 100% 100%/270% 360% no-repeat;clip-path:inset(5% 5% 0 5%)}
+.copy-hero-heading h1{margin:0!important;min-width:0;line-height:1.35!important;word-break:keep-all}
+@media(max-width:640px){.copy-hero-heading{grid-template-columns:minmax(0,1fr) 90px;gap:6px;min-height:90px}.copy-title-companion{width:90px;height:90px}.copy-hero-heading h1{font-size:28px!important}}
+.head-actions .head-pill{display:inline-flex;align-items:center;justify-content:center;min-height:44px;box-sizing:border-box}
+@media(max-width:640px){.head-actions>a[href="../"]{display:none!important}}

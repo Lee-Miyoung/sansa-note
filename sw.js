@@ -2,15 +2,20 @@
 // index.html은 온라인일 때 항상 최신 버전을 먼저 가져오고,
 // 오프라인일 때만 캐시를 사용합니다.
 
-const CACHE_VERSION = 'sansanote-v6-unified';
+const CACHE_VERSION = 'sansanote-v7-navigation-game';
 
 const CORE_ASSETS = [
   './',
   './index.html',
-  './styles/brand-ui.css?v=20261016-unified',
-  './styles/copy-brand.css?v=20261016-unified',
+  './scripts/navigation.js?v=20261017',
+  './scripts/game-viewport.js?v=20261017',
+  './scripts/meditation-sounds.js?v=20261017',
+  './styles/game-viewport.css?v=20261017',
+  './styles/wellness.css?v=20261017-calm',
+  './styles/brand-ui.css?v=20261017-calm',
+  './styles/copy-brand.css?v=20261017',
+  './images/brand/wellness/companion-activities-v2.webp',
   './images/brand/wellness/emotion-faces.webp',
-  './styles/wellness.css?v=20261016-storybook',
   './scripts/wellness-effects.js?v=20261016-storybook',
   './images/brand/wellness/companion-poses.webp',
   './images/brand/wellness/props/card-moktak.webp',
