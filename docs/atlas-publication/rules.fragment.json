@@ -1,0 +1,22 @@
+{
+  "rules": {
+    "shared": {
+      "secretAtlasPublication": {
+        "haeinsa-001": {
+          ".read": true,
+          ".write": "auth != null && auth.token.email == 'song4mi12@gmail.com' && auth.token.email_verified == true && auth.token.firebase.sign_in_provider == 'google.com' && newData.exists()",
+          ".validate": "newData.hasChildren(['public', 'updatedAt'])",
+          "public": {
+            ".validate": "newData.isBoolean()"
+          },
+          "updatedAt": {
+            ".validate": "newData.isNumber() && newData.val() > 0 && newData.val() <= now"
+          },
+          "$other": {
+            ".validate": false
+          }
+        }
+      }
+    }
+  }
+}

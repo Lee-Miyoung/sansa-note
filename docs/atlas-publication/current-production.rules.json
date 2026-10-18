@@ -1,0 +1,58 @@
+{
+  "rules": {
+    "users": {
+      ".read": "auth != null && auth.token.email == 'song4mi12@gmail.com'",
+      "$uid": {
+        ".read": "auth != null && (auth.uid == $uid || auth.token.email == 'song4mi12@gmail.com')",
+        ".write": "auth != null && auth.uid == $uid"
+      }
+    },
+    "shared": {
+      "photoUploadControl": {
+        ".read": "auth != null",
+        ".write": "auth != null && auth.token.email == 'song4mi12@gmail.com'"
+      },
+      "lyricSync": {
+        ".read": true,
+        ".write": "auth != null && auth.token.email == 'song4mi12@gmail.com'"
+      },
+      "templeVerifyPoints": {
+        ".read": true,
+        ".write": "auth != null && auth.token.email == 'song4mi12@gmail.com'"
+      }
+    },
+    "community": {
+      "posts": {
+        ".read": true,
+        "$postId": {
+          ".write": "auth != null && (auth.token.email == 'song4mi12@gmail.com' || (!data.exists() && newData.child('uid').val() == auth.uid) || (data.exists() && data.child('uid').val() == auth.uid))"
+        }
+      },
+      "comments": {
+        ".read": true,
+        "$postId": {
+          "$commentId": {
+            ".write": "auth != null && (auth.token.email == 'song4mi12@gmail.com' || (!data.exists() && newData.child('uid').val() == auth.uid) || (data.exists() && data.child('uid').val() == auth.uid))"
+          }
+        }
+      },
+      "reports": {
+        ".read": "auth != null && auth.token.email == 'song4mi12@gmail.com'",
+        "$reportId": {
+          ".write": "auth != null"
+        }
+      }
+    },
+    "leaderboards": {
+      "beatShooter": {
+        ".read": "auth != null",
+        ".indexOn": [
+          "score"
+        ],
+        "$uid": {
+          ".write": "auth != null && auth.uid == $uid"
+        }
+      }
+    }
+  }
+}

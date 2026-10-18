@@ -1,0 +1,1 @@
+{"database":{"rules":"../../docs/atlas-publication/production-with-publication.rules.json"},"emulators":{"database":{"host":"127.0.0.1","port":9900},"ui":{"enabled":false},"singleProjectMode":true}}
