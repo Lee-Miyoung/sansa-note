@@ -1,0 +1,62 @@
+[
+  {
+    "id": "temple:해인사",
+    "name": "해인사",
+    "region": "경상",
+    "src": "/images/temple-covers/haeinsa-hapcheon.webp",
+    "width": 768,
+    "height": 512,
+    "bytes": 120806,
+    "sha256": "555f95acd24134ec1a0ab8ae7bf407855c1f02d308dc32c68e31326256c68b7b",
+    "source": {
+      "title": "File:Haeinsa Temple 01.jpg",
+      "url": "https://commons.wikimedia.org/wiki/File:Haeinsa_Temple_01.jpg",
+      "original": "https://upload.wikimedia.org/wikipedia/commons/e/e5/Haeinsa_Temple_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "creator": "Bernard Gagnon",
+      "license": "CC0",
+      "licenseURL": "http://creativecommons.org/publicdomain/zero/1.0/deed.en"
+    },
+    "adaptationLicense": "CC0",
+    "changes": "실제 사진을 참고한 AI 수채화 변환. 인물·임시 광고 일부 생략, 768×512 WebP 압축. 현장 사진·실측 복원도가 아닙니다."
+  },
+  {
+    "id": "temple:관음사",
+    "name": "관음사",
+    "region": "제주",
+    "src": "/images/temple-covers/gwaneumsa-jeju.webp",
+    "width": 768,
+    "height": 512,
+    "bytes": 147404,
+    "sha256": "af5a13cd9834553474100b664ab366ac1e238b797884ac2e5cfbb55ade80b721",
+    "source": {
+      "title": "File:Inside Gwaneumsa Temple (9).png",
+      "url": "https://commons.wikimedia.org/wiki/File:Inside_Gwaneumsa_Temple_(9).png",
+      "original": "https://upload.wikimedia.org/wikipedia/commons/e/e4/Inside_Gwaneumsa_Temple_%289%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "creator": "Thomas Housieaux",
+      "license": "CC BY-SA 4.0",
+      "licenseURL": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
+    "adaptationLicense": "CC BY-SA 4.0",
+    "changes": "실제 사진을 참고한 AI 수채화 변환. 인물·임시 광고 일부 생략, 768×512 WebP 압축. 현장 사진·실측 복원도가 아닙니다."
+  },
+  {
+    "id": "temple:개암사",
+    "name": "개암사",
+    "region": "전라",
+    "src": "/images/temple-covers/gaeamsa-buan.webp",
+    "width": 768,
+    "height": 512,
+    "bytes": 158134,
+    "sha256": "b7dee81107536672b0766d2b6bc75ae38fe1aa48a36768b2eebe159eb312438b",
+    "source": {
+      "title": "File:Gaeamsa Daeungjeon 13-05582 - Buan-gun, Jeollabuk-do, South Korea.JPG",
+      "url": "https://commons.wikimedia.org/wiki/File:Gaeamsa_Daeungjeon_13-05582_-_Buan-gun,_Jeollabuk-do,_South_Korea.JPG",
+      "original": "https://upload.wikimedia.org/wikipedia/commons/d/de/Gaeamsa_Daeungjeon_13-05582_-_Buan-gun%2C_Jeollabuk-do%2C_South_Korea.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "creator": "Steve46814",
+      "license": "CC BY-SA 3.0",
+      "licenseURL": "https://creativecommons.org/licenses/by-sa/3.0"
+    },
+    "adaptationLicense": "CC BY-SA 3.0",
+    "changes": "실제 사진을 참고한 AI 수채화 변환. 인물·임시 광고 일부 생략, 768×512 WebP 압축. 현장 사진·실측 복원도가 아닙니다."
+  }
+]

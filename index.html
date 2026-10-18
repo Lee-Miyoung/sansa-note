@@ -31327,6 +31327,7 @@ function coverPhotoLoaded(img){
   img.classList.add('loaded');
 }
 function watchCoverImage(img,kind){
+  if(img.dataset.templeCoverId)return; // Local watercolor cards never enter the real-photo retry loop.
   clearTimeout(img.__coverTimeout);
   if(img.complete&&img.naturalWidth>0){coverPhotoLoaded(img);return;}
   img.__coverTimeout=setTimeout(()=>{
@@ -31406,7 +31407,11 @@ function replaceBrokenCardCover(img,kind){
   if(!img)return;
   handleCoverPhotoError(img,kind);
 }
-function cardCoverMedia(photo, kind, name){
+function cardCoverMedia(photo, kind, name, place){
+  const painting=kind==='temple'&&window.sansaTempleCovers?.find(place);
+  if(painting){
+    return lotusPlaceholderHtml('수채화 불러오는 중',name)+`<img class="card-cover-img stable-cover loaded temple-watercolor-cover" data-temple-cover-id="${escapeAttr(painting.id)}" src="./images/temple-covers/${painting.file}" alt="${escapeAttr(name)} 실제 풍경을 바탕으로 그린 수채화" width="768" height="512" loading="lazy" decoding="async" style="opacity:1;transition:none" onerror="window.sansaTempleCovers.failed(this)"><a class="temple-cover-credit" href="./images/temple-covers/CREDITS.html" target="_blank" rel="noopener" onclick="event.stopPropagation()" onpointerdown="event.stopPropagation()">수채화·출처</a>`;
+  }
   const placeholder = kind==='mountain' ? mountainPlaceholderHtml('산 풍경 일러스트 · 실제 사진 준비 중',name) : lotusPlaceholderHtml('산사 일러스트 · 실제 사진 준비 중',name);
   if(!photo) return placeholder;
   return placeholder+`<img class="card-cover-img stable-cover" src="${escapeAttr(photo)}" alt="${escapeAttr(name||'')}"
@@ -31467,6 +31472,7 @@ function schedulePhotoHydration(type, entries){
   const queueOne=(id)=>{
     if(gen!==photoQueueGeneration) return;
     const d=store[id]; if(!d)return;
+    if(!isMountain&&window.sansaTempleCovers?.find(d))return;
     const photo=firstPhotoUrl(d);
     if(photo) return;
     if(coverFetching.has(id)||shouldSkipPhotoRetry(d))return;
@@ -31482,7 +31488,7 @@ function schedulePhotoHydration(type, entries){
   // 나머지 카드는 그대로 lazy 로딩해서 전체 네트워크 부담은 늘리지 않습니다.
   cards.slice(0,4).forEach(card=>{
     const img=card.querySelector('.card-cover-img');
-    if(img){
+    if(img&&!img.dataset.templeCoverId){
       img.loading='eager';
       watchCoverImage(img,isMountain?'mountain':'temple');
       try{img.fetchPriority='auto';}catch(_){ }
@@ -31494,7 +31500,7 @@ function schedulePhotoHydration(type, entries){
       items.forEach(it=>{
         if(it.isIntersecting){
           const img=it.target.querySelector('.card-cover-img');
-          if(img){img.loading='eager';watchCoverImage(img,isMountain?'mountain':'temple');}
+          if(img&&!img.dataset.templeCoverId){img.loading='eager';watchCoverImage(img,isMountain?'mountain':'temple');}
           queueOne(it.target.dataset.id);
           photoHydrationObserver.unobserve(it.target);
         }
@@ -31523,6 +31529,7 @@ function patchVisibleCover(id,url,kind,name){
   for(const card of matches){
   const photo=card.matches('.catalog-thumb')?card:card.querySelector('.card-photo');
   if(!photo)continue;
+  if(photo.dataset.templeCoverId||photo.querySelector('[data-temple-cover-id]'))continue;
   const oldImg=photo.querySelector('.card-cover-img');
   const ph=photo.querySelector('.cover-placeholder');
   const img=document.createElement('img');
@@ -31927,7 +31934,7 @@ function fetchCoverPhotoNow(id, name, locationHint, opts, done){
 }
 
 function renderCard(id,d){
-  const photo=firstPhotoUrl(d);
+  const photo=window.sansaTempleCovers?.find(d)?null:firstPhotoUrl(d);
   const stageIdx=Math.min(Number(d.stage)||0,STAGES.length-1);
   const vc=visitCount(d);
   const tagLabel=d.tag==='유명'?'대표 산사':'숨은 산사';
@@ -31936,7 +31943,7 @@ function renderCard(id,d){
   return `
   <div class="card ${visited?'visited-temple-card':''} ${recorded?'recorded-temple-card':''}" data-id="${id}">
     <div class="card-photo">
-      ${cardCoverMedia(photo,'temple',d.name)}
+      ${cardCoverMedia(photo,'temple',d.name,d)}
       ${visited?`<span class="lotus-visited-mark" title="다녀온 절">🪷 <b>${recorded?'기록 완료':'다녀온 곳'}</b></span>`:''}
       ${vc>0?`<span class="visit-flag">${vc}회 방문</span>`:''}
       <span class="field-reward-badge ${templeHasVerifiedVisit(d)?'is-verified':''}">${templeHasVerifiedVisit(d)?'✓ 현장인증':'📍 현장보상'}</span>
@@ -39539,6 +39546,7 @@ function hydrateCatalogPhotos(){
   const load=thumb=>{
     const kind=thumb.dataset.photoKind,id=thumb.dataset.photoId;
     const store=catalogPhotoRecords[kind],place=store?.[id];if(!place)return;
+    if(kind==='temple'&&window.sansaTempleCovers?.find(place))return;
     const image=thumb.querySelector('img');
     if(image){image.loading='eager';watchCoverImage(image,kind);return;}
     if(firstPhotoUrl(place)||shouldSkipPhotoRetry(place)||coverFetching.has(id))return;
@@ -39558,8 +39566,8 @@ function catalogThumbHtml(d,type){
   const id=type+':'+d.name;
   const previous=catalogPhotoRecords[type][id];
   const place=catalogPhotoRecords[type][id]={...d,...previous,photos:d.photos||previous?.photos};
-  const photo=firstPhotoUrl(place);
-  return `<div class="catalog-thumb" data-photo-id="${escapeAttr(id)}" data-photo-kind="${type}">${cardCoverMedia(photo,type,d.name)}</div>`;
+  const photo=type==='temple'&&window.sansaTempleCovers?.find(place)?null:firstPhotoUrl(place);
+  return `<div class="catalog-thumb" data-photo-id="${escapeAttr(id)}" data-photo-kind="${type}">${cardCoverMedia(photo,type,d.name,place)}</div>`;
 }
 
 renderCatalogOverlay = function(){
@@ -42302,7 +42310,8 @@ nav.site-global-nav{height:var(--global-nav-h)!important;box-sizing:border-box!i
 <script src="./scripts/meditation-sounds.js?v=20261018" defer></script>
 <script src="./scripts/game-viewport.js?v=20261017" defer></script>
 <script src="./scripts/navigation.js?v=20261018" defer></script>
-<link rel="stylesheet" href="/styles/atlas-home.css?v=20261018-public">
-<script src="/scripts/atlas/home-publication.js?v=20261018-public" defer></script>
+<link rel="stylesheet" href="/styles/atlas-home.css?v=20261018-narrative">
+<script src="/scripts/atlas/home-publication.js?v=20261018-narrative" defer></script>
+<script src="./scripts/temple-covers.js?v=20261018-pilot" defer></script>
 </body>
 </html>
