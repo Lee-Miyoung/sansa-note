@@ -11,3 +11,5 @@
 #secretAtlasOverlay .atlas-history h2{font-size:17px}#secretAtlasOverlay .atlas-history-note{color:#77806d;font-size:13px}
 #secretAtlasOverlay .atlas-reader-nav{margin-top:26px}
 @media(max-width:650px){#secretAtlasOverlay .atlas-prose p{line-height:2;word-break:normal;overflow-wrap:break-word}#secretAtlasOverlay .atlas-monk-quote blockquote{font-size:17px}#secretAtlasOverlay .atlas-scene-title small{display:block;font-size:12px;line-height:1.7}}
+
+#secretAtlasOverlay .atlas-keyword{color:#315e49;font-weight:800;background:linear-gradient(transparent 66%,#e0d3a755 66%)}#secretAtlasOverlay .atlas-takeaway{margin:22px 0;padding:15px 18px;border-left:3px solid #c7ab65;border-radius:0 12px 12px 0;background:#edf2e6;color:#365640}#secretAtlasOverlay .atlas-takeaway p{margin:0;font-size:17px;line-height:1.8;font-weight:650}#secretAtlasOverlay .atlas-prose p{line-height:1.95;margin:1em 0}@media(max-width:650px){#secretAtlasOverlay .atlas-prose{font-size:18px}#secretAtlasOverlay .atlas-takeaway p{font-size:16px}}
