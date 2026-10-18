@@ -96,9 +96,13 @@ async function check(name, fn) {
       for (let part = 1; part <= 3; part++) {
         const id = String(part).padStart(3, '0');
         await assertFails(set(ref(alice, base + '/cards/' + id), stamp));
-        const patch = { ['cards/' + id]: stamp };
+        const patch = {};
         for (let i = (part - 1) * 4 + 1; i <= part * 4; i++) patch['completed/' + i] = stamp;
-        await assertSucceeds(update(ref(alice, base), patch));
+        // Match store.flush(): persist completed scenes before acquiring the card.
+        try { await assertSucceeds(update(ref(alice, base), patch)); }
+        catch (cause) { throw new Error('Part ' + part + ' valid completed-scene write rejected', { cause }); }
+        try { await assertSucceeds(set(ref(alice, base + '/cards/' + id), stamp)); }
+        catch (cause) { throw new Error('Part ' + part + ' card rejected after completed scenes persisted', { cause }); }
         await assertSucceeds(set(ref(alice, base + '/cards/' + id), stamp));
         await assertFails(set(ref(alice, base + '/cards/' + id), stamp + 1));
       }
