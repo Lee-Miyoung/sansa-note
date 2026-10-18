@@ -1,0 +1,93 @@
+name: Firebase database rules
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/firebase-rules.yml'
+      - 'firebase/**'
+      - 'tests/secret-atlas-rules*.cjs'
+      - 'tests/firebase-rules/**'
+  push:
+    branches: [feat/haeinsa-secret-atlas-001]
+    paths:
+      - '.github/workflows/firebase-rules.yml'
+      - 'firebase/**'
+      - 'tests/secret-atlas-rules*.cjs'
+      - 'tests/firebase-rules/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: firebase-rules-${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  rules:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      SANSA_FIREBASE_DEPS: ${{ github.workspace }}/tests/firebase-rules
+      GCLOUD_PROJECT: demo-sansa-note
+      GOOGLE_CLOUD_PROJECT: demo-sansa-note
+      GOOGLE_APPLICATION_CREDENTIALS: ''
+      FIREBASE_TOKEN: ''
+      CI: 'true'
+    defaults:
+      run:
+        working-directory: tests/firebase-rules
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /.github/workflows/
+            /firebase/
+            /tests/
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: tests/firebase-rules/package-lock.json
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - run: npm ci --no-audit --no-fund
+      - name: Verify full rules preserve existing access
+        run: node ../secret-atlas-rules-preservation.cjs
+      - name: Test full rules in demo database emulator
+        id: rules
+        run: npm run test:emulator 2>&1 | tee emulator-tests.log
+      - name: Record test summary
+        if: always()
+        env:
+          RULES_OUTCOME: ${{ steps.rules.outcome }}
+        run: |
+          node - <<'JS'
+          const fs = require('node:fs');
+          const log = fs.existsSync('emulator-tests.log') ? fs.readFileSync('emulator-tests.log', 'utf8') : '';
+          const results = log.split('\n').filter(line => /^(PASS|FAIL) /.test(line));
+          if (process.env.RULES_OUTCOME === 'failure') {
+            const detail = log.slice(-2500).replace(/\x1b\[[0-9;]*m/g, '').replace(/%/g, '%25').replace(/\r/g, '%0D').replace(/\n/g, '%0A');
+            console.log('::error title=Firebase rules failure details::' + detail);
+          }
+          fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY,
+            '## Full Realtime Database rules\n\n' +
+            '- Project: `demo-sansa-note` (emulator only)\n' +
+            '- Rules: `firebase/production-with-secret-atlas.rules.json`\n' +
+            '- Result: **' + (process.env.RULES_OUTCOME || 'not run') + '**\n' +
+            '- No production credentials, service-account keys or deployment steps.\n\n' +
+            '```text\n' + results.join('\n') + '\n```\n');
+          JS
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: firebase-rules-logs-${{ github.run_id }}-${{ github.run_attempt }}
+          path: tests/firebase-rules/*.log
+          if-no-files-found: ignore
+          retention-days: 7
