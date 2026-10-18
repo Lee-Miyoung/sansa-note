@@ -22,7 +22,14 @@ if (process.env.SANSA_FIREBASE_DEPS) {
 console.log('Rules SHA256 ' + createHash('sha256').update(rules).digest('hex'));
 async function check(name, fn) {
   try { await fn(); console.log('PASS ' + name); }
-  catch (error) { console.error('FAIL ' + name); throw error; }
+  catch (error) {
+    console.error('FAIL ' + name);
+    if (process.env.CI) {
+      const detail = (name + ': ' + error.stack).replace(/%/g, '%25').replace(/\r/g, '%0D').replace(/\n/g, '%0A');
+      console.error('::error title=Firebase rules assertion::' + detail);
+    }
+    throw error;
+  }
 }
 (async () => {
   const env = await initializeTestEnvironment({
@@ -78,7 +85,10 @@ async function check(name, fn) {
         ['/answers/q1', { selection: [9], correct: true, at: stamp, attempts: 1 }],
         ['/answers/q7', { selection: [1], correct: true, at: stamp, attempts: 1 }]
       ];
-      for (const [suffix, value] of bad) await assertFails(set(ref(alice, base + suffix), value));
+      for (const [suffix, value] of bad) {
+        try { await assertFails(set(ref(alice, base + suffix), value)); }
+        catch (error) { throw new Error('Invalid data unexpectedly accepted at ' + suffix + ': ' + JSON.stringify(value).slice(0, 120), { cause: error }); }
+      }
       await assertSucceeds(set(ref(alice, base + '/note'), note('')));
       await assertSucceeds(set(ref(alice, base + '/note'), note('A 기록')));
     });

@@ -68,7 +68,7 @@ jobs:
           const log = fs.existsSync('emulator-tests.log') ? fs.readFileSync('emulator-tests.log', 'utf8') : '';
           const results = log.split('\n').filter(line => /^(PASS|FAIL) /.test(line));
           if (process.env.RULES_OUTCOME === 'failure') {
-            const detail = log.slice(-14000).replace(/\x1b\[[0-9;]*m/g, '').replace(/%/g, '%25').replace(/\r/g, '%0D').replace(/\n/g, '%0A');
+            const detail = log.slice(-2500).replace(/\x1b\[[0-9;]*m/g, '').replace(/%/g, '%25').replace(/\r/g, '%0D').replace(/\n/g, '%0A');
             console.log('::error title=Firebase rules failure details::' + detail);
           }
           fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY,
