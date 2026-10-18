@@ -1,0 +1,51 @@
+name: Atlas publication rules
+on:
+  pull_request:
+    branches: [main]
+    paths: ['docs/atlas-publication/**', 'tests/atlas-publication-rules/**', '.github/workflows/atlas-publication-rules.yml']
+  push:
+    branches: [feat/public-haeinsa-atlas]
+    paths: ['docs/atlas-publication/**', 'tests/atlas-publication-rules/**', '.github/workflows/atlas-publication-rules.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  rules:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      GCLOUD_PROJECT: demo-sansa-atlas-publication
+      GOOGLE_CLOUD_PROJECT: demo-sansa-atlas-publication
+      GOOGLE_APPLICATION_CREDENTIALS: ''
+      FIREBASE_TOKEN: ''
+      CI: 'true'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Install pinned emulator test dependencies
+        run: npm install --prefix /tmp/atlas-rules --no-save --no-package-lock @firebase/rules-unit-testing@6.0.0 firebase@13.0.0 firebase-tools@15.34.0
+      - name: Test full integrated rules in demo emulator only
+        env:
+          NODE_PATH: /tmp/atlas-rules/node_modules
+        run: |
+          cp docs/atlas-publication/production-with-publication.rules.json tests/atlas-publication-rules/merged.rules.json
+          cmp docs/atlas-publication/production-with-publication.rules.json tests/atlas-publication-rules/merged.rules.json
+          /tmp/atlas-rules/node_modules/.bin/firebase emulators:exec --only database --project demo-sansa-atlas-publication --config tests/atlas-publication-rules/firebase.json "node tests/atlas-publication-rules/test.cjs" 2>&1 | tee /tmp/atlas-publication-tests.log
+      - name: Preserve emulator result in check summary
+        if: always()
+        run: |
+          node - <<'JS'
+          const fs=require('node:fs');
+          const text=fs.existsSync('/tmp/atlas-publication-tests.log')?fs.readFileSync('/tmp/atlas-publication-tests.log','utf8'):'Emulator step did not run';
+          fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY,'## Demo emulator result\n\n```text\n'+text.slice(-7000)+'\n```\n');
+          const detail=text.slice(-5000).replace(/\x1b\[[0-9;]*m/g,'').replace(/%/g,'%25').replace(/\r/g,'%0D').replace(/\n/g,'%0A');
+          console.log('::notice title=Atlas emulator result::'+detail);
+          JS
