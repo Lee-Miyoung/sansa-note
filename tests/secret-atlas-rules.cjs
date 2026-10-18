@@ -36,6 +36,7 @@ async function check(name, fn) {
 async function diagnoseCompleted() {
   const variants = [
     ['original', () => {}],
+    ['capturing-group', c => { c.completed.$scene['.validate'] = c.completed.$scene['.validate'].replace('(?:', '('); }],
     ['without-key-regex', c => { const v = c.completed.$scene['.validate']; c.completed.$scene['.validate'] = v.slice(v.indexOf(' && ') + 4); }],
     ['without-child-validation', c => { c.completed.$scene['.validate'] = 'true'; }],
     ['without-container-validation', c => { c.completed['.validate'] = 'true'; }]
@@ -52,10 +53,16 @@ async function diagnoseCompleted() {
       const db = diagnostic.authenticatedContext('alice', { email: 'alice@example.test' }).database();
       const at = Date.now();
       try {
-        await update(ref(db, 'users/alice/secretAtlas/haeinsa-001'), {
-          'completed/1': at, 'completed/2': at, 'completed/3': at, 'completed/4': at
-        });
-        results.push({ variant: name, completedWrite: 'accepted' });
+        const base = 'users/alice/secretAtlas/haeinsa-001';
+        const patch = {};
+        for (let i = 1; i <= 12; i++) patch['completed/' + i] = at;
+        await update(ref(db, base), patch);
+        if (name === 'capturing-group') {
+          await assertFails(set(ref(db, base + '/completed/0'), at));
+          await assertFails(set(ref(db, base + '/completed/13'), at));
+          for (let i = 1; i <= 3; i++) await assertSucceeds(set(ref(db, base + '/cards/' + String(i).padStart(3, '0')), at));
+        }
+        results.push({ variant: name, completedWrite: 'accepted', ...(name === 'capturing-group' ? { cardsAcquired: 3, outOfRangeDenied: true } : {}) });
       } catch (error) { results.push({ variant: name, completedWrite: 'rejected', code: error.code }); }
     } finally { await diagnostic.cleanup(); }
   }
