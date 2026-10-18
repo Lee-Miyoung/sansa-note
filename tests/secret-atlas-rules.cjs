@@ -15,6 +15,10 @@ assert(!process.env.GOOGLE_APPLICATION_CREDENTIALS, 'Production credential files
 assert(!process.env.FIREBASE_TOKEN, 'Firebase credentials must not be used');
 const fullRules = path.resolve(__dirname, '../firebase/production-with-secret-atlas.rules.json');
 const rules = fs.readFileSync(fullRules, 'utf8');
+if (process.env.SANSA_FIREBASE_DEPS) {
+  assert.equal(fs.readFileSync(path.join(process.env.SANSA_FIREBASE_DEPS, 'merged.rules.json'), 'utf8'), rules,
+    'CLI must load a byte-identical copy of the full merged rules');
+}
 console.log('Rules SHA256 ' + createHash('sha256').update(rules).digest('hex'));
 async function check(name, fn) {
   try { await fn(); console.log('PASS ' + name); }
