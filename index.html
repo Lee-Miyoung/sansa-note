@@ -23390,7 +23390,7 @@ body.catalog-screen-open #catalogOverlay,
 <div class="overlay wellness-room" id="breathOverlay">
   <div class="modal" style="text-align:center;">
     <div class="modal-head">
-      <span class="room-companion sansa-mascot" data-pose="breathe" aria-hidden="true"></span>
+      <img class="room-companion breath-munyeom" src="./images/brand/monks/monk-meditation.png" alt="명상하는 무념스님" width="76" height="76" loading="lazy" decoding="async">
       <div><h2 class="serif" id="breathTitle">🫁 수식관 호흡</h2><div class="sub" id="breathSub">스님들이 참선할 때 쓰는 '수식관(數息觀)' — 숨을 헤아리며 마음을 가라앉히는 전통 수행법이에요</div></div>
       <button type="button" aria-label="닫기" class="close-x" onclick="closeBreathOverlay()">✕</button>
     </div>
@@ -23398,16 +23398,16 @@ body.catalog-screen-open #catalogOverlay,
       <div id="breathBreathBody" style="position:relative;overflow:hidden;border-radius:14px;">
         <video autoplay loop muted playsinline src="bg-video.mp4" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.35;"></video>
         <div id="breathParticles" style="position:absolute;inset:0;overflow:hidden;pointer-events:none;"></div>
+        <img id="breathMonk" src="./images/brand/monks/monk-meditation.png" alt="편안히 앉아 호흡하는 무념스님" width="150" height="150" loading="lazy" decoding="async">
         <div id="breathCircle" style="position:relative;width:140px;height:140px;border-radius:50%;background:radial-gradient(circle,var(--moss),var(--moss-dark));margin:20px auto;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:15px;transition:transform 4s ease-in-out;">준비</div>
         <div id="breathCount" style="position:relative;font-size:12px;color:var(--ink-soft);margin-bottom:14px;">시작 버튼을 눌러주세요</div>
         <div id="breathRemaining" style="display:none;font-size:12px;color:var(--ink-soft);margin:4px 0 12px;"></div>
         <button class="btn btn-primary btn-block" id="breathStartBtn" onclick="startBreathing()" style="position:relative;">시작하기</button>
       </div>
       <div id="breathPhraseBody" style="display:none;padding:10px 10px 30px;">
-        <img src="IMG_4439.png" style="width:130px;margin-bottom:10px;" alt="" onerror="this.style.display='none'">
+        <img src="./images/brand/monks/monk-meditation.png" style="width:130px;height:130px;object-fit:contain;margin-bottom:10px;" alt="명상하는 무념스님" loading="lazy" onerror="this.style.display='none'">
         <div id="breathPhraseText" style="font-family:'Nanum Myeongjo','Noto Serif KR',serif;font-size:22px;color:var(--stamp);min-height:60px;transition:opacity .4s ease;line-height:1.6;"></div>
       </div>
-      <button class="btn btn-ghost btn-block" id="ambientToggleBtn" onclick="toggleAmbient()" style="margin-top:8px;">🔇 배경음 꺼짐</button>
       <div class="map-note" style="margin-top:14px;">🙏 이 시간은 마음을 잠시 쉬게 하는 작은 방편일 뿐이에요. 계속 마음이 무겁다면, 그 마음을 혼자 두지 말고 가까운 사람과 나눠보세요.</div>
     </div>
   </div>
@@ -26418,17 +26418,7 @@ let ambientCtx = null;
 let ambientNodes = [];
 let ambientOn = false;
 
-function startAmbient(baseFreq){
-  stopAmbient();
-  if(!ambientOn) return;
-  try{
-    const audio = new Audio('ambient.mp3');
-    audio.loop = true;
-    audio.volume = 0.22;
-    audio.play().catch(()=>{});
-    ambientNodes.push(audio);
-  }catch(e){}
-}
+function startAmbient(){ stopAmbient(); /* Meditation always enters silently. */ }
 function stopAmbient(){
   ambientNodes.forEach(n=>{
     try{
@@ -26439,12 +26429,7 @@ function stopAmbient(){
   });
   ambientNodes = [];
 }
-function toggleAmbient(){
-  ambientOn = !ambientOn;
-  document.getElementById('ambientToggleBtn').textContent = ambientOn ? '🔊 배경음 켜짐' : '🔇 배경음 꺼짐';
-  if(ambientOn){ startAmbient(currentAmbientTone); }
-  else { stopAmbient(); }
-}
+function toggleAmbient(){ window.sansaMeditationSound?.stop(); }
 
 function renderParticles(colorPair){
   const wrap = document.getElementById('breathParticles');
@@ -26503,6 +26488,7 @@ const MEDITATION_PHRASES = {
 let currentAmbientTone = 220;
 
 function openBreathOverlay(typeKey){
+  window.sansaMeditationSound?.enter();
   typeKey = typeKey || 'box';
   const phraseType = MEDITATION_PHRASES[typeKey];
   if(phraseType){
@@ -26531,6 +26517,7 @@ function closeBreathOverlay(){
 function resetBreathing(){
   window.sansaMeditationSound?.stop();
   window.sansaWellnessBreathing?.(0);
+  window.sansaWellnessBreathPhase?.('준비',0,1);
   clearTimeout(breathTimer);
   const circle = document.getElementById('breathCircle');
   circle.style.transition = 'none';
@@ -26549,6 +26536,7 @@ function startBreathing(){
   let stepIdx = 0;
   function runStep(){
     if(cycle >= med.cycles){
+      window.sansaMeditationSound?.stop();
       window.sansaWellnessBreathing?.(0);
       circle.style.transition = 'transform 1s ease';
       circle.style.transform = 'scale(1)';
@@ -26559,7 +26547,7 @@ function startBreathing(){
       return;
     }
     const step = med.steps[stepIdx];
-    window.sansaMeditationSound?.play();
+    window.sansaWellnessBreathPhase?.(step.label,step.dur,step.scale);
     const remainingMs=med.steps.slice(stepIdx).reduce((n,s)=>n+s.dur,0)+(med.cycles-cycle-1)*med.steps.reduce((n,s)=>n+s.dur,0);
     window.sansaWellnessBreathing?.(remainingMs);
     circle.style.transition = `transform ${step.dur/1000}s ease-in-out`;
@@ -26575,6 +26563,8 @@ function startBreathing(){
 
 let phraseTimer = null;
 function openPhraseMeditation(key){
+  clearTimeout(breathTimer);clearTimeout(phraseTimer);
+  window.sansaMeditationSound?.enter();
   const data = MEDITATION_PHRASES[key];
   document.getElementById('breathBreathBody').style.display = 'none';
   document.getElementById('breathPhraseBody').style.display = 'block';
@@ -26584,8 +26574,10 @@ function openPhraseMeditation(key){
   currentAmbientTone = data.tone;
   startAmbient(currentAmbientTone);
   let idx = 0;
+  window.sansaMeditationSound?.setDeadline(data.phrases.length*4000);
   const el = document.getElementById('breathPhraseText');
   function showNext(){
+    if(idx>=data.phrases.length){window.sansaMeditationSound?.stop();return;}
     el.style.opacity = 0;
     setTimeout(()=>{
       el.textContent = data.phrases[idx % data.phrases.length];
@@ -29684,6 +29676,20 @@ function sansa108Mark(name){
   const number=sansa108Number(name);
   return number?`<span class="sansa108-course-mark" title="산사노트 한국 명찰 108선 ${String(number).padStart(3,'0')}번">🪷 108선 ${String(number).padStart(3,'0')}</span>`:'';
 }
+// Existing official companions, selected for each course theme without changing course data.
+function courseCompanion(pack){
+  const text=pack.key+' '+pack.label+' '+(pack.route||'');
+  let pose='walking';
+  if(/unesco|gyeongju|andong|buyeo|역사|문화유산/.test(text)) pose='reading';
+  else if(/jeokmyeol|보궁|성지/.test(text)) pose='prayer';
+  else if(/forest|숲길|고즈넉/.test(text)) pose='meditation';
+  else if(/cherry|벚꽃/.test(text)) pose='lotus';
+  else if(/autumn|단풍/.test(text)) pose='smile';
+  return './images/brand/monks/monk-'+pose+'.png';
+}
+function courseCompanionHeading(pack,earned=false){
+  return `<div class="pack-companion-heading"><img class="pack-companion" src="${courseCompanion(pack)}" alt="" width="60" height="68" loading="lazy" decoding="async"><div class="packrow-title">${earned?'🏅 ':''}${escapeHtml(pack.label)}</div></div>`;
+}
 function renderPackOverlay(){
   const wrap=document.getElementById('packList');
 
@@ -29704,7 +29710,7 @@ function renderPackOverlay(){
 
     return `<div class="packrow">
       <div class="packrow-main">
-        <div class="packrow-title">${earned?'🏅 ':''}${escapeHtml(p.label)}</div>
+        ${courseCompanionHeading(p,earned)}
         <div class="sansa108-course-summary">🪷 한국 명찰 108선 ${featuredCount}곳 포함${featuredCount<packData.length?` · 그 외 사찰 ${packData.length-featuredCount}곳도 순례 가능`:''}</div>
 
         <button class="pack-progress-summary" type="button" onclick="openCourseProgressDetail('${p.key}')">
@@ -29749,7 +29755,7 @@ function openPackDetail(key){
     <div style="margin-bottom:12px;">
       <a onclick="renderPackOverlay()" style="cursor:pointer;color:var(--moss);font-size:12.5px;font-weight:700;">← 코스 목록으로</a>
     </div>
-    <div class="packrow-title" style="font-size:18px;margin-bottom:4px;">${escapeHtml(pack.label)}</div>
+    ${courseCompanionHeading(pack)}
     ${pack.route?`<div class="packrow-sub" style="color:var(--stamp);margin-bottom:8px;">🚗 ${escapeHtml(pack.route)}</div>`:''}
     ${pack.nearby?`<div class="packrow-sub" style="color:var(--moss);margin-bottom:12px;">📍 주변 들를 만한 곳: ${escapeHtml(pack.nearby)}</div>`:''}
 
@@ -42276,8 +42282,8 @@ nav.site-global-nav{height:var(--global-nav-h)!important;box-sizing:border-box!i
 }
 @media(prefers-reduced-motion:reduce){.site-global-nav .site-global-nav-links>button{transition:none!important}}
 </style>
-<link rel="stylesheet" href="./styles/wellness.css?v=20261017-calm">
-<link rel="stylesheet" href="./styles/brand-ui.css?v=20261017-calm">
+<link rel="stylesheet" href="./styles/wellness.css?v=20261018-integrated">
+<link rel="stylesheet" href="./styles/brand-ui.css?v=20261018-integrated">
 <link rel="stylesheet" href="./styles/game-viewport.css?v=20261017">
 <style id="sansa-home-personal-cards-only">
 #mainListArea{display:none!important}
@@ -42285,9 +42291,9 @@ nav.site-global-nav{height:var(--global-nav-h)!important;box-sizing:border-box!i
 
 
 
-<script src="./scripts/wellness-effects.js?v=20261016-storybook" defer></script>
-<script src="./scripts/meditation-sounds.js?v=20261017" defer></script>
+<script src="./scripts/wellness-effects.js?v=20261018-integrated" defer></script>
+<script src="./scripts/meditation-sounds.js?v=20261018" defer></script>
 <script src="./scripts/game-viewport.js?v=20261017" defer></script>
-<script src="./scripts/navigation.js?v=20261017" defer></script>
+<script src="./scripts/navigation.js?v=20261018" defer></script>
 </body>
 </html>

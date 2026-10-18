@@ -2,7 +2,12 @@
 (()=>{
   const feedbackTimers=new WeakMap();
   let breathVisualTimer;
+  window.sansaWellnessBreathPhase=(label,duration,scale)=>{
+    const monk=document.getElementById('breathMonk');if(!monk)return;
+    monk.dataset.phase=label;monk.style.setProperty('--breath-duration',duration+'ms');monk.style.transform=scale>1?'scale(1.035)':'scale(1)';
+  };
   window.sansaWellnessBreathing=remainingMs=>{
+    window.sansaMeditationSound?.setDeadline(remainingMs);
     clearInterval(breathVisualTimer);
     const label=document.getElementById('breathRemaining');
     if(!label)return;

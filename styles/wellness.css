@@ -224,3 +224,29 @@
 .sansa-mascot[data-pose=explore]{background-size:300% 395%!important;background-position:50% 33.6%!important;clip-path:inset(2% 0 0 8%)}
 .sansa-mascot[data-pose=comfort]{clip-path:inset(2% 0 0)}
 .sansa-mascot[data-pose=count]{clip-path:inset(2% 0 5%)}
+/* Official existing Munyeom asset; contain preserves the entire seated character. */
+#breathOverlay .modal-head .breath-munyeom{position:absolute;object-fit:contain;aspect-ratio:1;filter:none;background:none!important}
+#breathMonk{display:block;position:relative;object-fit:contain;width:150px;height:150px;max-width:55%;margin:10px auto 24px;transform-origin:center 75%;transition:transform var(--breath-duration,0ms) ease-in-out;will-change:transform}
+@media(prefers-reduced-motion:reduce){#breathMonk{transition:none!important}}
+
+/* New scenery only: the foreground companion atlas and compact card geometry are unchanged. */
+.hero-experience .hip-quick-row .hip-quick-btn .wellness-scene,
+#funBannerWrap .fun-banner-row .fun-banner-btn .wellness-scene{
+ width:46%!important;height:100%!important;
+ background-image:url('../images/brand/wellness/activity-settings.webp')!important;
+ background-size:300% 400%!important;background-repeat:no-repeat!important;
+ opacity:.7;-webkit-mask-image:linear-gradient(90deg,transparent,#000 34%);mask-image:linear-gradient(90deg,transparent,#000 34%);
+}
+.hero-experience .hip-quick-row .hip-quick-btn .scene-prop,
+#funBannerWrap .fun-banner-row .fun-banner-btn .scene-prop{display:none!important}
+.wellness-scene.scene-worry{background-position:0 0!important}
+.wellness-scene.scene-breathe{background-position:50% 0!important}
+.wellness-scene.scene-rhythm{background-position:100% 0!important}
+.wellness-scene.scene-write{background-position:0 33.333333%!important}
+.wellness-scene.scene-explore{background-position:50% 33.333333%!important}
+.wellness-scene.scene-comfort{background-position:100% 33.333333%!important}
+.wellness-scene.scene-wish{background-position:0 66.666667%!important}
+.wellness-scene.scene-count{background-position:50% 66.666667%!important}
+.wellness-scene.scene-pouch{background-position:100% 66.666667%!important}
+.wellness-scene.scene-dance{background-position:0 100%!important}
+.wellness-scene.scene-music{background-position:50% 100%!important}

@@ -29,8 +29,8 @@
 #settingsOverlay .settings-section-title{font-size:20px!important;color:#315741!important;margin-top:24px!important}
 #settingsOverlay .settings-account-card{background:#f4f1e5!important;border:1px solid #dedbc7!important;border-radius:18px!important}
 #catalogOverlay .modal-head{padding:24px 62px 22px 106px!important;background:#eef3e7!important;min-height:110px}
-#catalogOverlay .modal-head::before{content:''!important;position:absolute!important;left:18px!important;top:24px!important;transform:none!important;width:74px!important;height:64px!important;border-radius:0!important;background:url('../images/brand/wellness/props/card-suggest-temple.webp') center/contain no-repeat!important}
-#catalogOverlay[data-place-kind=mountain] .modal-head::before{background-image:url('../images/brand/wellness/props/card-breath-mountain.webp')!important}
+#catalogOverlay .modal-head::before{content:''!important;position:absolute!important;left:18px!important;top:24px!important;transform:none!important;width:74px!important;height:64px!important;border-radius:0!important;background:url('../images/brand/monks/monk-prayer.png') center/contain no-repeat!important}
+#catalogOverlay[data-place-kind=mountain] .modal-head::before{background-image:url('../images/brand/monks/monk-walking.png')!important}
 #catalogOverlay .catalog-kind-tabs{gap:8px!important;flex-wrap:nowrap!important}
 #catalogOverlay .catalog-kind-tabs>button{font-size:16px!important;min-height:44px!important;border-radius:12px!important;flex:1!important;background:#f5f3e9!important;color:#45634c!important}
 #catalogOverlay .catalog-kind-tabs>button.active{background:#dfead6!important;color:#294f41!important}
@@ -110,3 +110,12 @@ html body #catalogOverlay.show .modal-head{padding:24px 62px 22px 106px!importan
 /* A card detail must sit above its collection, including when restored with Forward. */
 #guardianCardDetail{z-index:2147483647!important}
 #guardianCardDetail .guardian-detail-close{min-width:44px;min-height:44px}
+.meditation-sound-panel #meditationSound{width:100%;min-height:46px;white-space:normal;font:inherit;background:#fffdf5;color:#315542;border:1px solid #bccab8;border-radius:10px;padding:10px}
+.meditation-controls{display:flex;flex-wrap:wrap;gap:8px}.meditation-controls button{flex:1 1 110px;min-height:44px;white-space:normal}
+#meditationDescription,#meditationAttribution{font-size:14px;line-height:1.7;overflow-wrap:anywhere}#meditationAttribution a{display:inline-block;margin-right:10px}#meditationAttribution p{margin:8px 0}
+
+/* Companion images are presentation only; course actions and progress stay intact. */
+.pack-companion-heading{display:flex;align-items:center;gap:12px;min-width:0;margin-bottom:6px}
+.pack-companion-heading .packrow-title{min-width:0;overflow-wrap:anywhere;flex:1}
+.pack-companion{width:60px;height:68px;object-fit:contain;flex:none;filter:drop-shadow(0 3px 3px #516d4820)}
+@media(max-width:700px){.pack-companion-heading{gap:8px}.pack-companion{width:48px;height:56px}#packOverlay .pack-companion-heading .packrow-title{font-size:18px!important}}
