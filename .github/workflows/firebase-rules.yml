@@ -43,6 +43,11 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /.github/workflows/
+            /firebase/
+            /tests/
       - uses: actions/setup-node@v4
         with:
           node-version: '24'

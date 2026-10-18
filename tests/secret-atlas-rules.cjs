@@ -20,16 +20,47 @@ if (process.env.SANSA_FIREBASE_DEPS) {
     'CLI must load a byte-identical copy of the full merged rules');
 }
 console.log('Rules SHA256 ' + createHash('sha256').update(rules).digest('hex'));
+const failures = [];
 async function check(name, fn) {
-  try { await fn(); console.log('PASS ' + name); }
+  try { await fn(); console.log('PASS ' + name); return true; }
   catch (error) {
     console.error('FAIL ' + name);
     if (process.env.CI) {
       const detail = (name + ': ' + error.stack).replace(/%/g, '%25').replace(/\r/g, '%0D').replace(/\n/g, '%0A');
       console.error('::error title=Firebase rules assertion::' + detail);
     }
-    throw error;
+    failures.push({ name, message: error.message });
+    return false;
   }
+}
+async function diagnoseCompleted() {
+  const variants = [
+    ['original', () => {}],
+    ['without-key-regex', c => { const v = c.completed.$scene['.validate']; c.completed.$scene['.validate'] = v.slice(v.indexOf(' && ') + 4); }],
+    ['without-child-validation', c => { c.completed.$scene['.validate'] = 'true'; }],
+    ['without-container-validation', c => { c.completed['.validate'] = 'true'; }]
+  ];
+  const results = [];
+  for (const [name, change] of variants) {
+    const copy = JSON.parse(rules);
+    change(copy.rules.users.$uid.secretAtlas['haeinsa-001']);
+    const diagnostic = await initializeTestEnvironment({
+      projectId: PROJECT + '-diag-' + name,
+      database: { host: '127.0.0.1', port: 9900, rules: JSON.stringify(copy) }
+    });
+    try {
+      const db = diagnostic.authenticatedContext('alice', { email: 'alice@example.test' }).database();
+      const at = Date.now();
+      try {
+        await update(ref(db, 'users/alice/secretAtlas/haeinsa-001'), {
+          'completed/1': at, 'completed/2': at, 'completed/3': at, 'completed/4': at
+        });
+        results.push({ variant: name, completedWrite: 'accepted' });
+      } catch (error) { results.push({ variant: name, completedWrite: 'rejected', code: error.code }); }
+    } finally { await diagnostic.cleanup(); }
+  }
+  console.log('DIAGNOSTIC in-memory full-rules clones only; original files unchanged: ' + JSON.stringify(results));
+  if (process.env.CI) console.log('::notice title=Completed-rule diagnosis::' + JSON.stringify(results));
 }
 (async () => {
   const env = await initializeTestEnvironment({
@@ -92,7 +123,7 @@ async function check(name, fn) {
       await assertSucceeds(set(ref(alice, base + '/note'), note('')));
       await assertSucceeds(set(ref(alice, base + '/note'), note('A 기록')));
     });
-    await check('All three cards require four completed scenes and retain first timestamp', async () => {
+    const acquisitionPassed = await check('All three cards require four completed scenes and retain first timestamp', async () => {
       for (let part = 1; part <= 3; part++) {
         const id = String(part).padStart(3, '0');
         await assertFails(set(ref(alice, base + '/cards/' + id), stamp));
@@ -108,7 +139,15 @@ async function check(name, fn) {
       }
       assert.equal(Object.keys((await get(ref(alice, base + '/cards'))).val()).length, 3);
     });
-    await check('Duplicate concurrent card transactions remain idempotent', async () => {
+    if (!acquisitionPassed) await diagnoseCompleted();
+    // Independent existing-card fixtures: do not turn a failed acquisition into a pass.
+    await env.withSecurityRulesDisabled(async ctx => {
+      const patch = {};
+      for (let i = 1; i <= 12; i++) patch['completed/' + i] = stamp;
+      for (let i = 1; i <= 3; i++) patch['cards/' + String(i).padStart(3, '0')] = stamp;
+      await update(ref(ctx.database(), base), patch);
+    });
+    await check('Existing-card fixture concurrent transactions remain idempotent', async () => {
       const second = env.authenticatedContext('alice', { email: 'alice@example.test' }).database();
       await Promise.all([
         runTransaction(ref(alice, base + '/cards/001'), old => old || stamp + 1),
@@ -190,6 +229,9 @@ async function check(name, fn) {
       assert.deepEqual((await get(ref(alice, 'users/alice/destinations/legacy108'))).val(), legacy);
       assert.equal((await get(ref(bob, other + '/note/text'))).val(), 'B 기록');
     });
-    console.log('PASS all 14 full-rules emulator scenarios; no production access or deployment');
+    if (failures.length) {
+      console.error('FAIL full-rules suite: ' + failures.length + '/14 scenario(s): ' + JSON.stringify(failures));
+      process.exitCode = 1;
+    } else console.log('PASS all 14 full-rules emulator scenarios; no production access or deployment');
   } finally { await env.cleanup(); }
 })().catch(error => { console.error(error); process.exitCode = 1; });
