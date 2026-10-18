@@ -2,12 +2,17 @@
 // index.html은 온라인일 때 항상 최신 버전을 먼저 가져오고,
 // 오프라인일 때만 캐시를 사용합니다.
 
-const CACHE_VERSION = 'sansanote-v7-navigation-game';
+const CACHE_VERSION = 'sansanote-v8-secret-atlas-review';
 
 const CORE_ASSETS = [
   './',
   './index.html',
-  './scripts/navigation.js?v=20261017',
+  './styles/secret-atlas.css?v=20261018',
+  './scripts/secret-atlas/content.js?v=20261018',
+  './scripts/secret-atlas/store.js?v=20261018',
+  './scripts/secret-atlas/app.js?v=20261018',
+  './images/secret-atlas/haeinsa-cover-small.webp',
+  './scripts/navigation.js?v=20261018',
   './scripts/game-viewport.js?v=20261017',
   './scripts/meditation-sounds.js?v=20261017',
   './styles/game-viewport.css?v=20261017',

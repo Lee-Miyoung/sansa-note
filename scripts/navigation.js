@@ -37,6 +37,7 @@
     if(ids.includes('vowOverlay'))parts.push(document.querySelector('#vowBody textarea')?'vow-editor':'vow-list');
     if(ids.includes('amuletOverlay'))parts.push(document.getElementById('amuletCanvas')?'amulet-preview':'amulet-picker');
     if(ids.includes('pilgrimCollectionOverlay'))parts.push('pg:'+s.pg);
+    if(ids.includes('secretAtlasOverlay'))parts.push('secret-atlas:'+window.sansaSecretAtlas?.routeKey());
     const guardian=document.getElementById('guardianCardDetail');
     if(guardian)parts.push('guardian:'+(guardian.querySelector('h3')?.textContent||''));
     return parts.join('|');
@@ -44,13 +45,13 @@
   function pageY(){const top=parseFloat(document.body.style.top);return document.body.classList.contains('sansa-overlay-locked')&&Number.isFinite(top)?-top:scrollY;}
   function snapshot(id,index){
     const ids=shown(),fields={},scrolls={},panels={};rememberDraft();
-    document.querySelectorAll('input[id]:not([type=file]):not([type=password]),textarea[id],select[id]').forEach(e=>{if(e.matches('[type=range],#meditationSound,#meditationBellEnabled'))return;fields[e.id]={value:e.value,checked:e.checked};});
+    document.querySelectorAll('input[id]:not([type=file]):not([type=password]),textarea[id],select[id]').forEach(e=>{if(e.matches('[type=range],#meditationSound,#meditationBellEnabled,#atlasNote'))return;fields[e.id]={value:e.value,checked:e.checked};});
     document.querySelectorAll('.overlay.show .modal,.overlay.show .modal-body,.overlay.show [id]').forEach(e=>{
       if(e.id||e.matches('.modal,.modal-body')){const selector=e.id?'#'+e.id:'#'+e.closest('.overlay').id+(e.matches('.modal')?' .modal':' .modal-body');if(e.scrollHeight>e.clientHeight+1)scrolls[selector]=[e.scrollTop,e.scrollLeft];}
     });
     for(const name of ['worryBody','vowBody']){const e=document.getElementById(name);if(e&&ids.includes(e.closest('.overlay')?.id))panels[name]={html:e.innerHTML,className:e.className,emotion:e.dataset.emotionKey||''};}
     const guardian=document.getElementById('guardianCardDetail');if(guardian)liveNodes.set(id,guardian);
-    return {id,index,key:route(),ids,fields,scrolls,panels,bits:stateBits(),y:pageY(),gameRank:!!document.getElementById('beatLeaderboard')?.classList.contains('show'),guardian:!!guardian,guardianIndex:guardian?Number((guardian.querySelector('.guardian-detail-kicker,small')?.textContent||'').match(/\d{3}/)?.[0]||'1')-1:null,bodyClasses:[...document.body.classList].filter(c=>/catalog|community/.test(c)),editorKey,at:Date.now()};
+    return {id,index,key:route(),ids,fields,scrolls,panels,secretAtlas:ids.includes('secretAtlasOverlay')?window.sansaSecretAtlas?.capture():null,bits:stateBits(),y:pageY(),gameRank:!!document.getElementById('beatLeaderboard')?.classList.contains('show'),guardian:!!guardian,guardianIndex:guardian?Number((guardian.querySelector('.guardian-detail-kicker,small')?.textContent||'').match(/\d{3}/)?.[0]||'1')-1:null,bodyClasses:[...document.body.classList].filter(c=>/catalog|community/.test(c)),editorKey,at:Date.now()};
   }
   function attach(r,push){records.set(r.id,r);current=r;const st={...(history.state||{}),sansaNavigation:{v:1,id:r.id,index:r.index}};try{(push?native.push:native.replace)(st,'',location.href);}catch(_){}persist();}
   function checkpoint(){if(restoring||!current)return;if(route()!==current.key){if(performance.now()<batchUntil){schedule();return;}flush();}attach(snapshot(current.id,current.index),false);}
@@ -90,6 +91,7 @@
     if(typeof amuletPattern!=='undefined')amuletPattern=s.pattern||'lattice';
   }
   function cleanupLeaving(target){
+    if(!target.ids.includes('secretAtlasOverlay')&&document.getElementById('secretAtlasOverlay')?.classList.contains('show'))window.sansaSecretAtlas?.suspend();
     const closers={beatLabOverlay:'closeBeatLab',breathOverlay:'closeBreathOverlay',mantraOverlay:'closeMantraOverlay',rouletteOverlay:'closeRouletteOverlay'};
     for(const [id,fn]of Object.entries(closers))if(!target.ids.includes(id)&&document.getElementById(id)?.classList.contains('show'))window[fn]?.();
     if(!target.guardian)document.getElementById('guardianCardDetail')?.remove();
@@ -112,6 +114,7 @@
       document.body.classList.toggle('sansa-catalog-active',hasCatalog);
       if(app)hasCatalog?app.style.setProperty('display','none','important'):app.style.setProperty('display','block');
       if(catalog){catalog.style.removeProperty('display');if(hasCatalog)catalog.style.setProperty('display','flex','important');}
+      if(r.ids.includes('secretAtlasOverlay'))window.sansaSecretAtlas?.restore(r.secretAtlas);
       applyFields(r);
       if(hasCatalog){window.syncCatalogModeTabs?.();window.renderCatalogOverlay?.();}
       if(r.ids.includes('breathOverlay')&&r.bits.meditation)window.openBreathOverlay?.(r.bits.meditation);
