@@ -58,5 +58,89 @@
     },
     "adaptationLicense": "CC BY-SA 3.0",
     "changes": "실제 사진을 참고한 AI 수채화 변환. 인물·임시 광고 일부 생략, 768×512 WebP 압축. 현장 사진·실측 복원도가 아닙니다."
+  },
+  {
+    "id": "temple:갑사",
+    "name": "갑사",
+    "region": "충청",
+    "src": "/images/temple-covers/gapsa-gongju.webp",
+    "width": 768,
+    "height": 512,
+    "bytes": 124042,
+    "sha256": "95caafc4b6efd5cc7a2578b3262c6a29bb6109c92024b9395009395e87755426",
+    "source": {
+      "title": "File:갑사철당간및지주.jpg",
+      "url": "https://commons.wikimedia.org/wiki/File:갑사철당간및지주.jpg",
+      "original": "https://upload.wikimedia.org/wikipedia/commons/8/85/%EA%B0%91%EC%82%AC%EC%B2%A0%EB%8B%B9%EA%B0%84%EB%B0%8F%EC%A7%80%EC%A3%BC.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "creator": "문화재청",
+      "license": "KOGL Type 1",
+      "licenseURL": "http://www.kogl.or.kr/info/licenseType1.do",
+      "referenceDate": "2010-07-22 10:21:46"
+    },
+    "adaptationLicense": "KOGL Type 1",
+    "changes": "실제 사진을 참고한 AI 수채화 제작·WebP 압축. 철당간·지주와 숲. 전각을 추정해 추가하지 않음."
+  },
+  {
+    "id": "temple:개심사",
+    "name": "개심사",
+    "region": "충청",
+    "src": "/images/temple-covers/gaesimsa-seosan.webp",
+    "width": 768,
+    "height": 512,
+    "bytes": 141182,
+    "sha256": "4ffdc6931b1ca65ce76de01f1080160dd99ff3348241c7a7c4f05b0d614bd54b",
+    "source": {
+      "title": "File:서산 개심사 대웅전 01.jpg",
+      "url": "https://commons.wikimedia.org/wiki/File:서산_개심사_대웅전_01.jpg",
+      "original": "https://upload.wikimedia.org/wikipedia/commons/7/7c/%EC%84%9C%EC%82%B0_%EA%B0%9C%EC%8B%AC%EC%82%AC_%EB%8C%80%EC%9B%85%EC%A0%84_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "creator": "Unknown authorUnknown author",
+      "license": "Public domain",
+      "licenseURL": "https://creativecommons.org/publicdomain/mark/1.0/",
+      "referenceDate": "Unknown date"
+    },
+    "adaptationLicense": "CC0",
+    "changes": "실제 사진을 참고한 AI 수채화 제작·WebP 압축. 대웅전·석탑·축대의 실제 배치. 수채화 색조로 계절감 표현."
+  },
+  {
+    "id": "temple:건봉사",
+    "name": "건봉사",
+    "region": "강원",
+    "src": "/images/temple-covers/geonbongsa-goseong.webp",
+    "width": 768,
+    "height": 512,
+    "bytes": 135610,
+    "sha256": "0fadcc7ab5a703dc09c62f53570e5797b11e3ee14f2c66d0ada4ff6de99510ea",
+    "source": {
+      "title": "File:Geonbongsa Neungpagyo 071104 by Mansegmj 0030.jpg",
+      "url": "https://commons.wikimedia.org/wiki/File:Geonbongsa_Neungpagyo_071104_by_Mansegmj_0030.jpg",
+      "original": "https://upload.wikimedia.org/wikipedia/commons/2/24/Geonbongsa_Neungpagyo_071104_by_Mansegmj_0030.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "creator": "Mansegmj",
+      "license": "CC BY-SA 4.0",
+      "licenseURL": "https://creativecommons.org/licenses/by-sa/4.0",
+      "referenceDate": "2007-11-04 11:29:15"
+    },
+    "adaptationLicense": "CC BY-SA 4.0",
+    "changes": "실제 사진을 참고한 AI 수채화 제작·WebP 압축. 능파교의 단일 아치·계류·가을 숲. 전각을 추정해 추가하지 않음."
+  },
+  {
+    "id": "temple:고운사",
+    "name": "고운사",
+    "region": "경상",
+    "src": "/images/temple-covers/gounsa-uiseong.webp",
+    "width": 768,
+    "height": 512,
+    "bytes": 134034,
+    "sha256": "fd365f48955a6947e51eb5ae8eae238ef20ab7525c00bd59382c93fb7017fff4",
+    "source": {
+      "title": "File:Korea-Andong-Gounsa-01.jpg",
+      "url": "https://commons.wikimedia.org/wiki/File:Korea-Andong-Gounsa-01.jpg",
+      "original": "https://upload.wikimedia.org/wikipedia/commons/5/5c/Korea-Andong-Gounsa-01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "creator": "Robert at Picasa",
+      "license": "CC BY 3.0",
+      "licenseURL": "https://creativecommons.org/licenses/by/3.0",
+      "referenceDate": "Taken on 13 November 2005"
+    },
+    "adaptationLicense": "CC BY 3.0",
+    "changes": "실제 사진을 참고한 AI 수채화 제작·WebP 압축. 2005년 참고 사진의 대웅보전과 숲을 그린 기록적 풍경. 2025년 산불 이후 현재 경내 전체 상태를 재현하는 그림이 아님."
   }
 ]
