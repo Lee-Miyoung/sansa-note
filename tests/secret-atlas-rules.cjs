@@ -41,11 +41,11 @@ async function diagnoseCompleted() {
     ['without-container-validation', c => { c.completed['.validate'] = 'true'; }]
   ];
   const results = [];
-  for (const [name, change] of variants) {
+  for (const [index, [name, change]] of variants.entries()) {
     const copy = JSON.parse(rules);
     change(copy.rules.users.$uid.secretAtlas['haeinsa-001']);
     const diagnostic = await initializeTestEnvironment({
-      projectId: PROJECT + '-diag-' + name,
+      projectId: PROJECT + '-diag-' + index,
       database: { host: '127.0.0.1', port: 9900, rules: JSON.stringify(copy) }
     });
     try {
