@@ -6,6 +6,8 @@
 
 최근 운영 배포 사전 검사: [2026-10-18 배포 중단 결과](deployment-preflight-20261018.md). Firebase 필수 검증이 막혀 운영 main은 유지했다.
 
+현행 규칙을 제공받아 작성한 [전체 Firebase 규칙 통합 초안과 검증 한계](firebase-rules-integration.md)를 별도로 검토할 수 있다. 운영에는 적용하지 않았다.
+
 ## 로컬에서 보기
 
 ```sh
