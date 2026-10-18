@@ -4,7 +4,7 @@
   const native={push:history.pushState.bind(history),replace:history.replaceState.bind(history)};
   const KEY='sansaNavigation_v1',records=new Map();
   let current=null,restoring=false,timer=0,batchUntil=0,depth=0,serial=0,restoreVersion=0;
-  const liveNodes=new Map();
+  const liveNodes=new Map(),pendingCloses=new Set();
   let editorKey=null;const drafts={};try{Object.assign(drafts,JSON.parse(sessionStorage.getItem('sansaVowDrafts_v1')||'{}'));}catch(_){}
   function persistDrafts(){try{sessionStorage.setItem('sansaVowDrafts_v1',JSON.stringify(drafts));}catch(_){}}
   function rememberDraft(){const field=document.querySelector('#vowBody textarea');if(field&&editorKey){drafts[editorKey]=field.value;persistDrafts();}}
@@ -67,6 +67,7 @@
     for(const name of Object.keys(window).filter(n=>/^open[A-Z]/.test(n)).concat(extra)){
       const fn=window[name];if(typeof fn!=='function'||fn.__sansaNavigationWrapped||String(fn).includes('[native code]'))continue;
       const wrapped=function(...args){beforeAction();depth++;try{
+        if(/^open[A-Z]/.test(name)&&!['openBreathOverlay','openPhraseMeditation'].includes(name)&&shown().includes('breathOverlay'))window.sansaMeditationSound?.stop();
         const result=fn.apply(this,args);
         if(name==='renderVowWrite'||name==='renderVowEdit'){
           editorKey=(typeof currentUid==='undefined'||!currentUid?'guest':currentUid)+':'+(name==='renderVowWrite'?'new':'edit:'+args[0]);
@@ -131,14 +132,46 @@
       applyScroll(r);setTimeout(()=>{if(current?.id===r.id)applyScroll(r);},100);
     }finally{setTimeout(()=>{if(version===restoreVersion){restoring=false;schedule();}},150);}
   }
+  // Closing a window is not navigating to its preceding internal page.
+  // Retire it from every saved snapshot so Back/Forward/reload cannot resurrect it.
+  function finishClose(id,previous){
+    if(!pendingCloses.has(id))return;
+    const removedParts={worryOverlay:/^(emotions|emotion-result:)/,vowOverlay:/^vow-/,amuletOverlay:/^amulet-/,catalogOverlay:/^catalog:/,detailOverlay:/^temple:/,mDetailOverlay:/^mountain:/,pilgrimCollectionOverlay:/^pg:/,beatLabOverlay:/^beat-rank$/,guardianCardDetail:/^guardian:/};
+    // Several synthetic/fast closes may settle in the same task: retire all of
+    // their confirmed intents before choosing a previous screen.
+    for(const closed of pendingCloses){const node=document.getElementById(closed);if(node){node.setAttribute('aria-hidden','true');node.style.removeProperty('display');}}
+    for(const closed of pendingCloses)for(const r of records.values()){
+      r.ids=r.ids.filter(value=>value!==closed);if(closed==='guardianCardDetail'){r.guardian=false;r.guardianIndex=null;liveNodes.delete(r.id);}
+      if(closed==='worryOverlay')delete r.panels.worryBody;if(closed==='vowOverlay')delete r.panels.vowBody;
+      const parts=r.key.split('|').slice(1).filter(part=>!removedParts[closed]?.test(part));
+      r.key=[r.ids.join(',')||'main',...parts].join('|');
+    }
+    pendingCloses.delete(id);
+    const identity={id:current.id,index:current.index};
+    let target=snapshot(identity.id,identity.index);
+    if(!target.ids.length&&previous)target={...previous,...identity,at:Date.now()};
+    attach(target,false);restore(target);
+  }
+  function prepareClose(button,event){
+    const owner=button.closest('#guardianCardDetail,.overlay'),id=owner?.id;if(!id)return false;
+    ++restoreVersion;restoring=false;clearTimeout(timer);timer=0;rememberDraft();
+    const previous=[...records.values()].filter(r=>r.index<current.index&&!r.ids.includes(id)&&(id!=='guardianCardDetail'||!r.guardian)).sort((a,b)=>b.index-a.index)[0];
+    // Let the original close handler run, including cleanup and draft confirmation.
+    // Stop at its button rather than letting a parent tab click reopen the window.
+    const complete=()=>{const node=document.getElementById(id);if(id==='guardianCardDetail'?node?.isConnected:node?.classList.contains('show'))return;pendingCloses.add(id);queueMicrotask(()=>finishClose(id,previous));};
+    if(button.onclick)button.addEventListener('click',e=>{e.stopPropagation();complete();},{once:true});
+    else setTimeout(complete,0);return true;
+  }
   function canBack(){return !!current&&current.index>0;}
   function back(){flush();checkpoint();if(canBack()){history.back();return true;}return false;}
   document.addEventListener('click',event=>{
+    const closeButton=event.target.closest('.close-x,.guardian-detail-close,.guardian-detail-ok,#guardianCardDetail .close-detail');
+    if(closeButton&&prepareClose(closeButton,event))return;
     if(restoring)return;
     batchUntil=0;beforeAction();batchUntil=performance.now()+110;
-    const close=event.target.closest('.close-x,.guardian-detail-close,.guardian-detail-ok,#guardianCardDetail .close-detail,[data-sansa-back]')||(event.target.id==='guardianCardDetail')||(event.target.matches('.overlay.show[onclick]'));
+    const close=event.target.closest('[data-sansa-back]')||(event.target.id==='guardianCardDetail')||(event.target.matches('.overlay.show[onclick]'));
     const inlineBack=event.target.closest('a[onclick],button[onclick]');
-    if((close||(inlineBack&&(/^\s*[←‹]/.test(inlineBack.textContent)||/^\s*close[A-Za-z]+\(\);?\s*$/.test(inlineBack.getAttribute('onclick')||''))))&&canBack()){
+    if((close||(inlineBack&&/^\s*[←‹]/.test(inlineBack.textContent)))&&canBack()){
       event.preventDefault();event.stopImmediatePropagation();back();return;
     }
     const link=event.target.closest('a[href]');
@@ -154,7 +187,9 @@
   window.addEventListener('pagehide',()=>{flush();checkpoint();});
   window.addEventListener('popstate',event=>{
     clearTimeout(timer);const mark=event.state?.sansaNavigation;if(!mark)return;
-    const r=records.get(mark.id);if(r)restore(r);
+    const r=records.get(mark.id);
+    if(r&&current&&r.key===current.key&&r.index!==current.index&&r.index>0){const direction=r.index<current.index?-1:1;current=r;history.go(direction);return;}
+    if(r)restore(r);
   });
   readSaved();const existing=history.state?.sansaNavigation,saved=existing&&records.get(existing.id);
   if(saved){current=saved;pendingRestore=saved;restoring=true;if(appReady){pendingRestore=null;setTimeout(()=>restore(saved),0);}}
@@ -163,5 +198,5 @@
   const launch=window.launchApp;if(typeof launch==='function'){window.launchApp=function(...args){const result=launch.apply(this,args);appReady=true;if(pendingRestore){const r=pendingRestore;pendingRestore=null;restore(r);}else checkpoint();return result;};}
   wrapActions();window.addEventListener('DOMContentLoaded',wrapActions,{once:true});
   window.addEventListener('pageshow',event=>{const r=records.get(history.state?.sansaNavigation?.id);if(r&&event.persisted){if(appReady)restore(r);else pendingRestore=r;}});
-  window.sansaNavigation={back,checkpoint,flush,get current(){return current;},get size(){return records.size;}};
+  window.sansaNavigation={back,checkpoint,flush,get current(){return current;},get size(){return records.size;},get open(){return shown();}};
 })();

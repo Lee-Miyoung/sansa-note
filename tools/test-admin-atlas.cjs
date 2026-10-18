@@ -1,9 +1,10 @@
 // Offline integration checks. Private review/key inputs must stay outside Git.
 const fs=require('node:fs'),path=require('node:path'),http=require('node:http'),assert=require('node:assert/strict'),{chromium}=require('playwright');
-const key=fs.readFileSync(process.argv[3],'utf8').trim(),bundle=fs.readFileSync(process.argv[2],'utf8'),repo=path.resolve(__dirname,'..');
+const key=fs.readFileSync(process.argv[3],'utf8').trim(),legacyBundle=fs.readFileSync(process.argv[2],'utf8'),repo=path.resolve(__dirname,'..');
+const parsed=JSON.parse(legacyBundle);parsed.renderer=require('../admin-atlas/review-runtime.js').withoutMap(parsed.renderer);const bundle=JSON.stringify(parsed);
 const claims={aud:'travel-diary-c0676',iss:'https://securetoken.google.com/travel-diary-c0676',email:'song4mi12@gmail.com',email_verified:true,firebase:{sign_in_provider:'google.com'}};
 const sdk=`(()=>{
- const claims=${JSON.stringify(claims)};let cb;window.mockReads=[];window.mockWrites=[];window.mockData={draft:new URLSearchParams(location.search).has('registered')?${JSON.stringify(bundle)}:null,progress:null};
+ const claims=${JSON.stringify(claims)};let cb;window.mockReads=[];window.mockWrites=[];window.mockData={draft:new URLSearchParams(location.search).has('registered')?${JSON.stringify(legacyBundle)}:null,progress:null};
  const listeners=new Map(),copy=x=>x==null?null:JSON.parse(JSON.stringify(x));
  const auth={currentUser:null,setPersistence:async()=>{},onAuthStateChanged(fn){cb=fn;fn(null);},getRedirectResult:async()=>null,
  async signInWithPopup(){const email=window.mockNonAdmin?'other@example.com':claims.email;auth.currentUser={uid:'admin-uid',emailVerified:true,email,getIdTokenResult:async()=>({claims:{...claims,email}}),getIdToken:async()=>'mock'};await cb(auth.currentUser);},
@@ -26,7 +27,7 @@ const sdk=`(()=>{
   page.on('pageerror',e=>errors.push(e.message));
   await page.route('**/*',async route=>{
    const u=route.request().url();if(u.startsWith('https://www.gstatic.com/'))return route.fulfill({contentType:'application/javascript',body:u.includes('firebase-app-compat')?sdk:''});
-   if(u.includes('firebasedatabase.app'))return route.fulfill({json:await page.evaluate(()=>window.mockData.progress)});
+   if(u.includes('firebasedatabase.app'))return route.fulfill({headers:{'Access-Control-Allow-Origin':'*'},json:await page.evaluate(()=>window.mockData.progress)});
    if(u.endsWith('/review.enc'))encryptedReads++;
    if(u.startsWith(origin))return route.continue();return route.abort();
   });
@@ -40,18 +41,19 @@ const sdk=`(()=>{
   assert.deepEqual(await page.evaluate(()=>mockReads),[]);assert.equal(encryptedReads,0);
   assert.equal(await page.evaluate(()=>sessionStorage.getItem('sansaAdminAtlasSetup_v1')),null);
   await page.evaluate(()=>{window.mockNonAdmin=false;sessionStorage.setItem('sansaAdminAtlasSetup_v1','A'.repeat(43));});
-  await page.locator('#login').click();await page.waitForFunction(()=>document.getElementById('status').textContent.includes('열지 못했습니다'));
+  await page.locator('#login').click();await page.waitForFunction(()=>document.getElementById('status').textContent.includes('연결을 확인하지 못했습니다'));
   assert.deepEqual(await page.evaluate(()=>mockWrites),[]);
   await page.evaluate(k=>sessionStorage.setItem('sansaAdminAtlasSetup_v1',k),key);await page.locator('#login').click();
   await page.locator('[data-atlas="resume"]').waitFor({state:'visible'});
   assert.equal(await page.evaluate(()=>mockData.draft),bundle);
   assert.equal(await page.evaluate(()=>sessionStorage.getItem('sansaAdminAtlasSetup_v1')),null);
-  await page.locator('[data-atlas="resume"]').click();assert.equal(await page.locator('.atlas-progress b').textContent(),'1/12');
-  await page.locator('[data-atlas="sources"]').click();await page.locator('[data-atlas="read"]').click();
+  await page.locator('[data-atlas="resume"]').click();assert.equal(await page.locator('.atlas-progress b').textContent(),'1/12');assert.equal(await page.locator('.atlas-scene-title h1').textContent(),'1. 나무판이 책이라고?');
+  const centered=await page.locator('.atlas-top [data-atlas="back"]').evaluate(button=>{const r=button.getBoundingClientRect(),s=button.querySelector('svg').getBoundingClientRect();return Math.abs((r.left+r.right-s.left-s.right)/2)<.1&&Math.abs((r.top+r.bottom-s.top-s.bottom)/2)<.1;});assert(centered,'circular back icon centered');
+  await page.locator('.atlas-reading-tools [data-atlas="sources"]').click();await page.locator('[data-atlas="read"]').click();
   for(let i=0;i<12;i++)await page.locator('[data-atlas="next"]').click();
   assert.equal(await page.locator('#secretAtlasOverlay').getAttribute('data-atlas-page'),'cards');
-  await page.locator('[data-atlas="goods"]').click();await page.locator('.atlas-bottom [data-atlas="cards"]').click();
-  await page.locator('.atlas-card-button').first().click();await page.locator('.atlas-bottom [data-atlas="map"]').click();
+  assert.equal(await page.locator('[data-atlas="goods"]').count(),0);
+  await page.locator('.atlas-card-button').first().click();assert.equal(await page.locator('[data-atlas="map"]').count(),0);assert.equal(await page.locator('.atlas-map').count(),0);
   await page.locator('.atlas-bottom [data-atlas="intro"]').click();await page.locator('[data-atlas="quiz"]').click();
   for(let i=0;i<5;i++)await page.locator('[data-atlas="quiznext"]').click();
   await page.locator('.atlas-bottom [data-atlas="note"]').click();await page.locator('#atlasNote').fill('관리자 격리 테스트');
@@ -61,6 +63,7 @@ const sdk=`(()=>{
   assert.equal(await page.evaluate(()=>mockWrites.every(p=>p==='users/admin-uid/adminTests/haeinsa-001/draft'||p.startsWith('users/admin-uid/adminTests/haeinsa-001/progress'))),true);
   assert.equal(await page.evaluate(()=>Object.keys(localStorage).every(k=>k.startsWith('sansaAdminAtlasTest_v1:'))),true);
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);assert.deepEqual(errors,[]);
+  await page.locator('[data-atlas="close"]').click();await page.locator('#verify').click();await page.waitForFunction(()=>document.getElementById('saved').textContent.includes('서버 기록 일치'));
   await page.screenshot({path:'/tmp/admin-atlas-iphone-'+width+'.png',fullPage:true});
   const fetchedBefore=encryptedReads;
   await page.goto(origin+'/admin-atlas/?registered=1');await page.waitForFunction(()=>!document.getElementById('login').disabled);
