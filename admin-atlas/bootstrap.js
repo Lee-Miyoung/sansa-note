@@ -5,6 +5,29 @@ let currentUid=null,auth=null,db=null,localMode=false;
  const ADMIN='song4mi12@gmail.com',PROJECT='travel-diary-c0676',BUNDLE_SHA='b8e5d454e61dd5aee8cff8392f229145d52d226ea580de32a889f0bf213ddd51';
  const $=id=>document.getElementById(id);let raw,epoch=0,loaded=false;
  const status=text=>{$('status').textContent=text;};
+ const SETUP_SESSION='sansaAdminAtlasSetup_v1';
+ // URL fragments are not sent to the web server. Remove the one-time key from
+ // history immediately, retaining it only for this tab's auth/worker reload.
+ try{const fragment=new URLSearchParams(location.hash.slice(1)),key=fragment.get('setup');
+  if(key){history.replaceState(null,'',location.pathname+location.search);if(/^[A-Za-z0-9_-]{43}$/.test(key))sessionStorage.setItem(SETUP_SESSION,key);}
+ }catch(_){status('Safari의 일반 탭에서 최초 등록 링크를 다시 열어 주세요.');return;}
+ async function registerReview(gen){
+  const encoded=sessionStorage.getItem(SETUP_SESSION);
+  if(!encoded){$('setupHelp').hidden=false;status('이 대화의 최초 등록 링크를 한 번만 열어 주세요. 파일 선택은 필요 없습니다.');return null;}
+  if(!/^[A-Za-z0-9_-]{43}$/.test(encoded))throw Error();
+  const response=await fetch('review.enc',{cache:'no-store'});if(!response.ok)throw Error();
+  const envelope=new Uint8Array(await response.arrayBuffer());if(envelope.length<29||envelope.length>100000)throw Error();
+  const bytes=Uint8Array.from(atob(encoded.replace(/-/g,'+').replace(/_/g,'/')+'='),c=>c.charCodeAt(0));
+  const key=await crypto.subtle.importKey('raw',bytes,{name:'AES-GCM'},false,['decrypt']);
+  const decrypted=await crypto.subtle.decrypt({name:'AES-GCM',iv:envelope.slice(0,12),additionalData:new TextEncoder().encode('sansa-admin-atlas:haeinsa-001:v1')},key,envelope.slice(12));
+  const text=new TextDecoder('utf-8',{fatal:true}).decode(decrypted);
+  if(await hash(text)!==BUNDLE_SHA||gen!==epoch||!currentUid)throw Error();
+  // Initialize only this test draft. Never replace a previously registered draft.
+  const result=await raw.ref(base()+'/draft').transaction(old=>gen===epoch&&currentUid?(old===null?text:old):undefined);
+  if(!result.committed||gen!==epoch)throw Error();sessionStorage.removeItem(SETUP_SESSION);
+  return result.snapshot.val();
+ }
+
  window.showToast=text=>{let node=document.getElementById('toast');if(!node){node=document.createElement('p');node.id='toast';node.setAttribute('role','status');document.body.append(node);}node.textContent=text;clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>node.remove(),5000);};
  const hash=async text=>Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(text))),n=>n.toString(16).padStart(2,'0')).join('');
  function admin(user,claims){return user&&user.emailVerified===true&&user.email===ADMIN&&claims.email===ADMIN&&claims.email_verified===true&&claims.aud===PROJECT&&claims.iss==='https://securetoken.google.com/'+PROJECT&&claims.firebase?.sign_in_provider==='google.com';}
@@ -26,7 +49,7 @@ let currentUid=null,auth=null,db=null,localMode=false;
   let step=0;const capture=()=>({atlas:true,step,route:window.sansaSecretAtlas.capture()});
   window.sansaNavigation={checkpoint(){history.replaceState(capture(),'');step++;history.pushState(null,'');},flush(){history.replaceState(capture(),'');},back(){if(step>0){history.back();return true;}return false;}};
   window.addEventListener('popstate',event=>{if(event.state?.atlas){step=event.state.step;window.sansaSecretAtlas.restore(event.state.route);}else window.sansaSecretAtlas.suspend();});
-  $('open').hidden=false;$('verify').hidden=false;$('upload').hidden=true;status('관리자 인증 완료 · 별도 테스트 기록만 저장합니다.');
+  $('open').hidden=false;$('verify').hidden=false;$('setupHelp').hidden=true;sessionStorage.removeItem(SETUP_SESSION);status('관리자 인증 완료 · 별도 테스트 기록만 저장합니다.');window.openSecretAtlas();
  }
  async function serverCheck(){
   const uid=currentUid,ref=base()+'/progress';await window.SansaAtlasStore.flush();
@@ -55,15 +78,14 @@ let currentUid=null,auth=null,db=null,localMode=false;
   auth.onAuthStateChanged(async user=>{const gen=++epoch;currentUid=null;$('authorized').hidden=true;$('logout').hidden=!user;
    if(loaded){window.__SANSA_ADMIN_ATLAS_AUTHORIZED__=false;window.SansaAtlasStore.connect();location.reload();return;}
    if(!user)return;
-   try{const token=await user.getIdTokenResult(true);if(gen!==epoch)return;if(!admin(user,token.claims)){status('관리자 Google 계정만 사용할 수 있습니다. 검토자료에는 접근하지 않았습니다.');return;}
+   try{const token=await user.getIdTokenResult(true);if(gen!==epoch)return;if(!admin(user,token.claims)){sessionStorage.removeItem(SETUP_SESSION);status('관리자 Google 계정만 사용할 수 있습니다. 검토자료에는 접근하지 않았습니다.');return;}
     currentUid=user.uid;$('authorized').hidden=false;status('관리자 인증 완료 · 비공개 검토자료 확인 중…');
     const snap=await raw.ref(base()+'/draft').get();if(gen!==epoch)return;
-    if(snap.exists())await activate(snap.val(),gen);else{$('upload').hidden=false;status('최초 검토자료를 선택해 주세요. 기존 사용자 기록에는 쓰지 않습니다.');}
-   }catch(_){status('인증 또는 비공개 자료 읽기에 실패했습니다. 로그인 상태·연결·기존 권한을 확인하세요.');}
+    const text=snap.exists()?snap.val():await registerReview(gen);if(text)await activate(text,gen);
+   }catch(_){status('검토자료를 열지 못했습니다. 이 대화의 최초 등록 링크로 다시 접속해 주세요. 기존 기록은 변경하지 않았습니다.');}
   });
   $('login').onclick=async()=>{try{const p=new firebase.auth.GoogleAuthProvider();p.setCustomParameters({prompt:'select_account'});await auth.signInWithPopup(p);}catch(e){if(e.code==='auth/popup-blocked')await auth.signInWithRedirect(new firebase.auth.GoogleAuthProvider());else status('Google 로그인에 실패했습니다. 다시 시도해 주세요.');}};
   await auth.getRedirectResult();
-  $('file').onchange=async event=>{try{const file=event.target.files[0];if(!file)return;if(file.size>100000)throw Error();const text=await file.text();if(await hash(text)!==BUNDLE_SHA)throw Error();const gen=epoch;await raw.ref(base()).update({draft:text});await activate(text,gen);}catch(_){status('제공된 검토자료와 일치하지 않거나 저장에 실패했습니다. 기존 기록은 변경하지 않았습니다.');}};
   $('open').onclick=()=>window.openSecretAtlas();
   $('verify').onclick=()=>serverCheck().catch(()=>{$('saved').textContent='서버 기록 일치를 확인하지 못했습니다. 잠시 후 다시 확인하세요.';});
   $('logout').onclick=async()=>{if(loaded){try{await serverCheck();}catch(_){status('서버 확인 실패로 로그아웃을 보류했습니다. 연결을 확인해 주세요.');return;}}await auth.signOut();location.reload();};
