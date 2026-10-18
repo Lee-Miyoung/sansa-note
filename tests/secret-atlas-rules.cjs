@@ -1,46 +1,177 @@
-/* Run under a local Realtime Database emulator. No production credentials or writes. */
-const fs=require('fs'),path=require('path'),assert=require('node:assert/strict');
-const req=require('node:module').createRequire(path.join(process.env.SANSA_FIREBASE_DEPS||'/tmp/sansa-firebase','package.json'));
-const{initializeTestEnvironment,assertSucceeds,assertFails}=req('@firebase/rules-unit-testing');const{ref,set,get,update,remove,runTransaction}=req('firebase/database');
-(async()=>{const rules=fs.readFileSync(path.resolve(__dirname,'../firebase/production-with-secret-atlas.rules.json'),'utf8');const env=await initializeTestEnvironment({projectId:'demo-sansa-note',database:{host:'127.0.0.1',port:9900,rules}});try{await env.clearDatabase();const legacy={name:'조계사',stage:1,visits:{visited:{verified:true,ts:123}},photos:{photo:{url:'https://example.invalid/legacy.jpg'}}};await env.withSecurityRulesDisabled(async ctx=>set(ref(ctx.database(),'users/alice/destinations/legacy108'),legacy));const alice=env.authenticatedContext('alice').database(),bob=env.authenticatedContext('bob').database(),guest=env.unauthenticatedContext().database(),base='users/alice/secretAtlas/haeinsa-001';await assertSucceeds(set(ref(alice,base+'/position'),{scene:5,at:Date.now()}));await assertSucceeds(get(ref(alice,base)));await assertFails(get(ref(bob,base)));await assertFails(set(ref(bob,base+'/note'),{text:'intrusion',at:Date.now()}));await assertFails(get(ref(guest,base)));await assertFails(set(ref(guest,base+'/note'),{text:'intrusion',at:Date.now()}));await assertFails(set(ref(alice,base+'/position'),{scene:12,at:Date.now()}));await assertFails(set(ref(alice,base+'/unknown'),'no'));await assertFails(set(ref(alice,base+'/completed'),42));await assertFails(set(ref(alice,base+'/cards'),'invalid'));await assertFails(set(ref(alice,base+'/answers'),'invalid'));await assertFails(set(ref(alice,base+'/answers/q1'),{selection:'invalid',correct:true,at:Date.now(),attempts:1}));await assertFails(set(ref(alice,base+'/cards/001'),Date.now()));const stamp=Date.now();await assertSucceeds(update(ref(alice,base),{'completed/1':stamp,'completed/2':stamp,'completed/3':stamp,'completed/4':stamp,'cards/001':stamp}));await assertSucceeds(set(ref(alice,base+'/cards/001'),stamp));await assertFails(set(ref(alice,base+'/cards/001'),stamp+1));await assertFails(set(ref(alice,base+'/cards/002'),stamp));await assertSucceeds(set(ref(alice,base+'/note'),{text:'나만의 기록',at:Date.now()}));await assertFails(set(ref(alice,base+'/note'),{text:'x'.repeat(10001),at:Date.now()}));await assertSucceeds(set(ref(alice,base+'/answers/q1'),{selection:[1,2,0],correct:true,at:Date.now(),attempts:1}));await assertFails(set(ref(alice,base+'/answers/q7'),{selection:[1],correct:true,at:Date.now(),attempts:1}));await assertFails(set(ref(alice,base+'/fieldVerification'),{templeId:'h',visitId:'v',at:123}));await env.withSecurityRulesDisabled(async ctx=>set(ref(ctx.database(),'users/alice/destinations/h'),{name:'해인사',visits:{v:{verified:true,ts:123}}}));await assertSucceeds(set(ref(alice,base+'/fieldVerification'),{templeId:'h',visitId:'v',at:123}));await assertFails(set(ref(bob,'users/bob/secretAtlas/haeinsa-001/fieldVerification'),{templeId:'h',visitId:'v',at:123}));assert.equal((await get(ref(alice,base+'/note/text'))).val(),'나만의 기록');
-const otherBase='users/bob/secretAtlas/haeinsa-001';
-await assertSucceeds(update(ref(bob,otherBase),{position:{scene:7,at:Date.now()},note:{text:'B private note',at:Date.now()}}));
-assert.equal((await get(ref(bob,otherBase+'/position/scene'))).val(),7);
-await assertFails(get(ref(alice,otherBase)));await assertFails(set(ref(alice,otherBase+'/note'),{text:'intrusion',at:Date.now()}));
-const aliceReconnect=env.authenticatedContext('alice').database();
-assert.equal((await get(ref(aliceReconnect,base+'/note/text'))).val(),'나만의 기록');
-assert.equal((await get(ref(aliceReconnect,base+'/position/scene'))).val(),5);
-await Promise.all([runTransaction(ref(alice,base+'/cards/001'),old=>old||stamp+1),runTransaction(ref(aliceReconnect,base+'/cards/001'),old=>old||stamp+2)]);
-assert.equal((await get(ref(alice,base+'/cards/001'))).val(),stamp);
-assert.deepEqual((await get(ref(alice,'users/alice/destinations/legacy108'))).val(),legacy,'old visit/photo/108 source record unchanged');
-
-{
- const admin=env.authenticatedContext('admin',{email:'song4mi12@gmail.com'}).database();
- await assertSucceeds(get(ref(admin,'users')));await assertSucceeds(get(ref(admin,base)));
- await assertFails(set(ref(admin,base+'/note'),{text:'admin cross-write forbidden',at:Date.now()}));
- await assertFails(get(ref(alice,'users')));
- await assertSucceeds(set(ref(alice,'users/alice/profile'),{nickname:'legacy-preserved'}));
- await assertFails(set(ref(bob,'users/alice/profile'),{nickname:'cross-user'}));
- for(const item of ['photoUploadControl','lyricSync','templeVerifyPoints']){
-  await assertSucceeds(set(ref(admin,'shared/'+item),{test:true}));
-  await assertFails(set(ref(alice,'shared/'+item),{test:false}));
- }
- await assertSucceeds(get(ref(guest,'shared/lyricSync')));await assertSucceeds(get(ref(guest,'shared/templeVerifyPoints')));await assertFails(get(ref(guest,'shared/photoUploadControl')));
- await assertSucceeds(set(ref(alice,'community/posts/test'),{uid:'alice',text:'test'}));
- await assertFails(set(ref(bob,'community/posts/test'),{uid:'bob',text:'other'}));
- await assertSucceeds(get(ref(guest,'community/posts')));
- await assertSucceeds(set(ref(alice,'leaderboards/beatShooter/alice'),{score:42}));
- await assertFails(set(ref(bob,'leaderboards/beatShooter/alice'),{score:99}));
- await assertSucceeds(get(ref(bob,'leaderboards/beatShooter')));await assertFails(get(ref(guest,'leaderboards/beatShooter')));
- await assertFails(remove(ref(alice,base+'/cards/001')));
- await assertFails(remove(ref(alice,base+'/completed/1')));
- await assertSucceeds(remove(ref(alice,base+'/answers/q1')));
- const future='users/alice/secretAtlas/future-test';
- await assertSucceeds(set(ref(alice,future),{schemaNotDefinedYet:true}));
- await assertFails(get(ref(bob,future)));await assertFails(set(ref(bob,future),{intrusion:true}));
- await assertFails(remove(ref(bob,base)));
- await assertSucceeds(remove(ref(alice,base)));
- assert.equal((await get(ref(alice,base))).val(),null,'whole episode deletion is permitted by inherited owner write; validate is skipped');
- console.log('PASS merged rules: legacy access/admin read preserved; known episode validation; future episode inherited access; partial card/dependency delete denied while parent exists; entire episode deletion remains allowed');
+/* Firebase emulator only. Full merged rules; no real identities or production credentials. */
+const fs = require('node:fs');
+const path = require('node:path');
+const assert = require('node:assert/strict');
+const { createHash } = require('node:crypto');
+const req = require('node:module').createRequire(path.join(
+  process.env.SANSA_FIREBASE_DEPS || '/tmp/sansa-firebase', 'package.json'));
+const { initializeTestEnvironment, assertSucceeds, assertFails } = req('@firebase/rules-unit-testing');
+const { ref, set, get, update, remove, runTransaction } = req('firebase/database');
+const PROJECT = 'demo-sansa-note';
+assert(PROJECT.startsWith('demo-'));
+assert.equal(process.env.FIREBASE_DATABASE_EMULATOR_HOST, '127.0.0.1:9900', 'Run through emulators:exec on loopback only');
+assert.equal(process.env.GCLOUD_PROJECT || PROJECT, PROJECT);
+assert(!process.env.GOOGLE_APPLICATION_CREDENTIALS, 'Production credential files must not be used');
+assert(!process.env.FIREBASE_TOKEN, 'Firebase credentials must not be used');
+const fullRules = path.resolve(__dirname, '../firebase/production-with-secret-atlas.rules.json');
+const rules = fs.readFileSync(fullRules, 'utf8');
+console.log('Rules SHA256 ' + createHash('sha256').update(rules).digest('hex'));
+async function check(name, fn) {
+  try { await fn(); console.log('PASS ' + name); }
+  catch (error) { console.error('FAIL ' + name); throw error; }
 }
-console.log('PASS full merged Firebase emulator rules: owner access and explicit admin read exception, guest denied, schema/size bounds, card invariants and source-visit verification');}finally{await env.cleanup();}})().catch(e=>{console.error(e);process.exit(1)});
+(async () => {
+  const env = await initializeTestEnvironment({
+    projectId: PROJECT, database: { host: '127.0.0.1', port: 9900, rules }
+  });
+  try {
+    await env.clearDatabase();
+    const legacy = { name: '조계사', stage: 1, visits: { visited: { verified: true, ts: 123 } },
+      photos: { photo: { url: 'https://example.invalid/legacy.jpg' } } };
+    await env.withSecurityRulesDisabled(async ctx =>
+      set(ref(ctx.database(), 'users/alice/destinations/legacy108'), legacy));
+    const alice = env.authenticatedContext('alice', { email: 'alice@example.test' }).database();
+    const bob = env.authenticatedContext('bob', { email: 'bob@example.test' }).database();
+    const admin = env.authenticatedContext('admin', { email: 'song4mi12@gmail.com' }).database();
+    const guest = env.unauthenticatedContext().database();
+    const base = 'users/alice/secretAtlas/haeinsa-001';
+    const other = 'users/bob/secretAtlas/haeinsa-001';
+    const stamp = Date.now();
+    const note = text => ({ text, at: stamp });
+
+    await check('A and B own progress/note save and restore', async () => {
+      for (const [db, location, scene, text] of [[alice, base, 5, 'A 기록'], [bob, other, 7, 'B 기록']]) {
+        await assertSucceeds(update(ref(db, location), {
+          version: 1, position: { scene, at: stamp }, note: note(text), lastReadAt: stamp
+        }));
+        assert.equal((await get(ref(db, location + '/position/scene'))).val(), scene);
+        assert.equal((await get(ref(db, location + '/note/text'))).val(), text);
+      }
+    });
+    await check('Both directions of cross-account read/write denied; guest denied', async () => {
+      for (const [db, location] of [[bob, base], [alice, other], [guest, base]]) {
+        await assertFails(get(ref(db, location)));
+        await assertFails(set(ref(db, location + '/note'), note('intrusion')));
+      }
+      await assertFails(get(ref(alice, 'users')));
+    });
+    await check('Existing admin read exception retained without cross-user write', async () => {
+      await assertSucceeds(get(ref(admin, 'users')));
+      await assertSucceeds(get(ref(admin, base)));
+      await assertFails(set(ref(admin, base + '/note'), note('admin cross-write')));
+      await assertSucceeds(set(ref(alice, 'users/alice/profile'), { nickname: 'legacy-preserved' }));
+      await assertFails(set(ref(bob, 'users/alice/profile'), { nickname: 'intrusion' }));
+    });
+    await check('Invalid scene, timestamp, types, note length and unknown fields rejected', async () => {
+      const bad = [
+        ['/version', 2], ['/position', { scene: 12, at: stamp }],
+        ['/position', { scene: 1.5, at: stamp }], ['/position', { scene: 0, at: -1 }],
+        ['/lastReadAt', stamp + 172800000], ['/unknown', 'no'], ['/completed', 42],
+        ['/completed/0', stamp], ['/cards', 'invalid'], ['/answers', 'invalid'],
+        ['/note', { text: 'x'.repeat(10001), at: stamp }], ['/note', { at: stamp }],
+        ['/answers/q1', { selection: 'invalid', correct: true, at: stamp, attempts: 1 }],
+        ['/answers/q1', { selection: { 0: 1, 2: 0 }, correct: true, at: stamp, attempts: 1 }],
+        ['/answers/q1', { selection: [9], correct: true, at: stamp, attempts: 1 }],
+        ['/answers/q7', { selection: [1], correct: true, at: stamp, attempts: 1 }]
+      ];
+      for (const [suffix, value] of bad) await assertFails(set(ref(alice, base + suffix), value));
+      await assertSucceeds(set(ref(alice, base + '/note'), note('')));
+      await assertSucceeds(set(ref(alice, base + '/note'), note('A 기록')));
+    });
+    await check('All three cards require four completed scenes and retain first timestamp', async () => {
+      for (let part = 1; part <= 3; part++) {
+        const id = String(part).padStart(3, '0');
+        await assertFails(set(ref(alice, base + '/cards/' + id), stamp));
+        const patch = { ['cards/' + id]: stamp };
+        for (let i = (part - 1) * 4 + 1; i <= part * 4; i++) patch['completed/' + i] = stamp;
+        await assertSucceeds(update(ref(alice, base), patch));
+        await assertSucceeds(set(ref(alice, base + '/cards/' + id), stamp));
+        await assertFails(set(ref(alice, base + '/cards/' + id), stamp + 1));
+      }
+      assert.equal(Object.keys((await get(ref(alice, base + '/cards'))).val()).length, 3);
+    });
+    await check('Duplicate concurrent card transactions remain idempotent', async () => {
+      const second = env.authenticatedContext('alice', { email: 'alice@example.test' }).database();
+      await Promise.all([
+        runTransaction(ref(alice, base + '/cards/001'), old => old || stamp + 1),
+        runTransaction(ref(second, base + '/cards/001'), old => old || stamp + 2)
+      ]);
+      assert.equal((await get(ref(alice, base + '/cards/001'))).val(), stamp);
+    });
+    await check('Answers save; fresh emulator session restores progress and note', async () => {
+      await assertSucceeds(set(ref(alice, base + '/answers/q1'), {
+        selection: [1, 2, 0], correct: true, at: stamp, attempts: 2
+      }));
+      const fresh = env.authenticatedContext('alice', { email: 'alice@example.test' }).database();
+      assert.equal((await get(ref(fresh, base + '/note/text'))).val(), 'A 기록');
+      assert.equal((await get(ref(fresh, base + '/position/scene'))).val(), 5);
+      assert.deepEqual((await get(ref(fresh, base + '/answers/q1/selection'))).val(), [1, 2, 0]);
+    });
+    await check('Field stamp references only same-owner existing verified Haeinsa visit', async () => {
+      const field = { templeId: 'h', visitId: 'v', at: 123 };
+      await assertFails(set(ref(alice, base + '/fieldVerification'), field));
+      await env.withSecurityRulesDisabled(async ctx => set(ref(ctx.database(), 'users/alice/destinations/h'), {
+        name: '해인사', visits: { v: { verified: true, ts: 123 }, no: { verified: false, ts: 124 } }
+      }));
+      await assertSucceeds(set(ref(alice, base + '/fieldVerification'), field));
+      await assertFails(set(ref(alice, base + '/fieldVerification'), { ...field, visitId: 'no' }));
+      await assertFails(set(ref(alice, base + '/fieldVerification'), { ...field, templeId: 'legacy108', visitId: 'visited' }));
+      await assertFails(set(ref(bob, other + '/fieldVerification'), field));
+    });
+    await check('Shared lyric, verification point and photo control permissions preserved', async () => {
+      for (const item of ['photoUploadControl', 'lyricSync', 'templeVerifyPoints']) {
+        await assertSucceeds(set(ref(admin, 'shared/' + item), { test: true }));
+        await assertFails(set(ref(alice, 'shared/' + item), { test: false }));
+        await assertSucceeds(get(ref(alice, 'shared/' + item)));
+      }
+      await assertSucceeds(get(ref(guest, 'shared/lyricSync')));
+      await assertSucceeds(get(ref(guest, 'shared/templeVerifyPoints')));
+      await assertFails(get(ref(guest, 'shared/photoUploadControl')));
+    });
+    await check('Community post/comment ownership and report/admin rules preserved', async () => {
+      await assertSucceeds(set(ref(alice, 'community/posts/test'), { uid: 'alice', text: 'post' }));
+      await assertFails(set(ref(bob, 'community/posts/test'), { uid: 'bob', text: 'intrusion' }));
+      await assertSucceeds(update(ref(alice, 'community/posts/test'), { text: 'edited' }));
+      await assertSucceeds(update(ref(admin, 'community/posts/test'), { text: 'moderated' }));
+      await assertSucceeds(get(ref(guest, 'community/posts')));
+      await assertSucceeds(set(ref(alice, 'community/comments/test/comment'), { uid: 'alice', text: 'comment' }));
+      await assertFails(set(ref(bob, 'community/comments/test/comment'), { uid: 'bob', text: 'intrusion' }));
+      await assertSucceeds(update(ref(admin, 'community/comments/test/comment'), { text: 'moderated' }));
+      await assertSucceeds(get(ref(guest, 'community/comments')));
+      await assertSucceeds(set(ref(alice, 'community/reports/report'), { reason: 'test' }));
+      await assertFails(get(ref(alice, 'community/reports')));
+      await assertSucceeds(get(ref(admin, 'community/reports')));
+      await assertFails(set(ref(guest, 'community/reports/report2'), { reason: 'test' }));
+    });
+    await check('Leaderboard authenticated read and owner-only score writes preserved', async () => {
+      await assertSucceeds(set(ref(alice, 'leaderboards/beatShooter/alice'), { score: 42 }));
+      await assertFails(set(ref(bob, 'leaderboards/beatShooter/alice'), { score: 99 }));
+      await assertSucceeds(get(ref(bob, 'leaderboards/beatShooter')));
+      await assertFails(get(ref(guest, 'leaderboards/beatShooter')));
+    });
+    await check('Partial card/dependency deletion denied while optional-node deletion allowed', async () => {
+      await assertFails(remove(ref(alice, base + '/cards/001')));
+      await assertFails(remove(ref(alice, base + '/cards')));
+      await assertFails(remove(ref(alice, base + '/completed/1')));
+      await assertFails(remove(ref(alice, base + '/note/text')));
+      await assertSucceeds(remove(ref(alice, base + '/answers/q1')));
+      await assertSucceeds(remove(ref(alice, base + '/fieldVerification')));
+      await assertSucceeds(remove(ref(alice, base + '/note')));
+    });
+    await check('Future episode not blocked; existing visit/photo/108 source record untouched', async () => {
+      const future = 'users/alice/secretAtlas/future-test';
+      await assertSucceeds(set(ref(alice, future), { schemaNotDefinedYet: true }));
+      await assertFails(get(ref(bob, future)));
+      await assertFails(set(ref(bob, future), { intrusion: true }));
+      assert.deepEqual((await get(ref(alice, 'users/alice/destinations/legacy108'))).val(), legacy);
+    });
+    await check('Whole-episode deletion allowed by inherited owner write, denied to other user', async () => {
+      await assertFails(remove(ref(bob, base)));
+      await assertSucceeds(remove(ref(alice, base)));
+      assert.equal((await get(ref(alice, base))).val(), null);
+      assert.deepEqual((await get(ref(alice, 'users/alice/destinations/legacy108'))).val(), legacy);
+      assert.equal((await get(ref(bob, other + '/note/text'))).val(), 'B 기록');
+    });
+    console.log('PASS all 14 full-rules emulator scenarios; no production access or deployment');
+  } finally { await env.cleanup(); }
+})().catch(error => { console.error(error); process.exitCode = 1; });
