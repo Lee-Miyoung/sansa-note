@@ -22457,6 +22457,7 @@ body.catalog-screen-open #catalogOverlay,
 }
 </style>
 
+<script src="./scripts/temple-covers.js?v=20261019-illustrations"></script>
 </head>
 <body>
 
@@ -22603,11 +22604,23 @@ body.catalog-screen-open #catalogOverlay,
     </div>
   </header>
 
-  <section id="homeAtlasEntry" aria-label="무념스님의 산사 비밀도감">
-    <a class="home-atlas-card" href="/atlas/">
-      <span class="home-atlas-copy"><small>무념스님의 산사 비밀도감 · 제001화</small><b>해인사, 시간을 지킨 나무판</b><span>나무판이 책이라고? 무념스님과 작은 비밀을 찾아봐요.</span><strong>이야기 열기 <span aria-hidden="true">→</span></strong></span>
-      <img src="/admin-atlas/images/secret-atlas/haeinsa-cover-small.webp" alt="해인사로 초대하는 무념스님 창작 삽화" width="720" height="480" loading="lazy" decoding="async">
-    </a>
+  <section id="homeAtlasEntry" aria-label="무념스님의 산사 비밀도감" aria-roledescription="캐러셀">
+    <div class="home-atlas-track" id="homeAtlasTrack" tabindex="0" aria-label="이야기 목록 · 좌우로 밀어 선택">
+      <a class="home-atlas-card" href="/atlas/" aria-label="제1화 해인사, 시간을 지킨 나무판">
+        <span class="home-atlas-copy"><small>무념스님의 산사 비밀도감 · 제001화</small><b>해인사, 시간을 지킨 나무판</b><span>전쟁 속에서 다시 새긴 책, 그 책을 지켜 온 사람들.</span><strong>이야기 열기 <span aria-hidden="true">→</span></strong></span>
+        <img src="/admin-atlas/images/secret-atlas/haeinsa-cover-small.webp" alt="해인사로 초대하는 무념스님 수채화" width="720" height="480" loading="lazy" decoding="async">
+      </a>
+      <a class="home-atlas-card" href="/atlas/bulguksa/" aria-label="제2화 불국사, 두 탑이 품은 천 년의 이야기">
+        <span class="home-atlas-copy"><small>무념스님의 산사 비밀도감 · 제002화</small><b>불국사, 두 탑이 품은 천 년의 이야기</b><span>서로 다른 두 탑, 탑 속에서 나온 작은 종이 한 장.</span><strong>이야기 열기 <span aria-hidden="true">→</span></strong></span>
+        <img src="/atlas/bulguksa/images/bulguksa-cover-small.webp" alt="불국사에서 걷는 무념스님 수채화" width="720" height="480" loading="lazy" decoding="async">
+      </a>
+    </div>
+    <div class="home-atlas-controls" aria-label="이야기 목록 이동">
+      <button type="button" id="homeAtlasPrev" aria-label="이전 이야기" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg></button>
+      <div class="home-atlas-dots"><button type="button" data-atlas-slide="0" aria-label="제1화 해인사 보기" aria-current="true"><span></span></button><button type="button" data-atlas-slide="1" aria-label="제2화 불국사 보기" aria-current="false"><span></span></button></div>
+      <span id="homeAtlasPage" class="home-atlas-page" aria-live="polite">1 / 2</span>
+      <button type="button" id="homeAtlasNext" aria-label="다음 이야기"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m10 6 6 6-6 6"/></svg></button>
+    </div>
   </section>
 
   <!-- ===================== EASY START GUIDE ===================== -->
@@ -22906,6 +22919,7 @@ body.catalog-screen-open #catalogOverlay,
       <button class="close-x" onclick="closeDetail()">✕</button>
     </div>
     <div class="modal-body">
+      <div class="photo-slider temple-representative-slider" id="dCoverPhotos" aria-label="사찰 대표 풍경" style="margin-bottom:14px;"></div>
       <div id="dTagline" style="display:none;font-family:'Nanum Myeongjo','Noto Serif KR',serif;font-size:16px;color:var(--stamp);margin-bottom:10px;line-height:1.4;"></div>
       <div id="dPoeticWrap" style="display:none;background:linear-gradient(135deg,#fdf8f0,#f3e6d0);border-radius:14px;padding:16px;margin-bottom:14px;border:1px solid var(--paper-line);">
         <div style="font-size:11px;color:var(--gold);font-weight:800;letter-spacing:1px;margin-bottom:6px;">🖼 화폭의 시선</div>
@@ -22968,9 +22982,6 @@ body.catalog-screen-open #catalogOverlay,
 
       <div class="section-label">할 일 / 콘텐츠 아이디어</div>
       <textarea class="notes" id="dNotes" placeholder="예: 예불 시간 확인, 템플스테이 운영 여부, 단풍 절정 시기, 근처 사찰음식점 태그..." onblur="saveNotes()"></textarea>
-
-      <div class="section-label">참고 사진 <span style="font-weight:400;color:var(--ink-soft);font-size:11px;">(자동으로 찾은 사진, 클릭하면 크게 봐요)</span></div>
-      <div class="photo-slider" id="dCoverPhotos"></div>
 
       <div class="section-label">내가 찍은 사진</div>
       <div class="photo-opt-note">📷 큰 사진도 자동으로 웹용 크기로 줄여 저장해요. 원본은 휴대폰에 보관해주세요.</div>
@@ -31358,6 +31369,7 @@ function handleCoverPhotoError(img,kind){
   }
 }
 function retryDetailCoverPhotos(kind){
+  if(kind!=='mountain'){if(destinations[currentDetailId])renderCoverPhotos(destinations[currentDetailId]);return;}
   const mountain=kind==='mountain';
   const store=mountain?mountainDestinations:destinations;
   const id=mountain?currentMountainDetailId:currentDetailId;
@@ -31408,9 +31420,9 @@ function replaceBrokenCardCover(img,kind){
   handleCoverPhotoError(img,kind);
 }
 function cardCoverMedia(photo, kind, name, place){
-  const painting=kind==='temple'&&window.sansaTempleCovers?.find(place);
+  const painting=kind==='temple'?(window.sansaTempleCovers?.resolve?.(place)||{id:'temple:default',file:'default-watercolor.webp',isDefault:true}):null;
   if(painting){
-    return '<div class="temple-watercolor-underlay" aria-hidden="true"></div>'+`<img class="card-cover-img stable-cover loaded temple-watercolor-cover" data-temple-cover-id="${escapeAttr(painting.id)}" src="./images/temple-covers/${painting.file}" alt="${escapeAttr(name)} 실제 풍경을 바탕으로 그린 수채화" width="768" height="512" loading="lazy" decoding="async" style="opacity:1;transition:none" onerror="window.sansaTempleCovers.failed(this)">`;
+    return '<div class="temple-watercolor-underlay" aria-hidden="true"></div>'+`<img class="card-cover-img stable-cover loaded temple-watercolor-cover" data-temple-cover-id="${escapeAttr(painting.id)}" src="./images/temple-covers/${painting.file}" alt="${escapeAttr(name)} ${painting.isDefault?'기본 숲길 일러스트':'대표 수채화 일러스트'}" width="768" height="512" loading="lazy" decoding="async" style="opacity:1!important;transition:none!important;object-fit:contain!important" onerror="window.sansaTempleCovers?.failed?.(this)">`;
   }
   const placeholder = kind==='mountain' ? mountainPlaceholderHtml('산 풍경 일러스트 · 실제 사진 준비 중',name) : lotusPlaceholderHtml('',name);
   if(!photo) return placeholder;
@@ -31446,6 +31458,7 @@ let activePhotoFetches = 0;
 const MAX_CONCURRENT_PHOTO_FETCHES = 4;
 
 function queuePhotoFetch(id, name, locationHint, opts){
+  if(opts?.kind!=='mountain'&&opts?.store!==mountainDestinations)return; // Temple representatives are local illustrations only.
   if(coverFetching.has(id)) return;
   coverFetching.add(id);
   photoFetchQueue.push({id, name, locationHint, opts:opts||{}});
@@ -31466,6 +31479,7 @@ let renderDebounceTimer = null;
 
 function schedulePhotoHydration(type, entries){
   if(photoHydrationObserver){try{photoHydrationObserver.disconnect();}catch(e){}}
+  if(type==='temple')return;
   const gen=photoQueueGeneration;
   const isMountain=type==='mountain';
   const store=isMountain?mountainDestinations:destinations;
@@ -31575,6 +31589,7 @@ function fetchCoverPhotoNow(id, name, locationHint, opts, done){
   const getCurrentId = opts.getCurrentId || (()=>currentDetailId);
   const onDetailUpdate = opts.onDetailUpdate || renderCoverPhotos;
   const isMountain = opts.kind==='mountain' || store === mountainDestinations;
+  if(!isMountain){coverFetching.delete(id);if(done)done();return;}
   const place = store[id] || {};
   const strictHint = (!isMountain && VERIFIED_LOCATION_HINTS[name]) || place.locationHint || '';
   const queryHint = strictHint || locationHint || place.region || '';
@@ -31934,7 +31949,7 @@ function fetchCoverPhotoNow(id, name, locationHint, opts, done){
 }
 
 function renderCard(id,d){
-  const photo=window.sansaTempleCovers?.find(d)?null:firstPhotoUrl(d);
+  const photo=null; // Temple cards always use their local representative illustration.
   const stageIdx=Math.min(Number(d.stage)||0,STAGES.length-1);
   const vc=visitCount(d);
   const tagLabel=d.tag==='유명'?'대표 산사':'숨은 산사';
@@ -32036,9 +32051,6 @@ function openDetail(id){
   renderStepper(d.stage||0);
   renderPhotos(d.photos||{});
   renderCoverPhotos(d);
-  if((!firstPhotoUrl(d) || d.coverPhotoVersion!==PHOTO_SCHEMA_VERSION) && !coverFetching.has(id) && !shouldSkipPhotoRetry(d)){
-    queuePhotoFetch(id, d.name, d.locationHint || '', {region:d.region});
-  }
   renderVisits(d.visits||{});
   renderRepeatChallenge(d);
   renderPilgrimRewardPreview(d);
@@ -32072,7 +32084,7 @@ function refetchLocation(){
   const id=currentDetailId,d=destinations[id];
   updateDestination(id,{lat:null,lng:null,coverPhotoVersion:0});
   destinations[id]=Object.assign({},d,{lat:null,lng:null,coverPhotoVersion:0});
-  showToast('위치와 사진을 다시 확인하는 중이에요. 기존 사진은 유지해요.');
+  showToast('위치를 다시 확인하는 중이에요. 기존 사진과 대표 이미지는 유지해요.');
   requestAnimationFrame(()=>setupDetailMap(destinations[id],id));
   coverFetching.delete(id);
   queuePhotoFetch(id,destinations[id].name,destinations[id].locationHint||'',{region:destinations[id].region});
@@ -32446,11 +32458,16 @@ function photoCreditHtml(m, i){
 function renderAutoCoverPhotos(wrapId,d){
   const wrap=document.getElementById(wrapId);if(!wrap)return;
   const kind=wrapId==='mCoverPhotos'?'mountain':'temple';
+  if(kind==='temple'){
+    wrap.innerHTML='<div class="temple-detail-cover">'+cardCoverMedia(null,'temple',d.name,d)+'</div>';
+    const image=wrap.querySelector('img');if(image){image.loading='eager';image.fetchPriority='high';}
+    return;
+  }
   firstPhotoUrl(d);
   const urls=(d.coverPhotos||[]).filter(usableCoverUrl);
   if(urls.length===0){
     const q=encodeURIComponent((d.name||'')+' 국가유산');
-    wrap.innerHTML=`<div class="auto-photo-empty">${kind==='mountain'?mountainPlaceholderHtml('산 풍경 일러스트 · 실제 사진 준비 중',d.name):lotusPlaceholderHtml('산사 일러스트 · 실제 사진 준비 중',d.name)}<div><b>사진을 준비하고 있어요.</b><span>연결이 느리거나 사진이 없을 수 있어요. 다시 불러올 수 있습니다.</span><button type="button" class="btn btn-ghost" onclick="retryDetailCoverPhotos('${kind}')">사진 다시 불러오기</button><a class="heritage-photo-link" href="https://www.heritage.go.kr/heri/cul/culSelectViewList.do?searchCondition=${q}" target="_blank" rel="noopener">국가유산포털에서도 사진 확인 ↗</a></div></div>`;
+    wrap.innerHTML=`<div class="auto-photo-empty">${mountainPlaceholderHtml('산 풍경 일러스트 · 실제 사진 준비 중',d.name)}<div><b>사진을 준비하고 있어요.</b><span>연결이 느리거나 사진이 없을 수 있어요. 다시 불러올 수 있습니다.</span><button type="button" class="btn btn-ghost" onclick="retryDetailCoverPhotos('${kind}')">사진 다시 불러오기</button><a class="heritage-photo-link" href="https://www.heritage.go.kr/heri/cul/culSelectViewList.do?searchCondition=${q}" target="_blank" rel="noopener">국가유산포털에서도 사진 확인 ↗</a></div></div>`;
     return;
   }
   const meta=urls.map(url=>(d.coverPhotoMeta||[]).find(m=>m.url===url)||(d.coverPhotoMeta||[])[(d.coverPhotos||[]).indexOf(url)]||{});
@@ -39546,7 +39563,7 @@ function hydrateCatalogPhotos(){
   const load=thumb=>{
     const kind=thumb.dataset.photoKind,id=thumb.dataset.photoId;
     const store=catalogPhotoRecords[kind],place=store?.[id];if(!place)return;
-    if(kind==='temple'&&window.sansaTempleCovers?.find(place))return;
+    if(kind==='temple')return;
     const image=thumb.querySelector('img');
     if(image){image.loading='eager';watchCoverImage(image,kind);return;}
     if(firstPhotoUrl(place)||shouldSkipPhotoRetry(place)||coverFetching.has(id))return;
@@ -39566,7 +39583,7 @@ function catalogThumbHtml(d,type){
   const id=type+':'+d.name;
   const previous=catalogPhotoRecords[type][id];
   const place=catalogPhotoRecords[type][id]={...d,...previous,photos:d.photos||previous?.photos};
-  const photo=type==='temple'&&window.sansaTempleCovers?.find(place)?null:firstPhotoUrl(place);
+  const photo=type==='temple'?null:firstPhotoUrl(place);
   return `<div class="catalog-thumb" data-photo-id="${escapeAttr(id)}" data-photo-kind="${type}">${cardCoverMedia(photo,type,d.name,place)}</div>`;
 }
 
@@ -42310,8 +42327,9 @@ nav.site-global-nav{height:var(--global-nav-h)!important;box-sizing:border-box!i
 <script src="./scripts/meditation-sounds.js?v=20261018" defer></script>
 <script src="./scripts/game-viewport.js?v=20261017" defer></script>
 <script src="./scripts/navigation.js?v=20261018" defer></script>
-<link rel="stylesheet" href="/styles/atlas-home.css?v=20261018-narrative">
-<script src="/scripts/atlas/home-publication.js?v=20261018-narrative" defer></script>
-<script src="./scripts/temple-covers.js?v=20261018-unified" defer></script>
+<link rel="stylesheet" href="/styles/atlas-home.css?v=20261019-episodes">
+<script src="/scripts/atlas/home-publication.js?v=20261019-episodes" defer></script>
+<script src="/scripts/atlas/home-carousel.js?v=20261019-episodes" defer></script>
+
 </body>
 </html>

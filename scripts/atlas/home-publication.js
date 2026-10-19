@@ -5,8 +5,8 @@
   if(!card)return;
   const panel=document.createElement('section');
   panel.id='atlasPublicationAdmin';panel.hidden=true;panel.className='atlas-publication-admin';
-  panel.innerHTML=`<h3>산사 비밀도감 · 해인사</h3>
-    <p>공개하면 홈 메뉴가 나타나고, 비공개로 바꾸면 홈에서만 숨깁니다. <b>직접 주소는 계속 열립니다.</b> 본문 접근을 제한하는 보안 기능은 아닙니다.</p>
+  panel.innerHTML=`<h3>산사 비밀도감 · 이야기 목록</h3>
+    <p>공개하면 홈의 1·2화 이야기 목록이 나타나고, 비공개로 바꾸면 목록 전체를 홈에서만 숨깁니다. <b>직접 주소는 계속 열립니다.</b> 본문 접근을 제한하는 보안 기능은 아닙니다.</p>
     <div class="atlas-publication-actions"><button type="button" id="atlasPublish" class="btn btn-primary" disabled>홈에 공개</button><button type="button" id="atlasUnpublish" class="btn btn-ghost" disabled>홈에서 비공개</button><a href="/atlas/">비밀도감 열기 ↗</a></div>
     <p id="atlasPublicationStatus" role="status">설정 연결 중…</p>
     <button type="button" id="atlasPublicationRetry" class="btn btn-ghost">설정 다시 확인</button>

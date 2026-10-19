@@ -7,5 +7,16 @@ for(const db of[a,b,guest])await assertFails(set(ref(db,path),{...setting,public
 const unverified=env.authenticatedContext('unverified',{...claims('song4mi12@gmail.com'),email_verified:false}).database(),password=env.authenticatedContext('password',{...claims('song4mi12@gmail.com'),firebase:{sign_in_provider:'password'}}).database();await assertFails(set(ref(unverified,path),setting));await assertFails(set(ref(password,path),setting));console.log('PASS verified Google administrator required');
 for(const data of[{public:'false',updatedAt:setting.updatedAt},{public:true},{...setting,extra:true},{...setting,updatedAt:Date.now()+86400000}])await assertFails(set(ref(admin,path),data));await assertFails(remove(ref(admin,path)));await assertFails(remove(ref(admin,path+'/public')));await assertSucceeds(update(ref(admin,path),{public:false}));assert.equal((await get(ref(guest,path+'/public'))).val(),false);console.log('PASS invalid values, future timestamp, whole/partial deletion denied; valid toggle persists');
 await assertSucceeds(set(ref(a,'users/A/secretAtlas/haeinsa-001/note'),{text:'A',at:Date.now()}));await assertSucceeds(set(ref(b,'users/B/secretAtlas/haeinsa-001/note'),{text:'B',at:Date.now()}));await assertSucceeds(get(ref(a,'users/A')));await assertFails(get(ref(a,'users/B')));await assertFails(set(ref(a,'users/B/secretAtlas/haeinsa-001/note'),{text:'bad'}));await assertSucceeds(get(ref(admin,'users')));console.log('PASS existing own-user save/read, cross-user denial and administrator read preserved');
+for(const [db,uid] of [[a,'A'],[b,'B']]){
+ const base='users/'+uid+'/secretAtlas/';
+ await assertSucceeds(set(ref(db,base+'bulguksa-002/note'),{text:uid+' Bulguksa',at:Date.now()}));
+ assert.equal((await assertSucceeds(get(ref(db,base+'bulguksa-002/note')))).val().text,uid+' Bulguksa');
+ assert.equal((await assertSucceeds(get(ref(db,base+'haeinsa-001/note')))).val().text,uid);
+}
+await assertFails(get(ref(a,'users/B/secretAtlas/bulguksa-002')));
+await assertFails(set(ref(b,'users/A/secretAtlas/bulguksa-002/note'),{text:'bad'}));
+await assertFails(get(ref(guest,'users/A/secretAtlas/bulguksa-002')));
+await assertSucceeds(get(ref(admin,'users/A/secretAtlas/bulguksa-002')));
+console.log('PASS two episodes isolated for A/B; old Haeinsa records unchanged; cross-account/guest denied; administrator read unchanged');
 await assertSucceeds(set(ref(a,'community/posts/post'),{uid:'A',text:'post'}));await assertSucceeds(get(ref(guest,'community/posts')));await assertFails(set(ref(b,'community/posts/post'),{uid:'B',text:'bad'}));await assertSucceeds(set(ref(admin,'shared/lyricSync/song'),1));await assertSucceeds(get(ref(guest,'shared/lyricSync')));await assertFails(set(ref(a,'shared/lyricSync/song'),2));await assertSucceeds(set(ref(a,'leaderboards/beatShooter/A'),{score:1}));await assertFails(set(ref(b,'leaderboards/beatShooter/A'),{score:2}));console.log('PASS existing community, shared music and game score rules preserved');
 }finally{await env.cleanup();}})().catch(e=>{console.error(e);process.exit(1)});
