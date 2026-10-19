@@ -1,11 +1,11 @@
-const assert = require('node:assert/strict');
+const assert = require('node:assert/strict'), fs = require('node:fs');
 const { chromium, webkit } = require('playwright');
 const { route } = require('./atlas-fixtures.cjs');
 (async () => {
   const engine = process.env.SANSA_BROWSER === 'webkit' ? webkit : chromium;
   const b = await engine.launch(engine === chromium ? { executablePath: '/usr/bin/chromium', args: ['--no-sandbox'] } : { executablePath: '/workspace/.sansa-webkit-run' });
   try {
-    for (const url of ['/atlas/', '/atlas/bulguksa/', ...(process.env.INCLUDE_TONGDOSA ? ['/atlas/tongdosa/'] : [])]) {
+    for (const url of JSON.parse(fs.readFileSync('scripts/atlas/episodes.json')).map(e=>e.href)) {
       const p = await b.newPage({ viewport: { width: 390, height: 844 }, hasTouch: true, serviceWorkers: 'block' });
       const requests = []; p.on('request', r => requests.push(new URL(r.url()).pathname));
       await route(p); await p.route('https://www.gstatic.com/**', () => {});

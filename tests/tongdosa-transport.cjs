@@ -1,5 +1,7 @@
 const fs = require('node:fs'), path = require('node:path'), http = require('node:http'), assert = require('node:assert/strict');
 const { chromium } = require('playwright'), root = path.resolve(__dirname, '..');
+const episodePath=process.env.ATLAS_EPISODE_PATH||'/atlas/tongdosa/';
+const episode=JSON.parse(fs.readFileSync('scripts/atlas/episodes.json')).find(e=>e.href===episodePath);assert(episode,'episode must be in the published catalog');
 (async () => {
   const requests = [];
   const server = http.createServer((req, res) => {
@@ -19,15 +21,15 @@ const { chromium } = require('playwright'), root = path.resolve(__dirname, '..')
       localStorage.setItem('old-progress-sentinel', 'preserve');
       await (await caches.open('legacy-runtime')).put('/atlas/store.js?v=20261019-episodes', new Response('throw Error("stale legacy runtime executed")', { headers: { 'Content-Type': 'application/javascript' } }));
     });
-    await p.goto(origin + '/atlas/tongdosa/');
+    await p.goto(origin + episodePath);
     await p.waitForFunction(() => window.sansaSecretAtlas && navigator.serviceWorker.controller?.scriptURL.endsWith('/atlas/sw.js'));
     await p.locator('#startAtlas').click(); await p.locator('[data-atlas=resume]').click();
     await p.locator('.atlas-reader figure img').evaluate(im => im.decode());
-    assert.equal(await p.evaluate(() => SansaAtlasEpisode.id), 'tongdosa-003');
+    assert.equal(await p.evaluate(() => SansaAtlasEpisode.id), episode.id);
     assert.equal(await p.evaluate(() => localStorage.getItem('old-progress-sentinel')), 'preserve');
     assert(requests.includes('/atlas/store.js?v=20261019-catalog'));
     assert(!requests.includes('/index.html'));
     assert.deepEqual(errors, []);
-    console.log('PASS actual root→atlas worker transition: stale old runtime bypassed, Tongdosa reader/images usable, no home HTML fetch, old progress retained');
+    console.log('PASS',episode.id,'actual root→atlas worker transition: stale old runtime bypassed, reader/images usable, no home HTML fetch, old progress retained');
   } finally { await b.close(); server.closeAllConnections(); await new Promise(resolve => server.close(resolve)); }
 })().catch(e => { console.error(e); process.exitCode = 1; });

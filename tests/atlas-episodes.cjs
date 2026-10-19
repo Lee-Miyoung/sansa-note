@@ -1,6 +1,6 @@
 const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict'),{chromium}=require('playwright'),{route}=require('./atlas-fixtures.cjs');
 function content(file){const c={window:{}};vm.runInNewContext(fs.readFileSync(file,'utf8'),c);return c.window.SansaAtlasContent;}
-const episodes=[{url:'/atlas/',data:content('atlas/content.js')},{url:'/atlas/bulguksa/',data:content('atlas/bulguksa/content.js')},{url:'/atlas/tongdosa/',data:content('atlas/tongdosa/content.js')}];
+const episodes=[{url:'/atlas/',data:content('atlas/content.js')},{url:'/atlas/bulguksa/',data:content('atlas/bulguksa/content.js')},{url:'/atlas/tongdosa/',data:content('atlas/tongdosa/content.js')},{url:'/atlas/songgwangsa/',data:content('atlas/songgwangsa/content.js')}];
 assert.equal(episodes[0].data.id,'haeinsa-001');assert.equal(episodes[1].data.id,'bulguksa-002');assert.equal(episodes[2].data.id,'tongdosa-003');
 for(const{data:c}of episodes){assert.equal(c.scenes.length,12);assert.equal(new Set(c.scenes.map(s=>s.art)).size,12);assert.equal(c.quizzes.length,6);assert.equal(c.cards.length,3);assert(c.scenes.every(s=>s.paragraphs.length===3));}
 async function answer(p,q){
