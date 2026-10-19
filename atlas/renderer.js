@@ -8,7 +8,39 @@
  const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  const date=ts=>ts?new Intl.DateTimeFormat('ko-KR',{year:'numeric',month:'long',day:'numeric',timeZone:'Asia/Seoul'}).format(ts):'아직 기록 없음';
  const btn=(action,label,cls='atlas-btn',extra='')=>`<button type="button" class="${cls}" data-atlas="${action}" ${extra}>${label}</button>`;
- const img=(name,alt,cls='')=>`<img class="${cls}" src="${art(name)}" srcset="${art(name+'-small')} 480w, ${art(name)} ${name.startsWith('card-')?1024:1440}w" sizes="${name.startsWith('card-')?'(max-width:650px) 45vw, 300px':'(max-width:650px) 95vw, 760px'}" alt="${esc(C.artFormat==='svg'?alt.replace('수채화 창작 삽화','개념 삽화'):alt)}" width="${name.startsWith('card-')?1024:1440}" height="${name.startsWith('card-')?1536:960}" decoding="async">`;
+ const img=(name,alt,cls='')=>{
+  const small=art(name+'-small'),large=art(name),compact=matchMedia('(max-width:650px)').matches||navigator.connection?.saveData;
+  const responsive=compact?'':` srcset="${small} 480w, ${large} ${name.startsWith('card-')?1024:1440}w" sizes="${name.startsWith('card-')?'300px':'760px'}"`;
+  return `<img class="${cls}" src="${compact?small:large}" data-atlas-art-small="${small}" data-atlas-art-large="${large}"${responsive} alt="${esc(C.artFormat==='svg'?alt.replace('수채화 창작 삽화','개념 삽화'):alt)}" width="${name.startsWith('card-')?1024:1440}" height="${name.startsWith('card-')?1536:960}" decoding="async">`;
+ };
+
+ // A transient image failure must not leave a blank page until the next visit.
+ function watchArtwork(){
+  const states=[...body.querySelectorAll('img')].map(im=>({im,original:im.dataset.atlasArtLarge||im.getAttribute('src'),small:im.dataset.atlasArtSmall||im.getAttribute('src'),alt:im.alt,attempts:0,failed:false,timer:0,retryTimer:0}));
+  const notice=document.createElement('div');notice.className='atlas-art-retry';notice.setAttribute('role','status');
+  const text=document.createElement('span');text.textContent='그림을 불러오지 못했어요. 이야기는 계속 읽을 수 있습니다.';
+  const button=document.createElement('button');button.type='button';button.textContent='그림 다시 불러오기';notice.append(text,button);
+  function updateNotice(){if(states.some(s=>s.failed&&s.im.isConnected)){if(!notice.isConnected)body.prepend(notice);}else notice.remove();}
+  function fail(s){if(!s.im.isConnected)return;s.failed=true;s.im.classList.add('atlas-image-error');s.im.alt='그림을 받지 못했어요. 그림 다시 불러오기 버튼을 눌러 주세요.';updateNotice();}
+  function request(s,source){
+   clearTimeout(s.timer);s.failed=false;s.im.classList.remove('atlas-image-error');s.im.alt=s.alt;
+   const url=new URL(source,location.href);url.searchParams.set('atlas_art_retry',Date.now()+'-'+s.attempts);
+   s.im.removeAttribute('srcset');s.im.src=url.href;
+   s.timer=setTimeout(()=>{if(!s.im.complete||!s.im.naturalWidth)fail(s);},10000);updateNotice();
+  }
+  button.addEventListener('click',event=>{event.stopPropagation();states.filter(s=>s.failed).forEach(s=>{s.attempts=0;request(s,s.small);});});
+  states.forEach(s=>{
+   s.im.addEventListener('load',()=>{clearTimeout(s.timer);clearTimeout(s.retryTimer);s.failed=false;s.im.classList.remove('atlas-image-error');s.im.alt=s.alt;updateNotice();});
+   s.im.addEventListener('error',()=>{
+    clearTimeout(s.timer);if(s.retryTimer)return;
+    if(s.attempts>=2){fail(s);return;}
+    const source=s.attempts===0?s.small:s.original;s.attempts++;
+    s.retryTimer=setTimeout(()=>{s.retryTimer=0;if(s.im.isConnected)request(s,source);},150*s.attempts);
+   });
+   // A pending request does not always fire an error on a weak mobile network.
+   s.timer=setTimeout(()=>{if(!s.im.complete||!s.im.naturalWidth)fail(s);},10000);
+  });
+ }
  const completed=()=>Object.keys(S.state.completed).length;
  const canRead=()=>true;
  const available=()=>{if(canRead())return true;body.innerHTML=`<div class="atlas-pad"><h2>자료를 확인하고 있어요</h2><p>정확한 역사 이야기를 전하기 위해 공식 원문을 대조하고 있습니다. 확인되지 않은 원고는 정식 공개하지 않습니다.</p>${btn('intro','소개로 돌아가기')}</div>`;return false;};
@@ -47,7 +79,7 @@
  function status(){const texts={guest:'이 브라우저에 저장 · 로그인하면 계정별 별도 기록',cloud:'계정에 저장됨',saving:'계정에 저장 중…',loading:'계정 기록 불러오는 중…',offline:'기기에 저장됨 · 온라인 연결 후 동기화', 'permission-denied':'기기에 저장됨 · 서버 저장 권한을 확인해야 합니다', 'local-error':'저장 공간을 확인해 주세요'};root.querySelector('#atlasSaveStatus').textContent=texts[S.status]||'기기에 저장됨';}
  function render(){if(!['intro'].includes(view.page)&&!available())return;
   const pages={intro,reader,quiz,cards:collection,card:cardDetail,note:notes,sources:sourcesView};body.innerHTML=(pages[view.page]||intro)();root.dataset.atlasPage=view.page;root.querySelectorAll('.atlas-bottom button').forEach(b=>b.classList.toggle('active',b.dataset.atlas===({reader:'intro',quiz:'intro',card:'cards',sources:'sources'}[view.page]||view.page)));status();
-  body.querySelectorAll('img').forEach(im=>im.addEventListener('error',()=>{im.classList.add('atlas-image-error');im.alt='삽화를 불러오지 못했습니다. 연결 후 다시 열어 주세요.';},{once:true}));
+  watchArtwork();
   if(focusNext){body.querySelector('h1')?.setAttribute('tabindex','-1');body.querySelector('h1')?.focus({preventScroll:true});focusNext=false;}
  }
  function stopSpeech(){window.speechSynthesis?.cancel();}
