@@ -1,0 +1,167 @@
+{
+  "episode": "tongdosa-003",
+  "artType": "AI-generated imaginative watercolor cover and original SVG conceptual diagrams",
+  "notReconstruction": true,
+  "files": [
+    {
+      "file": "card-01-small.svg",
+      "bytes": 4664,
+      "sha256": "279789615ed8e40c7d03d5a72b573fdfb6280cdc319648c8d691f9fe45507aa9"
+    },
+    {
+      "file": "card-01.svg",
+      "bytes": 4664,
+      "sha256": "279789615ed8e40c7d03d5a72b573fdfb6280cdc319648c8d691f9fe45507aa9"
+    },
+    {
+      "file": "card-02-small.svg",
+      "bytes": 4505,
+      "sha256": "279c6668f2b3be72f8b7f3eaf83490955de8743fae7e725340f59df54a5e914c"
+    },
+    {
+      "file": "card-02.svg",
+      "bytes": 4505,
+      "sha256": "279c6668f2b3be72f8b7f3eaf83490955de8743fae7e725340f59df54a5e914c"
+    },
+    {
+      "file": "card-03-small.svg",
+      "bytes": 4663,
+      "sha256": "629f8bf7d1f482f2fa233b756435f0e4bfd94e53a0a333b219f1698490a2984a"
+    },
+    {
+      "file": "card-03.svg",
+      "bytes": 4663,
+      "sha256": "629f8bf7d1f482f2fa233b756435f0e4bfd94e53a0a333b219f1698490a2984a"
+    },
+    {
+      "file": "scene-01-small.svg",
+      "bytes": 3600,
+      "sha256": "d5f8b8333084e4c4d8c2c10a53426da5aebe0860af8984d3fa4a7b48bae9a546"
+    },
+    {
+      "file": "scene-01.svg",
+      "bytes": 3600,
+      "sha256": "d5f8b8333084e4c4d8c2c10a53426da5aebe0860af8984d3fa4a7b48bae9a546"
+    },
+    {
+      "file": "scene-02-small.svg",
+      "bytes": 3780,
+      "sha256": "57ab913675a3129f1aa8b2c9cba5af871fdbba9d9149884e9d571f1e609c210a"
+    },
+    {
+      "file": "scene-02.svg",
+      "bytes": 3780,
+      "sha256": "57ab913675a3129f1aa8b2c9cba5af871fdbba9d9149884e9d571f1e609c210a"
+    },
+    {
+      "file": "scene-03-small.svg",
+      "bytes": 3780,
+      "sha256": "8cae434b5c11fa7e1e00ba8f5105d58a184dd3bab31add4c8016814e5203f704"
+    },
+    {
+      "file": "scene-03.svg",
+      "bytes": 3780,
+      "sha256": "8cae434b5c11fa7e1e00ba8f5105d58a184dd3bab31add4c8016814e5203f704"
+    },
+    {
+      "file": "scene-04-small.svg",
+      "bytes": 3783,
+      "sha256": "b93a1073f8709790a7495b85ccb6166516454ab25c49c8e10db9b924e0aa7556"
+    },
+    {
+      "file": "scene-04.svg",
+      "bytes": 3783,
+      "sha256": "b93a1073f8709790a7495b85ccb6166516454ab25c49c8e10db9b924e0aa7556"
+    },
+    {
+      "file": "scene-05-small.svg",
+      "bytes": 3810,
+      "sha256": "8d1afc773e3cc0aa3e8b39efa398b859389627c133eac86cc0943ee6aeca7fac"
+    },
+    {
+      "file": "scene-05.svg",
+      "bytes": 3810,
+      "sha256": "8d1afc773e3cc0aa3e8b39efa398b859389627c133eac86cc0943ee6aeca7fac"
+    },
+    {
+      "file": "scene-06-small.svg",
+      "bytes": 3530,
+      "sha256": "b48ea98150472d411043b3dd6dbd85339853dae57dbc3dc7ded6602ade0bbfe3"
+    },
+    {
+      "file": "scene-06.svg",
+      "bytes": 3530,
+      "sha256": "b48ea98150472d411043b3dd6dbd85339853dae57dbc3dc7ded6602ade0bbfe3"
+    },
+    {
+      "file": "scene-07-small.svg",
+      "bytes": 3617,
+      "sha256": "47a14fa6c1c6c1871c694116cee176966c1ae333ab8dedde90c6908e8df3ce41"
+    },
+    {
+      "file": "scene-07.svg",
+      "bytes": 3617,
+      "sha256": "47a14fa6c1c6c1871c694116cee176966c1ae333ab8dedde90c6908e8df3ce41"
+    },
+    {
+      "file": "scene-08-small.svg",
+      "bytes": 3681,
+      "sha256": "fcc90a0a9a2d3b68d977152b6b097e41068a1d3ceeaaccde771628136bb2da62"
+    },
+    {
+      "file": "scene-08.svg",
+      "bytes": 3681,
+      "sha256": "fcc90a0a9a2d3b68d977152b6b097e41068a1d3ceeaaccde771628136bb2da62"
+    },
+    {
+      "file": "scene-09-small.svg",
+      "bytes": 3670,
+      "sha256": "8c112be9821ba8122e54548a9fb90e8751c008efc30ca0d208d7bb1f953e997e"
+    },
+    {
+      "file": "scene-09.svg",
+      "bytes": 3670,
+      "sha256": "8c112be9821ba8122e54548a9fb90e8751c008efc30ca0d208d7bb1f953e997e"
+    },
+    {
+      "file": "scene-10-small.svg",
+      "bytes": 3548,
+      "sha256": "c0fdddf7ed9c15c90d8edde94cc82174c1e8c77631b0e6c534718cc6e145ceb5"
+    },
+    {
+      "file": "scene-10.svg",
+      "bytes": 3548,
+      "sha256": "c0fdddf7ed9c15c90d8edde94cc82174c1e8c77631b0e6c534718cc6e145ceb5"
+    },
+    {
+      "file": "scene-11-small.svg",
+      "bytes": 3675,
+      "sha256": "8cf0c4f29b9c809ee299297a018e570858bdbb3b5fce036f114751f5669e51fd"
+    },
+    {
+      "file": "scene-11.svg",
+      "bytes": 3675,
+      "sha256": "8cf0c4f29b9c809ee299297a018e570858bdbb3b5fce036f114751f5669e51fd"
+    },
+    {
+      "file": "scene-12-small.svg",
+      "bytes": 3781,
+      "sha256": "70b236666d2fa6c5feda046be420e5cef27d405e7a5c52b96cff3c0c81191ea2"
+    },
+    {
+      "file": "scene-12.svg",
+      "bytes": 3781,
+      "sha256": "70b236666d2fa6c5feda046be420e5cef27d405e7a5c52b96cff3c0c81191ea2"
+    },
+    {
+      "file": "tongdosa-cover-small.webp",
+      "bytes": 44566,
+      "sha256": "d244a26d5e40baed0b97b4a7aab2bee72ba7d38ff2816c5cc749ad8e32d7b0bf"
+    },
+    {
+      "file": "tongdosa-cover.webp",
+      "bytes": 218924,
+      "sha256": "effbecb510f1d7a16252b7bcc7fa2f2cc57ebb45ebb7981c98992eae3a94b0c7"
+    }
+  ]
+}

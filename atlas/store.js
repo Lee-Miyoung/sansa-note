@@ -1,8 +1,8 @@
 /* Independent, per-user progress. Never writes to existing pilgrimage/card/diary paths. */
 (()=>{
  const ID=window.SansaAtlasEpisode?.id||'haeinsa-001',VERSION=1;
- if(!['haeinsa-001','bulguksa-002'].includes(ID))throw Error('Unknown episode');
- const TEMPLE=ID==='bulguksa-002'?'불국사':'해인사';
+ if(!/^[a-z][a-z-]*-\d{3}$/.test(ID)||window.SansaAtlasContent?.id!==ID)throw Error('Unknown episode');
+ const TEMPLE=window.SansaAtlasContent.templeName||window.SansaAtlasContent.temple;
  const blank=()=>({version:VERSION,position:{scene:0,at:0},completed:{},answers:{},cards:{},note:{text:'',at:0},lastReadAt:0,fieldVerification:null});
  const safeNum=(v,max=Date.now()+86400000)=>Number.isFinite(Number(v))?Math.max(0,Math.min(max,Number(v))):0;
  function normalize(raw){const s=blank(),r=raw&&typeof raw==='object'?raw:{};

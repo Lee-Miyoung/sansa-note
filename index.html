@@ -22607,19 +22607,12 @@ body.catalog-screen-open #catalogOverlay,
 
   <section id="homeAtlasEntry" aria-label="무념스님의 산사 비밀도감" aria-roledescription="캐러셀">
     <div class="home-atlas-track" id="homeAtlasTrack" tabindex="0" aria-label="이야기 목록 · 좌우로 밀어 선택">
-      <a class="home-atlas-card" href="/atlas/" aria-label="제1화 해인사, 시간을 지킨 나무판">
-        <span class="home-atlas-copy"><small>무념스님의 산사 비밀도감 · 제001화</small><b>해인사, 시간을 지킨 나무판</b><span>전쟁 속에서 다시 새긴 책, 그 책을 지켜 온 사람들.</span><strong>이야기 열기 <span aria-hidden="true">→</span></strong></span>
-        <img src="/admin-atlas/images/secret-atlas/haeinsa-cover-small.webp" alt="해인사로 초대하는 무념스님 수채화" width="720" height="480" loading="lazy" decoding="async">
-      </a>
-      <a class="home-atlas-card" href="/atlas/bulguksa/" aria-label="제2화 불국사, 두 탑이 품은 천 년의 이야기">
-        <span class="home-atlas-copy"><small>무념스님의 산사 비밀도감 · 제002화</small><b>불국사, 두 탑이 품은 천 년의 이야기</b><span>서로 다른 두 탑, 탑 속에서 나온 작은 종이 한 장.</span><strong>이야기 열기 <span aria-hidden="true">→</span></strong></span>
-        <img src="/atlas/bulguksa/images/bulguksa-cover-small.webp" alt="불국사에서 걷는 무념스님 수채화" width="720" height="480" loading="lazy" decoding="async">
-      </a>
+      <a href="/atlas/" class="home-atlas-fallback">비밀도감 이야기 목록을 준비하고 있어요 · 제1화 열기 →</a>
     </div>
     <div class="home-atlas-controls" aria-label="이야기 목록 이동">
       <button type="button" id="homeAtlasPrev" aria-label="이전 이야기" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg></button>
-      <div class="home-atlas-dots"><button type="button" data-atlas-slide="0" aria-label="제1화 해인사 보기" aria-current="true"><span></span></button><button type="button" data-atlas-slide="1" aria-label="제2화 불국사 보기" aria-current="false"><span></span></button></div>
-      <span id="homeAtlasPage" class="home-atlas-page" aria-live="polite">1 / 2</span>
+      <div class="home-atlas-dots"></div>
+      <span id="homeAtlasPage" class="home-atlas-page" aria-live="polite">이야기 목록</span>
       <button type="button" id="homeAtlasNext" aria-label="다음 이야기"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m10 6 6 6-6 6"/></svg></button>
     </div>
   </section>
@@ -42377,9 +42370,9 @@ nav.site-global-nav{height:var(--global-nav-h)!important;box-sizing:border-box!i
 <script src="./scripts/meditation-sounds.js?v=20261018" defer></script>
 <script src="./scripts/game-viewport.js?v=20261017" defer></script>
 <script src="./scripts/navigation.js?v=20261018" defer></script>
-<link rel="stylesheet" href="/styles/atlas-home.css?v=20261019-episodes">
+<link rel="stylesheet" href="/styles/atlas-home.css?v=20261019-catalog">
 <script src="/scripts/atlas/home-publication.js?v=20261019-episodes" defer></script>
-<script src="/scripts/atlas/home-carousel.js?v=20261019-episodes" defer></script>
+<script src="/scripts/atlas/home-carousel.js?v=20261019-catalog" defer></script>
 
 </body>
 </html>

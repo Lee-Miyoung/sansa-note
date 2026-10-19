@@ -6,6 +6,8 @@ const { chromium } = require('playwright');
 const root = path.resolve(__dirname, '..');
 (async () => {
   let delayed = false;
+  let catalogCount = 2;
+  const catalog = JSON.parse(fs.readFileSync(path.join(root, 'scripts/atlas/episodes.json')));
   const timers = new Set();
   const server = http.createServer((req, res) => {
     const url = new URL(req.url, 'http://localhost');
@@ -23,6 +25,10 @@ const root = path.resolve(__dirname, '..');
         return;
       }
       return res.end('<h1>Saved app</h1><script>navigator.serviceWorker.register("/sw.js")</script>');
+    }
+    if (url.pathname === '/scripts/atlas/episodes.json') {
+      res.setHeader('Content-Type', 'application/json');
+      return res.end(JSON.stringify(catalog.slice(0, catalogCount)));
     }
     if (url.pathname === '/search.html') {
       res.setHeader('Content-Type', 'text/html');
@@ -42,6 +48,9 @@ const root = path.resolve(__dirname, '..');
     await p.goto(origin);
     await p.waitForFunction(() => navigator.serviceWorker.controller);
     await p.evaluate(() => localStorage.setItem('record-sentinel', 'keep'));
+    assert.equal(await p.evaluate(async () => (await (await fetch('/scripts/atlas/episodes.json')).json()).length), 2);
+    catalogCount = 3;
+    assert.equal(await p.evaluate(async () => (await (await fetch('/scripts/atlas/episodes.json')).json()).length), 3, 'new metadata must not remain hidden behind an old worker cache');
     const streamingStart = Date.now();
     await p.goto(origin + '/?stream=1', { waitUntil: 'commit', timeout: 3000 });
     await p.locator('h1').waitFor({ timeout: 2000 });

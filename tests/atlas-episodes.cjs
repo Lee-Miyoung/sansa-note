@@ -1,7 +1,7 @@
 const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict'),{chromium}=require('playwright'),{route}=require('./atlas-fixtures.cjs');
 function content(file){const c={window:{}};vm.runInNewContext(fs.readFileSync(file,'utf8'),c);return c.window.SansaAtlasContent;}
-const episodes=[{url:'/atlas/',data:content('atlas/content.js')},{url:'/atlas/bulguksa/',data:content('atlas/bulguksa/content.js')}];
-assert.equal(episodes[0].data.id,'haeinsa-001');assert.equal(episodes[1].data.id,'bulguksa-002');
+const episodes=[{url:'/atlas/',data:content('atlas/content.js')},{url:'/atlas/bulguksa/',data:content('atlas/bulguksa/content.js')},{url:'/atlas/tongdosa/',data:content('atlas/tongdosa/content.js')}];
+assert.equal(episodes[0].data.id,'haeinsa-001');assert.equal(episodes[1].data.id,'bulguksa-002');assert.equal(episodes[2].data.id,'tongdosa-003');
 for(const{data:c}of episodes){assert.equal(c.scenes.length,12);assert.equal(new Set(c.scenes.map(s=>s.art)).size,12);assert.equal(c.quizzes.length,6);assert.equal(c.cards.length,3);assert(c.scenes.every(s=>s.paragraphs.length===3));}
 async function answer(p,q){
  if(q.type==='order'||q.type==='sequence'){const order=q.items.map((_,i)=>i);for(let pos=0;pos<q.correct.length;pos++){let at=order.indexOf(q.correct[pos]);while(at>pos){await p.locator('[data-atlas=up][data-index="'+at+'"]').click();[order[at],order[at-1]]=[order[at-1],order[at]];at--;}}}
@@ -43,7 +43,7 @@ async function answer(p,q){
    if(c.id==='haeinsa-001')haeinsaSnapshot=await p.evaluate(()=>localStorage.getItem('sansaSecretAtlas_v1:guest:haeinsa-001'));
    console.log('PASS episode',width,c.id,'12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images');
   }
-  await p.goto('https://sansanote.com/');await p.evaluate(()=>startLocalMode());const track=p.locator('#homeAtlasTrack');await track.scrollIntoViewIfNeeded();assert.equal(await p.locator('#homeAtlasPage').innerText(),'1 / 2');await p.locator('#homeAtlasNext').click();await p.waitForFunction(()=>document.querySelector('#homeAtlasTrack').scrollLeft>document.querySelector('#homeAtlasTrack').clientWidth*.95);assert.equal(await p.locator('[data-atlas-slide="1"]').getAttribute('aria-current'),'true');await p.locator('[data-atlas-slide="0"]').click();await p.waitForFunction(()=>document.querySelector('#homeAtlasTrack').scrollLeft<1);
+  await p.goto('https://sansanote.com/');await p.evaluate(()=>startLocalMode());const track=p.locator('#homeAtlasTrack');await track.scrollIntoViewIfNeeded();await p.waitForFunction(()=>document.getElementById('homeAtlasEntry').dataset.catalogReady==='true');assert.equal(await p.locator('#homeAtlasPage').innerText(),'1 / '+episodes.length);await p.locator('#homeAtlasNext').click();await p.waitForFunction(()=>document.querySelector('#homeAtlasTrack').scrollLeft>document.querySelector('#homeAtlasTrack').clientWidth*.95);assert.equal(await p.locator('[data-atlas-slide="1"]').getAttribute('aria-current'),'true');await p.locator('[data-atlas-slide="0"]').click();await p.waitForFunction(()=>document.querySelector('#homeAtlasTrack').scrollLeft<1);
   if(width<1000){const box=await track.boundingBox(),cdp=await context.newCDPSession(p),start=box.x+box.width*.86,end=box.x+box.width*.12,y=box.y+Math.min(box.height*.5,65);await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:start,y}]});for(let n=1;n<=12;n++)await cdp.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:start+(end-start)*n/12,y}]});await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});await p.waitForFunction(()=>document.querySelector('#homeAtlasTrack').scrollLeft>document.querySelector('#homeAtlasTrack').clientWidth*.8);await cdp.detach();}
   else{await track.focus();await track.press('ArrowRight');await p.waitForFunction(()=>document.querySelector('#homeAtlasTrack').scrollLeft>document.querySelector('#homeAtlasTrack').clientWidth*.8);}
   assert.equal(await p.locator('.home-atlas-card').nth(1).getAttribute('href'),'/atlas/bulguksa/');
@@ -59,9 +59,10 @@ async function answer(p,q){
   await p.evaluate(async()=>{await mockSignIn('A');SansaAtlasStore.connect();SansaAtlasStore.note(SansaAtlasContent.templeName+' A');for(let i=0;i<12;i++)SansaAtlasStore.complete(i);await SansaAtlasStore.flush();});
   const snapshot=await p.evaluate(()=>({records:mockRecords,writes:mockWrites}));assert(snapshot.writes.every(x=>x==='users/A/secretAtlas/'+c.id||x.startsWith('users/A/secretAtlas/'+c.id+'/')));
   assert.deepEqual(snapshot.records['users/A/destinations'],{existing:{name:'해인사',visits:{v:{verified:true,ts:100}}}});assert.deepEqual(snapshot.records['users/A/guardianCards'],{keep:true});
-  if(index===1)assert.deepEqual(snapshot.records['users/A/secretAtlas/haeinsa-001'],records['users/A/secretAtlas/haeinsa-001']);
+  if(records)for(const [path,value] of Object.entries(records))if(path.startsWith('users/A/secretAtlas/'))assert.deepEqual(snapshot.records[path],value,'new episode must not modify an older episode');
   records=snapshot.records;
  }
+ await p.goto('https://sansanote.com/atlas/bulguksa/');await p.waitForFunction(()=>window.SansaAtlasStore);await p.evaluate(async records=>{window.mockRecords=records;await mockSignIn('A');SansaAtlasStore.connect();},records);
  await p.evaluate(async()=>{await mockSignIn('B');SansaAtlasStore.connect();SansaAtlasStore.note('불국사 B');await SansaAtlasStore.flush();await mockSignIn('A');SansaAtlasStore.connect();});
  assert.equal(await p.evaluate(()=>SansaAtlasStore.state.note.text),'불국사 A');
  assert.equal(await p.evaluate(()=>mockRecords['users/B/secretAtlas/bulguksa-002'].note.text),'불국사 B');

@@ -1,12 +1,72 @@
-/* Native scroll snapping: no touch interception, autoplay, or stored user data. */
-(()=>{
- const root=document.getElementById('homeAtlasEntry'),track=document.getElementById('homeAtlasTrack');if(!root||!track)return;
- const dots=[...root.querySelectorAll('[data-atlas-slide]')],prev=root.querySelector('#homeAtlasPrev'),next=root.querySelector('#homeAtlasNext'),page=root.querySelector('#homeAtlasPage');let active=0,frame=0;
- function render(){dots.forEach((d,i)=>d.setAttribute('aria-current',String(i===active)));prev.disabled=active===0;next.disabled=active===dots.length-1;page.textContent=(active+1)+' / '+dots.length;}
- function select(i){active=Math.max(0,Math.min(dots.length-1,i));track.scrollTo({left:active*track.clientWidth,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});render();}
- track.addEventListener('scroll',()=>{cancelAnimationFrame(frame);frame=requestAnimationFrame(()=>{if(!track.clientWidth)return;active=Math.max(0,Math.min(dots.length-1,Math.round(track.scrollLeft/track.clientWidth)));render();});},{passive:true});
- prev.addEventListener('click',()=>select(active-1));next.addEventListener('click',()=>select(active+1));dots.forEach((d,i)=>d.addEventListener('click',()=>select(i)));
- track.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'||e.key==='ArrowRight'){e.preventDefault();select(active+(e.key==='ArrowRight'?1:-1));}});
- function resized(){if(track.clientWidth)track.scrollTo({left:active*track.clientWidth,behavior:'auto'});}
- if('ResizeObserver'in window)new ResizeObserver(resized).observe(track);else window.addEventListener('resize',resized);render();
+/* Lightweight metadata only. Episode runtimes and artwork stay on their own pages. */
+(async () => {
+  const root = document.getElementById('homeAtlasEntry');
+  const track = document.getElementById('homeAtlasTrack');
+  if (!root || !track) return;
+  root.querySelector('#homeAtlasNext').disabled = true;
+  try {
+    const response = await fetch('/scripts/atlas/episodes.json', { cache: 'no-store' });
+    if (!response.ok) throw Error('Episode list unavailable');
+    const episodes = await response.json();
+    if (!Array.isArray(episodes) || !episodes.length || episodes.length > 100 ||
+        new Set(episodes.map(e => e.id)).size !== episodes.length ||
+        episodes.some(e => !/^[a-z][a-z-]*-\d{3}$/.test(e.id) || !/^\d{3}$/.test(e.number) ||
+          !/^\/atlas\/(?:[a-z][a-z-]*\/)?$/.test(e.href) ||
+          !/^\/(?:atlas\/[a-z-]+|admin-atlas\/images\/secret-atlas)\/(?:images\/)?[a-z0-9-]+-small\.webp$/.test(e.thumbnail) ||
+          typeof e.title !== 'string' || e.title.length > 160 || typeof e.temple !== 'string')) throw Error('Invalid episode list');
+    const element = (tag, className, text) => {
+      const node = document.createElement(tag);
+      if (className) node.className = className;
+      if (text) node.textContent = text;
+      return node;
+    };
+    const images = [];
+    const cards = episodes.map(e => {
+      const card = element('a', 'home-atlas-card'); card.href = e.href;
+      card.setAttribute('aria-label', `제${Number(e.number)}화 ${e.temple}, ${e.title}`);
+      const copy = element('span', 'home-atlas-copy');
+      copy.append(element('small', '', `무념스님의 산사 비밀도감 · 제${e.number}화`),
+        element('b', '', `${e.temple}, ${e.title}`), element('strong', '', '이야기 열기 →'));
+      const image = element('img'); image.alt = `${e.temple} 이야기 표지 삽화`;
+      image.width = 720; image.height = 480; image.loading = 'lazy'; image.decoding = 'async';
+      images.push({ node: image, url: e.thumbnail }); card.append(copy, image); return card;
+    });
+    track.replaceChildren(...cards);
+    const dots = episodes.map((e, i) => {
+      const dot = element('button'); dot.type = 'button'; dot.dataset.atlasSlide = i;
+      dot.setAttribute('aria-label', `제${Number(e.number)}화 ${e.temple} 보기`);
+      dot.append(element('span')); return dot;
+    });
+    root.querySelector('.home-atlas-dots').replaceChildren(...dots);
+    const prev = root.querySelector('#homeAtlasPrev'), next = root.querySelector('#homeAtlasNext'), page = root.querySelector('#homeAtlasPage');
+    let active = 0, frame = 0;
+    function render() {
+      dots.forEach((d, i) => d.setAttribute('aria-current', String(i === active)));
+      prev.disabled = active === 0; next.disabled = active === dots.length - 1;
+      page.textContent = `${active + 1} / ${dots.length}`;
+      // Only nearby thumbnails receive a URL. No episode body, cards or quizzes.
+      images.forEach((image, i) => { if (Math.abs(i - active) <= 1 && !image.node.hasAttribute('src')) image.node.src = image.url; });
+    }
+    function select(i) {
+      active = Math.max(0, Math.min(dots.length - 1, i)); render();
+      track.scrollTo({ left: active * track.clientWidth, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+    }
+    track.addEventListener('scroll', () => {
+      cancelAnimationFrame(frame); frame = requestAnimationFrame(() => {
+        if (!track.clientWidth) return;
+        active = Math.max(0, Math.min(dots.length - 1, Math.round(track.scrollLeft / track.clientWidth))); render();
+      });
+    }, { passive: true });
+    prev.onclick = () => select(active - 1); next.onclick = () => select(active + 1);
+    dots.forEach((d, i) => d.onclick = () => select(i));
+    track.addEventListener('keydown', e => { if (['ArrowLeft', 'ArrowRight'].includes(e.key)) { e.preventDefault(); select(active + (e.key === 'ArrowRight' ? 1 : -1)); } });
+    const resized = () => { if (track.clientWidth) track.scrollTo({ left: active * track.clientWidth, behavior: 'auto' }); };
+    if ('ResizeObserver' in window) new ResizeObserver(resized).observe(track); else window.addEventListener('resize', resized);
+    render(); root.dataset.catalogReady = 'true';
+  } catch (_) {
+    root.querySelector('#homeAtlasPrev').disabled = true;
+    root.querySelector('#homeAtlasNext').disabled = true;
+    root.querySelector('#homeAtlasPage').textContent = '제1화 바로 열기';
+    // Keep the ordinary fallback link usable even with a blocked metadata request.
+  }
 })();
