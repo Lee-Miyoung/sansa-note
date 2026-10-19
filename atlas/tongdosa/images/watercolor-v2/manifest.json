@@ -1,0 +1,167 @@
+{
+  "episode": "tongdosa-003",
+  "artType": "AI-generated imaginative watercolor illustrations",
+  "notReconstruction": true,
+  "files": [
+    {
+      "file": "card-01-small.webp",
+      "bytes": 74624,
+      "sha256": "629537561e118c9ec3612f76b146113e422b3f9128b0531d1a07a742b1305311"
+    },
+    {
+      "file": "card-01.webp",
+      "bytes": 213168,
+      "sha256": "d33338df31aa198a8755cc79e61becd3dc0f0d3cf13ca4e415117dc71628db1e"
+    },
+    {
+      "file": "card-02-small.webp",
+      "bytes": 76638,
+      "sha256": "3800377fe19136e31fac63abe933dd664ea3366439dd0cf1acc0991c37749d90"
+    },
+    {
+      "file": "card-02.webp",
+      "bytes": 217948,
+      "sha256": "5e0dca748831a65720a59ebc900ff9b0fefe1db23b6ccdcc0402882140ea7201"
+    },
+    {
+      "file": "card-03-small.webp",
+      "bytes": 97492,
+      "sha256": "b14afc8f40880d81998204174103924ed20a7de6de9e8af79ff646ceae50db26"
+    },
+    {
+      "file": "card-03.webp",
+      "bytes": 270840,
+      "sha256": "fcb88527115c9eefa51bba45702c14b172fc919f4f73560a22b84429989540f5"
+    },
+    {
+      "file": "scene-01-small.webp",
+      "bytes": 59682,
+      "sha256": "e46084366bc518f6e94bed25ad3b1926bd88059adbfcc0876c1afcde54d45e5e"
+    },
+    {
+      "file": "scene-01.webp",
+      "bytes": 341330,
+      "sha256": "f89964532ad79ee1d604f3ab85377ac606645a2e0a36d0ea3b7cff8a49159bff"
+    },
+    {
+      "file": "scene-02-small.webp",
+      "bytes": 42456,
+      "sha256": "f094acfa18fd9d62122a435998de274f94c00eb3335bcbb2c3651701b65009d0"
+    },
+    {
+      "file": "scene-02.webp",
+      "bytes": 231310,
+      "sha256": "e994bf32a214a7d0ea6a7352d12f0f49bf61ae5900b5399e72c3accd4b04522f"
+    },
+    {
+      "file": "scene-03-small.webp",
+      "bytes": 44048,
+      "sha256": "a429e96026742236d1a8753071e23346962003883477ac18fac4aaa24315d38b"
+    },
+    {
+      "file": "scene-03.webp",
+      "bytes": 250044,
+      "sha256": "a500e9e96b6dddc8473dc60eca0973b77e4fab87760905b68e37adb75fffe2e4"
+    },
+    {
+      "file": "scene-04-small.webp",
+      "bytes": 47082,
+      "sha256": "bf1f90db46dca7797224bdc26b2a96da65f98837313f4e030add1589d5345680"
+    },
+    {
+      "file": "scene-04.webp",
+      "bytes": 255384,
+      "sha256": "721abd639057bb8d39247ba8ac376de187be358943c09b7d8aa01d79d4b6ae66"
+    },
+    {
+      "file": "scene-05-small.webp",
+      "bytes": 55362,
+      "sha256": "727e4b2d5e4bc437085329023e89a290eb620b9ea12111e6159d9336c247c6db"
+    },
+    {
+      "file": "scene-05.webp",
+      "bytes": 301806,
+      "sha256": "91c9d4246abb370bc3ddc823b3dd21c1699e25e158c7b816d97e318f4cce43a7"
+    },
+    {
+      "file": "scene-06-small.webp",
+      "bytes": 47144,
+      "sha256": "ec938fb0f72f3747785ca62ca1f322532b9d3044552e086588acb7724a26ff66"
+    },
+    {
+      "file": "scene-06.webp",
+      "bytes": 266172,
+      "sha256": "b138f819191629eb258911c6cb28509301390b248a916158681433eb14b9f5b9"
+    },
+    {
+      "file": "scene-07-small.webp",
+      "bytes": 59894,
+      "sha256": "8d1f251ffa04434ad341204f8bc2ea70b79c0f38552858e3d9a166dac85356cd"
+    },
+    {
+      "file": "scene-07.webp",
+      "bytes": 329554,
+      "sha256": "f6bbbd4f45c566a1ff3c0cc7223b87ec5321f5c510f28e05f61cafc7a8083ce8"
+    },
+    {
+      "file": "scene-08-small.webp",
+      "bytes": 42978,
+      "sha256": "715a7ebcfe4cde0ae119a35d67fb9ac7b35e4a20001079215178a34e6fe20acd"
+    },
+    {
+      "file": "scene-08.webp",
+      "bytes": 187180,
+      "sha256": "4698c500be00015bfa065189e6edd12a8e7fcdd86967271bb869da88632db1bd"
+    },
+    {
+      "file": "scene-09-small.webp",
+      "bytes": 48250,
+      "sha256": "26b1c70707299fcb4b6d9321fa1bce7140ffad9c8f235e05756154bae5cc39bf"
+    },
+    {
+      "file": "scene-09.webp",
+      "bytes": 221808,
+      "sha256": "edf0082f4bf964ffafa9dae717bbb7c0d93b5ebed8f8705abca2e876ea69cebf"
+    },
+    {
+      "file": "scene-10-small.webp",
+      "bytes": 68346,
+      "sha256": "9de772c785e2b1ca8f37874d8c11ef21d00ec2e5859575a3a8fcf05d4c0cb8a8"
+    },
+    {
+      "file": "scene-10.webp",
+      "bytes": 395122,
+      "sha256": "53574b0519d43a0054f83572eb49da6970e2320c37087ce5c7dc0a47b87026e7"
+    },
+    {
+      "file": "scene-11-small.webp",
+      "bytes": 61250,
+      "sha256": "bf64c89fe49f1bb8f1abe9738bb838b6cf2eeb21f08846b69efb9b38f8e2e09e"
+    },
+    {
+      "file": "scene-11.webp",
+      "bytes": 346834,
+      "sha256": "aefd69c97273ff32d7d7785c28d6ef9909d68e5a35c035edf267cf79887a2d35"
+    },
+    {
+      "file": "scene-12-small.webp",
+      "bytes": 48754,
+      "sha256": "1849f4cb654a6e60ed6873ef6fbddb473b7622c1a66f77481f8a7c402b09d774"
+    },
+    {
+      "file": "scene-12.webp",
+      "bytes": 249554,
+      "sha256": "dc7ec1b8b43565209f9b4ad20c0bd9eb60a897e19e1930ba34314ebc8b89dfeb"
+    },
+    {
+      "file": "tongdosa-cover-small.webp",
+      "bytes": 44566,
+      "sha256": "d244a26d5e40baed0b97b4a7aab2bee72ba7d38ff2816c5cc749ad8e32d7b0bf"
+    },
+    {
+      "file": "tongdosa-cover.webp",
+      "bytes": 218924,
+      "sha256": "effbecb510f1d7a16252b7bcc7fa2f2cc57ebb45ebb7981c98992eae3a94b0c7"
+    }
+  ]
+}

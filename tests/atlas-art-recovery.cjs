@@ -1,7 +1,7 @@
 const assert=require('node:assert/strict');
 const {chromium,webkit}=require('playwright');
 const {route}=require('./atlas-fixtures.cjs');
-const episodes=[['/atlas/','/admin-atlas/images/secret-atlas/','webp'],['/atlas/bulguksa/','/atlas/bulguksa/images/','webp'],['/atlas/tongdosa/','/atlas/tongdosa/images/','svg']];
+const episodes=[['/atlas/','/admin-atlas/images/secret-atlas/','webp'],['/atlas/bulguksa/','/atlas/bulguksa/images/','webp'],['/atlas/tongdosa/','/atlas/tongdosa/images/watercolor-v2/','webp']];
 (async()=>{
  for(const [name,engine]of [['chromium',chromium],['webkit',webkit]]){
   const b=await engine.launch(engine===chromium?{executablePath:'/usr/bin/chromium',args:['--no-sandbox']}:{executablePath:'/workspace/.sansa-webkit-run'});

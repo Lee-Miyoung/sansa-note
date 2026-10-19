@@ -6,9 +6,9 @@ window.SansaAtlasContent={
   "location": "경남 양산",
   "title": "불상이 없는 법당의 비밀",
   "cover": "tongdosa-cover",
-  "artBase": "/atlas/tongdosa/images/",
-  "artFormat": "svg",
-  "artLabel": "창작 표지 · 본문은 개념 삽화",
+  "artBase": "/atlas/tongdosa/images/watercolor-v2/",
+  "artFormat": "webp",
+  "artLabel": "무념스님과 함께하는 창작 수채화",
   "tags": [
     "대웅전 · 금강계단",
     "전승과 역사 구분하기"
@@ -113,7 +113,7 @@ window.SansaAtlasContent={
       ],
       "clue": "통도사 대웅전에는 다른 법당과 구별되는 특징이 있습니다.",
       "summary": "통도사 대웅전에는 다른 법당과 구별되는 특징이 있습니다.",
-      "interpretation": "그림은 이해를 돕는 개념 삽화이며 건축 실측도나 당시 장면의 복원도가 아닙니다.",
+      "interpretation": "그림은 이해를 돕는 창작 수채화이며 건축 실측도나 당시 장면의 복원도가 아닙니다.",
       "monk": "",
       "art": "scene-01",
       "part": 1
@@ -137,7 +137,7 @@ window.SansaAtlasContent={
       ],
       "clue": "대웅전의 특징을 통도사의 모든 전각으로 넓혀 설명하면 안 됩니다.",
       "summary": "대웅전의 특징을 통도사의 모든 전각으로 넓혀 설명하면 안 됩니다.",
-      "interpretation": "그림은 이해를 돕는 개념 삽화이며 건축 실측도나 당시 장면의 복원도가 아닙니다.",
+      "interpretation": "그림은 이해를 돕는 창작 수채화이며 건축 실측도나 당시 장면의 복원도가 아닙니다.",
       "monk": "",
       "art": "scene-02",
       "part": 1
@@ -161,7 +161,7 @@ window.SansaAtlasContent={
       ],
       "clue": "대웅전은 진신사리를 모신 금강계단을 향한 예경 공간입니다.",
       "summary": "대웅전은 진신사리를 모신 금강계단을 향한 예경 공간입니다.",
-      "interpretation": "그림은 이해를 돕는 개념 삽화이며 건축 실측도나 당시 장면의 복원도가 아닙니다.",
+      "interpretation": "그림은 이해를 돕는 창작 수채화이며 건축 실측도나 당시 장면의 복원도가 아닙니다.",
       "monk": "",
       "art": "scene-03",
       "part": 1
@@ -185,7 +185,7 @@ window.SansaAtlasContent={
       ],
       "clue": "불상이 없다는 특징은 금강계단의 사리 신앙과 함께 이해합니다.",
       "summary": "불상이 없다는 특징은 금강계단의 사리 신앙과 함께 이해합니다.",
-      "interpretation": "그림은 이해를 돕는 개념 삽화이며 건축 실측도나 당시 장면의 복원도가 아닙니다.",
+      "interpretation": "그림은 이해를 돕는 창작 수채화이며 건축 실측도나 당시 장면의 복원도가 아닙니다.",
       "monk": "",
       "art": "scene-04",
       "part": 1
@@ -233,7 +233,7 @@ window.SansaAtlasContent={
       ],
       "clue": "율사는 계율을 익히고 전하는 승려를 이르는 말입니다.",
       "summary": "율사는 계율을 익히고 전하는 승려를 이르는 말입니다.",
-      "interpretation": "그림은 이해를 돕는 개념 삽화이며 건축 실측도나 당시 장면의 복원도가 아닙니다.",
+      "interpretation": "그림은 이해를 돕는 창작 수채화이며 건축 실측도나 당시 장면의 복원도가 아닙니다.",
       "monk": "",
       "art": "scene-06",
       "part": 2
@@ -258,7 +258,7 @@ window.SansaAtlasContent={
       ],
       "clue": "금강계단의 계단(戒壇)은 단순한 층계라는 뜻이 아닙니다.",
       "summary": "금강계단의 계단(戒壇)은 단순한 층계라는 뜻이 아닙니다.",
-      "interpretation": "그림은 이해를 돕는 개념 삽화이며 건축 실측도나 당시 장면의 복원도가 아닙니다.",
+      "interpretation": "그림은 이해를 돕는 창작 수채화이며 건축 실측도나 당시 장면의 복원도가 아닙니다.",
       "monk": "",
       "art": "scene-07",
       "part": 2
@@ -307,7 +307,7 @@ window.SansaAtlasContent={
       ],
       "clue": "창건 전승의 시대와 현재 건물의 모든 부분을 같은 시대로 보지 않습니다.",
       "summary": "창건 전승의 시대와 현재 건물의 모든 부분을 같은 시대로 보지 않습니다.",
-      "interpretation": "그림은 이해를 돕는 개념 삽화이며 건축 실측도나 당시 장면의 복원도가 아닙니다.",
+      "interpretation": "그림은 이해를 돕는 창작 수채화이며 건축 실측도나 당시 장면의 복원도가 아닙니다.",
       "monk": "",
       "art": "scene-09",
       "part": 3
@@ -331,7 +331,7 @@ window.SansaAtlasContent={
       ],
       "clue": "통도사의 불보사찰이라는 성격은 진신사리 신앙과 연결됩니다.",
       "summary": "통도사의 불보사찰이라는 성격은 진신사리 신앙과 연결됩니다.",
-      "interpretation": "그림은 이해를 돕는 개념 삽화이며 건축 실측도나 당시 장면의 복원도가 아닙니다.",
+      "interpretation": "그림은 이해를 돕는 창작 수채화이며 건축 실측도나 당시 장면의 복원도가 아닙니다.",
       "monk": "",
       "art": "scene-10",
       "part": 3
@@ -355,7 +355,7 @@ window.SansaAtlasContent={
       ],
       "clue": "현장 안내에 따라 문화유산과 예경 공간을 존중합니다.",
       "summary": "현장 안내에 따라 문화유산과 예경 공간을 존중합니다.",
-      "interpretation": "그림은 이해를 돕는 개념 삽화이며 건축 실측도나 당시 장면의 복원도가 아닙니다.",
+      "interpretation": "그림은 이해를 돕는 창작 수채화이며 건축 실측도나 당시 장면의 복원도가 아닙니다.",
       "monk": "",
       "art": "scene-11",
       "part": 3
@@ -382,7 +382,7 @@ window.SansaAtlasContent={
       ],
       "clue": "불상이 없는 대웅전은 사리 신앙·금강계단·전승을 함께 읽는 출발점입니다.",
       "summary": "불상이 없는 대웅전은 사리 신앙·금강계단·전승을 함께 읽는 출발점입니다.",
-      "interpretation": "그림은 이해를 돕는 개념 삽화이며 건축 실측도나 당시 장면의 복원도가 아닙니다.",
+      "interpretation": "그림은 이해를 돕는 창작 수채화이며 건축 실측도나 당시 장면의 복원도가 아닙니다.",
       "monk": "",
       "art": "scene-12",
       "part": 3
