@@ -4,7 +4,7 @@ const { route } = require('./atlas-fixtures.cjs');
 const catalog = JSON.parse(fs.readFileSync('scripts/atlas/episodes.json'));
 // A release row cannot quietly grow into a story payload.
 for (const episode of catalog) {
-  assert.deepEqual(Object.keys(episode).sort(), ['href', 'id', 'number', 'temple', 'thumbnail', 'title']);
+  assert.deepEqual(Object.keys(episode).sort(), ['href', 'id', 'number', 'season', 'temple', 'thumbnail', 'title']);
   assert(Buffer.byteLength(JSON.stringify(episode)) < 512);
 }
 const publicConfig = JSON.parse(fs.readFileSync('atlas/firebase-config.json'));
@@ -32,10 +32,13 @@ const engine = process.env.SANSA_BROWSER === 'webkit' ? webkit : chromium;
         await p.waitForFunction(() => document.getElementById('homeAtlasEntry').dataset.catalogReady === 'true');
         await p.evaluate(() => startLocalMode());
         assert.equal(await p.locator('.home-atlas-card').count(), list.length);
-        assert.equal(await p.locator('.home-atlas-card img[src]').count(), Math.min(2, list.length));
+        assert.equal(await p.locator('.hero-inner > #homeAtlasEntry').count(),1);
+        await p.waitForFunction(()=>document.querySelector('#homeAtlasSeason').textContent.includes('천년의 이야기를 찾아서'));
+        assert.equal(await p.locator('.home-atlas-heading h2').innerText(),'무념스님의 산사 비밀도감');
+        assert.equal(await p.locator('.home-atlas-card img[src]').count(), Math.min(width>=1100?3:2, list.length));
         await p.locator('#homeAtlasEntry').scrollIntoViewIfNeeded();
-        await p.locator('[data-atlas-slide="' + (list.length - 1) + '"]').click();
-        await p.waitForFunction(n => { const t = document.getElementById('homeAtlasTrack'); return Math.abs(t.scrollLeft - (n - 1) * t.clientWidth) < 2 && document.getElementById('homeAtlasNext').disabled; }, list.length);
+        await p.locator('[data-atlas-slide="' + (list.length - (width>=1100?3:width>=701?2:1)) + '"]').click();
+        await p.waitForFunction(n => { const t = document.getElementById('homeAtlasTrack'); return Math.abs(t.scrollLeft - (t.scrollWidth-t.clientWidth)) < 2 && document.getElementById('homeAtlasNext').disabled; }, list.length);
         assert(await p.locator('#homeAtlasNext').isDisabled());
         assert.equal(await p.locator('.home-atlas-card').last().getAttribute('href'), list.at(-1).href);
         await p.locator('[data-atlas-slide="0"]').click();
@@ -52,5 +55,15 @@ const engine = process.env.SANSA_BROWSER === 'webkit' ? webkit : chromium;
     await p.goto('https://sansanote.com/');
     assert.equal(await p.locator('.home-atlas-fallback').getAttribute('href'), '/atlas/');
     console.log('PASS metadata failure preserves ordinary episode-one link');
+    await p.close();
+    const stalled=await browser.newPage({serviceWorkers:'block'});await route(stalled);
+    await stalled.route('**/scripts/atlas/seasons.json',()=>new Promise(()=>{}));
+    await stalled.goto('https://sansanote.com/',{waitUntil:'domcontentloaded'});
+    await stalled.waitForFunction(()=>document.querySelector('#homeAtlasEntry').dataset.catalogReady==='true',{},{timeout:3000});
+    assert.equal(await stalled.locator('.home-atlas-card').count(),catalog.length);
+    await stalled.goto('https://sansanote.com/atlas/naksansa/',{waitUntil:'domcontentloaded'});
+    await stalled.waitForFunction(()=>window.sansaSecretAtlas,{},{timeout:3000});
+    assert(!await stalled.locator('#startAtlas').isDisabled());
+    await stalled.close();console.log('PASS pending season metadata never blocks home cards or episode reader');
   } finally { await browser.close(); }
 })().catch(e => { console.error(e); process.exitCode = 1; });

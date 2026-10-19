@@ -6,7 +6,7 @@ const {chromium,webkit}=require('playwright'),{route}=require('./atlas-fixtures.
   try{
    const p=await b.newPage({viewport:{width:d.width,height:d.height},deviceScaleFactor:d.dpr,isMobile:true,hasTouch:true,serviceWorkers:'block'});await route(p);
    const requests=[];p.on('request',r=>requests.push(new URL(r.url()).pathname));
-   await p.goto('https://sansanote.com/atlas/songgwangsa/');await p.waitForFunction(()=>window.sansaSecretAtlas);
+   await p.goto('https://sansanote.com'+(process.env.ATLAS_EPISODE_PATH||'/atlas/songgwangsa/'));await p.waitForFunction(()=>window.sansaSecretAtlas);
    assert(!requests.some(u=>/\/images\/(?:scene-|card-)/.test(u)),'landing must not preload story/cards');
    await p.locator('#startAtlas').click();await p.locator('[data-atlas=resume]').click();await p.locator('.atlas-reader figure img').evaluate(im=>im.decode());
    assert(!requests.some(u=>/\/images\/scene-(?:0[2-9]|1[0-2])/.test(u)),'opening scene must not preload the other eleven');
@@ -28,7 +28,7 @@ const {chromium,webkit}=require('playwright'),{route}=require('./atlas-fixtures.
  }
  // Use the actual native API when available, in addition to the rejected/unsupported API tests.
  const b=await chromium.launch({executablePath:'/usr/bin/chromium',args:['--no-sandbox']});
- try{const p=await b.newPage({viewport:{width:1440,height:1000},serviceWorkers:'block'});await route(p);await p.goto('https://sansanote.com/atlas/songgwangsa/');await p.waitForFunction(()=>window.sansaSecretAtlas);await p.locator('#startAtlas').click();await p.locator('[data-atlas=resume]').click();
+ try{const p=await b.newPage({viewport:{width:1440,height:1000},serviceWorkers:'block'});await route(p);await p.goto('https://sansanote.com'+(process.env.ATLAS_EPISODE_PATH||'/atlas/songgwangsa/'));await p.waitForFunction(()=>window.sansaSecretAtlas);await p.locator('#startAtlas').click();await p.locator('[data-atlas=resume]').click();
   if(await p.evaluate(()=>document.fullscreenEnabled)){
    const state=await p.evaluate(()=>JSON.stringify(SansaAtlasStore.state));await p.locator('[data-atlas=fullscreen]').click();await p.waitForFunction(()=>document.fullscreenElement===document.getElementById('secretAtlasOverlay'));await p.evaluate(()=>document.exitFullscreen());await p.waitForFunction(()=>document.querySelector('[data-atlas=fullscreen]').getAttribute('aria-pressed')==='false');assert.equal(await p.evaluate(()=>JSON.stringify(SansaAtlasStore.state)),state);console.log('PASS native Chromium fullscreen entry/exit preserves progress and resets the toggle');
   }else console.log('SKIP native API unavailable; fallback is covered by atlas-reading-controls');

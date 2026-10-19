@@ -28,3 +28,5 @@ html body #secretAtlasOverlay.atlas-expanded{padding:0!important}
 html body #secretAtlasOverlay.atlas-expanded>.atlas-shell{width:100%!important;max-width:none!important;height:100dvh!important;max-height:100dvh!important;border:0!important;border-radius:0!important;padding-top:env(safe-area-inset-top)!important}
 #secretAtlasOverlay.atlas-expanded[data-atlas-page="reader"] .atlas-bottom,#secretAtlasOverlay.atlas-expanded[data-atlas-page="reader"] .atlas-status{display:none}
 @media(max-width:380px){#secretAtlasOverlay .atlas-top{gap:5px;padding-inline:7px}#secretAtlasOverlay .atlas-top>span{font-size:10px}#secretAtlasOverlay .atlas-top b{display:block;font-size:13px;margin:0}#secretAtlasOverlay .atlas-reader-dock{gap:5px;padding-inline:8px}#secretAtlasOverlay .atlas-reader-dock button{min-width:90px;padding-inline:10px}}
+
+.atlas-season-label{font:600 12px/1.7 system-ui,sans-serif;color:#61755a;min-height:20px;letter-spacing:.03em}.atlas-season-progress{font-size:13px;color:#61755a}

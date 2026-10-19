@@ -22556,6 +22556,20 @@ body.catalog-screen-open #catalogOverlay,
 
 
 
+  <section id="homeAtlasEntry" aria-label="무념스님의 산사 비밀도감" aria-roledescription="캐러셀">
+    <div class="home-atlas-heading"><div><p class="home-atlas-season" id="homeAtlasSeason"></p><h2>무념스님의 산사 비밀도감</h2><p>천년 사찰에 숨겨진 놀라운 이야기.<br>무념스님과 함께 한 장씩 펼쳐보세요.</p></div><button type="button" onclick="guideBrowsePlaces()">절·산 찾기 ↗</button></div>
+    <a class="home-atlas-feature" href="/atlas/" aria-label="해인사부터 이야기 펼치기"><img width="720" height="480" loading="lazy" decoding="async" alt="무념스님과 시작하는 산사 이야기"><span>오래된 산사의 문을 열어 보세요 →</span></a>
+    <div class="home-atlas-track" id="homeAtlasTrack" tabindex="0" aria-label="이야기 목록 · 좌우로 밀어 선택">
+      <a href="/atlas/" class="home-atlas-fallback">비밀도감 이야기 목록을 준비하고 있어요 · 제1화 열기 →</a>
+    </div>
+    <div class="home-atlas-controls" aria-label="이야기 목록 이동">
+      <button type="button" id="homeAtlasPrev" aria-label="이전 이야기" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg></button>
+      <div class="home-atlas-dots"></div>
+      <span id="homeAtlasPage" class="home-atlas-page" aria-live="polite">이야기 목록</span>
+      <button type="button" id="homeAtlasNext" aria-label="다음 이야기"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m10 6 6 6-6 6"/></svg></button>
+    </div>
+  </section>
+
       <nav class="hero-utility" aria-label="산사노트 빠른 기능">
         <button class="hero-util-btn util-course" title="순례 코스 불러오기" onclick="openPackOverlay()">
           <span class="hero-util-icon"><img src="./images/brand/symbols/mountain.png" alt="" aria-hidden="true"></span>
@@ -22605,17 +22619,7 @@ body.catalog-screen-open #catalogOverlay,
     </div>
   </header>
 
-  <section id="homeAtlasEntry" aria-label="무념스님의 산사 비밀도감" aria-roledescription="캐러셀">
-    <div class="home-atlas-track" id="homeAtlasTrack" tabindex="0" aria-label="이야기 목록 · 좌우로 밀어 선택">
-      <a href="/atlas/" class="home-atlas-fallback">비밀도감 이야기 목록을 준비하고 있어요 · 제1화 열기 →</a>
-    </div>
-    <div class="home-atlas-controls" aria-label="이야기 목록 이동">
-      <button type="button" id="homeAtlasPrev" aria-label="이전 이야기" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg></button>
-      <div class="home-atlas-dots"></div>
-      <span id="homeAtlasPage" class="home-atlas-page" aria-live="polite">이야기 목록</span>
-      <button type="button" id="homeAtlasNext" aria-label="다음 이야기"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m10 6 6 6-6 6"/></svg></button>
-    </div>
-  </section>
+
 
   <!-- ===================== EASY START GUIDE ===================== -->
   <section class="sansa-easy-start sansa-easy-start-single" id="sansaEasyStart" aria-label="절·산 찾기와 내 주변 절 찾기">
@@ -42370,9 +42374,9 @@ nav.site-global-nav{height:var(--global-nav-h)!important;box-sizing:border-box!i
 <script src="./scripts/meditation-sounds.js?v=20261018" defer></script>
 <script src="./scripts/game-viewport.js?v=20261017" defer></script>
 <script src="./scripts/navigation.js?v=20261018" defer></script>
-<link rel="stylesheet" href="/styles/atlas-home.css?v=20261019-catalog">
+<link rel="stylesheet" href="/styles/atlas-home.css?v=20261019-season1">
 <script src="/scripts/atlas/home-publication.js?v=20261019-episodes" defer></script>
-<script src="/scripts/atlas/home-carousel.js?v=20261019-catalog" defer></script>
+<script src="/scripts/atlas/home-carousel.js?v=20261019-season1" defer></script>
 
 </body>
 </html>

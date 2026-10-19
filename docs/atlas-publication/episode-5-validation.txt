@@ -1,0 +1,140 @@
+Episode 005 / Season 01 local automatic validation
+All account/record mutations use fixtures, no production data writes.
+Real devices not used; Chromium/WebKit emulation.
+
+=== episodes-final ===
+PASS episode 320 haeinsa-001 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS episode 320 bulguksa-002 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS episode 320 tongdosa-003 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS episode 320 songgwangsa-004 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS episode 320 naksansa-005 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS carousel 320 next/previous/dots/native touch or keyboard, snap, correct links/no page overflow
+PASS episode 390 haeinsa-001 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS episode 390 bulguksa-002 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS episode 390 tongdosa-003 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS episode 390 songgwangsa-004 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS episode 390 naksansa-005 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS carousel 390 next/previous/dots/native touch or keyboard, snap, correct links/no page overflow
+PASS episode 412 haeinsa-001 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS episode 412 bulguksa-002 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS episode 412 tongdosa-003 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS episode 412 songgwangsa-004 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS episode 412 naksansa-005 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS carousel 412 next/previous/dots/native touch or keyboard, snap, correct links/no page overflow
+PASS episode 768 haeinsa-001 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS episode 768 bulguksa-002 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS episode 768 tongdosa-003 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS episode 768 songgwangsa-004 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS episode 768 naksansa-005 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS carousel 768 next/previous/dots/native touch or keyboard, snap, correct links/no page overflow
+PASS episode 820 haeinsa-001 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS episode 820 bulguksa-002 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS episode 820 tongdosa-003 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS episode 820 songgwangsa-004 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS episode 820 naksansa-005 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS carousel 820 next/previous/dots/native touch or keyboard, snap, correct links/no page overflow
+PASS episode 1440 haeinsa-001 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS episode 1440 bulguksa-002 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS episode 1440 tongdosa-003 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS episode 1440 songgwangsa-004 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS episode 1440 naksansa-005 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS carousel 1440 next/previous/dots/native touch or keyboard, snap, correct links/no page overflow
+PASS authenticated mock A/B, independent episode paths/cards/notes, existing visit/108 fixture unchanged
+PASS missing episode content blocks store/auth startup without touching old Haeinsa key
+
+=== mobile ===
+PASS WebKit 390 12 scenes; four-scene card gates; six quizzes; image decoding; notes/cards reload; old episode bytes preserved
+PASS WebKit 820 12 scenes; four-scene card gates; six quizzes; image decoding; notes/cards reload; old episode bytes preserved
+PASS realistic old four-episode cards/position/notes restore; A/B/guest isolation; unrelated temple excluded; mock pilgrimage/108 records unchanged
+PASS mismatched episode content refuses startup without opening a wrong progress namespace
+
+=== controls ===
+PASS PC Chromium haeinsa-001 persistent controls at top/bottom; UI-only expanded fallback; safe card gates; close
+PASS PC Chromium bulguksa-002 persistent controls at top/bottom; UI-only expanded fallback; safe card gates; close
+PASS PC Chromium tongdosa-003 persistent controls at top/bottom; UI-only expanded fallback; safe card gates; close
+PASS PC Chromium songgwangsa-004 persistent controls at top/bottom; UI-only expanded fallback; safe card gates; close
+PASS PC Chromium naksansa-005 persistent controls at top/bottom; UI-only expanded fallback; safe card gates; close
+PASS iPhone Safari WebKit emulation haeinsa-001 persistent controls at top/bottom; UI-only expanded fallback; safe card gates; close
+PASS iPhone Safari WebKit emulation bulguksa-002 persistent controls at top/bottom; UI-only expanded fallback; safe card gates; close
+PASS iPhone Safari WebKit emulation tongdosa-003 persistent controls at top/bottom; UI-only expanded fallback; safe card gates; close
+PASS iPhone Safari WebKit emulation songgwangsa-004 persistent controls at top/bottom; UI-only expanded fallback; safe card gates; close
+PASS iPhone Safari WebKit emulation naksansa-005 persistent controls at top/bottom; UI-only expanded fallback; safe card gates; close
+PASS iPad Safari WebKit emulation haeinsa-001 persistent controls at top/bottom; UI-only expanded fallback; safe card gates; close
+PASS iPad Safari WebKit emulation bulguksa-002 persistent controls at top/bottom; UI-only expanded fallback; safe card gates; close
+PASS iPad Safari WebKit emulation tongdosa-003 persistent controls at top/bottom; UI-only expanded fallback; safe card gates; close
+PASS iPad Safari WebKit emulation songgwangsa-004 persistent controls at top/bottom; UI-only expanded fallback; safe card gates; close
+PASS iPad Safari WebKit emulation naksansa-005 persistent controls at top/bottom; UI-only expanded fallback; safe card gates; close
+PASS Galaxy Chrome Chromium emulation haeinsa-001 persistent controls at top/bottom; UI-only expanded fallback; safe card gates; close
+PASS Galaxy Chrome Chromium emulation bulguksa-002 persistent controls at top/bottom; UI-only expanded fallback; safe card gates; close
+PASS Galaxy Chrome Chromium emulation tongdosa-003 persistent controls at top/bottom; UI-only expanded fallback; safe card gates; close
+PASS Galaxy Chrome Chromium emulation songgwangsa-004 persistent controls at top/bottom; UI-only expanded fallback; safe card gates; close
+PASS Galaxy Chrome Chromium emulation naksansa-005 persistent controls at top/bottom; UI-only expanded fallback; safe card gates; close
+
+=== resources ===
+PASS iphone no unvisited-scene preloads; 120 scene replacements retain one reader/image; compact retina art; {"image":{"width":480,"src":"https://sansanote.com/atlas/naksansa/images/scene-01-small.webp"},"liveBefore":99,"liveAfter":105}
+PASS ipad no unvisited-scene preloads; 120 scene replacements retain one reader/image; compact retina art; {"image":{"width":633,"src":"https://sansanote.com/atlas/naksansa/images/scene-01.webp"},"liveBefore":99,"liveAfter":105}
+PASS galaxy no unvisited-scene preloads; 120 scene replacements retain one reader/image; compact retina art; {"image":{"width":480,"src":"https://sansanote.com/atlas/naksansa/images/scene-01-small.webp"},"liveBefore":99,"liveAfter":105,"counters":{"before":{"documents":1,"nodes":197,"jsEventListeners":51},"after":{"documents":1,"nodes":209,"jsEventListeners":51}}}
+PASS native Chromium fullscreen entry/exit preserves progress and resets the toggle
+PASS delayed native response after quick toggle exits cleanly
+
+=== season ===
+PASS season landing/intro/progress only haeinsa-001
+PASS season landing/intro/progress only bulguksa-002
+PASS season landing/intro/progress only tongdosa-003
+PASS season landing/intro/progress only songgwangsa-004
+PASS season landing/intro/progress only naksansa-005
+
+=== home-test ===
+PASS chromium 390 5 episodes: metadata only; bounded thumbnails; navigation and no story preloads
+PASS chromium 390 12 episodes: metadata only; bounded thumbnails; navigation and no story preloads
+PASS chromium 820 5 episodes: metadata only; bounded thumbnails; navigation and no story preloads
+PASS chromium 820 12 episodes: metadata only; bounded thumbnails; navigation and no story preloads
+PASS chromium 1440 5 episodes: metadata only; bounded thumbnails; navigation and no story preloads
+PASS chromium 1440 12 episodes: metadata only; bounded thumbnails; navigation and no story preloads
+PASS metadata failure preserves ordinary episode-one link
+PASS pending season metadata never blocks home cards or episode reader
+
+=== home-webkit ===
+PASS webkit 390 5 episodes: metadata only; bounded thumbnails; navigation and no story preloads
+PASS webkit 390 12 episodes: metadata only; bounded thumbnails; navigation and no story preloads
+PASS webkit 820 5 episodes: metadata only; bounded thumbnails; navigation and no story preloads
+PASS webkit 820 12 episodes: metadata only; bounded thumbnails; navigation and no story preloads
+PASS webkit 1440 5 episodes: metadata only; bounded thumbnails; navigation and no story preloads
+PASS webkit 1440 12 episodes: metadata only; bounded thumbnails; navigation and no story preloads
+PASS metadata failure preserves ordinary episode-one link
+PASS pending season metadata never blocks home cards or episode reader
+
+=== offline ===
+PASS chromium /atlas/ reader works while all Firebase SDK connections remain pending; no home HTML fetch
+PASS chromium /atlas/bulguksa/ reader works while all Firebase SDK connections remain pending; no home HTML fetch
+PASS chromium /atlas/tongdosa/ reader works while all Firebase SDK connections remain pending; no home HTML fetch
+PASS chromium /atlas/songgwangsa/ reader works while all Firebase SDK connections remain pending; no home HTML fetch
+PASS chromium /atlas/naksansa/ reader works while all Firebase SDK connections remain pending; no home HTML fetch
+
+=== transport ===
+PASS naksansa-005 actual root→atlas worker transition: stale old runtime bypassed, reader/images usable, no home HTML fetch, old progress retained
+
+=== worker ===
+PASS streaming HTML is not held for cache writes; search-result navigation: cached app opens while network stalls, delayed response refreshes cache, offline reload uses refreshed page, local records preserved
+
+=== publication ===
+PASS publication 390 server state restored after reload; ack required; offline no writes; delayed ack not success; precise minimal rule guide; identity reused
+PASS publication 820 server state restored after reload; ack required; offline no writes; delayed ack not success; precise minimal rule guide; identity reused
+PASS publication 1440 server state restored after reload; ack required; offline no writes; delayed ack not success; precise minimal rule guide; identity reused
+
+=== home-photo ===
+PASS 390 only pinned temple on home, title visible, orphan hidden, user photo and visits preserved
+PASS temple photo search disabled without writes; personal DB preserved
+PASS 1440 only pinned temple on home, title visible, orphan hidden, user photo and visits preserved
+PASS temple photo search disabled without writes; personal DB preserved
+
+=== navigation ===
+PASS 390 breathing, emotion backward/forward/complete close, nested mypage and vow drafts, temple/mountain search returns, copy document return
+PASS 1440 breathing, emotion backward/forward/complete close, nested mypage and vow drafts, temple/mountain search returns, copy document return
+
+=== startup ===
+PASS chromium sdk-stalled interactive home observed at 1924ms with pending fonts, preserved local records/session, safe account recovery
+PASS chromium sdk-error interactive home observed at 500ms with pending fonts, preserved local records/session, safe account recovery
+PASS chromium auth-pending-idle interactive home observed at 1872ms with pending fonts, preserved local records/session, safe account recovery
+PASS chromium auth-pending-edit interactive home observed at 1894ms with pending fonts, preserved local records/session, safe account recovery
+PASS chromium profile-stalled interactive home observed at 472ms with pending fonts, preserved local records/session, safe account recovery

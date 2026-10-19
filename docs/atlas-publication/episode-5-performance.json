@@ -1,0 +1,53 @@
+{
+  "conditions": "390x844 Chromium, CPU 4x, SDK empty replies delayed 2s, local files, external fonts blocked, no service workers. Interleaved HEAD baseline vs working tree. Not real-device/network CWV.",
+  "runs": [
+    {
+      "version": "before",
+      "bytes": 21221316,
+      "fcp": 424,
+      "dom": 764,
+      "cards": 4,
+      "initialImageSources": 2
+    },
+    {
+      "version": "after",
+      "bytes": 21226540,
+      "fcp": 456,
+      "dom": 779,
+      "cards": 5,
+      "initialImageSources": 2
+    },
+    {
+      "version": "after",
+      "bytes": 21226540,
+      "fcp": 460,
+      "dom": 764,
+      "cards": 5,
+      "initialImageSources": 2
+    },
+    {
+      "version": "before",
+      "bytes": 21221316,
+      "fcp": 492,
+      "dom": 713,
+      "cards": 4,
+      "initialImageSources": 2
+    },
+    {
+      "version": "before",
+      "bytes": 21221316,
+      "fcp": 528,
+      "dom": 912,
+      "cards": 4,
+      "initialImageSources": 2
+    },
+    {
+      "version": "after",
+      "bytes": 21226540,
+      "fcp": 440,
+      "dom": 739,
+      "cards": 5,
+      "initialImageSources": 2
+    }
+  ]
+}

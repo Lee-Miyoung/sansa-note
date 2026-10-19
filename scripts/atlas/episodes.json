@@ -1,1 +1,47 @@
-[{"id":"haeinsa-001","number":"001","temple":"해인사","title":"시간을 지킨 나무판","href":"/atlas/","thumbnail":"/admin-atlas/images/secret-atlas/haeinsa-cover-small.webp"},{"id":"bulguksa-002","number":"002","temple":"불국사","title":"두 탑이 품은 천 년의 이야기","href":"/atlas/bulguksa/","thumbnail":"/atlas/bulguksa/images/bulguksa-cover-small.webp"},{"id":"tongdosa-003","number":"003","temple":"통도사","title":"불상이 없는 법당의 비밀","href":"/atlas/tongdosa/","thumbnail":"/atlas/tongdosa/images/tongdosa-cover-small.webp"},{"id":"songgwangsa-004","number":"004","temple":"송광사","title":"한 스님의 다짐이 남긴 이야기","href":"/atlas/songgwangsa/","thumbnail":"/atlas/songgwangsa/images/songgwangsa-cover-small.webp"}]
+[
+  {
+    "id": "haeinsa-001",
+    "number": "001",
+    "temple": "해인사",
+    "title": "시간을 지킨 나무판",
+    "href": "/atlas/",
+    "thumbnail": "/admin-atlas/images/secret-atlas/haeinsa-cover-small.webp",
+    "season": "01"
+  },
+  {
+    "id": "bulguksa-002",
+    "number": "002",
+    "temple": "불국사",
+    "title": "두 탑이 품은 천 년의 이야기",
+    "href": "/atlas/bulguksa/",
+    "thumbnail": "/atlas/bulguksa/images/bulguksa-cover-small.webp",
+    "season": "01"
+  },
+  {
+    "id": "tongdosa-003",
+    "number": "003",
+    "temple": "통도사",
+    "title": "불상이 없는 법당의 비밀",
+    "href": "/atlas/tongdosa/",
+    "thumbnail": "/atlas/tongdosa/images/tongdosa-cover-small.webp",
+    "season": "01"
+  },
+  {
+    "id": "songgwangsa-004",
+    "number": "004",
+    "temple": "송광사",
+    "title": "한 스님의 다짐이 남긴 이야기",
+    "href": "/atlas/songgwangsa/",
+    "thumbnail": "/atlas/songgwangsa/images/songgwangsa-cover-small.webp",
+    "season": "01"
+  },
+  {
+    "id": "naksansa-005",
+    "number": "005",
+    "temple": "낙산사",
+    "title": "바다 위 붉은 연꽃의 비밀",
+    "href": "/atlas/naksansa/",
+    "thumbnail": "/atlas/naksansa/images/naksansa-cover-small.webp",
+    "season": "01"
+  }
+]

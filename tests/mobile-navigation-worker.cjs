@@ -51,6 +51,8 @@ const root = path.resolve(__dirname, '..');
     assert.equal(await p.evaluate(async () => (await (await fetch('/scripts/atlas/episodes.json')).json()).length), catalog.length - 1);
     catalogCount = catalog.length;
     assert.equal(await p.evaluate(async () => (await (await fetch('/scripts/atlas/episodes.json')).json()).length), catalog.length, 'new metadata must not remain hidden behind an old worker cache');
+    await p.evaluate(async()=>{const cache=await caches.open('old-season-fixture');await cache.put('/scripts/atlas/seasons.json',new Response('{"01":{"title":"stale"}}'));});
+    assert.equal(await p.evaluate(async()=>(await(await fetch('/scripts/atlas/seasons.json')).json())['01'].title),'천년의 이야기를 찾아서','season metadata also bypasses stale root caches');
     const streamingStart = Date.now();
     await p.goto(origin + '/?stream=1', { waitUntil: 'commit', timeout: 3000 });
     await p.locator('h1').waitFor({ timeout: 2000 });
