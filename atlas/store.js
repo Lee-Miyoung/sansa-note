@@ -1,6 +1,8 @@
 /* Independent, per-user progress. Never writes to existing pilgrimage/card/diary paths. */
 (()=>{
- const ID='haeinsa-001',VERSION=1;
+ const ID=window.SansaAtlasEpisode?.id||'haeinsa-001',VERSION=1;
+ if(!['haeinsa-001','bulguksa-002'].includes(ID))throw Error('Unknown episode');
+ const TEMPLE=ID==='bulguksa-002'?'불국사':'해인사';
  const blank=()=>({version:VERSION,position:{scene:0,at:0},completed:{},answers:{},cards:{},note:{text:'',at:0},lastReadAt:0,fieldVerification:null});
  const safeNum=(v,max=Date.now()+86400000)=>Number.isFinite(Number(v))?Math.max(0,Math.min(max,Number(v))):0;
  function normalize(raw){const s=blank(),r=raw&&typeof raw==='object'?raw:{};
@@ -46,7 +48,7 @@
    for(const k of Object.keys(pending))if(k.startsWith('answers/')&&remote.answers[k.slice(8)]?.at>pending[k].at)delete pending[k];
    persistPending();state=merge(state,remote);persist();status='cloud';emit();if(Object.keys(pending).length)flush();};
   ref.on('value',handler,e=>{if(gen!==generation)return;status=e?.code==='PERMISSION_DENIED'?'permission-denied':'offline';emit();});
-  visitRef=db.ref('users/'+uid+'/destinations');visitHandler=snap=>{if(gen!==generation)return;confirmedVisit=null;for(const [templeId,d]of Object.entries(snap.val()||{})){if(d?.name!=='해인사')continue;for(const [visitId,v]of Object.entries(d.visits||{}))if(v?.verified===true){confirmedVisit={templeId,visitId,at:safeNum(v.ts||v.createdAt)};break;}if(confirmedVisit)break;}syncVisit();emit();};
+  visitRef=db.ref('users/'+uid+'/destinations');visitHandler=snap=>{if(gen!==generation)return;confirmedVisit=null;for(const [templeId,d]of Object.entries(snap.val()||{})){if(d?.name!==TEMPLE)continue;for(const [visitId,v]of Object.entries(d.visits||{}))if(v?.verified===true){confirmedVisit={templeId,visitId,at:safeNum(v.ts||v.createdAt)};break;}if(confirmedVisit)break;}syncVisit();emit();};
   visitRef.on('value',visitHandler,()=>{if(gen===generation){confirmedVisit=null;emit();}});
  }
  function touch(scene){connect();const now=Date.now();state.position={scene:Math.max(0,Math.min(11,scene)),at:now};state.lastReadAt=now;write({version:VERSION,position:state.position,lastReadAt:now});}

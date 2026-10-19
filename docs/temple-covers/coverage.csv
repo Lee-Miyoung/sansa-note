@@ -1,112 +1,112 @@
-catalog_id,name,region,status,image_path,required_reference
-temple:각연사,각연사,충청,reference_required,/images/temple-covers/temple-각연사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:갑사,갑사,충청,ready,/images/temple-covers/gapsa-gongju.webp,
-temple:갓바위(선본사),갓바위(선본사),경상,reference_required,/images/temple-covers/temple-갓바위(선본사).webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:개심사,개심사,충청,ready,/images/temple-covers/gaesimsa-seosan.webp,
-temple:개암사,개암사,전라,ready,/images/temple-covers/gaeamsa-buan.webp,
-temple:건봉사,건봉사,강원,ready,/images/temple-covers/geonbongsa-goseong.webp,
-temple:고운사,고운사,경상,ready,/images/temple-covers/gounsa-uiseong.webp,
-temple:골굴사,골굴사,경상,reference_required,/images/temple-covers/temple-골굴사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:관룡사,관룡사,경상,reference_required,/images/temple-covers/temple-관룡사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:관음사,관음사,제주,ready,/images/temple-covers/gwaneumsa-jeju.webp,
-temple:관촉사,관촉사,충청,reference_required,/images/temple-covers/temple-관촉사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:구인사,구인사,충청,reference_required,/images/temple-covers/temple-구인사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:금산사,금산사,전라,reference_required,/images/temple-covers/temple-금산사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:기림사,기림사,경상,reference_required,/images/temple-covers/temple-기림사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:김룡사,김룡사,경상,reference_required,/images/temple-covers/temple-김룡사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:낙산사,낙산사,강원,reference_required,/images/temple-covers/temple-낙산사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:내소사,내소사,전라,reference_required,/images/temple-covers/temple-내소사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:다솔사,다솔사,경상,reference_required,/images/temple-covers/temple-다솔사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:대승사,대승사,경상,reference_required,/images/temple-covers/temple-대승사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:대원사,대원사,경상,reference_required,/images/temple-covers/temple-대원사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:대조사,대조사,충청,reference_required,/images/temple-covers/temple-대조사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:대흥사,대흥사,전라,reference_required,/images/temple-covers/temple-대흥사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:도갑사,도갑사,전라,reference_required,/images/temple-covers/temple-도갑사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:도리사,도리사,경상,reference_required,/images/temple-covers/temple-도리사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:도선사,도선사,수도권,reference_required,/images/temple-covers/temple-도선사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:도피안사,도피안사,강원,reference_required,/images/temple-covers/temple-도피안사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:동학사,동학사,충청,reference_required,/images/temple-covers/temple-동학사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:동화사,동화사,경상,reference_required,/images/temple-covers/temple-동화사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:마곡사,마곡사,충청,reference_required,/images/temple-covers/temple-마곡사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:만어사,만어사,경상,reference_required,/images/temple-covers/temple-만어사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:무량사,무량사,충청,reference_required,/images/temple-covers/temple-무량사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:무위사,무위사,전라,reference_required,/images/temple-covers/temple-무위사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:문수사,문수사,충청,reference_required,/images/temple-covers/temple-문수사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:미황사,미황사,전라,reference_required,/images/temple-covers/temple-미황사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:백담사,백담사,강원,reference_required,/images/temple-covers/temple-백담사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:백련사,백련사,전라,reference_required,/images/temple-covers/temple-백련사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:백양사,백양사,전라,reference_required,/images/temple-covers/temple-백양사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:범어사,범어사,경상,reference_required,/images/temple-covers/temple-범어사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:법주사,법주사,충청,reference_required,/images/temple-covers/temple-법주사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:법화사,법화사,제주,reference_required,/images/temple-covers/temple-법화사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:법흥사,법흥사,강원,reference_required,/images/temple-covers/temple-법흥사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:벽송사,벽송사,경상,reference_required,/images/temple-covers/temple-벽송사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:보광사,보광사,수도권,reference_required,/images/temple-covers/temple-보광사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:보리암,보리암,경상,reference_required,/images/temple-covers/temple-보리암.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:보문사,보문사,수도권,reference_required,/images/temple-covers/temple-보문사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:봉선사,봉선사,수도권,reference_required,/images/temple-covers/temple-봉선사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:봉암사,봉암사,경상,reference_required,/images/temple-covers/temple-봉암사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:봉원사,봉원사,수도권,reference_required,/images/temple-covers/temple-봉원사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:봉은사,봉은사,수도권,reference_required,/images/temple-covers/temple-봉은사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:봉정사,봉정사,경상,reference_required,/images/temple-covers/temple-봉정사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:봉정암,봉정암,강원,reference_required,/images/temple-covers/temple-봉정암.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:부석사,부석사,경상,reference_required,/images/temple-covers/temple-부석사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:분황사,분황사,경상,reference_required,/images/temple-covers/temple-분황사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:불갑사,불갑사,전라,reference_required,/images/temple-covers/temple-불갑사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:불국사,불국사,경상,reference_required,/images/temple-covers/temple-불국사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:불영사,불영사,경상,reference_required,/images/temple-covers/temple-불영사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:산방굴사,산방굴사,제주,reference_required,/images/temple-covers/temple-산방굴사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:삼광사,삼광사,경상,reference_required,/images/temple-covers/temple-삼광사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:상원사,상원사,강원,reference_required,/images/temple-covers/temple-상원사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:석굴암,석굴암,경상,reference_required,/images/temple-covers/temple-석굴암.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:선암사,선암사,전라,reference_required,/images/temple-covers/temple-선암사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:선운사,선운사,전라,reference_required,/images/temple-covers/temple-선운사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:송광사,송광사,전라,reference_required,/images/temple-covers/temple-송광사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:수덕사,수덕사,충청,reference_required,/images/temple-covers/temple-수덕사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:수종사,수종사,수도권,reference_required,/images/temple-covers/temple-수종사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:신륵사,신륵사,수도권,reference_required,/images/temple-covers/temple-신륵사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:신원사,신원사,충청,reference_required,/images/temple-covers/temple-신원사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:신흥사,신흥사,강원,reference_required,/images/temple-covers/temple-신흥사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:실상사,실상사,전라,reference_required,/images/temple-covers/temple-실상사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:쌍계사,쌍계사,경상,reference_required,/images/temple-covers/temple-쌍계사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:쌍봉사,쌍봉사,전라,reference_required,/images/temple-covers/temple-쌍봉사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:약천사,약천사,제주,reference_required,/images/temple-covers/temple-약천사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:연곡사,연곡사,전라,reference_required,/images/temple-covers/temple-연곡사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:오어사,오어사,경상,reference_required,/images/temple-covers/temple-오어사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:옥천사,옥천사,경상,reference_required,/images/temple-covers/temple-옥천사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:완주 송광사,완주 송광사,전라,reference_required,/images/temple-covers/temple-완주 송광사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:용문사(양평),용문사(양평),수도권,reference_required,/images/temple-covers/temple-용문사(양평).webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:용문사(예천),용문사(예천),경상,reference_required,/images/temple-covers/temple-용문사(예천).webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:용주사,용주사,수도권,reference_required,/images/temple-covers/temple-용주사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:운문사,운문사,경상,reference_required,/images/temple-covers/temple-운문사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:운주사,운주사,전라,reference_required,/images/temple-covers/temple-운주사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:원당사,원당사,제주,reference_required,/images/temple-covers/temple-원당사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:월정사,월정사,강원,reference_required,/images/temple-covers/temple-월정사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:은하사,은하사,경상,reference_required,/images/temple-covers/temple-은하사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:은해사,은해사,경상,reference_required,/images/temple-covers/temple-은해사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:자재암,자재암,수도권,reference_required,/images/temple-covers/temple-자재암.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:장안사(부산),장안사(부산),경상,reference_required,/images/temple-covers/temple-장안사(부산).webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:전등사,전등사,수도권,reference_required,/images/temple-covers/temple-전등사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:정암사,정암사,강원,reference_required,/images/temple-covers/temple-정암사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:조계사,조계사,수도권,reference_required,/images/temple-covers/temple-조계사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:존자암,존자암,제주,reference_required,/images/temple-covers/temple-존자암.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:직지사,직지사,경상,reference_required,/images/temple-covers/temple-직지사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:진관사,진관사,수도권,reference_required,/images/temple-covers/temple-진관사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:천은사,천은사,전라,reference_required,/images/temple-covers/temple-천은사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:청량사,청량사,경상,reference_required,/images/temple-covers/temple-청량사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:청암사,청암사,경상,reference_required,/images/temple-covers/temple-청암사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:청평사,청평사,강원,reference_required,/images/temple-covers/temple-청평사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:칠장사,칠장사,수도권,reference_required,/images/temple-covers/temple-칠장사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:태안사,태안사,전라,reference_required,/images/temple-covers/temple-태안사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:통도사,통도사,경상,reference_required,/images/temple-covers/temple-통도사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:파계사,파계사,경상,reference_required,/images/temple-covers/temple-파계사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:표충사,표충사,경상,reference_required,/images/temple-covers/temple-표충사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:해동용궁사,해동용궁사,경상,reference_required,/images/temple-covers/temple-해동용궁사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:해인사,해인사,경상,ready,/images/temple-covers/haeinsa-hapcheon.webp,
-temple:향일암,향일암,전라,reference_required,/images/temple-covers/temple-향일암.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:화계사,화계사,수도권,reference_required,/images/temple-covers/temple-화계사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:화암사,화암사,전라,reference_required,/images/temple-covers/temple-화암사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:화엄사,화엄사,전라,reference_required,/images/temple-covers/temple-화엄사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:회암사,회암사,수도권,reference_required,/images/temple-covers/temple-회암사.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:휴휴암,휴휴암,강원,reference_required,/images/temple-covers/temple-휴휴암.webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
-temple:흥국사(여수),흥국사(여수),전라,reference_required,/images/temple-covers/temple-흥국사(여수).webp,사찰 동일성·실제 전각/산세·촬영 시기·재사용 권리 확인
+catalog_id,name,region,review_status,active_image
+temple:각연사,각연사,충청,reviewed,/images/temple-covers/temple-각연사.webp
+temple:갑사,갑사,충청,reviewed,/images/temple-covers/temple-갑사.webp
+temple:갓바위(선본사),갓바위(선본사),경상,reviewed,/images/temple-covers/temple-갓바위(선본사).webp
+temple:개심사,개심사,충청,reviewed,/images/temple-covers/temple-개심사.webp
+temple:개암사,개암사,전라,reviewed,/images/temple-covers/temple-개암사.webp
+temple:건봉사,건봉사,강원,reviewed,/images/temple-covers/temple-건봉사.webp
+temple:고운사,고운사,경상,reviewed,/images/temple-covers/temple-고운사.webp
+temple:골굴사,골굴사,경상,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:관룡사,관룡사,경상,reviewed,/images/temple-covers/temple-관룡사.webp
+temple:관음사,관음사,제주,reviewed,/images/temple-covers/temple-관음사.webp
+temple:관촉사,관촉사,충청,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:구인사,구인사,충청,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:금산사,금산사,전라,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:기림사,기림사,경상,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:김룡사,김룡사,경상,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:낙산사,낙산사,강원,reviewed,/images/temple-covers/temple-낙산사.webp
+temple:내소사,내소사,전라,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:다솔사,다솔사,경상,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:대승사,대승사,경상,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:대원사,대원사,경상,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:대조사,대조사,충청,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:대흥사,대흥사,전라,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:도갑사,도갑사,전라,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:도리사,도리사,경상,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:도선사,도선사,수도권,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:도피안사,도피안사,강원,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:동학사,동학사,충청,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:동화사,동화사,경상,reviewed,/images/temple-covers/temple-동화사.webp
+temple:마곡사,마곡사,충청,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:만어사,만어사,경상,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:무량사,무량사,충청,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:무위사,무위사,전라,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:문수사,문수사,충청,reviewed,/images/temple-covers/temple-문수사.webp
+temple:미황사,미황사,전라,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:백담사,백담사,강원,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:백련사,백련사,전라,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:백양사,백양사,전라,reviewed,/images/temple-covers/temple-백양사.webp
+temple:범어사,범어사,경상,reviewed,/images/temple-covers/temple-범어사.webp
+temple:법주사,법주사,충청,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:법화사,법화사,제주,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:법흥사,법흥사,강원,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:벽송사,벽송사,경상,reviewed,/images/temple-covers/temple-벽송사.webp
+temple:보광사,보광사,수도권,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:보리암,보리암,경상,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:보문사,보문사,수도권,reviewed,/images/temple-covers/temple-보문사.webp
+temple:봉선사,봉선사,수도권,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:봉암사,봉암사,경상,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:봉원사,봉원사,수도권,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:봉은사,봉은사,수도권,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:봉정사,봉정사,경상,reviewed,/images/temple-covers/temple-봉정사.webp
+temple:봉정암,봉정암,강원,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:부석사,부석사,경상,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:분황사,분황사,경상,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:불갑사,불갑사,전라,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:불국사,불국사,경상,reviewed,/images/temple-covers/temple-불국사.webp
+temple:불영사,불영사,경상,reviewed,/images/temple-covers/temple-불영사.webp
+temple:산방굴사,산방굴사,제주,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:삼광사,삼광사,경상,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:상원사,상원사,강원,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:석굴암,석굴암,경상,reviewed,/images/temple-covers/temple-석굴암.webp
+temple:선암사,선암사,전라,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:선운사,선운사,전라,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:송광사,송광사,전라,reviewed,/images/temple-covers/temple-송광사.webp
+temple:수덕사,수덕사,충청,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:수종사,수종사,수도권,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:신륵사,신륵사,수도권,reviewed,/images/temple-covers/temple-신륵사.webp
+temple:신원사,신원사,충청,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:신흥사,신흥사,강원,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:실상사,실상사,전라,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:쌍계사,쌍계사,경상,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:쌍봉사,쌍봉사,전라,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:약천사,약천사,제주,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:연곡사,연곡사,전라,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:오어사,오어사,경상,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:옥천사,옥천사,경상,reviewed,/images/temple-covers/temple-옥천사.webp
+temple:완주 송광사,완주 송광사,전라,reviewed,/images/temple-covers/temple-완주 송광사.webp
+temple:용문사(양평),용문사(양평),수도권,reviewed,/images/temple-covers/temple-용문사(양평).webp
+temple:용문사(예천),용문사(예천),경상,reviewed,/images/temple-covers/temple-용문사(예천).webp
+temple:용주사,용주사,수도권,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:운문사,운문사,경상,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:운주사,운주사,전라,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:원당사,원당사,제주,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:월정사,월정사,강원,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:은하사,은하사,경상,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:은해사,은해사,경상,reviewed,/images/temple-covers/temple-은해사.webp
+temple:자재암,자재암,수도권,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:장안사(부산),장안사(부산),경상,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:전등사,전등사,수도권,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:정암사,정암사,강원,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:조계사,조계사,수도권,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:존자암,존자암,제주,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:직지사,직지사,경상,reviewed,/images/temple-covers/temple-직지사.webp
+temple:진관사,진관사,수도권,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:천은사,천은사,전라,reviewed,/images/temple-covers/temple-천은사.webp
+temple:청량사,청량사,경상,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:청암사,청암사,경상,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:청평사,청평사,강원,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:칠장사,칠장사,수도권,reviewed,/images/temple-covers/temple-칠장사.webp
+temple:태안사,태안사,전라,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:통도사,통도사,경상,reviewed,/images/temple-covers/temple-통도사.webp
+temple:파계사,파계사,경상,reviewed,/images/temple-covers/temple-파계사.webp
+temple:표충사,표충사,경상,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:해동용궁사,해동용궁사,경상,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:해인사,해인사,경상,reviewed,/images/temple-covers/temple-해인사.webp
+temple:향일암,향일암,전라,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:화계사,화계사,수도권,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:화암사,화암사,전라,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:화엄사,화엄사,전라,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:회암사,회암사,수도권,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:휴휴암,휴휴암,강원,needs-form-verification,/images/temple-covers/default-watercolor.webp
+temple:흥국사(여수),흥국사(여수),전라,needs-form-verification,/images/temple-covers/default-watercolor.webp

@@ -1,146 +1,605 @@
 [
   {
-    "id": "temple:해인사",
-    "name": "해인사",
-    "region": "경상",
-    "src": "/images/temple-covers/haeinsa-hapcheon.webp",
+    "id": "temple:각연사",
+    "name": "각연사",
+    "region": "충청",
+    "src": "/images/temple-covers/temple-각연사.webp",
     "width": 768,
     "height": 512,
-    "bytes": 120806,
-    "sha256": "555f95acd24134ec1a0ab8ae7bf407855c1f02d308dc32c68e31326256c68b7b",
-    "source": {
-      "title": "File:Haeinsa Temple 01.jpg",
-      "url": "https://commons.wikimedia.org/wiki/File:Haeinsa_Temple_01.jpg",
-      "original": "https://upload.wikimedia.org/wikipedia/commons/e/e5/Haeinsa_Temple_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "creator": "Bernard Gagnon",
-      "license": "CC0",
-      "licenseURL": "http://creativecommons.org/publicdomain/zero/1.0/deed.en"
-    },
-    "adaptationLicense": "CC0",
-    "changes": "실제 사진을 참고한 AI 수채화 변환. 인물·임시 광고 일부 생략, 768×512 WebP 압축. 현장 사진·실측 복원도가 아닙니다."
-  },
-  {
-    "id": "temple:관음사",
-    "name": "관음사",
-    "region": "제주",
-    "src": "/images/temple-covers/gwaneumsa-jeju.webp",
-    "width": 768,
-    "height": 512,
-    "bytes": 147404,
-    "sha256": "af5a13cd9834553474100b664ab366ac1e238b797884ac2e5cfbb55ade80b721",
-    "source": {
-      "title": "File:Inside Gwaneumsa Temple (9).png",
-      "url": "https://commons.wikimedia.org/wiki/File:Inside_Gwaneumsa_Temple_(9).png",
-      "original": "https://upload.wikimedia.org/wikipedia/commons/e/e4/Inside_Gwaneumsa_Temple_%289%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "creator": "Thomas Housieaux",
-      "license": "CC BY-SA 4.0",
-      "licenseURL": "https://creativecommons.org/licenses/by-sa/4.0"
-    },
-    "adaptationLicense": "CC BY-SA 4.0",
-    "changes": "실제 사진을 참고한 AI 수채화 변환. 인물·임시 광고 일부 생략, 768×512 WebP 압축. 현장 사진·실측 복원도가 아닙니다."
-  },
-  {
-    "id": "temple:개암사",
-    "name": "개암사",
-    "region": "전라",
-    "src": "/images/temple-covers/gaeamsa-buan.webp",
-    "width": 768,
-    "height": 512,
-    "bytes": 158134,
-    "sha256": "b7dee81107536672b0766d2b6bc75ae38fe1aa48a36768b2eebe159eb312438b",
-    "source": {
-      "title": "File:Gaeamsa Daeungjeon 13-05582 - Buan-gun, Jeollabuk-do, South Korea.JPG",
-      "url": "https://commons.wikimedia.org/wiki/File:Gaeamsa_Daeungjeon_13-05582_-_Buan-gun,_Jeollabuk-do,_South_Korea.JPG",
-      "original": "https://upload.wikimedia.org/wikipedia/commons/d/de/Gaeamsa_Daeungjeon_13-05582_-_Buan-gun%2C_Jeollabuk-do%2C_South_Korea.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "creator": "Steve46814",
-      "license": "CC BY-SA 3.0",
-      "licenseURL": "https://creativecommons.org/licenses/by-sa/3.0"
-    },
-    "adaptationLicense": "CC BY-SA 3.0",
-    "changes": "실제 사진을 참고한 AI 수채화 변환. 인물·임시 광고 일부 생략, 768×512 WebP 압축. 현장 사진·실측 복원도가 아닙니다."
+    "bytes": 119830,
+    "sha256": "6c26918de8db37cce44c2f4dd808f530f3e8f7e5d25e2e09f93938f78f4c04c3",
+    "creation": "original-watercolor-from-text",
+    "generatedFromPhotos": false,
+    "review": {
+      "features": "Goesan Gakyeonsa Daeungjeon: SINGLE storey, three front bays with four broad red wooden columns, sage-green lattice doors with small pale lower painted panels, broad low gray HIP-AND-GABLE tiled roof, muted green-red brackets, pale rough stone plinth, short centered stone steps, close wooded green hillside behind and sandy courtyard. No outdoor Buddha, cave, cliff carving or stream. View slightly from front-right so short gable end is visible.",
+      "basis": "공식 출처 사진은 별도로 형태 검토에만 열람. 제작 도구에는 사진을 제공하지 않고 텍스트 사양으로 새 그림 제작.",
+      "referenceTitle": "File:괴산 각연사 대웅전.jpg",
+      "referenceURL": "https://commons.wikimedia.org/wiki/File%3A%EA%B4%B4%EC%82%B0_%EA%B0%81%EC%97%B0%EC%82%AC_%EB%8C%80%EC%9B%85%EC%A0%84.jpg",
+      "referenceCreator": "한국학중앙연구원·유남해"
+    }
   },
   {
     "id": "temple:갑사",
     "name": "갑사",
     "region": "충청",
-    "src": "/images/temple-covers/gapsa-gongju.webp",
+    "src": "/images/temple-covers/temple-갑사.webp",
     "width": 768,
     "height": 512,
-    "bytes": 124042,
-    "sha256": "95caafc4b6efd5cc7a2578b3262c6a29bb6109c92024b9395009395e87755426",
-    "source": {
-      "title": "File:갑사철당간및지주.jpg",
-      "url": "https://commons.wikimedia.org/wiki/File:갑사철당간및지주.jpg",
-      "original": "https://upload.wikimedia.org/wikipedia/commons/8/85/%EA%B0%91%EC%82%AC%EC%B2%A0%EB%8B%B9%EA%B0%84%EB%B0%8F%EC%A7%80%EC%A3%BC.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "creator": "문화재청",
-      "license": "KOGL Type 1",
-      "licenseURL": "http://www.kogl.or.kr/info/licenseType1.do",
-      "referenceDate": "2010-07-22 10:21:46"
-    },
-    "adaptationLicense": "KOGL Type 1",
-    "changes": "실제 사진을 참고한 AI 수채화 제작·WebP 압축. 철당간·지주와 숲. 전각을 추정해 추가하지 않음."
+    "bytes": 124638,
+    "sha256": "8f0932f0e1650325bbedacf11ccda459d47ef8090a962510561c530377591986",
+    "creation": "original-watercolor-from-text",
+    "generatedFromPhotos": false,
+    "review": {
+      "features": "장식 없는 원통형 철당간·지주, 숲. 장식 보주와 돌출 원판을 제거해 수정.",
+      "basis": "기존 확인 철당간 자료와 공식 대웅전 형태 참고"
+    }
+  },
+  {
+    "id": "temple:갓바위(선본사)",
+    "name": "갓바위(선본사)",
+    "region": "경상",
+    "src": "/images/temple-covers/temple-갓바위(선본사).webp",
+    "width": 768,
+    "height": 512,
+    "bytes": 98704,
+    "sha256": "757981e114b87c908c6ba2eadd2902e4134333c649a69a737036b07682e9bf34",
+    "creation": "original-watercolor-from-text",
+    "generatedFromPhotos": false,
+    "review": {
+      "features": "관봉 석조여래좌상·얇고 평평한 판석 관·긴 얼굴·배후 화강암과 팔공산 산세. 목포 갓바위와 혼동하지 않음.",
+      "basis": "대구광역시 제공 공식 관광 사진을 별도로 열람해 형태만 확인. 사진을 생성 도구에 제공하지 않고 텍스트로 제작. 둥근 버섯형 관으로 생성된 초기 시안은 제외.",
+      "referenceTitle": "File:대구 갓바위.jpg",
+      "referenceURL": "https://commons.wikimedia.org/wiki/File:%EB%8C%80%EA%B5%AC_%EA%B0%93%EB%B0%94%EC%9C%84.jpg",
+      "referenceCreator": "대구광역시"
+    }
   },
   {
     "id": "temple:개심사",
     "name": "개심사",
     "region": "충청",
-    "src": "/images/temple-covers/gaesimsa-seosan.webp",
+    "src": "/images/temple-covers/temple-개심사.webp",
     "width": 768,
     "height": 512,
-    "bytes": 141182,
-    "sha256": "4ffdc6931b1ca65ce76de01f1080160dd99ff3348241c7a7c4f05b0d614bd54b",
-    "source": {
-      "title": "File:서산 개심사 대웅전 01.jpg",
-      "url": "https://commons.wikimedia.org/wiki/File:서산_개심사_대웅전_01.jpg",
-      "original": "https://upload.wikimedia.org/wikipedia/commons/7/7c/%EC%84%9C%EC%82%B0_%EA%B0%9C%EC%8B%AC%EC%82%AC_%EB%8C%80%EC%9B%85%EC%A0%84_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "creator": "Unknown authorUnknown author",
-      "license": "Public domain",
-      "licenseURL": "https://creativecommons.org/publicdomain/mark/1.0/",
-      "referenceDate": "Unknown date"
-    },
-    "adaptationLicense": "CC0",
-    "changes": "실제 사진을 참고한 AI 수채화 제작·WebP 압축. 대웅전·석탑·축대의 실제 배치. 수채화 색조로 계절감 표현."
+    "bytes": 127272,
+    "sha256": "43dc5678689cf29fcc531c88b5300fc0c72485c8c8da0ebb48ae16fb180b2f6f",
+    "creation": "original-watercolor-from-text",
+    "generatedFromPhotos": false,
+    "review": {
+      "features": "단층 팔작지붕 대웅전·녹색 살문·축대·앞 석탑",
+      "basis": "공유마당 제공 대웅전 건축 자료의 형태를 별도로 확인"
+    }
+  },
+  {
+    "id": "temple:개암사",
+    "name": "개암사",
+    "region": "전라",
+    "src": "/images/temple-covers/temple-개암사.webp",
+    "width": 768,
+    "height": 512,
+    "bytes": 116658,
+    "sha256": "2b9ca1dae9e65e3b534ce66e0039a1268055d8fe7cbd9f936608886c60b4d5c7",
+    "creation": "original-watercolor-from-text",
+    "generatedFromPhotos": false,
+    "review": {
+      "features": "대웅전 팔작지붕·삼칸 살문과 우금암 바위산의 상징",
+      "basis": "기존 확인 건축 형태·사찰 지형 설명. 앞마당 강·연못을 넣지 않음"
+    }
   },
   {
     "id": "temple:건봉사",
     "name": "건봉사",
     "region": "강원",
-    "src": "/images/temple-covers/geonbongsa-goseong.webp",
+    "src": "/images/temple-covers/temple-건봉사.webp",
     "width": 768,
     "height": 512,
-    "bytes": 135610,
-    "sha256": "0fadcc7ab5a703dc09c62f53570e5797b11e3ee14f2c66d0ada4ff6de99510ea",
-    "source": {
-      "title": "File:Geonbongsa Neungpagyo 071104 by Mansegmj 0030.jpg",
-      "url": "https://commons.wikimedia.org/wiki/File:Geonbongsa_Neungpagyo_071104_by_Mansegmj_0030.jpg",
-      "original": "https://upload.wikimedia.org/wikipedia/commons/2/24/Geonbongsa_Neungpagyo_071104_by_Mansegmj_0030.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "creator": "Mansegmj",
-      "license": "CC BY-SA 4.0",
-      "licenseURL": "https://creativecommons.org/licenses/by-sa/4.0",
-      "referenceDate": "2007-11-04 11:29:15"
-    },
-    "adaptationLicense": "CC BY-SA 4.0",
-    "changes": "실제 사진을 참고한 AI 수채화 제작·WebP 압축. 능파교의 단일 아치·계류·가을 숲. 전각을 추정해 추가하지 않음."
+    "bytes": 134758,
+    "sha256": "05bbfa23c2118a6b4d4fe7f95f0e2aecac32f5e30882891806c7182f1b1d3e3d",
+    "creation": "original-watercolor-from-text",
+    "generatedFromPhotos": false,
+    "review": {
+      "features": "능파교 단일 석조 홍예·낮은 석재 난간·계류",
+      "basis": "기존 확인 능파교 형태. 허구의 큰 석탑·폐허 제외"
+    }
   },
   {
     "id": "temple:고운사",
     "name": "고운사",
     "region": "경상",
-    "src": "/images/temple-covers/gounsa-uiseong.webp",
+    "src": "/images/temple-covers/temple-고운사.webp",
     "width": 768,
     "height": 512,
-    "bytes": 134034,
-    "sha256": "fd365f48955a6947e51eb5ae8eae238ef20ab7525c00bd59382c93fb7017fff4",
-    "source": {
-      "title": "File:Korea-Andong-Gounsa-01.jpg",
-      "url": "https://commons.wikimedia.org/wiki/File:Korea-Andong-Gounsa-01.jpg",
-      "original": "https://upload.wikimedia.org/wikipedia/commons/5/5c/Korea-Andong-Gounsa-01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "creator": "Robert at Picasa",
-      "license": "CC BY 3.0",
-      "licenseURL": "https://creativecommons.org/licenses/by/3.0",
-      "referenceDate": "Taken on 13 November 2005"
-    },
-    "adaptationLicense": "CC BY 3.0",
-    "changes": "실제 사진을 참고한 AI 수채화 제작·WebP 압축. 2005년 참고 사진의 대웅보전과 숲을 그린 기록적 풍경. 2025년 산불 이후 현재 경내 전체 상태를 재현하는 그림이 아님."
+    "bytes": 122592,
+    "sha256": "d0ffd0693f3ee591a44dcf0fb8c618cd411379cfb657c0ce986b06dc67301533",
+    "creation": "original-watercolor-from-text",
+    "generatedFromPhotos": false,
+    "review": {
+      "features": "대웅보전 팔작지붕의 측면 합각·단층 전각과 산자락",
+      "basis": "기존 확인 대웅보전 구조. 산불 이후 전체 배치의 임의 복원은 하지 않음"
+    }
+  },
+  {
+    "id": "temple:관룡사",
+    "name": "관룡사",
+    "region": "경상",
+    "src": "/images/temple-covers/temple-관룡사.webp",
+    "width": 768,
+    "height": 512,
+    "bytes": 98562,
+    "sha256": "0b8b0a85e97d4180b6be7945e7718b9bfa674e77b8c0fe7f7dd328e8853865ea",
+    "creation": "original-watercolor-from-text",
+    "generatedFromPhotos": false,
+    "review": {
+      "features": "Changnyeong Gwallyongsa Daeungjeon: compact SINGLE-storey three-bay hall, gray HIP-AND-GABLE tile roof, wide gently lifted eaves, faded jade-green brackets and lattice doors between dark red posts, pale stone terrace. Distinctive real jagged gray granite Byeongpung-bawi ridge rises BEHIND the hall; low adjoining tiled-roof wings at sides, rough sandy courtyard, a broad circular weathered stone base in foreground. No giant Buddha head carved into ridge, no cave shrine, no river. 병풍바위는 독립된 뾰족 봉우리 대신 연속된 암벽 능선으로 수정.",
+      "basis": "공식 출처 사진은 별도로 형태 검토에만 열람. 제작 도구에는 사진을 제공하지 않고 텍스트 사양으로 새 그림 제작.",
+      "referenceTitle": "File:창녕 관룡사 대웅전.jpg",
+      "referenceURL": "https://commons.wikimedia.org/wiki/File%3A%EC%B0%BD%EB%85%95_%EA%B4%80%EB%A3%A1%EC%82%AC_%EB%8C%80%EC%9B%85%EC%A0%84.jpg",
+      "referenceCreator": "Unknown authorUnknown author"
+    }
+  },
+  {
+    "id": "temple:관음사",
+    "name": "관음사",
+    "region": "제주",
+    "src": "/images/temple-covers/temple-관음사.webp",
+    "width": 768,
+    "height": 512,
+    "bytes": 148808,
+    "sha256": "b8b450ad47ed5282f7d9c69d52f0d5e11b449dd3218b31b0f9c21fb7ca66377e",
+    "creation": "original-watercolor-from-text",
+    "generatedFromPhotos": false,
+    "review": {
+      "features": "제주 한라산 숲·현무암 돌길·낮은 사찰 전각",
+      "basis": "제주 관음사의 지역·자연환경과 기존 확인 자료. 내륙 암벽·대형 누각 제외"
+    }
+  },
+  {
+    "id": "temple:낙산사",
+    "name": "낙산사",
+    "region": "강원",
+    "src": "/images/temple-covers/temple-낙산사.webp",
+    "width": 768,
+    "height": 512,
+    "bytes": 104168,
+    "sha256": "09476a928050c7332bf00c90b577a811e5fb8f1477a541e6f61e4ed41f57d237",
+    "creation": "original-watercolor-from-text",
+    "generatedFromPhotos": false,
+    "review": {
+      "features": "Naksansa Hongyemun: a LONG LOW stone-block wall with ONE rounded central arch passage; a small open THREE-bay Korean timber pavilion stands directly above arch, ONE dark gray hip-and-gable tile roof, four plain wooden posts, no enclosed second roof. Pine trees behind, sandy footpath through arch. Depict this real gate closely, not a seaside Guan-yin fantasy scene.",
+      "basis": "공식 출처 사진은 별도로 형태 검토에만 열람. 제작 도구에는 사진을 제공하지 않고 텍스트 사양으로 새 그림 제작.",
+      "referenceTitle": "File:양양 낙산사 홍예문.jpg",
+      "referenceURL": "https://commons.wikimedia.org/wiki/File%3A%EC%96%91%EC%96%91_%EB%82%99%EC%82%B0%EC%82%AC_%ED%99%8D%EC%98%88%EB%AC%B8.jpg",
+      "referenceCreator": "문화재청 (공공누리 제1유형)"
+    }
+  },
+  {
+    "id": "temple:동화사",
+    "name": "동화사",
+    "region": "경상",
+    "src": "/images/temple-covers/temple-동화사.webp",
+    "width": 768,
+    "height": 512,
+    "bytes": 116910,
+    "sha256": "5aad7e0f6ef438a9e59004ed291b32b171cfc2bd03382363764996b73d08ebbf",
+    "creation": "original-watercolor-from-text",
+    "generatedFromPhotos": false,
+    "review": {
+      "features": "Daegu Donghwasa Daeungjeon: front view of a broad THREE-bay SINGLE-storey hall, four dark red timber columns, muted sage lattice doors, dense faded dancheong brackets, broad dark gray hip-and-gable tiled roof with slightly lifted eaves. Low pale stone terrace and short centered granite steps, intimate wooded hillside. No giant Buddha, no craggy mountain pinnacles.",
+      "basis": "공식 출처 사진은 별도로 형태 검토에만 열람. 제작 도구에는 사진을 제공하지 않고 텍스트 사양으로 새 그림 제작.",
+      "referenceTitle": "File:대구 동화사 대웅전 (문화재청).jpg",
+      "referenceURL": "https://commons.wikimedia.org/wiki/File%3A%EB%8C%80%EA%B5%AC_%EB%8F%99%ED%99%94%EC%82%AC_%EB%8C%80%EC%9B%85%EC%A0%84_%28%EB%AC%B8%ED%99%94%EC%9E%AC%EC%B2%AD%29.jpg",
+      "referenceCreator": "Unknown authorUnknown author"
+    }
+  },
+  {
+    "id": "temple:문수사",
+    "name": "문수사",
+    "region": "충청",
+    "src": "/images/temple-covers/temple-문수사.webp",
+    "width": 768,
+    "height": 512,
+    "bytes": 122468,
+    "sha256": "b2378c3fdb3a3fb85b59c4e98a61a4841bde2d7c70d37f991d2fcd5f0e0ec1c1",
+    "creation": "original-watercolor-from-text",
+    "generatedFromPhotos": false,
+    "review": {
+      "features": "Gochang Munsusa actual maple-forest approach: a quiet gently curving paved gray path under a dense tunnel of OLD MAPLE trees, simple low dark brown timber-post railing on the left, mossy ground, green foliage with only a few pale warm leaves. No cliff Buddha, no rock carvings, no invented temple hall, no river.",
+      "basis": "공식 출처 사진은 별도로 형태 검토에만 열람. 제작 도구에는 사진을 제공하지 않고 텍스트 사양으로 새 그림 제작.",
+      "referenceTitle": "File:고창 문수사 단풍나무 숲 숲길2 (촬영년도 2015년).jpg",
+      "referenceURL": "https://commons.wikimedia.org/wiki/File%3A%EA%B3%A0%EC%B0%BD_%EB%AC%B8%EC%88%98%EC%82%AC_%EB%8B%A8%ED%92%8D%EB%82%98%EB%AC%B4_%EC%88%B2_%EC%88%B2%EA%B8%B82_%28%EC%B4%AC%EC%98%81%EB%85%84%EB%8F%84_2015%EB%85%84%29.jpg",
+      "referenceCreator": "Korea Heritage Service\n"
+    }
+  },
+  {
+    "id": "temple:백양사",
+    "name": "백양사",
+    "region": "전라",
+    "src": "/images/temple-covers/temple-백양사.webp",
+    "width": 768,
+    "height": 512,
+    "bytes": 106758,
+    "sha256": "cc01c939999bb964fbd93ac671ab3fdc5abc4ac196176793199d4c08fd4de77f",
+    "creation": "original-watercolor-from-text",
+    "generatedFromPhotos": false,
+    "review": {
+      "features": "Baegyangsa Ssanggyeru with Baekhakbong: a small TWO-level Korean open timber pavilion beside a STILL POND, a SINGLE broad gray hip-and-gable tiled roof and simple visible wood railings. Its reflection below. A SINGLE broad pale-gray vertical limestone cliff face crowns a forested mountain behind, not multiple alpine spires. Soft green leaves, restrained blush/gold, no exaggerated autumn.",
+      "basis": "공식 출처 사진은 별도로 형태 검토에만 열람. 제작 도구에는 사진을 제공하지 않고 텍스트 사양으로 새 그림 제작.",
+      "referenceTitle": "File:장성 백양사 쌍계루와 백학봉 2019년 촬영(출처 문화재청 대변인실).jpg",
+      "referenceURL": "https://commons.wikimedia.org/wiki/File%3A%EC%9E%A5%EC%84%B1_%EB%B0%B1%EC%96%91%EC%82%AC_%EC%8C%8D%EA%B3%84%EB%A3%A8%EC%99%80_%EB%B0%B1%ED%95%99%EB%B4%89_2019%EB%85%84_%EC%B4%AC%EC%98%81%28%EC%B6%9C%EC%B2%98_%EB%AC%B8%ED%99%94%EC%9E%AC%EC%B2%AD_%EB%8C%80%EB%B3%80%EC%9D%B8%EC%8B%A4%29.jpg",
+      "referenceCreator": "문화재청"
+    }
+  },
+  {
+    "id": "temple:범어사",
+    "name": "범어사",
+    "region": "경상",
+    "src": "/images/temple-covers/temple-범어사.webp",
+    "width": 768,
+    "height": 512,
+    "bytes": 101652,
+    "sha256": "ad6c351bb3ba192d38ab54c0a890458b36ad332bdcb32c8beb6c7921323d2e1d",
+    "creation": "original-watercolor-from-text",
+    "generatedFromPhotos": false,
+    "review": {
+      "features": "Busan Beomeosa THREE-storey stone pagoda as focal landmark: simple pale gray square body, THREE flat wide thin roof stones that become smaller upward, compact small finial and two-tier square base. Behind it a cropped long LOW one-storey gray tiled hall with dark wood and pale wall panels; green Geumjeongsan wooded slope. No orange mountain cliffs, no five-storey pagoda.",
+      "basis": "공식 출처 사진은 별도로 형태 검토에만 열람. 제작 도구에는 사진을 제공하지 않고 텍스트 사양으로 새 그림 제작.",
+      "referenceTitle": "File:부산 범어사 삼층석탑.jpg",
+      "referenceURL": "https://commons.wikimedia.org/wiki/File%3A%EB%B6%80%EC%82%B0_%EB%B2%94%EC%96%B4%EC%82%AC_%EC%82%BC%EC%B8%B5%EC%84%9D%ED%83%91.jpg",
+      "referenceCreator": "Korea Heritage Service\n"
+    }
+  },
+  {
+    "id": "temple:벽송사",
+    "name": "벽송사",
+    "region": "경상",
+    "src": "/images/temple-covers/temple-벽송사.webp",
+    "width": 768,
+    "height": 512,
+    "bytes": 117698,
+    "sha256": "e4b591712e27c1abc81a09f0bbdb4fe07016f295457618c11dab42b43773726c",
+    "creation": "original-watercolor-from-text",
+    "generatedFromPhotos": false,
+    "review": {
+      "features": "Hamyang Byeoksongsa THREE-storey stone pagoda: three graduated thin square roof stones, simple compact square body, small rounded finial, low double-tier square granite foundation, on a GRASSY gently sloping knoll. Rounded low forest hills, pine branches frame one side, tiny low temple roof at far edge only. No enormous pine trunk dominant, no stream, no added statue.",
+      "basis": "공식 출처 사진은 별도로 형태 검토에만 열람. 제작 도구에는 사진을 제공하지 않고 텍스트 사양으로 새 그림 제작.",
+      "referenceTitle": "File:함양 벽송사 삼층석탑.jpg",
+      "referenceURL": "https://commons.wikimedia.org/wiki/File%3A%ED%95%A8%EC%96%91_%EB%B2%BD%EC%86%A1%EC%82%AC_%EC%82%BC%EC%B8%B5%EC%84%9D%ED%83%91.jpg",
+      "referenceCreator": "문화재청 (공공누리 제1유형)"
+    }
+  },
+  {
+    "id": "temple:보문사",
+    "name": "보문사",
+    "region": "수도권",
+    "src": "/images/temple-covers/temple-보문사.webp",
+    "width": 768,
+    "height": 512,
+    "bytes": 118822,
+    "sha256": "8c6cdabd90ae935735de62bfe852924461d22d03787f44b005c9d50ab87b34cc",
+    "creation": "original-watercolor-from-text",
+    "generatedFromPhotos": false,
+    "review": {
+      "features": "Ganghwa Bomunsa stone chamber: a massive LOW natural pale granite rock slab forms the roof over THREE stone arched entry bays; carved pale stone columns at front, faded teal/blue doors within, a low straight stone terrace and broad steps. Green vegetation growing around and atop the rock. No sea cliffs, giant standing statue, pagoda, Korean tiled roof or fantasy cave palace.",
+      "basis": "공식 출처 사진은 별도로 형태 검토에만 열람. 제작 도구에는 사진을 제공하지 않고 텍스트 사양으로 새 그림 제작.",
+      "referenceTitle": "File:강화 보문사 석실 좌측 전경.jpg",
+      "referenceURL": "https://commons.wikimedia.org/wiki/File%3A%EA%B0%95%ED%99%94_%EB%B3%B4%EB%AC%B8%EC%82%AC_%EC%84%9D%EC%8B%A4_%EC%A2%8C%EC%B8%A1_%EC%A0%84%EA%B2%BD.jpg",
+      "referenceCreator": "문화재청"
+    }
+  },
+  {
+    "id": "temple:봉정사",
+    "name": "봉정사",
+    "region": "경상",
+    "src": "/images/temple-covers/temple-봉정사.webp",
+    "width": 768,
+    "height": 512,
+    "bytes": 121728,
+    "sha256": "77dc8de64fb17fbc3f0413bf4de52cd0e0ee5b5faaa1cfb8adc950ea4c6e5df5",
+    "creation": "original-watercolor-from-text",
+    "generatedFromPhotos": false,
+    "review": {
+      "features": "Andong Bongjeongsa Daeungjeon: weathered mostly BROWN TIMBER hall, SINGLE storey, THREE front bays with dark brown lattice doors, broad gray HIP-AND-GABLE roof, restrained faded brackets, prominent rough stone retaining terrace and a short central stair. A lower tiled-roof wing cropped at left, an overhanging eave cropped at upper right frames the courtyard. Quiet deciduous trees. Not a green-red palace, not a multi-storey tower.",
+      "basis": "공식 출처 사진은 별도로 형태 검토에만 열람. 제작 도구에는 사진을 제공하지 않고 텍스트 사양으로 새 그림 제작.",
+      "referenceTitle": "File:안동봉정사대웅전.jpg",
+      "referenceURL": "https://commons.wikimedia.org/wiki/File%3A%EC%95%88%EB%8F%99%EB%B4%89%EC%A0%95%EC%82%AC%EB%8C%80%EC%9B%85%EC%A0%84.jpg",
+      "referenceCreator": "Unknown authorUnknown author"
+    }
+  },
+  {
+    "id": "temple:불국사",
+    "name": "불국사",
+    "region": "경상",
+    "src": "/images/temple-covers/temple-불국사.webp",
+    "width": 768,
+    "height": 512,
+    "bytes": 97682,
+    "sha256": "20f3f5d0255044f42a6ebc46adf662529d9372209fab611658d70c3f974ba9b7",
+    "creation": "original-watercolor-from-text",
+    "generatedFromPhotos": false,
+    "review": {
+      "features": "서쪽 간결한 삼층 석가탑·동쪽 다보탑의 계단·기둥·팔각부",
+      "basis": "기존 확인 두 탑의 실제 구조. 새 대표 그림은 텍스트 지시로 제작"
+    }
+  },
+  {
+    "id": "temple:불영사",
+    "name": "불영사",
+    "region": "경상",
+    "src": "/images/temple-covers/temple-불영사.webp",
+    "width": 768,
+    "height": 512,
+    "bytes": 118476,
+    "sha256": "e3ad81cde23abec188172cdb30783c033df71a7c2d22aa208086dfe3420ede75",
+    "creation": "original-watercolor-from-text",
+    "generatedFromPhotos": false,
+    "review": {
+      "features": "Uljin Buryeongsa Daeungbojeon: SINGLE-storey THREE-bay hall with very broad dark gray HIP-AND-GABLE tile roof, densely carved green-red brackets under deep eaves, dark green lattice doors and red posts, on a low pale stone plinth. A modest THREE-storey square stone pagoda centered in front, with two smaller distinct pale stone lanterns to either side. Wooded pine hillside behind, light gravel courtyard. No pond in this close hall view, no extra temple roofs stacked on building.",
+      "basis": "공식 출처 사진은 별도로 형태 검토에만 열람. 제작 도구에는 사진을 제공하지 않고 텍스트 사양으로 새 그림 제작.",
+      "referenceTitle": "File:울진 불영사 대웅보전 01.jpg",
+      "referenceURL": "https://commons.wikimedia.org/wiki/File%3A%EC%9A%B8%EC%A7%84_%EB%B6%88%EC%98%81%EC%82%AC_%EB%8C%80%EC%9B%85%EB%B3%B4%EC%A0%84_01.jpg",
+      "referenceCreator": "문화재청 (공공누리 제1유형)"
+    }
+  },
+  {
+    "id": "temple:석굴암",
+    "name": "석굴암",
+    "region": "경상",
+    "src": "/images/temple-covers/temple-석굴암.webp",
+    "width": 768,
+    "height": 512,
+    "bytes": 75380,
+    "sha256": "9384f298fbb506ed1c250cbd9e3fd27a6934c925821d08798310ca2ff3158d7d",
+    "creation": "original-watercolor-from-text",
+    "generatedFromPhotos": false,
+    "review": {
+      "features": "Seokguram actual granite chamber concept: ONE pale gray granite seated Buddha on a ROUND lotus stone pedestal, right hand lowered over right knee, left hand resting in lap; a plain circular carved halo behind head. Rounded granite DOME with subtle block joints above, rectangular stone entry pillars and restrained bas-relief guardian panels on chamber walls. Keep stone pale gray/ivory, not gold. No gilded palace, multiple Buddhas or invented tall arch corridors. Peaceful, accurate Korean stone grotto silhouette.",
+      "basis": "공식 출처 사진은 별도로 형태 검토에만 열람. 제작 도구에는 사진을 제공하지 않고 텍스트 사양으로 새 그림 제작.",
+      "referenceTitle": "File:Front view of Seokguram from front chamber.jpg",
+      "referenceURL": "https://commons.wikimedia.org/wiki/File%3AFront_view_of_Seokguram_from_front_chamber.jpg",
+      "referenceCreator": "Seok-Hong, Han"
+    }
+  },
+  {
+    "id": "temple:송광사",
+    "name": "송광사",
+    "region": "전라",
+    "src": "/images/temple-covers/temple-송광사.webp",
+    "width": 768,
+    "height": 512,
+    "bytes": 84006,
+    "sha256": "948d046edcc4ca9c39f16b29128701ba4ecd9f373911a45db2cc9830927fe727",
+    "creation": "original-watercolor-from-text",
+    "generatedFromPhotos": false,
+    "review": {
+      "features": "Suncheon Songgwangsa Daeungjeon: very WIDE SINGLE-storey FIVE-bay hall with six red posts, alternating sage lattice door groups and pale open folding doors, broad sweeping dark gray HIP-AND-GABLE roof, complex muted green brackets. Pale granite terrace with THREE short adjacent center stair flights, low tiled wings behind and a softly wooded hill. No giant tree trunks or invented cliff.",
+      "basis": "공식 출처 사진은 별도로 형태 검토에만 열람. 제작 도구에는 사진을 제공하지 않고 텍스트 사양으로 새 그림 제작.",
+      "referenceTitle": "File:순천 송광사 대웅전 정면.jpg",
+      "referenceURL": "https://commons.wikimedia.org/wiki/File%3A%EC%88%9C%EC%B2%9C_%EC%86%A1%EA%B4%91%EC%82%AC_%EB%8C%80%EC%9B%85%EC%A0%84_%EC%A0%95%EB%A9%B4.jpg",
+      "referenceCreator": "한국학중앙연구원"
+    }
+  },
+  {
+    "id": "temple:신륵사",
+    "name": "신륵사",
+    "region": "수도권",
+    "src": "/images/temple-covers/temple-신륵사.webp",
+    "width": 768,
+    "height": 512,
+    "bytes": 110318,
+    "sha256": "5e5a82562f03959a4197cc56f1cc7a565ea055fb13cdc4d96dae84e4ba481431",
+    "creation": "original-watercolor-from-text",
+    "generatedFromPhotos": false,
+    "review": {
+      "features": "Yeoju Silleuksa multi-storey BRICK pagoda: narrow tapering RECTANGULAR pale gray weathered BRICK tower with SIX visible diminishing block-like tiers, each divided by a very shallow projecting brick cornice, NOT broad sloped stone pagoda roofs. Small rounded finial on stepped square top, broad granite multi-step pyramidal base, trees closely frame the tower. No Chinese curly eaves, no stone three-storey temple pagoda.",
+      "basis": "공식 출처 사진은 별도로 형태 검토에만 열람. 제작 도구에는 사진을 제공하지 않고 텍스트 사양으로 새 그림 제작.",
+      "referenceTitle": "File:여주 신륵사 다층전탑.jpg",
+      "referenceURL": "https://commons.wikimedia.org/wiki/File%3A%EC%97%AC%EC%A3%BC_%EC%8B%A0%EB%A5%B5%EC%82%AC_%EB%8B%A4%EC%B8%B5%EC%A0%84%ED%83%91.jpg",
+      "referenceCreator": "문화재청"
+    }
+  },
+  {
+    "id": "temple:옥천사",
+    "name": "옥천사",
+    "region": "경상",
+    "src": "/images/temple-covers/temple-옥천사.webp",
+    "width": 768,
+    "height": 512,
+    "bytes": 120378,
+    "sha256": "0e49759af702245935fca1616de0be897dbd39a13a859a74705b91ae25858860",
+    "creation": "original-watercolor-from-text",
+    "generatedFromPhotos": false,
+    "review": {
+      "features": "Goseong Okcheonsa Daeungjeon: small but deep-eaved SINGLE-storey THREE-bay Korean hall on a HIGH roughly squared stone terrace, a STRAIGHT centered granite stair of about ten steps, red columns, muted jade brackets, gray HIP-AND-GABLE roof. Central doorway dark and open, pale side door panels. Dark green wooded hillside directly behind; lower tiled wings cropped at both sides enclose courtyard. No creek, no waterfall, no extra Buddha.",
+      "basis": "공식 출처 사진은 별도로 형태 검토에만 열람. 제작 도구에는 사진을 제공하지 않고 텍스트 사양으로 새 그림 제작.",
+      "referenceTitle": "File:고성 옥천사 대웅전.jpg",
+      "referenceURL": "https://commons.wikimedia.org/wiki/File%3A%EA%B3%A0%EC%84%B1_%EC%98%A5%EC%B2%9C%EC%82%AC_%EB%8C%80%EC%9B%85%EC%A0%84.jpg",
+      "referenceCreator": "국가유산청"
+    }
+  },
+  {
+    "id": "temple:완주 송광사",
+    "name": "완주 송광사",
+    "region": "전라",
+    "src": "/images/temple-covers/temple-완주 송광사.webp",
+    "width": 768,
+    "height": 512,
+    "bytes": 88078,
+    "sha256": "604bcbcd944d9aa1ea1ddb33d8060ba0e91d1aecdd9fb37c2b53c29fd9e1a05c",
+    "creation": "original-watercolor-from-text",
+    "generatedFromPhotos": false,
+    "review": {
+      "features": "Wanju Songgwangsa bell pavilion INTERIOR: a large dark bronze hanging temple bell centered between thick dark-red timber posts, layered sage-green and faded red wooden bracket sets and a dense timber beam grid above; pale stone floor and a partial view of quiet green courtyard at side. This is an interior view of the real Jongru bell structure, not an invented external pavilion form. No extra towers or statues.",
+      "basis": "공식 출처 사진은 별도로 형태 검토에만 열람. 제작 도구에는 사진을 제공하지 않고 텍스트 사양으로 새 그림 제작.",
+      "referenceTitle": "File:완주 송광사 종루 01.jpg",
+      "referenceURL": "https://commons.wikimedia.org/wiki/File%3A%EC%99%84%EC%A3%BC_%EC%86%A1%EA%B4%91%EC%82%AC_%EC%A2%85%EB%A3%A8_01.jpg",
+      "referenceCreator": "문화재청 (공공누리 제1유형)"
+    }
+  },
+  {
+    "id": "temple:용문사(양평)",
+    "name": "용문사(양평)",
+    "region": "수도권",
+    "src": "/images/temple-covers/temple-용문사(양평).webp",
+    "width": 768,
+    "height": 512,
+    "bytes": 115860,
+    "sha256": "eab4f85b7b8eed8b9975778a030de7a7ff1c1778d5aeee59a2c6e5f8e661c9b7",
+    "creation": "original-watercolor-from-text",
+    "generatedFromPhotos": false,
+    "review": {
+      "features": "Yangpyeong Yongmunsa ancient GINKGO TREE: one MASSIVE gnarled gray trunk with a single broad base, branches dividing HIGH above ground into a tall irregular spreading crown. Small dark stone edging at its root mound, gentle sage and pale-gold fan-shaped foliage, only a very small gray tiled roof far behind. Tree is the clear landmark, not a grove of separate trunks. No river, no alpine cliffs.",
+      "basis": "공식 출처 사진은 별도로 형태 검토에만 열람. 제작 도구에는 사진을 제공하지 않고 텍스트 사양으로 새 그림 제작.",
+      "referenceTitle": "File:양평 용문사 은행나무.jpg",
+      "referenceURL": "https://commons.wikimedia.org/wiki/File%3A%EC%96%91%ED%8F%89_%EC%9A%A9%EB%AC%B8%EC%82%AC_%EC%9D%80%ED%96%89%EB%82%98%EB%AC%B4.jpg",
+      "referenceCreator": "문화재청"
+    }
+  },
+  {
+    "id": "temple:용문사(예천)",
+    "name": "용문사(예천)",
+    "region": "경상",
+    "src": "/images/temple-covers/temple-용문사(예천).webp",
+    "width": 768,
+    "height": 512,
+    "bytes": 101090,
+    "sha256": "6162c4e179264d9ab50e5aa1d40a23de39b328acc7dc58ddeb4bb655d2924491",
+    "creation": "original-watercolor-from-text",
+    "generatedFromPhotos": false,
+    "review": {
+      "features": "삼칸 전면·단층 맞배지붕·격자문·석축 계단. 팔작처럼 생성된 지붕을 맞배지붕으로 수정해 재검토.",
+      "basis": "공식 출처의 해당 전각 사진을 별도 열람해 형태 확인. 생성 도구에 사진을 제공하지 않고 텍스트로 원화 제작·수정.",
+      "referenceTitle": "File:예천 용문사 대장전 01.jpg",
+      "referenceURL": "https://commons.wikimedia.org/wiki/File%3A%EC%98%88%EC%B2%9C_%EC%9A%A9%EB%AC%B8%EC%82%AC_%EB%8C%80%EC%9E%A5%EC%A0%84_01.jpg",
+      "referenceCreator": "문화재청 (공공누리 제1유형)"
+    }
+  },
+  {
+    "id": "temple:은해사",
+    "name": "은해사",
+    "region": "경상",
+    "src": "/images/temple-covers/temple-은해사.webp",
+    "width": 768,
+    "height": 512,
+    "bytes": 110332,
+    "sha256": "2c57e0beabc4cf28b74d447302f3dca86bca80692485a1096c41dfe27d210a22",
+    "creation": "original-watercolor-from-text",
+    "generatedFromPhotos": false,
+    "review": {
+      "features": "Yeongcheon Eunhaesa established principal hall SHORT GABLED END view: SINGLE-storey, three-bay end wall with four red columns, pale pink/ivory solid lower door panels, very dense green-red carved eave brackets, dark gray HIP-AND-GABLE roof with the RED TRIANGULAR GABLE visible centered ABOVE this short end. A lower long tiled wing on left and rocky green hillside on right, low pale stone platform and short center steps. No river, no long stairway through forest.",
+      "basis": "공식 출처 사진은 별도로 형태 검토에만 열람. 제작 도구에는 사진을 제공하지 않고 텍스트 사양으로 새 그림 제작.",
+      "referenceTitle": "File:영천 은해사 대웅전.jpg",
+      "referenceURL": "https://commons.wikimedia.org/wiki/File%3A%EC%98%81%EC%B2%9C_%EC%9D%80%ED%95%B4%EC%82%AC_%EB%8C%80%EC%9B%85%EC%A0%84.jpg",
+      "referenceCreator": "문화재청 (공공누리 제1유형)"
+    }
+  },
+  {
+    "id": "temple:직지사",
+    "name": "직지사",
+    "region": "경상",
+    "src": "/images/temple-covers/temple-직지사.webp",
+    "width": 768,
+    "height": 512,
+    "bytes": 111120,
+    "sha256": "f7b69a67e5471a4ff733ed0e71599e7ff0dcc03acdc765960e284b605ba53803",
+    "creation": "original-watercolor-from-text",
+    "generatedFromPhotos": false,
+    "review": {
+      "features": "Gimcheon Jikjisa Daeungjeon: wide SINGLE-storey FIVE-bay front, six dark weathered timber columns, FIVE groups of dusty blue-sage lattice doors, broad dark gray HIP-AND-GABLE roof with gently lifted eaves, deep shaded brackets. Low granite terrace, short central steps, low pale stone balustrade and one small stone lantern left, straight pine-covered hillside behind. No ranks of tiny stone Buddhas, no giant staircase, no invented pagoda.",
+      "basis": "공식 출처 사진은 별도로 형태 검토에만 열람. 제작 도구에는 사진을 제공하지 않고 텍스트 사양으로 새 그림 제작.",
+      "referenceTitle": "File:김천 직지사 대웅전.jpg",
+      "referenceURL": "https://commons.wikimedia.org/wiki/File%3A%EA%B9%80%EC%B2%9C_%EC%A7%81%EC%A7%80%EC%82%AC_%EB%8C%80%EC%9B%85%EC%A0%84.jpg",
+      "referenceCreator": "Korea Heritage Service\n"
+    }
+  },
+  {
+    "id": "temple:천은사",
+    "name": "천은사",
+    "region": "전라",
+    "src": "/images/temple-covers/temple-천은사.webp",
+    "width": 768,
+    "height": 512,
+    "bytes": 115380,
+    "sha256": "5cf0eae30aa2e651a8affb0116e2bdc5071d12763daf2c74c3aac23f30dd0a5e",
+    "creation": "original-watercolor-from-text",
+    "generatedFromPhotos": false,
+    "review": {
+      "features": "Gurye Cheoneunsa Geungnakbojeon: SINGLE-storey THREE-bay hall, broad gray HIP-AND-GABLE tiled roof with upturned ends, ornate sage brackets, four red columns, sage lattice doors either side of a central OPEN doorway with pale folded doors. Rectangular rough stone terrace, short centered stone staircase and STRAIGHT flat stone walkway toward viewer, sandy courtyard with a few low stones and grasses on right, low tiled wings on both sides and wooded hill. No lake or cherry-reflection scene.",
+      "basis": "공식 출처 사진은 별도로 형태 검토에만 열람. 제작 도구에는 사진을 제공하지 않고 텍스트 사양으로 새 그림 제작.",
+      "referenceTitle": "File:구례 천은사 극락보전.jpg",
+      "referenceURL": "https://commons.wikimedia.org/wiki/File%3A%EA%B5%AC%EB%A1%80_%EC%B2%9C%EC%9D%80%EC%82%AC_%EA%B7%B9%EB%9D%BD%EB%B3%B4%EC%A0%84.jpg",
+      "referenceCreator": "문화재청 (공공누리 제1유형)"
+    }
+  },
+  {
+    "id": "temple:칠장사",
+    "name": "칠장사",
+    "region": "수도권",
+    "src": "/images/temple-covers/temple-칠장사.webp",
+    "width": 768,
+    "height": 512,
+    "bytes": 91452,
+    "sha256": "bb06e4b260e2dc7dad5f924635ba5ceb162bd72195b61e2b0693362487ce92f3",
+    "creation": "original-watercolor-from-text",
+    "generatedFromPhotos": false,
+    "review": {
+      "features": "삼칸 전면·단층 맞배지붕·격자문·석축 계단. 팔작처럼 생성된 지붕을 맞배지붕으로 수정해 재검토.",
+      "basis": "공식 출처의 해당 전각 사진을 별도 열람해 형태 확인. 생성 도구에 사진을 제공하지 않고 텍스트로 원화 제작·수정.",
+      "referenceTitle": "File:안성 칠장사 대웅전.jpg",
+      "referenceURL": "https://commons.wikimedia.org/wiki/File%3A%EC%95%88%EC%84%B1_%EC%B9%A0%EC%9E%A5%EC%82%AC_%EB%8C%80%EC%9B%85%EC%A0%84.jpg",
+      "referenceCreator": "문화재청 (공공누리 제1유형)"
+    }
+  },
+  {
+    "id": "temple:통도사",
+    "name": "통도사",
+    "region": "경상",
+    "src": "/images/temple-covers/temple-통도사.webp",
+    "width": 768,
+    "height": 512,
+    "bytes": 107190,
+    "sha256": "f270e6d1269dd24f2fd642ccfaf2bc52d3826f1b4306b422b38ad49c249624ba",
+    "creation": "original-watercolor-from-text",
+    "generatedFromPhotos": false,
+    "review": {
+      "features": "Yangsan Tongdosa Bulimun: THREE-bay SINGLE-storey red-brown Korean timber GATE with gray HIP-AND-GABLE tiled roof and muted sage bracketwork, central bay a deep OPEN passage revealing inner courtyard, two flanking pale blue door panels with simple faded red-blue circular painted motifs (NO writing). Low granite plinth and broad centered steps, low tiled wings at sides. No stone archway and no extra gate storeys.",
+      "basis": "공식 출처 사진은 별도로 형태 검토에만 열람. 제작 도구에는 사진을 제공하지 않고 텍스트 사양으로 새 그림 제작.",
+      "referenceTitle": "File:양산 통도사 불이문.jpg",
+      "referenceURL": "https://commons.wikimedia.org/wiki/File%3A%EC%96%91%EC%82%B0_%ED%86%B5%EB%8F%84%EC%82%AC_%EB%B6%88%EC%9D%B4%EB%AC%B8.jpg",
+      "referenceCreator": "Korea Heritage Service\n"
+    }
+  },
+  {
+    "id": "temple:파계사",
+    "name": "파계사",
+    "region": "경상",
+    "src": "/images/temple-covers/temple-파계사.webp",
+    "width": 768,
+    "height": 512,
+    "bytes": 117254,
+    "sha256": "2509a7349ee4f4fc1a339c38ce99d4ba47a433d82c1966eedb176dfe2a433533",
+    "creation": "original-watercolor-from-text",
+    "generatedFromPhotos": false,
+    "review": {
+      "features": "Daegu Pagyesa Jindongru: a long TWO-level timber pavilion with FIVE front bays, six tall plain dark-red/brown posts; the upper floor has red-brown shutter panels bordered with faded turquoise-sage woodwork. ONE long low dark gray HIP-AND-GABLE tiled roof, ground level OPEN between support posts with a center passage, a broad straight granite stair rises to it over a rough stone retaining wall. Green trees behind. No creek and no additional pagoda.",
+      "basis": "공식 출처 사진은 별도로 형태 검토에만 열람. 제작 도구에는 사진을 제공하지 않고 텍스트 사양으로 새 그림 제작.",
+      "referenceTitle": "File:파계사진동루 정면 (촬영년도 2015년).jpg",
+      "referenceURL": "https://commons.wikimedia.org/wiki/File%3A%ED%8C%8C%EA%B3%84%EC%82%AC%EC%A7%84%EB%8F%99%EB%A3%A8_%EC%A0%95%EB%A9%B4_%28%EC%B4%AC%EC%98%81%EB%85%84%EB%8F%84_2015%EB%85%84%29.jpg",
+      "referenceCreator": "문화재청"
+    }
+  },
+  {
+    "id": "temple:해인사",
+    "name": "해인사",
+    "region": "경상",
+    "src": "/images/temple-covers/temple-해인사.webp",
+    "width": 768,
+    "height": 512,
+    "bytes": 109722,
+    "sha256": "a3c48c0d24e72abd1e23f5f4f0d7e815c1dd5c07f2fcfa195428d8035ef782b4",
+    "creation": "original-watercolor-from-text",
+    "generatedFromPhotos": false,
+    "review": {
+      "features": "장경판전의 길고 낮은 맞배지붕·목재벽·살창과 가야산 숲",
+      "basis": "장경판전 건축 형식·보존 공간의 알려진 특징을 텍스트 제작 사양으로 사용"
+    }
   }
 ]

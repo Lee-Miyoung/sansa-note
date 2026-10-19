@@ -1,0 +1,358 @@
+{
+  "episode": "bulguksa-002",
+  "adaptationLicense": "CC BY-SA 4.0",
+  "adaptationLicenseURL": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "sources": {
+    "gate": {
+      "title": "File:Bulguksa temple entrance gate stairs flower bed and blue sky in Gyeongju South Korea.jpg",
+      "url": "https://commons.wikimedia.org/wiki/File:Bulguksa_temple_entrance_gate_stairs_flower_bed_and_blue_sky_in_Gyeongju_South_Korea.jpg",
+      "original": "https://upload.wikimedia.org/wikipedia/commons/e/ed/Bulguksa_temple_entrance_gate_stairs_flower_bed_and_blue_sky_in_Gyeongju_South_Korea.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "creator": "Basile Morin",
+      "license": "CC BY-SA 4.0",
+      "licenseURL": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
+    "seok": {
+      "title": "File:Seokgatap Pagoda.jpg",
+      "url": "https://commons.wikimedia.org/wiki/File:Seokgatap_Pagoda.jpg",
+      "original": "https://upload.wikimedia.org/wikipedia/commons/e/e0/Seokgatap_Pagoda.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "creator": "Bernard Gagnon",
+      "license": "CC0",
+      "licenseURL": "http://creativecommons.org/publicdomain/zero/1.0/deed.en"
+    },
+    "dabo": {
+      "title": "File:Dabotap.jpg",
+      "url": "https://commons.wikimedia.org/wiki/File:Dabotap.jpg",
+      "original": "https://upload.wikimedia.org/wikipedia/commons/a/ad/Dabotap.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "creator": "螺钉",
+      "license": "CC BY-SA 3.0",
+      "licenseURL": "https://creativecommons.org/licenses/by-sa/3.0"
+    }
+  },
+  "changes": "실제 사진의 건축 형태를 참고해 AI 수채화로 새로 제작. 무념스님·소품·계절 색채 추가, 일부 방문객·안내판 생략. 전설·보존·인쇄 장면은 개념 삽화이며 유물의 실측 복제나 역사 현장 사진이 아님.",
+  "images": [
+    {
+      "file": "bulguksa-cover.webp",
+      "width": 1440,
+      "height": 960,
+      "bytes": 290490,
+      "sha256": "ba2df31a749bffd49030b739abdb91a210725a74259ac93f0cf40526253c04ea",
+      "sources": [
+        "gate"
+      ]
+    },
+    {
+      "file": "bulguksa-cover-small.webp",
+      "width": 480,
+      "height": 320,
+      "bytes": 42454,
+      "sha256": "4ede37690e2faba8490e8fc34bb0db20047410dc014823dbe6f3e43c7777f94c",
+      "sources": [
+        "gate"
+      ]
+    },
+    {
+      "file": "scene-01.webp",
+      "width": 1440,
+      "height": 960,
+      "bytes": 300042,
+      "sha256": "1409d30595fdbc78be98ab783b97537eeabedbee2efd5cff8d9b2ead0bb25b71",
+      "sources": [
+        "gate"
+      ]
+    },
+    {
+      "file": "scene-01-small.webp",
+      "width": 480,
+      "height": 320,
+      "bytes": 44368,
+      "sha256": "da0567b452dc3d120a6be0fc99d2b821e44e3b4268efd38598fd5eaf4b1a72b0",
+      "sources": [
+        "gate"
+      ]
+    },
+    {
+      "file": "scene-02.webp",
+      "width": 1440,
+      "height": 960,
+      "bytes": 231268,
+      "sha256": "c516cc20d2da2b8b05ae991e626429e0d8416cbad70592727d9f5448d2c05591",
+      "sources": [
+        "seok"
+      ]
+    },
+    {
+      "file": "scene-02-small.webp",
+      "width": 480,
+      "height": 320,
+      "bytes": 33602,
+      "sha256": "9234d44677dc8f65a09c8d9873e0b6c550367f00d90b70555c6d10a96049ca69",
+      "sources": [
+        "seok"
+      ]
+    },
+    {
+      "file": "scene-03.webp",
+      "width": 1440,
+      "height": 960,
+      "bytes": 210892,
+      "sha256": "d80a46f331efc30d63bfca8fd5fc61feb6fe0e0ce98212f66df84ca16eb69552",
+      "sources": [
+        "dabo"
+      ]
+    },
+    {
+      "file": "scene-03-small.webp",
+      "width": 480,
+      "height": 320,
+      "bytes": 37056,
+      "sha256": "8a761c3683027e779f86966360ddf22b831aa4c49eaacbe94a0ad996ffad5b53",
+      "sources": [
+        "dabo"
+      ]
+    },
+    {
+      "file": "scene-04.webp",
+      "width": 1440,
+      "height": 960,
+      "bytes": 247182,
+      "sha256": "74187d7859143d6a7cc3304a30366288daa1f50647c061c0e1d2d645f88a1d4f",
+      "sources": [
+        "seok",
+        "dabo"
+      ]
+    },
+    {
+      "file": "scene-04-small.webp",
+      "width": 480,
+      "height": 320,
+      "bytes": 38132,
+      "sha256": "9d2567685ced5549a384170b0273c20fcbd321bc520957b5d35d0fb5c5f29d0c",
+      "sources": [
+        "seok",
+        "dabo"
+      ]
+    },
+    {
+      "file": "scene-05.webp",
+      "width": 1440,
+      "height": 960,
+      "bytes": 203332,
+      "sha256": "44ade489ed53275d910c03f50cfaa284b0e7074a23adae06da1cbc2e32c6c380",
+      "sources": [
+        "seok"
+      ]
+    },
+    {
+      "file": "scene-05-small.webp",
+      "width": 480,
+      "height": 320,
+      "bytes": 33170,
+      "sha256": "491300bc863fd4f1d44b2ad83a17e95f73dd47bb1b5763127fc1dd8d432a5517",
+      "sources": [
+        "seok"
+      ]
+    },
+    {
+      "file": "scene-06.webp",
+      "width": 1440,
+      "height": 960,
+      "bytes": 314358,
+      "sha256": "5a99233bd75beab5dd4f4d7c4b89e9b2343185ff4b974322bc26375189e8e102",
+      "sources": [
+        "gate"
+      ]
+    },
+    {
+      "file": "scene-06-small.webp",
+      "width": 480,
+      "height": 320,
+      "bytes": 45630,
+      "sha256": "6c4269ad21ad9427ce2442ae3992f0c6ea4aaadd7d789dbb462544295e116ed3",
+      "sources": [
+        "gate"
+      ]
+    },
+    {
+      "file": "scene-07.webp",
+      "width": 1440,
+      "height": 960,
+      "bytes": 179566,
+      "sha256": "2ea3445369e1018a6aeadf6d1e1f18b4086f9e4455171f533d21b58d180b56d8",
+      "sources": [
+        "seok"
+      ]
+    },
+    {
+      "file": "scene-07-small.webp",
+      "width": 480,
+      "height": 320,
+      "bytes": 33202,
+      "sha256": "1a62c06052e36eb3ad2088203cd01f6ef729d6ed5bcad1e05e6679af8bd68011",
+      "sources": [
+        "seok"
+      ]
+    },
+    {
+      "file": "scene-08.webp",
+      "width": 1440,
+      "height": 960,
+      "bytes": 175336,
+      "sha256": "c02cec9ab4712c04be05c39b0b8850533a33cc91fbc36f3ff6f198b810ee9727",
+      "sources": [
+        "seok"
+      ]
+    },
+    {
+      "file": "scene-08-small.webp",
+      "width": 480,
+      "height": 320,
+      "bytes": 31726,
+      "sha256": "11cdd6cf68d9ec636fbb8fd24971e651d53b374bb73823f723a5ad56c3641968",
+      "sources": [
+        "seok"
+      ]
+    },
+    {
+      "file": "scene-09.webp",
+      "width": 1440,
+      "height": 960,
+      "bytes": 262174,
+      "sha256": "d38ace2c305771b812ddd56d4826eec14dafbdcad0ed3d88f7ab51c9c134b05f",
+      "sources": [
+        "gate"
+      ]
+    },
+    {
+      "file": "scene-09-small.webp",
+      "width": 480,
+      "height": 320,
+      "bytes": 43610,
+      "sha256": "ca35e5bc1c6057b1fd24687c115c76e9e72f798efac080c46019954910d28e55",
+      "sources": [
+        "gate"
+      ]
+    },
+    {
+      "file": "scene-10.webp",
+      "width": 1440,
+      "height": 960,
+      "bytes": 304242,
+      "sha256": "9aa9a16c0203abb1157e4e592291aa6a36f729e88adcc6b8e91a0c76c62a0019",
+      "sources": [
+        "gate"
+      ]
+    },
+    {
+      "file": "scene-10-small.webp",
+      "width": 480,
+      "height": 320,
+      "bytes": 43922,
+      "sha256": "b44aa0fedd34be6c068e6ffa039fd6d070a0c9dea95f9c3d640dcc7796516d78",
+      "sources": [
+        "gate"
+      ]
+    },
+    {
+      "file": "scene-11.webp",
+      "width": 1440,
+      "height": 960,
+      "bytes": 207914,
+      "sha256": "304df6f2ede53f6de6055c2680cb14c7571c59c98ee9a3c2c529f232d81cc5e9",
+      "sources": [
+        "dabo"
+      ]
+    },
+    {
+      "file": "scene-11-small.webp",
+      "width": 480,
+      "height": 320,
+      "bytes": 37722,
+      "sha256": "8252a510004d66b28b4777292c1f684b782a86b53fec389a1757332a56a7bc75",
+      "sources": [
+        "dabo"
+      ]
+    },
+    {
+      "file": "scene-12.webp",
+      "width": 1440,
+      "height": 960,
+      "bytes": 293800,
+      "sha256": "16ad745940aaa9b2269efe7a81ae2524289d6bed5773c981e8612e2825e0812b",
+      "sources": [
+        "gate"
+      ]
+    },
+    {
+      "file": "scene-12-small.webp",
+      "width": 480,
+      "height": 320,
+      "bytes": 45770,
+      "sha256": "d0a3f1f3717e4905daf4f9db648f985df45dfe73f453baa6a272c0b16f7cbb48",
+      "sources": [
+        "gate"
+      ]
+    },
+    {
+      "file": "card-01.webp",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 321268,
+      "sha256": "d7441546cef06fdbce0315d59721c76bf7a1f55be406e379eabfd4745cc163be",
+      "sources": [
+        "seok",
+        "dabo"
+      ]
+    },
+    {
+      "file": "card-01-small.webp",
+      "width": 480,
+      "height": 720,
+      "bytes": 80974,
+      "sha256": "3c24f09daebf457559760f22ff3f02a6a03ed875faefaa465f880f5a60147792",
+      "sources": [
+        "seok",
+        "dabo"
+      ]
+    },
+    {
+      "file": "card-02.webp",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 289324,
+      "sha256": "146e64bf1ea17d11f69f66f1bee80bf9035d237b53c7681c924897981a7a2696",
+      "sources": [
+        "seok"
+      ]
+    },
+    {
+      "file": "card-02-small.webp",
+      "width": 480,
+      "height": 720,
+      "bytes": 75766,
+      "sha256": "9a60eedf84c4e9376df5eb759fe2d2d0abba072c149b19c0998d368960e8287b",
+      "sources": [
+        "seok"
+      ]
+    },
+    {
+      "file": "card-03.webp",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 356306,
+      "sha256": "a32803a24aa8e22d351d975253009df1e8629831873cc8042761ef8bd649ae05",
+      "sources": [
+        "gate"
+      ]
+    },
+    {
+      "file": "card-03-small.webp",
+      "width": 480,
+      "height": 720,
+      "bytes": 89656,
+      "sha256": "be2db198c015347d135d166d5e9a620679a4afc13f8f00f249c3bf22b954223e",
+      "sources": [
+        "gate"
+      ]
+    }
+  ]
+}
