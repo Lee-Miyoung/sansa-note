@@ -2,13 +2,14 @@
 // index.html은 온라인일 때 항상 최신 버전을 먼저 가져오고,
 // 오프라인일 때만 캐시를 사용합니다.
 
-const CACHE_VERSION = 'sansanote-v9-mobile-startup-20261019';
+const CACHE_VERSION = 'sansanote-v10-resilient-startup-20261019';
 
 // 첫 방문에는 작은 앱 셸만 준비합니다. 사진·음악·영상은 사용 시 아래 fetch
 // 핸들러가 캐시하므로 불필요한 다운로드가 첫 화면과 회선을 다투지 않습니다.
 // ./ 와 ./index.html 은 같은 문서이므로 설치 때 한 번만 받습니다.
 const CORE_ASSETS = [
   './',
+  './scripts/startup-cloud.js?v=20261019-resilient',
   './scripts/navigation.js?v=20261018',
   './scripts/game-viewport.js?v=20261017',
   './scripts/meditation-sounds.js?v=20261018',
@@ -139,58 +140,38 @@ self.addEventListener('fetch', event => {
    * 네트워크 우선
    *
    * 새 버전이 있으면 즉시 가져오고,
-   * 인터넷이 끊긴 경우에만 캐시 사용
+   * 인터넷이 끊기거나 페이지 응답이 오래 걸리면 저장된 페이지 사용
    */
   if (
     isAppShellRequest(
       event.request
     )
   ) {
-    event.respondWith(
-      freshFetch(
-        event.request
-      )
-
-        .then(response => {
-          if (
-            response &&
-            response.status === 200
-          ) {
-            const clone =
-              response.clone();
-
-            caches
-              .open(CACHE_VERSION)
-
-              .then(cache => {
-                return cache.put(
-                  event.request,
-                  clone
-                );
-              })
-
-              .catch(() => {});
-          }
-
-          return response;
-        })
-
-        .catch(async () => {
-          return (
-            await caches.match(
-              event.request
-            ) ||
-
-            await caches.match(
-              './index.html'
-            ) ||
-
-            await caches.match(
-              './'
-            )
-          );
-        })
-    );
+    // A flaky mobile connection can stay pending without rejecting. Keep the
+    // network-first policy, but let a previously saved page open after 2 seconds.
+    const cachedPage = caches.match(event.request).then(cached =>
+      cached || caches.match('./index.html').then(index => index || caches.match('./'))
+    ).catch(()=>undefined);
+    const networkPage = freshFetch(event.request);
+    // Clone immediately, then cache in the background. Never wait for the whole
+    // HTML body to be stored before allowing the browser to display its stream.
+    event.waitUntil(networkPage.then(response => {
+      if(response && response.status === 200){
+        const clone = response.clone();
+        return caches.open(CACHE_VERSION).then(cache => cache.put(event.request, clone));
+      }
+    }).catch(()=>{}));
+    event.respondWith((async () => {
+      const cached = await cachedPage;
+      if(!cached) return networkPage;
+      let timer;
+      try{
+        return await Promise.race([
+          networkPage.catch(()=>cached),
+          new Promise(resolve => { timer = setTimeout(()=>resolve(cached), 2000); })
+        ]);
+      }finally{ clearTimeout(timer); }
+    })());
 
     return;
   }

@@ -40,6 +40,8 @@ const sdk = {
       await p.goto('https://sansanote.com/');
       // No manual startLocalMode: the real DOMContentLoaded/auth path must open home.
       await p.waitForFunction(() => document.getElementById('app').style.display === 'block');
+      assert.deepEqual(await p.evaluate(() => sdkOrder), ['app', 'auth', 'database', 'storage']);
+      await p.evaluate(() => sansaLoadPdf());
       assert.deepEqual(await p.evaluate(() => sdkOrder), ['app', 'auth', 'database', 'storage', 'pdf']);
       assert.equal(await p.evaluate(() => firebase.apps.length), 1);
       assert.equal(await p.evaluate(() => typeof window.jspdf.jsPDF), 'function');
@@ -74,7 +76,12 @@ const sdk = {
     assert(!requests.includes('/index.html'), 'shell must not download twice');
     const size = await p.evaluate(async () => (await (await fetch('/song1.mp3')).arrayBuffer()).byteLength);
     assert.equal(size, fs.statSync(path.join(root, 'song1.mp3')).size);
-    await p.waitForFunction(async () => !!(await caches.match('/song1.mp3')));
+    let cached = false;
+    for (let i = 0; i < 50 && !cached; i++) {
+      cached = await p.evaluate(async () => !!(await caches.match('/song1.mp3')));
+      if (!cached) await p.waitForTimeout(100);
+    }
+    assert(cached, 'requested song must actually be in the cache');
     await context.setOffline(true);
     assert.equal(await p.evaluate(async () => (await (await fetch('/song1.mp3')).arrayBuffer()).byteLength), size);
     await p.reload();
