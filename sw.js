@@ -2,11 +2,13 @@
 // index.html은 온라인일 때 항상 최신 버전을 먼저 가져오고,
 // 오프라인일 때만 캐시를 사용합니다.
 
-const CACHE_VERSION = 'sansanote-v8-integrated-20261018';
+const CACHE_VERSION = 'sansanote-v9-mobile-startup-20261019';
 
+// 첫 방문에는 작은 앱 셸만 준비합니다. 사진·음악·영상은 사용 시 아래 fetch
+// 핸들러가 캐시하므로 불필요한 다운로드가 첫 화면과 회선을 다투지 않습니다.
+// ./ 와 ./index.html 은 같은 문서이므로 설치 때 한 번만 받습니다.
 const CORE_ASSETS = [
   './',
-  './index.html',
   './scripts/navigation.js?v=20261018',
   './scripts/game-viewport.js?v=20261017',
   './scripts/meditation-sounds.js?v=20261018',
@@ -23,19 +25,7 @@ const CORE_ASSETS = [
   './images/brand/wellness/companion-poses.webp',
   './images/brand/wellness/props/card-moktak.webp',
   './copy/index.html',
-  './copy/style.css',
-  './hero.jpg',
-  './IMG_4423.png',
-  './IMG_4425.png',
-  './IMG_4438.png',
-  './IMG_4439.png',
-  './IMG_4440.png',
-  './bg-video.mp4',
-  './ambient.mp3',
-  './moktak-hit.mp3',
-  './song1.mp3',
-  './song2.mp3',
-  './song3.mp3'
+  './copy/style.css'
 ];
 
 
