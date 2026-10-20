@@ -1,0 +1,17 @@
+Code commit: acdaf8f885f137b8326506ce7a8047f184afb180
+GitHub Pages: https://github.com/Lee-Miyoung/sansa-note/actions/runs/39348330592 (success)
+Public site: https://sansanote.com/
+No physical-device or real-user Firebase operations. TLS-verified public-file bytes rendered through WebKit with SDK replaced.
+
+PASS 203 TLS-validated deployed files match finalized release, including all 160 new WebP files, all new pages/content/credits/manifests and preserved legacy content/common store/config
+
+PASS deployed WebKit haeinsa-001 {"state":{"src":"https://sansanote.com/admin-atlas/images/secret-atlas/scene-01-small.webp","natural":[480,320],"box":[356,237.328125],"display":"block","visibility":"visible","opacity":"1"},"errors":[]}
+PASS deployed WebKit bulguksa-002 {"state":{"src":"https://sansanote.com/atlas/bulguksa/images/scene-01-small.webp","natural":[480,320],"box":[356,237.328125],"display":"block","visibility":"visible","opacity":"1"},"errors":[]}
+PASS deployed WebKit tongdosa-003 {"state":{"src":"https://sansanote.com/atlas/tongdosa/images/watercolor-v2/scene-01-small.webp","natural":[480,320],"box":[356,237.328125],"display":"block","visibility":"visible","opacity":"1"},"errors":[]}
+PASS deployed WebKit songgwangsa-004 {"state":{"src":"https://sansanote.com/atlas/songgwangsa/images/scene-01-small.webp","natural":[480,320],"box":[356,237.328125],"display":"block","visibility":"visible","opacity":"1"},"errors":[]}
+PASS deployed WebKit naksansa-005 {"state":{"src":"https://sansanote.com/atlas/naksansa/images/scene-01-small.webp","natural":[480,320],"box":[356,237.328125],"display":"block","visibility":"visible","opacity":"1"},"errors":[]}
+PASS deployed WebKit hwaeomsa-006 {"state":{"src":"https://sansanote.com/atlas/hwaeomsa/images/scene-11-small.webp","natural":[480,320],"box":[356,237.328125],"display":"block","visibility":"visible","opacity":"1"},"errors":[]}
+PASS deployed WebKit buseoksa-007 {"state":{"src":"https://sansanote.com/atlas/buseoksa/images/scene-11-small.webp","natural":[480,320],"box":[356,237.328125],"display":"block","visibility":"visible","opacity":"1"},"errors":[]}
+PASS deployed WebKit bongjeongsa-008 {"state":{"src":"https://sansanote.com/atlas/bongjeongsa/images/scene-11-small.webp","natural":[480,320],"box":[356,237.328125],"display":"block","visibility":"visible","opacity":"1"},"errors":[]}
+PASS deployed WebKit beopjusa-009 {"state":{"src":"https://sansanote.com/atlas/beopjusa/images/scene-11-small.webp","natural":[480,320],"box":[356,237.328125],"display":"block","visibility":"visible","opacity":"1"},"errors":[]}
+PASS deployed WebKit daeheungsa-010 {"state":{"src":"https://sansanote.com/atlas/daeheungsa/images/scene-11-small.webp","natural":[480,320],"box":[356,237.328125],"display":"block","visibility":"visible","opacity":"1"},"errors":[]}

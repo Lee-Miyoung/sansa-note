@@ -10,7 +10,7 @@
 | 009 | 보은 법주사 · 다섯 층 나무탑의 생존 이야기 | `/atlas/beopjusa/` · `beopjusa-009` |
 | 010 | 해남 대흥사 · 스님이 남긴 작은 보따리 | `/atlas/daeheungsa/` · `daeheungsa-010` |
 
-회차마다 기존 `renderer.js`, `store.js`, `bootstrap.js`, `styles.css`를 재사용합니다. 새 런타임이나 데이터 저장 시스템을 추가하지 않았습니다. 각 회차는 12장면·6문제·3카드이며 시즌 1은 추가 회차로 이어질 수 있습니다.
+회차마다 기존 `renderer.js`, `store.js`, `bootstrap.js`, `site.css`를 재사용합니다. 새 런타임이나 데이터 저장 시스템을 추가하지 않았습니다. 각 회차는 12장면·6문제·3카드이며 시즌 1은 추가 회차로 이어질 수 있습니다.
 
 ## 변경 범위
 
@@ -47,3 +47,7 @@ Chromium의 PC 및 갤럭시 크기·터치 환경, WebKit의 아이폰·아이�
 최종 검사 결과와 성능 원자료는 같은 폴더의 `episodes-6-10-validation.txt`, `episodes-6-10-performance.json`을 참고하세요. 로컬 CPU 제한 측정은 실제 모바일망 Core Web Vitals나 구글 검색→사이트 진입 시간의 측정이 아닙니다.
 
 성능 비교(390×844, Chromium CPU 4배 제한, SDK 지연 모의 응답, 외부 폰트 차단): FCP 중앙값 484→492ms, DOMContentLoaded 795→763ms입니다. 작은 차이이므로 실기기 개선의 증거로 보지 않습니다. 확실하게 확인한 변화는 섹션 높이 874→294px, 첫 썸네일 2→2개 유지, 홈의 새 6~10화 파일 요청 0건입니다. 이 조건에서 전체 홈 전송량은 21,226,540→21,224,237바이트이며 비밀도감만의 용량 수치가 아닙니다.
+
+## 배포 확인
+
+코드 커밋 `acdaf8f885f137b8326506ce7a8047f184afb180`의 [GitHub Pages 배포](https://github.com/Lee-Miyoung/sansa-note/actions/runs/39348330592)가 성공했습니다. 새 WebP 160개를 포함한 공개 파일 203개의 바이트 일치를 TLS 검증 다운로드로 확인했습니다. 공개 서버에서 받은 파일로 WebKit 390px 읽기 화면을 검사해 1~10화 그림 표시, 새 6~10화 전체화면과 하단 넘기기 버튼, 페이지 오류 0건을 확인했습니다. Firebase SDK는 대체하여 운영 사용자 계정에 접근하지 않았습니다. 실제 Safari 기기 테스트는 아닙니다. 상세 결과는 `episodes-6-10-deployment.txt`에 기록했습니다.
