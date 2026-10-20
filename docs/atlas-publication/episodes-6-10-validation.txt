@@ -1,0 +1,356 @@
+Final local validation — 2026-10-20
+Base main: 57feb76e44f44aff678cd4642f9f7b019eb595f8
+Chromium /usr/bin/chromium; Playwright WebKit /workspace/.sansa-webkit-run. Emulation only, not physical devices. Firebase writes use fixtures, never operating user data.
+
+Coverage: 1–10 complete story/quiz/card/note/reload/Back/X flows at 320,390,412,768,820,1440px; new episodes additionally WebKit390/820 full flows and wrong answer/card protection. Fullscreen controls on PC/iPhone/iPad/Galaxy emulations; bounded scene DOM; actual workers and transport; legacy core pages/photos/108/offline and global publication.
+
+Initial 820px scroll comparison exposed integer stride accumulation: changed home carousel and test geometry to actual bounding rectangles. Rechecked native touch/keys/arrows at all six widths and home10/12 metadata at390/820/1440 on both engines. Native fullscreen resource test now waits for the entry fullscreenchange event before invoking exit; shared production renderer unchanged. Initial failed snapshots are superseded by passing corrected runs below.
+
+=== season6-10-episodes-small.log ===
+PASS episode 320 haeinsa-001 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS episode 320 bulguksa-002 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS episode 320 tongdosa-003 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS episode 320 songgwangsa-004 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS episode 320 naksansa-005 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS episode 320 hwaeomsa-006 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS episode 320 buseoksa-007 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS episode 320 bongjeongsa-008 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS episode 320 beopjusa-009 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS episode 320 daeheungsa-010 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS carousel 320 next/previous/dots/native touch or keyboard, snap, correct links/no page overflow
+PASS episode 390 haeinsa-001 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS episode 390 bulguksa-002 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS episode 390 tongdosa-003 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS episode 390 songgwangsa-004 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS episode 390 naksansa-005 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS episode 390 hwaeomsa-006 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS episode 390 buseoksa-007 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS episode 390 bongjeongsa-008 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS episode 390 beopjusa-009 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS episode 390 daeheungsa-010 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS carousel 390 next/previous/dots/native touch or keyboard, snap, correct links/no page overflow
+PASS episode 412 haeinsa-001 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS episode 412 bulguksa-002 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS episode 412 tongdosa-003 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS episode 412 songgwangsa-004 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS episode 412 naksansa-005 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS episode 412 hwaeomsa-006 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS episode 412 buseoksa-007 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS episode 412 bongjeongsa-008 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS episode 412 beopjusa-009 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS episode 412 daeheungsa-010 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS carousel 412 next/previous/dots/native touch or keyboard, snap, correct links/no page overflow
+PASS authenticated mock A/B, independent episode paths/cards/notes, existing visit/108 fixture unchanged
+PASS missing episode content blocks store/auth startup without touching old Haeinsa key
+
+=== season6-10-large-rerun.log ===
+PASS episode 820 haeinsa-001 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS episode 820 bulguksa-002 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS episode 820 tongdosa-003 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS episode 820 songgwangsa-004 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS episode 820 naksansa-005 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS episode 820 hwaeomsa-006 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS episode 820 buseoksa-007 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS episode 820 bongjeongsa-008 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS episode 820 beopjusa-009 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS episode 820 daeheungsa-010 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS carousel 820 next/previous/dots/native touch or keyboard, snap, correct links/no page overflow
+PASS episode 1440 haeinsa-001 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS episode 1440 bulguksa-002 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS episode 1440 tongdosa-003 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS episode 1440 songgwangsa-004 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS episode 1440 naksansa-005 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS episode 1440 hwaeomsa-006 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS episode 1440 buseoksa-007 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS episode 1440 bongjeongsa-008 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS episode 1440 beopjusa-009 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS episode 1440 daeheungsa-010 12 scenes, real slider keyboard, 6 answers, 3 cards, independent note/reload, Back/X, images
+PASS carousel 1440 next/previous/dots/native touch or keyboard, snap, correct links/no page overflow
+PASS authenticated mock A/B, independent episode paths/cards/notes, existing visit/108 fixture unchanged
+PASS missing episode content blocks store/auth startup without touching old Haeinsa key
+
+=== season6-10-native-final.log ===
+PASS carousel 320 next/previous/dots/native touch or keyboard, snap, correct links/no page overflow
+PASS carousel 390 next/previous/dots/native touch or keyboard, snap, correct links/no page overflow
+PASS carousel 412 next/previous/dots/native touch or keyboard, snap, correct links/no page overflow
+PASS carousel 768 next/previous/dots/native touch or keyboard, snap, correct links/no page overflow
+PASS carousel 820 next/previous/dots/native touch or keyboard, snap, correct links/no page overflow
+PASS carousel 1440 next/previous/dots/native touch or keyboard, snap, correct links/no page overflow
+PASS authenticated mock A/B, independent episode paths/cards/notes, existing visit/108 fixture unchanged
+PASS missing episode content blocks store/auth startup without touching old Haeinsa key
+
+=== season6-10-home-final.log ===
+PASS chromium 390 10 episodes: metadata only; bounded thumbnails; navigation and no story preloads
+PASS chromium 390 12 episodes: metadata only; bounded thumbnails; navigation and no story preloads
+PASS chromium 820 10 episodes: metadata only; bounded thumbnails; navigation and no story preloads
+PASS chromium 820 12 episodes: metadata only; bounded thumbnails; navigation and no story preloads
+PASS chromium 1440 10 episodes: metadata only; bounded thumbnails; navigation and no story preloads
+PASS chromium 1440 12 episodes: metadata only; bounded thumbnails; navigation and no story preloads
+PASS metadata failure preserves ordinary episode-one link
+PASS pending season metadata never blocks home cards or episode reader
+
+=== season6-10-home-webkit-final.log ===
+PASS webkit 390 10 episodes: metadata only; bounded thumbnails; navigation and no story preloads
+PASS webkit 390 12 episodes: metadata only; bounded thumbnails; navigation and no story preloads
+PASS webkit 820 10 episodes: metadata only; bounded thumbnails; navigation and no story preloads
+PASS webkit 820 12 episodes: metadata only; bounded thumbnails; navigation and no story preloads
+PASS webkit 1440 10 episodes: metadata only; bounded thumbnails; navigation and no story preloads
+PASS webkit 1440 12 episodes: metadata only; bounded thumbnails; navigation and no story preloads
+PASS metadata failure preserves ordinary episode-one link
+PASS pending season metadata never blocks home cards or episode reader
+
+=== season6-10-reading-controls.log ===
+PASS PC Chromium haeinsa-001 persistent controls at top/bottom; UI-only expanded fallback; safe card gates; close
+PASS PC Chromium bulguksa-002 persistent controls at top/bottom; UI-only expanded fallback; safe card gates; close
+PASS PC Chromium tongdosa-003 persistent controls at top/bottom; UI-only expanded fallback; safe card gates; close
+PASS PC Chromium songgwangsa-004 persistent controls at top/bottom; UI-only expanded fallback; safe card gates; close
+PASS PC Chromium naksansa-005 persistent controls at top/bottom; UI-only expanded fallback; safe card gates; close
+PASS PC Chromium hwaeomsa-006 persistent controls at top/bottom; UI-only expanded fallback; safe card gates; close
+PASS PC Chromium buseoksa-007 persistent controls at top/bottom; UI-only expanded fallback; safe card gates; close
+PASS PC Chromium bongjeongsa-008 persistent controls at top/bottom; UI-only expanded fallback; safe card gates; close
+PASS PC Chromium beopjusa-009 persistent controls at top/bottom; UI-only expanded fallback; safe card gates; close
+PASS PC Chromium daeheungsa-010 persistent controls at top/bottom; UI-only expanded fallback; safe card gates; close
+PASS iPhone Safari WebKit emulation haeinsa-001 persistent controls at top/bottom; UI-only expanded fallback; safe card gates; close
+PASS iPhone Safari WebKit emulation bulguksa-002 persistent controls at top/bottom; UI-only expanded fallback; safe card gates; close
+PASS iPhone Safari WebKit emulation tongdosa-003 persistent controls at top/bottom; UI-only expanded fallback; safe card gates; close
+PASS iPhone Safari WebKit emulation songgwangsa-004 persistent controls at top/bottom; UI-only expanded fallback; safe card gates; close
+PASS iPhone Safari WebKit emulation naksansa-005 persistent controls at top/bottom; UI-only expanded fallback; safe card gates; close
+PASS iPhone Safari WebKit emulation hwaeomsa-006 persistent controls at top/bottom; UI-only expanded fallback; safe card gates; close
+PASS iPhone Safari WebKit emulation buseoksa-007 persistent controls at top/bottom; UI-only expanded fallback; safe card gates; close
+PASS iPhone Safari WebKit emulation bongjeongsa-008 persistent controls at top/bottom; UI-only expanded fallback; safe card gates; close
+PASS iPhone Safari WebKit emulation beopjusa-009 persistent controls at top/bottom; UI-only expanded fallback; safe card gates; close
+PASS iPhone Safari WebKit emulation daeheungsa-010 persistent controls at top/bottom; UI-only expanded fallback; safe card gates; close
+PASS iPad Safari WebKit emulation haeinsa-001 persistent controls at top/bottom; UI-only expanded fallback; safe card gates; close
+PASS iPad Safari WebKit emulation bulguksa-002 persistent controls at top/bottom; UI-only expanded fallback; safe card gates; close
+PASS iPad Safari WebKit emulation tongdosa-003 persistent controls at top/bottom; UI-only expanded fallback; safe card gates; close
+PASS iPad Safari WebKit emulation songgwangsa-004 persistent controls at top/bottom; UI-only expanded fallback; safe card gates; close
+PASS iPad Safari WebKit emulation naksansa-005 persistent controls at top/bottom; UI-only expanded fallback; safe card gates; close
+PASS iPad Safari WebKit emulation hwaeomsa-006 persistent controls at top/bottom; UI-only expanded fallback; safe card gates; close
+PASS iPad Safari WebKit emulation buseoksa-007 persistent controls at top/bottom; UI-only expanded fallback; safe card gates; close
+PASS iPad Safari WebKit emulation bongjeongsa-008 persistent controls at top/bottom; UI-only expanded fallback; safe card gates; close
+PASS iPad Safari WebKit emulation beopjusa-009 persistent controls at top/bottom; UI-only expanded fallback; safe card gates; close
+PASS iPad Safari WebKit emulation daeheungsa-010 persistent controls at top/bottom; UI-only expanded fallback; safe card gates; close
+PASS Galaxy Chrome Chromium emulation haeinsa-001 persistent controls at top/bottom; UI-only expanded fallback; safe card gates; close
+PASS Galaxy Chrome Chromium emulation bulguksa-002 persistent controls at top/bottom; UI-only expanded fallback; safe card gates; close
+PASS Galaxy Chrome Chromium emulation tongdosa-003 persistent controls at top/bottom; UI-only expanded fallback; safe card gates; close
+PASS Galaxy Chrome Chromium emulation songgwangsa-004 persistent controls at top/bottom; UI-only expanded fallback; safe card gates; close
+PASS Galaxy Chrome Chromium emulation naksansa-005 persistent controls at top/bottom; UI-only expanded fallback; safe card gates; close
+PASS Galaxy Chrome Chromium emulation hwaeomsa-006 persistent controls at top/bottom; UI-only expanded fallback; safe card gates; close
+PASS Galaxy Chrome Chromium emulation buseoksa-007 persistent controls at top/bottom; UI-only expanded fallback; safe card gates; close
+PASS Galaxy Chrome Chromium emulation bongjeongsa-008 persistent controls at top/bottom; UI-only expanded fallback; safe card gates; close
+PASS Galaxy Chrome Chromium emulation beopjusa-009 persistent controls at top/bottom; UI-only expanded fallback; safe card gates; close
+PASS Galaxy Chrome Chromium emulation daeheungsa-010 persistent controls at top/bottom; UI-only expanded fallback; safe card gates; close
+
+=== season6-10-art-recovery.log ===
+PASS chromium /atlas/ first-fails retina phone uses compact art; image recovers; retries bounded; progress and protected records unchanged
+PASS chromium /atlas/ small-fails retina phone uses compact art; image recovers; retries bounded; progress and protected records unchanged
+PASS chromium /atlas/ all-fail retina phone uses compact art; image recovers; retries bounded; progress and protected records unchanged
+PASS chromium /atlas/bulguksa/ first-fails retina phone uses compact art; image recovers; retries bounded; progress and protected records unchanged
+PASS chromium /atlas/bulguksa/ small-fails retina phone uses compact art; image recovers; retries bounded; progress and protected records unchanged
+PASS chromium /atlas/bulguksa/ all-fail retina phone uses compact art; image recovers; retries bounded; progress and protected records unchanged
+PASS chromium /atlas/tongdosa/ first-fails retina phone uses compact art; image recovers; retries bounded; progress and protected records unchanged
+PASS chromium /atlas/tongdosa/ small-fails retina phone uses compact art; image recovers; retries bounded; progress and protected records unchanged
+PASS chromium /atlas/tongdosa/ all-fail retina phone uses compact art; image recovers; retries bounded; progress and protected records unchanged
+PASS chromium /atlas/songgwangsa/ first-fails retina phone uses compact art; image recovers; retries bounded; progress and protected records unchanged
+PASS chromium /atlas/songgwangsa/ small-fails retina phone uses compact art; image recovers; retries bounded; progress and protected records unchanged
+PASS chromium /atlas/songgwangsa/ all-fail retina phone uses compact art; image recovers; retries bounded; progress and protected records unchanged
+PASS chromium /atlas/naksansa/ first-fails retina phone uses compact art; image recovers; retries bounded; progress and protected records unchanged
+PASS chromium /atlas/naksansa/ small-fails retina phone uses compact art; image recovers; retries bounded; progress and protected records unchanged
+PASS chromium /atlas/naksansa/ all-fail retina phone uses compact art; image recovers; retries bounded; progress and protected records unchanged
+PASS chromium /atlas/hwaeomsa/ first-fails retina phone uses compact art; image recovers; retries bounded; progress and protected records unchanged
+PASS chromium /atlas/hwaeomsa/ small-fails retina phone uses compact art; image recovers; retries bounded; progress and protected records unchanged
+PASS chromium /atlas/hwaeomsa/ all-fail retina phone uses compact art; image recovers; retries bounded; progress and protected records unchanged
+PASS chromium /atlas/buseoksa/ first-fails retina phone uses compact art; image recovers; retries bounded; progress and protected records unchanged
+PASS chromium /atlas/buseoksa/ small-fails retina phone uses compact art; image recovers; retries bounded; progress and protected records unchanged
+PASS chromium /atlas/buseoksa/ all-fail retina phone uses compact art; image recovers; retries bounded; progress and protected records unchanged
+PASS chromium /atlas/bongjeongsa/ first-fails retina phone uses compact art; image recovers; retries bounded; progress and protected records unchanged
+PASS chromium /atlas/bongjeongsa/ small-fails retina phone uses compact art; image recovers; retries bounded; progress and protected records unchanged
+PASS chromium /atlas/bongjeongsa/ all-fail retina phone uses compact art; image recovers; retries bounded; progress and protected records unchanged
+PASS chromium /atlas/beopjusa/ first-fails retina phone uses compact art; image recovers; retries bounded; progress and protected records unchanged
+PASS chromium /atlas/beopjusa/ small-fails retina phone uses compact art; image recovers; retries bounded; progress and protected records unchanged
+PASS chromium /atlas/beopjusa/ all-fail retina phone uses compact art; image recovers; retries bounded; progress and protected records unchanged
+PASS chromium /atlas/daeheungsa/ first-fails retina phone uses compact art; image recovers; retries bounded; progress and protected records unchanged
+PASS chromium /atlas/daeheungsa/ small-fails retina phone uses compact art; image recovers; retries bounded; progress and protected records unchanged
+PASS chromium /atlas/daeheungsa/ all-fail retina phone uses compact art; image recovers; retries bounded; progress and protected records unchanged
+PASS webkit /atlas/ first-fails retina phone uses compact art; image recovers; retries bounded; progress and protected records unchanged
+PASS webkit /atlas/ small-fails retina phone uses compact art; image recovers; retries bounded; progress and protected records unchanged
+PASS webkit /atlas/ all-fail retina phone uses compact art; image recovers; retries bounded; progress and protected records unchanged
+PASS webkit /atlas/bulguksa/ first-fails retina phone uses compact art; image recovers; retries bounded; progress and protected records unchanged
+PASS webkit /atlas/bulguksa/ small-fails retina phone uses compact art; image recovers; retries bounded; progress and protected records unchanged
+PASS webkit /atlas/bulguksa/ all-fail retina phone uses compact art; image recovers; retries bounded; progress and protected records unchanged
+PASS webkit /atlas/tongdosa/ first-fails retina phone uses compact art; image recovers; retries bounded; progress and protected records unchanged
+PASS webkit /atlas/tongdosa/ small-fails retina phone uses compact art; image recovers; retries bounded; progress and protected records unchanged
+PASS webkit /atlas/tongdosa/ all-fail retina phone uses compact art; image recovers; retries bounded; progress and protected records unchanged
+PASS webkit /atlas/songgwangsa/ first-fails retina phone uses compact art; image recovers; retries bounded; progress and protected records unchanged
+PASS webkit /atlas/songgwangsa/ small-fails retina phone uses compact art; image recovers; retries bounded; progress and protected records unchanged
+PASS webkit /atlas/songgwangsa/ all-fail retina phone uses compact art; image recovers; retries bounded; progress and protected records unchanged
+PASS webkit /atlas/naksansa/ first-fails retina phone uses compact art; image recovers; retries bounded; progress and protected records unchanged
+PASS webkit /atlas/naksansa/ small-fails retina phone uses compact art; image recovers; retries bounded; progress and protected records unchanged
+PASS webkit /atlas/naksansa/ all-fail retina phone uses compact art; image recovers; retries bounded; progress and protected records unchanged
+PASS webkit /atlas/hwaeomsa/ first-fails retina phone uses compact art; image recovers; retries bounded; progress and protected records unchanged
+PASS webkit /atlas/hwaeomsa/ small-fails retina phone uses compact art; image recovers; retries bounded; progress and protected records unchanged
+PASS webkit /atlas/hwaeomsa/ all-fail retina phone uses compact art; image recovers; retries bounded; progress and protected records unchanged
+PASS webkit /atlas/buseoksa/ first-fails retina phone uses compact art; image recovers; retries bounded; progress and protected records unchanged
+PASS webkit /atlas/buseoksa/ small-fails retina phone uses compact art; image recovers; retries bounded; progress and protected records unchanged
+PASS webkit /atlas/buseoksa/ all-fail retina phone uses compact art; image recovers; retries bounded; progress and protected records unchanged
+PASS webkit /atlas/bongjeongsa/ first-fails retina phone uses compact art; image recovers; retries bounded; progress and protected records unchanged
+PASS webkit /atlas/bongjeongsa/ small-fails retina phone uses compact art; image recovers; retries bounded; progress and protected records unchanged
+PASS webkit /atlas/bongjeongsa/ all-fail retina phone uses compact art; image recovers; retries bounded; progress and protected records unchanged
+PASS webkit /atlas/beopjusa/ first-fails retina phone uses compact art; image recovers; retries bounded; progress and protected records unchanged
+PASS webkit /atlas/beopjusa/ small-fails retina phone uses compact art; image recovers; retries bounded; progress and protected records unchanged
+PASS webkit /atlas/beopjusa/ all-fail retina phone uses compact art; image recovers; retries bounded; progress and protected records unchanged
+PASS webkit /atlas/daeheungsa/ first-fails retina phone uses compact art; image recovers; retries bounded; progress and protected records unchanged
+PASS webkit /atlas/daeheungsa/ small-fails retina phone uses compact art; image recovers; retries bounded; progress and protected records unchanged
+PASS webkit /atlas/daeheungsa/ all-fail retina phone uses compact art; image recovers; retries bounded; progress and protected records unchanged
+PASS WebKit pending request without error exposes a working retry control
+
+=== season6-10-offline-chromium.log ===
+PASS chromium /atlas/ reader works while all Firebase SDK connections remain pending; no home HTML fetch
+PASS chromium /atlas/bulguksa/ reader works while all Firebase SDK connections remain pending; no home HTML fetch
+PASS chromium /atlas/tongdosa/ reader works while all Firebase SDK connections remain pending; no home HTML fetch
+PASS chromium /atlas/songgwangsa/ reader works while all Firebase SDK connections remain pending; no home HTML fetch
+PASS chromium /atlas/naksansa/ reader works while all Firebase SDK connections remain pending; no home HTML fetch
+PASS chromium /atlas/hwaeomsa/ reader works while all Firebase SDK connections remain pending; no home HTML fetch
+PASS chromium /atlas/buseoksa/ reader works while all Firebase SDK connections remain pending; no home HTML fetch
+PASS chromium /atlas/bongjeongsa/ reader works while all Firebase SDK connections remain pending; no home HTML fetch
+PASS chromium /atlas/beopjusa/ reader works while all Firebase SDK connections remain pending; no home HTML fetch
+PASS chromium /atlas/daeheungsa/ reader works while all Firebase SDK connections remain pending; no home HTML fetch
+
+=== season6-10-offline-webkit.log ===
+PASS webkit /atlas/ reader works while all Firebase SDK connections remain pending; no home HTML fetch
+PASS webkit /atlas/bulguksa/ reader works while all Firebase SDK connections remain pending; no home HTML fetch
+PASS webkit /atlas/tongdosa/ reader works while all Firebase SDK connections remain pending; no home HTML fetch
+PASS webkit /atlas/songgwangsa/ reader works while all Firebase SDK connections remain pending; no home HTML fetch
+PASS webkit /atlas/naksansa/ reader works while all Firebase SDK connections remain pending; no home HTML fetch
+PASS webkit /atlas/hwaeomsa/ reader works while all Firebase SDK connections remain pending; no home HTML fetch
+PASS webkit /atlas/buseoksa/ reader works while all Firebase SDK connections remain pending; no home HTML fetch
+PASS webkit /atlas/bongjeongsa/ reader works while all Firebase SDK connections remain pending; no home HTML fetch
+PASS webkit /atlas/beopjusa/ reader works while all Firebase SDK connections remain pending; no home HTML fetch
+PASS webkit /atlas/daeheungsa/ reader works while all Firebase SDK connections remain pending; no home HTML fetch
+
+=== season6-10-season.log ===
+PASS season landing/intro/progress only haeinsa-001
+PASS season landing/intro/progress only bulguksa-002
+PASS season landing/intro/progress only tongdosa-003
+PASS season landing/intro/progress only songgwangsa-004
+PASS season landing/intro/progress only naksansa-005
+PASS season landing/intro/progress only hwaeomsa-006
+PASS season landing/intro/progress only buseoksa-007
+PASS season landing/intro/progress only bongjeongsa-008
+PASS season landing/intro/progress only beopjusa-009
+PASS season landing/intro/progress only daeheungsa-010
+
+=== season6-10-startup.log ===
+PASS deferred SDK order, automatic guest startup, PDF readiness, 108 cards, saved photos/visits: 390
+PASS deferred SDK order, automatic guest startup, PDF readiness, 108 cards, saved photos/visits: 820
+PASS deferred SDK order, automatic guest startup, PDF readiness, 108 cards, saved photos/visits: 1440
+PASS actual worker: no unused media/duplicate shell at install; requested music caches and plays back offline; offline shell retained
+
+=== season6-10-worker.log ===
+PASS actual service worker: /atlas/ network-only, account response absent from caches, main worker scope preserved
+
+=== season6-10-navigation-worker.log ===
+PASS streaming HTML is not held for cache writes; search-result navigation: cached app opens while network stalls, delayed response refreshes cache, offline reload uses refreshed page, local records preserved
+
+=== season6-10-publication.log ===
+PASS publication 390 server state restored after reload; ack required; offline no writes; delayed ack not success; precise minimal rule guide; identity reused
+PASS publication 820 server state restored after reload; ack required; offline no writes; delayed ack not success; precise minimal rule guide; identity reused
+PASS publication 1440 server state restored after reload; ack required; offline no writes; delayed ack not success; precise minimal rule guide; identity reused
+
+=== season6-10-photos.log ===
+PASS 390 only pinned temple on home, title visible, orphan hidden, user photo and visits preserved
+PASS temple photo search disabled without writes; personal DB preserved
+PASS 1440 only pinned temple on home, title visible, orphan hidden, user photo and visits preserved
+PASS temple photo search disabled without writes; personal DB preserved
+
+=== season6-10-core-pages.log ===
+PASS 390 actual course/community/mypage navigation, map fallback, 108 collection and field verification records open
+PASS 1440 actual course/community/mypage navigation, map fallback, 108 collection and field verification records open
+
+=== season6-10-navigation.log ===
+PASS 390 breathing, emotion backward/forward/complete close, nested mypage and vow drafts, temple/mountain search returns, copy document return
+PASS 1440 breathing, emotion backward/forward/complete close, nested mypage and vow drafts, temple/mountain search returns, copy document return
+
+=== season6-10-hwaeomsa-resources.log ===
+PASS iphone no unvisited-scene preloads; 120 scene replacements retain one reader/image; compact retina art; {"image":{"width":480,"src":"https://sansanote.com/atlas/hwaeomsa/images/scene-01-small.webp"},"liveBefore":107,"liveAfter":110}
+PASS ipad no unvisited-scene preloads; 120 scene replacements retain one reader/image; compact retina art; {"image":{"width":760,"src":"https://sansanote.com/atlas/hwaeomsa/images/scene-01.webp"},"liveBefore":107,"liveAfter":110}
+PASS galaxy no unvisited-scene preloads; 120 scene replacements retain one reader/image; compact retina art; {"image":{"width":480,"src":"https://sansanote.com/atlas/hwaeomsa/images/scene-01-small.webp"},"liveBefore":107,"liveAfter":110,"counters":{"before":{"documents":1,"nodes":215,"jsEventListeners":51},"after":{"documents":1,"nodes":217,"jsEventListeners":51}}}
+PASS native Chromium fullscreen entry/exit preserves progress and resets the toggle
+PASS delayed native response after quick toggle exits cleanly
+
+=== season6-10-hwaeomsa-transport.log ===
+PASS hwaeomsa-006 actual root→atlas worker transition: stale old runtime bypassed, reader/images usable, no home HTML fetch, old progress retained
+
+=== season6-10-buseoksa-resources.log ===
+PASS iphone no unvisited-scene preloads; 120 scene replacements retain one reader/image; compact retina art; {"image":{"width":480,"src":"https://sansanote.com/atlas/buseoksa/images/scene-01-small.webp"},"liveBefore":105,"liveAfter":104}
+PASS ipad no unvisited-scene preloads; 120 scene replacements retain one reader/image; compact retina art; {"image":{"width":760,"src":"https://sansanote.com/atlas/buseoksa/images/scene-01.webp"},"liveBefore":105,"liveAfter":104}
+PASS galaxy no unvisited-scene preloads; 120 scene replacements retain one reader/image; compact retina art; {"image":{"width":480,"src":"https://sansanote.com/atlas/buseoksa/images/scene-01-small.webp"},"liveBefore":105,"liveAfter":104,"counters":{"before":{"documents":1,"nodes":209,"jsEventListeners":51},"after":{"documents":1,"nodes":207,"jsEventListeners":51}}}
+PASS native Chromium fullscreen entry/exit preserves progress and resets the toggle
+PASS delayed native response after quick toggle exits cleanly
+
+=== season6-10-buseoksa-transport.log ===
+PASS buseoksa-007 actual root→atlas worker transition: stale old runtime bypassed, reader/images usable, no home HTML fetch, old progress retained
+
+=== season6-10-bongjeongsa-resources.log ===
+PASS iphone no unvisited-scene preloads; 120 scene replacements retain one reader/image; compact retina art; {"image":{"width":480,"src":"https://sansanote.com/atlas/bongjeongsa/images/scene-01-small.webp"},"liveBefore":104,"liveAfter":104}
+PASS ipad no unvisited-scene preloads; 120 scene replacements retain one reader/image; compact retina art; {"image":{"width":760,"src":"https://sansanote.com/atlas/bongjeongsa/images/scene-01.webp"},"liveBefore":104,"liveAfter":104}
+PASS galaxy no unvisited-scene preloads; 120 scene replacements retain one reader/image; compact retina art; {"image":{"width":480,"src":"https://sansanote.com/atlas/bongjeongsa/images/scene-01-small.webp"},"liveBefore":104,"liveAfter":104,"counters":{"before":{"documents":1,"nodes":206,"jsEventListeners":51},"after":{"documents":1,"nodes":206,"jsEventListeners":51}}}
+PASS native Chromium fullscreen entry/exit preserves progress and resets the toggle
+PASS delayed native response after quick toggle exits cleanly
+
+=== season6-10-bongjeongsa-transport.log ===
+PASS bongjeongsa-008 actual root→atlas worker transition: stale old runtime bypassed, reader/images usable, no home HTML fetch, old progress retained
+
+=== season6-10-beopjusa-resources.log ===
+PASS iphone no unvisited-scene preloads; 120 scene replacements retain one reader/image; compact retina art; {"image":{"width":480,"src":"https://sansanote.com/atlas/beopjusa/images/scene-01-small.webp"},"liveBefore":103,"liveAfter":109}
+PASS ipad no unvisited-scene preloads; 120 scene replacements retain one reader/image; compact retina art; {"image":{"width":760,"src":"https://sansanote.com/atlas/beopjusa/images/scene-01.webp"},"liveBefore":103,"liveAfter":109}
+PASS galaxy no unvisited-scene preloads; 120 scene replacements retain one reader/image; compact retina art; {"image":{"width":480,"src":"https://sansanote.com/atlas/beopjusa/images/scene-01-small.webp"},"liveBefore":103,"liveAfter":109,"counters":{"before":{"documents":1,"nodes":203,"jsEventListeners":51},"after":{"documents":1,"nodes":215,"jsEventListeners":51}}}
+PASS native Chromium fullscreen entry/exit preserves progress and resets the toggle
+PASS delayed native response after quick toggle exits cleanly
+
+=== season6-10-beopjusa-transport.log ===
+PASS beopjusa-009 actual root→atlas worker transition: stale old runtime bypassed, reader/images usable, no home HTML fetch, old progress retained
+
+=== season6-10-daeheungsa-resources.log ===
+PASS iphone no unvisited-scene preloads; 120 scene replacements retain one reader/image; compact retina art; {"image":{"width":480,"src":"https://sansanote.com/atlas/daeheungsa/images/scene-01-small.webp"},"liveBefore":106,"liveAfter":114}
+PASS ipad no unvisited-scene preloads; 120 scene replacements retain one reader/image; compact retina art; {"image":{"width":760,"src":"https://sansanote.com/atlas/daeheungsa/images/scene-01.webp"},"liveBefore":106,"liveAfter":114}
+PASS galaxy no unvisited-scene preloads; 120 scene replacements retain one reader/image; compact retina art; {"image":{"width":480,"src":"https://sansanote.com/atlas/daeheungsa/images/scene-01-small.webp"},"liveBefore":106,"liveAfter":114,"counters":{"before":{"documents":1,"nodes":211,"jsEventListeners":51},"after":{"documents":1,"nodes":224,"jsEventListeners":51}}}
+PASS native Chromium fullscreen entry/exit preserves progress and resets the toggle
+PASS delayed native response after quick toggle exits cleanly
+
+=== season6-10-daeheungsa-transport.log ===
+PASS daeheungsa-010 actual root→atlas worker transition: stale old runtime bypassed, reader/images usable, no home HTML fetch, old progress retained
+
+=== hwaeomsa-final-validation.log ===
+PASS WebKit 390 12 scenes; four-scene card gates; six quizzes; image decoding; notes/cards reload; old episode bytes preserved
+PASS WebKit 820 12 scenes; four-scene card gates; six quizzes; image decoding; notes/cards reload; old episode bytes preserved
+PASS realistic old catalog-episode cards/position/notes restore; A/B/guest isolation; unrelated temple excluded; mock pilgrimage/108 records unchanged
+PASS mismatched episode content refuses startup without opening a wrong progress namespace
+
+=== buseoksa-final-validation.log ===
+PASS WebKit 390 12 scenes; four-scene card gates; six quizzes; image decoding; notes/cards reload; old episode bytes preserved
+PASS WebKit 820 12 scenes; four-scene card gates; six quizzes; image decoding; notes/cards reload; old episode bytes preserved
+PASS realistic old catalog-episode cards/position/notes restore; A/B/guest isolation; unrelated temple excluded; mock pilgrimage/108 records unchanged
+PASS mismatched episode content refuses startup without opening a wrong progress namespace
+
+=== bongjeongsa-validation.log ===
+PASS WebKit 390 12 scenes; four-scene card gates; six quizzes; image decoding; notes/cards reload; old episode bytes preserved
+PASS WebKit 820 12 scenes; four-scene card gates; six quizzes; image decoding; notes/cards reload; old episode bytes preserved
+PASS realistic old catalog-episode cards/position/notes restore; A/B/guest isolation; unrelated temple excluded; mock pilgrimage/108 records unchanged
+PASS mismatched episode content refuses startup without opening a wrong progress namespace
+
+=== beopjusa-validation.log ===
+PASS WebKit 390 12 scenes; four-scene card gates; six quizzes; image decoding; notes/cards reload; old episode bytes preserved
+PASS WebKit 820 12 scenes; four-scene card gates; six quizzes; image decoding; notes/cards reload; old episode bytes preserved
+PASS realistic old catalog-episode cards/position/notes restore; A/B/guest isolation; unrelated temple excluded; mock pilgrimage/108 records unchanged
+PASS mismatched episode content refuses startup without opening a wrong progress namespace
+
+=== daeheungsa-validation.log ===
+PASS WebKit 390 12 scenes; four-scene card gates; six quizzes; image decoding; notes/cards reload; old episode bytes preserved
+PASS WebKit 820 12 scenes; four-scene card gates; six quizzes; image decoding; notes/cards reload; old episode bytes preserved
+PASS realistic old catalog-episode cards/position/notes restore; A/B/guest isolation; unrelated temple excluded; mock pilgrimage/108 records unchanged
+PASS mismatched episode content refuses startup without opening a wrong progress namespace
+
+Asset validation: each new episode 16 unique artwork hashes /32 WebP files; 160 files total,24,810,518 bytes. All compact files <=100KB. Manifest byte counts/SHA256 match.
+Preservation: first five metadata objects; existing five content files; common renderer/store/bootstrap/styles; Firebase config/rules/publication; 108 journey HTML subtree byte-identical to base. No existing photos or assets deleted.
+History review: sources/scopes and interpretations embedded per scene and per-episode CREDITS. No physical GPS/device/network CWV claims.

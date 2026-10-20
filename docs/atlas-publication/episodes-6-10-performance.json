@@ -1,0 +1,93 @@
+{
+  "conditions": "390x844 Chromium, CPU 4x, SDK empty replies delayed 2s, local files, external fonts blocked, no service workers. Interleaved HEAD baseline vs working tree. Not real-device/network CWV.",
+  "runs": [
+    {
+      "version": "before",
+      "bytes": 21226540,
+      "fcp": 484,
+      "dom": 811,
+      "atlasHeight": 874,
+      "atlasTitlePx": 25,
+      "largeBanner": 1,
+      "cards": 5,
+      "initialImageSources": 2
+    },
+    {
+      "version": "after",
+      "bytes": 21224237,
+      "fcp": 492,
+      "dom": 763,
+      "atlasHeight": 294,
+      "atlasTitlePx": 18,
+      "largeBanner": 0,
+      "cards": 10,
+      "initialImageSources": 2
+    },
+    {
+      "version": "after",
+      "bytes": 21224237,
+      "fcp": 492,
+      "dom": 741,
+      "atlasHeight": 294,
+      "atlasTitlePx": 18,
+      "largeBanner": 0,
+      "cards": 10,
+      "initialImageSources": 2
+    },
+    {
+      "version": "before",
+      "bytes": 21226540,
+      "fcp": 460,
+      "dom": 770,
+      "atlasHeight": 874,
+      "atlasTitlePx": 25,
+      "largeBanner": 1,
+      "cards": 5,
+      "initialImageSources": 2
+    },
+    {
+      "version": "before",
+      "bytes": 21226540,
+      "fcp": 484,
+      "dom": 795,
+      "atlasHeight": 874,
+      "atlasTitlePx": 25,
+      "largeBanner": 1,
+      "cards": 5,
+      "initialImageSources": 2
+    },
+    {
+      "version": "after",
+      "bytes": 21224237,
+      "fcp": 472,
+      "dom": 774,
+      "atlasHeight": 294,
+      "atlasTitlePx": 18,
+      "largeBanner": 0,
+      "cards": 10,
+      "initialImageSources": 2
+    }
+  ],
+  "baselineCommit": "57feb76e44f44aff678cd4642f9f7b019eb595f8",
+  "newEpisodeHomeRequests": 0,
+  "summary": {
+    "before": {
+      "fcp": 484,
+      "dom": 795,
+      "bytes": 21226540,
+      "atlasHeight": 874,
+      "atlasTitlePx": 25,
+      "initialImageSources": 2
+    },
+    "after": {
+      "fcp": 492,
+      "dom": 763,
+      "bytes": 21224237,
+      "atlasHeight": 294,
+      "atlasTitlePx": 18,
+      "initialImageSources": 2
+    }
+  },
+  "interpretation": "FCP median 484 → 492ms is within local-run variation, not proof of actual-phone speed improvement or a material regression. DOMContentLoaded median795 →763ms. Atlas height874 →294px; first thumbnail sources2 →2; whole-home bytes21,226,540 →21,224,237 (not atlas-only). All five new episode path requests absent at home. Measured after fractional-stride correction with no other browser suites running. Earlier exploratory measurements are superseded.",
+  "homeCarouselSha256": "4897c7d318010da4213144de49fa137d5daa0a1ab34befdc08be9990576d0631"
+}

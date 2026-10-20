@@ -43,5 +43,50 @@
     "href": "/atlas/naksansa/",
     "thumbnail": "/atlas/naksansa/images/naksansa-cover-small.webp",
     "season": "01"
+  },
+  {
+    "id": "hwaeomsa-006",
+    "number": "006",
+    "temple": "화엄사",
+    "title": "네 마리 사자가 지킨 비밀",
+    "href": "/atlas/hwaeomsa/",
+    "thumbnail": "/atlas/hwaeomsa/images/hwaeomsa-cover-small.webp",
+    "season": "01"
+  },
+  {
+    "id": "buseoksa-007",
+    "number": "007",
+    "temple": "부석사",
+    "title": "떠 있는 돌에 숨겨진 약속",
+    "href": "/atlas/buseoksa/",
+    "thumbnail": "/atlas/buseoksa/images/buseoksa-cover-small.webp",
+    "season": "01"
+  },
+  {
+    "id": "bongjeongsa-008",
+    "number": "008",
+    "temple": "봉정사",
+    "title": "천 년의 시간을 품은 지붕",
+    "href": "/atlas/bongjeongsa/",
+    "thumbnail": "/atlas/bongjeongsa/images/bongjeongsa-cover-small.webp",
+    "season": "01"
+  },
+  {
+    "id": "beopjusa-009",
+    "number": "009",
+    "temple": "법주사",
+    "title": "다섯 층 나무탑의 생존 이야기",
+    "href": "/atlas/beopjusa/",
+    "thumbnail": "/atlas/beopjusa/images/beopjusa-cover-small.webp",
+    "season": "01"
+  },
+  {
+    "id": "daeheungsa-010",
+    "number": "010",
+    "temple": "대흥사",
+    "title": "스님이 남긴 작은 보따리",
+    "href": "/atlas/daeheungsa/",
+    "thumbnail": "/atlas/daeheungsa/images/daeheungsa-cover-small.webp",
+    "season": "01"
   }
 ]

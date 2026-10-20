@@ -23,15 +23,12 @@
     const seasonLabel = root.querySelector('#homeAtlasSeason');
     if(seasonLabel) seasonLabel.textContent = '무념스님과 함께 펼치는 이야기';
     fetch('/scripts/atlas/seasons.json',{cache:'no-store'}).then(r=>r.ok?r.json():{}).then(seasons=>{const season=seasons[episodes[0].season];if(seasonLabel&&typeof season?.title==='string')seasonLabel.textContent=`SEASON ${episodes[0].season} · ${season.title}`;}).catch(()=>{});
-    const feature = root.querySelector('.home-atlas-feature img');
-    if(feature) feature.src = episodes[0].thumbnail;
     const images = [];
     const cards = episodes.map(e => {
       const card = element('a', 'home-atlas-card'); card.href = e.href;
       card.setAttribute('aria-label', `제${Number(e.number)}화 ${e.temple}, ${e.title}`);
       const copy = element('span', 'home-atlas-copy');
-      copy.append(element('small', '', `SEASON ${e.season || '01'} · EPISODE ${String(Number(e.number)).padStart(2,'0')}`),
-        element('b', '', `제${Number(e.number)}화 | ${e.temple}`), element('span', '', e.title), element('strong', '', '이야기 펼치기 →'));
+      copy.append(element('b', '', `${String(Number(e.number)).padStart(2,'0')} ${e.temple}`), element('span', '', e.title));
       const image = element('img'); image.alt = `${e.temple} 이야기 표지 삽화`;
       image.width = 720; image.height = 480; image.loading = 'lazy'; image.decoding = 'async';
       images.push({ node: image, url: e.thumbnail }); card.append(copy, image); return card;
@@ -45,9 +42,10 @@
     root.querySelector('.home-atlas-dots').replaceChildren(...dots);
     const prev = root.querySelector('#homeAtlasPrev'), next = root.querySelector('#homeAtlasNext'), page = root.querySelector('#homeAtlasPage');
     let active = 0, frame = 0;
-    const stride = () => cards.length > 1 ? cards[1].offsetLeft - cards[0].offsetLeft : track.clientWidth;
-    const visible = () => !track.clientWidth || !stride() ? (innerWidth>=1100?3:innerWidth>=701?2:1) : Math.min(3,Math.max(1,Math.round((track.clientWidth+16)/stride())));
+    const stride = () => cards.length > 1 ? cards[1].getBoundingClientRect().left - cards[0].getBoundingClientRect().left : track.clientWidth;
+    const visible = () => !track.clientWidth || !stride() ? (innerWidth>=1100?4:innerWidth>=701?3:1) : Math.min(4,Math.max(1,Math.floor((track.clientWidth+12)/stride()+.01)));
     const maxStart = () => Math.max(0,cards.length-visible());
+    const target = i => Math.min(i*stride(),Math.max(0,track.scrollWidth-track.clientWidth));
     function render() {
       dots.forEach((d, i) => {d.hidden=i>maxStart();d.setAttribute('aria-current', String(i === active));});
       prev.disabled = active === 0; next.disabled = active >= maxStart();
@@ -57,18 +55,18 @@
     }
     function select(i) {
       active = Math.max(0, Math.min(maxStart(), i)); render();
-      track.scrollTo({ left: active * stride(), behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+      track.scrollTo({ left: target(active), behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
     }
     track.addEventListener('scroll', () => {
       cancelAnimationFrame(frame); frame = requestAnimationFrame(() => {
         if (!track.clientWidth) return;
-        active = Math.max(0, Math.min(maxStart(), Math.round(track.scrollLeft / stride()))); render();
+        active = Math.max(0, Math.min(maxStart(), track.scrollLeft>=track.scrollWidth-track.clientWidth-2 ? maxStart() : Math.round(track.scrollLeft / stride()))); render();
       });
     }, { passive: true });
     prev.onclick = () => select(active - 1); next.onclick = () => select(active + 1);
     dots.forEach((d, i) => d.onclick = () => select(i));
     track.addEventListener('keydown', e => { if (['ArrowLeft', 'ArrowRight'].includes(e.key)) { e.preventDefault(); select(active + (e.key === 'ArrowRight' ? 1 : -1)); } });
-    const resized = () => { if (track.clientWidth) {active=Math.min(active,maxStart());render();track.scrollTo({ left: active * stride(), behavior: 'auto' });} };
+    const resized = () => { if (track.clientWidth) {active=Math.min(active,maxStart());render();track.scrollTo({ left: target(active), behavior: 'auto' });} };
     if ('ResizeObserver' in window) new ResizeObserver(resized).observe(track); else window.addEventListener('resize', resized);
     render(); root.dataset.catalogReady = 'true';
   } catch (_) {
