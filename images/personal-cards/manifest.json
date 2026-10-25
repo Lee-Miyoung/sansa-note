@@ -1,0 +1,95 @@
+{
+  "art": "AI watercolor fictional common landscapes, not real temple depictions",
+  "files": [
+    {
+      "file": "01-pine-path-small.webp",
+      "bytes": 25532,
+      "sha256": "a9c1881f5b11f9d37cbab94491b2f834becc8426b98b14202cb7bdd86b5c3ad4"
+    },
+    {
+      "file": "01-pine-path.webp",
+      "bytes": 233996,
+      "sha256": "6ad3170fae050e831f189e5bc62276efe7bd050f82bcb9313457de4f487d4fcb"
+    },
+    {
+      "file": "02-temple-courtyard-small.webp",
+      "bytes": 22208,
+      "sha256": "41548969b9ab0249968612e72f0f9371b154b182f49f93cb756ee8d3f9b9a543"
+    },
+    {
+      "file": "02-temple-courtyard.webp",
+      "bytes": 200494,
+      "sha256": "78c4e350684afef3b3ba5783dce4801c8174b2b74bbc5eafe4fe048f6f49988f"
+    },
+    {
+      "file": "03-cloud-ridges-small.webp",
+      "bytes": 15764,
+      "sha256": "2e57c44c6c1170ba44f3cc45f26192fbab8d49e1ce5bca93887f3ee6a888d6fd"
+    },
+    {
+      "file": "03-cloud-ridges.webp",
+      "bytes": 147482,
+      "sha256": "f0afb1ccf22b6af464034408782752e48895269e6d0deabdc93f3f33a47da036"
+    },
+    {
+      "file": "04-east-sea-small.webp",
+      "bytes": 20876,
+      "sha256": "04564d959223ffa3c61224373cd2faa4eb4a485eca1115c62e828ac6e09a5f47"
+    },
+    {
+      "file": "04-east-sea.webp",
+      "bytes": 187506,
+      "sha256": "af438434e0ef4a8b12fd32fc1c26d8acf259701e45c21268fc6943b3508bf04b"
+    },
+    {
+      "file": "05-stream-bridge-small.webp",
+      "bytes": 23904,
+      "sha256": "9025be9d9c6de2d0b1c16aeb38e55de2d40d1d2a7572d5e95e216e004e2e754c"
+    },
+    {
+      "file": "05-stream-bridge.webp",
+      "bytes": 218360,
+      "sha256": "3e72ddd59be2bf4bcbe334661b037833140716b9291e113c1153675fec9fb35b"
+    },
+    {
+      "file": "06-first-snow-small.webp",
+      "bytes": 24020,
+      "sha256": "ae31521195098f66864085278376096304c8442bc3be822cbb9a087574947a74"
+    },
+    {
+      "file": "06-first-snow.webp",
+      "bytes": 196294,
+      "sha256": "daff2ccfe8885e81a25bbb75eb59ae50ff715df90a0ede9b96f1d0daac8f90e7"
+    },
+    {
+      "file": "07-forest-gate-small.webp",
+      "bytes": 24570,
+      "sha256": "1c5b38caadd58c4a42199c98eba5e673921fc0113df0f3439282b80dcc1243bd"
+    },
+    {
+      "file": "07-forest-gate.webp",
+      "bytes": 237130,
+      "sha256": "f78558982406c397452b2ff98bb89d1e3dd6101ac6fc51f6d4dfea4acc6642a6"
+    },
+    {
+      "file": "08-sunset-temple-small.webp",
+      "bytes": 21114,
+      "sha256": "db457082473bae63cd6ae4149c8a0637967d8cb7b22ad80215b474b96482cc37"
+    },
+    {
+      "file": "08-sunset-temple.webp",
+      "bytes": 180714,
+      "sha256": "33685500909a7d6fd5c546bbda0c14b12e430b6beaac17f5ab0128fd1becd6e2"
+    },
+    {
+      "file": "celebration-joy.webp",
+      "bytes": 25400,
+      "sha256": "725e09b4cb69a8a433743bf7410ee1c0bf9d51eba1133e571ba3b85db71f5f8d"
+    },
+    {
+      "file": "celebration-surprise.webp",
+      "bytes": 24328,
+      "sha256": "2d6a218ff11e95156118d571314ca955b8e6103088905a646bd401b9a6750086"
+    }
+  ]
+}

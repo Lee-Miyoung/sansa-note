@@ -1,0 +1,15 @@
+{
+  "baseline": "0816d4f",
+  "unchanged": [
+    "atlas/bootstrap.js",
+    "atlas/renderer.js",
+    "atlas/store.js",
+    "atlas/site.css",
+    "atlas/firebase-config.json",
+    "scripts/atlas/episodes.json",
+    "scripts/atlas/seasons.json"
+  ],
+  "allExistingAtlasAndGuardianAndBrandFilesUnchanged": true,
+  "productionDataWritesByTests": false,
+  "physicalDeviceTests": false
+}

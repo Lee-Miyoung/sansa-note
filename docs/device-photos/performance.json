@@ -1,0 +1,74 @@
+{
+  "baseline": "0816d4faf78c758c35843d05a8c6ceacb24dbde7",
+  "viewport": "390x844@3",
+  "cpuSlowdown": 4,
+  "sdkDelayMs": 2000,
+  "results": [
+    {
+      "fcp": 640,
+      "dcl": 1232.199999988079,
+      "height": 290.1875,
+      "thumbnails": 2,
+      "variant": "before",
+      "round": 1,
+      "responseBytes": 21232710,
+      "storyRequests": [],
+      "newArtRequests": []
+    },
+    {
+      "fcp": 636,
+      "dcl": 1287.0999999940395,
+      "height": 290.1875,
+      "thumbnails": 2,
+      "variant": "after",
+      "round": 1,
+      "responseBytes": 21289840,
+      "storyRequests": [],
+      "newArtRequests": []
+    },
+    {
+      "fcp": 656,
+      "dcl": 1258.800000011921,
+      "height": 290.1875,
+      "thumbnails": 2,
+      "variant": "after",
+      "round": 2,
+      "responseBytes": 21289840,
+      "storyRequests": [],
+      "newArtRequests": []
+    },
+    {
+      "fcp": 712,
+      "dcl": 1468.5,
+      "height": 290.1875,
+      "thumbnails": 2,
+      "variant": "before",
+      "round": 2,
+      "responseBytes": 21232710,
+      "storyRequests": [],
+      "newArtRequests": []
+    },
+    {
+      "fcp": 628,
+      "dcl": 1306.4000000059605,
+      "height": 290.1875,
+      "thumbnails": 2,
+      "variant": "before",
+      "round": 3,
+      "responseBytes": 21232710,
+      "storyRequests": [],
+      "newArtRequests": []
+    },
+    {
+      "fcp": 632,
+      "dcl": 1171.4000000059605,
+      "height": 290.1875,
+      "thumbnails": 2,
+      "variant": "after",
+      "round": 3,
+      "responseBytes": 21289840,
+      "storyRequests": [],
+      "newArtRequests": []
+    }
+  ]
+}

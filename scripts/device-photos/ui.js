@@ -1,0 +1,68 @@
+(()=>{'use strict';
+const S=window.SansaDevicePhotoStore,urls=new Map();let zipPromise,uploadBusy=false,backupBusy=false,viewEpoch=0,backupTimer=null;
+const note='사진은 현재 브라우저에만 보관되며, 다른 기기에서는 자동으로 보이지 않습니다.';
+const message=e=>e?.name==='QuotaExceededError'?'기기 저장공간이 부족해 사진을 저장하지 못했어요. 사진을 백업하고 저장공간을 확인해 주세요.':e?.message||'사진 작업을 완료하지 못했어요.';
+const place=(kind,id)=>(kind==='mountain'?mountainDestinations:destinations)?.[id]||{};
+function revoke(prefix=''){for(const [key,url]of urls)if(key.startsWith(prefix)){URL.revokeObjectURL(url);urls.delete(key)}}
+function url(key,blob){if(!urls.has(key))urls.set(key,URL.createObjectURL(blob));return urls.get(key)}
+function reset(){if(typeof storyCardManualPhotoBlob!=='undefined')storyCardManualPhotoBlob=null;const certificate=document.getElementById('storyCardCanvas');if(certificate)certificate.getContext('2d')?.clearRect(0,0,certificate.width,certificate.height);window.closeNearbyTempleFinder?.();viewEpoch++;clearTimeout(backupTimer);revoke();document.querySelectorAll('#dPhotos,#mPhotos,#albumBody,#homeGalleryWrap').forEach(e=>e.replaceChildren());for(const id of ['detailOverlay','mDetailOverlay','albumOverlay','storyCardOverlay','lightboxOverlay'])document.getElementById(id)?.classList.remove('show');document.querySelectorAll('.device-backup-link').forEach(e=>e.remove());document.querySelectorAll('.device-photo-thumb,.device-photo-album').forEach(e=>e.remove());document.querySelector('#deviceCardOverlay')?.remove();if(typeof closeLightbox==='function')closeLightbox();window.dispatchEvent(new Event('devicecardreset'));}
+window.addEventListener('devicephotosreset',reset);
+async function full(row,s){S.assert(s);const blob=await S.get(row.kind,row.placeId,row.id,s);S.assert(s);if(!blob)throw Error('이 기기에 사진이 없어요. 백업을 복원해 주세요.');return url('full:'+row.id,blob)}
+async function view(row){try{if(row.owner!==S.owner())throw Error('현재 계정의 사진만 열 수 있어요.');const s=S.scope(),u=await full(row,s);S.assert(s);document.getElementById('lightboxOverlay')?.classList.add('device-photo-viewer');openLightbox([u],0)}catch(e){showToast(message(e))}}
+function button(text,fn){const b=document.createElement('button');b.type='button';b.className='btn btn-ghost';b.textContent=text;b.onclick=fn;return b}
+function photoNode(row){const figure=document.createElement('div');figure.className='device-photo-thumb';const image=document.createElement('img');image.src=url('thumb:'+row.id,row.thumbnail);image.alt=(row.placeName||'나의 산사')+'에 등록한 사진';image.loading='lazy';const open=button('',()=>view(row));open.classList.add('device-photo-open');open.setAttribute('aria-label',(row.placeName||'나의 산사')+' 사진 크게 보기');open.append(image);figure.append(open);const del=button('삭제',async()=>{try{await S.remove(row.kind,row.placeId,row.id);showToast('이 기기의 사진을 삭제했어요.')}catch(e){showToast(message(e))}});del.setAttribute('aria-label','이 기기의 사진 삭제');figure.append(del);return figure}
+async function renderLocal(kind,id,wrap){
+ if(!wrap||!id)return;const epoch=viewEpoch;
+ try{const s=S.scope(),rows=await S.list(kind,id,s);S.assert(s);if(epoch!==viewEpoch||!wrap.isConnected||(kind==='temple'?currentDetailId:currentMountainDetailId)!==id)return;
+ wrap.querySelectorAll('.device-photo-thumb,.device-photo-add,.device-photo-backup').forEach(e=>e.remove());wrap.querySelectorAll('.upload-tile').forEach(e=>e.remove());rows.forEach(row=>wrap.append(photoNode(row)));const add=button('+ 사진 추가',()=>document.getElementById(kind==='temple'?'photoInput':'mPhotoInput').click());add.classList.add('device-photo-add');wrap.append(add);if(rows.length){const save=button(kind==='temple'?'이 사찰 사진 백업':'이 산 사진 백업',()=>backup(kind,id));save.classList.add('device-photo-backup');wrap.append(save);}
+ }catch(e){if(epoch===viewEpoch){const p=document.createElement('p');p.className='device-photo-error';p.textContent=message(e);wrap.append(p)}}
+}
+const oldTemple=window.renderPhotos,oldMountain=window.renderMountainPhotos;
+window.photoUploadStatusHtml=()=>'<div class="device-photo-notice">'+note+'<br>브라우저 데이터가 정리되면 사진이 사라질 수 있으니 백업해 주세요.</div>';
+window.renderPhotos=function(photos){oldTemple(photos);renderLocal('temple',currentDetailId,document.getElementById('dPhotos'))};
+window.renderMountainPhotos=function(photos){oldMountain(photos);renderLocal('mountain',currentMountainDetailId,document.getElementById('mPhotos'))};
+window.triggerMountainUpload=()=>document.getElementById('mPhotoInput').click();
+window.triggerUpload=()=>document.getElementById('photoInput').click();
+window.uploadOptimizedPhotoToFirebase=async()=>{throw Error('신규 사진은 이 기기의 브라우저에만 저장합니다.')};
+async function upload(kind,event){
+ const files=Array.from(event.target.files||[]),id=kind==='temple'?currentDetailId:currentMountainDetailId;event.target.value='';if(!files.length||!id)return;if(uploadBusy){showToast('진행 중인 사진 저장을 기다려 주세요.');return}uploadBusy=true;
+ let done=0,failed=0,s;
+ try{s=S.scope();showToast('사진을 이 기기에 저장하고 있어요...');for(const file of files){S.assert(s);try{await S.save(kind,id,file,s,place(kind,id));done++}catch(e){failed++;showToast(message(e));if(s.owner!==S.owner())break}}
+ S.assert(s);if(done)showToast('사진이 이 기기에 저장되었어요.'+(failed?' 일부 사진은 저장하지 못했어요.':''));else if(failed)showToast('사진을 저장하지 못했어요.');
+ try{if(done&&navigator.storage?.persist)await navigator.storage.persist()}catch(_){}
+ }catch(e){showToast(message(e))}finally{uploadBusy=false;refresh()}
+}
+window.uploadPhotos=e=>upload('temple',e);window.uploadMountainPhotos=e=>upload('mountain',e);
+const oldDelete=window.deletePhoto,oldDeleteMountain=window.deleteMountainPhoto;
+window.deletePhoto=(id,event)=>String(id).startsWith('device-')?S.remove('temple',currentDetailId,id).catch(e=>showToast(message(e))):oldDelete(id,event);
+window.deleteMountainPhoto=(id,event)=>String(id).startsWith('device-')?S.remove('mountain',currentMountainDetailId,id).catch(e=>showToast(message(e))):oldDeleteMountain(id,event);
+const oldClose=window.closeLightbox;if(oldClose)window.closeLightbox=function(){oldClose();document.getElementById('lightboxOverlay')?.classList.remove('device-photo-viewer');revoke('full:')};
+function loadZIP(){if(window.SansaPhotoZIP)return Promise.resolve(window.SansaPhotoZIP);if(!zipPromise)zipPromise=new Promise((resolve,reject)=>{const script=document.createElement('script');script.src='/scripts/device-photos/zip.js?v=20261025';script.onload=()=>resolve(window.SansaPhotoZIP);script.onerror=()=>{zipPromise=null;reject(Error('백업 도구를 불러오지 못했어요.'))};document.head.append(script)});return zipPromise;}
+async function capacity(node){try{const e=await navigator.storage?.estimate?.();if(e?.quota)node.textContent='브라우저 전체 사용 '+humanFileSize(e.usage||0)+' / '+humanFileSize(e.quota)+'. 저장 지속성은 영구 보장이 아니므로 백업해 주세요.';}catch(_){}}
+async function backup(kind,placeId){
+ if(backupBusy)return;backupBusy=true;
+ try{const s=S.scope(),zip=await loadZIP(),rows=await S.list(kind,placeId,s);if(rows.length>1000)throw Error('사진이1000장을 넘어요. 사찰별로 나누어 백업해 주세요.');if(!rows.length)throw Error('현재 계정으로 이 기기에 저장한 사진이 없어요. 기존 클라우드 사진은 그대로 보존됩니다.');
+ const files=[],photos=[];for(const row of rows){S.assert(s);const blob=await S.get(row.kind,row.placeId,row.id,s);if(!blob)throw Error('사진 파일이 빠져 있어 백업을 완료하지 못했어요.');files.push(['photos/'+row.id+'.jpg',blob],['thumbnails/'+row.id+'.jpg',row.thumbnail]);const d=place(row.kind,row.placeId);photos.push({id:row.id,kind:row.kind,placeId:row.placeId,placeName:row.placeName||d.name||'',region:row.region||d.region||'',createdAt:row.createdAt,mime:'image/jpeg',sha256:row.sha256,file:'photos/'+row.id+'.jpg',thumbnail:'thumbnails/'+row.id+'.jpg'});}
+ files.unshift(['manifest.json',new Blob([JSON.stringify({format:'sansa-device-photos',version:1,owner:s.owner,createdAt:Date.now(),photos})],{type:'application/json'})]);const blob=await zip.pack(files);S.assert(s);revoke('backup:');clearTimeout(backupTimer);const key='backup:'+crypto.randomUUID(),href=url(key,blob),a=document.createElement('a');a.href=href;a.download='sansanote-photos-'+new Date().toISOString().slice(0,10)+'.zip';a.textContent='백업 ZIP 다시 내려받기';a.className='device-backup-link';document.querySelectorAll('.device-backup-link').forEach(e=>e.remove());document.querySelector('#devicePhotoTools')?.append(a);a.click();showToast('백업 파일을 준비하고 다운로드를 요청했어요. 다운로드 폴더에 저장됐는지 확인해 주세요.');backupTimer=setTimeout(()=>{if(urls.has(key)){URL.revokeObjectURL(urls.get(key));urls.delete(key);a.remove()}},300000);
+ }catch(e){showToast(message(e))}finally{backupBusy=false}
+}
+async function restore(event){
+ const file=event.target.files?.[0];event.target.value='';if(!file)return;if(backupBusy){showToast('진행 중인 백업 작업을 기다려 주세요.');return}backupBusy=true;
+ try{const s=S.scope(),zip=await(await loadZIP()).unpack(file),manifest=JSON.parse(await(await zip.read('manifest.json')).text());
+ if(manifest.format!=='sansa-device-photos'||manifest.version!==1||!Array.isArray(manifest.photos)||manifest.photos.length>1000)throw Error('지원하는 산사노트 사진 백업 형식이 아니에요.');
+ if(typeof manifest.owner!=='string'||(manifest.owner.startsWith('user:')&&manifest.owner!==s.owner))throw Error('백업한 회원 계정으로 로그인한 뒤 복원해 주세요.');
+ const records=[],ids=new Set();for(const p of manifest.photos){if(!p||!/^device-[a-f0-9-]+$/.test(p.id)||ids.has(p.id)||p.file!=='photos/'+p.id+'.jpg'||p.thumbnail!=='thumbnails/'+p.id+'.jpg'||p.mime!=='image/jpeg'||!/^\w{64}$/.test(p.sha256))throw Error('백업 연결 정보가 올바르지 않아요.');ids.add(p.id);const blob=await zip.read(p.file);await zip.read(p.thumbnail);records.push({...p,blob});}
+ if(zip.names.length!==1+records.length*2)throw Error('백업에 예상하지 않은 파일이 들어 있어요.');S.assert(s);const result=await S.restore(records,s);S.assert(s);showToast('사진 '+result.added+'장 복원 · 중복 '+result.skipped+'장 유지. 기존 사진은 삭제하지 않았어요.');
+ }catch(e){showToast(message(e))}finally{backupBusy=false;refresh()}
+}
+function tools(){const box=document.createElement('section');box.id='devicePhotoTools';box.className='device-photo-tools';const h=document.createElement('h3');h.textContent='이 기기의 내 사진';const p=document.createElement('p');p.textContent=note+' 브라우저 데이터를 정리하기 전에 사진을 백업해 주세요.';const input=document.createElement('input');input.type='file';input.accept='.zip,application/zip';input.hidden=true;input.onchange=restore;const usage=document.createElement('small');usage.textContent='백업은 현재 계정의 기기 사진만 포함합니다. 기존 클라우드 사진은 자동 이전·삭제하지 않습니다.';box.append(h,p,button('내 사진 백업하기',()=>backup()),button('사진 백업 복원하기',()=>input.click()),button('저장공간 확인',()=>capacity(usage)),input,usage);return box;}
+async function album(){const body=document.getElementById('albumBody');if(!body||!document.getElementById('albumOverlay')?.classList.contains('show'))return;const epoch=viewEpoch;try{const s=S.scope(),rows=await S.list(null,null,s);S.assert(s);if(epoch!==viewEpoch)return;body.querySelector('.device-photo-album')?.remove();const section=document.createElement('section');section.className='device-photo-album';const h=document.createElement('h3');h.textContent='이 기기에 저장한 사진 · '+rows.length+'장';section.append(h);const grid=document.createElement('div');grid.className='device-photo-album-grid';for(const row of rows){const item=document.createElement('div'),caption=document.createElement('p');caption.textContent=row.placeName||place(row.kind,row.placeId).name||'연결된 산사';item.append(photoNode(row),caption);grid.append(item)}section.append(grid);if(rows.length)body.querySelector('.map-note')?.remove();body.prepend(section);document.getElementById('albumSub').textContent='이 기기 '+rows.length+'장 · 기존 클라우드 사진은 별도 보존';}catch(e){showToast(message(e))}}
+const oldAlbum=window.openAlbumOverlay;window.openAlbumOverlay=function(){oldAlbum();album()};
+function refresh(){if(document.getElementById('detailOverlay')?.classList.contains('show'))renderPhotos(destinations[currentDetailId]?.photos||{});if(document.getElementById('mountainDetailOverlay')?.classList.contains('show'))renderMountainPhotos(mountainDestinations[currentMountainDetailId]?.photos||{});album();}
+window.addEventListener('devicephotoschange',refresh);
+const settings=document.querySelector('#settingsOverlay .modal-body');if(settings)settings.append(tools());
+const albumHead=document.querySelector('#albumOverlay .modal-head');if(albumHead){albumHead.append(button('사진 백업·복원',()=>{closeAlbumOverlay();openSettings();document.getElementById('devicePhotoTools')?.scrollIntoView({block:'center'})}));}
+window.useManualStoryCardPhoto=async event=>{const file=event?.target?.files?.[0];if(!file)return;try{const s=S.scope(),id=storyCardDetailId||currentDetailId;if(!id||!destinations[id])throw Error('사진을 연결할 사찰을 먼저 열어 주세요.');const row=await S.save('temple',id,file,s,place('temple',id));S.assert(s);const blob=await S.get('temple',id,row.id,s);S.assert(s);if(!blob)throw Error('이 기기의 사진을 읽지 못했어요.');storyCardManualPhotoBlob=blob;document.getElementById('storyCardRemovePhotoBtn').style.display='inline-flex';renderStoryCard();showToast('사진이 이 기기에 저장되었어요.')}catch(e){showToast(message(e))}finally{event.target.value=''}};
+window.openPhotoPolicyOverlay=()=>{const el=document.getElementById('photoPolicyOverlay');if(!el)return;const body=el.querySelector('.modal-body');if(body){const h=document.createElement('h3');h.textContent='사진은 이 기기에, 기록은 계정에';const p=document.createElement('p');p.textContent=note+' 신규 사진은 긴 변1600px로 줄여 저장합니다. 기존 클라우드 사진은 그대로 조회할 수 있으며 자동 이전하거나 삭제하지 않습니다. 사진 백업·복원은 설정에서 사용할 수 있습니다.';body.replaceChildren(h,p)}el.classList.add('show')};
+window.SansaDevicePhotos={backup,restore,view,full,refresh,notice:note,reset,releaseFull:()=>revoke('full:'),thumbnailURL:row=>{if(row.owner!==S.owner())throw Error('현재 계정의 사진이 아니에요.');return url('thumb:'+row.id,row.thumbnail)}};
+})();
