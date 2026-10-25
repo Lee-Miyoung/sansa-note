@@ -1,9 +1,10 @@
 const fs = require('node:fs'), assert = require('node:assert/strict');
 const { chromium, webkit } = require('playwright');
 const { route } = require('./atlas-fixtures.cjs');
-const catalog = JSON.parse(fs.readFileSync('scripts/atlas/episodes.json'));
+const allCatalog = JSON.parse(fs.readFileSync('scripts/atlas/episodes.json'));
+const catalog=allCatalog.filter(e=>e.season==='01');
 // A release row cannot quietly grow into a story payload.
-for (const episode of catalog) {
+for (const episode of allCatalog) {
   assert.deepEqual(Object.keys(episode).sort(), ['href', 'id', 'number', 'season', 'temple', 'thumbnail', 'title']);
   assert(Buffer.byteLength(JSON.stringify(episode)) < 512);
 }
@@ -25,7 +26,7 @@ const engine = process.env.SANSA_BROWSER === 'webkit' ? webkit : chromium;
         const list = expanded ? Array.from({ length: 12 }, (_, i) => i < catalog.length ? catalog[i] : {
           id: 'sample-' + String.fromCharCode(97 + i) + '-' + String(i + 1).padStart(3, '0'), number: String(i + 1).padStart(3, '0'),
           temple: '확장 검사', title: '메타데이터만 추가한 회차', href: '/atlas/sample-' + String.fromCharCode(97 + i) + '/',
-          thumbnail: '/atlas/sample-' + String.fromCharCode(97 + i) + '/images/cover-small.webp'
+          thumbnail: '/atlas/sample-' + String.fromCharCode(97 + i) + '/images/cover-small.webp',season:'01'
         }) : catalog;
         await p.route('**/scripts/atlas/episodes.json', r => r.fulfill({ json: list }));
         await p.goto('https://sansanote.com/');
@@ -36,7 +37,7 @@ const engine = process.env.SANSA_BROWSER === 'webkit' ? webkit : chromium;
         assert.equal(await p.locator('.home-atlas-feature').count(),0);
         assert.equal(await p.locator('.home-atlas-copy strong').count(),0);
         assert(!fs.readFileSync('index.html','utf8').includes('오래된 산사의 문을 열어'));
-        assert((await p.locator('#homeAtlasEntry').boundingBox()).height<=320,'compact atlas must remain below 320px');
+        assert((await p.locator('#homeAtlasEntry').boundingBox()).height<=294,'compact atlas must remain at most294px');
         const cardWidth=await p.locator('.home-atlas-card').first().evaluate(e=>e.getBoundingClientRect().width),trackWidth=await p.locator('#homeAtlasTrack').evaluate(e=>e.clientWidth);
         if(width<701)assert(cardWidth/trackWidth>.66&&cardWidth/trackWidth<.9,'mobile should show 1–1.5 cards');
         await p.waitForFunction(()=>document.querySelector('#homeAtlasSeason').textContent.includes('천년의 이야기를 찾아서'));

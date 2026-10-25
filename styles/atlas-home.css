@@ -1,13 +1,19 @@
 /* Compact metadata-only atlas. Administrator controls remain independent. */
 #homeAtlasEntry{box-sizing:border-box;width:100%;min-width:0;margin:0 0 16px;padding:12px;border:1px solid #dedfcd;border-radius:16px;background:#faf8ef;color:#355844;text-align:left}
 #homeAtlasEntry[hidden],#atlasPublicationAdmin[hidden]{display:none!important}
-#homeAtlasEntry .home-atlas-heading{margin-bottom:10px}
+#homeAtlasEntry .home-atlas-heading{margin-bottom:4px}
+#homeAtlasEntry .home-atlas-season-row{display:flex;align-items:center;gap:6px;min-height:44px}
+#homeAtlasEntry .home-atlas-season-row p{flex:1;min-width:0;margin:0;line-height:1.4}
+#homeAtlasSeasons{display:flex;flex-shrink:0;gap:2px}
+#homeAtlasSeasons button{min-width:44px;min-height:44px;padding:0 5px;background:transparent;border:0;border-bottom:2px solid transparent;color:#6f735e;font:500 12px/1.4 system-ui;cursor:pointer}
+#homeAtlasSeasons button[aria-selected=true]{color:#355844;border-bottom-color:#9c8150;font-weight:700}
+#homeAtlasSeasons button[hidden]{display:none}
 #homeAtlasEntry .home-atlas-season{font:500 11px/1.5 system-ui,sans-serif;color:#837551;letter-spacing:.025em;min-height:17px;margin:0 0 3px}
 #homeAtlasEntry .home-atlas-heading h2{font:700 20px/1.4 'Nanum Myeongjo',serif;color:#355844;margin:0!important;word-break:keep-all;font-size:20px!important;line-height:1.4!important}
 #homeAtlasEntry .home-atlas-track{position:relative;display:flex;gap:12px;width:100%;min-width:0;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:none;-webkit-overflow-scrolling:touch;border-radius:12px}
 #homeAtlasEntry .home-atlas-track::-webkit-scrollbar{display:none}
 #homeAtlasEntry .home-atlas-card{box-sizing:border-box;display:flex;flex-direction:column;flex:0 0 calc((100% - 36px)/4);min-width:0;overflow:hidden;scroll-snap-align:start;border:1px solid #dce1ce;border-radius:12px;background:#fffdf7;color:#355844;text-decoration:none}
-#homeAtlasEntry .home-atlas-card>img{order:-1;display:block;width:100%;height:76px;object-fit:cover;object-position:center 60%;background:#e9eddf}
+#homeAtlasEntry .home-atlas-card>img{order:-1;display:block;width:100%;height:60px;object-fit:contain;object-position:center;background:#e9eddf}
 #homeAtlasEntry .home-atlas-copy{display:flex;flex-direction:column;gap:4px;padding:8px;min-width:0}
 #homeAtlasEntry .home-atlas-copy>b{font:700 15px/1.4 system-ui,sans-serif;color:#45654e}
 #homeAtlasEntry .home-atlas-copy>span{font:400 14px/1.5 system-ui,sans-serif;color:#715d47;word-break:keep-all;min-height:42px}
@@ -23,7 +29,7 @@
 #homeAtlasEntry .home-atlas-page{font:400 11px/1.5 system-ui,sans-serif;color:#76816e;min-width:36px;text-align:center;white-space:nowrap}
 #homeAtlasEntry a:focus-visible,#homeAtlasEntry button:focus-visible,#homeAtlasTrack:focus-visible{outline:2px solid #b89a55;outline-offset:-2px}
 @media(min-width:701px) and (max-width:1099px){#homeAtlasEntry .home-atlas-card{flex-basis:calc((100% - 24px)/3)}}
-@media(max-width:700px){#homeAtlasEntry{padding:12px 10px;border-radius:14px}#homeAtlasEntry .home-atlas-heading h2{font-size:18px!important}#homeAtlasEntry .home-atlas-card{flex-basis:76%}#homeAtlasEntry .home-atlas-card>img{height:82px}#homeAtlasEntry .home-atlas-controls{padding-right:44px}}
+@media(max-width:700px){#homeAtlasEntry{padding:12px 10px;border-radius:14px}#homeAtlasEntry .home-atlas-heading h2{font-size:18px!important}#homeAtlasEntry .home-atlas-card{flex-basis:76%}#homeAtlasEntry .home-atlas-card>img{height:60px}#homeAtlasEntry .home-atlas-controls{padding-right:44px}}
 
 .atlas-publication-admin{padding:18px;border:1px solid #d9dfca;border-radius:16px;background:#f1f5e9;margin-bottom:18px}.atlas-publication-admin h3{margin:0 0 8px;color:#315e49}.atlas-publication-admin p{font-size:14px;line-height:1.7;word-break:keep-all}.atlas-publication-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.atlas-publication-actions a,#atlasPublicationRules{color:#315e49;font-size:14px}.atlas-publication-actions button:disabled{opacity:.55}.atlas-publication-admin button{min-height:44px}#atlasPublicationRetry{margin-right:10px}
 #atlasPublicationSetup{margin-top:16px;font-size:14px}#atlasPublicationSetup summary{cursor:pointer;min-height:44px;align-content:center;color:#315e49}#atlasPublicationSetup ol{padding-left:24px}#atlasPublicationSetup li{margin:10px 0}#atlasPublicationRuleCode{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf7;border:1px solid #d9dfca;border-radius:10px;padding:12px;max-height:280px;overflow:auto;font-size:12px}#atlasPublicationCopyStatus{color:#315e49}

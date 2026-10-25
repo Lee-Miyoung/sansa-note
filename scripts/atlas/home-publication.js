@@ -21,11 +21,13 @@
     </details>`;
   document.querySelector('#adminOverlay .modal-body')?.prepend(panel);
   const $=id=>panel.querySelector('#'+id);
-  let ref=null,ready=false,busy=false,value=true,lastServerValue=null,authGeneration=0,ruleText='',rulePromise=null;
+  let ref=null,ready=false,busy=false,value=true,lastServerValue=null,authGeneration=0,ruleText='',rulePromise=null,lastConfirmedPublic=null;
   // The existing main-app administrator identity remains the single source of truth.
   const admin=()=>typeof isAdminUser==='function'&&isAdminUser()&&typeof auth!=='undefined'&&auth?.currentUser?.emailVerified===true;
   function render(){
     card.hidden=!value;panel.hidden=!admin();
+    const confirmed=String(lastConfirmedPublic===true);
+    if(card.dataset.publicationConfirmed!==confirmed){card.dataset.publicationConfirmed=confirmed;card.dispatchEvent(new Event('atlaspublicationchange'));}
     $('atlasPublish').disabled=!admin()||!ready||busy||value;
     $('atlasUnpublish').disabled=!admin()||!ready||busy||!value;
     $('atlasPublish').setAttribute('aria-pressed',String(value));$('atlasUnpublish').setAttribute('aria-pressed',String(!value));
@@ -44,7 +46,7 @@
     if(setting!==null&&(typeof setting?.public!=='boolean'||!Number.isFinite(setting?.updatedAt))){
       ready=false;$('atlasPublicationStatus').textContent='공개 설정 형식이 올바르지 않습니다. 새 경로의 public(참/거짓)과 updatedAt(시간)을 확인해 주세요. 기존 값은 수정하지 않았습니다.';render();return;
     }
-    ready=true;lastServerValue=setting;value=setting===null?true:setting.public;
+    ready=true;lastServerValue=setting;value=setting===null?true:setting.public;lastConfirmedPublic=value;
     $('atlasPublicationRules').hidden=true;
     $('atlasPublicationStatus').textContent=value?'현재: 홈에 공개 중':'현재: 홈에서 비공개 · 직접 주소는 공개';render();
   }

@@ -1,0 +1,68 @@
+{
+  "baseline": "c6bc0d2446a4ef4935aad9b48f2b7ef79df258f8",
+  "viewport": "390x844@3",
+  "cpuSlowdown": 4,
+  "sdkDelayMs": 2000,
+  "results": [
+    {
+      "fcp": 912,
+      "dcl": 1851.300000011921,
+      "height": 294.1875,
+      "thumbnails": 2,
+      "variant": "before",
+      "round": 1,
+      "responseBytes": 21226452,
+      "storyRequests": []
+    },
+    {
+      "fcp": 676,
+      "dcl": 1405.9000000059605,
+      "height": 290.1875,
+      "thumbnails": 2,
+      "variant": "after",
+      "round": 1,
+      "responseBytes": 21232499,
+      "storyRequests": []
+    },
+    {
+      "fcp": 628,
+      "dcl": 1208.4000000059605,
+      "height": 290.1875,
+      "thumbnails": 2,
+      "variant": "after",
+      "round": 2,
+      "responseBytes": 21232499,
+      "storyRequests": []
+    },
+    {
+      "fcp": 516,
+      "dcl": 1218,
+      "height": 294.1875,
+      "thumbnails": 2,
+      "variant": "before",
+      "round": 2,
+      "responseBytes": 21226452,
+      "storyRequests": []
+    },
+    {
+      "fcp": 616,
+      "dcl": 1291.0999999940395,
+      "height": 294.1875,
+      "thumbnails": 2,
+      "variant": "before",
+      "round": 3,
+      "responseBytes": 21226452,
+      "storyRequests": []
+    },
+    {
+      "fcp": 620,
+      "dcl": 1402.5999999940395,
+      "height": 290.1875,
+      "thumbnails": 2,
+      "variant": "after",
+      "round": 3,
+      "responseBytes": 21232499,
+      "storyRequests": []
+    }
+  ]
+}

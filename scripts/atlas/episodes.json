@@ -88,5 +88,95 @@
     "href": "/atlas/daeheungsa/",
     "thumbnail": "/atlas/daeheungsa/images/daeheungsa-cover-small.webp",
     "season": "01"
+  },
+  {
+    "id": "mireuksaji-011",
+    "number": "011",
+    "temple": "미륵사지",
+    "title": "탑 속에서 나온 왕후의 기록",
+    "href": "/atlas/mireuksaji/",
+    "thumbnail": "/atlas/mireuksaji/images/mireuksaji-cover-small.webp",
+    "season": "02"
+  },
+  {
+    "id": "hwangnyongsaji-012",
+    "number": "012",
+    "temple": "황룡사지",
+    "title": "사라진 아홉 층 탑의 비밀",
+    "href": "/atlas/hwangnyongsaji/",
+    "thumbnail": "/atlas/hwangnyongsaji/images/hwangnyongsaji-cover-small.webp",
+    "season": "02"
+  },
+  {
+    "id": "gameunsaji-013",
+    "number": "013",
+    "temple": "감은사지",
+    "title": "용이 드나들던 법당의 비밀",
+    "href": "/atlas/gameunsaji/",
+    "thumbnail": "/atlas/gameunsaji/images/gameunsaji-cover-small.webp",
+    "season": "02"
+  },
+  {
+    "id": "muwisa-014",
+    "number": "014",
+    "temple": "무위사",
+    "title": "벽에 남은 오백 년의 색",
+    "href": "/atlas/muwisa/",
+    "thumbnail": "/atlas/muwisa/images/muwisa-cover-small.webp",
+    "season": "02"
+  },
+  {
+    "id": "jingwansa-015",
+    "number": "015",
+    "temple": "진관사",
+    "title": "벽 속에 숨겨진 태극기",
+    "href": "/atlas/jingwansa/",
+    "thumbnail": "/atlas/jingwansa/images/jingwansa-cover-small.webp",
+    "season": "02"
+  },
+  {
+    "id": "magoksa-016",
+    "number": "016",
+    "temple": "마곡사",
+    "title": "청년 김구가 머물렀던 절",
+    "href": "/atlas/magoksa/",
+    "thumbnail": "/atlas/magoksa/images/magoksa-cover-small.webp",
+    "season": "02"
+  },
+  {
+    "id": "geumsansa-017",
+    "number": "017",
+    "temple": "금산사",
+    "title": "세 층인데 한 층인 법당",
+    "href": "/atlas/geumsansa/",
+    "thumbnail": "/atlas/geumsansa/images/geumsansa-cover-small.webp",
+    "season": "02"
+  },
+  {
+    "id": "jeongamsa-018",
+    "number": "018",
+    "temple": "정암사",
+    "title": "보석 이름을 가진 돌탑",
+    "href": "/atlas/jeongamsa/",
+    "thumbnail": "/atlas/jeongamsa/images/jeongamsa-cover-small.webp",
+    "season": "02"
+  },
+  {
+    "id": "bunhwangsa-019",
+    "number": "019",
+    "temple": "분황사",
+    "title": "벽돌이 아닌 벽돌탑",
+    "href": "/atlas/bunhwangsa/",
+    "thumbnail": "/atlas/bunhwangsa/images/bunhwangsa-cover-small.webp",
+    "season": "02"
+  },
+  {
+    "id": "jeongnimsaji-020",
+    "number": "020",
+    "temple": "정림사지",
+    "title": "무너진 왕국, 남겨진 다섯 층 탑",
+    "href": "/atlas/jeongnimsaji/",
+    "thumbnail": "/atlas/jeongnimsaji/images/jeongnimsaji-cover-small.webp",
+    "season": "02"
   }
 ]

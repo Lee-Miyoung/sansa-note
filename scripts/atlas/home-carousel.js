@@ -20,9 +20,40 @@
       if (text) node.textContent = text;
       return node;
     };
+    const allEpisodes=episodes;
     const seasonLabel = root.querySelector('#homeAtlasSeason');
-    if(seasonLabel) seasonLabel.textContent = '무념스님과 함께 펼치는 이야기';
-    fetch('/scripts/atlas/seasons.json',{cache:'no-store'}).then(r=>r.ok?r.json():{}).then(seasons=>{const season=seasons[episodes[0].season];if(seasonLabel&&typeof season?.title==='string')seasonLabel.textContent=`SEASON ${episodes[0].season} · ${season.title}`;}).catch(()=>{});
+    const seasonIds=[...new Set(allEpisodes.map(e=>e.season||'01'))];
+    const titles={'01':'천년의 이야기를 찾아서','02':'사라진 시간의 단서들'};
+    const tabs=root.querySelector('#homeAtlasSeasons');
+    let selected='',requested='01',stop=()=>{};
+    try{requested=localStorage.getItem('sansaAtlasHomeSeason_v1')||'01';}catch(_){}
+    const eligible=id=>id==='01'||root.dataset.publicationConfirmed==='true';
+    const tabButtons=seasonIds.map(id=>{
+      const button=element('button','',`시즌 ${Number(id)}`);button.type='button';button.dataset.season=id;
+      button.id='homeAtlasSeasonTab'+id;button.setAttribute('role','tab');button.setAttribute('aria-controls','homeAtlasTrack');
+      button.onclick=()=>{requested=id;try{localStorage.setItem('sansaAtlasHomeSeason_v1',id);}catch(_){}refreshSeason();};
+      button.onkeydown=e=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(e.key))return;
+        e.preventDefault();const enabled=tabButtons.filter(b=>!b.hidden);let i=enabled.indexOf(button);
+        i=e.key==='Home'?0:e.key==='End'?enabled.length-1:(i+(e.key==='ArrowRight'?1:-1)+enabled.length)%enabled.length;
+        enabled[i].focus();enabled[i].click();};
+      return button;
+    });
+    tabs?.replaceChildren(...tabButtons);
+    function refreshSeason(){
+      const next=seasonIds.includes(requested)&&eligible(requested)?requested:'01';
+      tabButtons.forEach(b=>{b.hidden=!eligible(b.dataset.season);b.setAttribute('aria-selected',String(b.dataset.season===next));b.tabIndex=b.dataset.season===next?0:-1;});
+      if(seasonLabel)seasonLabel.textContent=`SEASON ${next} · ${titles[next]||''}`;
+      if(selected!==next){selected=next;showSeason(next);}
+    }
+    root.addEventListener('atlaspublicationchange',refreshSeason);
+    fetch('/scripts/atlas/seasons.json',{cache:'no-store'}).then(r=>r.ok?r.json():{}).then(seasons=>{
+      Object.entries(seasons).forEach(([id,v])=>{if(typeof v?.title==='string')titles[id]=v.title;});refreshSeason();
+    }).catch(()=>{});
+    function showSeason(id){
+    stop();const controller=new AbortController();let observer=null;
+    stop=()=>{controller.abort();observer?.disconnect();cancelAnimationFrame(frame);};
+    const episodes=allEpisodes.filter(e=>(e.season||'01')===id);
+    track.setAttribute('role','tabpanel');track.setAttribute('aria-labelledby','homeAtlasSeasonTab'+id);
     const images = [];
     const cards = episodes.map(e => {
       const card = element('a', 'home-atlas-card'); card.href = e.href;
@@ -62,13 +93,15 @@
         if (!track.clientWidth) return;
         active = Math.max(0, Math.min(maxStart(), track.scrollLeft>=track.scrollWidth-track.clientWidth-2 ? maxStart() : Math.round(track.scrollLeft / stride()))); render();
       });
-    }, { passive: true });
+    }, { passive: true,signal:controller.signal });
     prev.onclick = () => select(active - 1); next.onclick = () => select(active + 1);
     dots.forEach((d, i) => d.onclick = () => select(i));
-    track.addEventListener('keydown', e => { if (['ArrowLeft', 'ArrowRight'].includes(e.key)) { e.preventDefault(); select(active + (e.key === 'ArrowRight' ? 1 : -1)); } });
+    track.addEventListener('keydown', e => { if (['ArrowLeft', 'ArrowRight'].includes(e.key)) { e.preventDefault(); select(active + (e.key === 'ArrowRight' ? 1 : -1)); } },{signal:controller.signal});
     const resized = () => { if (track.clientWidth) {active=Math.min(active,maxStart());render();track.scrollTo({ left: target(active), behavior: 'auto' });} };
-    if ('ResizeObserver' in window) new ResizeObserver(resized).observe(track); else window.addEventListener('resize', resized);
-    render(); root.dataset.catalogReady = 'true';
+    if ('ResizeObserver' in window){observer=new ResizeObserver(resized);observer.observe(track);}else window.addEventListener('resize',resized,{signal:controller.signal});
+    track.scrollTo({left:0,behavior:'auto'});render();root.dataset.catalogReady='true';
+    }
+    refreshSeason();
   } catch (_) {
     root.querySelector('#homeAtlasPrev').disabled = true;
     root.querySelector('#homeAtlasNext').disabled = true;
