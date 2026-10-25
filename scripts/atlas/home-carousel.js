@@ -23,11 +23,12 @@
     const allEpisodes=episodes;
     const seasonLabel = root.querySelector('#homeAtlasSeason');
     const seasonIds=[...new Set(allEpisodes.map(e=>e.season||'01'))];
+    const published=new Set(['01']);
     const titles={'01':'천년의 이야기를 찾아서','02':'사라진 시간의 단서들'};
     const tabs=root.querySelector('#homeAtlasSeasons');
     let selected='',requested='01',stop=()=>{};
     try{requested=localStorage.getItem('sansaAtlasHomeSeason_v1')||'01';}catch(_){}
-    const eligible=id=>id==='01'||root.dataset.publicationConfirmed==='true';
+    const eligible=id=>published.has(id)||root.dataset.publicationConfirmed==='true';
     const tabButtons=seasonIds.map(id=>{
       const button=element('button','',`시즌 ${Number(id)}`);button.type='button';button.dataset.season=id;
       button.id='homeAtlasSeasonTab'+id;button.setAttribute('role','tab');button.setAttribute('aria-controls','homeAtlasTrack');
@@ -47,7 +48,7 @@
     }
     root.addEventListener('atlaspublicationchange',refreshSeason);
     fetch('/scripts/atlas/seasons.json',{cache:'no-store'}).then(r=>r.ok?r.json():{}).then(seasons=>{
-      Object.entries(seasons).forEach(([id,v])=>{if(typeof v?.title==='string')titles[id]=v.title;});refreshSeason();
+      Object.entries(seasons).forEach(([id,v])=>{if(typeof v?.title==='string')titles[id]=v.title;if(v?.homePublished===true)published.add(id);});refreshSeason();
     }).catch(()=>{});
     function showSeason(id){
     stop();const controller=new AbortController();let observer=null;
