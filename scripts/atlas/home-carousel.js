@@ -30,7 +30,7 @@
     try{requested=localStorage.getItem('sansaAtlasHomeSeason_v1')||'01';}catch(_){}
     const eligible=id=>published.has(id)||root.dataset.publicationConfirmed==='true';
     const tabButtons=seasonIds.map(id=>{
-      const button=element('button','',`시즌 ${Number(id)}`);button.type='button';button.dataset.season=id;
+      const button=element('button','',id==='03'?'특별편':`시즌 ${Number(id)}`);button.type='button';button.dataset.season=id;
       button.id='homeAtlasSeasonTab'+id;button.setAttribute('role','tab');button.setAttribute('aria-controls','homeAtlasTrack');
       button.onclick=()=>{requested=id;try{localStorage.setItem('sansaAtlasHomeSeason_v1',id);}catch(_){}refreshSeason();};
       button.onkeydown=e=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(e.key))return;
@@ -39,11 +39,12 @@
         enabled[i].focus();enabled[i].click();};
       return button;
     });
-    tabs?.replaceChildren(...tabButtons);
+    tabs?.replaceChildren(...tabButtons);root.dataset.hasSpecial=String(seasonIds.includes('03'));
     function refreshSeason(){
       const next=seasonIds.includes(requested)&&eligible(requested)?requested:'01';
       tabButtons.forEach(b=>{b.hidden=!eligible(b.dataset.season);b.setAttribute('aria-selected',String(b.dataset.season===next));b.tabIndex=b.dataset.season===next?0:-1;});
-      if(seasonLabel)seasonLabel.textContent=`SEASON ${next} · ${titles[next]||''}`;
+      if(seasonLabel)seasonLabel.textContent=next==='03'?'특별편 · 사라진 산사 이야기':`SEASON ${next} · ${titles[next]||''}`;
+      const heading=root.querySelector('h2');if(heading)heading.textContent=next==='03'?'무념스님의 사라진 산사 이야기':'무념스님의 산사 비밀도감';
       if(selected!==next){selected=next;showSeason(next);}
     }
     root.addEventListener('atlaspublicationchange',refreshSeason);
@@ -58,9 +59,9 @@
     const images = [];
     const cards = episodes.map(e => {
       const card = element('a', 'home-atlas-card'); card.href = e.href;
-      card.setAttribute('aria-label', `제${Number(e.number)}화 ${e.temple}, ${e.title}`);
+      card.setAttribute('aria-label', `${e.season==='03'?'특별편':'제'}${Number(e.displayNumber||e.number)}${e.season==='03'?'':'화'} ${e.temple}, ${e.title}`);
       const copy = element('span', 'home-atlas-copy');
-      copy.append(element('b', '', `${String(Number(e.number)).padStart(2,'0')} ${e.temple}`), element('span', '', e.title));
+      copy.append(element('b', '', `${String(Number(e.displayNumber||e.number)).padStart(2,'0')} ${e.temple}`), element('span', '', e.title));
       const image = element('img'); image.alt = `${e.temple} 이야기 표지 삽화`;
       image.width = 720; image.height = 480; image.loading = 'lazy'; image.decoding = 'async';
       images.push({ node: image, url: e.thumbnail }); card.append(copy, image); return card;
@@ -68,7 +69,7 @@
     track.replaceChildren(...cards);
     const dots = episodes.map((e, i) => {
       const dot = element('button'); dot.type = 'button'; dot.dataset.atlasSlide = i;
-      dot.setAttribute('aria-label', `제${Number(e.number)}화 ${e.temple} 보기`);
+      dot.setAttribute('aria-label', `${e.season==='03'?'특별편':'제'}${Number(e.displayNumber||e.number)}${e.season==='03'?'':'화'} ${e.temple} 보기`);
       dot.append(element('span')); return dot;
     });
     root.querySelector('.home-atlas-dots').replaceChildren(...dots);

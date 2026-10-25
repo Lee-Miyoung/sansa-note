@@ -25398,6 +25398,8 @@ function launchApp(){
 }
 
 function mergeWithMaster(rawData){
+  if(sansaIsOtherBogwangsa(rawData))return rawData;
+  rawData=sansaEffectiveTemple(rawData);
   const master = MASTER_BY_NAME[rawData.name];
   if(!master) return rawData;
   return Object.assign({}, rawData, {
@@ -25410,8 +25412,8 @@ function mergeWithMaster(rawData){
     difficulty: master.difficulty || null,
     bestFor: master.bestFor || null,
     locationHint: master.locationHint || null,
-    fixedLat: master.fixedLat || null,
-    fixedLng: master.fixedLng || null
+    fixedLat: sansaVerifiedTemplePoint(rawData)?.lat || master.fixedLat || null,
+    fixedLng: sansaVerifiedTemplePoint(rawData)?.lng || master.fixedLng || null
   });
 }
 function mergeAllWithMaster(destObj){
@@ -32052,7 +32054,7 @@ function openDetail(id){
   currentDetailId = id;
   // 뒤쪽의 부가 렌더 중 하나가 실패해도 모달 자체는 열린 상태가 되게 먼저 표시한다.
   detailOverlay.classList.add('show');
-  document.getElementById('dRegion').textContent = d.region;
+  document.getElementById('dRegion').textContent = sansaVerifiedTemplePoint(d)?.region || d.region;
   document.getElementById('dName').textContent = d.name;
   document.getElementById('dTag').textContent = d.tag==='유명' ? '유명한 곳' : '숨은 곳';
   document.getElementById('dDesc').textContent = d.desc || '';
@@ -32106,7 +32108,8 @@ function openDetail(id){
   renderRepeatChallenge(d);
   renderPilgrimRewardPreview(d);
   document.getElementById('visitNoteInput').value = '';
-  document.getElementById('dMapLink').href = 'https://map.kakao.com/link/search/' + encodeURIComponent(sansaKakaoPlaceQuery(d));
+  const placePoint=sansaVerifiedTemplePoint(d);
+  document.getElementById('dMapLink').href = placePoint?'https://map.kakao.com/link/to/'+encodeURIComponent(placePoint.name+' · 경기 파주')+','+placePoint.lat+','+placePoint.lng:'https://map.kakao.com/link/search/' + encodeURIComponent(sansaKakaoPlaceQuery(d));
   document.getElementById('dFoodLink').href = 'https://map.kakao.com/link/search/' + encodeURIComponent(d.name + ' ' + (d.locationHint || d.region) + ' 맛집');
   /* detailOverlay는 함수 시작 시 먼저 표시 */
   renderVisitTips(d);
@@ -32358,7 +32361,7 @@ function addVisitRecord(withLocation){
       }catch(e){}
     }
     const confirmed=(typeof window.getConfirmedTempleVerifyPoint==='function')
-      ? window.getConfirmedTempleVerifyPoint(templeName)
+      ? window.getConfirmedTempleVerifyPoint(templeName,d)
       : null;
     if(confirmed && Number.isFinite(Number(confirmed.lat)) && Number.isFinite(Number(confirmed.lng))){
       return {lat:Number(confirmed.lat),lng:Number(confirmed.lng),label:String(confirmed.label||`${templeName} 확정 기준점`),source:'admin-confirmed'};
@@ -33815,6 +33818,11 @@ function sansaMapMarkerImage(d, isMountain){
   return new kakao.maps.MarkerImage('data:image/svg+xml;charset=UTF-8,'+encodeURIComponent(svg),new kakao.maps.Size(size,size),{offset:new kakao.maps.Point(center,center)});
 }
 
+// Source: 국가유산청 보광사대웅보전 2113100830000, address and map coordinates checked 2026-10-25.
+const SANSA_PAJU_BOGWANGSA=Object.freeze({placeId:'temple:paju-bogwangsa',name:'보광사',region:'경기 파주',address:'경기도 파주시 광탄면 보광로474번길 87',lat:37.7529977350211,lng:126.91994400383,radius:120,label:'파주 보광사 대웅보전',source:'heritage-2113100830000',sourceUrl:'https://www.heritage.go.kr/heri/cul/culSelectDetail.do?ccbaCpno=2113100830000'});
+function sansaIsOtherBogwangsa(d){return d?.name==='보광사'&&(!!d.placeId&&d.placeId!==SANSA_PAJU_BOGWANGSA.placeId||/서울|청송|완주/.test([d.region,d.locationHint,d.address].filter(Boolean).join(' ')))}
+function sansaVerifiedTemplePoint(d){return d?.name==='보광사'&&!sansaIsOtherBogwangsa(d)?SANSA_PAJU_BOGWANGSA:null}
+function sansaEffectiveTemple(d){const p=sansaVerifiedTemplePoint(d);return p?{...d,placeId:p.placeId,address:p.address,locationHint:p.address,fixedLat:p.lat,fixedLng:p.lng,lat:p.lat,lng:p.lng}:d}
 // 지역이 다른 동명이찰을 첫 번째 검색 결과로 잘못 저장하지 않도록 검증합니다.
 const SANSA_KAKAO_DISAMBIGUATION = Object.freeze({
   '장안사(부산)': {name:'장안사', area:'부산 기장', address:'부산 기장군 장안읍 장안로 482'},
@@ -33827,6 +33835,7 @@ const SANSA_KAKAO_DISAMBIGUATION = Object.freeze({
   '대조사': {name:'대조사', area:'충남 부여', address:'충남 부여군 임천면 성흥로197번길 112'}
 });
 function sansaKakaoPlaceQuery(d){
+  const point=sansaVerifiedTemplePoint(d);if(point)return point.address+' '+point.name;
   const spec=SANSA_KAKAO_DISAMBIGUATION[d.name];
   const base=spec?.name||String(d.name||'').replace(/\([^)]*\)/g,'').trim();
   if(spec?.address) return `${spec.address} ${base}`;
@@ -33834,7 +33843,9 @@ function sansaKakaoPlaceQuery(d){
   return [where,base,'사찰'].filter(Boolean).join(' ');
 }
 function sansaKakaoBestPlace(d, data){
+  const point=sansaVerifiedTemplePoint(d);if(point){const rows=Array.isArray(data)?data:[];return rows.find(p=>/보광사/.test(p.place_name||'')&&/파주시/.test((p.road_address_name||'')+' '+(p.address_name||''))&&Number.isFinite(Number(p.x))&&Number.isFinite(Number(p.y))&&haversineKm(point.lat,point.lng,Number(p.y),Number(p.x))<.5)||null;}
   if(!Array.isArray(data)||!data.length)return null;
+  if(sansaIsOtherBogwangsa(d)&&/서울/.test([d.region,d.address,d.locationHint].join(' ')))data=data.filter(p=>/서울/.test((p.road_address_name||'')+' '+(p.address_name||'')));
   const spec=SANSA_KAKAO_DISAMBIGUATION[d.name];
   const normalize=v=>String(v||'').replace(/\s|[()·ㆍ,._-]/g,'').toLowerCase();
   const expected=normalize(spec?.name||String(d.name||'').replace(/\([^)]*\)/g,''));
@@ -33880,6 +33891,7 @@ function sansaKakaoBestPlace(d, data){
   return null;
 }
 function sansaKakaoFindPlace(places,d,cb){
+  const point=sansaVerifiedTemplePoint(d);if(point){cb({id:point.placeId,place_name:point.name,road_address_name:point.address,x:String(point.lng),y:String(point.lat)});return;}
   const spec=SANSA_KAKAO_DISAMBIGUATION[d.name];
   const base=spec?.name||String(d.name||'').replace(/\([^)]*\)/g,'').trim();
   const queries=[
@@ -33902,6 +33914,7 @@ function sansaKakaoFindPlace(places,d,cb){
   next();
 }
 function setupDetailMap(d, id, opts){
+  d=sansaEffectiveTemple(d);
   opts = opts || {};
   const mapElId = opts.mapElId || 'dMap';
   const updateFn = opts.updateFn || updateDestination;
@@ -33999,6 +34012,7 @@ function openMapOverlay(){
       ? Object.fromEntries(Object.entries(sourceObj).filter(([id,d])=>((Number(d.stage)||0)>=1 || Object.values(d.visits||{}).length>0)))
       : sourceObj;
     Object.entries(filteredSource).forEach(([id,d])=>{
+      d=contentType==='mountain'?d:sansaEffectiveTemple(d);
       if(d.fixedLat && d.fixedLng){
         plot(id, d, d.fixedLat, d.fixedLng);
       } else if(d.lat && d.lng && !SANSA_KAKAO_DISAMBIGUATION[d.name]){
@@ -34065,6 +34079,7 @@ function openCourseBuilder(){
     const items = [];
 
     function resolveOne([id,d], cb){
+      d=sansaEffectiveTemple(d);
       if(d.fixedLat && d.fixedLng){ cb({id, ...d, lat:d.fixedLat, lng:d.fixedLng}); return; }
       if(d.lat && d.lng && !SANSA_KAKAO_DISAMBIGUATION[d.name]){ cb({id, ...d}); return; }
       sansaKakaoFindPlace(places,d,place=>{
@@ -41273,12 +41288,13 @@ body.sansa-catalog-active{
   const VERIFY_TIMEOUT=35000;
 
   function profileFor(d){
+    if(sansaIsOtherBogwangsa(d))return {query:sansaKakaoPlaceQuery(d),radius:120};
     const name=String(d&&d.name||'');
     return TEMPLE_VERIFY_PROFILES[name]||{query:name,radius:STRICT_RADIUS};
   }
   function profileRadius(d){
     const name=String(d&&d.name||'');
-    const confirmed=(typeof window.getConfirmedTempleVerifyPoint==='function')?window.getConfirmedTempleVerifyPoint(name):null;
+    const confirmed=(typeof window.getConfirmedTempleVerifyPoint==='function')?window.getConfirmedTempleVerifyPoint(name,d):null;
     const r=confirmed&&Number(confirmed.radius);
     return Math.max(90,Math.min(200,Number.isFinite(r)?r:(Number(profileFor(d).radius)||STRICT_RADIUS)));
   }
@@ -41310,10 +41326,11 @@ body.sansa-catalog-active{
     });
   }
   async function resolveTempleVerifyPoint(id,d){
+    const reviewed=sansaVerifiedTemplePoint(d);if(reviewed)return reviewed;
     const name=String(d&&d.name||'');
-    const confirmed=(typeof window.getConfirmedTempleVerifyPoint==='function')?window.getConfirmedTempleVerifyPoint(name):null;
+    const confirmed=(typeof window.getConfirmedTempleVerifyPoint==='function')?window.getConfirmedTempleVerifyPoint(name,d):null;
     if(confirmed)return confirmed;
-    const cached=cachedVerifyPoint(name);
+    const cached=sansaIsOtherBogwangsa(d)?null:cachedVerifyPoint(name);
     if(cached)return cached;
     const prof=profileFor(d);
     const baseLat=Number(d&& (d.fixedLat||d.lat)), baseLng=Number(d&& (d.fixedLng||d.lng));
@@ -41327,6 +41344,7 @@ body.sansa-catalog-active{
       })).filter(x=>Number.isFinite(x.lat)&&Number.isFinite(x.lng));
       let best=null,bestScore=-1e9;
       for(const x of candidates){
+        if(sansaIsOtherBogwangsa(d)&&!/서울/.test(x.addr)&&/서울/.test([d.region,d.address,d.locationHint].join(' ')))continue;
         let score=0;
         const nm=x.name.replace(/\s+/g,'');
         const bn=baseName.replace(/\s+/g,'');
@@ -41341,7 +41359,7 @@ body.sansa-catalog-active{
       }
       if(best&&bestScore>=50){
         const p={lat:best.lat,lng:best.lng,label:best.name||'경내 기준점',source:/일주문|입구|천왕문|불이문/.test(best.name)?'kakao-entrance':'kakao-place'};
-        storeVerifyPoint(name,p);return p;
+        if(!sansaIsOtherBogwangsa(d))storeVerifyPoint(name,p);return p;
       }
     }
     if(Number.isFinite(baseLat)&&Number.isFinite(baseLng))return {lat:baseLat,lng:baseLng,label:'기존 사찰 기준점',source:'fallback'};
@@ -41473,7 +41491,7 @@ body.sansa-catalog-active{
       const radius=profileRadius(t.d);
       const can=t.distanceM<=Math.max(300,radius+120);
       const status=t.distanceM<=radius?'현장 인증 거리':t.distanceM<=500?'조금 더 가까이':'주변 절';
-      return `<div class="nearby-card"><div><b>${i===0?'🪷 ':''}${escapeHtml(t.d.name)}</b><small>${escapeHtml(t.d.region||'')} · ${status}</small></div><div class="nearby-distance">${fmtDist(t.distanceM)}<em>${t.distanceM<=radius?'인증 도전 가능':''}</em></div><div class="nearby-card-actions"><button type="button" onclick="openNearbyTempleDetail('${escapeAttr(t.id)}')">상세보기</button><button type="button" class="primary" ${can?'':'disabled'} onclick="startNearbyTempleStrictVerify('${escapeAttr(t.id)}')">${t.distanceM<=radius?'현장 인증하기':'가까워지면 인증'}</button></div></div>`;
+      return `<div class="nearby-card"><div><b>${i===0?'🪷 ':''}${escapeHtml(t.d.name)}</b><small>${escapeHtml(sansaVerifiedTemplePoint(t.d)?.region||t.d.region||'')} · ${status}</small></div><div class="nearby-distance">${fmtDist(t.distanceM)}<em>${t.distanceM<=radius?'인증 도전 가능':''}</em></div><div class="nearby-card-actions"><button type="button" onclick="openNearbyTempleDetail('${escapeAttr(t.id)}')">상세보기</button><button type="button" class="primary" ${can?'':'disabled'} onclick="startNearbyTempleStrictVerify('${escapeAttr(t.id)}')">${t.distanceM<=radius?'현장 인증하기':'가까워지면 인증'}</button></div></div>`;
     }).join('')}</div><div class="nearby-statusbox">※ 기존 <b>절 상세 → 현장 인증하기</b> 기능은 그대로 유지됩니다.</div>`;
   }
   window.openNearbyTempleDetail=function(id){closeOverlay();setTimeout(()=>{try{openDetail(id);}catch(e){showToast('절 상세를 열지 못했어요.');}},80);};
@@ -41751,7 +41769,8 @@ body.sansa-catalog-active{
     };
   }
 
-  window.getConfirmedTempleVerifyPoint=function(name){
+  window.getConfirmedTempleVerifyPoint=function(name,d){
+    if(name==='보광사'){if(d&&sansaIsOtherBogwangsa(d))return null;return SANSA_PAJU_BOGWANGSA;}
     const p=normalizePoint(confirmedPoints[cleanName(name)]);
     if(!p)return null;
     return p;
@@ -42368,14 +42387,14 @@ nav.site-global-nav{height:var(--global-nav-h)!important;box-sizing:border-box!i
 <script src="./scripts/meditation-sounds.js?v=20261018" defer></script>
 <script src="./scripts/game-viewport.js?v=20261017" defer></script>
 <script src="./scripts/navigation.js?v=20261018" defer></script>
-<link rel="stylesheet" href="/styles/atlas-home.css?v=20261025-atlas-covers">
+<link rel="stylesheet" href="/styles/atlas-home.css?v=20261025-complete24">
 <script src="/scripts/atlas/home-publication.js?v=20261025-season2-visible" defer></script>
-<script src="/scripts/atlas/home-carousel.js?v=20261025-season2-visible" defer></script>
+<script src="/scripts/atlas/home-carousel.js?v=20261025-complete24" defer></script>
 
-<link rel="stylesheet" href="/styles/device-photos.css?v=20261025">
+<link rel="stylesheet" href="/styles/device-photos.css?v=20261025-dialogs">
 <script src="/scripts/device-photos/store.js?v=20261025" defer></script>
-<script src="/scripts/device-photos/ui.js?v=20261025" defer></script>
-<script src="/scripts/device-photos/cards.js?v=20261025" defer></script>
+<script src="/scripts/device-photos/ui.js?v=20261025-backup-save" defer></script>
+<script src="/scripts/device-photos/cards.js?v=20261025-collection" defer></script>
 <script src="/scripts/device-photos/celebration.js?v=20261025" defer></script>
 </body>
 </html>

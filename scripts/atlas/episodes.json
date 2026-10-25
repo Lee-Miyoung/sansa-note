@@ -90,40 +90,14 @@
     "season": "01"
   },
   {
-    "id": "mireuksaji-011",
-    "number": "011",
-    "temple": "미륵사지",
-    "title": "탑 속에서 나온 왕후의 기록",
-    "href": "/atlas/mireuksaji/",
-    "thumbnail": "/atlas/mireuksaji/images/mireuksaji-cover-small.webp",
-    "season": "02"
-  },
-  {
-    "id": "hwangnyongsaji-012",
-    "number": "012",
-    "temple": "황룡사지",
-    "title": "사라진 아홉 층 탑의 비밀",
-    "href": "/atlas/hwangnyongsaji/",
-    "thumbnail": "/atlas/hwangnyongsaji/images/hwangnyongsaji-cover-small.webp",
-    "season": "02"
-  },
-  {
-    "id": "gameunsaji-013",
-    "number": "013",
-    "temple": "감은사지",
-    "title": "용이 드나들던 법당의 비밀",
-    "href": "/atlas/gameunsaji/",
-    "thumbnail": "/atlas/gameunsaji/images/gameunsaji-cover-small.webp",
-    "season": "02"
-  },
-  {
     "id": "muwisa-014",
     "number": "014",
     "temple": "무위사",
     "title": "벽에 남은 오백 년의 색",
     "href": "/atlas/muwisa/",
     "thumbnail": "/atlas/muwisa/images/muwisa-cover-small.webp",
-    "season": "02"
+    "season": "02",
+    "displayNumber": "011"
   },
   {
     "id": "jingwansa-015",
@@ -132,7 +106,8 @@
     "title": "벽 속에 숨겨진 태극기",
     "href": "/atlas/jingwansa/",
     "thumbnail": "/atlas/jingwansa/images/jingwansa-cover-small.webp",
-    "season": "02"
+    "season": "02",
+    "displayNumber": "012"
   },
   {
     "id": "magoksa-016",
@@ -141,7 +116,8 @@
     "title": "청년 김구가 머물렀던 절",
     "href": "/atlas/magoksa/",
     "thumbnail": "/atlas/magoksa/images/magoksa-cover-small.webp",
-    "season": "02"
+    "season": "02",
+    "displayNumber": "013"
   },
   {
     "id": "geumsansa-017",
@@ -150,7 +126,8 @@
     "title": "세 층인데 한 층인 법당",
     "href": "/atlas/geumsansa/",
     "thumbnail": "/atlas/geumsansa/images/geumsansa-cover-small.webp",
-    "season": "02"
+    "season": "02",
+    "displayNumber": "014"
   },
   {
     "id": "jeongamsa-018",
@@ -159,7 +136,8 @@
     "title": "보석 이름을 가진 돌탑",
     "href": "/atlas/jeongamsa/",
     "thumbnail": "/atlas/jeongamsa/images/jeongamsa-cover-small.webp",
-    "season": "02"
+    "season": "02",
+    "displayNumber": "015"
   },
   {
     "id": "bunhwangsa-019",
@@ -168,7 +146,78 @@
     "title": "벽돌이 아닌 벽돌탑",
     "href": "/atlas/bunhwangsa/",
     "thumbnail": "/atlas/bunhwangsa/images/bunhwangsa-cover-small.webp",
-    "season": "02"
+    "season": "02",
+    "displayNumber": "016"
+  },
+  {
+    "id": "unjusa-021",
+    "number": "021",
+    "temple": "운주사",
+    "title": "일어나지 못한 두 부처의 비밀",
+    "href": "/atlas/unjusa/",
+    "thumbnail": "/atlas/unjusa/images/unjusa-cover-small.webp",
+    "season": "02",
+    "displayNumber": "017"
+  },
+  {
+    "id": "yongjusa-022",
+    "number": "022",
+    "temple": "용주사",
+    "title": "왕이 아버지를 위해 세운 절",
+    "href": "/atlas/yongjusa/",
+    "thumbnail": "/atlas/yongjusa/images/yongjusa-cover-small.webp",
+    "season": "02",
+    "displayNumber": "018"
+  },
+  {
+    "id": "seonamsa-023",
+    "number": "023",
+    "temple": "선암사",
+    "title": "무지개 다리에 숨겨진 비밀",
+    "href": "/atlas/seonamsa/",
+    "thumbnail": "/atlas/seonamsa/images/seonamsa-cover-small.webp",
+    "season": "02",
+    "displayNumber": "019"
+  },
+  {
+    "id": "seonunsa-024",
+    "number": "024",
+    "temple": "선운사",
+    "title": "미륵불 배꼽에 숨겨진 비밀",
+    "href": "/atlas/seonunsa/",
+    "thumbnail": "/atlas/seonunsa/images/seonunsa-cover-small.webp",
+    "season": "02",
+    "displayNumber": "020"
+  },
+  {
+    "id": "mireuksaji-011",
+    "number": "011",
+    "temple": "미륵사지",
+    "title": "탑 속에서 나온 왕후의 기록",
+    "href": "/atlas/mireuksaji/",
+    "thumbnail": "/atlas/mireuksaji/images/mireuksaji-cover-small.webp",
+    "season": "03",
+    "displayNumber": "001"
+  },
+  {
+    "id": "hwangnyongsaji-012",
+    "number": "012",
+    "temple": "황룡사지",
+    "title": "사라진 아홉 층 탑의 비밀",
+    "href": "/atlas/hwangnyongsaji/",
+    "thumbnail": "/atlas/hwangnyongsaji/images/hwangnyongsaji-cover-small.webp",
+    "season": "03",
+    "displayNumber": "002"
+  },
+  {
+    "id": "gameunsaji-013",
+    "number": "013",
+    "temple": "감은사지",
+    "title": "용이 드나들던 법당의 비밀",
+    "href": "/atlas/gameunsaji/",
+    "thumbnail": "/atlas/gameunsaji/images/gameunsaji-cover-small.webp",
+    "season": "03",
+    "displayNumber": "003"
   },
   {
     "id": "jeongnimsaji-020",
@@ -177,6 +226,7 @@
     "title": "무너진 왕국, 남겨진 다섯 층 탑",
     "href": "/atlas/jeongnimsaji/",
     "thumbnail": "/atlas/jeongnimsaji/images/jeongnimsaji-cover-small.webp",
-    "season": "02"
+    "season": "03",
+    "displayNumber": "004"
   }
 ]

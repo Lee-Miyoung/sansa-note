@@ -1,0 +1,131 @@
+{
+  "episode": "unjusa-021",
+  "illustrations": 16,
+  "expected": 16,
+  "prompts": [
+    {
+      "slug": "unjusa",
+      "name": "unjusa-cover",
+      "prompt": "Hwasun Unjusa in South Korea. Two unfinished Buddhas carved side by side lengthwise in a natural low gray bedrock outcrop lying FLAT ON THEIR BACKS facing upward to sky, with flat shallow carved robes, one figure folded legs and one straight legs, matching reference. Not the common reclining Buddha lying on its side.  Wide inviting establishing view, Munyeom steps into foreground, entire monument visible.",
+      "references": [
+        "/workspace/scratch/integrated-fixes/E0075284-official-ref.jpg"
+      ]
+    },
+    {
+      "slug": "unjusa",
+      "name": "scene-01",
+      "prompt": "Hwasun Unjusa in South Korea. Two unfinished Buddhas carved side by side lengthwise in a natural low gray bedrock outcrop lying FLAT ON THEIR BACKS facing upward to sky, with flat shallow carved robes, one figure folded legs and one straight legs, matching reference. Not the common reclining Buddha lying on its side. Munyeom peers from safe edge, curious expression.",
+      "references": [
+        "/workspace/scratch/integrated-fixes/E0075284-official-ref.jpg"
+      ]
+    },
+    {
+      "slug": "unjusa",
+      "name": "scene-02",
+      "prompt": "Hwasun Unjusa in South Korea. Two unfinished Buddhas carved side by side lengthwise in a natural low gray bedrock outcrop lying FLAT ON THEIR BACKS facing upward to sky, with flat shallow carved robes, one figure folded legs and one straight legs, matching reference. Not the common reclining Buddha lying on its side. High oblique view shows both shapes and bedrock grooves; Munyeom opens notebook.",
+      "references": [
+        "/workspace/scratch/integrated-fixes/E0075284-official-ref.jpg"
+      ]
+    },
+    {
+      "slug": "unjusa",
+      "name": "scene-03",
+      "prompt": "Imaginative folklore vignette: Korean premodern stone masons look at first dawn with unfinished stone blocks, small Munyeom listens. No literal thousands of floating Buddhas.",
+      "references": []
+    },
+    {
+      "slug": "unjusa",
+      "name": "scene-04",
+      "prompt": "Munyeom listens to a kindly adult storyteller by forest path, small pale dawn vignette of workers in distance; visibly ordinary retelling, no supernatural proof.",
+      "references": []
+    },
+    {
+      "slug": "unjusa",
+      "name": "scene-05",
+      "prompt": "Hwasun Unjusa in South Korea. Open valley scattered varied rough stone Buddha statues and square pagodas, humble green wooded hills. Munyeom strolls calmly.",
+      "references": [
+        "/workspace/scratch/integrated-fixes/E0040382-official-ref.jpg"
+      ]
+    },
+    {
+      "slug": "unjusa",
+      "name": "scene-06",
+      "prompt": "Hwasun Unjusa in South Korea. A small rectangular granite Buddhist stone shrine with heavy hip-and-gable STONE roof, open doorway facing viewer with seated Buddha, rear opposite opening and another seated Buddha facing the opposite way, matching reference. Three quarter view, Munyeom notes two opposite openings, no gold statue.",
+      "references": [
+        "/workspace/scratch/integrated-fixes/E0040381-official-ref.jpg"
+      ]
+    },
+    {
+      "slug": "unjusa",
+      "name": "scene-07",
+      "prompt": "Hwasun Unjusa in South Korea. A peculiar round multi-tier stone pagoda, flat circular disc roofs narrowing upwards, short cylindrical bodies, high polygonal base, gray mottled granite, matching reference. Three-quarter full view, Munyeom counts round roofs without touching.",
+      "references": [
+        "/workspace/scratch/integrated-fixes/E0040382-official-ref.jpg"
+      ]
+    },
+    {
+      "slug": "unjusa",
+      "name": "scene-08",
+      "prompt": "Close study of round roof edge and cylindrical body of granite pagoda, Munyeom holds blank sketchbook. A peculiar round multi-tier stone pagoda, flat circular disc roofs narrowing upwards, short cylindrical bodies, high polygonal base, gray mottled granite, matching reference. ",
+      "references": [
+        "/workspace/scratch/integrated-fixes/E0040382-official-ref.jpg"
+      ]
+    },
+    {
+      "slug": "unjusa",
+      "name": "scene-09",
+      "prompt": "Interpretative archaeologists examine ceramic sherds and old roof tile on padded table, clean blank labels, Munyeom watches, no fake inscriptions.",
+      "references": []
+    },
+    {
+      "slug": "unjusa",
+      "name": "scene-10",
+      "prompt": "Hwasun Unjusa in South Korea. Interpretative stone carver in simple Goryeo-era work clothes examines rough small stone Buddha using chisel, quiet work scene, no magic.",
+      "references": []
+    },
+    {
+      "slug": "unjusa",
+      "name": "scene-11",
+      "prompt": "Hwasun Unjusa in South Korea. A small rectangular granite Buddhist stone shrine with heavy hip-and-gable STONE roof, open doorway facing viewer with seated Buddha, rear opposite opening and another seated Buddha facing the opposite way, matching reference. Present conservation worker photographs shrine from path, Munyeom stands aside, no touching artifact.",
+      "references": [
+        "/workspace/scratch/integrated-fixes/E0040381-official-ref.jpg"
+      ]
+    },
+    {
+      "slug": "unjusa",
+      "name": "scene-12",
+      "prompt": "Hwasun Unjusa in South Korea. Two unfinished Buddhas carved side by side lengthwise in a natural low gray bedrock outcrop lying FLAT ON THEIR BACKS facing upward to sky, with flat shallow carved robes, one figure folded legs and one straight legs, matching reference. Not the common reclining Buddha lying on its side. Evening green forest, low oblique long view, Munyeom departs looking back.",
+      "references": [
+        "/workspace/scratch/integrated-fixes/E0075284-official-ref.jpg"
+      ]
+    },
+    {
+      "slug": "unjusa",
+      "name": "card-01",
+      "prompt": "Hwasun Unjusa in South Korea. Two unfinished Buddhas carved side by side lengthwise in a natural low gray bedrock outcrop lying FLAT ON THEIR BACKS facing upward to sky, with flat shallow carved robes, one figure folded legs and one straight legs, matching reference. Not the common reclining Buddha lying on its side. Portrait composition, entire paired flat stone Buddhas in lower middle, Munyeom at edge.",
+      "references": [
+        "/workspace/scratch/integrated-fixes/E0075284-official-ref.jpg"
+      ]
+    },
+    {
+      "slug": "unjusa",
+      "name": "card-02",
+      "prompt": "Hwasun Unjusa in South Korea. A small rectangular granite Buddhist stone shrine with heavy hip-and-gable STONE roof, open doorway facing viewer with seated Buddha, rear opposite opening and another seated Buddha facing the opposite way, matching reference. Portrait composition entire shrine, small Munyeom at bottom side.",
+      "references": [
+        "/workspace/scratch/integrated-fixes/E0040381-official-ref.jpg"
+      ]
+    },
+    {
+      "slug": "unjusa",
+      "name": "card-03",
+      "prompt": "Hwasun Unjusa in South Korea. A peculiar round multi-tier stone pagoda, flat circular disc roofs narrowing upwards, short cylindrical bodies, high polygonal base, gray mottled granite, matching reference. Portrait composition full round pagoda with generous headroom, Munyeom below.",
+      "references": [
+        "/workspace/scratch/integrated-fixes/E0040382-official-ref.jpg"
+      ]
+    }
+  ],
+  "style": "Detailed watercolor on cream paper, sage greens, warm earth tones. Munyeom: bald young monk, plain cream-gray robes, beads, brown cloth bag. No text, badges, watermark. Landscape3:2 or card2:3.",
+  "corrections": {
+    "scene-06": "Visible side wall is solid granite. Only opposite front/back faces have openings, not adjacent sides."
+  }
+}

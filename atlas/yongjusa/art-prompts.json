@@ -1,0 +1,120 @@
+{
+  "episode": "yongjusa-022",
+  "illustrations": 16,
+  "expected": 16,
+  "prompts": [
+    {
+      "slug": "yongjusa",
+      "name": "yongjusa-cover",
+      "prompt": "Actual Hwaseong Yongjusa Daeungbojeon: single story THREE front bays, one wide hip-and-gable dark tiled roof, painted green/red brackets, raised stone platform and central stairs, matching reference, not a palace or two-story hall.  Wide inviting establishing view, Munyeom steps into foreground, entire monument visible.",
+      "references": [
+        "/workspace/scratch/integrated-fixes/E0076951-official-ref.jpg"
+      ]
+    },
+    {
+      "slug": "yongjusa",
+      "name": "scene-01",
+      "prompt": "Actual Hwaseong Yongjusa Daeungbojeon: single story THREE front bays, one wide hip-and-gable dark tiled roof, painted green/red brackets, raised stone platform and central stairs, matching reference, not a palace or two-story hall. Munyeom stops curiously before main stairs.",
+      "references": [
+        "/workspace/scratch/integrated-fixes/E0076951-official-ref.jpg"
+      ]
+    },
+    {
+      "slug": "yongjusa",
+      "name": "scene-02",
+      "prompt": "Interpretative Joseon King Jeongjo in modest red royal robe and black ikseongwan cap studies a landscape plan inside quiet wooden study; no readable text, no modern glasses.",
+      "references": []
+    },
+    {
+      "slug": "yongjusa",
+      "name": "scene-03",
+      "prompt": "Interpretative late18th-century Korean royal tomb Hyeollyungwon grassy rounded burial mound in wooded Hwasan landscape, small procession at respectful distance; no modern city.",
+      "references": []
+    },
+    {
+      "slug": "yongjusa",
+      "name": "scene-04",
+      "prompt": "Interpretative1790 construction: adult monk craftsman and carpenters measure large timber on ground, raised frame of small three-bay temple hall behind, safe work.",
+      "references": []
+    },
+    {
+      "slug": "yongjusa",
+      "name": "scene-05",
+      "prompt": "Actual Hwaseong Yongjusa Daeungbojeon: single story THREE front bays, one wide hip-and-gable dark tiled roof, painted green/red brackets, raised stone platform and central stairs, matching reference, not a palace or two-story hall. Low courtyard view emphasizing the three front bays, small Munyeom counts on fingers.",
+      "references": [
+        "/workspace/scratch/integrated-fixes/E0076951-official-ref.jpg"
+      ]
+    },
+    {
+      "slug": "yongjusa",
+      "name": "scene-06",
+      "prompt": "Actual Hwaseong Yongjusa Daeungbojeon: single story THREE front bays, one wide hip-and-gable dark tiled roof, painted green/red brackets, raised stone platform and central stairs, matching reference, not a palace or two-story hall. Close view interlocking wooden bracket arms under single eave, Munyeom observes below.",
+      "references": [
+        "/workspace/scratch/integrated-fixes/E0076951-official-ref.jpg"
+      ]
+    },
+    {
+      "slug": "yongjusa",
+      "name": "scene-07",
+      "prompt": "Inside a quiet Joseon temple main hall: three seated wooden Buddha statues behind altar and painted hanging scroll, respectful distant viewpoint, Munyeom at doorway.",
+      "references": []
+    },
+    {
+      "slug": "yongjusa",
+      "name": "scene-08",
+      "prompt": "Interpretative1790 artisan, monk and ordinary donors reviewing plain accounting scroll and timber tools on table, no readable letters, no modern money.",
+      "references": []
+    },
+    {
+      "slug": "yongjusa",
+      "name": "scene-09",
+      "prompt": "A respectful path between distant royal tomb green mound and temple roof seen through pine trees, Munyeom walks with adult monk, symbolic geographic linkage not a measured site map.",
+      "references": [
+        "/workspace/scratch/integrated-fixes/E0076951-official-ref.jpg"
+      ]
+    },
+    {
+      "slug": "yongjusa",
+      "name": "scene-10",
+      "prompt": "Actual Hwaseong Yongjusa Daeungbojeon: single story THREE front bays, one wide hip-and-gable dark tiled roof, painted green/red brackets, raised stone platform and central stairs, matching reference, not a palace or two-story hall. Present morning open hall doors and cleaning volunteer outside, Munyeom bows briefly, everyday temple life.",
+      "references": [
+        "/workspace/scratch/integrated-fixes/E0076951-official-ref.jpg"
+      ]
+    },
+    {
+      "slug": "yongjusa",
+      "name": "scene-11",
+      "prompt": "Conservation archivist studies blank-looking old construction documents in supports beside pencil and photographs, Munyeom carefully reads without handling old paper, no fake readable writing.",
+      "references": []
+    },
+    {
+      "slug": "yongjusa",
+      "name": "scene-12",
+      "prompt": "Actual Hwaseong Yongjusa Daeungbojeon: single story THREE front bays, one wide hip-and-gable dark tiled roof, painted green/red brackets, raised stone platform and central stairs, matching reference, not a palace or two-story hall. Late sun on courtyard, Munyeom steps down toward viewer with warm small smile.",
+      "references": [
+        "/workspace/scratch/integrated-fixes/E0076951-official-ref.jpg"
+      ]
+    },
+    {
+      "slug": "yongjusa",
+      "name": "card-01",
+      "prompt": "Actual Hwaseong Yongjusa Daeungbojeon: single story THREE front bays, one wide hip-and-gable dark tiled roof, painted green/red brackets, raised stone platform and central stairs, matching reference, not a palace or two-story hall. Portrait full main hall and stone stairs, Munyeom at lower edge.",
+      "references": [
+        "/workspace/scratch/integrated-fixes/E0076951-official-ref.jpg"
+      ]
+    },
+    {
+      "slug": "yongjusa",
+      "name": "card-02",
+      "prompt": "Portrait interpretative Joseon Jeongjo from side by window with landscape of distant grassy tomb mound; gentle dignified scene and small Munyeom listening, no claims of exact portrait.",
+      "references": []
+    },
+    {
+      "slug": "yongjusa",
+      "name": "card-03",
+      "prompt": "Portrait careful old timber measuring tools and supported construction scroll with abstract illegible strokes, Munyeom studies; temple roof edge at top.",
+      "references": []
+    }
+  ],
+  "style": "Detailed watercolor on cream paper, sage greens, warm earth tones. Munyeom: bald young monk, plain cream-gray robes, beads, brown cloth bag. No text, badges, watermark. Landscape3:2 or card2:3."
+}

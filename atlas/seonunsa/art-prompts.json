@@ -1,0 +1,124 @@
+{
+  "episode": "seonunsa-024",
+  "illustrations": 16,
+  "expected": 16,
+  "prompts": [
+    {
+      "slug": "seonunsa",
+      "name": "seonunsa-cover",
+      "prompt": "Actual Gochang Seonunsa Dosolam Dongburamji cliff-carved Buddha: enormous FLAT shallow-relief seated Buddha carved directly in near vertical reddish-gray rock cliff, angular rectangular face, tall pointed topknot, elongated ears, broad hands meeting over abdomen, line-carved robe, broad seated knees and low lotus base, small square old timber sockets around figure. No freestanding white statue, no Buddha standing upright.  Wide inviting establishing view, Munyeom steps into foreground, entire monument visible.",
+      "references": [
+        "/workspace/scratch/integrated-fixes/E0028834-official-ref.jpg"
+      ]
+    },
+    {
+      "slug": "seonunsa",
+      "name": "scene-01",
+      "prompt": "Actual Gochang Seonunsa Dosolam Dongburamji cliff-carved Buddha: enormous FLAT shallow-relief seated Buddha carved directly in near vertical reddish-gray rock cliff, angular rectangular face, tall pointed topknot, elongated ears, broad hands meeting over abdomen, line-carved robe, broad seated knees and low lotus base, small square old timber sockets around figure. No freestanding white statue, no Buddha standing upright. Wide whole cliff and tiny Munyeom approaching from safe path.",
+      "references": [
+        "/workspace/scratch/integrated-fixes/E0028834-official-ref.jpg"
+      ]
+    },
+    {
+      "slug": "seonunsa",
+      "name": "scene-02",
+      "prompt": "Actual Gochang Seonunsa Dosolam Dongburamji cliff-carved Buddha: enormous FLAT shallow-relief seated Buddha carved directly in near vertical reddish-gray rock cliff, angular rectangular face, tall pointed topknot, elongated ears, broad hands meeting over abdomen, line-carved robe, broad seated knees and low lotus base, small square old timber sockets around figure. No freestanding white statue, no Buddha standing upright. Low angle at whole Buddha, Munyeom looks at abdomen from respectful distance.",
+      "references": [
+        "/workspace/scratch/integrated-fixes/E0028834-official-ref.jpg"
+      ]
+    },
+    {
+      "slug": "seonunsa",
+      "name": "scene-03",
+      "prompt": "Interpretative late19th-century Korean villagers talk quietly beside wooded path, one holds rolled plain paper, Munyeom listens. Mystery of rumored secret, no glowing prophecy.",
+      "references": []
+    },
+    {
+      "slug": "seonunsa",
+      "name": "scene-04",
+      "prompt": "Interpretative1892 evening woodland gathering of Korean peasants and a plain-robed local Donghak leader, serious expressions, distant rock Buddha silhouette, no violence or triumphant miracle.",
+      "references": [
+        "/workspace/scratch/integrated-fixes/E0028834-official-ref.jpg"
+      ]
+    },
+    {
+      "slug": "seonunsa",
+      "name": "scene-05",
+      "prompt": "Historian compares supported archival pages and plain notebook at desk, Munyeom notices difference between rumor and record, no readable letters.",
+      "references": []
+    },
+    {
+      "slug": "seonunsa",
+      "name": "scene-06",
+      "prompt": "Actual Gochang Seonunsa Dosolam Dongburamji cliff-carved Buddha: enormous FLAT shallow-relief seated Buddha carved directly in near vertical reddish-gray rock cliff, angular rectangular face, tall pointed topknot, elongated ears, broad hands meeting over abdomen, line-carved robe, broad seated knees and low lotus base, small square old timber sockets around figure. No freestanding white statue, no Buddha standing upright. Close angled face and upper torso showing shallow relief in uneven rock, no new inscription, Munyeom small at bottom corner.",
+      "references": [
+        "/workspace/scratch/integrated-fixes/E0028834-official-ref.jpg"
+      ]
+    },
+    {
+      "slug": "seonunsa",
+      "name": "scene-07",
+      "prompt": "Actual Gochang Seonunsa Dosolam Dongburamji cliff-carved Buddha: enormous FLAT shallow-relief seated Buddha carved directly in near vertical reddish-gray rock cliff, angular rectangular face, tall pointed topknot, elongated ears, broad hands meeting over abdomen, line-carved robe, broad seated knees and low lotus base, small square old timber sockets around figure. No freestanding white statue, no Buddha standing upright. Side view square beam sockets cut into rock beside Buddha, distant small Munyeom notices holes.",
+      "references": [
+        "/workspace/scratch/integrated-fixes/E0028834-official-ref.jpg"
+      ]
+    },
+    {
+      "slug": "seonunsa",
+      "name": "scene-08",
+      "prompt": "Interpretative Goryeo stone artisan outlines robe line on scrap stone beside rough cliff edge, ordinary mallet and chisel, small Munyeom watches, no magic.",
+      "references": []
+    },
+    {
+      "slug": "seonunsa",
+      "name": "scene-09",
+      "prompt": "Late Joseon village families at plain house courtyard discussing difficult harvest, baskets with modest grain, humane quiet scene, Munyeom listens, no dramatic weapons.",
+      "references": []
+    },
+    {
+      "slug": "seonunsa",
+      "name": "scene-10",
+      "prompt": "Actual Gochang Seonunsa main temple courtyard: long single-story main hall FIVE front bays with low hip-and-gable tile roof, broad wooden front doors, quiet green Dosolsan; Munyeom walks, not cliff Buddha inside this hall.",
+      "references": []
+    },
+    {
+      "slug": "seonunsa",
+      "name": "scene-11",
+      "prompt": "Actual Gochang Seonunsa Dosolam Dongburamji cliff-carved Buddha: enormous FLAT shallow-relief seated Buddha carved directly in near vertical reddish-gray rock cliff, angular rectangular face, tall pointed topknot, elongated ears, broad hands meeting over abdomen, line-carved robe, broad seated knees and low lotus base, small square old timber sockets around figure. No freestanding white statue, no Buddha standing upright. Present worker records surface condition from walkway, camera and notebook, Munyeom stays behind respectful barrier.",
+      "references": [
+        "/workspace/scratch/integrated-fixes/E0028834-official-ref.jpg"
+      ]
+    },
+    {
+      "slug": "seonunsa",
+      "name": "scene-12",
+      "prompt": "Actual Gochang Seonunsa Dosolam Dongburamji cliff-carved Buddha: enormous FLAT shallow-relief seated Buddha carved directly in near vertical reddish-gray rock cliff, angular rectangular face, tall pointed topknot, elongated ears, broad hands meeting over abdomen, line-carved robe, broad seated knees and low lotus base, small square old timber sockets around figure. No freestanding white statue, no Buddha standing upright. Sunset grazes rock, entire seated relief visible, Munyeom slowly walks home looking back, no floating secret scroll.",
+      "references": [
+        "/workspace/scratch/integrated-fixes/E0028834-official-ref.jpg"
+      ]
+    },
+    {
+      "slug": "seonunsa",
+      "name": "card-01",
+      "prompt": "Actual Gochang Seonunsa Dosolam Dongburamji cliff-carved Buddha: enormous FLAT shallow-relief seated Buddha carved directly in near vertical reddish-gray rock cliff, angular rectangular face, tall pointed topknot, elongated ears, broad hands meeting over abdomen, line-carved robe, broad seated knees and low lotus base, small square old timber sockets around figure. No freestanding white statue, no Buddha standing upright. Portrait full cliff relief with generous margins, Munyeom at base.",
+      "references": [
+        "/workspace/scratch/integrated-fixes/E0028834-official-ref.jpg"
+      ]
+    },
+    {
+      "slug": "seonunsa",
+      "name": "card-02",
+      "prompt": "Portrait interpretative late19th-century villagers listening to storyteller with closed plain scroll at small wooden table, Munyeom thoughtful, no supposed real secret text or supernatural light.",
+      "references": []
+    },
+    {
+      "slug": "seonunsa",
+      "name": "card-03",
+      "prompt": "Portrait old square beam sockets in reddish rock wall beside shallow carved Buddha robe edge, Munyeom compares sketch in blank notebook, no destruction.",
+      "references": [
+        "/workspace/scratch/integrated-fixes/E0028834-official-ref.jpg"
+      ]
+    }
+  ],
+  "style": "Detailed watercolor on cream paper, sage greens, warm earth tones. Munyeom: bald young monk, plain cream-gray robes, beads, brown cloth bag. No text, badges, watermark. Landscape3:2 or card2:3."
+}

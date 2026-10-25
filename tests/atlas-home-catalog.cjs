@@ -5,7 +5,7 @@ const allCatalog = JSON.parse(fs.readFileSync('scripts/atlas/episodes.json'));
 const catalog=allCatalog.filter(e=>e.season==='01');
 // A release row cannot quietly grow into a story payload.
 for (const episode of allCatalog) {
-  assert.deepEqual(Object.keys(episode).sort(), ['href', 'id', 'number', 'season', 'temple', 'thumbnail', 'title']);
+  assert.deepEqual(Object.keys(episode).filter(k=>k!=='displayNumber').sort(), ['href', 'id', 'number', 'season', 'temple', 'thumbnail', 'title']);
   assert(Buffer.byteLength(JSON.stringify(episode)) < 512);
 }
 const publicConfig = JSON.parse(fs.readFileSync('atlas/firebase-config.json'));

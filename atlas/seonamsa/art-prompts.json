@@ -1,0 +1,131 @@
+{
+  "episode": "seonamsa-023",
+  "illustrations": 16,
+  "expected": 16,
+  "prompts": [
+    {
+      "slug": "seonamsa",
+      "name": "seonamsa-cover",
+      "prompt": "Actual Suncheon Seonamsa Seungseongyo: ONE broad semicircular stone arch of precisely dressed wedge stones, rubble stone approach walls, natural rocky creek flowing beneath, NO roof or pavilion ON the bridge, NO modern railings. Gangseonru small two-story wooden pavilion with tiled roof appears farther upstream THROUGH arch, matching reference alignment.  Wide inviting establishing view, Munyeom steps into foreground, entire monument visible.",
+      "references": [
+        "/workspace/scratch/integrated-fixes/E0028796-official-ref.jpg"
+      ]
+    },
+    {
+      "slug": "seonamsa",
+      "name": "scene-01",
+      "prompt": "Actual Suncheon Seonamsa Seungseongyo: ONE broad semicircular stone arch of precisely dressed wedge stones, rubble stone approach walls, natural rocky creek flowing beneath, NO roof or pavilion ON the bridge, NO modern railings. Gangseonru small two-story wooden pavilion with tiled roof appears farther upstream THROUGH arch, matching reference alignment. Low creek viewpoint, Munyeom crouches safely on bank and wonders at circle in water.",
+      "references": [
+        "/workspace/scratch/integrated-fixes/E0028796-official-ref.jpg"
+      ]
+    },
+    {
+      "slug": "seonamsa",
+      "name": "scene-02",
+      "prompt": "Actual Suncheon Seonamsa Seungseongyo: ONE broad semicircular stone arch of precisely dressed wedge stones, rubble stone approach walls, natural rocky creek flowing beneath, NO roof or pavilion ON the bridge, NO modern railings. Gangseonru small two-story wooden pavilion with tiled roof appears farther upstream THROUGH arch, matching reference alignment. Munyeom looks through arch toward distant small pavilion, bridge arch prominent.",
+      "references": [
+        "/workspace/scratch/integrated-fixes/E0028796-official-ref.jpg"
+      ]
+    },
+    {
+      "slug": "seonamsa",
+      "name": "scene-03",
+      "prompt": "Close view individual wedge-shaped granite arch voussoir stones meeting at crown, intact bridge no exploded architecture, Actual Suncheon Seonamsa Seungseongyo: ONE broad semicircular stone arch of precisely dressed wedge stones, rubble stone approach walls, natural rocky creek flowing beneath, NO roof or pavilion ON the bridge, NO modern railings. Gangseonru small two-story wooden pavilion with tiled roof appears farther upstream THROUGH arch, matching reference alignment.  Munyeom studies from side.",
+      "references": [
+        "/workspace/scratch/integrated-fixes/E0028796-official-ref.jpg"
+      ]
+    },
+    {
+      "slug": "seonamsa",
+      "name": "scene-04",
+      "prompt": "Actual Suncheon Seonamsa Seungseongyo: ONE broad semicircular stone arch of precisely dressed wedge stones, rubble stone approach walls, natural rocky creek flowing beneath, NO roof or pavilion ON the bridge, NO modern railings. Gangseonru small two-story wooden pavilion with tiled roof appears farther upstream THROUGH arch, matching reference alignment. Side view arch feet resting on natural rock outcrop, stream passes freely; Munyeom points from dry path.",
+      "references": [
+        "/workspace/scratch/integrated-fixes/E0028796-official-ref.jpg"
+      ]
+    },
+    {
+      "slug": "seonamsa",
+      "name": "scene-05",
+      "prompt": "Interpretative Joseon stone masons measure dressed stone at creek bank with temporary curved timber centering supporting unfinished arch, plausible traditional tools; Munyeom observes.",
+      "references": [
+        "/workspace/scratch/integrated-fixes/E0028796-official-ref.jpg"
+      ]
+    },
+    {
+      "slug": "seonamsa",
+      "name": "scene-06",
+      "prompt": "Interpretative Joseon adult monk Hoam in plain robes reviews repair plans with carpenters beside modest temple courtyard, no invented readable inscription.",
+      "references": []
+    },
+    {
+      "slug": "seonamsa",
+      "name": "scene-07",
+      "prompt": "Soft imaginative oral-history vignette: Hoam-like adult monk listens by woodland creek, quiet light and distant bridge; no literal deity presented as documented history.",
+      "references": [
+        "/workspace/scratch/integrated-fixes/E0028796-official-ref.jpg"
+      ]
+    },
+    {
+      "slug": "seonamsa",
+      "name": "scene-08",
+      "prompt": "Actual Suncheon Seonamsa Seungseongyo: ONE broad semicircular stone arch of precisely dressed wedge stones, rubble stone approach walls, natural rocky creek flowing beneath, NO roof or pavilion ON the bridge, NO modern railings. Gangseonru small two-story wooden pavilion with tiled roof appears farther upstream THROUGH arch, matching reference alignment. Look up from bank to arch interior with one small carved dragon head stone at crown, Munyeom watches without touching.",
+      "references": [
+        "/workspace/scratch/integrated-fixes/E0028796-official-ref.jpg"
+      ]
+    },
+    {
+      "slug": "seonamsa",
+      "name": "scene-09",
+      "prompt": "Suncheon Seonamsa temple courtyard at foot of Jogyesan, modest single-story three-bay main hall and TWO small three-story stone pagodas in front; Munyeom walks. Do not depict Songgwangsa Uhwagak.",
+      "references": []
+    },
+    {
+      "slug": "seonamsa",
+      "name": "scene-10",
+      "prompt": "Interpretative postwar wooden temple repair: local carpenters and monks lift beam at ground using rope, old stone bases remain, Munyeom observes.",
+      "references": []
+    },
+    {
+      "slug": "seonamsa",
+      "name": "scene-11",
+      "prompt": "Actual Suncheon Seonamsa Seungseongyo: ONE broad semicircular stone arch of precisely dressed wedge stones, rubble stone approach walls, natural rocky creek flowing beneath, NO roof or pavilion ON the bridge, NO modern railings. Gangseonru small two-story wooden pavilion with tiled roof appears farther upstream THROUGH arch, matching reference alignment. Present conservation worker photographs creek masonry while another makes notes, Munyeom waits off bridge.",
+      "references": [
+        "/workspace/scratch/integrated-fixes/E0028796-official-ref.jpg"
+      ]
+    },
+    {
+      "slug": "seonamsa",
+      "name": "scene-12",
+      "prompt": "Actual Suncheon Seonamsa Seungseongyo: ONE broad semicircular stone arch of precisely dressed wedge stones, rubble stone approach walls, natural rocky creek flowing beneath, NO roof or pavilion ON the bridge, NO modern railings. Gangseonru small two-story wooden pavilion with tiled roof appears farther upstream THROUGH arch, matching reference alignment. Warm evening reflected semicircle in calm water, Munyeom crosses bridge safely seen small on top, no railing or pavilion on bridge.",
+      "references": [
+        "/workspace/scratch/integrated-fixes/E0028796-official-ref.jpg"
+      ]
+    },
+    {
+      "slug": "seonamsa",
+      "name": "card-01",
+      "prompt": "Actual Suncheon Seonamsa Seungseongyo: ONE broad semicircular stone arch of precisely dressed wedge stones, rubble stone approach walls, natural rocky creek flowing beneath, NO roof or pavilion ON the bridge, NO modern railings. Gangseonru small two-story wooden pavilion with tiled roof appears farther upstream THROUGH arch, matching reference alignment. Portrait arch and water reflection, small Munyeom below on safe bank.",
+      "references": [
+        "/workspace/scratch/integrated-fixes/E0028796-official-ref.jpg"
+      ]
+    },
+    {
+      "slug": "seonamsa",
+      "name": "card-02",
+      "prompt": "Portrait skilled Joseon mason hands arranging small wedge stone samples on workbench and wooden measuring ruler, Munyeom watches, distant creek bridge.",
+      "references": [
+        "/workspace/scratch/integrated-fixes/E0028796-official-ref.jpg"
+      ]
+    },
+    {
+      "slug": "seonamsa",
+      "name": "card-03",
+      "prompt": "Portrait Suncheon Seonamsa main courtyard modest three-bay single-roof hall, paired three-story stone pagodas, Munyeom walking; architecture from historical description not measured reconstruction.",
+      "references": []
+    }
+  ],
+  "style": "Detailed watercolor on cream paper, sage greens, warm earth tones. Munyeom: bald young monk, plain cream-gray robes, beads, brown cloth bag. No text, badges, watermark. Landscape3:2 or card2:3.",
+  "corrections": {
+    "scene-08": "Close view shows a weathered granite dragon head protruding downward from underside of arch crown, not top outside face."
+  }
+}

@@ -10,9 +10,9 @@ const { chromium } = require('playwright'), { route } = require('./atlas-fixture
       await page.goto('https://sansanote.com' + episode.href);
       await page.waitForFunction(title => document.querySelector('[data-atlas-season]').textContent.includes(title),seasons[episode.season].title);
       const label = await page.locator('[data-atlas-season]').innerText();
-      assert(label.includes('EPISODE ' + String(Number(episode.number)).padStart(2, '0')));
+      assert(label.includes(episode.season==='03'?'특별편':'EPISODE ' + String(Number(episode.displayNumber||episode.number)).padStart(2, '0')));
       await page.locator('#startAtlas').click();
-      assert((await page.locator('.atlas-intro [data-atlas-season]').innerText()).includes('SEASON '+episode.season));
+      assert((await page.locator('.atlas-intro [data-atlas-season]').innerText()).includes(episode.season==='03'?'특별편':'SEASON '+episode.season));
       assert((await page.locator('.atlas-season-progress').innerText()).includes('0/12'));
       await page.locator('[data-atlas=resume]').click();
       assert.equal(await page.locator('#atlasBody [data-atlas-season]').count(), 0);

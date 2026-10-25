@@ -1,0 +1,168 @@
+{
+  "episode": "yongjusa-022",
+  "artType": "AI-generated imaginative watercolor",
+  "notReconstruction": true,
+  "license": "CC BY-SA 4.0",
+  "files": [
+    {
+      "file": "card-01-small.webp",
+      "bytes": 88344,
+      "sha256": "369511b68b5093633b989ba194b54f9f8074a3c89dfdc04c0865d99d7c22e73e"
+    },
+    {
+      "file": "card-01.webp",
+      "bytes": 346162,
+      "sha256": "20e42d845bb02c8f0a60ed7f93723331bcca27bc30ce5a4c1e56c8fad104ff8a"
+    },
+    {
+      "file": "card-02-small.webp",
+      "bytes": 71646,
+      "sha256": "997bd8cb9279a3caa6c2d7d3417cfcfcfade107ff2f4e1777d8b0355db187321"
+    },
+    {
+      "file": "card-02.webp",
+      "bytes": 274682,
+      "sha256": "15f452fe115fdfb8581bae89c6f1b9053d7076e57d2fd6c6c2324d2f38e987d4"
+    },
+    {
+      "file": "card-03-small.webp",
+      "bytes": 87336,
+      "sha256": "49a483edd1747014187d2c979be07b4d5e0502ecfd208305c198e26eab163265"
+    },
+    {
+      "file": "card-03.webp",
+      "bytes": 320784,
+      "sha256": "9ad51b7f77a10a2e04e2d319259ee0e0526116b7cf3f0db8cab67f5ab573bb0d"
+    },
+    {
+      "file": "scene-01-small.webp",
+      "bytes": 44392,
+      "sha256": "5d8c3f8c107972ea9120018844ce82446d9e8b0d25e1adb25703299fac653ca4"
+    },
+    {
+      "file": "scene-01.webp",
+      "bytes": 341746,
+      "sha256": "794f4f17fbf815e5df6daa3e0110a352a695187388ea2bbfd11a9fce0cf69440"
+    },
+    {
+      "file": "scene-02-small.webp",
+      "bytes": 36536,
+      "sha256": "7e43b946f48d31a8b69f8648d9ab10dfe45fe0e38606c6fadc650fee185e32b2"
+    },
+    {
+      "file": "scene-02.webp",
+      "bytes": 243778,
+      "sha256": "087251d3c5024af1083b11e520124ebb7f42106193682de6bf40103a5f6c9843"
+    },
+    {
+      "file": "scene-03-small.webp",
+      "bytes": 50930,
+      "sha256": "647a6646f71dbf22fe6d1cb1298d3cb6c14ec70dbe035a0ab21ac000eff2a664"
+    },
+    {
+      "file": "scene-03.webp",
+      "bytes": 394958,
+      "sha256": "d75d991fd1049f05483b561f6d4f062447ccf157b0f39a12119fbe4239a5a5c9"
+    },
+    {
+      "file": "scene-04-small.webp",
+      "bytes": 45468,
+      "sha256": "66e50511fc75433056c6c8745884f1d880666d56b6af61ccf44fd405783b327e"
+    },
+    {
+      "file": "scene-04.webp",
+      "bytes": 299508,
+      "sha256": "a8e45fbe450cd92b48a11d6a7107063a2463bbf899c5f36ee5516e7372ef68de"
+    },
+    {
+      "file": "scene-05-small.webp",
+      "bytes": 41282,
+      "sha256": "7dcaf0e246804ba9e882b33d7f57ff6db1d1787b9392be5536e37239e86d4b10"
+    },
+    {
+      "file": "scene-05.webp",
+      "bytes": 311116,
+      "sha256": "22b9ff5ecf20e4c8a4e9ae978b05e4302855b78c60d4522ea6b3850c0a11ce38"
+    },
+    {
+      "file": "scene-06-small.webp",
+      "bytes": 44272,
+      "sha256": "38cc6d799e5815cea79c8433e760d4cd992f4e1d8c44f21b6083931a8b1b81f3"
+    },
+    {
+      "file": "scene-06.webp",
+      "bytes": 311334,
+      "sha256": "4656e8c5af858cdbdfd4126b0d6d5d7ef7267fb7dd3997ba2fcbfcd4dd25cd5f"
+    },
+    {
+      "file": "scene-07-small.webp",
+      "bytes": 33536,
+      "sha256": "29c8e6e3ad4aa5a621e45ee690ee6ad5327401168fef72184ab252925606560b"
+    },
+    {
+      "file": "scene-07.webp",
+      "bytes": 265520,
+      "sha256": "cd66c362b657b5cc5ecb045c5f681b823671ecbbcd6d5fcd642b88482a62040a"
+    },
+    {
+      "file": "scene-08-small.webp",
+      "bytes": 43024,
+      "sha256": "da1bdf41c5660f74f48c07c6ba90e598734519bc550d7aff0f4145a69d1d685f"
+    },
+    {
+      "file": "scene-08.webp",
+      "bytes": 300754,
+      "sha256": "408c8fa340e5e119904e18c1475f6a3a92d9681192e48b4955953a93a69cff6a"
+    },
+    {
+      "file": "scene-09-small.webp",
+      "bytes": 48906,
+      "sha256": "7eaf3d2c1b6f32e1a916bb6c45f95ff1ee0e4c5066bcf444a32bbe72410350b1"
+    },
+    {
+      "file": "scene-09.webp",
+      "bytes": 352320,
+      "sha256": "532ad4009e1a295df1a0efa203cacd81359c6cf2b788b7320346ab3c16440cb4"
+    },
+    {
+      "file": "scene-10-small.webp",
+      "bytes": 42096,
+      "sha256": "0fc6825843b0f3a2ef62f002789ec6aa531aeeebac9e62a8b4ff8135e32a852a"
+    },
+    {
+      "file": "scene-10.webp",
+      "bytes": 330006,
+      "sha256": "b9b1a8b6d6432a461ec5740c02cb7105eede1d81a81c26c69b078cf7da0ae178"
+    },
+    {
+      "file": "scene-11-small.webp",
+      "bytes": 34584,
+      "sha256": "00598f0d3106351216cf91dd8f1edd2fb569c6bc29603f482f910eca621790d0"
+    },
+    {
+      "file": "scene-11.webp",
+      "bytes": 247704,
+      "sha256": "d881d54ebc9a1530403fcc6ae2b3cb75f340e20e3cc4023419413dfd810ade41"
+    },
+    {
+      "file": "scene-12-small.webp",
+      "bytes": 39222,
+      "sha256": "cbdf87ca330517958d1983d62ff36eb6c02e3c64b0bcdc51378bc49ba1e96481"
+    },
+    {
+      "file": "scene-12.webp",
+      "bytes": 286262,
+      "sha256": "e13671089731f3da962ded7369043346a20c9e1f2f6cc762b7a718a1167e2fd6"
+    },
+    {
+      "file": "yongjusa-cover-small.webp",
+      "bytes": 44702,
+      "sha256": "187428dd78f95c26332fa04580222513aacfa1722580110140b3b0de5c7c7d3f"
+    },
+    {
+      "file": "yongjusa-cover.webp",
+      "bytes": 347662,
+      "sha256": "21bf77bd36feddfcd02e985e768e8eacc597cb2fe14382a48d53911788f4aed8"
+    }
+  ]
+}
