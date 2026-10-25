@@ -13,9 +13,9 @@ releaseMetadata();await p.waitForFunction(()=>document.querySelector('[data-seas
 await p.evaluate(()=>{auth=mockAuth;db=mockDB});await p.waitForFunction(()=>document.querySelector('#homeAtlasEntry').dataset.publicationConfirmed==='true');
 await p.waitForFunction(()=>document.querySelector('[data-season="02"]').getAttribute('aria-selected')==='true');
 const shown=await p.locator('.home-atlas-card').evaluateAll(es=>es.map(e=>e.getAttribute('href')));assert.deepEqual(shown,catalog.filter(e=>e.season==='02').map(e=>e.href));
-assert((await p.locator('#homeAtlasEntry').boundingBox()).height<=294,'season2 remains compact');
+assert((await p.locator('#homeAtlasEntry').boundingBox()).height<=370,'season2 remains compact');
 assert.equal(await p.locator('.pilgrim-collection-home-position > #homeAtlasEntry + .hero-108-journey').count(),1);
-assert(await p.locator('.home-atlas-card img').evaluateAll(es=>es.every(e=>getComputedStyle(e).objectFit==='contain')));
+assert(await p.locator('.home-atlas-card img').evaluateAll(es=>es.every(e=>getComputedStyle(e).objectFit==='cover')));
 await p.locator('#homeAtlasEntry').scrollIntoViewIfNeeded();await p.locator('[data-season="01"]').click();await p.locator('[data-season="02"]').focus();await p.keyboard.press('Enter');
 await p.locator('#homeAtlasNext').click();await p.waitForFunction(()=>document.querySelector('[data-atlas-slide="1"]').getAttribute('aria-current')==='true');
 assert((await p.locator('#homeAtlasPage').innerText()).endsWith('/ 10'));

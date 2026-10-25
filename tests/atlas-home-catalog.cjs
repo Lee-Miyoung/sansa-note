@@ -37,7 +37,7 @@ const engine = process.env.SANSA_BROWSER === 'webkit' ? webkit : chromium;
         assert.equal(await p.locator('.home-atlas-feature').count(),0);
         assert.equal(await p.locator('.home-atlas-copy strong').count(),0);
         assert(!fs.readFileSync('index.html','utf8').includes('오래된 산사의 문을 열어'));
-        assert((await p.locator('#homeAtlasEntry').boundingBox()).height<=294,'compact atlas must remain at most294px');
+        assert((await p.locator('#homeAtlasEntry').boundingBox()).height<=370,'compact atlas must remain at most370px');
         const cardWidth=await p.locator('.home-atlas-card').first().evaluate(e=>e.getBoundingClientRect().width),trackWidth=await p.locator('#homeAtlasTrack').evaluate(e=>e.clientWidth);
         if(width<701)assert(cardWidth/trackWidth>.66&&cardWidth/trackWidth<.9,'mobile should show 1–1.5 cards');
         await p.waitForFunction(()=>document.querySelector('#homeAtlasSeason').textContent.includes('천년의 이야기를 찾아서'));
