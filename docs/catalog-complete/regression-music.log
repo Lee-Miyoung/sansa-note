@@ -1,0 +1,1 @@
+PASS chromium public existing real audio playback/time advances;one shared player;playlist same state;pause/share/deep link/no autoplay;zero initial audio requests;no fake temple song;fixture-only published temple registration wired into detail+room+existing playlist

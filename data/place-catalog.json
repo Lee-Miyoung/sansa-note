@@ -1,0 +1,1690 @@
+[
+  {
+    "id": "temple:각연사",
+    "name": "각연사",
+    "kind": "temple",
+    "region": "충청",
+    "locality": "괴산",
+    "hint": "괴산"
+  },
+  {
+    "id": "temple:갑사",
+    "name": "갑사",
+    "kind": "temple",
+    "region": "충청",
+    "locality": "공주",
+    "hint": ""
+  },
+  {
+    "id": "temple:갓바위(선본사)",
+    "name": "갓바위(선본사)",
+    "kind": "temple",
+    "region": "경상",
+    "locality": "경산",
+    "hint": ""
+  },
+  {
+    "id": "temple:개심사",
+    "name": "개심사",
+    "kind": "temple",
+    "region": "충청",
+    "locality": "서산",
+    "hint": ""
+  },
+  {
+    "id": "temple:개암사",
+    "name": "개암사",
+    "kind": "temple",
+    "region": "전라",
+    "locality": "부안",
+    "hint": ""
+  },
+  {
+    "id": "temple:건봉사",
+    "name": "건봉사",
+    "kind": "temple",
+    "region": "강원",
+    "locality": "고성",
+    "hint": ""
+  },
+  {
+    "id": "temple:고운사",
+    "name": "고운사",
+    "kind": "temple",
+    "region": "경상",
+    "locality": "의성",
+    "hint": ""
+  },
+  {
+    "id": "temple:골굴사",
+    "name": "골굴사",
+    "kind": "temple",
+    "region": "경상",
+    "locality": "경주",
+    "hint": ""
+  },
+  {
+    "id": "temple:관룡사",
+    "name": "관룡사",
+    "kind": "temple",
+    "region": "경상",
+    "locality": "창녕",
+    "hint": ""
+  },
+  {
+    "id": "temple:관음사",
+    "name": "관음사",
+    "kind": "temple",
+    "region": "제주",
+    "locality": "제주",
+    "hint": "제주 한라산"
+  },
+  {
+    "id": "temple:관촉사",
+    "name": "관촉사",
+    "kind": "temple",
+    "region": "충청",
+    "locality": "논산",
+    "hint": ""
+  },
+  {
+    "id": "temple:구인사",
+    "name": "구인사",
+    "kind": "temple",
+    "region": "충청",
+    "locality": "단양",
+    "hint": ""
+  },
+  {
+    "id": "temple:금산사",
+    "name": "금산사",
+    "kind": "temple",
+    "region": "전라",
+    "locality": "김제",
+    "hint": ""
+  },
+  {
+    "id": "temple:기림사",
+    "name": "기림사",
+    "kind": "temple",
+    "region": "경상",
+    "locality": "경주",
+    "hint": ""
+  },
+  {
+    "id": "temple:김룡사",
+    "name": "김룡사",
+    "kind": "temple",
+    "region": "경상",
+    "locality": "문경",
+    "hint": ""
+  },
+  {
+    "id": "temple:낙산사",
+    "name": "낙산사",
+    "kind": "temple",
+    "region": "강원",
+    "locality": "양양",
+    "hint": ""
+  },
+  {
+    "id": "temple:내소사",
+    "name": "내소사",
+    "kind": "temple",
+    "region": "전라",
+    "locality": "부안",
+    "hint": ""
+  },
+  {
+    "id": "temple:다솔사",
+    "name": "다솔사",
+    "kind": "temple",
+    "region": "경상",
+    "locality": "사천",
+    "hint": ""
+  },
+  {
+    "id": "temple:대승사",
+    "name": "대승사",
+    "kind": "temple",
+    "region": "경상",
+    "locality": "문경",
+    "hint": "문경 산북면"
+  },
+  {
+    "id": "temple:대원사",
+    "name": "대원사",
+    "kind": "temple",
+    "region": "경상",
+    "locality": "산청",
+    "hint": ""
+  },
+  {
+    "id": "temple:대조사",
+    "name": "대조사",
+    "kind": "temple",
+    "region": "충청",
+    "locality": "부여",
+    "hint": "부여 임천면"
+  },
+  {
+    "id": "temple:대흥사",
+    "name": "대흥사",
+    "kind": "temple",
+    "region": "전라",
+    "locality": "해남",
+    "hint": ""
+  },
+  {
+    "id": "temple:도갑사",
+    "name": "도갑사",
+    "kind": "temple",
+    "region": "전라",
+    "locality": "영암",
+    "hint": ""
+  },
+  {
+    "id": "temple:도리사",
+    "name": "도리사",
+    "kind": "temple",
+    "region": "경상",
+    "locality": "구미",
+    "hint": ""
+  },
+  {
+    "id": "temple:도선사",
+    "name": "도선사",
+    "kind": "temple",
+    "region": "수도권",
+    "locality": "서울",
+    "hint": "서울 우이동 북한산"
+  },
+  {
+    "id": "temple:도피안사",
+    "name": "도피안사",
+    "kind": "temple",
+    "region": "강원",
+    "locality": "철원",
+    "hint": ""
+  },
+  {
+    "id": "temple:동학사",
+    "name": "동학사",
+    "kind": "temple",
+    "region": "충청",
+    "locality": "공주",
+    "hint": ""
+  },
+  {
+    "id": "temple:동화사",
+    "name": "동화사",
+    "kind": "temple",
+    "region": "경상",
+    "locality": "대구",
+    "hint": "대구 팔공산"
+  },
+  {
+    "id": "temple:마곡사",
+    "name": "마곡사",
+    "kind": "temple",
+    "region": "충청",
+    "locality": "공주",
+    "hint": ""
+  },
+  {
+    "id": "temple:만어사",
+    "name": "만어사",
+    "kind": "temple",
+    "region": "경상",
+    "locality": "밀양",
+    "hint": ""
+  },
+  {
+    "id": "temple:무량사",
+    "name": "무량사",
+    "kind": "temple",
+    "region": "충청",
+    "locality": "부여",
+    "hint": ""
+  },
+  {
+    "id": "temple:무위사",
+    "name": "무위사",
+    "kind": "temple",
+    "region": "전라",
+    "locality": "강진",
+    "hint": ""
+  },
+  {
+    "id": "temple:문수사",
+    "name": "문수사",
+    "kind": "temple",
+    "region": "충청",
+    "locality": "서산",
+    "hint": "서산 가야산"
+  },
+  {
+    "id": "temple:미황사",
+    "name": "미황사",
+    "kind": "temple",
+    "region": "전라",
+    "locality": "해남",
+    "hint": ""
+  },
+  {
+    "id": "temple:백담사",
+    "name": "백담사",
+    "kind": "temple",
+    "region": "강원",
+    "locality": "인제",
+    "hint": ""
+  },
+  {
+    "id": "temple:백련사",
+    "name": "백련사",
+    "kind": "temple",
+    "region": "전라",
+    "locality": "강진",
+    "hint": "강진 만덕산"
+  },
+  {
+    "id": "temple:백양사",
+    "name": "백양사",
+    "kind": "temple",
+    "region": "전라",
+    "locality": "장성",
+    "hint": ""
+  },
+  {
+    "id": "temple:범어사",
+    "name": "범어사",
+    "kind": "temple",
+    "region": "경상",
+    "locality": "부산",
+    "hint": ""
+  },
+  {
+    "id": "temple:법주사",
+    "name": "법주사",
+    "kind": "temple",
+    "region": "충청",
+    "locality": "보은",
+    "hint": ""
+  },
+  {
+    "id": "temple:법화사",
+    "name": "법화사",
+    "kind": "temple",
+    "region": "제주",
+    "locality": "제주",
+    "hint": "제주 서귀포"
+  },
+  {
+    "id": "temple:법흥사",
+    "name": "법흥사",
+    "kind": "temple",
+    "region": "강원",
+    "locality": "영월",
+    "hint": ""
+  },
+  {
+    "id": "temple:벽송사",
+    "name": "벽송사",
+    "kind": "temple",
+    "region": "경상",
+    "locality": "함양",
+    "hint": ""
+  },
+  {
+    "id": "temple:보광사",
+    "name": "보광사",
+    "kind": "temple",
+    "region": "수도권",
+    "locality": "파주",
+    "hint": ""
+  },
+  {
+    "id": "temple:보리암",
+    "name": "보리암",
+    "kind": "temple",
+    "region": "경상",
+    "locality": "남해",
+    "hint": "남해 금산"
+  },
+  {
+    "id": "temple:보문사",
+    "name": "보문사",
+    "kind": "temple",
+    "region": "수도권",
+    "locality": "강화",
+    "hint": "강화 석모도"
+  },
+  {
+    "id": "temple:봉선사",
+    "name": "봉선사",
+    "kind": "temple",
+    "region": "수도권",
+    "locality": "남양주",
+    "hint": ""
+  },
+  {
+    "id": "temple:봉암사",
+    "name": "봉암사",
+    "kind": "temple",
+    "region": "경상",
+    "locality": "문경",
+    "hint": ""
+  },
+  {
+    "id": "temple:봉원사",
+    "name": "봉원사",
+    "kind": "temple",
+    "region": "수도권",
+    "locality": "서울",
+    "hint": ""
+  },
+  {
+    "id": "temple:봉은사",
+    "name": "봉은사",
+    "kind": "temple",
+    "region": "수도권",
+    "locality": "서울",
+    "hint": ""
+  },
+  {
+    "id": "temple:봉정사",
+    "name": "봉정사",
+    "kind": "temple",
+    "region": "경상",
+    "locality": "안동",
+    "hint": ""
+  },
+  {
+    "id": "temple:봉정암",
+    "name": "봉정암",
+    "kind": "temple",
+    "region": "강원",
+    "locality": "인제",
+    "hint": ""
+  },
+  {
+    "id": "temple:부석사",
+    "name": "부석사",
+    "kind": "temple",
+    "region": "경상",
+    "locality": "영주",
+    "hint": ""
+  },
+  {
+    "id": "temple:분황사",
+    "name": "분황사",
+    "kind": "temple",
+    "region": "경상",
+    "locality": "경주",
+    "hint": ""
+  },
+  {
+    "id": "temple:불갑사",
+    "name": "불갑사",
+    "kind": "temple",
+    "region": "전라",
+    "locality": "영광",
+    "hint": ""
+  },
+  {
+    "id": "temple:불국사",
+    "name": "불국사",
+    "kind": "temple",
+    "region": "경상",
+    "locality": "경주",
+    "hint": ""
+  },
+  {
+    "id": "temple:불영사",
+    "name": "불영사",
+    "kind": "temple",
+    "region": "경상",
+    "locality": "울진",
+    "hint": ""
+  },
+  {
+    "id": "temple:산방굴사",
+    "name": "산방굴사",
+    "kind": "temple",
+    "region": "제주",
+    "locality": "제주",
+    "hint": ""
+  },
+  {
+    "id": "temple:삼광사",
+    "name": "삼광사",
+    "kind": "temple",
+    "region": "경상",
+    "locality": "부산",
+    "hint": "부산 부산진구 초읍동 백양산"
+  },
+  {
+    "id": "temple:상원사",
+    "name": "상원사",
+    "kind": "temple",
+    "region": "강원",
+    "locality": "평창",
+    "hint": ""
+  },
+  {
+    "id": "temple:석굴암",
+    "name": "석굴암",
+    "kind": "temple",
+    "region": "경상",
+    "locality": "경주",
+    "hint": ""
+  },
+  {
+    "id": "temple:선암사",
+    "name": "선암사",
+    "kind": "temple",
+    "region": "전라",
+    "locality": "순천",
+    "hint": ""
+  },
+  {
+    "id": "temple:선운사",
+    "name": "선운사",
+    "kind": "temple",
+    "region": "전라",
+    "locality": "고창",
+    "hint": ""
+  },
+  {
+    "id": "temple:송광사",
+    "name": "송광사",
+    "kind": "temple",
+    "region": "전라",
+    "locality": "순천",
+    "hint": "순천 조계산"
+  },
+  {
+    "id": "temple:수덕사",
+    "name": "수덕사",
+    "kind": "temple",
+    "region": "충청",
+    "locality": "예산",
+    "hint": ""
+  },
+  {
+    "id": "temple:수종사",
+    "name": "수종사",
+    "kind": "temple",
+    "region": "수도권",
+    "locality": "남양주",
+    "hint": "남양주 조안면 운길산"
+  },
+  {
+    "id": "temple:신륵사",
+    "name": "신륵사",
+    "kind": "temple",
+    "region": "수도권",
+    "locality": "여주",
+    "hint": ""
+  },
+  {
+    "id": "temple:신원사",
+    "name": "신원사",
+    "kind": "temple",
+    "region": "충청",
+    "locality": "공주",
+    "hint": ""
+  },
+  {
+    "id": "temple:신흥사",
+    "name": "신흥사",
+    "kind": "temple",
+    "region": "강원",
+    "locality": "속초",
+    "hint": "속초 설악산"
+  },
+  {
+    "id": "temple:실상사",
+    "name": "실상사",
+    "kind": "temple",
+    "region": "전라",
+    "locality": "남원",
+    "hint": ""
+  },
+  {
+    "id": "temple:쌍계사",
+    "name": "쌍계사",
+    "kind": "temple",
+    "region": "경상",
+    "locality": "하동",
+    "hint": ""
+  },
+  {
+    "id": "temple:쌍봉사",
+    "name": "쌍봉사",
+    "kind": "temple",
+    "region": "전라",
+    "locality": "화순",
+    "hint": ""
+  },
+  {
+    "id": "temple:약천사",
+    "name": "약천사",
+    "kind": "temple",
+    "region": "제주",
+    "locality": "제주",
+    "hint": ""
+  },
+  {
+    "id": "temple:연곡사",
+    "name": "연곡사",
+    "kind": "temple",
+    "region": "전라",
+    "locality": "구례",
+    "hint": ""
+  },
+  {
+    "id": "temple:오어사",
+    "name": "오어사",
+    "kind": "temple",
+    "region": "경상",
+    "locality": "포항",
+    "hint": ""
+  },
+  {
+    "id": "temple:옥천사",
+    "name": "옥천사",
+    "kind": "temple",
+    "region": "경상",
+    "locality": "고성",
+    "hint": "고성 연화산"
+  },
+  {
+    "id": "temple:완주 송광사",
+    "name": "완주 송광사",
+    "kind": "temple",
+    "region": "전라",
+    "locality": "완주",
+    "hint": "완주 종남산"
+  },
+  {
+    "id": "temple:용문사(양평)",
+    "name": "용문사(양평)",
+    "kind": "temple",
+    "region": "수도권",
+    "locality": "양평",
+    "hint": ""
+  },
+  {
+    "id": "temple:용문사(예천)",
+    "name": "용문사(예천)",
+    "kind": "temple",
+    "region": "경상",
+    "locality": "예천",
+    "hint": "예천 소백산"
+  },
+  {
+    "id": "temple:용주사",
+    "name": "용주사",
+    "kind": "temple",
+    "region": "수도권",
+    "locality": "화성",
+    "hint": "화성"
+  },
+  {
+    "id": "temple:운문사",
+    "name": "운문사",
+    "kind": "temple",
+    "region": "경상",
+    "locality": "청도",
+    "hint": ""
+  },
+  {
+    "id": "temple:운주사",
+    "name": "운주사",
+    "kind": "temple",
+    "region": "전라",
+    "locality": "화순",
+    "hint": ""
+  },
+  {
+    "id": "temple:원당사",
+    "name": "원당사",
+    "kind": "temple",
+    "region": "제주",
+    "locality": "제주",
+    "hint": ""
+  },
+  {
+    "id": "temple:월정사",
+    "name": "월정사",
+    "kind": "temple",
+    "region": "강원",
+    "locality": "평창",
+    "hint": ""
+  },
+  {
+    "id": "temple:은하사",
+    "name": "은하사",
+    "kind": "temple",
+    "region": "경상",
+    "locality": "김해",
+    "hint": ""
+  },
+  {
+    "id": "temple:은해사",
+    "name": "은해사",
+    "kind": "temple",
+    "region": "경상",
+    "locality": "영천",
+    "hint": ""
+  },
+  {
+    "id": "temple:자재암",
+    "name": "자재암",
+    "kind": "temple",
+    "region": "수도권",
+    "locality": "동두천",
+    "hint": ""
+  },
+  {
+    "id": "temple:장안사(부산)",
+    "name": "장안사(부산)",
+    "kind": "temple",
+    "region": "경상",
+    "locality": "부산",
+    "hint": "부산 기장 장안읍"
+  },
+  {
+    "id": "temple:전등사",
+    "name": "전등사",
+    "kind": "temple",
+    "region": "수도권",
+    "locality": "강화",
+    "hint": ""
+  },
+  {
+    "id": "temple:정암사",
+    "name": "정암사",
+    "kind": "temple",
+    "region": "강원",
+    "locality": "정선",
+    "hint": ""
+  },
+  {
+    "id": "temple:조계사",
+    "name": "조계사",
+    "kind": "temple",
+    "region": "수도권",
+    "locality": "서울",
+    "hint": ""
+  },
+  {
+    "id": "temple:존자암",
+    "name": "존자암",
+    "kind": "temple",
+    "region": "제주",
+    "locality": "제주",
+    "hint": ""
+  },
+  {
+    "id": "temple:직지사",
+    "name": "직지사",
+    "kind": "temple",
+    "region": "경상",
+    "locality": "김천",
+    "hint": ""
+  },
+  {
+    "id": "temple:진관사",
+    "name": "진관사",
+    "kind": "temple",
+    "region": "수도권",
+    "locality": "서울",
+    "hint": ""
+  },
+  {
+    "id": "temple:천은사",
+    "name": "천은사",
+    "kind": "temple",
+    "region": "전라",
+    "locality": "구례",
+    "hint": ""
+  },
+  {
+    "id": "temple:청량사",
+    "name": "청량사",
+    "kind": "temple",
+    "region": "경상",
+    "locality": "봉화",
+    "hint": ""
+  },
+  {
+    "id": "temple:청암사",
+    "name": "청암사",
+    "kind": "temple",
+    "region": "경상",
+    "locality": "김천",
+    "hint": "김천 증산면"
+  },
+  {
+    "id": "temple:청평사",
+    "name": "청평사",
+    "kind": "temple",
+    "region": "강원",
+    "locality": "춘천",
+    "hint": ""
+  },
+  {
+    "id": "temple:칠장사",
+    "name": "칠장사",
+    "kind": "temple",
+    "region": "수도권",
+    "locality": "안성",
+    "hint": ""
+  },
+  {
+    "id": "temple:태안사",
+    "name": "태안사",
+    "kind": "temple",
+    "region": "전라",
+    "locality": "곡성",
+    "hint": ""
+  },
+  {
+    "id": "temple:통도사",
+    "name": "통도사",
+    "kind": "temple",
+    "region": "경상",
+    "locality": "양산",
+    "hint": ""
+  },
+  {
+    "id": "temple:파계사",
+    "name": "파계사",
+    "kind": "temple",
+    "region": "경상",
+    "locality": "대구",
+    "hint": "대구 팔공산"
+  },
+  {
+    "id": "temple:표충사",
+    "name": "표충사",
+    "kind": "temple",
+    "region": "경상",
+    "locality": "밀양",
+    "hint": ""
+  },
+  {
+    "id": "temple:해동용궁사",
+    "name": "해동용궁사",
+    "kind": "temple",
+    "region": "경상",
+    "locality": "부산",
+    "hint": "부산 기장 해안"
+  },
+  {
+    "id": "temple:해인사",
+    "name": "해인사",
+    "kind": "temple",
+    "region": "경상",
+    "locality": "합천",
+    "hint": ""
+  },
+  {
+    "id": "temple:향일암",
+    "name": "향일암",
+    "kind": "temple",
+    "region": "전라",
+    "locality": "여수",
+    "hint": ""
+  },
+  {
+    "id": "temple:화계사",
+    "name": "화계사",
+    "kind": "temple",
+    "region": "수도권",
+    "locality": "서울",
+    "hint": ""
+  },
+  {
+    "id": "temple:화암사",
+    "name": "화암사",
+    "kind": "temple",
+    "region": "전라",
+    "locality": "완주",
+    "hint": "완주 불명산"
+  },
+  {
+    "id": "temple:화엄사",
+    "name": "화엄사",
+    "kind": "temple",
+    "region": "전라",
+    "locality": "구례",
+    "hint": "구례 화엄사"
+  },
+  {
+    "id": "temple:회암사",
+    "name": "회암사",
+    "kind": "temple",
+    "region": "수도권",
+    "locality": "양주",
+    "hint": ""
+  },
+  {
+    "id": "temple:휴휴암",
+    "name": "휴휴암",
+    "kind": "temple",
+    "region": "강원",
+    "locality": "양양",
+    "hint": ""
+  },
+  {
+    "id": "temple:흥국사(여수)",
+    "name": "흥국사(여수)",
+    "kind": "temple",
+    "region": "전라",
+    "locality": "여수",
+    "hint": "여수 영취산"
+  },
+  {
+    "id": "mountain:가리왕산",
+    "name": "가리왕산",
+    "kind": "mountain",
+    "region": "강원",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:가야산",
+    "name": "가야산",
+    "kind": "mountain",
+    "region": "경상",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:가야산(서산)",
+    "name": "가야산(서산)",
+    "kind": "mountain",
+    "region": "충청",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:가지산",
+    "name": "가지산",
+    "kind": "mountain",
+    "region": "경상",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:간월산",
+    "name": "간월산",
+    "kind": "mountain",
+    "region": "경상",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:감악산",
+    "name": "감악산",
+    "kind": "mountain",
+    "region": "수도권",
+    "locality": "경기 파주시 적성면 설마리 감악산",
+    "hint": "경기 파주시 적성면 설마리 감악산"
+  },
+  {
+    "id": "mountain:검단산",
+    "name": "검단산",
+    "kind": "mountain",
+    "region": "수도권",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:계룡산",
+    "name": "계룡산",
+    "kind": "mountain",
+    "region": "충청",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:계방산",
+    "name": "계방산",
+    "kind": "mountain",
+    "region": "강원",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:관악산",
+    "name": "관악산",
+    "kind": "mountain",
+    "region": "수도권",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:광덕산",
+    "name": "광덕산",
+    "kind": "mountain",
+    "region": "강원",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:국망봉",
+    "name": "국망봉",
+    "kind": "mountain",
+    "region": "수도권",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:금오산",
+    "name": "금오산",
+    "kind": "mountain",
+    "region": "경상",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:금원산",
+    "name": "금원산",
+    "kind": "mountain",
+    "region": "경상",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:금정산",
+    "name": "금정산",
+    "kind": "mountain",
+    "region": "경상",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:남산",
+    "name": "남산",
+    "kind": "mountain",
+    "region": "수도권",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:내장산",
+    "name": "내장산",
+    "kind": "mountain",
+    "region": "전라",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:대둔산",
+    "name": "대둔산",
+    "kind": "mountain",
+    "region": "전라",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:대암산",
+    "name": "대암산",
+    "kind": "mountain",
+    "region": "강원",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:대야산",
+    "name": "대야산",
+    "kind": "mountain",
+    "region": "경상",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:덕유산",
+    "name": "덕유산",
+    "kind": "mountain",
+    "region": "전라",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:도봉산",
+    "name": "도봉산",
+    "kind": "mountain",
+    "region": "수도권",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:두륜산",
+    "name": "두륜산",
+    "kind": "mountain",
+    "region": "전라",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:두타산",
+    "name": "두타산",
+    "kind": "mountain",
+    "region": "강원",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:마니산",
+    "name": "마니산",
+    "kind": "mountain",
+    "region": "수도권",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:마이산",
+    "name": "마이산",
+    "kind": "mountain",
+    "region": "전라",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:매봉산",
+    "name": "매봉산",
+    "kind": "mountain",
+    "region": "강원",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:명성산",
+    "name": "명성산",
+    "kind": "mountain",
+    "region": "강원",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:명지산",
+    "name": "명지산",
+    "kind": "mountain",
+    "region": "수도권",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:모악산",
+    "name": "모악산",
+    "kind": "mountain",
+    "region": "전라",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:무등산",
+    "name": "무등산",
+    "kind": "mountain",
+    "region": "전라",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:무학산",
+    "name": "무학산",
+    "kind": "mountain",
+    "region": "경상",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:민둥산",
+    "name": "민둥산",
+    "kind": "mountain",
+    "region": "강원",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:민주지산",
+    "name": "민주지산",
+    "kind": "mountain",
+    "region": "충청",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:방태산",
+    "name": "방태산",
+    "kind": "mountain",
+    "region": "강원",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:백덕산",
+    "name": "백덕산",
+    "kind": "mountain",
+    "region": "강원",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:백운산",
+    "name": "백운산",
+    "kind": "mountain",
+    "region": "전라",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:변산",
+    "name": "변산",
+    "kind": "mountain",
+    "region": "전라",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:북한산",
+    "name": "북한산",
+    "kind": "mountain",
+    "region": "수도권",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:불암산",
+    "name": "불암산",
+    "kind": "mountain",
+    "region": "수도권",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:비슬산",
+    "name": "비슬산",
+    "kind": "mountain",
+    "region": "경상",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:삼악산",
+    "name": "삼악산",
+    "kind": "mountain",
+    "region": "강원",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:서대산",
+    "name": "서대산",
+    "kind": "mountain",
+    "region": "충청",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:설악산",
+    "name": "설악산",
+    "kind": "mountain",
+    "region": "강원",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:소백산",
+    "name": "소백산",
+    "kind": "mountain",
+    "region": "경상",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:소요산",
+    "name": "소요산",
+    "kind": "mountain",
+    "region": "수도권",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:속리산",
+    "name": "속리산",
+    "kind": "mountain",
+    "region": "충청",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:수락산",
+    "name": "수락산",
+    "kind": "mountain",
+    "region": "수도권",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:신불산",
+    "name": "신불산",
+    "kind": "mountain",
+    "region": "경상",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:아차산",
+    "name": "아차산",
+    "kind": "mountain",
+    "region": "수도권",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:연인산",
+    "name": "연인산",
+    "kind": "mountain",
+    "region": "수도권",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:영축산",
+    "name": "영축산",
+    "kind": "mountain",
+    "region": "경상",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:예봉산",
+    "name": "예봉산",
+    "kind": "mountain",
+    "region": "수도권",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:오대산",
+    "name": "오대산",
+    "kind": "mountain",
+    "region": "강원",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:오봉산",
+    "name": "오봉산",
+    "kind": "mountain",
+    "region": "강원",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:오서산",
+    "name": "오서산",
+    "kind": "mountain",
+    "region": "충청",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:용문산",
+    "name": "용문산",
+    "kind": "mountain",
+    "region": "수도권",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:운문산",
+    "name": "운문산",
+    "kind": "mountain",
+    "region": "경상",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:운악산",
+    "name": "운악산",
+    "kind": "mountain",
+    "region": "수도권",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:운장산",
+    "name": "운장산",
+    "kind": "mountain",
+    "region": "전라",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:월악산",
+    "name": "월악산",
+    "kind": "mountain",
+    "region": "충청",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:월출산",
+    "name": "월출산",
+    "kind": "mountain",
+    "region": "전라",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:유명산",
+    "name": "유명산",
+    "kind": "mountain",
+    "region": "수도권",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:육백산",
+    "name": "육백산",
+    "kind": "mountain",
+    "region": "강원",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:응봉산",
+    "name": "응봉산",
+    "kind": "mountain",
+    "region": "강원",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:인왕산",
+    "name": "인왕산",
+    "kind": "mountain",
+    "region": "수도권",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:장산",
+    "name": "장산",
+    "kind": "mountain",
+    "region": "경상",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:재약산",
+    "name": "재약산",
+    "kind": "mountain",
+    "region": "경상",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:점봉산",
+    "name": "점봉산",
+    "kind": "mountain",
+    "region": "강원",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:조계산",
+    "name": "조계산",
+    "kind": "mountain",
+    "region": "전라",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:종남산",
+    "name": "종남산",
+    "kind": "mountain",
+    "region": "전라",
+    "locality": "전북 완주군 소양면 종남산 송광사",
+    "hint": "전북 완주군 소양면 종남산 송광사"
+  },
+  {
+    "id": "mountain:주왕산",
+    "name": "주왕산",
+    "kind": "mountain",
+    "region": "경상",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:주흘산",
+    "name": "주흘산",
+    "kind": "mountain",
+    "region": "경상",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:지리망산",
+    "name": "지리망산",
+    "kind": "mountain",
+    "region": "경상",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:지리산",
+    "name": "지리산",
+    "kind": "mountain",
+    "region": "경상",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:천관산",
+    "name": "천관산",
+    "kind": "mountain",
+    "region": "전라",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:천마산",
+    "name": "천마산",
+    "kind": "mountain",
+    "region": "수도권",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:천성산",
+    "name": "천성산",
+    "kind": "mountain",
+    "region": "경상",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:청계산",
+    "name": "청계산",
+    "kind": "mountain",
+    "region": "수도권",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:청량산",
+    "name": "청량산",
+    "kind": "mountain",
+    "region": "경상",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:청옥산",
+    "name": "청옥산",
+    "kind": "mountain",
+    "region": "강원",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:축령산",
+    "name": "축령산",
+    "kind": "mountain",
+    "region": "전라",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:축령산(남양주)",
+    "name": "축령산(남양주)",
+    "kind": "mountain",
+    "region": "수도권",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:치악산",
+    "name": "치악산",
+    "kind": "mountain",
+    "region": "강원",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:칠갑산",
+    "name": "칠갑산",
+    "kind": "mountain",
+    "region": "충청",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:태기산",
+    "name": "태기산",
+    "kind": "mountain",
+    "region": "강원",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:태백산",
+    "name": "태백산",
+    "kind": "mountain",
+    "region": "강원",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:태화산",
+    "name": "태화산",
+    "kind": "mountain",
+    "region": "수도권",
+    "locality": "경기 광주시 도척면 태화산",
+    "hint": "경기 광주시 도척면 태화산"
+  },
+  {
+    "id": "mountain:팔공산",
+    "name": "팔공산",
+    "kind": "mountain",
+    "region": "경상",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:팔봉산",
+    "name": "팔봉산",
+    "kind": "mountain",
+    "region": "강원",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:팔영산",
+    "name": "팔영산",
+    "kind": "mountain",
+    "region": "전라",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:한라산",
+    "name": "한라산",
+    "kind": "mountain",
+    "region": "제주",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:함백산",
+    "name": "함백산",
+    "kind": "mountain",
+    "region": "강원",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:화악산",
+    "name": "화악산",
+    "kind": "mountain",
+    "region": "강원",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:화야산",
+    "name": "화야산",
+    "kind": "mountain",
+    "region": "수도권",
+    "locality": "양평 서종면 가평 설악면 화야산",
+    "hint": "양평 서종면 가평 설악면 화야산"
+  },
+  {
+    "id": "mountain:화왕산",
+    "name": "화왕산",
+    "kind": "mountain",
+    "region": "경상",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:황매산",
+    "name": "황매산",
+    "kind": "mountain",
+    "region": "경상",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:황석산",
+    "name": "황석산",
+    "kind": "mountain",
+    "region": "경상",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:황장산",
+    "name": "황장산",
+    "kind": "mountain",
+    "region": "경상",
+    "locality": "",
+    "hint": ""
+  },
+  {
+    "id": "mountain:희양산",
+    "name": "희양산",
+    "kind": "mountain",
+    "region": "경상",
+    "locality": "",
+    "hint": ""
+  }
+]

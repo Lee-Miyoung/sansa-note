@@ -2,12 +2,16 @@
 // index.html은 온라인일 때 항상 최신 버전을 먼저 가져오고,
 // 오프라인일 때만 캐시를 사용합니다.
 
-const CACHE_VERSION = 'sansanote-v20-ui-content-20261026';
+const CACHE_VERSION = 'sansanote-v21-catalog-20261026';
 
 // 첫 방문에는 작은 앱 셸만 준비합니다. 사진·음악·영상은 사용 시 아래 fetch
 // 핸들러가 캐시하므로 불필요한 다운로드가 첫 화면과 회선을 다투지 않습니다.
 // ./ 와 ./index.html 은 같은 문서이므로 설치 때 한 번만 받습니다.
 const CORE_ASSETS = [
+  './scripts/place-identity.js?v=20261026-catalog',
+  './scripts/temple-covers.js?v=20261026-catalog',
+  './scripts/mountain-covers.js?v=20261026-catalog',
+  './scripts/visit-tips.js?v=20261026-catalog',
   './',
   './scripts/startup-cloud.js?v=20261019-resilient',
   './scripts/navigation.js?v=20261026-ui',

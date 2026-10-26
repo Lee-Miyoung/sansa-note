@@ -22457,7 +22457,8 @@ body.catalog-screen-open #catalogOverlay,
 }
 </style>
 
-<script src="./scripts/temple-covers.js?v=20261026-ui"></script>
+<script src="./scripts/place-identity.js?v=20261026-catalog"></script>
+<script src="./scripts/temple-covers.js?v=20261026-catalog"></script>
 </head>
 <body>
 
@@ -22955,7 +22956,6 @@ body.catalog-screen-open #catalogOverlay,
         <div class="desc-block" id="dSight" style="background:#eef7f3;border-left:3px solid var(--moss);padding:10px 12px;border-radius:8px;"></div>
       </div>
 
-      <div class="section-label">방문 전 한눈 팁</div>
       <div id="dVisitTips" style="background:#fff8e6;border-left:3px solid var(--gold);padding:10px 12px;border-radius:8px;font-size:12.5px;line-height:1.7;"></div>
 
       <div class="section-label">위치</div>
@@ -28488,7 +28488,7 @@ function renderVisitTips(d){
   } else {
     document.getElementById('dDocentWrap').style.display = 'none';
   }
-  if(window.SansaVisitTips){SansaVisitTips.render(d,wrap);return;}
+  if(window.SansaVisitTips){return SansaVisitTips.render(d,wrap);}
   wrap.textContent='이 장소의 방문 정보를 확인하고 있어요.';
 }
 function fetchSunTimes(lat, lng, elId){
@@ -31460,18 +31460,18 @@ function lotusPlaceholderHtml(label='사진 확인 중',placeName=''){
     ${placeName?`<strong class="place-fallback-name">${escapeHtml(placeName)}</strong>`:''}<span class="place-fallback-status">${escapeHtml(label)}</span>
   </div>`;
 }
-function mountainPlaceholderHtml(label='산 풍경 수채화 · 실제 사진 준비 중',placeName='',place){
- const art=window.sansaMountainCovers?.find(place);if(art)return `<div class="cover-placeholder cover-placeholder-mountain mountain-watercolor-placeholder has-mountain-art" title="산세를 떠올린 감성 수채화 · 실제 풍경과 다를 수 있어요"><img src="${art.coverIllustration}" data-mountain-cover-id="${escapeAttr(art.id)}" alt="${escapeAttr(placeName)}의 산세를 떠올린 감성 수채화 · 실제 풍경과 다를 수 있어요" width="480" height="320" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='/images/temple-covers/default-watercolor.webp'"></div>`;
- return `<div class="cover-placeholder cover-placeholder-mountain mountain-watercolor-placeholder"><img src="/images/temple-covers/default-watercolor.webp" alt="특정 장소를 나타내지 않는 중립적인 숲길 수채화" width="768" height="512" loading="lazy" decoding="async">${placeName?`<strong class="place-fallback-name">${escapeHtml(placeName)}</strong>`:''}<span class="place-fallback-status">${escapeHtml(label)}</span></div>`;
+function mountainPlaceholderHtml(label='',placeName='',place){
+ const art=window.sansaMountainCovers?.find(place);const src=art?.coverIllustration||window.SansaPlaceIdentity.placeholder(place||{name:placeName},'mountain');
+ return `<div class="cover-placeholder cover-placeholder-mountain mountain-watercolor-placeholder${art?' has-mountain-art':''}"><img src="${escapeAttr(src)}" data-place-name="${escapeAttr(placeName)}" ${art?`data-mountain-cover-id="${escapeAttr(art.id)}"`:''} alt="${escapeAttr(placeName)} ${art?'대표 수채화':'개별 그림 확인 중 · 실제 풍경이 아닙니다'}" width="480" height="320" loading="lazy" decoding="async" onerror="window.sansaMountainCovers.failed(this)"></div>`;
 }
 function replaceBrokenCardCover(img,kind){
   if(!img)return;
   handleCoverPhotoError(img,kind);
 }
 function cardCoverMedia(photo, kind, name, place){
-  const painting=kind==='temple'?(window.sansaTempleCovers?.resolve?.(place)||{id:'temple:default',file:'default-watercolor.webp',isDefault:true}):null;
+  const painting=kind==='temple'?(window.sansaTempleCovers?.resolve?.(place)||{id:'temple:pending',src:window.SansaPlaceIdentity.placeholder(place||{name},'temple'),isDefault:true}):null;
   if(painting){
-    return '<div class="temple-watercolor-underlay" aria-hidden="true"></div>'+`<img class="card-cover-img stable-cover loaded temple-watercolor-cover" data-temple-cover-id="${escapeAttr(painting.id)}" src="${painting.src||'./images/temple-covers/'+painting.file}" alt="${escapeAttr(name)} ${painting.isDefault?'기본 숲길 일러스트':'대표 수채화 일러스트'}" width="768" height="512" loading="lazy" decoding="async" style="opacity:1!important;transition:none!important;object-fit:contain!important" onerror="window.sansaTempleCovers?.failed?.(this)">`;
+    return '<div class="temple-watercolor-underlay" aria-hidden="true"></div>'+`<img class="card-cover-img stable-cover loaded temple-watercolor-cover" data-temple-cover-id="${escapeAttr(painting.id)}" data-place-name="${escapeAttr(name)}" src="${painting.thumbnail||painting.src||'./images/temple-covers/'+painting.file}" alt="${escapeAttr(name)} ${painting.isDefault?'개별 그림 확인 중 · 실제 풍경이 아닙니다':'대표 수채화 일러스트'}" width="768" height="512" loading="lazy" decoding="async" style="opacity:1!important;transition:none!important;object-fit:contain!important" onerror="window.sansaTempleCovers?.failed?.(this)">`;
   }
   const placeholder = kind==='mountain' ? mountainPlaceholderHtml('산 풍경 일러스트 · 실제 사진 준비 중',name,place) : lotusPlaceholderHtml('',name);
   if(!photo) return placeholder;
@@ -32512,13 +32512,13 @@ function renderAutoCoverPhotos(wrapId,d){
   const wrap=document.getElementById(wrapId);if(!wrap)return;
   const kind=wrapId==='mCoverPhotos'?'mountain':'temple';
   if(kind==='temple'){
-    wrap.innerHTML='<div class="temple-detail-cover">'+cardCoverMedia(null,'temple',d.name,d)+'</div>';
+    wrap.innerHTML='<div class="temple-detail-cover">'+cardCoverMedia(null,'temple',d.name,d)+'</div>';const art=window.sansaTempleCovers.find(d);if(art)wrap.querySelector('img').src=art.src;
     const image=wrap.querySelector('img');if(image){image.loading='eager';image.fetchPriority='high';}
     return;
   }
   firstPhotoUrl(d);
   const urls=(d.coverPhotos||[]).filter(usableCoverUrl);
-  if(urls.length===0&&window.sansaMountainCovers?.find(d)){wrap.innerHTML=mountainPlaceholderHtml('',d.name,d)+'<p class="mountain-art-note">산세를 떠올린 수채화 · 실제 풍경과 다를 수 있어요. <a href="/images/mountain-covers/CREDITS.html" target="_blank" rel="noopener">그림 안내</a></p>';return;}
+  if(urls.length===0&&window.sansaMountainCovers?.find(d)){wrap.innerHTML=mountainPlaceholderHtml('',d.name,d)+'<p class="mountain-art-note">자료의 지형을 참고한 창작 수채화 · 현장 사진이 아닙니다. <a href="/images/mountain-covers/CREDITS.html" target="_blank" rel="noopener">그림 안내</a></p>';const image=wrap.querySelector('img');image.src=window.sansaMountainCovers.find(d).coverImage;image.loading='eager';image.fetchPriority='high';return;}
   if(urls.length===0){
     const q=encodeURIComponent((d.name||'')+' 국가유산');
     wrap.innerHTML=`<div class="auto-photo-empty">${mountainPlaceholderHtml('산 풍경 일러스트 · 실제 사진 준비 중',d.name,d)}<div><b>사진을 준비하고 있어요.</b><span>연결이 느리거나 사진이 없을 수 있어요. 다시 불러올 수 있습니다.</span><button type="button" class="btn btn-ghost" onclick="retryDetailCoverPhotos('${kind}')">사진 다시 불러오기</button><a class="heritage-photo-link" href="https://www.heritage.go.kr/heri/cul/culSelectViewList.do?searchCondition=${q}" target="_blank" rel="noopener">국가유산포털에서도 사진 확인 ↗</a></div></div>`;
@@ -42400,8 +42400,8 @@ nav.site-global-nav{height:var(--global-nav-h)!important;box-sizing:border-box!i
 <script src="/scripts/device-photos/themes.js?v=20261025-unified" defer></script>
 <script src="/scripts/device-photos/cards.js?v=20261026-ui" defer></script>
 <script src="/scripts/personal-location.js?v=20261025-unified" defer></script>
-<script src="/scripts/mountain-covers.js?v=20261026-ui" defer></script>
-<script src="/scripts/visit-tips.js?v=20261026-ui" defer></script>
+<script src="/scripts/mountain-covers.js?v=20261026-catalog" defer></script>
+<script src="/scripts/visit-tips.js?v=20261026-catalog" defer></script>
 <script src="/scripts/temple-music.js?v=20261026-ui" defer></script>
 <script src="/scripts/device-photos/celebration.js?v=20261026-unified" defer></script>
 <link rel="stylesheet" href="/styles/ui-content.css?v=20261026-ui">

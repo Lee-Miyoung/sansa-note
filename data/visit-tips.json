@@ -1,0 +1,4515 @@
+[
+  {
+    "id": "temple:각연사",
+    "name": "각연사",
+    "region": "충청",
+    "locality": "괴산",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "비로전 안에서",
+        "text": "돌로 만든 비로자나불좌상이 이 절의 중요한 유산이에요. 손 모양과 불상을 둘러싼 광배를 함께 살펴보세요.",
+        "keywords": [
+          "비로",
+          "석조"
+        ]
+      },
+      {
+        "title": "함께 볼 유산",
+        "text": "통일대사탑과 탑비는 승려의 자취를 전하는 유산이에요. 불상을 모신 전각과 승탑의 쓰임을 구분하면 관람이 더 재미있어요.",
+        "keywords": [
+          "통일",
+          "탑비"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "보개산 각연사 (寶蓋山 覺淵寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0000467",
+        "checkedAt": "2026-10-26",
+        "sha256": "4e84030fba1fabc9527393c55ec25d87a9c8e581a0048752560a3c20eb99d86f"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "비로",
+        "석조"
+      ],
+      [
+        "통일",
+        "탑비"
+      ]
+    ]
+  },
+  {
+    "id": "temple:갑사",
+    "name": "갑사",
+    "region": "충청",
+    "locality": "공주",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "쇠로 세운 깃대",
+        "text": "갑사의 철당간은 돌기둥 사이에 쇠 깃대가 남아 있는 유산이에요. 석탑과는 다른 역할을 했다는 점을 생각하며 보세요.",
+        "keywords": [
+          "철당간"
+        ]
+      },
+      {
+        "title": "오래된 공간",
+        "text": "대적전은 갑사에서 따로 눈여겨볼 전각이에요. 지금의 대웅전만 보고 돌아오기보다 두 건물의 자리를 함께 살펴보세요.",
+        "keywords": [
+          "대적전",
+          "대웅전"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "계룡산 갑사 (鷄龍山 甲寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0000898",
+        "checkedAt": "2026-10-26",
+        "sha256": "0c2c240d2919e4980725bdf9c7720ef00e45ad0c9f5a342d445ed658cc7583ef"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "철당간"
+      ],
+      [
+        "대적전",
+        "대웅전"
+      ]
+    ]
+  },
+  {
+    "id": "temple:갓바위(선본사)",
+    "name": "갓바위(선본사)",
+    "region": "경상",
+    "locality": "경산",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "갓을 쓴 듯한 불상",
+        "text": "관봉 석조여래좌상은 머리 위 넓은 돌판이 눈에 띄어요. ‘갓바위’라는 이름을 불상의 모습과 연결해 보세요.",
+        "keywords": [
+          "관봉",
+          "갓바위"
+        ]
+      },
+      {
+        "title": "장소를 구분해요",
+        "text": "선본사와 산 위 갓바위 부처는 같은 관람 지점이 아니에요. 산행을 더할지 정하고 각각의 위치를 확인해 주세요.",
+        "keywords": [
+          "선본사",
+          "관봉"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "팔공산 선본사 (八公山 禪本寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0028721",
+        "checkedAt": "2026-10-26",
+        "sha256": "28088e67577300282b493be558b8ea7e2954d7232844ad6bf8884d4ebd10b52c"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "관봉",
+        "갓바위"
+      ],
+      [
+        "선본사",
+        "관봉"
+      ]
+    ]
+  },
+  {
+    "id": "temple:개심사",
+    "name": "개심사",
+    "region": "충청",
+    "locality": "서산",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "대웅보전의 균형",
+        "text": "상왕산 개심사 대웅전은 조선 전기 목조건축이에요. 돌기단 위에 올라선 기둥과 지붕의 비례를 천천히 바라보세요.",
+        "keywords": [
+          "대웅전"
+        ]
+      },
+      {
+        "title": "작은 전각도 함께",
+        "text": "심검당은 대웅보전과 함께 개심사의 오래된 공간을 이루어요. 중심 법당과 생활·수행 공간이 어떻게 다른지 비교해 보세요.",
+        "keywords": [
+          "심검당"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "상왕산 개심사 (象王山 開心寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0001677",
+        "checkedAt": "2026-10-26",
+        "sha256": "b30269de9d45bb5cc432033637475493fe511aa466857c32540d37731eb09e88"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "대웅전"
+      ],
+      [
+        "심검당"
+      ]
+    ]
+  },
+  {
+    "id": "temple:개암사",
+    "name": "개암사",
+    "region": "전라",
+    "locality": "부안",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "전각 뒤 산을 봐요",
+        "text": "개암사에서는 대웅보전과 뒤편 울금바위가 이루는 풍경을 함께 보세요. 바위산과 전각의 크기가 대비되는 장면이에요.",
+        "keywords": [
+          "대웅보전",
+          "울금"
+        ]
+      },
+      {
+        "title": "옛 이름의 흔적",
+        "text": "지금의 대웅보전은 옛 황금전에 해당해요. 건물 이름이 바뀌어 온 이야기를 알고 보면 사찰의 중창 과정도 새롭게 보여요.",
+        "keywords": [
+          "황금전"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "능가산 개암사 (楞伽山 開巖寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0001691",
+        "checkedAt": "2026-10-26",
+        "sha256": "fa7f442bb5cf5c941c0ba5e2339fd90eddb173d7821fccda55ff82c503823535"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "대웅보전",
+        "울금"
+      ],
+      [
+        "황금전"
+      ]
+    ]
+  },
+  {
+    "id": "temple:건봉사",
+    "name": "건봉사",
+    "region": "강원",
+    "locality": "고성",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "물길 위 다리",
+        "text": "능파교는 계류 위에 놓인 돌다리예요. 무지개 모양 아치와 그 아래로 이어지는 물길을 함께 살펴보세요.",
+        "keywords": [
+          "능파교"
+        ]
+      },
+      {
+        "title": "염불을 이어온 곳",
+        "text": "건봉사는 염불만일회의 역사로 알려져 있어요. 오랜 시간 염불을 이어간 공동체의 이야기를 알고 경내를 둘러보면 좋아요.",
+        "keywords": [
+          "만일"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "금강산 건봉사 (金剛山 乾鳳寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0001989",
+        "checkedAt": "2026-10-26",
+        "sha256": "25fa93bcd0818b2334d92b7c366d4b1da4f8a0a2ba0149624eabbd70ca557407"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "능파교"
+      ],
+      [
+        "만일"
+      ]
+    ]
+  },
+  {
+    "id": "temple:고운사",
+    "name": "고운사",
+    "region": "경상",
+    "locality": "의성",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "옛 모습을 읽는 방법",
+        "text": "가운루는 고운사의 공간을 이해할 때 중요한 누각이에요. 옛 사진과 현재 모습을 구분하고 현장 복구·관람 안내를 먼저 확인해 주세요.",
+        "keywords": [
+          "가운루"
+        ]
+      },
+      {
+        "title": "왕실과 이어진 전각",
+        "text": "연수전에는 왕실의 장수를 기원한 역사가 담겨 있어요. 현재 관람 가능한 범위와 자료 속 전각을 나누어 살펴보세요.",
+        "keywords": [
+          "연수전"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "등운산 고운사 (騰雲山 孤雲寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0003856",
+        "checkedAt": "2026-10-26",
+        "sha256": "f2c7dd234ab1f825ad9584c88ebe55720a29ec19efb26f2244dce9d6f44ef20d"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "가운루"
+      ],
+      [
+        "연수전"
+      ]
+    ]
+  },
+  {
+    "id": "temple:골굴사",
+    "name": "골굴사",
+    "region": "경상",
+    "locality": "경주",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "바위에 새긴 부처",
+        "text": "골굴암 마애여래좌상은 바위에 새긴 불상이에요. 따로 세운 조각이 아니라 암벽의 일부라는 점을 살펴보세요.",
+        "keywords": [
+          "마애"
+        ]
+      },
+      {
+        "title": "석굴과 불상의 관계",
+        "text": "자연굴을 활용한 여러 석굴 가운데 가장 윗부분에 마애불이 있어요. 바위 지형과 불상의 자리를 함께 눈여겨보세요.",
+        "keywords": [
+          "자연굴",
+          "윗"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "경주 골굴암 마애여래좌상 사진 해설 · 한국민족문화대백과사전",
+        "url": "https://encykorea.aks.ac.kr/Media/Search?query=%EA%B3%A8%EA%B5%B4%EC%95%94",
+        "checkedAt": "2026-10-26",
+        "mediaId": "0519d9c1-c698-49fa-a011-6f1e32e77275",
+        "sha256": "86db6ccdf78e5d8437d430e9a88076f8248dc9882c11807550360c2479dd7022"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "마애"
+      ],
+      [
+        "자연굴",
+        "윗"
+      ]
+    ]
+  },
+  {
+    "id": "temple:관룡사",
+    "name": "관룡사",
+    "region": "경상",
+    "locality": "창녕",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "바위 위 부처",
+        "text": "용선대 석조여래좌상은 바위 위에 자리한 불상이에요. 경내 전각을 보는 일정과 용선대까지 가는 일정을 구분해 주세요.",
+        "keywords": [
+          "용선대",
+          "석조여래좌상"
+        ]
+      },
+      {
+        "title": "서로 다른 법당",
+        "text": "대웅전과 약사전은 관룡사의 중요한 목조건축이에요. 큰 법당만 보고 지나치지 말고 작은 약사전의 모습도 살펴보세요.",
+        "keywords": [
+          "약사전",
+          "대웅전"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "관룡산 관룡사 (觀龍山 觀龍寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0004814",
+        "checkedAt": "2026-10-26",
+        "sha256": "4f69cdd52dc160639a7d27c8e0131223862353e5d5a1cfbd9d0d383daeeb8df7"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "용선대",
+        "석조여래좌상"
+      ],
+      [
+        "약사전",
+        "대웅전"
+      ]
+    ]
+  },
+  {
+    "id": "temple:관음사",
+    "name": "관음사",
+    "region": "제주",
+    "locality": "제주",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "제주 불교의 자취",
+        "text": "제주 관음사는 봉려관 스님의 중창과 관련된 사찰이에요. 오늘의 경내를 보며 근대 제주 불교의 출발점도 함께 떠올려 보세요.",
+        "keywords": [
+          "봉려관"
+        ]
+      },
+      {
+        "title": "한라산과 구분해요",
+        "text": "관음사 경내 참배와 한라산 관음사 코스 산행은 다른 일정이에요. 절을 둘러보는 방문에 정상 산행 준비를 무심코 섞지 않아요.",
+        "keywords": [
+          "한라산",
+          "관음사"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "한라산 관음사 (漢拏山 觀音寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0004965",
+        "checkedAt": "2026-10-26",
+        "sha256": "f341fd0ea654c2374c430b76d9277f12d9f4ab0995e89594140b3910b539adc4"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "봉려관"
+      ],
+      [
+        "한라산",
+        "관음사"
+      ]
+    ]
+  },
+  {
+    "id": "temple:관촉사",
+    "name": "관촉사",
+    "region": "충청",
+    "locality": "논산",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "큰 불상의 얼굴",
+        "text": "석조미륵보살입상은 흔히 은진미륵으로 불려요. 얼굴과 몸의 비례, 머리 위 장식을 아래에서 차례로 바라보세요.",
+        "keywords": [
+          "미륵",
+          "은진"
+        ]
+      },
+      {
+        "title": "불상 앞 유산",
+        "text": "관촉사 석등도 함께 눈여겨보세요. 큰 미륵불과 그 앞 석등의 규모를 비교하면 이 공간의 인상이 또렷해져요.",
+        "keywords": [
+          "석등"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "반야산 관촉사 (般若山 灌燭寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0005022",
+        "checkedAt": "2026-10-26",
+        "sha256": "89950e32fbebb1b66ff5f493250275730c8a13bb3051255f71035fd06c38e206"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "미륵",
+        "은진"
+      ],
+      [
+        "석등"
+      ]
+    ]
+  },
+  {
+    "id": "temple:구인사",
+    "name": "구인사",
+    "region": "충청",
+    "locality": "단양",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "산골짜기의 사찰",
+        "text": "소백산 골짜기에 자리한 구인사는 건물들이 높은 곳으로 이어지는 사찰이에요. 한 건물만 보기보다 지형과 배치를 함께 살펴보세요.",
+        "keywords": [
+          "소백산"
+        ]
+      },
+      {
+        "title": "창건자의 이야기",
+        "text": "구인사는 상월 스님과 현대 천태종의 역사로 이어지는 곳이에요. 오래된 전각의 연대만 찾기보다 근현대 불교의 이야기에 주목해 보세요.",
+        "keywords": [
+          "상월"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "소백산 구인사 (小白山 救仁寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0005987",
+        "checkedAt": "2026-10-26",
+        "sha256": "89be21199f86c467fd8c42611acccb86e9a61b6333780a5561c49fb87830f072"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "소백산"
+      ],
+      [
+        "상월"
+      ]
+    ]
+  },
+  {
+    "id": "temple:금산사",
+    "name": "금산사",
+    "region": "전라",
+    "locality": "김제",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "겉과 속이 다른 전각",
+        "text": "미륵전은 바깥에서 여러 층으로 보이지만 내부는 높게 트인 불전이에요. 지붕 층수와 실내 공간을 나누어 생각해 보세요.",
+        "keywords": [
+          "미륵전"
+        ]
+      },
+      {
+        "title": "계단과 탑의 관계",
+        "text": "방등계단 앞에는 오층석탑이 있어요. 여기서 계단은 오르내리는 층계가 아니라 불교 의식과 관련된 시설을 뜻해요.",
+        "keywords": [
+          "방등계단",
+          "오층석탑"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "모악산 금산사 (母岳山 金山寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0007797",
+        "checkedAt": "2026-10-26",
+        "sha256": "89905c65f24a5896076dfb18ec6584bc1e2b74d6e205c3c0b9f47dd876d9df39"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "미륵전"
+      ],
+      [
+        "방등계단",
+        "오층석탑"
+      ]
+    ]
+  },
+  {
+    "id": "temple:기림사",
+    "name": "기림사",
+    "region": "경상",
+    "locality": "경주",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "대적광전부터",
+        "text": "대적광전은 기림사에서 놓치기 아쉬운 전각이에요. 비로자나불을 모신 법당이라는 점을 알고 건물과 불상을 함께 살펴보세요.",
+        "keywords": [
+          "대적광전",
+          "비로자나"
+        ]
+      },
+      {
+        "title": "글씨를 남긴 나무",
+        "text": "기림사에는 절의 내력을 나무에 기록한 목비가 전해요. 돌에 새긴 비석만 있는 것이 아니라는 점이 흥미로워요.",
+        "keywords": [
+          "목비"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "함월산 기림사 (含月山 祇林寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0008199",
+        "checkedAt": "2026-10-26",
+        "sha256": "d486b9fe97c4b2e3ca6229fcd6925cac0c92f38090f080947c78fa2074094623"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "대적광전",
+        "비로자나"
+      ],
+      [
+        "목비"
+      ]
+    ]
+  },
+  {
+    "id": "temple:김룡사",
+    "name": "김룡사",
+    "region": "경상",
+    "locality": "문경",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "운달산의 수행 공간",
+        "text": "김룡사는 운달산 자락의 사찰이에요. 대웅전을 중심으로 이어지는 전각들을 보며 산속 수행 도량의 배치를 살펴보세요.",
+        "keywords": [
+          "운달산",
+          "대웅전"
+        ]
+      },
+      {
+        "title": "그림과 종의 역사",
+        "text": "김룡사의 괘불과 동종은 경내 건물과는 또 다른 유산이에요. 큰 불화를 펴는 불교 의식과 종을 만드는 장인의 이야기를 자료로 알아보세요.",
+        "keywords": [
+          "동종",
+          "괘불"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "운달산 김룡사 (雲達山 金龍寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0009055",
+        "checkedAt": "2026-10-26",
+        "sha256": "819518ab3ba25c813de00b5ad2ac67d674664d2ce0f7373e5bf7561fc296ef4f"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "운달산",
+        "대웅전"
+      ],
+      [
+        "동종",
+        "괘불"
+      ]
+    ]
+  },
+  {
+    "id": "temple:낙산사",
+    "name": "낙산사",
+    "region": "강원",
+    "locality": "양양",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "바다 곁 홍련암",
+        "text": "홍련암은 바다와 맞닿은 관람 지점이에요. 원통보전 주변과 같은 자리라고 생각하지 말고 경내 안내도에서 위치를 나누어 보세요.",
+        "keywords": [
+          "홍련암",
+          "원통보전"
+        ]
+      },
+      {
+        "title": "작은 돌탑도 함께",
+        "text": "칠층석탑은 낙산사의 오랜 자취를 전하는 유산이에요. 큰 해수관음상에만 시선을 두지 말고 석탑의 지붕돌도 살펴보세요.",
+        "keywords": [
+          "칠층석탑"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "오봉산 낙산사 (五峰山 洛山寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0011589",
+        "checkedAt": "2026-10-26",
+        "sha256": "a1f10c5002b682d192729b9c48140c708d8b683371b17cb881e1b0407400041d"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "홍련암",
+        "원통보전"
+      ],
+      [
+        "칠층석탑"
+      ]
+    ]
+  },
+  {
+    "id": "temple:내소사",
+    "name": "내소사",
+    "region": "전라",
+    "locality": "부안",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "문에 핀 꽃",
+        "text": "대웅보전의 꽃살문을 가까이 살펴보세요. 멀리서 본 지붕의 인상과 문짝에 새긴 섬세한 장식이 다르게 다가와요.",
+        "keywords": [
+          "꽃살"
+        ]
+      },
+      {
+        "title": "법당 앞 돌탑",
+        "text": "대웅전 앞 삼층석탑은 전각과 함께 보는 유산이에요. 탑과 법당이 서로 마주하는 자리를 눈여겨보세요.",
+        "keywords": [
+          "삼층석탑"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "능가산 내소사 (楞伽山 來蘇寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0012487",
+        "checkedAt": "2026-10-26",
+        "sha256": "a523c8f880c7dd6eb2dbdeea8584f8e1cf3bcf1772e60b5ef3fc9a94b8d0d31b"
+      },
+      {
+        "title": "부안 내소사 대웅보전",
+        "url": "https://encykorea.aks.ac.kr/Article/E0012489",
+        "checkedAt": "2026-10-26",
+        "sha256": "ffa7776a07b2919cb6dcf5936462f743ac0448c2d16a9317758343941f5edca1"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "꽃살"
+      ],
+      [
+        "삼층석탑"
+      ]
+    ]
+  },
+  {
+    "id": "temple:다솔사",
+    "name": "다솔사",
+    "region": "경상",
+    "locality": "사천",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "누각을 올려다봐요",
+        "text": "대양루는 다솔사의 중요한 문루예요. 문을 통과하는 기능과 사람들이 머무는 누각의 기능을 함께 생각해 보세요.",
+        "keywords": [
+          "대양루"
+        ]
+      },
+      {
+        "title": "법당 이름의 뜻",
+        "text": "적멸보궁이라는 법당 이름에는 사리를 모시는 공간의 의미가 담겨 있어요. 보통의 대웅전과 어떻게 다른지 안내 자료를 함께 읽어보세요.",
+        "keywords": [
+          "적멸보궁"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "봉명산 다솔사 (鳳鳴山 多率寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0013469",
+        "checkedAt": "2026-10-26",
+        "sha256": "9e4a7c8cf327ce4d1d47f700e875385ccef0f818d8d230b7d8ad798dbc210228"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "대양루"
+      ],
+      [
+        "적멸보궁"
+      ]
+    ]
+  },
+  {
+    "id": "temple:대승사",
+    "name": "대승사",
+    "region": "경상",
+    "locality": "문경",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "나무에 새긴 불교 세계",
+        "text": "대승사 목각아미타여래설법상은 나무에 여러 인물을 새긴 작품이에요. 한 인물만 보기보다 장면 전체의 배치를 살펴보세요.",
+        "keywords": [
+          "목각"
+        ]
+      },
+      {
+        "title": "사불산의 이름",
+        "text": "사불산과 사방불에 얽힌 이야기가 사찰의 창건 전승으로 전해져요. 하늘에서 내려왔다는 이야기는 역사적 사실과 나누어 읽어요.",
+        "keywords": [
+          "사불",
+          "창건설화"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "사불산 대승사 (四佛山 大乘寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0014542",
+        "checkedAt": "2026-10-26",
+        "sha256": "92940db5caea46891718a2a1f154f48f4d4a832dcbee71bec08928aa3fdee496"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "목각"
+      ],
+      [
+        "사불",
+        "창건설화"
+      ]
+    ]
+  },
+  {
+    "id": "temple:대원사",
+    "name": "대원사",
+    "region": "경상",
+    "locality": "산청",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "산청의 대원사",
+        "text": "이곳은 지리산 자락의 산청 대원사예요. 보성 천봉산 대원사와 이름이 같으니 여행 동선을 잡을 때 지역을 먼저 확인하세요.",
+        "keywords": [
+          "산청",
+          "지리산"
+        ]
+      },
+      {
+        "title": "붉은 기운의 돌탑",
+        "text": "대원사 다층석탑은 돌에 함유된 철분으로 붉은 물이 배어 나오는 특징이 소개돼요. 돌의 색과 층층이 쌓인 형태를 함께 보세요.",
+        "keywords": [
+          "철분",
+          "다층석탑"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "지리산 대원사 (智異山 大源寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0014643",
+        "checkedAt": "2026-10-26",
+        "sha256": "d2577e2341f7221d725edb3603479f7738c9cc5346f9e8c423fd2de714659ed6"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "산청",
+        "지리산"
+      ],
+      [
+        "철분",
+        "다층석탑"
+      ]
+    ]
+  },
+  {
+    "id": "temple:대조사",
+    "name": "대조사",
+    "region": "충청",
+    "locality": "부여",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "대웅전 뒤의 큰 미륵",
+        "text": "석조미륵보살입상은 대조사의 대표 유산이에요. 법당만 둘러본 뒤 돌아가지 않도록 큰 불상의 자리도 함께 살펴보세요.",
+        "keywords": [
+          "미륵보살입상"
+        ]
+      },
+      {
+        "title": "이름에 담긴 전승",
+        "text": "대조사 창건에는 큰 새가 나타났다는 이야기가 전해져요. 절 이름의 유래를 전하는 전승으로 받아들이면 좋아요.",
+        "keywords": [
+          "새"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "성흥산 대조사 (聖興山 大鳥寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0014775",
+        "checkedAt": "2026-10-26",
+        "sha256": "6193888b322846024a76a0914fd5072c113af42f82033ebddaf3a904a957d863"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "미륵보살입상"
+      ],
+      [
+        "새"
+      ]
+    ]
+  },
+  {
+    "id": "temple:대흥사",
+    "name": "대흥사",
+    "region": "전라",
+    "locality": "해남",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "두륜산을 배경으로",
+        "text": "대흥사는 두륜산 자락에 전각들이 나뉘어 자리한 사찰이에요. 대웅보전 주변만 보고 끝내기보다 경내 안내도에서 공간을 먼저 살펴보세요.",
+        "keywords": [
+          "두륜산",
+          "대웅보전"
+        ]
+      },
+      {
+        "title": "서산대사의 흔적",
+        "text": "표충사는 서산대사를 기리는 공간이에요. 불상을 모신 법당과 인물을 기리는 사당의 역할을 구분하면 더 잘 보여요.",
+        "keywords": [
+          "표충사",
+          "서산"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "두륜산 대흥사 (頭輪山 大興寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0015277",
+        "checkedAt": "2026-10-26",
+        "sha256": "b0da587ca4647296e80f8af7013de79fda91f908f6ff20ee3f8a1db1ec6c72c2"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "두륜산",
+        "대웅보전"
+      ],
+      [
+        "표충사",
+        "서산"
+      ]
+    ]
+  },
+  {
+    "id": "temple:도갑사",
+    "name": "도갑사",
+    "region": "전라",
+    "locality": "영암",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "산문에서 시작해요",
+        "text": "해탈문은 도갑사의 대표 목조건축이에요. 중심 법당에 이르기 전 사찰문 자체도 하나의 유산으로 바라보세요.",
+        "keywords": [
+          "해탈문"
+        ]
+      },
+      {
+        "title": "절의 내력을 읽는 돌",
+        "text": "도선국사·수미선사비에는 도갑사와 두 승려의 자취가 담겨 있어요. 건물과 비석을 함께 보면 중창의 역사가 이어져요.",
+        "keywords": [
+          "수미",
+          "도선"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "월출산 도갑사 (月出山 道岬寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0015479",
+        "checkedAt": "2026-10-26",
+        "sha256": "d2b25495c3d4e1bbdbc582b6c01505e81b009da96d98253a7dfa46278e6a4cfb"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "해탈문"
+      ],
+      [
+        "수미",
+        "도선"
+      ]
+    ]
+  },
+  {
+    "id": "temple:도리사",
+    "name": "도리사",
+    "region": "경상",
+    "locality": "구미",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "낯선 모양의 석탑",
+        "text": "도리사 석탑은 일반적인 삼층석탑과 다른 돌 쌓기 모양으로 눈길을 끌어요. 멀리서 전체를 보고 가까이서 돌의 구성을 살펴보세요.",
+        "keywords": [
+          "석탑"
+        ]
+      },
+      {
+        "title": "아도 화상의 자취",
+        "text": "도리사에는 아도 화상과 관련된 이야기가 전해져요. 신라 불교의 시작을 설명하는 기록과 전승을 나누어 읽어 보세요.",
+        "keywords": [
+          "아도"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "냉산 도리사 (冷山 桃李寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0015609",
+        "checkedAt": "2026-10-26",
+        "sha256": "680a3cd6935fc6db7e340b96851dc7221f250443485236aafb111b20a8a3f75a"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "석탑"
+      ],
+      [
+        "아도"
+      ]
+    ]
+  },
+  {
+    "id": "temple:도선사",
+    "name": "도선사",
+    "region": "수도권",
+    "locality": "서울",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "바위에 새긴 부처",
+        "text": "도선사 마애불은 바위 면에 새긴 불상이에요. 따로 세운 불상과 달리 원래 바위의 형태가 작품의 일부가 된다는 점을 보세요.",
+        "keywords": [
+          "마애"
+        ]
+      },
+      {
+        "title": "근현대의 흔적",
+        "text": "호국참회원은 도선사의 근현대 역사를 보여주는 공간이에요. 오래된 창건 이야기와 이후에 더해진 전각을 구분해 보세요.",
+        "keywords": [
+          "호국참회원"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "북한산 도선사 (北漢山 道詵寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0015707",
+        "checkedAt": "2026-10-26",
+        "sha256": "e205cbfd777c260acfc03dc6f8beaa04d0ef4956545532ec473efd1899870195"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "마애"
+      ],
+      [
+        "호국참회원"
+      ]
+    ]
+  },
+  {
+    "id": "temple:도피안사",
+    "name": "도피안사",
+    "region": "강원",
+    "locality": "철원",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "쇠로 만든 부처",
+        "text": "철조비로자나불좌상은 도피안사의 대표 유산이에요. 돌이나 나무가 아니라 철로 만들었다는 점을 알고 보면 인상이 달라져요.",
+        "keywords": [
+          "철조",
+          "비로자나"
+        ]
+      },
+      {
+        "title": "불상과 석탑",
+        "text": "삼층석탑도 함께 살펴보세요. 철불과 돌탑이 한 사찰의 자취를 서로 다른 재료로 전하고 있어요.",
+        "keywords": [
+          "삼층석탑"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "화개산 도피안사 (花開山 到彼岸寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0015905",
+        "checkedAt": "2026-10-26",
+        "sha256": "9e8267186c89b3c444d024f4556366fa806d92944db776dcc3dbbc990903a0b6"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "철조",
+        "비로자나"
+      ],
+      [
+        "삼층석탑"
+      ]
+    ]
+  },
+  {
+    "id": "temple:동학사",
+    "name": "동학사",
+    "region": "충청",
+    "locality": "공주",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "배움이 이어지는 절",
+        "text": "동학강원은 비구니 스님들의 교육 공간이에요. 전각을 보는 여행 속에서 지금도 이어지는 배움의 기능을 함께 생각해 보세요.",
+        "keywords": [
+          "동학강원",
+          "비구니"
+        ]
+      },
+      {
+        "title": "역사를 기리는 공간",
+        "text": "숙모전은 일반 법당과 다른 역사적 배경을 가진 곳이에요. 경내 여러 건물이 모두 같은 역할을 하는 것은 아니라는 점이 보여요.",
+        "keywords": [
+          "숙모전"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "계룡산 동학사 (鷄龍山 東鶴寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0016863",
+        "checkedAt": "2026-10-26",
+        "sha256": "66d7fff6c16829a373629437639d1fb97b4aa5b638f8e129141275f1907fd4e3"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "동학강원",
+        "비구니"
+      ],
+      [
+        "숙모전"
+      ]
+    ]
+  },
+  {
+    "id": "temple:동화사",
+    "name": "동화사",
+    "region": "경상",
+    "locality": "대구",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "대웅전의 자리를 봐요",
+        "text": "동화사 대웅전은 팔공산 자락의 지형 속에 자리해요. 전각 정면과 주변 산자락을 함께 바라보면 공간의 깊이가 느껴져요.",
+        "keywords": [
+          "대웅전",
+          "팔공산"
+        ]
+      },
+      {
+        "title": "산문도 하나의 유산",
+        "text": "봉황문은 동화사의 중요한 목조건축이에요. 경내로 들어가는 문과 중심 법당의 역할을 나누어 살펴보세요.",
+        "keywords": [
+          "봉황문"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "팔공산 동화사 (八公山 桐華寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0016906",
+        "checkedAt": "2026-10-26",
+        "sha256": "76f506da5fe5de28797c1a095c8da75a6067c153d13891d0a8d1809c623fe427"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "대웅전",
+        "팔공산"
+      ],
+      [
+        "봉황문"
+      ]
+    ]
+  },
+  {
+    "id": "temple:마곡사",
+    "name": "마곡사",
+    "region": "충청",
+    "locality": "공주",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "여러 전각의 관계",
+        "text": "대광보전과 대웅보전은 서로 다른 법당이에요. 이름이 비슷하다고 한 건물로 생각하지 말고 두 공간의 관계를 살펴보세요.",
+        "keywords": [
+          "대광보전",
+          "대웅보전"
+        ]
+      },
+      {
+        "title": "석탑 꼭대기를 봐요",
+        "text": "오층석탑은 마곡사의 중요한 유산이에요. 탑 몸체뿐 아니라 맨 위 장식에도 눈길을 주면 관람이 더 풍부해져요.",
+        "keywords": [
+          "오층석탑"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "태화산 마곡사 (泰華山 麻谷寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0017282",
+        "checkedAt": "2026-10-26",
+        "sha256": "f69d9fd662f8ac78feac315edb772a320f68e90b47381fba48deb4de7647fdcf"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "대광보전",
+        "대웅보전"
+      ],
+      [
+        "오층석탑"
+      ]
+    ]
+  },
+  {
+    "id": "temple:만어사",
+    "name": "만어사",
+    "region": "경상",
+    "locality": "밀양",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "돌이 모인 풍경",
+        "text": "만어사 주변에는 커다란 돌들이 무리 지은 독특한 풍경이 있어요. 전각과 너덜 지형을 서로 다른 볼거리로 살펴보세요.",
+        "keywords": [
+          "만어석"
+        ]
+      },
+      {
+        "title": "바위에 얽힌 이야기",
+        "text": "미륵바위와 고기들이 돌로 변했다는 이야기는 만어사에 전하는 전승이에요. 실제 돌의 모습과 이야기를 나누어 즐겨보세요.",
+        "keywords": [
+          "미륵",
+          "고기"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "만어산 만어사 (萬魚山 萬魚寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0017654",
+        "checkedAt": "2026-10-26",
+        "sha256": "feec3a150b94565cfe368c44abd91aa32eab87edeec72c357f61eec868aed7e4"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "만어석"
+      ],
+      [
+        "미륵",
+        "고기"
+      ]
+    ]
+  },
+  {
+    "id": "temple:무량사",
+    "name": "무량사",
+    "region": "충청",
+    "locality": "부여",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "김시습의 마지막 자리",
+        "text": "김시습은 무량사에서 말년을 보냈어요. 극락전뿐 아니라 그의 초상과 사찰에 남은 자취를 함께 알아보면 관람의 폭이 넓어져요.",
+        "keywords": [
+          "김시습",
+          "초상"
+        ]
+      },
+      {
+        "title": "탑과 석등의 자리",
+        "text": "극락전 앞 오층석탑과 석등을 함께 바라보세요. 각각의 유산이 한 축을 이루는 경내 풍경을 읽을 수 있어요.",
+        "keywords": [
+          "오층석탑",
+          "석등"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "만수산 무량사 (萬壽山 無量寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0018996",
+        "checkedAt": "2026-10-26",
+        "sha256": "11c76428610187a0fadca3c2985f68c4293cfe2e7ab3a7c4b8d78495922ff1df"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "김시습",
+        "초상"
+      ],
+      [
+        "오층석탑",
+        "석등"
+      ]
+    ]
+  },
+  {
+    "id": "temple:무위사",
+    "name": "무위사",
+    "region": "전라",
+    "locality": "강진",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "벽화가 남은 법당",
+        "text": "극락보전에는 조선 전기의 불화가 남아 있어요. 불상 뒤 벽과 다른 곳으로 옮겨 보존한 벽화를 구분해 살펴보세요.",
+        "keywords": [
+          "극락보전",
+          "벽화"
+        ]
+      },
+      {
+        "title": "단정한 지붕",
+        "text": "극락보전은 맞배지붕을 한 작은 전각이에요. 복잡한 장식보다 기둥과 지붕이 이루는 차분한 비례를 바라보세요.",
+        "keywords": [
+          "극락보전"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "월출산 무위사 (月出山 無爲寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0019187",
+        "checkedAt": "2026-10-26",
+        "sha256": "11308d6d9183bb4a671ff1c87d76db7b578292d2ea334e6ea7ff2853e030be2e"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "극락보전",
+        "벽화"
+      ],
+      [
+        "극락보전"
+      ]
+    ]
+  },
+  {
+    "id": "temple:문수사",
+    "name": "문수사",
+    "region": "충청",
+    "locality": "서산",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "서산의 극락보전",
+        "text": "이곳은 서산 상왕산 문수사예요. 극락보전을 중심으로 남은 공간을 둘러보며 다른 지역의 문수사와 구분해 보세요.",
+        "keywords": [
+          "상왕산",
+          "극락보전"
+        ]
+      },
+      {
+        "title": "불상 안의 기록",
+        "text": "문수사 금동아미타불좌상과 복장유물은 절의 역사를 전하는 자료예요. 불상 안에 넣었던 물건들도 연구의 단서가 된다는 점이 흥미로워요.",
+        "keywords": [
+          "복장"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "상왕산 문수사 (象王山 文殊寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0019543",
+        "checkedAt": "2026-10-26",
+        "sha256": "8b28096d858227fa2585015926d7ccc54647fec85b78d150d22bceab1f5c43a0"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "상왕산",
+        "극락보전"
+      ],
+      [
+        "복장"
+      ]
+    ]
+  },
+  {
+    "id": "temple:미황사",
+    "name": "미황사",
+    "region": "전라",
+    "locality": "해남",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "달마산과 전각",
+        "text": "미황사는 달마산 자락에 자리해요. 대웅보전 뒤로 이어지는 바위산의 풍경을 함께 바라보세요.",
+        "keywords": [
+          "달마산",
+          "대웅보전"
+        ]
+      },
+      {
+        "title": "작은 전각도 함께",
+        "text": "응진당은 대웅보전과 함께 미황사의 중요한 전각이에요. 중심 법당과 나한을 모신 공간의 역할을 나누어 살펴보세요.",
+        "keywords": [
+          "응진당"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "달마산 미황사 (達磨山 美黃寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0020052",
+        "checkedAt": "2026-10-26",
+        "sha256": "4f946ed3c0fab59c2c2ec543bcfc766741cd9cb4d7cc705fca69d58eb6e5f39b"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "달마산",
+        "대웅보전"
+      ],
+      [
+        "응진당"
+      ]
+    ]
+  },
+  {
+    "id": "temple:백담사",
+    "name": "백담사",
+    "region": "강원",
+    "locality": "인제",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "만해의 자취",
+        "text": "백담사는 한용운의 수행과 문학 활동으로도 알려져 있어요. 설악산 풍경 속에서 만해의 자취를 함께 찾아보세요.",
+        "keywords": [
+          "한용운"
+        ]
+      },
+      {
+        "title": "극락보전의 불상",
+        "text": "목조아미타여래좌상은 백담사의 중요한 유산이에요. 산행의 출발점으로만 생각하기보다 경내에 남은 불교미술도 살펴보세요.",
+        "keywords": [
+          "목조",
+          "아미타"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "설악산 백담사 (雪嶽山 百潭寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0022035",
+        "checkedAt": "2026-10-26",
+        "sha256": "3809cd3573cabd20ec0db846421aed8a64905fa0b4415093ca9d84ad1ef4b57b"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "한용운"
+      ],
+      [
+        "목조",
+        "아미타"
+      ]
+    ]
+  },
+  {
+    "id": "temple:백련사",
+    "name": "백련사",
+    "region": "전라",
+    "locality": "강진",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "동백숲을 기억해요",
+        "text": "강진 백련사 주변 동백나무 숲은 사찰과 함께 보는 풍경이에요. 꽃이 없는 때에도 상록수 숲의 분위기를 느낄 수 있어요.",
+        "keywords": [
+          "동백"
+        ]
+      },
+      {
+        "title": "다산과 혜장",
+        "text": "백련사는 정약용과 혜장의 교류로도 알려져 있어요. 다산초당을 더해 볼 때는 별개의 방문 지점이라는 점을 기억하세요.",
+        "keywords": [
+          "혜장",
+          "정약용"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "만덕산 백련사 (萬德山 白蓮寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0022070",
+        "checkedAt": "2026-10-26",
+        "sha256": "60952d24f43a43a0c67439e54acaa3ee13409d37107821836e26ea98764df22c"
+      },
+      {
+        "title": "백련사",
+        "url": "https://encykorea.aks.ac.kr/Article/E0022065",
+        "checkedAt": "2026-10-26",
+        "sha256": "33cb530478aa7b25da89045df6ad8399847effaaf90f73439e142e3709f0b87a"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "동백"
+      ],
+      [
+        "혜장",
+        "정약용"
+      ]
+    ]
+  },
+  {
+    "id": "temple:백양사",
+    "name": "백양사",
+    "region": "전라",
+    "locality": "장성",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "누각과 산의 풍경",
+        "text": "쌍계루와 백암산을 함께 바라보면 백양사만의 풍경이 보여요. 물가의 반영만 찾기보다 누각 뒤 산의 모양도 살펴보세요.",
+        "keywords": [
+          "쌍계루",
+          "백암산"
+        ]
+      },
+      {
+        "title": "두 법당을 구분해요",
+        "text": "대웅전과 극락보전은 서로 다른 전각이에요. 각 법당이 모신 불상과 건물의 모습을 나누어 관찰해 보세요.",
+        "keywords": [
+          "극락보전",
+          "대웅전"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "백암산 백양사 (白巖山 白羊寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0022216",
+        "checkedAt": "2026-10-26",
+        "sha256": "e454db8b9ef7998b7ce230ad69ebc68f483cdd72ab34051e8bc99d6a5f155c1d"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "쌍계루",
+        "백암산"
+      ],
+      [
+        "극락보전",
+        "대웅전"
+      ]
+    ]
+  },
+  {
+    "id": "temple:범어사",
+    "name": "범어사",
+    "region": "경상",
+    "locality": "부산",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "입구의 돌기둥",
+        "text": "조계문은 범어사의 산문이에요. 나무기둥만 떠올리기 쉬운 일주문에서 돌기둥과 지붕의 관계를 살펴보세요.",
+        "keywords": [
+          "조계문"
+        ]
+      },
+      {
+        "title": "산속 경내의 중심",
+        "text": "대웅전과 삼층석탑은 범어사의 오래된 자취를 전해요. 금정산 산행과 경내 관람은 각각의 일정으로 준비하세요.",
+        "keywords": [
+          "대웅전",
+          "삼층석탑"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "금정산 범어사 (金井山 梵魚寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0022578",
+        "checkedAt": "2026-10-26",
+        "sha256": "58ba193096ce6ebcb4953a14cc43ced039e88ba2d9368b78ca94e102f2c7e13f"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "조계문"
+      ],
+      [
+        "대웅전",
+        "삼층석탑"
+      ]
+    ]
+  },
+  {
+    "id": "temple:법주사",
+    "name": "법주사",
+    "region": "충청",
+    "locality": "보은",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "여러 층의 목탑",
+        "text": "팔상전은 법주사의 대표 목조건축이에요. 돌탑과 달리 나무로 지은 탑이라는 점을 알고 층층이 올라간 지붕을 바라보세요.",
+        "keywords": [
+          "팔상전"
+        ]
+      },
+      {
+        "title": "두 사자의 석등",
+        "text": "쌍사자석등은 두 사자가 석등을 받치는 모양이에요. 사자의 자세와 그 위 돌 구조가 어떻게 이어지는지 살펴보세요.",
+        "keywords": [
+          "쌍사자석등"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "속리산 법주사 (俗離山 法住寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0022716",
+        "checkedAt": "2026-10-26",
+        "sha256": "986eda6fb2689a638b7cee5feb7e94cd4be17e1e17fe09aea1ef1a5da52d20df"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "팔상전"
+      ],
+      [
+        "쌍사자석등"
+      ]
+    ]
+  },
+  {
+    "id": "temple:법화사",
+    "name": "법화사",
+    "region": "제주",
+    "locality": "제주",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "옛 절터를 읽어요",
+        "text": "법화사지에서는 고려시대 사찰의 흔적을 살펴볼 수 있어요. 지금 보이는 건물과 발굴로 확인된 옛터를 같은 시기의 모습으로 생각하지 않아요.",
+        "keywords": [
+          "고려",
+          "절터"
+        ]
+      },
+      {
+        "title": "제주와 바닷길",
+        "text": "법화사는 고려시대 제주와 원나라의 관계를 생각하게 하는 유적이에요. 경내 관람에 앞서 이 섬이 바닷길의 한 지점이었다는 배경을 읽어 보세요.",
+        "keywords": [
+          "원나라"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "법화사지 (法華寺址)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0022773",
+        "checkedAt": "2026-10-26",
+        "sha256": "d56a0533ec106c965a8d30af115f4bb6b9111f477682ba8aa4ec9711b5f54d61"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "고려",
+        "절터"
+      ],
+      [
+        "원나라"
+      ]
+    ]
+  },
+  {
+    "id": "temple:법흥사",
+    "name": "법흥사",
+    "region": "강원",
+    "locality": "영월",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "사리를 모시는 공간",
+        "text": "법흥사는 적멸보궁으로 알려진 절이에요. 불상을 모신 법당과 사리를 신앙의 중심에 둔 공간의 차이를 알아보세요.",
+        "keywords": [
+          "적멸보궁"
+        ]
+      },
+      {
+        "title": "옛 사자산문의 자취",
+        "text": "흥녕사라는 옛 이름과 사자산문의 역사가 법흥사에 이어져요. 지금의 사찰 이름만으로는 보이지 않는 이야기를 함께 읽어보세요.",
+        "keywords": [
+          "흥녕사"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "사자산 법흥사 (獅子山 法興寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0022783",
+        "checkedAt": "2026-10-26",
+        "sha256": "bd622f5474607403ceb12d6befefd95ecd39c9005f5c92f2db3e63b9776c4994"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "적멸보궁"
+      ],
+      [
+        "흥녕사"
+      ]
+    ]
+  },
+  {
+    "id": "temple:벽송사",
+    "name": "벽송사",
+    "region": "경상",
+    "locality": "함양",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "세 갈래의 볼거리",
+        "text": "삼층석탑과 목장승은 서로 다른 재료로 만든 유산이에요. 탑의 돌 쌓기와 장승의 얼굴을 나누어 살펴보세요.",
+        "keywords": [
+          "삼층석탑",
+          "목장승"
+        ]
+      },
+      {
+        "title": "지리산 속 선원",
+        "text": "벽송사는 지리산 자락에서 선 수행의 역사를 이어온 사찰이에요. 전각만 보기보다 수행 전통이 남은 자리라는 점을 함께 생각해 보세요.",
+        "keywords": [
+          "지리산",
+          "선"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "지리산 벽송사 (智異山 碧松寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0022851",
+        "checkedAt": "2026-10-26",
+        "sha256": "a3dd06e29c1b44630b7611c05c827639a7a349ed845bf51591b6f25cfbc4ca22"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "삼층석탑",
+        "목장승"
+      ],
+      [
+        "지리산",
+        "선"
+      ]
+    ]
+  },
+  {
+    "id": "temple:보광사",
+    "name": "보광사",
+    "region": "수도권",
+    "locality": "파주",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "파주인지 확인해요",
+        "text": "이곳은 고령산 자락의 파주 보광사예요. 다른 지역의 동명 사찰과 혼동하지 않도록 지도를 열 때 파주를 함께 확인하세요.",
+        "keywords": [
+          "파주",
+          "고령산"
+        ]
+      },
+      {
+        "title": "왕실과 이어진 전각",
+        "text": "대웅보전과 어실각은 보광사의 역사에서 중요한 공간이에요. 영조와 왕실 원찰의 이야기를 읽고 두 전각을 살펴보세요.",
+        "keywords": [
+          "대웅보전",
+          "어실각"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "고령산 보광사 (高靈山 普光寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0023217",
+        "checkedAt": "2026-10-26",
+        "sha256": "696338dce3b84ee47ef83018c1ca7b9181a3345a22a20f789eed8e846e324182"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "파주",
+        "고령산"
+      ],
+      [
+        "대웅보전",
+        "어실각"
+      ]
+    ]
+  },
+  {
+    "id": "temple:보리암",
+    "name": "보리암",
+    "region": "경상",
+    "locality": "남해",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "산 위의 관음도량",
+        "text": "남해 금산의 보리암은 바위산과 함께 보는 암자예요. 경내 참배와 금산 산길 걷기를 하나의 짧은 일정으로 단정하지 않아요.",
+        "keywords": [
+          "금산",
+          "남해"
+        ]
+      },
+      {
+        "title": "작은 돌탑의 자리",
+        "text": "보리암 앞 삼층석탑도 눈여겨보세요. 높은 산중 암자와 석탑이 한 풍경을 이루는 모습을 볼 수 있어요.",
+        "keywords": [
+          "삼층석탑"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "금산 보리암 (錦山 菩提庵)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0023299",
+        "checkedAt": "2026-10-26",
+        "sha256": "3c24087f23274ef023c25e8282c62fdd7b8f18a1771d390b72b9e409b3a3e829"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "금산",
+        "남해"
+      ],
+      [
+        "삼층석탑"
+      ]
+    ]
+  },
+  {
+    "id": "temple:보문사",
+    "name": "보문사",
+    "region": "수도권",
+    "locality": "강화",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "바위에 새긴 관음",
+        "text": "강화 석모도 보문사는 마애관음보살상으로 알려져 있어요. 바위면에 새긴 불상이라는 특징을 먼저 알아두세요.",
+        "keywords": [
+          "관음"
+        ]
+      },
+      {
+        "title": "석굴 안의 공간",
+        "text": "보문사의 석실은 바위를 이용한 불교 공간이에요. 바깥 마애불과 석실을 서로 다른 관람 지점으로 구분해 보세요.",
+        "keywords": [
+          "석실"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "낙가산 보문사 (洛迦山 普門寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0023334",
+        "checkedAt": "2026-10-26",
+        "sha256": "5213f3421b25ff7622529f7c70403b6dbc779a4acb8e7b9ab9d83543286e6d14"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "관음"
+      ],
+      [
+        "석실"
+      ]
+    ]
+  },
+  {
+    "id": "temple:봉선사",
+    "name": "봉선사",
+    "region": "수도권",
+    "locality": "남양주",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "왕릉과 이어진 이름",
+        "text": "봉선사는 광릉을 지키고 제사를 돕던 원찰의 역사가 있어요. 남양주 왕릉 문화와 사찰의 관계를 함께 읽어보세요.",
+        "keywords": [
+          "광릉"
+        ]
+      },
+      {
+        "title": "종에 남은 시대",
+        "text": "봉선사 동종은 조선 전기의 유산이에요. 건물만 바라보기보다 종에 새긴 문양과 글씨에도 관심을 가져보세요.",
+        "keywords": [
+          "동종"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "운악산 봉선사 (雲岳山 奉先寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0023921",
+        "checkedAt": "2026-10-26",
+        "sha256": "f162aabea270eecb5c304975f9c2f45687d049340e9fa6828bb64e297d610c8e"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "광릉"
+      ],
+      [
+        "동종"
+      ]
+    ]
+  },
+  {
+    "id": "temple:봉암사",
+    "name": "봉암사",
+    "region": "경상",
+    "locality": "문경",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "수행 도량을 먼저 이해해요",
+        "text": "봉암사는 희양산 자락의 선 수행 도량이에요. 일반 관광지와 같은 방식으로 방문을 정하기보다 공식 관람 안내를 먼저 확인하세요.",
+        "keywords": [
+          "희양산"
+        ]
+      },
+      {
+        "title": "스님의 자취를 전하는 돌",
+        "text": "지증대사탑과 탑비는 봉암사의 중요한 유산이에요. 탑은 사리를 모시고 비는 내력을 기록한다는 차이를 살펴보세요.",
+        "keywords": [
+          "지증",
+          "탑비"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "희양산 봉암사 (曦陽山 鳳巖寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0023951",
+        "checkedAt": "2026-10-26",
+        "sha256": "f04b042f930174d04cfd6f83e5089599c52bfcc959bd69f8674273af1c864b35"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "희양산"
+      ],
+      [
+        "지증",
+        "탑비"
+      ]
+    ]
+  },
+  {
+    "id": "temple:봉원사",
+    "name": "봉원사",
+    "region": "수도권",
+    "locality": "서울",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "태고종의 중심 사찰",
+        "text": "봉원사는 한국불교태고종의 중심 사찰로 알려져 있어요. 전각의 모습과 함께 근현대 불교의 역사를 읽어보세요.",
+        "keywords": [
+          "태고종"
+        ]
+      },
+      {
+        "title": "서울 안산의 사찰",
+        "text": "이곳은 서울 서대문구 안산의 봉원사예요. 다른 지역의 같은 이름 사찰과 구분하고 도심 속 산사의 배경을 살펴보세요.",
+        "keywords": [
+          "서대문",
+          "안산"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "안산 봉원사 (鞍山 奉元寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0023976",
+        "checkedAt": "2026-10-26",
+        "sha256": "948592186711c9e4c04d5ae40fba8a623f7a7a5de5436cd474d4a0d3de4bb426"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "태고종"
+      ],
+      [
+        "서대문",
+        "안산"
+      ]
+    ]
+  },
+  {
+    "id": "temple:봉은사",
+    "name": "봉은사",
+    "region": "수도권",
+    "locality": "서울",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "서울의 오래된 사찰",
+        "text": "강남 도심의 봉은사는 조선시대 불교사와 이어지는 곳이에요. 지금의 도시 풍경과 절의 오랜 자취를 함께 바라보세요.",
+        "keywords": [
+          "강남"
+        ]
+      },
+      {
+        "title": "글과 판목의 공간",
+        "text": "판전은 경판을 보관하던 전각이에요. 불상을 모신 법당과 경전을 남기는 공간이 어떻게 다른지 알아보세요.",
+        "keywords": [
+          "판전"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "수도산 봉은사 (修道山 奉恩寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0023980",
+        "checkedAt": "2026-10-26",
+        "sha256": "c8a1e9e06fdbaf9d33c74035c53446796356b44a73a2ab1bfeae06d410213c87"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "강남"
+      ],
+      [
+        "판전"
+      ]
+    ]
+  },
+  {
+    "id": "temple:봉정사",
+    "name": "봉정사",
+    "region": "경상",
+    "locality": "안동",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "목조건축을 비교해요",
+        "text": "극락전과 대웅전은 봉정사의 중요한 전각이에요. 같은 사찰 안에서 서로 다른 시대의 목조건축을 비교해 볼 수 있어요.",
+        "keywords": [
+          "극락전",
+          "대웅전"
+        ]
+      },
+      {
+        "title": "산속의 배치",
+        "text": "봉정사는 천등산에 자리한 절이에요. 전각 하나의 정면만 보기보다 주변 건물과 높낮이가 이루는 공간도 살펴보세요.",
+        "keywords": [
+          "천등산"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "봉정사 (鳳停寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0024002",
+        "checkedAt": "2026-10-26",
+        "sha256": "14743111e2209f7db850ed7ff5025acfaa26ff3d3f1123a4bbd6f8a7a2ba4f9f"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "극락전",
+        "대웅전"
+      ],
+      [
+        "천등산"
+      ]
+    ]
+  },
+  {
+    "id": "temple:봉정암",
+    "name": "봉정암",
+    "region": "강원",
+    "locality": "인제",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "높은 산속 암자",
+        "text": "봉정암은 설악산 소청봉 부근의 암자예요. 산 아래 절처럼 잠깐 들르는 방문이 아니라 산행을 동반하는 장소로 이해해 주세요.",
+        "keywords": [
+          "소청봉"
+        ]
+      },
+      {
+        "title": "돌탑의 의미",
+        "text": "오층석탑은 봉정암에서 중요한 유산이에요. 탑을 둘러싼 신앙의 이야기는 산중 암자의 성격을 이해하는 데 도움이 돼요.",
+        "keywords": [
+          "오층석탑"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "봉정암 (鳳頂庵)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0024010",
+        "checkedAt": "2026-10-26",
+        "sha256": "249c8681cf24159162812289e2b3ddd76016cb58c6d33e97a16d36d3a281dfbe"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "소청봉"
+      ],
+      [
+        "오층석탑"
+      ]
+    ]
+  },
+  {
+    "id": "temple:부석사",
+    "name": "부석사",
+    "region": "경상",
+    "locality": "영주",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "기둥의 곡선을 봐요",
+        "text": "무량수전은 부석사를 대표하는 목조건축이에요. 배흘림기둥과 지붕의 비례를 함께 바라보세요.",
+        "keywords": [
+          "무량수전"
+        ]
+      },
+      {
+        "title": "오래된 작은 전각",
+        "text": "조사당은 무량수전과 다른 곳에 있는 전각이에요. 두 건물을 함께 보려면 경내 배치와 관람 범위를 먼저 살펴보세요.",
+        "keywords": [
+          "조사당"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "봉황산 부석사 (鳳凰山 浮石寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0024295",
+        "checkedAt": "2026-10-26",
+        "sha256": "1406da6fd1cc76163c5212a9cb8c6fb78eaf158dfbc39cfb3559dc71a7d74380"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "무량수전"
+      ],
+      [
+        "조사당"
+      ]
+    ]
+  },
+  {
+    "id": "temple:분황사",
+    "name": "분황사",
+    "region": "경상",
+    "locality": "경주",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "돌로 벽돌처럼",
+        "text": "모전석탑은 돌을 벽돌처럼 다듬어 쌓은 탑이에요. 일반 석탑의 큰 돌 부재와 다른 쌓기 방식을 찾아보세요.",
+        "keywords": [
+          "석탑"
+        ]
+      },
+      {
+        "title": "우물에도 이야기가",
+        "text": "분황사에는 석정이 전해요. 탑만 보고 지나치지 말고 경내 물을 길었던 시설의 모습도 자료와 함께 살펴보세요.",
+        "keywords": [
+          "우물"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "경주 분황사 (慶州 芬皇寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0024894",
+        "checkedAt": "2026-10-26",
+        "sha256": "f1a55db21d0ee5dedcc94b7b8bac723e7b4860549a3ade2beb985860e931291e"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "석탑"
+      ],
+      [
+        "우물"
+      ]
+    ]
+  },
+  {
+    "id": "temple:불갑사",
+    "name": "불갑사",
+    "region": "전라",
+    "locality": "영광",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "대웅전의 세 부처",
+        "text": "대웅전에는 석가모니불을 중심으로 약사불과 아미타불을 함께 모셨어요. 나란히 놓인 세 불상의 손 모양과 구성을 살펴보세요.",
+        "keywords": [
+          "석가모니불",
+          "약사불",
+          "아미타불"
+        ]
+      },
+      {
+        "title": "불상 안에서 찾은 기록",
+        "text": "불상 안에서 발견된 조성기는 만든 시기와 조각승을 알려 줘요. 겉모습뿐 아니라 내부의 기록도 유산을 이해하는 단서가 된답니다.",
+        "keywords": [
+          "조성기",
+          "무염"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "불갑사 목조 삼세불 좌상 (佛甲寺 木造 三世佛 坐像)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0067181",
+        "checkedAt": "2026-10-26",
+        "sha256": "54427f9aae417407be8c0f989b8edcbac3a5395dcf787bfea02e1224a70d494b"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "석가모니불",
+        "약사불",
+        "아미타불"
+      ],
+      [
+        "조성기",
+        "무염"
+      ]
+    ]
+  },
+  {
+    "id": "temple:불국사",
+    "name": "불국사",
+    "region": "경상",
+    "locality": "경주",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "서로 다른 두 탑",
+        "text": "다보탑과 석가탑은 같은 마당에서 대조해 보기 좋은 유산이에요. 복잡한 장식과 단정한 형태의 차이를 찾아보세요.",
+        "keywords": [
+          "다보탑",
+          "석가탑"
+        ]
+      },
+      {
+        "title": "돌다리와 전각",
+        "text": "청운교·백운교는 불국사의 공간을 높이로 나누는 석조 시설이에요. 건너갈 수 있는 길과 유산의 관람 범위는 현장 안내를 따라 주세요.",
+        "keywords": [
+          "청운교",
+          "백운교"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "경주 불국사 (慶州 佛國寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0024933",
+        "checkedAt": "2026-10-26",
+        "sha256": "bd7e9b64101856bf6da14fbce53e609a6568e2e3f435f8750c7356ef2b84ddaf"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "다보탑",
+        "석가탑"
+      ],
+      [
+        "청운교",
+        "백운교"
+      ]
+    ]
+  },
+  {
+    "id": "temple:불영사",
+    "name": "불영사",
+    "region": "경상",
+    "locality": "울진",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "연못과 절 이름",
+        "text": "불영사의 연못에는 부처의 그림자에 관한 전승이 이어져요. 물가 풍경을 보며 절 이름의 유래를 이야기로 읽어보세요.",
+        "keywords": [
+          "그림자"
+        ]
+      },
+      {
+        "title": "계곡과 경내",
+        "text": "불영사와 불영계곡은 함께 떠올리기 쉽지만 같은 관람 지점은 아니에요. 절을 보는 일정과 계곡을 둘러보는 동선을 나누어 주세요.",
+        "keywords": [
+          "계곡"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "불영사 (佛影寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0025004",
+        "checkedAt": "2026-10-26",
+        "sha256": "bfba1bca5f49839be82c5e8be0cd75b105c43dce2e9d09939573ea30c6eba23c"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "그림자"
+      ],
+      [
+        "계곡"
+      ]
+    ]
+  },
+  {
+    "id": "temple:산방굴사",
+    "name": "산방굴사",
+    "region": "제주",
+    "locality": "제주",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "산의 동굴이 법당으로",
+        "text": "산방굴은 산방산 남쪽 암벽에 있는 동굴이에요. 따로 세운 목조건물이 아니라 바위 속 공간이라는 점이 특별해요.",
+        "keywords": [
+          "동굴",
+          "암벽"
+        ]
+      },
+      {
+        "title": "산방산과 바다",
+        "text": "산방산은 제주 남서쪽의 독특한 화산 지형이에요. 동굴을 보는 일정과 산 주변의 다른 관광 지점을 같은 장소로 혼동하지 않아요.",
+        "keywords": [
+          "제주",
+          "화산"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "산방산 (山房山)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0026233",
+        "checkedAt": "2026-10-26",
+        "sha256": "3ba0a0ad2c6b0ce87295c270f8be7a4b9cb1274f70fb512fa199fcec4c6f11f7"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "동굴",
+        "암벽"
+      ],
+      [
+        "제주",
+        "화산"
+      ]
+    ]
+  },
+  {
+    "id": "temple:삼광사",
+    "name": "삼광사",
+    "region": "경상",
+    "locality": "부산",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "부산의 삼광사",
+        "text": "이곳은 부산 삼광사예요. 제주 삼광사와 이름이 같으니 문화유산 자료를 볼 때도 소재지를 먼저 확인하세요.",
+        "keywords": [
+          "부산"
+        ]
+      },
+      {
+        "title": "작은 불상의 재료",
+        "text": "삼광사 석조여래좌상은 불석으로 만든 조선 후기 불상이에요. 큰 전각의 규모와 별개로 작은 불상에 담긴 조각도 자료로 살펴보세요.",
+        "keywords": [
+          "불석",
+          "조선"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "부산 삼광사 석조 여래 좌상 (釜山 三光寺 石造 如來 坐像)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0075385",
+        "checkedAt": "2026-10-26",
+        "sha256": "0d3c7769b563e77aeb06dd07175ae2c5e211b55e7f67301cb5f04a4a219a70e7"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "부산"
+      ],
+      [
+        "불석",
+        "조선"
+      ]
+    ]
+  },
+  {
+    "id": "temple:상원사",
+    "name": "상원사",
+    "region": "강원",
+    "locality": "평창",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "소리의 유산",
+        "text": "상원사 동종은 오래된 범종이에요. 종의 몸체에 새긴 장식과 종을 매다는 부분을 함께 살펴보세요.",
+        "keywords": [
+          "동종"
+        ]
+      },
+      {
+        "title": "어린 모습의 문수보살",
+        "text": "목조문수동자좌상은 상원사를 대표하는 불상이에요. 근엄한 어른의 모습과 다른 어린 보살의 형상을 알아보세요.",
+        "keywords": [
+          "문수동자"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "상원사 (上院寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0027234",
+        "checkedAt": "2026-10-26",
+        "sha256": "2263d35d2c801ed69aaed6eaf732b0ef314b3b4262ed61d4497172b27ca82bda"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "동종"
+      ],
+      [
+        "문수동자"
+      ]
+    ]
+  },
+  {
+    "id": "temple:석굴암",
+    "name": "석굴암",
+    "region": "경상",
+    "locality": "경주",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "돌로 만든 실내",
+        "text": "석굴암은 자연 동굴을 그대로 이용한 곳이 아니라 돌을 짜 맞춘 석굴이에요. 밖의 산세와 내부의 구조를 나누어 이해해 보세요.",
+        "keywords": [
+          "석굴"
+        ]
+      },
+      {
+        "title": "본존을 둘러싼 구성",
+        "text": "가운데 본존불만 아니라 주위에 배치한 인물들도 석굴암을 이루어요. 실제 관람 범위와 자료 속 내부 모습을 구분해 살펴보세요.",
+        "keywords": [
+          "본존"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "경주 석굴암 석굴 (慶州 石窟庵 石窟)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0028362",
+        "checkedAt": "2026-10-26",
+        "sha256": "11cd72f9b1eabcbfb0e6bcccc4a8f823768720376948d9e7f7548313e93d45ed"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "석굴"
+      ],
+      [
+        "본존"
+      ]
+    ]
+  },
+  {
+    "id": "temple:선암사",
+    "name": "선암사",
+    "region": "전라",
+    "locality": "순천",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "계류 위 돌다리",
+        "text": "승선교는 선암사로 들어가는 길에서 만나는 돌다리예요. 다리의 아치와 아래 물길이 이어지는 모습을 함께 보세요.",
+        "keywords": [
+          "승선교"
+        ]
+      },
+      {
+        "title": "전각과 승방",
+        "text": "선암사에는 법당과 스님들이 생활하는 건물들이 함께 자리해요. 대웅전만 보기보다 각 건물의 역할을 나누어 살펴보세요.",
+        "keywords": [
+          "대웅전"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "조계산 선암사 (曹溪山 仙巖寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0028783",
+        "checkedAt": "2026-10-26",
+        "sha256": "87a312b9672cddef0bfd6c694a2e8adec745d561dd2bce066bbc5bbc451dd197"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "승선교"
+      ],
+      [
+        "대웅전"
+      ]
+    ]
+  },
+  {
+    "id": "temple:선운사",
+    "name": "선운사",
+    "region": "전라",
+    "locality": "고창",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "본찰과 도솔암",
+        "text": "선운사 본찰과 도솔암은 서로 다른 관람 지점이에요. 도솔암 마애불까지 볼 계획이라면 추가 동선을 따로 확인하세요.",
+        "keywords": [
+          "도솔암",
+          "마애"
+        ]
+      },
+      {
+        "title": "봄에도 다른 초록",
+        "text": "선운사 동백나무 숲은 사찰과 함께 보는 풍경이에요. 낙엽수의 계절 변화와 다른 상록수 숲의 분위기를 살펴보세요.",
+        "keywords": [
+          "동백"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "도솔산 선운사 (兜率山 禪雲寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0028831",
+        "checkedAt": "2026-10-26",
+        "sha256": "f89cddc92b4a24db1cfb46a7bf56c6239a1dcf28be146c64d293005fd7d312b9"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "도솔암",
+        "마애"
+      ],
+      [
+        "동백"
+      ]
+    ]
+  },
+  {
+    "id": "temple:송광사",
+    "name": "송광사",
+    "region": "전라",
+    "locality": "순천",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "승보사찰을 읽는 방법",
+        "text": "송광사는 지눌의 수행 공동체와 이후 국사들의 역사로 이어지는 절이에요. 지눌이 모든 국사를 직접 길렀다는 뜻으로 받아들이지 않아요.",
+        "keywords": [
+          "지눌"
+        ]
+      },
+      {
+        "title": "국사전의 의미",
+        "text": "국사전은 송광사의 승보사찰 성격을 보여주는 건물이에요. 불상을 모신 법당과 스님들을 기리는 전각을 구분해 보세요.",
+        "keywords": [
+          "국사전"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "조계산 송광사 (曹溪山 松廣寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0030662",
+        "checkedAt": "2026-10-26",
+        "sha256": "f3b00c86bf89363579d5578e6023aa45e9a7b6b57caecafe42dc52d33af54a7c"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "지눌"
+      ],
+      [
+        "국사전"
+      ]
+    ]
+  },
+  {
+    "id": "temple:수덕사",
+    "name": "수덕사",
+    "region": "충청",
+    "locality": "예산",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "고려 목조건축",
+        "text": "수덕사 대웅전은 고려시대 목조건축을 살펴보기 좋은 건물이에요. 정면과 옆면에서 기둥과 지붕의 균형을 비교해 보세요.",
+        "keywords": [
+          "고려",
+          "대웅전"
+        ]
+      },
+      {
+        "title": "산행은 별도 일정",
+        "text": "수덕사는 덕숭산 자락에 자리해요. 경내 전각 관람과 덕숭산 산행은 각각 필요한 준비를 나누어 생각해 주세요.",
+        "keywords": [
+          "덕숭산"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "덕숭산 수덕사 (德崇山 修德寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0031274",
+        "checkedAt": "2026-10-26",
+        "sha256": "e8e0f7e77618b44d41e910a08b520bb48ef119a2955d1faa90f64499225801ab"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "고려",
+        "대웅전"
+      ],
+      [
+        "덕숭산"
+      ]
+    ]
+  },
+  {
+    "id": "temple:수종사",
+    "name": "수종사",
+    "region": "수도권",
+    "locality": "남양주",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "두 물길의 배경",
+        "text": "운길산 수종사는 두물머리 일대 풍경과 함께 떠올리는 절이에요. 산 위 사찰과 강가 관람을 같은 자리로 생각하지 않아요.",
+        "keywords": [
+          "운길산"
+        ]
+      },
+      {
+        "title": "작은 사리탑",
+        "text": "수종사 사리탑은 경내에서 놓치기 쉬운 유산이에요. 넓은 조망만 바라보기보다 탑의 세부도 함께 살펴보세요.",
+        "keywords": [
+          "사리탑"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "운길산 수종사 (雲吉山 水鐘寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0031688",
+        "checkedAt": "2026-10-26",
+        "sha256": "524f3be0a5d1e50e4bdc3337bbd0b6b28c4eb09afbe194320c821734b76389a0"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "운길산"
+      ],
+      [
+        "사리탑"
+      ]
+    ]
+  },
+  {
+    "id": "temple:신륵사",
+    "name": "신륵사",
+    "region": "수도권",
+    "locality": "여주",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "강 곁의 사찰",
+        "text": "신륵사는 강변 풍경과 어우러지는 절이에요. 산 깊은 절과 다른 경내의 배경을 살펴보세요.",
+        "keywords": [
+          "강변"
+        ]
+      },
+      {
+        "title": "벽돌로 쌓은 탑",
+        "text": "다층전탑은 돌탑과 다른 재료를 사용한 유산이에요. 벽돌을 쌓아 올린 탑의 겉면과 전체 형태를 비교해 보세요.",
+        "keywords": [
+          "전탑"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "봉미산 신륵사 (鳳尾山 神勒寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0032887",
+        "checkedAt": "2026-10-26",
+        "sha256": "7d5413d16c834d13a136bb43cd8636686ffba17837adc9d69c3c1dcae27b89d1"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "강변"
+      ],
+      [
+        "전탑"
+      ]
+    ]
+  },
+  {
+    "id": "temple:신원사",
+    "name": "신원사",
+    "region": "충청",
+    "locality": "공주",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "법당과 제단을 구분해요",
+        "text": "중악단은 불상을 모신 법당과 다른 국가 제사의 역사를 가진 공간이에요. 신원사 경내에서 그 역할의 차이를 살펴보세요.",
+        "keywords": [
+          "중악단"
+        ]
+      },
+      {
+        "title": "계룡산 남쪽 사찰",
+        "text": "신원사는 계룡산 자락의 절이에요. 갑사·동학사와 이름이 함께 나온다고 경내에서 바로 이어지는 한 장소로 생각하지 않아요.",
+        "keywords": [
+          "계룡산"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "계룡산 신원사 (鷄龍山 新元寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0033235",
+        "checkedAt": "2026-10-26",
+        "sha256": "fa381e857bb1ff8b382581783c4e396eee44f736f058a939ab2a53931f1ab53d"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "중악단"
+      ],
+      [
+        "계룡산"
+      ]
+    ]
+  },
+  {
+    "id": "temple:신흥사",
+    "name": "신흥사",
+    "region": "강원",
+    "locality": "속초",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "설악산의 법당",
+        "text": "극락보전은 신흥사의 중요한 전각이에요. 산의 큰 풍경에만 시선을 두지 말고 목조건축의 세부도 살펴보세요.",
+        "keywords": [
+          "극락보전"
+        ]
+      },
+      {
+        "title": "산문 밖 풍경과 구분",
+        "text": "신흥사는 설악산 신흥사예요. 다른 지역의 동명 사찰과 구분하고, 경내 관람과 본격적인 설악산 산행은 일정을 나누어 주세요.",
+        "keywords": [
+          "설악산"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "설악산 신흥사 (雪嶽山 新興寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0033614",
+        "checkedAt": "2026-10-26",
+        "sha256": "65cc24862535ddce37ae0ebff4ea2c725e16a71bc51e441e33926b3b5c21d9fc"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "극락보전"
+      ],
+      [
+        "설악산"
+      ]
+    ]
+  },
+  {
+    "id": "temple:실상사",
+    "name": "실상사",
+    "region": "전라",
+    "locality": "남원",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "들판의 산사",
+        "text": "실상사는 지리산을 배경으로 비교적 넓게 펼쳐진 공간이 인상적인 절이에요. 산중 급경사 사찰과 다른 배치를 살펴보세요.",
+        "keywords": [
+          "지리산"
+        ]
+      },
+      {
+        "title": "쌍탑과 석등",
+        "text": "동·서 삼층석탑과 석등은 실상사의 중요한 유산이에요. 개별 조각뿐 아니라 서로 마주한 위치도 함께 보세요.",
+        "keywords": [
+          "삼층석탑",
+          "석등"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "지리산 실상사 (天皇峯 實相寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0033656",
+        "checkedAt": "2026-10-26",
+        "sha256": "08fcf2d2c0bfbe03980b64eb703688d1211f740d36a240df5eb6c3716f1ece66"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "지리산"
+      ],
+      [
+        "삼층석탑",
+        "석등"
+      ]
+    ]
+  },
+  {
+    "id": "temple:쌍계사",
+    "name": "쌍계사",
+    "region": "경상",
+    "locality": "하동",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "기록을 새긴 비",
+        "text": "진감선사대공탑비는 쌍계사의 역사를 전하는 유산이에요. 탑과 비석이 서로 어떤 역할을 하는지 나누어 보세요.",
+        "keywords": [
+          "진감"
+        ]
+      },
+      {
+        "title": "차와 불교의 역사",
+        "text": "쌍계사는 차의 역사와도 이어지는 곳이에요. 꽃길 사진만 남기기보다 하동 지역의 차 문화와 사찰의 관계도 읽어 보세요.",
+        "keywords": [
+          "차"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "지리산 쌍계사 (智異山 雙磎寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0034076",
+        "checkedAt": "2026-10-26",
+        "sha256": "0c72140926a33bf99bfab5e37d36f47ade9b44ac9d7ed8b273531dbf25d89e48"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "진감"
+      ],
+      [
+        "차"
+      ]
+    ]
+  },
+  {
+    "id": "temple:쌍봉사",
+    "name": "쌍봉사",
+    "region": "전라",
+    "locality": "화순",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "목탑 같은 대웅전",
+        "text": "쌍봉사 대웅전은 층층이 올라간 지붕이 특징인 건물이에요. 일반 단층 법당과 다른 바깥 모습을 살펴보세요.",
+        "keywords": [
+          "대웅전"
+        ]
+      },
+      {
+        "title": "정교한 승탑",
+        "text": "철감선사탑은 돌에 새긴 장식으로 눈길을 끄는 유산이에요. 멀리서 전체를 본 뒤 탑 표면의 세부를 자료로 함께 살펴보세요.",
+        "keywords": [
+          "철감선사탑"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "계당산 쌍봉사 (桂棠山 雙峰寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0034131",
+        "checkedAt": "2026-10-26",
+        "sha256": "04f3063b734ddadc42a8cfa232c03115f9d60411f52777874ad7c06c07d95a3e"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "대웅전"
+      ],
+      [
+        "철감선사탑"
+      ]
+    ]
+  },
+  {
+    "id": "temple:약천사",
+    "name": "약천사",
+    "region": "제주",
+    "locality": "제주",
+    "status": "pending",
+    "cards": [],
+    "sources": [],
+    "reason": "공식 개별 자료를 확인하지 못해 내용을 등록하지 않았습니다.",
+    "evidenceKeywords": []
+  },
+  {
+    "id": "temple:연곡사",
+    "name": "연곡사",
+    "region": "전라",
+    "locality": "구례",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "승탑을 비교해요",
+        "text": "연곡사 동 승탑과 북 승탑은 서로 다른 탑이에요. 불상을 모신 석탑과 승려의 사리를 모신 승탑도 구분해 보세요.",
+        "keywords": [
+          "승탑"
+        ]
+      },
+      {
+        "title": "기록이 남은 돌",
+        "text": "승탑 옆 탑비에는 승려와 절의 자취가 담겨 있어요. 비석의 글과 받침 장식을 나누어 보면 볼거리가 늘어나요.",
+        "keywords": [
+          "탑비"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "지리산 연곡사 (智異山 鷰谷寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0036683",
+        "checkedAt": "2026-10-26",
+        "sha256": "cb12abe2726e45f5fe15e183cd0d024530ebbcebf833289489b1bb0229fe63f0"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "승탑"
+      ],
+      [
+        "탑비"
+      ]
+    ]
+  },
+  {
+    "id": "temple:오어사",
+    "name": "오어사",
+    "region": "경상",
+    "locality": "포항",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "물가의 사찰",
+        "text": "오어사는 운제산 자락에 자리한 절이에요. 주변 물가 풍경과 경내 전각을 함께 살펴보세요.",
+        "keywords": [
+          "운제산"
+        ]
+      },
+      {
+        "title": "되찾은 종",
+        "text": "오어사 동종은 고려시대에 주조된 유산이에요. 종의 몸체와 손잡이의 조각을 자료로 살펴보면 금속 공예의 섬세함이 보여요.",
+        "keywords": [
+          "동종",
+          "고려"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "운제산 오어사 (雲梯山 吾魚寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0038405",
+        "checkedAt": "2026-10-26",
+        "sha256": "641c506402417e8e6e02154ed7b7ee7697c77b5084bd4794c62963598a31c8f3"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "운제산"
+      ],
+      [
+        "동종",
+        "고려"
+      ]
+    ]
+  },
+  {
+    "id": "temple:옥천사",
+    "name": "옥천사",
+    "region": "경상",
+    "locality": "고성",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "청동북도 문화유산",
+        "text": "옥천사 청동북은 두드려 소리를 내던 불교 의식구예요. 범종과 닮았지만 다른 모양과 쓰임이라는 점을 알아보세요.",
+        "keywords": [
+          "청동북",
+          "청동북"
+        ]
+      },
+      {
+        "title": "누각과 법당",
+        "text": "자방루와 대웅전은 옥천사의 중요한 건물이에요. 누각의 열린 공간과 법당의 구성을 비교해 보세요.",
+        "keywords": [
+          "자방루",
+          "대웅전"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "연화산 옥천사 (蓮花山 玉泉寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0038783",
+        "checkedAt": "2026-10-26",
+        "sha256": "d107aa195baefa03df0c6605a4a531de6c8a02289c7dd64939ca6093c5289871"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "청동북",
+        "청동북"
+      ],
+      [
+        "자방루",
+        "대웅전"
+      ]
+    ]
+  },
+  {
+    "id": "temple:완주 송광사",
+    "name": "완주 송광사",
+    "region": "전라",
+    "locality": "완주",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "같은 이름의 다른 절",
+        "text": "이곳은 완주 종남산 송광사예요. 순천 조계산 송광사와 다른 사찰이라는 점을 자료와 지도에서도 구분해 주세요.",
+        "keywords": [
+          "완주",
+          "종남산"
+        ]
+      },
+      {
+        "title": "넓은 대웅전",
+        "text": "완주 송광사 대웅전은 길게 펼쳐진 정면이 인상적인 전각이에요. 건물의 규모와 내부에 모신 불상의 관계를 살펴보세요.",
+        "keywords": [
+          "대웅전"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "종남산 송광사 (終南山 松廣寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0030661",
+        "checkedAt": "2026-10-26",
+        "sha256": "bdfd64c8c9fb6985ccd568c3f4bf21bf8c08aa30391a0d2c48212bfb76a4a265"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "완주",
+        "종남산"
+      ],
+      [
+        "대웅전"
+      ]
+    ]
+  },
+  {
+    "id": "temple:용문사(양평)",
+    "name": "용문사(양평)",
+    "region": "수도권",
+    "locality": "양평",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "큰 은행나무",
+        "text": "양평 용문사에서는 은행나무가 중요한 볼거리예요. 나무를 절의 전각과 함께 오랜 시간을 전하는 존재로 바라보세요.",
+        "keywords": [
+          "은행나무"
+        ]
+      },
+      {
+        "title": "스님을 기리는 유산",
+        "text": "정지국사탑과 비는 양평 용문사의 역사를 전하는 유산이에요. 예천 용문사의 윤장대와 혼동하지 않도록 지역을 구분해 주세요.",
+        "keywords": [
+          "정지국사"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "용문산 용문사 (龍門山 龍門寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0039477",
+        "checkedAt": "2026-10-26",
+        "sha256": "5b754f7a35acbf489f9b2236c73e449ff3813408181187ca87de85b387080b7f"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "은행나무"
+      ],
+      [
+        "정지국사"
+      ]
+    ]
+  },
+  {
+    "id": "temple:용문사(예천)",
+    "name": "용문사(예천)",
+    "region": "경상",
+    "locality": "예천",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "돌아가는 경전장",
+        "text": "윤장대는 경전을 넣어 두는 회전식 시설이에요. 예천 용문사 대장전 안의 구조와 함께 자료로 살펴보세요.",
+        "keywords": [
+          "윤장대"
+        ]
+      },
+      {
+        "title": "양평과 달라요",
+        "text": "예천 용문사는 경북 용문면의 사찰이에요. 은행나무로 알려진 양평 용문사와 구분하면 찾는 유산을 놓치지 않아요.",
+        "keywords": [
+          "예천"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "용문산 용문사 (龍門山 龍門寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0039476",
+        "checkedAt": "2026-10-26",
+        "sha256": "838085179118c521e2b9a352748e75f84c379f85e0d142d692ba32a37afd78c0"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "윤장대"
+      ],
+      [
+        "예천"
+      ]
+    ]
+  },
+  {
+    "id": "temple:용주사",
+    "name": "용주사",
+    "region": "수도권",
+    "locality": "화성",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "효를 기리는 절",
+        "text": "용주사는 정조와 현륭원의 역사로 이어지는 사찰이에요. 왕릉을 돌보던 원찰의 의미를 알고 경내를 둘러보세요.",
+        "keywords": [
+          "현륭원"
+        ]
+      },
+      {
+        "title": "종과 법당",
+        "text": "용주사 동종과 대웅보전은 각각 다른 종류의 유산이에요. 목조건축과 금속 공예를 한 사찰에서 나누어 살펴볼 수 있어요.",
+        "keywords": [
+          "동종",
+          "대웅보전"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "화산 용주사 (花山 龍珠寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0039674",
+        "checkedAt": "2026-10-26",
+        "sha256": "17308e91d12212981a8b744c6c51722d3e122816ed38a83affe32b6ff87c153f"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "현륭원"
+      ],
+      [
+        "동종",
+        "대웅보전"
+      ]
+    ]
+  },
+  {
+    "id": "temple:운문사",
+    "name": "운문사",
+    "region": "경상",
+    "locality": "청도",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "배움과 수행의 공간",
+        "text": "운문사는 비구니 스님들의 교육과 수행으로 알려져 있어요. 관람 구역과 스님들의 생활 공간을 구분하며 경내를 살펴보세요.",
+        "keywords": [
+          "비구니"
+        ]
+      },
+      {
+        "title": "돌로 세운 장식",
+        "text": "석조사천왕상과 삼층석탑은 운문사에서 눈여겨볼 유산이에요. 사찰의 입구를 지키는 조각과 탑의 역할을 나누어 보세요.",
+        "keywords": [
+          "사천왕",
+          "삼층석탑"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "호거산 운문사 (虎踞山 雲門寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0040278",
+        "checkedAt": "2026-10-26",
+        "sha256": "5c107166b32deb0966d855b4d3b6e3e9d5b83047bcd6c6721c6987061a69a902"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "비구니"
+      ],
+      [
+        "사천왕",
+        "삼층석탑"
+      ]
+    ]
+  },
+  {
+    "id": "temple:운주사",
+    "name": "운주사",
+    "region": "전라",
+    "locality": "화순",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "서로 다른 돌탑",
+        "text": "운주사는 여러 모양의 석탑과 석불로 알려져 있어요. 탑들이 모두 같은 규칙으로 생기지 않았다는 점을 찾아보세요.",
+        "keywords": [
+          "석탑",
+          "석불"
+        ]
+      },
+      {
+        "title": "누워 있는 두 부처",
+        "text": "와불은 나란히 누운 형상의 돌조각이에요. 하룻밤에 천불천탑을 세웠다는 이야기는 전승으로 나누어 읽어요.",
+        "keywords": [
+          "와",
+          "천불천탑"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "천불산 운주사 (千佛山 雲住寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0040378",
+        "checkedAt": "2026-10-26",
+        "sha256": "e43a67930613ec3c9381c9899964958770f23146575941d033bf8851ed90fe74"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "석탑",
+        "석불"
+      ],
+      [
+        "와",
+        "천불천탑"
+      ]
+    ]
+  },
+  {
+    "id": "temple:원당사",
+    "name": "원당사",
+    "region": "제주",
+    "locality": "제주",
+    "status": "pending",
+    "cards": [],
+    "sources": [],
+    "reason": "공식 개별 자료를 확인하지 못해 내용을 등록하지 않았습니다.",
+    "evidenceKeywords": []
+  },
+  {
+    "id": "temple:월정사",
+    "name": "월정사",
+    "region": "강원",
+    "locality": "평창",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "팔각의 아홉 층",
+        "text": "월정사 팔각구층석탑은 탑의 평면과 층수가 모두 눈에 띄어요. 사각 삼층석탑과 무엇이 다른지 비교해 보세요.",
+        "keywords": [
+          "팔각구층석탑"
+        ]
+      },
+      {
+        "title": "보살과 탑의 관계",
+        "text": "석조보살좌상은 탑 앞에 공양하는 모습으로 알려진 유산이에요. 탑만 따로 보기보다 이 공간의 구성을 함께 살펴보세요.",
+        "keywords": [
+          "석조보살"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "오대산 월정사 (五臺山 月精寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0041058",
+        "checkedAt": "2026-10-26",
+        "sha256": "91b289ec63a15e52a3ec8197564f825ec490a01be532985319c3a421632bdeb5"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "팔각구층석탑"
+      ],
+      [
+        "석조보살"
+      ]
+    ]
+  },
+  {
+    "id": "temple:은하사",
+    "name": "은하사",
+    "region": "경상",
+    "locality": "김해",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "신어산 아래 전각",
+        "text": "은하사는 김해 신어산 자락의 절이에요. 대웅전과 뒤편 산의 모습을 함께 바라보면 사찰의 위치가 더 잘 느껴져요.",
+        "keywords": [
+          "신어산",
+          "대웅전"
+        ]
+      },
+      {
+        "title": "누각에 남은 옛 이름",
+        "text": "화운루에는 서림사라는 편액이 전해요. 지금의 절 이름과 다른 이름이 남은 까닭을 자료와 함께 읽어보세요.",
+        "keywords": [
+          "화운루",
+          "서림사"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "신어산 은하사 (神魚山 銀河寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0042911",
+        "checkedAt": "2026-10-26",
+        "sha256": "e64d010e2e3a3834cffc91d8dafb3489e6d6bd7b1b72762a4dd09e9559f9d038"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "신어산",
+        "대웅전"
+      ],
+      [
+        "화운루",
+        "서림사"
+      ]
+    ]
+  },
+  {
+    "id": "temple:은해사",
+    "name": "은해사",
+    "region": "경상",
+    "locality": "영천",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "본찰과 암자를 나눠요",
+        "text": "은해사 본찰과 백흥암·거조암 등은 서로 다른 방문 지점이에요. 문화유산 이름만 보고 한 마당에 모두 있다고 생각하지 않아요.",
+        "keywords": [
+          "백흥암"
+        ]
+      },
+      {
+        "title": "불교미술을 자료로",
+        "text": "은해사와 부속 암자에는 여러 탱화와 조각이 전해요. 항상 공개된 전시물로 단정하지 말고 보고 싶은 작품의 소재지를 먼저 확인해 주세요.",
+        "keywords": [
+          "탱화"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "팔공산 은해사 (八公山 銀海寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0042914",
+        "checkedAt": "2026-10-26",
+        "sha256": "af8c6a6eef1e04dec60ee551d1320e8321ec9e49f758c32a7bdd8a7d66fb25da"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "백흥암"
+      ],
+      [
+        "탱화"
+      ]
+    ]
+  },
+  {
+    "id": "temple:자재암",
+    "name": "자재암",
+    "region": "수도권",
+    "locality": "동두천",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "소요산의 암자",
+        "text": "자재암은 소요산과 원효에 얽힌 이야기로 이어지는 절이에요. 절의 역사와 창건 전승은 구분해서 읽으면 좋아요.",
+        "keywords": [
+          "소요산",
+          "원효"
+        ]
+      },
+      {
+        "title": "그림을 새긴 경전",
+        "text": "자재암에는 반야바라밀다심경약소 등 불교 전적이 전해요. 전각뿐 아니라 책과 인쇄의 역사도 함께 살펴보세요.",
+        "keywords": [
+          "심경"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "소요산 자재암 (逍遙山 自在庵)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0048067",
+        "checkedAt": "2026-10-26",
+        "sha256": "d4fb46a99f51e35288c198f169f597d28a9fbb4e643b8d59d5c25658bbedce63"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "소요산",
+        "원효"
+      ],
+      [
+        "심경"
+      ]
+    ]
+  },
+  {
+    "id": "temple:장안사(부산)",
+    "name": "장안사(부산)",
+    "region": "경상",
+    "locality": "부산",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "기장의 장안사",
+        "text": "이곳은 부산 기장 불광산 장안사예요. 같은 이름의 다른 지역 사찰과 구분하고 주변 전각의 배치를 살펴보세요.",
+        "keywords": [
+          "기장",
+          "불광산"
+        ]
+      },
+      {
+        "title": "조선의 법당",
+        "text": "대웅전은 장안사의 대표 목조건축이에요. 정면과 옆면을 나누어 보면 지붕과 기둥의 비례가 다르게 보여요.",
+        "keywords": [
+          "대웅전"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "불광산 장안사 (佛光山 長安寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0048650",
+        "checkedAt": "2026-10-26",
+        "sha256": "f6caf6d21b2f52197bc7d7abf2620cd4acc281469a70cdbc31328c1eb6d39ae5"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "기장",
+        "불광산"
+      ],
+      [
+        "대웅전"
+      ]
+    ]
+  },
+  {
+    "id": "temple:전등사",
+    "name": "전등사",
+    "region": "수도권",
+    "locality": "강화",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "누각을 지나 법당으로",
+        "text": "대조루를 지나면 대웅보전과 여러 전각이 이어져요. 입구 누각과 중심 법당의 관계를 살펴보세요.",
+        "keywords": [
+          "대조루",
+          "대웅보전"
+        ]
+      },
+      {
+        "title": "지붕 아래 조각",
+        "text": "대웅보전에서는 처마를 받치는 조각에도 눈길을 주세요. 조각에 얽힌 이야기는 전승으로 읽고 건축의 실제 모습과 나누어 보세요.",
+        "keywords": [
+          "대웅보전"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "정족산 전등사 (鼎足山 傳燈寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0049355",
+        "checkedAt": "2026-10-26",
+        "sha256": "2e165402ecbb835643aa5b7d1e7e3abe429595e3f45edc20a7f8a9be34d1b636"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "대조루",
+        "대웅보전"
+      ],
+      [
+        "대웅보전"
+      ]
+    ]
+  },
+  {
+    "id": "temple:정암사",
+    "name": "정암사",
+    "region": "강원",
+    "locality": "정선",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "돌이 아니라 돌처럼",
+        "text": "수마노탑은 돌을 벽돌처럼 다듬어 쌓은 모전석탑이에요. 보통 석탑과 다른 겉면의 쌓기 방식을 살펴보세요.",
+        "keywords": [
+          "수마노탑"
+        ]
+      },
+      {
+        "title": "적멸보궁과 탑",
+        "text": "정암사의 적멸보궁과 수마노탑은 함께 이해하는 신앙 공간이에요. 법당과 산비탈의 탑을 같은 지점으로 혼동하지 않아요.",
+        "keywords": [
+          "적멸보궁"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "태백산 정암사 (太白山 淨巖寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0050538",
+        "checkedAt": "2026-10-26",
+        "sha256": "eafee63aab08a8dc46a41a84939a21c3db20ad4dbe7bc5676a50fb4b985d99c6"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "수마노탑"
+      ],
+      [
+        "적멸보궁"
+      ]
+    ]
+  },
+  {
+    "id": "temple:조계사",
+    "name": "조계사",
+    "region": "수도권",
+    "locality": "서울",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "도심의 큰 법당",
+        "text": "조계사는 서울 종로의 사찰이에요. 대웅전의 규모와 주변 도시 풍경이 만나는 모습을 살펴보세요.",
+        "keywords": [
+          "종로",
+          "대웅전"
+        ]
+      },
+      {
+        "title": "근대 불교의 중심",
+        "text": "조계사는 현대 조계종의 역사와 이어지는 곳이에요. 창건 연대만 외우기보다 총본산이 된 과정을 자료로 읽어보세요.",
+        "keywords": [
+          "조계종"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "조계사 (曹溪寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0051570",
+        "checkedAt": "2026-10-26",
+        "sha256": "3d576748f50e93c1c0a358e1d67c89b9faf9fd87f146d68f1424be154edec3ea"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "종로",
+        "대웅전"
+      ],
+      [
+        "조계종"
+      ]
+    ]
+  },
+  {
+    "id": "temple:존자암",
+    "name": "존자암",
+    "region": "제주",
+    "locality": "제주",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "옛 절터를 살펴요",
+        "text": "존자암지는 제주 불교의 역사를 전하는 사찰터예요. 발굴된 옛 건물터와 뒤에 정비한 모습을 구분해 보세요.",
+        "keywords": [
+          "제주",
+          "사찰터"
+        ]
+      },
+      {
+        "title": "판자를 쓴 옛 건물",
+        "text": "옛 기록에는 지붕과 벽에 판자를 썼던 존자암의 모습이 전해요. 지금의 정비된 모습과 기록 속 건물을 나누어 생각해 보세요.",
+        "keywords": [
+          "판자",
+          "지붕"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "존자암지 (尊者庵址)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0052845",
+        "checkedAt": "2026-10-26",
+        "sha256": "05000d6147fa599f018afb1d718fd92238a3165c960afc2ac2c24dae6d3dec5b"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "제주",
+        "사찰터"
+      ],
+      [
+        "판자",
+        "지붕"
+      ]
+    ]
+  },
+  {
+    "id": "temple:직지사",
+    "name": "직지사",
+    "region": "경상",
+    "locality": "김천",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "많은 부처의 공간",
+        "text": "비로전은 천불전이라고도 불려요. 많은 불상을 모신 구성을 살펴보면 대웅전과 다른 공간의 성격이 보여요.",
+        "keywords": [
+          "비로전",
+          "천불"
+        ]
+      },
+      {
+        "title": "돌탑과 큰 법당",
+        "text": "대웅전과 삼층석탑은 직지사의 중요한 유산이에요. 각 건물을 따로 보기보다 탑과 법당의 위치를 함께 바라보세요.",
+        "keywords": [
+          "대웅전",
+          "삼층석탑"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "황악산 직지사 (黃嶽山 直指寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0054538",
+        "checkedAt": "2026-10-26",
+        "sha256": "16a5fae676fc2d7b86126f889dbcea9c445167382e776f22756f2c229c06bb3c"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "비로전",
+        "천불"
+      ],
+      [
+        "대웅전",
+        "삼층석탑"
+      ]
+    ]
+  },
+  {
+    "id": "temple:진관사",
+    "name": "진관사",
+    "region": "수도권",
+    "locality": "서울",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "전각마다 다른 역할",
+        "text": "진관사의 나한전·독성전·칠성각은 서로 다른 신앙 공간이에요. 모두 같은 이름의 법당처럼 지나치지 말고 역할을 나누어 보세요.",
+        "keywords": [
+          "나한전",
+          "칠성각"
+        ]
+      },
+      {
+        "title": "작은 절에서 나온 기록",
+        "text": "진관사에서는 태극기와 독립운동 관련 자료가 발견되었어요. 전각 안에 남은 기록이 근현대사를 전한다는 점도 기억해 주세요.",
+        "keywords": [
+          "태극기"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "북한산 진관사 (北漢山 津寬寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0054587",
+        "checkedAt": "2026-10-26",
+        "sha256": "5a7d1860e9de2567d57e69871c5f175a25dad37fb11c61470f6b711b34c3872d"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "나한전",
+        "칠성각"
+      ],
+      [
+        "태극기"
+      ]
+    ]
+  },
+  {
+    "id": "temple:천은사",
+    "name": "천은사",
+    "region": "전라",
+    "locality": "구례",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "물가의 누각",
+        "text": "수홍문는 천은사의 풍경을 이루는 누각이에요. 건물의 모습과 아래 물길을 함께 바라보세요.",
+        "keywords": [
+          "수홍문"
+        ]
+      },
+      {
+        "title": "지리산의 또 다른 절",
+        "text": "천은사는 구례 지리산 자락의 절이에요. 화엄사와 가까운 권역이라고 같은 경내로 생각하지 말고 각각의 장소를 확인하세요.",
+        "keywords": [
+          "구례",
+          "지리산"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "지리산 천은사 (智異山 泉隱寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0055985",
+        "checkedAt": "2026-10-26",
+        "sha256": "2ce5448949fcb16660b35010e0e1e448049862032730ef5033acf67e408007cf"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "수홍문"
+      ],
+      [
+        "구례",
+        "지리산"
+      ]
+    ]
+  },
+  {
+    "id": "temple:청량사",
+    "name": "청량사",
+    "region": "경상",
+    "locality": "봉화",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "산과 함께 보는 법당",
+        "text": "유리보전은 청량사의 중심 전각이에요. 뒤편 청량산의 산세와 전각이 이루는 풍경을 함께 바라보세요.",
+        "keywords": [
+          "유리보전",
+          "청량산"
+        ]
+      },
+      {
+        "title": "흙칠로 만든 불상",
+        "text": "건칠약사여래좌상은 마른 옻칠 기법으로 만든 불상이에요. 나무나 돌로만 불상을 만든 것은 아니라는 점이 흥미로워요.",
+        "keywords": [
+          "건칠약사"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "청량사 (淸凉寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0056382",
+        "checkedAt": "2026-10-26",
+        "sha256": "265f48a9ea8048aa989fdd4d58d6fd6726d8510940be51ebc1ae16e925be8ce8"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "유리보전",
+        "청량산"
+      ],
+      [
+        "건칠약사"
+      ]
+    ]
+  },
+  {
+    "id": "temple:청암사",
+    "name": "청암사",
+    "region": "경상",
+    "locality": "김천",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "스님들의 배움터",
+        "text": "청암사는 비구니 교육과 이어지는 사찰이에요. 경내를 볼 때 전각의 모습뿐 아니라 배움과 수행의 기능도 함께 생각해 보세요.",
+        "keywords": [
+          "비구니"
+        ]
+      },
+      {
+        "title": "본찰과 수도암",
+        "text": "청암사 본찰과 수도암은 다른 관람 지점이에요. 수도암 유산을 보려면 별도 위치를 먼저 확인해 주세요.",
+        "keywords": [
+          "수도암"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "불영산 청암사 (佛靈山 靑巖寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0056536",
+        "checkedAt": "2026-10-26",
+        "sha256": "a0db22950fc59f356c6e71d5ecc48ed4b4eb43e47a5aefbce7f4ae572e2880a1"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "비구니"
+      ],
+      [
+        "수도암"
+      ]
+    ]
+  },
+  {
+    "id": "temple:청평사",
+    "name": "청평사",
+    "region": "강원",
+    "locality": "춘천",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "문에 담긴 공간감",
+        "text": "회전문은 청평사의 중요한 목조건축이에요. 정문 하나가 경내 공간을 어떻게 나누는지 살펴보세요.",
+        "keywords": [
+          "회전문"
+        ]
+      },
+      {
+        "title": "옛 정원의 자취",
+        "text": "고려시대 정원의 흔적과 영지를 자료와 함께 살펴보세요. 오늘의 전각뿐 아니라 물과 돌로 이루었던 옛 공간도 볼거리가 돼요.",
+        "keywords": [
+          "영지"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "오봉산 청평사 (五峰山 淸平寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0056813",
+        "checkedAt": "2026-10-26",
+        "sha256": "0350834faa7bd78127393b2ec1e1c46e7bc76a8e4b951055e2338e0e0b31b08c"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "회전문"
+      ],
+      [
+        "영지"
+      ]
+    ]
+  },
+  {
+    "id": "temple:칠장사",
+    "name": "칠장사",
+    "region": "수도권",
+    "locality": "안성",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "스님의 내력을 새긴 비",
+        "text": "혜소국사비는 칠장사의 역사를 전하는 유산이에요. 비석의 글과 받침을 나누어 살펴보세요.",
+        "keywords": [
+          "혜소"
+        ]
+      },
+      {
+        "title": "쇠 깃대의 역할",
+        "text": "칠장사 당간은 불교 행사 때 깃발을 달던 시설이에요. 탑과는 다른 목적으로 세운 구조물이라는 점을 알아보세요.",
+        "keywords": [
+          "당간"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "칠현산 칠장사 (七賢山 七長寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0058524",
+        "checkedAt": "2026-10-26",
+        "sha256": "e058de715d14a24fc7fb8a51b164209249049e346cc3787258d2f1f645af6ce7"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "혜소"
+      ],
+      [
+        "당간"
+      ]
+    ]
+  },
+  {
+    "id": "temple:태안사",
+    "name": "태안사",
+    "region": "전라",
+    "locality": "곡성",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "다리와 누각을 함께",
+        "text": "능파각은 계류를 건너는 다리 기능을 겸한 건물이에요. 누각 아래의 물길을 함께 살펴보세요.",
+        "keywords": [
+          "능파각"
+        ]
+      },
+      {
+        "title": "구산선문의 자취",
+        "text": "태안사는 동리산문의 역사와 이어지는 절이에요. 적인선사의 자취를 전하는 승탑과 비를 자료로 함께 읽어보세요.",
+        "keywords": [
+          "동리산",
+          "적인"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "동리산 태안사 (桐裏山 泰安寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0058975",
+        "checkedAt": "2026-10-26",
+        "sha256": "dbade1a4103be5a30c3e05058a310630d08e4ff6eb04376942b53a2c97a44843"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "능파각"
+      ],
+      [
+        "동리산",
+        "적인"
+      ]
+    ]
+  },
+  {
+    "id": "temple:통도사",
+    "name": "통도사",
+    "region": "경상",
+    "locality": "양산",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "불상 없는 법당의 뜻",
+        "text": "대웅전은 금강계단과 진신사리를 중심으로 이해하는 법당이에요. 내부에 불상을 따로 두지 않은 특징을 먼저 알아두세요.",
+        "keywords": [
+          "금강계단",
+          "사리"
+        ]
+      },
+      {
+        "title": "서로 다른 구역",
+        "text": "통도사에는 상로전·중로전·하로전 등 여러 구역이 있어요. 전각 이름만 따라가기보다 안내도에서 전체 배치를 먼저 살펴보세요.",
+        "keywords": [
+          "상로전",
+          "하로전"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "영축산 통도사 (靈鷲山 通度寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0059253",
+        "checkedAt": "2026-10-26",
+        "sha256": "de2c961a29366a97c9aa99c13ad31803e9379cad5e3c0d31e751206d597d1337"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "금강계단",
+        "사리"
+      ],
+      [
+        "상로전",
+        "하로전"
+      ]
+    ]
+  },
+  {
+    "id": "temple:파계사",
+    "name": "파계사",
+    "region": "경상",
+    "locality": "대구",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "관음보살을 모신 전각",
+        "text": "원통전은 파계사에서 중요한 법당이에요. 대웅전이라는 이름만 찾기보다 이 전각의 이름과 모신 대상을 함께 알아보세요.",
+        "keywords": [
+          "원통전"
+        ]
+      },
+      {
+        "title": "왕실의 원당",
+        "text": "기영각은 왕실의 안녕을 기원한 역사를 전하는 공간이에요. 일반 법당과 원당의 역할 차이를 살펴보세요.",
+        "keywords": [
+          "기영각"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "팔공산 파계사 (八公山 把溪寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0059537",
+        "checkedAt": "2026-10-26",
+        "sha256": "bc9455d904e33f76521122dfc26210d3134aa0efe09a19a49af3a0ab50fcc41c"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "원통전"
+      ],
+      [
+        "기영각"
+      ]
+    ]
+  },
+  {
+    "id": "temple:표충사",
+    "name": "표충사",
+    "region": "경상",
+    "locality": "밀양",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "법당과 사당을 함께",
+        "text": "표충사는 사명대사 유정과 관련된 사찰이에요. 불교 법당과 승병을 기리는 공간이 함께 있다는 점을 알아보세요.",
+        "keywords": [
+          "사명"
+        ]
+      },
+      {
+        "title": "작은 향로의 세부",
+        "text": "청동은입사향완은 표충사의 대표 공예 유산이에요. 큰 전각과 달리 작은 금속 표면에 새긴 무늬를 자료로 살펴보세요.",
+        "keywords": [
+          "향완"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "재약산 표충사 (載藥山 表忠寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0060276",
+        "checkedAt": "2026-10-26",
+        "sha256": "e8a2a61b71b520dc411d6065a50f72ce5d782dbfe5d6a4f19d38559707d3ac65"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "사명"
+      ],
+      [
+        "향완"
+      ]
+    ]
+  },
+  {
+    "id": "temple:해동용궁사",
+    "name": "해동용궁사",
+    "region": "경상",
+    "locality": "부산",
+    "status": "pending",
+    "cards": [],
+    "sources": [],
+    "reason": "공식 개별 자료를 확인하지 못해 내용을 등록하지 않았습니다.",
+    "evidenceKeywords": []
+  },
+  {
+    "id": "temple:해인사",
+    "name": "해인사",
+    "region": "경상",
+    "locality": "합천",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "경판을 지키는 건축",
+        "text": "장경판전은 팔만대장경을 보관하는 공간이에요. 경판뿐 아니라 바람과 습도를 다루는 건물의 배치에도 관심을 가져보세요.",
+        "keywords": [
+          "장경판전",
+          "대장경"
+        ]
+      },
+      {
+        "title": "중심 법당의 이름",
+        "text": "대적광전은 해인사의 중심 법당이에요. 다른 절에서 자주 보는 대웅전과 이름이 다른 까닭을 알아보면 관람이 더 풍부해져요.",
+        "keywords": [
+          "대적광전"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "가야산 해인사 (伽倻山 海印寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0062704",
+        "checkedAt": "2026-10-26",
+        "sha256": "eab6bc275520b3aa6d385cc12fbf766fc1e44f31cc1f157d01d5a6bf0142c40e"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "장경판전",
+        "대장경"
+      ],
+      [
+        "대적광전"
+      ]
+    ]
+  },
+  {
+    "id": "temple:향일암",
+    "name": "향일암",
+    "region": "전라",
+    "locality": "여수",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "바위산과 바다",
+        "text": "향일암은 여수 돌산 금오산에 자리한 암자예요. 바위산의 공간과 바다를 향한 시선을 함께 느껴보세요.",
+        "keywords": [
+          "금오산",
+          "돌산"
+        ]
+      },
+      {
+        "title": "관음신앙의 자리",
+        "text": "향일암은 해수관음 기도도량으로 알려져 있어요. 일출 풍경만 아니라 관음전과 사찰의 신앙 배경도 함께 살펴보세요.",
+        "keywords": [
+          "관음전"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "금오산 향일암 (金鰲山 向日庵)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0062977",
+        "checkedAt": "2026-10-26",
+        "sha256": "09655a132cbe52093b5bb605f9dff24e1778b4f54d0cce1cd4bc160f3d4256ca"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "금오산",
+        "돌산"
+      ],
+      [
+        "관음전"
+      ]
+    ]
+  },
+  {
+    "id": "temple:화계사",
+    "name": "화계사",
+    "region": "수도권",
+    "locality": "서울",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "도심과 산의 경계",
+        "text": "화계사는 서울 강북구의 사찰이에요. 대웅전과 주변 산사의 분위기를 도심의 위치와 함께 이해해 보세요.",
+        "keywords": [
+          "강북구",
+          "대웅전"
+        ]
+      },
+      {
+        "title": "종을 만든 장인",
+        "text": "화계사 동종은 사인비구가 만든 종으로 알려져 있어요. 종에 새긴 장식과 장인의 흔적을 자료로 알아보세요.",
+        "keywords": [
+          "사인"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "삼각산 화계사 (三角山 華溪寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0064547",
+        "checkedAt": "2026-10-26",
+        "sha256": "76105c9644f5f2796c542379bcc4613a6ec00995c882feb31cac71c89478024e"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "강북구",
+        "대웅전"
+      ],
+      [
+        "사인"
+      ]
+    ]
+  },
+  {
+    "id": "temple:화암사",
+    "name": "화암사",
+    "region": "전라",
+    "locality": "완주",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "처마 아래를 올려다봐요",
+        "text": "극락전의 하앙 구조는 완주 화암사의 특별한 볼거리예요. 지붕을 떠받치는 부재가 바깥으로 뻗은 모습을 살펴보세요.",
+        "keywords": [
+          "하앙"
+        ]
+      },
+      {
+        "title": "문루와 법당의 관계",
+        "text": "우화루는 극락전과 함께 보는 건물이에요. 두 전각의 높이와 마당이 이어지는 방식을 함께 바라보세요.",
+        "keywords": [
+          "우화루"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "불명산 화암사 (佛明山 花巖寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0064751",
+        "checkedAt": "2026-10-26",
+        "sha256": "34c41041ebaf3608e40ec05a1a69bb4c554efc23c36b6906dc227ef11aac4f29"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "하앙"
+      ],
+      [
+        "우화루"
+      ]
+    ]
+  },
+  {
+    "id": "temple:화엄사",
+    "name": "화엄사",
+    "region": "전라",
+    "locality": "구례",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "큰 전각과 돌빛",
+        "text": "각황전과 그 앞 석등은 화엄사의 대표 유산이에요. 큰 목조건축과 돌 구조물의 규모를 함께 살펴보세요.",
+        "keywords": [
+          "각황전",
+          "석등"
+        ]
+      },
+      {
+        "title": "별개의 석탑",
+        "text": "사사자 삼층석탑은 각황전 앞 석등과 다른 관람 지점이에요. 네 사자가 받친 탑과 석등을 혼동하지 않아요.",
+        "keywords": [
+          "사사자"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "지리산 화엄사 (智異山 華嚴寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0064785",
+        "checkedAt": "2026-10-26",
+        "sha256": "7a29dbe8ffb2d29ceb690f3959257344a59aaac6987876d7b753e87fe7e8c702"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "각황전",
+        "석등"
+      ],
+      [
+        "사사자"
+      ]
+    ]
+  },
+  {
+    "id": "temple:회암사",
+    "name": "회암사",
+    "region": "수도권",
+    "locality": "양주",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "사찰과 사찰터",
+        "text": "회암사와 넓은 회암사지는 서로 구분해 볼 곳이에요. 현재의 사찰 건물과 옛 대가람의 유구를 같은 시기의 모습으로 생각하지 않아요.",
+        "keywords": [
+          "옛터"
+        ]
+      },
+      {
+        "title": "세 스님의 자취",
+        "text": "지공·나옹·무학의 승탑과 비는 이곳의 중요한 역사 자료예요. 스님의 이름과 각 탑의 내력을 나누어 살펴보세요.",
+        "keywords": [
+          "지공",
+          "나옹",
+          "무학"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "천보산 회암사 (天寶山 檜巖寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0065525",
+        "checkedAt": "2026-10-26",
+        "sha256": "e64644af36e444eccf966b469d127bb53061be7dd7f743086a417ffd56ceebc5"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "옛터"
+      ],
+      [
+        "지공",
+        "나옹",
+        "무학"
+      ]
+    ]
+  },
+  {
+    "id": "temple:휴휴암",
+    "name": "휴휴암",
+    "region": "강원",
+    "locality": "양양",
+    "status": "pending",
+    "cards": [],
+    "sources": [],
+    "reason": "공식 개별 자료를 확인하지 못해 내용을 등록하지 않았습니다.",
+    "evidenceKeywords": []
+  },
+  {
+    "id": "temple:흥국사(여수)",
+    "name": "흥국사(여수)",
+    "region": "전라",
+    "locality": "여수",
+    "status": "verified",
+    "cards": [
+      {
+        "title": "계곡을 잇는 돌다리",
+        "text": "홍교는 여수 흥국사의 대표 유산이에요. 돌로 만든 아치와 물길의 관계를 함께 바라보세요.",
+        "keywords": [
+          "홍교"
+        ]
+      },
+      {
+        "title": "넓은 법당의 구성",
+        "text": "대웅전에는 석가여래삼존불을 모시고 있어요. 건물의 규모와 세 불상의 배치를 함께 살펴보세요.",
+        "keywords": [
+          "대웅전",
+          "삼존"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "영취산 흥국사 (靈鷲山 興國寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0065958",
+        "checkedAt": "2026-10-26",
+        "sha256": "af5b63683b626b0622c291001288fee500637bcd89b824c1a6dd581ddf715b86"
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "홍교"
+      ],
+      [
+        "대웅전",
+        "삼존"
+      ]
+    ]
+  }
+]

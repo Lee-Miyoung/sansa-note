@@ -1,0 +1,212 @@
+id,kind,name,region,locality,tipsStatus,artworkStatus,image,thumbnail,pendingReason
+temple:각연사,temple,각연사,충청,괴산,verified,verified,/images/temple-covers/temple-각연사.webp,/images/temple-covers/thumb-각연사.webp,
+temple:갑사,temple,갑사,충청,공주,verified,verified,/images/temple-covers/temple-갑사.webp,/images/temple-covers/thumb-갑사.webp,
+temple:갓바위(선본사),temple,갓바위(선본사),경상,경산,verified,verified,/images/temple-covers/temple-갓바위(선본사).webp,/images/temple-covers/thumb-갓바위(선본사).webp,
+temple:개심사,temple,개심사,충청,서산,verified,verified,/images/temple-covers/temple-개심사.webp,/images/temple-covers/thumb-개심사.webp,
+temple:개암사,temple,개암사,전라,부안,verified,verified,/images/temple-covers/temple-개암사.webp,/images/temple-covers/thumb-개암사.webp,
+temple:건봉사,temple,건봉사,강원,고성,verified,verified,/images/temple-covers/temple-건봉사.webp,/images/temple-covers/thumb-건봉사.webp,
+temple:고운사,temple,고운사,경상,의성,verified,verified,/images/temple-covers/temple-고운사.webp,/images/temple-covers/thumb-고운사.webp,
+temple:골굴사,temple,골굴사,경상,경주,verified,verified,/images/temple-covers/reviewed-골굴사.webp,/images/temple-covers/reviewed-골굴사-small.webp,
+temple:관룡사,temple,관룡사,경상,창녕,verified,verified,/images/temple-covers/temple-관룡사.webp,/images/temple-covers/thumb-관룡사.webp,
+temple:관음사,temple,관음사,제주,제주,verified,verified,/images/temple-covers/temple-관음사.webp,/images/temple-covers/thumb-관음사.webp,
+temple:관촉사,temple,관촉사,충청,논산,verified,verified,/images/temple-covers/reviewed-관촉사.webp,/images/temple-covers/reviewed-관촉사-small.webp,
+temple:구인사,temple,구인사,충청,단양,verified,verified,/images/temple-covers/reviewed-구인사.webp,/images/temple-covers/reviewed-구인사-small.webp,
+temple:금산사,temple,금산사,전라,김제,verified,verified,/atlas/geumsansa/images/geumsansa-cover.webp,/atlas/geumsansa/images/geumsansa-cover-small.webp,
+temple:기림사,temple,기림사,경상,경주,verified,verified,/images/temple-covers/reviewed-기림사.webp,/images/temple-covers/reviewed-기림사-small.webp,
+temple:김룡사,temple,김룡사,경상,문경,verified,verified,/images/temple-covers/reviewed-김룡사.webp,/images/temple-covers/reviewed-김룡사-small.webp,
+temple:낙산사,temple,낙산사,강원,양양,verified,verified,/images/temple-covers/temple-낙산사.webp,/images/temple-covers/thumb-낙산사.webp,
+temple:내소사,temple,내소사,전라,부안,verified,verified,/images/temple-covers/reviewed-내소사.webp,/images/temple-covers/reviewed-내소사-small.webp,
+temple:다솔사,temple,다솔사,경상,사천,verified,verified,/images/temple-covers/reviewed-다솔사.webp,/images/temple-covers/reviewed-다솔사-small.webp,
+temple:대승사,temple,대승사,경상,문경,verified,verified,/images/temple-covers/reviewed-대승사.webp,/images/temple-covers/reviewed-대승사-small.webp,
+temple:대원사,temple,대원사,경상,산청,verified,verified,/images/temple-covers/reviewed-대원사.webp,/images/temple-covers/reviewed-대원사-small.webp,
+temple:대조사,temple,대조사,충청,부여,verified,verified,/images/temple-covers/reviewed-대조사.webp,/images/temple-covers/reviewed-대조사-small.webp,
+temple:대흥사,temple,대흥사,전라,해남,verified,verified,/atlas/daeheungsa/images/daeheungsa-cover.webp,/atlas/daeheungsa/images/daeheungsa-cover-small.webp,
+temple:도갑사,temple,도갑사,전라,영암,verified,verified,/images/temple-covers/reviewed-도갑사.webp,/images/temple-covers/reviewed-도갑사-small.webp,
+temple:도리사,temple,도리사,경상,구미,verified,verified,/images/temple-covers/reviewed-도리사.webp,/images/temple-covers/reviewed-도리사-small.webp,
+temple:도선사,temple,도선사,수도권,서울,verified,verified,/images/temple-covers/reviewed-도선사.webp,/images/temple-covers/reviewed-도선사-small.webp,
+temple:도피안사,temple,도피안사,강원,철원,verified,verified,/images/temple-covers/reviewed-도피안사.webp,/images/temple-covers/reviewed-도피안사-small.webp,
+temple:동학사,temple,동학사,충청,공주,verified,verified,/images/temple-covers/reviewed-동학사.webp,/images/temple-covers/reviewed-동학사-small.webp,
+temple:동화사,temple,동화사,경상,대구,verified,verified,/images/temple-covers/temple-동화사.webp,/images/temple-covers/thumb-동화사.webp,
+temple:마곡사,temple,마곡사,충청,공주,verified,verified,/atlas/magoksa/images/magoksa-cover.webp,/atlas/magoksa/images/magoksa-cover-small.webp,
+temple:만어사,temple,만어사,경상,밀양,verified,verified,/images/temple-covers/reviewed-만어사.webp,/images/temple-covers/reviewed-만어사-small.webp,
+temple:무량사,temple,무량사,충청,부여,verified,verified,/images/temple-covers/reviewed-무량사.webp,/images/temple-covers/reviewed-무량사-small.webp,
+temple:무위사,temple,무위사,전라,강진,verified,verified,/atlas/muwisa/images/muwisa-cover-small.webp,/atlas/muwisa/images/muwisa-cover-small.webp,
+temple:문수사,temple,문수사,충청,서산,verified,verified,/images/temple-covers/temple-문수사.webp,/images/temple-covers/thumb-문수사.webp,
+temple:미황사,temple,미황사,전라,해남,verified,verified,/images/temple-covers/reviewed-미황사.webp,/images/temple-covers/reviewed-미황사-small.webp,
+temple:백담사,temple,백담사,강원,인제,verified,verified,/images/temple-covers/reviewed-백담사.webp,/images/temple-covers/reviewed-백담사-small.webp,
+temple:백련사,temple,백련사,전라,강진,verified,verified,/images/temple-covers/reviewed-백련사.webp,/images/temple-covers/reviewed-백련사-small.webp,
+temple:백양사,temple,백양사,전라,장성,verified,verified,/images/temple-covers/temple-백양사.webp,/images/temple-covers/thumb-백양사.webp,
+temple:범어사,temple,범어사,경상,부산,verified,verified,/images/temple-covers/temple-범어사.webp,/images/temple-covers/thumb-범어사.webp,
+temple:법주사,temple,법주사,충청,보은,verified,verified,/atlas/beopjusa/images/beopjusa-cover.webp,/atlas/beopjusa/images/beopjusa-cover-small.webp,
+temple:법화사,temple,법화사,제주,제주,verified,verified,/images/temple-covers/reviewed-법화사.webp,/images/temple-covers/reviewed-법화사-small.webp,
+temple:법흥사,temple,법흥사,강원,영월,verified,verified,/images/temple-covers/reviewed-법흥사.webp,/images/temple-covers/reviewed-법흥사-small.webp,
+temple:벽송사,temple,벽송사,경상,함양,verified,verified,/images/temple-covers/temple-벽송사.webp,/images/temple-covers/thumb-벽송사.webp,
+temple:보광사,temple,보광사,수도권,파주,verified,verified,/images/temple-covers/reviewed-보광사.webp,/images/temple-covers/reviewed-보광사-small.webp,
+temple:보리암,temple,보리암,경상,남해,verified,verified,/images/temple-covers/reviewed-보리암.webp,/images/temple-covers/reviewed-보리암-small.webp,
+temple:보문사,temple,보문사,수도권,강화,verified,verified,/images/temple-covers/temple-보문사.webp,/images/temple-covers/thumb-보문사.webp,
+temple:봉선사,temple,봉선사,수도권,남양주,verified,verified,/images/temple-covers/reviewed-봉선사.webp,/images/temple-covers/reviewed-봉선사-small.webp,
+temple:봉암사,temple,봉암사,경상,문경,verified,verified,/images/temple-covers/reviewed-봉암사.webp,/images/temple-covers/reviewed-봉암사-small.webp,
+temple:봉원사,temple,봉원사,수도권,서울,verified,verified,/images/temple-covers/reviewed-봉원사.webp,/images/temple-covers/reviewed-봉원사-small.webp,
+temple:봉은사,temple,봉은사,수도권,서울,verified,verified,/images/temple-covers/reviewed-봉은사.webp,/images/temple-covers/reviewed-봉은사-small.webp,
+temple:봉정사,temple,봉정사,경상,안동,verified,verified,/images/temple-covers/temple-봉정사.webp,/images/temple-covers/thumb-봉정사.webp,
+temple:봉정암,temple,봉정암,강원,인제,verified,pending,,,정확한 소재지와 대표 요소를 확인할 사용 가능 참고 사진 미확보
+temple:부석사,temple,부석사,경상,영주,verified,verified,/atlas/buseoksa/images/buseoksa-cover.webp,/atlas/buseoksa/images/buseoksa-cover-small.webp,
+temple:분황사,temple,분황사,경상,경주,verified,verified,/atlas/bunhwangsa/images/bunhwangsa-cover.webp,/atlas/bunhwangsa/images/bunhwangsa-cover-small.webp,
+temple:불갑사,temple,불갑사,전라,영광,verified,verified,/images/temple-covers/reviewed-불갑사.webp,/images/temple-covers/reviewed-불갑사-small.webp,
+temple:불국사,temple,불국사,경상,경주,verified,verified,/images/temple-covers/temple-불국사.webp,/images/temple-covers/thumb-불국사.webp,
+temple:불영사,temple,불영사,경상,울진,verified,verified,/images/temple-covers/temple-불영사.webp,/images/temple-covers/thumb-불영사.webp,
+temple:산방굴사,temple,산방굴사,제주,제주,verified,verified,/images/temple-covers/reviewed-산방굴사.webp,/images/temple-covers/reviewed-산방굴사-small.webp,
+temple:삼광사,temple,삼광사,경상,부산,verified,pending,,,동명 장소의 소재지 또는 대표 산세를 확인할 수 있는 사용 가능 참고 사진 부족
+temple:상원사,temple,상원사,강원,평창,verified,verified,/images/temple-covers/reviewed-상원사.webp,/images/temple-covers/reviewed-상원사-small.webp,
+temple:석굴암,temple,석굴암,경상,경주,verified,verified,/images/temple-covers/temple-석굴암.webp,/images/temple-covers/thumb-석굴암.webp,
+temple:선암사,temple,선암사,전라,순천,verified,verified,/atlas/seonamsa/images/seonamsa-cover.webp,/atlas/seonamsa/images/seonamsa-cover-small.webp,
+temple:선운사,temple,선운사,전라,고창,verified,verified,/atlas/seonunsa/images/seonunsa-cover.webp,/atlas/seonunsa/images/seonunsa-cover-small.webp,
+temple:송광사,temple,송광사,전라,순천,verified,verified,/images/temple-covers/temple-송광사.webp,/images/temple-covers/thumb-송광사.webp,
+temple:수덕사,temple,수덕사,충청,예산,verified,verified,/images/temple-covers/reviewed-수덕사.webp,/images/temple-covers/reviewed-수덕사-small.webp,
+temple:수종사,temple,수종사,수도권,남양주,verified,verified,/images/temple-covers/reviewed-수종사.webp,/images/temple-covers/reviewed-수종사-small.webp,
+temple:신륵사,temple,신륵사,수도권,여주,verified,verified,/images/temple-covers/temple-신륵사.webp,/images/temple-covers/thumb-신륵사.webp,
+temple:신원사,temple,신원사,충청,공주,verified,verified,/images/temple-covers/reviewed-신원사.webp,/images/temple-covers/reviewed-신원사-small.webp,
+temple:신흥사,temple,신흥사,강원,속초,verified,verified,/images/temple-covers/reviewed-신흥사.webp,/images/temple-covers/reviewed-신흥사-small.webp,
+temple:실상사,temple,실상사,전라,남원,verified,verified,/images/temple-covers/reviewed-실상사.webp,/images/temple-covers/reviewed-실상사-small.webp,
+temple:쌍계사,temple,쌍계사,경상,하동,verified,verified,/images/temple-covers/reviewed-쌍계사.webp,/images/temple-covers/reviewed-쌍계사-small.webp,
+temple:쌍봉사,temple,쌍봉사,전라,화순,verified,verified,/images/temple-covers/reviewed-쌍봉사.webp,/images/temple-covers/reviewed-쌍봉사-small.webp,
+temple:약천사,temple,약천사,제주,제주,pending,pending,,,정확한 소재지와 대표 요소를 확인할 사용 가능 참고 사진 미확보
+temple:연곡사,temple,연곡사,전라,구례,verified,verified,/images/temple-covers/reviewed-연곡사.webp,/images/temple-covers/reviewed-연곡사-small.webp,
+temple:오어사,temple,오어사,경상,포항,verified,verified,/images/temple-covers/reviewed-오어사.webp,/images/temple-covers/reviewed-오어사-small.webp,
+temple:옥천사,temple,옥천사,경상,고성,verified,verified,/images/temple-covers/temple-옥천사.webp,/images/temple-covers/thumb-옥천사.webp,
+temple:완주 송광사,temple,완주 송광사,전라,완주,verified,verified,/images/temple-covers/temple-완주 송광사.webp,/images/temple-covers/thumb-완주 송광사.webp,
+temple:용문사(양평),temple,용문사(양평),수도권,양평,verified,verified,/images/temple-covers/temple-용문사(양평).webp,/images/temple-covers/thumb-용문사(양평).webp,
+temple:용문사(예천),temple,용문사(예천),경상,예천,verified,verified,/images/temple-covers/temple-용문사(예천).webp,/images/temple-covers/thumb-용문사(예천).webp,
+temple:용주사,temple,용주사,수도권,화성,verified,verified,/atlas/yongjusa/images/yongjusa-cover.webp,/atlas/yongjusa/images/yongjusa-cover-small.webp,
+temple:운문사,temple,운문사,경상,청도,verified,verified,/images/temple-covers/reviewed-운문사.webp,/images/temple-covers/reviewed-운문사-small.webp,
+temple:운주사,temple,운주사,전라,화순,verified,verified,/atlas/unjusa/images/unjusa-cover.webp,/atlas/unjusa/images/unjusa-cover-small.webp,
+temple:원당사,temple,원당사,제주,제주,pending,pending,,,정확한 소재지와 대표 요소를 확인할 사용 가능 참고 사진 미확보
+temple:월정사,temple,월정사,강원,평창,verified,verified,/images/temple-covers/reviewed-월정사.webp,/images/temple-covers/reviewed-월정사-small.webp,
+temple:은하사,temple,은하사,경상,김해,verified,verified,/images/temple-covers/reviewed-은하사.webp,/images/temple-covers/reviewed-은하사-small.webp,
+temple:은해사,temple,은해사,경상,영천,verified,verified,/images/temple-covers/temple-은해사.webp,/images/temple-covers/thumb-은해사.webp,
+temple:자재암,temple,자재암,수도권,동두천,verified,verified,/images/temple-covers/reviewed-자재암.webp,/images/temple-covers/reviewed-자재암-small.webp,
+temple:장안사(부산),temple,장안사(부산),경상,부산,verified,verified,/images/temple-covers/reviewed-장안사(부산).webp,/images/temple-covers/reviewed-장안사(부산)-small.webp,
+temple:전등사,temple,전등사,수도권,강화,verified,verified,/images/temple-covers/reviewed-전등사.webp,/images/temple-covers/reviewed-전등사-small.webp,
+temple:정암사,temple,정암사,강원,정선,verified,verified,/atlas/jeongamsa/images/jeongamsa-cover.webp,/atlas/jeongamsa/images/jeongamsa-cover-small.webp,
+temple:조계사,temple,조계사,수도권,서울,verified,verified,/images/temple-covers/reviewed-조계사.webp,/images/temple-covers/reviewed-조계사-small.webp,
+temple:존자암,temple,존자암,제주,제주,verified,verified,/images/temple-covers/reviewed-존자암.webp,/images/temple-covers/reviewed-존자암-small.webp,
+temple:직지사,temple,직지사,경상,김천,verified,verified,/images/temple-covers/temple-직지사.webp,/images/temple-covers/thumb-직지사.webp,
+temple:진관사,temple,진관사,수도권,서울,verified,verified,/atlas/jingwansa/images/jingwansa-cover.webp,/atlas/jingwansa/images/jingwansa-cover-small.webp,
+temple:천은사,temple,천은사,전라,구례,verified,verified,/images/temple-covers/temple-천은사.webp,/images/temple-covers/thumb-천은사.webp,
+temple:청량사,temple,청량사,경상,봉화,verified,verified,/images/temple-covers/reviewed-청량사.webp,/images/temple-covers/reviewed-청량사-small.webp,
+temple:청암사,temple,청암사,경상,김천,verified,verified,/images/temple-covers/reviewed-청암사.webp,/images/temple-covers/reviewed-청암사-small.webp,
+temple:청평사,temple,청평사,강원,춘천,verified,pending,,,공식 매체의 다운로드 서버가 반복해서 HTTP 500을 반환해 실제 형태를 대조하지 못했습니다.
+temple:칠장사,temple,칠장사,수도권,안성,verified,verified,/images/temple-covers/temple-칠장사.webp,/images/temple-covers/thumb-칠장사.webp,
+temple:태안사,temple,태안사,전라,곡성,verified,verified,/images/temple-covers/reviewed-태안사.webp,/images/temple-covers/reviewed-태안사-small.webp,
+temple:통도사,temple,통도사,경상,양산,verified,verified,/images/temple-covers/temple-통도사.webp,/images/temple-covers/thumb-통도사.webp,
+temple:파계사,temple,파계사,경상,대구,verified,verified,/images/temple-covers/temple-파계사.webp,/images/temple-covers/thumb-파계사.webp,
+temple:표충사,temple,표충사,경상,밀양,verified,verified,/images/temple-covers/reviewed-표충사.webp,/images/temple-covers/reviewed-표충사-small.webp,
+temple:해동용궁사,temple,해동용궁사,경상,부산,pending,pending,,,정확한 소재지와 대표 요소를 확인할 사용 가능 참고 사진 미확보
+temple:해인사,temple,해인사,경상,합천,verified,verified,/images/temple-covers/temple-해인사.webp,/images/temple-covers/thumb-해인사.webp,
+temple:향일암,temple,향일암,전라,여수,verified,pending,,,정확한 소재지와 대표 요소를 확인할 사용 가능 참고 사진 미확보
+temple:화계사,temple,화계사,수도권,서울,verified,verified,/images/temple-covers/reviewed-화계사.webp,/images/temple-covers/reviewed-화계사-small.webp,
+temple:화암사,temple,화암사,전라,완주,verified,verified,/images/temple-covers/reviewed-화암사.webp,/images/temple-covers/reviewed-화암사-small.webp,
+temple:화엄사,temple,화엄사,전라,구례,verified,verified,/atlas/hwaeomsa/images/hwaeomsa-cover.webp,/atlas/hwaeomsa/images/hwaeomsa-cover-small.webp,
+temple:회암사,temple,회암사,수도권,양주,verified,verified,/images/temple-covers/reviewed-회암사.webp,/images/temple-covers/reviewed-회암사-small.webp,
+temple:휴휴암,temple,휴휴암,강원,양양,pending,pending,,,정확한 소재지와 대표 요소를 확인할 사용 가능 참고 사진 미확보
+temple:흥국사(여수),temple,흥국사(여수),전라,여수,verified,verified,/images/temple-covers/reviewed-흥국사(여수).webp,/images/temple-covers/reviewed-흥국사(여수)-small.webp,
+mountain:가리왕산,mountain,가리왕산,강원,,not-applicable,pending,,,사용 가능한 정확한 지역의 대표 지형 사진 미확보
+mountain:가야산,mountain,가야산,경상,,not-applicable,verified,/images/mountain-covers/reviewed-가야산.webp,/images/mountain-covers/reviewed-가야산-small.webp,
+mountain:가야산(서산),mountain,가야산(서산),충청,,not-applicable,pending,,,공식 매체의 다운로드 서버가 반복해서 HTTP 500을 반환해 실제 형태를 대조하지 못했습니다.
+mountain:가지산,mountain,가지산,경상,,not-applicable,pending,,,사용 가능한 정확한 지역의 대표 지형 사진 미확보
+mountain:간월산,mountain,간월산,경상,,not-applicable,pending,,,사용 가능한 정확한 지역의 대표 지형 사진 미확보
+mountain:감악산,mountain,감악산,수도권,경기 파주시 적성면 설마리 감악산,not-applicable,pending,,,동명 장소의 소재지 또는 대표 산세를 확인할 수 있는 사용 가능 참고 사진 부족
+mountain:검단산,mountain,검단산,수도권,,not-applicable,pending,,,공식 매체의 다운로드 서버가 반복해서 HTTP 500을 반환해 실제 형태를 대조하지 못했습니다.
+mountain:계룡산,mountain,계룡산,충청,,not-applicable,verified,/images/mountain-covers/reviewed-계룡산.webp,/images/mountain-covers/reviewed-계룡산-small.webp,
+mountain:계방산,mountain,계방산,강원,,not-applicable,pending,,,사용 가능한 정확한 지역의 대표 지형 사진 미확보
+mountain:관악산,mountain,관악산,수도권,,not-applicable,verified,/images/mountain-covers/reviewed-관악산.webp,/images/mountain-covers/reviewed-관악산-small.webp,
+mountain:광덕산,mountain,광덕산,강원,,not-applicable,pending,,,공식 매체의 다운로드 서버가 반복해서 HTTP 500을 반환해 실제 형태를 대조하지 못했습니다.
+mountain:국망봉,mountain,국망봉,수도권,,not-applicable,pending,,,사용 가능한 정확한 지역의 대표 지형 사진 미확보
+mountain:금오산,mountain,금오산,경상,,not-applicable,verified,/images/mountain-covers/reviewed-금오산.webp,/images/mountain-covers/reviewed-금오산-small.webp,
+mountain:금원산,mountain,금원산,경상,,not-applicable,verified,/images/mountain-covers/reviewed-금원산.webp,/images/mountain-covers/reviewed-금원산-small.webp,
+mountain:금정산,mountain,금정산,경상,,not-applicable,verified,/images/mountain-covers/reviewed-금정산.webp,/images/mountain-covers/reviewed-금정산-small.webp,
+mountain:남산,mountain,남산,수도권,,not-applicable,pending,,,공식 매체의 다운로드 서버가 반복해서 HTTP 500을 반환해 실제 형태를 대조하지 못했습니다.
+mountain:내장산,mountain,내장산,전라,,not-applicable,verified,/images/mountain-covers/reviewed-내장산.webp,/images/mountain-covers/reviewed-내장산-small.webp,
+mountain:대둔산,mountain,대둔산,전라,,not-applicable,verified,/images/mountain-covers/reviewed-대둔산.webp,/images/mountain-covers/reviewed-대둔산-small.webp,
+mountain:대암산,mountain,대암산,강원,,not-applicable,verified,/images/mountain-covers/reviewed-대암산.webp,/images/mountain-covers/reviewed-대암산-small.webp,
+mountain:대야산,mountain,대야산,경상,,not-applicable,pending,,,사용 가능한 정확한 지역의 대표 지형 사진 미확보
+mountain:덕유산,mountain,덕유산,전라,,not-applicable,verified,/images/mountain-covers/reviewed-덕유산.webp,/images/mountain-covers/reviewed-덕유산-small.webp,
+mountain:도봉산,mountain,도봉산,수도권,,not-applicable,verified,/images/mountain-covers/reviewed-도봉산.webp,/images/mountain-covers/reviewed-도봉산-small.webp,
+mountain:두륜산,mountain,두륜산,전라,,not-applicable,verified,/images/mountain-covers/reviewed-두륜산.webp,/images/mountain-covers/reviewed-두륜산-small.webp,
+mountain:두타산,mountain,두타산,강원,,not-applicable,verified,/images/mountain-covers/reviewed-두타산.webp,/images/mountain-covers/reviewed-두타산-small.webp,
+mountain:마니산,mountain,마니산,수도권,,not-applicable,verified,/images/mountain-covers/reviewed-마니산.webp,/images/mountain-covers/reviewed-마니산-small.webp,
+mountain:마이산,mountain,마이산,전라,,not-applicable,verified,/images/mountain-covers/reviewed-마이산.webp,/images/mountain-covers/reviewed-마이산-small.webp,
+mountain:매봉산,mountain,매봉산,강원,,not-applicable,verified,/images/mountain-covers/reviewed-매봉산.webp,/images/mountain-covers/reviewed-매봉산-small.webp,
+mountain:명성산,mountain,명성산,강원,,not-applicable,verified,/images/mountain-covers/reviewed-명성산.webp,/images/mountain-covers/reviewed-명성산-small.webp,
+mountain:명지산,mountain,명지산,수도권,,not-applicable,verified,/images/mountain-covers/reviewed-명지산.webp,/images/mountain-covers/reviewed-명지산-small.webp,
+mountain:모악산,mountain,모악산,전라,,not-applicable,pending,,,공식 매체의 다운로드 서버가 반복해서 HTTP 500을 반환해 실제 형태를 대조하지 못했습니다.
+mountain:무등산,mountain,무등산,전라,,not-applicable,verified,/images/mountain-covers/reviewed-무등산.webp,/images/mountain-covers/reviewed-무등산-small.webp,
+mountain:무학산,mountain,무학산,경상,,not-applicable,verified,/images/mountain-covers/reviewed-무학산.webp,/images/mountain-covers/reviewed-무학산-small.webp,
+mountain:민둥산,mountain,민둥산,강원,,not-applicable,pending,,,사용 가능한 정확한 지역의 대표 지형 사진 미확보
+mountain:민주지산,mountain,민주지산,충청,,not-applicable,pending,,,사용 가능한 정확한 지역의 대표 지형 사진 미확보
+mountain:방태산,mountain,방태산,강원,,not-applicable,pending,,,사용 가능한 정확한 지역의 대표 지형 사진 미확보
+mountain:백덕산,mountain,백덕산,강원,,not-applicable,pending,,,공식 매체의 다운로드 서버가 반복해서 HTTP 500을 반환해 실제 형태를 대조하지 못했습니다.
+mountain:백운산,mountain,백운산,전라,,not-applicable,pending,,,동명 장소의 소재지 또는 대표 산세를 확인할 수 있는 사용 가능 참고 사진 부족
+mountain:변산,mountain,변산,전라,,not-applicable,pending,,,확보한 사진은 해수욕장 중심이어서 내변산 대표 지형의 근거로 사용하지 않았습니다.
+mountain:북한산,mountain,북한산,수도권,,not-applicable,verified,/images/mountain-covers/reviewed-북한산.webp,/images/mountain-covers/reviewed-북한산-small.webp,
+mountain:불암산,mountain,불암산,수도권,,not-applicable,verified,/images/mountain-covers/reviewed-불암산.webp,/images/mountain-covers/reviewed-불암산-small.webp,
+mountain:비슬산,mountain,비슬산,경상,,not-applicable,pending,,,공식 매체의 다운로드 서버가 반복해서 HTTP 500을 반환해 실제 형태를 대조하지 못했습니다.
+mountain:삼악산,mountain,삼악산,강원,,not-applicable,verified,/images/mountain-covers/reviewed-삼악산.webp,/images/mountain-covers/reviewed-삼악산-small.webp,
+mountain:서대산,mountain,서대산,충청,,not-applicable,verified,/images/mountain-covers/reviewed-서대산.webp,/images/mountain-covers/reviewed-서대산-small.webp,
+mountain:설악산,mountain,설악산,강원,,not-applicable,verified,/images/mountain-covers/reviewed-설악산.webp,/images/mountain-covers/reviewed-설악산-small.webp,
+mountain:소백산,mountain,소백산,경상,,not-applicable,verified,/images/mountain-covers/reviewed-소백산.webp,/images/mountain-covers/reviewed-소백산-small.webp,
+mountain:소요산,mountain,소요산,수도권,,not-applicable,verified,/images/mountain-covers/reviewed-소요산.webp,/images/mountain-covers/reviewed-소요산-small.webp,
+mountain:속리산,mountain,속리산,충청,,not-applicable,verified,/images/mountain-covers/reviewed-속리산.webp,/images/mountain-covers/reviewed-속리산-small.webp,
+mountain:수락산,mountain,수락산,수도권,,not-applicable,verified,/images/mountain-covers/reviewed-수락산.webp,/images/mountain-covers/reviewed-수락산-small.webp,
+mountain:신불산,mountain,신불산,경상,,not-applicable,verified,/images/mountain-covers/reviewed-신불산.webp,/images/mountain-covers/reviewed-신불산-small.webp,
+mountain:아차산,mountain,아차산,수도권,,not-applicable,verified,/images/mountain-covers/reviewed-아차산.webp,/images/mountain-covers/reviewed-아차산-small.webp,
+mountain:연인산,mountain,연인산,수도권,,not-applicable,pending,,,사용 가능한 정확한 지역의 대표 지형 사진 미확보
+mountain:영축산,mountain,영축산,경상,,not-applicable,verified,/images/mountain-covers/reviewed-영축산.webp,/images/mountain-covers/reviewed-영축산-small.webp,
+mountain:예봉산,mountain,예봉산,수도권,,not-applicable,verified,/images/mountain-covers/reviewed-예봉산.webp,/images/mountain-covers/reviewed-예봉산-small.webp,
+mountain:오대산,mountain,오대산,강원,,not-applicable,verified,/images/mountain-covers/reviewed-오대산.webp,/images/mountain-covers/reviewed-오대산-small.webp,
+mountain:오봉산,mountain,오봉산,강원,,not-applicable,pending,,,동명 장소의 소재지 또는 대표 산세를 확인할 수 있는 사용 가능 참고 사진 부족
+mountain:오서산,mountain,오서산,충청,,not-applicable,verified,/images/mountain-covers/reviewed-오서산.webp,/images/mountain-covers/reviewed-오서산-small.webp,
+mountain:용문산,mountain,용문산,수도권,,not-applicable,pending,,,동명 장소의 소재지 또는 대표 산세를 확인할 수 있는 사용 가능 참고 사진 부족
+mountain:운문산,mountain,운문산,경상,,not-applicable,verified,/images/mountain-covers/reviewed-운문산.webp,/images/mountain-covers/reviewed-운문산-small.webp,
+mountain:운악산,mountain,운악산,수도권,,not-applicable,pending,,,공식 매체의 다운로드 서버가 반복해서 HTTP 500을 반환해 실제 형태를 대조하지 못했습니다.
+mountain:운장산,mountain,운장산,전라,,not-applicable,verified,/images/mountain-covers/reviewed-운장산.webp,/images/mountain-covers/reviewed-운장산-small.webp,
+mountain:월악산,mountain,월악산,충청,,not-applicable,pending,,,사용 가능한 정확한 지역의 대표 지형 사진 미확보
+mountain:월출산,mountain,월출산,전라,,not-applicable,pending,,,공식 매체의 다운로드 서버가 반복해서 HTTP 500을 반환해 실제 형태를 대조하지 못했습니다.
+mountain:유명산,mountain,유명산,수도권,,not-applicable,pending,,,사용 가능한 정확한 지역의 대표 지형 사진 미확보
+mountain:육백산,mountain,육백산,강원,,not-applicable,pending,,,공식 매체의 다운로드 서버가 반복해서 HTTP 500을 반환해 실제 형태를 대조하지 못했습니다.
+mountain:응봉산,mountain,응봉산,강원,,not-applicable,verified,/images/mountain-covers/reviewed-응봉산.webp,/images/mountain-covers/reviewed-응봉산-small.webp,
+mountain:인왕산,mountain,인왕산,수도권,,not-applicable,pending,,,공식 매체의 다운로드 서버가 반복해서 HTTP 500을 반환해 실제 형태를 대조하지 못했습니다.
+mountain:장산,mountain,장산,경상,,not-applicable,pending,,,동명 장소의 소재지 또는 대표 산세를 확인할 수 있는 사용 가능 참고 사진 부족
+mountain:재약산,mountain,재약산,경상,,not-applicable,verified,/images/mountain-covers/reviewed-재약산.webp,/images/mountain-covers/reviewed-재약산-small.webp,
+mountain:점봉산,mountain,점봉산,강원,,not-applicable,verified,/images/mountain-covers/reviewed-점봉산.webp,/images/mountain-covers/reviewed-점봉산-small.webp,
+mountain:조계산,mountain,조계산,전라,,not-applicable,verified,/images/mountain-covers/reviewed-조계산.webp,/images/mountain-covers/reviewed-조계산-small.webp,
+mountain:종남산,mountain,종남산,전라,전북 완주군 소양면 종남산 송광사,not-applicable,pending,,,사용 가능한 정확한 지역의 대표 지형 사진 미확보
+mountain:주왕산,mountain,주왕산,경상,,not-applicable,verified,/images/mountain-covers/reviewed-주왕산.webp,/images/mountain-covers/reviewed-주왕산-small.webp,
+mountain:주흘산,mountain,주흘산,경상,,not-applicable,verified,/images/mountain-covers/reviewed-주흘산.webp,/images/mountain-covers/reviewed-주흘산-small.webp,
+mountain:지리망산,mountain,지리망산,경상,,not-applicable,pending,,,사용 가능한 정확한 지역의 대표 지형 사진 미확보
+mountain:지리산,mountain,지리산,경상,,not-applicable,verified,/images/mountain-covers/reviewed-지리산.webp,/images/mountain-covers/reviewed-지리산-small.webp,
+mountain:천관산,mountain,천관산,전라,,not-applicable,pending,,,공식 매체의 다운로드 서버가 반복해서 HTTP 500을 반환해 실제 형태를 대조하지 못했습니다.
+mountain:천마산,mountain,천마산,수도권,,not-applicable,verified,/images/mountain-covers/reviewed-천마산.webp,/images/mountain-covers/reviewed-천마산-small.webp,
+mountain:천성산,mountain,천성산,경상,,not-applicable,verified,/images/mountain-covers/reviewed-천성산.webp,/images/mountain-covers/reviewed-천성산-small.webp,
+mountain:청계산,mountain,청계산,수도권,,not-applicable,pending,,,공식 매체의 다운로드 서버가 반복해서 HTTP 500을 반환해 실제 형태를 대조하지 못했습니다.
+mountain:청량산,mountain,청량산,경상,,not-applicable,pending,,,공식 매체의 다운로드 서버가 반복해서 HTTP 500을 반환해 실제 형태를 대조하지 못했습니다.
+mountain:청옥산,mountain,청옥산,강원,,not-applicable,pending,,,사용 가능한 정확한 지역의 대표 지형 사진 미확보
+mountain:축령산,mountain,축령산,전라,,not-applicable,pending,,,사용 가능한 정확한 지역의 대표 지형 사진 미확보
+mountain:축령산(남양주),mountain,축령산(남양주),수도권,,not-applicable,pending,,,사용 가능한 정확한 지역의 대표 지형 사진 미확보
+mountain:치악산,mountain,치악산,강원,,not-applicable,pending,,,동명 장소의 소재지 또는 대표 산세를 확인할 수 있는 사용 가능 참고 사진 부족
+mountain:칠갑산,mountain,칠갑산,충청,,not-applicable,pending,,,확보한 사진은 기념 시설 중심이어서 대표 산세를 확인하기 부족합니다. 생성 시안은 등록하지 않았습니다.
+mountain:태기산,mountain,태기산,강원,,not-applicable,verified,/images/mountain-covers/reviewed-태기산.webp,/images/mountain-covers/reviewed-태기산-small.webp,
+mountain:태백산,mountain,태백산,강원,,not-applicable,verified,/images/mountain-covers/reviewed-태백산.webp,/images/mountain-covers/reviewed-태백산-small.webp,
+mountain:태화산,mountain,태화산,수도권,경기 광주시 도척면 태화산,not-applicable,pending,,,동명 장소의 소재지 또는 대표 산세를 확인할 수 있는 사용 가능 참고 사진 부족
+mountain:팔공산,mountain,팔공산,경상,,not-applicable,verified,/images/mountain-covers/reviewed-팔공산.webp,/images/mountain-covers/reviewed-팔공산-small.webp,
+mountain:팔봉산,mountain,팔봉산,강원,,not-applicable,pending,,,동명 장소의 소재지 또는 대표 산세를 확인할 수 있는 사용 가능 참고 사진 부족
+mountain:팔영산,mountain,팔영산,전라,,not-applicable,pending,,,공식 매체의 다운로드 서버가 반복해서 HTTP 500을 반환해 실제 형태를 대조하지 못했습니다.
+mountain:한라산,mountain,한라산,제주,,not-applicable,verified,/images/mountain-covers/reviewed-한라산.webp,/images/mountain-covers/reviewed-한라산-small.webp,
+mountain:함백산,mountain,함백산,강원,,not-applicable,verified,/images/mountain-covers/reviewed-함백산.webp,/images/mountain-covers/reviewed-함백산-small.webp,
+mountain:화악산,mountain,화악산,강원,,not-applicable,verified,/images/mountain-covers/reviewed-화악산.webp,/images/mountain-covers/reviewed-화악산-small.webp,
+mountain:화야산,mountain,화야산,수도권,양평 서종면 가평 설악면 화야산,not-applicable,pending,,,사용 가능한 정확한 지역의 대표 지형 사진 미확보
+mountain:화왕산,mountain,화왕산,경상,,not-applicable,verified,/images/mountain-covers/reviewed-화왕산.webp,/images/mountain-covers/reviewed-화왕산-small.webp,
+mountain:황매산,mountain,황매산,경상,,not-applicable,verified,/images/mountain-covers/reviewed-황매산.webp,/images/mountain-covers/reviewed-황매산-small.webp,
+mountain:황석산,mountain,황석산,경상,,not-applicable,verified,/images/mountain-covers/reviewed-황석산.webp,/images/mountain-covers/reviewed-황석산-small.webp,
+mountain:황장산,mountain,황장산,경상,,not-applicable,pending,,,사용 가능한 정확한 지역의 대표 지형 사진 미확보
+mountain:희양산,mountain,희양산,경상,,not-applicable,verified,/images/mountain-covers/reviewed-희양산.webp,/images/mountain-covers/reviewed-희양산-small.webp,
