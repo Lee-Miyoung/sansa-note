@@ -33,6 +33,7 @@
   "temple:칠장사":Object.freeze({"id":"temple:칠장사","name":"칠장사","region":"수도권","file":"temple-칠장사.webp"}),
   "temple:통도사":Object.freeze({"id":"temple:통도사","name":"통도사","region":"경상","file":"temple-통도사.webp"}),
   "temple:파계사":Object.freeze({"id":"temple:파계사","name":"파계사","region":"경상","file":"temple-파계사.webp"}),
+  "temple:무위사":Object.freeze({"id":"temple:무위사","name":"무위사","region":"전라","src":"/atlas/muwisa/images/muwisa-cover-small.webp","file":"muwisa-cover-small.webp"}),
   "temple:해인사":Object.freeze({"id":"temple:해인사","name":"해인사","region":"경상","file":"temple-해인사.webp"})
  });
  const DEFAULT=Object.freeze({id:'temple:default',file:'default-watercolor.webp',isDefault:true});

@@ -1,7 +1,7 @@
 const fs=require('node:fs'),crypto=require('node:crypto'),assert=require('node:assert/strict'),{chromium}=require('playwright'),{route}=require('./atlas-fixtures.cjs');
 const manifest=JSON.parse(fs.readFileSync('images/temple-covers/manifest.json'));
 assert(manifest.length>=8);for(const field of['id','src','sha256'])assert.equal(new Set(manifest.map(x=>x[field])).size,manifest.length);
-for(const m of manifest){const bytes=fs.readFileSync('.'+m.src);assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'),m.sha256);assert(bytes.length<160000);assert.equal(m.generatedFromPhotos,false);assert.equal(m.creation,'original-watercolor-from-text');assert(m.review.features&&m.review.basis);}
+for(const m of manifest){const bytes=fs.readFileSync('.'+m.src);assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'),m.sha256);assert(bytes.length<160000);assert.equal(m.generatedFromPhotos,false);assert(['original-watercolor-from-text','existing-reviewed-atlas-watercolor'].includes(m.creation));assert(m.review.features&&m.review.basis);}
 (async()=>{const b=await chromium.launch({executablePath:'/usr/bin/chromium',args:['--no-sandbox']});
 for(const width of[320,390,412,768,820,1440]){
  const p=await b.newPage({serviceWorkers:'block',viewport:{width,height:1000},hasTouch:width<1000});await route(p);
@@ -22,7 +22,7 @@ for(const width of[320,390,412,768,820,1440]){
   await p.locator('#catalogSearch').fill(m.name);await p.waitForTimeout(120);const im=p.locator('#catalogList [data-temple-cover-id="'+m.id+'"]');assert.equal(await im.count(),1);await im.scrollIntoViewIfNeeded();await im.evaluate(e=>e.decode());const box=await im.boundingBox();assert(Math.abs(box.width/box.height-1.5)<.02);
   assert(await im.evaluate(e=>e.parentElement.getBoundingClientRect().right<=e.closest('.catalog-card').querySelector('.catalog-copy').getBoundingClientRect().left+1));
   await p.evaluate(m=>renderAutoCoverPhotos('dCoverPhotos',{name:m.name,region:m.region,coverPhotos:['https://images.test/old-auto.jpg']}),m);
-  const detail=p.locator('#dCoverPhotos img');assert.equal(await detail.getAttribute('src'),'.'+m.src);await detail.evaluate(e=>e.decode());assert.equal(await detail.evaluate(e=>getComputedStyle(e).objectFit),'contain');
+  const detail=p.locator('#dCoverPhotos img');assert.equal(await detail.evaluate(e=>decodeURIComponent(new URL(e.src).pathname)),m.src);await detail.evaluate(e=>e.decode());assert.equal(await detail.evaluate(e=>getComputedStyle(e).objectFit),'contain');
   if(width===390&&['해인사','갑사','개암사','불국사'].includes(m.name))await p.locator('#catalogOverlay .modal').screenshot({path:'/tmp/temple-cover-'+m.name+'-390.png'});
  }
  await p.evaluate(()=>renderAutoCoverPhotos('dCoverPhotos',{name:'새로운 사찰',region:'기타'}));assert((await p.locator('#dCoverPhotos img').getAttribute('src')).endsWith('default-watercolor.webp'));

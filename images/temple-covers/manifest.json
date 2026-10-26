@@ -601,5 +601,21 @@
       "features": "장경판전의 길고 낮은 맞배지붕·목재벽·살창과 가야산 숲",
       "basis": "장경판전 건축 형식·보존 공간의 알려진 특징을 텍스트 제작 사양으로 사용"
     }
+  },
+  {
+    "id": "temple:무위사",
+    "name": "무위사",
+    "region": "전라",
+    "src": "/atlas/muwisa/images/muwisa-cover-small.webp",
+    "width": 480,
+    "height": 320,
+    "bytes": 45558,
+    "sha256": "308e0d79a08aaee3834df713d2a556cb53ffbd7743a74affded4e45f33d999c8",
+    "creation": "existing-reviewed-atlas-watercolor",
+    "generatedFromPhotos": false,
+    "review": {
+      "features": "기존 무위사 제014화 대표 수채화 재사용",
+      "basis": "atlas/muwisa/CREDITS.html 및 기존 회차 검토 자료"
+    }
   }
 ]

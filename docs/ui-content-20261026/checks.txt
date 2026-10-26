@@ -1,0 +1,62 @@
+=== layout-before ===
+BASELINE 390 {"left":{"x":10,"y":400,"w":44,"h":44,"right":54,"bottom":444,"cx":32,"cy":422},"right":{"x":336,"y":400,"w":44,"h":44,"right":380,"bottom":444,"cx":358,"cy":422},"photo":{"x":7.796875,"y":297.203125,"w":374.390625,"h":249.59375,"right":382.1875,"bottom":546.796875,"cx":194.9921875,"cy":422},"stage":{"x":0,"y":0,"w":390,"h":844,"right":390,"bottom":844,"cx":195,"cy":422},"close":390,"manage":829}
+
+=== layout-chromium-390 ===
+PASS chromium 390 landscape/portrait within viewport;arrows symmetric in separate gutters;keyboard/count/close/management;old photos/MY/notes retained {"left":{"x":6,"y":386,"w":44,"h":44,"right":50,"bottom":430,"cx":28,"cy":408},"right":{"x":340,"y":386,"w":44,"h":44,"right":384,"bottom":430,"cx":362,"cy":408},"photo":{"x":56,"y":315.328125,"w":278,"h":185.328125,"right":334,"bottom":500.65625,"cx":195,"cy":407.9921875},"stage":{"x":56,"y":76,"w":278,"h":664,"right":334,"bottom":740,"cx":195,"cy":408},"close":390}
+
+=== layout-chromium-412 ===
+PASS chromium 412 landscape/portrait within viewport;arrows symmetric in separate gutters;keyboard/count/close/management;old photos/MY/notes retained {"left":{"x":6,"y":386,"w":44,"h":44,"right":50,"bottom":430,"cx":28,"cy":408},"right":{"x":362,"y":386,"w":44,"h":44,"right":406,"bottom":430,"cx":384,"cy":408},"photo":{"x":56,"y":308,"w":300,"h":200,"right":356,"bottom":508,"cx":206,"cy":408},"stage":{"x":56,"y":76,"w":300,"h":664,"right":356,"bottom":740,"cx":206,"cy":408},"close":412}
+
+=== layout-chromium-1440 ===
+PASS chromium 1440 landscape/portrait within viewport;arrows symmetric in separate gutters;keyboard/count/close/management;old photos/MY/notes retained {"left":{"x":114,"y":386,"w":44,"h":44,"right":158,"bottom":430,"cx":136,"cy":408},"right":{"x":1282,"y":386,"w":44,"h":44,"right":1326,"bottom":430,"cx":1304,"cy":408},"photo":{"x":336,"y":152,"w":768,"h":512,"right":1104,"bottom":664,"cx":720,"cy":408},"stage":{"x":170,"y":76,"w":1100,"h":664,"right":1270,"bottom":740,"cx":720,"cy":408},"close":1440}
+
+=== layout-webkit-390 ===
+PASS webkit 390 landscape/portrait within viewport;arrows symmetric in separate gutters;keyboard/count/close/management;old photos/MY/notes retained {"left":{"x":6,"y":385.984375,"w":44,"h":44,"right":50,"bottom":429.984375,"cx":28,"cy":407.984375},"right":{"x":340,"y":385.984375,"w":44,"h":44,"right":384,"bottom":429.984375,"cx":362,"cy":407.984375},"photo":{"x":56,"y":315.328125,"w":278,"h":185.328125,"right":334,"bottom":500.65625,"cx":195,"cy":407.9921875},"stage":{"x":56,"y":76,"w":278,"h":663.984375,"right":334,"bottom":739.984375,"cx":195,"cy":407.9921875},"close":390}
+
+=== layout-webkit-820 ===
+PASS webkit 820 landscape/portrait within viewport;arrows symmetric in separate gutters;keyboard/count/close/management;old photos/MY/notes retained {"left":{"x":6,"y":385.984375,"w":44,"h":44,"right":50,"bottom":429.984375,"cx":28,"cy":407.984375},"right":{"x":770,"y":385.984375,"w":44,"h":44,"right":814,"bottom":429.984375,"cx":792,"cy":407.984375},"photo":{"x":56,"y":171.984375,"w":708,"h":472,"right":764,"bottom":643.984375,"cx":410,"cy":407.984375},"stage":{"x":56,"y":76,"w":708,"h":663.984375,"right":764,"bottom":739.984375,"cx":410,"cy":407.9921875},"close":820}
+
+=== catalog-chromium-390 ===
+PASS chromium 390 five distinct compressed conceptual mountain illustrations;correct region;real old cover retained;Muwisa existing art;unknown temple neutral;5 differentiated concise tips;unknown concise;personal entry inside108;original user records retained;no story/audio preloads
+
+=== catalog-chromium-412 ===
+PASS chromium 412 five distinct compressed conceptual mountain illustrations;correct region;real old cover retained;Muwisa existing art;unknown temple neutral;5 differentiated concise tips;unknown concise;personal entry inside108;original user records retained;no story/audio preloads
+
+=== catalog-chromium-1440 ===
+PASS chromium 1440 five distinct compressed conceptual mountain illustrations;correct region;real old cover retained;Muwisa existing art;unknown temple neutral;5 differentiated concise tips;unknown concise;personal entry inside108;original user records retained;no story/audio preloads
+
+=== catalog-webkit-390 ===
+PASS webkit 390 five distinct compressed conceptual mountain illustrations;correct region;real old cover retained;Muwisa existing art;unknown temple neutral;5 differentiated concise tips;unknown concise;personal entry inside108;original user records retained;no story/audio preloads
+
+=== catalog-webkit-820 ===
+PASS webkit 820 five distinct compressed conceptual mountain illustrations;correct region;real old cover retained;Muwisa existing art;unknown temple neutral;5 differentiated concise tips;unknown concise;personal entry inside108;original user records retained;no story/audio preloads
+
+=== photos-chromium ===
+PASS chromium 390 member local photo/legacy mixed14; selected7/14; swipe/arrows;3-URL memory bound;no delete overlay;600ms hold;scroll cancel;confirm/cancel delete;album temple/mountain counts;keyboard menu;account isolation;notes preserved
+
+=== photos-webkit ===
+PASS webkit 390 member local photo/legacy mixed14; selected7/14; swipe/arrows;3-URL memory bound;no delete overlay;600ms hold;scroll cancel;confirm/cancel delete;album temple/mountain counts;keyboard menu;account isolation;notes preserved
+
+=== temple-covers ===
+PASS covers 320 34 reviewed identities + default for pending/custom; 111 catalog mappings, same detail asset, no photo search/labels, local fallback, user photos/visits unchanged
+PASS covers 390 34 reviewed identities + default for pending/custom; 111 catalog mappings, same detail asset, no photo search/labels, local fallback, user photos/visits unchanged
+PASS covers 412 34 reviewed identities + default for pending/custom; 111 catalog mappings, same detail asset, no photo search/labels, local fallback, user photos/visits unchanged
+PASS covers 768 34 reviewed identities + default for pending/custom; 111 catalog mappings, same detail asset, no photo search/labels, local fallback, user photos/visits unchanged
+PASS covers 820 34 reviewed identities + default for pending/custom; 111 catalog mappings, same detail asset, no photo search/labels, local fallback, user photos/visits unchanged
+PASS covers 1440 34 reviewed identities + default for pending/custom; 111 catalog mappings, same detail asset, no photo search/labels, local fallback, user photos/visits unchanged
+
+=== personal-collection ===
+PASS chromium regular account Yeonju MY001 → collection → same card; reload from server without in-memory destinations; same-account relogin; MY002; no duplicates; other account isolation; original visits/photos/notes unchanged; 2 coherent entry points (journey and settings)
+
+=== music-chromium ===
+PASS chromium public existing real audio playback/time advances;one shared player;playlist same state;pause/share/deep link/no autoplay;zero initial audio requests;no fake temple song;fixture-only published temple registration wired into detail+room+existing playlist
+
+=== music-webkit ===
+PASS webkit playback UNVERIFIED: WebKit /var/tmp media sandbox restriction;metadata/controls tested;one shared player;playlist same state;pause/share/deep link/no autoplay;zero initial audio requests;no fake temple song;fixture-only published temple registration wired into detail+room+existing playlist
+
+=== navigation ===
+PASS 390 breathing, emotion backward/forward/complete close, nested mypage and vow drafts, temple/mountain search returns, copy document return
+PASS 1440 breathing, emotion backward/forward/complete close, nested mypage and vow drafts, temple/mountain search returns, copy document return
+
+=== worker ===
+PASS streaming HTML is not held for cache writes; search-result navigation: cached app opens while network stalls, delayed response refreshes cache, offline reload uses refreshed page, local records preserved

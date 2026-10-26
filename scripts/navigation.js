@@ -180,7 +180,7 @@
     if(link&&new URL(link.href,location.href).origin===location.origin){checkpoint();persist();}
     schedule();
   },true);
-  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&shown().length&&canBack()){e.preventDefault();e.stopImmediatePropagation();back();}},true);
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!document.querySelector('.device-card-overlay,#lightboxOverlay.show')&&shown().length&&canBack()){e.preventDefault();e.stopImmediatePropagation();back();}},true);
   let draftTimer;
   document.addEventListener('input',()=>{clearTimeout(draftTimer);draftTimer=setTimeout(checkpoint,120);},true);
   document.addEventListener('change',()=>{clearTimeout(draftTimer);draftTimer=setTimeout(checkpoint,30);},true);

@@ -1,0 +1,72 @@
+[
+  {
+    "id": "mountain:가야산",
+    "name": "가야산",
+    "region": "경상",
+    "coverImage": "/images/mountain-covers/gayasan.webp",
+    "coverIllustration": "/images/mountain-covers/gayasan-small.webp",
+    "landscapeType": "rocky-ridge",
+    "seasonHint": "초여름",
+    "creation": "original-watercolor-from-text",
+    "referenceStatus": "conceptual-not-photo-verified",
+    "reviewNote": "기존 산 설명의 산세·식생을 바탕으로 제작한 감성 수채화. 외부 공식 사진 서버 403으로 실제 지형 대조는 미완료. 실제 풍경 사진 또는 현장 복원도로 표시하지 않음.",
+    "bytes": 80940,
+    "sha256": "8de8e27c4064b4bfa7c286643ae84c2f34f3f84dfefa2f88932f0bec58714f6d"
+  },
+  {
+    "id": "mountain:가지산",
+    "name": "가지산",
+    "region": "경상",
+    "coverImage": "/images/mountain-covers/gajisan.webp",
+    "coverIllustration": "/images/mountain-covers/gajisan-small.webp",
+    "landscapeType": "rocky-ridge",
+    "seasonHint": "봄",
+    "creation": "original-watercolor-from-text",
+    "referenceStatus": "conceptual-not-photo-verified",
+    "reviewNote": "기존 산 설명의 산세·식생을 바탕으로 제작한 감성 수채화. 외부 공식 사진 서버 403으로 실제 지형 대조는 미완료. 실제 풍경 사진 또는 현장 복원도로 표시하지 않음.",
+    "bytes": 93316,
+    "sha256": "0c010808abfd42d75cc1b61affd772c7a12a1609b541abef1b7edd05e10a9188"
+  },
+  {
+    "id": "mountain:간월산",
+    "name": "간월산",
+    "region": "경상",
+    "coverImage": "/images/mountain-covers/ganwolsan.webp",
+    "coverIllustration": "/images/mountain-covers/ganwolsan-small.webp",
+    "landscapeType": "reed-ridge",
+    "seasonHint": "가을",
+    "creation": "original-watercolor-from-text",
+    "referenceStatus": "conceptual-not-photo-verified",
+    "reviewNote": "기존 산 설명의 산세·식생을 바탕으로 제작한 감성 수채화. 외부 공식 사진 서버 403으로 실제 지형 대조는 미완료. 실제 풍경 사진 또는 현장 복원도로 표시하지 않음.",
+    "bytes": 82100,
+    "sha256": "6baea9eb1d83b0ded03fca1d7663fd61fde329c4d4c2e57d0fdc347c13bc9782"
+  },
+  {
+    "id": "mountain:감악산",
+    "name": "감악산",
+    "region": "수도권",
+    "coverImage": "/images/mountain-covers/gamaksan.webp",
+    "coverIllustration": "/images/mountain-covers/gamaksan-small.webp",
+    "landscapeType": "forest-valley",
+    "seasonHint": "여름",
+    "creation": "original-watercolor-from-text",
+    "referenceStatus": "conceptual-not-photo-verified",
+    "reviewNote": "기존 산 설명의 산세·식생을 바탕으로 제작한 감성 수채화. 외부 공식 사진 서버 403으로 실제 지형 대조는 미완료. 실제 풍경 사진 또는 현장 복원도로 표시하지 않음.",
+    "bytes": 93002,
+    "sha256": "9604212e2d568016391a7c1e0b947f54384f049f1924217d5a3d7dd7957c7f95"
+  },
+  {
+    "id": "mountain:계룡산",
+    "name": "계룡산",
+    "region": "충청",
+    "coverImage": "/images/mountain-covers/gyeryongsan.webp",
+    "coverIllustration": "/images/mountain-covers/gyeryongsan-small.webp",
+    "landscapeType": "ridgeline",
+    "seasonHint": "늦봄",
+    "creation": "original-watercolor-from-text",
+    "referenceStatus": "conceptual-not-photo-verified",
+    "reviewNote": "기존 산 설명의 산세·식생을 바탕으로 제작한 감성 수채화. 외부 공식 사진 서버 403으로 실제 지형 대조는 미완료. 실제 풍경 사진 또는 현장 복원도로 표시하지 않음.",
+    "bytes": 80140,
+    "sha256": "509755c220419b54dc674c0759ae0d35bb51cc78b0ab6ba3091faad95215fd1c"
+  }
+]

@@ -1,0 +1,47 @@
+/* Photo controls live in separate grid gutters: never over the picture. */
+#lightboxOverlay.show{display:grid!important;grid-template-columns:56px minmax(0,1fr) 56px!important;grid-template-rows:max(76px,calc(env(safe-area-inset-top) + 64px)) minmax(0,1fr) max(104px,calc(env(safe-area-inset-bottom) + 80px))!important;position:fixed!important;inset:0!important;width:100%!important;height:100dvh!important;max-height:none!important;box-sizing:border-box!important;padding:0!important;margin:0!important;transform:none!important;background:#111b19!important;border-radius:0!important;backdrop-filter:none!important;overflow:hidden!important;isolation:isolate}
+#lightboxOverlay.show #lightboxStage{grid-column:2;grid-row:2;position:relative!important;inset:auto!important;width:100%!important;height:100%!important;min-width:0;min-height:0;display:flex!important;align-items:center!important;justify-content:center!important;overflow:hidden!important}
+#lightboxOverlay.show #lightboxImg{display:block!important;width:auto!important;height:auto!important;max-width:100%!important;max-height:100%!important;object-fit:contain!important;border-radius:8px!important}
+#lightboxOverlay.show :is(#lbPrev,#lbNext){position:static!important;inset:auto!important;transform:none!important;align-self:center!important;justify-self:center!important;align-items:center!important;justify-content:center!important;width:44px!important;height:44px!important;min-width:44px!important;min-height:44px!important;max-height:44px!important;padding:0!important;margin:0!important;line-height:1!important;border:1px solid #ffffff30!important;border-radius:50%!important;background:#ffffff20!important;color:#fff!important;font:30px/1 system-ui!important;grid-row:2;z-index:3!important;cursor:pointer}
+#lightboxOverlay.show #lbPrev{grid-column:1}#lightboxOverlay.show #lbNext{grid-column:3}
+#lightboxOverlay.show #lbCounter{position:absolute!important;inset:auto auto max(20px,env(safe-area-inset-bottom)) 50%!important;transform:translateX(-50%)!important;max-height:30px!important;width:max-content!important;margin:0!important;font:13px/20px system-ui!important;padding:4px 12px!important;border-radius:99px;background:#ffffff20;color:#fff;white-space:nowrap}
+#lightboxOverlay.show #lbPhotoInfo{position:absolute!important;inset:auto auto max(59px,calc(env(safe-area-inset-bottom) + 39px)) 50%!important;transform:translateX(-50%)!important;width:max-content!important;max-width:calc(100% - 36px)!important;max-height:38px!important;overflow:hidden!important;padding:4px 10px!important;font:12px/1.4 system-ui!important;color:#fff!important;background:transparent!important;box-sizing:border-box!important}
+#lightboxOverlay.show #lbZoomControls{position:absolute!important;top:max(12px,env(safe-area-inset-top))!important;left:50%!important;bottom:auto!important;right:auto!important;transform:translateX(-50%)!important;height:44px!important;margin:0!important}
+#lightboxOverlay.show #lbZoomControls button{position:static!important;inset:auto!important;transform:none!important;margin:0!important;height:44px!important;min-height:44px!important;max-height:44px!important;line-height:1!important}
+#lightboxOverlay.show>.close-x{position:absolute!important;inset:max(12px,env(safe-area-inset-top)) 10px auto auto!important;transform:none!important;width:44px!important;height:44px!important;min-height:44px!important;max-height:44px!important;display:flex!important;align-items:center!important;justify-content:center!important;margin:0!important;padding:0!important;color:#fff!important;background:#ffffff20!important;border:0!important;border-radius:50%!important;font:24px/1 system-ui!important;z-index:5!important}
+#lightboxOverlay.show #lbGestureTip,#lbManagePhoto{display:none!important}
+#lightboxOverlay button:focus-visible{outline:3px solid #dcc58e!important;outline-offset:2px}
+#photoManageDialog{z-index:2147483647!important}
+@media(min-width:900px){#lightboxOverlay.show{grid-template-columns:minmax(64px,1fr) minmax(0,1100px) minmax(64px,1fr)!important}#lightboxOverlay.show #lbPrev{justify-self:end!important;margin-right:12px!important}#lightboxOverlay.show #lbNext{justify-self:start!important;margin-left:12px!important}}
+@media(max-width:360px){#lightboxOverlay.show{grid-template-columns:48px minmax(0,1fr) 48px!important}}
+@media(prefers-reduced-motion:reduce){#lightboxOverlay *{transition:none!important}}
+/* A single listening room; the second tab is a panel, not another overlay. */
+#playlistOverlay .music-section-tabs{display:flex;gap:6px;padding:0 0 14px;border-bottom:1px solid #d8dfcf;margin-bottom:16px}
+#playlistOverlay .music-section-tabs button{flex:1;min-width:0;min-height:46px;padding:8px;border:1px solid #d2dcc9;border-radius:12px;background:#f7f6ed;color:#45614e;font:600 13px/1.4 system-ui;white-space:normal}
+#playlistOverlay .music-section-tabs [aria-selected=true]{background:#456b54;color:#fff;border-color:#456b54}
+#playlistOverlay [role=tabpanel][hidden],#playlistOverlay [hidden]{display:none!important}
+#playlistOverlay .music-room-intro{font:13px/1.7 system-ui;color:#746c59;text-align:left}
+#playlistOverlay .temple-music-row{display:grid;grid-template-columns:64px minmax(0,1fr) auto;gap:10px;align-items:center;margin:10px 0;padding:10px;background:#faf8ef;border:1px solid #dbe1cf;border-radius:12px;text-align:left}
+#playlistOverlay .temple-music-row img{width:64px;height:64px;object-fit:cover;border-radius:9px}
+#playlistOverlay .temple-music-row button{min-height:44px;white-space:normal}#playlistOverlay .temple-music-row p{font-size:12px;color:#746d59}
+#playlistOverlay .music-share-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;border-top:1px solid #dbe1cf;padding-top:12px}#playlistOverlay .music-share-actions button{flex:1;min-height:44px;font-size:12px;white-space:normal}
+#playlistOverlay :is(.music-share-actions,.temple-music-player) button{position:static;transform:none;margin:0}
+/* Compact companion entry stays inside the official journey card. */
+.sansa-discovery-refresh .journey-core-card .journey-personal-entry{display:flex!important;align-items:center;justify-content:space-between;gap:14px;padding:13px 0 0;margin-top:14px;border-top:1px solid #d1c7a84d;background:transparent!important}
+.journey-personal-entry div{min-width:0}.sansa-discovery-refresh .journey-personal-entry strong{display:block;font:600 14px/1.5 system-ui!important;color:#fff7df!important}.sansa-discovery-refresh .journey-personal-entry p{font:12px/1.5 system-ui!important;color:#e8e3ce!important;margin:4px 0 0!important}
+.sansa-discovery-refresh .journey-personal-entry button{flex:0 0 auto;min-height:44px;max-width:130px;font:600 12px/1.4 system-ui!important;padding:8px 10px!important;border-radius:10px!important;border:1px solid #e2d4ae88!important;background:#fff8e912!important;color:#fff7df!important;white-space:normal}
+/* Only differentiated, reviewed visit guidance; no repeated prayer timetables. */
+#dVisitTips{background:transparent!important;border:0!important;padding:0!important}.visit-tip-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.visit-tip-card{padding:12px;background:#f2f4ea;border:1px solid #dce3d0;border-radius:12px;min-width:0}.visit-tip-card h4{font:600 12px/1.5 system-ui!important;color:#47654e!important;margin:0 0 5px!important}.visit-tip-card p{font:13px/1.65 system-ui!important;color:#625e4f!important;margin:0!important}.visit-tip-summary{font:12px/1.7 system-ui;color:#6c705e;margin:10px 0 0}.visit-tip-empty{font:13px/1.7 system-ui;color:#6c705e}.visit-tip-sources{margin-top:10px;font:11px/1.5 system-ui;color:#756f60}.visit-tip-sources a{color:inherit;text-underline-offset:3px}
+@media(max-width:360px){.visit-tip-cards{grid-template-columns:1fr}.journey-personal-entry{flex-wrap:wrap}}
+#catalogOverlay .catalog-thumb[data-photo-kind=mountain]{width:120px!important;height:80px!important;min-height:80px!important;flex:0 0 120px!important;aspect-ratio:3/2;border-radius:12px!important}
+#catalogOverlay .catalog-card:has(.catalog-thumb[data-photo-kind=mountain]){grid-template-columns:120px minmax(0,1fr) auto!important;column-gap:14px!important}
+#catalogOverlay .catalog-thumb .has-mountain-art{position:absolute!important;inset:0!important;min-height:0!important;height:100%!important;width:100%!important;aspect-ratio:3/2}
+.has-mountain-art{background:#edf0e4}.has-mountain-art>img{z-index:0!important}.has-mountain-art :is(strong,span){display:none!important}
+@media(max-width:700px){#catalogOverlay .catalog-card:has(.catalog-thumb[data-photo-kind=mountain]){grid-template-columns:96px minmax(0,1fr)!important;grid-template-areas:"thumb copy" "thumb actions"!important;column-gap:12px!important;row-gap:8px!important}#catalogOverlay .catalog-thumb[data-photo-kind=mountain]{width:96px!important;height:64px!important;min-height:64px!important;flex-basis:96px!important}}
+
+.mountain-art-note{font:12px/1.6 system-ui;color:#746e5d;margin:8px 0!important;text-align:center}
+
+#playlistOverlay .music-section-tabs button{font-size:13px!important;line-height:1.4!important;word-break:keep-all!important}
+#catalogOverlay :is(.catalog-card,.catalog-thumb,.catalog-thumb img){scroll-margin-top:90px}
+/* A direct music link must expose the panel immediately, including WebKit's first frame. */
+#playlistOverlay.show>.modal{transform:none!important;animation:none!important}
