@@ -24741,7 +24741,7 @@ window.addEventListener('DOMContentLoaded', ()=>{
       if(!user && authInitialHandled)window.SansaDevicePhotoStore?.lock();
       if(user){
         // Do not change the storage destination underneath a guest edit form.
-        if(startupFallbackUsed && localMode && document.querySelector('.overlay.show')){
+        if(startupFallbackUsed && localMode && document.querySelector('.overlay.show') && !window.SansaSession?.loginRequested){
           if(notice){
             notice.hidden = false;
             notice.firstChild.textContent = '계정 연결이 완료됐어요. 둘러보기 기록은 이 기기에 보존됩니다. 내 계정 기록을 보려면 다시 열어 주세요. ';
@@ -24749,7 +24749,8 @@ window.addEventListener('DOMContentLoaded', ()=>{
           }
           return;
         }
-        const restoreAfterFallback = startupFallbackUsed && localMode;
+        const accountChanged=localMode||currentUid!==user.uid;if(accountChanged)window.sansaDataReadyUid=null;
+        const restoreAfterFallback = accountChanged;
         if(restoreAfterFallback){
           // Only clear in-memory guest views; the guest's saved records stay intact.
           destinations = {};
@@ -24762,7 +24763,7 @@ window.addEventListener('DOMContentLoaded', ()=>{
         window.dispatchEvent(new Event('sansaaccountchange'));
         document.body.classList.remove('guest-browsing');
         document.getElementById('authScreen').style.display = 'none';
-        if(!authInitialHandled || document.getElementById('app').style.display!=='block'){
+        if(accountChanged || !authInitialHandled || document.getElementById('app').style.display!=='block'){
           launchApp();
         }else{
           updateAccountInfo();
@@ -24773,8 +24774,9 @@ window.addEventListener('DOMContentLoaded', ()=>{
           if(auth.currentUser?.uid === user.uid) updateAccountInfo();
         });
         authInitialHandled = true;
-      }else if(!authInitialHandled){
+      }else{
         authInitialHandled = true;
+        stopAccountData();destinations={};mountainDestinations={};window.sansaDataReadyUid=null;
         startLocalMode();
       }
     }, showBrowsingFallback);
@@ -25338,7 +25340,9 @@ function startSharedLyricSyncListener(){
   });
 }
 
+let stopAccountData=()=>{};
 function launchApp(){
+  stopAccountData();stopAccountData=()=>{};
   document.getElementById('app').style.display='block';
   startSharedLyricSyncListener();
   startPhotoUploadControlListener();
@@ -25369,7 +25373,10 @@ function launchApp(){
       clearTimeout(fullRenderDebounceTimer);
       fullRenderDebounceTimer = setTimeout(fn, 250);
     }
-    destinationsRef().on('value', snap=>{
+    const activeDestinationRef=destinationsRef(),activeMountainRef=mountainsRef(),dataUid=currentUid;
+    stopAccountData=()=>{activeDestinationRef.off('value');activeMountainRef.off('value');clearTimeout(fullRenderDebounceTimer)};
+    activeDestinationRef.on('value', snap=>{
+      if(currentUid!==dataUid||localMode)return;
       destinations = mergeAllWithMaster(snap.val() || {});
       if(suppressNextDestinationRender){
         // 사진 자동 매칭 결과는 patchVisibleCover로 이미 화면에 바로 반영했으므로,
@@ -25385,13 +25392,15 @@ function launchApp(){
         // Storage 복구는 사용자가 '저장소 사진 다시 연결하기'를 직접 눌렀을 때만 실행합니다.
       });
     });
-    mountainsRef().on('value', snap=>{
+    activeMountainRef.on('value', snap=>{
+      if(currentUid!==dataUid||localMode)return;
       mountainDestinations = mergeAllMountainsWithMaster(snap.val() || {});
       if(suppressNextMountainRender){
         suppressNextMountainRender = false;
         return;
       }
       if(contentType==='mountain') debouncedFullRender(render);
+      window.dispatchEvent(new Event('sansadataloaded'));
     });
 
   }
@@ -25482,6 +25491,8 @@ function afterDataLoaded(){
   renderLevelBadge();
   if(!suggestBannerRendered){ renderSuggestBanner(); suggestBannerRendered = true; }
   render();
+  window.sansaDataReadyUid=localMode?null:currentUid;
+  window.dispatchEvent(new Event('sansadataloaded'));
 }
 // 절 기본 목록(MASTER_BY_NAME)에 있는 곳인데 아직 내 기록에 없는 곳을 자동으로 채워 넣습니다.
 // 게스트(둘러보기) 모드에서만 실행합니다 — 로그인 계정은 이미 각자 취향대로
@@ -25512,9 +25523,11 @@ function ensureDestinationsSeeded(){
 }
 
 function persistLocal(){
+  if(window.SansaSession&&!SansaSession.member())return;
   if(localMode) localStorage.setItem('travelDiaryLocalData', JSON.stringify(destinations));
 }
 function persistLocalMountains(){
+  if(window.SansaSession&&!SansaSession.member())return;
   if(localMode) localStorage.setItem('travelDiaryLocalMountains', JSON.stringify(mountainDestinations));
 }
 
@@ -31456,18 +31469,10 @@ function lotusPlaceholderHtml(label='사진 확인 중',placeName=''){
     ${placeName?`<strong class="place-fallback-name">${escapeHtml(placeName)}</strong>`:''}<span class="place-fallback-status">${escapeHtml(label)}</span>
   </div>`;
 }
-function mountainPlaceholderHtml(label='사진 확인 중',placeName=''){
-  return `<div class="cover-placeholder cover-placeholder-mountain" aria-label="${escapeAttr(label)}">
-    <svg viewBox="0 0 120 86" aria-hidden="true">
-      <g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M15 68 42 31l13 18 10-13 39 32Z"/>
-        <path d="m35 41 7-10 7 10"/>
-        <path d="M20 68h84"/>
-      </g>
-    </svg>
-    ${placeName?`<strong class="place-fallback-name">${escapeHtml(placeName)}</strong>`:''}<span class="place-fallback-status">${escapeHtml(label)}</span>
-  </div>`;
+function mountainPlaceholderHtml(label='산 풍경 수채화 · 실제 사진 준비 중',placeName=''){
+ return `<div class="cover-placeholder cover-placeholder-mountain mountain-watercolor-placeholder"><img src="/images/temple-covers/default-watercolor.webp" alt="특정 장소를 나타내지 않는 중립적인 숲길 수채화" width="768" height="512" loading="lazy" decoding="async">${placeName?`<strong class="place-fallback-name">${escapeHtml(placeName)}</strong>`:''}<span class="place-fallback-status">${escapeHtml(label)}</span></div>`;
 }
+
 function replaceBrokenCardCover(img,kind){
   if(!img)return;
   handleCoverPhotoError(img,kind);
@@ -32108,8 +32113,8 @@ function openDetail(id){
   renderRepeatChallenge(d);
   renderPilgrimRewardPreview(d);
   document.getElementById('visitNoteInput').value = '';
-  const placePoint=sansaVerifiedTemplePoint(d);
-  document.getElementById('dMapLink').href = placePoint?'https://map.kakao.com/link/to/'+encodeURIComponent(placePoint.name+' · 경기 파주')+','+placePoint.lat+','+placePoint.lng:'https://map.kakao.com/link/search/' + encodeURIComponent(sansaKakaoPlaceQuery(d));
+  const placePoint=sansaVerifiedTemplePoint(d)||sansaPersonalTemplePoint(d);
+  document.getElementById('dMapLink').href = placePoint?'https://map.kakao.com/link/to/'+encodeURIComponent(placePoint.name+' · '+(placePoint.region||d.region||''))+','+placePoint.lat+','+placePoint.lng:'https://map.kakao.com/link/search/' + encodeURIComponent(sansaKakaoPlaceQuery(d));
   document.getElementById('dFoodLink').href = 'https://map.kakao.com/link/search/' + encodeURIComponent(d.name + ' ' + (d.locationHint || d.region) + ' 맛집');
   /* detailOverlay는 함수 시작 시 먼저 표시 */
   renderVisitTips(d);
@@ -33822,7 +33827,8 @@ function sansaMapMarkerImage(d, isMountain){
 const SANSA_PAJU_BOGWANGSA=Object.freeze({placeId:'temple:paju-bogwangsa',name:'보광사',region:'경기 파주',address:'경기도 파주시 광탄면 보광로474번길 87',lat:37.7529977350211,lng:126.91994400383,radius:120,label:'파주 보광사 대웅보전',source:'heritage-2113100830000',sourceUrl:'https://www.heritage.go.kr/heri/cul/culSelectDetail.do?ccbaCpno=2113100830000'});
 function sansaIsOtherBogwangsa(d){return d?.name==='보광사'&&(!!d.placeId&&d.placeId!==SANSA_PAJU_BOGWANGSA.placeId||/서울|청송|완주/.test([d.region,d.locationHint,d.address].filter(Boolean).join(' ')))}
 function sansaVerifiedTemplePoint(d){return d?.name==='보광사'&&!sansaIsOtherBogwangsa(d)?SANSA_PAJU_BOGWANGSA:null}
-function sansaEffectiveTemple(d){const p=sansaVerifiedTemplePoint(d);return p?{...d,placeId:p.placeId,address:p.address,locationHint:p.address,fixedLat:p.lat,fixedLng:p.lng,lat:p.lat,lng:p.lng}:d}
+function sansaPersonalTemplePoint(d){const p=d?.personalLocation;if(!p||detailGuardianCardInfo(d)||p.updatedBy!==currentUid)return null;const lat=Number(p.lat),lng=Number(p.lng);return Number.isFinite(lat)&&Number.isFinite(lng)&&lat>=33&&lat<=39&&lng>=124&&lng<=132?{...p,name:d.name,label:p.label||d.name,lat,lng,source:'user-selected'}:null}
+function sansaEffectiveTemple(d){const p=sansaVerifiedTemplePoint(d)||sansaPersonalTemplePoint(d);return p?{...d,placeId:p.placeId||d.placeId,address:p.address,locationHint:p.address,fixedLat:p.lat,fixedLng:p.lng,lat:p.lat,lng:p.lng}:d}
 // 지역이 다른 동명이찰을 첫 번째 검색 결과로 잘못 저장하지 않도록 검증합니다.
 const SANSA_KAKAO_DISAMBIGUATION = Object.freeze({
   '장안사(부산)': {name:'장안사', area:'부산 기장', address:'부산 기장군 장안읍 장안로 482'},
@@ -33835,7 +33841,7 @@ const SANSA_KAKAO_DISAMBIGUATION = Object.freeze({
   '대조사': {name:'대조사', area:'충남 부여', address:'충남 부여군 임천면 성흥로197번길 112'}
 });
 function sansaKakaoPlaceQuery(d){
-  const point=sansaVerifiedTemplePoint(d);if(point)return point.address+' '+point.name;
+  const point=sansaVerifiedTemplePoint(d)||sansaPersonalTemplePoint(d);if(point)return point.address+' '+point.name;
   const spec=SANSA_KAKAO_DISAMBIGUATION[d.name];
   const base=spec?.name||String(d.name||'').replace(/\([^)]*\)/g,'').trim();
   if(spec?.address) return `${spec.address} ${base}`;
@@ -33891,7 +33897,7 @@ function sansaKakaoBestPlace(d, data){
   return null;
 }
 function sansaKakaoFindPlace(places,d,cb){
-  const point=sansaVerifiedTemplePoint(d);if(point){cb({id:point.placeId,place_name:point.name,road_address_name:point.address,x:String(point.lng),y:String(point.lat)});return;}
+  const point=sansaVerifiedTemplePoint(d)||sansaPersonalTemplePoint(d);if(point){cb({id:point.placeId,place_name:point.name,road_address_name:point.address,x:String(point.lng),y:String(point.lat)});return;}
   const spec=SANSA_KAKAO_DISAMBIGUATION[d.name];
   const base=spec?.name||String(d.name||'').replace(/\([^)]*\)/g,'').trim();
   const queries=[
@@ -37313,6 +37319,7 @@ function openPassportOverlay(){
 
 /* 절 상세: 인증 전에는 보상 예고, 인증 후에는 획득한 보상/기록을 확실히 보여준다. */
 function detailGuardianCardInfo(d){
+  if(typeof sansaIsOtherBogwangsa==='function'&&sansaIsOtherBogwangsa(d))return null;
   const name=String(d?.name||'');
   try{
     if(typeof window.guardianCatalog==='function'){
@@ -41326,6 +41333,7 @@ body.sansa-catalog-active{
     });
   }
   async function resolveTempleVerifyPoint(id,d){
+    const personal=sansaPersonalTemplePoint(d);if(personal)return personal;
     const reviewed=sansaVerifiedTemplePoint(d);if(reviewed)return reviewed;
     const name=String(d&&d.name||'');
     const confirmed=(typeof window.getConfirmedTempleVerifyPoint==='function')?window.getConfirmedTempleVerifyPoint(name,d):null;
@@ -42386,15 +42394,21 @@ nav.site-global-nav{height:var(--global-nav-h)!important;box-sizing:border-box!i
 <script src="./scripts/wellness-effects.js?v=20261018-integrated" defer></script>
 <script src="./scripts/meditation-sounds.js?v=20261018" defer></script>
 <script src="./scripts/game-viewport.js?v=20261017" defer></script>
-<script src="./scripts/navigation.js?v=20261018" defer></script>
+<script src="./scripts/navigation.js?v=20261026-unified" defer></script>
 <link rel="stylesheet" href="/styles/atlas-home.css?v=20261025-complete24">
 <script src="/scripts/atlas/home-publication.js?v=20261025-season2-visible" defer></script>
 <script src="/scripts/atlas/home-carousel.js?v=20261025-complete24" defer></script>
 
-<link rel="stylesheet" href="/styles/device-photos.css?v=20261025-dialogs">
-<script src="/scripts/device-photos/store.js?v=20261025" defer></script>
-<script src="/scripts/device-photos/ui.js?v=20261025-backup-save" defer></script>
-<script src="/scripts/device-photos/cards.js?v=20261025-collection" defer></script>
-<script src="/scripts/device-photos/celebration.js?v=20261025" defer></script>
+<link rel="stylesheet" href="/styles/photo-gallery.css?v=20261025-unified">
+<link rel="stylesheet" href="/styles/device-photos.css?v=20261026-unified">
+<script src="/scripts/session-policy.js?v=20261025-unified" defer></script>
+<script src="/scripts/device-photos/store.js?v=20261026-unified" defer></script>
+<script src="/scripts/device-photos/gallery.js?v=20261025-unified" defer></script>
+<script src="/scripts/device-photos/ui.js?v=20261026-unified" defer></script>
+<script src="/scripts/device-photos/themes.js?v=20261025-unified" defer></script>
+<script src="/scripts/device-photos/cards.js?v=20261026-unified" defer></script>
+<script src="/scripts/personal-location.js?v=20261025-unified" defer></script>
+<script src="/scripts/temple-music.js?v=20261025-unified" defer></script>
+<script src="/scripts/device-photos/celebration.js?v=20261026-unified" defer></script>
 </body>
 </html>

@@ -26,9 +26,9 @@
  let uid=null,state=blank(),ref=null,handler=null,status='local',pending={},timer=0,generation=0;
  const listeners=new Set();function emit(){listeners.forEach(fn=>fn(state,status));}
  function key(){return 'sansaSecretAtlas_v1:'+uid+':'+ID;}
- function persist(){try{localStorage.setItem(key(),JSON.stringify(state));}catch(_){status='local-error';}}
+ function persist(){if(uid==='guest')return;try{localStorage.setItem(key(),JSON.stringify(state));}catch(_){status='local-error';}}
  function getPending(){try{return JSON.parse(localStorage.getItem(key()+':pending')||'{}')}catch(_){return {};}}
- function persistPending(){try{localStorage.setItem(key()+':pending',JSON.stringify(pending));}catch(_){}}
+ function persistPending(){if(uid==='guest')return;try{localStorage.setItem(key()+':pending',JSON.stringify(pending));}catch(_){}}
  async function flush(){clearTimeout(timer);const currentRef=ref,gen=generation;if(!currentRef||!Object.keys(pending).length)return;
   if(flush.busy===gen)return;flush.busy=gen;const batch={...pending};status='saving';emit();try{const regular=Object.fromEntries(Object.entries(batch).filter(([k])=>!k.startsWith('cards/')));
    if(Object.keys(regular).length)await currentRef.update(regular);
@@ -36,7 +36,7 @@
    if(gen!==generation)return;for(const k of Object.keys(batch))if(JSON.stringify(pending[k])===JSON.stringify(batch[k]))delete pending[k];persistPending();status=Object.keys(pending).length?'saving':'cloud';}
   catch(e){if(gen!==generation)return;status=e?.code==='PERMISSION_DENIED'?'permission-denied':'offline';}finally{if(flush.busy===gen)flush.busy=null;}emit();if(gen===generation&&status==='saving'&&Object.keys(pending).length){clearTimeout(timer);timer=setTimeout(flush,400);}
  }
- function write(patch){Object.assign(pending,patch);persist();persistPending();emit();if(ref){clearTimeout(timer);timer=setTimeout(flush,400);}}
+ function write(patch){if(uid==='guest'){emit();return;}Object.assign(pending,patch);persist();persistPending();emit();if(ref){clearTimeout(timer);timer=setTimeout(flush,400);}}
  function connect(){const next=owner();if(next===uid)return;generation++;clearTimeout(timer);if(ref&&handler)ref.off('value',handler);if(visitRef&&visitHandler)visitRef.off('value',visitHandler);visitRef=null;visitHandler=null;confirmedVisit=null;uid=next;ref=null;handler=null;
   try{state=normalize(JSON.parse(localStorage.getItem(key())||'null'));}catch(_){state=blank();}pending=getPending();status=uid==='guest'?'guest':'loading';emit();
   if(uid==='guest'||typeof db==='undefined'||!db)return;
@@ -52,13 +52,13 @@
   visitRef.on('value',visitHandler,()=>{if(gen===generation){confirmedVisit=null;emit();}});
  }
  function touch(scene){connect();const now=Date.now();state.position={scene:Math.max(0,Math.min(11,scene)),at:now};state.lastReadAt=now;write({version:VERSION,position:state.position,lastReadAt:now});}
- function complete(scene){connect();const n=scene+1;if(n<1||n>12)return[];const now=Date.now(),patch={},earned=[];
+ function complete(scene){connect();const n=scene+1;if(n<1||n>12)return[];const now=Date.now(),patch={},earned=[];if(uid==='guest'){if(!state.completed[n])state.completed[n]=now;emit();return []}
   if(!state.completed[n]){state.completed[n]=now;patch['completed/'+n]=now;}
   for(let p=1;p<=3;p++){const id=String(p).padStart(3,'0');if([0,1,2,3].every(n=>state.completed[(p-1)*4+n+1])&&!state.cards[id]){state.cards[id]=now;patch['cards/'+id]=now;earned.push(id);}}
   if(Object.keys(patch).length)write(patch);return earned;
  }
  function answer(id,selection,correct){connect();const a={selection:[...selection],correct:!!correct,at:Date.now(),attempts:(state.answers[id]?.attempts||0)+1};state.answers[id]=a;write({['answers/'+id]:a});}
- function note(text){connect();state.note={text:String(text).slice(0,10000),at:Date.now()};write({note:state.note});}
+ function note(text){connect();if(uid==='guest'){window.showToast?.('개인 기록 저장은 Google 로그인 후 이용합니다.');return;}state.note={text:String(text).slice(0,10000),at:Date.now()};write({note:state.note});}
  function verifiedVisit(){connect();return confirmedVisit;}
  function syncVisit(){connect();const v=verifiedVisit();if(v&&JSON.stringify(v)!==JSON.stringify(state.fieldVerification)){state.fieldVerification=v;write({fieldVerification:v});}return v;}
  window.SansaAtlasStore={connect,flush,touch,complete,answer,note,syncVisit,verifiedVisit,normalize,merge,get state(){connect();return state;},get uid(){connect();return uid;},get status(){return status;},subscribe(fn){listeners.add(fn);return()=>listeners.delete(fn);}};

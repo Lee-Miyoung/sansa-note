@@ -1,0 +1,7 @@
+[
+  {"musicId":"legacy-song1","templeId":null,"title":"비워내 비워내","artist":"산사노트 기존 플레이리스트","audioUrl":"/song1.mp3","coverUrl":"/images/personal-cards/03-cloud-ridges-small.webp","duration":null,"published":true,"existingPlaylist":true},
+  {"musicId":"legacy-song2","templeId":null,"title":"흘러가네","artist":"산사노트 기존 플레이리스트","audioUrl":"/song2.mp3","coverUrl":"/images/personal-cards/05-stream-bridge-small.webp","duration":null,"published":true,"existingPlaylist":true},
+  {"musicId":"legacy-song3","templeId":null,"title":"가벼워진 마음","artist":"산사노트 기존 플레이리스트","audioUrl":"/song3.mp3","coverUrl":"/images/personal-cards/01-pine-path-small.webp","duration":null,"published":true,"existingPlaylist":true},
+  {"musicId":"legacy-song4","templeId":null,"title":"깨부숴","artist":"산사노트 기존 플레이리스트","audioUrl":"/song4.mp3","coverUrl":"/images/personal-cards/07-forest-gate-small.webp","duration":null,"published":true,"existingPlaylist":true},
+  {"musicId":"legacy-song5","templeId":null,"title":"마음의 쉼표","artist":"산사노트 기존 플레이리스트","audioUrl":"/song5.mp3","coverUrl":"/images/personal-cards/08-sunset-temple-small.webp","duration":null,"published":true,"existingPlaylist":true}
+]

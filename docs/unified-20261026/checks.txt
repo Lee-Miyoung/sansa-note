@@ -1,0 +1,90 @@
+=== session-chromium ===
+PASS chromium public detail;member-only upload/GPS;cancel preserves screen;popup login resumes same place;no guest merge;old IndexedDB photo+MY001 retained across update;member-only legacy ZIP export
+
+=== session-webkit ===
+PASS webkit public detail;member-only upload/GPS;cancel preserves screen;popup login resumes same place;no guest merge;old IndexedDB photo+MY001 retained across update;member-only legacy ZIP export
+
+=== photos-chromium ===
+PASS chromium 390 member local photo/legacy mixed14; selected7/14; swipe/arrows;3-URL memory bound;no delete overlay;600ms hold;scroll cancel;confirm/cancel delete;album temple/mountain counts;keyboard menu;account isolation;notes preserved
+
+=== photos-webkit ===
+PASS webkit 390 member local photo/legacy mixed14; selected7/14; swipe/arrows;3-URL memory bound;no delete overlay;600ms hold;scroll cancel;confirm/cancel delete;album temple/mountain counts;keyboard menu;account isolation;notes preserved
+
+=== galaxy-412 ===
+PASS chromium 412 member local photo/legacy mixed14; selected7/14; swipe/arrows;3-URL memory bound;no delete overlay;600ms hold;scroll cancel;confirm/cancel delete;album temple/mountain counts;keyboard menu;account isolation;notes preserved
+
+=== ipad-820 ===
+PASS webkit 820 member local photo/legacy mixed14; selected7/14; swipe/arrows;3-URL memory bound;no delete overlay;600ms hold;scroll cancel;confirm/cancel delete;album temple/mountain counts;keyboard menu;account isolation;notes preserved
+
+=== desktop-1440 ===
+PASS chromium 1440 member local photo/legacy mixed14; selected7/14; swipe/arrows;3-URL memory bound;no delete overlay;600ms hold;scroll cancel;confirm/cancel delete;album temple/mountain counts;keyboard menu;account isolation;notes preserved
+
+=== iphone-390-final ===
+PASS webkit 390 member local photo/legacy mixed14; selected7/14; swipe/arrows;3-URL memory bound;no delete overlay;600ms hold;scroll cancel;confirm/cancel delete;album temple/mountain counts;keyboard menu;account isolation;notes preserved
+
+=== themes-chromium ===
+PASS chromium six themes;stable existing MY001;5/10 reward gating;different actual PNG exports via explicit save;Firebase+device design persistence;collection theme;no record reset
+
+=== themes-webkit ===
+PASS webkit six themes;stable existing MY001;5/10 reward gating;different actual PNG exports via explicit save;Firebase+device design persistence;collection theme;no record reset
+
+=== location-chromium ===
+PASS chromium explicit address selection;no first-result auto-match;marker drag;cancel/confirm;only own location+history changed;old MY001/notes/photos/visits preserved;new GPS+route point;official108 and other user protected
+
+=== location-webkit ===
+PASS webkit explicit address selection;no first-result auto-match;marker drag;cancel/confirm;only own location+history changed;old MY001/notes/photos/visits preserved;new GPS+route point;official108 and other user protected
+
+=== atlas-chromium ===
+PASS chromium all12 public story images;no anonymous progress writes/new cards;historical guest note/card readable+preserved;login resumes note screen;member-only note persists;no guest merge
+
+=== atlas-webkit ===
+PASS webkit all12 public story images;no anonymous progress writes/new cards;historical guest note/card readable+preserved;login resumes note screen;member-only note persists;no guest merge
+
+=== backup-chromium ===
+PASS regular account zero-photo feedback,explicit ZIP save,share user activation/cancel,corrupt backup preserves existing chromium EXIF rotation6,metadata stripped,actual ZIP download,new profile no sync,restore photos and temple link,duplicate restore preserves existing,album image decoding
+
+=== backup-webkit ===
+PASS regular account zero-photo feedback,explicit ZIP save,share user activation/cancel,corrupt backup preserves existing webkit EXIF rotation6,metadata stripped,actual ZIP download,new profile no sync,restore photos and temple link,duplicate restore preserves existing,album image decoding
+
+=== accounts-chromium ===
+PASS chromium regular/admin same local uploads,no cloud photo changes,logout closes/revokes private UI,account switch cancels compression,old photos remain,local photo plus Munyeom card PNG
+
+=== party ===
+PASS chromium stable MY number and art,coast exclusion,PNG download,3s party,quiet default,one event once,canvas cleanup,reduced motion,official108 distinct
+
+=== paju ===
+PASS chromium heritage verified Paju coordinates; cached/confirmed Seoul ignored; full-address destination; detail marker; GPS resolver plus actual strict-verify callbacks reject Seoul and accept Paju after dwell; distinct custom place ID; reload; original records untouched
+
+=== navigation ===
+PASS 390 breathing, emotion backward/forward/complete close, nested mypage and vow drafts, temple/mountain search returns, copy document return
+PASS 1440 breathing, emotion backward/forward/complete close, nested mypage and vow drafts, temple/mountain search returns, copy document return
+
+=== worker ===
+PASS streaming HTML is not held for cache writes; search-result navigation: cached app opens while network stalls, delayed response refreshes cache, offline reload uses refreshed page, local records preserved
+
+=== music-chromium ===
+PASS chromium public existing real audio playback/time advances;one shared player;playlist same state;pause/share/deep link/no autoplay;zero initial audio requests;no fake temple song;fixture-only published temple registration wired into detail+room+existing playlist
+
+=== music-webkit-controls ===
+PASS webkit playback UNVERIFIED: WebKit /var/tmp media sandbox restriction;metadata/controls tested;one shared player;playlist same state;pause/share/deep link/no autoplay;zero initial audio requests;no fake temple song;fixture-only published temple registration wired into detail+room+existing playlist
+
+=== home-catalog ===
+PASS chromium 390 10 episodes: metadata only; bounded thumbnails; navigation and no story preloads
+PASS chromium 390 12 episodes: metadata only; bounded thumbnails; navigation and no story preloads
+PASS chromium 820 10 episodes: metadata only; bounded thumbnails; navigation and no story preloads
+PASS chromium 820 12 episodes: metadata only; bounded thumbnails; navigation and no story preloads
+PASS chromium 1440 10 episodes: metadata only; bounded thumbnails; navigation and no story preloads
+PASS chromium 1440 12 episodes: metadata only; bounded thumbnails; navigation and no story preloads
+PASS metadata failure preserves ordinary episode-one link
+PASS pending season metadata never blocks home cards or episode reader
+
+=== home-images ===
+PASS webkit 390 24 decoded images; full-width art; bounded crop; text separate; section 369 px; tabs/arrows;108 adjacency;protected fixture unchanged
+PASS webkit 820 24 decoded images; full-width art; bounded crop; text separate; section 355 px; tabs/arrows;108 adjacency;protected fixture unchanged
+PASS future special-episode fixture uses same full-width150px image style; real catalog unchanged
+
+=== final photos-chromium (explicit photo download included) ===
+PASS chromium 390 member local photo/legacy mixed14; selected7/14; swipe/arrows;3-URL memory bound;no delete overlay;600ms hold;scroll cancel;confirm/cancel delete;album temple/mountain counts;keyboard menu;account isolation;notes preserved
+
+=== final photos-webkit (explicit photo download included) ===
+PASS webkit 390 member local photo/legacy mixed14; selected7/14; swipe/arrows;3-URL memory bound;no delete overlay;600ms hold;scroll cancel;confirm/cancel delete;album temple/mountain counts;keyboard menu;account isolation;notes preserved

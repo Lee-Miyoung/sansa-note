@@ -1,0 +1,27 @@
+{
+  "variant": "/workspace/sansa-note",
+  "conditions": "390x844 Chromium, 4x CPU, empty SDK responses delayed 2000ms; no real Firebase or mobile network",
+  "measurements": [
+    {
+      "fcp": 604,
+      "dom": 939,
+      "lcp": 4284,
+      "home": "block"
+    },
+    {
+      "fcp": 1148,
+      "dom": 1992,
+      "lcp": 5544,
+      "home": "block"
+    },
+    {
+      "fcp": 652,
+      "dom": 1136,
+      "lcp": 4048,
+      "home": "block"
+    }
+  ],
+  "workerRequests": 20,
+  "workerBytes": 4960786,
+  "media": []
+}

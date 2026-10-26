@@ -11,6 +11,8 @@
   let appReady=!!document.getElementById('app')&&getComputedStyle(document.getElementById('app')).display!=='none',pendingRestore=null;
   function readSaved(){try{for(const r of JSON.parse(sessionStorage.getItem(KEY)||'[]'))records.set(r.id,r);}catch(_){}}
   function persist(){try{sessionStorage.setItem(KEY,JSON.stringify([...records.values()].slice(-30)));}catch(_){}}
+  const owner=()=>typeof currentUid!=='undefined'&&currentUid&&typeof localMode!=='undefined'&&!localMode?'user:'+currentUid:'guest';
+  window.addEventListener('sansaaccountchange',()=>{restoreVersion++;restoring=false;});
   function shown(){return [...document.querySelectorAll('.overlay.show')].map(e=>e.id);}
   function stateBits(){return {
     type:typeof contentType==='undefined'?'temple':contentType,
@@ -50,7 +52,7 @@
     });
     for(const name of ['worryBody','vowBody']){const e=document.getElementById(name);if(e&&ids.includes(e.closest('.overlay')?.id))panels[name]={html:e.innerHTML,className:e.className,emotion:e.dataset.emotionKey||''};}
     const guardian=document.getElementById('guardianCardDetail');if(guardian)liveNodes.set(id,guardian);
-    return {id,index,key:route(),ids,fields,scrolls,panels,bits:stateBits(),y:pageY(),gameRank:!!document.getElementById('beatLeaderboard')?.classList.contains('show'),guardian:!!guardian,guardianIndex:guardian?Number((guardian.querySelector('.guardian-detail-kicker,small')?.textContent||'').match(/\d{3}/)?.[0]||'1')-1:null,bodyClasses:[...document.body.classList].filter(c=>/catalog|community/.test(c)),editorKey,at:Date.now()};
+    return {id,index,owner:owner(),key:route(),ids,fields,scrolls,panels,bits:stateBits(),y:pageY(),gameRank:!!document.getElementById('beatLeaderboard')?.classList.contains('show'),guardian:!!guardian,guardianIndex:guardian?Number((guardian.querySelector('.guardian-detail-kicker,small')?.textContent||'').match(/\d{3}/)?.[0]||'1')-1:null,bodyClasses:[...document.body.classList].filter(c=>/catalog|community/.test(c)),editorKey,at:Date.now()};
   }
   function attach(r,push){records.set(r.id,r);current=r;const st={...(history.state||{}),sansaNavigation:{v:1,id:r.id,index:r.index}};try{(push?native.push:native.replace)(st,'',location.href);}catch(_){}persist();}
   function checkpoint(){if(restoring||!current)return;if(route()!==current.key){if(performance.now()<batchUntil){schedule();return;}flush();}attach(snapshot(current.id,current.index),false);}
@@ -101,7 +103,7 @@
     if(!r.ids.length){document.body.style.position='';document.body.style.top='';document.body.style.overflow='';document.documentElement.style.overflow='';document.body.classList.remove('sansa-overlay-locked','pack-modal-open','sansa-modal-open');window.scrollTo({top:r.y,left:0,behavior:'instant'});}
   }
   async function restore(r){
-    if(!r)return;const version=++restoreVersion;restoring=true;clearTimeout(timer);
+    if(!r)return;if(r.owner!==owner()){attach(snapshot(r.id,r.index),false);return;}const version=++restoreVersion;restoring=true;clearTimeout(timer);
     try{
       const previousBits=stateBits();cleanupLeaving(r);restoreBits(r.bits);
       if(!r.ids.length&&['type','region','tag','quick'].some(k=>previousBits[k]!==r.bits[k]))window.render?.();

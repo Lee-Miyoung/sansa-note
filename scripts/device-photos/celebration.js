@@ -5,6 +5,7 @@ function close(){if(active){active.dispose();active.el.remove();const focus=acti
 window.closePilgrimageAchievement=close;
 window.addEventListener('devicephotosreset',close);
 window.showPilgrimageAchievement=function(info){
+ if(!SansaSession.member())return false;
  const id=info?.templeId,d=typeof destinations!=='undefined'?destinations[id]:null,v=d?.visits?.[info?.visitId];
  if(!id||!info.visitId||v?.verified!==true||Date.now()-Number(v.ts)>60000)return false;
  let scope;try{scope=SansaDevicePhotoStore.scope()}catch(_){return false}const eventKey=scope.owner+':'+id+':'+info.visitId;if(seen.has(eventKey))return false;seen.add(eventKey);if(seen.size>128)seen.delete(seen.values().next().value);close();
@@ -26,9 +27,9 @@ window.showPilgrimageAchievement=function(info){
  if(reduced){skip.hidden=true;monk.src='/images/personal-cards/celebration-joy.webp';return true;}
  const ctx=canvas.getContext('2d');if(!ctx){finish();return true;}function resize(){w=innerWidth;height=innerHeight;const dpr=Math.min(1.5,devicePixelRatio||1,1600/Math.max(w,height));canvas.width=Math.round(w*dpr);canvas.height=Math.round(height*dpr);ctx.setTransform(dpr,0,0,dpr,0,0)}resize();window.addEventListener('resize',resize,{signal:controller.signal});
  const colors=['#c3a052','#e59fa6','#b9cb94','#689e96','#f6db8b'];
- function burst(x,y,n=24){for(let i=0;i<n&&particles.length<(w<700?150:220);i++){const angle=-Math.PI+Math.random()*Math.PI,speed=140+Math.random()*250;particles.push({x,y,vx:Math.cos(angle)*speed,vy:Math.sin(angle)*speed-80,life:1.6+Math.random(),age:0,size:4+Math.random()*7,rotation:Math.random()*6,spin:(Math.random()-.5)*5,color:colors[i%colors.length],shape:i%11===0?'lotus':i%7===0?'star':i%5===0?'petal':'paper'})}}
- burst(w*.08,height*.9,30);burst(w*.92,height*.9,30);
+ function burst(x,y,n=24){for(let i=0;i<n&&particles.length<(w<700?170:240);i++){const angle=-Math.PI+Math.random()*Math.PI,speed=140+Math.random()*250;particles.push({x,y,vx:Math.cos(angle)*speed,vy:Math.sin(angle)*speed-80,life:1.6+Math.random(),age:0,size:4+Math.random()*7,rotation:Math.random()*6,spin:(Math.random()-.5)*5,color:colors[i%colors.length],shape:i%5===0?'lotus':i%4===0?'star':i%3===0?'petal':'paper'})}}
+ burst(w*.08,height*.9,42);burst(w*.92,height*.9,42);
  function draw(now){if(stopped)return;const dt=Math.min(.032,(now-(last||now))/1000);last=now;ctx.clearRect(0,0,w,height);particles=particles.filter(p=>p.age<p.life&&p.y<height+60&&p.x>-80&&p.x<w+80);for(const p of particles){p.age+=dt;p.vy+=340*dt;p.x+=p.vx*dt;p.y+=p.vy*dt;p.rotation+=p.spin*dt;ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.rotation);ctx.globalAlpha=Math.max(0,Math.min(1,(p.life-p.age)*2));ctx.fillStyle=p.color;if(p.shape==='lotus'){ctx.fillStyle='#dfa0aa';for(let k=-2;k<=2;k++){ctx.save();ctx.rotate(k*.34);ctx.beginPath();ctx.ellipse(0,-p.size*.3,p.size*.35,p.size*.85,0,0,Math.PI*2);ctx.fill();ctx.restore()}}else if(p.shape==='petal'){ctx.beginPath();ctx.ellipse(0,0,p.size*.6,p.size*1.3,0,0,Math.PI*2);ctx.fill()}else if(p.shape==='star'){ctx.beginPath();for(let k=0;k<10;k++){const r=k%2?p.size*.45:p.size;ctx.lineTo(Math.cos(k*Math.PI/5)*r,Math.sin(k*Math.PI/5)*r)}ctx.closePath();ctx.fill()}else ctx.fillRect(-p.size/2,-p.size/2,p.size,p.size*.6);ctx.restore()}raf=requestAnimationFrame(draw)}raf=requestAnimationFrame(draw);
- later(()=>{monk.src='/images/personal-cards/celebration-joy.webp';el.classList.add('has-joy');burst(w*.2,height*.28,22);burst(w*.2,height*.7,8)},500);later(()=>burst(w*.8,height*.22,22),950);later(()=>{burst(w*.5,height*.36,25);el.classList.add('has-card')},1400);later(finish,2900);return true;
+ later(()=>{monk.src='/images/personal-cards/celebration-joy.webp';el.classList.add('has-joy');burst(w*.2,height*.28,30);burst(w*.2,height*.7,8)},500);later(()=>burst(w*.8,height*.22,30),950);later(()=>{burst(w*.5,height*.36,35);el.classList.add('has-card')},1400);later(finish,2900);return true;
 };
 })();

@@ -13,6 +13,7 @@ function owner(){
 function scope(){const value=owner();if(!value)throw Error('계정 연결을 확인한 뒤 다시 시도해 주세요.');boundOwner??=value;return {owner:value,generation};}
 function assert(s){if(!s||s.owner!==owner()||s.generation!==generation)throw Error('계정이 바뀌어 사진 작업을 중단했어요.');}
 function changed(){const next=owner();if(!locked&&next===boundOwner)return;boundOwner=next;generation++;locked=false;for(const tx of active)try{tx.abort()}catch(_){};window.dispatchEvent(new Event('devicephotosreset'));}
+function member(s){assert(s);if(!s.owner.startsWith('user:'))throw Error('사진과 개인 기록은 Google 로그인 후 저장할 수 있어요.');}
 function lock(){generation++;locked=true;boundOwner=null;for(const tx of active)try{tx.abort()}catch(_){}window.dispatchEvent(new Event('devicephotosreset'));}
 function open(){
  if(connection)return connection;
@@ -51,6 +52,7 @@ async function get(kind,placeId,id,s=scope()){
  return transaction(['blobs'],'readonly',s,(tx,set)=>{const req=tx.objectStore('blobs').get(key(s,kind,placeId,id));req.onsuccess=()=>set(req.result?.blob||null)});
 }
 async function save(kind,placeId,file,s=scope(),place={}){
+ member(s);
  assert(s);if(!['temple','mountain'].includes(kind)||!placeId)throw Error('사진을 연결할 장소를 확인해 주세요.');
  const optimized=await compressUserPhoto(file);assert(s);const small=await thumbnail(optimized.file),sha256=await hash(optimized.file);assert(s);
  const id='device-'+crypto.randomUUID(),createdAt=Date.now(),k=key(s,kind,placeId,id);
@@ -59,21 +61,27 @@ async function save(kind,placeId,file,s=scope(),place={}){
  window.dispatchEvent(new Event('devicephotoschange'));return record;
 }
 async function remove(kind,placeId,id,s=scope()){
+ member(s);
  await transaction(['photos','blobs'],'readwrite',s,tx=>{const k=key(s,kind,placeId,id);tx.objectStore('photos').delete(k);tx.objectStore('blobs').delete(k)});window.dispatchEvent(new Event('devicephotoschange'));
 }
 async function preference(placeId,value,s=scope()){
+ if(value!==undefined)member(s);
  const k=[s.owner,String(placeId)];return transaction(['cards'],value===undefined?'readonly':'readwrite',s,(tx,set)=>{
  const store=tx.objectStore('cards');if(value!==undefined){store.put({key:k,...value});set(value)}else{const req=store.get(k);req.onsuccess=()=>set(req.result||null)}});
 }
 async function restore(records,s=scope()){
+ member(s);
  assert(s);const existing=await list(null,null,s),seen=new Set(existing.map(p=>[p.kind,p.placeId,p.sha256].join(':'))),prepared=[];let skipped=0;
  for(const r of records){assert(s);if(!['temple','mountain'].includes(r.kind)||typeof r.placeId!=='string'||!r.placeId||r.placeId.length>200||!(r.blob instanceof Blob)||r.blob.size>2*1024*1024)throw Error('백업 사진 정보가 올바르지 않아요.');const sha256=await hash(r.blob);if(sha256!==r.sha256)throw Error('백업 사진이 손상되었어요.');const sig=[r.kind,r.placeId,sha256].join(':');if(seen.has(sig)){skipped++;continue;}seen.add(sig);const small=await thumbnail(r.blob);if(Math.max(small.width,small.height)>1600)throw Error('지원하는 백업 이미지 크기를 초과했어요.');const id='device-'+crypto.randomUUID(),k=key(s,r.kind,r.placeId,id);prepared.push({record:{key:k,owner:s.owner,kind:r.kind,placeId:r.placeId,id,createdAt:Number.isFinite(r.createdAt)&&r.createdAt>0?r.createdAt:Date.now(),registeredAt:Date.now(),placeName:String(r.placeName||'').slice(0,160),region:String(r.region||'').slice(0,80),mime:'image/jpeg',bytes:r.blob.size,width:small.width,height:small.height,sha256,thumbnail:small.blob},blob:r.blob});}
  assert(s);await transaction(['photos','blobs'],'readwrite',s,tx=>{for(const p of prepared){tx.objectStore('photos').put(p.record);tx.objectStore('blobs').put({key:p.record.key,blob:p.blob});}});window.dispatchEvent(new Event('devicephotoschange'));return {added:prepared.length,skipped};
 }
 async function number(placeId,preferred,s=scope()){
+ member(s);
  const k=[s.owner,String(placeId)];return transaction(['cards'],'readwrite',s,(tx,set)=>{
  const store=tx.objectStore('cards'),req=store.getAll(IDBKeyRange.bound([s.owner,''],[s.owner,'\uffff']));req.onsuccess=()=>{const rows=req.result,old=rows.find(r=>r.key[1]===String(placeId));if(Number.isInteger(old?.number)&&old.number>0){set(old.number);return}const used=new Set(rows.map(r=>r.number).filter(Number.isInteger));const n=Number.isInteger(preferred)&&preferred>0&&!used.has(preferred)?preferred:Math.max(0,...used)+1;store.put({...old,key:k,number:n});set(n)};});
 }
+async function legacyList(s=scope()){member(s);return transaction(['photos'],'readonly',s,(tx,set)=>{const req=tx.objectStore('photos').index('owner').getAll('guest:'+guest);req.onsuccess=()=>set(req.result)})}
+async function legacyGet(row,s=scope()){member(s);if(row.owner!=='guest:'+guest)throw Error('이 브라우저의 이전 게스트 사진만 백업할 수 있어요.');return transaction(['blobs'],'readonly',s,(tx,set)=>{const req=tx.objectStore('blobs').get([row.owner,row.kind,row.placeId,row.id]);req.onsuccess=()=>set(req.result?.blob||null)})}
 window.addEventListener('sansaaccountchange',changed);
-window.SansaDevicePhotoStore={scope,assert,owner,lock,list,get,save,remove,preference,number,restore,hash,thumbnail};
+window.SansaDevicePhotoStore={scope,assert,owner,lock,legacyList,legacyGet,list,get,save,remove,preference,number,restore,hash,thumbnail};
 })();
