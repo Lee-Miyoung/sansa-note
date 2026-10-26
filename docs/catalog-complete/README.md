@@ -112,6 +112,8 @@
 - 화야산 (수도권): 사용 가능한 정확한 지역의 대표 지형 사진 미확보
 - 황장산 (경상): 사용 가능한 정확한 지역의 대표 지형 사진 미확보
 
+운영 WebKit 추가 검사에서 108카드 미리보기의 늦은 이미지 이벤트가 이미 사라진 임시 요소를 참조하는 오류를 발견했습니다. 해당 요소의 존재를 확인하는 4곳의 DOM 표시 조건만 보완했습니다. 카드 기록·데이터·이미지는 바꾸지 않았고, 임시 요소가 사라진 뒤 load 이벤트가 도착하는 회귀 검사도 추가했습니다.
+
 ## 참고 자료와 재현
 
 - [전체 211곳 상태표](coverage.csv)
@@ -121,5 +123,7 @@
 - [파일·시각적 유사도 감사](image-audit.json)
 - `NODE_PATH=/workspace/.sansa-tools/node_modules node tests/catalog-complete.cjs` (브라우저·화면 폭은 SANSA_BROWSER/SANSA_WIDTH)
 - `python3 tests/catalog-image-audit.py`
+
+운영 브라우저 확인은 클라우드 프록시 인증서를 허용한 격리 환경에서 실행합니다. 별도의 HTTPS 파일 내용 검사는 시스템 인증서 검증을 켠 상태로 수행합니다.
 
 운영 배포 결과는 최종 보고와 GitHub Actions의 pages-build-deployment 실행 기록에서 확인합니다.

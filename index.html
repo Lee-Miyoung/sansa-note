@@ -22681,9 +22681,9 @@ body.catalog-screen-open #catalogOverlay,
           </span>
           <span class="journey-card-preview" id="heroGuardianPreview" aria-hidden="true">
             <span class="journey-preview-badge">108 수호카드 미리보기</span>
-            <span class="journey-mini-card preview-left"><span class="journey-mini-card-fallback"><b>009</b><strong>수덕사</strong><small>LOTUS GUARDIAN</small></span><img src="./images/lotus-cards/009.png?v=20261012static" alt="" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" loading="eager" decoding="async"></span>
-            <span class="journey-mini-card preview-center"><span class="journey-mini-card-fallback"><b>010</b><strong>백양사</strong><small>LOTUS GUARDIAN</small></span><img src="./images/lotus-cards/010.png?v=20261012static" alt="" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" loading="eager" decoding="async"></span>
-            <span class="journey-mini-card preview-right"><span class="journey-mini-card-fallback"><b>016</b><strong>석굴암</strong><small>LOTUS GUARDIAN</small></span><img src="./images/lotus-cards/016.png?v=20261012static" alt="" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" loading="eager" decoding="async"></span>
+            <span class="journey-mini-card preview-left"><span class="journey-mini-card-fallback"><b>009</b><strong>수덕사</strong><small>LOTUS GUARDIAN</small></span><img src="./images/lotus-cards/009.png?v=20261012static" alt="" onload="if(this.previousElementSibling)this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" loading="eager" decoding="async"></span>
+            <span class="journey-mini-card preview-center"><span class="journey-mini-card-fallback"><b>010</b><strong>백양사</strong><small>LOTUS GUARDIAN</small></span><img src="./images/lotus-cards/010.png?v=20261012static" alt="" onload="if(this.previousElementSibling)this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" loading="eager" decoding="async"></span>
+            <span class="journey-mini-card preview-right"><span class="journey-mini-card-fallback"><b>016</b><strong>석굴암</strong><small>LOTUS GUARDIAN</small></span><img src="./images/lotus-cards/016.png?v=20261012static" alt="" onload="if(this.previousElementSibling)this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" loading="eager" decoding="async"></span>
           </span>
         </button>
 
@@ -30798,7 +30798,7 @@ function updateHero108Journey(){
         const no=String(item.number||idx+1).padStart(3,'0');
         const pos=cls[idx]||'preview-right';
         const label=escapeHtml(item.name||'수호카드');
-        return `<span class="journey-mini-card ${pos}"><span class="journey-mini-card-fallback"><b>${no}</b><strong>${label}</strong><small>LOTUS GUARDIAN</small></span><img src="./images/lotus-cards/${no}.png?v=20261012hero6" alt="${label} 수호카드" loading="eager" decoding="async" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'"></span>`;
+        return `<span class="journey-mini-card ${pos}"><span class="journey-mini-card-fallback"><b>${no}</b><strong>${label}</strong><small>LOTUS GUARDIAN</small></span><img src="./images/lotus-cards/${no}.png?v=20261012hero6" alt="${label} 수호카드" loading="eager" decoding="async" onload="if(this.previousElementSibling)this.previousElementSibling.style.display='none'" onerror="this.style.display='none'"></span>`;
       }).join('');
     }
   }catch(e){console.warn('updateHero108Journey failed',e);}
