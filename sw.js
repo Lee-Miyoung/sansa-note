@@ -2,7 +2,7 @@
 // index.html은 온라인일 때 항상 최신 버전을 먼저 가져오고,
 // 오프라인일 때만 캐시를 사용합니다.
 
-const CACHE_VERSION = 'sansanote-v25-oracle-match-20261027';
+const CACHE_VERSION = 'sansanote-v26-oracle-match-20261027';
 
 // 첫 방문에는 작은 앱 셸만 준비합니다. 사진·음악·영상은 사용 시 아래 fetch
 // 핸들러가 캐시하므로 불필요한 다운로드가 첫 화면과 회선을 다투지 않습니다.

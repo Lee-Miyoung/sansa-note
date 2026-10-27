@@ -59,8 +59,8 @@
   ],
   "holdouts": 40,
   "holdoutClarify": 2,
-  "unknownMinimalPairs": 17,
-  "safety": 7,
+  "unknownMinimalPairs": 19,
+  "safety": 10,
   "allExpectedTopicsReachable": true,
   "noRandomAdvice": true,
   "noDuplicateExamples": true
