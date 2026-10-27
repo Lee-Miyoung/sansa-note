@@ -1,0 +1,37 @@
+[
+  {
+    "question": "상사가 제 아이디어를 가로채요",
+    "oldIntent": "work_conflict",
+    "newKind": "matched",
+    "newIntent": "recognition",
+    "candidates": []
+  },
+  {
+    "question": "친구가 제 비밀을 퍼뜨려 배신감이 들어요",
+    "oldIntent": "cheating_trust",
+    "newKind": "matched",
+    "newIntent": "friend_betrayal",
+    "candidates": []
+  },
+  {
+    "question": "약속을 거절하고 싶어요",
+    "oldIntent": "boundaries_rejection",
+    "newKind": "matched",
+    "newIntent": "refusal",
+    "candidates": []
+  },
+  {
+    "question": "전여친에게 연락이 왔어요",
+    "oldIntent": "cheating_trust",
+    "newKind": "matched",
+    "newIntent": "reconcile",
+    "candidates": []
+  },
+  {
+    "question": "회사에 퇴사할 생각은 없고 상사가 모욕해요",
+    "oldIntent": "work_resignation",
+    "newKind": "matched",
+    "newIntent": "boss_bullying",
+    "candidates": []
+  }
+]

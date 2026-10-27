@@ -1,0 +1,6005 @@
+{
+  "version": "20261027-oracle",
+  "examples": [
+    {
+      "id": "resign-01",
+      "topicId": "resign",
+      "text": "퇴사 결정을 내리기가 두려워요",
+      "sampleable": true
+    },
+    {
+      "id": "resign-02",
+      "topicId": "resign",
+      "text": "사표를 낼 시기를 못 정하겠어요",
+      "sampleable": true
+    },
+    {
+      "id": "resign-03",
+      "topicId": "resign",
+      "text": "퇴사 후 생활이 막막합니다",
+      "sampleable": true
+    },
+    {
+      "id": "resign-04",
+      "topicId": "resign",
+      "text": "퇴사하고 쉬고 싶은데 망설여져요",
+      "sampleable": true
+    },
+    {
+      "id": "resign-05",
+      "topicId": "resign",
+      "text": "퇴사 의사를 말할 용기가 안 나요",
+      "sampleable": true
+    },
+    {
+      "id": "resign-06",
+      "topicId": "resign",
+      "text": "계약이 남았는데 퇴사를 고민해요",
+      "sampleable": true
+    },
+    {
+      "id": "resign-07",
+      "topicId": "resign",
+      "text": "충동적으로 사표를 쓸까 걱정돼요",
+      "sampleable": true
+    },
+    {
+      "id": "resign-08",
+      "topicId": "resign",
+      "text": "퇴사 준비를 어디서 시작하죠",
+      "sampleable": true
+    },
+    {
+      "id": "resign-09",
+      "topicId": "resign",
+      "text": "퇴사할지 휴직할지 갈팡질팡해요",
+      "sampleable": true
+    },
+    {
+      "id": "resign-10",
+      "topicId": "resign",
+      "text": "퇴사 뒤 후회할까 겁이 납니다",
+      "sampleable": true
+    },
+    {
+      "id": "change_jobs-01",
+      "topicId": "change_jobs",
+      "text": "이직 제안 두 곳을 비교하고 있어요",
+      "sampleable": true
+    },
+    {
+      "id": "change_jobs-02",
+      "topicId": "change_jobs",
+      "text": "이직하면 연봉은 오르지만 야근이 늘어요",
+      "sampleable": true
+    },
+    {
+      "id": "change_jobs-03",
+      "topicId": "change_jobs",
+      "text": "새 직장 제안의 조건이 모호해요",
+      "sampleable": true
+    },
+    {
+      "id": "change_jobs-04",
+      "topicId": "change_jobs",
+      "text": "이직 면접을 회사에 알리고 싶지 않아요",
+      "sampleable": true
+    },
+    {
+      "id": "change_jobs-05",
+      "topicId": "change_jobs",
+      "text": "이직 준비와 업무 병행이 버겁습니다",
+      "sampleable": true
+    },
+    {
+      "id": "change_jobs-06",
+      "topicId": "change_jobs",
+      "text": "스카우트 제안을 받아 흔들려요",
+      "sampleable": true
+    },
+    {
+      "id": "change_jobs-07",
+      "topicId": "change_jobs",
+      "text": "이직할 때 직급을 낮춰도 될까요",
+      "sampleable": true
+    },
+    {
+      "id": "change_jobs-08",
+      "topicId": "change_jobs",
+      "text": "이직 시 통근 시간이 길어집니다",
+      "sampleable": true
+    },
+    {
+      "id": "change_jobs-09",
+      "topicId": "change_jobs",
+      "text": "이직한 지 얼마 안 돼 또 옮기고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "change_jobs-10",
+      "topicId": "change_jobs",
+      "text": "오퍼 수락 전에 뭘 확인해야 하죠",
+      "sampleable": true
+    },
+    {
+      "id": "burnout-01",
+      "topicId": "burnout",
+      "text": "주말에 자도 번아웃이 풀리지 않아요",
+      "sampleable": true
+    },
+    {
+      "id": "burnout-02",
+      "topicId": "burnout",
+      "text": "과로로 집에 오면 말할 힘이 없어요",
+      "sampleable": true
+    },
+    {
+      "id": "burnout-03",
+      "topicId": "burnout",
+      "text": "번아웃인데 쉬면 뒤처질까 무서워요",
+      "sampleable": true
+    },
+    {
+      "id": "burnout-04",
+      "topicId": "burnout",
+      "text": "일에 대한 소진이 심해졌어요",
+      "sampleable": true
+    },
+    {
+      "id": "burnout-05",
+      "topicId": "burnout",
+      "text": "야근이 쌓여 기진맥진해요",
+      "sampleable": true
+    },
+    {
+      "id": "burnout-06",
+      "topicId": "burnout",
+      "text": "번아웃으로 좋아하던 일도 싫어졌어요",
+      "sampleable": true
+    },
+    {
+      "id": "burnout-07",
+      "topicId": "burnout",
+      "text": "휴가 뒤에도 번아웃이 계속돼요",
+      "sampleable": true
+    },
+    {
+      "id": "burnout-08",
+      "topicId": "burnout",
+      "text": "과로를 인정하기가 부끄러워요",
+      "sampleable": true
+    },
+    {
+      "id": "burnout-09",
+      "topicId": "burnout",
+      "text": "번아웃 때문에 출근 준비도 버겁네요",
+      "sampleable": true
+    },
+    {
+      "id": "burnout-10",
+      "topicId": "burnout",
+      "text": "업무 소진을 상사에게 어떻게 말하죠",
+      "sampleable": true
+    },
+    {
+      "id": "boss_bullying-01",
+      "topicId": "boss_bullying",
+      "text": "상사가 회의에서 인격을 깎아내려요",
+      "sampleable": true
+    },
+    {
+      "id": "boss_bullying-02",
+      "topicId": "boss_bullying",
+      "text": "팀장의 폭언을 매일 듣습니다",
+      "sampleable": true
+    },
+    {
+      "id": "boss_bullying-03",
+      "topicId": "boss_bullying",
+      "text": "상사가 실수할 때마다 공개적으로 망신줘요",
+      "sampleable": true
+    },
+    {
+      "id": "boss_bullying-04",
+      "topicId": "boss_bullying",
+      "text": "직장 내 괴롭힘을 신고할지 고민돼요",
+      "sampleable": true
+    },
+    {
+      "id": "boss_bullying-05",
+      "topicId": "boss_bullying",
+      "text": "상사의 고함 때문에 몸이 굳어요",
+      "sampleable": true
+    },
+    {
+      "id": "boss_bullying-06",
+      "topicId": "boss_bullying",
+      "text": "팀장이 제 외모를 모욕해요",
+      "sampleable": true
+    },
+    {
+      "id": "boss_bullying-07",
+      "topicId": "boss_bullying",
+      "text": "상사의 괴롭힘 증거를 어떻게 남기죠",
+      "sampleable": true
+    },
+    {
+      "id": "boss_bullying-08",
+      "topicId": "boss_bullying",
+      "text": "직장 괴롭힘을 말하면 보복할까 무서워요",
+      "sampleable": true
+    },
+    {
+      "id": "boss_bullying-09",
+      "topicId": "boss_bullying",
+      "text": "상사가 사람들 앞에서 모욕을 줍니다",
+      "sampleable": true
+    },
+    {
+      "id": "boss_bullying-10",
+      "topicId": "boss_bullying",
+      "text": "팀장의 인격 비난을 참기 어렵네요",
+      "sampleable": true
+    },
+    {
+      "id": "recognition-01",
+      "topicId": "recognition",
+      "text": "동료가 제 성과를 가로채요",
+      "sampleable": true
+    },
+    {
+      "id": "recognition-02",
+      "topicId": "recognition",
+      "text": "승진 평가에서 기여가 누락됐어요",
+      "sampleable": true
+    },
+    {
+      "id": "recognition-03",
+      "topicId": "recognition",
+      "text": "공로를 인정받지 못해 속상해요",
+      "sampleable": true
+    },
+    {
+      "id": "recognition-04",
+      "topicId": "recognition",
+      "text": "평가가 부당한 것 같아 답답해요",
+      "sampleable": true
+    },
+    {
+      "id": "recognition-05",
+      "topicId": "recognition",
+      "text": "팀장이 제 업적을 빼앗은 느낌이에요",
+      "sampleable": true
+    },
+    {
+      "id": "recognition-06",
+      "topicId": "recognition",
+      "text": "성과 평가 기준이 불공정해 보여요",
+      "sampleable": true
+    },
+    {
+      "id": "recognition-07",
+      "topicId": "recognition",
+      "text": "제 기여를 기록으로 남기고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "recognition-08",
+      "topicId": "recognition",
+      "text": "평가에서 성과를 인정받지 못했어요",
+      "sampleable": true
+    },
+    {
+      "id": "recognition-09",
+      "topicId": "recognition",
+      "text": "승진에서 밀려 자존감이 흔들려요",
+      "sampleable": true
+    },
+    {
+      "id": "recognition-10",
+      "topicId": "recognition",
+      "text": "제 공을 다른 사람 성과로 올렸어요",
+      "sampleable": true
+    },
+    {
+      "id": "coworker-01",
+      "topicId": "coworker",
+      "text": "동료가 인수인계를 안 해줘요",
+      "sampleable": true
+    },
+    {
+      "id": "coworker-02",
+      "topicId": "coworker",
+      "text": "팀원과 역할 경계가 겹칩니다",
+      "sampleable": true
+    },
+    {
+      "id": "coworker-03",
+      "topicId": "coworker",
+      "text": "동료와 업무 분담이 불균형해요",
+      "sampleable": true
+    },
+    {
+      "id": "coworker-04",
+      "topicId": "coworker",
+      "text": "팀원과 협업 방식이 달라 충돌해요",
+      "sampleable": true
+    },
+    {
+      "id": "coworker-05",
+      "topicId": "coworker",
+      "text": "동료에게 업무를 계속 넘겨받아요",
+      "sampleable": true
+    },
+    {
+      "id": "coworker-06",
+      "topicId": "coworker",
+      "text": "동료가 협조하지 않아 일정이 밀려요",
+      "sampleable": true
+    },
+    {
+      "id": "coworker-07",
+      "topicId": "coworker",
+      "text": "팀원과 분담을 다시 정하고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "coworker-08",
+      "topicId": "coworker",
+      "text": "동료와 협업할 때마다 마찰이 나요",
+      "sampleable": true
+    },
+    {
+      "id": "coworker-09",
+      "topicId": "coworker",
+      "text": "동료의 역할까지 맡고 있습니다",
+      "sampleable": true
+    },
+    {
+      "id": "coworker-10",
+      "topicId": "coworker",
+      "text": "팀원과 인수인계 약속이 안 지켜져요",
+      "sampleable": true
+    },
+    {
+      "id": "work_mistake-01",
+      "topicId": "work_mistake",
+      "text": "보고서 숫자 오류를 뒤늦게 봤어요",
+      "sampleable": true
+    },
+    {
+      "id": "work_mistake-02",
+      "topicId": "work_mistake",
+      "text": "업무 실수를 숨기고 싶어집니다",
+      "sampleable": true
+    },
+    {
+      "id": "work_mistake-03",
+      "topicId": "work_mistake",
+      "text": "회사에서 같은 실수를 반복해요",
+      "sampleable": true
+    },
+    {
+      "id": "work_mistake-04",
+      "topicId": "work_mistake",
+      "text": "보고를 잘못해 동료에게 피해를 줬어요",
+      "sampleable": true
+    },
+    {
+      "id": "work_mistake-05",
+      "topicId": "work_mistake",
+      "text": "업무 누락을 어떻게 알릴까요",
+      "sampleable": true
+    },
+    {
+      "id": "work_mistake-06",
+      "topicId": "work_mistake",
+      "text": "보고서 오류를 고치기 겁나요",
+      "sampleable": true
+    },
+    {
+      "id": "work_mistake-07",
+      "topicId": "work_mistake",
+      "text": "직장 실수 이후 손이 떨려요",
+      "sampleable": true
+    },
+    {
+      "id": "work_mistake-08",
+      "topicId": "work_mistake",
+      "text": "일처리 실수가 늘어 자신이 없어요",
+      "sampleable": true
+    },
+    {
+      "id": "work_mistake-09",
+      "topicId": "work_mistake",
+      "text": "회사 자료를 잘못 전달했어요",
+      "sampleable": true
+    },
+    {
+      "id": "work_mistake-10",
+      "topicId": "work_mistake",
+      "text": "업무 수정 요청을 받을 때마다 위축돼요",
+      "sampleable": true
+    },
+    {
+      "id": "after_hours-01",
+      "topicId": "after_hours",
+      "text": "퇴근 후 업무 연락이 끊이지 않아요",
+      "sampleable": true
+    },
+    {
+      "id": "after_hours-02",
+      "topicId": "after_hours",
+      "text": "휴일에도 회사 전화가 옵니다",
+      "sampleable": true
+    },
+    {
+      "id": "after_hours-03",
+      "topicId": "after_hours",
+      "text": "휴가 중 업무 메시지를 확인하게 돼요",
+      "sampleable": true
+    },
+    {
+      "id": "after_hours-04",
+      "topicId": "after_hours",
+      "text": "주말 업무 단톡에 답해야 할까요",
+      "sampleable": true
+    },
+    {
+      "id": "after_hours-05",
+      "topicId": "after_hours",
+      "text": "퇴근 뒤 메신저 답장을 재촉해요",
+      "sampleable": true
+    },
+    {
+      "id": "after_hours-06",
+      "topicId": "after_hours",
+      "text": "휴일 업무 연락으로 가족과 시간을 못 보내요",
+      "sampleable": true
+    },
+    {
+      "id": "after_hours-07",
+      "topicId": "after_hours",
+      "text": "휴가 중에도 업무 전화를 기다립니다",
+      "sampleable": true
+    },
+    {
+      "id": "after_hours-08",
+      "topicId": "after_hours",
+      "text": "퇴근 후 연락 경계를 말하기 어렵네요",
+      "sampleable": true
+    },
+    {
+      "id": "after_hours-09",
+      "topicId": "after_hours",
+      "text": "주말마다 업무 메시지 때문에 쉬지 못해요",
+      "sampleable": true
+    },
+    {
+      "id": "after_hours-10",
+      "topicId": "after_hours",
+      "text": "퇴근한 뒤 연락 알림만 와도 긴장해요",
+      "sampleable": true
+    },
+    {
+      "id": "workload-01",
+      "topicId": "workload",
+      "text": "업무량이 감당할 수 없을 만큼 많아요",
+      "sampleable": true
+    },
+    {
+      "id": "workload-02",
+      "topicId": "workload",
+      "text": "업무 우선순위를 못 정하겠어요",
+      "sampleable": true
+    },
+    {
+      "id": "workload-03",
+      "topicId": "workload",
+      "text": "일감이 한 사람에게 몰립니다",
+      "sampleable": true
+    },
+    {
+      "id": "workload-04",
+      "topicId": "workload",
+      "text": "업무 분량을 줄여달라고 말하고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "workload-05",
+      "topicId": "workload",
+      "text": "업무량에 비해 마감이 너무 짧아요",
+      "sampleable": true
+    },
+    {
+      "id": "workload-06",
+      "topicId": "workload",
+      "text": "일이 너무 많아 점심도 못 먹어요",
+      "sampleable": true
+    },
+    {
+      "id": "workload-07",
+      "topicId": "workload",
+      "text": "업무량을 말하면 무능해 보일까 걱정돼요",
+      "sampleable": true
+    },
+    {
+      "id": "workload-08",
+      "topicId": "workload",
+      "text": "일감이 계속 추가되어 끝이 안 나요",
+      "sampleable": true
+    },
+    {
+      "id": "workload-09",
+      "topicId": "workload",
+      "text": "업무 분량 때문에 중요한 일을 놓쳐요",
+      "sampleable": true
+    },
+    {
+      "id": "workload-10",
+      "topicId": "workload",
+      "text": "업무 우선순위를 상사와 정하고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "unpaid_wages-01",
+      "topicId": "unpaid_wages",
+      "text": "월급이 두 달째 밀렸어요",
+      "sampleable": true
+    },
+    {
+      "id": "unpaid_wages-02",
+      "topicId": "unpaid_wages",
+      "text": "급여 지연으로 생활이 어려워요",
+      "sampleable": true
+    },
+    {
+      "id": "unpaid_wages-03",
+      "topicId": "unpaid_wages",
+      "text": "임금 체불을 어디에 상담하나요",
+      "sampleable": true
+    },
+    {
+      "id": "unpaid_wages-04",
+      "topicId": "unpaid_wages",
+      "text": "월급을 못 받아 카드값이 걱정돼요",
+      "sampleable": true
+    },
+    {
+      "id": "unpaid_wages-05",
+      "topicId": "unpaid_wages",
+      "text": "급여가 밀렸는데 사장님이 기다리래요",
+      "sampleable": true
+    },
+    {
+      "id": "unpaid_wages-06",
+      "topicId": "unpaid_wages",
+      "text": "월급이 안 들어왔는데 말하기 어려워요",
+      "sampleable": true
+    },
+    {
+      "id": "unpaid_wages-07",
+      "topicId": "unpaid_wages",
+      "text": "임금 체불 기록을 남기고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "unpaid_wages-08",
+      "topicId": "unpaid_wages",
+      "text": "급여 지연 약속이 계속 바뀝니다",
+      "sampleable": true
+    },
+    {
+      "id": "unpaid_wages-09",
+      "topicId": "unpaid_wages",
+      "text": "이번 달에도 월급을 못 받았어요",
+      "sampleable": true
+    },
+    {
+      "id": "unpaid_wages-10",
+      "topicId": "unpaid_wages",
+      "text": "퇴직 뒤에도 밀린 월급이 있어요",
+      "sampleable": true
+    },
+    {
+      "id": "work_presentation-01",
+      "topicId": "work_presentation",
+      "text": "회의 발언을 할 때 목소리가 떨려요",
+      "sampleable": true
+    },
+    {
+      "id": "work_presentation-02",
+      "topicId": "work_presentation",
+      "text": "발표 전날부터 너무 긴장해요",
+      "sampleable": true
+    },
+    {
+      "id": "work_presentation-03",
+      "topicId": "work_presentation",
+      "text": "프레젠테이션 도중 말문이 막혀요",
+      "sampleable": true
+    },
+    {
+      "id": "work_presentation-04",
+      "topicId": "work_presentation",
+      "text": "사람들 앞 발표가 무서워요",
+      "sampleable": true
+    },
+    {
+      "id": "work_presentation-05",
+      "topicId": "work_presentation",
+      "text": "회의 발언 차례만 오면 겁이 나요",
+      "sampleable": true
+    },
+    {
+      "id": "work_presentation-06",
+      "topicId": "work_presentation",
+      "text": "발표 때 떨려 자료를 놓칩니다",
+      "sampleable": true
+    },
+    {
+      "id": "work_presentation-07",
+      "topicId": "work_presentation",
+      "text": "프레젠테이션 긴장 때문에 피하고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "work_presentation-08",
+      "topicId": "work_presentation",
+      "text": "발표할 때 목소리가 작아져요",
+      "sampleable": true
+    },
+    {
+      "id": "work_presentation-09",
+      "topicId": "work_presentation",
+      "text": "회의 발언 실수를 할까 불안해요",
+      "sampleable": true
+    },
+    {
+      "id": "work_presentation-10",
+      "topicId": "work_presentation",
+      "text": "발표 긴장을 어떻게 준비하면 좋죠",
+      "sampleable": true
+    },
+    {
+      "id": "job_security-01",
+      "topicId": "job_security",
+      "text": "구조조정 소문 때문에 잠이 안 와요",
+      "sampleable": true
+    },
+    {
+      "id": "job_security-02",
+      "topicId": "job_security",
+      "text": "권고사직 이야기를 들었습니다",
+      "sampleable": true
+    },
+    {
+      "id": "job_security-03",
+      "topicId": "job_security",
+      "text": "해고될까 봐 매일 불안해요",
+      "sampleable": true
+    },
+    {
+      "id": "job_security-04",
+      "topicId": "job_security",
+      "text": "계약 종료 뒤가 막막해요",
+      "sampleable": true
+    },
+    {
+      "id": "job_security-05",
+      "topicId": "job_security",
+      "text": "계약 갱신 여부를 안 알려줘요",
+      "sampleable": true
+    },
+    {
+      "id": "job_security-06",
+      "topicId": "job_security",
+      "text": "고용 불안으로 미래 계획을 못 세워요",
+      "sampleable": true
+    },
+    {
+      "id": "job_security-07",
+      "topicId": "job_security",
+      "text": "권고사직 서명을 재촉받아요",
+      "sampleable": true
+    },
+    {
+      "id": "job_security-08",
+      "topicId": "job_security",
+      "text": "구조조정 때 제 권리를 알고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "job_security-09",
+      "topicId": "job_security",
+      "text": "계약 갱신을 기다리는 시간이 괴로워요",
+      "sampleable": true
+    },
+    {
+      "id": "job_security-10",
+      "topicId": "job_security",
+      "text": "해고 통보 뒤 뭘 먼저 해야 하죠",
+      "sampleable": true
+    },
+    {
+      "id": "sales-01",
+      "topicId": "sales",
+      "text": "가게 매출이 지난달보다 줄었어요",
+      "sampleable": true
+    },
+    {
+      "id": "sales-02",
+      "topicId": "sales",
+      "text": "손님이 줄어 가게가 한산해요",
+      "sampleable": true
+    },
+    {
+      "id": "sales-03",
+      "topicId": "sales",
+      "text": "온라인 주문이 줄고 있습니다",
+      "sampleable": true
+    },
+    {
+      "id": "sales-04",
+      "topicId": "sales",
+      "text": "장사가 안돼 자신감이 없어요",
+      "sampleable": true
+    },
+    {
+      "id": "sales-05",
+      "topicId": "sales",
+      "text": "판매량이 떨어진 이유를 모르겠어요",
+      "sampleable": true
+    },
+    {
+      "id": "sales-06",
+      "topicId": "sales",
+      "text": "매출이 주말마다 크게 출렁여요",
+      "sampleable": true
+    },
+    {
+      "id": "sales-07",
+      "topicId": "sales",
+      "text": "손님이 줄어도 원인을 못 찾겠어요",
+      "sampleable": true
+    },
+    {
+      "id": "sales-08",
+      "topicId": "sales",
+      "text": "새 가게의 매출이 기대보다 낮아요",
+      "sampleable": true
+    },
+    {
+      "id": "sales-09",
+      "topicId": "sales",
+      "text": "주문이 줄어 재고가 쌓여요",
+      "sampleable": true
+    },
+    {
+      "id": "sales-10",
+      "topicId": "sales",
+      "text": "판매량이 내려가 광고를 늘릴까 고민해요",
+      "sampleable": true
+    },
+    {
+      "id": "pricing-01",
+      "topicId": "pricing",
+      "text": "상품 가격을 올리기가 미안해요",
+      "sampleable": true
+    },
+    {
+      "id": "pricing-02",
+      "topicId": "pricing",
+      "text": "판매가 책정이 너무 어렵습니다",
+      "sampleable": true
+    },
+    {
+      "id": "pricing-03",
+      "topicId": "pricing",
+      "text": "단가를 올려달라고 말하기 힘들어요",
+      "sampleable": true
+    },
+    {
+      "id": "pricing-04",
+      "topicId": "pricing",
+      "text": "가격 인상 뒤 손님이 떠날까 무서워요",
+      "sampleable": true
+    },
+    {
+      "id": "pricing-05",
+      "topicId": "pricing",
+      "text": "할인 가격을 낮추다 마진이 없어졌어요",
+      "sampleable": true
+    },
+    {
+      "id": "pricing-06",
+      "topicId": "pricing",
+      "text": "제 서비스 가격을 정하고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "pricing-07",
+      "topicId": "pricing",
+      "text": "원가가 올라 가격 인상을 고민해요",
+      "sampleable": true
+    },
+    {
+      "id": "pricing-08",
+      "topicId": "pricing",
+      "text": "판매가를 낮추면 해결될까요",
+      "sampleable": true
+    },
+    {
+      "id": "pricing-09",
+      "topicId": "pricing",
+      "text": "단가 인상을 거래처에 설명해야 해요",
+      "sampleable": true
+    },
+    {
+      "id": "pricing-10",
+      "topicId": "pricing",
+      "text": "가격 책정에서 제 시간을 빼먹게 돼요",
+      "sampleable": true
+    },
+    {
+      "id": "abusive_customer-01",
+      "topicId": "abusive_customer",
+      "text": "손님이 욕설을 해서 무서웠어요",
+      "sampleable": true
+    },
+    {
+      "id": "abusive_customer-02",
+      "topicId": "abusive_customer",
+      "text": "고객의 무리한 요구가 계속돼요",
+      "sampleable": true
+    },
+    {
+      "id": "abusive_customer-03",
+      "topicId": "abusive_customer",
+      "text": "손님에게 모욕을 듣고 울었어요",
+      "sampleable": true
+    },
+    {
+      "id": "abusive_customer-04",
+      "topicId": "abusive_customer",
+      "text": "고객이 리뷰로 협박합니다",
+      "sampleable": true
+    },
+    {
+      "id": "abusive_customer-05",
+      "topicId": "abusive_customer",
+      "text": "매장에서 손님 폭언을 감당하기 힘들어요",
+      "sampleable": true
+    },
+    {
+      "id": "abusive_customer-06",
+      "topicId": "abusive_customer",
+      "text": "고객의 막말을 어디까지 들어야 하죠",
+      "sampleable": true
+    },
+    {
+      "id": "abusive_customer-07",
+      "topicId": "abusive_customer",
+      "text": "손님의 무리한 요구를 거절하고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "abusive_customer-08",
+      "topicId": "abusive_customer",
+      "text": "고객 모욕 때문에 출근이 겁나요",
+      "sampleable": true
+    },
+    {
+      "id": "abusive_customer-09",
+      "topicId": "abusive_customer",
+      "text": "전화 손님이 계속 욕설을 해요",
+      "sampleable": true
+    },
+    {
+      "id": "abusive_customer-10",
+      "topicId": "abusive_customer",
+      "text": "고객 폭언 후에도 웃어야 할까요",
+      "sampleable": true
+    },
+    {
+      "id": "advertising-01",
+      "topicId": "advertising",
+      "text": "광고비만 쓰고 주문은 없어요",
+      "sampleable": true
+    },
+    {
+      "id": "advertising-02",
+      "topicId": "advertising",
+      "text": "광고 효과를 어떻게 확인하죠",
+      "sampleable": true
+    },
+    {
+      "id": "advertising-03",
+      "topicId": "advertising",
+      "text": "홍보비 지출이 부담스럽습니다",
+      "sampleable": true
+    },
+    {
+      "id": "advertising-04",
+      "topicId": "advertising",
+      "text": "광고 성과가 없는데 계속해야 할까요",
+      "sampleable": true
+    },
+    {
+      "id": "advertising-05",
+      "topicId": "advertising",
+      "text": "광고 집행을 중단하면 손님이 끊길까 겁나요",
+      "sampleable": true
+    },
+    {
+      "id": "advertising-06",
+      "topicId": "advertising",
+      "text": "광고비 예산을 못 정하겠어요",
+      "sampleable": true
+    },
+    {
+      "id": "advertising-07",
+      "topicId": "advertising",
+      "text": "홍보비를 써도 문의가 늘지 않아요",
+      "sampleable": true
+    },
+    {
+      "id": "advertising-08",
+      "topicId": "advertising",
+      "text": "광고 효과가 있는지 판단이 어려워요",
+      "sampleable": true
+    },
+    {
+      "id": "advertising-09",
+      "topicId": "advertising",
+      "text": "광고 집행 대행사 말만 믿어도 될까요",
+      "sampleable": true
+    },
+    {
+      "id": "advertising-10",
+      "topicId": "advertising",
+      "text": "광고 성과보다 지출만 늘고 있어요",
+      "sampleable": true
+    },
+    {
+      "id": "receivables-01",
+      "topicId": "receivables",
+      "text": "거래처 미수금이 쌓이고 있어요",
+      "sampleable": true
+    },
+    {
+      "id": "receivables-02",
+      "topicId": "receivables",
+      "text": "거래 대금을 달라고 하기 어렵습니다",
+      "sampleable": true
+    },
+    {
+      "id": "receivables-03",
+      "topicId": "receivables",
+      "text": "납품했는데 입금이 안 됩니다",
+      "sampleable": true
+    },
+    {
+      "id": "receivables-04",
+      "topicId": "receivables",
+      "text": "고객이 대금 지급을 미뤄요",
+      "sampleable": true
+    },
+    {
+      "id": "receivables-05",
+      "topicId": "receivables",
+      "text": "미수금 때문에 자금이 막혔어요",
+      "sampleable": true
+    },
+    {
+      "id": "receivables-06",
+      "topicId": "receivables",
+      "text": "거래 대금 약속이 계속 바뀌어요",
+      "sampleable": true
+    },
+    {
+      "id": "receivables-07",
+      "topicId": "receivables",
+      "text": "대금을 못 받아도 추가 납품해야 할까요",
+      "sampleable": true
+    },
+    {
+      "id": "receivables-08",
+      "topicId": "receivables",
+      "text": "미수금 독촉 문자를 어떻게 쓰죠",
+      "sampleable": true
+    },
+    {
+      "id": "receivables-09",
+      "topicId": "receivables",
+      "text": "납품 후 입금 지연이 반복돼요",
+      "sampleable": true
+    },
+    {
+      "id": "receivables-10",
+      "topicId": "receivables",
+      "text": "거래 대금 지급 기한을 정하고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "staff-01",
+      "topicId": "staff",
+      "text": "첫 직원 채용으로 인건비가 늘까 걱정돼요",
+      "sampleable": true
+    },
+    {
+      "id": "staff-02",
+      "topicId": "staff",
+      "text": "직원 교육을 혼자 하니 지칩니다",
+      "sampleable": true
+    },
+    {
+      "id": "staff-03",
+      "topicId": "staff",
+      "text": "직원 근태를 어떻게 이야기하죠",
+      "sampleable": true
+    },
+    {
+      "id": "staff-04",
+      "topicId": "staff",
+      "text": "인건비 때문에 채용이 망설여져요",
+      "sampleable": true
+    },
+    {
+      "id": "staff-05",
+      "topicId": "staff",
+      "text": "직원 역할을 정리하고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "staff-06",
+      "topicId": "staff",
+      "text": "인력 부족인데 채용 비용이 부담돼요",
+      "sampleable": true
+    },
+    {
+      "id": "staff-07",
+      "topicId": "staff",
+      "text": "사장으로서 직원 지시가 어렵습니다",
+      "sampleable": true
+    },
+    {
+      "id": "staff-08",
+      "topicId": "staff",
+      "text": "직원 운영 기준이 자꾸 흔들려요",
+      "sampleable": true
+    },
+    {
+      "id": "staff-09",
+      "topicId": "staff",
+      "text": "직원 교육 시간을 못 내겠어요",
+      "sampleable": true
+    },
+    {
+      "id": "staff-10",
+      "topicId": "staff",
+      "text": "직원에게 업무 역할을 어떻게 나누죠",
+      "sampleable": true
+    },
+    {
+      "id": "closure-01",
+      "topicId": "closure",
+      "text": "폐업을 결정하지 못하고 있어요",
+      "sampleable": true
+    },
+    {
+      "id": "closure-02",
+      "topicId": "closure",
+      "text": "가게를 접으면 실패자 같아요",
+      "sampleable": true
+    },
+    {
+      "id": "closure-03",
+      "topicId": "closure",
+      "text": "사업 중단 시점을 정하고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "closure-04",
+      "topicId": "closure",
+      "text": "폐업 비용이 두려워 버티고 있어요",
+      "sampleable": true
+    },
+    {
+      "id": "closure-05",
+      "topicId": "closure",
+      "text": "적자 사업을 접는 게 맞을까요",
+      "sampleable": true
+    },
+    {
+      "id": "closure-06",
+      "topicId": "closure",
+      "text": "가게를 접고 다른 일을 하고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "closure-07",
+      "topicId": "closure",
+      "text": "폐업 이야기를 가족에게 못 하겠어요",
+      "sampleable": true
+    },
+    {
+      "id": "closure-08",
+      "topicId": "closure",
+      "text": "사업 중단 뒤 생활이 막막해요",
+      "sampleable": true
+    },
+    {
+      "id": "closure-09",
+      "topicId": "closure",
+      "text": "폐업 결정을 계속 미루게 됩니다",
+      "sampleable": true
+    },
+    {
+      "id": "closure-10",
+      "topicId": "closure",
+      "text": "사업을 접어도 다시 시작할 수 있을까요",
+      "sampleable": true
+    },
+    {
+      "id": "startup-01",
+      "topicId": "startup",
+      "text": "창업 아이디어는 있는데 시작이 무서워요",
+      "sampleable": true
+    },
+    {
+      "id": "startup-02",
+      "topicId": "startup",
+      "text": "첫 창업 자금을 얼마나 써야 할까요",
+      "sampleable": true
+    },
+    {
+      "id": "startup-03",
+      "topicId": "startup",
+      "text": "사업 시작 전에 고객을 확인하고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "startup-04",
+      "topicId": "startup",
+      "text": "가게 창업 계약을 서두르고 있어요",
+      "sampleable": true
+    },
+    {
+      "id": "startup-05",
+      "topicId": "startup",
+      "text": "사업 아이디어가 실제 수요인지 모르겠어요",
+      "sampleable": true
+    },
+    {
+      "id": "startup-06",
+      "topicId": "startup",
+      "text": "창업을 혼자 해도 될지 막막해요",
+      "sampleable": true
+    },
+    {
+      "id": "startup-07",
+      "topicId": "startup",
+      "text": "소규모 창업으로 시험해보고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "startup-08",
+      "topicId": "startup",
+      "text": "사업 시작을 가족이 반대합니다",
+      "sampleable": true
+    },
+    {
+      "id": "startup-09",
+      "topicId": "startup",
+      "text": "창업 계획이 너무 커져 불안해요",
+      "sampleable": true
+    },
+    {
+      "id": "startup-10",
+      "topicId": "startup",
+      "text": "사업 아이디어 검증을 어디서 하죠",
+      "sampleable": true
+    },
+    {
+      "id": "partner_contact-01",
+      "topicId": "partner_contact",
+      "text": "남자친구 답장이 하루 종일 없어요",
+      "sampleable": true
+    },
+    {
+      "id": "partner_contact-02",
+      "topicId": "partner_contact",
+      "text": "여자친구 연락이 예전보다 줄었어요",
+      "sampleable": true
+    },
+    {
+      "id": "partner_contact-03",
+      "topicId": "partner_contact",
+      "text": "연인이 자꾸 읽씹해서 서운해요",
+      "sampleable": true
+    },
+    {
+      "id": "partner_contact-04",
+      "topicId": "partner_contact",
+      "text": "배우자의 전화 빈도가 달라졌어요",
+      "sampleable": true
+    },
+    {
+      "id": "partner_contact-05",
+      "topicId": "partner_contact",
+      "text": "남친과 연락 기준을 맞추고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "partner_contact-06",
+      "topicId": "partner_contact",
+      "text": "여친의 답장을 계속 기다리게 돼요",
+      "sampleable": true
+    },
+    {
+      "id": "partner_contact-07",
+      "topicId": "partner_contact",
+      "text": "연인에게 매일 연락해달라 말해도 될까요",
+      "sampleable": true
+    },
+    {
+      "id": "partner_contact-08",
+      "topicId": "partner_contact",
+      "text": "남자친구 연락이 없으면 불안합니다",
+      "sampleable": true
+    },
+    {
+      "id": "partner_contact-09",
+      "topicId": "partner_contact",
+      "text": "여자친구와 답장 속도로 다퉈요",
+      "sampleable": true
+    },
+    {
+      "id": "partner_contact-10",
+      "topicId": "partner_contact",
+      "text": "연인과 연락 시간을 정하고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "breakup-01",
+      "topicId": "breakup",
+      "text": "이별 뒤 일상이 무너져 힘들어요",
+      "sampleable": true
+    },
+    {
+      "id": "breakup-02",
+      "topicId": "breakup",
+      "text": "헤어진 사람이 자꾸 그리워요",
+      "sampleable": true
+    },
+    {
+      "id": "breakup-03",
+      "topicId": "breakup",
+      "text": "이별의 슬픔을 견디기 어려워요",
+      "sampleable": true
+    },
+    {
+      "id": "breakup-04",
+      "topicId": "breakup",
+      "text": "차였다는 생각에 자신을 못 믿겠어요",
+      "sampleable": true
+    },
+    {
+      "id": "breakup-05",
+      "topicId": "breakup",
+      "text": "헤어진 뒤 사진을 못 지우겠어요",
+      "sampleable": true
+    },
+    {
+      "id": "breakup-06",
+      "topicId": "breakup",
+      "text": "이별 후 혼자 밥 먹는 게 외로워요",
+      "sampleable": true
+    },
+    {
+      "id": "breakup-07",
+      "topicId": "breakup",
+      "text": "전 연인을 잊지 못해 힘듭니다",
+      "sampleable": true
+    },
+    {
+      "id": "breakup-08",
+      "topicId": "breakup",
+      "text": "헤어졌는데 계속 울게 돼요",
+      "sampleable": true
+    },
+    {
+      "id": "breakup-09",
+      "topicId": "breakup",
+      "text": "이별 후 생활을 다시 정리하고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "breakup-10",
+      "topicId": "breakup",
+      "text": "헤어진 뒤 마음이 오래 아파요",
+      "sampleable": true
+    },
+    {
+      "id": "reconcile-01",
+      "topicId": "reconcile",
+      "text": "전남친에게 연락이 와서 재회를 고민해요",
+      "sampleable": true
+    },
+    {
+      "id": "reconcile-02",
+      "topicId": "reconcile",
+      "text": "전여친과 다시 만나도 될까요",
+      "sampleable": true
+    },
+    {
+      "id": "reconcile-03",
+      "topicId": "reconcile",
+      "text": "재회하면 같은 문제로 싸울까 겁나요",
+      "sampleable": true
+    },
+    {
+      "id": "reconcile-04",
+      "topicId": "reconcile",
+      "text": "전 연인 연락에 마음이 흔들려요",
+      "sampleable": true
+    },
+    {
+      "id": "reconcile-05",
+      "topicId": "reconcile",
+      "text": "다시 만나자는 말을 믿어도 될까요",
+      "sampleable": true
+    },
+    {
+      "id": "reconcile-06",
+      "topicId": "reconcile",
+      "text": "재회를 원하지만 신뢰가 없어요",
+      "sampleable": true
+    },
+    {
+      "id": "reconcile-07",
+      "topicId": "reconcile",
+      "text": "헤어진 이유가 그대로인데 다시 만나고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "reconcile-08",
+      "topicId": "reconcile",
+      "text": "전 연인이 연락해서 만나자고 해요",
+      "sampleable": true
+    },
+    {
+      "id": "reconcile-09",
+      "topicId": "reconcile",
+      "text": "재회 전에 무엇을 확인해야 하죠",
+      "sampleable": true
+    },
+    {
+      "id": "reconcile-10",
+      "topicId": "reconcile",
+      "text": "다시 만날지 생각할 시간이 필요해요",
+      "sampleable": true
+    },
+    {
+      "id": "infidelity-01",
+      "topicId": "infidelity",
+      "text": "배우자의 외도를 알게 됐어요",
+      "sampleable": true
+    },
+    {
+      "id": "infidelity-02",
+      "topicId": "infidelity",
+      "text": "연인이 양다리를 걸쳤습니다",
+      "sampleable": true
+    },
+    {
+      "id": "infidelity-03",
+      "topicId": "infidelity",
+      "text": "남편이 바람을 피웠어요",
+      "sampleable": true
+    },
+    {
+      "id": "infidelity-04",
+      "topicId": "infidelity",
+      "text": "아내의 불륜 뒤 신뢰가 깨졌어요",
+      "sampleable": true
+    },
+    {
+      "id": "infidelity-05",
+      "topicId": "infidelity",
+      "text": "여자친구 외도를 용서할지 모르겠어요",
+      "sampleable": true
+    },
+    {
+      "id": "infidelity-06",
+      "topicId": "infidelity",
+      "text": "남자친구가 바람을 피운 걸 인정했어요",
+      "sampleable": true
+    },
+    {
+      "id": "infidelity-07",
+      "topicId": "infidelity",
+      "text": "외도 뒤 계속 확인하게 됩니다",
+      "sampleable": true
+    },
+    {
+      "id": "infidelity-08",
+      "topicId": "infidelity",
+      "text": "배우자 불륜을 알고 마음이 무너졌어요",
+      "sampleable": true
+    },
+    {
+      "id": "infidelity-09",
+      "topicId": "infidelity",
+      "text": "연인의 양다리 때문에 자책해요",
+      "sampleable": true
+    },
+    {
+      "id": "infidelity-10",
+      "topicId": "infidelity",
+      "text": "외도 이후 관계를 어떻게 볼까요",
+      "sampleable": true
+    },
+    {
+      "id": "marriage-01",
+      "topicId": "marriage",
+      "text": "결혼 확신이 들지 않아 망설여요",
+      "sampleable": true
+    },
+    {
+      "id": "marriage-02",
+      "topicId": "marriage",
+      "text": "재혼 결정을 가족에게 말하기 어려워요",
+      "sampleable": true
+    },
+    {
+      "id": "marriage-03",
+      "topicId": "marriage",
+      "text": "결혼 준비 중 가치관 차이를 봤어요",
+      "sampleable": true
+    },
+    {
+      "id": "marriage-04",
+      "topicId": "marriage",
+      "text": "결혼을 미루고 싶은데 눈치가 보여요",
+      "sampleable": true
+    },
+    {
+      "id": "marriage-05",
+      "topicId": "marriage",
+      "text": "파혼 결정이 두렵습니다",
+      "sampleable": true
+    },
+    {
+      "id": "marriage-06",
+      "topicId": "marriage",
+      "text": "결혼해야 하는지 제 마음을 모르겠어요",
+      "sampleable": true
+    },
+    {
+      "id": "marriage-07",
+      "topicId": "marriage",
+      "text": "결혼식을 취소하고 싶은 마음이 들어요",
+      "sampleable": true
+    },
+    {
+      "id": "marriage-08",
+      "topicId": "marriage",
+      "text": "재혼 전에 확인할 조건이 궁금해요",
+      "sampleable": true
+    },
+    {
+      "id": "marriage-09",
+      "topicId": "marriage",
+      "text": "결혼 결정에 부모님 의견이 너무 커요",
+      "sampleable": true
+    },
+    {
+      "id": "marriage-10",
+      "topicId": "marriage",
+      "text": "결혼할지 혼자 살지 고민해요",
+      "sampleable": true
+    },
+    {
+      "id": "chores-01",
+      "topicId": "chores",
+      "text": "가사 분담이 늘 저에게 몰려요",
+      "sampleable": true
+    },
+    {
+      "id": "chores-02",
+      "topicId": "chores",
+      "text": "남편이 집안일을 안 해요",
+      "sampleable": true
+    },
+    {
+      "id": "chores-03",
+      "topicId": "chores",
+      "text": "아내와 가사 분담으로 다툽니다",
+      "sampleable": true
+    },
+    {
+      "id": "chores-04",
+      "topicId": "chores",
+      "text": "집안일을 혼자 챙겨서 지쳐요",
+      "sampleable": true
+    },
+    {
+      "id": "chores-05",
+      "topicId": "chores",
+      "text": "배우자는 집안일을 부탁해야만 해요",
+      "sampleable": true
+    },
+    {
+      "id": "chores-06",
+      "topicId": "chores",
+      "text": "가사 분담표를 함께 만들고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "chores-07",
+      "topicId": "chores",
+      "text": "남편과 집안일 기준이 달라요",
+      "sampleable": true
+    },
+    {
+      "id": "chores-08",
+      "topicId": "chores",
+      "text": "아내가 집안일을 당연히 제 몫으로 봐요",
+      "sampleable": true
+    },
+    {
+      "id": "chores-09",
+      "topicId": "chores",
+      "text": "배우자와 집안일 책임을 나누고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "chores-10",
+      "topicId": "chores",
+      "text": "가사 분담 이야기를 꺼내기가 어렵네요",
+      "sampleable": true
+    },
+    {
+      "id": "couple_money-01",
+      "topicId": "couple_money",
+      "text": "배우자와 소비 습관이 정반대예요",
+      "sampleable": true
+    },
+    {
+      "id": "couple_money-02",
+      "topicId": "couple_money",
+      "text": "연인과 돈 관리 방식이 달라요",
+      "sampleable": true
+    },
+    {
+      "id": "couple_money-03",
+      "topicId": "couple_money",
+      "text": "부부 생활비 분담을 못 정했어요",
+      "sampleable": true
+    },
+    {
+      "id": "couple_money-04",
+      "topicId": "couple_money",
+      "text": "남편의 씀씀이가 걱정됩니다",
+      "sampleable": true
+    },
+    {
+      "id": "couple_money-05",
+      "topicId": "couple_money",
+      "text": "아내와 통장을 합칠지 고민이에요",
+      "sampleable": true
+    },
+    {
+      "id": "couple_money-06",
+      "topicId": "couple_money",
+      "text": "연인의 소비관 때문에 자꾸 다퉈요",
+      "sampleable": true
+    },
+    {
+      "id": "couple_money-07",
+      "topicId": "couple_money",
+      "text": "배우자와 지출 기준을 맞추고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "couple_money-08",
+      "topicId": "couple_money",
+      "text": "부부 중 한쪽만 경제권을 가져요",
+      "sampleable": true
+    },
+    {
+      "id": "couple_money-09",
+      "topicId": "couple_money",
+      "text": "남편과 생활비 분담이 불공평해요",
+      "sampleable": true
+    },
+    {
+      "id": "couple_money-10",
+      "topicId": "couple_money",
+      "text": "아내와 돈 관리 이야기를 피하게 돼요",
+      "sampleable": true
+    },
+    {
+      "id": "jealousy-01",
+      "topicId": "jealousy",
+      "text": "연인의 이성 친구에게 질투가 나요",
+      "sampleable": true
+    },
+    {
+      "id": "jealousy-02",
+      "topicId": "jealousy",
+      "text": "남친 과거 연애를 자꾸 비교해요",
+      "sampleable": true
+    },
+    {
+      "id": "jealousy-03",
+      "topicId": "jealousy",
+      "text": "여친에게 질투심을 드러내게 돼요",
+      "sampleable": true
+    },
+    {
+      "id": "jealousy-04",
+      "topicId": "jealousy",
+      "text": "배우자 동료에게 질투가 생깁니다",
+      "sampleable": true
+    },
+    {
+      "id": "jealousy-05",
+      "topicId": "jealousy",
+      "text": "연인에게 질투한다고 말해도 될까요",
+      "sampleable": true
+    },
+    {
+      "id": "jealousy-06",
+      "topicId": "jealousy",
+      "text": "남자친구의 과거 연애가 신경 쓰여요",
+      "sampleable": true
+    },
+    {
+      "id": "jealousy-07",
+      "topicId": "jealousy",
+      "text": "여자친구가 칭찬받으면 질투해요",
+      "sampleable": true
+    },
+    {
+      "id": "jealousy-08",
+      "topicId": "jealousy",
+      "text": "배우자에 대한 질투를 조절하고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "jealousy-09",
+      "topicId": "jealousy",
+      "text": "연인의 이성 친구 모임이 불편해요",
+      "sampleable": true
+    },
+    {
+      "id": "jealousy-10",
+      "topicId": "jealousy",
+      "text": "질투심 때문에 연인을 감시하고 싶어져요",
+      "sampleable": true
+    },
+    {
+      "id": "consent-01",
+      "topicId": "consent",
+      "text": "원치 않는 스킨십을 거절하기 어려워요",
+      "sampleable": true
+    },
+    {
+      "id": "consent-02",
+      "topicId": "consent",
+      "text": "연인의 성관계 요구가 부담돼요",
+      "sampleable": true
+    },
+    {
+      "id": "consent-03",
+      "topicId": "consent",
+      "text": "신체 접촉 속도가 저에게 빨라요",
+      "sampleable": true
+    },
+    {
+      "id": "consent-04",
+      "topicId": "consent",
+      "text": "스킨십 거절을 이해하지 못해요",
+      "sampleable": true
+    },
+    {
+      "id": "consent-05",
+      "topicId": "consent",
+      "text": "동의 없는 신체 접촉이 불편해요",
+      "sampleable": true
+    },
+    {
+      "id": "consent-06",
+      "topicId": "consent",
+      "text": "성관계를 원하지 않는다고 말하고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "consent-07",
+      "topicId": "consent",
+      "text": "스킨십을 강요받는 느낌이에요",
+      "sampleable": true
+    },
+    {
+      "id": "consent-08",
+      "topicId": "consent",
+      "text": "연인의 신체 접촉을 싫다고 해도 될까요",
+      "sampleable": true
+    },
+    {
+      "id": "consent-09",
+      "topicId": "consent",
+      "text": "스킨십 속도를 천천히 맞추고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "consent-10",
+      "topicId": "consent",
+      "text": "성관계 거절 후 눈치를 보게 돼요",
+      "sampleable": true
+    },
+    {
+      "id": "partner_control-01",
+      "topicId": "partner_control",
+      "text": "남친이 제 위치를 계속 추적해요",
+      "sampleable": true
+    },
+    {
+      "id": "partner_control-02",
+      "topicId": "partner_control",
+      "text": "여친이 비밀번호를 요구합니다",
+      "sampleable": true
+    },
+    {
+      "id": "partner_control-03",
+      "topicId": "partner_control",
+      "text": "연인이 제 친구를 못 만나게 해요",
+      "sampleable": true
+    },
+    {
+      "id": "partner_control-04",
+      "topicId": "partner_control",
+      "text": "배우자가 입는 옷을 간섭해요",
+      "sampleable": true
+    },
+    {
+      "id": "partner_control-05",
+      "topicId": "partner_control",
+      "text": "연인에게 일상을 감시받는 느낌이에요",
+      "sampleable": true
+    },
+    {
+      "id": "partner_control-06",
+      "topicId": "partner_control",
+      "text": "남자친구가 제 행동을 통제해요",
+      "sampleable": true
+    },
+    {
+      "id": "partner_control-07",
+      "topicId": "partner_control",
+      "text": "여자친구가 계정 비밀번호를 요구해요",
+      "sampleable": true
+    },
+    {
+      "id": "partner_control-08",
+      "topicId": "partner_control",
+      "text": "배우자의 위치 추적이 불편합니다",
+      "sampleable": true
+    },
+    {
+      "id": "partner_control-09",
+      "topicId": "partner_control",
+      "text": "연인이 인간관계를 통제해요",
+      "sampleable": true
+    },
+    {
+      "id": "partner_control-10",
+      "topicId": "partner_control",
+      "text": "남친의 감시를 애정으로 받아야 할까요",
+      "sampleable": true
+    },
+    {
+      "id": "partner_looks-01",
+      "topicId": "partner_looks",
+      "text": "남친이 제 외모를 평가해요",
+      "sampleable": true
+    },
+    {
+      "id": "partner_looks-02",
+      "topicId": "partner_looks",
+      "text": "여친이 제 몸매를 놀립니다",
+      "sampleable": true
+    },
+    {
+      "id": "partner_looks-03",
+      "topicId": "partner_looks",
+      "text": "연인이 살쪘다고 자꾸 말해요",
+      "sampleable": true
+    },
+    {
+      "id": "partner_looks-04",
+      "topicId": "partner_looks",
+      "text": "배우자가 외모 비교를 해서 상처예요",
+      "sampleable": true
+    },
+    {
+      "id": "partner_looks-05",
+      "topicId": "partner_looks",
+      "text": "남자친구가 저를 못생겼다고 해요",
+      "sampleable": true
+    },
+    {
+      "id": "partner_looks-06",
+      "topicId": "partner_looks",
+      "text": "여자친구의 외모 지적이 힘들어요",
+      "sampleable": true
+    },
+    {
+      "id": "partner_looks-07",
+      "topicId": "partner_looks",
+      "text": "연인이 제 몸매를 놀려서 위축돼요",
+      "sampleable": true
+    },
+    {
+      "id": "partner_looks-08",
+      "topicId": "partner_looks",
+      "text": "배우자가 남의 외모와 비교해요",
+      "sampleable": true
+    },
+    {
+      "id": "partner_looks-09",
+      "topicId": "partner_looks",
+      "text": "남친에게 외모 이야기를 그만해달라 하고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "partner_looks-10",
+      "topicId": "partner_looks",
+      "text": "여친의 외모 농담에 웃어줘야 할까요",
+      "sampleable": true
+    },
+    {
+      "id": "long_distance-01",
+      "topicId": "long_distance",
+      "text": "장거리 연애로 외로움이 커져요",
+      "sampleable": true
+    },
+    {
+      "id": "long_distance-02",
+      "topicId": "long_distance",
+      "text": "장거리 관계의 방문 비용이 부담돼요",
+      "sampleable": true
+    },
+    {
+      "id": "long_distance-03",
+      "topicId": "long_distance",
+      "text": "연인과 멀리 살아 만남이 드물어요",
+      "sampleable": true
+    },
+    {
+      "id": "long_distance-04",
+      "topicId": "long_distance",
+      "text": "장거리 연애 끝이 보이지 않아요",
+      "sampleable": true
+    },
+    {
+      "id": "long_distance-05",
+      "topicId": "long_distance",
+      "text": "장거리 관계에서 통화 시간을 못 맞춰요",
+      "sampleable": true
+    },
+    {
+      "id": "long_distance-06",
+      "topicId": "long_distance",
+      "text": "장거리 연애를 시작할지 고민돼요",
+      "sampleable": true
+    },
+    {
+      "id": "long_distance-07",
+      "topicId": "long_distance",
+      "text": "연인이 멀리 살아 서운함이 쌓여요",
+      "sampleable": true
+    },
+    {
+      "id": "long_distance-08",
+      "topicId": "long_distance",
+      "text": "장거리 연애 때문에 주말마다 지쳐요",
+      "sampleable": true
+    },
+    {
+      "id": "long_distance-09",
+      "topicId": "long_distance",
+      "text": "장거리 관계를 유지할 기준이 필요해요",
+      "sampleable": true
+    },
+    {
+      "id": "long_distance-10",
+      "topicId": "long_distance",
+      "text": "장거리 연애 중 한쪽만 찾아가게 돼요",
+      "sampleable": true
+    },
+    {
+      "id": "parent_interference-01",
+      "topicId": "parent_interference",
+      "text": "부모님이 제 선택마다 간섭해요",
+      "sampleable": true
+    },
+    {
+      "id": "parent_interference-02",
+      "topicId": "parent_interference",
+      "text": "엄마의 허락 없이는 결정을 못 해요",
+      "sampleable": true
+    },
+    {
+      "id": "parent_interference-03",
+      "topicId": "parent_interference",
+      "text": "아빠가 진로를 반대합니다",
+      "sampleable": true
+    },
+    {
+      "id": "parent_interference-04",
+      "topicId": "parent_interference",
+      "text": "부모님이 독립을 반대해요",
+      "sampleable": true
+    },
+    {
+      "id": "parent_interference-05",
+      "topicId": "parent_interference",
+      "text": "엄마가 제 선택을 대신하려 해요",
+      "sampleable": true
+    },
+    {
+      "id": "parent_interference-06",
+      "topicId": "parent_interference",
+      "text": "아빠의 간섭에 숨이 막혀요",
+      "sampleable": true
+    },
+    {
+      "id": "parent_interference-07",
+      "topicId": "parent_interference",
+      "text": "부모님 허락을 기다리느라 지쳤어요",
+      "sampleable": true
+    },
+    {
+      "id": "parent_interference-08",
+      "topicId": "parent_interference",
+      "text": "엄마가 제 결정을 받아주지 않아요",
+      "sampleable": true
+    },
+    {
+      "id": "parent_interference-09",
+      "topicId": "parent_interference",
+      "text": "아빠가 제 선택을 모두 틀렸대요",
+      "sampleable": true
+    },
+    {
+      "id": "parent_interference-10",
+      "topicId": "parent_interference",
+      "text": "부모님 간섭에 경계를 말하고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "parent_comparison-01",
+      "topicId": "parent_comparison",
+      "text": "엄마가 남의 집 자녀와 비교해요",
+      "sampleable": true
+    },
+    {
+      "id": "parent_comparison-02",
+      "topicId": "parent_comparison",
+      "text": "아빠가 형제와 저를 비교합니다",
+      "sampleable": true
+    },
+    {
+      "id": "parent_comparison-03",
+      "topicId": "parent_comparison",
+      "text": "부모님 비교 때문에 집에 가기 싫어요",
+      "sampleable": true
+    },
+    {
+      "id": "parent_comparison-04",
+      "topicId": "parent_comparison",
+      "text": "가족이 누구네 자식 이야기를 꺼내요",
+      "sampleable": true
+    },
+    {
+      "id": "parent_comparison-05",
+      "topicId": "parent_comparison",
+      "text": "엄마의 성적 비교가 아직 상처예요",
+      "sampleable": true
+    },
+    {
+      "id": "parent_comparison-06",
+      "topicId": "parent_comparison",
+      "text": "아빠가 남의 집 연봉과 비교해요",
+      "sampleable": true
+    },
+    {
+      "id": "parent_comparison-07",
+      "topicId": "parent_comparison",
+      "text": "부모님이 형제가 저보다 낫다고 해요",
+      "sampleable": true
+    },
+    {
+      "id": "parent_comparison-08",
+      "topicId": "parent_comparison",
+      "text": "가족 모임의 비교 발언이 괴로워요",
+      "sampleable": true
+    },
+    {
+      "id": "parent_comparison-09",
+      "topicId": "parent_comparison",
+      "text": "엄마에게 비교를 그만해달라 말하고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "parent_comparison-10",
+      "topicId": "parent_comparison",
+      "text": "부모님 비교를 들으면 위축됩니다",
+      "sampleable": true
+    },
+    {
+      "id": "family_money-01",
+      "topicId": "family_money",
+      "text": "부모님이 계속 돈을 달라고 해요",
+      "sampleable": true
+    },
+    {
+      "id": "family_money-02",
+      "topicId": "family_money",
+      "text": "형제가 보증을 부탁합니다",
+      "sampleable": true
+    },
+    {
+      "id": "family_money-03",
+      "topicId": "family_money",
+      "text": "엄마 생활비 지원이 제 형편을 넘어요",
+      "sampleable": true
+    },
+    {
+      "id": "family_money-04",
+      "topicId": "family_money",
+      "text": "아빠가 제 이름으로 보증을 원해요",
+      "sampleable": true
+    },
+    {
+      "id": "family_money-05",
+      "topicId": "family_money",
+      "text": "동생이 돈을 빌려달라고 해요",
+      "sampleable": true
+    },
+    {
+      "id": "family_money-06",
+      "topicId": "family_money",
+      "text": "가족 금전 요구를 거절하기 어려워요",
+      "sampleable": true
+    },
+    {
+      "id": "family_money-07",
+      "topicId": "family_money",
+      "text": "자매에게 돈을 빌려줘도 될까요",
+      "sampleable": true
+    },
+    {
+      "id": "family_money-08",
+      "topicId": "family_money",
+      "text": "부모님 생활비 지원을 줄여야 해요",
+      "sampleable": true
+    },
+    {
+      "id": "family_money-09",
+      "topicId": "family_money",
+      "text": "형제의 금전 요구에 죄책감이 들어요",
+      "sampleable": true
+    },
+    {
+      "id": "family_money-10",
+      "topicId": "family_money",
+      "text": "가족 돈 요구 때문에 제 생활이 어려워요",
+      "sampleable": true
+    },
+    {
+      "id": "caregiving-01",
+      "topicId": "caregiving",
+      "text": "부모님 간병을 혼자 맡아 지쳤어요",
+      "sampleable": true
+    },
+    {
+      "id": "caregiving-02",
+      "topicId": "caregiving",
+      "text": "치매 어머니를 돌보다 울게 돼요",
+      "sampleable": true
+    },
+    {
+      "id": "caregiving-03",
+      "topicId": "caregiving",
+      "text": "병간호 때문에 제 생활이 없어요",
+      "sampleable": true
+    },
+    {
+      "id": "caregiving-04",
+      "topicId": "caregiving",
+      "text": "돌봄에 지쳐 잠깐 쉬고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "caregiving-05",
+      "topicId": "caregiving",
+      "text": "요양 부담이 너무 크게 느껴져요",
+      "sampleable": true
+    },
+    {
+      "id": "caregiving-06",
+      "topicId": "caregiving",
+      "text": "간병 중 짜증 내는 제가 싫어요",
+      "sampleable": true
+    },
+    {
+      "id": "caregiving-07",
+      "topicId": "caregiving",
+      "text": "가족 간병으로 일도 쉬고 있어요",
+      "sampleable": true
+    },
+    {
+      "id": "caregiving-08",
+      "topicId": "caregiving",
+      "text": "돌봄 피로를 말하면 불효 같아요",
+      "sampleable": true
+    },
+    {
+      "id": "caregiving-09",
+      "topicId": "caregiving",
+      "text": "병간호를 도와달라고 요청하고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "caregiving-10",
+      "topicId": "caregiving",
+      "text": "간병에서 잠시 벗어날 시간이 필요해요",
+      "sampleable": true
+    },
+    {
+      "id": "sibling_care-01",
+      "topicId": "sibling_care",
+      "text": "형제와 간병 분담이 안 돼요",
+      "sampleable": true
+    },
+    {
+      "id": "sibling_care-02",
+      "topicId": "sibling_care",
+      "text": "자매 사이 돌봄 분담이 불공평해요",
+      "sampleable": true
+    },
+    {
+      "id": "sibling_care-03",
+      "topicId": "sibling_care",
+      "text": "동생은 병원에 안 가고 저만 혼자 가요",
+      "sampleable": true
+    },
+    {
+      "id": "sibling_care-04",
+      "topicId": "sibling_care",
+      "text": "오빠와 돌봄 분담을 정하고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "sibling_care-05",
+      "topicId": "sibling_care",
+      "text": "언니는 돌봄을 나만 하라고 해요",
+      "sampleable": true
+    },
+    {
+      "id": "sibling_care-06",
+      "topicId": "sibling_care",
+      "text": "형제끼리 부양을 나만 맡게 됐어요",
+      "sampleable": true
+    },
+    {
+      "id": "sibling_care-07",
+      "topicId": "sibling_care",
+      "text": "자매의 간병 분담 약속이 안 지켜져요",
+      "sampleable": true
+    },
+    {
+      "id": "sibling_care-08",
+      "topicId": "sibling_care",
+      "text": "동생과 돌봄 분담 대화를 피하게 돼요",
+      "sampleable": true
+    },
+    {
+      "id": "sibling_care-09",
+      "topicId": "sibling_care",
+      "text": "형제 중 나만 병원 동행을 혼자 해요",
+      "sampleable": true
+    },
+    {
+      "id": "sibling_care-10",
+      "topicId": "sibling_care",
+      "text": "오빠에게 간병 분담을 요청하고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "inlaws-01",
+      "topicId": "inlaws",
+      "text": "시댁 방문 부담이 너무 큽니다",
+      "sampleable": true
+    },
+    {
+      "id": "inlaws-02",
+      "topicId": "inlaws",
+      "text": "시부모님 간섭으로 갈등이 생겨요",
+      "sampleable": true
+    },
+    {
+      "id": "inlaws-03",
+      "topicId": "inlaws",
+      "text": "장인어른 방문 요구가 부담돼요",
+      "sampleable": true
+    },
+    {
+      "id": "inlaws-04",
+      "topicId": "inlaws",
+      "text": "장모님 연락에 늘 눈치를 봐요",
+      "sampleable": true
+    },
+    {
+      "id": "inlaws-05",
+      "topicId": "inlaws",
+      "text": "양가 명절 일정을 못 정했어요",
+      "sampleable": true
+    },
+    {
+      "id": "inlaws-06",
+      "topicId": "inlaws",
+      "text": "처가와 경계를 말하기 어렵습니다",
+      "sampleable": true
+    },
+    {
+      "id": "inlaws-07",
+      "topicId": "inlaws",
+      "text": "시댁 연락 때문에 배우자와 다퉈요",
+      "sampleable": true
+    },
+    {
+      "id": "inlaws-08",
+      "topicId": "inlaws",
+      "text": "양가의 잦은 방문이 힘들어요",
+      "sampleable": true
+    },
+    {
+      "id": "inlaws-09",
+      "topicId": "inlaws",
+      "text": "장모님의 간섭에 어떻게 말하죠",
+      "sampleable": true
+    },
+    {
+      "id": "inlaws-10",
+      "topicId": "inlaws",
+      "text": "시부모님과 명절 어디로 갈지 갈등해요",
+      "sampleable": true
+    },
+    {
+      "id": "child_study-01",
+      "topicId": "child_study",
+      "text": "딸 성적이 떨어져 걱정돼요",
+      "sampleable": true
+    },
+    {
+      "id": "child_study-02",
+      "topicId": "child_study",
+      "text": "아들이 공부를 아예 안 하려 해요",
+      "sampleable": true
+    },
+    {
+      "id": "child_study-03",
+      "topicId": "child_study",
+      "text": "자녀 학원을 더 보내야 할까요",
+      "sampleable": true
+    },
+    {
+      "id": "child_study-04",
+      "topicId": "child_study",
+      "text": "아이의 진로 선택이 제 기대와 달라요",
+      "sampleable": true
+    },
+    {
+      "id": "child_study-05",
+      "topicId": "child_study",
+      "text": "딸에게 공부 얘기만 하게 돼요",
+      "sampleable": true
+    },
+    {
+      "id": "child_study-06",
+      "topicId": "child_study",
+      "text": "아들 성적 때문에 다툼이 잦아요",
+      "sampleable": true
+    },
+    {
+      "id": "child_study-07",
+      "topicId": "child_study",
+      "text": "자녀 공부를 어디까지 도와야 하죠",
+      "sampleable": true
+    },
+    {
+      "id": "child_study-08",
+      "topicId": "child_study",
+      "text": "아이와 학원 문제를 이야기하고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "child_study-09",
+      "topicId": "child_study",
+      "text": "딸 진로를 제가 정하려는 것 같아요",
+      "sampleable": true
+    },
+    {
+      "id": "child_study-10",
+      "topicId": "child_study",
+      "text": "아들의 학교 공부 어려움을 알고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "child_phone-01",
+      "topicId": "child_phone",
+      "text": "아들이 게임만 하려 해서 걱정이에요",
+      "sampleable": true
+    },
+    {
+      "id": "child_phone-02",
+      "topicId": "child_phone",
+      "text": "딸 휴대폰 시간을 정하고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "child_phone-03",
+      "topicId": "child_phone",
+      "text": "자녀 스마트폰 사용으로 매일 싸워요",
+      "sampleable": true
+    },
+    {
+      "id": "child_phone-04",
+      "topicId": "child_phone",
+      "text": "아이의 밤늦은 영상 시청이 걱정돼요",
+      "sampleable": true
+    },
+    {
+      "id": "child_phone-05",
+      "topicId": "child_phone",
+      "text": "아들과 게임 규칙을 못 정하겠어요",
+      "sampleable": true
+    },
+    {
+      "id": "child_phone-06",
+      "topicId": "child_phone",
+      "text": "딸이 휴대폰을 숨겨서 사용해요",
+      "sampleable": true
+    },
+    {
+      "id": "child_phone-07",
+      "topicId": "child_phone",
+      "text": "자녀 게임 때문에 수면이 줄었어요",
+      "sampleable": true
+    },
+    {
+      "id": "child_phone-08",
+      "topicId": "child_phone",
+      "text": "아이에게 스마트폰을 언제 줄까요",
+      "sampleable": true
+    },
+    {
+      "id": "child_phone-09",
+      "topicId": "child_phone",
+      "text": "딸 휴대폰을 압수해야 할까요",
+      "sampleable": true
+    },
+    {
+      "id": "child_phone-10",
+      "topicId": "child_phone",
+      "text": "아들 영상 시청을 줄이도록 돕고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "child_defiance-01",
+      "topicId": "child_defiance",
+      "text": "아들이 말대꾸하면 저도 소리 질러요",
+      "sampleable": true
+    },
+    {
+      "id": "child_defiance-02",
+      "topicId": "child_defiance",
+      "text": "딸 반항에 화가 치밀어요",
+      "sampleable": true
+    },
+    {
+      "id": "child_defiance-03",
+      "topicId": "child_defiance",
+      "text": "자녀와 대화만 하면 싸움이 돼요",
+      "sampleable": true
+    },
+    {
+      "id": "child_defiance-04",
+      "topicId": "child_defiance",
+      "text": "아이가 대화를 거부합니다",
+      "sampleable": true
+    },
+    {
+      "id": "child_defiance-05",
+      "topicId": "child_defiance",
+      "text": "아들과 말싸움이 멈추지 않아요",
+      "sampleable": true
+    },
+    {
+      "id": "child_defiance-06",
+      "topicId": "child_defiance",
+      "text": "딸에게 소리를 질러 마음이 아파요",
+      "sampleable": true
+    },
+    {
+      "id": "child_defiance-07",
+      "topicId": "child_defiance",
+      "text": "자녀 반항을 어떻게 받아들여야 하죠",
+      "sampleable": true
+    },
+    {
+      "id": "child_defiance-08",
+      "topicId": "child_defiance",
+      "text": "아이와 대화가 매번 싸움으로 끝나요",
+      "sampleable": true
+    },
+    {
+      "id": "child_defiance-09",
+      "topicId": "child_defiance",
+      "text": "아들의 말대꾸를 들으면 흥분해요",
+      "sampleable": true
+    },
+    {
+      "id": "child_defiance-10",
+      "topicId": "child_defiance",
+      "text": "딸이 대화를 거부해 답답해요",
+      "sampleable": true
+    },
+    {
+      "id": "child_independence-01",
+      "topicId": "child_independence",
+      "text": "성인 아들 독립을 허락하기 어려워요",
+      "sampleable": true
+    },
+    {
+      "id": "child_independence-02",
+      "topicId": "child_independence",
+      "text": "딸의 독립 준비가 걱정돼요",
+      "sampleable": true
+    },
+    {
+      "id": "child_independence-03",
+      "topicId": "child_independence",
+      "text": "자녀 취업에 간섭하게 됩니다",
+      "sampleable": true
+    },
+    {
+      "id": "child_independence-04",
+      "topicId": "child_independence",
+      "text": "아들에게 연락을 강요하는 것 같아요",
+      "sampleable": true
+    },
+    {
+      "id": "child_independence-05",
+      "topicId": "child_independence",
+      "text": "성인 딸 결혼에 간섭하고 싶어져요",
+      "sampleable": true
+    },
+    {
+      "id": "child_independence-06",
+      "topicId": "child_independence",
+      "text": "자녀 독립 비용을 어디까지 도울까요",
+      "sampleable": true
+    },
+    {
+      "id": "child_independence-07",
+      "topicId": "child_independence",
+      "text": "아들 독립 뒤 자꾸 확인하게 돼요",
+      "sampleable": true
+    },
+    {
+      "id": "child_independence-08",
+      "topicId": "child_independence",
+      "text": "딸에게 취업 간섭을 그만하고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "child_independence-09",
+      "topicId": "child_independence",
+      "text": "성인 자녀 독립을 믿고 기다리기 어렵네요",
+      "sampleable": true
+    },
+    {
+      "id": "child_independence-10",
+      "topicId": "child_independence",
+      "text": "딸 독립 결정을 존중하고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "parenting_disagreement-01",
+      "topicId": "parenting_disagreement",
+      "text": "남편과 훈육 기준이 달라요",
+      "sampleable": true
+    },
+    {
+      "id": "parenting_disagreement-02",
+      "topicId": "parenting_disagreement",
+      "text": "아내와 양육 방식으로 다퉈요",
+      "sampleable": true
+    },
+    {
+      "id": "parenting_disagreement-03",
+      "topicId": "parenting_disagreement",
+      "text": "부부가 육아 방식을 못 맞추겠어요",
+      "sampleable": true
+    },
+    {
+      "id": "parenting_disagreement-04",
+      "topicId": "parenting_disagreement",
+      "text": "배우자가 제 훈육을 아이 앞에서 비난해요",
+      "sampleable": true
+    },
+    {
+      "id": "parenting_disagreement-05",
+      "topicId": "parenting_disagreement",
+      "text": "남편과 아이 교육 방식이 정반대예요",
+      "sampleable": true
+    },
+    {
+      "id": "parenting_disagreement-06",
+      "topicId": "parenting_disagreement",
+      "text": "아내와 훈육 기준을 정하고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "parenting_disagreement-07",
+      "topicId": "parenting_disagreement",
+      "text": "부부 양육 갈등이 아이에게 미안해요",
+      "sampleable": true
+    },
+    {
+      "id": "parenting_disagreement-08",
+      "topicId": "parenting_disagreement",
+      "text": "배우자와 육아 방식 대화가 안 돼요",
+      "sampleable": true
+    },
+    {
+      "id": "parenting_disagreement-09",
+      "topicId": "parenting_disagreement",
+      "text": "남편의 양육 방식이 너무 엄격해요",
+      "sampleable": true
+    },
+    {
+      "id": "parenting_disagreement-10",
+      "topicId": "parenting_disagreement",
+      "text": "아내와 아이 교육 방식 타협이 어렵네요",
+      "sampleable": true
+    },
+    {
+      "id": "fertility-01",
+      "topicId": "fertility",
+      "text": "난임 치료로 마음이 지쳤어요",
+      "sampleable": true
+    },
+    {
+      "id": "fertility-02",
+      "topicId": "fertility",
+      "text": "임신 준비가 기대보다 오래 걸려요",
+      "sampleable": true
+    },
+    {
+      "id": "fertility-03",
+      "topicId": "fertility",
+      "text": "주변의 임신 압박이 힘들어요",
+      "sampleable": true
+    },
+    {
+      "id": "fertility-04",
+      "topicId": "fertility",
+      "text": "아이 언제 갖느냐는 질문이 아파요",
+      "sampleable": true
+    },
+    {
+      "id": "fertility-05",
+      "topicId": "fertility",
+      "text": "난임 때문에 스스로를 탓해요",
+      "sampleable": true
+    },
+    {
+      "id": "fertility-06",
+      "topicId": "fertility",
+      "text": "임신 준비 중 부부가 지쳐가요",
+      "sampleable": true
+    },
+    {
+      "id": "fertility-07",
+      "topicId": "fertility",
+      "text": "난임 치료를 잠시 쉴지 고민이에요",
+      "sampleable": true
+    },
+    {
+      "id": "fertility-08",
+      "topicId": "fertility",
+      "text": "임신 압박을 받는 모임이 부담돼요",
+      "sampleable": true
+    },
+    {
+      "id": "fertility-09",
+      "topicId": "fertility",
+      "text": "임신 준비 비용 때문에 불안해요",
+      "sampleable": true
+    },
+    {
+      "id": "fertility-10",
+      "topicId": "fertility",
+      "text": "난임 결과를 기다리는 시간이 괴로워요",
+      "sampleable": true
+    },
+    {
+      "id": "debt-01",
+      "topicId": "debt",
+      "text": "빚 상환 때문에 매일 불안해요",
+      "sampleable": true
+    },
+    {
+      "id": "debt-02",
+      "topicId": "debt",
+      "text": "대출 이자가 생활을 압박해요",
+      "sampleable": true
+    },
+    {
+      "id": "debt-03",
+      "topicId": "debt",
+      "text": "연체를 막으려 또 빌리고 있어요",
+      "sampleable": true
+    },
+    {
+      "id": "debt-04",
+      "topicId": "debt",
+      "text": "채무를 어디서부터 정리하죠",
+      "sampleable": true
+    },
+    {
+      "id": "debt-05",
+      "topicId": "debt",
+      "text": "대출 상환일만 다가오면 겁나요",
+      "sampleable": true
+    },
+    {
+      "id": "debt-06",
+      "topicId": "debt",
+      "text": "부채 규모를 확인하는 게 무서워요",
+      "sampleable": true
+    },
+    {
+      "id": "debt-07",
+      "topicId": "debt",
+      "text": "빚을 가족에게 말하기 어렵습니다",
+      "sampleable": true
+    },
+    {
+      "id": "debt-08",
+      "topicId": "debt",
+      "text": "연체 통지를 받고 막막해요",
+      "sampleable": true
+    },
+    {
+      "id": "debt-09",
+      "topicId": "debt",
+      "text": "채무 조정 상담을 받아도 될까요",
+      "sampleable": true
+    },
+    {
+      "id": "debt-10",
+      "topicId": "debt",
+      "text": "대출 이자 때문에 잠이 오지 않아요",
+      "sampleable": true
+    },
+    {
+      "id": "basic_bills-01",
+      "topicId": "basic_bills",
+      "text": "이번 달 월세를 못 내겠어요",
+      "sampleable": true
+    },
+    {
+      "id": "basic_bills-02",
+      "topicId": "basic_bills",
+      "text": "공과금이 밀려 막막해요",
+      "sampleable": true
+    },
+    {
+      "id": "basic_bills-03",
+      "topicId": "basic_bills",
+      "text": "생활비가 모자라 식사를 줄여요",
+      "sampleable": true
+    },
+    {
+      "id": "basic_bills-04",
+      "topicId": "basic_bills",
+      "text": "식비가 부족해 걱정입니다",
+      "sampleable": true
+    },
+    {
+      "id": "basic_bills-05",
+      "topicId": "basic_bills",
+      "text": "월세가 부족한데 도움을 어디서 찾죠",
+      "sampleable": true
+    },
+    {
+      "id": "basic_bills-06",
+      "topicId": "basic_bills",
+      "text": "생활비가 없어 하루하루가 불안해요",
+      "sampleable": true
+    },
+    {
+      "id": "basic_bills-07",
+      "topicId": "basic_bills",
+      "text": "공과금을 감당하기 어렵습니다",
+      "sampleable": true
+    },
+    {
+      "id": "basic_bills-08",
+      "topicId": "basic_bills",
+      "text": "생활비 부족을 말하기 부끄러워요",
+      "sampleable": true
+    },
+    {
+      "id": "basic_bills-09",
+      "topicId": "basic_bills",
+      "text": "월세가 밀려 집주인에게 말해야 해요",
+      "sampleable": true
+    },
+    {
+      "id": "basic_bills-10",
+      "topicId": "basic_bills",
+      "text": "식비를 감당할 여유가 없어요",
+      "sampleable": true
+    },
+    {
+      "id": "budget-01",
+      "topicId": "budget",
+      "text": "가계부를 써도 돈이 새는 것 같아요",
+      "sampleable": true
+    },
+    {
+      "id": "budget-02",
+      "topicId": "budget",
+      "text": "지출 관리를 시작하고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "budget-03",
+      "topicId": "budget",
+      "text": "고정비를 어떻게 줄일지 모르겠어요",
+      "sampleable": true
+    },
+    {
+      "id": "budget-04",
+      "topicId": "budget",
+      "text": "충동 구매 뒤 후회가 큽니다",
+      "sampleable": true
+    },
+    {
+      "id": "budget-05",
+      "topicId": "budget",
+      "text": "소비 기록을 보는 게 두려워요",
+      "sampleable": true
+    },
+    {
+      "id": "budget-06",
+      "topicId": "budget",
+      "text": "지출을 줄이면 너무 답답할까 걱정돼요",
+      "sampleable": true
+    },
+    {
+      "id": "budget-07",
+      "topicId": "budget",
+      "text": "고정비가 소득에 비해 많아요",
+      "sampleable": true
+    },
+    {
+      "id": "budget-08",
+      "topicId": "budget",
+      "text": "가계부를 꾸준히 못 써요",
+      "sampleable": true
+    },
+    {
+      "id": "budget-09",
+      "topicId": "budget",
+      "text": "충동 구매를 줄일 장치가 필요해요",
+      "sampleable": true
+    },
+    {
+      "id": "budget-10",
+      "topicId": "budget",
+      "text": "작은 지출 관리부터 해보고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "saving-01",
+      "topicId": "saving",
+      "text": "저축을 시작할 여유가 없는 것 같아요",
+      "sampleable": true
+    },
+    {
+      "id": "saving-02",
+      "topicId": "saving",
+      "text": "비상금이 없어 작은 지출도 불안해요",
+      "sampleable": true
+    },
+    {
+      "id": "saving-03",
+      "topicId": "saving",
+      "text": "목돈을 모으는 계획이 막막해요",
+      "sampleable": true
+    },
+    {
+      "id": "saving-04",
+      "topicId": "saving",
+      "text": "저축 목표가 너무 부담스럽습니다",
+      "sampleable": true
+    },
+    {
+      "id": "saving-05",
+      "topicId": "saving",
+      "text": "비상 자금을 마련하고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "saving-06",
+      "topicId": "saving",
+      "text": "저축을 못 하는 저를 자책해요",
+      "sampleable": true
+    },
+    {
+      "id": "saving-07",
+      "topicId": "saving",
+      "text": "소액 저축부터 시작해도 될까요",
+      "sampleable": true
+    },
+    {
+      "id": "saving-08",
+      "topicId": "saving",
+      "text": "비상금 계획을 어디서 세우죠",
+      "sampleable": true
+    },
+    {
+      "id": "saving-09",
+      "topicId": "saving",
+      "text": "목돈 목표를 어떻게 정하면 좋죠",
+      "sampleable": true
+    },
+    {
+      "id": "saving-10",
+      "topicId": "saving",
+      "text": "저축 계획이 매달 무너져요",
+      "sampleable": true
+    },
+    {
+      "id": "investment_loss-01",
+      "topicId": "investment_loss",
+      "text": "주식 손실 때문에 하루 종일 시세를 봐요",
+      "sampleable": true
+    },
+    {
+      "id": "investment_loss-02",
+      "topicId": "investment_loss",
+      "text": "코인 손실을 만회하고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "investment_loss-03",
+      "topicId": "investment_loss",
+      "text": "투자 손실을 가족에게 숨기고 있어요",
+      "sampleable": true
+    },
+    {
+      "id": "investment_loss-04",
+      "topicId": "investment_loss",
+      "text": "본전 생각에 팔지 못하겠어요",
+      "sampleable": true
+    },
+    {
+      "id": "investment_loss-05",
+      "topicId": "investment_loss",
+      "text": "한 종목에 물려 마음이 불안해요",
+      "sampleable": true
+    },
+    {
+      "id": "investment_loss-06",
+      "topicId": "investment_loss",
+      "text": "손절 결정을 못 내리고 있습니다",
+      "sampleable": true
+    },
+    {
+      "id": "investment_loss-07",
+      "topicId": "investment_loss",
+      "text": "투자 손실 뒤 추가 매수를 고민해요",
+      "sampleable": true
+    },
+    {
+      "id": "investment_loss-08",
+      "topicId": "investment_loss",
+      "text": "주식 손실로 잠을 못 자요",
+      "sampleable": true
+    },
+    {
+      "id": "investment_loss-09",
+      "topicId": "investment_loss",
+      "text": "코인 손실 때문에 생활비도 줄었어요",
+      "sampleable": true
+    },
+    {
+      "id": "investment_loss-10",
+      "topicId": "investment_loss",
+      "text": "손실을 만회하려 더 빌리고 싶어져요",
+      "sampleable": true
+    },
+    {
+      "id": "investment_fomo-01",
+      "topicId": "investment_fomo",
+      "text": "남들이 주식으로 돈 벌었다니 조급해요",
+      "sampleable": true
+    },
+    {
+      "id": "investment_fomo-02",
+      "topicId": "investment_fomo",
+      "text": "급등하는 코인을 따라 사고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "investment_fomo-03",
+      "topicId": "investment_fomo",
+      "text": "투자에서 저만 뒤처진 느낌이에요",
+      "sampleable": true
+    },
+    {
+      "id": "investment_fomo-04",
+      "topicId": "investment_fomo",
+      "text": "남이 좋다는 주식을 따라 살까 해요",
+      "sampleable": true
+    },
+    {
+      "id": "investment_fomo-05",
+      "topicId": "investment_fomo",
+      "text": "투자를 안 하면 소외되는 기분이에요",
+      "sampleable": true
+    },
+    {
+      "id": "investment_fomo-06",
+      "topicId": "investment_fomo",
+      "text": "코인 급등 소식만 보면 마음이 급해요",
+      "sampleable": true
+    },
+    {
+      "id": "investment_fomo-07",
+      "topicId": "investment_fomo",
+      "text": "남들 수익에 투자 계획이 흔들려요",
+      "sampleable": true
+    },
+    {
+      "id": "investment_fomo-08",
+      "topicId": "investment_fomo",
+      "text": "주식을 시작하고 싶은데 몰라서 겁나요",
+      "sampleable": true
+    },
+    {
+      "id": "investment_fomo-09",
+      "topicId": "investment_fomo",
+      "text": "남이 투자로 돈 벌었다는 말이 신경 쓰여요",
+      "sampleable": true
+    },
+    {
+      "id": "investment_fomo-10",
+      "topicId": "investment_fomo",
+      "text": "조급해서 코인에 큰돈을 넣고 싶어져요",
+      "sampleable": true
+    },
+    {
+      "id": "friend_loan-01",
+      "topicId": "friend_loan",
+      "text": "친구가 돈을 빌려달라고 해요",
+      "sampleable": true
+    },
+    {
+      "id": "friend_loan-02",
+      "topicId": "friend_loan",
+      "text": "지인에게 빌려준 돈을 못 받았어요",
+      "sampleable": true
+    },
+    {
+      "id": "friend_loan-03",
+      "topicId": "friend_loan",
+      "text": "동료와 금전 거래를 해도 될까요",
+      "sampleable": true
+    },
+    {
+      "id": "friend_loan-04",
+      "topicId": "friend_loan",
+      "text": "친구가 돈을 안 갚아 속상해요",
+      "sampleable": true
+    },
+    {
+      "id": "friend_loan-05",
+      "topicId": "friend_loan",
+      "text": "지인에게 돈을 빌려주기 부담돼요",
+      "sampleable": true
+    },
+    {
+      "id": "friend_loan-06",
+      "topicId": "friend_loan",
+      "text": "친구에게 빌려준 돈 이야기를 못 꺼내요",
+      "sampleable": true
+    },
+    {
+      "id": "friend_loan-07",
+      "topicId": "friend_loan",
+      "text": "동료가 돈을 빌려달라 해서 난감해요",
+      "sampleable": true
+    },
+    {
+      "id": "friend_loan-08",
+      "topicId": "friend_loan",
+      "text": "지인과 금전 거래 뒤 연락이 끊겼어요",
+      "sampleable": true
+    },
+    {
+      "id": "friend_loan-09",
+      "topicId": "friend_loan",
+      "text": "친구에게 돈 빌려주기를 거절하고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "friend_loan-10",
+      "topicId": "friend_loan",
+      "text": "친구가 빌려간 돈의 상환일을 미뤄요",
+      "sampleable": true
+    },
+    {
+      "id": "housing_deposit-01",
+      "topicId": "housing_deposit",
+      "text": "전세 계약이 안전한지 걱정돼요",
+      "sampleable": true
+    },
+    {
+      "id": "housing_deposit-02",
+      "topicId": "housing_deposit",
+      "text": "보증금 반환이 늦어지고 있어요",
+      "sampleable": true
+    },
+    {
+      "id": "housing_deposit-03",
+      "topicId": "housing_deposit",
+      "text": "임대차 계약 만료가 다가와 불안해요",
+      "sampleable": true
+    },
+    {
+      "id": "housing_deposit-04",
+      "topicId": "housing_deposit",
+      "text": "집 계약 전에 확인할 게 많아 막막해요",
+      "sampleable": true
+    },
+    {
+      "id": "housing_deposit-05",
+      "topicId": "housing_deposit",
+      "text": "전세 사기일까 의심돼요",
+      "sampleable": true
+    },
+    {
+      "id": "housing_deposit-06",
+      "topicId": "housing_deposit",
+      "text": "보증금을 돌려받지 못할까 무서워요",
+      "sampleable": true
+    },
+    {
+      "id": "housing_deposit-07",
+      "topicId": "housing_deposit",
+      "text": "임대차 계약서를 다시 확인하고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "housing_deposit-08",
+      "topicId": "housing_deposit",
+      "text": "집 계약을 서두르라 해서 걱정돼요",
+      "sampleable": true
+    },
+    {
+      "id": "housing_deposit-09",
+      "topicId": "housing_deposit",
+      "text": "전세 계약 조건이 자꾸 바뀌어요",
+      "sampleable": true
+    },
+    {
+      "id": "housing_deposit-10",
+      "topicId": "housing_deposit",
+      "text": "보증금 반환 약속을 기록하고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "scam-01",
+      "topicId": "scam",
+      "text": "보이스피싱 전화를 받은 것 같아요",
+      "sampleable": true
+    },
+    {
+      "id": "scam-02",
+      "topicId": "scam",
+      "text": "사기 문자를 눌러서 불안해요",
+      "sampleable": true
+    },
+    {
+      "id": "scam-03",
+      "topicId": "scam",
+      "text": "중고 거래 사기를 당했어요",
+      "sampleable": true
+    },
+    {
+      "id": "scam-04",
+      "topicId": "scam",
+      "text": "수상한 송금 요청을 받았습니다",
+      "sampleable": true
+    },
+    {
+      "id": "scam-05",
+      "topicId": "scam",
+      "text": "투자 사기 피해가 의심돼요",
+      "sampleable": true
+    },
+    {
+      "id": "scam-06",
+      "topicId": "scam",
+      "text": "보이스피싱으로 돈을 보낸 것 같아요",
+      "sampleable": true
+    },
+    {
+      "id": "scam-07",
+      "topicId": "scam",
+      "text": "사기인 줄 모르고 정보를 줬어요",
+      "sampleable": true
+    },
+    {
+      "id": "scam-08",
+      "topicId": "scam",
+      "text": "사기 피해 뒤 뭘 먼저 해야 하죠",
+      "sampleable": true
+    },
+    {
+      "id": "scam-09",
+      "topicId": "scam",
+      "text": "사기 의심 상대가 추가금을 요구해요",
+      "sampleable": true
+    },
+    {
+      "id": "scam-10",
+      "topicId": "scam",
+      "text": "보이스피싱 피해를 말하기 부끄러워요",
+      "sampleable": true
+    },
+    {
+      "id": "gambling-01",
+      "topicId": "gambling",
+      "text": "도박을 그만두겠다고 해도 반복해요",
+      "sampleable": true
+    },
+    {
+      "id": "gambling-02",
+      "topicId": "gambling",
+      "text": "베팅 손실을 되찾고 싶어져요",
+      "sampleable": true
+    },
+    {
+      "id": "gambling-03",
+      "topicId": "gambling",
+      "text": "사설 토토 때문에 돈을 잃었어요",
+      "sampleable": true
+    },
+    {
+      "id": "gambling-04",
+      "topicId": "gambling",
+      "text": "카지노 생각이 계속 떠올라요",
+      "sampleable": true
+    },
+    {
+      "id": "gambling-05",
+      "topicId": "gambling",
+      "text": "도박 빚을 숨기고 있습니다",
+      "sampleable": true
+    },
+    {
+      "id": "gambling-06",
+      "topicId": "gambling",
+      "text": "베팅 앱을 끊기가 어려워요",
+      "sampleable": true
+    },
+    {
+      "id": "gambling-07",
+      "topicId": "gambling",
+      "text": "도박 때문에 가족과 신뢰가 깨졌어요",
+      "sampleable": true
+    },
+    {
+      "id": "gambling-08",
+      "topicId": "gambling",
+      "text": "사설 토토를 멈출 도움을 받고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "gambling-09",
+      "topicId": "gambling",
+      "text": "도박을 안 하면 불안해져요",
+      "sampleable": true
+    },
+    {
+      "id": "gambling-10",
+      "topicId": "gambling",
+      "text": "카지노에서 잃은 돈이 자꾸 생각나요",
+      "sampleable": true
+    },
+    {
+      "id": "exam_failure-01",
+      "topicId": "exam_failure",
+      "text": "자격시험 불합격 뒤 의욕이 없어요",
+      "sampleable": true
+    },
+    {
+      "id": "exam_failure-02",
+      "topicId": "exam_failure",
+      "text": "시험에 또 떨어져 자신이 없어요",
+      "sampleable": true
+    },
+    {
+      "id": "exam_failure-03",
+      "topicId": "exam_failure",
+      "text": "공무원 시험 낙방을 가족에게 못 말해요",
+      "sampleable": true
+    },
+    {
+      "id": "exam_failure-04",
+      "topicId": "exam_failure",
+      "text": "시험 실패 후 다시 할지 고민해요",
+      "sampleable": true
+    },
+    {
+      "id": "exam_failure-05",
+      "topicId": "exam_failure",
+      "text": "불합격 통보를 받고 울었어요",
+      "sampleable": true
+    },
+    {
+      "id": "exam_failure-06",
+      "topicId": "exam_failure",
+      "text": "시험에서 떨어진 이유를 알고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "exam_failure-07",
+      "topicId": "exam_failure",
+      "text": "계속 낙방하니 길이 틀린 것 같아요",
+      "sampleable": true
+    },
+    {
+      "id": "exam_failure-08",
+      "topicId": "exam_failure",
+      "text": "시험 실패 뒤 쉬어도 될까요",
+      "sampleable": true
+    },
+    {
+      "id": "exam_failure-09",
+      "topicId": "exam_failure",
+      "text": "불합격 후 공부 계획을 다시 세우고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "exam_failure-10",
+      "topicId": "exam_failure",
+      "text": "재수를 할지 고민이 큽니다",
+      "sampleable": true
+    },
+    {
+      "id": "study_focus-01",
+      "topicId": "study_focus",
+      "text": "공부하려 앉으면 집중이 안 돼요",
+      "sampleable": true
+    },
+    {
+      "id": "study_focus-02",
+      "topicId": "study_focus",
+      "text": "독서실에서 계속 딴짓합니다",
+      "sampleable": true
+    },
+    {
+      "id": "study_focus-03",
+      "topicId": "study_focus",
+      "text": "교재가 눈에 안 읽혀요",
+      "sampleable": true
+    },
+    {
+      "id": "study_focus-04",
+      "topicId": "study_focus",
+      "text": "책상 앞에서 멍하게 있어요",
+      "sampleable": true
+    },
+    {
+      "id": "study_focus-05",
+      "topicId": "study_focus",
+      "text": "공부할 때 생각이 산만해져요",
+      "sampleable": true
+    },
+    {
+      "id": "study_focus-06",
+      "topicId": "study_focus",
+      "text": "집중이 짧아 공부가 밀려요",
+      "sampleable": true
+    },
+    {
+      "id": "study_focus-07",
+      "topicId": "study_focus",
+      "text": "독서실에서도 집중을 못 하겠어요",
+      "sampleable": true
+    },
+    {
+      "id": "study_focus-08",
+      "topicId": "study_focus",
+      "text": "공부 중 휴대폰 딴짓을 반복해요",
+      "sampleable": true
+    },
+    {
+      "id": "study_focus-09",
+      "topicId": "study_focus",
+      "text": "교재 한 장도 집중해서 못 읽어요",
+      "sampleable": true
+    },
+    {
+      "id": "study_focus-10",
+      "topicId": "study_focus",
+      "text": "공부 내용이 읽히지 않아 답답해요",
+      "sampleable": true
+    },
+    {
+      "id": "exam_anxiety-01",
+      "topicId": "exam_anxiety",
+      "text": "시험 날짜가 다가와 불안해요",
+      "sampleable": true
+    },
+    {
+      "id": "exam_anxiety-02",
+      "topicId": "exam_anxiety",
+      "text": "수능 생각만 하면 긴장합니다",
+      "sampleable": true
+    },
+    {
+      "id": "exam_anxiety-03",
+      "topicId": "exam_anxiety",
+      "text": "자격시험 당일 실수할까 무서워요",
+      "sampleable": true
+    },
+    {
+      "id": "exam_anxiety-04",
+      "topicId": "exam_anxiety",
+      "text": "시험장에 가는 게 두렵습니다",
+      "sampleable": true
+    },
+    {
+      "id": "exam_anxiety-05",
+      "topicId": "exam_anxiety",
+      "text": "시험 전날 긴장해서 뒤척여요",
+      "sampleable": true
+    },
+    {
+      "id": "exam_anxiety-06",
+      "topicId": "exam_anxiety",
+      "text": "시험 시간에 머리가 하얘질까 겁나요",
+      "sampleable": true
+    },
+    {
+      "id": "exam_anxiety-07",
+      "topicId": "exam_anxiety",
+      "text": "수능을 앞두고 불안이 커졌어요",
+      "sampleable": true
+    },
+    {
+      "id": "exam_anxiety-08",
+      "topicId": "exam_anxiety",
+      "text": "자격시험 긴장을 어떻게 다룰까요",
+      "sampleable": true
+    },
+    {
+      "id": "exam_anxiety-09",
+      "topicId": "exam_anxiety",
+      "text": "시험이 다가오니 아는 것도 의심돼요",
+      "sampleable": true
+    },
+    {
+      "id": "exam_anxiety-10",
+      "topicId": "exam_anxiety",
+      "text": "시험 때 실수할까 공부가 손에 안 잡혀요",
+      "sampleable": true
+    },
+    {
+      "id": "study_plan-01",
+      "topicId": "study_plan",
+      "text": "공부 계획을 너무 크게 잡아요",
+      "sampleable": true
+    },
+    {
+      "id": "study_plan-02",
+      "topicId": "study_plan",
+      "text": "학습 계획을 매일 못 지켜요",
+      "sampleable": true
+    },
+    {
+      "id": "study_plan-03",
+      "topicId": "study_plan",
+      "text": "공부 분량을 어떻게 나눠야 하죠",
+      "sampleable": true
+    },
+    {
+      "id": "study_plan-04",
+      "topicId": "study_plan",
+      "text": "진도 계획이 계속 밀립니다",
+      "sampleable": true
+    },
+    {
+      "id": "study_plan-05",
+      "topicId": "study_plan",
+      "text": "공부 시간표를 현실적으로 짜고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "study_plan-06",
+      "topicId": "study_plan",
+      "text": "직장과 공부 계획 병행이 어려워요",
+      "sampleable": true
+    },
+    {
+      "id": "study_plan-07",
+      "topicId": "study_plan",
+      "text": "학습 계획에 복습 시간을 못 넣겠어요",
+      "sampleable": true
+    },
+    {
+      "id": "study_plan-08",
+      "topicId": "study_plan",
+      "text": "하루 공부 분량을 정하지 못해요",
+      "sampleable": true
+    },
+    {
+      "id": "study_plan-09",
+      "topicId": "study_plan",
+      "text": "공부 계획을 짜다가 시간만 써요",
+      "sampleable": true
+    },
+    {
+      "id": "study_plan-10",
+      "topicId": "study_plan",
+      "text": "주간 학습 계획을 다시 세우고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "job_search-01",
+      "topicId": "job_search",
+      "text": "취업 준비가 길어져 지쳤어요",
+      "sampleable": true
+    },
+    {
+      "id": "job_search-02",
+      "topicId": "job_search",
+      "text": "구직 중 가족 눈치가 보여요",
+      "sampleable": true
+    },
+    {
+      "id": "job_search-03",
+      "topicId": "job_search",
+      "text": "서류 탈락이 반복돼 막막해요",
+      "sampleable": true
+    },
+    {
+      "id": "job_search-04",
+      "topicId": "job_search",
+      "text": "지원서 쓰는 게 두렵습니다",
+      "sampleable": true
+    },
+    {
+      "id": "job_search-05",
+      "topicId": "job_search",
+      "text": "취준 생활에 끝이 안 보여요",
+      "sampleable": true
+    },
+    {
+      "id": "job_search-06",
+      "topicId": "job_search",
+      "text": "취업 준비 비용이 부담돼요",
+      "sampleable": true
+    },
+    {
+      "id": "job_search-07",
+      "topicId": "job_search",
+      "text": "구직 전략을 바꿔야 할지 고민해요",
+      "sampleable": true
+    },
+    {
+      "id": "job_search-08",
+      "topicId": "job_search",
+      "text": "서류 탈락 후 지원을 피하게 돼요",
+      "sampleable": true
+    },
+    {
+      "id": "job_search-09",
+      "topicId": "job_search",
+      "text": "취준 중 친구 만남이 부담스러워요",
+      "sampleable": true
+    },
+    {
+      "id": "job_search-10",
+      "topicId": "job_search",
+      "text": "지원서에 제 강점을 못 쓰겠어요",
+      "sampleable": true
+    },
+    {
+      "id": "interview-01",
+      "topicId": "interview",
+      "text": "면접만 가면 목소리가 떨려요",
+      "sampleable": true
+    },
+    {
+      "id": "interview-02",
+      "topicId": "interview",
+      "text": "면접 답변을 길게 하게 돼요",
+      "sampleable": true
+    },
+    {
+      "id": "interview-03",
+      "topicId": "interview",
+      "text": "압박 면접 질문이 무서워요",
+      "sampleable": true
+    },
+    {
+      "id": "interview-04",
+      "topicId": "interview",
+      "text": "면접 준비를 어디서 시작하죠",
+      "sampleable": true
+    },
+    {
+      "id": "interview-05",
+      "topicId": "interview",
+      "text": "면접에서 경험을 잘 설명하고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "interview-06",
+      "topicId": "interview",
+      "text": "면접 질문을 들으면 말문이 막혀요",
+      "sampleable": true
+    },
+    {
+      "id": "interview-07",
+      "topicId": "interview",
+      "text": "면접 연습을 혼자 해도 될까요",
+      "sampleable": true
+    },
+    {
+      "id": "interview-08",
+      "topicId": "interview",
+      "text": "면접 긴장으로 잠을 설칩니다",
+      "sampleable": true
+    },
+    {
+      "id": "interview-09",
+      "topicId": "interview",
+      "text": "면접 답변을 외우다 더 불안해져요",
+      "sampleable": true
+    },
+    {
+      "id": "interview-10",
+      "topicId": "interview",
+      "text": "면접에서 모르는 질문이 나올까 겁나요",
+      "sampleable": true
+    },
+    {
+      "id": "career_unknown-01",
+      "topicId": "career_unknown",
+      "text": "제가 원하는 진로를 모르겠어요",
+      "sampleable": true
+    },
+    {
+      "id": "career_unknown-02",
+      "topicId": "career_unknown",
+      "text": "적성을 찾는 게 너무 막막해요",
+      "sampleable": true
+    },
+    {
+      "id": "career_unknown-03",
+      "topicId": "career_unknown",
+      "text": "하고 싶은 일이 없어서 불안해요",
+      "sampleable": true
+    },
+    {
+      "id": "career_unknown-04",
+      "topicId": "career_unknown",
+      "text": "좋아하는 일을 어떻게 찾을까요",
+      "sampleable": true
+    },
+    {
+      "id": "career_unknown-05",
+      "topicId": "career_unknown",
+      "text": "진로 방향이 전혀 안 보입니다",
+      "sampleable": true
+    },
+    {
+      "id": "career_unknown-06",
+      "topicId": "career_unknown",
+      "text": "제 적성을 탐색하고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "career_unknown-07",
+      "topicId": "career_unknown",
+      "text": "하고 싶은 일을 아직 모르겠어요",
+      "sampleable": true
+    },
+    {
+      "id": "career_unknown-08",
+      "topicId": "career_unknown",
+      "text": "진로를 찾는 시간이 낭비 같아요",
+      "sampleable": true
+    },
+    {
+      "id": "career_unknown-09",
+      "topicId": "career_unknown",
+      "text": "어떤 일이 맞는 적성인지 모르겠어요",
+      "sampleable": true
+    },
+    {
+      "id": "career_unknown-10",
+      "topicId": "career_unknown",
+      "text": "좋아하는 일의 방향을 정하고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "career_change-01",
+      "topicId": "career_change",
+      "text": "경력 전환을 준비하고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "career_change-02",
+      "topicId": "career_change",
+      "text": "직업 전환 비용이 걱정됩니다",
+      "sampleable": true
+    },
+    {
+      "id": "career_change-03",
+      "topicId": "career_change",
+      "text": "다른 분야에 도전하기가 두려워요",
+      "sampleable": true
+    },
+    {
+      "id": "career_change-04",
+      "topicId": "career_change",
+      "text": "새 직업을 시작할 방법을 찾고 있어요",
+      "sampleable": true
+    },
+    {
+      "id": "career_change-05",
+      "topicId": "career_change",
+      "text": "경력 전환 때 제 경험이 쓸모없을까 겁나요",
+      "sampleable": true
+    },
+    {
+      "id": "career_change-06",
+      "topicId": "career_change",
+      "text": "직업 전환을 가족이 말려요",
+      "sampleable": true
+    },
+    {
+      "id": "career_change-07",
+      "topicId": "career_change",
+      "text": "다른 분야로 바꾸려면 뭘 배워야 하죠",
+      "sampleable": true
+    },
+    {
+      "id": "career_change-08",
+      "topicId": "career_change",
+      "text": "새 직업 준비와 생계를 병행해야 해요",
+      "sampleable": true
+    },
+    {
+      "id": "career_change-09",
+      "topicId": "career_change",
+      "text": "경력 전환 위험을 작게 확인하고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "career_change-10",
+      "topicId": "career_change",
+      "text": "직업 전환 고민을 오래 하고 있어요",
+      "sampleable": true
+    },
+    {
+      "id": "major-01",
+      "topicId": "major",
+      "text": "전공 수업이 저와 안 맞아요",
+      "sampleable": true
+    },
+    {
+      "id": "major-02",
+      "topicId": "major",
+      "text": "전과를 신청할지 고민입니다",
+      "sampleable": true
+    },
+    {
+      "id": "major-03",
+      "topicId": "major",
+      "text": "학과 선택을 잘못한 것 같아요",
+      "sampleable": true
+    },
+    {
+      "id": "major-04",
+      "topicId": "major",
+      "text": "전공을 바꾸면 시간이 아까울까요",
+      "sampleable": true
+    },
+    {
+      "id": "major-05",
+      "topicId": "major",
+      "text": "복수전공을 시작할지 망설여요",
+      "sampleable": true
+    },
+    {
+      "id": "major-06",
+      "topicId": "major",
+      "text": "전공과 취업 방향이 달라요",
+      "sampleable": true
+    },
+    {
+      "id": "major-07",
+      "topicId": "major",
+      "text": "학과 선택에 부모님 의견만 따랐어요",
+      "sampleable": true
+    },
+    {
+      "id": "major-08",
+      "topicId": "major",
+      "text": "전과 준비가 늦었을까 걱정돼요",
+      "sampleable": true
+    },
+    {
+      "id": "major-09",
+      "topicId": "major",
+      "text": "전공 공부의 실제 내용을 더 알고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "major-10",
+      "topicId": "major",
+      "text": "전공을 유지할 기준을 정하고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "learning_age-01",
+      "topicId": "learning_age",
+      "text": "나이 들어 공부를 시작해도 될까요",
+      "sampleable": true
+    },
+    {
+      "id": "learning_age-02",
+      "topicId": "learning_age",
+      "text": "마흔에 대학 진학을 고민해요",
+      "sampleable": true
+    },
+    {
+      "id": "learning_age-03",
+      "topicId": "learning_age",
+      "text": "쉰에 배움을 시작하기 부끄러워요",
+      "sampleable": true
+    },
+    {
+      "id": "learning_age-04",
+      "topicId": "learning_age",
+      "text": "중년의 학습 속도가 느려 걱정돼요",
+      "sampleable": true
+    },
+    {
+      "id": "learning_age-05",
+      "topicId": "learning_age",
+      "text": "늦게 공부하니 비교하게 됩니다",
+      "sampleable": true
+    },
+    {
+      "id": "learning_age-06",
+      "topicId": "learning_age",
+      "text": "나이 때문에 배우기를 포기할까 해요",
+      "sampleable": true
+    },
+    {
+      "id": "learning_age-07",
+      "topicId": "learning_age",
+      "text": "마흔에 새로운 배움을 찾고 있어요",
+      "sampleable": true
+    },
+    {
+      "id": "learning_age-08",
+      "topicId": "learning_age",
+      "text": "쉰에 공부할 시간이 나지 않아요",
+      "sampleable": true
+    },
+    {
+      "id": "learning_age-09",
+      "topicId": "learning_age",
+      "text": "중년 공부를 작게 시작하고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "learning_age-10",
+      "topicId": "learning_age",
+      "text": "늦게 대학 진학을 결정하기 두려워요",
+      "sampleable": true
+    },
+    {
+      "id": "refusal-01",
+      "topicId": "refusal",
+      "text": "친구 부탁을 거절하면 미움받을까 겁나요",
+      "sampleable": true
+    },
+    {
+      "id": "refusal-02",
+      "topicId": "refusal",
+      "text": "싫다고 말하는 연습을 하고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "refusal-03",
+      "topicId": "refusal",
+      "text": "부탁을 다 들어주다 지쳤어요",
+      "sampleable": true
+    },
+    {
+      "id": "refusal-04",
+      "topicId": "refusal",
+      "text": "동료 부탁을 거절하기 어렵습니다",
+      "sampleable": true
+    },
+    {
+      "id": "refusal-05",
+      "topicId": "refusal",
+      "text": "가족 모임 초대를 거절하고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "refusal-06",
+      "topicId": "refusal",
+      "text": "좋은 사람으로 보이려 계속 맞춰요",
+      "sampleable": true
+    },
+    {
+      "id": "refusal-07",
+      "topicId": "refusal",
+      "text": "싫다고 말하면 분위기가 깨질까 걱정돼요",
+      "sampleable": true
+    },
+    {
+      "id": "refusal-08",
+      "topicId": "refusal",
+      "text": "추가 부탁을 떠안게 됩니다",
+      "sampleable": true
+    },
+    {
+      "id": "refusal-09",
+      "topicId": "refusal",
+      "text": "거절 뒤 죄책감이 오래 가요",
+      "sampleable": true
+    },
+    {
+      "id": "refusal-10",
+      "topicId": "refusal",
+      "text": "정중하게 거절할 말을 찾고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "friend_distance-01",
+      "topicId": "friend_distance",
+      "text": "친구에게 저만 먼저 연락해요",
+      "sampleable": true
+    },
+    {
+      "id": "friend_distance-02",
+      "topicId": "friend_distance",
+      "text": "동창과 연락이 줄어 서운해요",
+      "sampleable": true
+    },
+    {
+      "id": "friend_distance-03",
+      "topicId": "friend_distance",
+      "text": "친구가 약속을 계속 취소해요",
+      "sampleable": true
+    },
+    {
+      "id": "friend_distance-04",
+      "topicId": "friend_distance",
+      "text": "오래된 친구와 멀어진 것 같아요",
+      "sampleable": true
+    },
+    {
+      "id": "friend_distance-05",
+      "topicId": "friend_distance",
+      "text": "친구가 제 연락을 피하는 느낌이에요",
+      "sampleable": true
+    },
+    {
+      "id": "friend_distance-06",
+      "topicId": "friend_distance",
+      "text": "친구 관계에 나만 노력하는 것 같아요",
+      "sampleable": true
+    },
+    {
+      "id": "friend_distance-07",
+      "topicId": "friend_distance",
+      "text": "친구의 연락이 없어 속상합니다",
+      "sampleable": true
+    },
+    {
+      "id": "friend_distance-08",
+      "topicId": "friend_distance",
+      "text": "동창 모임 친구들이 멀게 느껴져요",
+      "sampleable": true
+    },
+    {
+      "id": "friend_distance-09",
+      "topicId": "friend_distance",
+      "text": "친구에게 서운하다고 말하고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "friend_distance-10",
+      "topicId": "friend_distance",
+      "text": "친구에게 먼저 연락하기만 해서 지쳐요",
+      "sampleable": true
+    },
+    {
+      "id": "friend_betrayal-01",
+      "topicId": "friend_betrayal",
+      "text": "친구가 제 비밀을 다른 사람에게 말했어요",
+      "sampleable": true
+    },
+    {
+      "id": "friend_betrayal-02",
+      "topicId": "friend_betrayal",
+      "text": "지인 뒷담화를 듣고 상처받았어요",
+      "sampleable": true
+    },
+    {
+      "id": "friend_betrayal-03",
+      "topicId": "friend_betrayal",
+      "text": "친구 거짓말로 신뢰가 깨졌어요",
+      "sampleable": true
+    },
+    {
+      "id": "friend_betrayal-04",
+      "topicId": "friend_betrayal",
+      "text": "친구에게 배신당한 기분입니다",
+      "sampleable": true
+    },
+    {
+      "id": "friend_betrayal-05",
+      "topicId": "friend_betrayal",
+      "text": "지인이 제 비밀을 퍼뜨렸어요",
+      "sampleable": true
+    },
+    {
+      "id": "friend_betrayal-06",
+      "topicId": "friend_betrayal",
+      "text": "친구가 뒷담화한 뒤 사과하지 않아요",
+      "sampleable": true
+    },
+    {
+      "id": "friend_betrayal-07",
+      "topicId": "friend_betrayal",
+      "text": "친구의 비밀 누설을 어떻게 말하죠",
+      "sampleable": true
+    },
+    {
+      "id": "friend_betrayal-08",
+      "topicId": "friend_betrayal",
+      "text": "친구 거짓말을 또 알게 됐어요",
+      "sampleable": true
+    },
+    {
+      "id": "friend_betrayal-09",
+      "topicId": "friend_betrayal",
+      "text": "친구가 제 비밀을 말해버려 불안해요",
+      "sampleable": true
+    },
+    {
+      "id": "friend_betrayal-10",
+      "topicId": "friend_betrayal",
+      "text": "지인에게 신뢰가 깨졌다고 말하고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "loneliness-01",
+      "topicId": "loneliness",
+      "text": "연락할 사람이 없어 외로워요",
+      "sampleable": true
+    },
+    {
+      "id": "loneliness-02",
+      "topicId": "loneliness",
+      "text": "혼자 밥 먹는 고독이 힘들어요",
+      "sampleable": true
+    },
+    {
+      "id": "loneliness-03",
+      "topicId": "loneliness",
+      "text": "친구가 없다는 생각에 위축돼요",
+      "sampleable": true
+    },
+    {
+      "id": "loneliness-04",
+      "topicId": "loneliness",
+      "text": "내 편이 없는 것 같아 쓸쓸해요",
+      "sampleable": true
+    },
+    {
+      "id": "loneliness-05",
+      "topicId": "loneliness",
+      "text": "외로움이 저녁마다 커집니다",
+      "sampleable": true
+    },
+    {
+      "id": "loneliness-06",
+      "topicId": "loneliness",
+      "text": "고독한 주말을 보내기 어려워요",
+      "sampleable": true
+    },
+    {
+      "id": "loneliness-07",
+      "topicId": "loneliness",
+      "text": "힘들 때 연락할 사람이 없어요",
+      "sampleable": true
+    },
+    {
+      "id": "loneliness-08",
+      "topicId": "loneliness",
+      "text": "친구가 없어 모임을 찾고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "loneliness-09",
+      "topicId": "loneliness",
+      "text": "사람들 속에서도 외로워요",
+      "sampleable": true
+    },
+    {
+      "id": "loneliness-10",
+      "topicId": "loneliness",
+      "text": "내 편이 없다는 기분을 털어놓고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "social_anxiety-01",
+      "topicId": "social_anxiety",
+      "text": "낯선 사람 앞에서 말하기 무서워요",
+      "sampleable": true
+    },
+    {
+      "id": "social_anxiety-02",
+      "topicId": "social_anxiety",
+      "text": "모임에서 평가받을까 긴장해요",
+      "sampleable": true
+    },
+    {
+      "id": "social_anxiety-03",
+      "topicId": "social_anxiety",
+      "text": "사람을 만나면 얼굴이 붉어져요",
+      "sampleable": true
+    },
+    {
+      "id": "social_anxiety-04",
+      "topicId": "social_anxiety",
+      "text": "대인 관계 불안이 커지고 있어요",
+      "sampleable": true
+    },
+    {
+      "id": "social_anxiety-05",
+      "topicId": "social_anxiety",
+      "text": "모임에 가는 것이 두렵습니다",
+      "sampleable": true
+    },
+    {
+      "id": "social_anxiety-06",
+      "topicId": "social_anxiety",
+      "text": "낯선 사람에게 질문을 못 하겠어요",
+      "sampleable": true
+    },
+    {
+      "id": "social_anxiety-07",
+      "topicId": "social_anxiety",
+      "text": "사람을 만날 때 긴장을 낮추고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "social_anxiety-08",
+      "topicId": "social_anxiety",
+      "text": "대인 불안 때문에 약속을 피하게 돼요",
+      "sampleable": true
+    },
+    {
+      "id": "social_anxiety-09",
+      "topicId": "social_anxiety",
+      "text": "모임에서 말을 못 하고 돌아와요",
+      "sampleable": true
+    },
+    {
+      "id": "social_anxiety-10",
+      "topicId": "social_anxiety",
+      "text": "낯선 사람들의 평가가 너무 무서워요",
+      "sampleable": true
+    },
+    {
+      "id": "neighbor-01",
+      "topicId": "neighbor",
+      "text": "층간 소음 때문에 화가 나요",
+      "sampleable": true
+    },
+    {
+      "id": "neighbor-02",
+      "topicId": "neighbor",
+      "text": "이웃 주차 갈등으로 다퉜어요",
+      "sampleable": true
+    },
+    {
+      "id": "neighbor-03",
+      "topicId": "neighbor",
+      "text": "소음 문제를 이웃에게 말하기 무서워요",
+      "sampleable": true
+    },
+    {
+      "id": "neighbor-04",
+      "topicId": "neighbor",
+      "text": "주차 갈등을 어떻게 중재받죠",
+      "sampleable": true
+    },
+    {
+      "id": "neighbor-05",
+      "topicId": "neighbor",
+      "text": "이웃과 다툼이 반복돼 불편해요",
+      "sampleable": true
+    },
+    {
+      "id": "neighbor-06",
+      "topicId": "neighbor",
+      "text": "층간 소음 기록을 남기고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "neighbor-07",
+      "topicId": "neighbor",
+      "text": "이웃 소음 때문에 잠을 설쳐요",
+      "sampleable": true
+    },
+    {
+      "id": "neighbor-08",
+      "topicId": "neighbor",
+      "text": "주차 갈등으로 얼굴 보기가 어렵네요",
+      "sampleable": true
+    },
+    {
+      "id": "neighbor-09",
+      "topicId": "neighbor",
+      "text": "이웃에게 불편을 정중하게 전하고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "neighbor-10",
+      "topicId": "neighbor",
+      "text": "층간 소음을 관리실에 말해도 될까요",
+      "sampleable": true
+    },
+    {
+      "id": "group_chat-01",
+      "topicId": "group_chat",
+      "text": "단톡에서 저만 소외되는 기분이에요",
+      "sampleable": true
+    },
+    {
+      "id": "group_chat-02",
+      "topicId": "group_chat",
+      "text": "단체 대화방 뒷담화가 불편해요",
+      "sampleable": true
+    },
+    {
+      "id": "group_chat-03",
+      "topicId": "group_chat",
+      "text": "단톡 눈치를 보느라 지쳤어요",
+      "sampleable": true
+    },
+    {
+      "id": "group_chat-04",
+      "topicId": "group_chat",
+      "text": "단체 채팅에서 말할 틈이 없어요",
+      "sampleable": true
+    },
+    {
+      "id": "group_chat-05",
+      "topicId": "group_chat",
+      "text": "단톡 말을 오해받아 속상해요",
+      "sampleable": true
+    },
+    {
+      "id": "group_chat-06",
+      "topicId": "group_chat",
+      "text": "단체 대화방에서 싸움이 났어요",
+      "sampleable": true
+    },
+    {
+      "id": "group_chat-07",
+      "topicId": "group_chat",
+      "text": "단톡을 읽는 것만으로 피곤해요",
+      "sampleable": true
+    },
+    {
+      "id": "group_chat-08",
+      "topicId": "group_chat",
+      "text": "단체 채팅에서 저를 끼워주지 않아요",
+      "sampleable": true
+    },
+    {
+      "id": "group_chat-09",
+      "topicId": "group_chat",
+      "text": "단톡의 불편한 농담을 말하고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "group_chat-10",
+      "topicId": "group_chat",
+      "text": "단체 대화방에 참여할 때 눈치가 보여요",
+      "sampleable": true
+    },
+    {
+      "id": "digital_boundaries-01",
+      "topicId": "digital_boundaries",
+      "text": "SNS를 잠시 쉬고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "digital_boundaries-02",
+      "topicId": "digital_boundaries",
+      "text": "메신저 알림을 줄이면 불안할까요",
+      "sampleable": true
+    },
+    {
+      "id": "digital_boundaries-03",
+      "topicId": "digital_boundaries",
+      "text": "온라인 모임을 탈퇴하고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "digital_boundaries-04",
+      "topicId": "digital_boundaries",
+      "text": "단톡을 끊고 싶은데 눈치가 보여요",
+      "sampleable": true
+    },
+    {
+      "id": "digital_boundaries-05",
+      "topicId": "digital_boundaries",
+      "text": "알림 확인을 멈추고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "digital_boundaries-06",
+      "topicId": "digital_boundaries",
+      "text": "SNS 차단을 하면 상대가 서운할까요",
+      "sampleable": true
+    },
+    {
+      "id": "digital_boundaries-07",
+      "topicId": "digital_boundaries",
+      "text": "메신저 접속을 줄이고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "digital_boundaries-08",
+      "topicId": "digital_boundaries",
+      "text": "온라인 관계에서 쉬고 싶습니다",
+      "sampleable": true
+    },
+    {
+      "id": "digital_boundaries-09",
+      "topicId": "digital_boundaries",
+      "text": "단톡 알림을 끊는 연습이 필요해요",
+      "sampleable": true
+    },
+    {
+      "id": "digital_boundaries-10",
+      "topicId": "digital_boundaries",
+      "text": "SNS 탈퇴 결정을 고민하고 있어요",
+      "sampleable": true
+    },
+    {
+      "id": "comparison-01",
+      "topicId": "comparison",
+      "text": "친구 성과와 비교하며 위축돼요",
+      "sampleable": true
+    },
+    {
+      "id": "comparison-02",
+      "topicId": "comparison",
+      "text": "SNS를 보면 열등감이 커져요",
+      "sampleable": true
+    },
+    {
+      "id": "comparison-03",
+      "topicId": "comparison",
+      "text": "또래보다 뒤처진 기분이에요",
+      "sampleable": true
+    },
+    {
+      "id": "comparison-04",
+      "topicId": "comparison",
+      "text": "인스타 속 사람들과 비교해요",
+      "sampleable": true
+    },
+    {
+      "id": "comparison-05",
+      "topicId": "comparison",
+      "text": "동기 연봉과 제 삶을 비교하게 돼요",
+      "sampleable": true
+    },
+    {
+      "id": "comparison-06",
+      "topicId": "comparison",
+      "text": "남의 속도를 보면 조급해져요",
+      "sampleable": true
+    },
+    {
+      "id": "comparison-07",
+      "topicId": "comparison",
+      "text": "친구 성공을 보면 열등감이 생겨요",
+      "sampleable": true
+    },
+    {
+      "id": "comparison-08",
+      "topicId": "comparison",
+      "text": "남들과 비교하는 습관을 줄이고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "comparison-09",
+      "topicId": "comparison",
+      "text": "SNS의 성과 자랑에 마음이 흔들려요",
+      "sampleable": true
+    },
+    {
+      "id": "comparison-10",
+      "topicId": "comparison",
+      "text": "또래와 비교하면 제가 작아집니다",
+      "sampleable": true
+    },
+    {
+      "id": "body_image-01",
+      "topicId": "body_image",
+      "text": "거울 속 모습이 싫어 자신이 없어요",
+      "sampleable": true
+    },
+    {
+      "id": "body_image-02",
+      "topicId": "body_image",
+      "text": "외모 콤플렉스로 위축됩니다",
+      "sampleable": true
+    },
+    {
+      "id": "body_image-03",
+      "topicId": "body_image",
+      "text": "사진 속 제 모습이 마음에 안 들어요",
+      "sampleable": true
+    },
+    {
+      "id": "body_image-04",
+      "topicId": "body_image",
+      "text": "몸매 단점만 계속 보게 돼요",
+      "sampleable": true
+    },
+    {
+      "id": "body_image-05",
+      "topicId": "body_image",
+      "text": "외모 평가가 제 가치를 정하는 것 같아요",
+      "sampleable": true
+    },
+    {
+      "id": "body_image-06",
+      "topicId": "body_image",
+      "text": "외모 비교를 멈추기 어렵습니다",
+      "sampleable": true
+    },
+    {
+      "id": "body_image-07",
+      "topicId": "body_image",
+      "text": "못생겼다는 생각에 사람을 피해요",
+      "sampleable": true
+    },
+    {
+      "id": "body_image-08",
+      "topicId": "body_image",
+      "text": "몸매에 불만이 있어 자신감이 줄어요",
+      "sampleable": true
+    },
+    {
+      "id": "body_image-09",
+      "topicId": "body_image",
+      "text": "외모 단점만 떠올라 우울해요",
+      "sampleable": true
+    },
+    {
+      "id": "body_image-10",
+      "topicId": "body_image",
+      "text": "거울을 보며 제 가치를 낮게 평가해요",
+      "sampleable": true
+    },
+    {
+      "id": "perfectionism-01",
+      "topicId": "perfectionism",
+      "text": "완벽하지 않으면 시작을 못 해요",
+      "sampleable": true
+    },
+    {
+      "id": "perfectionism-02",
+      "topicId": "perfectionism",
+      "text": "제 기준이 너무 높아 지쳐요",
+      "sampleable": true
+    },
+    {
+      "id": "perfectionism-03",
+      "topicId": "perfectionism",
+      "text": "백점이 아니면 모두 실패 같아요",
+      "sampleable": true
+    },
+    {
+      "id": "perfectionism-04",
+      "topicId": "perfectionism",
+      "text": "실수를 허용하지 못하는 제가 힘들어요",
+      "sampleable": true
+    },
+    {
+      "id": "perfectionism-05",
+      "topicId": "perfectionism",
+      "text": "완벽한 계획만 세우다 멈춥니다",
+      "sampleable": true
+    },
+    {
+      "id": "perfectionism-06",
+      "topicId": "perfectionism",
+      "text": "항상 100점을 받아야 안심해요",
+      "sampleable": true
+    },
+    {
+      "id": "perfectionism-07",
+      "topicId": "perfectionism",
+      "text": "완벽한 모습만 보여주려 애써요",
+      "sampleable": true
+    },
+    {
+      "id": "perfectionism-08",
+      "topicId": "perfectionism",
+      "text": "기준을 너무 높게 잡고 자책해요",
+      "sampleable": true
+    },
+    {
+      "id": "perfectionism-09",
+      "topicId": "perfectionism",
+      "text": "완벽하게 끝내느라 시간을 다 써요",
+      "sampleable": true
+    },
+    {
+      "id": "perfectionism-10",
+      "topicId": "perfectionism",
+      "text": "실수 허용을 못 해서 검토만 반복해요",
+      "sampleable": true
+    },
+    {
+      "id": "procrastination-01",
+      "topicId": "procrastination",
+      "text": "메일 보내는 일을 계속 미뤄요",
+      "sampleable": true
+    },
+    {
+      "id": "procrastination-02",
+      "topicId": "procrastination",
+      "text": "해야 할 일에 손을 못 대겠어요",
+      "sampleable": true
+    },
+    {
+      "id": "procrastination-03",
+      "topicId": "procrastination",
+      "text": "미루다가 마감에 쫓겨요",
+      "sampleable": true
+    },
+    {
+      "id": "procrastination-04",
+      "topicId": "procrastination",
+      "text": "작은 일도 착수가 어렵습니다",
+      "sampleable": true
+    },
+    {
+      "id": "procrastination-05",
+      "topicId": "procrastination",
+      "text": "시작을 못 해서 계획만 늘어나요",
+      "sampleable": true
+    },
+    {
+      "id": "procrastination-06",
+      "topicId": "procrastination",
+      "text": "중요한 일을 두고 딴짓하게 돼요",
+      "sampleable": true
+    },
+    {
+      "id": "procrastination-07",
+      "topicId": "procrastination",
+      "text": "미루는 습관 때문에 자책합니다",
+      "sampleable": true
+    },
+    {
+      "id": "procrastination-08",
+      "topicId": "procrastination",
+      "text": "정리해야 하는데 손이 안 가서 미뤄요",
+      "sampleable": true
+    },
+    {
+      "id": "procrastination-09",
+      "topicId": "procrastination",
+      "text": "일을 시작 못 하고 창만 바꿔요",
+      "sampleable": true
+    },
+    {
+      "id": "procrastination-10",
+      "topicId": "procrastination",
+      "text": "착수할 수 있는 작은 단계가 필요해요",
+      "sampleable": true
+    },
+    {
+      "id": "anger-01",
+      "topicId": "anger",
+      "text": "분노를 조절하기 어려워요",
+      "sampleable": true
+    },
+    {
+      "id": "anger-02",
+      "topicId": "anger",
+      "text": "화가 나면 말을 세게 해요",
+      "sampleable": true
+    },
+    {
+      "id": "anger-03",
+      "topicId": "anger",
+      "text": "짜증을 참다가 폭발합니다",
+      "sampleable": true
+    },
+    {
+      "id": "anger-04",
+      "topicId": "anger",
+      "text": "복수 충동을 멈추고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "anger-05",
+      "topicId": "anger",
+      "text": "화난 행동 뒤에 후회가 커요",
+      "sampleable": true
+    },
+    {
+      "id": "anger-06",
+      "topicId": "anger",
+      "text": "분노가 가라앉지 않아 힘들어요",
+      "sampleable": true
+    },
+    {
+      "id": "anger-07",
+      "topicId": "anger",
+      "text": "화가 나도 표현을 못 해요",
+      "sampleable": true
+    },
+    {
+      "id": "anger-08",
+      "topicId": "anger",
+      "text": "짜증 나는 말을 자꾸 하게 돼요",
+      "sampleable": true
+    },
+    {
+      "id": "anger-09",
+      "topicId": "anger",
+      "text": "분노를 가라앉힐 시간이 필요해요",
+      "sampleable": true
+    },
+    {
+      "id": "anger-10",
+      "topicId": "anger",
+      "text": "폭발하기 전에 멈추고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "guilt-01",
+      "topicId": "guilt",
+      "text": "친구에게 상처 준 말을 사과하고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "guilt-02",
+      "topicId": "guilt",
+      "text": "과거 실수에 죄책감이 남아요",
+      "sampleable": true
+    },
+    {
+      "id": "guilt-03",
+      "topicId": "guilt",
+      "text": "작은 잘못도 자책이 오래가요",
+      "sampleable": true
+    },
+    {
+      "id": "guilt-04",
+      "topicId": "guilt",
+      "text": "후회되는 일을 반복해서 생각해요",
+      "sampleable": true
+    },
+    {
+      "id": "guilt-05",
+      "topicId": "guilt",
+      "text": "상처 준 말이 계속 마음에 걸려요",
+      "sampleable": true
+    },
+    {
+      "id": "guilt-06",
+      "topicId": "guilt",
+      "text": "사과를 해도 마음이 무겁습니다",
+      "sampleable": true
+    },
+    {
+      "id": "guilt-07",
+      "topicId": "guilt",
+      "text": "옛날 잘못을 용서하지 못하겠어요",
+      "sampleable": true
+    },
+    {
+      "id": "guilt-08",
+      "topicId": "guilt",
+      "text": "과거 선택을 되돌리고 싶어 자책해요",
+      "sampleable": true
+    },
+    {
+      "id": "guilt-09",
+      "topicId": "guilt",
+      "text": "실수 생각에 죄책감이 커져요",
+      "sampleable": true
+    },
+    {
+      "id": "guilt-10",
+      "topicId": "guilt",
+      "text": "후회에 매달리느라 지금 일을 못 해요",
+      "sampleable": true
+    },
+    {
+      "id": "confidence-01",
+      "topicId": "confidence",
+      "text": "자신감을 잃어 제 판단을 못 믿겠어요",
+      "sampleable": true
+    },
+    {
+      "id": "confidence-02",
+      "topicId": "confidence",
+      "text": "자존감이 낮아 칭찬을 못 받아들여요",
+      "sampleable": true
+    },
+    {
+      "id": "confidence-03",
+      "topicId": "confidence",
+      "text": "저는 쓸모없는 사람 같아요",
+      "sampleable": true
+    },
+    {
+      "id": "confidence-04",
+      "topicId": "confidence",
+      "text": "제 장점이 없다는 생각이 들어요",
+      "sampleable": true
+    },
+    {
+      "id": "confidence-05",
+      "topicId": "confidence",
+      "text": "실패 뒤 자신감이 떨어졌어요",
+      "sampleable": true
+    },
+    {
+      "id": "confidence-06",
+      "topicId": "confidence",
+      "text": "제가 무가치하게 느껴져요",
+      "sampleable": true
+    },
+    {
+      "id": "confidence-07",
+      "topicId": "confidence",
+      "text": "자존감을 어떻게 다시 세울까요",
+      "sampleable": true
+    },
+    {
+      "id": "confidence-08",
+      "topicId": "confidence",
+      "text": "자신감이 없어 도전을 피하게 돼요",
+      "sampleable": true
+    },
+    {
+      "id": "confidence-09",
+      "topicId": "confidence",
+      "text": "나를 믿는 마음을 잃었어요",
+      "sampleable": true
+    },
+    {
+      "id": "confidence-10",
+      "topicId": "confidence",
+      "text": "자존감이 낮아 제 의견을 못 말해요",
+      "sampleable": true
+    },
+    {
+      "id": "rest_guilt-01",
+      "topicId": "rest_guilt",
+      "text": "쉬면 죄책감부터 들어요",
+      "sampleable": true
+    },
+    {
+      "id": "rest_guilt-02",
+      "topicId": "rest_guilt",
+      "text": "휴식 시간이 낭비처럼 느껴져요",
+      "sampleable": true
+    },
+    {
+      "id": "rest_guilt-03",
+      "topicId": "rest_guilt",
+      "text": "쉬는 날에도 생산적이어야 할 것 같아요",
+      "sampleable": true
+    },
+    {
+      "id": "rest_guilt-04",
+      "topicId": "rest_guilt",
+      "text": "휴식하면 게으른 사람 같아요",
+      "sampleable": true
+    },
+    {
+      "id": "rest_guilt-05",
+      "topicId": "rest_guilt",
+      "text": "쉬고 있으면 불안해집니다",
+      "sampleable": true
+    },
+    {
+      "id": "rest_guilt-06",
+      "topicId": "rest_guilt",
+      "text": "휴식할 때 가족 눈치를 봐요",
+      "sampleable": true
+    },
+    {
+      "id": "rest_guilt-07",
+      "topicId": "rest_guilt",
+      "text": "쉬는 시간을 잘못 쓴 느낌이에요",
+      "sampleable": true
+    },
+    {
+      "id": "rest_guilt-08",
+      "topicId": "rest_guilt",
+      "text": "휴식하는 제가 쓸모없게 느껴져요",
+      "sampleable": true
+    },
+    {
+      "id": "rest_guilt-09",
+      "topicId": "rest_guilt",
+      "text": "쉬면 안 된다는 죄책감이 있어요",
+      "sampleable": true
+    },
+    {
+      "id": "rest_guilt-10",
+      "topicId": "rest_guilt",
+      "text": "휴식을 하면서도 불안해 쉬지 못해요",
+      "sampleable": true
+    },
+    {
+      "id": "indecision-01",
+      "topicId": "indecision",
+      "text": "작은 결정도 못 내리겠어요",
+      "sampleable": true
+    },
+    {
+      "id": "indecision-02",
+      "topicId": "indecision",
+      "text": "선택 기준을 어떻게 정하죠",
+      "sampleable": true
+    },
+    {
+      "id": "indecision-03",
+      "topicId": "indecision",
+      "text": "결정을 미루다 기회를 놓쳐요",
+      "sampleable": true
+    },
+    {
+      "id": "indecision-04",
+      "topicId": "indecision",
+      "text": "선택하면 후회할까 무서워요",
+      "sampleable": true
+    },
+    {
+      "id": "indecision-05",
+      "topicId": "indecision",
+      "text": "정답을 찾느라 결정을 못 해요",
+      "sampleable": true
+    },
+    {
+      "id": "indecision-06",
+      "topicId": "indecision",
+      "text": "두 선택 사이에서 갈팡질팡해요",
+      "sampleable": true
+    },
+    {
+      "id": "indecision-07",
+      "topicId": "indecision",
+      "text": "결정이 어려워 남에게 맡깁니다",
+      "sampleable": true
+    },
+    {
+      "id": "indecision-08",
+      "topicId": "indecision",
+      "text": "선택 기준이 자꾸 바뀌어요",
+      "sampleable": true
+    },
+    {
+      "id": "indecision-09",
+      "topicId": "indecision",
+      "text": "결정할 때마다 오래 망설여요",
+      "sampleable": true
+    },
+    {
+      "id": "indecision-10",
+      "topicId": "indecision",
+      "text": "제 선택을 후회할까 시작을 못 해요",
+      "sampleable": true
+    },
+    {
+      "id": "meaning-01",
+      "topicId": "meaning",
+      "text": "사는 의미를 모르겠어요",
+      "sampleable": true
+    },
+    {
+      "id": "meaning-02",
+      "topicId": "meaning",
+      "text": "마음이 공허해 아무것도 즐겁지 않아요",
+      "sampleable": true
+    },
+    {
+      "id": "meaning-03",
+      "topicId": "meaning",
+      "text": "무기력해서 씻는 것도 버거워요",
+      "sampleable": true
+    },
+    {
+      "id": "meaning-04",
+      "topicId": "meaning",
+      "text": "아무것도 하기 싫은 날이 이어져요",
+      "sampleable": true
+    },
+    {
+      "id": "meaning-05",
+      "topicId": "meaning",
+      "text": "삶의 의미가 사라진 느낌이에요",
+      "sampleable": true
+    },
+    {
+      "id": "meaning-06",
+      "topicId": "meaning",
+      "text": "공허함을 무엇으로 채울지 모르겠어요",
+      "sampleable": true
+    },
+    {
+      "id": "meaning-07",
+      "topicId": "meaning",
+      "text": "무기력한 제가 답답합니다",
+      "sampleable": true
+    },
+    {
+      "id": "meaning-08",
+      "topicId": "meaning",
+      "text": "아무것도 하기 싫어 약속을 취소해요",
+      "sampleable": true
+    },
+    {
+      "id": "meaning-09",
+      "topicId": "meaning",
+      "text": "삶의 의미를 다시 찾고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "meaning-10",
+      "topicId": "meaning",
+      "text": "공허한 기분이 오래 이어져요",
+      "sampleable": true
+    },
+    {
+      "id": "insomnia-01",
+      "topicId": "insomnia",
+      "text": "누우면 잠이 안 와요",
+      "sampleable": true
+    },
+    {
+      "id": "insomnia-02",
+      "topicId": "insomnia",
+      "text": "불면 때문에 아침이 두려워요",
+      "sampleable": true
+    },
+    {
+      "id": "insomnia-03",
+      "topicId": "insomnia",
+      "text": "새벽마다 깨서 다시 못 자요",
+      "sampleable": true
+    },
+    {
+      "id": "insomnia-04",
+      "topicId": "insomnia",
+      "text": "수면 리듬이 뒤집혔어요",
+      "sampleable": true
+    },
+    {
+      "id": "insomnia-05",
+      "topicId": "insomnia",
+      "text": "잠을 못 자서 낮에 졸아요",
+      "sampleable": true
+    },
+    {
+      "id": "insomnia-06",
+      "topicId": "insomnia",
+      "text": "불면이 반복되어 예민해져요",
+      "sampleable": true
+    },
+    {
+      "id": "insomnia-07",
+      "topicId": "insomnia",
+      "text": "자려고 애쓸수록 잠이 안 와요",
+      "sampleable": true
+    },
+    {
+      "id": "insomnia-08",
+      "topicId": "insomnia",
+      "text": "새벽에 자꾸 깨는 게 힘들어요",
+      "sampleable": true
+    },
+    {
+      "id": "insomnia-09",
+      "topicId": "insomnia",
+      "text": "수면 리듬을 되찾고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "insomnia-10",
+      "topicId": "insomnia",
+      "text": "잠을 못 자면 내일이 망할까 걱정돼요",
+      "sampleable": true
+    },
+    {
+      "id": "health_worry-01",
+      "topicId": "health_worry",
+      "text": "검사 결과를 기다리며 겁이 나요",
+      "sampleable": true
+    },
+    {
+      "id": "health_worry-02",
+      "topicId": "health_worry",
+      "text": "작은 증상도 큰 병일까 걱정돼요",
+      "sampleable": true
+    },
+    {
+      "id": "health_worry-03",
+      "topicId": "health_worry",
+      "text": "건강 불안으로 검색을 멈추지 못해요",
+      "sampleable": true
+    },
+    {
+      "id": "health_worry-04",
+      "topicId": "health_worry",
+      "text": "건강 걱정이 하루를 차지해요",
+      "sampleable": true
+    },
+    {
+      "id": "health_worry-05",
+      "topicId": "health_worry",
+      "text": "인터넷 증상 검색 뒤 더 무서워졌어요",
+      "sampleable": true
+    },
+    {
+      "id": "health_worry-06",
+      "topicId": "health_worry",
+      "text": "검사 결과 숫자를 혼자 해석하게 돼요",
+      "sampleable": true
+    },
+    {
+      "id": "health_worry-07",
+      "topicId": "health_worry",
+      "text": "가족력이 있어 큰 병이 두려워요",
+      "sampleable": true
+    },
+    {
+      "id": "health_worry-08",
+      "topicId": "health_worry",
+      "text": "건강 불안을 의료진에게 말하고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "health_worry-09",
+      "topicId": "health_worry",
+      "text": "검사 결과 전부터 최악을 생각해요",
+      "sampleable": true
+    },
+    {
+      "id": "health_worry-10",
+      "topicId": "health_worry",
+      "text": "증상 검색을 반복하느라 잠을 놓쳐요",
+      "sampleable": true
+    },
+    {
+      "id": "doctor_avoidance-01",
+      "topicId": "doctor_avoidance",
+      "text": "검진을 계속 미루고 있어요",
+      "sampleable": true
+    },
+    {
+      "id": "doctor_avoidance-02",
+      "topicId": "doctor_avoidance",
+      "text": "병원 가기가 무서워 예약을 못 해요",
+      "sampleable": true
+    },
+    {
+      "id": "doctor_avoidance-03",
+      "topicId": "doctor_avoidance",
+      "text": "진료 비용이 걱정돼 미뤄요",
+      "sampleable": true
+    },
+    {
+      "id": "doctor_avoidance-04",
+      "topicId": "doctor_avoidance",
+      "text": "검사 받는 일을 자꾸 피합니다",
+      "sampleable": true
+    },
+    {
+      "id": "doctor_avoidance-05",
+      "topicId": "doctor_avoidance",
+      "text": "병원 예약을 못 잡고 망설여요",
+      "sampleable": true
+    },
+    {
+      "id": "doctor_avoidance-06",
+      "topicId": "doctor_avoidance",
+      "text": "건강검진이 두려워 미루고 있어요",
+      "sampleable": true
+    },
+    {
+      "id": "doctor_avoidance-07",
+      "topicId": "doctor_avoidance",
+      "text": "진료가 필요해도 시간 때문에 미뤄요",
+      "sampleable": true
+    },
+    {
+      "id": "doctor_avoidance-08",
+      "topicId": "doctor_avoidance",
+      "text": "검사 예약을 못 하고 불안해해요",
+      "sampleable": true
+    },
+    {
+      "id": "doctor_avoidance-09",
+      "topicId": "doctor_avoidance",
+      "text": "병원 가기가 겁나 동행을 부탁하고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "doctor_avoidance-10",
+      "topicId": "doctor_avoidance",
+      "text": "검진을 미루는 습관을 바꾸고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "medication-01",
+      "topicId": "medication",
+      "text": "처방약을 계속 먹어도 될지 걱정돼요",
+      "sampleable": true
+    },
+    {
+      "id": "medication-02",
+      "topicId": "medication",
+      "text": "약 부작용 같아 불안합니다",
+      "sampleable": true
+    },
+    {
+      "id": "medication-03",
+      "topicId": "medication",
+      "text": "복용량을 줄여도 되는지 궁금해요",
+      "sampleable": true
+    },
+    {
+      "id": "medication-04",
+      "topicId": "medication",
+      "text": "약 복용을 자꾸 잊어버려요",
+      "sampleable": true
+    },
+    {
+      "id": "medication-05",
+      "topicId": "medication",
+      "text": "복약 시간을 맞추기 어려워요",
+      "sampleable": true
+    },
+    {
+      "id": "medication-06",
+      "topicId": "medication",
+      "text": "약을 끊고 싶지만 어떻게 말하죠",
+      "sampleable": true
+    },
+    {
+      "id": "medication-07",
+      "topicId": "medication",
+      "text": "처방약 부작용을 질문하고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "medication-08",
+      "topicId": "medication",
+      "text": "약을 먹는 것 자체가 두려워요",
+      "sampleable": true
+    },
+    {
+      "id": "medication-09",
+      "topicId": "medication",
+      "text": "복용량을 혼자 바꿔도 될까요",
+      "sampleable": true
+    },
+    {
+      "id": "medication-10",
+      "topicId": "medication",
+      "text": "약 복용 걱정을 의료진과 상의하고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "exercise-01",
+      "topicId": "exercise",
+      "text": "운동을 시작해도 작심삼일이에요",
+      "sampleable": true
+    },
+    {
+      "id": "exercise-02",
+      "topicId": "exercise",
+      "text": "걷기 습관을 만들고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "exercise-03",
+      "topicId": "exercise",
+      "text": "등록한 헬스장에 꾸준히 가고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "exercise-04",
+      "topicId": "exercise",
+      "text": "운동할 시간을 정하기 어려워요",
+      "sampleable": true
+    },
+    {
+      "id": "exercise-05",
+      "topicId": "exercise",
+      "text": "운동 강도를 너무 높여 금방 멈춰요",
+      "sampleable": true
+    },
+    {
+      "id": "exercise-06",
+      "topicId": "exercise",
+      "text": "걷기를 꾸준히 이어가고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "exercise-07",
+      "topicId": "exercise",
+      "text": "운동 시작을 자꾸 미루게 돼요",
+      "sampleable": true
+    },
+    {
+      "id": "exercise-08",
+      "topicId": "exercise",
+      "text": "헬스장에 가는 습관이 안 생겨요",
+      "sampleable": true
+    },
+    {
+      "id": "exercise-09",
+      "topicId": "exercise",
+      "text": "운동을 쉬었다가 다시 시작하고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "exercise-10",
+      "topicId": "exercise",
+      "text": "운동 지속을 위한 작은 기준이 필요해요",
+      "sampleable": true
+    },
+    {
+      "id": "eating-01",
+      "topicId": "eating",
+      "text": "스트레스를 받으면 폭식이 반복돼요",
+      "sampleable": true
+    },
+    {
+      "id": "eating-02",
+      "topicId": "eating",
+      "text": "먹는 죄책감 때문에 끼니를 걸러요",
+      "sampleable": true
+    },
+    {
+      "id": "eating-03",
+      "topicId": "eating",
+      "text": "식단이 무너지면 저를 탓하게 돼요",
+      "sampleable": true
+    },
+    {
+      "id": "eating-04",
+      "topicId": "eating",
+      "text": "식사를 조절하는 일이 너무 힘들어요",
+      "sampleable": true
+    },
+    {
+      "id": "eating-05",
+      "topicId": "eating",
+      "text": "폭식 뒤 굶어서 보상하려 해요",
+      "sampleable": true
+    },
+    {
+      "id": "eating-06",
+      "topicId": "eating",
+      "text": "끼니를 거르는 습관이 생겼어요",
+      "sampleable": true
+    },
+    {
+      "id": "eating-07",
+      "topicId": "eating",
+      "text": "식단 관리가 스트레스가 됩니다",
+      "sampleable": true
+    },
+    {
+      "id": "eating-08",
+      "topicId": "eating",
+      "text": "식사 뒤 죄책감이 오래가요",
+      "sampleable": true
+    },
+    {
+      "id": "eating-09",
+      "topicId": "eating",
+      "text": "폭식할까 불안해서 약속을 피하게 돼요",
+      "sampleable": true
+    },
+    {
+      "id": "eating-10",
+      "topicId": "eating",
+      "text": "먹는 죄책감을 줄이고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "panic-01",
+      "topicId": "panic",
+      "text": "공황 증상이 또 올까 무서워요",
+      "sampleable": true
+    },
+    {
+      "id": "panic-02",
+      "topicId": "panic",
+      "text": "불안 발작 뒤 외출을 피하게 돼요",
+      "sampleable": true
+    },
+    {
+      "id": "panic-03",
+      "topicId": "panic",
+      "text": "과호흡이 반복되어 걱정됩니다",
+      "sampleable": true
+    },
+    {
+      "id": "panic-04",
+      "topicId": "panic",
+      "text": "공황 때문에 지하철이 두려워요",
+      "sampleable": true
+    },
+    {
+      "id": "panic-05",
+      "topicId": "panic",
+      "text": "불안 발작을 가족에게 설명하기 어려워요",
+      "sampleable": true
+    },
+    {
+      "id": "panic-06",
+      "topicId": "panic",
+      "text": "과호흡 때 어떻게 도움을 요청하죠",
+      "sampleable": true
+    },
+    {
+      "id": "panic-07",
+      "topicId": "panic",
+      "text": "공황 진료를 받아볼지 망설여요",
+      "sampleable": true
+    },
+    {
+      "id": "panic-08",
+      "topicId": "panic",
+      "text": "불안 발작 이후 긴장이 계속돼요",
+      "sampleable": true
+    },
+    {
+      "id": "panic-09",
+      "topicId": "panic",
+      "text": "공황 같은 반응이 반복됩니다",
+      "sampleable": true
+    },
+    {
+      "id": "panic-10",
+      "topicId": "panic",
+      "text": "과호흡이 올까 약속을 피하게 돼요",
+      "sampleable": true
+    },
+    {
+      "id": "chronic_pain-01",
+      "topicId": "chronic_pain",
+      "text": "만성 통증으로 일상이 지쳐요",
+      "sampleable": true
+    },
+    {
+      "id": "chronic_pain-02",
+      "topicId": "chronic_pain",
+      "text": "허리 통증 때문에 약속을 피합니다",
+      "sampleable": true
+    },
+    {
+      "id": "chronic_pain-03",
+      "topicId": "chronic_pain",
+      "text": "무릎 통증이 계속되어 답답해요",
+      "sampleable": true
+    },
+    {
+      "id": "chronic_pain-04",
+      "topicId": "chronic_pain",
+      "text": "오래된 통증으로 마음도 가라앉아요",
+      "sampleable": true
+    },
+    {
+      "id": "chronic_pain-05",
+      "topicId": "chronic_pain",
+      "text": "통증이 생활을 차지하는 느낌이에요",
+      "sampleable": true
+    },
+    {
+      "id": "chronic_pain-06",
+      "topicId": "chronic_pain",
+      "text": "만성 통증을 주변이 이해하지 못해요",
+      "sampleable": true
+    },
+    {
+      "id": "chronic_pain-07",
+      "topicId": "chronic_pain",
+      "text": "허리 통증 때문에 일을 줄여야 해요",
+      "sampleable": true
+    },
+    {
+      "id": "chronic_pain-08",
+      "topicId": "chronic_pain",
+      "text": "무릎 통증이 오래가서 불안해요",
+      "sampleable": true
+    },
+    {
+      "id": "chronic_pain-09",
+      "topicId": "chronic_pain",
+      "text": "통증이 계속되니 아무것도 못 할까 겁나요",
+      "sampleable": true
+    },
+    {
+      "id": "chronic_pain-10",
+      "topicId": "chronic_pain",
+      "text": "오래가는 통증을 진료 때 설명하고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "bereavement-01",
+      "topicId": "bereavement",
+      "text": "사별 뒤 집에 혼자 있기가 힘들어요",
+      "sampleable": true
+    },
+    {
+      "id": "bereavement-02",
+      "topicId": "bereavement",
+      "text": "엄마가 돌아가셔서 마음이 텅 비었어요",
+      "sampleable": true
+    },
+    {
+      "id": "bereavement-03",
+      "topicId": "bereavement",
+      "text": "장례 후에도 실감이 나지 않아요",
+      "sampleable": true
+    },
+    {
+      "id": "bereavement-04",
+      "topicId": "bereavement",
+      "text": "고인 생각에 갑자기 눈물이 나요",
+      "sampleable": true
+    },
+    {
+      "id": "bereavement-05",
+      "topicId": "bereavement",
+      "text": "소중한 사람을 떠나보내고 잠을 설쳐요",
+      "sampleable": true
+    },
+    {
+      "id": "bereavement-06",
+      "topicId": "bereavement",
+      "text": "가족을 잃은 슬픔을 말하기 어려워요",
+      "sampleable": true
+    },
+    {
+      "id": "bereavement-07",
+      "topicId": "bereavement",
+      "text": "사별 이후 웃어도 되는지 모르겠어요",
+      "sampleable": true
+    },
+    {
+      "id": "bereavement-08",
+      "topicId": "bereavement",
+      "text": "아버지가 돌아가셔서 그리워요",
+      "sampleable": true
+    },
+    {
+      "id": "bereavement-09",
+      "topicId": "bereavement",
+      "text": "장례 뒤 일상으로 돌아가기 어렵습니다",
+      "sampleable": true
+    },
+    {
+      "id": "bereavement-10",
+      "topicId": "bereavement",
+      "text": "고인과의 기억을 천천히 나누고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "pet_loss-01",
+      "topicId": "pet_loss",
+      "text": "반려견을 떠나보내고 울고 있어요",
+      "sampleable": true
+    },
+    {
+      "id": "pet_loss-02",
+      "topicId": "pet_loss",
+      "text": "고양이가 죽은 뒤 집이 너무 조용해요",
+      "sampleable": true
+    },
+    {
+      "id": "pet_loss-03",
+      "topicId": "pet_loss",
+      "text": "반려동물을 잃은 슬픔이 커요",
+      "sampleable": true
+    },
+    {
+      "id": "pet_loss-04",
+      "topicId": "pet_loss",
+      "text": "강아지가 무지개다리를 건너 그리워요",
+      "sampleable": true
+    },
+    {
+      "id": "pet_loss-05",
+      "topicId": "pet_loss",
+      "text": "반려묘를 보내고 일상이 무너졌어요",
+      "sampleable": true
+    },
+    {
+      "id": "pet_loss-06",
+      "topicId": "pet_loss",
+      "text": "반려동물 사별을 이해받지 못해요",
+      "sampleable": true
+    },
+    {
+      "id": "pet_loss-07",
+      "topicId": "pet_loss",
+      "text": "강아지를 떠나보내고 산책길이 힘들어요",
+      "sampleable": true
+    },
+    {
+      "id": "pet_loss-08",
+      "topicId": "pet_loss",
+      "text": "고양이를 잃은 뒤 사진만 보고 있어요",
+      "sampleable": true
+    },
+    {
+      "id": "pet_loss-09",
+      "topicId": "pet_loss",
+      "text": "반려견을 보내고 다시 웃기가 미안해요",
+      "sampleable": true
+    },
+    {
+      "id": "pet_loss-10",
+      "topicId": "pet_loss",
+      "text": "반려묘가 그리워 잠들기 어렵네요",
+      "sampleable": true
+    },
+    {
+      "id": "loss_guilt-01",
+      "topicId": "loss_guilt",
+      "text": "고인에게 더 잘해줄 걸 후회해요",
+      "sampleable": true
+    },
+    {
+      "id": "loss_guilt-02",
+      "topicId": "loss_guilt",
+      "text": "사별 뒤 모든 게 제 탓 같아요",
+      "sampleable": true
+    },
+    {
+      "id": "loss_guilt-03",
+      "topicId": "loss_guilt",
+      "text": "돌아가신 부모님께 못해준 일만 떠올라요",
+      "sampleable": true
+    },
+    {
+      "id": "loss_guilt-04",
+      "topicId": "loss_guilt",
+      "text": "떠나보낸 뒤 죄책감이 큽니다",
+      "sampleable": true
+    },
+    {
+      "id": "loss_guilt-05",
+      "topicId": "loss_guilt",
+      "text": "고인에게 미안해서 행복해지기 어려워요",
+      "sampleable": true
+    },
+    {
+      "id": "loss_guilt-06",
+      "topicId": "loss_guilt",
+      "text": "사별 뒤 못해준 것만 생각해요",
+      "sampleable": true
+    },
+    {
+      "id": "loss_guilt-07",
+      "topicId": "loss_guilt",
+      "text": "반려동물을 보내고 제 탓을 하게 돼요",
+      "sampleable": true
+    },
+    {
+      "id": "loss_guilt-08",
+      "topicId": "loss_guilt",
+      "text": "돌아가시기 전 잘해줄 걸 자책해요",
+      "sampleable": true
+    },
+    {
+      "id": "loss_guilt-09",
+      "topicId": "loss_guilt",
+      "text": "고인에게 전하지 못한 말이 후회돼요",
+      "sampleable": true
+    },
+    {
+      "id": "loss_guilt-10",
+      "topicId": "loss_guilt",
+      "text": "떠나보낸 사람에게 미안한 마음을 나누고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "retirement-01",
+      "topicId": "retirement",
+      "text": "은퇴 뒤 제 역할이 없어진 느낌이에요",
+      "sampleable": true
+    },
+    {
+      "id": "retirement-02",
+      "topicId": "retirement",
+      "text": "퇴직 후 일상 리듬이 무너졌어요",
+      "sampleable": true
+    },
+    {
+      "id": "retirement-03",
+      "topicId": "retirement",
+      "text": "은퇴 생활이 공허할까 걱정돼요",
+      "sampleable": true
+    },
+    {
+      "id": "retirement-04",
+      "topicId": "retirement",
+      "text": "은퇴 준비를 어디서 시작하죠",
+      "sampleable": true
+    },
+    {
+      "id": "retirement-05",
+      "topicId": "retirement",
+      "text": "퇴직 후 만남이 줄어들었어요",
+      "sampleable": true
+    },
+    {
+      "id": "retirement-06",
+      "topicId": "retirement",
+      "text": "은퇴 뒤 쓸모없는 사람이 될까 겁나요",
+      "sampleable": true
+    },
+    {
+      "id": "retirement-07",
+      "topicId": "retirement",
+      "text": "퇴직 후 생활 계획을 세우고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "retirement-08",
+      "topicId": "retirement",
+      "text": "은퇴 후 정체성을 다시 찾고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "retirement-09",
+      "topicId": "retirement",
+      "text": "은퇴 일상을 어떻게 구성하면 좋죠",
+      "sampleable": true
+    },
+    {
+      "id": "retirement-10",
+      "topicId": "retirement",
+      "text": "퇴직 후 새로운 역할이 필요해요",
+      "sampleable": true
+    },
+    {
+      "id": "empty_nest-01",
+      "topicId": "empty_nest",
+      "text": "아이들이 독립해 집이 허전해요",
+      "sampleable": true
+    },
+    {
+      "id": "empty_nest-02",
+      "topicId": "empty_nest",
+      "text": "자녀 독립 뒤 제 역할이 줄었어요",
+      "sampleable": true
+    },
+    {
+      "id": "empty_nest-03",
+      "topicId": "empty_nest",
+      "text": "딸이 독립하니 빈집이 외로워요",
+      "sampleable": true
+    },
+    {
+      "id": "empty_nest-04",
+      "topicId": "empty_nest",
+      "text": "아들 독립 후 혼자 있는 시간이 늘었어요",
+      "sampleable": true
+    },
+    {
+      "id": "empty_nest-05",
+      "topicId": "empty_nest",
+      "text": "빈 둥지의 공허함이 힘듭니다",
+      "sampleable": true
+    },
+    {
+      "id": "empty_nest-06",
+      "topicId": "empty_nest",
+      "text": "아이들 독립 뒤 연락만 기다리게 돼요",
+      "sampleable": true
+    },
+    {
+      "id": "empty_nest-07",
+      "topicId": "empty_nest",
+      "text": "자녀가 독립해 빈집 적응이 어려워요",
+      "sampleable": true
+    },
+    {
+      "id": "empty_nest-08",
+      "topicId": "empty_nest",
+      "text": "아들 독립 이후 허전함을 채우고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "empty_nest-09",
+      "topicId": "empty_nest",
+      "text": "딸 독립 뒤 제 일상이 공허해요",
+      "sampleable": true
+    },
+    {
+      "id": "empty_nest-10",
+      "topicId": "empty_nest",
+      "text": "빈 둥지에서 새로운 역할을 찾고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "moving-01",
+      "topicId": "moving",
+      "text": "새 동네 적응이 막막해요",
+      "sampleable": true
+    },
+    {
+      "id": "moving-02",
+      "topicId": "moving",
+      "text": "타지 생활이 시작돼 외롭습니다",
+      "sampleable": true
+    },
+    {
+      "id": "moving-03",
+      "topicId": "moving",
+      "text": "이사 준비가 부담되어 지쳤어요",
+      "sampleable": true
+    },
+    {
+      "id": "moving-04",
+      "topicId": "moving",
+      "text": "낯선 도시에서 생활을 다시 만들고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "moving-05",
+      "topicId": "moving",
+      "text": "이사 뒤 익숙한 곳이 그리워요",
+      "sampleable": true
+    },
+    {
+      "id": "moving-06",
+      "topicId": "moving",
+      "text": "새 동네가 너무 낯설게 느껴져요",
+      "sampleable": true
+    },
+    {
+      "id": "moving-07",
+      "topicId": "moving",
+      "text": "타지 생활에 적응할 방법이 필요해요",
+      "sampleable": true
+    },
+    {
+      "id": "moving-08",
+      "topicId": "moving",
+      "text": "이사하며 오래 산 집을 떠나기 아쉬워요",
+      "sampleable": true
+    },
+    {
+      "id": "moving-09",
+      "topicId": "moving",
+      "text": "낯선 도시 이사 계획이 걱정돼요",
+      "sampleable": true
+    },
+    {
+      "id": "moving-10",
+      "topicId": "moving",
+      "text": "새 동네에서 새로 사람을 만나고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "household_overload-01",
+      "topicId": "household_overload",
+      "text": "혼자 살림을 감당하기 버거워요",
+      "sampleable": true
+    },
+    {
+      "id": "household_overload-02",
+      "topicId": "household_overload",
+      "text": "청소가 밀려 손을 못 대겠어요",
+      "sampleable": true
+    },
+    {
+      "id": "household_overload-03",
+      "topicId": "household_overload",
+      "text": "집 정리를 어디서 시작할지 모르겠어요",
+      "sampleable": true
+    },
+    {
+      "id": "household_overload-04",
+      "topicId": "household_overload",
+      "text": "집안일이 너무 많아 지쳐요",
+      "sampleable": true
+    },
+    {
+      "id": "household_overload-05",
+      "topicId": "household_overload",
+      "text": "살림 부담 때문에 쉬지 못해요",
+      "sampleable": true
+    },
+    {
+      "id": "household_overload-06",
+      "topicId": "household_overload",
+      "text": "청소할 물건이 쌓여 막막합니다",
+      "sampleable": true
+    },
+    {
+      "id": "household_overload-07",
+      "topicId": "household_overload",
+      "text": "집안일 순서를 정하고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "household_overload-08",
+      "topicId": "household_overload",
+      "text": "혼자 청소를 다 하려니 부담돼요",
+      "sampleable": true
+    },
+    {
+      "id": "household_overload-09",
+      "topicId": "household_overload",
+      "text": "집 정리가 쌓여 집에 들어가기 싫어요",
+      "sampleable": true
+    },
+    {
+      "id": "household_overload-10",
+      "topicId": "household_overload",
+      "text": "살림이 버거워 기본 생활도 어렵네요",
+      "sampleable": true
+    },
+    {
+      "id": "bullying-01",
+      "topicId": "bullying",
+      "text": "학교에서 따돌림을 당하는 것 같아요",
+      "sampleable": true
+    },
+    {
+      "id": "bullying-02",
+      "topicId": "bullying",
+      "text": "왕따가 되어 누구에게도 말을 못 해요",
+      "sampleable": true
+    },
+    {
+      "id": "bullying-03",
+      "topicId": "bullying",
+      "text": "학교 폭력을 말하면 보복할까 무서워요",
+      "sampleable": true
+    },
+    {
+      "id": "bullying-04",
+      "topicId": "bullying",
+      "text": "사이버 괴롭힘을 받고 있습니다",
+      "sampleable": true
+    },
+    {
+      "id": "bullying-05",
+      "topicId": "bullying",
+      "text": "모임에서 집단 따돌림을 당해요",
+      "sampleable": true
+    },
+    {
+      "id": "bullying-06",
+      "topicId": "bullying",
+      "text": "학교 폭력 증거를 남기고 싶어요",
+      "sampleable": true
+    },
+    {
+      "id": "bullying-07",
+      "topicId": "bullying",
+      "text": "온라인 왕따 때문에 접속이 두려워요",
+      "sampleable": true
+    },
+    {
+      "id": "bullying-08",
+      "topicId": "bullying",
+      "text": "따돌림을 보호자에게 어떻게 말하죠",
+      "sampleable": true
+    },
+    {
+      "id": "bullying-09",
+      "topicId": "bullying",
+      "text": "사이버 괴롭힘 신고를 고민해요",
+      "sampleable": true
+    },
+    {
+      "id": "bullying-10",
+      "topicId": "bullying",
+      "text": "집단 따돌림을 혼자 견디기 어렵네요",
+      "sampleable": true
+    },
+    {
+      "id": "partner_abuse-01",
+      "topicId": "partner_abuse",
+      "text": "남편이 저를 때려서 무서워요",
+      "sampleable": false
+    },
+    {
+      "id": "partner_abuse-02",
+      "topicId": "partner_abuse",
+      "text": "연인에게 협박을 받고 있어요",
+      "sampleable": false
+    },
+    {
+      "id": "partner_abuse-03",
+      "topicId": "partner_abuse",
+      "text": "배우자의 폭행이 반복됩니다",
+      "sampleable": false
+    },
+    {
+      "id": "partner_abuse-04",
+      "topicId": "partner_abuse",
+      "text": "데이트 폭력에서 벗어날 도움을 찾고 있어요",
+      "sampleable": false
+    },
+    {
+      "id": "partner_abuse-05",
+      "topicId": "partner_abuse",
+      "text": "가정 폭력을 혼자 숨기고 있어요",
+      "sampleable": false
+    },
+    {
+      "id": "partner_abuse-06",
+      "topicId": "partner_abuse",
+      "text": "아내가 저를 때렸습니다",
+      "sampleable": false
+    },
+    {
+      "id": "partner_abuse-07",
+      "topicId": "partner_abuse",
+      "text": "남친이 헤어지면 죽인다고 해요",
+      "sampleable": false
+    },
+    {
+      "id": "partner_abuse-08",
+      "topicId": "partner_abuse",
+      "text": "스토킹 때문에 귀가가 두려워요",
+      "sampleable": false
+    },
+    {
+      "id": "partner_abuse-09",
+      "topicId": "partner_abuse",
+      "text": "연인이 저를 감금하려 했어요",
+      "sampleable": false
+    },
+    {
+      "id": "partner_abuse-10",
+      "topicId": "partner_abuse",
+      "text": "배우자가 폭력을 쓰면 어디에 도움을 청하죠",
+      "sampleable": false
+    },
+    {
+      "id": "selfharm-01",
+      "topicId": "selfharm",
+      "text": "죽고 싶다는 생각이 자꾸 들어요",
+      "sampleable": false
+    },
+    {
+      "id": "selfharm-02",
+      "topicId": "selfharm",
+      "text": "자해하고 싶은 마음이 무서워요",
+      "sampleable": false
+    },
+    {
+      "id": "selfharm-03",
+      "topicId": "selfharm",
+      "text": "스스로를 해칠까 걱정돼요",
+      "sampleable": false
+    },
+    {
+      "id": "selfharm-04",
+      "topicId": "selfharm",
+      "text": "목숨을 끊고 싶은 생각이 들어요",
+      "sampleable": false
+    },
+    {
+      "id": "selfharm-05",
+      "topicId": "selfharm",
+      "text": "자살 생각을 혼자 숨기고 있어요",
+      "sampleable": false
+    },
+    {
+      "id": "selfharm-06",
+      "topicId": "selfharm",
+      "text": "죽어 버리고 싶어 도움을 구해요",
+      "sampleable": false
+    },
+    {
+      "id": "selfharm-07",
+      "topicId": "selfharm",
+      "text": "자해 충동을 견디기 어렵습니다",
+      "sampleable": false
+    },
+    {
+      "id": "selfharm-08",
+      "topicId": "selfharm",
+      "text": "스스로를 해치지 않게 누가 곁에 있어줬으면 해요",
+      "sampleable": false
+    },
+    {
+      "id": "selfharm-09",
+      "topicId": "selfharm",
+      "text": "죽고 싶을 만큼 힘들어서 누군가에게 말하고 싶어요",
+      "sampleable": false
+    },
+    {
+      "id": "selfharm-10",
+      "topicId": "selfharm",
+      "text": "자살 생각이 들어 지금 혼자 있기 두려워요",
+      "sampleable": false
+    }
+  ]
+}

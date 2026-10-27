@@ -1,0 +1,15 @@
+{
+  "scripts/oracle-counsel.js": {
+    "bytes": 9195,
+    "gzipEstimate": 3958
+  },
+  "data/oracle-topics.json": {
+    "bytes": 78987,
+    "gzipEstimate": 21059
+  },
+  "data/oracle-examples-1000.json": {
+    "bytes": 161662,
+    "gzipEstimate": 22290
+  },
+  "initialHTMLGzipDelta": 298
+}

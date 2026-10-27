@@ -1,0 +1,1 @@
+PASS {"existingExamples":1974,"newExamples":1000,"total":2974,"topics":104,"exampleResults":{"matched":933,"clarify":47,"safety":20},"clarifications":47,"holdouts":40,"holdoutClarify":2,"unknownMinimalPairs":17,"safety":7,"allExpectedTopicsReachable":true,"noRandomAdvice":true,"noDuplicateExamples":true}

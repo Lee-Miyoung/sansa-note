@@ -1,0 +1,12 @@
+AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+
+  assert(await p.evaluate(()=>loadVows().some(v=>v.text==='검증용 작은 다짐')))
+
+    at /workspace/scratch/oracle/baseline-wellness.cjs:10:138 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}

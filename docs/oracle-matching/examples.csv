@@ -1,0 +1,1001 @@
+id,domain,topicId,situation,question,randomSampleEligible
+resign-01,work,resign,퇴사 결정,퇴사 결정을 내리기가 두려워요,True
+resign-02,work,resign,퇴사 결정,사표를 낼 시기를 못 정하겠어요,True
+resign-03,work,resign,퇴사 결정,퇴사 후 생활이 막막합니다,True
+resign-04,work,resign,퇴사 결정,퇴사하고 쉬고 싶은데 망설여져요,True
+resign-05,work,resign,퇴사 결정,퇴사 의사를 말할 용기가 안 나요,True
+resign-06,work,resign,퇴사 결정,계약이 남았는데 퇴사를 고민해요,True
+resign-07,work,resign,퇴사 결정,충동적으로 사표를 쓸까 걱정돼요,True
+resign-08,work,resign,퇴사 결정,퇴사 준비를 어디서 시작하죠,True
+resign-09,work,resign,퇴사 결정,퇴사할지 휴직할지 갈팡질팡해요,True
+resign-10,work,resign,퇴사 결정,퇴사 뒤 후회할까 겁이 납니다,True
+change_jobs-01,work,change_jobs,이직 조건 비교,이직 제안 두 곳을 비교하고 있어요,True
+change_jobs-02,work,change_jobs,이직 조건 비교,이직하면 연봉은 오르지만 야근이 늘어요,True
+change_jobs-03,work,change_jobs,이직 조건 비교,새 직장 제안의 조건이 모호해요,True
+change_jobs-04,work,change_jobs,이직 조건 비교,이직 면접을 회사에 알리고 싶지 않아요,True
+change_jobs-05,work,change_jobs,이직 조건 비교,이직 준비와 업무 병행이 버겁습니다,True
+change_jobs-06,work,change_jobs,이직 조건 비교,스카우트 제안을 받아 흔들려요,True
+change_jobs-07,work,change_jobs,이직 조건 비교,이직할 때 직급을 낮춰도 될까요,True
+change_jobs-08,work,change_jobs,이직 조건 비교,이직 시 통근 시간이 길어집니다,True
+change_jobs-09,work,change_jobs,이직 조건 비교,이직한 지 얼마 안 돼 또 옮기고 싶어요,True
+change_jobs-10,work,change_jobs,이직 조건 비교,오퍼 수락 전에 뭘 확인해야 하죠,True
+burnout-01,work,burnout,일로 인한 소진,주말에 자도 번아웃이 풀리지 않아요,True
+burnout-02,work,burnout,일로 인한 소진,과로로 집에 오면 말할 힘이 없어요,True
+burnout-03,work,burnout,일로 인한 소진,번아웃인데 쉬면 뒤처질까 무서워요,True
+burnout-04,work,burnout,일로 인한 소진,일에 대한 소진이 심해졌어요,True
+burnout-05,work,burnout,일로 인한 소진,야근이 쌓여 기진맥진해요,True
+burnout-06,work,burnout,일로 인한 소진,번아웃으로 좋아하던 일도 싫어졌어요,True
+burnout-07,work,burnout,일로 인한 소진,휴가 뒤에도 번아웃이 계속돼요,True
+burnout-08,work,burnout,일로 인한 소진,과로를 인정하기가 부끄러워요,True
+burnout-09,work,burnout,일로 인한 소진,번아웃 때문에 출근 준비도 버겁네요,True
+burnout-10,work,burnout,일로 인한 소진,업무 소진을 상사에게 어떻게 말하죠,True
+boss_bullying-01,work,boss_bullying,상사의 모욕·괴롭힘,상사가 회의에서 인격을 깎아내려요,True
+boss_bullying-02,work,boss_bullying,상사의 모욕·괴롭힘,팀장의 폭언을 매일 듣습니다,True
+boss_bullying-03,work,boss_bullying,상사의 모욕·괴롭힘,상사가 실수할 때마다 공개적으로 망신줘요,True
+boss_bullying-04,work,boss_bullying,상사의 모욕·괴롭힘,직장 내 괴롭힘을 신고할지 고민돼요,True
+boss_bullying-05,work,boss_bullying,상사의 모욕·괴롭힘,상사의 고함 때문에 몸이 굳어요,True
+boss_bullying-06,work,boss_bullying,상사의 모욕·괴롭힘,팀장이 제 외모를 모욕해요,True
+boss_bullying-07,work,boss_bullying,상사의 모욕·괴롭힘,상사의 괴롭힘 증거를 어떻게 남기죠,True
+boss_bullying-08,work,boss_bullying,상사의 모욕·괴롭힘,직장 괴롭힘을 말하면 보복할까 무서워요,True
+boss_bullying-09,work,boss_bullying,상사의 모욕·괴롭힘,상사가 사람들 앞에서 모욕을 줍니다,True
+boss_bullying-10,work,boss_bullying,상사의 모욕·괴롭힘,팀장의 인격 비난을 참기 어렵네요,True
+recognition-01,work,recognition,성과 인정과 평가,동료가 제 성과를 가로채요,True
+recognition-02,work,recognition,성과 인정과 평가,승진 평가에서 기여가 누락됐어요,True
+recognition-03,work,recognition,성과 인정과 평가,공로를 인정받지 못해 속상해요,True
+recognition-04,work,recognition,성과 인정과 평가,평가가 부당한 것 같아 답답해요,True
+recognition-05,work,recognition,성과 인정과 평가,팀장이 제 업적을 빼앗은 느낌이에요,True
+recognition-06,work,recognition,성과 인정과 평가,성과 평가 기준이 불공정해 보여요,True
+recognition-07,work,recognition,성과 인정과 평가,제 기여를 기록으로 남기고 싶어요,True
+recognition-08,work,recognition,성과 인정과 평가,평가에서 성과를 인정받지 못했어요,True
+recognition-09,work,recognition,성과 인정과 평가,승진에서 밀려 자존감이 흔들려요,True
+recognition-10,work,recognition,성과 인정과 평가,제 공을 다른 사람 성과로 올렸어요,True
+coworker-01,work,coworker,동료와 업무 조율,동료가 인수인계를 안 해줘요,True
+coworker-02,work,coworker,동료와 업무 조율,팀원과 역할 경계가 겹칩니다,True
+coworker-03,work,coworker,동료와 업무 조율,동료와 업무 분담이 불균형해요,True
+coworker-04,work,coworker,동료와 업무 조율,팀원과 협업 방식이 달라 충돌해요,True
+coworker-05,work,coworker,동료와 업무 조율,동료에게 업무를 계속 넘겨받아요,True
+coworker-06,work,coworker,동료와 업무 조율,동료가 협조하지 않아 일정이 밀려요,True
+coworker-07,work,coworker,동료와 업무 조율,팀원과 분담을 다시 정하고 싶어요,True
+coworker-08,work,coworker,동료와 업무 조율,동료와 협업할 때마다 마찰이 나요,True
+coworker-09,work,coworker,동료와 업무 조율,동료의 역할까지 맡고 있습니다,True
+coworker-10,work,coworker,동료와 업무 조율,팀원과 인수인계 약속이 안 지켜져요,True
+work_mistake-01,work,work_mistake,업무 실수 수습,보고서 숫자 오류를 뒤늦게 봤어요,True
+work_mistake-02,work,work_mistake,업무 실수 수습,업무 실수를 숨기고 싶어집니다,True
+work_mistake-03,work,work_mistake,업무 실수 수습,회사에서 같은 실수를 반복해요,True
+work_mistake-04,work,work_mistake,업무 실수 수습,보고를 잘못해 동료에게 피해를 줬어요,True
+work_mistake-05,work,work_mistake,업무 실수 수습,업무 누락을 어떻게 알릴까요,True
+work_mistake-06,work,work_mistake,업무 실수 수습,보고서 오류를 고치기 겁나요,True
+work_mistake-07,work,work_mistake,업무 실수 수습,직장 실수 이후 손이 떨려요,True
+work_mistake-08,work,work_mistake,업무 실수 수습,일처리 실수가 늘어 자신이 없어요,True
+work_mistake-09,work,work_mistake,업무 실수 수습,회사 자료를 잘못 전달했어요,True
+work_mistake-10,work,work_mistake,업무 실수 수습,업무 수정 요청을 받을 때마다 위축돼요,True
+after_hours-01,work,after_hours,퇴근 후 업무 연락,퇴근 후 업무 연락이 끊이지 않아요,True
+after_hours-02,work,after_hours,퇴근 후 업무 연락,휴일에도 회사 전화가 옵니다,True
+after_hours-03,work,after_hours,퇴근 후 업무 연락,휴가 중 업무 메시지를 확인하게 돼요,True
+after_hours-04,work,after_hours,퇴근 후 업무 연락,주말 업무 단톡에 답해야 할까요,True
+after_hours-05,work,after_hours,퇴근 후 업무 연락,퇴근 뒤 메신저 답장을 재촉해요,True
+after_hours-06,work,after_hours,퇴근 후 업무 연락,휴일 업무 연락으로 가족과 시간을 못 보내요,True
+after_hours-07,work,after_hours,퇴근 후 업무 연락,휴가 중에도 업무 전화를 기다립니다,True
+after_hours-08,work,after_hours,퇴근 후 업무 연락,퇴근 후 연락 경계를 말하기 어렵네요,True
+after_hours-09,work,after_hours,퇴근 후 업무 연락,주말마다 업무 메시지 때문에 쉬지 못해요,True
+after_hours-10,work,after_hours,퇴근 후 업무 연락,퇴근한 뒤 연락 알림만 와도 긴장해요,True
+workload-01,work,workload,과도한 업무량,업무량이 감당할 수 없을 만큼 많아요,True
+workload-02,work,workload,과도한 업무량,업무 우선순위를 못 정하겠어요,True
+workload-03,work,workload,과도한 업무량,일감이 한 사람에게 몰립니다,True
+workload-04,work,workload,과도한 업무량,업무 분량을 줄여달라고 말하고 싶어요,True
+workload-05,work,workload,과도한 업무량,업무량에 비해 마감이 너무 짧아요,True
+workload-06,work,workload,과도한 업무량,일이 너무 많아 점심도 못 먹어요,True
+workload-07,work,workload,과도한 업무량,업무량을 말하면 무능해 보일까 걱정돼요,True
+workload-08,work,workload,과도한 업무량,일감이 계속 추가되어 끝이 안 나요,True
+workload-09,work,workload,과도한 업무량,업무 분량 때문에 중요한 일을 놓쳐요,True
+workload-10,work,workload,과도한 업무량,업무 우선순위를 상사와 정하고 싶어요,True
+unpaid_wages-01,work,unpaid_wages,임금 지연·체불,월급이 두 달째 밀렸어요,True
+unpaid_wages-02,work,unpaid_wages,임금 지연·체불,급여 지연으로 생활이 어려워요,True
+unpaid_wages-03,work,unpaid_wages,임금 지연·체불,임금 체불을 어디에 상담하나요,True
+unpaid_wages-04,work,unpaid_wages,임금 지연·체불,월급을 못 받아 카드값이 걱정돼요,True
+unpaid_wages-05,work,unpaid_wages,임금 지연·체불,급여가 밀렸는데 사장님이 기다리래요,True
+unpaid_wages-06,work,unpaid_wages,임금 지연·체불,월급이 안 들어왔는데 말하기 어려워요,True
+unpaid_wages-07,work,unpaid_wages,임금 지연·체불,임금 체불 기록을 남기고 싶어요,True
+unpaid_wages-08,work,unpaid_wages,임금 지연·체불,급여 지연 약속이 계속 바뀝니다,True
+unpaid_wages-09,work,unpaid_wages,임금 지연·체불,이번 달에도 월급을 못 받았어요,True
+unpaid_wages-10,work,unpaid_wages,임금 지연·체불,퇴직 뒤에도 밀린 월급이 있어요,True
+work_presentation-01,work,work_presentation,발표와 회의 발언,회의 발언을 할 때 목소리가 떨려요,True
+work_presentation-02,work,work_presentation,발표와 회의 발언,발표 전날부터 너무 긴장해요,True
+work_presentation-03,work,work_presentation,발표와 회의 발언,프레젠테이션 도중 말문이 막혀요,True
+work_presentation-04,work,work_presentation,발표와 회의 발언,사람들 앞 발표가 무서워요,True
+work_presentation-05,work,work_presentation,발표와 회의 발언,회의 발언 차례만 오면 겁이 나요,True
+work_presentation-06,work,work_presentation,발표와 회의 발언,발표 때 떨려 자료를 놓칩니다,True
+work_presentation-07,work,work_presentation,발표와 회의 발언,프레젠테이션 긴장 때문에 피하고 싶어요,True
+work_presentation-08,work,work_presentation,발표와 회의 발언,발표할 때 목소리가 작아져요,True
+work_presentation-09,work,work_presentation,발표와 회의 발언,회의 발언 실수를 할까 불안해요,True
+work_presentation-10,work,work_presentation,발표와 회의 발언,발표 긴장을 어떻게 준비하면 좋죠,True
+job_security-01,work,job_security,고용 불안과 구조조정,구조조정 소문 때문에 잠이 안 와요,True
+job_security-02,work,job_security,고용 불안과 구조조정,권고사직 이야기를 들었습니다,True
+job_security-03,work,job_security,고용 불안과 구조조정,해고될까 봐 매일 불안해요,True
+job_security-04,work,job_security,고용 불안과 구조조정,계약 종료 뒤가 막막해요,True
+job_security-05,work,job_security,고용 불안과 구조조정,계약 갱신 여부를 안 알려줘요,True
+job_security-06,work,job_security,고용 불안과 구조조정,고용 불안으로 미래 계획을 못 세워요,True
+job_security-07,work,job_security,고용 불안과 구조조정,권고사직 서명을 재촉받아요,True
+job_security-08,work,job_security,고용 불안과 구조조정,구조조정 때 제 권리를 알고 싶어요,True
+job_security-09,work,job_security,고용 불안과 구조조정,계약 갱신을 기다리는 시간이 괴로워요,True
+job_security-10,work,job_security,고용 불안과 구조조정,해고 통보 뒤 뭘 먼저 해야 하죠,True
+sales-01,business,sales,매출 감소,가게 매출이 지난달보다 줄었어요,True
+sales-02,business,sales,매출 감소,손님이 줄어 가게가 한산해요,True
+sales-03,business,sales,매출 감소,온라인 주문이 줄고 있습니다,True
+sales-04,business,sales,매출 감소,장사가 안돼 자신감이 없어요,True
+sales-05,business,sales,매출 감소,판매량이 떨어진 이유를 모르겠어요,True
+sales-06,business,sales,매출 감소,매출이 주말마다 크게 출렁여요,True
+sales-07,business,sales,매출 감소,손님이 줄어도 원인을 못 찾겠어요,True
+sales-08,business,sales,매출 감소,새 가게의 매출이 기대보다 낮아요,True
+sales-09,business,sales,매출 감소,주문이 줄어 재고가 쌓여요,True
+sales-10,business,sales,매출 감소,판매량이 내려가 광고를 늘릴까 고민해요,True
+pricing-01,business,pricing,가격 책정,상품 가격을 올리기가 미안해요,True
+pricing-02,business,pricing,가격 책정,판매가 책정이 너무 어렵습니다,True
+pricing-03,business,pricing,가격 책정,단가를 올려달라고 말하기 힘들어요,True
+pricing-04,business,pricing,가격 책정,가격 인상 뒤 손님이 떠날까 무서워요,True
+pricing-05,business,pricing,가격 책정,할인 가격을 낮추다 마진이 없어졌어요,True
+pricing-06,business,pricing,가격 책정,제 서비스 가격을 정하고 싶어요,True
+pricing-07,business,pricing,가격 책정,원가가 올라 가격 인상을 고민해요,True
+pricing-08,business,pricing,가격 책정,판매가를 낮추면 해결될까요,True
+pricing-09,business,pricing,가격 책정,단가 인상을 거래처에 설명해야 해요,True
+pricing-10,business,pricing,가격 책정,가격 책정에서 제 시간을 빼먹게 돼요,True
+abusive_customer-01,business,abusive_customer,고객의 모욕·무리한 요구,손님이 욕설을 해서 무서웠어요,True
+abusive_customer-02,business,abusive_customer,고객의 모욕·무리한 요구,고객의 무리한 요구가 계속돼요,True
+abusive_customer-03,business,abusive_customer,고객의 모욕·무리한 요구,손님에게 모욕을 듣고 울었어요,True
+abusive_customer-04,business,abusive_customer,고객의 모욕·무리한 요구,고객이 리뷰로 협박합니다,True
+abusive_customer-05,business,abusive_customer,고객의 모욕·무리한 요구,매장에서 손님 폭언을 감당하기 힘들어요,True
+abusive_customer-06,business,abusive_customer,고객의 모욕·무리한 요구,고객의 막말을 어디까지 들어야 하죠,True
+abusive_customer-07,business,abusive_customer,고객의 모욕·무리한 요구,손님의 무리한 요구를 거절하고 싶어요,True
+abusive_customer-08,business,abusive_customer,고객의 모욕·무리한 요구,고객 모욕 때문에 출근이 겁나요,True
+abusive_customer-09,business,abusive_customer,고객의 모욕·무리한 요구,전화 손님이 계속 욕설을 해요,True
+abusive_customer-10,business,abusive_customer,고객의 모욕·무리한 요구,고객 폭언 후에도 웃어야 할까요,True
+advertising-01,business,advertising,광고비와 효과,광고비만 쓰고 주문은 없어요,True
+advertising-02,business,advertising,광고비와 효과,광고 효과를 어떻게 확인하죠,True
+advertising-03,business,advertising,광고비와 효과,홍보비 지출이 부담스럽습니다,True
+advertising-04,business,advertising,광고비와 효과,광고 성과가 없는데 계속해야 할까요,True
+advertising-05,business,advertising,광고비와 효과,광고 집행을 중단하면 손님이 끊길까 겁나요,True
+advertising-06,business,advertising,광고비와 효과,광고비 예산을 못 정하겠어요,True
+advertising-07,business,advertising,광고비와 효과,홍보비를 써도 문의가 늘지 않아요,True
+advertising-08,business,advertising,광고비와 효과,광고 효과가 있는지 판단이 어려워요,True
+advertising-09,business,advertising,광고비와 효과,광고 집행 대행사 말만 믿어도 될까요,True
+advertising-10,business,advertising,광고비와 효과,광고 성과보다 지출만 늘고 있어요,True
+receivables-01,business,receivables,거래대금 미수,거래처 미수금이 쌓이고 있어요,True
+receivables-02,business,receivables,거래대금 미수,거래 대금을 달라고 하기 어렵습니다,True
+receivables-03,business,receivables,거래대금 미수,납품했는데 입금이 안 됩니다,True
+receivables-04,business,receivables,거래대금 미수,고객이 대금 지급을 미뤄요,True
+receivables-05,business,receivables,거래대금 미수,미수금 때문에 자금이 막혔어요,True
+receivables-06,business,receivables,거래대금 미수,거래 대금 약속이 계속 바뀌어요,True
+receivables-07,business,receivables,거래대금 미수,대금을 못 받아도 추가 납품해야 할까요,True
+receivables-08,business,receivables,거래대금 미수,미수금 독촉 문자를 어떻게 쓰죠,True
+receivables-09,business,receivables,거래대금 미수,납품 후 입금 지연이 반복돼요,True
+receivables-10,business,receivables,거래대금 미수,거래 대금 지급 기한을 정하고 싶어요,True
+staff-01,business,staff,직원 채용과 운영,첫 직원 채용으로 인건비가 늘까 걱정돼요,True
+staff-02,business,staff,직원 채용과 운영,직원 교육을 혼자 하니 지칩니다,True
+staff-03,business,staff,직원 채용과 운영,직원 근태를 어떻게 이야기하죠,True
+staff-04,business,staff,직원 채용과 운영,인건비 때문에 채용이 망설여져요,True
+staff-05,business,staff,직원 채용과 운영,직원 역할을 정리하고 싶어요,True
+staff-06,business,staff,직원 채용과 운영,인력 부족인데 채용 비용이 부담돼요,True
+staff-07,business,staff,직원 채용과 운영,사장으로서 직원 지시가 어렵습니다,True
+staff-08,business,staff,직원 채용과 운영,직원 운영 기준이 자꾸 흔들려요,True
+staff-09,business,staff,직원 채용과 운영,직원 교육 시간을 못 내겠어요,True
+staff-10,business,staff,직원 채용과 운영,직원에게 업무 역할을 어떻게 나누죠,True
+closure-01,business,closure,사업 중단·폐업,폐업을 결정하지 못하고 있어요,True
+closure-02,business,closure,사업 중단·폐업,가게를 접으면 실패자 같아요,True
+closure-03,business,closure,사업 중단·폐업,사업 중단 시점을 정하고 싶어요,True
+closure-04,business,closure,사업 중단·폐업,폐업 비용이 두려워 버티고 있어요,True
+closure-05,business,closure,사업 중단·폐업,적자 사업을 접는 게 맞을까요,True
+closure-06,business,closure,사업 중단·폐업,가게를 접고 다른 일을 하고 싶어요,True
+closure-07,business,closure,사업 중단·폐업,폐업 이야기를 가족에게 못 하겠어요,True
+closure-08,business,closure,사업 중단·폐업,사업 중단 뒤 생활이 막막해요,True
+closure-09,business,closure,사업 중단·폐업,폐업 결정을 계속 미루게 됩니다,True
+closure-10,business,closure,사업 중단·폐업,사업을 접어도 다시 시작할 수 있을까요,True
+startup-01,business,startup,사업 시작과 검증,창업 아이디어는 있는데 시작이 무서워요,True
+startup-02,business,startup,사업 시작과 검증,첫 창업 자금을 얼마나 써야 할까요,True
+startup-03,business,startup,사업 시작과 검증,사업 시작 전에 고객을 확인하고 싶어요,True
+startup-04,business,startup,사업 시작과 검증,가게 창업 계약을 서두르고 있어요,True
+startup-05,business,startup,사업 시작과 검증,사업 아이디어가 실제 수요인지 모르겠어요,True
+startup-06,business,startup,사업 시작과 검증,창업을 혼자 해도 될지 막막해요,True
+startup-07,business,startup,사업 시작과 검증,소규모 창업으로 시험해보고 싶어요,True
+startup-08,business,startup,사업 시작과 검증,사업 시작을 가족이 반대합니다,True
+startup-09,business,startup,사업 시작과 검증,창업 계획이 너무 커져 불안해요,True
+startup-10,business,startup,사업 시작과 검증,사업 아이디어 검증을 어디서 하죠,True
+partner_contact-01,relationship,partner_contact,연인의 연락과 기대,남자친구 답장이 하루 종일 없어요,True
+partner_contact-02,relationship,partner_contact,연인의 연락과 기대,여자친구 연락이 예전보다 줄었어요,True
+partner_contact-03,relationship,partner_contact,연인의 연락과 기대,연인이 자꾸 읽씹해서 서운해요,True
+partner_contact-04,relationship,partner_contact,연인의 연락과 기대,배우자의 전화 빈도가 달라졌어요,True
+partner_contact-05,relationship,partner_contact,연인의 연락과 기대,남친과 연락 기준을 맞추고 싶어요,True
+partner_contact-06,relationship,partner_contact,연인의 연락과 기대,여친의 답장을 계속 기다리게 돼요,True
+partner_contact-07,relationship,partner_contact,연인의 연락과 기대,연인에게 매일 연락해달라 말해도 될까요,True
+partner_contact-08,relationship,partner_contact,연인의 연락과 기대,남자친구 연락이 없으면 불안합니다,True
+partner_contact-09,relationship,partner_contact,연인의 연락과 기대,여자친구와 답장 속도로 다퉈요,True
+partner_contact-10,relationship,partner_contact,연인의 연락과 기대,연인과 연락 시간을 정하고 싶어요,True
+breakup-01,relationship,breakup,이별 후 회복,이별 뒤 일상이 무너져 힘들어요,True
+breakup-02,relationship,breakup,이별 후 회복,헤어진 사람이 자꾸 그리워요,True
+breakup-03,relationship,breakup,이별 후 회복,이별의 슬픔을 견디기 어려워요,True
+breakup-04,relationship,breakup,이별 후 회복,차였다는 생각에 자신을 못 믿겠어요,True
+breakup-05,relationship,breakup,이별 후 회복,헤어진 뒤 사진을 못 지우겠어요,True
+breakup-06,relationship,breakup,이별 후 회복,이별 후 혼자 밥 먹는 게 외로워요,True
+breakup-07,relationship,breakup,이별 후 회복,전 연인을 잊지 못해 힘듭니다,True
+breakup-08,relationship,breakup,이별 후 회복,헤어졌는데 계속 울게 돼요,True
+breakup-09,relationship,breakup,이별 후 회복,이별 후 생활을 다시 정리하고 싶어요,True
+breakup-10,relationship,breakup,이별 후 회복,헤어진 뒤 마음이 오래 아파요,True
+reconcile-01,relationship,reconcile,재회 판단,전남친에게 연락이 와서 재회를 고민해요,True
+reconcile-02,relationship,reconcile,재회 판단,전여친과 다시 만나도 될까요,True
+reconcile-03,relationship,reconcile,재회 판단,재회하면 같은 문제로 싸울까 겁나요,True
+reconcile-04,relationship,reconcile,재회 판단,전 연인 연락에 마음이 흔들려요,True
+reconcile-05,relationship,reconcile,재회 판단,다시 만나자는 말을 믿어도 될까요,True
+reconcile-06,relationship,reconcile,재회 판단,재회를 원하지만 신뢰가 없어요,True
+reconcile-07,relationship,reconcile,재회 판단,헤어진 이유가 그대로인데 다시 만나고 싶어요,True
+reconcile-08,relationship,reconcile,재회 판단,전 연인이 연락해서 만나자고 해요,True
+reconcile-09,relationship,reconcile,재회 판단,재회 전에 무엇을 확인해야 하죠,True
+reconcile-10,relationship,reconcile,재회 판단,다시 만날지 생각할 시간이 필요해요,True
+infidelity-01,relationship,infidelity,연인의 외도와 신뢰,배우자의 외도를 알게 됐어요,True
+infidelity-02,relationship,infidelity,연인의 외도와 신뢰,연인이 양다리를 걸쳤습니다,True
+infidelity-03,relationship,infidelity,연인의 외도와 신뢰,남편이 바람을 피웠어요,True
+infidelity-04,relationship,infidelity,연인의 외도와 신뢰,아내의 불륜 뒤 신뢰가 깨졌어요,True
+infidelity-05,relationship,infidelity,연인의 외도와 신뢰,여자친구 외도를 용서할지 모르겠어요,True
+infidelity-06,relationship,infidelity,연인의 외도와 신뢰,남자친구가 바람을 피운 걸 인정했어요,True
+infidelity-07,relationship,infidelity,연인의 외도와 신뢰,외도 뒤 계속 확인하게 됩니다,True
+infidelity-08,relationship,infidelity,연인의 외도와 신뢰,배우자 불륜을 알고 마음이 무너졌어요,True
+infidelity-09,relationship,infidelity,연인의 외도와 신뢰,연인의 양다리 때문에 자책해요,True
+infidelity-10,relationship,infidelity,연인의 외도와 신뢰,외도 이후 관계를 어떻게 볼까요,True
+marriage-01,relationship,marriage,결혼 결정과 준비,결혼 확신이 들지 않아 망설여요,True
+marriage-02,relationship,marriage,결혼 결정과 준비,재혼 결정을 가족에게 말하기 어려워요,True
+marriage-03,relationship,marriage,결혼 결정과 준비,결혼 준비 중 가치관 차이를 봤어요,True
+marriage-04,relationship,marriage,결혼 결정과 준비,결혼을 미루고 싶은데 눈치가 보여요,True
+marriage-05,relationship,marriage,결혼 결정과 준비,파혼 결정이 두렵습니다,True
+marriage-06,relationship,marriage,결혼 결정과 준비,결혼해야 하는지 제 마음을 모르겠어요,True
+marriage-07,relationship,marriage,결혼 결정과 준비,결혼식을 취소하고 싶은 마음이 들어요,True
+marriage-08,relationship,marriage,결혼 결정과 준비,재혼 전에 확인할 조건이 궁금해요,True
+marriage-09,relationship,marriage,결혼 결정과 준비,결혼 결정에 부모님 의견이 너무 커요,True
+marriage-10,relationship,marriage,결혼 결정과 준비,결혼할지 혼자 살지 고민해요,True
+chores-01,relationship,chores,부부의 가사 분담,가사 분담이 늘 저에게 몰려요,True
+chores-02,relationship,chores,부부의 가사 분담,남편이 집안일을 안 해요,True
+chores-03,relationship,chores,부부의 가사 분담,아내와 가사 분담으로 다툽니다,True
+chores-04,relationship,chores,부부의 가사 분담,집안일을 혼자 챙겨서 지쳐요,True
+chores-05,relationship,chores,부부의 가사 분담,배우자는 집안일을 부탁해야만 해요,True
+chores-06,relationship,chores,부부의 가사 분담,가사 분담표를 함께 만들고 싶어요,True
+chores-07,relationship,chores,부부의 가사 분담,남편과 집안일 기준이 달라요,True
+chores-08,relationship,chores,부부의 가사 분담,아내가 집안일을 당연히 제 몫으로 봐요,True
+chores-09,relationship,chores,부부의 가사 분담,배우자와 집안일 책임을 나누고 싶어요,True
+chores-10,relationship,chores,부부의 가사 분담,가사 분담 이야기를 꺼내기가 어렵네요,True
+couple_money-01,relationship,couple_money,연인·부부의 돈 가치관,배우자와 소비 습관이 정반대예요,True
+couple_money-02,relationship,couple_money,연인·부부의 돈 가치관,연인과 돈 관리 방식이 달라요,True
+couple_money-03,relationship,couple_money,연인·부부의 돈 가치관,부부 생활비 분담을 못 정했어요,True
+couple_money-04,relationship,couple_money,연인·부부의 돈 가치관,남편의 씀씀이가 걱정됩니다,True
+couple_money-05,relationship,couple_money,연인·부부의 돈 가치관,아내와 통장을 합칠지 고민이에요,True
+couple_money-06,relationship,couple_money,연인·부부의 돈 가치관,연인의 소비관 때문에 자꾸 다퉈요,True
+couple_money-07,relationship,couple_money,연인·부부의 돈 가치관,배우자와 지출 기준을 맞추고 싶어요,True
+couple_money-08,relationship,couple_money,연인·부부의 돈 가치관,부부 중 한쪽만 경제권을 가져요,True
+couple_money-09,relationship,couple_money,연인·부부의 돈 가치관,남편과 생활비 분담이 불공평해요,True
+couple_money-10,relationship,couple_money,연인·부부의 돈 가치관,아내와 돈 관리 이야기를 피하게 돼요,True
+jealousy-01,relationship,jealousy,관계에서의 질투,연인의 이성 친구에게 질투가 나요,True
+jealousy-02,relationship,jealousy,관계에서의 질투,남친 과거 연애를 자꾸 비교해요,True
+jealousy-03,relationship,jealousy,관계에서의 질투,여친에게 질투심을 드러내게 돼요,True
+jealousy-04,relationship,jealousy,관계에서의 질투,배우자 동료에게 질투가 생깁니다,True
+jealousy-05,relationship,jealousy,관계에서의 질투,연인에게 질투한다고 말해도 될까요,True
+jealousy-06,relationship,jealousy,관계에서의 질투,남자친구의 과거 연애가 신경 쓰여요,True
+jealousy-07,relationship,jealousy,관계에서의 질투,여자친구가 칭찬받으면 질투해요,True
+jealousy-08,relationship,jealousy,관계에서의 질투,배우자에 대한 질투를 조절하고 싶어요,True
+jealousy-09,relationship,jealousy,관계에서의 질투,연인의 이성 친구 모임이 불편해요,True
+jealousy-10,relationship,jealousy,관계에서의 질투,질투심 때문에 연인을 감시하고 싶어져요,True
+consent-01,relationship,consent,스킨십과 동의,원치 않는 스킨십을 거절하기 어려워요,True
+consent-02,relationship,consent,스킨십과 동의,연인의 성관계 요구가 부담돼요,True
+consent-03,relationship,consent,스킨십과 동의,신체 접촉 속도가 저에게 빨라요,True
+consent-04,relationship,consent,스킨십과 동의,스킨십 거절을 이해하지 못해요,True
+consent-05,relationship,consent,스킨십과 동의,동의 없는 신체 접촉이 불편해요,True
+consent-06,relationship,consent,스킨십과 동의,성관계를 원하지 않는다고 말하고 싶어요,True
+consent-07,relationship,consent,스킨십과 동의,스킨십을 강요받는 느낌이에요,True
+consent-08,relationship,consent,스킨십과 동의,연인의 신체 접촉을 싫다고 해도 될까요,True
+consent-09,relationship,consent,스킨십과 동의,스킨십 속도를 천천히 맞추고 싶어요,True
+consent-10,relationship,consent,스킨십과 동의,성관계 거절 후 눈치를 보게 돼요,True
+partner_control-01,relationship,partner_control,연인의 감시·통제,남친이 제 위치를 계속 추적해요,True
+partner_control-02,relationship,partner_control,연인의 감시·통제,여친이 비밀번호를 요구합니다,True
+partner_control-03,relationship,partner_control,연인의 감시·통제,연인이 제 친구를 못 만나게 해요,True
+partner_control-04,relationship,partner_control,연인의 감시·통제,배우자가 입는 옷을 간섭해요,True
+partner_control-05,relationship,partner_control,연인의 감시·통제,연인에게 일상을 감시받는 느낌이에요,True
+partner_control-06,relationship,partner_control,연인의 감시·통제,남자친구가 제 행동을 통제해요,True
+partner_control-07,relationship,partner_control,연인의 감시·통제,여자친구가 계정 비밀번호를 요구해요,True
+partner_control-08,relationship,partner_control,연인의 감시·통제,배우자의 위치 추적이 불편합니다,True
+partner_control-09,relationship,partner_control,연인의 감시·통제,연인이 인간관계를 통제해요,True
+partner_control-10,relationship,partner_control,연인의 감시·통제,남친의 감시를 애정으로 받아야 할까요,True
+partner_looks-01,relationship,partner_looks,연인의 외모 평가,남친이 제 외모를 평가해요,True
+partner_looks-02,relationship,partner_looks,연인의 외모 평가,여친이 제 몸매를 놀립니다,True
+partner_looks-03,relationship,partner_looks,연인의 외모 평가,연인이 살쪘다고 자꾸 말해요,True
+partner_looks-04,relationship,partner_looks,연인의 외모 평가,배우자가 외모 비교를 해서 상처예요,True
+partner_looks-05,relationship,partner_looks,연인의 외모 평가,남자친구가 저를 못생겼다고 해요,True
+partner_looks-06,relationship,partner_looks,연인의 외모 평가,여자친구의 외모 지적이 힘들어요,True
+partner_looks-07,relationship,partner_looks,연인의 외모 평가,연인이 제 몸매를 놀려서 위축돼요,True
+partner_looks-08,relationship,partner_looks,연인의 외모 평가,배우자가 남의 외모와 비교해요,True
+partner_looks-09,relationship,partner_looks,연인의 외모 평가,남친에게 외모 이야기를 그만해달라 하고 싶어요,True
+partner_looks-10,relationship,partner_looks,연인의 외모 평가,여친의 외모 농담에 웃어줘야 할까요,True
+long_distance-01,relationship,long_distance,장거리 관계,장거리 연애로 외로움이 커져요,True
+long_distance-02,relationship,long_distance,장거리 관계,장거리 관계의 방문 비용이 부담돼요,True
+long_distance-03,relationship,long_distance,장거리 관계,연인과 멀리 살아 만남이 드물어요,True
+long_distance-04,relationship,long_distance,장거리 관계,장거리 연애 끝이 보이지 않아요,True
+long_distance-05,relationship,long_distance,장거리 관계,장거리 관계에서 통화 시간을 못 맞춰요,True
+long_distance-06,relationship,long_distance,장거리 관계,장거리 연애를 시작할지 고민돼요,True
+long_distance-07,relationship,long_distance,장거리 관계,연인이 멀리 살아 서운함이 쌓여요,True
+long_distance-08,relationship,long_distance,장거리 관계,장거리 연애 때문에 주말마다 지쳐요,True
+long_distance-09,relationship,long_distance,장거리 관계,장거리 관계를 유지할 기준이 필요해요,True
+long_distance-10,relationship,long_distance,장거리 관계,장거리 연애 중 한쪽만 찾아가게 돼요,True
+parent_interference-01,family,parent_interference,부모의 선택 간섭,부모님이 제 선택마다 간섭해요,True
+parent_interference-02,family,parent_interference,부모의 선택 간섭,엄마의 허락 없이는 결정을 못 해요,True
+parent_interference-03,family,parent_interference,부모의 선택 간섭,아빠가 진로를 반대합니다,True
+parent_interference-04,family,parent_interference,부모의 선택 간섭,부모님이 독립을 반대해요,True
+parent_interference-05,family,parent_interference,부모의 선택 간섭,엄마가 제 선택을 대신하려 해요,True
+parent_interference-06,family,parent_interference,부모의 선택 간섭,아빠의 간섭에 숨이 막혀요,True
+parent_interference-07,family,parent_interference,부모의 선택 간섭,부모님 허락을 기다리느라 지쳤어요,True
+parent_interference-08,family,parent_interference,부모의 선택 간섭,엄마가 제 결정을 받아주지 않아요,True
+parent_interference-09,family,parent_interference,부모의 선택 간섭,아빠가 제 선택을 모두 틀렸대요,True
+parent_interference-10,family,parent_interference,부모의 선택 간섭,부모님 간섭에 경계를 말하고 싶어요,True
+parent_comparison-01,family,parent_comparison,가족의 비교하는 말,엄마가 남의 집 자녀와 비교해요,True
+parent_comparison-02,family,parent_comparison,가족의 비교하는 말,아빠가 형제와 저를 비교합니다,True
+parent_comparison-03,family,parent_comparison,가족의 비교하는 말,부모님 비교 때문에 집에 가기 싫어요,True
+parent_comparison-04,family,parent_comparison,가족의 비교하는 말,가족이 누구네 자식 이야기를 꺼내요,True
+parent_comparison-05,family,parent_comparison,가족의 비교하는 말,엄마의 성적 비교가 아직 상처예요,True
+parent_comparison-06,family,parent_comparison,가족의 비교하는 말,아빠가 남의 집 연봉과 비교해요,True
+parent_comparison-07,family,parent_comparison,가족의 비교하는 말,부모님이 형제가 저보다 낫다고 해요,True
+parent_comparison-08,family,parent_comparison,가족의 비교하는 말,가족 모임의 비교 발언이 괴로워요,True
+parent_comparison-09,family,parent_comparison,가족의 비교하는 말,엄마에게 비교를 그만해달라 말하고 싶어요,True
+parent_comparison-10,family,parent_comparison,가족의 비교하는 말,부모님 비교를 들으면 위축됩니다,True
+family_money-01,family,family_money,가족의 금전 요구,부모님이 계속 돈을 달라고 해요,True
+family_money-02,family,family_money,가족의 금전 요구,형제가 보증을 부탁합니다,True
+family_money-03,family,family_money,가족의 금전 요구,엄마 생활비 지원이 제 형편을 넘어요,True
+family_money-04,family,family_money,가족의 금전 요구,아빠가 제 이름으로 보증을 원해요,True
+family_money-05,family,family_money,가족의 금전 요구,동생이 돈을 빌려달라고 해요,True
+family_money-06,family,family_money,가족의 금전 요구,가족 금전 요구를 거절하기 어려워요,True
+family_money-07,family,family_money,가족의 금전 요구,자매에게 돈을 빌려줘도 될까요,True
+family_money-08,family,family_money,가족의 금전 요구,부모님 생활비 지원을 줄여야 해요,True
+family_money-09,family,family_money,가족의 금전 요구,형제의 금전 요구에 죄책감이 들어요,True
+family_money-10,family,family_money,가족의 금전 요구,가족 돈 요구 때문에 제 생활이 어려워요,True
+caregiving-01,family,caregiving,돌봄으로 인한 소진,부모님 간병을 혼자 맡아 지쳤어요,True
+caregiving-02,family,caregiving,돌봄으로 인한 소진,치매 어머니를 돌보다 울게 돼요,True
+caregiving-03,family,caregiving,돌봄으로 인한 소진,병간호 때문에 제 생활이 없어요,True
+caregiving-04,family,caregiving,돌봄으로 인한 소진,돌봄에 지쳐 잠깐 쉬고 싶어요,True
+caregiving-05,family,caregiving,돌봄으로 인한 소진,요양 부담이 너무 크게 느껴져요,True
+caregiving-06,family,caregiving,돌봄으로 인한 소진,간병 중 짜증 내는 제가 싫어요,True
+caregiving-07,family,caregiving,돌봄으로 인한 소진,가족 간병으로 일도 쉬고 있어요,True
+caregiving-08,family,caregiving,돌봄으로 인한 소진,돌봄 피로를 말하면 불효 같아요,True
+caregiving-09,family,caregiving,돌봄으로 인한 소진,병간호를 도와달라고 요청하고 싶어요,True
+caregiving-10,family,caregiving,돌봄으로 인한 소진,간병에서 잠시 벗어날 시간이 필요해요,True
+sibling_care-01,family,sibling_care,형제자매의 돌봄 분담,형제와 간병 분담이 안 돼요,True
+sibling_care-02,family,sibling_care,형제자매의 돌봄 분담,자매 사이 돌봄 분담이 불공평해요,True
+sibling_care-03,family,sibling_care,형제자매의 돌봄 분담,동생은 병원에 안 가고 저만 혼자 가요,True
+sibling_care-04,family,sibling_care,형제자매의 돌봄 분담,오빠와 돌봄 분담을 정하고 싶어요,True
+sibling_care-05,family,sibling_care,형제자매의 돌봄 분담,언니는 돌봄을 나만 하라고 해요,True
+sibling_care-06,family,sibling_care,형제자매의 돌봄 분담,형제끼리 부양을 나만 맡게 됐어요,True
+sibling_care-07,family,sibling_care,형제자매의 돌봄 분담,자매의 간병 분담 약속이 안 지켜져요,True
+sibling_care-08,family,sibling_care,형제자매의 돌봄 분담,동생과 돌봄 분담 대화를 피하게 돼요,True
+sibling_care-09,family,sibling_care,형제자매의 돌봄 분담,형제 중 나만 병원 동행을 혼자 해요,True
+sibling_care-10,family,sibling_care,형제자매의 돌봄 분담,오빠에게 간병 분담을 요청하고 싶어요,True
+inlaws-01,family,inlaws,양가와의 경계,시댁 방문 부담이 너무 큽니다,True
+inlaws-02,family,inlaws,양가와의 경계,시부모님 간섭으로 갈등이 생겨요,True
+inlaws-03,family,inlaws,양가와의 경계,장인어른 방문 요구가 부담돼요,True
+inlaws-04,family,inlaws,양가와의 경계,장모님 연락에 늘 눈치를 봐요,True
+inlaws-05,family,inlaws,양가와의 경계,양가 명절 일정을 못 정했어요,True
+inlaws-06,family,inlaws,양가와의 경계,처가와 경계를 말하기 어렵습니다,True
+inlaws-07,family,inlaws,양가와의 경계,시댁 연락 때문에 배우자와 다퉈요,True
+inlaws-08,family,inlaws,양가와의 경계,양가의 잦은 방문이 힘들어요,True
+inlaws-09,family,inlaws,양가와의 경계,장모님의 간섭에 어떻게 말하죠,True
+inlaws-10,family,inlaws,양가와의 경계,시부모님과 명절 어디로 갈지 갈등해요,True
+child_study-01,family,child_study,자녀의 공부와 진로,딸 성적이 떨어져 걱정돼요,True
+child_study-02,family,child_study,자녀의 공부와 진로,아들이 공부를 아예 안 하려 해요,True
+child_study-03,family,child_study,자녀의 공부와 진로,자녀 학원을 더 보내야 할까요,True
+child_study-04,family,child_study,자녀의 공부와 진로,아이의 진로 선택이 제 기대와 달라요,True
+child_study-05,family,child_study,자녀의 공부와 진로,딸에게 공부 얘기만 하게 돼요,True
+child_study-06,family,child_study,자녀의 공부와 진로,아들 성적 때문에 다툼이 잦아요,True
+child_study-07,family,child_study,자녀의 공부와 진로,자녀 공부를 어디까지 도와야 하죠,True
+child_study-08,family,child_study,자녀의 공부와 진로,아이와 학원 문제를 이야기하고 싶어요,True
+child_study-09,family,child_study,자녀의 공부와 진로,딸 진로를 제가 정하려는 것 같아요,True
+child_study-10,family,child_study,자녀의 공부와 진로,아들의 학교 공부 어려움을 알고 싶어요,True
+child_phone-01,family,child_phone,자녀의 휴대폰·게임,아들이 게임만 하려 해서 걱정이에요,True
+child_phone-02,family,child_phone,자녀의 휴대폰·게임,딸 휴대폰 시간을 정하고 싶어요,True
+child_phone-03,family,child_phone,자녀의 휴대폰·게임,자녀 스마트폰 사용으로 매일 싸워요,True
+child_phone-04,family,child_phone,자녀의 휴대폰·게임,아이의 밤늦은 영상 시청이 걱정돼요,True
+child_phone-05,family,child_phone,자녀의 휴대폰·게임,아들과 게임 규칙을 못 정하겠어요,True
+child_phone-06,family,child_phone,자녀의 휴대폰·게임,딸이 휴대폰을 숨겨서 사용해요,True
+child_phone-07,family,child_phone,자녀의 휴대폰·게임,자녀 게임 때문에 수면이 줄었어요,True
+child_phone-08,family,child_phone,자녀의 휴대폰·게임,아이에게 스마트폰을 언제 줄까요,True
+child_phone-09,family,child_phone,자녀의 휴대폰·게임,딸 휴대폰을 압수해야 할까요,True
+child_phone-10,family,child_phone,자녀의 휴대폰·게임,아들 영상 시청을 줄이도록 돕고 싶어요,True
+child_defiance-01,family,child_defiance,자녀와의 말다툼,아들이 말대꾸하면 저도 소리 질러요,True
+child_defiance-02,family,child_defiance,자녀와의 말다툼,딸 반항에 화가 치밀어요,True
+child_defiance-03,family,child_defiance,자녀와의 말다툼,자녀와 대화만 하면 싸움이 돼요,True
+child_defiance-04,family,child_defiance,자녀와의 말다툼,아이가 대화를 거부합니다,True
+child_defiance-05,family,child_defiance,자녀와의 말다툼,아들과 말싸움이 멈추지 않아요,True
+child_defiance-06,family,child_defiance,자녀와의 말다툼,딸에게 소리를 질러 마음이 아파요,True
+child_defiance-07,family,child_defiance,자녀와의 말다툼,자녀 반항을 어떻게 받아들여야 하죠,True
+child_defiance-08,family,child_defiance,자녀와의 말다툼,아이와 대화가 매번 싸움으로 끝나요,True
+child_defiance-09,family,child_defiance,자녀와의 말다툼,아들의 말대꾸를 들으면 흥분해요,True
+child_defiance-10,family,child_defiance,자녀와의 말다툼,딸이 대화를 거부해 답답해요,True
+child_independence-01,family,child_independence,성인 자녀의 독립,성인 아들 독립을 허락하기 어려워요,True
+child_independence-02,family,child_independence,성인 자녀의 독립,딸의 독립 준비가 걱정돼요,True
+child_independence-03,family,child_independence,성인 자녀의 독립,자녀 취업에 간섭하게 됩니다,True
+child_independence-04,family,child_independence,성인 자녀의 독립,아들에게 연락을 강요하는 것 같아요,True
+child_independence-05,family,child_independence,성인 자녀의 독립,성인 딸 결혼에 간섭하고 싶어져요,True
+child_independence-06,family,child_independence,성인 자녀의 독립,자녀 독립 비용을 어디까지 도울까요,True
+child_independence-07,family,child_independence,성인 자녀의 독립,아들 독립 뒤 자꾸 확인하게 돼요,True
+child_independence-08,family,child_independence,성인 자녀의 독립,딸에게 취업 간섭을 그만하고 싶어요,True
+child_independence-09,family,child_independence,성인 자녀의 독립,성인 자녀 독립을 믿고 기다리기 어렵네요,True
+child_independence-10,family,child_independence,성인 자녀의 독립,딸 독립 결정을 존중하고 싶어요,True
+parenting_disagreement-01,family,parenting_disagreement,부부의 양육 방식 차이,남편과 훈육 기준이 달라요,True
+parenting_disagreement-02,family,parenting_disagreement,부부의 양육 방식 차이,아내와 양육 방식으로 다퉈요,True
+parenting_disagreement-03,family,parenting_disagreement,부부의 양육 방식 차이,부부가 육아 방식을 못 맞추겠어요,True
+parenting_disagreement-04,family,parenting_disagreement,부부의 양육 방식 차이,배우자가 제 훈육을 아이 앞에서 비난해요,True
+parenting_disagreement-05,family,parenting_disagreement,부부의 양육 방식 차이,남편과 아이 교육 방식이 정반대예요,True
+parenting_disagreement-06,family,parenting_disagreement,부부의 양육 방식 차이,아내와 훈육 기준을 정하고 싶어요,True
+parenting_disagreement-07,family,parenting_disagreement,부부의 양육 방식 차이,부부 양육 갈등이 아이에게 미안해요,True
+parenting_disagreement-08,family,parenting_disagreement,부부의 양육 방식 차이,배우자와 육아 방식 대화가 안 돼요,True
+parenting_disagreement-09,family,parenting_disagreement,부부의 양육 방식 차이,남편의 양육 방식이 너무 엄격해요,True
+parenting_disagreement-10,family,parenting_disagreement,부부의 양육 방식 차이,아내와 아이 교육 방식 타협이 어렵네요,True
+fertility-01,family,fertility,임신 준비와 난임의 부담,난임 치료로 마음이 지쳤어요,True
+fertility-02,family,fertility,임신 준비와 난임의 부담,임신 준비가 기대보다 오래 걸려요,True
+fertility-03,family,fertility,임신 준비와 난임의 부담,주변의 임신 압박이 힘들어요,True
+fertility-04,family,fertility,임신 준비와 난임의 부담,아이 언제 갖느냐는 질문이 아파요,True
+fertility-05,family,fertility,임신 준비와 난임의 부담,난임 때문에 스스로를 탓해요,True
+fertility-06,family,fertility,임신 준비와 난임의 부담,임신 준비 중 부부가 지쳐가요,True
+fertility-07,family,fertility,임신 준비와 난임의 부담,난임 치료를 잠시 쉴지 고민이에요,True
+fertility-08,family,fertility,임신 준비와 난임의 부담,임신 압박을 받는 모임이 부담돼요,True
+fertility-09,family,fertility,임신 준비와 난임의 부담,임신 준비 비용 때문에 불안해요,True
+fertility-10,family,fertility,임신 준비와 난임의 부담,난임 결과를 기다리는 시간이 괴로워요,True
+debt-01,finance,debt,빚과 상환 압박,빚 상환 때문에 매일 불안해요,True
+debt-02,finance,debt,빚과 상환 압박,대출 이자가 생활을 압박해요,True
+debt-03,finance,debt,빚과 상환 압박,연체를 막으려 또 빌리고 있어요,True
+debt-04,finance,debt,빚과 상환 압박,채무를 어디서부터 정리하죠,True
+debt-05,finance,debt,빚과 상환 압박,대출 상환일만 다가오면 겁나요,True
+debt-06,finance,debt,빚과 상환 압박,부채 규모를 확인하는 게 무서워요,True
+debt-07,finance,debt,빚과 상환 압박,빚을 가족에게 말하기 어렵습니다,True
+debt-08,finance,debt,빚과 상환 압박,연체 통지를 받고 막막해요,True
+debt-09,finance,debt,빚과 상환 압박,채무 조정 상담을 받아도 될까요,True
+debt-10,finance,debt,빚과 상환 압박,대출 이자 때문에 잠이 오지 않아요,True
+basic_bills-01,finance,basic_bills,당장 필요한 생활비,이번 달 월세를 못 내겠어요,True
+basic_bills-02,finance,basic_bills,당장 필요한 생활비,공과금이 밀려 막막해요,True
+basic_bills-03,finance,basic_bills,당장 필요한 생활비,생활비가 모자라 식사를 줄여요,True
+basic_bills-04,finance,basic_bills,당장 필요한 생활비,식비가 부족해 걱정입니다,True
+basic_bills-05,finance,basic_bills,당장 필요한 생활비,월세가 부족한데 도움을 어디서 찾죠,True
+basic_bills-06,finance,basic_bills,당장 필요한 생활비,생활비가 없어 하루하루가 불안해요,True
+basic_bills-07,finance,basic_bills,당장 필요한 생활비,공과금을 감당하기 어렵습니다,True
+basic_bills-08,finance,basic_bills,당장 필요한 생활비,생활비 부족을 말하기 부끄러워요,True
+basic_bills-09,finance,basic_bills,당장 필요한 생활비,월세가 밀려 집주인에게 말해야 해요,True
+basic_bills-10,finance,basic_bills,당장 필요한 생활비,식비를 감당할 여유가 없어요,True
+budget-01,finance,budget,지출 관리,가계부를 써도 돈이 새는 것 같아요,True
+budget-02,finance,budget,지출 관리,지출 관리를 시작하고 싶어요,True
+budget-03,finance,budget,지출 관리,고정비를 어떻게 줄일지 모르겠어요,True
+budget-04,finance,budget,지출 관리,충동 구매 뒤 후회가 큽니다,True
+budget-05,finance,budget,지출 관리,소비 기록을 보는 게 두려워요,True
+budget-06,finance,budget,지출 관리,지출을 줄이면 너무 답답할까 걱정돼요,True
+budget-07,finance,budget,지출 관리,고정비가 소득에 비해 많아요,True
+budget-08,finance,budget,지출 관리,가계부를 꾸준히 못 써요,True
+budget-09,finance,budget,지출 관리,충동 구매를 줄일 장치가 필요해요,True
+budget-10,finance,budget,지출 관리,작은 지출 관리부터 해보고 싶어요,True
+saving-01,finance,saving,저축과 비상자금,저축을 시작할 여유가 없는 것 같아요,True
+saving-02,finance,saving,저축과 비상자금,비상금이 없어 작은 지출도 불안해요,True
+saving-03,finance,saving,저축과 비상자금,목돈을 모으는 계획이 막막해요,True
+saving-04,finance,saving,저축과 비상자금,저축 목표가 너무 부담스럽습니다,True
+saving-05,finance,saving,저축과 비상자금,비상 자금을 마련하고 싶어요,True
+saving-06,finance,saving,저축과 비상자금,저축을 못 하는 저를 자책해요,True
+saving-07,finance,saving,저축과 비상자금,소액 저축부터 시작해도 될까요,True
+saving-08,finance,saving,저축과 비상자금,비상금 계획을 어디서 세우죠,True
+saving-09,finance,saving,저축과 비상자금,목돈 목표를 어떻게 정하면 좋죠,True
+saving-10,finance,saving,저축과 비상자금,저축 계획이 매달 무너져요,True
+investment_loss-01,finance,investment_loss,투자 손실과 위험 관리,주식 손실 때문에 하루 종일 시세를 봐요,True
+investment_loss-02,finance,investment_loss,투자 손실과 위험 관리,코인 손실을 만회하고 싶어요,True
+investment_loss-03,finance,investment_loss,투자 손실과 위험 관리,투자 손실을 가족에게 숨기고 있어요,True
+investment_loss-04,finance,investment_loss,투자 손실과 위험 관리,본전 생각에 팔지 못하겠어요,True
+investment_loss-05,finance,investment_loss,투자 손실과 위험 관리,한 종목에 물려 마음이 불안해요,True
+investment_loss-06,finance,investment_loss,투자 손실과 위험 관리,손절 결정을 못 내리고 있습니다,True
+investment_loss-07,finance,investment_loss,투자 손실과 위험 관리,투자 손실 뒤 추가 매수를 고민해요,True
+investment_loss-08,finance,investment_loss,투자 손실과 위험 관리,주식 손실로 잠을 못 자요,True
+investment_loss-09,finance,investment_loss,투자 손실과 위험 관리,코인 손실 때문에 생활비도 줄었어요,True
+investment_loss-10,finance,investment_loss,투자 손실과 위험 관리,손실을 만회하려 더 빌리고 싶어져요,True
+investment_fomo-01,finance,investment_fomo,투자 조급함,남들이 주식으로 돈 벌었다니 조급해요,True
+investment_fomo-02,finance,investment_fomo,투자 조급함,급등하는 코인을 따라 사고 싶어요,True
+investment_fomo-03,finance,investment_fomo,투자 조급함,투자에서 저만 뒤처진 느낌이에요,True
+investment_fomo-04,finance,investment_fomo,투자 조급함,남이 좋다는 주식을 따라 살까 해요,True
+investment_fomo-05,finance,investment_fomo,투자 조급함,투자를 안 하면 소외되는 기분이에요,True
+investment_fomo-06,finance,investment_fomo,투자 조급함,코인 급등 소식만 보면 마음이 급해요,True
+investment_fomo-07,finance,investment_fomo,투자 조급함,남들 수익에 투자 계획이 흔들려요,True
+investment_fomo-08,finance,investment_fomo,투자 조급함,주식을 시작하고 싶은데 몰라서 겁나요,True
+investment_fomo-09,finance,investment_fomo,투자 조급함,남이 투자로 돈 벌었다는 말이 신경 쓰여요,True
+investment_fomo-10,finance,investment_fomo,투자 조급함,조급해서 코인에 큰돈을 넣고 싶어져요,True
+friend_loan-01,finance,friend_loan,지인과의 돈거래,친구가 돈을 빌려달라고 해요,True
+friend_loan-02,finance,friend_loan,지인과의 돈거래,지인에게 빌려준 돈을 못 받았어요,True
+friend_loan-03,finance,friend_loan,지인과의 돈거래,동료와 금전 거래를 해도 될까요,True
+friend_loan-04,finance,friend_loan,지인과의 돈거래,친구가 돈을 안 갚아 속상해요,True
+friend_loan-05,finance,friend_loan,지인과의 돈거래,지인에게 돈을 빌려주기 부담돼요,True
+friend_loan-06,finance,friend_loan,지인과의 돈거래,친구에게 빌려준 돈 이야기를 못 꺼내요,True
+friend_loan-07,finance,friend_loan,지인과의 돈거래,동료가 돈을 빌려달라 해서 난감해요,True
+friend_loan-08,finance,friend_loan,지인과의 돈거래,지인과 금전 거래 뒤 연락이 끊겼어요,True
+friend_loan-09,finance,friend_loan,지인과의 돈거래,친구에게 돈 빌려주기를 거절하고 싶어요,True
+friend_loan-10,finance,friend_loan,지인과의 돈거래,친구가 빌려간 돈의 상환일을 미뤄요,True
+housing_deposit-01,finance,housing_deposit,주거 계약과 보증금,전세 계약이 안전한지 걱정돼요,True
+housing_deposit-02,finance,housing_deposit,주거 계약과 보증금,보증금 반환이 늦어지고 있어요,True
+housing_deposit-03,finance,housing_deposit,주거 계약과 보증금,임대차 계약 만료가 다가와 불안해요,True
+housing_deposit-04,finance,housing_deposit,주거 계약과 보증금,집 계약 전에 확인할 게 많아 막막해요,True
+housing_deposit-05,finance,housing_deposit,주거 계약과 보증금,전세 사기일까 의심돼요,True
+housing_deposit-06,finance,housing_deposit,주거 계약과 보증금,보증금을 돌려받지 못할까 무서워요,True
+housing_deposit-07,finance,housing_deposit,주거 계약과 보증금,임대차 계약서를 다시 확인하고 싶어요,True
+housing_deposit-08,finance,housing_deposit,주거 계약과 보증금,집 계약을 서두르라 해서 걱정돼요,True
+housing_deposit-09,finance,housing_deposit,주거 계약과 보증금,전세 계약 조건이 자꾸 바뀌어요,True
+housing_deposit-10,finance,housing_deposit,주거 계약과 보증금,보증금 반환 약속을 기록하고 싶어요,True
+scam-01,finance,scam,사기 의심과 피해,보이스피싱 전화를 받은 것 같아요,True
+scam-02,finance,scam,사기 의심과 피해,사기 문자를 눌러서 불안해요,True
+scam-03,finance,scam,사기 의심과 피해,중고 거래 사기를 당했어요,True
+scam-04,finance,scam,사기 의심과 피해,수상한 송금 요청을 받았습니다,True
+scam-05,finance,scam,사기 의심과 피해,투자 사기 피해가 의심돼요,True
+scam-06,finance,scam,사기 의심과 피해,보이스피싱으로 돈을 보낸 것 같아요,True
+scam-07,finance,scam,사기 의심과 피해,사기인 줄 모르고 정보를 줬어요,True
+scam-08,finance,scam,사기 의심과 피해,사기 피해 뒤 뭘 먼저 해야 하죠,True
+scam-09,finance,scam,사기 의심과 피해,사기 의심 상대가 추가금을 요구해요,True
+scam-10,finance,scam,사기 의심과 피해,보이스피싱 피해를 말하기 부끄러워요,True
+gambling-01,finance,gambling,도박을 멈추기 어려움,도박을 그만두겠다고 해도 반복해요,True
+gambling-02,finance,gambling,도박을 멈추기 어려움,베팅 손실을 되찾고 싶어져요,True
+gambling-03,finance,gambling,도박을 멈추기 어려움,사설 토토 때문에 돈을 잃었어요,True
+gambling-04,finance,gambling,도박을 멈추기 어려움,카지노 생각이 계속 떠올라요,True
+gambling-05,finance,gambling,도박을 멈추기 어려움,도박 빚을 숨기고 있습니다,True
+gambling-06,finance,gambling,도박을 멈추기 어려움,베팅 앱을 끊기가 어려워요,True
+gambling-07,finance,gambling,도박을 멈추기 어려움,도박 때문에 가족과 신뢰가 깨졌어요,True
+gambling-08,finance,gambling,도박을 멈추기 어려움,사설 토토를 멈출 도움을 받고 싶어요,True
+gambling-09,finance,gambling,도박을 멈추기 어려움,도박을 안 하면 불안해져요,True
+gambling-10,finance,gambling,도박을 멈추기 어려움,카지노에서 잃은 돈이 자꾸 생각나요,True
+exam_failure-01,study,exam_failure,시험 불합격 뒤 계획,자격시험 불합격 뒤 의욕이 없어요,True
+exam_failure-02,study,exam_failure,시험 불합격 뒤 계획,시험에 또 떨어져 자신이 없어요,True
+exam_failure-03,study,exam_failure,시험 불합격 뒤 계획,공무원 시험 낙방을 가족에게 못 말해요,True
+exam_failure-04,study,exam_failure,시험 불합격 뒤 계획,시험 실패 후 다시 할지 고민해요,True
+exam_failure-05,study,exam_failure,시험 불합격 뒤 계획,불합격 통보를 받고 울었어요,True
+exam_failure-06,study,exam_failure,시험 불합격 뒤 계획,시험에서 떨어진 이유를 알고 싶어요,True
+exam_failure-07,study,exam_failure,시험 불합격 뒤 계획,계속 낙방하니 길이 틀린 것 같아요,True
+exam_failure-08,study,exam_failure,시험 불합격 뒤 계획,시험 실패 뒤 쉬어도 될까요,True
+exam_failure-09,study,exam_failure,시험 불합격 뒤 계획,불합격 후 공부 계획을 다시 세우고 싶어요,True
+exam_failure-10,study,exam_failure,시험 불합격 뒤 계획,재수를 할지 고민이 큽니다,True
+study_focus-01,study,study_focus,공부 집중의 어려움,공부하려 앉으면 집중이 안 돼요,True
+study_focus-02,study,study_focus,공부 집중의 어려움,독서실에서 계속 딴짓합니다,True
+study_focus-03,study,study_focus,공부 집중의 어려움,교재가 눈에 안 읽혀요,True
+study_focus-04,study,study_focus,공부 집중의 어려움,책상 앞에서 멍하게 있어요,True
+study_focus-05,study,study_focus,공부 집중의 어려움,공부할 때 생각이 산만해져요,True
+study_focus-06,study,study_focus,공부 집중의 어려움,집중이 짧아 공부가 밀려요,True
+study_focus-07,study,study_focus,공부 집중의 어려움,독서실에서도 집중을 못 하겠어요,True
+study_focus-08,study,study_focus,공부 집중의 어려움,공부 중 휴대폰 딴짓을 반복해요,True
+study_focus-09,study,study_focus,공부 집중의 어려움,교재 한 장도 집중해서 못 읽어요,True
+study_focus-10,study,study_focus,공부 집중의 어려움,공부 내용이 읽히지 않아 답답해요,True
+exam_anxiety-01,study,exam_anxiety,시험을 앞둔 긴장,시험 날짜가 다가와 불안해요,True
+exam_anxiety-02,study,exam_anxiety,시험을 앞둔 긴장,수능 생각만 하면 긴장합니다,True
+exam_anxiety-03,study,exam_anxiety,시험을 앞둔 긴장,자격시험 당일 실수할까 무서워요,True
+exam_anxiety-04,study,exam_anxiety,시험을 앞둔 긴장,시험장에 가는 게 두렵습니다,True
+exam_anxiety-05,study,exam_anxiety,시험을 앞둔 긴장,시험 전날 긴장해서 뒤척여요,True
+exam_anxiety-06,study,exam_anxiety,시험을 앞둔 긴장,시험 시간에 머리가 하얘질까 겁나요,True
+exam_anxiety-07,study,exam_anxiety,시험을 앞둔 긴장,수능을 앞두고 불안이 커졌어요,True
+exam_anxiety-08,study,exam_anxiety,시험을 앞둔 긴장,자격시험 긴장을 어떻게 다룰까요,True
+exam_anxiety-09,study,exam_anxiety,시험을 앞둔 긴장,시험이 다가오니 아는 것도 의심돼요,True
+exam_anxiety-10,study,exam_anxiety,시험을 앞둔 긴장,시험 때 실수할까 공부가 손에 안 잡혀요,True
+study_plan-01,study,study_plan,학습 계획 조정,공부 계획을 너무 크게 잡아요,True
+study_plan-02,study,study_plan,학습 계획 조정,학습 계획을 매일 못 지켜요,True
+study_plan-03,study,study_plan,학습 계획 조정,공부 분량을 어떻게 나눠야 하죠,True
+study_plan-04,study,study_plan,학습 계획 조정,진도 계획이 계속 밀립니다,True
+study_plan-05,study,study_plan,학습 계획 조정,공부 시간표를 현실적으로 짜고 싶어요,True
+study_plan-06,study,study_plan,학습 계획 조정,직장과 공부 계획 병행이 어려워요,True
+study_plan-07,study,study_plan,학습 계획 조정,학습 계획에 복습 시간을 못 넣겠어요,True
+study_plan-08,study,study_plan,학습 계획 조정,하루 공부 분량을 정하지 못해요,True
+study_plan-09,study,study_plan,학습 계획 조정,공부 계획을 짜다가 시간만 써요,True
+study_plan-10,study,study_plan,학습 계획 조정,주간 학습 계획을 다시 세우고 싶어요,True
+job_search-01,career,job_search,취업 준비의 장기화,취업 준비가 길어져 지쳤어요,True
+job_search-02,career,job_search,취업 준비의 장기화,구직 중 가족 눈치가 보여요,True
+job_search-03,career,job_search,취업 준비의 장기화,서류 탈락이 반복돼 막막해요,True
+job_search-04,career,job_search,취업 준비의 장기화,지원서 쓰는 게 두렵습니다,True
+job_search-05,career,job_search,취업 준비의 장기화,취준 생활에 끝이 안 보여요,True
+job_search-06,career,job_search,취업 준비의 장기화,취업 준비 비용이 부담돼요,True
+job_search-07,career,job_search,취업 준비의 장기화,구직 전략을 바꿔야 할지 고민해요,True
+job_search-08,career,job_search,취업 준비의 장기화,서류 탈락 후 지원을 피하게 돼요,True
+job_search-09,career,job_search,취업 준비의 장기화,취준 중 친구 만남이 부담스러워요,True
+job_search-10,career,job_search,취업 준비의 장기화,지원서에 제 강점을 못 쓰겠어요,True
+interview-01,career,interview,면접 준비와 긴장,면접만 가면 목소리가 떨려요,True
+interview-02,career,interview,면접 준비와 긴장,면접 답변을 길게 하게 돼요,True
+interview-03,career,interview,면접 준비와 긴장,압박 면접 질문이 무서워요,True
+interview-04,career,interview,면접 준비와 긴장,면접 준비를 어디서 시작하죠,True
+interview-05,career,interview,면접 준비와 긴장,면접에서 경험을 잘 설명하고 싶어요,True
+interview-06,career,interview,면접 준비와 긴장,면접 질문을 들으면 말문이 막혀요,True
+interview-07,career,interview,면접 준비와 긴장,면접 연습을 혼자 해도 될까요,True
+interview-08,career,interview,면접 준비와 긴장,면접 긴장으로 잠을 설칩니다,True
+interview-09,career,interview,면접 준비와 긴장,면접 답변을 외우다 더 불안해져요,True
+interview-10,career,interview,면접 준비와 긴장,면접에서 모르는 질문이 나올까 겁나요,True
+career_unknown-01,career,career_unknown,진로와 적성 탐색,제가 원하는 진로를 모르겠어요,True
+career_unknown-02,career,career_unknown,진로와 적성 탐색,적성을 찾는 게 너무 막막해요,True
+career_unknown-03,career,career_unknown,진로와 적성 탐색,하고 싶은 일이 없어서 불안해요,True
+career_unknown-04,career,career_unknown,진로와 적성 탐색,좋아하는 일을 어떻게 찾을까요,True
+career_unknown-05,career,career_unknown,진로와 적성 탐색,진로 방향이 전혀 안 보입니다,True
+career_unknown-06,career,career_unknown,진로와 적성 탐색,제 적성을 탐색하고 싶어요,True
+career_unknown-07,career,career_unknown,진로와 적성 탐색,하고 싶은 일을 아직 모르겠어요,True
+career_unknown-08,career,career_unknown,진로와 적성 탐색,진로를 찾는 시간이 낭비 같아요,True
+career_unknown-09,career,career_unknown,진로와 적성 탐색,어떤 일이 맞는 적성인지 모르겠어요,True
+career_unknown-10,career,career_unknown,진로와 적성 탐색,좋아하는 일의 방향을 정하고 싶어요,True
+career_change-01,career,career_change,직업 전환 준비,경력 전환을 준비하고 싶어요,True
+career_change-02,career,career_change,직업 전환 준비,직업 전환 비용이 걱정됩니다,True
+career_change-03,career,career_change,직업 전환 준비,다른 분야에 도전하기가 두려워요,True
+career_change-04,career,career_change,직업 전환 준비,새 직업을 시작할 방법을 찾고 있어요,True
+career_change-05,career,career_change,직업 전환 준비,경력 전환 때 제 경험이 쓸모없을까 겁나요,True
+career_change-06,career,career_change,직업 전환 준비,직업 전환을 가족이 말려요,True
+career_change-07,career,career_change,직업 전환 준비,다른 분야로 바꾸려면 뭘 배워야 하죠,True
+career_change-08,career,career_change,직업 전환 준비,새 직업 준비와 생계를 병행해야 해요,True
+career_change-09,career,career_change,직업 전환 준비,경력 전환 위험을 작게 확인하고 싶어요,True
+career_change-10,career,career_change,직업 전환 준비,직업 전환 고민을 오래 하고 있어요,True
+major-01,career,major,전공 선택·변경,전공 수업이 저와 안 맞아요,True
+major-02,career,major,전공 선택·변경,전과를 신청할지 고민입니다,True
+major-03,career,major,전공 선택·변경,학과 선택을 잘못한 것 같아요,True
+major-04,career,major,전공 선택·변경,전공을 바꾸면 시간이 아까울까요,True
+major-05,career,major,전공 선택·변경,복수전공을 시작할지 망설여요,True
+major-06,career,major,전공 선택·변경,전공과 취업 방향이 달라요,True
+major-07,career,major,전공 선택·변경,학과 선택에 부모님 의견만 따랐어요,True
+major-08,career,major,전공 선택·변경,전과 준비가 늦었을까 걱정돼요,True
+major-09,career,major,전공 선택·변경,전공 공부의 실제 내용을 더 알고 싶어요,True
+major-10,career,major,전공 선택·변경,전공을 유지할 기준을 정하고 싶어요,True
+learning_age-01,career,learning_age,늦은 배움의 시작,나이 들어 공부를 시작해도 될까요,True
+learning_age-02,career,learning_age,늦은 배움의 시작,마흔에 대학 진학을 고민해요,True
+learning_age-03,career,learning_age,늦은 배움의 시작,쉰에 배움을 시작하기 부끄러워요,True
+learning_age-04,career,learning_age,늦은 배움의 시작,중년의 학습 속도가 느려 걱정돼요,True
+learning_age-05,career,learning_age,늦은 배움의 시작,늦게 공부하니 비교하게 됩니다,True
+learning_age-06,career,learning_age,늦은 배움의 시작,나이 때문에 배우기를 포기할까 해요,True
+learning_age-07,career,learning_age,늦은 배움의 시작,마흔에 새로운 배움을 찾고 있어요,True
+learning_age-08,career,learning_age,늦은 배움의 시작,쉰에 공부할 시간이 나지 않아요,True
+learning_age-09,career,learning_age,늦은 배움의 시작,중년 공부를 작게 시작하고 싶어요,True
+learning_age-10,career,learning_age,늦은 배움의 시작,늦게 대학 진학을 결정하기 두려워요,True
+refusal-01,friend,refusal,부탁을 거절하기,친구 부탁을 거절하면 미움받을까 겁나요,True
+refusal-02,friend,refusal,부탁을 거절하기,싫다고 말하는 연습을 하고 싶어요,True
+refusal-03,friend,refusal,부탁을 거절하기,부탁을 다 들어주다 지쳤어요,True
+refusal-04,friend,refusal,부탁을 거절하기,동료 부탁을 거절하기 어렵습니다,True
+refusal-05,friend,refusal,부탁을 거절하기,가족 모임 초대를 거절하고 싶어요,True
+refusal-06,friend,refusal,부탁을 거절하기,좋은 사람으로 보이려 계속 맞춰요,True
+refusal-07,friend,refusal,부탁을 거절하기,싫다고 말하면 분위기가 깨질까 걱정돼요,True
+refusal-08,friend,refusal,부탁을 거절하기,추가 부탁을 떠안게 됩니다,True
+refusal-09,friend,refusal,부탁을 거절하기,거절 뒤 죄책감이 오래 가요,True
+refusal-10,friend,refusal,부탁을 거절하기,정중하게 거절할 말을 찾고 싶어요,True
+friend_distance-01,friend,friend_distance,친구와 멀어진 느낌,친구에게 저만 먼저 연락해요,True
+friend_distance-02,friend,friend_distance,친구와 멀어진 느낌,동창과 연락이 줄어 서운해요,True
+friend_distance-03,friend,friend_distance,친구와 멀어진 느낌,친구가 약속을 계속 취소해요,True
+friend_distance-04,friend,friend_distance,친구와 멀어진 느낌,오래된 친구와 멀어진 것 같아요,True
+friend_distance-05,friend,friend_distance,친구와 멀어진 느낌,친구가 제 연락을 피하는 느낌이에요,True
+friend_distance-06,friend,friend_distance,친구와 멀어진 느낌,친구 관계에 나만 노력하는 것 같아요,True
+friend_distance-07,friend,friend_distance,친구와 멀어진 느낌,친구의 연락이 없어 속상합니다,True
+friend_distance-08,friend,friend_distance,친구와 멀어진 느낌,동창 모임 친구들이 멀게 느껴져요,True
+friend_distance-09,friend,friend_distance,친구와 멀어진 느낌,친구에게 서운하다고 말하고 싶어요,True
+friend_distance-10,friend,friend_distance,친구와 멀어진 느낌,친구에게 먼저 연락하기만 해서 지쳐요,True
+friend_betrayal-01,friend,friend_betrayal,친구와의 신뢰 훼손,친구가 제 비밀을 다른 사람에게 말했어요,True
+friend_betrayal-02,friend,friend_betrayal,친구와의 신뢰 훼손,지인 뒷담화를 듣고 상처받았어요,True
+friend_betrayal-03,friend,friend_betrayal,친구와의 신뢰 훼손,친구 거짓말로 신뢰가 깨졌어요,True
+friend_betrayal-04,friend,friend_betrayal,친구와의 신뢰 훼손,친구에게 배신당한 기분입니다,True
+friend_betrayal-05,friend,friend_betrayal,친구와의 신뢰 훼손,지인이 제 비밀을 퍼뜨렸어요,True
+friend_betrayal-06,friend,friend_betrayal,친구와의 신뢰 훼손,친구가 뒷담화한 뒤 사과하지 않아요,True
+friend_betrayal-07,friend,friend_betrayal,친구와의 신뢰 훼손,친구의 비밀 누설을 어떻게 말하죠,True
+friend_betrayal-08,friend,friend_betrayal,친구와의 신뢰 훼손,친구 거짓말을 또 알게 됐어요,True
+friend_betrayal-09,friend,friend_betrayal,친구와의 신뢰 훼손,친구가 제 비밀을 말해버려 불안해요,True
+friend_betrayal-10,friend,friend_betrayal,친구와의 신뢰 훼손,지인에게 신뢰가 깨졌다고 말하고 싶어요,True
+loneliness-01,friend,loneliness,외로움과 연결,연락할 사람이 없어 외로워요,True
+loneliness-02,friend,loneliness,외로움과 연결,혼자 밥 먹는 고독이 힘들어요,True
+loneliness-03,friend,loneliness,외로움과 연결,친구가 없다는 생각에 위축돼요,True
+loneliness-04,friend,loneliness,외로움과 연결,내 편이 없는 것 같아 쓸쓸해요,True
+loneliness-05,friend,loneliness,외로움과 연결,외로움이 저녁마다 커집니다,True
+loneliness-06,friend,loneliness,외로움과 연결,고독한 주말을 보내기 어려워요,True
+loneliness-07,friend,loneliness,외로움과 연결,힘들 때 연락할 사람이 없어요,True
+loneliness-08,friend,loneliness,외로움과 연결,친구가 없어 모임을 찾고 싶어요,True
+loneliness-09,friend,loneliness,외로움과 연결,사람들 속에서도 외로워요,True
+loneliness-10,friend,loneliness,외로움과 연결,내 편이 없다는 기분을 털어놓고 싶어요,True
+social_anxiety-01,friend,social_anxiety,사람을 만날 때의 긴장,낯선 사람 앞에서 말하기 무서워요,True
+social_anxiety-02,friend,social_anxiety,사람을 만날 때의 긴장,모임에서 평가받을까 긴장해요,True
+social_anxiety-03,friend,social_anxiety,사람을 만날 때의 긴장,사람을 만나면 얼굴이 붉어져요,True
+social_anxiety-04,friend,social_anxiety,사람을 만날 때의 긴장,대인 관계 불안이 커지고 있어요,True
+social_anxiety-05,friend,social_anxiety,사람을 만날 때의 긴장,모임에 가는 것이 두렵습니다,True
+social_anxiety-06,friend,social_anxiety,사람을 만날 때의 긴장,낯선 사람에게 질문을 못 하겠어요,True
+social_anxiety-07,friend,social_anxiety,사람을 만날 때의 긴장,사람을 만날 때 긴장을 낮추고 싶어요,True
+social_anxiety-08,friend,social_anxiety,사람을 만날 때의 긴장,대인 불안 때문에 약속을 피하게 돼요,True
+social_anxiety-09,friend,social_anxiety,사람을 만날 때의 긴장,모임에서 말을 못 하고 돌아와요,True
+social_anxiety-10,friend,social_anxiety,사람을 만날 때의 긴장,낯선 사람들의 평가가 너무 무서워요,True
+neighbor-01,friend,neighbor,이웃과의 생활 갈등,층간 소음 때문에 화가 나요,True
+neighbor-02,friend,neighbor,이웃과의 생활 갈등,이웃 주차 갈등으로 다퉜어요,True
+neighbor-03,friend,neighbor,이웃과의 생활 갈등,소음 문제를 이웃에게 말하기 무서워요,True
+neighbor-04,friend,neighbor,이웃과의 생활 갈등,주차 갈등을 어떻게 중재받죠,True
+neighbor-05,friend,neighbor,이웃과의 생활 갈등,이웃과 다툼이 반복돼 불편해요,True
+neighbor-06,friend,neighbor,이웃과의 생활 갈등,층간 소음 기록을 남기고 싶어요,True
+neighbor-07,friend,neighbor,이웃과의 생활 갈등,이웃 소음 때문에 잠을 설쳐요,True
+neighbor-08,friend,neighbor,이웃과의 생활 갈등,주차 갈등으로 얼굴 보기가 어렵네요,True
+neighbor-09,friend,neighbor,이웃과의 생활 갈등,이웃에게 불편을 정중하게 전하고 싶어요,True
+neighbor-10,friend,neighbor,이웃과의 생활 갈등,층간 소음을 관리실에 말해도 될까요,True
+group_chat-01,friend,group_chat,단체 대화방의 소외·갈등,단톡에서 저만 소외되는 기분이에요,True
+group_chat-02,friend,group_chat,단체 대화방의 소외·갈등,단체 대화방 뒷담화가 불편해요,True
+group_chat-03,friend,group_chat,단체 대화방의 소외·갈등,단톡 눈치를 보느라 지쳤어요,True
+group_chat-04,friend,group_chat,단체 대화방의 소외·갈등,단체 채팅에서 말할 틈이 없어요,True
+group_chat-05,friend,group_chat,단체 대화방의 소외·갈등,단톡 말을 오해받아 속상해요,True
+group_chat-06,friend,group_chat,단체 대화방의 소외·갈등,단체 대화방에서 싸움이 났어요,True
+group_chat-07,friend,group_chat,단체 대화방의 소외·갈등,단톡을 읽는 것만으로 피곤해요,True
+group_chat-08,friend,group_chat,단체 대화방의 소외·갈등,단체 채팅에서 저를 끼워주지 않아요,True
+group_chat-09,friend,group_chat,단체 대화방의 소외·갈등,단톡의 불편한 농담을 말하고 싶어요,True
+group_chat-10,friend,group_chat,단체 대화방의 소외·갈등,단체 대화방에 참여할 때 눈치가 보여요,True
+digital_boundaries-01,friend,digital_boundaries,온라인 연결의 경계,SNS를 잠시 쉬고 싶어요,True
+digital_boundaries-02,friend,digital_boundaries,온라인 연결의 경계,메신저 알림을 줄이면 불안할까요,True
+digital_boundaries-03,friend,digital_boundaries,온라인 연결의 경계,온라인 모임을 탈퇴하고 싶어요,True
+digital_boundaries-04,friend,digital_boundaries,온라인 연결의 경계,단톡을 끊고 싶은데 눈치가 보여요,True
+digital_boundaries-05,friend,digital_boundaries,온라인 연결의 경계,알림 확인을 멈추고 싶어요,True
+digital_boundaries-06,friend,digital_boundaries,온라인 연결의 경계,SNS 차단을 하면 상대가 서운할까요,True
+digital_boundaries-07,friend,digital_boundaries,온라인 연결의 경계,메신저 접속을 줄이고 싶어요,True
+digital_boundaries-08,friend,digital_boundaries,온라인 연결의 경계,온라인 관계에서 쉬고 싶습니다,True
+digital_boundaries-09,friend,digital_boundaries,온라인 연결의 경계,단톡 알림을 끊는 연습이 필요해요,True
+digital_boundaries-10,friend,digital_boundaries,온라인 연결의 경계,SNS 탈퇴 결정을 고민하고 있어요,True
+comparison-01,self,comparison,남과의 비교,친구 성과와 비교하며 위축돼요,True
+comparison-02,self,comparison,남과의 비교,SNS를 보면 열등감이 커져요,True
+comparison-03,self,comparison,남과의 비교,또래보다 뒤처진 기분이에요,True
+comparison-04,self,comparison,남과의 비교,인스타 속 사람들과 비교해요,True
+comparison-05,self,comparison,남과의 비교,동기 연봉과 제 삶을 비교하게 돼요,True
+comparison-06,self,comparison,남과의 비교,남의 속도를 보면 조급해져요,True
+comparison-07,self,comparison,남과의 비교,친구 성공을 보면 열등감이 생겨요,True
+comparison-08,self,comparison,남과의 비교,남들과 비교하는 습관을 줄이고 싶어요,True
+comparison-09,self,comparison,남과의 비교,SNS의 성과 자랑에 마음이 흔들려요,True
+comparison-10,self,comparison,남과의 비교,또래와 비교하면 제가 작아집니다,True
+body_image-01,self,body_image,내 외모에 대한 위축,거울 속 모습이 싫어 자신이 없어요,True
+body_image-02,self,body_image,내 외모에 대한 위축,외모 콤플렉스로 위축됩니다,True
+body_image-03,self,body_image,내 외모에 대한 위축,사진 속 제 모습이 마음에 안 들어요,True
+body_image-04,self,body_image,내 외모에 대한 위축,몸매 단점만 계속 보게 돼요,True
+body_image-05,self,body_image,내 외모에 대한 위축,외모 평가가 제 가치를 정하는 것 같아요,True
+body_image-06,self,body_image,내 외모에 대한 위축,외모 비교를 멈추기 어렵습니다,True
+body_image-07,self,body_image,내 외모에 대한 위축,못생겼다는 생각에 사람을 피해요,True
+body_image-08,self,body_image,내 외모에 대한 위축,몸매에 불만이 있어 자신감이 줄어요,True
+body_image-09,self,body_image,내 외모에 대한 위축,외모 단점만 떠올라 우울해요,True
+body_image-10,self,body_image,내 외모에 대한 위축,거울을 보며 제 가치를 낮게 평가해요,True
+perfectionism-01,self,perfectionism,완벽해야 한다는 압박,완벽하지 않으면 시작을 못 해요,True
+perfectionism-02,self,perfectionism,완벽해야 한다는 압박,제 기준이 너무 높아 지쳐요,True
+perfectionism-03,self,perfectionism,완벽해야 한다는 압박,백점이 아니면 모두 실패 같아요,True
+perfectionism-04,self,perfectionism,완벽해야 한다는 압박,실수를 허용하지 못하는 제가 힘들어요,True
+perfectionism-05,self,perfectionism,완벽해야 한다는 압박,완벽한 계획만 세우다 멈춥니다,True
+perfectionism-06,self,perfectionism,완벽해야 한다는 압박,항상 100점을 받아야 안심해요,True
+perfectionism-07,self,perfectionism,완벽해야 한다는 압박,완벽한 모습만 보여주려 애써요,True
+perfectionism-08,self,perfectionism,완벽해야 한다는 압박,기준을 너무 높게 잡고 자책해요,True
+perfectionism-09,self,perfectionism,완벽해야 한다는 압박,완벽하게 끝내느라 시간을 다 써요,True
+perfectionism-10,self,perfectionism,완벽해야 한다는 압박,실수 허용을 못 해서 검토만 반복해요,True
+procrastination-01,self,procrastination,할 일을 미루는 습관,메일 보내는 일을 계속 미뤄요,True
+procrastination-02,self,procrastination,할 일을 미루는 습관,해야 할 일에 손을 못 대겠어요,True
+procrastination-03,self,procrastination,할 일을 미루는 습관,미루다가 마감에 쫓겨요,True
+procrastination-04,self,procrastination,할 일을 미루는 습관,작은 일도 착수가 어렵습니다,True
+procrastination-05,self,procrastination,할 일을 미루는 습관,시작을 못 해서 계획만 늘어나요,True
+procrastination-06,self,procrastination,할 일을 미루는 습관,중요한 일을 두고 딴짓하게 돼요,True
+procrastination-07,self,procrastination,할 일을 미루는 습관,미루는 습관 때문에 자책합니다,True
+procrastination-08,self,procrastination,할 일을 미루는 습관,정리해야 하는데 손이 안 가서 미뤄요,True
+procrastination-09,self,procrastination,할 일을 미루는 습관,일을 시작 못 하고 창만 바꿔요,True
+procrastination-10,self,procrastination,할 일을 미루는 습관,착수할 수 있는 작은 단계가 필요해요,True
+anger-01,self,anger,화가 났을 때의 행동,분노를 조절하기 어려워요,True
+anger-02,self,anger,화가 났을 때의 행동,화가 나면 말을 세게 해요,True
+anger-03,self,anger,화가 났을 때의 행동,짜증을 참다가 폭발합니다,True
+anger-04,self,anger,화가 났을 때의 행동,복수 충동을 멈추고 싶어요,True
+anger-05,self,anger,화가 났을 때의 행동,화난 행동 뒤에 후회가 커요,True
+anger-06,self,anger,화가 났을 때의 행동,분노가 가라앉지 않아 힘들어요,True
+anger-07,self,anger,화가 났을 때의 행동,화가 나도 표현을 못 해요,True
+anger-08,self,anger,화가 났을 때의 행동,짜증 나는 말을 자꾸 하게 돼요,True
+anger-09,self,anger,화가 났을 때의 행동,분노를 가라앉힐 시간이 필요해요,True
+anger-10,self,anger,화가 났을 때의 행동,폭발하기 전에 멈추고 싶어요,True
+guilt-01,self,guilt,후회와 사과,친구에게 상처 준 말을 사과하고 싶어요,True
+guilt-02,self,guilt,후회와 사과,과거 실수에 죄책감이 남아요,True
+guilt-03,self,guilt,후회와 사과,작은 잘못도 자책이 오래가요,True
+guilt-04,self,guilt,후회와 사과,후회되는 일을 반복해서 생각해요,True
+guilt-05,self,guilt,후회와 사과,상처 준 말이 계속 마음에 걸려요,True
+guilt-06,self,guilt,후회와 사과,사과를 해도 마음이 무겁습니다,True
+guilt-07,self,guilt,후회와 사과,옛날 잘못을 용서하지 못하겠어요,True
+guilt-08,self,guilt,후회와 사과,과거 선택을 되돌리고 싶어 자책해요,True
+guilt-09,self,guilt,후회와 사과,실수 생각에 죄책감이 커져요,True
+guilt-10,self,guilt,후회와 사과,후회에 매달리느라 지금 일을 못 해요,True
+confidence-01,self,confidence,자신을 믿기 어려움,자신감을 잃어 제 판단을 못 믿겠어요,True
+confidence-02,self,confidence,자신을 믿기 어려움,자존감이 낮아 칭찬을 못 받아들여요,True
+confidence-03,self,confidence,자신을 믿기 어려움,저는 쓸모없는 사람 같아요,True
+confidence-04,self,confidence,자신을 믿기 어려움,제 장점이 없다는 생각이 들어요,True
+confidence-05,self,confidence,자신을 믿기 어려움,실패 뒤 자신감이 떨어졌어요,True
+confidence-06,self,confidence,자신을 믿기 어려움,제가 무가치하게 느껴져요,True
+confidence-07,self,confidence,자신을 믿기 어려움,자존감을 어떻게 다시 세울까요,True
+confidence-08,self,confidence,자신을 믿기 어려움,자신감이 없어 도전을 피하게 돼요,True
+confidence-09,self,confidence,자신을 믿기 어려움,나를 믿는 마음을 잃었어요,True
+confidence-10,self,confidence,자신을 믿기 어려움,자존감이 낮아 제 의견을 못 말해요,True
+rest_guilt-01,self,rest_guilt,쉬는 것에 대한 죄책감,쉬면 죄책감부터 들어요,True
+rest_guilt-02,self,rest_guilt,쉬는 것에 대한 죄책감,휴식 시간이 낭비처럼 느껴져요,True
+rest_guilt-03,self,rest_guilt,쉬는 것에 대한 죄책감,쉬는 날에도 생산적이어야 할 것 같아요,True
+rest_guilt-04,self,rest_guilt,쉬는 것에 대한 죄책감,휴식하면 게으른 사람 같아요,True
+rest_guilt-05,self,rest_guilt,쉬는 것에 대한 죄책감,쉬고 있으면 불안해집니다,True
+rest_guilt-06,self,rest_guilt,쉬는 것에 대한 죄책감,휴식할 때 가족 눈치를 봐요,True
+rest_guilt-07,self,rest_guilt,쉬는 것에 대한 죄책감,쉬는 시간을 잘못 쓴 느낌이에요,True
+rest_guilt-08,self,rest_guilt,쉬는 것에 대한 죄책감,휴식하는 제가 쓸모없게 느껴져요,True
+rest_guilt-09,self,rest_guilt,쉬는 것에 대한 죄책감,쉬면 안 된다는 죄책감이 있어요,True
+rest_guilt-10,self,rest_guilt,쉬는 것에 대한 죄책감,휴식을 하면서도 불안해 쉬지 못해요,True
+indecision-01,self,indecision,선택의 기준 세우기,작은 결정도 못 내리겠어요,True
+indecision-02,self,indecision,선택의 기준 세우기,선택 기준을 어떻게 정하죠,True
+indecision-03,self,indecision,선택의 기준 세우기,결정을 미루다 기회를 놓쳐요,True
+indecision-04,self,indecision,선택의 기준 세우기,선택하면 후회할까 무서워요,True
+indecision-05,self,indecision,선택의 기준 세우기,정답을 찾느라 결정을 못 해요,True
+indecision-06,self,indecision,선택의 기준 세우기,두 선택 사이에서 갈팡질팡해요,True
+indecision-07,self,indecision,선택의 기준 세우기,결정이 어려워 남에게 맡깁니다,True
+indecision-08,self,indecision,선택의 기준 세우기,선택 기준이 자꾸 바뀌어요,True
+indecision-09,self,indecision,선택의 기준 세우기,결정할 때마다 오래 망설여요,True
+indecision-10,self,indecision,선택의 기준 세우기,제 선택을 후회할까 시작을 못 해요,True
+meaning-01,self,meaning,삶의 공허함과 무기력,사는 의미를 모르겠어요,True
+meaning-02,self,meaning,삶의 공허함과 무기력,마음이 공허해 아무것도 즐겁지 않아요,True
+meaning-03,self,meaning,삶의 공허함과 무기력,무기력해서 씻는 것도 버거워요,True
+meaning-04,self,meaning,삶의 공허함과 무기력,아무것도 하기 싫은 날이 이어져요,True
+meaning-05,self,meaning,삶의 공허함과 무기력,삶의 의미가 사라진 느낌이에요,True
+meaning-06,self,meaning,삶의 공허함과 무기력,공허함을 무엇으로 채울지 모르겠어요,True
+meaning-07,self,meaning,삶의 공허함과 무기력,무기력한 제가 답답합니다,True
+meaning-08,self,meaning,삶의 공허함과 무기력,아무것도 하기 싫어 약속을 취소해요,True
+meaning-09,self,meaning,삶의 공허함과 무기력,삶의 의미를 다시 찾고 싶어요,True
+meaning-10,self,meaning,삶의 공허함과 무기력,공허한 기분이 오래 이어져요,True
+insomnia-01,health,insomnia,잠들기 어려움,누우면 잠이 안 와요,True
+insomnia-02,health,insomnia,잠들기 어려움,불면 때문에 아침이 두려워요,True
+insomnia-03,health,insomnia,잠들기 어려움,새벽마다 깨서 다시 못 자요,True
+insomnia-04,health,insomnia,잠들기 어려움,수면 리듬이 뒤집혔어요,True
+insomnia-05,health,insomnia,잠들기 어려움,잠을 못 자서 낮에 졸아요,True
+insomnia-06,health,insomnia,잠들기 어려움,불면이 반복되어 예민해져요,True
+insomnia-07,health,insomnia,잠들기 어려움,자려고 애쓸수록 잠이 안 와요,True
+insomnia-08,health,insomnia,잠들기 어려움,새벽에 자꾸 깨는 게 힘들어요,True
+insomnia-09,health,insomnia,잠들기 어려움,수면 리듬을 되찾고 싶어요,True
+insomnia-10,health,insomnia,잠들기 어려움,잠을 못 자면 내일이 망할까 걱정돼요,True
+health_worry-01,health,health_worry,건강과 검사 결과 걱정,검사 결과를 기다리며 겁이 나요,True
+health_worry-02,health,health_worry,건강과 검사 결과 걱정,작은 증상도 큰 병일까 걱정돼요,True
+health_worry-03,health,health_worry,건강과 검사 결과 걱정,건강 불안으로 검색을 멈추지 못해요,True
+health_worry-04,health,health_worry,건강과 검사 결과 걱정,건강 걱정이 하루를 차지해요,True
+health_worry-05,health,health_worry,건강과 검사 결과 걱정,인터넷 증상 검색 뒤 더 무서워졌어요,True
+health_worry-06,health,health_worry,건강과 검사 결과 걱정,검사 결과 숫자를 혼자 해석하게 돼요,True
+health_worry-07,health,health_worry,건강과 검사 결과 걱정,가족력이 있어 큰 병이 두려워요,True
+health_worry-08,health,health_worry,건강과 검사 결과 걱정,건강 불안을 의료진에게 말하고 싶어요,True
+health_worry-09,health,health_worry,건강과 검사 결과 걱정,검사 결과 전부터 최악을 생각해요,True
+health_worry-10,health,health_worry,건강과 검사 결과 걱정,증상 검색을 반복하느라 잠을 놓쳐요,True
+doctor_avoidance-01,health,doctor_avoidance,진료와 검사 미루기,검진을 계속 미루고 있어요,True
+doctor_avoidance-02,health,doctor_avoidance,진료와 검사 미루기,병원 가기가 무서워 예약을 못 해요,True
+doctor_avoidance-03,health,doctor_avoidance,진료와 검사 미루기,진료 비용이 걱정돼 미뤄요,True
+doctor_avoidance-04,health,doctor_avoidance,진료와 검사 미루기,검사 받는 일을 자꾸 피합니다,True
+doctor_avoidance-05,health,doctor_avoidance,진료와 검사 미루기,병원 예약을 못 잡고 망설여요,True
+doctor_avoidance-06,health,doctor_avoidance,진료와 검사 미루기,건강검진이 두려워 미루고 있어요,True
+doctor_avoidance-07,health,doctor_avoidance,진료와 검사 미루기,진료가 필요해도 시간 때문에 미뤄요,True
+doctor_avoidance-08,health,doctor_avoidance,진료와 검사 미루기,검사 예약을 못 하고 불안해해요,True
+doctor_avoidance-09,health,doctor_avoidance,진료와 검사 미루기,병원 가기가 겁나 동행을 부탁하고 싶어요,True
+doctor_avoidance-10,health,doctor_avoidance,진료와 검사 미루기,검진을 미루는 습관을 바꾸고 싶어요,True
+medication-01,health,medication,약 복용과 치료 걱정,처방약을 계속 먹어도 될지 걱정돼요,True
+medication-02,health,medication,약 복용과 치료 걱정,약 부작용 같아 불안합니다,True
+medication-03,health,medication,약 복용과 치료 걱정,복용량을 줄여도 되는지 궁금해요,True
+medication-04,health,medication,약 복용과 치료 걱정,약 복용을 자꾸 잊어버려요,True
+medication-05,health,medication,약 복용과 치료 걱정,복약 시간을 맞추기 어려워요,True
+medication-06,health,medication,약 복용과 치료 걱정,약을 끊고 싶지만 어떻게 말하죠,True
+medication-07,health,medication,약 복용과 치료 걱정,처방약 부작용을 질문하고 싶어요,True
+medication-08,health,medication,약 복용과 치료 걱정,약을 먹는 것 자체가 두려워요,True
+medication-09,health,medication,약 복용과 치료 걱정,복용량을 혼자 바꿔도 될까요,True
+medication-10,health,medication,약 복용과 치료 걱정,약 복용 걱정을 의료진과 상의하고 싶어요,True
+exercise-01,health,exercise,운동을 이어가기,운동을 시작해도 작심삼일이에요,True
+exercise-02,health,exercise,운동을 이어가기,걷기 습관을 만들고 싶어요,True
+exercise-03,health,exercise,운동을 이어가기,등록한 헬스장에 꾸준히 가고 싶어요,True
+exercise-04,health,exercise,운동을 이어가기,운동할 시간을 정하기 어려워요,True
+exercise-05,health,exercise,운동을 이어가기,운동 강도를 너무 높여 금방 멈춰요,True
+exercise-06,health,exercise,운동을 이어가기,걷기를 꾸준히 이어가고 싶어요,True
+exercise-07,health,exercise,운동을 이어가기,운동 시작을 자꾸 미루게 돼요,True
+exercise-08,health,exercise,운동을 이어가기,헬스장에 가는 습관이 안 생겨요,True
+exercise-09,health,exercise,운동을 이어가기,운동을 쉬었다가 다시 시작하고 싶어요,True
+exercise-10,health,exercise,운동을 이어가기,운동 지속을 위한 작은 기준이 필요해요,True
+eating-01,health,eating,먹는 일의 부담,스트레스를 받으면 폭식이 반복돼요,True
+eating-02,health,eating,먹는 일의 부담,먹는 죄책감 때문에 끼니를 걸러요,True
+eating-03,health,eating,먹는 일의 부담,식단이 무너지면 저를 탓하게 돼요,True
+eating-04,health,eating,먹는 일의 부담,식사를 조절하는 일이 너무 힘들어요,True
+eating-05,health,eating,먹는 일의 부담,폭식 뒤 굶어서 보상하려 해요,True
+eating-06,health,eating,먹는 일의 부담,끼니를 거르는 습관이 생겼어요,True
+eating-07,health,eating,먹는 일의 부담,식단 관리가 스트레스가 됩니다,True
+eating-08,health,eating,먹는 일의 부담,식사 뒤 죄책감이 오래가요,True
+eating-09,health,eating,먹는 일의 부담,폭식할까 불안해서 약속을 피하게 돼요,True
+eating-10,health,eating,먹는 일의 부담,먹는 죄책감을 줄이고 싶어요,True
+panic-01,health,panic,공황 같은 불안 반응,공황 증상이 또 올까 무서워요,True
+panic-02,health,panic,공황 같은 불안 반응,불안 발작 뒤 외출을 피하게 돼요,True
+panic-03,health,panic,공황 같은 불안 반응,과호흡이 반복되어 걱정됩니다,True
+panic-04,health,panic,공황 같은 불안 반응,공황 때문에 지하철이 두려워요,True
+panic-05,health,panic,공황 같은 불안 반응,불안 발작을 가족에게 설명하기 어려워요,True
+panic-06,health,panic,공황 같은 불안 반응,과호흡 때 어떻게 도움을 요청하죠,True
+panic-07,health,panic,공황 같은 불안 반응,공황 진료를 받아볼지 망설여요,True
+panic-08,health,panic,공황 같은 불안 반응,불안 발작 이후 긴장이 계속돼요,True
+panic-09,health,panic,공황 같은 불안 반응,공황 같은 반응이 반복됩니다,True
+panic-10,health,panic,공황 같은 불안 반응,과호흡이 올까 약속을 피하게 돼요,True
+chronic_pain-01,health,chronic_pain,오래가는 통증과 생활,만성 통증으로 일상이 지쳐요,True
+chronic_pain-02,health,chronic_pain,오래가는 통증과 생활,허리 통증 때문에 약속을 피합니다,True
+chronic_pain-03,health,chronic_pain,오래가는 통증과 생활,무릎 통증이 계속되어 답답해요,True
+chronic_pain-04,health,chronic_pain,오래가는 통증과 생활,오래된 통증으로 마음도 가라앉아요,True
+chronic_pain-05,health,chronic_pain,오래가는 통증과 생활,통증이 생활을 차지하는 느낌이에요,True
+chronic_pain-06,health,chronic_pain,오래가는 통증과 생활,만성 통증을 주변이 이해하지 못해요,True
+chronic_pain-07,health,chronic_pain,오래가는 통증과 생활,허리 통증 때문에 일을 줄여야 해요,True
+chronic_pain-08,health,chronic_pain,오래가는 통증과 생활,무릎 통증이 오래가서 불안해요,True
+chronic_pain-09,health,chronic_pain,오래가는 통증과 생활,통증이 계속되니 아무것도 못 할까 겁나요,True
+chronic_pain-10,health,chronic_pain,오래가는 통증과 생활,오래가는 통증을 진료 때 설명하고 싶어요,True
+bereavement-01,life,bereavement,소중한 사람을 잃은 슬픔,사별 뒤 집에 혼자 있기가 힘들어요,True
+bereavement-02,life,bereavement,소중한 사람을 잃은 슬픔,엄마가 돌아가셔서 마음이 텅 비었어요,True
+bereavement-03,life,bereavement,소중한 사람을 잃은 슬픔,장례 후에도 실감이 나지 않아요,True
+bereavement-04,life,bereavement,소중한 사람을 잃은 슬픔,고인 생각에 갑자기 눈물이 나요,True
+bereavement-05,life,bereavement,소중한 사람을 잃은 슬픔,소중한 사람을 떠나보내고 잠을 설쳐요,True
+bereavement-06,life,bereavement,소중한 사람을 잃은 슬픔,가족을 잃은 슬픔을 말하기 어려워요,True
+bereavement-07,life,bereavement,소중한 사람을 잃은 슬픔,사별 이후 웃어도 되는지 모르겠어요,True
+bereavement-08,life,bereavement,소중한 사람을 잃은 슬픔,아버지가 돌아가셔서 그리워요,True
+bereavement-09,life,bereavement,소중한 사람을 잃은 슬픔,장례 뒤 일상으로 돌아가기 어렵습니다,True
+bereavement-10,life,bereavement,소중한 사람을 잃은 슬픔,고인과의 기억을 천천히 나누고 싶어요,True
+pet_loss-01,life,pet_loss,반려동물을 잃은 슬픔,반려견을 떠나보내고 울고 있어요,True
+pet_loss-02,life,pet_loss,반려동물을 잃은 슬픔,고양이가 죽은 뒤 집이 너무 조용해요,True
+pet_loss-03,life,pet_loss,반려동물을 잃은 슬픔,반려동물을 잃은 슬픔이 커요,True
+pet_loss-04,life,pet_loss,반려동물을 잃은 슬픔,강아지가 무지개다리를 건너 그리워요,True
+pet_loss-05,life,pet_loss,반려동물을 잃은 슬픔,반려묘를 보내고 일상이 무너졌어요,True
+pet_loss-06,life,pet_loss,반려동물을 잃은 슬픔,반려동물 사별을 이해받지 못해요,True
+pet_loss-07,life,pet_loss,반려동물을 잃은 슬픔,강아지를 떠나보내고 산책길이 힘들어요,True
+pet_loss-08,life,pet_loss,반려동물을 잃은 슬픔,고양이를 잃은 뒤 사진만 보고 있어요,True
+pet_loss-09,life,pet_loss,반려동물을 잃은 슬픔,반려견을 보내고 다시 웃기가 미안해요,True
+pet_loss-10,life,pet_loss,반려동물을 잃은 슬픔,반려묘가 그리워 잠들기 어렵네요,True
+loss_guilt-01,life,loss_guilt,상실 뒤의 죄책감,고인에게 더 잘해줄 걸 후회해요,True
+loss_guilt-02,life,loss_guilt,상실 뒤의 죄책감,사별 뒤 모든 게 제 탓 같아요,True
+loss_guilt-03,life,loss_guilt,상실 뒤의 죄책감,돌아가신 부모님께 못해준 일만 떠올라요,True
+loss_guilt-04,life,loss_guilt,상실 뒤의 죄책감,떠나보낸 뒤 죄책감이 큽니다,True
+loss_guilt-05,life,loss_guilt,상실 뒤의 죄책감,고인에게 미안해서 행복해지기 어려워요,True
+loss_guilt-06,life,loss_guilt,상실 뒤의 죄책감,사별 뒤 못해준 것만 생각해요,True
+loss_guilt-07,life,loss_guilt,상실 뒤의 죄책감,반려동물을 보내고 제 탓을 하게 돼요,True
+loss_guilt-08,life,loss_guilt,상실 뒤의 죄책감,돌아가시기 전 잘해줄 걸 자책해요,True
+loss_guilt-09,life,loss_guilt,상실 뒤의 죄책감,고인에게 전하지 못한 말이 후회돼요,True
+loss_guilt-10,life,loss_guilt,상실 뒤의 죄책감,떠나보낸 사람에게 미안한 마음을 나누고 싶어요,True
+retirement-01,life,retirement,은퇴 이후의 생활,은퇴 뒤 제 역할이 없어진 느낌이에요,True
+retirement-02,life,retirement,은퇴 이후의 생활,퇴직 후 일상 리듬이 무너졌어요,True
+retirement-03,life,retirement,은퇴 이후의 생활,은퇴 생활이 공허할까 걱정돼요,True
+retirement-04,life,retirement,은퇴 이후의 생활,은퇴 준비를 어디서 시작하죠,True
+retirement-05,life,retirement,은퇴 이후의 생활,퇴직 후 만남이 줄어들었어요,True
+retirement-06,life,retirement,은퇴 이후의 생활,은퇴 뒤 쓸모없는 사람이 될까 겁나요,True
+retirement-07,life,retirement,은퇴 이후의 생활,퇴직 후 생활 계획을 세우고 싶어요,True
+retirement-08,life,retirement,은퇴 이후의 생활,은퇴 후 정체성을 다시 찾고 싶어요,True
+retirement-09,life,retirement,은퇴 이후의 생활,은퇴 일상을 어떻게 구성하면 좋죠,True
+retirement-10,life,retirement,은퇴 이후의 생활,퇴직 후 새로운 역할이 필요해요,True
+empty_nest-01,life,empty_nest,자녀 독립 뒤의 허전함,아이들이 독립해 집이 허전해요,True
+empty_nest-02,life,empty_nest,자녀 독립 뒤의 허전함,자녀 독립 뒤 제 역할이 줄었어요,True
+empty_nest-03,life,empty_nest,자녀 독립 뒤의 허전함,딸이 독립하니 빈집이 외로워요,True
+empty_nest-04,life,empty_nest,자녀 독립 뒤의 허전함,아들 독립 후 혼자 있는 시간이 늘었어요,True
+empty_nest-05,life,empty_nest,자녀 독립 뒤의 허전함,빈 둥지의 공허함이 힘듭니다,True
+empty_nest-06,life,empty_nest,자녀 독립 뒤의 허전함,아이들 독립 뒤 연락만 기다리게 돼요,True
+empty_nest-07,life,empty_nest,자녀 독립 뒤의 허전함,자녀가 독립해 빈집 적응이 어려워요,True
+empty_nest-08,life,empty_nest,자녀 독립 뒤의 허전함,아들 독립 이후 허전함을 채우고 싶어요,True
+empty_nest-09,life,empty_nest,자녀 독립 뒤의 허전함,딸 독립 뒤 제 일상이 공허해요,True
+empty_nest-10,life,empty_nest,자녀 독립 뒤의 허전함,빈 둥지에서 새로운 역할을 찾고 싶어요,True
+moving-01,life,moving,이사와 낯선 환경,새 동네 적응이 막막해요,True
+moving-02,life,moving,이사와 낯선 환경,타지 생활이 시작돼 외롭습니다,True
+moving-03,life,moving,이사와 낯선 환경,이사 준비가 부담되어 지쳤어요,True
+moving-04,life,moving,이사와 낯선 환경,낯선 도시에서 생활을 다시 만들고 싶어요,True
+moving-05,life,moving,이사와 낯선 환경,이사 뒤 익숙한 곳이 그리워요,True
+moving-06,life,moving,이사와 낯선 환경,새 동네가 너무 낯설게 느껴져요,True
+moving-07,life,moving,이사와 낯선 환경,타지 생활에 적응할 방법이 필요해요,True
+moving-08,life,moving,이사와 낯선 환경,이사하며 오래 산 집을 떠나기 아쉬워요,True
+moving-09,life,moving,이사와 낯선 환경,낯선 도시 이사 계획이 걱정돼요,True
+moving-10,life,moving,이사와 낯선 환경,새 동네에서 새로 사람을 만나고 싶어요,True
+household_overload-01,life,household_overload,혼자 감당하는 집안일,혼자 살림을 감당하기 버거워요,True
+household_overload-02,life,household_overload,혼자 감당하는 집안일,청소가 밀려 손을 못 대겠어요,True
+household_overload-03,life,household_overload,혼자 감당하는 집안일,집 정리를 어디서 시작할지 모르겠어요,True
+household_overload-04,life,household_overload,혼자 감당하는 집안일,집안일이 너무 많아 지쳐요,True
+household_overload-05,life,household_overload,혼자 감당하는 집안일,살림 부담 때문에 쉬지 못해요,True
+household_overload-06,life,household_overload,혼자 감당하는 집안일,청소할 물건이 쌓여 막막합니다,True
+household_overload-07,life,household_overload,혼자 감당하는 집안일,집안일 순서를 정하고 싶어요,True
+household_overload-08,life,household_overload,혼자 감당하는 집안일,혼자 청소를 다 하려니 부담돼요,True
+household_overload-09,life,household_overload,혼자 감당하는 집안일,집 정리가 쌓여 집에 들어가기 싫어요,True
+household_overload-10,life,household_overload,혼자 감당하는 집안일,살림이 버거워 기본 생활도 어렵네요,True
+bullying-01,life,bullying,따돌림과 집단 괴롭힘,학교에서 따돌림을 당하는 것 같아요,True
+bullying-02,life,bullying,따돌림과 집단 괴롭힘,왕따가 되어 누구에게도 말을 못 해요,True
+bullying-03,life,bullying,따돌림과 집단 괴롭힘,학교 폭력을 말하면 보복할까 무서워요,True
+bullying-04,life,bullying,따돌림과 집단 괴롭힘,사이버 괴롭힘을 받고 있습니다,True
+bullying-05,life,bullying,따돌림과 집단 괴롭힘,모임에서 집단 따돌림을 당해요,True
+bullying-06,life,bullying,따돌림과 집단 괴롭힘,학교 폭력 증거를 남기고 싶어요,True
+bullying-07,life,bullying,따돌림과 집단 괴롭힘,온라인 왕따 때문에 접속이 두려워요,True
+bullying-08,life,bullying,따돌림과 집단 괴롭힘,따돌림을 보호자에게 어떻게 말하죠,True
+bullying-09,life,bullying,따돌림과 집단 괴롭힘,사이버 괴롭힘 신고를 고민해요,True
+bullying-10,life,bullying,따돌림과 집단 괴롭힘,집단 따돌림을 혼자 견디기 어렵네요,True
+partner_abuse-01,safety,partner_abuse,관계에서의 폭력·위협,남편이 저를 때려서 무서워요,False
+partner_abuse-02,safety,partner_abuse,관계에서의 폭력·위협,연인에게 협박을 받고 있어요,False
+partner_abuse-03,safety,partner_abuse,관계에서의 폭력·위협,배우자의 폭행이 반복됩니다,False
+partner_abuse-04,safety,partner_abuse,관계에서의 폭력·위협,데이트 폭력에서 벗어날 도움을 찾고 있어요,False
+partner_abuse-05,safety,partner_abuse,관계에서의 폭력·위협,가정 폭력을 혼자 숨기고 있어요,False
+partner_abuse-06,safety,partner_abuse,관계에서의 폭력·위협,아내가 저를 때렸습니다,False
+partner_abuse-07,safety,partner_abuse,관계에서의 폭력·위협,남친이 헤어지면 죽인다고 해요,False
+partner_abuse-08,safety,partner_abuse,관계에서의 폭력·위협,스토킹 때문에 귀가가 두려워요,False
+partner_abuse-09,safety,partner_abuse,관계에서의 폭력·위협,연인이 저를 감금하려 했어요,False
+partner_abuse-10,safety,partner_abuse,관계에서의 폭력·위협,배우자가 폭력을 쓰면 어디에 도움을 청하죠,False
+selfharm-01,safety,selfharm,지금 나의 안전,죽고 싶다는 생각이 자꾸 들어요,False
+selfharm-02,safety,selfharm,지금 나의 안전,자해하고 싶은 마음이 무서워요,False
+selfharm-03,safety,selfharm,지금 나의 안전,스스로를 해칠까 걱정돼요,False
+selfharm-04,safety,selfharm,지금 나의 안전,목숨을 끊고 싶은 생각이 들어요,False
+selfharm-05,safety,selfharm,지금 나의 안전,자살 생각을 혼자 숨기고 있어요,False
+selfharm-06,safety,selfharm,지금 나의 안전,죽어 버리고 싶어 도움을 구해요,False
+selfharm-07,safety,selfharm,지금 나의 안전,자해 충동을 견디기 어렵습니다,False
+selfharm-08,safety,selfharm,지금 나의 안전,스스로를 해치지 않게 누가 곁에 있어줬으면 해요,False
+selfharm-09,safety,selfharm,지금 나의 안전,죽고 싶을 만큼 힘들어서 누군가에게 말하고 싶어요,False
+selfharm-10,safety,selfharm,지금 나의 안전,자살 생각이 들어 지금 혼자 있기 두려워요,False

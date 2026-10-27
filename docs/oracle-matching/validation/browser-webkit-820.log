@@ -1,0 +1,1 @@
+PASS {"browser":"webkit","width":820,"oldExamples":1974,"newExamples":1000,"totalExamples":2974,"staleAnswerCleared":true,"deterministicReplies":true,"ambiguityChoice":true,"personDirection":true,"negation":true,"noInitialFetch":true,"noNetworkQuestion":true,"noUserWrites":true,"errors":[]}

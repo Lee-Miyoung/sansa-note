@@ -1,0 +1,3 @@
+PASS {"browser":"chromium","width":390,"oldExamples":1974,"newExamples":1000,"totalExamples":2974,"staleAnswerCleared":true,"deterministicReplies":true,"ambiguityChoice":true,"personDirection":true,"negation":true,"noInitialFetch":true,"noNetworkQuestion":true,"noUserWrites":true,"errors":[]}
+PASS existing vow guest/member storage policy unchanged
+PASS delayed matcher/example requests preserve latest input; data failure recovers without random fallback
