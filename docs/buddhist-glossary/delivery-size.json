@@ -1,0 +1,15 @@
+{
+  "data/buddhist-glossary.json": {
+    "bytes": 45067,
+    "gzipEstimate": 7903
+  },
+  "scripts/buddhist-glossary.js": {
+    "bytes": 8499,
+    "gzipEstimate": 3588
+  },
+  "styles/buddhist-glossary.css": {
+    "bytes": 3062,
+    "gzipEstimate": 895
+  },
+  "homeGzipDelta": 446
+}

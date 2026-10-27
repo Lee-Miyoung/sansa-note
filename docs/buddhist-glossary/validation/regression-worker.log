@@ -1,0 +1,1 @@
+PASS streaming HTML is not held for cache writes; search-result navigation: cached app opens while network stalls, delayed response refreshes cache, offline reload uses refreshed page, local records preserved

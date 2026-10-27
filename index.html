@@ -23803,10 +23803,11 @@ body.catalog-screen-open #catalogOverlay,
   <div class="modal">
     <div class="modal-head">
       <div><h2 class="serif">📖 불교 용어 사전</h2><div class="sub">절 설명에 자주 나오는 말들, 쉽게 풀어드려요</div></div>
-      <button class="close-x" onclick="closeGlossaryOverlay()">✕</button>
+      <button type="button" aria-label="불교 용어 사전 닫기" class="close-x" onclick="closeGlossaryOverlay()">✕</button>
     </div>
     <div class="modal-body">
       <input class="searchbox" id="glossarySearch" placeholder="용어 검색 (예: 적멸보궁)" oninput="renderGlossaryList(this.value)" style="width:100%;margin-bottom:12px;">
+      <p id="glossaryStatus" role="status" hidden></p>
       <div id="glossaryBody"></div>
     </div>
   </div>
@@ -27052,12 +27053,23 @@ const GLOSSARY = [
   {term:"단청 (丹靑)", desc:"절 건물에 칠하는 화려한 색색의 무늬예요. 붉은색과 푸른색이 주로 쓰인다고 해서 이런 이름이 붙었어요. 나무를 보호하는 실용적인 역할도 해요."}
 ];
 
+let glossaryExtensionPromise=null;
+function loadGlossaryExtension(){
+  if(glossaryExtensionPromise)return glossaryExtensionPromise;
+  const status=document.getElementById('glossaryStatus');status.hidden=false;status.textContent='부처님·보살님 설명을 불러오고 있어요.';
+  if(!document.getElementById('glossaryStyles')){const css=document.createElement('link');css.id='glossaryStyles';css.rel='stylesheet';css.href='/styles/buddhist-glossary.css?v=20261027-glossary';document.head.append(css)}
+  glossaryExtensionPromise=(window.SansaGlossary?Promise.resolve():new Promise((resolve,reject)=>{const script=document.createElement('script');script.src='/scripts/buddhist-glossary.js?v=20261027-glossary';script.onload=resolve;script.onerror=()=>{script.remove();reject(Error('glossary script'))};document.head.append(script)})).then(()=>SansaGlossary.init(GLOSSARY)).then(()=>{status.hidden=true;status.replaceChildren()}).catch(()=>{glossaryExtensionPromise=null;status.hidden=false;status.textContent='확장 설명을 불러오지 못했어요. 기존 용어 검색은 계속 사용할 수 있어요.';const retry=document.createElement('button');retry.type='button';retry.textContent='다시 불러오기';retry.onclick=loadGlossaryExtension;status.append(retry)});
+  return glossaryExtensionPromise;
+}
 function openGlossaryOverlay(){
+  window.SansaGlossary?.reset();
   document.getElementById('glossarySearch').value = '';
   renderGlossaryList('');
   document.getElementById('glossaryOverlay').classList.add('show');
+  loadGlossaryExtension();
 }
 function renderGlossaryList(search){
+  if(window.SansaGlossary?.ready){SansaGlossary.render(search);return;}
   const q = (search||'').trim().toLowerCase();
   const filtered = q ? GLOSSARY.filter(g=> g.term.toLowerCase().includes(q) || g.desc.toLowerCase().includes(q)) : GLOSSARY;
   const wrap = document.getElementById('glossaryBody');
