@@ -2971,11 +2971,47 @@
     "name": "약천사",
     "region": "제주",
     "locality": "제주",
-    "status": "pending",
-    "cards": [],
-    "sources": [],
-    "reason": "공식 개별 자료를 확인하지 못해 내용을 등록하지 않았습니다.",
-    "evidenceKeywords": []
+    "status": "verified",
+    "cards": [
+      {
+        "title": "지붕을 세 번 따라가요",
+        "text": "큰 법당의 지붕이 위로 층층이 이어져요. 앞마당에서 전체 모습을 본 다음, 가까이에서 처마 아래 단청과 붉은 기둥을 살펴보세요.",
+        "keywords": [
+          "세 겹 지붕",
+          "단청"
+        ]
+      },
+      {
+        "title": "넓은 마당과 전각의 크기",
+        "text": "법당 앞의 넓은 마당에서는 계단과 전각의 규모를 함께 볼 수 있어요. 가까이에서 본 문과 멀리서 본 건물의 비례를 비교해 보세요.",
+        "keywords": [
+          "법당 앞마당",
+          "계단"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "약천사1.jpeg · Wikimedia Commons 공개 라이선스 사진",
+        "url": "https://commons.wikimedia.org/wiki/File:%EC%95%BD%EC%B2%9C%EC%82%AC1.jpeg",
+        "checkedAt": "2026-10-27",
+        "sha256": "b30d03704a76a0fb0c0a205ed300e4cb1d7e651248cdf3a7c797226de824edf6",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "evidenceType": "직접 열람한 사진에서 확인되는 공간·건축 관찰 포인트. 운영 정보나 창건 연대의 근거로 사용하지 않음."
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "세 겹 지붕",
+        "단청"
+      ],
+      [
+        "법당 앞마당",
+        "계단"
+      ]
+    ]
   },
   {
     "id": "temple:연곡사",
@@ -3358,11 +3394,45 @@
     "name": "원당사",
     "region": "제주",
     "locality": "제주",
-    "status": "pending",
-    "cards": [],
-    "sources": [],
-    "reason": "공식 개별 자료를 확인하지 못해 내용을 등록하지 않았습니다.",
-    "evidenceKeywords": []
+    "status": "verified",
+    "cards": [
+      {
+        "title": "현재 이름과 옛 절터 구분",
+        "text": "오층석탑의 현재 소재지는 불탑사예요. 자료에 나오는 ‘옛 원당사지’와 현재 사찰 이름을 구분하고, 석탑을 보려면 불탑사의 위치를 확인해 주세요.",
+        "keywords": [
+          "불탑사",
+          "옛 원당사지"
+        ]
+      },
+      {
+        "title": "제주의 돌로 만든 탑",
+        "text": "불탑사 오층석탑은 기단부터 위쪽 부재까지 현무암으로 만들었어요. 다른 지역의 밝은 화강암 탑과 달리, 돌의 색과 표면을 가까이 살펴보는 재미가 있어요.",
+        "keywords": [
+          "현무암",
+          "기단"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "제주 불탑사 오층석탑 · 한국민족문화대백과사전",
+        "url": "https://encykorea.aks.ac.kr/Article/E0025044",
+        "checkedAt": "2026-10-27",
+        "sha256": "a13c5e8b3c2542fce4315cc07ef1704a2b5b1975e1142816a044390d7d800150",
+        "evidenceType": "현 소재지와 옛 원당사지의 관계, 현무암 석재를 본문과 참고문헌에서 확인."
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "불탑사",
+        "옛 원당사지"
+      ],
+      [
+        "현무암",
+        "기단"
+      ]
+    ]
   },
   {
     "id": "temple:월정사",
@@ -4201,11 +4271,47 @@
     "name": "해동용궁사",
     "region": "경상",
     "locality": "부산",
-    "status": "pending",
-    "cards": [],
-    "sources": [],
-    "reason": "공식 개별 자료를 확인하지 못해 내용을 등록하지 않았습니다.",
-    "evidenceKeywords": []
+    "status": "verified",
+    "cards": [
+      {
+        "title": "바다가 법당의 배경",
+        "text": "전각 바로 아래로 해안 바위와 바다가 이어져요. 지붕만 보기보다 석축·바위·파도가 만나는 사찰의 배치를 함께 살펴보세요.",
+        "keywords": [
+          "해안 바위",
+          "전각"
+        ]
+      },
+      {
+        "title": "돌난간을 따라 보는 풍경",
+        "text": "밝은 돌난간이 전각 앞과 바다 쪽 가장자리를 따라 이어져요. 난간 안쪽의 관람 공간과 그 너머 바위 해안을 나누어 보면 이 절의 자리가 더 잘 보여요.",
+        "keywords": [
+          "돌난간",
+          "석축"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "Haedong Yonggungsa Temple, Busan, South Korea.jpg · Wikimedia Commons 공개 라이선스 사진",
+        "url": "https://commons.wikimedia.org/wiki/File:Haedong_Yonggungsa_Temple,_Busan,_South_Korea.jpg",
+        "checkedAt": "2026-10-27",
+        "sha256": "fba517974112cc139cc2bafb751f353b32b3fc6289054fd120388a4e609e7d04",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "evidenceType": "직접 열람한 사진에서 확인되는 공간·건축 관찰 포인트. 운영 정보나 창건 연대의 근거로 사용하지 않음."
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "해안 바위",
+        "전각"
+      ],
+      [
+        "돌난간",
+        "석축"
+      ]
+    ]
   },
   {
     "id": "temple:해인사",
@@ -4467,7 +4573,7 @@
     "status": "pending",
     "cards": [],
     "sources": [],
-    "reason": "공식 개별 자료를 확인하지 못해 내용을 등록하지 않았습니다.",
+    "reason": "휴휴암의 세부 방문 정보는 공식 자료와 추가 대조 중이에요.",
     "evidenceKeywords": []
   },
   {

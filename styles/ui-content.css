@@ -45,3 +45,8 @@
 #catalogOverlay :is(.catalog-card,.catalog-thumb,.catalog-thumb img){scroll-margin-top:90px}
 /* A direct music link must expose the panel immediately, including WebKit's first frame. */
 #playlistOverlay.show>.modal{transform:none!important;animation:none!important}
+
+/* Keep public catalog paintings in their native landscape ratio; leave user photos alone. */
+#dCoverPhotos:has(>.temple-detail-cover),#mCoverPhotos:has(>.mountain-watercolor-placeholder){display:block!important}
+#dCoverPhotos>.temple-detail-cover,#mCoverPhotos>.mountain-watercolor-placeholder{position:relative!important;width:100%!important;height:auto!important;min-height:0!important;aspect-ratio:3/2!important;overflow:hidden;border-radius:14px}
+#dCoverPhotos>.temple-detail-cover>img,#mCoverPhotos>.mountain-watercolor-placeholder>img{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:contain!important}

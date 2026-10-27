@@ -7,10 +7,12 @@ def dhash(im):
 for r in actual:
  f=root/r['src'].lstrip('/');raw=f.read_bytes();sha=hashlib.sha256(raw).hexdigest();assert sha not in hashes,(r['id'],hashes.get(sha));hashes[sha]=r['id'];im=Image.open(f);im.load();assert im.width>=480 and im.height>=320
  thumb=Image.open(root/r['thumbnail'].lstrip('/'));thumb.load();assert abs(im.width/im.height-thumb.width/thumb.height)<.02
- result.append({'id':r['id'],'sha256':sha,'dhash':dhash(im),'thumbnailDhash':dhash(thumb),'dimensions':[im.width,im.height],'bytes':len(raw)})
+ result.append({'id':r['id'],'sha256':sha,'dhash':dhash(im),'mirroredDhash':dhash(ImageOps.mirror(im)),'thumbnailDhash':dhash(thumb),'dimensions':[im.width,im.height],'bytes':len(raw)})
 near=[];pairs=0
 for a,b in itertools.combinations(result,2):
  pairs+=1;distance=(a['dhash']^b['dhash']).bit_count()
- if distance<=22:near.append({'a':a['id'],'b':b['id'],'distanceOf256':distance})
-output={'catalogMappings':len(rows),'actualArtwork':len(actual),'neutralPending':len(rows)-len(actual),'distinctFiles':len(hashes),'pairsCompared':pairs,'nearDuplicateThreshold':22,'nearDuplicateCandidates':near,'artwork':[{**x,'dhash':hex(x['dhash']),'thumbnailDhash':hex(x['thumbnailDhash'])} for x in result]}
+ if distance<=22:near.append({'a':a['id'],'b':b['id'],'distanceOf256':distance,'orientation':'original'})
+ mirrorDistance=(a['dhash']^b['mirroredDhash']).bit_count()
+ if mirrorDistance<=22:near.append({'a':a['id'],'b':b['id'],'distanceOf256':mirrorDistance,'orientation':'horizontal-mirror'})
+output={'catalogMappings':len(rows),'actualArtwork':len(actual),'neutralPending':len(rows)-len(actual),'distinctFiles':len(hashes),'pairsCompared':pairs,'mirrorPairsCompared':pairs,'nearDuplicateThreshold':22,'nearDuplicateCandidates':near,'artwork':[{**x,'dhash':hex(x['dhash']),'thumbnailDhash':hex(x['thumbnailDhash']),'mirroredDhash':hex(x['mirroredDhash'])} for x in result]}
 p=root/'docs/catalog-complete';p.mkdir(exist_ok=True,parents=True);(p/'image-audit.json').write_text(json.dumps(output,ensure_ascii=False,indent=2)+'\n');print(json.dumps({k:v for k,v in output.items() if k!='artwork'},ensure_ascii=False));assert not near,'Review perceptual near-duplicate candidates before release'

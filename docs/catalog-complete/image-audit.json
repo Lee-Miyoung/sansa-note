@@ -1,9 +1,10 @@
 {
   "catalogMappings": 211,
-  "actualArtwork": 159,
-  "neutralPending": 52,
-  "distinctFiles": 159,
-  "pairsCompared": 12561,
+  "actualArtwork": 207,
+  "neutralPending": 4,
+  "distinctFiles": 207,
+  "pairsCompared": 21321,
+  "mirrorPairsCompared": 21321,
   "nearDuplicateThreshold": 22,
   "nearDuplicateCandidates": [],
   "artwork": [
@@ -11,6 +12,7 @@
       "id": "temple:각연사",
       "sha256": "6c26918de8db37cce44c2f4dd808f530f3e8f7e5d25e2e09f93938f78f4c04c3",
       "dhash": "0xd9b4764f76c6fcd07d956d958db7ad973d9651fc5ff03e847086e38ac33b1d35",
+      "mirroredDhash": "0x524009819c91d4c056415649124e124a9643c075f005dc839ef1ae38233c5347",
       "thumbnailDhash": "0x99b4764f76c6fcd07d946d958db7ad973d9651fc5ff03e847086e38ac33b1d35",
       "dimensions": [
         768,
@@ -22,6 +24,7 @@
       "id": "temple:갑사",
       "sha256": "8f0932f0e1650325bbedacf11ccda459d47ef8090a962510561c530377591986",
       "dhash": "0x3763f41cf08ed4a2c4b89cacf2acc3ac43b842986cc87038b499bf09af2aee20",
+      "mirroredDhash": "0x3001c7d08ef0bad4e2dccac6cab0ca1ce23de6adecc9e3f166d26e02ab0afa88",
       "thumbnailDhash": "0x3763f41cf08ed4a2c4b89cacf2acc3ac43b842986cc87038b499bf09af2aee20",
       "dimensions": [
         768,
@@ -33,6 +36,7 @@
       "id": "temple:갓바위(선본사)",
       "sha256": "757981e114b87c908c6ba2eadd2902e4134333c649a69a737036b07682e9bf34",
       "dhash": "0xc6964a14610c18440c060e0e260c170d010c0d082c18040a022d443404302601",
+      "mirroredDhash": "0x969cd7adce79dce79fcf8e8f8f9b4b174f7fef4fe7c3afdf4b9fd3cdf3df7f9a",
       "thumbnailDhash": "0xc6964a14610c18440c060e0e260c170d010c0d080c18040a042d443404302601",
       "dimensions": [
         768,
@@ -44,6 +48,7 @@
       "id": "temple:개심사",
       "sha256": "43dc5678689cf29fcc531c88b5300fc0c72485c8c8da0ebb48ae16fb180b2f6f",
       "dhash": "0x7d807b58472dc60c220d92a592b830bc1fce7b8cc12c40759a651b433933f20b",
+      "mirroredDhash": "0xfe41e5214b1dcf9c4ebb5ab6e2b6c2f38c07ce01c36451bd59a63d2733632730",
       "thumbnailDhash": "0x7d807b58472dc60c220d92a592b830bc1fce7f8cc12c40759a651b433933f20b",
       "dimensions": [
         768,
@@ -55,6 +60,7 @@
       "id": "temple:개암사",
       "sha256": "2b9ca1dae9e65e3b534ce66e0039a1268055d8fe7cbd9f936608886c60b4d5c7",
       "dhash": "0x4301a3268733661e420fca1b085e1c8cffc491ac9796344de15d933886606658",
+      "mirroredDhash": "0x37299b3a330e87990f9d252c84efce07dc00ca6696164cd34578e336f99ee599",
       "thumbnailDhash": "0x4301a3268733661e420fca1b085e1e8cffc491ac9796344de15d933886606658",
       "dimensions": [
         768,
@@ -66,6 +72,7 @@
       "id": "temple:건봉사",
       "sha256": "05bbfa23c2118a6b4d4fe7f95f0e2aecac32f5e30882891806c7182f1b1d3e3d",
       "dhash": "0x4d8c6ec67b216589c190e3dcb3c731639496164c16463c2a0fe81f2c3f003d12",
+      "mirroredDhash": "0xce4d9c097b216e59f67cc4381c32387396c6cc979d97abc3e80ccb037f03b642",
       "thumbnailDhash": "0x4d8c6ec67b216589c190e3dcb3c731639496164c16463c2a0fe81f2c3f003d12",
       "dimensions": [
         768,
@@ -77,6 +84,7 @@
       "id": "temple:고운사",
       "sha256": "d0ffd0693f3ee591a44dcf0fb8c618cd411379cfb657c0ce986b06dc67301533",
       "dhash": "0x4241a0039ba3a28385928c830c6700730f817c74e16bc799b799fcc5f867f95",
+      "mirroredDhash": "0xc39fff83a263e2a365e3accb9cf31fe1e0e31c17978d61c26126cc069e015601",
       "thumbnailDhash": "0x6241a0039ba3a38385928c830c6700730f817c74e16bc399b799fcc5f867f95",
       "dimensions": [
         768,
@@ -88,6 +96,7 @@
       "id": "temple:골굴사",
       "sha256": "c7cb65ffbe71ee0c3923325f06cc5864e4cccb93780a6ab02f5fd992e90e6473",
       "dhash": "0xe9d7607d78556a43a66ce11ce5066140734c65c06590a544b32456824e430e3",
+      "mirroredDhash": "0x468f1f915e14da9599a3778cf58cd799d31fc59c659ed5aeb32de95dd8d938f3",
       "thumbnailDhash": "0xe9d7607d78556a43a66ce11ce5066140734c65c06590a544b32056864e430e3",
       "dimensions": [
         1200,
@@ -99,6 +108,7 @@
       "id": "temple:관룡사",
       "sha256": "0b8b0a85e97d4180b6be7945e7718b9bfa674e77b8c0fe7f7dd328e8853865ea",
       "dhash": "0x6078807011a7ff22da5aca5c4a57925bbf0e7a44d1d38868952301af111c72f0",
+      "mirroredDhash": "0xa1f8c1fc1a57bb00a5a4c5a4152d24b68f02dd013430c1ae1b560a7fc776f031",
       "thumbnailDhash": "0x6078807811a7ff22da5aca5c4a57925b3f0c7a44f1d38868952301af111c72f0",
       "dimensions": [
         768,
@@ -110,6 +120,7 @@
       "id": "temple:관음사",
       "sha256": "b8b450ad47ed5282f7d9c69d52f0d5e11b449dd3218b31b0f9c21fb7ca66377e",
       "dhash": "0x2e862f8e1f15079c8b06a70aee89bcc828ab2c822c9148d6dd441d11d704a72c",
+      "mirroredDhash": "0x9e8b8e0b5707c61f9f2eaf1a6e88ecc22a6bbecb764b14eddd447746df14cb1a",
       "thumbnailDhash": "0x2e862f8e1f15079c8b06a70aee89bcc8288b2c822c8148c6dd441d11d704a72c",
       "dimensions": [
         768,
@@ -121,6 +132,7 @@
       "id": "temple:관촉사",
       "sha256": "d6ef37db8b78a840408e9f19524bac79af377d7a3671f814755f10cad5d025fd",
       "dhash": "0xad634c06971fa719c718611861146751625d621cdb38ca3444310d64b961e101",
+      "mirroredDhash": "0x394a8fcc0716671ae71ce779d739751945b9c7b9e324d3ac73ddd94d79623f38",
       "thumbnailDhash": "0xa5634c06971fa719c718611861146551625d621cdb38ca3444310d64b961e101",
       "dimensions": [
         1200,
@@ -132,6 +144,7 @@
       "id": "temple:구인사",
       "sha256": "99a780cc55752d7830f3941313cc6a423a0c45a88ee8e413f1d4a18333dac655",
       "dhash": "0xc2938aa2993118487c6867f0cdfcd4b6527c8b6db85c9d3cdb7cc6fcdfb0bd99",
+      "mirroredDhash": "0x36acbaae7366edc7e9c1f019c04c9254c195492ec1e2c346c124c09cf2046642",
       "thumbnailDhash": "0xca938aa2993118487c6867f0cdfcd536527c8b6db87c9d3cd37cc6fcdfb0bd99",
       "dimensions": [
         1200,
@@ -143,6 +156,7 @@
       "id": "temple:금산사",
       "sha256": "2eb3f2e68d64a89d54fd99fec890715a9751ffe8311d821c565c716276c16af4",
       "dhash": "0x1c1c19367787209438d118c100c600c8f3c0119303927740030807960406e44",
+      "mirroredDhash": "0x7c6f307cc1196fb14e3dcc77cfe7cfe9c30c677f63f3d11be37f61fefdf99d89",
       "thumbnailDhash": "0x1c1c19367787209438d118c100c600c8f3c0119303927740030807960406e44",
       "dimensions": [
         1440,
@@ -154,6 +168,7 @@
       "id": "temple:기림사",
       "sha256": "7c95c0e5c7ea13e8b502b919bd0210cfcdf74f9a99b4541271f9ad57984ffb3d",
       "dhash": "0x37e0119ea32d54a2a9a2ae2553057d67e16c0b91a9bbbd1ce63c263319c385",
+      "mirroredDhash": "0x13ff77f00a86d14b6aba8aba355b415778192f496a72422298c69bc367335e3c",
       "thumbnailDhash": "0x37f0119eab2d54a2a9a2ae2553057d67e16c0b91a9bbbd1ce63c263319c385",
       "dimensions": [
         1200,
@@ -165,6 +180,7 @@
       "id": "temple:김룡사",
       "sha256": "fe86eb3c71307e8f66ce2d88eb2e2966290c0df155e0ed598bf4a731dae7ad33",
       "dhash": "0x2b7f70d9e875a9076b254e63ce49e9a13126d09262d3f13998143c013c002762",
+      "mirroredDhash": "0x12b647151a81f6a5b29398c6d8c7a689b73b6f434b96170d7e67fc3ffc3b91b",
       "thumbnailDhash": "0x2b7f70d9e875a9076b254e63ce49e9a13126d09262d3f17998143c013c002762",
       "dimensions": [
         1200,
@@ -176,6 +192,7 @@
       "id": "temple:낙산사",
       "sha256": "09476a928050c7332bf00c90b577a811e5fb8f1477a541e6f61e4ed41f57d237",
       "dhash": "0x5e033f816b26192139713d621cc5db0571127495e33ecf0b45cdb335f3016b83",
+      "mirroredDhash": "0x2a057e039b293b677163b9435cc71f04b77156d183182f0c4c1d53327f303e29",
       "thumbnailDhash": "0x5c013f816b26192339713d621cc5db0771127495e33ecf0b45cdb335f3016b83",
       "dimensions": [
         768,
@@ -187,6 +204,7 @@
       "id": "temple:내소사",
       "sha256": "3f4749fc9deea418e2d4bcca7dff502bbcf25d0d88692c4de49239d99a0d41db",
       "dhash": "0x11b611e05f8aff64c347d5dcd4dcf23d599c6a8d38c3593369242b813fe46374",
+      "mirroredDhash": "0x1277f817ae05d9001c3cc454c4d443b0c6654ea93c633365da697e2bd803c139",
       "thumbnailDhash": "0x11b711e05f8afe64c3c7d5dcd4dcf23d599c6a8d38c3593369242b813fe46374",
       "dimensions": [
         1200,
@@ -198,6 +216,7 @@
       "id": "temple:다솔사",
       "sha256": "71467e0b0af1a40172c51a3099da222560c88651b1198d65e908d8c76c6fc4b8",
       "dhash": "0x3dfa0de2094540d52bd834f3d453ecc79a6deb1de1b518fd94997193a3b225b3",
+      "mirroredDhash": "0xa043b84f5d6f54fde42330d335d414c849a64728527840e766c63671b23a325b",
       "thumbnailDhash": "0x3dfa0de2094540d52bd834f3d453ecc79a6deb1de1b518fd94997193a3b225b3",
       "dimensions": [
         1200,
@@ -209,6 +228,7 @@
       "id": "temple:대승사",
       "sha256": "fc51a94448ed66bd911c816638f7d61235cac698fda681031c72ac854c27903a",
       "dhash": "0x4b83bb707471c30e5e0edf26f70eb74725c46c2cceb3d6b1f6f937f48b3ac709",
+      "mirroredDhash": "0xc2df12271d18f1c8f859b048f101d12dc5bcb89328c70946090d013a30e6f1c",
       "thumbnailDhash": "0x4b83bb707471c30e5e0edf26b70eb74725c44c2ccea3d6b1f6f937f48b3ac709",
       "dimensions": [
         1200,
@@ -220,6 +240,7 @@
       "id": "temple:대원사",
       "sha256": "21cf45b32bd2641ca6a5a030ed781ff3b2ae425a89d4dcdadda842e6fd88bb45",
       "dhash": "0x313b339f16c718c70f8c27b9b4b33a37881bc44352b339cb6222911908c35380",
+      "mirroredDhash": "0x237306331c971ce5ce0f621b12d211a327ee3dcc32b52c639b9967763cedfe31",
       "thumbnailDhash": "0x313b339f16c718c70f8c27b934b33a37881bc44352b339cb6222911908c35280",
       "dimensions": [
         1200,
@@ -231,6 +252,7 @@
       "id": "temple:대조사",
       "sha256": "e72de4ab4786ba25be54bf3986ecfa6c1a75a859b5043e1c2d30d85ed6491257",
       "dhash": "0x67b0cdb3001b3059f12e399a719901dcc39503115302941cc69941e1096032e",
+      "mirroredDhash": "0x19f24cd6ff35f22b7066618671a46f263cc73f57357796b69c887d696f78b3f",
       "thumbnailDhash": "0x67b0cdb3001b3059f12e399a719901dcc39503115302941cc69941e1096032e",
       "dimensions": [
         1200,
@@ -242,6 +264,7 @@
       "id": "temple:대흥사",
       "sha256": "01a13b2343cc1f4f8e9f2cfcc4935820d72ae06c0d32df4d420ac0cc3598f605",
       "dhash": "0xdcb89f67bea46f30cc37acb4adb6acb829b065b4181e5bdb3fcbb0629b227322",
+      "mirroredDhash": "0xe2441806d882f30913ccd2ca9248e2caf26bd21987e724052c03a9f2bb26bb31",
       "thumbnailDhash": "0xdcb89f67bea46f30cc37acb4adb6acb829b065b4181e5bdb3fcbb0629b227322",
       "dimensions": [
         1440,
@@ -253,6 +276,7 @@
       "id": "temple:도갑사",
       "sha256": "d1392293861f4601abe938d0b5031d02e0cf39b26e78c0d0e2a44554c389062b",
       "dhash": "0x1a40300410053b45a0264526d1868ba7dd8f17921f93ef9b7fe9df947803604",
+      "mirroredDhash": "0xda7fff3dfe41d235bf253549e749a2c9e4416170607b608380126046fe1ddb93",
       "thumbnailDhash": "0x1a40300490053b45b0264526d1860ba7dd8f17921f93ef9b7fe9df947803604",
       "dimensions": [
         1200,
@@ -264,6 +288,7 @@
       "id": "temple:도리사",
       "sha256": "e1dce46067b2f845e3830d08943912b4a61244b1fe3f4991ddf174309eb7ff1a",
       "dhash": "0x781a0898d240ffc487b293309ccc988c378c6954ca70de63b581b80a78367165",
+      "mirroredDhash": "0x87e1e6cffdb0dc00b21ef336ccc6cee6ce13d469f1ac39847e52afe293e15970",
       "thumbnailDhash": "0x781a0898d240ffc487b293309ccc988c378c6954ca70de63b581b80a7836f165",
       "dimensions": [
         1200,
@@ -275,6 +300,7 @@
       "id": "temple:도선사",
       "sha256": "2bd4502ac30830d7dffc73a7c57ae99bbffd2ba826002e721dc421652693382e",
       "dhash": "0xf14378ab3e6df6306fd24bf195681d7a0fb64f870b274bf316b95d7037ca738c",
+      "mirroredDhash": "0x3d302ae14983f390b409700de956a147900f1e0d1b2f302d6297f145ac13ce31",
       "thumbnailDhash": "0xf34378ab3e6df6306fd24af195681d7a0fb64f870b234bf316b95d7037ca738c",
       "dimensions": [
         1200,
@@ -286,6 +312,7 @@
       "id": "temple:도피안사",
       "sha256": "83d2498add70b9a3ae76e5dc8a1e28672d8e7f5c5183bbcaa55ed6b70b0d7e64",
       "dhash": "0x72bf7c77fc1f5e9b46dfaa192b2926bb7f2fc2e536f9e4f1e6b956397536b3f3",
+      "mirroredDhash": "0x2b001c107c026850495662a6b2b201b0b0158bc609370d86298619513513032",
       "thumbnailDhash": "0x72bf7c77fc1f5e9b46dfaa192b2926bb7b2fc0e536f9e4f1e6b956397536b3f3",
       "dimensions": [
         1200,
@@ -297,6 +324,7 @@
       "id": "temple:동학사",
       "sha256": "efed450c16993b5f5271fdc7803388036259cfb495534ce3e9b118b8cc6f708d",
       "dhash": "0x139b12d5c765038d1d279b0e34cc33b37697dcd5f39aaca29e133c08181840d8",
+      "mirroredDhash": "0x263754b7591c4e2f1b478f26ccd33233169154c4a630b8ca37866fc3e7e7e4f9",
       "thumbnailDhash": "0x139b12d5c765038d1d279b0e34cc33b37697dcd5f39aaca29e133c08181840d8",
       "dimensions": [
         1200,
@@ -308,6 +336,7 @@
       "id": "temple:동화사",
       "sha256": "5aad7e0f6ef438a9e59004ed291b32b171cfc2bd03382363764996b73d08ebbf",
       "dhash": "0x4310d724c564f9305b361b34db371b3713333a437c515c65469f258ebd8fd9d0",
+      "mirroredDhash": "0xe325db04d90cf2609325d327132413271327158371c119c5069d8e5b0642f424",
       "thumbnailDhash": "0x4310d724c564f1b05b361b34db371b37133336037c715c65469f258ebd8fdbd0",
       "dimensions": [
         768,
@@ -319,6 +348,7 @@
       "id": "temple:마곡사",
       "sha256": "80e17aec9ce3202eb208d60dbfdbe246ed93bf49fd997cccbc23835fa5f261b3",
       "dhash": "0x1c154f014a996a633161906b27e43077bc0c8fc54ca74591e58c0585d280e388",
+      "mirroredDhash": "0x16457f0d64ad39a9787329f2181b11f3cfc25c0e18cd765dce585e5ffc34ee38",
       "thumbnailDhash": "0x1c150f014a996a633161b06b27e43077bc0c8fc54ca74591e58c0585d380e388",
       "dimensions": [
         1440,
@@ -330,6 +360,7 @@
       "id": "temple:만어사",
       "sha256": "934817f7b21da9db38a60e834682806d27201d18a46130c589ca02c315a144ca",
       "dhash": "0x1d944cbf21ccf90c5e69f09ad29cd4ecc7a4f24eca4ef70cce935c827d07b74",
+      "mirroredDhash": "0x647f24dd47b0560c985c6f066b4a8d4ca0ccdb0dd8c8f10868ccec53f40ad121",
       "thumbnailDhash": "0x1d944cbf21dcf90c5e69f09ad29cd4ecc7a4f24ece4ef70cce935c027d07b70",
       "dimensions": [
         1200,
@@ -341,6 +372,7 @@
       "id": "temple:무량사",
       "sha256": "bd3e9e602773556cc3080e874e0291e6190be3759b6a3cb42c468e7274ae7b5c",
       "dhash": "0xc0319ee7380f7001f930b3d892fa8c6881dcca60cce1c580a7527c4ab90ae093",
+      "mirroredDhash": "0x73fc18860de37ff1f360e432a0b6e88ec47c702c78ccfc5cb51aadc1af6236e8",
       "thumbnailDhash": "0xc0319ee7380f7001f930b3d8927a8c68c1dccae0cce1c580a7527c4ab90ae093",
       "dimensions": [
         1200,
@@ -352,6 +384,7 @@
       "id": "temple:무위사",
       "sha256": "308e0d79a08aaee3834df713d2a556cb53ffbd7743a74affded4e45f33d999c8",
       "dhash": "0x129af9c3b199a3a5a2e4228c229c617c67e43f06346331463d4d95c2d7829700",
+      "mirroredDhash": "0xa6a7386066705a38d8baccbbc6bbc179d8199f0339939d730d42bc56be14ff16",
       "thumbnailDhash": "0x129af9c3b199a3a5a2e4228c229c617c67e43f06346331463d4d95c2d7829700",
       "dimensions": [
         480,
@@ -363,6 +396,7 @@
       "id": "temple:문수사",
       "sha256": "b2378c3fdb3a3fb85b59c4e98a61a4841bde2d7c70d37f991d2fcd5f0e0ec1c1",
       "dhash": "0xd741ec827109bf05be283e344f049f153f25af09a79396935e435f4643c75387",
+      "mirroredDhash": "0x7d14be486f614f02eb82d183dd0d57065b036f0a361a36963d849d051c2d1e35",
       "thumbnailDhash": "0xd741e8827109bf05ba283e744f049f153f25af09a79396935e435f464bc75387",
       "dimensions": [
         768,
@@ -374,6 +408,7 @@
       "id": "temple:미황사",
       "sha256": "f1e79b1594e058e1fcbc22515567f7dd681818f41a17d1bd28d32da41a3e6b1e",
       "dhash": "0x39cfe2c7373314f1e6cb6658546c4e1c936b38615970612600266806650d683e",
+      "mirroredDhash": "0xc611cb8331370972c98e599c9d5c78d293679e3d1659b499bfd9fe14e1983e1",
       "thumbnailDhash": "0x39cfe2c7373314f1e6cb6658546c4e1c936b38615970612600266806650d683e",
       "dimensions": [
         1200,
@@ -385,6 +420,7 @@
       "id": "temple:백담사",
       "sha256": "9c50abdd87b87753b0f458b492cc40e361bf95f8eb9d143e056054158fe38d1f",
       "dhash": "0x1bf0d9769079d815cc8b66173c8b9862b2ab61634b2b9766e11cb806b99658e",
+      "mirroredDhash": "0x27f144f1f697e46ecc57992e83196628b239792b2d391627709fe2c46098e59",
       "thumbnailDhash": "0x1bf0d9769079d815cc8b66173c8b9962b26b61634b2b9766f11cb806b99658e",
       "dimensions": [
         1200,
@@ -396,6 +432,7 @@
       "id": "temple:백련사",
       "sha256": "3319639211501f8687b9f84967f20bb06b0431457a65ddaf0590fb80073c4634",
       "dhash": "0x7a06ffe0b6fcec679923d0bbc1f110f603e64e3439b268ce599cf3b9f7847d94",
+      "mirroredDhash": "0x9f81f800c01219c83b6622f4707c90f7983fd30da2618cc9c6254230de109641",
       "thumbnailDhash": "0x7a06ffc0b2fcec679923d0bbc1f110f603e64e3439b268ce599cf3b9f7847d96",
       "dimensions": [
         1200,
@@ -407,6 +444,7 @@
       "id": "temple:백양사",
       "sha256": "cc01c939999bb964fbd93ac671ab3fdc5abc4ac196176793199d4c08fd4de77f",
       "dhash": "0x939181a309ea39c272c6624a39f301a303d1838169c395418080d9c613c8166",
+      "mirroredDhash": "0x636f27e786f3c632cb1bdb19063aa67343f3e3c7c6979463abe7c64fc379993a",
       "thumbnailDhash": "0x939181a309ea39c272c6624a39f301a303d1c38169c395418080d9c613c8166",
       "dimensions": [
         768,
@@ -418,6 +456,7 @@
       "id": "temple:범어사",
       "sha256": "ad6c351bb3ba192d38ab54c0a890458b36ad332bdcb32c8beb6c7921323d2e1d",
       "dhash": "0x1e41d33c6351e341a31423863b3cd186870665964d04cc85e3a5d881c81dae39",
+      "mirroredDhash": "0x3006833475317d38d73a9e3bc3039e709f1a9659d34d5c4c5a387ae443e4630a",
       "thumbnailDhash": "0x1a41d33c6351e341a30423863b3cd186a70665964d04cd85e3a5d881c81dae39",
       "dimensions": [
         768,
@@ -429,6 +468,7 @@
       "id": "temple:법주사",
       "sha256": "307d7c6f6fd57c0198c415c0bb1c6f6caed867cbbf4f015bdc037f158151695c",
       "dhash": "0xcc4aa66aa6a97628d1f48163ce7086d287c802cd01e401b011e10381c1080e19",
+      "mirroredDhash": "0xadcca99a6892eb91d074397ef10cb49eec1a4cbbd83ff23f78777e3fef5c6587",
       "thumbnailDhash": "0xcc4aa66aa6a97628d1f48163ce7086d2a7c802cd03e403b011e10381c1081e19",
       "dimensions": [
         1440,
@@ -440,6 +480,7 @@
       "id": "temple:법화사",
       "sha256": "4e07cee340484c7e9c09ad22e9e8125df92f1b13319a1db6c28187fad3e5a386",
       "dhash": "0x313344981020e000da9833d8b56b9353b00739872dee2c3c93541365e4230007",
+      "mirroredDhash": "0x3173e6ddfbf7fff8e6a0e4332952350617f21e23884bc3cbd53659373b981bff",
       "thumbnailDhash": "0x313344981020e000da9833d8b56b9353b00739872dee2c3c93541365e4230027",
       "dimensions": [
         1200,
@@ -451,6 +492,7 @@
       "id": "temple:법흥사",
       "sha256": "17adee1b0d1c8aa5cfc907a12359f265654b8bdbe23735fd8dd0f80d176f9cbb",
       "dhash": "0x521007410067be17a85658b15ce55c77ed33b922e60345cef989f8d3c15ba1b",
+      "mirroredDhash": "0x7b5fd17f9ff778215ea12e518c551c553481b623f98bc5d3e6084e0657c327a2",
       "thumbnailDhash": "0x521006410067be17a85658b15ce55c77ed33b922e60345cef989f8d3c15ba19",
       "dimensions": [
         1200,
@@ -462,6 +504,7 @@
       "id": "temple:벽송사",
       "sha256": "e4b591712e27c1abc81a09f0bbdb4fe07016f295457618c11dab42b43773726c",
       "dhash": "0x3c0e9589f109ac668e66d229e6516660c62d3c8f76c2c8c4be81fc11d452642b",
+      "mirroredDhash": "0x8ec32e16676099c8998e6bb47598f9994b980ec39c919cec7e8277c0b5c42bc9",
       "thumbnailDhash": "0x3c0e9589f119ec668e66d229e6516660c62d3c8f76c2c8c6be81fc11d452642b",
       "dimensions": [
         768,
@@ -473,6 +516,7 @@
       "id": "temple:보광사",
       "sha256": "89899ab26b10237d43335d23d41539c76d6f0b50466bc393ba4220e1019a598a",
       "dhash": "0xf609cc81e4d13246392649a693261f4303f3101b270710b20c3c40f071e260f6",
+      "mirroredDhash": "0x6f907ccc74989db39b639a4d9b363d07303f27e71f1bb273c3ced0fdb8719071",
       "thumbnailDhash": "0xf609cc81e6d13246392649a693261f4303f3101b270710b20c3c40f071e260f6",
       "dimensions": [
         1200,
@@ -484,6 +528,7 @@
       "id": "temple:보리암",
       "sha256": "b9cf47d924d2d1dee806252b4f7ae74a622157b5bdb3bf9eea8d9effc4bc7a7a",
       "dhash": "0x9f37d38dd98448da1a6978e3128bd9988b180929c36cc32340934cc6c93482a0",
+      "mirroredDhash": "0x13064e34de64a4ed69a738e12eb7e664e72e6b6fc93c3b3c36fd9cc953487aa0",
       "thumbnailDhash": "0x9f37d38dd98448da1a6978e3128bd9988b180929c36cc32300932cc6c93482a0",
       "dimensions": [
         1200,
@@ -495,6 +540,7 @@
       "id": "temple:보문사",
       "sha256": "8c6cdabd90ae935735de62bfe852924461d22d03787f44b005c9d50ab87b34cc",
       "dhash": "0x2c18dc5494b196a42490a4d9249324972495603933e219035b93e197ac57239f",
+      "mirroredDhash": "0xe6cbd5c472d6da96f6da64da36db16db56db63d9b8333e673625167815ca0639",
       "thumbnailDhash": "0x2c18dc5494b196a4a490a4d9249324972495603933e219025b93e197ac57239f",
       "dimensions": [
         768,
@@ -506,6 +552,7 @@
       "id": "temple:봉선사",
       "sha256": "448420e284faea3737934392f3ef56136a79fd5666f1e689bf3691af22804c10",
       "dhash": "0xe72cfe373f16611cc5ab05e73e8ec27c84789c96667729338d12726770ef196",
+      "mirroredDhash": "0x208f380c70317799a5cc85f2e8311bc81dec4c6e199936b174639b198f111630",
       "thumbnailDhash": "0xe72cfe373f16611cc5ab05e73e8ec27c84789c96665729338d12726770ef396",
       "dimensions": [
         1200,
@@ -517,6 +564,7 @@
       "id": "temple:봉암사",
       "sha256": "ad692d72834d21126e4fd54bf9a4d3c32ae202b12bb6ea94612bcc89eb95f513",
       "dhash": "0x18e31f825668dd70e50cb31c32c3a8da84e926f37373515e159e779e4dfb9fe3",
+      "mirroredDhash": "0x38e7be07e995e144cf58c7322cb3a4ea28de309b313185558657861120093806",
       "thumbnailDhash": "0x18e31f825660dd70e50cb31c32c3a8da84e926f37373515e159e779e4dfb9fe3",
       "dimensions": [
         1200,
@@ -528,6 +576,7 @@
       "id": "temple:봉원사",
       "sha256": "2c22149f8dc6df741dadefb55f3fca3626ae9849b12be5b6c3de3c4400dc40e4",
       "dhash": "0xd0b24d90483fe012da00bc80bcc78726135318c31e6335b648b46ca24503216",
+      "mirroredDhash": "0x2f4f64db3ccf7f80ea0aec2fcc2fb0e11379ce53987325332ed9ac9df5db97b3",
       "thumbnailDhash": "0xd0b24d90483fe012da00bc80bcc78726135318c31e6335b648b46ca24503216",
       "dimensions": [
         1200,
@@ -539,6 +588,7 @@
       "id": "temple:봉은사",
       "sha256": "d7a98ff6a00245609e911042e5c31e5bd792b677b7505fac622f540ff8d8e409",
       "dhash": "0x97939ed3dad3d293d196d953cb72cab2db93dc33d072ca7ecd48c5c9d50c580e",
+      "mirroredDhash": "0x2606348634a436a496703564312cb2ac362433c031f481aced4c4c58cf548fe5",
       "thumbnailDhash": "0x97939ed3dad3d293d196d953cb72cab2db93dc33d072ca7ecd48c589d50c580e",
       "dimensions": [
         1200,
@@ -550,6 +600,7 @@
       "id": "temple:봉정사",
       "sha256": "77dc8de64fb17fbc3f0413bf4de52cd0e0ee5b5faaa1cfb8adc950ea4c6e5df5",
       "dhash": "0xff30f4c9a6c906827182b96266d886de372f31f79fc3b81bf0f4ea5cf33cff1c",
+      "mirroredDhash": "0x600064d06c9abe999e71b962e49984960b131073380227c2d0f0c028c330c700",
       "thumbnailDhash": "0xffa0f4c9a6c906827182b96266d886de372f31f79fc3b81bf0f4eafcf33cff1c",
       "dimensions": [
         768,
@@ -558,9 +609,22 @@
       "bytes": 121728
     },
     {
+      "id": "temple:봉정암",
+      "sha256": "8f142c49ced4c43974a6a1b14ed410d91b420f80042d4fa9213563153de82adf",
+      "dhash": "0x66437ce31c6616c2364b43c18641204324514e441b909b9143921393c4d523e8",
+      "mirroredDhash": "0x3d9918c199c7bc972d937c3d7d9e3df335dbdd8df6277626b63d363754dc283a",
+      "thumbnailDhash": "0x66437ce31c6616c2364b43c18641204324514e441b909b9143921393c4d423e8",
+      "dimensions": [
+        1200,
+        800
+      ],
+      "bytes": 166508
+    },
+    {
       "id": "temple:부석사",
       "sha256": "7e14daade0f8f6fb28247b0def445b806ac45b140561557510c07615f2593fd8",
       "dhash": "0x6583fc03f533730cf965658362977134722595ac1c9840f6126803ccc788e241",
+      "mirroredDhash": "0x2e593bc03350cf3159601e5916b9d3715bb1ca56e4c3907dc997cc3fee1c7db8",
       "thumbnailDhash": "0x6583fc03f533730cf965658362977134722595ac1c9841f6166803ccc788e241",
       "dimensions": [
         1440,
@@ -572,6 +636,7 @@
       "id": "temple:분황사",
       "sha256": "3d5c742e998d6a62a45bae9059931ea3d8b84ca3310eb141f69f936083de08ce",
       "dhash": "0x1efb83c38bb24d4b4cd9199cd998999c3dbd15b1083144784c6c40ee01b90931",
+      "mirroredDhash": "0x20873c3eb22e294d64cdc667e664c6664243725673efe1ddc9cd00d9627f736f",
       "thumbnailDhash": "0x1efb83c38bb24d4b4cd9199cd998999c3dbd15b1083144784c6c40ee01b90931",
       "dimensions": [
         1440,
@@ -583,6 +648,7 @@
       "id": "temple:불갑사",
       "sha256": "5857120014cda163c1dbc984c4f3051f5bec2690ab353cf79faecaff5b94f403",
       "dhash": "0xb275b3333b1371b621162113313331337133d433543369396864b0c66974289",
+      "mirroredDhash": "0xb2f33257233271377b976b93733373337133543355334939e96cf2c16996e3c",
       "thumbnailDhash": "0xb275b3333b1371b621162913313331337133d433543368392864b0c62934389",
       "dimensions": [
         1200,
@@ -594,6 +660,7 @@
       "id": "temple:불국사",
       "sha256": "20f3f5d0255044f42a6ebc46adf662529d9372209fab611658d70c3f974ba9b7",
       "dhash": "0x289d48292ae1aab3c8d3e473653165f0e67064f354e06ee4ce24ec2ead8f29bf",
+      "mirroredDhash": "0x42eb6bed78ab32aa34ec31d87359f059f19830d9f8d1d889da8c8b480a4a026b",
       "thumbnailDhash": "0x209548292ae1aab3c8d3e473651165f0e67064f154e06ee4ce24ec2ead8f29bf",
       "dimensions": [
         768,
@@ -605,6 +672,7 @@
       "id": "temple:불영사",
       "sha256": "e3ad81cde23abec188172cdb30783c033df71a7c2d22aa208086dfe3420ede75",
       "dhash": "0x469c38f130d5f0c5db25c73d4b2d4b2d9b271b277f017cc1b8e74cc75ee3beab",
+      "mirroredDhash": "0xc68c70e354f254d05b24430c4b2d4b2d1b261b277f017cc110e21ccd38852882",
       "thumbnailDhash": "0x461438f130d5f0c5db25c73d0b2d4b2d9b271b077f017cc1b8e74cc75ee3beab",
       "dimensions": [
         768,
@@ -616,6 +684,7 @@
       "id": "temple:산방굴사",
       "sha256": "d33e51fb4aa5dd3d861a988203f6bbda59b889097672f47700632721c5db2d47",
       "dhash": "0x3a727a76ce33e793c79e87468f430f4317c335c367c0cec08c9213a3b321255",
+      "mirroredDhash": "0x1a3f1a0b38c9618361c3c1e8d0e9d0f3c133c533c193c8c76ccfa37bb32355b7",
       "thumbnailDhash": "0x3a72fa76ce33e793c79e87468f430f4317c335c367c0cec08c9213a3b321255",
       "dimensions": [
         1200,
@@ -624,9 +693,22 @@
       "bytes": 174702
     },
     {
+      "id": "temple:삼광사",
+      "sha256": "23a58c088eb10d9a256ede54ec0b3017ac6218064e0623f50a02ae8ccba9c501",
+      "dhash": "0x2f074767937d51ece86dfe253f0b383e080e48005f08270f6c1f0c071e0125c0",
+      "mirroredDhash": "0x1f0b191d4136c87549e85b802b0183e38fef7fedef050f1b07891fcf7f87fc1b",
+      "thumbnailDhash": "0x2f074767937d51ece86dfc253f0b383e080e48005f08270f6c1f0c071a0125c0",
+      "dimensions": [
+        1200,
+        800
+      ],
+      "bytes": 162890
+    },
+    {
       "id": "temple:상원사",
       "sha256": "a3703e6f84a0ab6277d091af59412bea2cb97991899f156ae3b0c156858f92ee",
       "dhash": "0x803348037206d2cd9301ab39aab180e1be39f9318398f293d2c6b7c4bf04bc1",
+      "mirroredDhash": "0x3fe7fe83fb13cb49f34432a72aa68fa73827360663e7630ecb43c109f02d7c2d",
       "thumbnailDhash": "0x803348037206d2cd9301ab39aab180e1be39f9318398f293d2c6a7c4bf04bc1",
       "dimensions": [
         1200,
@@ -638,6 +720,7 @@
       "id": "temple:석굴암",
       "sha256": "9384f298fbb506ed1c250cbd9e3fd27a6934c925821d08798310ca2ff3158d7d",
       "dhash": "0xff00ef0cef8ccf0cef08ec88e64ce758cf1cef08ee88ee88ee08ee88ef08ef08",
+      "mirroredDhash": "0xff00cf08ce08ce0cef08cec8cd98e518c70ce708ee88ee88ef08ee88ef08ef08",
       "thumbnailDhash": "0xff00ef0cef8ccf0cef08ec88e64ce758cf1cef08ee88ee88ee08ee88ef08ef08",
       "dimensions": [
         768,
@@ -649,6 +732,7 @@
       "id": "temple:선암사",
       "sha256": "8dbf57868aa5b639a8dcb8e67cd6d5b302a5c34805af0ed6060c859a557407ab",
       "dhash": "0x78609c53eccaec38ee796e18ef1aed99e525f364d9cebc0cbf043e027c20ac05",
+      "mirroredDhash": "0xf9e135c4acc8e3486188e789a70866485b58d9308c64cfc2df02bf837bc15fc2",
       "thumbnailDhash": "0x7860dc53eccaec38ee796e18ef1aed99e525f364d9cebc0cbf043e027c20ac05",
       "dimensions": [
         1440,
@@ -660,6 +744,7 @@
       "id": "temple:선운사",
       "sha256": "36eac8130fc6749e662785a1e9a75acb0d787d7366a5bfe0c9103905401b65b6",
       "dhash": "0xec329ef86cf8e4aa789a6d9ae4376c343c282c701c3c5c424cc5258d89aae313",
+      "mirroredDhash": "0x91c8e086e0c922d8a6e1a64913c8d3c9ebc3f1cbc3c7bdc55ccd4e5baa6e3738",
       "thumbnailDhash": "0xec329ef86cf8e4ab789a6d9ae4376c343c282c701c3c5c424cc5258d89aae313",
       "dimensions": [
         1440,
@@ -671,6 +756,7 @@
       "id": "temple:송광사",
       "sha256": "948d046edcc4ca9c39f16b29128701ba4ecd9f373911a45db2cc9830927fe727",
       "dhash": "0x1e035223496fcd6c25ab36b316b7296b029b7be133f108790503418f409d8cb5",
+      "mirroredDhash": "0x3f853b35096dc94c2a5b32931297296b063f78017023614f0f4f067d467c50ce",
       "thumbnailDhash": "0x5e035223496fcd6c25ab36b316b7294b029b7be13bf108790507418f409d8cb5",
       "dimensions": [
         768,
@@ -682,6 +768,7 @@
       "id": "temple:수덕사",
       "sha256": "f3745ea37d060f3a4a6247a8329eb01f2df008ac14f21940a39e14d451eb41de",
       "dhash": "0x1863000cfc00eea2cb22b4c634f167a4c456cbd419e88979c9e213c20f8a8f42",
+      "mirroredDhash": "0x39a7cb3bffc0ba08bb2c9c5270d3da1995d8d42ce867216eb86cbc17ae0fbd0e",
       "thumbnailDhash": "0x1863020cfc00ef22cb22b4c634f167a4c456cbd419e88979c9e213c20f8a8e42",
       "dimensions": [
         1200,
@@ -693,6 +780,7 @@
       "id": "temple:수종사",
       "sha256": "5b4634833d830fb655c296790d46aab564820674e577e80f80c417fd41a3868e",
       "dhash": "0xf09a587ed9787136e722876287583a9848fc1bec8ec81de817b2bf181cc11ccd",
+      "mirroredDhash": "0xa6f081e5e1649170bb18b91ce51ec6a3c0edc827ec8ee047b217e7027cc74cc7",
       "thumbnailDhash": "0xf09a587ed9787136e722c76287583a9848fc1bec8ec81de817b2bf181cc11ccd",
       "dimensions": [
         1200,
@@ -704,6 +792,7 @@
       "id": "temple:신륵사",
       "sha256": "5e5a82562f03959a4197cc56f1cc7a565ea055fb13cdc4d96dae84e4ba481431",
       "dhash": "0x6d811ca3178b37866323e32b4b295d3a3d92199b1d863c8314c33c813c8b5991",
+      "mirroredDhash": "0x3e493ac72e179e133b192b386b2da345b64326679e473ec33cd75ec32ec33645",
       "thumbnailDhash": "0x6d811ca3178b37866323e32b4b295d3a3d92199b1d863c8314c32c813c8b5991",
       "dimensions": [
         768,
@@ -715,6 +804,7 @@
       "id": "temple:신원사",
       "sha256": "5716d9602e0cfff49b9ef16fec4134abe6ccce028197f4e8a3cd9ba5ceb1bd6b",
       "dhash": "0x24593bc98dfc88ee1631a321e18e239b638da13d21097804f041c131104380",
+      "mirroredDhash": "0x5bed23654e6ccec097883a73785b3b8e39267a4e3b03e167f09f7c78f6637c3d",
       "thumbnailDhash": "0x24593bc98dfc88ee1631a321e18e239b638da13d21097804f041c131104380",
       "dimensions": [
         1200,
@@ -726,6 +816,7 @@
       "id": "temple:신흥사",
       "sha256": "c5642b0dc4c8f0fb3f8dbf1b16518f6407eaa817a9477f47b5c2085d001057b8",
       "dhash": "0xf19089b729330cc5d244d645dc24de68498744ddc16b707ee4d994273c17031",
+      "mirroredDhash": "0x270f26ef36b1ccf3db45d94dbc45884de6da4dd197c40f124d88b9667c3163a1",
       "thumbnailDhash": "0xf1b089b729330cc5d244d645dc24de68498544ddc16b707ee4d994273c17031",
       "dimensions": [
         1200,
@@ -737,6 +828,7 @@
       "id": "temple:실상사",
       "sha256": "f79529ec324a7c8d28180e44a44675d6a75268ae97ed22e37df4d60e33c1fcb3",
       "dhash": "0x700f11f3f3c5e4ee24ef036f1d270d4e414e66acfced4f3d3f9a3daf65e74571",
+      "mirroredDhash": "0xff13077183088d8085b093f1b478d4f897dca9948c0430da60300431859304d",
       "thumbnailDhash": "0x700f11f3f3c7e4ee24af036f1d270d4e414e66acfced4f3d3f9a3daf65e74573",
       "dimensions": [
         1200,
@@ -748,6 +840,7 @@
       "id": "temple:쌍계사",
       "sha256": "96bd304c7113d696c0f3e3b183aa872c5785e4c34ec0123d5ef302faeffbf6c1",
       "dhash": "0x5c2563296a285c01d713b3b173ad332c333ae17a4338ce0dc8ddc339e202e014",
+      "mirroredDhash": "0x5b856b396b897fc5371472324a31ca33a333a178e33d4f0c44ec633cbf98d7f8",
       "thumbnailDhash": "0x5c2563296e285c01d313b3b173ad332c333ae17a4338ce0dc8ddc339e202e014",
       "dimensions": [
         1200,
@@ -759,6 +852,7 @@
       "id": "temple:쌍봉사",
       "sha256": "650ae0905b4bfea023c81cf664853c9ac9a405ac5d9fc6b1266b97ba6b04ca4d",
       "dhash": "0x191682569c069e4e689ded8bcccef683f2cec805f463f267c9178d0ec020c1",
+      "mirroredDhash": "0x47ffbc97c695829fe98d4846c42e908cb03e6c8cd05fb0396c194e17bc8f7c7b",
       "thumbnailDhash": "0x191682569c06be4e689ded8bdccef683f2cec805f463f267c9178d0ec020c1",
       "dimensions": [
         1200,
@@ -767,9 +861,22 @@
       "bytes": 174518
     },
     {
+      "id": "temple:약천사",
+      "sha256": "79717b76bdb8c0f478b279fb7e5145189dbfa401b16a27e12fbad2b66ca865fe",
+      "dhash": "0xbd0778016601e329eb2888f888ef9f173a03655e661c72bd20b9296c39860fc0",
+      "mirroredDhash": "0x1e407f817f996b28eb28e0ca08ee17063e838559c799423162ba09690e63000f",
+      "thumbnailDhash": "0xbd0768016601e329eb2888f888ef9f173a83645e661c72bd22b9696e29840fc0",
+      "dimensions": [
+        1200,
+        800
+      ],
+      "bytes": 166804
+    },
+    {
       "id": "temple:연곡사",
       "sha256": "62d0055ee3fe23e1851ae654c9ab5645c30a33db3586e16dce328a839c955c04",
       "dhash": "0x6598791c1e06223b2231a435b437ae132235a555a967a6338f1b8e171613ca01",
+      "mirroredDhash": "0xe659c7619f8723bb73bb539a13d2278a533b555a192a339a270e178e37977fac",
       "thumbnailDhash": "0x6598791c1e06223b2231a435b437ae1b2235a555a967a6338f1b8e171613ca01",
       "dimensions": [
         1200,
@@ -781,6 +888,7 @@
       "id": "temple:오어사",
       "sha256": "8352824e2f73a4e0cff525f2b13f497c06aeb04418f1b0a5742cbc2108d45dc4",
       "dhash": "0x1bb019f019b029b025d085d161b579444b6cc974e592bb105d140c9b0243422",
+      "mirroredDhash": "0x227f067f067f26bf459f45ef2797d61592dd16cc658d722b645f6cfddbf2bbd3",
       "thumbnailDhash": "0x1bb019f019b029b025d085d161b579444b6cc974e592bb1055140c9b0263422",
       "dimensions": [
         1200,
@@ -792,6 +900,7 @@
       "id": "temple:옥천사",
       "sha256": "0e49759af702245935fca1616de0be897dbd39a13a859a74705b91ae25858860",
       "dhash": "0x1964a373c33ad218e355f0d018e618e69acc3b2bfc01fa40724c667c4736a78f",
+      "mirroredDhash": "0x9967113a2338e7b45538f4f098e798e7c8a62b233f80fd80cd31c119931d0e0a",
       "thumbnailDhash": "0x1962a373c33ad218e355f0d018e618e69acc3b2bfc01fa40724c667c4736a78f",
       "dimensions": [
         768,
@@ -803,6 +912,7 @@
       "id": "temple:완주 송광사",
       "sha256": "604bcbcd944d9aa1ea1ddb33d8060ba0e91d1aecdd9fb37c2b53c29fd9e1a05c",
       "dhash": "0x20fb217368e968e968ed69e969ed68e968c92dcb29ebedc864c96c892e8b32b3",
+      "mirroredDhash": "0x20bb307368e968e948696869486968696cc92c4b286be4486cc96ec92e8b32b3",
       "thumbnailDhash": "0x20fb21b368e968e969ed69e969ed68e968c92dcb29ebe5c864c96c892e8b32b3",
       "dimensions": [
         768,
@@ -814,6 +924,7 @@
       "id": "temple:용문사(양평)",
       "sha256": "eab4f85b7b8eed8b9975778a030de7a7ff1c1778d5aeee59a2c6e5f8e661c9b7",
       "dhash": "0x7974a5728b3a4b0d278c8781868586b506b506701ab29bf2a9f44cf05670537",
+      "mirroredDhash": "0x161f150d326bf2d8e1b4e1eca9e729e529f519f52a7f026b06ab0cdd195e135f",
       "thumbnailDhash": "0x7974a5728b3a4a0d278c8781868586b506b506701ab29bf2a9f44cf05670537",
       "dimensions": [
         768,
@@ -825,6 +936,7 @@
       "id": "temple:용문사(예천)",
       "sha256": "6162c4e179264d9ab50e5aa1d40a23de39b328acc7dc58ddeb4bb655d2924491",
       "dhash": "0xf293ea13f83ae81af083334932653279b253b323e036ae10a764f0e9f13bf03",
+      "mirroredDhash": "0x6b077a833e037e8aef0ad323933613255b26b3232003788990af8f0d37063f02",
       "thumbnailDhash": "0xf293ea13f81ae81af083334933653279b253b323e036ae10a764f0e9f13bf03",
       "dimensions": [
         768,
@@ -836,6 +948,7 @@
       "id": "temple:용주사",
       "sha256": "21bf77bd36feddfcd02e985e768e8eacc597cb2fe14382a48d53911788f4aed8",
       "dhash": "0xc7334644bc107f125f1bb15154b95cac06da0f1e3366b490f428f0ada231f222",
+      "mirroredDhash": "0x231cdd99f742b7012705757262d4cac5249d870f9933d6d2ebd04af073b2bbb0",
       "thumbnailDhash": "0xc7334644bc107e125f1bb15154b95cac46da0e1e3366b490f428f0ada231f222",
       "dimensions": [
         1440,
@@ -847,6 +960,7 @@
       "id": "temple:운문사",
       "sha256": "80e3998401d1aa025c59aeaff3ca29bf6132c1f9a7880bb9a8eaeb9b703495c6",
       "dhash": "0x16e737e137083d1b2f3376133d8b1399324c2c86ce230d19083d49eb03c75237",
+      "mirroredDhash": "0x8937813ef132743330b379126436237cdb39ecb338c674e436f206d183f13b5",
       "thumbnailDhash": "0x36e737e137083d1b2f3376133d8b1399324c2c86c6230d19083d49e903e75237",
       "dimensions": [
         1200,
@@ -858,6 +972,7 @@
       "id": "temple:운주사",
       "sha256": "30a6b079f5cd386b7fb4db920006e13f09e2bbc1f9bbc6bcb1b3ed483eef6e43",
       "dhash": "0xa5313623a669f13c870db6f5d924606ce126ecf2d376c8c6ac5bfc4ab84cb014",
+      "mirroredDhash": "0x735a3b93699ac3704f1e5092db64c9e98b78b0c8912498ec25caadc0cde2d7f2",
       "thumbnailDhash": "0xa5313623a669f13c870db6f5d924604ce126ccf2d376c8c6ac5bfc4ab84cb014",
       "dimensions": [
         1440,
@@ -866,9 +981,22 @@
       "bytes": 371260
     },
     {
+      "id": "temple:원당사",
+      "sha256": "529a7b7f94d561f380bfeff740ca0ed1dc3684774c61b9a84bf493a43dd0ea9f",
+      "dhash": "0x721d403c0e059daa183219251998198a12ef1a6e100d311c3034b212e010689",
+      "mirroredDhash": "0x3b1f2ed4f8fca4652e7aa67b6675e6768b7a9a70ff7077343f3c7b2d5f8b6e9f",
+      "thumbnailDhash": "0x723d403c0e059d2a183219251998198a12ef1a6e100d311c3014b212e010689",
+      "dimensions": [
+        1200,
+        800
+      ],
+      "bytes": 183764
+    },
+    {
       "id": "temple:월정사",
       "sha256": "0ef945adf71fd158bf6ea9c54094b545237c3530d9de738a03141cf0abc88d88",
       "dhash": "0x100d20187bc031642a5c4ac105995b91338367314d242bbe977b9fc97dc47261",
+      "mirroredDhash": "0x4ff7e7fbfc21d972c5ab7c8d664b762536337319d34d822b21166c06dc4179b1",
       "thumbnailDhash": "0x100d20187bc031642a5c4ac10d995b91338367314d242bbe977b9fc97dc47261",
       "dimensions": [
         1200,
@@ -880,6 +1008,7 @@
       "id": "temple:은하사",
       "sha256": "a25dfcead13ae81f5b7e5399c417b9c0eb735dbbd796a7c9fff25d78a4d5bd3b",
       "dhash": "0x42256618b49dde355f095baad8b4b454c22ec01d9a2fa311c1298c8f62074261",
+      "mirroredDhash": "0x5bbde79946d053846f05aa25d2a0c5d28bbc47f80b86753a6b7c0ece1f997999",
       "thumbnailDhash": "0x42256618b49dde355f095baad8b4b45cc22ee01d9a2fa311c1298c8d60074261",
       "dimensions": [
         1200,
@@ -891,6 +1020,7 @@
       "id": "temple:은해사",
       "sha256": "2c57e0beabc4cf28b74d447302f3dca86bca80692485a1096c41dfe27d210a22",
       "dhash": "0xeb2e3b7c1e439d4e1d431d4c355b2d4f49df8c873297733e616fc0ffaae3afb1",
+      "mirroredDhash": "0x8a28c1233d878d463d47cd4725530d0b040d0e4616b38330097900f438aa720a",
       "thumbnailDhash": "0xeb2e337c1e439d4e1d431d4c355b2f4f49df8c873297733e616fc0ffaae3afb1",
       "dimensions": [
         768,
@@ -902,6 +1032,7 @@
       "id": "temple:자재암",
       "sha256": "cdfc6fbedfa9016a5c83089bb8f31dd944fd5a38d658db5c2efde0c3152d5343",
       "dhash": "0x18cb518f718ff0d8b659e5dc49fc1299363c763fe73dcb38c33a8f7c2f782be1",
+      "mirroredDhash": "0x2ce70e750e71e4f06582c458c06d66b7c39303914318632ca31c810ee109782b",
       "thumbnailDhash": "0x18cb518f718ff0d8b659e5dc49fc1299363c763fe73dcb38c33a8f7c2f782be1",
       "dimensions": [
         1200,
@@ -913,6 +1044,7 @@
       "id": "temple:장안사(부산)",
       "sha256": "29d5739b04417431ebff27cd4a8afcb07adb8ab09120c439273da860ac9a3f7a",
       "dhash": "0x133b59899d1609232241d8c19d24e763a8b909381a383678ee4cbf047b20c10d",
+      "mirroredDhash": "0x23376e6597463b6f7dbb6ce4d342391862eae36fe3a7e193cd88df02fb204f78",
       "thumbnailDhash": "0x133b59899d1609232241d8c9bd24e763a8b909381a383678ee4cbf04fb20c10d",
       "dimensions": [
         1200,
@@ -924,6 +1056,7 @@
       "id": "temple:전등사",
       "sha256": "90b36fc6238efcc410b1a06581b66ccad1c5555af38bd6715ebe5394bc6296ab",
       "dhash": "0x4ab506ac918bb0c76499618b3e42265ad4b5c50d4ce41db55b08eea3f9a359f1",
+      "mirroredDhash": "0x52adc29e2e760cf266d92e79bd83a59952d44d5cc8cc5247ef253a8832405025",
       "thumbnailDhash": "0x4ab506ac918bb0c76499618b3e42265ad4b5c50d4ce41db55b08eea3f5a35bf1",
       "dimensions": [
         1200,
@@ -935,6 +1068,7 @@
       "id": "temple:정암사",
       "sha256": "b9ab50f7e78b0c544e08918141822d85918a2c5fd288890a90474fc862aefc66",
       "dhash": "0xc6636d66697093369333e375f2716330e312e3156604a6243639360ab4eae461",
+      "mirroredDhash": "0x39989949f16993363336513871b0f338b7385738df99db9a6393af93a8d231d8",
       "thumbnailDhash": "0xe6636d66697093369333e375f2716330e312e3156604a6243639360ab4eae461",
       "dimensions": [
         1440,
@@ -946,6 +1080,7 @@
       "id": "temple:조계사",
       "sha256": "02dc6f198070a58e3a36690c386dfa3c62102b64e26d41d4473634079e90ad6e",
       "dhash": "0x1c6f94271613671a33732e31709b60f4e61d4f8b40ff63bb321a73326f3269f7",
+      "mirroredDhash": "0x9c71bd63783a7193133738b26f1d0f947182e0d007d2229a7b3b331b2091061",
       "thumbnailDhash": "0x1c6f94271603671a33732e31709b60f4e61d4f8b41ff6bbb321a73326f3269d7",
       "dimensions": [
         1200,
@@ -957,6 +1092,7 @@
       "id": "temple:존자암",
       "sha256": "e6e942f1e78d1bcef2b6d0931c0ebce738ad4408760c8e8c45fc8e22849f0d31",
       "dhash": "0x87b380421641b6c1617acb322e1f73c4acbea438b219b14938269e163a033a0",
+      "mirroredDhash": "0x21efdfc3d97ac927159732ca78b3c3102cad25a87b2ed326be367869fa39f230",
       "thumbnailDhash": "0x87b380421641b6c1617acb332e1f73c4acbea438b219b14938269e163a073a0",
       "dimensions": [
         1200,
@@ -968,6 +1104,7 @@
       "id": "temple:직지사",
       "sha256": "f7b69a67e5471a4ff733ed0e71599e7ff0dcc03acdc765960e284b605ba53803",
       "dhash": "0x111912403161bb32db1265522d52855713273b03f881302329ba78ab2747b24f",
+      "mirroredDhash": "0x6372f9056171b322b724b549b54b155e0a373e037ae038e2a26b2ae11d1b0db2",
       "thumbnailDhash": "0x111952403171bb32db1265522d52855713273b03f88130a329ba78ab2647b24f",
       "dimensions": [
         768,
@@ -979,6 +1116,7 @@
       "id": "temple:진관사",
       "sha256": "1e859ff05e86a5f8d609d924e9371a6b05ed3a5cbc4347b19e8248d43934236b",
       "dhash": "0x4ec14fc77380c30a654ba4e564e176b8c94e4f0f5e63a6b961cb5e691cce30ef",
+      "mirroredDhash": "0x38891c0dfe21af242d4158da78d9e2918d4c0f0d3804601a287969858cc708f3",
       "thumbnailDhash": "0x4ec34fc77380d30a654ba4e564e176b8c84e4b0f5e63a6b961cb5e691cce30ef",
       "dimensions": [
         1440,
@@ -990,6 +1128,7 @@
       "id": "temple:천은사",
       "sha256": "5cf0eae30aa2e651a8affb0116e2bdc5071d12763daf2c74c3aac23f30dd0a5e",
       "dhash": "0xcf06b70ebb106b20621018e23aa0eaa64aad13271e03788361061696160e1e57",
+      "mirroredDhash": "0x9b088f027722f329f7b9b8e7faa39aa04aad13371d033ee19879969787971587",
       "thumbnailDhash": "0xef26b70ebb106b30621018e23aa0eaa64aad13271e03788361061696160e1e57",
       "dimensions": [
         768,
@@ -1001,6 +1140,7 @@
       "id": "temple:청량사",
       "sha256": "ce5d0da22163fc6082f8297ddb8b25faed82530a6f8cc17ed2538afcf69c6c1f",
       "dhash": "0x66d770a3738d27076a1132b8711adbc8cb658972b95971ac1dac2f1f6e98ec6c",
+      "mirroredDhash": "0x14993af14e311f1b77a9e2b1a771ac24592cb16e6462ca71ca47070be609c1c8",
       "thumbnailDhash": "0x66d770a3738d27076a1172b8711adbc8cb658972b95971ac1dac2f1f6e18ec6c",
       "dimensions": [
         1200,
@@ -1012,6 +1152,7 @@
       "id": "temple:청암사",
       "sha256": "d1357a70cbf1ca5262ba697127dd16ee74e0046d2ad438e9964c6ae343fb853f",
       "dhash": "0x14bf0b311b2952391319996d892d4926336619673c0228975b539f6d9b8d598f",
+      "mirroredDhash": "0x2d773276b2763b5673749664b6e9b6d99231967bfc306e3342549064e220e25",
       "thumbnailDhash": "0x14bf0b311b2952391319996d892d4926336619673c0228975b539f6d9b8d198f",
       "dimensions": [
         1200,
@@ -1020,9 +1161,22 @@
       "bytes": 176926
     },
     {
+      "id": "temple:청평사",
+      "sha256": "a642bf3bf10763ff7c7898e7a3c5729302a05db3087e3067d6f7d681b8cef8a7",
+      "dhash": "0x21aa58a16c08aec739a4a4728453c3b96309681be51bf75d69d6cfa2c629f09d",
+      "mirroredDhash": "0xaa7b72e1ee811c8ada61b1da355e62346f3127e9275845109469ba0c6b9c46f0",
+      "thumbnailDhash": "0x21aa58a17c08aec739a4a4728453d3b96309681be51bf75d69d6cfa2c629f09d",
+      "dimensions": [
+        1200,
+        800
+      ],
+      "bytes": 183920
+    },
+    {
       "id": "temple:칠장사",
       "sha256": "bb06e4b260e2dc7dad5f924635ba5ceb162bd72195b61e2b0693362487ce92f3",
       "dhash": "0x690075116f1c6d5459355b0c5b0a130b934911763b6361d10374319d301f102f",
+      "mirroredDhash": "0x7f497751c709c5495265cd25af252f276934917739236419d03f467307f30bf7",
       "thumbnailDhash": "0x680075116f1c6d5459355b0c5b0a1b0b934911763b6362c90354319d301f102f",
       "dimensions": [
         768,
@@ -1034,6 +1188,7 @@
       "id": "temple:태안사",
       "sha256": "f3c3921bf8f84ef6e838dccdd5a5d456020c72dc881b633a197f4923e465a745",
       "dhash": "0x103e000ed902cb08c518cdc9c4c1cf607cb1e194cf989d8337863c5fb06f183",
+      "mirroredDhash": "0x3f7ffff0f608f2cb554ec4cecc4680c72c1f678760cdc42ee1325c211f203e70",
       "thumbnailDhash": "0x103f000ed902cb08d518cdc9c4c1cf607cb1e194cf989dc337873c5fb06f183",
       "dimensions": [
         1200,
@@ -1045,6 +1200,7 @@
       "id": "temple:통도사",
       "sha256": "f270e6d1269dd24f2fd642ccfaf2bc52d3826f1b4306b422b38ad49c249624ba",
       "dhash": "0x2073b1337115697d7101336133733319337117617137fc178e1886927186ac0",
+      "mirroredDhash": "0x1b0f370377131695f7149337133773331336917737137c0178c168eee71bfc09",
       "thumbnailDhash": "0x2073b1337115697d7101336133733319337117637137fc178e1886927186ac0",
       "dimensions": [
         768,
@@ -1056,6 +1212,7 @@
       "id": "temple:파계사",
       "sha256": "2509a7349ee4f4fc1a339c38ce99d4ba47a433d82c1966eedb176dfe2a433533",
       "dhash": "0x6e096b2b6a272e442b0465142d5a25530a5214a696b3294b6161914cc46de498",
+      "mirroredDhash": "0x6f092b291ba9dd8bdf23d759a54b355bb58792d732962d6b7941cd46499ce698",
       "thumbnailDhash": "0x6e096b2b6a272e442b0465142d5a25530a5214a696b3294b6961914cc66de498",
       "dimensions": [
         768,
@@ -1067,6 +1224,7 @@
       "id": "temple:표충사",
       "sha256": "cf5995ba9833577428e6b80270b86faabb34c0f53ea2f900b188ec085f006bfd",
       "dhash": "0x368f1c47354f566906386e2bee63694f570d716774cf18f930fc277c4fccfdb3",
+      "mirroredDhash": "0xe930dc30d536995e39f2b8939880d494f15197108d160e7c0f380194c0d0240",
       "thumbnailDhash": "0x368f1c47354f566906386e2bee636947570d716774cf18f930fc477c4fccfdbb",
       "dimensions": [
         1200,
@@ -1075,9 +1233,22 @@
       "bytes": 170308
     },
     {
+      "id": "temple:해동용궁사",
+      "sha256": "a59c9e9e620ddc6cce50f9b314da60794db804523ff5205a61deb05e671b8e3f",
+      "dhash": "0x23ff3a6f6e8f9e9f105f24ffe527ccc9a9eba06f261f7abf32f822e74e893c0d",
+      "mirroredDhash": "0x3b09830689068605f300db1b586ccc286a08f8050b02a140b318bb660d4fc1",
+      "thumbnailDhash": "0x23ff3a6f6e8f9e9f105f24ffe525ccc9a9eba06f271f7abf32f822e74e897c0d",
+      "dimensions": [
+        1200,
+        800
+      ],
+      "bytes": 172962
+    },
+    {
       "id": "temple:해인사",
       "sha256": "a3c48c0d24e72abd1e23f5f4f0d7e815c1dd5c07f2fcfa195428d8035ef782b4",
       "dhash": "0x137c3371b371bb031bd6823919cb0c74b71557c175225611e619c0c151702932",
+      "mirroredDhash": "0xc137713371323b22942763be2c67d1cf57125c15bb51779567985cfcf174b360",
       "thumbnailDhash": "0x137c3370b371bb031bd6823919cb0c74b71557c575225611e619c0c151702932",
       "dimensions": [
         768,
@@ -1086,9 +1257,22 @@
       "bytes": 109722
     },
     {
+      "id": "temple:향일암",
+      "sha256": "c5e92f6014149ac54c890801c716781a03cbbe24ea6a0ce2fcc75493fab351d6",
+      "dhash": "0x67340e7426e42645614b68d249b638e77ce17ce17ce97cf17cf43c64dd3e29be",
+      "mirroredDhash": "0xc319d18e589b5d992c69b4e9926d18e358c178c168c170c1d0c1d9c38344826b",
+      "thumbnailDhash": "0x67340e7426e42645614b68d249b638e77ce17ce17ce97cf17cf43c64dd3e29be",
+      "dimensions": [
+        1200,
+        800
+      ],
+      "bytes": 169036
+    },
+    {
       "id": "temple:화계사",
       "sha256": "e8b19c9005760d98e1ea8413ef409e2ada9cd95b0571642776fb5a56903075ad",
       "dhash": "0x467766f16570642f5e2d1f205e2924d924659866d8e66462c631b319d1100890",
+      "mirroredDhash": "0x119d709971590bd94b859b076b8564cb59db99e698e4b9d9739c6330f770f4c1",
       "thumbnailDhash": "0x427766f16570642f5e2d1f205e2924d924659866d8e66462c631b319d1100890",
       "dimensions": [
         1200,
@@ -1100,6 +1284,7 @@
       "id": "temple:화암사",
       "sha256": "67086dd949914ed1e848d829045f92f2e0cfd8ae61f4b849358bb81a8fbada06",
       "dhash": "0x25d11b98363a64eb656661b0a3b09994d284d26cf327e44374677b137f0a9fc3",
+      "mirroredDhash": "0x745be627a39328c99959f279f23ac666deb4c9b41b3039d811913721af013c02",
       "thumbnailDhash": "0x25d11b98363a64eb656661b0a3b09994d284d26cf327e44374677b137f0a9fc3",
       "dimensions": [
         1200,
@@ -1111,6 +1296,7 @@
       "id": "temple:화엄사",
       "sha256": "da01eb5a22262c22b3f0448512e26917b7bff554791bb51e8733ec5f27a34743",
       "dhash": "0xfc90a507b0b1148661874b8336a534a53cac5c4a7a4236184c120e105f02fe41",
+      "mirroredDhash": "0xf6c01f4a72f29e570e793e2d5a935ad3cac3a5c5bda1e793b7cdf78fbf057d80",
       "thumbnailDhash": "0xfc90a50790b1158661874b8336a534a53cac5c4a7a4236184c120e105f02fe41",
       "dimensions": [
         1440,
@@ -1122,6 +1308,7 @@
       "id": "temple:회암사",
       "sha256": "13458c3aa583f626d6de301b21c17c906d5e7459af1574842fc0b10c6d08a28e",
       "dhash": "0x2609ff00ef02c789c686cbc2715164f6a41683c65336b24a314c0dc007610761",
+      "mirroredDhash": "0x6f9bff00be086e1c9e9cb42c657190d917da9c3c9134adb0cd73fc4f791f7915",
       "thumbnailDhash": "0x2609ff00ef02c789c686cbc2715164f6a41783865336b24a314c0dc007614761",
       "dimensions": [
         1200,
@@ -1133,6 +1320,7 @@
       "id": "temple:흥국사(여수)",
       "sha256": "b19dff43bb4098a74bfc019fd2defdcacac976a57a03137c8ab2fcf5d32ac5b6",
       "dhash": "0x15734c655d979d1679066da5bc239d07edb5c8abd1aa3317ac8fb1e5678ae702",
+      "mirroredDhash": "0x315759cd164597469f615a493bc21f4652482aec0a7417330eca5862ae19bf18",
       "thumbnailDhash": "0x15734c655d979d1679066da5bc239d07edb5c8abd1aa3317ac8fb1e5678ae702",
       "dimensions": [
         1200,
@@ -1141,9 +1329,22 @@
       "bytes": 177550
     },
     {
+      "id": "mountain:가리왕산",
+      "sha256": "7f41fd9b71de53f4068bdca78dc01d2382f392c340ed4f1eefa2f576ae4f7ca9",
+      "dhash": "0x8632c33469903d3d07f48b524378d67c2471cd728bc134149c907b745a6480b",
+      "mirroredDhash": "0x39eb33cb669d343f01f412ed13db194e1db814c7c2eb7d376c2d121f1a5d24e1",
+      "thumbnailDhash": "0x8632c33469903d3d07f48b524378d67c2471cd728bc134149c907b745a7480b",
+      "dimensions": [
+        1200,
+        800
+      ],
+      "bytes": 182638
+    },
+    {
       "id": "mountain:가야산",
       "sha256": "0afdc6da41ca57ae0d5892dc3dfad3b921cad5c6622163ea14e7c5fac79c232e",
       "dhash": "0xf012387c75f6cf639f311e19d2766e716bab5e8b3e13784ed86cf08ff00fcc1",
+      "mirroredDhash": "0x5d0f1e2b051c90c93063707709461899a297e8527832da139e48ef0cff007c40",
       "thumbnailDhash": "0xf012387c75f6cf639f311e19d2766e716bab5e8b3e13784ed86cf08bf00fcc1",
       "dimensions": [
         1200,
@@ -1152,9 +1353,70 @@
       "bytes": 182802
     },
     {
+      "id": "mountain:가야산(서산)",
+      "sha256": "1fcf584e106f4e47c23e7b9cbea27214b09711e0c1e079efca4a1bc6f6164d2f",
+      "dhash": "0xd9612e4b97b359662964dd53e56770afd88d7b6d0edbcffe07275e0f313739ff",
+      "mirroredDhash": "0x79642d8a32129965d96b354419580af14ce44921248f800c0b0e090113010043",
+      "thumbnailDhash": "0xd9612e4b97b359662964dd53e56770afd88d7b6d0edbcffe87275e0f313739ff",
+      "dimensions": [
+        1200,
+        800
+      ],
+      "bytes": 154990
+    },
+    {
+      "id": "mountain:가지산",
+      "sha256": "4372d6aeadbba502590396d49e33b1b94e01a275cded1534f62763ddb92aa0f3",
+      "dhash": "0x2b893247cb0cea293f226e072e4b8e052723861dc21b7073046e02cf01320097",
+      "mirroredDhash": "0x6e2b1db3cf2c6ba8bb031f81258b5f8e3b1b479e26bc31f109df0cb7837f167f",
+      "thumbnailDhash": "0x2b893247cb0cea293f226e072e4b8e052723861dc21b7073046e02cf01360097",
+      "dimensions": [
+        1200,
+        800
+      ],
+      "bytes": 156016
+    },
+    {
+      "id": "mountain:간월산",
+      "sha256": "954b9e99b0201269f3c9f0489089196cf67dd43f5d3dc7cb019c166c20023d59",
+      "dhash": "0x7d673de65d4b4edb4e3c5f9c59cd8dc9dfd83651e5d78d6762671a4343261374",
+      "mirroredDhash": "0x194188432d05248d438dc6054c456c4ee40475131458194e19b13587833dc137",
+      "thumbnailDhash": "0x7d673de65d4b4edb4e3c5f9c59cd8dc9dfd83651e5d78d6762671a4303261374",
+      "dimensions": [
+        1200,
+        800
+      ],
+      "bytes": 182022
+    },
+    {
+      "id": "mountain:감악산",
+      "sha256": "468eedd4b964a93907bdb9e82ce92267d09b0e2c0383898ad57d5bdb2f160930",
+      "dhash": "0x240f2c5f45d9549e91adb666e1d333db66594e2431fb0de14787634749738c78",
+      "mirroredDhash": "0xedb05cb645d86d54a769992347824326599d98d2073184f161d0d39316d21ce",
+      "thumbnailDhash": "0x240f2c5f45d9549e91adb666e1d333db66594e2431fb0de14787634749738c78",
+      "dimensions": [
+        1200,
+        800
+      ],
+      "bytes": 179802
+    },
+    {
+      "id": "mountain:검단산",
+      "sha256": "bb1213c499274156f2d730da3ab79238c2d5afbf78aba3a4c3c414807048d31e",
+      "dhash": "0x38e3ac826c271a1fe9786e920d800038f219718970e3e11cc067004401e20871",
+      "mirroredDhash": "0x38e3beca1b8907a7e168b689fe4fe3ff67b04e7138f1c77819fcddb7387f71e7",
+      "thumbnailDhash": "0x38e3ac826c271a1fe9786c920d800038f219718970e3e11cc067104401e20871",
+      "dimensions": [
+        1200,
+        800
+      ],
+      "bytes": 161168
+    },
+    {
       "id": "mountain:계룡산",
       "sha256": "0a86957170b465ada12ab8466c2d4bbeb81b8d7350724aa56556ecff82abdfc4",
       "dhash": "0x2d9721a314c946e468d63c5119d111d309d1c0d163611e21218309c726c61415",
+      "mirroredDhash": "0x164b3a7b68d7c89d94e935c374673466746f74fc79397b873e731c6398931646",
       "thumbnailDhash": "0x2d9721a314e946e468d63c5119d111d309d1c0d163611e21318309c726c61415",
       "dimensions": [
         1200,
@@ -1163,9 +1425,22 @@
       "bytes": 167734
     },
     {
+      "id": "mountain:계방산",
+      "sha256": "089d8c4e2e5e5785c05b8b5384a09a2860c1a246dde2c5820ea106f3a8616bf7",
+      "dhash": "0x7873bc12ee1c708f5c638c67c83770673c448429c9b320ab09c522414c878066",
+      "mirroredDhash": "0x31c1b642c7880ef139c519ce13ec19f1ddc32bde326c2afb1c6f7cb91ec899fe",
+      "thumbnailDhash": "0x7873bc12ee1c708f5c638c67c83770673c448429c9b320ab09c5224148878066",
+      "dimensions": [
+        1200,
+        800
+      ],
+      "bytes": 180580
+    },
+    {
       "id": "mountain:관악산",
       "sha256": "c162f92437308355cdf73ab1148169f5a9a264b7a12df21f2f40d56c5d2dfec5",
       "dhash": "0x19371a575b5b51e9024f071b2f1334e34c7f417938c5060d1065609d01f70063",
+      "mirroredDhash": "0x136715a7242548750cbf270f3303189301cd617d5ce34e8b58710279107f217b",
       "thumbnailDhash": "0x19371a575b5b51e9024f0f1b2f1334e34c3f417938c5060d3065609d01e30063",
       "dimensions": [
         1200,
@@ -1174,9 +1449,34 @@
       "bytes": 132932
     },
     {
+      "id": "mountain:광덕산",
+      "sha256": "32baae257a598d9d76e9743c9c0d20fd55d846b7363dd065a6db22909c20d9c2",
+      "dhash": "0x1ce178617058f2dcd8962c5ade67f171ac781cde186c83fec2f971ef6dd4d9fe",
+      "mirroredDhash": "0x78c779e1e5f1c4b096e425cb19847170e1ca84c7c9e7803e60bc087104408044",
+      "thumbnailDhash": "0x1ce178617058f25cd8962c5ade67f171ac781cde186c83fec2f971eb6dd4d9fe",
+      "dimensions": [
+        1200,
+        800
+      ],
+      "bytes": 154760
+    },
+    {
+      "id": "mountain:국망봉",
+      "sha256": "48f3d26a9ef0674e4ab59e3cdf9b2f64308fcbaf77ac6895a9262d7895085bd0",
+      "dhash": "0xd0b64c9c8f0dcb9f6c9e78f17079558a9e179a4b0a9f823901b501415617e03b",
+      "mirroredDhash": "0x92f4c6cd4f0e062c864970e061f1ae55078621a6068f639e507e6c7b178021f8",
+      "thumbnailDhash": "0xd0b64c9c8f0ccb9f6d9e78f17079518a9e179a6b0a9f823901b501414e17e03b",
+      "dimensions": [
+        1200,
+        800
+      ],
+      "bytes": 170582
+    },
+    {
       "id": "mountain:금오산",
       "sha256": "24134e1e04ac87186ed2c0e6b62df9a74ad3b8e73ad56d17fbc5d63e14b7b20b",
       "dhash": "0x25e049f61b1c9b1a98d07491e610930e0d3f0337113f847c027972d28e930fa2",
+      "mirroredDhash": "0xf859906dc526a726f4e676d197988f36034f133f0377c1de21bb90b1328c900f",
       "thumbnailDhash": "0x65e049f61b1c9b0a98d07411e610930e0d3d0337113f847c027972d28e930fa2",
       "dimensions": [
         1200,
@@ -1188,6 +1488,7 @@
       "id": "mountain:금원산",
       "sha256": "b4fa14badcb250425cb95b417f168fbf24f848d866c8275f429c44ce271f42c5",
       "dhash": "0xd3f650fb10e5b98d9a715d1331afec5cdb15b30745be64f85e7058a110f1023",
+      "mirroredDhash": "0x34f0f598f72e2251a643057a7335c80724cf32525d10d98185e2e5109333365",
       "thumbnailDhash": "0xd3f650fb10e5b98d9a715c1331afec5cdb15b30745be64f85e7258b010f1023",
       "dimensions": [
         1200,
@@ -1199,6 +1500,7 @@
       "id": "mountain:금정산",
       "sha256": "a1ed69c1271c975f66f3d18af0c26d7bef595f8478af867632e9843aeacd1ed6",
       "dhash": "0xf3644cacb28e4ca347200c3602630d1d71440c5708fee1d8387a4ee45b8416f7",
+      "mirroredDhash": "0xd930cacd8eb03acdfb1d93cf190f470f9d1115cf80efa0782163d80d1e051017",
       "thumbnailDhash": "0xf3644cacb28e4ca347200c3602630d1d61440c5708f6e1d838724ee45b8616f7",
       "dimensions": [
         1200,
@@ -1207,9 +1509,22 @@
       "bytes": 175982
     },
     {
+      "id": "mountain:남산",
+      "sha256": "761dc934514d8610580a916c82616260564c0e5eb74569f5472c99024d5cac39",
+      "dhash": "0xaa3463361a559630a391b2f0eff29fc0fcec73ff63707ad55c7a3eb19af1976",
+      "mirroredDhash": "0x3aaf339d5a79386562af0b27008fc06b8c0f031c119000171c51283a08261067",
+      "thumbnailDhash": "0xaa3463361a559630a391b2f0eff29fc0fcec73ff67707ad55c7a3eb19af1977",
+      "dimensions": [
+        1200,
+        800
+      ],
+      "bytes": 164052
+    },
+    {
       "id": "mountain:내장산",
       "sha256": "a59076967991792b0bda7bd70d8a852654b07998494349ace0c2cc2868a10041",
       "dhash": "0x8693f2d1699a30ce3867b57346cdd15249db06480369e021088b03cf8037086f",
+      "mirroredDhash": "0x369e74b0a6698c7319c331524c9db524246ded97693f7bf82ecf0c3f029e096f",
       "thumbnailDhash": "0x8693f2d1699a30ce3867b57346cdd15249db06480369e0210c8b01cf803f096f",
       "dimensions": [
         1200,
@@ -1221,6 +1536,7 @@
       "id": "mountain:대둔산",
       "sha256": "14227b53ff0f4872665b7c2ba21d84458023f8752393f80a1b7cd2aa67700bcb",
       "dhash": "0x5a035b0d490d490d452b542bd96f736f776c27cdb3cc79f27ade73a31b491f6f",
+      "mirroredDhash": "0x3fa54f254f6d4f6d2b5d2bd50960093149114c19cc32b06184a138316c270907",
       "thumbnailDhash": "0x5a035b0d490d490d452b542bd86f736f776c27cdb3cc79f07ade73a31b491f6f",
       "dimensions": [
         1200,
@@ -1232,6 +1548,7 @@
       "id": "mountain:대암산",
       "sha256": "5b8aa8549f600d0ec94964cdd238992385a391d7a16286ca86dd44d302782687",
       "dhash": "0x7c9349c21c121b94739cd301cc1bc306713cf1cd37759a70b3c05c52da12532",
+      "mirroredDhash": "0x6c1fc6d37c7b627b631df34c7cc7f3c23719c70c11341a65832f185f704b1351",
       "thumbnailDhash": "0x7c9349c21c121b94739cd301cc1bc306713cf1cd37759a70b3c05c52da12532",
       "dimensions": [
         1200,
@@ -1243,6 +1560,7 @@
       "id": "mountain:덕유산",
       "sha256": "6b07827d27fff334070efcfc91b4c35386f0c8913a73df15e220950e5cae9396",
       "dhash": "0x27e70b8d0113299573a73ca2ee1b8d0e1acdc5e08571267c30e7b12d119c2ccc",
+      "mirroredDhash": "0x181b0e0f377f56691a31bac327888f4e4ca7d85c715ec19b18f30b72c677cccb",
       "thumbnailDhash": "0x27e70b8d0113299573a73ca2ee1b8d0e1acdc5e08571247c30e7b12d119c2ccc",
       "dimensions": [
         1200,
@@ -1254,6 +1572,7 @@
       "id": "mountain:도봉산",
       "sha256": "cb2a637e5033441c8f88e50515ebcb9ba78ab6610597fd6f821c13c17275b12b",
       "dhash": "0x1b370c8ec47664631270581c660d70e440d151190c970c8e126b13e306f71c7e",
+      "mirroredDhash": "0x13238ecf91cc38d9f1b787e54f99d8f174fd677516cf0e8f09013034000f01c7",
       "thumbnailDhash": "0x3b370c8ec47664631270581c660d70e440d151190c970e8e126b13e307771c7f",
       "dimensions": [
         1200,
@@ -1265,6 +1584,7 @@
       "id": "mountain:두륜산",
       "sha256": "adfb08f7fcf7fda8271ef5cd454294f362f3e38b51aac2075f0ad8de624da6d7",
       "dhash": "0x66106b00f8cb7e411d184fc162693319318b31c7834f650d9099487c6661052b",
+      "mirroredDhash": "0xf799ff292ce07d81e7477c09683967332e731c730c3e4f5966f481e129992b19",
       "thumbnailDhash": "0x66106b00f8c97e411d184fc162693319318b3187834f650d9099487a6661052b",
       "dimensions": [
         1200,
@@ -1276,6 +1596,7 @@
       "id": "mountain:두타산",
       "sha256": "f3733ff8198cb09936a0d2fd5954fe4d7f7718c73ee41c65e83fa9b7c994da96",
       "dhash": "0x15b73c871b6db27dd1ad68c71663199d0cf6435d0143041f20590866086b012f",
+      "mirroredDhash": "0x12571ec3492741b24a741ce93993066710cf453d3c7f07df64fb19af28ef037f",
       "thumbnailDhash": "0x15b73c871b6db27dd1ad68c71662199d0ce6435d0143041f2059086608eb012f",
       "dimensions": [
         1200,
@@ -1287,6 +1608,7 @@
       "id": "mountain:마니산",
       "sha256": "443a14f4867198bb48d8133af4374e28eb13d1f817d6168cbaf3fdcc18895b15",
       "dhash": "0x3f123784d360a3d1c16131b13843063164308c7283c0e390f030332016d006b",
+      "mirroredDhash": "0x703fe13b934d43af97c727379a3739f33d971cef43e963863f0fb33b497f20df",
       "thumbnailDhash": "0x3f123784d360a3d1c16131b13843063164308c7283c16390f030332016d00eb",
       "dimensions": [
         1200,
@@ -1298,6 +1620,7 @@
       "id": "mountain:마이산",
       "sha256": "468e2c98eb2ceecdaee597e69d64a20e86f76fd302eb23a83faf992d10ee293f",
       "dhash": "0x71e031f834d22cc2d2d073f292da31d219200b780ce414c031b261e1c1b3253",
+      "mirroredDhash": "0x71e073f4d3eccbb4b4b011b4b6b433ab27310ff8cfe0d7d273f869907c70593",
       "thumbnailDhash": "0x71e031f834d22cc2d2d073f292da31d21b200b780ce414d031a261e1c1b3253",
       "dimensions": [
         1200,
@@ -1309,6 +1632,7 @@
       "id": "mountain:매봉산",
       "sha256": "800799fab9831b66cdcc5b3ad2e3c2e4c4b5f0a163776aa71c386bb7be52a150",
       "dhash": "0x612398958c098fc6687363686b1dc38fe8e930ce21bc0b0e6303b81e793e0cf7",
+      "mirroredDhash": "0x3b7956664fce9c0e31e9e13146290e3c68e08cf3423b872f3f3987e28321104f",
       "thumbnailDhash": "0x612398958c098fc4687363686b9dc38ff8e930ce21bc0b0e6303b81e793e0cf7",
       "dimensions": [
         1200,
@@ -1320,6 +1644,7 @@
       "id": "mountain:명성산",
       "sha256": "6da2cc0697b94ac8eac84c274ec2d5cbd7c8a4859b2af4c349b102dd45c70224",
       "dhash": "0x78fe58ff597e497e492e4f779323b121b0aca4d9b51e677712be88f13099941e",
+      "mirroredDhash": "0x6100e58165816d836d11093b347b32caf264da0752111982b730ec22f387c2",
       "thumbnailDhash": "0x78ff58ff597e497e492e4f779323b321b0aca4d9b51f667712be88f33099141e",
       "dimensions": [
         1200,
@@ -1331,6 +1656,7 @@
       "id": "mountain:명지산",
       "sha256": "97d129c9e4d91e37b53e68607b654bdd6e4a92106c1319591156a2ad0468dece",
       "dhash": "0x314d31a478da1f1f774767212f0c1f0771d3597e63fc47f00f83298d4f860709",
+      "mirroredDhash": "0x4d73d273a4e107071d117b11cf0b1f0330718165c029f01d380f48299e0d6f1d",
       "thumbnailDhash": "0x314d31a478da1f1f774763212f0c3f0771d3597e63fc07f00f8329cd4f860709",
       "dimensions": [
         1200,
@@ -1339,9 +1665,22 @@
       "bytes": 170848
     },
     {
+      "id": "mountain:모악산",
+      "sha256": "235e558be391c5ec72039e57c598bc6b3e8a416501e2df74433007cef72d55d1",
+      "dhash": "0x319b11275869189f387e07f01b0c9a930e47a62c19a70cff01f901c8334d244d",
+      "mirroredDhash": "0x26731b7729e504e781e3f01fcf2736a61c8bcb1a1a4700cf607f487b4d314cdb",
+      "thumbnailDhash": "0x319b11275869189f387e07f01b0c9a910e47a72c1da70cff01f921c8734d244d",
+      "dimensions": [
+        1200,
+        800
+      ],
+      "bytes": 172272
+    },
+    {
       "id": "mountain:무등산",
       "sha256": "7b3b3e4d1f8c64be2517bd84b554b17a53fbdf606cad0ac716a15c9675690711",
       "dhash": "0xc469426a38940b79533209934c74423e213f00f80df06c05000d0061842c8007",
+      "mirroredDhash": "0x69dca9bd56e3210bb335366fd1cd81bd037be0fbd04f5fc94bff1923c99a1fdc",
       "thumbnailDhash": "0xc461426a38940a79533209934c74423e213f00f80df06c05000d0063842c8007",
       "dimensions": [
         1200,
@@ -1353,6 +1692,7 @@
       "id": "mountain:무학산",
       "sha256": "ecdc6e4e7047baab8fa410a4b8f8746d08d7271b0d0cf4c3a51fe3bfcea747a3",
       "dhash": "0x1db714336a586c42e46174691db462438b0d659708bf0bfc2797d913011c0678",
+      "mirroredDhash": "0x124733d7e5a99d8979d849d1d2473c194f2e165902efc02f161b07640351c187",
       "thumbnailDhash": "0x1db714336a586c42e46174691db462438b0d659708bf0bfc2797d913011c0678",
       "dimensions": [
         1200,
@@ -1361,9 +1701,82 @@
       "bytes": 156404
     },
     {
+      "id": "mountain:민둥산",
+      "sha256": "bd80b214cee2bec764fc27885755e17f19974551b07b812faa2a38fca38aa203",
+      "dhash": "0x8389c2b0f0d869a85da63ea61ab6c264e084c83b309d611c10ec30e504110619",
+      "mirroredDhash": "0x6e1ef2bce4e0ea699a4192839283d9bcded823ec46f3c679c8f518f3674e6797",
+      "thumbnailDhash": "0x8309c2b0f0d869a87da63ea61ab6c264e084c83b309d611c10ec30e504110619",
+      "dimensions": [
+        1200,
+        800
+      ],
+      "bytes": 167490
+    },
+    {
+      "id": "mountain:민주지산",
+      "sha256": "079c4a6422f3d126231680133791f85e16664cffe110ac608f6787baa963ea2c",
+      "dhash": "0x12a923936637a49d20d3e4dbe4d86ade9e278dce8cdd8279a4ed36df3b27f7f3",
+      "mirroredDhash": "0x6ab7363b138944ca34fb24d8e4d884a91b86084e44ce61be48da04811b213010",
+      "thumbnailDhash": "0x12a923936637ac9d20d3e4dbe4d86ade9e278dce8cdd8279a4ed36df3b27f7f3",
+      "dimensions": [
+        1200,
+        800
+      ],
+      "bytes": 181716
+    },
+    {
+      "id": "mountain:방태산",
+      "sha256": "965486bceb51196a4573e287c02f627455d1495c199b991524029022776a920c",
+      "dhash": "0x320d1e130c9a7c9c7d14dc9d3c9e9c9d8ed157096335ed6ee919331da6d3e541",
+      "mirroredDhash": "0x4fb33687a6cfc6c0d74146c486c346c6748e6f145339814865684733349a7d58",
+      "thumbnailDhash": "0x320d1e130c9a7c9c7d14dc9d3c9e9c9d8ed157096335ed6ee919331da6d3e541",
+      "dimensions": [
+        1200,
+        800
+      ],
+      "bytes": 168916
+    },
+    {
+      "id": "mountain:백덕산",
+      "sha256": "c8c5c35f7806a6b94baed36ba5b559b5dbf1d1e9607d0bac11d3f58aff32c3cd",
+      "dhash": "0x2ecb16cb0265535d0dcb14e919b8150d071f074c474f031f157902ef03fd8a1f",
+      "mirroredDhash": "0x2c8b2c9759be45352c4f68d7e2674f57071fcd0f0d1d073f615708bf403f07ac",
+      "thumbnailDhash": "0x2ecb16cb0265535d0dcb14e919b8150d071f074c474f031f117902ef03fd8a1f",
+      "dimensions": [
+        1200,
+        800
+      ],
+      "bytes": 181158
+    },
+    {
+      "id": "mountain:백운산",
+      "sha256": "00149fdb6cf21beaf54e34b5f15c5da5fe2b6550357b654160cf2f6bac4d7ebc",
+      "dhash": "0x26e6d9b6fc4cd71ac39360e4ccce8ccd34c916590af200a7886d0c5821890646",
+      "mirroredDhash": "0x989b9264cdc0a714363cd8f98ccc4cce64d36497b0af1afb01e6c5ce0e33099f",
+      "thumbnailDhash": "0x26e6d9b6fc4cd71ac39360e4ccce8ccd34c916590af200a7886d0c5831090646",
+      "dimensions": [
+        1200,
+        800
+      ],
+      "bytes": 172438
+    },
+    {
+      "id": "mountain:변산",
+      "sha256": "d6c6b5439afdff559328d62befb89a05d6c939af10d3bc4b682d668fc8950b50",
+      "dhash": "0x1fc3cdf8397b2c8d95841fd52e61e56dc73aceb6d9b2bab04930c39893244982",
+      "mirroredDhash": "0x3c07e00c01634e4bde565407790b4958a31c928cb264e2a2f36de43cdb34ba2d",
+      "thumbnailDhash": "0x1fc3cdf8397b2c8d95841fd52e61e56dc73aceb6d9b2bab04930c39893244982",
+      "dimensions": [
+        1200,
+        800
+      ],
+      "bytes": 177754
+    },
+    {
       "id": "mountain:북한산",
       "sha256": "faa965e00e9e1ab697b85204cdc80de1e4a5ed4032558bd447a3d31952fbb680",
       "dhash": "0x233930b9188d1a9624a646bb8988835ee37860e920d32197170e461b2439111c",
+      "mirroredDhash": "0x633b62f24ee396879ad9229dee6e853ee13868f934f9167b8f17059c635bc777",
       "thumbnailDhash": "0x233930b9188d1a9624a646bb8988835ee37860e920d32197170e461b2439111c",
       "dimensions": [
         1200,
@@ -1375,6 +1788,7 @@
       "id": "mountain:불암산",
       "sha256": "647c56ef5a80f232695a9be25c45c7b6f8cc23a39f8692040fedf9931a507b85",
       "dhash": "0x4987474d46f3433646494d4c5d265a1c29ef0ce61b690e96241a011b04571057",
+      "mirroredDhash": "0x1e654d1d209d133d6d8dcd499a458121084b98c76926168da1db254710df14e7",
       "thumbnailDhash": "0x4987474d46f3433646496d4c5d267a1c29ef0ce61b690e96241a011b045710d7",
       "dimensions": [
         1200,
@@ -1383,9 +1797,22 @@
       "bytes": 182576
     },
     {
+      "id": "mountain:비슬산",
+      "sha256": "d8bcb4adaa5f5b7b91ecead6922054943887d8e6d8f928a3cafbc6383e5c18bc",
+      "dhash": "0x5e1f582f5119762465656141e4662865b9683df069f9db7889ec87e087381b8e",
+      "mirroredDhash": "0x7850be56775db9149597d7199d859ebe962f0436069e124c06ee81ee31e8e27",
+      "thumbnailDhash": "0x5e0f582f5119762465656141e4662865b9683df069f9db7889ec87e087381b8e",
+      "dimensions": [
+        1200,
+        800
+      ],
+      "bytes": 172122
+    },
+    {
       "id": "mountain:삼악산",
       "sha256": "7894afd6ced5c58d823f0b97001e66ca66ddcced2d8cdb72c5e11b491afd371b",
       "dhash": "0x27708e70384039d019e18cf2d8d66cc1b332c8f059d23111a8d00c414e75076",
+      "mirroredDhash": "0x10bf18ef9e3f463f067f0ce74e4bcc9933270ec3465f77300ea5dc7f18d511f1",
       "thumbnailDhash": "0x27708e70384039d019e18cf2d8d26cc1b331c8f019d23110a8d00c410e75077",
       "dimensions": [
         1200,
@@ -1397,6 +1824,7 @@
       "id": "mountain:서대산",
       "sha256": "299a9ce58601cb9fff3d7058872bd8b9b587fb627e64c9dda6646968e28ab674",
       "dhash": "0x1adf2f47cc10c2f838712e2dcf69b43b71b23b3d3b130937473d7738399b31d4",
+      "mirroredDhash": "0x4a71d0bf6c8e0bc71e34b8b690c2212b27143233722136f431c431106615443",
       "thumbnailDhash": "0x1adf2f47cc10c2f838712e2dcf69b43b71323b3d3b130937473d7738399b39d4",
       "dimensions": [
         1200,
@@ -1408,6 +1836,7 @@
       "id": "mountain:설악산",
       "sha256": "ddbe1c3474b9c99d0920d48941e50c37f96b08109e1d49b61cfd680ac1391843",
       "dhash": "0x21f551b092d0b57237733376163e177c175c564d548d4cdd464d3343f8edcce",
+      "mirroredDhash": "0x1bf27554b4f152f1133133339791178517cc95ced544cd4d9d4d3348e038c84",
       "thumbnailDhash": "0x21f551b092d0b57337733376163e173c175c564d548d4cdd464d3343f8edcce",
       "dimensions": [
         1200,
@@ -1419,6 +1848,7 @@
       "id": "mountain:소백산",
       "sha256": "fa3a9b7576ad15fc29ffeb06eb77c0fc60d7f54c8e0761952d4acf1de2e7b833",
       "dhash": "0x85f093be067718f136c31cccb7b67f507c73e617c398f0b1a7117050c5121d2",
+      "mirroredDhash": "0x5cf236719b80e718133cc73212c50091c1f798363c12e0e71871d17740fa47b",
       "thumbnailDhash": "0x85f093be067718f136c31cccb7b6ff507c73e617c398f0b1a7117050cd021d2",
       "dimensions": [
         1200,
@@ -1430,6 +1860,7 @@
       "id": "mountain:소요산",
       "sha256": "6fed9e3b4fb364ef227df99a417a412120475ff3204c37c8233bfdfab60bf70f",
       "dhash": "0x30b5047e0e4e4b4e4d9bc59364d5248d3626129d125f0c1f3c0739031d851632",
+      "mirroredDhash": "0x52d380df8d8f8d2d264d365c54594ecb9b9346b705b707cf1fc33f635c479197",
       "thumbnailDhash": "0x30b5047e0e4e4b4e4d9bc59365d5248d3626129d12570c1f3c0739031d851636",
       "dimensions": [
         1200,
@@ -1441,6 +1872,7 @@
       "id": "mountain:속리산",
       "sha256": "c45429c6c037d080bca6d87909eaff3b5ae9dd4b72af78b8ba6f959ed5056478",
       "dhash": "0x6d295a26920e949c9c4f4f33d319ecca6c666513e489ca2418324c3e09936747",
+      "mirroredDhash": "0x6b498ba58fb6c6d60dc6310d6614acc8998937496ed8dbacb3e783cd302f0c19",
       "thumbnailDhash": "0x6d295a26920e949c9c4f4f33d399ecca6c666513e489c22418324c3e0b936747",
       "dimensions": [
         1200,
@@ -1452,6 +1884,7 @@
       "id": "mountain:수락산",
       "sha256": "86290bf1188578f23d844d8e0a347811563b746b335ac3658906f72bfc5aaadd",
       "dhash": "0xc459c3657724b1cceb4c40e3263892674ac70cb7044f83fc439214a902d94a4b",
+      "mirroredDhash": "0x65dc593cdb11cc72cd2838fde39b19b61cad12cf0ddf403e923862d764b92589",
       "thumbnailDhash": "0xc459c3657724b1cce34c4063263892674ac70cb7044f83fc439214a902d94a4b",
       "dimensions": [
         1200,
@@ -1463,6 +1896,7 @@
       "id": "mountain:신불산",
       "sha256": "0c01d6116e54dea0821e56379941ac394df0ae0b079965b9112654d72f3c3b79",
       "dhash": "0x36cf12735838d80d4c5f88c94acf8a610674083d007730df3c79272a06d90ed1",
+      "mirroredDhash": "0x89331b7636507e405cd6cee0cad59aed19b43ef10fb04f361c32b0b649f348e",
       "thumbnailDhash": "0x26cf12735839d80d4c5f88c94acf8a610674083d007730df3c79272206d90ed2",
       "dimensions": [
         1200,
@@ -1474,6 +1908,7 @@
       "id": "mountain:아차산",
       "sha256": "bd0c9de0261f5edad41549725174122471133325dc0252ccb747d3bf4c3cb202",
       "dhash": "0x61f1e5508fa6993ed106e1e3e03732f532c932d13311f318748d78275918380c",
+      "mirroredDhash": "0x7079f5189a0e81269f743878133050b36cb364337731e6304ed01ba167654fc3",
       "thumbnailDhash": "0x61f1e7508fa6997ed106e1e3e03732f532c932d13311f318748d78275818380c",
       "dimensions": [
         1200,
@@ -1482,9 +1917,22 @@
       "bytes": 172806
     },
     {
+      "id": "mountain:연인산",
+      "sha256": "f5c4ebed024bdf820f5e1574eaf8cdc1165d2ba952a759cef2adf9bb71fc42f0",
+      "dhash": "0xf125fb71794c6cccf1c9a3cc9bd8ab480c456c277d32d98aa1e279c27c227872",
+      "mirroredDhash": "0x5b707120cc61ccc96c30cc3ae426ed2a5dca13c9b340ae64b87abc61bbc1b1e1",
+      "thumbnailDhash": "0xf125fb71794c6cccf1c9a3cc9bd8ab482c456c277d32d98aa1e279c07c227872",
+      "dimensions": [
+        1200,
+        800
+      ],
+      "bytes": 182610
+    },
+    {
       "id": "mountain:영축산",
       "sha256": "995dc5c462f75d30419a4e02086bf65158e252960f2c468b4730b0d9e0d5dd24",
       "dhash": "0x96f4d6758e515dd202d3439372349d4cc552657129d507924e3735949ca09b2",
+      "mirroredDhash": "0x96f194d58e5445749fb61d33b03906515cc159b46b761e53083643124653267",
       "thumbnailDhash": "0x96f4d6758e515cd202d3439372349d6cc552657129d50792473735909ca09b2",
       "dimensions": [
         1200,
@@ -1496,6 +1944,7 @@
       "id": "mountain:예봉산",
       "sha256": "01f09ecfe5e59c940d5f31950ca026e049be9a11e7aca1cc40e241d28f9811a5",
       "dhash": "0x3e4c066d035b48fb097376cb4663823d059c24170a1f461d0c9e0b6c0373267d",
+      "mirroredDhash": "0xcd83419f013720e501652c91399d43bc865f17db07af479d86cec90f312b419b",
       "thumbnailDhash": "0x3e4c066d035b58bb097376cb4663823d059c24170a1f461d0c9e0b6c0373067d",
       "dimensions": [
         1200,
@@ -1507,6 +1956,7 @@
       "id": "mountain:오대산",
       "sha256": "52e0468af5b46f31eb2684326052d3f49ddfa495a40a101f276d2dff3701428e",
       "dhash": "0x545554c927cd23cc06189c4e07273e420b28070d171e9e972229402e30760c34",
+      "mirroredDhash": "0x55d56cd54c118c3be79f8dc61b17bd03eb2f4f1f870716866ba30bd991d341c6",
       "thumbnailDhash": "0x545554c927cd23ce06189c4e17273e420b28070d171e9e972229402e30760c35",
       "dimensions": [
         1200,
@@ -1515,9 +1965,22 @@
       "bytes": 175704
     },
     {
+      "id": "mountain:오봉산",
+      "sha256": "7ea3a8b49b5a8116237ee1e856c54b534fb641f471ed4b7a3400c6a49803ed54",
+      "dhash": "0x509158949c373a722f31e65948e98e388d24c38c6cec133391736cce67736071",
+      "mirroredDhash": "0x76f5d6e513c621a3730b6598686de38edb4ec63cc8c9333731668cc9111970d9",
+      "thumbnailDhash": "0x509158949c373a722f31e65948e98e388d24c38c6cec133381736cce67736071",
+      "dimensions": [
+        1200,
+        800
+      ],
+      "bytes": 176176
+    },
+    {
       "id": "mountain:오서산",
       "sha256": "f81f7c84ad445c5c4f590d118e53e7ad48e0692de24aee6d38792a0b931da696",
       "dhash": "0x78b54cd5c66721bf843d5471960da98c0e502f63627051f007b4ce34e3143d4",
+      "mirroredDhash": "0x2e1f4cd599c527b13de01d54f967e62418fc90bb1b93075f217c18c9320d0438",
       "thumbnailDhash": "0x78b54cd5c66721bf843d5471960da98c0e502f23627051f407b4ce34e314396",
       "dimensions": [
         1200,
@@ -1526,9 +1989,22 @@
       "bytes": 178986
     },
     {
+      "id": "mountain:용문산",
+      "sha256": "2e61cd436a0554ffcb8fb894673a5cad61387cd3440440a44a5c39ba410b8e40",
+      "dhash": "0x6b657ba3d8e1d9b139986d8cc4cb8a6b2a6b146f052360b3189c147512134019",
+      "mirroredDhash": "0x59293a2178e47264e663ca492cdc29ae29ab09d73b5f32f9c6e751c32637666d",
+      "thumbnailDhash": "0x6b657ba3d8e1d9b139986d8cc4cb826b226b146f052360b3189c1c75020b4019",
+      "dimensions": [
+        1200,
+        800
+      ],
+      "bytes": 165252
+    },
+    {
       "id": "mountain:운문산",
       "sha256": "857bfe8198009f84cc459c4a802053a301eaffecd11c01af77bf2fc0aaed12e8",
       "dhash": "0x26df2f5317a537c325b24f9b2f891d24331263842364102f09ae7c250d450671",
+      "mirroredDhash": "0x49b350b5a172c13b25b240d6e0bdb47b733d639d93b0247826f5ac11d073107",
       "thumbnailDhash": "0x26df2f5317a537c325b6479b2f891d24331263842364102f09ae68241d471671",
       "dimensions": [
         1200,
@@ -1537,9 +2013,22 @@
       "bytes": 161290
     },
     {
+      "id": "mountain:운악산",
+      "sha256": "bb91ef9e3ecb69bdefd4367164dcbc40c36f36d673f750bb9e673dcc252662bf",
+      "dhash": "0x4c4e7e674f67ef36cb96dfb937193308a30ce986c1aa838b069005f121f0712c",
+      "mirroredDhash": "0x8dcd1981190d9300962462046713ef33c73a9e68aa7c2e2ee49f705ff079cb61",
+      "thumbnailDhash": "0x4c4e7e674f67ef36cb96dfb937193308a30ce986c1aa8b8b069005f121f0792c",
+      "dimensions": [
+        1200,
+        800
+      ],
+      "bytes": 183042
+    },
+    {
       "id": "mountain:운장산",
       "sha256": "231395f458f04f616cd34346a16357f938e0e3274c7eafbb065efd427b37164c",
       "dhash": "0x133f33272fa5836495e4596c4e5f895b0b370c9f1dfd8e734e4d21af00ff097d",
+      "mirroredDhash": "0x3371b335a0bd93ec854c925058d216e132b06c90047318e0d8d087300fb016f",
       "thumbnailDhash": "0x133f33272fa5836495e4596c4e5f895b0b370c9f1dfd8e734e0d20af007f097d",
       "dimensions": [
         1200,
@@ -1548,9 +2037,58 @@
       "bytes": 176746
     },
     {
+      "id": "mountain:월악산",
+      "sha256": "8c281f9ed74c1e9a92ee61bb77fbb54ec2a590854c63c23502866165bd2c79e4",
+      "dhash": "0x70fb79e04dc67995a791849c8899165c26dcdb7999f92dfc3bf91fbcce5be4db",
+      "mirroredDhash": "0x20f1f8619c4d5661761ac6de66c6c597c49b61246066c04b40238207258c24c8",
+      "thumbnailDhash": "0x70fb79e04dc67995a791849c8c99165c26dcdb7999f92dfc3bf91fbcce4be4db",
+      "dimensions": [
+        1200,
+        800
+      ],
+      "bytes": 174462
+    },
+    {
+      "id": "mountain:월출산",
+      "sha256": "bf6f824a55cdf0a1527ee1a68aae3b2c2725bf45033bba76fe8209da5982b776",
+      "dhash": "0x136f48cb432950d964fc317e144b20c9a9492b4911998463130f118c021b0279",
+      "mirroredDhash": "0x9372c8d6b3d6474c0d981732dd76cfb6d6a6d2b667739de0f37ce77243f60bf",
+      "thumbnailDhash": "0x136f4ccb432950d964fc317e144b20c9a9492b4911998463130f118c021b0279",
+      "dimensions": [
+        1200,
+        800
+      ],
+      "bytes": 181274
+    },
+    {
+      "id": "mountain:유명산",
+      "sha256": "77a2ee194f062d9e824fe8b324ce2c28edc4d43d041c7c812d947adc4f0e0575",
+      "dhash": "0x1a8d2316a1c6f8ccfc403e1837e0326100d22071006d004110c700062381098d",
+      "mirroredDhash": "0x4ea7973b9c78c4e0fdc0e703f81339b3b4bf71fb49bf35f714f38f2d6e3b4c6f",
+      "thumbnailDhash": "0x1a8d2316a1c6f8ccfc403e1837e0326100d20071006d004110c700062381098d",
+      "dimensions": [
+        1200,
+        800
+      ],
+      "bytes": 160424
+    },
+    {
+      "id": "mountain:육백산",
+      "sha256": "0f7eb3f2cb2758bb31e6ae1a9fbde885af0538d58307a6cfe2319fe5b8d4325e",
+      "dhash": "0x68d33c4927a6aee09698e6cd70cc3806f8435729310e6e497213411145b20332",
+      "mirroredDhash": "0x34c92dc39a1bf88ae6964c98cce19fe31de06b158f73608937b17769221d230d",
+      "thumbnailDhash": "0x6cd33c4927a6aee09698e6cd70cc3806f8435729310e6e497213411145320b33",
+      "dimensions": [
+        1200,
+        800
+      ],
+      "bytes": 178304
+    },
+    {
       "id": "mountain:응봉산",
       "sha256": "30ad260fc8806f4b309742430d02ad91d10e9d09477e0b0d7a8c4325c0767d55",
       "dhash": "0x107f46ef53a71c15268d64e35b310c1c398fc2d1041b4c4f431f0f6c04bb443f",
+      "mirroredDhash": "0x177089d1a3557470e9b18c97325c7cf0e6374bc27df0dcd073dc10e22de02dd",
       "thumbnailDhash": "0x7f46ef53a71c15268f64e75b310c1c398fc2d1041b4c4f431f0f7c04bb443f",
       "dimensions": [
         1200,
@@ -1559,9 +2097,34 @@
       "bytes": 176216
     },
     {
+      "id": "mountain:인왕산",
+      "sha256": "296838572f0c5a3f8886673a6326efc574f1ea94cf31152bb4662f95f847d530",
+      "dhash": "0x1f8f3b431ce004b9c2954c9d145c8649468e031c78b3cc4f3b1d031a18d90199",
+      "mirroredDhash": "0xe073c21f8c7609f16b446cdc5d56d9e8e9dc73f32e00dc84723272e60e7667d",
+      "thumbnailDhash": "0x1f8f3b431ce004f982974c99145c8649468c031c78b3cc4f3b1d031b18d90099",
+      "dimensions": [
+        1200,
+        800
+      ],
+      "bytes": 180992
+    },
+    {
+      "id": "mountain:장산",
+      "sha256": "f6c2d44b01ceebf84dd2280118f13da43bb3c4440f86b3e1c4861a9b8af2a3d4",
+      "dhash": "0x25280d2c18cc50b215e5138b0f1dbe1e7c3e797038e616d297de4347321f563f",
+      "mirroredDhash": "0xeb5bcb4fcce7b2f558552e37470f878283c1f16198e334978414093d05b30195",
+      "thumbnailDhash": "0x25280d2c18cc50b215e5138b0f1dbe1e7c3e797038e616d297de4347321f563f",
+      "dimensions": [
+        1200,
+        800
+      ],
+      "bytes": 170908
+    },
+    {
       "id": "mountain:재약산",
       "sha256": "bac06756903371786fa31ce2e6843a48be460622fd2c3dc9b4bc22f591ba405c",
       "dhash": "0x49c749a74b924671465146514619546c6534a79397159e910e481f232f910f50",
+      "mirroredDhash": "0x184d1a6db62d719d759d759d678dc9d5d359361a57167686cd8f3b07760bf50f",
       "thumbnailDhash": "0x49c749a74b924671465146514e19546c6534a79397159e910e481f232f910f50",
       "dimensions": [
         1200,
@@ -1573,6 +2136,7 @@
       "id": "mountain:점봉산",
       "sha256": "b1899a155f2f9a4f65cc1eec7d72ad86c132b0ac78e0f7f163abb0aa0298a973",
       "dhash": "0x34cd2cc6ee66af313b8cdf4c9f22be127c11b8607073f81808dc00de7401c219",
+      "mirroredDhash": "0x4cd39ccb9988730ace23cd04bb06b78277c1f9e231f1e7e0c4ef04ef46110738",
       "thumbnailDhash": "0x34cd2cc6ee66af313b8cdf4c9f22be127c11b8607073f81808dc00de7401c219",
       "dimensions": [
         1200,
@@ -1584,6 +2148,7 @@
       "id": "mountain:조계산",
       "sha256": "ec1202eeb34a8112322bbc1dbefbd58454db4b6ba436c4b0132c067c3129e92a",
       "dhash": "0x163f3c8fcce1293b4d0f19c14c705b1e6e6565311647067d62f808c7258f1525",
+      "mirroredDhash": "0x3970ec378cc236b0f4d7c67f1cd8725598973591d97419e80b91ced0e030b17",
       "thumbnailDhash": "0x163f3c8fcce1293b4d0f19c14c705b1e6e6565311647067d62f808c7258f1725",
       "dimensions": [
         1200,
@@ -1592,9 +2157,22 @@
       "bytes": 182606
     },
     {
+      "id": "mountain:종남산",
+      "sha256": "5696a4dbf1b598e02ecc241d5d0d215f5426712fa7a67508693d03e3ab426698",
+      "dhash": "0x70a7784f5e0e52c346e3410c14a33023271ee19f7963790b0cc50ec13079a039",
+      "mirroredDhash": "0x1af10dc18f853c353899cd553ad73bf1871b0678396127415ccf7c8d6053635a",
+      "thumbnailDhash": "0x70a7784f5e0e52c346e3510c14a33023271ee19f7963790b0cc50ec13079a039",
+      "dimensions": [
+        1200,
+        800
+      ],
+      "bytes": 179506
+    },
+    {
       "id": "mountain:주왕산",
       "sha256": "53d97f6ef056c8913b280033f5a90abf34f40aca49b0ff817dc59e9b83416d04",
       "dhash": "0x39b658f1e0d3cf731e6035e9e6f465b4b9b249a1aed9aed4bdd4f464e9b611f",
+      "mirroredDhash": "0x263f0e594f8710c31872853f09862599262d26db48a348a6042d190d268d0771",
       "thumbnailDhash": "0x39b658f1e0d3cf731e6035e9e6f465b4b9b249a1aed9aed4bdd4f464e9b611f",
       "dimensions": [
         1200,
@@ -1606,6 +2184,7 @@
       "id": "mountain:주흘산",
       "sha256": "765e85d2c76238d008964e40fda69f4ed9100caafd942c0b79fbf510c5495a99",
       "dhash": "0x9af292b5075f0cfd78156d9c9cd606121b9096f396d09f843c7874731716571",
+      "mirroredDhash": "0xa6f2b6951d50cf07c1464954c6c79f9423b086b4963e06f0c3d191e71737059",
       "thumbnailDhash": "0x9af292b5075f0cfd78156d9c9cd606121b909cf396d09f843c7874721716571",
       "dimensions": [
         1200,
@@ -1614,9 +2193,22 @@
       "bytes": 165318
     },
     {
+      "id": "mountain:지리망산",
+      "sha256": "1220247c2c8f4e0ecbf68d3c996241fd6754d34d780958e21d519fc0894dfa77",
+      "dhash": "0x2f1013110a719db04190432143953182333158784ff2c3832473271181c5d2f",
+      "mirroredDhash": "0x709f737f1af5246767dfb3df6357e335233b0a5700dea3c815b361b3c7e30b41",
+      "thumbnailDhash": "0x6f1013110a718db04190432153953382333158784ff6c3832473231181c5d2f",
+      "dimensions": [
+        1200,
+        800
+      ],
+      "bytes": 161564
+    },
+    {
       "id": "mountain:지리산",
       "sha256": "bd4a215ee754553da6d6a35a625e753115e590c3419e8608d1ed904a9fa9bb94",
       "dhash": "0x1e771c5d91a6399ef0df3c466e494c0c68d2707b83a30b8b1c2f581f33248be0",
+      "mirroredDhash": "0x118745c79a76866304f099c36d89cfcdb4e921e02a3e2e2f0bc707c14323d826",
       "thumbnailDhash": "0x1e771c5d91a6399ef0df3c466e494c0c68d2787b83ab0f8b1c2f581f332493e0",
       "dimensions": [
         1200,
@@ -1625,9 +2217,22 @@
       "bytes": 163434
     },
     {
+      "id": "mountain:천관산",
+      "sha256": "969c1f908faa8bd40caf40fe7465a11685965ac7c6a675bbbef48a6d402868c5",
+      "dhash": "0x16adc2972883cd607c143a8ccee6531131a0843341674826091a01621123000d",
+      "mirroredDhash": "0x489716bc3eebf94cd7c1cea3988c7735fa73339e197c9beda767b96f3a674ffa",
+      "thumbnailDhash": "0x16adc2972883cd607c143a8ccee6531131a0843341674826091a016200a3000d",
+      "dimensions": [
+        1200,
+        800
+      ],
+      "bytes": 165648
+    },
+    {
       "id": "mountain:천마산",
       "sha256": "9cba16a1d94211785710b245bc264625db8a18ad31fcb5cccd58e8b4237a160f",
       "dhash": "0xacf0f67599c149b02cc00670057009d8137007d88f94385230739a70087243a",
+      "mirroredDhash": "0xcaf190fc66526d6ccbd18ff15ff46fe037e01ff60ee4e3d1b3b1a430ce2a3db",
       "thumbnailDhash": "0xacf0f67599c149b02cc00670057009d8137007d88f94385230739a7008f243a",
       "dimensions": [
         1200,
@@ -1639,6 +2244,7 @@
       "id": "mountain:천성산",
       "sha256": "71e0f1315cdaf8377d926fc028dc7cd7d03752b64ee978203ddee341f9d3a87d",
       "dhash": "0x84d1e57039b0dad0fcb537327994d0c1f17748b0d470731059d6d0533053531",
+      "mirroredDhash": "0x4def1587263f4a4f2c0f3125661bca4d13072e511d4f731f465f47490b134313",
       "thumbnailDhash": "0x84d1e57019b0dad0fcb537327994d0c1f17748b0d470731059d6d0533053531",
       "dimensions": [
         1200,
@@ -1647,9 +2253,82 @@
       "bytes": 180520
     },
     {
+      "id": "mountain:청계산",
+      "sha256": "0d5d3034d97c0138c03abc85ed40245325888b626b0ad795366347d1c1dd1c31",
+      "dhash": "0x5bd30b8125986397cc62b1b319f04c6426642195138dc76d42e138c5b18dc181",
+      "mirroredDhash": "0x34255e2da65b1639b9cc3272f067d9cdd993567b4e37491c78bd5ce34e707e7c",
+      "thumbnailDhash": "0x5bd34b8525986397cc62b1b319f04c6436642195138dc76d42e138c5b18dc181",
+      "dimensions": [
+        1200,
+        800
+      ],
+      "bytes": 180664
+    },
+    {
+      "id": "mountain:청량산",
+      "sha256": "d9e708aadd584e0cd143acb8236d85c9434c66b346929443b056b2ac51ffc9f6",
+      "dhash": "0x6263645b68997533927136cc343c6434e567659761bf627e63fc19871a1504e5",
+      "mirroredDhash": "0x39b925d966e9335171b6cc93c3d3d3d919581659027901b9c0391a6757a75897",
+      "thumbnailDhash": "0x6263645b68997533927136cc343c6434e567659761bf627e63fc19871a1504e5",
+      "dimensions": [
+        1200,
+        800
+      ],
+      "bytes": 183074
+    },
+    {
+      "id": "mountain:청옥산",
+      "sha256": "b999edd775a75d6d57125a9472f3047214293d32385617ad305af6662904197d",
+      "dhash": "0xe2a6733311d39443262e9f089cf2cc7393372dac0cc94c680c14934103091b9",
+      "mirroredDhash": "0xa38f331947739d63b9b3f0680c6614cb3361a4b1ccfc9cd67cfed36df3f76076",
+      "thumbnailDhash": "0xe2a6733311d39463262e9f089cf2cc7393372dac0cc90c680c14934103091b9",
+      "dimensions": [
+        1200,
+        800
+      ],
+      "bytes": 170532
+    },
+    {
+      "id": "mountain:축령산(남양주)",
+      "sha256": "70887dcba60620438ed1c15553ea388c9ab10c1903c590f45df7f6881f62fc8a",
+      "dhash": "0xe309f306d145f0583836f11cf010e8505051d431c835c335818588a5c1a3c4c3",
+      "mirroredDhash": "0x6f189f305d74e5b093e3c570f7d075e075f573d453ec533c5e7c5aee3a7c1cdc",
+      "thumbnailDhash": "0xe309f306d145f2583836711cf010f8505051d431c835c335818588a5c1a3c4c3",
+      "dimensions": [
+        1200,
+        800
+      ],
+      "bytes": 177862
+    },
+    {
+      "id": "mountain:치악산",
+      "sha256": "5ce63b15a36764e27b0a48b625e4897282a692dc716060fe3ab232adabdb28bf",
+      "dhash": "0xc905df238f305bccd2c4e6194c30cc214e185d849d00af00760876065021b1",
+      "mirroredDhash": "0x6cdf045f0e3b05f2b4cc98dccd67ccf38d7b45e744de0aff11ff11e5f597726b",
+      "thumbnailDhash": "0xc905df238f305bccd2c4e6194c30cc214e185d849d00af00770877065021b1",
+      "dimensions": [
+        1200,
+        800
+      ],
+      "bytes": 167768
+    },
+    {
+      "id": "mountain:칠갑산",
+      "sha256": "8bcf97022c53d2f7b2fa3b9fcdac3806481168d93b8de638ac07f588e010ede8",
+      "dhash": "0x628d1db330e570a6f84b6405e246a9722427162c458c49992136326c6478119d",
+      "mirroredDhash": "0x4eb9324758f39af12de05ed99db8b16a1bdbcb97ce5d666d937bc9b3e1d94231",
+      "thumbnailDhash": "0x628d1db330e570a6f84b6405e246a9722427162c458c49992136326c6478319d",
+      "dimensions": [
+        1200,
+        800
+      ],
+      "bytes": 168036
+    },
+    {
       "id": "mountain:태기산",
       "sha256": "363f45d89c5a17526fa5186fd873fadd4666bfa68cfb775d220988257c91223e",
       "dhash": "0x12c504d99bed432306238e13998b48362247086fc83d78247e05678117e35b60",
+      "mirroredDhash": "0x5c37649f48263b35399f338a2e6693ed0d9b09ef03cc5bc15f017e1938110925",
       "thumbnailDhash": "0x12c504d99bed532306238e13998b48362247086fc83d78247e05678117c35b60",
       "dimensions": [
         1200,
@@ -1661,6 +2340,7 @@
       "id": "mountain:태백산",
       "sha256": "2b9c822f986b8258be3c53777c617112fca7cabd32498aac696b7183dfef8311",
       "dhash": "0x276359433d1758bc49f91f3b0f393e172f1f833d718f20ed0a31018f033f007f",
+      "mirroredDhash": "0x391b3d651743c2e5606d2307230716830703433e0e7148fb020108410137007a",
       "thumbnailDhash": "0x276359433d1758bc49f91f3b0f393e172f1f833d718f20ed0a31110d037f007f",
       "dimensions": [
         1200,
@@ -1669,9 +2349,22 @@
       "bytes": 178108
     },
     {
+      "id": "mountain:태화산",
+      "sha256": "5b0b14988636e18988e1c370dfe7dcfc344454c7c5fa262f0b6af6f310cfaea7",
+      "dhash": "0x676c2db012a58ac649068323e1477c861c432726160cce32390bf11cc49c00cf",
+      "mirroredDhash": "0xc919f24b5ab79cae9f6d3b3e1d789ec13dc79b19cf97b38c2f63c770c64c0ceb",
+      "thumbnailDhash": "0x676c2db012a58ac649068323e1477c861c432726160cce32390bf11cc49c00cf",
+      "dimensions": [
+        1200,
+        800
+      ],
+      "bytes": 169978
+    },
+    {
       "id": "mountain:팔공산",
       "sha256": "c13d8fdc20dfccde34a29f9fc51c6765f063d12722482c51be31bebb408b129b",
       "dhash": "0x51a3c98f063b2c7f355ba391270cc904e1c3680ce003837381b45001011d280d",
+      "mirroredDhash": "0x1a350e6c039f01cb2553663a4f1bd76c3878cfe93df8312ec27e5285436b4fcb",
       "thumbnailDhash": "0x51a3c98f063b2c7f355ba391270cc904e1c3680ce003837381b41005011d280d",
       "dimensions": [
         1200,
@@ -1680,9 +2373,22 @@
       "bytes": 178232
     },
     {
+      "id": "mountain:팔영산",
+      "sha256": "36e97511e2cb92c56e96644dc151bdba665f0104978702b8f3087ad3236c2bca",
+      "dhash": "0xdd1d4f593ac94cf66670533518ef2cb62be44ec4d1000084108c114400068883",
+      "mirroredDhash": "0x4744650d6ca390cdd199533508e792cbd82b5c8dff644effcee75d66997e32ee",
+      "thumbnailDhash": "0xdd1d4f593ac94cf66670533518ef2cb62be44ec4d9000088188c114400068893",
+      "dimensions": [
+        1200,
+        800
+      ],
+      "bytes": 174738
+    },
+    {
       "id": "mountain:한라산",
       "sha256": "a411e98a35447289a40124b06255e5a7b0a0d3d5bec0cb7d3f8a9c792c46e3fe",
       "dhash": "0x2761716523b165392e5e8c2a1b43233909991c8e91870246d40c9f191a1c282b",
+      "mirroredDhash": "0x791b5971723b6359858babc63d27633b666f86c71e769dbfcfd46706c7272a6b",
       "thumbnailDhash": "0x2761716523b165392e5e8c2a1b43233909991c9691870246d40c9f191a1c280b",
       "dimensions": [
         1200,
@@ -1694,6 +2400,7 @@
       "id": "mountain:함백산",
       "sha256": "c23b2da553950c809d851cee3a5d08940f0201f5884addb5875803f82ec86be6",
       "dhash": "0x71388c73b26316b10c3199d8cbb416604471c1f10fc10e3698720e7047104b1",
+      "mirroredDhash": "0x371f1cee9b2329733cf7066722ce997d14df03c7c0f708f71e4918eb315f72df",
       "thumbnailDhash": "0x71388c73b26316b10c3199d8cb3416604471c1f10fc10eb698720e7047104b1",
       "dimensions": [
         1200,
@@ -1705,6 +2412,7 @@
       "id": "mountain:화악산",
       "sha256": "4b0062364c9dc071c6bd18de12612c0bfd7e2283f3659affe12e8a0310617058",
       "dhash": "0x7b192f0f05ab71276667e265a3b08e217aea6a4ea2692d2f0d9f50cf30afa437",
+      "mirroredDhash": "0x63210f0b2a5f1b71119959b872327a8ea8a18da969ba0b4b064f0cf508f3035a",
       "thumbnailDhash": "0x7b392f0f05ab71276667e265a3b08ea17aea6a4ea2692d2f0d9f50cf30afa437",
       "dimensions": [
         1200,
@@ -1713,9 +2421,22 @@
       "bytes": 165638
     },
     {
+      "id": "mountain:화야산",
+      "sha256": "92589e53a02cf4bc246b767afff124ae1d6b9b3f792171f30686e6904c480585",
+      "dhash": "0x59d10cdc8d94e4d4066633023395338b0d8e67df123712374026c84160d7715",
+      "mirroredDhash": "0x465f4cf764cc4d8d99acf338633be335e4f2419833303b71bfd1dec94f155711",
+      "thumbnailDhash": "0x59d10cdccd94e4d4a46633023395338b0d8e67df123712370026c84160d7715",
+      "dimensions": [
+        1200,
+        800
+      ],
+      "bytes": 170568
+    },
+    {
       "id": "mountain:화왕산",
       "sha256": "6a023620cc72302fbb56b92b7164694274ab9ea26eb4b616117a3b2b52eabbd0",
       "dhash": "0x301d18075ec103fe32871903c8a706c230d710cf407f3b230ab518e52b322206",
+      "mirroredDhash": "0x47f31f677c05802f16a33e6712ecb49f14f30c7701fd3b2312af58e7a32b959b",
       "thumbnailDhash": "0x301d18075ec103fe32870901c8a706d230d710cf407f3b230ab518e52b322206",
       "dimensions": [
         1200,
@@ -1727,6 +2448,7 @@
       "id": "mountain:황매산",
       "sha256": "c73f7b8f443f73375acb632445439aacdde35350baf06beeb78d6074752cdaa8",
       "dhash": "0x20cb392913b99b5fedc326725e4d61b71650021b20af00ce601a81e7b3676266",
+      "mirroredDhash": "0x2c336b63623605063c48b19b49851279f59727bf0afb8cff27b9187e083299b1",
       "thumbnailDhash": "0x21cb392913b19a5fedc326725e4d61b71650021b00af00ce601b81e7b36f6266",
       "dimensions": [
         1200,
@@ -1738,6 +2460,7 @@
       "id": "mountain:황석산",
       "sha256": "5e84bd05433837ace6b95f5dc47bdd1aa25f0e295bee70ab0468634a48df2504",
       "dhash": "0x1dc11cd19e4d4d2626833591199149b00c3914fd14ff40f15991094306c31011",
+      "mirroredDhash": "0x7c4774874d869b4d3e9b76537667f26563cf40d700d750fd76653d6e389f13b0",
       "thumbnailDhash": "0x1dc11cd19e4d4d2626833591199149b00c3914fd14ff40f15991094306c32012",
       "dimensions": [
         1200,
@@ -1746,9 +2469,22 @@
       "bytes": 183632
     },
     {
+      "id": "mountain:황장산",
+      "sha256": "3d504695764d7e6c4609c91027a93751eb2d111347857d60282ddf4cedadf0a4",
+      "dhash": "0x19bb2719274d6fe372e3c3f0d1d298ecb25c6056e017c00d8084800c681c19d4",
+      "mirroredDhash": "0x2267671b0d1b380938b0703cb434c8e6c5b295f917f84ffcdefecff4c7a9d426",
+      "thumbnailDhash": "0x19bb2719274d6fe372e3c3f1d1d298ecb25c6056e017c00d8084800c681c19d4",
+      "dimensions": [
+        1200,
+        800
+      ],
+      "bytes": 167552
+    },
+    {
       "id": "mountain:희양산",
       "sha256": "a05d2f17791b7e03615932c9f32c040db0b76ca347bac8f822a9fb7074b3b148",
       "dhash": "0x9ef44674782661cd9a5870709c6409f5077332f716e0c99227741cf192b0130",
+      "mirroredDhash": "0x86f19ddbc19c7995a641b1e9c6d06bd11f50b33097146cf11b90c7d23661124",
       "thumbnailDhash": "0x9ef44676782661cd9a5870749c6409f5077332f716e0c99227741cf890b0130",
       "dimensions": [
         1200,
