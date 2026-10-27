@@ -1,0 +1,62 @@
+{
+  "checkedAt": "2026-10-27",
+  "suppliedOfficialLinks": [
+    {
+      "url": "https://korean.visitkorea.or.kr/detail/ms_detail.do?big_area=32&big_category=A02&cotid=2fac7b80-b616-431d-9e0f-13649ce8b14f&mid_category=A0201",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "url": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2ae26755-16dd-46e6-a455-ce3a0e0b5312",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "url": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=0245",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "url": "https://www.fowi.or.kr/user/program/programView.do?progrmId=74&progrmSeCd=PS03",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "url": "https://www.hongcheon.go.kr/tour/selectTourCntntsWebView.do?key=1856&pageIndex=246&pageUnit=1000&searchCnd=all&searchShowAt=Y&sortTy=HIT&tourNo=2674",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    }
+  ],
+  "readAlternatives": [
+    {
+      "url": "https://github.com/Lithium07z/ICT_Hackathon_2024/blob/a0025a3963a06bdc9149732ae3af1e6b81eef3c0/Assets/Resources/YangyangData.json",
+      "sha256": "0f71a9b9de28d14d5171d29f49ee369a4308fb5f170d0ba5eb3d0909c124c594",
+      "title": "장소별 공개 설명·지형 대체 열람 자료",
+      "checkedAt": "2026-10-27",
+      "evidenceType": "읽은 대체 자료와 사용자가 제공한 공식 자료 요지를 교차 대조. 원 공식 링크는 프록시 403으로 직접 본문 열람하지 못함. 사진 원본의 구조 대조나 실경 정밀 재현을 뜻하지 않음."
+    },
+    {
+      "name": "daeya",
+      "url": "https://github.com/korea-trip/korea-trip.github.io/blob/gh-pages/_next/data/OM5gS98mcrKmVlnWv9DFL/Gyeongsangbuk-do/2022-11-23-1669175265577.json",
+      "sha256": "4bf7a7f3bd148d2fa8b16cc3f65af83f933d9dfb2e365c26bce13726f987b10b",
+      "date": "2026-10-27",
+      "title": "장소별 공개 설명·지형 대체 열람 자료",
+      "checkedAt": "2026-10-27",
+      "evidenceType": "읽은 대체 자료와 사용자가 제공한 공식 자료 요지를 교차 대조. 원 공식 링크는 프록시 403으로 직접 본문 열람하지 못함. 사진 원본의 구조 대조나 실경 정밀 재현을 뜻하지 않음."
+    },
+    {
+      "name": "jangseong",
+      "url": "https://github.com/hosungseo/ai-readable-gazette-kr/blob/main/derived/readable-corrected/2022-01-04/126_%EC%82%B0%EB%A6%BC%EC%B2%AD_%EC%82%B0%EB%A6%BC%EC%B2%AD%EA%B3%A0%EC%8B%9C%EC%A0%9C2022_01%ED%98%B8_%EA%B5%AD%EB%A6%BD%EC%B6%95%EB%A0%B9%EC%82%B0%EB%AC%B8%EC%88%98%EC%82%B0_%ED%8E%B8%EB%B0%B1_%EC%B9%98%EC%9C%A0%EC%9D%98_%EC%88%B2_%EC%A1%B0%EC%84%B1%EA%B3%84%ED%9A%8D_%EA%B3%A0%EC%8B%9C.md",
+      "sha256": "403841dee4e1f51d6548f9bc5abdc6babf4d53fc930dbab6c1f4f2ba81686b20",
+      "date": "2026-10-27",
+      "title": "장소별 공개 설명·지형 대체 열람 자료",
+      "checkedAt": "2026-10-27",
+      "evidenceType": "읽은 대체 자료와 사용자가 제공한 공식 자료 요지를 교차 대조. 원 공식 링크는 프록시 403으로 직접 본문 열람하지 못함. 사진 원본의 구조 대조나 실경 정밀 재현을 뜻하지 않음."
+    },
+    {
+      "name": "palbong",
+      "url": "https://github.com/hiker-s/hikers-FE/blob/main/src/data/mnt/%ED%8C%94%EB%B4%89%EC%82%B0/%ED%8C%94%EB%B4%89%EC%82%B0_1.json",
+      "sha256": "ddd04853ce25df3a7af988e87d724244bcf8d8eae4c6340881a96fee1451a9e2",
+      "date": "2026-10-27",
+      "title": "장소별 공개 설명·지형 대체 열람 자료",
+      "checkedAt": "2026-10-27",
+      "evidenceType": "읽은 대체 자료와 사용자가 제공한 공식 자료 요지를 교차 대조. 원 공식 링크는 프록시 403으로 직접 본문 열람하지 못함. 사진 원본의 구조 대조나 실경 정밀 재현을 뜻하지 않음."
+    }
+  ],
+  "limitations": "공식 페이지는 프록시 연결 단계 403으로 읽지 못함. 사용자 제공 장소별 요지와 직접 읽은 공개 데이터·고시 대체 열람본·등산 위치 자료를 대조. 공식 사이트 직접 검증 또는 사진 실경 정밀 대조를 완료했다는 뜻은 아님. 사진 복제·전달·변형 없이 사실적 특징을 문장으로 기술하여 원화 생성."
+}

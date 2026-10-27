@@ -1,0 +1,80 @@
+[
+  {
+    "id": "temple:휴휴암",
+    "name": "휴휴암",
+    "prompt": "Create one original landscape watercolor illustration, 3:2 horizontal, for Sansa Note Korean travel catalog. Warm delicate hand-painted watercolor with subtle natural paper grain, muted sage greens, soft earth tones, pale blue light, painterly not photorealistic. No writing, labels, badges, watermark, border, decorative flowers or autumn foliage. This is an interpretive landscape based on documented geographic features, not an exact photographic reconstruction. Do not copy other mountains or temples. Subject Huhyuam hermitage, Hyeonnam-myeon, Yangyang, South Korea (NOT Naksansa or Haedong Yonggungsa). Calm EAST SEA coast with broad LOW natural rock shelves below the hermitage, small waves rolling onto their edges, wide blue sea horizon. Small understated Korean hermitage gray tiled roof modestly visible among green coastal pines at left, distant pale standing Avalokitesvara sculpture on coastal hillside at right, facing the sea. Sculpture should stay small, suggestion of draped robe without invented precise architectural details; do not add giant Buddha, pagodas or grand bridges. Rock shelves and sea take most of frame; a peaceful sea-facing scene, ordinary scale. In documented visitor description the wide coastal rocks are called Yeonhwadae, below Myojeokjeon, and the seaside hillside has the Jihye Gwanseeumbosal statue. Do not invent a complex precise temple plan or fantastical human-shaped rocks.",
+    "reviewedFeatures": "양양 현남면 동해 바위 해안·묘적전 아래 연화대·바닷가 언덕 지혜관세음보살상. 정확한 전각 배치·조형 세부는 재현 대상에서 제외.",
+    "reference": {
+      "url": "https://github.com/Lithium07z/ICT_Hackathon_2024/blob/a0025a3963a06bdc9149732ae3af1e6b81eef3c0/Assets/Resources/YangyangData.json",
+      "sha256": "0f71a9b9de28d14d5171d29f49ee369a4308fb5f170d0ba5eb3d0909c124c594",
+      "title": "장소별 공개 설명·지형 대체 열람 자료",
+      "checkedAt": "2026-10-27",
+      "evidenceType": "읽은 대체 자료와 사용자가 제공한 공식 자료 요지를 교차 대조. 원 공식 링크는 프록시 403으로 직접 본문 열람하지 못함. 사진 원본의 구조 대조나 실경 정밀 재현을 뜻하지 않음."
+    },
+    "src": "/images/temple-covers/completed-휴휴암.webp",
+    "thumbnail": "/images/temple-covers/completed-휴휴암-small.webp",
+    "sha256": "c435b0e34817ad11b4f7693771b49f47703feb901688c36929d4f780aa64f0c6",
+    "thumbnailHash": "89a0f77b49fc4cb8982d3871ec8d59a46e65862cf0464c2b2998121693ef9098",
+    "reviewResult": "사용자 지정 소재 및 열람한 지형 설명과 대조. 사진 실경 정밀 재현 주장은 하지 않음."
+  },
+  {
+    "id": "mountain:대야산",
+    "name": "대야산",
+    "prompt": "Create one original landscape watercolor illustration, 3:2 horizontal, for Sansa Note Korean travel catalog. Warm delicate hand-painted watercolor with subtle natural paper grain, muted sage greens, soft earth tones, pale blue light, painterly not photorealistic. No writing, labels, badges, watermark, border, decorative flowers or autumn foliage. This is an interpretive landscape based on documented geographic features, not an exact photographic reconstruction. Do not copy other mountains or temples. Subject Daeyasan mountain's Yongchugyegok valley on the Mungyeong/Goesan boundary, South Korea. Broad pale GRAY GRANITE rounded rock slabs beside clear jade stream pools, low water flowing between smooth granite, lush green woodland rising on either side and an understated rocky forested mountain ridge in distance. Oblique low viewpoint along stream: a broad curving rock shelf foreground, water cutting through central rock channel, forest and rocky foothill beyond. Preserve granite stream-and-forest character; no sheer gigantic waterfall, no fantasy alpine spires, no temple or statue. The exact Yongchu waterfall geometry has not been verified, so do NOT invent a recognizable named waterfall. Interpret verified rocky valley features in a new original composition.",
+    "reviewedFeatures": "문경·괴산 경계 대야산의 숲·화강암 암반·용추계곡. 확인하지 못한 폭포 세부 형상은 제작하지 않음.",
+    "reference": {
+      "name": "daeya",
+      "url": "https://github.com/korea-trip/korea-trip.github.io/blob/gh-pages/_next/data/OM5gS98mcrKmVlnWv9DFL/Gyeongsangbuk-do/2022-11-23-1669175265577.json",
+      "sha256": "4bf7a7f3bd148d2fa8b16cc3f65af83f933d9dfb2e365c26bce13726f987b10b",
+      "date": "2026-10-27",
+      "title": "장소별 공개 설명·지형 대체 열람 자료",
+      "checkedAt": "2026-10-27",
+      "evidenceType": "읽은 대체 자료와 사용자가 제공한 공식 자료 요지를 교차 대조. 원 공식 링크는 프록시 403으로 직접 본문 열람하지 못함. 사진 원본의 구조 대조나 실경 정밀 재현을 뜻하지 않음."
+    },
+    "src": "/images/mountain-covers/completed-대야산.webp",
+    "thumbnail": "/images/mountain-covers/completed-대야산-small.webp",
+    "sha256": "8badd1a0cf9d7a8a2e6f3cf05c74d8b1d7f99d12c2658817911cb4882919c644",
+    "thumbnailHash": "1d20411d4196dcbd4df4daa0ca071a4ce04e68df8f12c29ec6ad8e991473f510",
+    "reviewResult": "사용자 지정 소재 및 열람한 지형 설명과 대조. 사진 실경 정밀 재현 주장은 하지 않음."
+  },
+  {
+    "id": "mountain:축령산",
+    "name": "축령산",
+    "prompt": "Create one original landscape watercolor illustration, 3:2 horizontal, for Sansa Note Korean travel catalog. Warm delicate hand-painted watercolor with subtle natural paper grain, muted sage greens, soft earth tones, pale blue light, painterly not photorealistic. No writing, labels, badges, watermark, border, decorative flowers or autumn foliage. This is an interpretive landscape based on documented geographic features, not an exact photographic reconstruction. Do not copy other mountains or temples. Subject Chukryeongsan in JANGSEONG, Jeollanam-do, South Korea, its healing cypress forest. This is NOT the different Chukryeongsan in Namyangju. Ground-level view into an extensive forest of tall straight closely spaced hinoki cypress trunks, brown-gray vertical trunks rising beyond frame, dark feathery evergreen crowns, deep calm soft green shade. Natural unpaved gently curving earth forest path goes into middle distance, diffused soft beams of daylight through canopy. Distinctive restrained forest interior with perspective and variation in trunk widths; no jagged rock ridge, giant pine branches, flowering shrubs, buildings, signs or boards. Naturalistic woodland, gently sloping terrain, no exact named facilities invented.",
+    "reviewedFeatures": "장성 축령산의 편백림·곧은 침엽수·흙길. 남양주 축령산과 별개.",
+    "reference": {
+      "name": "jangseong",
+      "url": "https://github.com/hosungseo/ai-readable-gazette-kr/blob/main/derived/readable-corrected/2022-01-04/126_%EC%82%B0%EB%A6%BC%EC%B2%AD_%EC%82%B0%EB%A6%BC%EC%B2%AD%EA%B3%A0%EC%8B%9C%EC%A0%9C2022_01%ED%98%B8_%EA%B5%AD%EB%A6%BD%EC%B6%95%EB%A0%B9%EC%82%B0%EB%AC%B8%EC%88%98%EC%82%B0_%ED%8E%B8%EB%B0%B1_%EC%B9%98%EC%9C%A0%EC%9D%98_%EC%88%B2_%EC%A1%B0%EC%84%B1%EA%B3%84%ED%9A%8D_%EA%B3%A0%EC%8B%9C.md",
+      "sha256": "403841dee4e1f51d6548f9bc5abdc6babf4d53fc930dbab6c1f4f2ba81686b20",
+      "date": "2026-10-27",
+      "title": "장소별 공개 설명·지형 대체 열람 자료",
+      "checkedAt": "2026-10-27",
+      "evidenceType": "읽은 대체 자료와 사용자가 제공한 공식 자료 요지를 교차 대조. 원 공식 링크는 프록시 403으로 직접 본문 열람하지 못함. 사진 원본의 구조 대조나 실경 정밀 재현을 뜻하지 않음."
+    },
+    "src": "/images/mountain-covers/completed-축령산.webp",
+    "thumbnail": "/images/mountain-covers/completed-축령산-small.webp",
+    "sha256": "e65e9816bd374ba398c615e1702506a369e53536351a7b9dd95286a03b91b3fc",
+    "thumbnailHash": "b8e41a32dda23061e8321aeb961c207568500745b85b0321f05ae85b0f65d857",
+    "reviewResult": "사용자 지정 소재 및 열람한 지형 설명과 대조. 사진 실경 정밀 재현 주장은 하지 않음."
+  },
+  {
+    "id": "mountain:팔봉산",
+    "name": "팔봉산",
+    "prompt": "Create one original landscape watercolor illustration, 3:2 horizontal, for Sansa Note Korean travel catalog. Warm delicate hand-painted watercolor with subtle natural paper grain, muted sage greens, soft earth tones, pale blue light, painterly not photorealistic. No writing, labels, badges, watermark, border, decorative flowers or autumn foliage. This is an interpretive landscape based on documented geographic features, not an exact photographic reconstruction. Do not copy other mountains or temples. Subject Palbongsan, HONGCHEON, Gangwon-do, South Korea, beside the Hongcheon River, NOT Seosan Palbongsan. Wide view from across the river at a modest LOW rocky mountain with an irregular connected ridge of EIGHT small distinguishable rounded craggy summits; forested slopes with pale weathered rock outcrops on their crests. Hongcheon River makes a gentle bend across foreground below the slopes, a pale gravel bank, woodland and a soft hazy rural distance. Proportions must feel like a 300-meter-scale Korean riverside hill range, not enormous jagged fantasy peaks, not eight identical triangular spikes. Muted green summer, quiet pale sky. This composition conveys documented river-and-eight-peak relationship without claiming exact survey geometry. No temples, buildings, labels or people.",
+    "reviewedFeatures": "홍천 팔봉산의 낮은 바위 봉우리·여덟 봉우리와 홍천강의 관계. 서산 팔봉산과 별개.",
+    "reference": {
+      "name": "palbong",
+      "url": "https://github.com/hiker-s/hikers-FE/blob/main/src/data/mnt/%ED%8C%94%EB%B4%89%EC%82%B0/%ED%8C%94%EB%B4%89%EC%82%B0_1.json",
+      "sha256": "ddd04853ce25df3a7af988e87d724244bcf8d8eae4c6340881a96fee1451a9e2",
+      "date": "2026-10-27",
+      "title": "장소별 공개 설명·지형 대체 열람 자료",
+      "checkedAt": "2026-10-27",
+      "evidenceType": "읽은 대체 자료와 사용자가 제공한 공식 자료 요지를 교차 대조. 원 공식 링크는 프록시 403으로 직접 본문 열람하지 못함. 사진 원본의 구조 대조나 실경 정밀 재현을 뜻하지 않음."
+    },
+    "src": "/images/mountain-covers/completed-팔봉산.webp",
+    "thumbnail": "/images/mountain-covers/completed-팔봉산-small.webp",
+    "sha256": "87bb1646111c69a765ca355ec8e3450271a4dc94e9529a2a9aecf3d5d84b2839",
+    "thumbnailHash": "87d7cc30af1db896eb7733d4ba0baea51ad9ee67b6644370d1a1e4be143184d0",
+    "reviewResult": "사용자 지정 소재 및 열람한 지형 설명과 대조. 사진 실경 정밀 재현 주장은 하지 않음."
+  }
+]

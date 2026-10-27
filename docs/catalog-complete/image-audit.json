@@ -1,10 +1,10 @@
 {
   "catalogMappings": 211,
-  "actualArtwork": 207,
-  "neutralPending": 4,
-  "distinctFiles": 207,
-  "pairsCompared": 21321,
-  "mirrorPairsCompared": 21321,
+  "actualArtwork": 211,
+  "neutralPending": 0,
+  "distinctFiles": 211,
+  "pairsCompared": 22155,
+  "mirrorPairsCompared": 22155,
   "nearDuplicateThreshold": 22,
   "nearDuplicateCandidates": [],
   "artwork": [
@@ -1317,6 +1317,18 @@
       "bytes": 171952
     },
     {
+      "id": "temple:휴휴암",
+      "sha256": "c435b0e34817ad11b4f7693771b49f47703feb901688c36929d4f780aa64f0c6",
+      "dhash": "0x3fa70cd102f9e07c66661f87d8dd3ccb729b727a03ca010c420c4b8072607a38",
+      "mirroredDhash": "0x1a03748f60afc1f889991e0744e42cc026b1a1b1ac3fcf7bcfadde05f931e180",
+      "thumbnailDhash": "0x3fa70cd102f9e07c66661f87d8dd3ccb729b727a03ca010c42044b8072607a38",
+      "dimensions": [
+        1200,
+        800
+      ],
+      "bytes": 169146
+    },
+    {
       "id": "temple:흥국사(여수)",
       "sha256": "b19dff43bb4098a74bfc019fd2defdcacac976a57a03137c8ab2fcf5d32ac5b6",
       "dhash": "0x15734c655d979d1679066da5bc239d07edb5c8abd1aa3317ac8fb1e5678ae702",
@@ -1555,6 +1567,18 @@
         800
       ],
       "bytes": 172756
+    },
+    {
+      "id": "mountain:대야산",
+      "sha256": "8badd1a0cf9d7a8a2e6f3cf05c74d8b1d7f99d12c2658817911cb4882919c644",
+      "dhash": "0xb2584d021b87bbc54ddc4d6a3519cfc7b277763b9d282c892de869e6e3c1e24d",
+      "mirroredDhash": "0xe5b2bf4d1e275c22c44da94d67531c0c11b02391eb466ec3e84b98617c384db8",
+      "thumbnailDhash": "0xb2584d021b87bbc54ddc4d6a3519cfc7b277763b9d283c892de869e6e3c1e24d",
+      "dimensions": [
+        1200,
+        800
+      ],
+      "bytes": 178962
     },
     {
       "id": "mountain:덕유산",
@@ -2289,6 +2313,18 @@
       "bytes": 170532
     },
     {
+      "id": "mountain:축령산",
+      "sha256": "e65e9816bd374ba398c615e1702506a369e53536351a7b9dd95286a03b91b3fc",
+      "dhash": "0x6d4d5d81e793e613ce0bce8b54cbd4cac6ca56ca56ca56cb4f8b6ccb64cb56cb",
+      "mirroredDhash": "0x4d497e45361827982f8c2e8c2cd4acd4ac9cac95ac952c952e0d2cc92cd92c95",
+      "thumbnailDhash": "0x6d4d5d81e793e613ce0bce8b54cbd4cac6ca56ca56ca56cb4f8b6ccb64cb56cb",
+      "dimensions": [
+        1200,
+        800
+      ],
+      "bytes": 180970
+    },
+    {
       "id": "mountain:축령산(남양주)",
       "sha256": "70887dcba60620438ed1c15553ea388c9ab10c1903c590f45df7f6881f62fc8a",
       "dhash": "0xe309f306d145f0583836f11cf010e8505051d431c835c335818588a5c1a3c4c3",
@@ -2371,6 +2407,18 @@
         800
       ],
       "bytes": 178232
+    },
+    {
+      "id": "mountain:팔봉산",
+      "sha256": "87bb1646111c69a765ca355ec8e3450271a4dc94e9529a2a9aecf3d5d84b2839",
+      "dhash": "0x76c037310cbe09c6b8570187e8aa99130cc00a3020b3043003840d80c1b183f",
+      "mirroredDhash": "0xc91f313d2cf7c6f85e29e7f18e01762accf32a3f2dbf3db3a315e43d21cf03e7",
+      "thumbnailDhash": "0x76c037310cbe09c6b8570187e8aa99130cc00a3020b3043023840d80c1b183f",
+      "dimensions": [
+        1200,
+        800
+      ],
+      "bytes": 183262
     },
     {
       "id": "mountain:팔영산",

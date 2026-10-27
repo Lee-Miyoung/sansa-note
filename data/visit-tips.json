@@ -4570,11 +4570,47 @@
     "name": "휴휴암",
     "region": "강원",
     "locality": "양양",
-    "status": "pending",
-    "cards": [],
-    "sources": [],
-    "reason": "휴휴암의 세부 방문 정보는 공식 자료와 추가 대조 중이에요.",
-    "evidenceKeywords": []
+    "status": "verified",
+    "cards": [
+      {
+        "title": "연화대에서 바위 풍경 찾기",
+        "text": "묘적전 아래 바닷가의 넓은 바위가 연화대예요. 관음보살과 거북을 닮았다는 바위 이야기를 떠올리며, 바다와 맞닿은 여러 바위의 윤곽을 살펴보세요.",
+        "keywords": [
+          "묘적전",
+          "연화대",
+          "바위 형상 이야기"
+        ]
+      },
+      {
+        "title": "동해를 배경으로 관음보살상 보기",
+        "text": "바닷가 언덕의 지혜관세음보살상은 동해와 함께 바라보는 것이 관람 포인트예요. 양옆의 동해용왕상과 남순동자상도 찾아보세요.",
+        "keywords": [
+          "지혜관세음보살상",
+          "동해용왕상",
+          "남순동자상"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://github.com/Lithium07z/ICT_Hackathon_2024/blob/a0025a3963a06bdc9149732ae3af1e6b81eef3c0/Assets/Resources/YangyangData.json",
+        "sha256": "0f71a9b9de28d14d5171d29f49ee369a4308fb5f170d0ba5eb3d0909c124c594",
+        "title": "휴휴암 관광 안내 공개 데이터 · 대체 열람본",
+        "checkedAt": "2026-10-27",
+        "evidenceType": "공개 데이터의 휴휴암 개별 설명을 직접 열람. 사용자 제공 한국관광공사 안내 요지와 대조. 공식 URL 직접 열람 실패 사실은 작업 보고서에 별도 기록."
+      }
+    ],
+    "reason": "",
+    "evidenceKeywords": [
+      [
+        "묘적전",
+        "연화대"
+      ],
+      [
+        "지혜관세음보살상",
+        "동해"
+      ]
+    ]
   },
   {
     "id": "temple:흥국사(여수)",

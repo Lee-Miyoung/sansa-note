@@ -1,0 +1,11 @@
+{
+  "browser": "chromium",
+  "width": 1440,
+  "list": 100,
+  "details": 100,
+  "staticPixels": true,
+  "repeatRenderMutations": 0,
+  "thumbnailAndNeutralFallback": true,
+  "reload": true,
+  "errors": []
+}
