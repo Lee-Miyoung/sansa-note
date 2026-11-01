@@ -27,6 +27,11 @@ jobs:
           sudo apt-get install -y -qq ffmpeg
           python -m pip install --upgrade pip
           pip install -r tools/recitation-requirements.txt
+          # MeloTTS imports its Japanese frontend even for Korean. Unidic's
+          # dictionary is not installed by pip; use the bundled unidic_lite
+          # dictionary instead of downloading hundreds of MB of Japanese data.
+          python -m pip uninstall -y unidic
+          python -c "import MeCab; assert MeCab.Tagger().parse('テスト')"
       - name: Generate and check six tracks
         run: python tools/generate-sansa-recitations.py
       - name: Validate published configuration
