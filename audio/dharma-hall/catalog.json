@@ -127,5 +127,131 @@
       "yaksa",
       "jijang"
     ]
+  },
+  {
+    "id": "recitation-daewung",
+    "title": "석가모니불 명호 낭독 · AI 합성 음성",
+    "kind": "chant",
+    "src": "./audio/dharma-hall/recitation-daewung.mp3",
+    "creator": "산사노트 · MeloTTS 한국어 합성 음성",
+    "source": "https://huggingface.co/myshell-ai/MeloTTS-Korean",
+    "originalMedia": "https://sansanote.com/audio/dharma-hall/recitation-daewung.mp3",
+    "license": "MIT (MeloTTS)",
+    "licenseURL": "https://github.com/myshell-ai/MeloTTS/blob/main/LICENSE",
+    "changes": "Original Korean invocation script, synthesized speech; not a monk's voice, live chant, or temple recording.",
+    "description": "법당별 명호를 천천히 반복하는 한국어 합성 낭독. 실제 스님의 정근이나 의식 음원은 아닙니다.",
+    "duration": 50.233,
+    "bytes": 603160,
+    "sha256": "293eab30c3fc1821c7e69ec45f3f5635ef4693f66fa251b31bf921db65f35f39",
+    "verified": true,
+    "gain": 0.8,
+    "allowedHalls": [
+      "daewung"
+    ]
+  },
+  {
+    "id": "recitation-geungnak",
+    "title": "아미타불 명호 낭독 · AI 합성 음성",
+    "kind": "chant",
+    "src": "./audio/dharma-hall/recitation-geungnak.mp3",
+    "creator": "산사노트 · MeloTTS 한국어 합성 음성",
+    "source": "https://huggingface.co/myshell-ai/MeloTTS-Korean",
+    "originalMedia": "https://sansanote.com/audio/dharma-hall/recitation-geungnak.mp3",
+    "license": "MIT (MeloTTS)",
+    "licenseURL": "https://github.com/myshell-ai/MeloTTS/blob/main/LICENSE",
+    "changes": "Original Korean invocation script, synthesized speech; not a monk's voice, live chant, or temple recording.",
+    "description": "법당별 명호를 천천히 반복하는 한국어 합성 낭독. 실제 스님의 정근이나 의식 음원은 아닙니다.",
+    "duration": 52.741,
+    "bytes": 633253,
+    "sha256": "7512c16a44a138f49a5aa334f14016f725180e8c6ba96def42b4800422366ebb",
+    "verified": true,
+    "gain": 0.8,
+    "allowedHalls": [
+      "geungnak"
+    ]
+  },
+  {
+    "id": "recitation-gwanum",
+    "title": "관세음보살 명호 낭독 · AI 합성 음성",
+    "kind": "chant",
+    "src": "./audio/dharma-hall/recitation-gwanum.mp3",
+    "creator": "산사노트 · MeloTTS 한국어 합성 음성",
+    "source": "https://huggingface.co/myshell-ai/MeloTTS-Korean",
+    "originalMedia": "https://sansanote.com/audio/dharma-hall/recitation-gwanum.mp3",
+    "license": "MIT (MeloTTS)",
+    "licenseURL": "https://github.com/myshell-ai/MeloTTS/blob/main/LICENSE",
+    "changes": "Original Korean invocation script, synthesized speech; not a monk's voice, live chant, or temple recording.",
+    "description": "법당별 명호를 천천히 반복하는 한국어 합성 낭독. 실제 스님의 정근이나 의식 음원은 아닙니다.",
+    "duration": 52.611,
+    "bytes": 631685,
+    "sha256": "870b86d5f24d398ea96583c7ee3873d324734c33a3b10cc722088dcbc49245fd",
+    "verified": true,
+    "gain": 0.8,
+    "allowedHalls": [
+      "gwanum"
+    ]
+  },
+  {
+    "id": "recitation-munsu",
+    "title": "문수보살 명호 낭독 · AI 합성 음성",
+    "kind": "chant",
+    "src": "./audio/dharma-hall/recitation-munsu.mp3",
+    "creator": "산사노트 · MeloTTS 한국어 합성 음성",
+    "source": "https://huggingface.co/myshell-ai/MeloTTS-Korean",
+    "originalMedia": "https://sansanote.com/audio/dharma-hall/recitation-munsu.mp3",
+    "license": "MIT (MeloTTS)",
+    "licenseURL": "https://github.com/myshell-ai/MeloTTS/blob/main/LICENSE",
+    "changes": "Original Korean invocation script, synthesized speech; not a monk's voice, live chant, or temple recording.",
+    "description": "법당별 명호를 천천히 반복하는 한국어 합성 낭독. 실제 스님의 정근이나 의식 음원은 아닙니다.",
+    "duration": 54.674,
+    "bytes": 656449,
+    "sha256": "47b95c6e76af3886696dc3049d87682ab76bfd40a3c1173531397c0c16edf9a6",
+    "verified": true,
+    "gain": 0.8,
+    "allowedHalls": [
+      "munsu"
+    ]
+  },
+  {
+    "id": "recitation-yaksa",
+    "title": "약사여래 명호 낭독 · AI 합성 음성",
+    "kind": "chant",
+    "src": "./audio/dharma-hall/recitation-yaksa.mp3",
+    "creator": "산사노트 · MeloTTS 한국어 합성 음성",
+    "source": "https://huggingface.co/myshell-ai/MeloTTS-Korean",
+    "originalMedia": "https://sansanote.com/audio/dharma-hall/recitation-yaksa.mp3",
+    "license": "MIT (MeloTTS)",
+    "licenseURL": "https://github.com/myshell-ai/MeloTTS/blob/main/LICENSE",
+    "changes": "Original Korean invocation script, synthesized speech; not a monk's voice, live chant, or temple recording.",
+    "description": "법당별 명호를 천천히 반복하는 한국어 합성 낭독. 실제 스님의 정근이나 의식 음원은 아닙니다.",
+    "duration": 53.473,
+    "bytes": 642030,
+    "sha256": "1dbf24e2c14cba7e32054a44700d4b8d9f9c8ada19cf80a753123f988651dad5",
+    "verified": true,
+    "gain": 0.8,
+    "allowedHalls": [
+      "yaksa"
+    ]
+  },
+  {
+    "id": "recitation-jijang",
+    "title": "지장보살 명호 낭독 · AI 합성 음성",
+    "kind": "chant",
+    "src": "./audio/dharma-hall/recitation-jijang.mp3",
+    "creator": "산사노트 · MeloTTS 한국어 합성 음성",
+    "source": "https://huggingface.co/myshell-ai/MeloTTS-Korean",
+    "originalMedia": "https://sansanote.com/audio/dharma-hall/recitation-jijang.mp3",
+    "license": "MIT (MeloTTS)",
+    "licenseURL": "https://github.com/myshell-ai/MeloTTS/blob/main/LICENSE",
+    "changes": "Original Korean invocation script, synthesized speech; not a monk's voice, live chant, or temple recording.",
+    "description": "법당별 명호를 천천히 반복하는 한국어 합성 낭독. 실제 스님의 정근이나 의식 음원은 아닙니다.",
+    "duration": 55.771,
+    "bytes": 669615,
+    "sha256": "818b0855c5d70bebfb7c9e5b249022b3489dcf76c80beea622975b1777910038",
+    "verified": true,
+    "gain": 0.8,
+    "allowedHalls": [
+      "jijang"
+    ]
   }
 ]

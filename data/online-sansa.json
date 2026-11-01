@@ -14,7 +14,7 @@
       "description": "오늘 하루의 마음을 돌아보며 잠시 이 자리에 머뭅니다.",
       "vow": "감사한 일 한 가지를 떠올리고, 나와 이웃의 평안을 발원합니다.",
       "faith": "삼귀의 등 예불 독송을 하는 전통이 있습니다. 여기서는 의식 전체를 재현하지 않는 짧은 안내를 제공합니다.",
-      "audioNote": "염불소리1 · 특정 독송의 원문은 확인하지 않은 일반 염불 녹음입니다.",
+      "audioNote": "실제 스님이나 사찰의 정근 녹음이 아니라 한국어 AI 합성 명호 낭독입니다.",
       "invocation": "석가모니불",
       "chantConfirmed": true,
       "image": "/images/online-sansa/daewung-refined.webp",
@@ -25,7 +25,8 @@
         "moktak",
         "chime",
         "chant",
-        "opening-ritual"
+        "opening-ritual",
+        "recitation-daewung"
       ],
       "sequence": [
         {
@@ -112,7 +113,7 @@
           "action": "소리를 따라 잠시 고요히 머뭅니다.",
           "monk": "",
           "pose": "listen",
-          "track": "chant",
+          "track": "recitation-daewung",
           "offset": 0,
           "auto": true,
           "subtitle": [
@@ -124,7 +125,7 @@
             100
           ],
           "audioAt": 100,
-          "audioEnd": 0,
+          "audioEnd": 50.233,
           "motionAt": 100,
           "waitAction": "none"
         },
@@ -232,7 +233,8 @@
         "phrase": "석가모니불",
         "note": "석가모니 부처님의 이름을 차분히 되새깁니다. · 사찰별 정근·독송 방식은 다를 수 있습니다.",
         "source": "https://encykorea.aks.ac.kr/Article/E0028328"
-      }
+      },
+      "syntheticRecitationId": "recitation-daewung"
     },
     {
       "id": "geungnak",
@@ -245,7 +247,7 @@
       "description": "그리운 이를 기억하며 평안을 발원합니다.",
       "vow": "그리운 이가 평안하기를, 남은 이들이 서로를 돌볼 수 있기를 발원합니다.",
       "faith": "아미타불의 서원에 의지하여 서방 극락정토에 왕생하기를 바라는 정토신앙과 연결됩니다. 결과를 보장하는 뜻은 아닙니다.",
-      "audioNote": "아미타불 정근 녹음은 준비 중입니다. 무음으로 발원할 수 있습니다.",
+      "audioNote": "실제 스님이나 사찰의 정근 녹음이 아니라 한국어 AI 합성 명호 낭독입니다.",
       "invocation": "나무아미타불",
       "chantConfirmed": false,
       "image": "/images/online-sansa/geungnak-refined.webp",
@@ -255,7 +257,8 @@
         "bell",
         "moktak",
         "chime",
-        "opening-ritual"
+        "opening-ritual",
+        "recitation-geungnak"
       ],
       "sequence": [
         {
@@ -342,7 +345,7 @@
           "action": "녹음 대신 나무아미타불를 마음속으로 부르거나 조용히 머물러도 좋습니다.",
           "monk": "",
           "pose": "listen",
-          "track": "",
+          "track": "recitation-geungnak",
           "offset": 0,
           "auto": true,
           "subtitle": [
@@ -354,7 +357,7 @@
             100
           ],
           "audioAt": 100,
-          "audioEnd": 0,
+          "audioEnd": 52.741,
           "motionAt": 100,
           "waitAction": "none"
         },
@@ -468,7 +471,8 @@
         "phrase": "나무아미타불",
         "note": "아미타불의 이름을 되새기며 극락왕생과 평안을 발원합니다. · 사찰별 정근·독송 방식은 다를 수 있습니다.",
         "source": "https://encykorea.aks.ac.kr/Article/E0034298"
-      }
+      },
+      "syntheticRecitationId": "recitation-geungnak"
     },
     {
       "id": "gwanum",
@@ -481,7 +485,7 @@
       "description": "소중한 생명과 가족의 평안을 바라는 마음을 모읍니다.",
       "vow": "가족과 나의 몸과 마음이 안전하게 돌봄을 받고 서로 자비롭게 대하기를 발원합니다.",
       "faith": "자비의 신앙과 연결되는 공간입니다. 임신·출산을 바라는 마음도 담을 수 있으나 결과를 보장하지 않습니다. 사연이나 이름을 적지 않아도 됩니다.",
-      "audioNote": "관세음보살 정근 녹음은 준비 중입니다. 무음으로 발원할 수 있습니다.",
+      "audioNote": "실제 스님이나 사찰의 정근 녹음이 아니라 한국어 AI 합성 명호 낭독입니다.",
       "invocation": "나무관세음보살",
       "chantConfirmed": false,
       "image": "/images/online-sansa/gwanum-refined.webp",
@@ -491,7 +495,8 @@
         "bell",
         "moktak",
         "chime",
-        "opening-ritual"
+        "opening-ritual",
+        "recitation-gwanum"
       ],
       "sequence": [
         {
@@ -578,7 +583,7 @@
           "action": "녹음 대신 나무관세음보살를 마음속으로 부르거나 조용히 머물러도 좋습니다.",
           "monk": "",
           "pose": "listen",
-          "track": "",
+          "track": "recitation-gwanum",
           "offset": 0,
           "auto": true,
           "subtitle": [
@@ -590,7 +595,7 @@
             100
           ],
           "audioAt": 100,
-          "audioEnd": 0,
+          "audioEnd": 52.611,
           "motionAt": 100,
           "waitAction": "none"
         },
@@ -699,7 +704,8 @@
         "phrase": "관세음보살",
         "note": "관세음보살의 자비를 생각하며 이름을 되새깁니다. · 사찰별 정근·독송 방식은 다를 수 있습니다.",
         "source": "https://encykorea.aks.ac.kr/Article/E0004915"
-      }
+      },
+      "syntheticRecitationId": "recitation-gwanum"
     },
     {
       "id": "munsu",
@@ -712,7 +718,7 @@
       "description": "준비한 노력을 믿고 차분한 마음으로 자신의 길을 걸어가기를 바랍니다.",
       "vow": "준비한 것을 차분히 살피고, 결과보다 오늘 할 수 있는 노력과 지혜로운 판단에 마음을 모읍니다.",
       "faith": "지혜를 상징하는 문수보살을 향한 창작 기도 공간입니다. 모든 사찰에 같은 이름의 전각이 있다고 뜻하지 않습니다. 합격이나 결과를 보장하지 않습니다.",
-      "audioNote": "문수보살 독송 녹음은 준비 중입니다. 무음으로 발원할 수 있습니다.",
+      "audioNote": "실제 스님이나 사찰의 정근 녹음이 아니라 한국어 AI 합성 명호 낭독입니다.",
       "invocation": "나무문수보살",
       "chantConfirmed": false,
       "image": "/images/online-sansa/munsu-refined.webp",
@@ -722,7 +728,8 @@
         "bell",
         "moktak",
         "chime",
-        "opening-ritual"
+        "opening-ritual",
+        "recitation-munsu"
       ],
       "sequence": [
         {
@@ -809,7 +816,7 @@
           "action": "녹음 대신 나무문수보살를 마음속으로 부르거나 조용히 머물러도 좋습니다.",
           "monk": "",
           "pose": "listen",
-          "track": "",
+          "track": "recitation-munsu",
           "offset": 0,
           "auto": true,
           "subtitle": [
@@ -821,7 +828,7 @@
             100
           ],
           "audioAt": 100,
-          "audioEnd": 0,
+          "audioEnd": 54.674,
           "motionAt": 100,
           "waitAction": "none"
         },
@@ -929,7 +936,8 @@
         "phrase": "나무문수보살",
         "note": "문수보살의 지혜를 떠올립니다. 특정 사찰의 공식 의식 전체를 재현하지 않습니다. · 사찰별 정근·독송 방식은 다를 수 있습니다.",
         "source": "https://encykorea.aks.ac.kr/Article/E0019535"
-      }
+      },
+      "syntheticRecitationId": "recitation-munsu"
     },
     {
       "id": "yaksa",
@@ -942,7 +950,7 @@
       "description": "몸과 마음이 힘든 이들이 필요한 돌봄과 평안을 얻기를 바랍니다.",
       "vow": "아픈 이들이 필요한 치료와 돌봄에 연결되고, 돌보는 이들도 쉴 수 있기를 발원합니다.",
       "faith": "약사여래의 치유 서원에 마음을 모읍니다. 기도는 치료를 대신하지 않습니다. 심한 흉통·호흡곤란·의식 저하 등은 119 등 실제 의료 도움을 먼저 구하세요.",
-      "audioNote": "약사여래 정근 녹음은 준비 중입니다. 무음으로 발원할 수 있습니다.",
+      "audioNote": "실제 스님이나 사찰의 정근 녹음이 아니라 한국어 AI 합성 명호 낭독입니다.",
       "invocation": "나무약사여래",
       "chantConfirmed": false,
       "image": "/images/online-sansa/yaksa-refined.webp",
@@ -952,7 +960,8 @@
         "bell",
         "moktak",
         "chime",
-        "opening-ritual"
+        "opening-ritual",
+        "recitation-yaksa"
       ],
       "sequence": [
         {
@@ -1039,7 +1048,7 @@
           "action": "녹음 대신 나무약사여래를 마음속으로 부르거나 조용히 머물러도 좋습니다.",
           "monk": "",
           "pose": "listen",
-          "track": "",
+          "track": "recitation-yaksa",
           "offset": 0,
           "auto": true,
           "subtitle": [
@@ -1051,7 +1060,7 @@
             100
           ],
           "audioAt": 100,
-          "audioEnd": 0,
+          "audioEnd": 53.473,
           "motionAt": 100,
           "waitAction": "none"
         },
@@ -1159,7 +1168,8 @@
         "phrase": "나무약사여래",
         "note": "약사여래의 서원을 생각하며 회복을 발원합니다. 치료를 대신하지 않습니다. · 사찰별 정근·독송 방식은 다를 수 있습니다.",
         "source": "https://encykorea.aks.ac.kr/Article/E0035327"
-      }
+      },
+      "syntheticRecitationId": "recitation-yaksa"
     },
     {
       "id": "jijang",
@@ -1172,7 +1182,7 @@
       "description": "그리운 이를 기억하며 자비와 평안을 발원합니다.",
       "vow": "그리운 이를 기억하고, 상실의 시간을 지나는 마음이 고립되지 않기를 발원합니다.",
       "faith": "큰 서원과 중생 구제, 고인을 위한 천도 발원과 연결되는 신앙을 참고했습니다. 극락정토를 향한 아미타 신앙의 극락전과 구분하며, 특정 사찰의 공식 천도재를 대신하지 않습니다.",
-      "audioNote": "지장보살 정근 녹음은 준비 중입니다. 무음으로 발원할 수 있습니다.",
+      "audioNote": "실제 스님이나 사찰의 정근 녹음이 아니라 한국어 AI 합성 명호 낭독입니다.",
       "invocation": "나무지장보살",
       "chantConfirmed": false,
       "image": "/images/online-sansa/jijang-refined.webp",
@@ -1182,7 +1192,8 @@
         "bell",
         "moktak",
         "chime",
-        "opening-ritual"
+        "opening-ritual",
+        "recitation-jijang"
       ],
       "sequence": [
         {
@@ -1269,7 +1280,7 @@
           "action": "녹음 대신 나무지장보살를 마음속으로 부르거나 조용히 머물러도 좋습니다.",
           "monk": "",
           "pose": "listen",
-          "track": "",
+          "track": "recitation-jijang",
           "offset": 0,
           "auto": true,
           "subtitle": [
@@ -1281,7 +1292,7 @@
             100
           ],
           "audioAt": 100,
-          "audioEnd": 0,
+          "audioEnd": 55.771,
           "motionAt": 100,
           "waitAction": "none"
         },
@@ -1389,7 +1400,8 @@
         "phrase": "나무지장보살",
         "note": "지장보살의 큰 원력을 떠올리며 고인을 기억합니다. · 사찰별 정근·독송 방식은 다를 수 있습니다.",
         "source": "https://encykorea.aks.ac.kr/Article/E0054346"
-      }
+      },
+      "syntheticRecitationId": "recitation-jijang"
     }
   ],
   "schedules": [
