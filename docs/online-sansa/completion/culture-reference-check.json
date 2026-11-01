@@ -1,0 +1,72 @@
+[
+  {
+    "title": "석가모니불 - 한국민족문화대백과사전",
+    "url": "https://encykorea.aks.ac.kr/Article/E0028328",
+    "http": "000",
+    "status": 56,
+    "error": "curl: (56) CONNECT tunnel failed, response 403\n"
+  },
+  {
+    "title": "불상 - 한국민족문화대백과사전",
+    "url": "https://encykorea.aks.ac.kr/Article/E0024979",
+    "http": "000",
+    "status": 56,
+    "error": "curl: (56) CONNECT tunnel failed, response 403\n"
+  },
+  {
+    "title": "아미타불 - 한국민족문화대백과사전",
+    "url": "https://encykorea.aks.ac.kr/Article/E0034298",
+    "http": "000",
+    "status": 56,
+    "error": "curl: (56) CONNECT tunnel failed, response 403\n"
+  },
+  {
+    "title": "극락전 - 한국민족문화대백과사전",
+    "url": "https://encykorea.aks.ac.kr/Article/E0007354",
+    "http": "000",
+    "status": 56,
+    "error": "curl: (56) CONNECT tunnel failed, response 403\n"
+  },
+  {
+    "title": "삼존불 - 한국민족문화대백과사전",
+    "url": "https://encykorea.aks.ac.kr/Article/E0026810",
+    "http": "000",
+    "status": 56,
+    "error": "curl: (56) CONNECT tunnel failed, response 403\n"
+  },
+  {
+    "title": "관세음보살 - 한국민족문화대백과사전",
+    "url": "https://encykorea.aks.ac.kr/Article/E0004915",
+    "http": "000",
+    "status": 56,
+    "error": "curl: (56) CONNECT tunnel failed, response 403\n"
+  },
+  {
+    "title": "문수보살 - 한국민족문화대백과사전",
+    "url": "https://encykorea.aks.ac.kr/Article/E0019535",
+    "http": "000",
+    "status": 56,
+    "error": "curl: (56) CONNECT tunnel failed, response 403\n"
+  },
+  {
+    "title": "약사여래 - 한국민족문화대백과사전",
+    "url": "https://encykorea.aks.ac.kr/Article/E0035327",
+    "http": "000",
+    "status": 56,
+    "error": "curl: (56) CONNECT tunnel failed, response 403\n"
+  },
+  {
+    "title": "약사전 - 한국민족문화대백과사전",
+    "url": "https://encykorea.aks.ac.kr/Article/E0035330",
+    "http": "000",
+    "status": 56,
+    "error": "curl: (56) CONNECT tunnel failed, response 403\n"
+  },
+  {
+    "title": "지장보살 - 한국민족문화대백과사전",
+    "url": "https://encykorea.aks.ac.kr/Article/E0054346",
+    "http": "000",
+    "status": 56,
+    "error": "curl: (56) CONNECT tunnel failed, response 403\n"
+  }
+]

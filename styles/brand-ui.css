@@ -9,8 +9,8 @@
 .overlay:not(#beatLabOverlay):not(#lightboxOverlay):not(#playlistOverlay) .modal-head h2{font-family:'Nanum Myeongjo','Noto Serif KR',serif!important;color:var(--brand-ink)!important;font-size:26px!important;line-height:1.45!important;letter-spacing:-.045em!important;white-space:normal!important;word-break:keep-all!important}
 .overlay:not(#beatLabOverlay):not(#lightboxOverlay) .modal-body{font-size:16px!important;line-height:1.7!important}
 .overlay:not(#beatLabOverlay):not(#lightboxOverlay) :is(.modal-head .sub,.map-note,.vdate,.catalog-copy small,.catalog-section-heading small,.nickname-editor small,.settings-feature small){font-size:15px!important;line-height:1.7!important;color:#657966!important;word-break:keep-all}
-.overlay:not(#beatLabOverlay):not(#lightboxOverlay) .modal-body :is(p,small,[style*="font-size:10"],[style*="font-size:11"],[style*="font-size:12"],[style*="font-size:13"]){font-size:15px!important;line-height:1.7!important}
-.overlay:not(#beatLabOverlay):not(#lightboxOverlay) :is(.btn,.club-btn,.catalog-view-btn,.settings-login-btn,.settings-logout-btn){font-size:16px!important;line-height:1.45!important;min-height:44px!important;border-radius:12px!important}
+.overlay:not(#beatLabOverlay):not(#lightboxOverlay):not(.hall-experience-v2):not(#mindRestOverlay):not(#oracleOverlay) .modal-body :is(p,small,[style*="font-size:10"],[style*="font-size:11"],[style*="font-size:12"],[style*="font-size:13"]){font-size:15px!important;line-height:1.7!important}
+.overlay:not(#beatLabOverlay):not(#lightboxOverlay):not(.hall-experience-v2):not(#mindRestOverlay):not(#oracleOverlay) :is(.btn,.club-btn,.catalog-view-btn,.settings-login-btn,.settings-logout-btn){font-size:16px!important;line-height:1.45!important;min-height:44px!important;border-radius:12px!important}
 .overlay:not(#beatLabOverlay):not(#lightboxOverlay) .btn-primary{background:#355f49!important;color:#fffaf0!important;border-color:#355f49!important}
 .overlay:not(#beatLabOverlay):not(#lightboxOverlay) .btn-ghost{background:#eef3e8!important;color:#315741!important;border-color:#d7e1cf!important}
 .overlay:not(#beatLabOverlay):not(#lightboxOverlay) :is(textarea,input:not([type=range]),select){font-size:16px!important;line-height:1.6!important;border-color:#d7e0cf!important;border-radius:12px!important;max-width:100%!important;box-sizing:border-box!important}
@@ -97,7 +97,7 @@ html body #catalogOverlay.show .modal-head{padding:24px 62px 22px 106px!importan
 #packOverlay .packrow-title{font-size:20px!important;line-height:1.5!important}
 #packOverlay .packrow-sub{font-size:15px!important;line-height:1.7!important}
 #communityWindowOverlay :is(.community-empty,.community-meta){font-size:15px!important;line-height:1.7!important}
-.overlay:not(#beatLabOverlay):not(#lightboxOverlay) .modal-body button:not(.close-x){font-size:16px!important;min-height:44px!important;line-height:1.45!important}
+.overlay:not(#beatLabOverlay):not(#lightboxOverlay):not(.hall-experience-v2):not(#mindRestOverlay):not(#oracleOverlay) .modal-body button:not(.close-x){font-size:16px!important;min-height:44px!important;line-height:1.45!important}
 .meditation-sound-panel{margin-top:18px;padding:16px;background:#edf3e6;border:1px solid #d7e0cd;border-radius:16px;text-align:left;font-size:15px}
 .meditation-sound-panel>label:first-child{display:block;font-size:18px;font-weight:700;margin-bottom:10px}
 .meditation-sound-row{display:flex;align-items:center;gap:8px}

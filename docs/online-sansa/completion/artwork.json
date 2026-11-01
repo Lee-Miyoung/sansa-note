@@ -1,0 +1,87 @@
+{
+  "method": "AI-generated independent low-eye-level perspectives, referenced to original entrance paintings; no CSS zoom/crop used to simulate sitting.",
+  "verification": "Developer visual review; not expert iconography or specific historic temple reconstruction.",
+  "assets": [
+    {
+      "path": "/images/online-sansa/daewung-seated.webp",
+      "sha256": "75b5c61066a95827ee26a83dd5337a82782db55a5b090eb6c46222d1dd32c3b9",
+      "bytes": 219848,
+      "source": "/workspace/generated_images/exec-43310dcc-7972-423e-b4b5-6be3d64f91ca.png"
+    },
+    {
+      "path": "/images/online-sansa/daewung-seated-small.webp",
+      "sha256": "c66a12af0e2936ec83327d2b075f73be53edc861f562b8fe6920b9e935405419",
+      "bytes": 74484,
+      "source": "/workspace/generated_images/exec-43310dcc-7972-423e-b4b5-6be3d64f91ca.png"
+    },
+    {
+      "path": "/images/online-sansa/geungnak-seated.webp",
+      "sha256": "d7bfe0d2b54b1b9244dedb1095a56a1b72a60dca594ab99d7f9bd9a0c035e962",
+      "bytes": 217648,
+      "source": "/workspace/generated_images/exec-d0c6b1e7-c908-4d55-9660-b99e41c60161.png"
+    },
+    {
+      "path": "/images/online-sansa/geungnak-seated-small.webp",
+      "sha256": "60a2d43d5a421f6cfad5ed0cf926efab778043ba63a830b60c61e38fdb6897cd",
+      "bytes": 76498,
+      "source": "/workspace/generated_images/exec-d0c6b1e7-c908-4d55-9660-b99e41c60161.png"
+    },
+    {
+      "path": "/images/online-sansa/gwanum-seated.webp",
+      "sha256": "15b5fc03935238bc5447740c8b2240aa03fc12f649456e3bd098580b72bdaed6",
+      "bytes": 218646,
+      "source": "/workspace/generated_images/exec-9ad4f239-58c1-44f5-8351-8609b4274dc1.png"
+    },
+    {
+      "path": "/images/online-sansa/gwanum-seated-small.webp",
+      "sha256": "0aeac07430e66d56e9b4af77c30f33774736f2fbe8cd9177dd804e4196084e4e",
+      "bytes": 73488,
+      "source": "/workspace/generated_images/exec-9ad4f239-58c1-44f5-8351-8609b4274dc1.png"
+    },
+    {
+      "path": "/images/online-sansa/munsu-seated.webp",
+      "sha256": "a6e784f7bbb7b01aab3cfb24e50ef8531f22b3a98c7eb62245d783b29f8822f3",
+      "bytes": 243484,
+      "source": "/workspace/generated_images/exec-63d7380b-7bfc-4a1d-b9cd-3ef6805f3948.png"
+    },
+    {
+      "path": "/images/online-sansa/munsu-seated-small.webp",
+      "sha256": "44b6bee5b37b4c90d6f123a986c6bc8c3707b32a84cbf9137b75a90e8712eb2e",
+      "bytes": 82404,
+      "source": "/workspace/generated_images/exec-63d7380b-7bfc-4a1d-b9cd-3ef6805f3948.png"
+    },
+    {
+      "path": "/images/online-sansa/yaksa-seated.webp",
+      "sha256": "f2c2b566e19ca997c23856503bdb79b911f2cf4e7583bbcf4945cc24c53b601c",
+      "bytes": 219944,
+      "source": "/workspace/generated_images/exec-91d4189e-4e33-4117-b20d-2c6cf66c78c1.png"
+    },
+    {
+      "path": "/images/online-sansa/yaksa-seated-small.webp",
+      "sha256": "27fdb94c3aecc4803f66b9e9ae75b96511ff6624248eb78744d216dab73f5746",
+      "bytes": 78516,
+      "source": "/workspace/generated_images/exec-91d4189e-4e33-4117-b20d-2c6cf66c78c1.png"
+    },
+    {
+      "path": "/images/online-sansa/jijang-seated.webp",
+      "sha256": "95a8969e79f205cb8dfbb3e01ccfee2ed29d5171b809c3ceb3ea81afec6e4d56",
+      "bytes": 205420,
+      "source": "/workspace/generated_images/exec-e27604eb-8df5-45a1-a693-6b947e72f772.png"
+    },
+    {
+      "path": "/images/online-sansa/jijang-seated-small.webp",
+      "sha256": "322ff94c707d4df39b17fd985c3dd6610ed9bf6ec11b034ec47f2732d9f850cd",
+      "bytes": 68718,
+      "source": "/workspace/generated_images/exec-e27604eb-8df5-45a1-a693-6b947e72f772.png"
+    },
+    {
+      "path": "/images/online-sansa/monk-upper-bow.webp",
+      "sha256": "98aa6cfd0dccf7692d1f915967fc2cffd46885bd7532539b92a8025e1ec57a31",
+      "bytes": 13494,
+      "source": "/workspace/generated_images/exec-e97ada73-e310-4f84-9fc4-6f21f05d54fc.png"
+    }
+  ],
+  "operatingBytes": 1792592,
+  "entryArt": "Existing six refined entrance paintings preserved. New files are independent seated views.",
+  "culturalSources": "Per-hall references in data/online-sansa.json; fresh source retrieval blocked (see culture-reference-check.json)."
+}

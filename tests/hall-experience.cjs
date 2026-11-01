@@ -144,7 +144,7 @@ async function assertCoreVisible(p) {
     assert.equal(await p.locator('#hallModeLabel').innerText(), '108배 마음 수행');
     await primary(p);
     assert.equal((await state(p)).count, 1);
-    await p.waitForFunction(() => document.getElementById('hallMonk').dataset.bowFrame === '2');
+    await p.waitForFunction(() => document.getElementById('hallMonk').dataset.bowFrame === '3');
     assert((await p.locator('#hallMonk').getAttribute('src')).includes('monk-prostrate'));
     assert.equal(await p.locator('#hallMonk').evaluate(e => getComputedStyle(e).transform), 'none');
     assert.equal(await p.locator('#hallMonk').evaluate(e => getComputedStyle(e).animationName), 'none');
@@ -173,7 +173,7 @@ async function assertCoreVisible(p) {
     const s = await openPage(browser, { width: 390, height: 844 }, true);
     await enter(s, 'daewung', { kind: 'scheduled', startAt: Date.parse('2026-11-01T07:00:00+09:00'), duration: 300, title: '아침 예불' });
     await s.locator('#hallQuickStart').click();
-    assert.equal(await s.locator('#hallModeLabel').innerText(), '정시 예불 참여 중');
+    assert.equal(await s.locator('#hallModeLabel').innerText(), '정시 안내 예불 참여 중');
     assert.equal(await s.locator('#hallStepFraction').innerText(), '현재 단계 4 / 7');
     assert.equal((await state(s)).three, 0);
     assert.equal((await state(s)).gassho, 0);

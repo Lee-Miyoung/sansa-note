@@ -1,0 +1,39 @@
+[
+  {
+    "query": "아미타불 정근",
+    "url": "https://gongu.copyright.or.kr/gongu/search/search/list.do?menuNo=200070&kwd=%EC%95%84%EB%AF%B8%ED%83%80%EB%B6%88%20%EC%A0%95%EA%B7%BC",
+    "commandStatus": 0,
+    "candidateIds": [],
+    "verification": "검색 결과만으로 실제 낭송 내용·파일·라이선스가 검증된 것은 아님. 신규 운영 음원 추가 없음."
+  },
+  {
+    "query": "관세음보살 정근",
+    "url": "https://gongu.copyright.or.kr/gongu/search/search/list.do?menuNo=200070&kwd=%EA%B4%80%EC%84%B8%EC%9D%8C%EB%B3%B4%EC%82%B4%20%EC%A0%95%EA%B7%BC",
+    "commandStatus": 0,
+    "candidateIds": [],
+    "verification": "검색 결과만으로 실제 낭송 내용·파일·라이선스가 검증된 것은 아님. 신규 운영 음원 추가 없음."
+  },
+  {
+    "query": "문수보살 독송",
+    "url": "https://gongu.copyright.or.kr/gongu/search/search/list.do?menuNo=200070&kwd=%EB%AC%B8%EC%88%98%EB%B3%B4%EC%82%B4%20%EB%8F%85%EC%86%A1",
+    "commandStatus": 0,
+    "candidateIds": [
+      "12013477"
+    ],
+    "verification": "검색 결과만으로 실제 낭송 내용·파일·라이선스가 검증된 것은 아님. 신규 운영 음원 추가 없음."
+  },
+  {
+    "query": "약사여래 정근",
+    "url": "https://gongu.copyright.or.kr/gongu/search/search/list.do?menuNo=200070&kwd=%EC%95%BD%EC%82%AC%EC%97%AC%EB%9E%98%20%EC%A0%95%EA%B7%BC",
+    "commandStatus": 0,
+    "candidateIds": [],
+    "verification": "검색 결과만으로 실제 낭송 내용·파일·라이선스가 검증된 것은 아님. 신규 운영 음원 추가 없음."
+  },
+  {
+    "query": "지장보살 정근",
+    "url": "https://gongu.copyright.or.kr/gongu/search/search/list.do?menuNo=200070&kwd=%EC%A7%80%EC%9E%A5%EB%B3%B4%EC%82%B4%20%EC%A0%95%EA%B7%BC",
+    "commandStatus": 0,
+    "candidateIds": [],
+    "verification": "검색 결과만으로 실제 낭송 내용·파일·라이선스가 검증된 것은 아님. 신규 운영 음원 추가 없음."
+  }
+]

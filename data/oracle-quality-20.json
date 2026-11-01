@@ -1,0 +1,146 @@
+{
+  "version": "20261101-completion20",
+  "note": "사용자가 제공한 신규 20개 검증 기준. 기존 30개 및 1000개 예시 보존.",
+  "cases": [
+    {
+      "id": "completion-01",
+      "label": "거절을 못하는 고민",
+      "input": "친구 부탁을 거절하지 못해 계속 힘들어요.",
+      "referenceAnswer": "상대를 배려하는 것과 모든 부탁을 들어주는 것은 달라요. 다음에는 바로 수락하지 않고 생각할 시간을 요청해 보세요.",
+      "expectedTopicId": "refusal"
+    },
+    {
+      "id": "completion-02",
+      "label": "반복해서 약속을 어기는 친구",
+      "input": "친구가 항상 약속을 취소해서 서운해요.",
+      "referenceAnswer": "반복된 약속 취소가 관계의 신뢰를 흔들고 있군요. 서운했던 점을 구체적으로 이야기하고 이후 행동을 살펴보세요.",
+      "expectedTopicId": "friend_reliability"
+    },
+    {
+      "id": "completion-03",
+      "label": "배우자가 말을 듣지 않는 고민",
+      "input": "남편은 제 이야기를 듣지 않고 해결책만 말해요.",
+      "referenceAnswer": "지금은 해결책보다 이해받는 시간이 필요하신 것 같아요. 대화 전에 먼저 들어주기를 부탁해 보세요.",
+      "expectedTopicId": "partner_listening"
+    },
+    {
+      "id": "completion-04",
+      "label": "부모님 간섭",
+      "input": "엄마가 제 결정에 계속 간섭해요.",
+      "referenceAnswer": "부모님의 걱정과 자신의 선택권은 구분할 수 있어요. 한 가지 결정부터 스스로 해보고 싶다고 말씀드려 보세요.",
+      "expectedTopicId": "parent_interference"
+    },
+    {
+      "id": "completion-05",
+      "label": "부모 돌봄 피로",
+      "input": "아픈 엄마를 돌보느라 너무 지쳤어요.",
+      "referenceAnswer": "돌봄은 사랑만으로 모든 부담을 감당하기 어려운 일이에요. 가족과 나눌 일이나 외부 돌봄 지원이 있는지 찾아보세요.",
+      "expectedTopicId": "caregiving"
+    },
+    {
+      "id": "completion-06",
+      "label": "자녀와 소통 단절",
+      "input": "아이가 저와 말을 하지 않으려고 해요.",
+      "referenceAnswer": "지금은 질문보다 편안하게 말할 수 있는 분위기가 필요할 수 있어요. 조언 없이 이야기를 듣고 싶다고 전해보세요.",
+      "expectedTopicId": "child_communication"
+    },
+    {
+      "id": "completion-07",
+      "label": "직장 내 모욕",
+      "input": "상사가 사람들 앞에서 저를 계속 모욕해요.",
+      "referenceAnswer": "반복적인 모욕은 무조건 참아야 하는 문제가 아니에요. 사건을 기록하고 안전하게 도움받을 경로를 확인해 보세요.",
+      "expectedTopicId": "boss_bullying"
+    },
+    {
+      "id": "completion-08",
+      "label": "업무 과중",
+      "input": "일이 너무 많이 몰려 매일 야근해요.",
+      "referenceAnswer": "현재의 업무량과 우선순위를 조정할 필요가 있어 보여요. 맡은 일과 예상 시간을 정리해 분담을 요청해 보세요.",
+      "expectedTopicId": "workload"
+    },
+    {
+      "id": "completion-09",
+      "label": "퇴사 고민",
+      "input": "퇴사하고 싶은데 다음 직장이 걱정돼요.",
+      "referenceAnswer": "현재의 어려움과 앞으로의 불확실함을 나눠 살펴보세요. 생활비와 이직 준비를 먼저 정리하면 선택을 조금 더 구체화할 수 있습니다.",
+      "expectedTopicId": "resign"
+    },
+    {
+      "id": "completion-10",
+      "label": "시험 불안",
+      "input": "시험이 코앞인데 공부한 내용이 기억나지 않아요.",
+      "referenceAnswer": "시험이 가까워질수록 모르는 부분이 크게 느껴질 수 있어요. 오늘은 전체를 다시 보기보다 약한 부분 몇 개를 정해 복습해 보세요.",
+      "expectedTopicId": "exam_anxiety"
+    },
+    {
+      "id": "completion-11",
+      "label": "생활비 부족",
+      "input": "이번 달 생활비가 부족해 너무 불안해요.",
+      "referenceAnswer": "이 고민은 단순한 마음 문제가 아니라 실제 금전 부담이 있는 상황이에요. 우선 필수 지출과 납부 기한을 확인해 보세요.",
+      "expectedTopicId": "basic_bills"
+    },
+    {
+      "id": "completion-12",
+      "label": "빚 독촉",
+      "input": "대출금을 갚기 힘들고 독촉 연락이 무서워요.",
+      "referenceAnswer": "독촉과 상환 부담이 겹치면 긴장될 수 있어요. 채무 현황을 정리하고 공적 상담 창구에 조정 가능성을 문의해 보세요.",
+      "expectedTopicId": "debt"
+    },
+    {
+      "id": "completion-13",
+      "label": "사업 매출 감소",
+      "input": "장사가 안돼 사업을 접어야 할지 모르겠어요.",
+      "referenceAnswer": "지금은 감정뿐 아니라 실제 운영 수치를 살펴볼 때예요. 매출과 고정비, 남은 자금을 기준으로 판단 시점을 정해보세요.",
+      "expectedTopicId": "closure"
+    },
+    {
+      "id": "completion-14",
+      "label": "부모님 의료비",
+      "input": "어머니가 아프신데 병원비가 많이 나와요.",
+      "referenceAnswer": "건강에 대한 걱정과 비용 부담이 함께 있는 상황이군요. 병원 사회사업팀 등에서 의료비 지원 가능성을 확인해 보세요.",
+      "expectedTopicId": "medical_bills"
+    },
+    {
+      "id": "completion-15",
+      "label": "외로움",
+      "input": "친구가 있어도 마음을 털어놓을 사람이 없어요.",
+      "referenceAnswer": "사람이 많아도 깊이 이야기할 관계가 부족하면 외로울 수 있어요. 편안한 사람 한 명에게 마음을 조금 나눠보세요.",
+      "expectedTopicId": "loneliness"
+    },
+    {
+      "id": "completion-16",
+      "label": "과거 후회",
+      "input": "몇 년 전 선택이 계속 후회돼요.",
+      "referenceAnswer": "과거의 선택을 지금의 경험으로 평가하면 자신에게 지나치게 엄격해질 수 있어요. 바꿀 수 있는 부분과 없는 부분을 나눠보세요.",
+      "expectedTopicId": "past_regret"
+    },
+    {
+      "id": "completion-17",
+      "label": "부모님께 죄책감",
+      "input": "부모님께 잘해드리지 못한 것 같아 미안해요.",
+      "referenceAnswer": "더 잘해드리고 싶었던 마음이 미안함으로 남은 것 같아요. 자신을 계속 탓하기보다 그 마음을 표현할 방법을 생각해 보세요.",
+      "expectedTopicId": "family_guilt"
+    },
+    {
+      "id": "completion-18",
+      "label": "사별 후 그리움",
+      "input": "아버지가 돌아가신 뒤 너무 허전해요.",
+      "referenceAnswer": "소중한 분의 빈자리는 쉽게 사라지지 않아요. 떠오르는 기억을 억지로 밀어내지 말고 믿을 수 있는 사람과 나눠보셔도 좋겠습니다.",
+      "expectedTopicId": "bereavement"
+    },
+    {
+      "id": "completion-19",
+      "label": "번아웃",
+      "input": "쉬어도 회복이 안 되고 아무것도 하기 싫어요.",
+      "referenceAnswer": "지속된 소진은 잠깐 쉬는 것만으로 회복되지 않을 수 있어요. 부담을 줄일 방법을 찾고 일상 기능 저하가 이어지면 전문적인 도움을 고려해 보세요.",
+      "expectedTopicId": "burnout"
+    },
+    {
+      "id": "completion-20",
+      "label": "중요한 선택",
+      "input": "두 가지 선택 중 무엇을 해야 할지 모르겠어요.",
+      "referenceAnswer": "후회가 전혀 없는 선택을 찾기보다 자신이 감당할 수 있는 선택을 살펴보세요. 시간·건강·경제적 영향과 자신의 중요한 가치를 비교해 보세요.",
+      "expectedTopicId": "indecision"
+    }
+  ]
+}

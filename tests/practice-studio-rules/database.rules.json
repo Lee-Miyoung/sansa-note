@@ -122,6 +122,9 @@
               },
               "waitAction": {
                 ".validate": "newData.isString() && (newData.val() == 'none' || newData.val() == 'seated' || newData.val() == 'gassho' || newData.val() == 'three' || newData.val() == 'vow')"
+              },
+              "volume": {
+                ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 1"
               }
             }
           },
@@ -308,6 +311,9 @@
                   },
                   "waitAction": {
                     ".validate": "newData.isString() && (newData.val() == 'none' || newData.val() == 'seated' || newData.val() == 'gassho' || newData.val() == 'three' || newData.val() == 'vow')"
+                  },
+                  "volume": {
+                    ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 1"
                   }
                 }
               },
@@ -363,6 +369,12 @@
               },
               "$other": {
                 ".validate": false
+              },
+              "imageSeated": {
+                ".validate": "newData.isString() && newData.val().length <= 1200"
+              },
+              "imageSeatedSmall": {
+                ".validate": "newData.isString() && newData.val().length <= 1200"
               }
             }
           },

@@ -1,0 +1,54 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "users": {
+      "$uid": {
+        ".read": "auth != null && auth.uid === $uid",
+        ".write": "auth != null && auth.uid === $uid"
+      }
+    },
+    "onlineSansaPresence": {
+      ".read": false,
+      ".write": false,
+      "config": {
+        ".read": true,
+        ".write": false
+      },
+      "sessions": {
+        "$hall": {
+          "$uid": {
+            ".read": "auth != null && auth.uid === $uid && auth.token.email_verified === true && auth.token.firebase.sign_in_provider === 'google.com'",
+            ".validate": "$hall === 'daewung' || $hall === 'geungnak' || $hall === 'gwanum' || $hall === 'munsu' || $hall === 'yaksa' || $hall === 'jijang'",
+            "$slot": {
+              ".write": "auth != null && auth.uid === $uid && auth.token.email_verified === true && auth.token.firebase.sign_in_provider === 'google.com' && ($slot === 'a' || $slot === 'b' || $slot === 'c') && (!newData.exists() || (newData.child('phase').val() === 'offline' && data.child('id').val() === newData.child('id').val()) || (root.child('onlineSansaPresence/config/enabled').val() === true && (((!data.exists() || data.child('phase').val() === 'offline' || data.child('updatedAt').val() <= now - 120000) && newData.child('phase').val() === 'reserved') || (data.child('id').val() === newData.child('id').val() && (data.child('phase').val() !== 'online' || now - data.child('updatedAt').val() >= 10000)))))",
+              ".validate": "($slot === 'a' || $slot === 'b' || $slot === 'c') && newData.hasChildren(['id','phase','updatedAt'])",
+              "updatedAt": {
+                ".validate": "newData.isNumber() && newData.val() >= now - 5000 && newData.val() <= now"
+              },
+              "$other": {
+                ".validate": false
+              },
+              "id": {
+                ".validate": "newData.isString() && newData.val().matches(/^[a-zA-Z0-9-]{10,64}$/)"
+              },
+              "phase": {
+                ".validate": "newData.val() === 'reserved' || newData.val() === 'online' || newData.val() === 'offline'"
+              }
+            }
+          }
+        }
+      },
+      "aggregates": {
+        "$hall": {
+          ".read": false,
+          ".write": false,
+          "public": {
+            ".read": true,
+            ".write": false
+          }
+        }
+      }
+    }
+  }
+}

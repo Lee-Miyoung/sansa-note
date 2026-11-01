@@ -223,7 +223,9 @@
             "checkedAt": "2026-10-27"
           }
         ]
-      }
+      },
+      "imageSeated": "/images/online-sansa/daewung-seated.webp",
+      "imageSeatedSmall": "/images/online-sansa/daewung-seated-small.webp"
     },
     {
       "id": "geungnak",
@@ -450,7 +452,9 @@
             "checkedAt": "2026-10-27"
           }
         ]
-      }
+      },
+      "imageSeated": "/images/online-sansa/geungnak-seated.webp",
+      "imageSeatedSmall": "/images/online-sansa/geungnak-seated-small.webp"
     },
     {
       "id": "gwanum",
@@ -672,7 +676,9 @@
             "checkedAt": "2026-10-27"
           }
         ]
-      }
+      },
+      "imageSeated": "/images/online-sansa/gwanum-seated.webp",
+      "imageSeatedSmall": "/images/online-sansa/gwanum-seated-small.webp"
     },
     {
       "id": "munsu",
@@ -893,7 +899,9 @@
             "checkedAt": "2026-10-27"
           }
         ]
-      }
+      },
+      "imageSeated": "/images/online-sansa/munsu-seated.webp",
+      "imageSeatedSmall": "/images/online-sansa/munsu-seated-small.webp"
     },
     {
       "id": "yaksa",
@@ -1114,7 +1122,9 @@
             "checkedAt": "2026-10-27"
           }
         ]
-      }
+      },
+      "imageSeated": "/images/online-sansa/yaksa-seated.webp",
+      "imageSeatedSmall": "/images/online-sansa/yaksa-seated-small.webp"
     },
     {
       "id": "jijang",
@@ -1335,7 +1345,9 @@
             "checkedAt": "2026-10-27"
           }
         ]
-      }
+      },
+      "imageSeated": "/images/online-sansa/jijang-seated.webp",
+      "imageSeatedSmall": "/images/online-sansa/jijang-seated-small.webp"
     }
   ],
   "schedules": [

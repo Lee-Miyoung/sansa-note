@@ -34685,7 +34685,7 @@ function clearOracleAnswer(){
 function loadOracleEngine(){
   if(oracleEnginePromise)return oracleEnginePromise;
   oracleStatus('고민에 맞는 설명을 준비하고 있어요.');
-  oracleEnginePromise=(window.SansaOracle?Promise.resolve():new Promise((resolve,reject)=>{const script=document.createElement('script');script.src='/scripts/oracle-counsel.js?v=20261101-quality30';script.onload=resolve;script.onerror=()=>{script.remove();reject(Error('oracle script'))};document.head.append(script)})).then(()=>SansaOracle.init(ORACLE_EXAMPLES)).then(()=>{oracleStatus('');return SansaOracle}).catch(error=>{oracleEnginePromise=null;throw error});
+  oracleEnginePromise=(window.SansaOracle?Promise.resolve():new Promise((resolve,reject)=>{const script=document.createElement('script');script.src='/scripts/oracle-counsel.js?v=20261101-completion';script.onload=resolve;script.onerror=()=>{script.remove();reject(Error('oracle script'))};document.head.append(script)})).then(()=>SansaOracle.init(ORACLE_EXAMPLES)).then(()=>{oracleStatus('');return SansaOracle}).catch(error=>{oracleEnginePromise=null;throw error});
   return oracleEnginePromise;
 }
 function openOracleOverlay(){
@@ -42341,7 +42341,7 @@ nav.site-global-nav{height:var(--global-nav-h)!important;box-sizing:border-box!i
 @media(prefers-reduced-motion:reduce){.site-global-nav .site-global-nav-links>button{transition:none!important}}
 </style>
 <link rel="stylesheet" href="./styles/wellness.css?v=20261018-integrated">
-<link rel="stylesheet" href="./styles/brand-ui.css?v=20261018-integrated">
+<link rel="stylesheet" href="./styles/brand-ui.css?v=20261101-completion">
 <link rel="stylesheet" href="./styles/game-viewport.css?v=20261017">
 <style id="sansa-home-personal-cards-only">
 #mainListArea{display:none!important}
@@ -42372,12 +42372,15 @@ nav.site-global-nav{height:var(--global-nav-h)!important;box-sizing:border-box!i
 <script src="/scripts/device-photos/celebration.js?v=20261026-unified" defer></script>
 <link rel="stylesheet" href="/styles/ui-content.css?v=20261027-static">
 <link rel="stylesheet" href="./styles/dharma-hall.css?v=20261101-guided-studio">
-<script src="./scripts/practice-config.js?v=20261101-studio" defer></script>
-<script src="./scripts/sansa-core.js?v=20261101-six" defer></script>
-<script src="./scripts/dharma-hall.js?v=20261101-guided" defer></script>
+<script src="./scripts/practice-config.js?v=20261101-completion" defer></script>
+<script src="./scripts/sansa-core.js?v=20261101-completion" defer></script>
+<script src="./scripts/dharma-hall.js?v=20261101-completion" defer></script>
 <link rel="stylesheet" href="/styles/online-sansa.css?v=20261101-six">
-<script src="/scripts/online-sansa.js?v=20261101-guided" defer></script>
-<link rel="stylesheet" href="/styles/hall-experience.css?v=20261101-guided">
-<script src="/scripts/hall-experience.js?v=20261101-guided" defer></script>
+<script src="/scripts/online-sansa.js?v=20261101-completion" defer></script>
+<link rel="stylesheet" href="/styles/hall-experience.css?v=20261101-completion">
+<script src="/scripts/hall-experience.js?v=20261101-completion" defer></script>
+<link rel="stylesheet" href="/styles/monastery-experience.css?v=20261101-complete">
+<script src="/scripts/monastery-experience.js?v=20261101-complete" defer></script>
+<script src="/scripts/hall-presence.js?v=20261101-complete" defer></script>
 </body>
 </html>
