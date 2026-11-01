@@ -1,0 +1,41 @@
+name: Generate Korean synthetic invocation audio
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/generate-sansa-recitations.yml'
+      - 'tools/generate-sansa-recitations.py'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+          cache: pip
+          cache-dependency-path: tools/recitation-requirements.txt
+      - name: Set up audio generator and license-compatible Korean model
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
+          python -m pip install --upgrade pip
+          pip install -r tools/recitation-requirements.txt
+      - name: Generate and check six tracks
+        run: python tools/generate-sansa-recitations.py
+      - name: Validate published configuration
+        run: |
+          node tests/online-sansa.cjs
+          node tests/practice-config.cjs
+      - name: Publish only generated audio, catalog and hall references
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add audio/dharma-hall/recitation-*.mp3 audio/dharma-hall/catalog.json data/online-sansa.json
+          git diff --cached --quiet || (git commit -m 'Publish verified synthetic Korean invocation guides for six halls' && git pull --rebase && git push)
