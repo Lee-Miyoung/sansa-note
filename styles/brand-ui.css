@@ -119,3 +119,27 @@ html body #catalogOverlay.show .modal-head{padding:24px 62px 22px 106px!importan
 .pack-companion-heading .packrow-title{min-width:0;overflow-wrap:anywhere;flex:1}
 .pack-companion{width:60px;height:68px;object-fit:contain;flex:none;filter:drop-shadow(0 3px 3px #516d4820)}
 @media(max-width:700px){.pack-companion-heading{gap:8px}.pack-companion{width:48px;height:56px}#packOverlay .pack-companion-heading .packrow-title{font-size:18px!important}}
+
+/* Restore complete SANSA NOTE home introduction on narrow screens, 2026-11-01 */
+/* Keep the original HTML paragraph intact, without shortening it to an ellipsis. */
+header.hero .hero-main-grid .hero-copy > p {
+  display:block!important;
+  -webkit-line-clamp:unset!important;
+  line-clamp:unset!important;
+  -webkit-box-orient:initial!important;
+  white-space:normal!important;
+  overflow-wrap:break-word!important;
+  text-overflow:clip!important;
+  overflow:visible!important;
+  max-height:none!important;
+  min-height:0!important;
+  height:auto!important;
+}
+@media (max-width:700px) {
+  header.hero .hero-main-grid .hero-copy,
+  header.hero .hero-main-grid {
+    max-height:none!important;
+    height:auto!important;
+  }
+  header.hero .hero-main-grid .hero-copy { overflow:visible!important; }
+}
