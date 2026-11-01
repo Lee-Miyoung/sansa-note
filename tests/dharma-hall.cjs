@@ -13,7 +13,7 @@ const {fullRoute}=require('./unified-fixtures.cjs');
    await page.evaluate(()=>SansaDharmaHall.ready);await page.evaluate(()=>startLocalMode());
    await page.evaluate(()=>openDharmaHall());
    assert(await page.locator('#dharmaHallOverlay').isVisible());
-   assert.equal(await page.locator('#hallSound option').count(),5,'only verified audio choices');
+   assert.equal(await page.locator('#hallSound option').count(),6,'four verified recordings plus one original opening and silence');
    assert.equal(await page.evaluate(()=>SansaDharmaHall.media.paused),true);
    assert.equal(audioRequests.length,0,'entry remains silent and never fetches audio');
    if(width===320){

@@ -101,5 +101,31 @@
       "yaksa",
       "jijang"
     ]
+  },
+  {
+    "id": "opening-ritual",
+    "title": "마음을 여는 종 · 산사노트 창작",
+    "kind": "bell",
+    "src": "./audio/dharma-hall/original-opening.mp3",
+    "creator": "산사노트",
+    "source": "https://sansanote.com/audio/dharma-hall/ORIGINAL.md",
+    "originalMedia": "https://sansanote.com/audio/dharma-hall/original-opening.mp3",
+    "license": "CC BY 4.0",
+    "licenseURL": "https://creativecommons.org/licenses/by/4.0/",
+    "changes": "산사노트 전용 절차적 합성 원곡 · 종과 나무 타격음 · 음성/현장 녹음 아님 · -25 LUFS 목표 MP3 변환",
+    "description": "입장할 때 마음을 모으는 창작 종·목탁 계열 타격음. 실제 사찰 의식이나 스님의 염불 녹음이 아닙니다.",
+    "duration": 28.029388,
+    "bytes": 448931,
+    "sha256": "b0d13fb054f670688314c2142968d162f6f225488f51fa55ba889988425612bb",
+    "verified": true,
+    "gain": 0.8,
+    "allowedHalls": [
+      "daewung",
+      "geungnak",
+      "gwanum",
+      "munsu",
+      "yaksa",
+      "jijang"
+    ]
   }
 ]
