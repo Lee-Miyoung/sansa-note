@@ -1,5 +1,7 @@
 const assert=require('node:assert/strict'),fs=require('node:fs');const data=require('../data/oracle-topics.json'),suite=require('../data/oracle-quality-30.json'),{createMatcher}=require('../scripts/oracle-counsel.js'),m=createMatcher(data);assert.equal(suite.cases.length,30);assert.equal(new Set(suite.cases.map(c=>c.id)).size,30);for(const c of suite.cases){const r=m.analyze(c.input);assert.equal(r.kind,'matched',c.id);assert.equal(r.topic.id,c.expectedTopicId,c.id);assert(r.summary&&r.answer.length===2&&r.answer.every(x=>x.trim()));assert(r.actors&&r.intent&&r.urgency);assert.equal(m.analyze(c.input).answer.join(''),r.answer.join(''),'deterministic')}
 const variants=[
+['엄마가 아픈데 병원비 때문에 힘들어요.','medical_bills'],
+['남편이 제 말을 들어주지 않아요.','partner_listening'],
 ['제 수술비를 감당하기 어려워요.','medical_bills'],
 ['돌아가신 아버지께 잘해드리지 못해서 죄책감이 들어요.','loss_guilt'],
 ['아픈 엄마의 병원비 때문에 돈 걱정이 됩니다.','medical_bills'],

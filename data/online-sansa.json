@@ -1,0 +1,1437 @@
+{
+  "schemaVersion": 1,
+  "revision": 0,
+  "timezone": "Asia/Seoul",
+  "halls": [
+    {
+      "id": "daewung",
+      "name": "대웅전",
+      "deityId": "shakyamuni",
+      "deity": "석가모니불",
+      "hanja": "釋迦牟尼佛",
+      "kind": "buddha",
+      "wish": "마음의 평안",
+      "description": "오늘 하루의 마음을 돌아보며 잠시 이 자리에 머뭅니다.",
+      "vow": "감사한 일 한 가지를 떠올리고, 나와 이웃의 평안을 발원합니다.",
+      "faith": "삼귀의 등 예불 독송을 하는 전통이 있습니다. 여기서는 의식 전체를 재현하지 않는 짧은 안내를 제공합니다.",
+      "audioNote": "염불소리1 · 특정 독송의 원문은 확인하지 않은 일반 염불 녹음입니다.",
+      "invocation": "",
+      "chantConfirmed": true,
+      "image": "/images/online-sansa/daewung.webp",
+      "imageSmall": "/images/online-sansa/daewung-small.webp",
+      "published": true,
+      "tracks": [
+        "bell",
+        "moktak",
+        "chime",
+        "chant"
+      ],
+      "sequence": [
+        {
+          "id": "welcome",
+          "title": "입장과 합장",
+          "start": 0,
+          "end": 25,
+          "guide": "두 손을 모으고 법당 앞에 앉습니다.",
+          "action": "방석을 눌러 내 자리에 앉고, 합장 버튼으로 마음을 모아 주세요.",
+          "monk": "어서 오세요. 먼저 숨을 한번 고르고 함께 합장해요.",
+          "pose": "sit",
+          "track": "bell",
+          "offset": 0,
+          "auto": true,
+          "subtitle": [
+            0,
+            25
+          ],
+          "bubble": [
+            0,
+            12
+          ],
+          "audioAt": 0,
+          "audioEnd": 0,
+          "motionAt": 0,
+          "waitAction": "gassho"
+        },
+        {
+          "id": "breath",
+          "title": "호흡 가다듬기",
+          "start": 25,
+          "end": 40,
+          "guide": "어깨의 힘을 빼고 편안하게 숨을 쉽니다.",
+          "action": "들이쉬고, 천천히 내쉬어 보세요.",
+          "monk": "호흡을 바꾸려 애쓰지 않아도 괜찮아요.",
+          "pose": "breathe",
+          "track": "",
+          "offset": 0,
+          "auto": true,
+          "subtitle": [
+            25,
+            40
+          ],
+          "bubble": [
+            25,
+            37
+          ],
+          "audioAt": 25,
+          "audioEnd": 0,
+          "motionAt": 25,
+          "waitAction": "none"
+        },
+        {
+          "id": "three-bows",
+          "title": "천천히 삼배",
+          "start": 40,
+          "end": 100,
+          "guide": "몸을 천천히 낮추고 일어나세요. 앉아서 합장해도 좋습니다.",
+          "action": "한 배씩 직접 눌러 주세요. 앉아서 합장으로 대신할 수 있습니다.",
+          "monk": "무리하지 말고 자신의 속도로 세 번 절해 볼게요.",
+          "pose": "bow",
+          "track": "moktak",
+          "offset": 0,
+          "auto": true,
+          "subtitle": [
+            40,
+            100
+          ],
+          "bubble": [
+            40,
+            52
+          ],
+          "audioAt": 40,
+          "audioEnd": 0,
+          "motionAt": 40,
+          "waitAction": "three"
+        },
+        {
+          "id": "chant",
+          "title": "염불에 귀 기울이기",
+          "start": 100,
+          "end": 220,
+          "guide": "염불소리1 · 특정 독송의 원문은 확인하지 않은 일반 염불 녹음입니다.",
+          "action": "소리를 따라 잠시 고요히 머뭅니다.",
+          "monk": "",
+          "pose": "listen",
+          "track": "chant",
+          "offset": 0,
+          "auto": true,
+          "subtitle": [
+            100,
+            220
+          ],
+          "bubble": [
+            100,
+            100
+          ],
+          "audioAt": 100,
+          "audioEnd": 0,
+          "motionAt": 100,
+          "waitAction": "none"
+        },
+        {
+          "id": "vow",
+          "title": "마음속 발원",
+          "start": 220,
+          "end": 250,
+          "guide": "감사한 일 한 가지를 떠올리고, 나와 이웃의 평안을 발원합니다.",
+          "action": "발원문은 선택 사항입니다. 마음속으로 담아도 충분합니다.",
+          "monk": "오늘 하루의 마음을 돌아보며 잠시 이 자리에 머뭅니다.",
+          "pose": "vow",
+          "track": "",
+          "offset": 0,
+          "auto": true,
+          "subtitle": [
+            220,
+            250
+          ],
+          "bubble": [
+            220,
+            232
+          ],
+          "audioAt": 220,
+          "audioEnd": 0,
+          "motionAt": 220,
+          "waitAction": "none"
+        },
+        {
+          "id": "closing",
+          "title": "마무리 종소리",
+          "start": 250,
+          "end": 280,
+          "guide": "종의 울림이 사라질 때까지 조용히 기다립니다.",
+          "action": "종의 끝 울림을 따라 잠시 쉬어 주세요.",
+          "monk": "함께해 주셔서 고맙습니다.",
+          "pose": "bell",
+          "track": "bell",
+          "offset": 0,
+          "auto": true,
+          "subtitle": [
+            250,
+            280
+          ],
+          "bubble": [
+            250,
+            262
+          ],
+          "audioAt": 250,
+          "audioEnd": 0,
+          "motionAt": 250,
+          "waitAction": "none"
+        },
+        {
+          "id": "silence",
+          "title": "고요히 머물기",
+          "start": 280,
+          "end": 300,
+          "guide": "지금 이 자리에서 잠시 고요히 머뭅니다.",
+          "action": "편안히 앉아 여운을 느껴 보세요.",
+          "monk": "서둘러 일어나지 않아도 괜찮아요.",
+          "pose": "quiet",
+          "track": "",
+          "offset": 0,
+          "auto": true,
+          "subtitle": [
+            280,
+            300
+          ],
+          "bubble": [
+            280,
+            292
+          ],
+          "audioAt": 280,
+          "audioEnd": 0,
+          "motionAt": 280,
+          "waitAction": "none"
+        }
+      ],
+      "culture": {
+        "meaning": "석가족의 성자라는 뜻으로, 불교의 가르침을 펼친 역사적 부처님이에요.",
+        "role": "경전에서는 괴로움과 그 원인을 살피고, 괴로움에서 벗어나는 길을 가르치는 분으로 등장해요.",
+        "halls": [
+          "대웅전",
+          "대웅보전"
+        ],
+        "recognition": "오른손을 땅으로 내리는 항마촉지인이 대표적이에요. 손 모양만으로 모든 석가모니불상을 판별할 수는 없어요.",
+        "sources": [
+          {
+            "title": "석가모니불 - 한국민족문화대백과사전",
+            "url": "https://encykorea.aks.ac.kr/Article/E0028328",
+            "checkedAt": "2026-10-27"
+          },
+          {
+            "title": "불상 - 한국민족문화대백과사전",
+            "url": "https://encykorea.aks.ac.kr/Article/E0024979",
+            "checkedAt": "2026-10-27"
+          }
+        ]
+      }
+    },
+    {
+      "id": "geungnak",
+      "name": "극락전",
+      "deityId": "amitabha",
+      "deity": "아미타불",
+      "hanja": "阿彌陀佛",
+      "kind": "buddha",
+      "wish": "극락왕생",
+      "description": "그리운 이를 기억하며 평안을 발원합니다.",
+      "vow": "그리운 이가 평안하기를, 남은 이들이 서로를 돌볼 수 있기를 발원합니다.",
+      "faith": "아미타불의 서원에 의지하여 서방 극락정토에 왕생하기를 바라는 정토신앙과 연결됩니다. 결과를 보장하는 뜻은 아닙니다.",
+      "audioNote": "아미타불 정근 녹음은 준비 중입니다. 무음으로 발원할 수 있습니다.",
+      "invocation": "나무아미타불",
+      "chantConfirmed": false,
+      "image": "/images/online-sansa/geungnak.webp",
+      "imageSmall": "/images/online-sansa/geungnak-small.webp",
+      "published": true,
+      "tracks": [
+        "bell",
+        "moktak",
+        "chime"
+      ],
+      "sequence": [
+        {
+          "id": "welcome",
+          "title": "입장과 합장",
+          "start": 0,
+          "end": 25,
+          "guide": "두 손을 모으고 법당 앞에 앉습니다.",
+          "action": "방석을 눌러 내 자리에 앉고, 합장 버튼으로 마음을 모아 주세요.",
+          "monk": "어서 오세요. 먼저 숨을 한번 고르고 함께 합장해요.",
+          "pose": "sit",
+          "track": "bell",
+          "offset": 0,
+          "auto": true,
+          "subtitle": [
+            0,
+            25
+          ],
+          "bubble": [
+            0,
+            12
+          ],
+          "audioAt": 0,
+          "audioEnd": 0,
+          "motionAt": 0,
+          "waitAction": "gassho"
+        },
+        {
+          "id": "breath",
+          "title": "호흡 가다듬기",
+          "start": 25,
+          "end": 40,
+          "guide": "어깨의 힘을 빼고 편안하게 숨을 쉽니다.",
+          "action": "들이쉬고, 천천히 내쉬어 보세요.",
+          "monk": "호흡을 바꾸려 애쓰지 않아도 괜찮아요.",
+          "pose": "breathe",
+          "track": "",
+          "offset": 0,
+          "auto": true,
+          "subtitle": [
+            25,
+            40
+          ],
+          "bubble": [
+            25,
+            37
+          ],
+          "audioAt": 25,
+          "audioEnd": 0,
+          "motionAt": 25,
+          "waitAction": "none"
+        },
+        {
+          "id": "three-bows",
+          "title": "천천히 삼배",
+          "start": 40,
+          "end": 100,
+          "guide": "몸을 천천히 낮추고 일어나세요. 앉아서 합장해도 좋습니다.",
+          "action": "한 배씩 직접 눌러 주세요. 앉아서 합장으로 대신할 수 있습니다.",
+          "monk": "무리하지 말고 자신의 속도로 세 번 절해 볼게요.",
+          "pose": "bow",
+          "track": "moktak",
+          "offset": 0,
+          "auto": true,
+          "subtitle": [
+            40,
+            100
+          ],
+          "bubble": [
+            40,
+            52
+          ],
+          "audioAt": 40,
+          "audioEnd": 0,
+          "motionAt": 40,
+          "waitAction": "three"
+        },
+        {
+          "id": "chant",
+          "title": "명호를 마음에 담기",
+          "start": 100,
+          "end": 220,
+          "guide": "아미타불 정근 녹음은 준비 중입니다. 무음으로 발원할 수 있습니다.",
+          "action": "녹음 대신 나무아미타불를 마음속으로 부르거나 조용히 머물러도 좋습니다.",
+          "monk": "",
+          "pose": "listen",
+          "track": "",
+          "offset": 0,
+          "auto": true,
+          "subtitle": [
+            100,
+            220
+          ],
+          "bubble": [
+            100,
+            100
+          ],
+          "audioAt": 100,
+          "audioEnd": 0,
+          "motionAt": 100,
+          "waitAction": "none"
+        },
+        {
+          "id": "vow",
+          "title": "마음속 발원",
+          "start": 220,
+          "end": 250,
+          "guide": "그리운 이가 평안하기를, 남은 이들이 서로를 돌볼 수 있기를 발원합니다.",
+          "action": "발원문은 선택 사항입니다. 마음속으로 담아도 충분합니다.",
+          "monk": "그리운 이를 기억하며 평안을 발원합니다.",
+          "pose": "vow",
+          "track": "",
+          "offset": 0,
+          "auto": true,
+          "subtitle": [
+            220,
+            250
+          ],
+          "bubble": [
+            220,
+            232
+          ],
+          "audioAt": 220,
+          "audioEnd": 0,
+          "motionAt": 220,
+          "waitAction": "none"
+        },
+        {
+          "id": "closing",
+          "title": "마무리 종소리",
+          "start": 250,
+          "end": 280,
+          "guide": "종의 울림이 사라질 때까지 조용히 기다립니다.",
+          "action": "종의 끝 울림을 따라 잠시 쉬어 주세요.",
+          "monk": "함께해 주셔서 고맙습니다.",
+          "pose": "bell",
+          "track": "bell",
+          "offset": 0,
+          "auto": true,
+          "subtitle": [
+            250,
+            280
+          ],
+          "bubble": [
+            250,
+            262
+          ],
+          "audioAt": 250,
+          "audioEnd": 0,
+          "motionAt": 250,
+          "waitAction": "none"
+        },
+        {
+          "id": "silence",
+          "title": "고요히 머물기",
+          "start": 280,
+          "end": 300,
+          "guide": "지금 이 자리에서 잠시 고요히 머뭅니다.",
+          "action": "편안히 앉아 여운을 느껴 보세요.",
+          "monk": "서둘러 일어나지 않아도 괜찮아요.",
+          "pose": "quiet",
+          "track": "",
+          "offset": 0,
+          "auto": true,
+          "subtitle": [
+            280,
+            300
+          ],
+          "bubble": [
+            280,
+            292
+          ],
+          "audioAt": 280,
+          "audioEnd": 0,
+          "motionAt": 280,
+          "waitAction": "none"
+        }
+      ],
+      "culture": {
+        "meaning": "한량없는 빛과 수명을 뜻하는 이름을 지닌 부처님이에요.",
+        "role": "정토 경전에서 서방 극락정토를 주재하며, 중생을 그곳으로 이끌겠다는 서원을 세운 부처님으로 설명해요.",
+        "halls": [
+          "극락전",
+          "무량수전",
+          "아미타전"
+        ],
+        "recognition": "아미타정인이나 구품인 등 여러 수인이 있어요. 손 모양뿐 아니라 함께 모신 보살과 기록도 살펴봐요.",
+        "sources": [
+          {
+            "title": "아미타불 - 한국민족문화대백과사전",
+            "url": "https://encykorea.aks.ac.kr/Article/E0034298",
+            "checkedAt": "2026-10-27"
+          },
+          {
+            "title": "극락전 - 한국민족문화대백과사전",
+            "url": "https://encykorea.aks.ac.kr/Article/E0007354",
+            "checkedAt": "2026-10-27"
+          },
+          {
+            "title": "삼존불 - 한국민족문화대백과사전",
+            "url": "https://encykorea.aks.ac.kr/Article/E0026810",
+            "checkedAt": "2026-10-27"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gwanum",
+      "name": "관음전",
+      "deityId": "avalokitesvara",
+      "deity": "관세음보살",
+      "hanja": "觀世音菩薩",
+      "kind": "bodhisattva",
+      "wish": "임신·출산과 가족의 평안",
+      "description": "소중한 생명과 가족의 평안을 바라는 마음을 모읍니다.",
+      "vow": "가족과 나의 몸과 마음이 안전하게 돌봄을 받고 서로 자비롭게 대하기를 발원합니다.",
+      "faith": "자비의 신앙과 연결되는 공간입니다. 임신·출산을 바라는 마음도 담을 수 있으나 결과를 보장하지 않습니다. 사연이나 이름을 적지 않아도 됩니다.",
+      "audioNote": "관세음보살 정근 녹음은 준비 중입니다. 무음으로 발원할 수 있습니다.",
+      "invocation": "나무관세음보살",
+      "chantConfirmed": false,
+      "image": "/images/online-sansa/gwanum.webp",
+      "imageSmall": "/images/online-sansa/gwanum-small.webp",
+      "published": true,
+      "tracks": [
+        "bell",
+        "moktak",
+        "chime"
+      ],
+      "sequence": [
+        {
+          "id": "welcome",
+          "title": "입장과 합장",
+          "start": 0,
+          "end": 25,
+          "guide": "두 손을 모으고 법당 앞에 앉습니다.",
+          "action": "방석을 눌러 내 자리에 앉고, 합장 버튼으로 마음을 모아 주세요.",
+          "monk": "어서 오세요. 먼저 숨을 한번 고르고 함께 합장해요.",
+          "pose": "sit",
+          "track": "bell",
+          "offset": 0,
+          "auto": true,
+          "subtitle": [
+            0,
+            25
+          ],
+          "bubble": [
+            0,
+            12
+          ],
+          "audioAt": 0,
+          "audioEnd": 0,
+          "motionAt": 0,
+          "waitAction": "gassho"
+        },
+        {
+          "id": "breath",
+          "title": "호흡 가다듬기",
+          "start": 25,
+          "end": 40,
+          "guide": "어깨의 힘을 빼고 편안하게 숨을 쉽니다.",
+          "action": "들이쉬고, 천천히 내쉬어 보세요.",
+          "monk": "호흡을 바꾸려 애쓰지 않아도 괜찮아요.",
+          "pose": "breathe",
+          "track": "",
+          "offset": 0,
+          "auto": true,
+          "subtitle": [
+            25,
+            40
+          ],
+          "bubble": [
+            25,
+            37
+          ],
+          "audioAt": 25,
+          "audioEnd": 0,
+          "motionAt": 25,
+          "waitAction": "none"
+        },
+        {
+          "id": "three-bows",
+          "title": "천천히 삼배",
+          "start": 40,
+          "end": 100,
+          "guide": "몸을 천천히 낮추고 일어나세요. 앉아서 합장해도 좋습니다.",
+          "action": "한 배씩 직접 눌러 주세요. 앉아서 합장으로 대신할 수 있습니다.",
+          "monk": "무리하지 말고 자신의 속도로 세 번 절해 볼게요.",
+          "pose": "bow",
+          "track": "moktak",
+          "offset": 0,
+          "auto": true,
+          "subtitle": [
+            40,
+            100
+          ],
+          "bubble": [
+            40,
+            52
+          ],
+          "audioAt": 40,
+          "audioEnd": 0,
+          "motionAt": 40,
+          "waitAction": "three"
+        },
+        {
+          "id": "chant",
+          "title": "명호를 마음에 담기",
+          "start": 100,
+          "end": 220,
+          "guide": "관세음보살 정근 녹음은 준비 중입니다. 무음으로 발원할 수 있습니다.",
+          "action": "녹음 대신 나무관세음보살를 마음속으로 부르거나 조용히 머물러도 좋습니다.",
+          "monk": "",
+          "pose": "listen",
+          "track": "",
+          "offset": 0,
+          "auto": true,
+          "subtitle": [
+            100,
+            220
+          ],
+          "bubble": [
+            100,
+            100
+          ],
+          "audioAt": 100,
+          "audioEnd": 0,
+          "motionAt": 100,
+          "waitAction": "none"
+        },
+        {
+          "id": "vow",
+          "title": "마음속 발원",
+          "start": 220,
+          "end": 250,
+          "guide": "가족과 나의 몸과 마음이 안전하게 돌봄을 받고 서로 자비롭게 대하기를 발원합니다.",
+          "action": "발원문은 선택 사항입니다. 마음속으로 담아도 충분합니다.",
+          "monk": "소중한 생명과 가족의 평안을 바라는 마음을 모읍니다.",
+          "pose": "vow",
+          "track": "",
+          "offset": 0,
+          "auto": true,
+          "subtitle": [
+            220,
+            250
+          ],
+          "bubble": [
+            220,
+            232
+          ],
+          "audioAt": 220,
+          "audioEnd": 0,
+          "motionAt": 220,
+          "waitAction": "none"
+        },
+        {
+          "id": "closing",
+          "title": "마무리 종소리",
+          "start": 250,
+          "end": 280,
+          "guide": "종의 울림이 사라질 때까지 조용히 기다립니다.",
+          "action": "종의 끝 울림을 따라 잠시 쉬어 주세요.",
+          "monk": "함께해 주셔서 고맙습니다.",
+          "pose": "bell",
+          "track": "bell",
+          "offset": 0,
+          "auto": true,
+          "subtitle": [
+            250,
+            280
+          ],
+          "bubble": [
+            250,
+            262
+          ],
+          "audioAt": 250,
+          "audioEnd": 0,
+          "motionAt": 250,
+          "waitAction": "none"
+        },
+        {
+          "id": "silence",
+          "title": "고요히 머물기",
+          "start": 280,
+          "end": 300,
+          "guide": "지금 이 자리에서 잠시 고요히 머뭅니다.",
+          "action": "편안히 앉아 여운을 느껴 보세요.",
+          "monk": "서둘러 일어나지 않아도 괜찮아요.",
+          "pose": "quiet",
+          "track": "",
+          "offset": 0,
+          "auto": true,
+          "subtitle": [
+            280,
+            300
+          ],
+          "bubble": [
+            280,
+            292
+          ],
+          "audioAt": 280,
+          "audioEnd": 0,
+          "motionAt": 280,
+          "waitAction": "none"
+        }
+      ],
+      "culture": {
+        "meaning": "고통의 소리에 귀 기울이는 자비를 상징하는 보살님이에요.",
+        "role": "《법화경》 보문품 등에서는 중생에 맞는 여러 모습으로 나타나 돕는다고 설명해요.",
+        "halls": [
+          "관음전",
+          "원통전",
+          "아미타불의 협시 자리"
+        ],
+        "recognition": "보관 속 작은 부처나 연꽃이 단서가 되지만, 천수관음 등 모습이 다양해 하나로 단정하지 않아요.",
+        "sources": [
+          {
+            "title": "관세음보살 - 한국민족문화대백과사전",
+            "url": "https://encykorea.aks.ac.kr/Article/E0004915",
+            "checkedAt": "2026-10-27"
+          },
+          {
+            "title": "불상 - 한국민족문화대백과사전",
+            "url": "https://encykorea.aks.ac.kr/Article/E0024979",
+            "checkedAt": "2026-10-27"
+          }
+        ]
+      }
+    },
+    {
+      "id": "munsu",
+      "name": "문수보살 지혜 기도실",
+      "deityId": "manjusri",
+      "deity": "문수보살",
+      "hanja": "文殊菩薩",
+      "kind": "bodhisattva",
+      "wish": "입시·시험과 지혜",
+      "description": "준비한 노력을 믿고 차분한 마음으로 자신의 길을 걸어가기를 바랍니다.",
+      "vow": "준비한 것을 차분히 살피고, 결과보다 오늘 할 수 있는 노력과 지혜로운 판단에 마음을 모읍니다.",
+      "faith": "지혜를 상징하는 문수보살을 향한 창작 기도 공간입니다. 모든 사찰에 같은 이름의 전각이 있다고 뜻하지 않습니다. 합격이나 결과를 보장하지 않습니다.",
+      "audioNote": "문수보살 독송 녹음은 준비 중입니다. 무음으로 발원할 수 있습니다.",
+      "invocation": "나무문수보살",
+      "chantConfirmed": false,
+      "image": "/images/online-sansa/munsu.webp",
+      "imageSmall": "/images/online-sansa/munsu-small.webp",
+      "published": true,
+      "tracks": [
+        "bell",
+        "moktak",
+        "chime"
+      ],
+      "sequence": [
+        {
+          "id": "welcome",
+          "title": "입장과 합장",
+          "start": 0,
+          "end": 25,
+          "guide": "두 손을 모으고 법당 앞에 앉습니다.",
+          "action": "방석을 눌러 내 자리에 앉고, 합장 버튼으로 마음을 모아 주세요.",
+          "monk": "어서 오세요. 먼저 숨을 한번 고르고 함께 합장해요.",
+          "pose": "sit",
+          "track": "bell",
+          "offset": 0,
+          "auto": true,
+          "subtitle": [
+            0,
+            25
+          ],
+          "bubble": [
+            0,
+            12
+          ],
+          "audioAt": 0,
+          "audioEnd": 0,
+          "motionAt": 0,
+          "waitAction": "gassho"
+        },
+        {
+          "id": "breath",
+          "title": "호흡 가다듬기",
+          "start": 25,
+          "end": 40,
+          "guide": "어깨의 힘을 빼고 편안하게 숨을 쉽니다.",
+          "action": "들이쉬고, 천천히 내쉬어 보세요.",
+          "monk": "호흡을 바꾸려 애쓰지 않아도 괜찮아요.",
+          "pose": "breathe",
+          "track": "",
+          "offset": 0,
+          "auto": true,
+          "subtitle": [
+            25,
+            40
+          ],
+          "bubble": [
+            25,
+            37
+          ],
+          "audioAt": 25,
+          "audioEnd": 0,
+          "motionAt": 25,
+          "waitAction": "none"
+        },
+        {
+          "id": "three-bows",
+          "title": "천천히 삼배",
+          "start": 40,
+          "end": 100,
+          "guide": "몸을 천천히 낮추고 일어나세요. 앉아서 합장해도 좋습니다.",
+          "action": "한 배씩 직접 눌러 주세요. 앉아서 합장으로 대신할 수 있습니다.",
+          "monk": "무리하지 말고 자신의 속도로 세 번 절해 볼게요.",
+          "pose": "bow",
+          "track": "moktak",
+          "offset": 0,
+          "auto": true,
+          "subtitle": [
+            40,
+            100
+          ],
+          "bubble": [
+            40,
+            52
+          ],
+          "audioAt": 40,
+          "audioEnd": 0,
+          "motionAt": 40,
+          "waitAction": "three"
+        },
+        {
+          "id": "chant",
+          "title": "지혜의 발원",
+          "start": 100,
+          "end": 220,
+          "guide": "문수보살 독송 녹음은 준비 중입니다. 무음으로 발원할 수 있습니다.",
+          "action": "녹음 대신 나무문수보살를 마음속으로 부르거나 조용히 머물러도 좋습니다.",
+          "monk": "",
+          "pose": "listen",
+          "track": "",
+          "offset": 0,
+          "auto": true,
+          "subtitle": [
+            100,
+            220
+          ],
+          "bubble": [
+            100,
+            100
+          ],
+          "audioAt": 100,
+          "audioEnd": 0,
+          "motionAt": 100,
+          "waitAction": "none"
+        },
+        {
+          "id": "vow",
+          "title": "마음속 발원",
+          "start": 220,
+          "end": 250,
+          "guide": "준비한 것을 차분히 살피고, 결과보다 오늘 할 수 있는 노력과 지혜로운 판단에 마음을 모읍니다.",
+          "action": "발원문은 선택 사항입니다. 마음속으로 담아도 충분합니다.",
+          "monk": "준비한 노력을 믿고 차분한 마음으로 자신의 길을 걸어가기를 바랍니다.",
+          "pose": "vow",
+          "track": "",
+          "offset": 0,
+          "auto": true,
+          "subtitle": [
+            220,
+            250
+          ],
+          "bubble": [
+            220,
+            232
+          ],
+          "audioAt": 220,
+          "audioEnd": 0,
+          "motionAt": 220,
+          "waitAction": "none"
+        },
+        {
+          "id": "closing",
+          "title": "마무리 종소리",
+          "start": 250,
+          "end": 280,
+          "guide": "종의 울림이 사라질 때까지 조용히 기다립니다.",
+          "action": "종의 끝 울림을 따라 잠시 쉬어 주세요.",
+          "monk": "함께해 주셔서 고맙습니다.",
+          "pose": "bell",
+          "track": "bell",
+          "offset": 0,
+          "auto": true,
+          "subtitle": [
+            250,
+            280
+          ],
+          "bubble": [
+            250,
+            262
+          ],
+          "audioAt": 250,
+          "audioEnd": 0,
+          "motionAt": 250,
+          "waitAction": "none"
+        },
+        {
+          "id": "silence",
+          "title": "고요히 머물기",
+          "start": 280,
+          "end": 300,
+          "guide": "지금 이 자리에서 잠시 고요히 머뭅니다.",
+          "action": "편안히 앉아 여운을 느껴 보세요.",
+          "monk": "서둘러 일어나지 않아도 괜찮아요.",
+          "pose": "quiet",
+          "track": "",
+          "offset": 0,
+          "auto": true,
+          "subtitle": [
+            280,
+            300
+          ],
+          "bubble": [
+            280,
+            292
+          ],
+          "audioAt": 280,
+          "audioEnd": 0,
+          "motionAt": 280,
+          "waitAction": "none"
+        }
+      ],
+      "culture": {
+        "meaning": "깊이 살펴 깨닫는 지혜를 상징하는 보살님이에요.",
+        "role": "대승경전에서 지혜를 드러내는 보살로 등장하며, 석가모니불의 협시로 모시기도 해요.",
+        "halls": [
+          "문수전",
+          "석가모니불의 협시 자리"
+        ],
+        "recognition": "사자를 탄 모습 등이 알려져 있지만 모든 문수보살상이 같은 모습은 아니에요.",
+        "sources": [
+          {
+            "title": "문수보살 - 한국민족문화대백과사전",
+            "url": "https://encykorea.aks.ac.kr/Article/E0019535",
+            "checkedAt": "2026-10-27"
+          },
+          {
+            "title": "불상 - 한국민족문화대백과사전",
+            "url": "https://encykorea.aks.ac.kr/Article/E0024979",
+            "checkedAt": "2026-10-27"
+          }
+        ]
+      }
+    },
+    {
+      "id": "yaksa",
+      "name": "약사전",
+      "deityId": "medicine-buddha",
+      "deity": "약사여래",
+      "hanja": "藥師如來",
+      "kind": "buddha",
+      "wish": "건강과 회복",
+      "description": "몸과 마음이 힘든 이들이 필요한 돌봄과 평안을 얻기를 바랍니다.",
+      "vow": "아픈 이들이 필요한 치료와 돌봄에 연결되고, 돌보는 이들도 쉴 수 있기를 발원합니다.",
+      "faith": "약사여래의 치유 서원에 마음을 모읍니다. 기도는 치료를 대신하지 않습니다. 심한 흉통·호흡곤란·의식 저하 등은 119 등 실제 의료 도움을 먼저 구하세요.",
+      "audioNote": "약사여래 정근 녹음은 준비 중입니다. 무음으로 발원할 수 있습니다.",
+      "invocation": "나무약사여래",
+      "chantConfirmed": false,
+      "image": "/images/online-sansa/yaksa.webp",
+      "imageSmall": "/images/online-sansa/yaksa-small.webp",
+      "published": true,
+      "tracks": [
+        "bell",
+        "moktak",
+        "chime"
+      ],
+      "sequence": [
+        {
+          "id": "welcome",
+          "title": "입장과 합장",
+          "start": 0,
+          "end": 25,
+          "guide": "두 손을 모으고 법당 앞에 앉습니다.",
+          "action": "방석을 눌러 내 자리에 앉고, 합장 버튼으로 마음을 모아 주세요.",
+          "monk": "어서 오세요. 먼저 숨을 한번 고르고 함께 합장해요.",
+          "pose": "sit",
+          "track": "bell",
+          "offset": 0,
+          "auto": true,
+          "subtitle": [
+            0,
+            25
+          ],
+          "bubble": [
+            0,
+            12
+          ],
+          "audioAt": 0,
+          "audioEnd": 0,
+          "motionAt": 0,
+          "waitAction": "gassho"
+        },
+        {
+          "id": "breath",
+          "title": "호흡 가다듬기",
+          "start": 25,
+          "end": 40,
+          "guide": "어깨의 힘을 빼고 편안하게 숨을 쉽니다.",
+          "action": "들이쉬고, 천천히 내쉬어 보세요.",
+          "monk": "호흡을 바꾸려 애쓰지 않아도 괜찮아요.",
+          "pose": "breathe",
+          "track": "",
+          "offset": 0,
+          "auto": true,
+          "subtitle": [
+            25,
+            40
+          ],
+          "bubble": [
+            25,
+            37
+          ],
+          "audioAt": 25,
+          "audioEnd": 0,
+          "motionAt": 25,
+          "waitAction": "none"
+        },
+        {
+          "id": "three-bows",
+          "title": "천천히 삼배",
+          "start": 40,
+          "end": 100,
+          "guide": "몸을 천천히 낮추고 일어나세요. 앉아서 합장해도 좋습니다.",
+          "action": "한 배씩 직접 눌러 주세요. 앉아서 합장으로 대신할 수 있습니다.",
+          "monk": "무리하지 말고 자신의 속도로 세 번 절해 볼게요.",
+          "pose": "bow",
+          "track": "moktak",
+          "offset": 0,
+          "auto": true,
+          "subtitle": [
+            40,
+            100
+          ],
+          "bubble": [
+            40,
+            52
+          ],
+          "audioAt": 40,
+          "audioEnd": 0,
+          "motionAt": 40,
+          "waitAction": "three"
+        },
+        {
+          "id": "chant",
+          "title": "명호를 마음에 담기",
+          "start": 100,
+          "end": 220,
+          "guide": "약사여래 정근 녹음은 준비 중입니다. 무음으로 발원할 수 있습니다.",
+          "action": "녹음 대신 나무약사여래를 마음속으로 부르거나 조용히 머물러도 좋습니다.",
+          "monk": "",
+          "pose": "listen",
+          "track": "",
+          "offset": 0,
+          "auto": true,
+          "subtitle": [
+            100,
+            220
+          ],
+          "bubble": [
+            100,
+            100
+          ],
+          "audioAt": 100,
+          "audioEnd": 0,
+          "motionAt": 100,
+          "waitAction": "none"
+        },
+        {
+          "id": "vow",
+          "title": "마음속 발원",
+          "start": 220,
+          "end": 250,
+          "guide": "아픈 이들이 필요한 치료와 돌봄에 연결되고, 돌보는 이들도 쉴 수 있기를 발원합니다.",
+          "action": "발원문은 선택 사항입니다. 마음속으로 담아도 충분합니다.",
+          "monk": "몸과 마음이 힘든 이들이 필요한 돌봄과 평안을 얻기를 바랍니다.",
+          "pose": "vow",
+          "track": "",
+          "offset": 0,
+          "auto": true,
+          "subtitle": [
+            220,
+            250
+          ],
+          "bubble": [
+            220,
+            232
+          ],
+          "audioAt": 220,
+          "audioEnd": 0,
+          "motionAt": 220,
+          "waitAction": "none"
+        },
+        {
+          "id": "closing",
+          "title": "마무리 종소리",
+          "start": 250,
+          "end": 280,
+          "guide": "종의 울림이 사라질 때까지 조용히 기다립니다.",
+          "action": "종의 끝 울림을 따라 잠시 쉬어 주세요.",
+          "monk": "함께해 주셔서 고맙습니다.",
+          "pose": "bell",
+          "track": "bell",
+          "offset": 0,
+          "auto": true,
+          "subtitle": [
+            250,
+            280
+          ],
+          "bubble": [
+            250,
+            262
+          ],
+          "audioAt": 250,
+          "audioEnd": 0,
+          "motionAt": 250,
+          "waitAction": "none"
+        },
+        {
+          "id": "silence",
+          "title": "고요히 머물기",
+          "start": 280,
+          "end": 300,
+          "guide": "지금 이 자리에서 잠시 고요히 머뭅니다.",
+          "action": "편안히 앉아 여운을 느껴 보세요.",
+          "monk": "서둘러 일어나지 않아도 괜찮아요.",
+          "pose": "quiet",
+          "track": "",
+          "offset": 0,
+          "auto": true,
+          "subtitle": [
+            280,
+            300
+          ],
+          "bubble": [
+            280,
+            292
+          ],
+          "audioAt": 280,
+          "audioEnd": 0,
+          "motionAt": 280,
+          "waitAction": "none"
+        }
+      ],
+      "culture": {
+        "meaning": "중생의 질병과 고통을 덜어주겠다는 서원을 세운 부처님이에요.",
+        "role": "《약사경》에서 동방 정유리세계의 부처님으로 설명해요. 열두 가지 큰 서원인 십이대원을 세웠다고 전해요.",
+        "halls": [
+          "약사전",
+          "유리광전"
+        ],
+        "recognition": "약그릇을 든 모습이 대표적이지만, 모든 약사여래상이 약그릇을 들고 있지는 않아요.",
+        "sources": [
+          {
+            "title": "약사여래 - 한국민족문화대백과사전",
+            "url": "https://encykorea.aks.ac.kr/Article/E0035327",
+            "checkedAt": "2026-10-27"
+          },
+          {
+            "title": "약사전 - 한국민족문화대백과사전",
+            "url": "https://encykorea.aks.ac.kr/Article/E0035330",
+            "checkedAt": "2026-10-27"
+          }
+        ]
+      }
+    },
+    {
+      "id": "jijang",
+      "name": "지장전",
+      "deityId": "ksitigarbha",
+      "deity": "지장보살",
+      "hanja": "地藏菩薩",
+      "kind": "bodhisattva",
+      "wish": "고인을 위한 추모",
+      "description": "그리운 이를 기억하며 자비와 평안을 발원합니다.",
+      "vow": "그리운 이를 기억하고, 상실의 시간을 지나는 마음이 고립되지 않기를 발원합니다.",
+      "faith": "큰 서원과 중생 구제, 고인을 위한 천도 발원과 연결되는 신앙을 참고했습니다. 극락정토를 향한 아미타 신앙의 극락전과 구분하며, 특정 사찰의 공식 천도재를 대신하지 않습니다.",
+      "audioNote": "지장보살 정근 녹음은 준비 중입니다. 무음으로 발원할 수 있습니다.",
+      "invocation": "나무지장보살",
+      "chantConfirmed": false,
+      "image": "/images/online-sansa/jijang.webp",
+      "imageSmall": "/images/online-sansa/jijang-small.webp",
+      "published": true,
+      "tracks": [
+        "bell",
+        "moktak",
+        "chime"
+      ],
+      "sequence": [
+        {
+          "id": "welcome",
+          "title": "입장과 합장",
+          "start": 0,
+          "end": 25,
+          "guide": "두 손을 모으고 법당 앞에 앉습니다.",
+          "action": "방석을 눌러 내 자리에 앉고, 합장 버튼으로 마음을 모아 주세요.",
+          "monk": "어서 오세요. 먼저 숨을 한번 고르고 함께 합장해요.",
+          "pose": "sit",
+          "track": "bell",
+          "offset": 0,
+          "auto": true,
+          "subtitle": [
+            0,
+            25
+          ],
+          "bubble": [
+            0,
+            12
+          ],
+          "audioAt": 0,
+          "audioEnd": 0,
+          "motionAt": 0,
+          "waitAction": "gassho"
+        },
+        {
+          "id": "breath",
+          "title": "호흡 가다듬기",
+          "start": 25,
+          "end": 40,
+          "guide": "어깨의 힘을 빼고 편안하게 숨을 쉽니다.",
+          "action": "들이쉬고, 천천히 내쉬어 보세요.",
+          "monk": "호흡을 바꾸려 애쓰지 않아도 괜찮아요.",
+          "pose": "breathe",
+          "track": "",
+          "offset": 0,
+          "auto": true,
+          "subtitle": [
+            25,
+            40
+          ],
+          "bubble": [
+            25,
+            37
+          ],
+          "audioAt": 25,
+          "audioEnd": 0,
+          "motionAt": 25,
+          "waitAction": "none"
+        },
+        {
+          "id": "three-bows",
+          "title": "천천히 삼배",
+          "start": 40,
+          "end": 100,
+          "guide": "몸을 천천히 낮추고 일어나세요. 앉아서 합장해도 좋습니다.",
+          "action": "한 배씩 직접 눌러 주세요. 앉아서 합장으로 대신할 수 있습니다.",
+          "monk": "무리하지 말고 자신의 속도로 세 번 절해 볼게요.",
+          "pose": "bow",
+          "track": "moktak",
+          "offset": 0,
+          "auto": true,
+          "subtitle": [
+            40,
+            100
+          ],
+          "bubble": [
+            40,
+            52
+          ],
+          "audioAt": 40,
+          "audioEnd": 0,
+          "motionAt": 40,
+          "waitAction": "three"
+        },
+        {
+          "id": "chant",
+          "title": "명호를 마음에 담기",
+          "start": 100,
+          "end": 220,
+          "guide": "지장보살 정근 녹음은 준비 중입니다. 무음으로 발원할 수 있습니다.",
+          "action": "녹음 대신 나무지장보살를 마음속으로 부르거나 조용히 머물러도 좋습니다.",
+          "monk": "",
+          "pose": "listen",
+          "track": "",
+          "offset": 0,
+          "auto": true,
+          "subtitle": [
+            100,
+            220
+          ],
+          "bubble": [
+            100,
+            100
+          ],
+          "audioAt": 100,
+          "audioEnd": 0,
+          "motionAt": 100,
+          "waitAction": "none"
+        },
+        {
+          "id": "vow",
+          "title": "마음속 발원",
+          "start": 220,
+          "end": 250,
+          "guide": "그리운 이를 기억하고, 상실의 시간을 지나는 마음이 고립되지 않기를 발원합니다.",
+          "action": "발원문은 선택 사항입니다. 마음속으로 담아도 충분합니다.",
+          "monk": "그리운 이를 기억하며 자비와 평안을 발원합니다.",
+          "pose": "vow",
+          "track": "",
+          "offset": 0,
+          "auto": true,
+          "subtitle": [
+            220,
+            250
+          ],
+          "bubble": [
+            220,
+            232
+          ],
+          "audioAt": 220,
+          "audioEnd": 0,
+          "motionAt": 220,
+          "waitAction": "none"
+        },
+        {
+          "id": "closing",
+          "title": "마무리 종소리",
+          "start": 250,
+          "end": 280,
+          "guide": "종의 울림이 사라질 때까지 조용히 기다립니다.",
+          "action": "종의 끝 울림을 따라 잠시 쉬어 주세요.",
+          "monk": "함께해 주셔서 고맙습니다.",
+          "pose": "bell",
+          "track": "bell",
+          "offset": 0,
+          "auto": true,
+          "subtitle": [
+            250,
+            280
+          ],
+          "bubble": [
+            250,
+            262
+          ],
+          "audioAt": 250,
+          "audioEnd": 0,
+          "motionAt": 250,
+          "waitAction": "none"
+        },
+        {
+          "id": "silence",
+          "title": "고요히 머물기",
+          "start": 280,
+          "end": 300,
+          "guide": "지금 이 자리에서 잠시 고요히 머뭅니다.",
+          "action": "편안히 앉아 여운을 느껴 보세요.",
+          "monk": "서둘러 일어나지 않아도 괜찮아요.",
+          "pose": "quiet",
+          "track": "",
+          "offset": 0,
+          "auto": true,
+          "subtitle": [
+            280,
+            300
+          ],
+          "bubble": [
+            280,
+            292
+          ],
+          "audioAt": 280,
+          "audioEnd": 0,
+          "motionAt": 280,
+          "waitAction": "none"
+        }
+      ],
+      "culture": {
+        "meaning": "고통받는 중생을 끝까지 돕겠다는 큰 서원을 상징하는 보살님이에요.",
+        "role": "《지장보살본원경》 등에서는 지옥을 포함한 여러 세계의 중생을 돕는 분으로 설명해요.",
+        "halls": [
+          "지장전",
+          "명부전"
+        ],
+        "recognition": "스님처럼 삭발한 머리, 석장과 보주를 든 모습이 익숙해요. 시대와 작품에 따라 다른 표현도 있어요.",
+        "sources": [
+          {
+            "title": "지장보살 - 한국민족문화대백과사전",
+            "url": "https://encykorea.aks.ac.kr/Article/E0054346",
+            "checkedAt": "2026-10-27"
+          },
+          {
+            "title": "삼존불 - 한국민족문화대백과사전",
+            "url": "https://encykorea.aks.ac.kr/Article/E0026810",
+            "checkedAt": "2026-10-27"
+          }
+        ]
+      }
+    }
+  ],
+  "schedules": [
+    {
+      "id": "morning",
+      "hallId": "daewung",
+      "title": "대웅전 아침 예불",
+      "weekdays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "time": "07:00",
+      "duration": 300,
+      "enabled": true,
+      "publishAt": 0
+    },
+    {
+      "id": "evening",
+      "hallId": "daewung",
+      "title": "대웅전 저녁 예불",
+      "weekdays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "time": "20:00",
+      "duration": 300,
+      "enabled": true,
+      "publishAt": 0
+    },
+    {
+      "id": "wisdom",
+      "hallId": "munsu",
+      "title": "문수보살 지혜 기도",
+      "weekdays": [
+        1,
+        4
+      ],
+      "time": "20:30",
+      "duration": 300,
+      "enabled": true,
+      "publishAt": 0
+    },
+    {
+      "id": "family",
+      "hallId": "gwanum",
+      "title": "관음전 가족 평안 기도",
+      "weekdays": [
+        2,
+        5
+      ],
+      "time": "20:30",
+      "duration": 300,
+      "enabled": true,
+      "publishAt": 0
+    },
+    {
+      "id": "health",
+      "hallId": "yaksa",
+      "title": "약사전 건강 발원",
+      "weekdays": [
+        3,
+        0
+      ],
+      "time": "20:30",
+      "duration": 300,
+      "enabled": true,
+      "publishAt": 0
+    },
+    {
+      "id": "remembrance",
+      "hallId": "geungnak",
+      "title": "극락전 추모·왕생 발원",
+      "weekdays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "time": "21:00",
+      "duration": 300,
+      "enabled": true,
+      "publishAt": 0
+    }
+  ],
+  "specialEvents": []
+}

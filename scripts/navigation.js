@@ -46,7 +46,7 @@
   function pageY(){const top=parseFloat(document.body.style.top);return document.body.classList.contains('sansa-overlay-locked')&&Number.isFinite(top)?-top:scrollY;}
   function snapshot(id,index){
     const ids=shown(),fields={},scrolls={},panels={};rememberDraft();
-    document.querySelectorAll('input[id]:not([type=file]):not([type=password]),textarea[id],select[id]').forEach(e=>{if(e.matches('[type=range],#meditationSound,#meditationBellEnabled'))return;fields[e.id]={value:e.value,checked:e.checked};});
+    document.querySelectorAll('input[id]:not([type=file]):not([type=password]),textarea[id],select[id]').forEach(e=>{if(e.matches('[type=range],#meditationSound,#meditationBellEnabled,#hallVow'))return;fields[e.id]={value:e.value,checked:e.checked};});
     document.querySelectorAll('.overlay.show .modal,.overlay.show .modal-body,.overlay.show [id]').forEach(e=>{
       if(e.id||e.matches('.modal,.modal-body')){const selector=e.id?'#'+e.id:'#'+e.closest('.overlay').id+(e.matches('.modal')?' .modal':' .modal-body');if(e.scrollHeight>e.clientHeight+1)scrolls[selector]=[e.scrollTop,e.scrollLeft];}
     });

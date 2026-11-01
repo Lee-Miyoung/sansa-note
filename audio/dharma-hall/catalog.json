@@ -16,7 +16,10 @@
     "sha256": "99df4a9039aa580b219aee5f4159f9699feaac144ae42229ad935c5a85c47cc0",
     "originalSha256": "affd68ec279cd7302c04ecde02f9c153bd1efe7d5498b706f208151833a98efa",
     "verified": true,
-    "gain": 1
+    "gain": 1,
+    "allowedHalls": [
+      "daewung"
+    ]
   },
   {
     "id": "bell",
@@ -35,7 +38,15 @@
     "sha256": "fbcb10bd2fceee87361385f557c5baa9730d6fc6cb12561eaec11402704b8cd4",
     "originalSha256": "2b3cd37855df1c88b104cc129ee05753c007bee4e684b1304dc34167af9c5aec",
     "verified": true,
-    "gain": 1
+    "gain": 1,
+    "allowedHalls": [
+      "daewung",
+      "geungnak",
+      "gwanum",
+      "munsu",
+      "yaksa",
+      "jijang"
+    ]
   },
   {
     "id": "moktak",
@@ -54,7 +65,15 @@
     "sha256": "9f5532821a7eb0d4fd45d008745a95cbfa0ea10dfd68aa0d435d694f839c42be",
     "originalSha256": "cb67019aca82d6d17f653aa488b74c25ad380ae797e66aee4874bb06f56547ed",
     "verified": true,
-    "gain": 0.65
+    "gain": 0.65,
+    "allowedHalls": [
+      "daewung",
+      "geungnak",
+      "gwanum",
+      "munsu",
+      "yaksa",
+      "jijang"
+    ]
   },
   {
     "id": "chime",
@@ -73,6 +92,14 @@
     "sha256": "76b817dbb535b1700354cfc9ae263fce45f5970e5d70f42c11d7804e6d083de8",
     "originalSha256": "e463c3251d9dc7f6d31afa6bfeab847948c6b77f57550c5eb27c49a3dfc13ce8",
     "verified": true,
-    "gain": 0.8
+    "gain": 0.8,
+    "allowedHalls": [
+      "daewung",
+      "geungnak",
+      "gwanum",
+      "munsu",
+      "yaksa",
+      "jijang"
+    ]
   }
 ]
