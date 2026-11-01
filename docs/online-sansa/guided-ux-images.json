@@ -1,0 +1,75 @@
+{
+  "description": "산사노트 전용 AI 생성 수채화 수정본. 특정 사찰을 재현하지 않음. 원본 자산 보존.",
+  "assets": [
+    {
+      "path": "/images/online-sansa/daewung-refined.webp",
+      "sha256": "d0f09d6ba4dafc85d04318532fd362e97f0994c4027ababca09e5136bdf59c89",
+      "bytes": 237184
+    },
+    {
+      "path": "/images/online-sansa/daewung-refined-small.webp",
+      "sha256": "f1637228014161d13242d5c34219142ffda4e800710821e28d19332f30d56552",
+      "bytes": 72162
+    },
+    {
+      "path": "/images/online-sansa/geungnak-refined.webp",
+      "sha256": "a8cc36f9a8afe9aac065795b6fa9dabfa420789b48bc5d73eed4331e9779afe0",
+      "bytes": 230520
+    },
+    {
+      "path": "/images/online-sansa/geungnak-refined-small.webp",
+      "sha256": "af8aefbf4756563e8b8fc741ae52796cfb265b6ed0e59ff9d5b5589827e6471b",
+      "bytes": 70708
+    },
+    {
+      "path": "/images/online-sansa/gwanum-refined.webp",
+      "sha256": "707a24aaf24d5e0507b98428bcaa7a0cf5e397f91447ad3552b03ae31fc269d1",
+      "bytes": 227924
+    },
+    {
+      "path": "/images/online-sansa/gwanum-refined-small.webp",
+      "sha256": "4ae92509b48df7721cbe0368b72ec849b1847d53f993a9944180dccd15212499",
+      "bytes": 69700
+    },
+    {
+      "path": "/images/online-sansa/munsu-refined.webp",
+      "sha256": "765e6415c4015bbfb03f34455e0a333db48a6441c51014ea28cdf0fb414f53b4",
+      "bytes": 230340
+    },
+    {
+      "path": "/images/online-sansa/munsu-refined-small.webp",
+      "sha256": "5928ca6f55efe7d941d6e534060c41f8e3e527fdae985539b2daf837acedf4bb",
+      "bytes": 75560
+    },
+    {
+      "path": "/images/online-sansa/yaksa-refined.webp",
+      "sha256": "bcc698538063efd25a54798da16eee889903a5eca97b884f372130e5c227e6ab",
+      "bytes": 245004
+    },
+    {
+      "path": "/images/online-sansa/yaksa-refined-small.webp",
+      "sha256": "c0841b7d3cdbd4bdc8bb15a94afbcc9a4e354947405430ff51b0b32401a8bd79",
+      "bytes": 78178
+    },
+    {
+      "path": "/images/online-sansa/jijang-refined.webp",
+      "sha256": "abb209fe711ea019111eaf04f9c7509b9ee7b92061ea59a8c1262c51aafec791",
+      "bytes": 225494
+    },
+    {
+      "path": "/images/online-sansa/jijang-refined-small.webp",
+      "sha256": "03ebf68db0966a02dc3a25e6939e341bc585d202c181161edd620d3fe04c9ff5",
+      "bytes": 69752
+    },
+    {
+      "path": "/images/online-sansa/monk-kneel.webp",
+      "sha256": "925a32d5185a22b6f059b4722d643b2be64bf4a85c94d575964c1a16df42e265",
+      "bytes": 14550
+    },
+    {
+      "path": "/images/online-sansa/monk-prostrate.webp",
+      "sha256": "f5ef7519e8d6c844b3f3eacff7df9227b728cdea2c7eb405c5eacadad3a6492b",
+      "bytes": 14694
+    }
+  ]
+}
