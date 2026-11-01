@@ -15,7 +15,7 @@
       "vow": "감사한 일 한 가지를 떠올리고, 나와 이웃의 평안을 발원합니다.",
       "faith": "삼귀의 등 예불 독송을 하는 전통이 있습니다. 여기서는 의식 전체를 재현하지 않는 짧은 안내를 제공합니다.",
       "audioNote": "염불소리1 · 특정 독송의 원문은 확인하지 않은 일반 염불 녹음입니다.",
-      "invocation": "",
+      "invocation": "석가모니불",
       "chantConfirmed": true,
       "image": "/images/online-sansa/daewung-refined.webp",
       "imageSmall": "/images/online-sansa/daewung-refined-small.webp",
@@ -226,7 +226,13 @@
         ]
       },
       "imageSeated": "/images/online-sansa/daewung-seated.webp",
-      "imageSeatedSmall": "/images/online-sansa/daewung-seated-small.webp"
+      "imageSeatedSmall": "/images/online-sansa/daewung-seated-small.webp",
+      "recitation": {
+        "title": "석가모니불 정근",
+        "phrase": "석가모니불",
+        "note": "석가모니 부처님의 이름을 차분히 되새깁니다. · 사찰별 정근·독송 방식은 다를 수 있습니다.",
+        "source": "https://encykorea.aks.ac.kr/Article/E0028328"
+      }
     },
     {
       "id": "geungnak",
@@ -456,7 +462,13 @@
         ]
       },
       "imageSeated": "/images/online-sansa/geungnak-seated.webp",
-      "imageSeatedSmall": "/images/online-sansa/geungnak-seated-small.webp"
+      "imageSeatedSmall": "/images/online-sansa/geungnak-seated-small.webp",
+      "recitation": {
+        "title": "아미타불 정근",
+        "phrase": "나무아미타불",
+        "note": "아미타불의 이름을 되새기며 극락왕생과 평안을 발원합니다. · 사찰별 정근·독송 방식은 다를 수 있습니다.",
+        "source": "https://encykorea.aks.ac.kr/Article/E0034298"
+      }
     },
     {
       "id": "gwanum",
@@ -681,7 +693,13 @@
         ]
       },
       "imageSeated": "/images/online-sansa/gwanum-seated.webp",
-      "imageSeatedSmall": "/images/online-sansa/gwanum-seated-small.webp"
+      "imageSeatedSmall": "/images/online-sansa/gwanum-seated-small.webp",
+      "recitation": {
+        "title": "관세음보살 정근",
+        "phrase": "관세음보살",
+        "note": "관세음보살의 자비를 생각하며 이름을 되새깁니다. · 사찰별 정근·독송 방식은 다를 수 있습니다.",
+        "source": "https://encykorea.aks.ac.kr/Article/E0004915"
+      }
     },
     {
       "id": "munsu",
@@ -905,7 +923,13 @@
         ]
       },
       "imageSeated": "/images/online-sansa/munsu-seated.webp",
-      "imageSeatedSmall": "/images/online-sansa/munsu-seated-small.webp"
+      "imageSeatedSmall": "/images/online-sansa/munsu-seated-small.webp",
+      "recitation": {
+        "title": "문수보살 명호",
+        "phrase": "나무문수보살",
+        "note": "문수보살의 지혜를 떠올립니다. 특정 사찰의 공식 의식 전체를 재현하지 않습니다. · 사찰별 정근·독송 방식은 다를 수 있습니다.",
+        "source": "https://encykorea.aks.ac.kr/Article/E0019535"
+      }
     },
     {
       "id": "yaksa",
@@ -1129,7 +1153,13 @@
         ]
       },
       "imageSeated": "/images/online-sansa/yaksa-seated.webp",
-      "imageSeatedSmall": "/images/online-sansa/yaksa-seated-small.webp"
+      "imageSeatedSmall": "/images/online-sansa/yaksa-seated-small.webp",
+      "recitation": {
+        "title": "약사여래 명호",
+        "phrase": "나무약사여래",
+        "note": "약사여래의 서원을 생각하며 회복을 발원합니다. 치료를 대신하지 않습니다. · 사찰별 정근·독송 방식은 다를 수 있습니다.",
+        "source": "https://encykorea.aks.ac.kr/Article/E0035327"
+      }
     },
     {
       "id": "jijang",
@@ -1353,7 +1383,13 @@
         ]
       },
       "imageSeated": "/images/online-sansa/jijang-seated.webp",
-      "imageSeatedSmall": "/images/online-sansa/jijang-seated-small.webp"
+      "imageSeatedSmall": "/images/online-sansa/jijang-seated-small.webp",
+      "recitation": {
+        "title": "지장보살 정근",
+        "phrase": "나무지장보살",
+        "note": "지장보살의 큰 원력을 떠올리며 고인을 기억합니다. · 사찰별 정근·독송 방식은 다를 수 있습니다.",
+        "source": "https://encykorea.aks.ac.kr/Article/E0054346"
+      }
     }
   ],
   "schedules": [
