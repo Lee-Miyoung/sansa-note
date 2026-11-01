@@ -1,23 +1,20 @@
-# 온라인 법당 음원 조사 상태
+# 법당 음원 출처와 변환 기록
 
-현재 앱에 연결된 법당 음원: **없음**. 후보 페이지의 CC BY 표시·저작자·실제 파일을 확인하지 못했으므로 재생 목록에 등록하지 않았습니다. 기존 명상 음원과 극락왕생 플레이리스트는 그대로 유지합니다.
+확인일: 2026-11-01. 아래 네 자료의 상세 페이지에서 CC BY 4.0 링크와 저작자를 확인하고, 동일 페이지의 재생 파일을 확보했습니다. 원본 사찰의 특정 이름이나 승려 신원은 확인하지 않았으며 임의로 붙이지 않습니다.
 
-| 후보 | 원본 상세 페이지 | 상태 |
-| --- | --- | --- |
-| 염불소리1 | https://gongu.copyright.or.kr/gongu/wrt/wrt/view.do?menuNo=200275&wrtSn=13254274 | 접근 차단으로 저작자·파일·라이선스 미확인 |
-| 절 법당 종소리 | https://gongu.copyright.or.kr/gongu/wrt/wrt/view.do?menuNo=200020&wrtSn=13254523 | 미확인 |
-| 목탁3 | https://gongu.copyright.or.kr/gongu/wrt/wrt/view.do?menuNo=200020&wrtSn=13253417 | 미확인 |
-| 사찰 풍경소리 | https://gongu.copyright.or.kr/gongu/wrt/wrt/view.do?menuNo=200020&wrtSn=13220756 | 미확인 |
-| 선운사 저녁예불 | https://gongu.copyright.or.kr/gongu/wrt/wrt/view.do?menuNo=200020&wrtSn=13372495 | 이용조건과 허락 미확인 · 사용하지 않음 |
+| 음원 | 저작자 | 앱 파일 길이 | 출처 | 라이선스 |
+| --- | --- | ---: | --- | --- |
+| 염불소리1 | 김용배 | 119.406초 | [공유마당](https://gongu.copyright.or.kr/gongu/wrt/wrt/view.do?menuNo=200020&wrtSn=13254274) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.ko) |
+| 절 법당 종소리 | 김용배 | 24.346초 | [공유마당](https://gongu.copyright.or.kr/gongu/wrt/wrt/view.do?menuNo=200020&wrtSn=13254523) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.ko) |
+| 목탁3 | 김용배 | 14.602초 | [공유마당](https://gongu.copyright.or.kr/gongu/wrt/wrt/view.do?menuNo=200020&wrtSn=13253417) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.ko) |
+| 사찰 풍경소리 | 한국저작권위원회 | 32.078초 | [공유마당](https://gongu.copyright.or.kr/gongu/wrt/wrt/view.do?menuNo=200020&wrtSn=13220756) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.ko) |
 
-2026-11-01: 첫 번째 상세 페이지를 HTTPS 프록시로 요청했으나 HTTP 403. 도메인 허용 요청은 환경 설정 초안에 저장했으며 현재 실행 환경에는 아직 적용되지 않았습니다. 다른 후보의 개별 파일 접근을 검증한 것으로 해석하지 않습니다.
+염불의 확보된 재생 파일은 약 1분 59초입니다. 이전 안내의 7분 19초 파일을 확보했다고 주장하지 않습니다. 다른 길이의 원본 다운로드 파일과 동일한지 확인하지 않았습니다. 예불의 염불 단계는 120초이며 파일이 끝나면 고요히 머뭅니다.
 
-## 등록 전 필수 확인
+변경: 각 제공 파일의 전체 길이를 보존하고 -25 LUFS 목표로 음량 정규화, 44.1kHz/128kbps MP3로 변환했습니다. 종의 끝 울림과 원본 잔향을 유지하며 별도 잔향·배경음·반복을 추가하지 않았습니다. 목탁 재생 gain은 0.65, 풍경은 0.8로 낮췄습니다.
 
-1. 각 상세 페이지에서 원저작자, 라이선스 버전, 다운로드 파일의 적용 범위를 확인하고 근거를 기록합니다. 미확인 권리정보는 추정하지 않습니다.
-2. 원본 파일과 SHA-256, 재생 길이, 출처 URL, 라이선스 URL을 기록합니다. 로컬 MP3로 최적화한 경우 변환·트리밍·음량 보정 내역을 표시합니다.
-3. 실제 녹음의 잔향을 보존하고 종의 끝 울림을 자르지 않습니다. 염불·효과음은 반복하지 않습니다. 스마트폰 스피커와 이어폰에서 음량을 비교합니다.
-4. 실파일 디코딩 및 브라우저 시간 진행, iPhone Safari 실기기 재생을 확인합니다.
-5. `catalog.json`에는 검증이 끝난 항목만 추가합니다. 필수 필드: `id`, `title`, `kind` (`chant`, `bell`, `moktak`, `instrumental`), `src` (`./audio/dharma-hall/<id>.mp3`), `creator`, `source`, `license`, `changes`, `description`, `verified: true`. 라이선스 URL·파일 해시·길이 등 근거도 함께 기록합니다.
+파일별 `*-rights.txt`에 확인한 출처 표시를, `catalog.json`에 원본·변환 파일 SHA-256, 제공 URL, 길이, 바이트 크기를 기록했습니다. 원본 제공 파일은 작업용 임시 경로에서 확보했으며 앱에는 최적화 MP3만 연결합니다.
 
-전통 악기 연주곡은 아직 확보하거나 제작하지 않았습니다. 합성 효과음을 실제 사찰 녹음으로 대체 표시하지 않습니다.
+## 검증 범위
+
+ffprobe 디코딩·길이 검사와 Chromium의 실제 재생 시간 진행·탐색·중단을 검사합니다. 자동 분석은 사람의 청취를 대체하지 않습니다. iPhone Safari 실기기와 스마트폰 스피커·이어폰에서의 음질·체감 음량 균형은 아직 검증하지 않았습니다. 전통 악기 오리지널 곡은 제작하거나 추가하지 않았습니다. 선운사 저녁예불 후보는 이용조건 미확인으로 사용하지 않습니다.

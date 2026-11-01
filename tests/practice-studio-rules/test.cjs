@@ -1,0 +1,21 @@
+const assert=require('node:assert/strict'),fs=require('node:fs');
+const {initializeTestEnvironment,assertSucceeds,assertFails}=require('@firebase/rules-unit-testing');
+const {ref,set,get,update,serverTimestamp}=require('firebase/database');
+(async()=>{const env=await initializeTestEnvironment({projectId:'demo-sansa-practice-studio',database:{host:'127.0.0.1',port:9011,rules:fs.readFileSync(__dirname+'/database.rules.json','utf8')}});try{
+ await env.clearDatabase();const token={email:'song4mi12@gmail.com',email_verified:true,firebase:{sign_in_provider:'google.com'}},admin=env.authenticatedContext('admin',token).database(),user=env.authenticatedContext('A',{email:'ordinary@example.com',email_verified:true,firebase:{sign_in_provider:'google.com'}}).database(),other=env.authenticatedContext('B').database(),anon=env.unauthenticatedContext().database();
+ const release={...require('../../scripts/practice-config.js').validate(require('../../data/practice-experience.json'),require('../../audio/dharma-hall/catalog.json')),revision:1};
+ await env.withSecurityRulesDisabled(async c=>{await set(ref(c.database(),'users/A'),{destinations:{keep:'original'},photos:{keep:'photo'},guardianCards:{keep:true}})});
+ await assertFails(set(ref(anon,'shared/practiceExperience/current'),release));await assertFails(set(ref(user,'shared/practiceExperience/current'),release));
+ for(const claims of [{...token,email_verified:false},{...token,firebase:{sign_in_provider:'password'}},{...token,email:'other@example.com'}])await assertFails(set(ref(env.authenticatedContext('pretend',claims).database(),'shared/practiceExperience/current'),release));
+ await assertSucceeds(set(ref(admin,'shared/practiceExperience/current'),release));assert.equal((await assertSucceeds(get(ref(anon,'shared/practiceExperience/current')))).val().revision,1);
+ await assertFails(set(ref(admin,'shared/practiceExperience/current'),release));await assertFails(set(ref(admin,'shared/practiceExperience/current'),null));
+ await assertFails(set(ref(admin,'shared/practiceExperience/current'),{...release,revision:2,replies:{selfharm:{answer:['bad','bad'],style:'brief'}}}));
+ await assertFails(set(ref(admin,'shared/practiceExperience/current'),{...release,revision:2,extra:'injected'}));
+ const next={...release,revision:2,replies:{refusal:{answer:['관계에서 내 경계를 지키기 어렵군요.','오늘은 이번에는 어렵다고 한 번 말해보세요.'],style:'action'}}};await assertSucceeds(set(ref(admin,'shared/practiceExperience/current'),next));
+ const log={schemaVersion:1,uid:'A',consent:true,input:'거절하기 어려워 힘들어요',topicId:'refusal',category:'인간관계',emotions:['지침'],style:'action',summary:'거절을 말하기 어렵군요.',answer:['핵심','제안'],createdAt:serverTimestamp()};
+ await assertFails(set(ref(anon,'shared/oracleReviewInbox/A/one'),log));await assertFails(set(ref(other,'shared/oracleReviewInbox/A/one'),log));await assertFails(set(ref(user,'shared/oracleReviewInbox/A/one'),{...log,consent:false}));await assertFails(set(ref(user,'shared/oracleReviewInbox/A/one'),{...log,uid:'B'}));
+ await assertSucceeds(set(ref(user,'shared/oracleReviewInbox/A/one'),log));await assertFails(set(ref(user,'shared/oracleReviewInbox/A/one'),log));await assertFails(get(ref(user,'shared/oracleReviewInbox')));await assertFails(get(ref(anon,'shared/oracleReviewInbox')));const logs=await assertSucceeds(get(ref(admin,'shared/oracleReviewInbox')));assert.equal(logs.val().A.one.input,log.input);
+ await assertSucceeds(set(ref(admin,'users/admin/practiceStudio/draft'),{config:next,baseRevision:2,updatedAt:Date.now()}));await assertFails(get(ref(user,'users/admin/practiceStudio')));await assertFails(set(ref(other,'users/admin/practiceStudio/draft'),{}));
+ const original=(await get(ref(user,'users/A'))).val();assert.deepEqual(original,{destinations:{keep:'original'},photos:{keep:'photo'},guardianCards:{keep:true}});
+ console.log('PASS emulator: verified Google admin publish only; stale/deleted/unsafe release denied; consent/create-only own logs; private inbox; isolated drafts; existing destinations/photos/cards unchanged');
+}finally{await env.cleanup()}})().catch(e=>{console.error(e);process.exitCode=1});

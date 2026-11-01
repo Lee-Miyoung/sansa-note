@@ -1,0 +1,154 @@
+{
+  "schemaVersion": 1,
+  "revision": 0,
+  "sequence": [
+    {
+      "id": "welcome",
+      "title": "입장과 합장",
+      "start": 0,
+      "end": 25,
+      "guide": "두 손을 모으고 법당 앞에 앉습니다.",
+      "action": "중앙 방석에 앉아 합장해 주세요.",
+      "monk": "어서 오세요. 먼저 숨을 한번 고르고 함께 합장해요.",
+      "pose": "sit",
+      "track": "bell",
+      "offset": 0,
+      "auto": true,
+      "subtitle": [
+        0,
+        25
+      ],
+      "bubble": [
+        0,
+        12
+      ]
+    },
+    {
+      "id": "breath",
+      "title": "호흡 가다듬기",
+      "start": 25,
+      "end": 40,
+      "guide": "어깨의 힘을 빼고 편안하게 숨을 쉽니다.",
+      "action": "들이쉬고, 천천히 내쉬어 보세요.",
+      "monk": "호흡을 바꾸려 애쓰지 않아도 괜찮아요.",
+      "pose": "breathe",
+      "track": "",
+      "offset": 0,
+      "auto": true,
+      "subtitle": [
+        25,
+        40
+      ],
+      "bubble": [
+        25,
+        37
+      ]
+    },
+    {
+      "id": "three-bows",
+      "title": "천천히 삼배",
+      "start": 40,
+      "end": 100,
+      "guide": "몸을 천천히 낮추고 일어나세요. 앉아서 합장해도 좋습니다.",
+      "action": "한 배씩 직접 눌러 함께해 주세요.",
+      "monk": "무리하지 말고 자신의 속도로 세 번 절해 볼게요.",
+      "pose": "bow",
+      "track": "moktak",
+      "offset": 0,
+      "auto": true,
+      "subtitle": [
+        40,
+        100
+      ],
+      "bubble": [
+        40,
+        52
+      ]
+    },
+    {
+      "id": "chant",
+      "title": "염불 듣기",
+      "start": 100,
+      "end": 220,
+      "guide": "이제 잠시 소리를 따라 마음을 내려놓습니다.",
+      "action": "두 손을 편히 두고 염불에 귀 기울여 보세요.",
+      "monk": "잘하고 계세요. 잠시 소리에 머물러 보세요.",
+      "pose": "listen",
+      "track": "chant",
+      "offset": 0,
+      "auto": true,
+      "subtitle": [
+        100,
+        220
+      ],
+      "bubble": [
+        100,
+        112
+      ]
+    },
+    {
+      "id": "vow",
+      "title": "마음속 발원",
+      "start": 220,
+      "end": 250,
+      "guide": "나와 이웃의 평안을 마음속으로 발원합니다.",
+      "action": "오늘의 바람 한 가지를 마음속에 떠올려 보세요.",
+      "monk": "이제 마음속으로 오늘의 바람을 떠올려 보세요.",
+      "pose": "vow",
+      "track": "",
+      "offset": 0,
+      "auto": true,
+      "subtitle": [
+        220,
+        250
+      ],
+      "bubble": [
+        220,
+        232
+      ]
+    },
+    {
+      "id": "closing",
+      "title": "마무리 종소리",
+      "start": 250,
+      "end": 280,
+      "guide": "종의 울림이 사라질 때까지 조용히 기다립니다.",
+      "action": "종의 끝 울림을 따라 잠시 쉬어 주세요.",
+      "monk": "함께해 주셔서 고맙습니다.",
+      "pose": "bell",
+      "track": "bell",
+      "offset": 0,
+      "auto": true,
+      "subtitle": [
+        250,
+        280
+      ],
+      "bubble": [
+        250,
+        262
+      ]
+    },
+    {
+      "id": "silence",
+      "title": "고요히 머물기",
+      "start": 280,
+      "end": 300,
+      "guide": "지금 이 자리에서 잠시 고요히 머뭅니다.",
+      "action": "편안히 앉아 여운을 느껴 보세요.",
+      "monk": "서둘러 일어나지 않아도 괜찮아요.",
+      "pose": "quiet",
+      "track": "",
+      "offset": 0,
+      "auto": true,
+      "subtitle": [
+        280,
+        300
+      ],
+      "bubble": [
+        280,
+        292
+      ]
+    }
+  ],
+  "replies": {}
+}

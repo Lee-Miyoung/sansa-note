@@ -1,0 +1,26 @@
+[
+  {
+    "id": "chant",
+    "integratedLUFS": -24.88,
+    "truePeakDBTP": -3.2,
+    "playbackGain": 1
+  },
+  {
+    "id": "bell",
+    "integratedLUFS": -27.64,
+    "truePeakDBTP": -8.39,
+    "playbackGain": 1
+  },
+  {
+    "id": "moktak",
+    "integratedLUFS": -25.46,
+    "truePeakDBTP": -4.5,
+    "playbackGain": 0.65
+  },
+  {
+    "id": "chime",
+    "integratedLUFS": -24.99,
+    "truePeakDBTP": -10.34,
+    "playbackGain": 0.8
+  }
+]

@@ -1,0 +1,238 @@
+{
+  "rules": {
+    "users": {
+      ".read": "auth != null && auth.token.email == 'song4mi12@gmail.com'",
+      "$uid": {
+        ".read": "auth != null && (auth.uid == $uid || auth.token.email == 'song4mi12@gmail.com')",
+        ".write": "auth != null && auth.uid == $uid"
+      }
+    },
+    "shared": {
+      "photoUploadControl": {
+        ".read": "auth != null",
+        ".write": "auth != null && auth.token.email == 'song4mi12@gmail.com'"
+      },
+      "lyricSync": {
+        ".read": true,
+        ".write": "auth != null && auth.token.email == 'song4mi12@gmail.com'"
+      },
+      "templeVerifyPoints": {
+        ".read": true,
+        ".write": "auth != null && auth.token.email == 'song4mi12@gmail.com'"
+      },
+      "secretAtlasPublication": {
+        "haeinsa-001": {
+          ".read": true,
+          ".write": "auth != null && auth.token.email == 'song4mi12@gmail.com' && auth.token.email_verified == true && auth.token.firebase.sign_in_provider == 'google.com' && newData.exists()",
+          ".validate": "newData.hasChildren(['public', 'updatedAt'])",
+          "public": {
+            ".validate": "newData.isBoolean()"
+          },
+          "updatedAt": {
+            ".validate": "newData.isNumber() && newData.val() > 0 && newData.val() <= now"
+          },
+          "$other": {
+            ".validate": false
+          }
+        }
+      },
+      "practiceExperience": {
+        "current": {
+          ".read": true,
+          ".write": "auth != null && auth.token.email == 'song4mi12@gmail.com' && auth.token.email_verified == true && auth.token.firebase.sign_in_provider == 'google.com' && newData.exists()",
+          ".validate": "newData.hasChildren(['schemaVersion','revision','sequence'])",
+          "schemaVersion": {
+            ".validate": "newData.val() == 1"
+          },
+          "revision": {
+            ".validate": "newData.isNumber() && ((!data.exists() && newData.val() == 1) || (data.exists() && newData.val() == data.val() + 1))"
+          },
+          "sequence": {
+            ".validate": "newData.hasChild('0')",
+            "$i": {
+              ".validate": "$i.matches(/^(0|[1-9]|1[0-9])$/) && newData.hasChildren(['id','title','guide','action','monk','pose','start','end','track','offset','auto','subtitle','bubble']) && newData.child('end').val() > newData.child('start').val()",
+              "id": {
+                ".validate": "newData.isString() && newData.val().length <= 80"
+              },
+              "title": {
+                ".validate": "newData.isString() && newData.val().length <= 80"
+              },
+              "guide": {
+                ".validate": "newData.isString() && newData.val().length <= 500"
+              },
+              "action": {
+                ".validate": "newData.isString() && newData.val().length <= 500"
+              },
+              "monk": {
+                ".validate": "newData.isString() && newData.val().length <= 500"
+              },
+              "pose": {
+                ".validate": "newData.isString() && newData.val().length <= 20"
+              },
+              "track": {
+                ".validate": "newData.isString() && newData.val().length <= 80"
+              },
+              "start": {
+                ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 1800"
+              },
+              "end": {
+                ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 1800"
+              },
+              "offset": {
+                ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 1800"
+              },
+              "audioAt": {
+                ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 1800"
+              },
+              "auto": {
+                ".validate": "newData.isBoolean()"
+              },
+              "subtitle": {
+                ".validate": "newData.hasChildren(['0', '1'])",
+                "0": {
+                  ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 1800"
+                },
+                "1": {
+                  ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 1800"
+                },
+                "$other": {
+                  ".validate": false
+                }
+              },
+              "bubble": {
+                ".validate": "newData.hasChildren(['0', '1'])",
+                "0": {
+                  ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 1800"
+                },
+                "1": {
+                  ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 1800"
+                },
+                "$other": {
+                  ".validate": false
+                }
+              },
+              "$other": {
+                ".validate": false
+              }
+            }
+          },
+          "replies": {
+            "$topic": {
+              ".validate": "$topic.matches(/^[-a-z0-9_]+$/) && $topic != 'selfharm' && $topic != 'partner_abuse' && $topic != 'medical_emergency' && $topic != 'harm_others' && newData.hasChildren(['answer','style'])",
+              "answer": {
+                ".validate": "newData.hasChildren(['0', '1'])",
+                "0": {
+                  ".validate": "newData.isString() && newData.val().length <= 1200"
+                },
+                "1": {
+                  ".validate": "newData.isString() && newData.val().length <= 1200"
+                },
+                "$other": {
+                  ".validate": false
+                }
+              },
+              "style": {
+                ".validate": "newData.isString() && (newData.val() == 'comfort' || newData.val() == 'practical' || newData.val() == 'perspective' || newData.val() == 'action' || newData.val() == 'reflection' || newData.val() == 'brief')"
+              },
+              "$other": {
+                ".validate": false
+              }
+            }
+          },
+          "$other": {
+            ".validate": false
+          }
+        }
+      },
+      "oracleReviewInbox": {
+        ".read": "auth != null && auth.token.email == 'song4mi12@gmail.com' && auth.token.email_verified == true && auth.token.firebase.sign_in_provider == 'google.com'",
+        "$uid": {
+          "$id": {
+            ".write": "auth != null && auth.uid == $uid && !data.exists() && newData.exists()",
+            ".validate": "newData.hasChildren(['schemaVersion','uid','consent','input','topicId','category','style','summary','answer','createdAt'])",
+            "schemaVersion": {
+              ".validate": "newData.val() == 1"
+            },
+            "uid": {
+              ".validate": "newData.val() == $uid"
+            },
+            "consent": {
+              ".validate": "newData.val() == true"
+            },
+            "input": {
+              ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 2000"
+            },
+            "topicId": {
+              ".validate": "newData.isString() && newData.val().length <= 80"
+            },
+            "category": {
+              ".validate": "newData.isString() && newData.val().length <= 80"
+            },
+            "style": {
+              ".validate": "newData.isString() && newData.val().length <= 30"
+            },
+            "summary": {
+              ".validate": "newData.isString() && newData.val().length <= 1200"
+            },
+            "answer": {
+              ".validate": "newData.hasChildren(['0', '1'])",
+              "0": {
+                ".validate": "newData.isString() && newData.val().length <= 2000"
+              },
+              "1": {
+                ".validate": "newData.isString() && newData.val().length <= 2000"
+              },
+              "$other": {
+                ".validate": false
+              }
+            },
+            "emotions": {
+              "$i": {
+                ".validate": "$i.matches(/^[0-9]$/) && newData.isString() && newData.val().length <= 30"
+              }
+            },
+            "createdAt": {
+              ".validate": "newData.isNumber() && newData.val() > 0 && newData.val() <= now"
+            },
+            "$other": {
+              ".validate": false
+            }
+          }
+        }
+      }
+    },
+    "community": {
+      "posts": {
+        ".read": true,
+        "$postId": {
+          ".write": "auth != null && (auth.token.email == 'song4mi12@gmail.com' || (!data.exists() && newData.child('uid').val() == auth.uid) || (data.exists() && data.child('uid').val() == auth.uid))"
+        }
+      },
+      "comments": {
+        ".read": true,
+        "$postId": {
+          "$commentId": {
+            ".write": "auth != null && (auth.token.email == 'song4mi12@gmail.com' || (!data.exists() && newData.child('uid').val() == auth.uid) || (data.exists() && data.child('uid').val() == auth.uid))"
+          }
+        }
+      },
+      "reports": {
+        ".read": "auth != null && auth.token.email == 'song4mi12@gmail.com'",
+        "$reportId": {
+          ".write": "auth != null"
+        }
+      }
+    },
+    "leaderboards": {
+      "beatShooter": {
+        ".read": "auth != null",
+        ".indexOn": [
+          "score"
+        ],
+        "$uid": {
+          ".write": "auth != null && auth.uid == $uid"
+        }
+      }
+    }
+  }
+}

@@ -34685,7 +34685,7 @@ function clearOracleAnswer(){
 function loadOracleEngine(){
   if(oracleEnginePromise)return oracleEnginePromise;
   oracleStatus('고민에 맞는 설명을 준비하고 있어요.');
-  oracleEnginePromise=(window.SansaOracle?Promise.resolve():new Promise((resolve,reject)=>{const script=document.createElement('script');script.src='/scripts/oracle-counsel.js?v=20261027-oracle2';script.onload=resolve;script.onerror=()=>{script.remove();reject(Error('oracle script'))};document.head.append(script)})).then(()=>SansaOracle.init(ORACLE_EXAMPLES)).then(()=>{oracleStatus('');return SansaOracle}).catch(error=>{oracleEnginePromise=null;throw error});
+  oracleEnginePromise=(window.SansaOracle?Promise.resolve():new Promise((resolve,reject)=>{const script=document.createElement('script');script.src='/scripts/oracle-counsel.js?v=20261101-quality30';script.onload=resolve;script.onerror=()=>{script.remove();reject(Error('oracle script'))};document.head.append(script)})).then(()=>SansaOracle.init(ORACLE_EXAMPLES)).then(()=>{oracleStatus('');return SansaOracle}).catch(error=>{oracleEnginePromise=null;throw error});
   return oracleEnginePromise;
 }
 function openOracleOverlay(){
@@ -42371,7 +42371,8 @@ nav.site-global-nav{height:var(--global-nav-h)!important;box-sizing:border-box!i
 <script src="/scripts/temple-music.js?v=20261026-ui" defer></script>
 <script src="/scripts/device-photos/celebration.js?v=20261026-unified" defer></script>
 <link rel="stylesheet" href="/styles/ui-content.css?v=20261027-static">
-<link rel="stylesheet" href="./styles/dharma-hall.css?v=20261101">
-<script src="./scripts/dharma-hall.js?v=20261101" defer></script>
+<link rel="stylesheet" href="./styles/dharma-hall.css?v=20261101-studio">
+<script src="./scripts/practice-config.js?v=20261101-studio" defer></script>
+<script src="./scripts/dharma-hall.js?v=20261101-studio" defer></script>
 </body>
 </html>
