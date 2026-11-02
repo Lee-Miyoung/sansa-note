@@ -1,0 +1,178 @@
+{
+  "wallSeconds": 300.288,
+  "report": [
+    {
+      "wallSeconds": 0.005,
+      "s": {
+        "mode": "ceremony",
+        "running": true,
+        "elapsed": 0,
+        "count": 0,
+        "stage": 0,
+        "three": 0,
+        "waiting": false,
+        "completed": false,
+        "seated": true,
+        "gassho": 0,
+        "vowed": false,
+        "attended": 0,
+        "hallId": "geungnak",
+        "session": {
+          "kind": "guided",
+          "duration": 300
+        }
+      },
+      "t": "bell",
+      "playing": true,
+      "status": "음원 불러오는 중"
+    },
+    {
+      "wallSeconds": 25.131,
+      "s": {
+        "mode": "ceremony",
+        "running": true,
+        "elapsed": 25.003299999997015,
+        "count": 0,
+        "stage": 1,
+        "three": 0,
+        "waiting": false,
+        "completed": false,
+        "seated": true,
+        "gassho": 0,
+        "vowed": false,
+        "attended": 25.003299999997015,
+        "hallId": "geungnak",
+        "session": {
+          "kind": "guided",
+          "duration": 300
+        }
+      },
+      "playing": false,
+      "status": "무음"
+    },
+    {
+      "wallSeconds": 40.237,
+      "s": {
+        "mode": "ceremony",
+        "running": true,
+        "elapsed": 40.20479999999705,
+        "count": 0,
+        "stage": 2,
+        "three": 0,
+        "waiting": false,
+        "completed": false,
+        "seated": true,
+        "gassho": 0,
+        "vowed": false,
+        "attended": 40.20479999999705,
+        "hallId": "geungnak",
+        "session": {
+          "kind": "guided",
+          "duration": 300
+        }
+      },
+      "t": "moktak",
+      "playing": true,
+      "status": "재생 중"
+    },
+    {
+      "wallSeconds": 100.488,
+      "s": {
+        "mode": "ceremony",
+        "running": true,
+        "elapsed": 100.40329999999697,
+        "count": 0,
+        "stage": 3,
+        "three": 0,
+        "waiting": false,
+        "completed": false,
+        "seated": true,
+        "gassho": 0,
+        "vowed": false,
+        "attended": 100.40329999999697,
+        "hallId": "geungnak",
+        "session": {
+          "kind": "guided",
+          "duration": 300
+        }
+      },
+      "t": "recitation-geungnak",
+      "playing": true,
+      "status": "재생 중 · 한 번 듣고 남은 시간은 고요히 머뭅니다."
+    },
+    {
+      "wallSeconds": 220.893,
+      "s": {
+        "mode": "ceremony",
+        "running": true,
+        "elapsed": 220.8033999999969,
+        "count": 0,
+        "stage": 4,
+        "three": 0,
+        "waiting": false,
+        "completed": false,
+        "seated": true,
+        "gassho": 0,
+        "vowed": false,
+        "attended": 220.8033999999969,
+        "hallId": "geungnak",
+        "session": {
+          "kind": "guided",
+          "duration": 300
+        }
+      },
+      "playing": false,
+      "status": "무음"
+    },
+    {
+      "wallSeconds": 250.037,
+      "s": {
+        "mode": "ceremony",
+        "running": true,
+        "elapsed": 250.0033999999964,
+        "count": 0,
+        "stage": 5,
+        "three": 0,
+        "waiting": false,
+        "completed": false,
+        "seated": true,
+        "gassho": 0,
+        "vowed": false,
+        "attended": 250.0033999999964,
+        "hallId": "geungnak",
+        "session": {
+          "kind": "guided",
+          "duration": 300
+        }
+      },
+      "t": "bell",
+      "playing": true,
+      "status": "재생 중"
+    },
+    {
+      "wallSeconds": 280.168,
+      "s": {
+        "mode": "ceremony",
+        "running": true,
+        "elapsed": 280.0033999999964,
+        "count": 0,
+        "stage": 6,
+        "three": 0,
+        "waiting": false,
+        "completed": false,
+        "seated": true,
+        "gassho": 0,
+        "vowed": false,
+        "attended": 280.0033999999964,
+        "hallId": "geungnak",
+        "session": {
+          "kind": "guided",
+          "duration": 300
+        }
+      },
+      "playing": false,
+      "status": "무음"
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,91 @@
+/* Three independently painted planes; the altar is contained, never cropped. */
+html body #dharmaHallOverlay.hall-25d .hall-art{padding:0;gap:0;position:relative;background:#3b3024}
+html body #dharmaHallOverlay.hall-25d .hall-art .hall-scene{width:100%;height:100%;max-height:100%;aspect-ratio:auto;flex:1 1 0;border:0;border-radius:0;box-shadow:none;perspective:1100px}
+.shrine-layers{position:absolute;inset:0;overflow:hidden;background:#7e6343;isolation:isolate}
+.shrine-layers img{position:absolute;pointer-events:none;display:block;transition:transform 1.8s cubic-bezier(.2,.6,.25,1);transform-origin:50% 70%;max-width:none!important}
+.shrine-architecture{inset:0;width:100%;height:100%;object-fit:cover;transform:translateZ(-40px) scale(1.01)}
+.shrine-altar{left:50%;bottom:9%;height:85%;width:90%;object-fit:contain;transform:translateX(-50%);z-index:1;filter:drop-shadow(0 6px 4px #382a2925)}
+.shrine-foreground{inset:0;width:100%;height:100%;object-fit:fill;z-index:2;transform:translateZ(30px)}
+.shrine-layers[data-camera=entrance] .shrine-altar{transform:translateX(-50%) scale(.78) translateY(-2%)}
+.shrine-layers[data-camera=entrance] .shrine-architecture{transform:scale(.97)}
+.shrine-layers[data-camera=entrance] .shrine-foreground{transform:translateY(8%)}
+.shrine-layers[data-camera=listen] .shrine-altar{transform:translateX(-50%) scale(1.025)}
+.shrine-layers[data-camera=bow] .shrine-foreground{transform:translateY(-2%)}
+.shrine-layers[data-camera=rest] .shrine-altar{transform:translateX(-50%) scale(.98)}
+.shrine-layers[data-hall=geungnak] .shrine-architecture{filter:sepia(.12)}
+.shrine-layers[data-hall=gwanum] .shrine-architecture{filter:saturate(.8)}
+.shrine-layers[data-hall=munsu] .shrine-architecture{filter:brightness(.94)}
+.shrine-layers[data-hall=yaksa] .shrine-architecture{filter:saturate(.7)}
+.shrine-layers[data-hall=jijang] .shrine-architecture{filter:brightness(.88)}
+#dharmaHallOverlay.hall-25d #hallSeat{z-index:3;bottom:3%;width:85px;height:30px;min-height:30px;border-color:#e7d194;background:#f5e4ae22}
+#dharmaHallOverlay.hall-25d #hallSeatStatus,#dharmaHallOverlay.hall-25d #hallRitualRail,#dharmaHallOverlay.hall-25d #hallParticipationBloom{display:none!important}
+#dharmaHallOverlay.hall-25d .modal-head{padding:10px 16px!important;min-height:64px}
+#dharmaHallOverlay.hall-25d .modal-head>div>p:not(#hallLiveSubtitle){display:none}
+#dharmaHallOverlay.hall-25d #hallLiveSubtitle{display:block!important;margin:3px 0 0;font-size:11px;color:#6e785e;font-variant-numeric:tabular-nums}
+#hallAutoProgress{display:block;flex:none;width:100%;height:3px;border:0;border-radius:0;accent-color:#c7a450;background:#ddd5b7;margin:0}
+#hallAutoProgress::-webkit-progress-bar{background:#e7dfca}#hallAutoProgress::-webkit-progress-value{background:#a88637}
+#dharmaHallOverlay.hall-25d #hallAutoStart{display:flex;flex-direction:column;gap:7px;align-items:center;justify-content:center;width:100%;min-height:78px;border:1px solid #345e46;border-radius:14px;color:#fff6d6;background:#244b39;margin:12px 0 10px;padding:14px;cursor:pointer;font-size:18px}
+#hallAutoStart small{font-size:11px;font-weight:400;color:#e5e4cb;line-height:1.5}
+#dharmaHallOverlay.hall-25d #hallEnterRitual{min-height:58px;background:#f0eddf;color:#3a5c43;font-size:13px;box-shadow:none;margin-bottom:8px}
+#dharmaHallOverlay.hall-25d #hallEnterRitual small{color:#708269}
+#dharmaHallOverlay.hall-25d .hall-guidance{padding:12px 18px;gap:5px}
+#dharmaHallOverlay.hall-25d .hall-mode-line{font-size:10px}
+#dharmaHallOverlay.hall-25d .hall-instruction{padding:0}
+#dharmaHallOverlay.hall-25d .hall-small-label,#dharmaHallOverlay.hall-25d #hallGuideText{display:none}
+#dharmaHallOverlay.hall-25d #hallGuidePortrait #hallMonk{width:48px!important;height:58px!important}
+#dharmaHallOverlay.hall-25d.ritual-timed :is(.hall-main-actions,.hall-do-label,#hallActionHint,#hallSkipAction,#hallNextStage,#hallUXTime,.hall-audio-panel,.hall-recitation-panel,#hallActionState){display:none!important}
+#dharmaHallOverlay.hall-25d.ritual-timed #hallCurrent{position:relative}
+#dharmaHallOverlay.hall-25d.ritual-timed .hall-instruction{position:absolute;right:0;top:12px;margin:0;width:48px}
+#dharmaHallOverlay.hall-25d.ritual-listening .hall-instruction{display:none!important}
+#dharmaHallOverlay.hall-25d.ritual-timed #hallStepTexts{padding-right:48px}
+#dharmaHallOverlay.hall-25d.ritual-timed #hallNowAction{font-size:11px;font-weight:400;color:#758269;margin:2px 0 7px;line-height:1.5}
+#dharmaHallOverlay.hall-25d.ritual-timed #hallStep{font-size:19px;margin:1px 0 4px}
+#dharmaHallOverlay.hall-25d.ritual-timed #hallGuide{font-size:12px;line-height:1.65}
+#dharmaHallOverlay.hall-25d.ritual-timed .hall-next-row{display:none}
+#dharmaHallOverlay.hall-25d.ritual-timed .hall-options{display:none}
+#dharmaHallOverlay.hall-25d.ritual-settings .hall-options{display:block!important}
+#ritualOptional{display:flex;flex-wrap:wrap;gap:5px;align-items:center;margin-top:6px}
+#dharmaHallOverlay #ritualOptional button{min-height:36px;padding:5px 9px;border:1px solid #d0d6bd;border-radius:8px;background:#f4f2e5;color:#506b47;font-size:10px;cursor:pointer}
+#ritualActualActions{width:100%;font-size:9px;color:#859071;margin:0;line-height:1.5}
+.ritual-transport{flex:0 0 auto;padding:10px 18px max(8px,env(safe-area-inset-bottom));background:#f7f3e5;border-top:1px solid #d6d6bd;color:#3c533c;z-index:4}
+#ritualSoundName{font-size:12px;font-weight:600;margin:0 0 3px;line-height:1.5}#ritualSoundState{font-size:10px;color:#7b8468;margin:0 0 6px;line-height:1.5}
+.ritual-play-row{display:flex;gap:6px}.ritual-play-row button,.ritual-volume-row button{border:1px solid #cbd3bb;border-radius:8px;background:#eeefe1;color:#4b6547;font-size:11px;cursor:pointer;padding:5px 12px;min-height:38px!important}
+.ritual-play-row #ritualToggle{background:#2d513e;color:#fcf3d6;flex:1;border-color:#2d513e}.ritual-play-row button:disabled{opacity:.4}
+.ritual-volume-row{display:flex;gap:9px;align-items:center;margin-top:5px;font-size:10px}.ritual-volume-row input{flex:1;min-width:40px;accent-color:#758460;height:18px}.ritual-volume-row button{font-size:10px;min-height:30px!important;padding:3px 8px}
+#dharmaHallOverlay.hall-25d.ritual-settings .hall-audio-panel{display:grid}
+#dharmaHallOverlay.hall-25d.ritual-completed .hall-instruction{display:none}
+#dharmaHallOverlay.hall-25d #hallSummary{padding:12px;border:0;background:transparent}#dharmaHallOverlay.hall-25d #hallSummary li{font-size:11px;padding:2px 0}
+@media(max-width:700px){
+ html body #dharmaHallOverlay.hall-25d .modal-body,html[data-monastery-compact=true] body #dharmaHallOverlay.hall-25d .modal-body{grid-template-columns:minmax(0,1fr)!important;grid-template-rows:minmax(150px,1fr) minmax(0,260px)!important}
+ html body #dharmaHallOverlay.hall-25d.ritual-timed .modal-body,html[data-monastery-compact=true] body #dharmaHallOverlay.hall-25d.ritual-timed .modal-body{grid-template-rows:minmax(120px,1fr) 160px!important}
+ #dharmaHallOverlay.hall-25d .hall-guidance{padding:8px 14px;gap:3px}
+ #dharmaHallOverlay.hall-25d .hall-mode-line>b{font-size:9px;padding:3px 7px}
+ #dharmaHallOverlay.hall-25d .hall-mode-line #hallHelpOpen{font-size:9px!important}
+ #dharmaHallOverlay.hall-25d #hallWelcome h3{font-size:18px;margin:2px 0 5px}
+ #dharmaHallOverlay.hall-25d #hallWelcome .hall-arrival-copy{font-size:11px!important;margin:0 0 8px;line-height:1.6!important}
+ #dharmaHallOverlay.hall-25d #hallAutoStart{min-height:62px;font-size:16px;padding:10px;margin:6px 0}
+ #dharmaHallOverlay.hall-25d #hallEnterRitual{min-height:44px;padding:6px;margin-bottom:3px}#hallEnterRitual small{display:none}
+ #dharmaHallOverlay.hall-25d #hallWelcome .hall-first-steps{margin:5px 0}
+ #dharmaHallOverlay.hall-25d #hallWelcome>div button{font-size:10px;padding:6px;min-height:34px}
+ .ritual-transport{padding:7px 12px max(5px,env(safe-area-inset-bottom))}#ritualSoundName{font-size:10px}#ritualSoundState{font-size:9px;line-height:1.4;margin-bottom:4px}
+ .ritual-play-row button{min-height:36px!important;padding:5px 8px;font-size:10px}.ritual-volume-row{margin-top:3px}.ritual-volume-row button{min-height:27px!important}
+ #dharmaHallOverlay.hall-25d.ritual-timed #hallStep{font-size:17px}#dharmaHallOverlay.hall-25d.ritual-timed #hallGuide{font-size:11px;line-height:1.5;margin:2px 0}
+ #hallStepFraction{margin:2px 0;font-size:9px}#dharmaHallOverlay.hall-25d.ritual-timed #hallNowAction{font-size:9px;margin:3px 0}
+ #dharmaHallOverlay.hall-25d .hall-mode-line :is(#hallCourtyard,#hallToFree){font-size:9px!important;min-height:25px!important;padding:2px 5px!important}
+ #dharmaHallOverlay.hall-25d.ritual-writing .modal-body{grid-template-rows:minmax(80px,1fr) minmax(180px,55%)!important}
+ #dharmaHallOverlay.hall-25d.ritual-settings .modal-body{grid-template-rows:minmax(100px,1fr) minmax(180px,60%)!important}
+ #dharmaHallOverlay.hall-25d.ritual-completed .modal-body{grid-template-rows:minmax(100px,1fr) minmax(180px,48%)!important}
+ .shrine-architecture{object-fit:fill}
+}
+@media(max-height:520px) and (min-width:701px){#dharmaHallOverlay.hall-25d .hall-modal{height:100%}#dharmaHallOverlay.hall-25d .modal-head{min-height:52px}#dharmaHallOverlay.hall-25d .hall-guidance{padding:8px 12px}.ritual-transport{padding:4px 12px}.ritual-volume-row{display:none}}
+@media(prefers-reduced-motion:reduce){.shrine-layers img{transition:none!important}.shrine-layers[data-camera] .shrine-altar{transform:translateX(-50%)!important}.shrine-layers[data-camera] .shrine-architecture,.shrine-layers[data-camera] .shrine-foreground{transform:none!important}}
+
+.ritual-track-line{display:flex;align-items:center;gap:8px;justify-content:space-between}.ritual-track-line #ritualSoundName{flex:1;min-width:0}#ritualSoundClock{flex:none;font-size:10px;font-variant-numeric:tabular-nums;color:#7c846b}
+
+#dharmaHallOverlay.hall-25d.ritual-timed #hallNowAction{display:none!important}
+
+#dharmaHallOverlay.hall-25d.ritual-awaiting-schedule #hallCurrent .hall-main-actions{display:grid!important}
+html[data-monastery-compact=true] body #dharmaHallOverlay.hall-25d.ritual-timed .modal-body{grid-template-rows:minmax(70px,1fr) clamp(110px,calc(var(--monastery-vh,100dvh)*.25),160px)!important}
+#dharmaHallOverlay.hall-25d .modal-head>div{flex:1;min-width:0;max-width:calc(100% - 52px)}
+#dharmaHallOverlay.hall-25d #hallTitle{white-space:normal;overflow-wrap:anywhere;line-height:1.35}
+#dharmaHallOverlay.hall-25d .modal-head>.close-x{flex:none}

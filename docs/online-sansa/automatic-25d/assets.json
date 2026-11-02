@@ -1,0 +1,200 @@
+{
+  "description": "Thirteen independently generated planes: six architectures, six deity altars and shared foreground. PNG sources preserved; mobile/desktop WebP keep full image and alpha.",
+  "assets": [
+    {
+      "path": "/images/online-sansa/layers/architecture-small.webp",
+      "bytes": 65808,
+      "sha256": "06db6d4bcecd47fac1a1b6a938c81a61a85cef7f0951f2e10048f2c9f2093656"
+    },
+    {
+      "path": "/images/online-sansa/layers/architecture.webp",
+      "bytes": 343884,
+      "sha256": "6e67c43a25dde3512e05ddd05a18bb100fcc30db3677228cef7ad5cc540cadf9"
+    },
+    {
+      "path": "/images/online-sansa/layers/daewung-altar-small.webp",
+      "bytes": 140948,
+      "sha256": "791ee7f6e0edcf542c28c5028f82aeffb0a4c468bd51f6bf0ca67f16db465101"
+    },
+    {
+      "path": "/images/online-sansa/layers/daewung-altar.webp",
+      "bytes": 367892,
+      "sha256": "29e26f661ee1de69753928b07bb2b61516845dc123ade2306649f2022b39cf6c"
+    },
+    {
+      "path": "/images/online-sansa/layers/foreground-small.webp",
+      "bytes": 35058,
+      "sha256": "9e5a431d5ed85f5ad778768e0ca0d948fb1a6e1c0fc50a9a6070a67a9387e0d4"
+    },
+    {
+      "path": "/images/online-sansa/layers/foreground.webp",
+      "bytes": 143780,
+      "sha256": "eeae6465aed627262ecc5c2b55eff4b6bae5df918928e0477c4f249ef30c9a76"
+    },
+    {
+      "path": "/images/online-sansa/layers/geungnak-altar-small.webp",
+      "bytes": 147438,
+      "sha256": "5c13c1c34cbff0cdbb9863cde6ad70afbe0460692f3ff22c39098d6e381a5416"
+    },
+    {
+      "path": "/images/online-sansa/layers/geungnak-altar.webp",
+      "bytes": 388906,
+      "sha256": "faf92dcc2ca9e52cc7b5ae7cc9dad0a52c707031d3da821124ba0f9513155b5c"
+    },
+    {
+      "path": "/images/online-sansa/layers/geungnak-architecture-small.webp",
+      "bytes": 62218,
+      "sha256": "09cdb464c6b29a4b9e06d912fe178595fc10f38ce5c07eba54c23b58a2158cdb"
+    },
+    {
+      "path": "/images/online-sansa/layers/geungnak-architecture.webp",
+      "bytes": 298088,
+      "sha256": "e22df7242416f5f202d3a692226ed784680a6f7f9cdfb481c584a65ace6d9a10"
+    },
+    {
+      "path": "/images/online-sansa/layers/gwanum-altar-small.webp",
+      "bytes": 154916,
+      "sha256": "06ff211ea7fe0051f4c42d46574af8e6ba4659f583fa453f46ea746be8d73e89"
+    },
+    {
+      "path": "/images/online-sansa/layers/gwanum-altar.webp",
+      "bytes": 368128,
+      "sha256": "7faa40f91c7a6ffde66bba663140311c132e8cb801b6432746b406c0eb9b30c8"
+    },
+    {
+      "path": "/images/online-sansa/layers/gwanum-architecture-small.webp",
+      "bytes": 52838,
+      "sha256": "af78ebee842ad9d74561da62b264579d0fb389606a6db6d64d58c9aee07f545e"
+    },
+    {
+      "path": "/images/online-sansa/layers/gwanum-architecture.webp",
+      "bytes": 238506,
+      "sha256": "d63be4cd20dfc3575eb59013759aa5390c57e0571d6d353bb1e5763498954f15"
+    },
+    {
+      "path": "/images/online-sansa/layers/jijang-altar-small.webp",
+      "bytes": 127306,
+      "sha256": "d486bef9a4e9f79ee392895641824720e3997b772949fade2214f43cedfa3d95"
+    },
+    {
+      "path": "/images/online-sansa/layers/jijang-altar.webp",
+      "bytes": 320584,
+      "sha256": "3dba19ff90d5c22b6550a40a5a9e76fa4a2ad369039b05c2065bfe662a362060"
+    },
+    {
+      "path": "/images/online-sansa/layers/jijang-architecture-small.webp",
+      "bytes": 48176,
+      "sha256": "badfde9d8473dba779ac2eecfa0570fc0f7f1faa0c4275a49a3dc5be14612d91"
+    },
+    {
+      "path": "/images/online-sansa/layers/jijang-architecture.webp",
+      "bytes": 235012,
+      "sha256": "a1435e64d6ed6c8a3f84524dc62931597dcc06399433d2def250b16f49acb20e"
+    },
+    {
+      "path": "/images/online-sansa/layers/munsu-altar-small.webp",
+      "bytes": 167596,
+      "sha256": "aad4bde6400cd1cb2a115ea782c0404dede32fa44531a5d3c7b6560a644404fb"
+    },
+    {
+      "path": "/images/online-sansa/layers/munsu-altar.webp",
+      "bytes": 433538,
+      "sha256": "113ed8b3d3a8ed51ae518a9b9bbb6d79c174867929ff079c5569944b7ab4a6e8"
+    },
+    {
+      "path": "/images/online-sansa/layers/munsu-architecture-small.webp",
+      "bytes": 59806,
+      "sha256": "5bed4ac23a6de51d5fc726d9cafa9f65f061bfef3665f1e04fa50ae6a4d8b740"
+    },
+    {
+      "path": "/images/online-sansa/layers/munsu-architecture.webp",
+      "bytes": 298736,
+      "sha256": "38ee023f648f6320bb392cc7181198613fc411175ca2d6a452da4cfc01a99add"
+    },
+    {
+      "path": "/images/online-sansa/layers/originals/architecture.png",
+      "bytes": 3064819,
+      "sha256": "91d4c787fc03be65c2d2cf4369c9b6f916f41364a3558ddb8c253902202c7ef5"
+    },
+    {
+      "path": "/images/online-sansa/layers/originals/daewung-altar.png",
+      "bytes": 2759776,
+      "sha256": "64aecb8df614ef90fdc3c465131384700f8f07b7609730bcbf752916b5867a7b"
+    },
+    {
+      "path": "/images/online-sansa/layers/originals/foreground.png",
+      "bytes": 1402263,
+      "sha256": "07a70d65fc2d183706417d0315048b9fa1482ee1cc9561149357d91f5a3f9685"
+    },
+    {
+      "path": "/images/online-sansa/layers/originals/geungnak-altar.png",
+      "bytes": 2846641,
+      "sha256": "b017d4f74a0200a6893b0f99205cc4769b48424dbef16446a6cd7c2b43786fa2"
+    },
+    {
+      "path": "/images/online-sansa/layers/originals/geungnak-architecture.png",
+      "bytes": 3010580,
+      "sha256": "bb2f1305f5b68137d6c92f2b255b3b209f69e942336d18a60925fc7e180920f7"
+    },
+    {
+      "path": "/images/online-sansa/layers/originals/gwanum-altar.png",
+      "bytes": 2741712,
+      "sha256": "01b10c6e531c77f9522b61d33d2e0b636c3fc19bfe2333d85a6f781b448cdb31"
+    },
+    {
+      "path": "/images/online-sansa/layers/originals/gwanum-architecture.png",
+      "bytes": 2795046,
+      "sha256": "aa81066508e789f959eab7344030ef477c890c1edbe3f7ae463b4d135d0659f5"
+    },
+    {
+      "path": "/images/online-sansa/layers/originals/jijang-altar.png",
+      "bytes": 2574857,
+      "sha256": "74c2e6c39f9b41bb036ddd0815b9d2605d4472394537db0dc45fc6697bfc3f0f"
+    },
+    {
+      "path": "/images/online-sansa/layers/originals/jijang-architecture.png",
+      "bytes": 2800494,
+      "sha256": "e1378e81200aceb037e5af1ae02133615d80ef333d20f9656fc45dd30674e920"
+    },
+    {
+      "path": "/images/online-sansa/layers/originals/munsu-altar.png",
+      "bytes": 2960875,
+      "sha256": "dea97b293ef83b0baae27d6bcfccb1dbcf89943b579a5de7098f478cd605f792"
+    },
+    {
+      "path": "/images/online-sansa/layers/originals/munsu-architecture.png",
+      "bytes": 3057473,
+      "sha256": "f3dccc7549ddd3b74b04580b0e07f5e4a15f488cabed96319d773c034df8f13a"
+    },
+    {
+      "path": "/images/online-sansa/layers/originals/yaksa-altar.png",
+      "bytes": 3111580,
+      "sha256": "3d4269582e6c9e48e146a58c108e8c5aec208fde803a3609b1de8e61802a3468"
+    },
+    {
+      "path": "/images/online-sansa/layers/originals/yaksa-architecture.png",
+      "bytes": 3072315,
+      "sha256": "3d5bc6b648e3644d1f77a17fee2e2888a175c735d9ee8d920a06bf95c5a269c2"
+    },
+    {
+      "path": "/images/online-sansa/layers/yaksa-altar-small.webp",
+      "bytes": 178362,
+      "sha256": "ad40d7366c921d309ecd95e92d51cef8f8319d13ff4621c827fddec14aefd3e7"
+    },
+    {
+      "path": "/images/online-sansa/layers/yaksa-altar.webp",
+      "bytes": 472878,
+      "sha256": "f2c399a2aa4c1a74842d9a18a3f7687b5fe01201ccb982b918204a86486a88f1"
+    },
+    {
+      "path": "/images/online-sansa/layers/yaksa-architecture-small.webp",
+      "bytes": 66712,
+      "sha256": "716b5b917a75175641e96267e805f85545cf36c05e8dd6952328a89c9e86adfd"
+    },
+    {
+      "path": "/images/online-sansa/layers/yaksa-architecture.webp",
+      "bytes": 313790,
+      "sha256": "4cdf540340ac59978c09bce3fcad5f13ffe4e8093d0764cd7c10b8dd6e11d86b"
+    }
+  ]
+}

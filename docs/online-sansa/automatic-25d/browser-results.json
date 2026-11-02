@@ -1,0 +1,60 @@
+{
+  "results": [
+    {
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "fullSequence": true,
+      "noInventedActions": true,
+      "errors": []
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "fullSequence": true,
+      "noInventedActions": true,
+      "errors": []
+    },
+    {
+      "viewport": {
+        "width": 412,
+        "height": 915
+      },
+      "fullSequence": true,
+      "noInventedActions": true,
+      "errors": []
+    },
+    {
+      "viewport": {
+        "width": 820,
+        "height": 1180
+      },
+      "fullSequence": true,
+      "noInventedActions": true,
+      "errors": []
+    },
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "fullSequence": true,
+      "noInventedActions": true,
+      "errors": []
+    }
+  ],
+  "controls": true,
+  "distinctLayers": [
+    "/images/online-sansa/layers/daewung-altar.webp",
+    "/images/online-sansa/layers/geungnak-altar.webp",
+    "/images/online-sansa/layers/gwanum-altar.webp",
+    "/images/online-sansa/layers/munsu-altar.webp",
+    "/images/online-sansa/layers/yaksa-altar.webp",
+    "/images/online-sansa/layers/jijang-altar.webp"
+  ],
+  "realPhone": false,
+  "webkit": false
+}

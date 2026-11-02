@@ -34,7 +34,7 @@
           "title": "입장과 합장",
           "start": 0,
           "end": 25,
-          "guide": "두 손을 모으고 법당 앞에 앉습니다.",
+          "guide": "두 손을 모으고 마음을 가다듬습니다.",
           "action": "방석을 눌러 내 자리에 앉고, 합장 버튼으로 마음을 모아 주세요.",
           "monk": "어서 오세요. 먼저 숨을 한번 고르고 함께 합장해요.",
           "pose": "sit",
@@ -84,7 +84,7 @@
           "title": "천천히 삼배",
           "start": 40,
           "end": 100,
-          "guide": "몸을 천천히 낮추고 일어나세요. 앉아서 합장해도 좋습니다.",
+          "guide": "천천히 세 번 절하거나, 앉아서 합장으로 함께합니다.",
           "action": "한 배씩 직접 눌러 주세요. 앉아서 합장으로 대신할 수 있습니다.",
           "monk": "무리하지 말고 자신의 속도로 세 번 절해 볼게요.",
           "pose": "bow",
@@ -109,8 +109,8 @@
           "title": "염불에 귀 기울이기",
           "start": 100,
           "end": 220,
-          "guide": "염불소리1 · 특정 독송의 원문은 확인하지 않은 일반 염불 녹음입니다.",
-          "action": "소리를 따라 잠시 고요히 머뭅니다.",
+          "guide": "명호 낭독을 한 번 듣고, 남은 시간은 고요히 마음속으로 함께합니다.",
+          "action": "참여 표시는 선택 사항입니다. 소리가 끝나도 다음 단계까지 안내는 계속됩니다.",
           "monk": "",
           "pose": "listen",
           "track": "recitation-daewung",
@@ -127,7 +127,8 @@
           "audioAt": 100,
           "audioEnd": 50.233,
           "motionAt": 100,
-          "waitAction": "none"
+          "waitAction": "none",
+          "repeat": false
         },
         {
           "id": "vow",
@@ -234,7 +235,14 @@
         "note": "석가모니 부처님의 이름을 차분히 되새깁니다. · 사찰별 정근·독송 방식은 다를 수 있습니다.",
         "source": "https://encykorea.aks.ac.kr/Article/E0028328"
       },
-      "syntheticRecitationId": "recitation-daewung"
+      "syntheticRecitationId": "recitation-daewung",
+      "sceneLayers": {
+        "version": 1,
+        "architecture": "/images/online-sansa/layers/architecture.webp",
+        "altar": "/images/online-sansa/layers/daewung-altar.webp",
+        "altarSmall": "/images/online-sansa/layers/daewung-altar-small.webp",
+        "foreground": "/images/online-sansa/layers/foreground.webp"
+      }
     },
     {
       "id": "geungnak",
@@ -266,7 +274,7 @@
           "title": "입장과 합장",
           "start": 0,
           "end": 25,
-          "guide": "두 손을 모으고 법당 앞에 앉습니다.",
+          "guide": "두 손을 모으고 마음을 가다듬습니다.",
           "action": "방석을 눌러 내 자리에 앉고, 합장 버튼으로 마음을 모아 주세요.",
           "monk": "어서 오세요. 먼저 숨을 한번 고르고 함께 합장해요.",
           "pose": "sit",
@@ -316,7 +324,7 @@
           "title": "천천히 삼배",
           "start": 40,
           "end": 100,
-          "guide": "몸을 천천히 낮추고 일어나세요. 앉아서 합장해도 좋습니다.",
+          "guide": "천천히 세 번 절하거나, 앉아서 합장으로 함께합니다.",
           "action": "한 배씩 직접 눌러 주세요. 앉아서 합장으로 대신할 수 있습니다.",
           "monk": "무리하지 말고 자신의 속도로 세 번 절해 볼게요.",
           "pose": "bow",
@@ -341,8 +349,8 @@
           "title": "명호를 마음에 담기",
           "start": 100,
           "end": 220,
-          "guide": "아미타불 정근 녹음은 준비 중입니다. 무음으로 발원할 수 있습니다.",
-          "action": "녹음 대신 나무아미타불를 마음속으로 부르거나 조용히 머물러도 좋습니다.",
+          "guide": "명호 낭독을 한 번 듣고, 남은 시간은 고요히 마음속으로 함께합니다.",
+          "action": "참여 표시는 선택 사항입니다. 소리가 끝나도 다음 단계까지 안내는 계속됩니다.",
           "monk": "",
           "pose": "listen",
           "track": "recitation-geungnak",
@@ -359,7 +367,8 @@
           "audioAt": 100,
           "audioEnd": 52.741,
           "motionAt": 100,
-          "waitAction": "none"
+          "waitAction": "none",
+          "repeat": false
         },
         {
           "id": "vow",
@@ -472,7 +481,14 @@
         "note": "아미타불의 이름을 되새기며 극락왕생과 평안을 발원합니다. · 사찰별 정근·독송 방식은 다를 수 있습니다.",
         "source": "https://encykorea.aks.ac.kr/Article/E0034298"
       },
-      "syntheticRecitationId": "recitation-geungnak"
+      "syntheticRecitationId": "recitation-geungnak",
+      "sceneLayers": {
+        "version": 1,
+        "architecture": "/images/online-sansa/layers/geungnak-architecture.webp",
+        "altar": "/images/online-sansa/layers/geungnak-altar.webp",
+        "altarSmall": "/images/online-sansa/layers/geungnak-altar-small.webp",
+        "foreground": "/images/online-sansa/layers/foreground.webp"
+      }
     },
     {
       "id": "gwanum",
@@ -504,7 +520,7 @@
           "title": "입장과 합장",
           "start": 0,
           "end": 25,
-          "guide": "두 손을 모으고 법당 앞에 앉습니다.",
+          "guide": "두 손을 모으고 마음을 가다듬습니다.",
           "action": "방석을 눌러 내 자리에 앉고, 합장 버튼으로 마음을 모아 주세요.",
           "monk": "어서 오세요. 먼저 숨을 한번 고르고 함께 합장해요.",
           "pose": "sit",
@@ -554,7 +570,7 @@
           "title": "천천히 삼배",
           "start": 40,
           "end": 100,
-          "guide": "몸을 천천히 낮추고 일어나세요. 앉아서 합장해도 좋습니다.",
+          "guide": "천천히 세 번 절하거나, 앉아서 합장으로 함께합니다.",
           "action": "한 배씩 직접 눌러 주세요. 앉아서 합장으로 대신할 수 있습니다.",
           "monk": "무리하지 말고 자신의 속도로 세 번 절해 볼게요.",
           "pose": "bow",
@@ -579,8 +595,8 @@
           "title": "명호를 마음에 담기",
           "start": 100,
           "end": 220,
-          "guide": "관세음보살 정근 녹음은 준비 중입니다. 무음으로 발원할 수 있습니다.",
-          "action": "녹음 대신 나무관세음보살를 마음속으로 부르거나 조용히 머물러도 좋습니다.",
+          "guide": "명호 낭독을 한 번 듣고, 남은 시간은 고요히 마음속으로 함께합니다.",
+          "action": "참여 표시는 선택 사항입니다. 소리가 끝나도 다음 단계까지 안내는 계속됩니다.",
           "monk": "",
           "pose": "listen",
           "track": "recitation-gwanum",
@@ -597,7 +613,8 @@
           "audioAt": 100,
           "audioEnd": 52.611,
           "motionAt": 100,
-          "waitAction": "none"
+          "waitAction": "none",
+          "repeat": false
         },
         {
           "id": "vow",
@@ -705,7 +722,14 @@
         "note": "관세음보살의 자비를 생각하며 이름을 되새깁니다. · 사찰별 정근·독송 방식은 다를 수 있습니다.",
         "source": "https://encykorea.aks.ac.kr/Article/E0004915"
       },
-      "syntheticRecitationId": "recitation-gwanum"
+      "syntheticRecitationId": "recitation-gwanum",
+      "sceneLayers": {
+        "version": 1,
+        "architecture": "/images/online-sansa/layers/gwanum-architecture.webp",
+        "altar": "/images/online-sansa/layers/gwanum-altar.webp",
+        "altarSmall": "/images/online-sansa/layers/gwanum-altar-small.webp",
+        "foreground": "/images/online-sansa/layers/foreground.webp"
+      }
     },
     {
       "id": "munsu",
@@ -737,7 +761,7 @@
           "title": "입장과 합장",
           "start": 0,
           "end": 25,
-          "guide": "두 손을 모으고 법당 앞에 앉습니다.",
+          "guide": "두 손을 모으고 마음을 가다듬습니다.",
           "action": "방석을 눌러 내 자리에 앉고, 합장 버튼으로 마음을 모아 주세요.",
           "monk": "어서 오세요. 먼저 숨을 한번 고르고 함께 합장해요.",
           "pose": "sit",
@@ -787,7 +811,7 @@
           "title": "천천히 삼배",
           "start": 40,
           "end": 100,
-          "guide": "몸을 천천히 낮추고 일어나세요. 앉아서 합장해도 좋습니다.",
+          "guide": "천천히 세 번 절하거나, 앉아서 합장으로 함께합니다.",
           "action": "한 배씩 직접 눌러 주세요. 앉아서 합장으로 대신할 수 있습니다.",
           "monk": "무리하지 말고 자신의 속도로 세 번 절해 볼게요.",
           "pose": "bow",
@@ -812,8 +836,8 @@
           "title": "지혜의 발원",
           "start": 100,
           "end": 220,
-          "guide": "문수보살 독송 녹음은 준비 중입니다. 무음으로 발원할 수 있습니다.",
-          "action": "녹음 대신 나무문수보살를 마음속으로 부르거나 조용히 머물러도 좋습니다.",
+          "guide": "명호 낭독을 한 번 듣고, 남은 시간은 고요히 마음속으로 함께합니다.",
+          "action": "참여 표시는 선택 사항입니다. 소리가 끝나도 다음 단계까지 안내는 계속됩니다.",
           "monk": "",
           "pose": "listen",
           "track": "recitation-munsu",
@@ -830,7 +854,8 @@
           "audioAt": 100,
           "audioEnd": 54.674,
           "motionAt": 100,
-          "waitAction": "none"
+          "waitAction": "none",
+          "repeat": false
         },
         {
           "id": "vow",
@@ -937,7 +962,14 @@
         "note": "문수보살의 지혜를 떠올립니다. 특정 사찰의 공식 의식 전체를 재현하지 않습니다. · 사찰별 정근·독송 방식은 다를 수 있습니다.",
         "source": "https://encykorea.aks.ac.kr/Article/E0019535"
       },
-      "syntheticRecitationId": "recitation-munsu"
+      "syntheticRecitationId": "recitation-munsu",
+      "sceneLayers": {
+        "version": 1,
+        "architecture": "/images/online-sansa/layers/munsu-architecture.webp",
+        "altar": "/images/online-sansa/layers/munsu-altar.webp",
+        "altarSmall": "/images/online-sansa/layers/munsu-altar-small.webp",
+        "foreground": "/images/online-sansa/layers/foreground.webp"
+      }
     },
     {
       "id": "yaksa",
@@ -969,7 +1001,7 @@
           "title": "입장과 합장",
           "start": 0,
           "end": 25,
-          "guide": "두 손을 모으고 법당 앞에 앉습니다.",
+          "guide": "두 손을 모으고 마음을 가다듬습니다.",
           "action": "방석을 눌러 내 자리에 앉고, 합장 버튼으로 마음을 모아 주세요.",
           "monk": "어서 오세요. 먼저 숨을 한번 고르고 함께 합장해요.",
           "pose": "sit",
@@ -1019,7 +1051,7 @@
           "title": "천천히 삼배",
           "start": 40,
           "end": 100,
-          "guide": "몸을 천천히 낮추고 일어나세요. 앉아서 합장해도 좋습니다.",
+          "guide": "천천히 세 번 절하거나, 앉아서 합장으로 함께합니다.",
           "action": "한 배씩 직접 눌러 주세요. 앉아서 합장으로 대신할 수 있습니다.",
           "monk": "무리하지 말고 자신의 속도로 세 번 절해 볼게요.",
           "pose": "bow",
@@ -1044,8 +1076,8 @@
           "title": "명호를 마음에 담기",
           "start": 100,
           "end": 220,
-          "guide": "약사여래 정근 녹음은 준비 중입니다. 무음으로 발원할 수 있습니다.",
-          "action": "녹음 대신 나무약사여래를 마음속으로 부르거나 조용히 머물러도 좋습니다.",
+          "guide": "명호 낭독을 한 번 듣고, 남은 시간은 고요히 마음속으로 함께합니다.",
+          "action": "참여 표시는 선택 사항입니다. 소리가 끝나도 다음 단계까지 안내는 계속됩니다.",
           "monk": "",
           "pose": "listen",
           "track": "recitation-yaksa",
@@ -1062,7 +1094,8 @@
           "audioAt": 100,
           "audioEnd": 53.473,
           "motionAt": 100,
-          "waitAction": "none"
+          "waitAction": "none",
+          "repeat": false
         },
         {
           "id": "vow",
@@ -1169,7 +1202,14 @@
         "note": "약사여래의 서원을 생각하며 회복을 발원합니다. 치료를 대신하지 않습니다. · 사찰별 정근·독송 방식은 다를 수 있습니다.",
         "source": "https://encykorea.aks.ac.kr/Article/E0035327"
       },
-      "syntheticRecitationId": "recitation-yaksa"
+      "syntheticRecitationId": "recitation-yaksa",
+      "sceneLayers": {
+        "version": 1,
+        "architecture": "/images/online-sansa/layers/yaksa-architecture.webp",
+        "altar": "/images/online-sansa/layers/yaksa-altar.webp",
+        "altarSmall": "/images/online-sansa/layers/yaksa-altar-small.webp",
+        "foreground": "/images/online-sansa/layers/foreground.webp"
+      }
     },
     {
       "id": "jijang",
@@ -1201,7 +1241,7 @@
           "title": "입장과 합장",
           "start": 0,
           "end": 25,
-          "guide": "두 손을 모으고 법당 앞에 앉습니다.",
+          "guide": "두 손을 모으고 마음을 가다듬습니다.",
           "action": "방석을 눌러 내 자리에 앉고, 합장 버튼으로 마음을 모아 주세요.",
           "monk": "어서 오세요. 먼저 숨을 한번 고르고 함께 합장해요.",
           "pose": "sit",
@@ -1251,7 +1291,7 @@
           "title": "천천히 삼배",
           "start": 40,
           "end": 100,
-          "guide": "몸을 천천히 낮추고 일어나세요. 앉아서 합장해도 좋습니다.",
+          "guide": "천천히 세 번 절하거나, 앉아서 합장으로 함께합니다.",
           "action": "한 배씩 직접 눌러 주세요. 앉아서 합장으로 대신할 수 있습니다.",
           "monk": "무리하지 말고 자신의 속도로 세 번 절해 볼게요.",
           "pose": "bow",
@@ -1276,8 +1316,8 @@
           "title": "명호를 마음에 담기",
           "start": 100,
           "end": 220,
-          "guide": "지장보살 정근 녹음은 준비 중입니다. 무음으로 발원할 수 있습니다.",
-          "action": "녹음 대신 나무지장보살를 마음속으로 부르거나 조용히 머물러도 좋습니다.",
+          "guide": "명호 낭독을 한 번 듣고, 남은 시간은 고요히 마음속으로 함께합니다.",
+          "action": "참여 표시는 선택 사항입니다. 소리가 끝나도 다음 단계까지 안내는 계속됩니다.",
           "monk": "",
           "pose": "listen",
           "track": "recitation-jijang",
@@ -1294,7 +1334,8 @@
           "audioAt": 100,
           "audioEnd": 55.771,
           "motionAt": 100,
-          "waitAction": "none"
+          "waitAction": "none",
+          "repeat": false
         },
         {
           "id": "vow",
@@ -1401,7 +1442,14 @@
         "note": "지장보살의 큰 원력을 떠올리며 고인을 기억합니다. · 사찰별 정근·독송 방식은 다를 수 있습니다.",
         "source": "https://encykorea.aks.ac.kr/Article/E0054346"
       },
-      "syntheticRecitationId": "recitation-jijang"
+      "syntheticRecitationId": "recitation-jijang",
+      "sceneLayers": {
+        "version": 1,
+        "architecture": "/images/online-sansa/layers/jijang-architecture.webp",
+        "altar": "/images/online-sansa/layers/jijang-altar.webp",
+        "altarSmall": "/images/online-sansa/layers/jijang-altar-small.webp",
+        "foreground": "/images/online-sansa/layers/foreground.webp"
+      }
     }
   ],
   "schedules": [

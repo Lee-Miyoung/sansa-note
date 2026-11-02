@@ -1,0 +1,44 @@
+[
+  {
+    "id": "recitation-daewung",
+    "actualSeconds": 50.233469,
+    "catalogSeconds": 50.233,
+    "bytes": 603160,
+    "sha256": "293eab30c3fc1821c7e69ec45f3f5635ef4693f66fa251b31bf921db65f35f39"
+  },
+  {
+    "id": "recitation-geungnak",
+    "actualSeconds": 52.741224,
+    "catalogSeconds": 52.741,
+    "bytes": 633253,
+    "sha256": "7512c16a44a138f49a5aa334f14016f725180e8c6ba96def42b4800422366ebb"
+  },
+  {
+    "id": "recitation-gwanum",
+    "actualSeconds": 52.610612,
+    "catalogSeconds": 52.611,
+    "bytes": 631685,
+    "sha256": "870b86d5f24d398ea96583c7ee3873d324734c33a3b10cc722088dcbc49245fd"
+  },
+  {
+    "id": "recitation-munsu",
+    "actualSeconds": 54.674286,
+    "catalogSeconds": 54.674,
+    "bytes": 656449,
+    "sha256": "47b95c6e76af3886696dc3049d87682ab76bfd40a3c1173531397c0c16edf9a6"
+  },
+  {
+    "id": "recitation-yaksa",
+    "actualSeconds": 53.472653,
+    "catalogSeconds": 53.473,
+    "bytes": 642030,
+    "sha256": "1dbf24e2c14cba7e32054a44700d4b8d9f9c8ada19cf80a753123f988651dad5"
+  },
+  {
+    "id": "recitation-jijang",
+    "actualSeconds": 55.771429,
+    "catalogSeconds": 55.771,
+    "bytes": 669615,
+    "sha256": "818b0855c5d70bebfb7c9e5b249022b3489dcf76c80beea622975b1777910038"
+  }
+]

@@ -1,0 +1,4 @@
+const fs=require('node:fs'),path=require('node:path');const{fullRoute}=require('./unified-fixtures.cjs');
+async function setup(p){await fullRoute(p);await p.route('**/audio/dharma-hall/*.mp3',r=>{const bytes=fs.readFileSync(path.resolve('.'+new URL(r.request().url()).pathname)),m=r.request().headers().range?.match(/bytes=(\d+)-(\d*)/),start=m?+m[1]:0,end=m?.[2]?Math.min(+m[2],bytes.length-1):bytes.length-1;return r.fulfill({status:m?206:200,contentType:'audio/mpeg',headers:{'accept-ranges':'bytes','content-length':String(end-start+1),...(m?{'content-range':`bytes ${start}-${end}/${bytes.length}`}:{})},body:bytes.subarray(start,end+1)})});await p.goto('https://sansanote.com/');await p.evaluate(()=>SansaOnlineSansa.ready);await p.evaluate(()=>startLocalMode());}
+async function enter(p,id='daewung',kind='guided'){await p.evaluate(({id,kind})=>SansaOnlineSansa.enter(id,{kind}),{id,kind});}
+module.exports={setup,enter};
