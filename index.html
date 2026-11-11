@@ -22119,6 +22119,23 @@ body.catalog-screen-open #catalogOverlay,
 /* ---- 9. 푸터 ---- */
 .brand-footer-logo img{display:block;width:190px;max-width:70vw;height:auto;object-fit:contain}
 .brand-footer-logo span{display:none}
+img,picture,svg,canvas{
+  -webkit-touch-callout:none;
+  -webkit-user-drag:none;
+  -webkit-user-select:none;
+  user-select:none;
+}
+.site-footer .footer-rights{
+  margin-top:20px;padding-top:14px;border-top:1px solid #e9e3d9;
+  max-width:540px;font-family:"Pretendard","Noto Sans KR",sans-serif;
+  font-size:12px;line-height:1.8;letter-spacing:-.01em;color:#79746b;
+}
+.site-footer .footer-rights p{margin:0;font-size:inherit;line-height:inherit;color:inherit}
+.site-footer .footer-rights-status{
+  display:inline-block;margin:7px 0 8px;padding:2px 9px;
+  border:1px solid #dedfd2;border-radius:5px;background:#f3f3ec;
+  color:#62694e;font-size:11px;font-weight:500;line-height:1.7;
+}
 
 /* ---- Mobile ---- */
 @media(max-width:720px){
@@ -22825,7 +22842,11 @@ body.catalog-screen-open #catalogOverlay,
     <div>
       <div class="site-footer-brand brand-footer-logo"><img src="./images/brand/logos/text-logo-color.png" alt="산사노트" onerror="this.style.display='none';this.nextElementSibling.style.display='inline'"><span>산사노트</span></div>
       <div class="site-footer-copy">사찰·산 순례 기록을 위한 개인 아카이브<br>문의 · 오류 제보 · 협업 제안</div>
-      <p class="site-footer-copy">무념스님 캐릭터는 저작권법에 따라 보호됩니다.<br>산사노트 상표 출원·심사 중<br>캐릭터 및 로고의 무단 복제·배포·상업적 사용을 금합니다.</p>
+      <div class="footer-rights" aria-label="저작권 및 상표 안내">
+        <p>무념스님 캐릭터는 저작권법에 따라 보호됩니다.</p>
+        <span class="footer-rights-status">산사노트 상표 출원·심사 중</span>
+        <p>캐릭터 및 로고의 무단 복제·배포·상업적 사용을 금합니다.</p>
+      </div>
     </div>
     <div class="site-footer-links">
       <button class="site-footer-link" type="button" onclick="openSansaMail('contact')" style="cursor:pointer;">✉ 문의하기</button>
@@ -42386,5 +42407,6 @@ nav.site-global-nav{height:var(--global-nav-h)!important;box-sizing:border-box!i
 <link rel="stylesheet" href="/styles/monastery-stage.css?v=20261101-live">
 <script src="/scripts/monastery-stage.js?v=20261101-live" defer></script>
 <link rel="stylesheet" href="/styles/automatic-ritual.css?v=20261102-25d"><script src="/scripts/automatic-ritual.js?v=20261102-25d" defer></script>
+<script src="/scripts/image-protection.js?v=20261111" defer></script>
 </body>
 </html>
