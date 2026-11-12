@@ -23525,7 +23525,7 @@ img,picture,svg,canvas{
         <button class="btn btn-primary" style="flex:1;" id="playlistPlayBtn" onclick="togglePlaylistPlay()">▶ 재생하기</button>
         <button class="btn btn-ghost" style="padding:10px 16px;" onclick="nextSong()">⏭</button>
       </div>
-      <div class="sync-panel" id="lyricSyncPanel">
+      <div class="sync-panel" id="lyricSyncPanel" hidden>
         <p id="lyricSyncSelected" role="status">맞출 가사 줄을 선택해 주세요.</p><div class="sync-slider-row">
           <button class="btn btn-ghost" style="padding:6px 9px;font-size:11px;" onclick="adjustLyricOffset(-0.1)">−0.1</button>
           <input id="lyricOffsetRange" type="range" min="-120" max="120" step="0.1" value="0" oninput="setLyricOffset(this.value)">
@@ -23534,13 +23534,13 @@ img,picture,svg,canvas{
         <div style="display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap;margin-top:8px;">
           <span id="lyricOffsetLabel" style="min-width:92px;font-size:11px;font-weight:800;color:var(--stamp);">싱크 0.0초</span>
           <span id="lyricSyncSaveStatus" style="font-size:10px;font-weight:800;color:var(--ink-soft);">공용 싱크 준비</span>
-          <button class="btn btn-primary" style="padding:7px 10px;font-size:11px;" onclick="alignSelectedLyricToNow()">🎯 선택한 줄을 지금에 맞춤</button>
-          <button class="btn btn-primary" type="button" onclick="flushLyricOffsets()">싱크 저장</button><button class="btn btn-ghost" style="padding:6px 9px;font-size:10.5px;" onclick="resetLyricOffset()">초기화</button>
+          <button class="btn btn-primary" style="padding:7px 10px;font-size:11px;" onclick="alignSelectedLyricToNow()">🎯 이 줄 시작을 지금에 맞춤</button>
+          <button class="btn btn-ghost" type="button" onclick="selectNextLyricForSync()">다음 가사 줄</button><button class="btn btn-primary" type="button" onclick="flushLyricOffsets()">싱크 저장</button><button class="btn btn-ghost" style="padding:6px 9px;font-size:10.5px;" onclick="resetLyricOffset()">전체 시차 0초</button>
         </div>
-        <div class="map-note" style="margin-top:7px;padding:0;">가사 한 줄을 먼저 톡 누른 뒤, 실제 노래에서 그 줄이 시작되는 순간 <b>‘선택한 줄을 지금에 맞춤’</b>을 누르세요.</div>
+        <div class="map-note" style="margin-top:7px;padding:0;">관리자 전용 · 가사 줄을 선택하고 노래에서 시작되는 순간 맞춰 주세요. 저장한 싱크는 모든 이용자에게 적용돼요.</div>
       </div>
       <button class="btn btn-ghost btn-block" style="margin-top:8px;" onclick="stopPlaylist()">⏹ 완전히 끄기</button>
-      <div class="map-note" style="margin-top:12px;">노래 순서는 손잡이(☰)를 끌어 바꿀 수 있고, 곡마다 가사 싱크값이 따로 저장돼요. 창을 닫아도 음악은 계속 재생돼요.</div>
+      <div class="map-note" style="margin-top:12px;">노래 순서는 손잡이(☰)를 끌어 바꿀 수 있어요. 창을 닫아도 음악은 계속 재생돼요.</div>
     </div>
   </div>
 </div>
@@ -25361,14 +25361,25 @@ async function recoverTemplePhotoMetadataFromStorage(){
 
 
 let lyricSyncListening=false;
+function normalizeSharedLyricSync(shared){
+  const values={...shared};delete values.__lineTimesV1;
+  const perSong=shared.__lineTimesV1;
+  if(perSong&&typeof perSong==='object'&&!Array.isArray(perSong)){
+    for(const [title,lines]of Object.entries(perSong))if(lines&&typeof lines==='object'&&!Array.isArray(lines)){
+      values[title]={version:1,offset:Number.isFinite(Number(shared[title]))?Number(shared[title]):0,lines};
+    }
+  }
+  return values;
+}
 function startSharedLyricSyncListener(){
   if(!db || lyricSyncListening) return;
   lyricSyncListening=true;
   lyricSyncRef().on('value', snap=>{
     const shared=snap.val();
     if(shared && typeof shared==='object' && !Array.isArray(shared)){
-      const changed=JSON.stringify(shared)!==JSON.stringify(lyricOffsets);
-      lyricOffsets={...shared,...Object.fromEntries([...lyricSyncPending].map(([key,entry])=>[key,entry.value]))};
+      const values=normalizeSharedLyricSync(shared);
+      const changed=JSON.stringify(values)!==JSON.stringify(lyricOffsets);
+      lyricOffsets={...values,...Object.fromEntries([...lyricSyncPending].map(([key,entry])=>[key,entry.value]))};
       try{ localStorage.setItem('sansaLyricOffsets_v3',JSON.stringify(lyricOffsets)); }catch(e){}
       const st=document.getElementById('lyricSyncSaveStatus');
       if(st && !isAdminUser()) st.textContent='공용 싱크 적용됨';
@@ -25928,7 +25939,34 @@ let lyricOffsets = (()=>{
   return out;
 })();
 let selectedLyricSyncIdx = -1;
-function currentLyricOffset(){ return Number(lyricOffsets[SONGS[currentSongIdx]?.title] || 0); }
+function currentLyricSync(){return lyricOffsets[SONGS[currentSongIdx]?.title];}
+function currentLyricOffset(){const sync=currentLyricSync(),value=Number(sync&&typeof sync==='object'?sync.offset:sync);return Number.isFinite(value)?value:0;}
+function lyricStartTime(index){
+  const sync=currentLyricSync(),saved=sync&&typeof sync==='object'?sync.lines?.[index]:undefined;
+  if(Number.isFinite(saved))return Math.max(0,saved+currentLyricOffset());
+  const time=SONGS[currentSongIdx]?.lyrics[index]?.t;
+  return Number.isFinite(time)&&time>=0?Math.max(0,time+currentLyricOffset()):null;
+}
+function setCurrentLyricOffset(value){
+  const title=SONGS[currentSongIdx]?.title,old=currentLyricSync();if(!title)return;
+  lyricOffsets[title]=old&&typeof old==='object'?{...old,offset:value}:value;
+}
+function refreshLyricLineTimes(){
+  document.querySelectorAll('#lyricsInner .lyric-sync-time').forEach(el=>{const time=lyricStartTime(Number(el.dataset.line));el.textContent=time===null?'시작 맞추기':formatTime(time)+' · '+time.toFixed(1)+'초';});
+}
+function renderPlaylistLyrics(){
+  const wrap=document.getElementById('lyricsInner');if(!wrap)return;
+  const admin=isAdminUser(),song=SONGS[currentSongIdx];
+  wrap.innerHTML=(song?.lyrics||[]).map((line,i)=>`<div class="lyric-line ${line.text.startsWith('[')?'lyric-section':''}" id="lyricLine${i}">${admin?`<button type="button" class="lyric-sync-pick" onclick="selectLyricForSync(${i})">${escapeHtml(line.text)}<small class="lyric-sync-time" data-line="${i}"></small></button>`:escapeHtml(line.text)}</div>`).join('');
+  refreshLyricLineTimes();
+}
+function syncLyricAdminAccess(){
+  const panel=document.getElementById('lyricSyncPanel');if(!panel)return;
+  const admin=isAdminUser();panel.hidden=!admin;panel.style.display=admin?'':'none';
+  if(!admin)selectedLyricSyncIdx=-1;
+  renderPlaylistLyrics();lastLyricIdx=-1;
+}
+function selectNextLyricForSync(){const lines=SONGS[currentSongIdx]?.lyrics||[];if(isAdminUser()&&lines.length)selectLyricForSync(Math.min(lines.length-1,selectedLyricSyncIdx+1));}
 let lyricSyncSaveTimer = null,lyricSyncWriting=false,lyricSyncRevision=0;
 const lyricSyncPending=new Map();
 let lyricSyncStatusText='';
@@ -25945,7 +25983,14 @@ async function flushLyricOffsets(){
   showLyricSyncStatus('저장 중…');
   let saved=false;
   try{
-    await lyricSyncRef().update(Object.fromEntries([...batch].map(([key,entry])=>[key,entry.value])));
+    // Keep original numeric offsets readable by already-open older clients.
+    const patch={};
+    for(const [title,entry]of batch){
+      const value=entry.value;
+      patch[title]=value&&typeof value==='object'?value.offset:value;
+      if(value&&typeof value==='object')patch['__lineTimesV1/'+title]=value.lines;
+    }
+    await lyricSyncRef().update(patch);
     for(const [key,entry]of batch)if(lyricSyncPending.get(key)?.revision===entry.revision)lyricSyncPending.delete(key);
     saved=true;
     showLyricSyncStatus(lyricSyncPending.size?'새 조정값 저장 중…':'✓ 전체 사용자에게 저장됨');
@@ -25961,7 +26006,8 @@ function saveLyricOffsets(){
   try{localStorage.setItem('sansaLyricOffsets_v3',JSON.stringify(lyricOffsets));}catch(_){}
   if(!isAdminUser())return;
   const title=SONGS[currentSongIdx]?.title;if(!title)return;
-  lyricSyncPending.set(title,{value:currentLyricOffset(),revision:++lyricSyncRevision});
+  const sync=currentLyricSync();
+  lyricSyncPending.set(title,{value:sync&&typeof sync==='object'?structuredClone(sync):currentLyricOffset(),revision:++lyricSyncRevision});
   showLyricSyncStatus('조정값 저장 대기…');
   clearTimeout(lyricSyncSaveTimer);
   lyricSyncSaveTimer=setTimeout(flushLyricOffsets,350);
@@ -25970,12 +26016,13 @@ function updateLyricOffsetLabel(){
   const el = document.getElementById('lyricOffsetLabel');
   if(!el) return;
   const v = currentLyricOffset();
-  el.textContent = `싱크 ${v>=0?'+':''}${v.toFixed(1)}초`;
+  el.textContent = `전체 시차 ${v>=0?'+':''}${v.toFixed(1)}초`;
   const range=document.getElementById('lyricOffsetRange'); if(range) range.value=String(v);
+  refreshLyricLineTimes();
 }
 function adjustLyricOffset(delta){
   if(!isAdminUser()) return;
-  lyricOffsets[SONGS[currentSongIdx].title] = Math.max(-120, Math.min(120, Math.round((currentLyricOffset()+delta)*10)/10));
+  setCurrentLyricOffset(Math.max(-120, Math.min(120, Math.round((currentLyricOffset()+delta)*10)/10)));
   saveLyricOffsets();
   lastLyricIdx = -1;
   updateLyricOffsetLabel();
@@ -25985,7 +26032,7 @@ function adjustLyricOffset(delta){
 function setLyricOffset(v){
   if(!isAdminUser()) return;
   const n=Math.max(-120,Math.min(120,Number(v)||0));
-  lyricOffsets[SONGS[currentSongIdx].title]=Math.round(n*10)/10;
+  setCurrentLyricOffset(Math.round(n*10)/10);
   saveLyricOffsets(); lastLyricIdx=-1; updateLyricOffsetLabel(); updatePlaylistProgress();
 }
 function selectLyricForSync(i){
@@ -26000,13 +26047,16 @@ function alignSelectedLyricToNow(){
   const lyrics=SONGS[currentSongIdx]?.lyrics||[];
   const i=selectedLyricSyncIdx>=0?selectedLyricSyncIdx:lastLyricIdx;
   if(!audio||i<0||!lyrics[i]){ showToast('먼저 맞추고 싶은 가사 줄을 눌러주세요'); return; }
-  setLyricOffset(audio.currentTime-lyrics[i].t);
-  showToast('이 줄을 현재 재생 위치에 맞췄어요');
+  const old=currentLyricSync(),title=SONGS[currentSongIdx].title;
+  const start=Math.round((audio.currentTime-currentLyricOffset())*10)/10;
+  lyricOffsets[title]={version:1,offset:currentLyricOffset(),lines:{...(old&&typeof old==='object'?old.lines:{}),[i]:start}};
+  saveLyricOffsets();refreshLyricLineTimes();lastLyricIdx=-1;updatePlaylistProgress();
+  showToast('선택한 가사 줄의 시작을 맞췄어요');
 }
 
 function resetLyricOffset(){
   if(!isAdminUser()) return;
-  lyricOffsets[SONGS[currentSongIdx].title] = 0;
+  setCurrentLyricOffset(0);
   saveLyricOffsets();
   lastLyricIdx = -1;
   updateLyricOffsetLabel();
@@ -26046,7 +26096,7 @@ function loadSong(idx, autoplay){
   document.getElementById('miniPlayerTitle').textContent = song.title;
   renderSongPicks();
   const wrap = document.getElementById('lyricsInner');
-  wrap.innerHTML = song.lyrics.map((l,i)=>`<div class="lyric-line" id="lyricLine${i}" onclick="selectLyricForSync(${i})" style="padding:5px 0;font-size:${l.text.startsWith('[')?'11px':'13.5px'};color:${l.text.startsWith('[')?'var(--stamp)':'var(--ink-soft)'};font-weight:${l.text.startsWith('[')?'800':'500'};transition:color .3s ease;cursor:pointer;">${escapeHtml(l.text)}</div>`).join('');
+  renderPlaylistLyrics();
   selectedLyricSyncIdx=-1;
   const selected=document.getElementById('lyricSyncSelected');if(selected)selected.textContent='맞출 가사 줄을 선택해 주세요.';
   lastLyricIdx = -1;
@@ -26065,7 +26115,7 @@ function openPlaylistOverlay(){
     document.querySelectorAll('.song-pick').forEach((b,i)=> b.classList.toggle('active', i===currentSongIdx));
   }
   const syncPanel = document.getElementById('lyricSyncPanel');
-  if(syncPanel) syncPanel.style.display = isAdminUser() ? '' : 'none';
+  syncLyricAdminAccess();
   const syncStatus=document.getElementById('lyricSyncSaveStatus');
   if(syncStatus){
     syncStatus.textContent=isAdminUser() ? (lyricSyncStatusText||'관리자 공용 싱크') : '공용 싱크 적용됨';
@@ -26135,9 +26185,10 @@ function updatePlaylistProgress(){
   document.getElementById('playlistSeek').value = (audio.currentTime/audio.duration)*100;
   updatePlaylistPlayButtons();
   const lyrics = SONGS[currentSongIdx].lyrics;
-  let idx = 0;
+  let idx = -1,latest=-Infinity;
   for(let i=0;i<lyrics.length;i++){
-    if((lyrics[i].t + currentLyricOffset()) <= audio.currentTime) idx = i; else break;
+    const time=lyricStartTime(i);
+    if(time!==null&&time<=audio.currentTime&&time>=latest){idx=i;latest=time;}
   }
   if(idx !== lastLyricIdx){
     if(lastLyricIdx>=0){ const prev = document.getElementById('lyricLine'+lastLyricIdx); if(prev){ prev.style.color = 'var(--ink-soft)'; prev.style.fontWeight = '500'; } }
@@ -42404,9 +42455,9 @@ nav.site-global-nav{height:var(--global-nav-h)!important;box-sizing:border-box!i
 <script src="/scripts/personal-location.js?v=20261025-unified" defer></script>
 <script src="/scripts/mountain-covers.js?v=20261027-static" defer></script>
 <script src="/scripts/visit-tips.js?v=20261112-cnn37" defer></script>
-<script src="/scripts/temple-music.js?v=20261112-sync-room" defer></script>
+<script src="/scripts/temple-music.js?v=20261112-unified-lyrics" defer></script>
 <script src="/scripts/device-photos/celebration.js?v=20261026-unified" defer></script>
-<link rel="stylesheet" href="/styles/ui-content.css?v=20261112-music-header">
+<link rel="stylesheet" href="/styles/ui-content.css?v=20261112-unified-lyrics">
 <link rel="stylesheet" href="./styles/dharma-hall.css?v=20261101-guided-studio">
 <script src="./scripts/practice-config.js?v=20261102-25d" defer></script>
 <script src="./scripts/sansa-core.js?v=20261102-25d" defer></script>

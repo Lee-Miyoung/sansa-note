@@ -59,3 +59,12 @@ body.sansa-modal-open:has(#playlistOverlay.show) nav.site-global-nav{visibility:
 #playlistOverlay>.modal>.modal-body{flex:1 1 auto!important;min-height:0!important;overflow-y:auto!important;overscroll-behavior:contain}
 #lyricSyncSelected{font-size:12px;line-height:1.6;color:#49674e;margin:0 0 8px}
 #lyricsInner .lyric-line.sync-selected{background:#e1ead4;border-radius:6px;outline:2px solid #728d5c;outline-offset:2px}
+
+/* The same lyric panel serves every song; timing tools never flash for visitors. */
+#lyricSyncPanel[hidden]{display:none!important}
+#lyricsInner .lyric-line{padding:5px 0;font-size:13.5px;color:var(--ink-soft);font-weight:500;line-height:1.8;transition:color .2s ease}
+#lyricsInner .lyric-section{font-size:11px;color:var(--stamp);font-weight:800}
+#lyricsInner .lyric-sync-pick{display:block;width:100%;border:0;background:transparent;color:inherit;font:inherit;line-height:inherit;text-align:center;padding:5px;cursor:pointer}
+#lyricsInner .lyric-sync-time{display:block;font:500 10px/1.6 system-ui;color:#62765d}
+#playlistOverlay .music-share-actions{align-items:center}
+#playlistMusicStatus:empty{display:none}
