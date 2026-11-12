@@ -22517,11 +22517,11 @@ img,picture,svg,canvas{
       <button type="button" aria-label="로그인 창 닫기" onclick="closeLoginOverlay()" style="position:absolute;right:14px;top:12px;border:0;background:transparent;color:var(--ink-soft);font-size:20px;cursor:pointer;">✕</button>
       <img class="sansa-brand-auth-logo" src="./images/brand/logos/main-logo-color.png" alt="산사노트" onerror="this.style.display='none'">
       <h1 class="serif sansa-brand-fallback-title">산사노트</h1>
-      <p class="lead">전국의 절을 기록하는 나만의 순례 노트. 유네스코 산사부터 조용한 숨은 고찰까지, 다녀온 절과 사진을 한곳에 모아보세요. 가입하면 어느 기기에서든 이어서 쓸 수 있어요.</p>
+      <p class="lead">산사와 음악, 작은 쉼은 로그인 없이 편하게 즐기세요. 나만의 글을 남기고 수호카드를 모을 때만 Google 로그인으로 시작해요.</p>
 
       <button class="btn btn-primary btn-block" id="googleLoginBtn" onclick="googleLogin()">G&nbsp;&nbsp;Google로 시작하기</button>
       <div id="pwaLoginNote" style="display:none;margin:10px 0 2px;padding:9px 11px;border-radius:10px;background:rgba(152,111,67,.08);font-size:11.5px;line-height:1.55;color:var(--ink-soft);">아이폰·아이패드 홈 화면 앱에서는 Google 로그인 창이 제한될 수 있어요. Safari에서 sansanote.com을 열어 한 번 로그인하면 더 안정적이에요.</div>
-      <div style="margin:12px 0 0;padding:10px 12px;border-radius:12px;background:rgba(83,108,74,.07);font-size:11px;line-height:1.55;color:var(--ink-soft);text-align:center;">Google 계정 하나로 순례 기록과 게임 최고점수를 기기마다 이어서 볼 수 있어요.</div>
+      <div style="margin:12px 0 0;padding:10px 12px;border-radius:12px;background:rgba(83,108,74,.07);font-size:11px;line-height:1.55;color:var(--ink-soft);text-align:center;">개인정보 보호를 위해 새로 추가하는 사진은 클라우드에 올리지 않고, 내 기기의 브라우저에만 보관해요. 글과 수행 기록은 Google 계정으로 이어갈 수 있어요.</div>
       <div id="authError" style="color:var(--stamp);font-size:12.5px;margin-top:10px;display:none;"></div>
 
       <button class="auth-back-btn" type="button" onclick="closeLoginOverlay()">← 로그인하지 않고 계속 둘러보기</button>
@@ -22642,6 +22642,15 @@ img,picture,svg,canvas{
           <img class="ses-brand-monk ses-monk-nearby" src="./images/brand/monks/monk-prayer.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
         </button>
       </div>
+    </div>
+  </section>
+
+  <section class="sansa-privacy-welcome" aria-labelledby="privacyWelcomeTitle">
+    <span class="privacy-welcome-mark" aria-hidden="true">♧</span>
+    <div><h2 id="privacyWelcomeTitle">마음은 편하게, 내 사진은 소중하게.</h2>
+      <p><strong>개인정보 보호를 위해 새로 추가하는 사진은 클라우드에 올리지 않아요.</strong><br>사진은 내 기기의 브라우저에만 보관해요.</p>
+      <p>둘러보기와 음악·쉼은 로그인 없이.<br>나만의 글과 수호카드 모으기는 Google 로그인으로.</p>
+      <details><summary>안심하고 이용하는 산사노트</summary><p>별도의 회원가입 양식 없이 Google 계정으로 시작해요. 로그인 정보와 글·수행 기록은 계정에 저장되지만, 새 사진 파일은 서버로 전송하지 않아요. 사진은 다른 기기로 자동 공유되지 않으니, 기기 변경이나 브라우저 데이터 삭제 전 사진 백업을 해 주세요. 예전에 클라우드에 저장한 사진은 기존 방식으로 유지돼요.</p></details>
     </div>
   </section>
 
@@ -35275,7 +35284,7 @@ function playIOSBeat(kind,volume=.75){
 function getHipAudio(){
   const AC=window.AudioContext||window.webkitAudioContext;
   if(!AC) return null;
-  if(!hipAudioCtx){try{hipAudioCtx=new AC({latencyHint:'interactive'});}catch(e){hipAudioCtx=new AC();}}
+  if(!hipAudioCtx){try{hipAudioCtx=new AC({latencyHint:'interactive'});}catch(e){try{hipAudioCtx=new AC();}catch(_){return null;}}}
   return hipAudioCtx;
 }
 function unlockHipAudio(){
@@ -35417,6 +35426,7 @@ function loseBeatLife(enemy){
 }
 function clearWorryField(){const z=document.getElementById('worrySmashZone');z?.querySelectorAll('.worry-enemy,.worry-missile,.worry-hit-ring,.worry-explosion,.worry-shard,.beat-guaranteed-boom,.beat-guaranteed-shard').forEach(x=>x.remove());}
 function restartWorryGame(){
+  stopWorryShooter();
   beatLives=3;beatLifeGraceUntil=performance.now()+700;updateBeatLives();
   document.getElementById('beatGameOver')?.classList.remove('show');
   clearWorryField();lockBeatDefenseLine();worrySpawnClock=0;
@@ -35484,7 +35494,7 @@ function worryShooterTick(ts){
     enemy.classList.toggle('danger',y>dangerLine-48);
     if(enemy.dataset.locked!=='1' && y>=dangerLine){loseBeatLife(enemy);}
   });
-  worryGameTimer=requestAnimationFrame(worryShooterTick);
+  if(worryGameRunning)worryGameTimer=requestAnimationFrame(worryShooterTick);
 }
 function nearestEnemyInLane(kind){
   const cfg=BEAT_WEAPONS[kind];if(!cfg)return null;
@@ -35558,18 +35568,8 @@ function beatResolveGuaranteedHit(enemy,cx,cy,kind){
   boom.style.top=cy+'px';
   zone.appendChild(boom);
 
-  for(let i=0;i<12;i++){
-    const shard=document.createElement('i');
-    shard.className='beat-guaranteed-shard';
-    shard.style.left=cx+'px';
-    shard.style.top=cy+'px';
-    const a=(Math.PI*2*i/12)+(Math.random()-.5)*.25;
-    const d=28+Math.random()*38;
-    shard.style.setProperty('--sx',(Math.cos(a)*d)+'px');
-    shard.style.setProperty('--sy',(Math.sin(a)*d)+'px');
-    zone.appendChild(shard);
-    setTimeout(()=>shard.remove(),360);
-  }
+  // Reuse the canvas instead of adding twelve animated DOM nodes per hit.
+  beatFxBurst(cx,cy,12);
   setTimeout(()=>boom.remove(),330);
 
   let hp=Math.max(0,parseInt(enemy.dataset.hp||'1',10)-1);
@@ -42376,7 +42376,7 @@ nav.site-global-nav{height:var(--global-nav-h)!important;box-sizing:border-box!i
 }
 @media(prefers-reduced-motion:reduce){.site-global-nav .site-global-nav-links>button{transition:none!important}}
 </style>
-<link rel="stylesheet" href="./styles/wellness.css?v=20261018-integrated">
+<link rel="stylesheet" href="./styles/wellness.css?v=20261112-privacy-playlist">
 <link rel="stylesheet" href="./styles/brand-ui.css?v=20261101-completion">
 <link rel="stylesheet" href="./styles/game-viewport.css?v=20261017">
 <style id="sansa-home-personal-cards-only">
@@ -42386,7 +42386,7 @@ nav.site-global-nav{height:var(--global-nav-h)!important;box-sizing:border-box!i
 
 
 <script src="./scripts/wellness-effects.js?v=20261018-integrated" defer></script>
-<script src="./scripts/meditation-sounds.js?v=20261018" defer></script>
+<script src="./scripts/meditation-sounds.js?v=20261112-game-audio" defer></script>
 <script src="./scripts/game-viewport.js?v=20261017" defer></script>
 <script src="./scripts/navigation.js?v=20261101-sansa" defer></script>
 <link rel="stylesheet" href="/styles/atlas-home.css?v=20261025-complete24">
@@ -42395,10 +42395,10 @@ nav.site-global-nav{height:var(--global-nav-h)!important;box-sizing:border-box!i
 
 <link rel="stylesheet" href="/styles/photo-gallery.css?v=20261027-static">
 <link rel="stylesheet" href="/styles/device-photos.css?v=20261026-unified">
-<script src="/scripts/session-policy.js?v=20261025-unified" defer></script>
+<script src="/scripts/session-policy.js?v=20261112-privacy" defer></script>
 <script src="/scripts/device-photos/store.js?v=20261026-unified" defer></script>
 <script src="/scripts/device-photos/gallery.js?v=20261026-ui" defer></script>
-<script src="/scripts/device-photos/ui.js?v=20261026-unified" defer></script>
+<script src="/scripts/device-photos/ui.js?v=20261112-privacy" defer></script>
 <script src="/scripts/device-photos/themes.js?v=20261025-unified" defer></script>
 <script src="/scripts/device-photos/cards.js?v=20261026-ui" defer></script>
 <script src="/scripts/personal-location.js?v=20261025-unified" defer></script>

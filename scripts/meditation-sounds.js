@@ -42,7 +42,14 @@
  $('meditationSoundPreview').onclick=()=>play(true);$('meditationPlay').onclick=()=>play(false);$('meditationPause').onclick=pause;$('meditationStop').onclick=()=>stop();
  audio.addEventListener('error',()=>{playing=false;if(selected)status.textContent='음원을 불러오지 못했습니다. 다시 재생해 주세요.';});
  const overlay=document.getElementById('breathOverlay');
- new MutationObserver(changes=>{if(!overlay.classList.contains('show')||changes.some(c=>c.target!==overlay&&c.target.matches?.('.overlay.show')&&!String(c.oldValue).split(/\s+/).includes('show'))){stop(true);setDeadline(0);}}).observe(document.body,{subtree:true,attributes:true,attributeFilter:['class'],attributeOldValue:true});
+ // Ignore game effects and other class changes while this room is closed.
+ new MutationObserver(changes=>{
+  const visible=overlay.classList.contains('show');
+  const wasOpen=c=>String(c.oldValue).split(/\s+/).includes('show');
+  const closed=changes.some(c=>c.target===overlay&&!visible&&wasOpen(c));
+  const anotherOpened=visible&&changes.some(c=>c.target!==overlay&&c.target.matches?.('.overlay.show')&&!wasOpen(c));
+  if(closed||anotherOpened){stop(true);setDeadline(0);}
+ }).observe(document.body,{subtree:true,attributes:true,attributeFilter:['class'],attributeOldValue:true});
  document.addEventListener('play',event=>{if(event.target!==audio&&event.target instanceof HTMLMediaElement&&!event.target.muted)stop(true);},true);
  document.addEventListener('visibilitychange',()=>{if(document.hidden)stop(true);});window.addEventListener('pagehide',()=>stop(true));
  fetch('./audio/meditation/catalog.json').then(r=>{if(!r.ok)throw Error();return r.json();}).then(list=>{tracks=list.filter(t=>/^[a-z]+$/.test(t.id)&&/^\.\/audio\/meditation\/[a-z]+\.mp3$/.test(t.src));for(const t of tracks)select.add(new Option(t.title,t.id));}).catch(()=>{status.textContent='음원 목록을 불러오지 못했습니다. 호흡은 무음으로 이용할 수 있어요.';});

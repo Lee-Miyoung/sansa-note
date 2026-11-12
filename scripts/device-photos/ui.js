@@ -1,6 +1,6 @@
 (()=>{'use strict';
 const S=window.SansaDevicePhotoStore,urls=new Map();let zipPromise,uploadBusy=false,backupBusy=false,viewEpoch=0,backupTimer=null,preparedBackup=null;
-const note='사진은 현재 브라우저에만 보관되며, 다른 기기에서는 자동으로 보이지 않습니다.';
+const note='개인정보 보호를 위해 새 사진은 클라우드에 올리지 않고 이 기기의 브라우저에만 보관해요. 다른 기기로 자동 공유되지 않아요.';
 const message=e=>e?.name==='QuotaExceededError'?'기기 저장공간이 부족해 사진을 저장하지 못했어요. 사진을 백업하고 저장공간을 확인해 주세요.':e?.message||'사진 작업을 완료하지 못했어요.';
 const place=(kind,id)=>(kind==='mountain'?mountainDestinations:destinations)?.[id]||{};
 function revoke(prefix=''){for(const [key,url]of urls)if(key.startsWith(prefix)){URL.revokeObjectURL(url);urls.delete(key)}}

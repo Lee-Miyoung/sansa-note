@@ -250,3 +250,14 @@
 .wellness-scene.scene-pouch{background-position:100% 66.666667%!important}
 .wellness-scene.scene-dance{background-position:0 100%!important}
 .wellness-scene.scene-music{background-position:50% 100%!important}
+
+/* The music atlas cell must never expose neighboring hands or feet. */
+.sansa-mascot[data-pose=music]{background-size:300% 400%!important;background-position:50% 100%!important;border-radius:50%!important;clip-path:circle(49% at 50% 50%)!important;overflow:hidden!important;background-color:#f3ead5!important;aspect-ratio:1}
+.sansa-privacy-welcome{display:flex;gap:12px;max-width:1080px;margin:18px auto;padding:20px 22px;background:#f6f7ef;border:1px solid #dce4d4;border-radius:18px;color:#415648;box-sizing:border-box}
+.sansa-privacy-welcome .privacy-welcome-mark{font-size:29px;color:#527550;line-height:1.2}
+.sansa-privacy-welcome h2{margin:0 0 9px;font-size:17px;line-height:1.5;color:#2c5141}
+.sansa-privacy-welcome p{font-size:13px;line-height:1.8;margin:6px 0}
+.sansa-privacy-welcome strong{font-weight:600}
+.sansa-privacy-welcome summary{cursor:pointer;font-size:12px;line-height:1.7;text-decoration:underline;text-underline-offset:3px}
+.sansa-privacy-welcome details p{font-size:12px;max-width:760px}
+@media(max-width:700px){.sansa-privacy-welcome{margin:14px 12px;padding:17px 14px;gap:9px}.sansa-privacy-welcome h2{font-size:16px}.sansa-privacy-welcome p{font-size:12px}.sansa-privacy-welcome .privacy-welcome-mark{font-size:24px}}
