@@ -1694,5 +1694,69 @@
     "region": "전라",
     "locality": "구례",
     "hint": "구례 문척면 오산 사성암"
+  },
+  {
+    "id": "temple:천축사",
+    "name": "천축사",
+    "kind": "temple",
+    "region": "수도권",
+    "locality": "서울 도봉",
+    "hint": "서울 도봉산 천축사"
+  },
+  {
+    "id": "temple:망경사",
+    "name": "망경사",
+    "kind": "temple",
+    "region": "강원",
+    "locality": "태백",
+    "hint": "태백산 소도동 망경사"
+  },
+  {
+    "id": "temple:삼화사",
+    "name": "삼화사",
+    "kind": "temple",
+    "region": "강원",
+    "locality": "동해",
+    "hint": "동해 무릉계곡 삼화사"
+  },
+  {
+    "id": "temple:보탑사",
+    "name": "보탑사",
+    "kind": "temple",
+    "region": "충청",
+    "locality": "진천",
+    "hint": "진천 연곡리 보탑사"
+  },
+  {
+    "id": "temple:탑사",
+    "name": "탑사",
+    "kind": "temple",
+    "region": "전라",
+    "locality": "진안",
+    "hint": "진안 마이산 탑사"
+  },
+  {
+    "id": "temple:내장사",
+    "name": "내장사",
+    "kind": "temple",
+    "region": "전라",
+    "locality": "정읍",
+    "hint": "정읍 내장산 내장사"
+  },
+  {
+    "id": "temple:강천사",
+    "name": "강천사",
+    "kind": "temple",
+    "region": "전라",
+    "locality": "순창",
+    "hint": "순창 팔덕면 강천사"
+  },
+  {
+    "id": "temple:대전사",
+    "name": "대전사",
+    "kind": "temple",
+    "region": "경상",
+    "locality": "청송",
+    "hint": "청송 주왕산 대전사"
   }
 ]

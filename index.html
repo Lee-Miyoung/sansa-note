@@ -22476,8 +22476,8 @@ img,picture,svg,canvas{
 }
 </style>
 
-<script src="./scripts/place-identity.js?v=20261112-extra"></script>
-<script src="./scripts/temple-covers.js?v=20261112-extra"></script>
+<script src="./scripts/place-identity.js?v=20261112-cnn37"></script>
+<script src="./scripts/temple-covers.js?v=20261112-cnn37"></script>
 </head>
 <body>
 
@@ -24543,6 +24543,8 @@ function buildMasterByName(){
   ];
   // A curated extra destination; never changes the site's official 108 selection.
   guardianAdditions.push({region:"전라",name:"사성암",tag:"유명",desc:"전남 구례 오산의 암벽에 자리한 암자. 절벽에 기대어 세운 전각과 섬진강·구례 들판을 내려다보는 풍경으로 알려져 있습니다.",activity:"암벽 곁 전각 살펴보기 · 섬진강과 구례 들판 조망",tagline:"오산 절벽에서 만나는 섬진강 풍경",visitorTip:"구례군 문척면 오산에 있습니다. 오르막과 계단이 있어 편한 신발을 권합니다. 진입 교통·셔틀·주차 운영은 방문 전에 구례군 관광 안내에서 확인하세요.",nearbySight:"구례읍·섬진강, 화엄사·천은사·연곡사. 곡성 태안사는 차량으로 이동하는 별도 방문지입니다.",locationHint:"구례 문척면 오산 사성암",sourceUrl:"https://gongu.copyright.or.kr/gongu/wrt/wrt/view.do?menuNo=200019&wrtSn=12945655",catalogGroup:"extra"});
+  // User-supplied CNN-related reference: these destinations remain outside the official 108.
+  guardianAdditions.push(...[{"name":"천축사","region":"수도권","tag":"유명","desc":"서울 도봉산 자락에 자리한 산사입니다. 도봉산의 바위 능선과 산길을 함께 느끼며 조용히 머무는 여정으로 구성하세요.","activity":"도봉산 산길 걷기 · 경내에서 쉬어가기","visitorTip":"산길을 따라 접근하는 여정으로 준비하고, 등산화와 계절에 맞는 옷차림을 갖추세요. 대중교통·등산로·개방 범위는 출발 전 공식 안내에서 확인하세요.","nearbySight":"도봉산·도봉산역 주변","tagline":"도봉산 선인봉 아래의 산사","locationHint":"서울 도봉산 천축사","catalogGroup":"extra","sourceUrl":"https://gongu.copyright.or.kr/gongu/wrt/wrt/view.do?menuNo=200026&wrtSn=12439630"},{"name":"망경사","region":"강원","tag":"유명","desc":"강원 태백시 소도동 태백산에 있는 사찰입니다. 공개 소개 자료에는 대웅전·종각·사성전·요사와 용정이 함께 소개돼 있습니다.","activity":"태백산 산행 · 용정 주변 살펴보기","visitorTip":"산행 중 방문하는 곳으로 준비하세요. 기상·등산로 통제와 산행 일정을 먼저 확인하고, 용정 물의 이용·음용 가능 여부는 현장 안내를 따르세요.","nearbySight":"태백산 산행길","tagline":"태백산 산행길의 망경사와 용정","locationHint":"태백산 소도동 망경사","catalogGroup":"extra","sourceUrl":"https://gongu.copyright.or.kr/gongu/wrt/wrt/view.do?menuNo=200019&wrtSn=12990423"},{"name":"삼화사","region":"강원","tag":"유명","desc":"강원 동해의 삼화사입니다. 삼층석탑과 철조노사나불좌상 같은 불교 유산을 무릉계곡 여정과 함께 살펴보기 좋습니다.","activity":"삼층석탑 감상 · 불상과 전각 살펴보기","visitorTip":"무릉계곡 방문과 사찰 참배의 동선을 함께 확인하세요. 돌계단과 숲길을 걷기 편한 신발을 권하며, 전각 내부 관람은 현장 안내에 따르세요.","nearbySight":"무릉계곡·두타산","tagline":"무릉계곡에서 만나는 오래된 석탑","locationHint":"동해 무릉계곡 삼화사","catalogGroup":"extra","sourceUrl":"https://gongu.copyright.or.kr/gongu/wrt/wrt/view.do?menuNo=200018&wrtSn=12582562"},{"name":"보탑사","region":"충청","tag":"유명","desc":"충북 진천읍 연곡리의 사찰입니다. 공개 자료에는 통일대탑의 세 층이 대웅전·법보전·미륵전으로 구성된다고 소개돼 있습니다.","activity":"통일대탑의 세 층 지붕 감상 · 경내 산책","visitorTip":"단양이 아닌 진천의 사찰입니다. 내부 개방 층과 동선은 현장에서 확인하고, 계단 이용이 어려우면 바깥에서 목탑의 비례를 감상해도 좋습니다.","nearbySight":"진천 연곡리 일대","tagline":"세 층의 목탑을 품은 보탑사","locationHint":"진천 연곡리 보탑사","catalogGroup":"extra","sourceUrl":"https://gongu.copyright.or.kr/gongu/wrt/wrt/view.do?menuNo=200026&wrtSn=12462003"},{"name":"탑사","region":"전라","tag":"유명","desc":"전북 진안 마이산의 탑사입니다. 마이산 바위 절벽과 여러 돌탑이 어우러지는 독특한 풍경을 만날 수 있습니다.","activity":"돌탑과 바위 절벽 관찰 · 마이산 산책","visitorTip":"이름이 비슷한 다른 사찰과 혼동하지 않도록 진안 마이산 탑사로 검색하세요. 돌탑에 손대거나 돌을 보태지 말고 지정된 관람 동선을 따라주세요.","nearbySight":"마이산 산책길","tagline":"마이산 아래에 펼쳐진 돌탑 풍경","locationHint":"진안 마이산 탑사","catalogGroup":"extra","sourceUrl":"https://gongu.copyright.or.kr/gongu/wrt/wrt/view.do?menuNo=200019&wrtSn=12990409"},{"name":"내장사","region":"전라","tag":"유명","desc":"전북 정읍 내장산 자락의 산사입니다. 공개 자료와 사진에 소개된 단풍나무 숲과 산세를 함께 느끼며 걷기 좋습니다.","activity":"단풍나무 숲길 걷기 · 지붕과 산세 감상","visitorTip":"단풍철의 교통·탐방로 통제와 전각의 현재 관람 범위는 출발 전 확인하세요. 그림은 공개 자료의 숲과 지붕 특징을 해석한 것으로 현재 건물 배치의 정밀 재현은 아닙니다.","nearbySight":"내장산 탐방길","tagline":"내장산 단풍 숲에서 만나는 산사","locationHint":"정읍 내장산 내장사","catalogGroup":"extra","sourceUrl":"https://gongu.copyright.or.kr/gongu/wrt/wrt/view.do?menuNo=200019&wrtSn=12989391"},{"name":"강천사","region":"전라","tag":"유명","desc":"전북 순창군 팔덕면 강천산의 사찰입니다. 대광명전과 오층석탑 등 사찰의 공간을 숲길 여정과 함께 살펴볼 수 있습니다.","activity":"대광명전·오층석탑 살펴보기 · 숲길 걷기","visitorTip":"강천산 공원 방문과 사찰 참배의 동선을 나누어 계획하세요. 공원 시설의 현재 운영 정보와 입장 동선은 출발 전 현지 안내에서 확인하세요.","nearbySight":"강천산 숲길·계곡","tagline":"강천산 계곡 숲길 속의 사찰","locationHint":"순창 팔덕면 강천사","catalogGroup":"extra","sourceUrl":"https://gongu.copyright.or.kr/gongu/wrt/wrt/view.do?menuNo=200019&wrtSn=12990075"},{"name":"대전사","region":"경상","tag":"유명","desc":"경북 청송 주왕산의 사찰입니다. 보광전과 주변 산세를 함께 바라보며 산사와 바위 봉우리가 만드는 풍경을 느낄 수 있습니다.","activity":"보광전 감상 · 주왕산 산책","visitorTip":"대전시에 있는 절로 혼동하지 않도록 청송 주왕산 대전사로 검색하세요. 탐방로 개방과 전각 관람 범위는 출발 전 국립공원·현장 안내에서 확인하세요.","nearbySight":"주왕산 탐방길","tagline":"주왕산 바위 봉우리 아래의 대전사","locationHint":"청송 주왕산 대전사","catalogGroup":"extra","sourceUrl":"https://gongu.copyright.or.kr/gongu/wrt/wrt/view.do?menuNo=200018&wrtSn=901397"}]);
   guardianAdditions.forEach(item=>{if(!m[item.name])m[item.name]=item;});
   Object.values(m).forEach(item=>{
     if(VERIFIED_FAMOUS_TEMPLES.has(item.name)) item.tag = "유명";
@@ -24654,6 +24656,12 @@ const SUB_COURSES = [
 ];
 
 const PACKS = [
+  {"key":"cnn_beautiful_temples","label":"CNN 아름다운 사찰 탐방 · 참고 37곳","route":"제공받은 CNN 관련 참고 목록 37곳을 묶었습니다. 전국에 흩어져 있으므로 아래 지역 코스로 나누어 방문하세요. 이동·개방 정보는 출발 전 현지 안내에서 확인하세요.","sourceNote":"목록 출처: 사용자 제공 참고 자료 37곳 · CNN 원문 명단과의 일치는 아직 대조하지 못했습니다.","names":["천축사","수종사","보문사","망경사","삼화사","청평사","마곡사","법주사","보탑사","개심사","수덕사","화엄사","천은사","연곡사","사성암","송광사","선암사","대흥사","운주사","쌍봉사","탑사","금산사","내장사","강천사","태안사","향일암","선운사","백양사","통도사","불국사","골굴사","범어사","봉정사","대전사","부석사","해인사","보리암"]},
+  {"key":"cnn_capital","label":"CNN 참고 사찰 · 서울·경기·인천 코스","route":"서울·경기·인천 권역의 참고 목록입니다. 한 번에 방문하기보다 실제 이동 동선에 맞춰 나누어 계획하세요.","sourceNote":"사용자 제공 CNN 관련 참고 목록 기준 · 원문 미대조.","names":["천축사","수종사","보문사"]},
+  {"key":"cnn_gangwon","label":"CNN 참고 사찰 · 강원 코스","route":"강원 권역의 참고 목록입니다. 한 번에 방문하기보다 실제 이동 동선에 맞춰 나누어 계획하세요.","sourceNote":"사용자 제공 CNN 관련 참고 목록 기준 · 원문 미대조.","names":["망경사","삼화사","청평사"]},
+  {"key":"cnn_chungcheong","label":"CNN 참고 사찰 · 충청 코스","route":"충청 권역의 참고 목록입니다. 한 번에 방문하기보다 실제 이동 동선에 맞춰 나누어 계획하세요.","sourceNote":"사용자 제공 CNN 관련 참고 목록 기준 · 원문 미대조.","names":["마곡사","법주사","보탑사","개심사","수덕사"]},
+  {"key":"cnn_jeolla","label":"CNN 참고 사찰 · 전라 코스","route":"전라 권역의 참고 목록입니다. 한 번에 방문하기보다 실제 이동 동선에 맞춰 나누어 계획하세요.","sourceNote":"사용자 제공 CNN 관련 참고 목록 기준 · 원문 미대조.","names":["화엄사","천은사","연곡사","사성암","송광사","선암사","대흥사","운주사","쌍봉사","탑사","금산사","내장사","강천사","태안사","향일암","선운사","백양사"]},
+  {"key":"cnn_gyeongsang","label":"CNN 참고 사찰 · 경상·부산 코스","route":"경상·부산 권역의 참고 목록입니다. 한 번에 방문하기보다 실제 이동 동선에 맞춰 나누어 계획하세요.","sourceNote":"사용자 제공 CNN 관련 참고 목록 기준 · 원문 미대조.","names":["통도사","불국사","골굴사","범어사","봉정사","대전사","부석사","해인사","보리암"]},
   {key:"forest", label:"고즈넉한 숲길 걷기 코스", route:"경내 관람보다 숲길 산책 자체가 목적인 코스예요. 편한 신발만 있으면 충분해요.", names: ["월정사","내소사","부석사","해인사","송광사","백양사","불영사"]},
   {key:"unesco", label:"유네스코 산사 7곳", route:"전국에 흩어져 있어 한 번에 도는 코스는 아니고, 지역별로 나눠 방문하는 걸 추천해요.", data: UNESCO_SEED},
   {key:"chongnim", label:"조계종 8대 총림", route:"역시 전국 각지 본사라 지역별 코스(경주/지리산/경남 등)와 겹쳐서 도는 게 효율적이에요.", data: CHONGNIM_SEED},
@@ -28955,7 +28963,7 @@ function openCourseProgressDetail(packKey){
   document.getElementById('courseProgressTitle').textContent=`🧭 ${pack.label}`;
   document.getElementById('courseProgressSubtitle').textContent=`${done}곳 방문 · ${recorded}곳 기록 완료`;
   document.getElementById('courseProgressCount').textContent=`${done} / ${total}곳`;
-  document.getElementById('courseProgressRoute').textContent=pack.route||'각 장소를 눌러 내 기록을 바로 확인할 수 있어요.';
+  document.getElementById('courseProgressRoute').textContent=(pack.route||'각 장소를 눌러 내 기록을 바로 확인할 수 있어요.')+(pack.sourceNote?' · '+pack.sourceNote:'');
 
   const ring=document.getElementById('courseProgressRing');
   ring.style.setProperty('--course-pct',`${pct*3.6}deg`);
@@ -29805,6 +29813,7 @@ function courseCompanion(pack){
 function courseCompanionHeading(pack,earned=false){
   return `<div class="pack-companion-heading"><img class="pack-companion" src="${courseCompanion(pack)}" alt="" width="60" height="68" loading="lazy" decoding="async"><div class="packrow-title">${earned?'🏅 ':''}${escapeHtml(pack.label)}</div></div>`;
 }
+function courseSourceNote(pack){return pack.sourceNote?'<div class="packrow-sub pack-source-note" role="note" style="font-size:11px;line-height:1.6;color:var(--ink-soft);margin-top:6px">'+escapeHtml(pack.sourceNote)+'</div>':'';}
 function renderPackOverlay(){
   const wrap=document.getElementById('packList');
 
@@ -29846,6 +29855,7 @@ function renderPackOverlay(){
         </div>
 
         ${p.route?`<div class="packrow-sub pack-route-note">🚗 ${escapeHtml(p.route)}</div>`:''}
+        ${courseSourceNote(p)}
       </div>
 
       <div class="packrow-actions">
@@ -29871,6 +29881,7 @@ function openPackDetail(key){
       <a onclick="renderPackOverlay()" style="cursor:pointer;color:var(--moss);font-size:12.5px;font-weight:700;">← 코스 목록으로</a>
     </div>
     ${courseCompanionHeading(pack)}
+    ${courseSourceNote(pack)}
     ${pack.route?`<div class="packrow-sub" style="color:var(--stamp);margin-bottom:8px;">🚗 ${escapeHtml(pack.route)}</div>`:''}
     ${pack.nearby?`<div class="packrow-sub" style="color:var(--moss);margin-bottom:12px;">📍 주변 들를 만한 곳: ${escapeHtml(pack.nearby)}</div>`:''}
 
@@ -42392,7 +42403,7 @@ nav.site-global-nav{height:var(--global-nav-h)!important;box-sizing:border-box!i
 <script src="/scripts/device-photos/cards.js?v=20261026-ui" defer></script>
 <script src="/scripts/personal-location.js?v=20261025-unified" defer></script>
 <script src="/scripts/mountain-covers.js?v=20261027-static" defer></script>
-<script src="/scripts/visit-tips.js?v=20261112-extra" defer></script>
+<script src="/scripts/visit-tips.js?v=20261112-cnn37" defer></script>
 <script src="/scripts/temple-music.js?v=20261026-ui" defer></script>
 <script src="/scripts/device-photos/celebration.js?v=20261026-unified" defer></script>
 <link rel="stylesheet" href="/styles/ui-content.css?v=20261027-static">

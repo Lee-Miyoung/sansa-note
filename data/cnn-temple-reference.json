@@ -1,0 +1,103 @@
+{
+  "id": "cnn_beautiful_temples",
+  "title": "CNN 아름다운 사찰 탐방 · 참고 목록",
+  "provenance": "user-provided-reference-list",
+  "cnnArticleVerified": false,
+  "articleURL": "https://www.cnn.com/travel/article/south-korea-beautiful-temples/index.html",
+  "sourceNote": "사용자가 제공한 CNN 관련 참고 목록 37곳을 기준으로 구성했습니다. CNN 원문 명단과의 일치는 아직 대조하지 못했습니다.",
+  "groups": [
+    {
+      "id": "capital",
+      "label": "서울·경기·인천",
+      "names": [
+        "천축사",
+        "수종사",
+        "보문사"
+      ]
+    },
+    {
+      "id": "gangwon",
+      "label": "강원",
+      "names": [
+        "망경사",
+        "삼화사",
+        "청평사"
+      ]
+    },
+    {
+      "id": "chungcheong",
+      "label": "충청",
+      "names": [
+        "마곡사",
+        "법주사",
+        "보탑사",
+        "개심사",
+        "수덕사"
+      ]
+    },
+    {
+      "id": "jeolla",
+      "label": "전라",
+      "names": [
+        "화엄사",
+        "천은사",
+        "연곡사",
+        "사성암",
+        "송광사",
+        "선암사",
+        "대흥사",
+        "운주사",
+        "쌍봉사",
+        "탑사",
+        "금산사",
+        "내장사",
+        "강천사",
+        "태안사",
+        "향일암",
+        "선운사",
+        "백양사"
+      ]
+    },
+    {
+      "id": "gyeongsang",
+      "label": "경상·부산",
+      "names": [
+        "통도사",
+        "불국사",
+        "골굴사",
+        "범어사",
+        "봉정사",
+        "대전사",
+        "부석사",
+        "해인사",
+        "보리암"
+      ]
+    }
+  ],
+  "normalizations": [
+    {
+      "provided": "태백 만경사",
+      "canonical": "망경사",
+      "locality": "강원 태백",
+      "reason": "공유마당 공개 자료의 명칭·소재지에 맞춰 정규화",
+      "verified": true,
+      "sourceURL": "https://gongu.copyright.or.kr/gongu/wrt/wrt/view.do?menuNo=200019&wrtSn=12990423"
+    },
+    {
+      "provided": "삼척 삼화사",
+      "canonical": "삼화사",
+      "locality": "강원 동해",
+      "reason": "공유마당 공개 자료의 명칭·소재지에 맞춰 정규화",
+      "verified": true,
+      "sourceURL": "https://gongu.copyright.or.kr/gongu/wrt/wrt/view.do?menuNo=200018&wrtSn=12582562"
+    },
+    {
+      "provided": "단양 보탑사",
+      "canonical": "보탑사",
+      "locality": "충북 진천",
+      "reason": "공유마당 공개 자료의 명칭·소재지에 맞춰 정규화",
+      "verified": true,
+      "sourceURL": "https://gongu.copyright.or.kr/gongu/wrt/wrt/view.do?menuNo=200026&wrtSn=12462003"
+    }
+  ]
+}

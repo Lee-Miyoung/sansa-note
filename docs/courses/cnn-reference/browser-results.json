@@ -1,0 +1,25 @@
+{
+  "report": [
+    {
+      "width": 390,
+      "course": 37,
+      "regions": 5,
+      "extra": 9,
+      "newImages": 8,
+      "readOnlyBrowsing": true,
+      "duplicateSafeAdd": true,
+      "recordsPreserved": true
+    },
+    {
+      "width": 1440,
+      "course": 37,
+      "regions": 5,
+      "extra": 9,
+      "newImages": 8,
+      "readOnlyBrowsing": true,
+      "duplicateSafeAdd": true,
+      "recordsPreserved": true
+    }
+  ],
+  "realDevice": false
+}

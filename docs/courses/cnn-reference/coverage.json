@@ -1,0 +1,752 @@
+[
+  {
+    "id": "temple:천축사",
+    "name": "천축사",
+    "group": "서울·경기·인천",
+    "image": "/images/temple-covers/cnn-cheonchuksa.webp",
+    "thumbnail": "/images/temple-covers/cnn-cheonchuksa-small.webp",
+    "imageSha256": "53bef8ebabe53b4ad6831f0b371255aa63f633f91e2897ded5d5366bee007b89",
+    "tipCards": 2,
+    "sources": [
+      {
+        "title": "천축사 · 공유마당 공개 자료",
+        "url": "https://gongu.copyright.or.kr/gongu/wrt/wrt/view.do?menuNo=200026&wrtSn=12439630",
+        "checkedAt": "2026-11-12",
+        "sha256": "da4cb111965054c313739136846f1cecc99e0ee37e116c0aac78fb133a7a8953"
+      },
+      {
+        "title": "천축사 · 공유마당 공개 자료",
+        "url": "https://gongu.copyright.or.kr/gongu/wrt/wrt/view.do?menuNo=200026&wrtSn=12439662",
+        "checkedAt": "2026-11-12",
+        "sha256": "58a755dd0052c9b348b3f9e9876f6771bc59f32feb75a2f3142ee15812f70521"
+      }
+    ],
+    "newArtwork": true,
+    "photoReviewed": false
+  },
+  {
+    "id": "temple:수종사",
+    "name": "수종사",
+    "group": "서울·경기·인천",
+    "image": "/images/temple-covers/reviewed-수종사.webp",
+    "thumbnail": "/images/temple-covers/reviewed-수종사-small.webp",
+    "imageSha256": "5b4634833d830fb655c296790d46aab564820674e577e80f80c417fd41a3868e",
+    "tipCards": 2,
+    "sources": [
+      {
+        "title": "운길산 수종사 (雲吉山 水鐘寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0031688",
+        "checkedAt": "2026-10-26",
+        "sha256": "524f3be0a5d1e50e4bdc3337bbd0b6b28c4eb09afbe194320c821734b76389a0"
+      }
+    ],
+    "newArtwork": false,
+    "photoReviewed": "previous-review"
+  },
+  {
+    "id": "temple:보문사",
+    "name": "보문사",
+    "group": "서울·경기·인천",
+    "image": "/images/temple-covers/temple-보문사.webp",
+    "thumbnail": "/images/temple-covers/thumb-보문사.webp",
+    "imageSha256": "8c6cdabd90ae935735de62bfe852924461d22d03787f44b005c9d50ab87b34cc",
+    "tipCards": 2,
+    "sources": [
+      {
+        "title": "낙가산 보문사 (洛迦山 普門寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0023334",
+        "checkedAt": "2026-10-26",
+        "sha256": "5213f3421b25ff7622529f7c70403b6dbc779a4acb8e7b9ab9d83543286e6d14"
+      }
+    ],
+    "newArtwork": false,
+    "photoReviewed": "previous-review"
+  },
+  {
+    "id": "temple:망경사",
+    "name": "망경사",
+    "group": "강원",
+    "image": "/images/temple-covers/cnn-manggyeongsa.webp",
+    "thumbnail": "/images/temple-covers/cnn-manggyeongsa-small.webp",
+    "imageSha256": "0f42e5c58e04c5bdf22941ec5e229a4c95b94aead4b05179a1ea980a0a73cc96",
+    "tipCards": 2,
+    "sources": [
+      {
+        "title": "망경사 용정 · 공유마당 공개 자료",
+        "url": "https://gongu.copyright.or.kr/gongu/wrt/wrt/view.do?menuNo=200019&wrtSn=12990423",
+        "checkedAt": "2026-11-12",
+        "sha256": "e7d77e2e28f764e038a2c59ad8541d8e6eba1ea4f0cfcf7fbf33be5ddc5fc7e5"
+      }
+    ],
+    "newArtwork": true,
+    "photoReviewed": false
+  },
+  {
+    "id": "temple:삼화사",
+    "name": "삼화사",
+    "group": "강원",
+    "image": "/images/temple-covers/cnn-samhwasa.webp",
+    "thumbnail": "/images/temple-covers/cnn-samhwasa-small.webp",
+    "imageSha256": "1977b1454fcf506ae3d47a1365a975bb80048b52e15dd79d20064a4fc1a48843",
+    "tipCards": 2,
+    "sources": [
+      {
+        "title": "동해 삼화사 철조노사나불좌상(촬영:문화재청) · 공유마당 공개 자료",
+        "url": "https://gongu.copyright.or.kr/gongu/wrt/wrt/view.do?menuNo=200018&wrtSn=12582562",
+        "checkedAt": "2026-11-12",
+        "sha256": "c81fb98852edc141900f634043fdd43326e26682f1781576de894b0e2b035c34"
+      },
+      {
+        "title": "1971년_삼화사 석탑 · 공유마당 공개 자료",
+        "url": "https://gongu.copyright.or.kr/gongu/wrt/wrt/view.do?menuNo=200018&wrtSn=13300689",
+        "checkedAt": "2026-11-12",
+        "sha256": "572992a2616aeb325b9271bd3c6b5e611587d70a51c9c9479a63df4e66f88edb"
+      }
+    ],
+    "newArtwork": true,
+    "photoReviewed": true
+  },
+  {
+    "id": "temple:청평사",
+    "name": "청평사",
+    "group": "강원",
+    "image": "/images/temple-covers/completed-청평사.webp",
+    "thumbnail": "/images/temple-covers/completed-청평사-small.webp",
+    "imageSha256": "a642bf3bf10763ff7c7898e7a3c5729302a05db3087e3067d6f7d681b8cef8a7",
+    "tipCards": 2,
+    "sources": [
+      {
+        "title": "오봉산 청평사 (五峰山 淸平寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0056813",
+        "checkedAt": "2026-10-26",
+        "sha256": "0350834faa7bd78127393b2ec1e1c46e7bc76a8e4b951055e2338e0e0b31b08c"
+      }
+    ],
+    "newArtwork": false,
+    "photoReviewed": "previous-review"
+  },
+  {
+    "id": "temple:마곡사",
+    "name": "마곡사",
+    "group": "충청",
+    "image": "/atlas/magoksa/images/magoksa-cover.webp",
+    "thumbnail": "/atlas/magoksa/images/magoksa-cover-small.webp",
+    "imageSha256": "80e17aec9ce3202eb208d60dbfdbe246ed93bf49fd997cccbc23835fa5f261b3",
+    "tipCards": 2,
+    "sources": [
+      {
+        "title": "태화산 마곡사 (泰華山 麻谷寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0017282",
+        "checkedAt": "2026-10-26",
+        "sha256": "f69d9fd662f8ac78feac315edb772a320f68e90b47381fba48deb4de7647fdcf"
+      }
+    ],
+    "newArtwork": false,
+    "photoReviewed": "previous-review"
+  },
+  {
+    "id": "temple:법주사",
+    "name": "법주사",
+    "group": "충청",
+    "image": "/atlas/beopjusa/images/beopjusa-cover.webp",
+    "thumbnail": "/atlas/beopjusa/images/beopjusa-cover-small.webp",
+    "imageSha256": "307d7c6f6fd57c0198c415c0bb1c6f6caed867cbbf4f015bdc037f158151695c",
+    "tipCards": 2,
+    "sources": [
+      {
+        "title": "속리산 법주사 (俗離山 法住寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0022716",
+        "checkedAt": "2026-10-26",
+        "sha256": "986eda6fb2689a638b7cee5feb7e94cd4be17e1e17fe09aea1ef1a5da52d20df"
+      }
+    ],
+    "newArtwork": false,
+    "photoReviewed": "previous-review"
+  },
+  {
+    "id": "temple:보탑사",
+    "name": "보탑사",
+    "group": "충청",
+    "image": "/images/temple-covers/cnn-botapsa.webp",
+    "thumbnail": "/images/temple-covers/cnn-botapsa-small.webp",
+    "imageSha256": "6de385aa35b50ffc0df3e22b84557c419d3d282a6caafc21fd37c51aee48d4c4",
+    "tipCards": 2,
+    "sources": [
+      {
+        "title": "보탑사 · 공유마당 공개 자료",
+        "url": "https://gongu.copyright.or.kr/gongu/wrt/wrt/view.do?menuNo=200026&wrtSn=12462003",
+        "checkedAt": "2026-11-12",
+        "sha256": "720fe9066eea578f6a211daaa73cc6740ea86f270b8a835802a93f46bc3b2adb"
+      },
+      {
+        "title": "보탑사 통일대탑 · 공유마당 공개 자료",
+        "url": "https://gongu.copyright.or.kr/gongu/wrt/wrt/view.do?menuNo=200018&wrtSn=12463503",
+        "checkedAt": "2026-11-12",
+        "sha256": "7c47eaf961766c9773a371d8cd8e42a85342edf75eb3aeaa926001915dd7decf"
+      }
+    ],
+    "newArtwork": true,
+    "photoReviewed": false
+  },
+  {
+    "id": "temple:개심사",
+    "name": "개심사",
+    "group": "충청",
+    "image": "/images/temple-covers/temple-개심사.webp",
+    "thumbnail": "/images/temple-covers/thumb-개심사.webp",
+    "imageSha256": "43dc5678689cf29fcc531c88b5300fc0c72485c8c8da0ebb48ae16fb180b2f6f",
+    "tipCards": 2,
+    "sources": [
+      {
+        "title": "상왕산 개심사 (象王山 開心寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0001677",
+        "checkedAt": "2026-10-26",
+        "sha256": "b30269de9d45bb5cc432033637475493fe511aa466857c32540d37731eb09e88"
+      }
+    ],
+    "newArtwork": false,
+    "photoReviewed": "previous-review"
+  },
+  {
+    "id": "temple:수덕사",
+    "name": "수덕사",
+    "group": "충청",
+    "image": "/images/temple-covers/reviewed-수덕사.webp",
+    "thumbnail": "/images/temple-covers/reviewed-수덕사-small.webp",
+    "imageSha256": "f3745ea37d060f3a4a6247a8329eb01f2df008ac14f21940a39e14d451eb41de",
+    "tipCards": 2,
+    "sources": [
+      {
+        "title": "덕숭산 수덕사 (德崇山 修德寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0031274",
+        "checkedAt": "2026-10-26",
+        "sha256": "e8e0f7e77618b44d41e910a08b520bb48ef119a2955d1faa90f64499225801ab"
+      }
+    ],
+    "newArtwork": false,
+    "photoReviewed": "previous-review"
+  },
+  {
+    "id": "temple:화엄사",
+    "name": "화엄사",
+    "group": "전라",
+    "image": "/atlas/hwaeomsa/images/hwaeomsa-cover.webp",
+    "thumbnail": "/atlas/hwaeomsa/images/hwaeomsa-cover-small.webp",
+    "imageSha256": "da01eb5a22262c22b3f0448512e26917b7bff554791bb51e8733ec5f27a34743",
+    "tipCards": 2,
+    "sources": [
+      {
+        "title": "지리산 화엄사 (智異山 華嚴寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0064785",
+        "checkedAt": "2026-10-26",
+        "sha256": "7a29dbe8ffb2d29ceb690f3959257344a59aaac6987876d7b753e87fe7e8c702"
+      }
+    ],
+    "newArtwork": false,
+    "photoReviewed": "previous-review"
+  },
+  {
+    "id": "temple:천은사",
+    "name": "천은사",
+    "group": "전라",
+    "image": "/images/temple-covers/temple-천은사.webp",
+    "thumbnail": "/images/temple-covers/thumb-천은사.webp",
+    "imageSha256": "5cf0eae30aa2e651a8affb0116e2bdc5071d12763daf2c74c3aac23f30dd0a5e",
+    "tipCards": 2,
+    "sources": [
+      {
+        "title": "지리산 천은사 (智異山 泉隱寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0055985",
+        "checkedAt": "2026-10-26",
+        "sha256": "2ce5448949fcb16660b35010e0e1e448049862032730ef5033acf67e408007cf"
+      }
+    ],
+    "newArtwork": false,
+    "photoReviewed": "previous-review"
+  },
+  {
+    "id": "temple:연곡사",
+    "name": "연곡사",
+    "group": "전라",
+    "image": "/images/temple-covers/reviewed-연곡사.webp",
+    "thumbnail": "/images/temple-covers/reviewed-연곡사-small.webp",
+    "imageSha256": "62d0055ee3fe23e1851ae654c9ab5645c30a33db3586e16dce328a839c955c04",
+    "tipCards": 2,
+    "sources": [
+      {
+        "title": "지리산 연곡사 (智異山 鷰谷寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0036683",
+        "checkedAt": "2026-10-26",
+        "sha256": "cb12abe2726e45f5fe15e183cd0d024530ebbcebf833289489b1bb0229fe63f0"
+      }
+    ],
+    "newArtwork": false,
+    "photoReviewed": "previous-review"
+  },
+  {
+    "id": "temple:사성암",
+    "name": "사성암",
+    "group": "전라",
+    "image": "/images/temple-covers/completed-사성암.webp",
+    "thumbnail": "/images/temple-covers/completed-사성암-small.webp",
+    "imageSha256": "3a02d031c56954b0a3aa62b81afcd28b009f5ce9836399c439c83c0be7959dc8",
+    "tipCards": 3,
+    "sources": [
+      {
+        "title": "한국기행_지리산_건출물_사찰 · EBS 공개 사진",
+        "url": "https://gongu.copyright.or.kr/gongu/wrt/wrt/view.do?menuNo=200018&wrtSn=13068600",
+        "creator": "한국교육방송공사",
+        "license": "CC BY 4.0",
+        "checkedAt": "2026-11-12",
+        "sha256": "5b3fe51deb3770492eeea4307135eae1f4a7439c11bb6bd7af7bb67175609e82"
+      },
+      {
+        "title": "구례 오산 사성암 일원 명승 지정예고 · 전라남도 보도자료(2014)",
+        "url": "https://gongu.copyright.or.kr/gongu/wrt/wrt/view.do?menuNo=200019&wrtSn=12945655",
+        "creator": "전라남도",
+        "license": "공공누리 제1유형",
+        "checkedAt": "2026-11-12",
+        "sha256": "79b6bb0760dccd32880264521b134814738df14931c75d61fac0476e73b73b61"
+      }
+    ],
+    "newArtwork": false,
+    "photoReviewed": "previous-review"
+  },
+  {
+    "id": "temple:송광사",
+    "name": "송광사",
+    "group": "전라",
+    "image": "/images/temple-covers/temple-송광사.webp",
+    "thumbnail": "/images/temple-covers/thumb-송광사.webp",
+    "imageSha256": "948d046edcc4ca9c39f16b29128701ba4ecd9f373911a45db2cc9830927fe727",
+    "tipCards": 2,
+    "sources": [
+      {
+        "title": "조계산 송광사 (曹溪山 松廣寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0030662",
+        "checkedAt": "2026-10-26",
+        "sha256": "f3b00c86bf89363579d5578e6023aa45e9a7b6b57caecafe42dc52d33af54a7c"
+      }
+    ],
+    "newArtwork": false,
+    "photoReviewed": "previous-review"
+  },
+  {
+    "id": "temple:선암사",
+    "name": "선암사",
+    "group": "전라",
+    "image": "/atlas/seonamsa/images/seonamsa-cover.webp",
+    "thumbnail": "/atlas/seonamsa/images/seonamsa-cover-small.webp",
+    "imageSha256": "8dbf57868aa5b639a8dcb8e67cd6d5b302a5c34805af0ed6060c859a557407ab",
+    "tipCards": 2,
+    "sources": [
+      {
+        "title": "조계산 선암사 (曹溪山 仙巖寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0028783",
+        "checkedAt": "2026-10-26",
+        "sha256": "87a312b9672cddef0bfd6c694a2e8adec745d561dd2bce066bbc5bbc451dd197"
+      }
+    ],
+    "newArtwork": false,
+    "photoReviewed": "previous-review"
+  },
+  {
+    "id": "temple:대흥사",
+    "name": "대흥사",
+    "group": "전라",
+    "image": "/atlas/daeheungsa/images/daeheungsa-cover.webp",
+    "thumbnail": "/atlas/daeheungsa/images/daeheungsa-cover-small.webp",
+    "imageSha256": "01a13b2343cc1f4f8e9f2cfcc4935820d72ae06c0d32df4d420ac0cc3598f605",
+    "tipCards": 2,
+    "sources": [
+      {
+        "title": "두륜산 대흥사 (頭輪山 大興寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0015277",
+        "checkedAt": "2026-10-26",
+        "sha256": "b0da587ca4647296e80f8af7013de79fda91f908f6ff20ee3f8a1db1ec6c72c2"
+      }
+    ],
+    "newArtwork": false,
+    "photoReviewed": "previous-review"
+  },
+  {
+    "id": "temple:운주사",
+    "name": "운주사",
+    "group": "전라",
+    "image": "/atlas/unjusa/images/unjusa-cover.webp",
+    "thumbnail": "/atlas/unjusa/images/unjusa-cover-small.webp",
+    "imageSha256": "30a6b079f5cd386b7fb4db920006e13f09e2bbc1f9bbc6bcb1b3ed483eef6e43",
+    "tipCards": 2,
+    "sources": [
+      {
+        "title": "천불산 운주사 (千佛山 雲住寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0040378",
+        "checkedAt": "2026-10-26",
+        "sha256": "e43a67930613ec3c9381c9899964958770f23146575941d033bf8851ed90fe74"
+      }
+    ],
+    "newArtwork": false,
+    "photoReviewed": "previous-review"
+  },
+  {
+    "id": "temple:쌍봉사",
+    "name": "쌍봉사",
+    "group": "전라",
+    "image": "/images/temple-covers/reviewed-쌍봉사.webp",
+    "thumbnail": "/images/temple-covers/reviewed-쌍봉사-small.webp",
+    "imageSha256": "650ae0905b4bfea023c81cf664853c9ac9a405ac5d9fc6b1266b97ba6b04ca4d",
+    "tipCards": 2,
+    "sources": [
+      {
+        "title": "계당산 쌍봉사 (桂棠山 雙峰寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0034131",
+        "checkedAt": "2026-10-26",
+        "sha256": "04f3063b734ddadc42a8cfa232c03115f9d60411f52777874ad7c06c07d95a3e"
+      }
+    ],
+    "newArtwork": false,
+    "photoReviewed": "previous-review"
+  },
+  {
+    "id": "temple:탑사",
+    "name": "탑사",
+    "group": "전라",
+    "image": "/images/temple-covers/cnn-tapsa.webp",
+    "thumbnail": "/images/temple-covers/cnn-tapsa-small.webp",
+    "imageSha256": "338b58adc317f377cfbf52e74cb46cc1ad4915487302a26a081645c52a2c6647",
+    "tipCards": 2,
+    "sources": [
+      {
+        "title": "마이산 · 공유마당 공개 자료",
+        "url": "https://gongu.copyright.or.kr/gongu/wrt/wrt/view.do?menuNo=200019&wrtSn=12990409",
+        "checkedAt": "2026-11-12",
+        "sha256": "699d381b3f703423614bfe54e8625af4c9b357bcaf695844e54e5212aafb7d54"
+      },
+      {
+        "title": "1971년_마이산 탑사 · 공유마당 공개 자료",
+        "url": "https://gongu.copyright.or.kr/gongu/wrt/wrt/view.do?menuNo=200018&wrtSn=13297959",
+        "checkedAt": "2026-11-12",
+        "sha256": "32748b24a92963ef5f7989c86579a0fcaaf9c8aa7935af2baa45e9d51dd1a538"
+      }
+    ],
+    "newArtwork": true,
+    "photoReviewed": true
+  },
+  {
+    "id": "temple:금산사",
+    "name": "금산사",
+    "group": "전라",
+    "image": "/atlas/geumsansa/images/geumsansa-cover.webp",
+    "thumbnail": "/atlas/geumsansa/images/geumsansa-cover-small.webp",
+    "imageSha256": "2eb3f2e68d64a89d54fd99fec890715a9751ffe8311d821c565c716276c16af4",
+    "tipCards": 2,
+    "sources": [
+      {
+        "title": "모악산 금산사 (母岳山 金山寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0007797",
+        "checkedAt": "2026-10-26",
+        "sha256": "89905c65f24a5896076dfb18ec6584bc1e2b74d6e205c3c0b9f47dd876d9df39"
+      }
+    ],
+    "newArtwork": false,
+    "photoReviewed": "previous-review"
+  },
+  {
+    "id": "temple:내장사",
+    "name": "내장사",
+    "group": "전라",
+    "image": "/images/temple-covers/cnn-naejangsa.webp",
+    "thumbnail": "/images/temple-covers/cnn-naejangsa-small.webp",
+    "imageSha256": "7ce95bb2a1c96d4cb5ed8ab3362cc339e91e5ad74552a926f7a3a927c5a6a13d",
+    "tipCards": 2,
+    "sources": [
+      {
+        "title": "[명산ㆍ계곡] 내장사 주변의 단풍나무 숲(Maple forest around Naejangsa(temple)) · 공유마당 공개 자료",
+        "url": "https://gongu.copyright.or.kr/gongu/wrt/wrt/view.do?menuNo=200019&wrtSn=12989391",
+        "checkedAt": "2026-11-12",
+        "sha256": "36771c38320a1e65c928bfaf43125563dce47ff5b8634f3db2d0ebe16abc5b21"
+      },
+      {
+        "title": "한국_문화_여행_음식_내장산33_내장사 · 공유마당 공개 자료",
+        "url": "https://gongu.copyright.or.kr/gongu/wrt/wrt/view.do?menuNo=200018&wrtSn=13060230",
+        "checkedAt": "2026-11-12",
+        "sha256": "5e4137baf61b687251a106e25395f92ce9d6585d3c7db64bba087657ad1e3240"
+      }
+    ],
+    "newArtwork": true,
+    "photoReviewed": true
+  },
+  {
+    "id": "temple:강천사",
+    "name": "강천사",
+    "group": "전라",
+    "image": "/images/temple-covers/cnn-gangcheonsa.webp",
+    "thumbnail": "/images/temple-covers/cnn-gangcheonsa-small.webp",
+    "imageSha256": "3d61a5be3ae3d1b8d6866a32afa4e39e859b2145ab614d6d3a5eee8cd2ee7b6c",
+    "tipCards": 2,
+    "sources": [
+      {
+        "title": "강천사 · 공유마당 공개 자료",
+        "url": "https://gongu.copyright.or.kr/gongu/wrt/wrt/view.do?menuNo=200019&wrtSn=12990075",
+        "checkedAt": "2026-11-12",
+        "sha256": "213e23ba18a14f8716ee1022d4a99e2b9ad2e6a64b79dd3af286ad1739ce993b"
+      },
+      {
+        "title": "강천사 대광명전 · 공유마당 공개 자료",
+        "url": "https://gongu.copyright.or.kr/gongu/wrt/wrt/view.do?menuNo=200018&wrtSn=12459912",
+        "checkedAt": "2026-11-12",
+        "sha256": "bae50e2890f9791d7a9f156167ddb74a58f2edc33991c45799f34e0f7066e995"
+      }
+    ],
+    "newArtwork": true,
+    "photoReviewed": false
+  },
+  {
+    "id": "temple:태안사",
+    "name": "태안사",
+    "group": "전라",
+    "image": "/images/temple-covers/reviewed-태안사.webp",
+    "thumbnail": "/images/temple-covers/reviewed-태안사-small.webp",
+    "imageSha256": "f3c3921bf8f84ef6e838dccdd5a5d456020c72dc881b633a197f4923e465a745",
+    "tipCards": 2,
+    "sources": [
+      {
+        "title": "동리산 태안사 (桐裏山 泰安寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0058975",
+        "checkedAt": "2026-10-26",
+        "sha256": "dbade1a4103be5a30c3e05058a310630d08e4ff6eb04376942b53a2c97a44843"
+      }
+    ],
+    "newArtwork": false,
+    "photoReviewed": "previous-review"
+  },
+  {
+    "id": "temple:향일암",
+    "name": "향일암",
+    "group": "전라",
+    "image": "/images/temple-covers/completed-향일암.webp",
+    "thumbnail": "/images/temple-covers/completed-향일암-small.webp",
+    "imageSha256": "c5e92f6014149ac54c890801c716781a03cbbe24ea6a0ce2fcc75493fab351d6",
+    "tipCards": 2,
+    "sources": [
+      {
+        "title": "금오산 향일암 (金鰲山 向日庵)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0062977",
+        "checkedAt": "2026-10-26",
+        "sha256": "09655a132cbe52093b5bb605f9dff24e1778b4f54d0cce1cd4bc160f3d4256ca"
+      }
+    ],
+    "newArtwork": false,
+    "photoReviewed": "previous-review"
+  },
+  {
+    "id": "temple:선운사",
+    "name": "선운사",
+    "group": "전라",
+    "image": "/atlas/seonunsa/images/seonunsa-cover.webp",
+    "thumbnail": "/atlas/seonunsa/images/seonunsa-cover-small.webp",
+    "imageSha256": "36eac8130fc6749e662785a1e9a75acb0d787d7366a5bfe0c9103905401b65b6",
+    "tipCards": 2,
+    "sources": [
+      {
+        "title": "도솔산 선운사 (兜率山 禪雲寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0028831",
+        "checkedAt": "2026-10-26",
+        "sha256": "f89cddc92b4a24db1cfb46a7bf56c6239a1dcf28be146c64d293005fd7d312b9"
+      }
+    ],
+    "newArtwork": false,
+    "photoReviewed": "previous-review"
+  },
+  {
+    "id": "temple:백양사",
+    "name": "백양사",
+    "group": "전라",
+    "image": "/images/temple-covers/temple-백양사.webp",
+    "thumbnail": "/images/temple-covers/thumb-백양사.webp",
+    "imageSha256": "cc01c939999bb964fbd93ac671ab3fdc5abc4ac196176793199d4c08fd4de77f",
+    "tipCards": 2,
+    "sources": [
+      {
+        "title": "백암산 백양사 (白巖山 白羊寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0022216",
+        "checkedAt": "2026-10-26",
+        "sha256": "e454db8b9ef7998b7ce230ad69ebc68f483cdd72ab34051e8bc99d6a5f155c1d"
+      }
+    ],
+    "newArtwork": false,
+    "photoReviewed": "previous-review"
+  },
+  {
+    "id": "temple:통도사",
+    "name": "통도사",
+    "group": "경상·부산",
+    "image": "/images/temple-covers/temple-통도사.webp",
+    "thumbnail": "/images/temple-covers/thumb-통도사.webp",
+    "imageSha256": "f270e6d1269dd24f2fd642ccfaf2bc52d3826f1b4306b422b38ad49c249624ba",
+    "tipCards": 2,
+    "sources": [
+      {
+        "title": "영축산 통도사 (靈鷲山 通度寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0059253",
+        "checkedAt": "2026-10-26",
+        "sha256": "de2c961a29366a97c9aa99c13ad31803e9379cad5e3c0d31e751206d597d1337"
+      }
+    ],
+    "newArtwork": false,
+    "photoReviewed": "previous-review"
+  },
+  {
+    "id": "temple:불국사",
+    "name": "불국사",
+    "group": "경상·부산",
+    "image": "/images/temple-covers/temple-불국사.webp",
+    "thumbnail": "/images/temple-covers/thumb-불국사.webp",
+    "imageSha256": "20f3f5d0255044f42a6ebc46adf662529d9372209fab611658d70c3f974ba9b7",
+    "tipCards": 2,
+    "sources": [
+      {
+        "title": "경주 불국사 (慶州 佛國寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0024933",
+        "checkedAt": "2026-10-26",
+        "sha256": "bd7e9b64101856bf6da14fbce53e609a6568e2e3f435f8750c7356ef2b84ddaf"
+      }
+    ],
+    "newArtwork": false,
+    "photoReviewed": "previous-review"
+  },
+  {
+    "id": "temple:골굴사",
+    "name": "골굴사",
+    "group": "경상·부산",
+    "image": "/images/temple-covers/reviewed-골굴사.webp",
+    "thumbnail": "/images/temple-covers/reviewed-골굴사-small.webp",
+    "imageSha256": "c7cb65ffbe71ee0c3923325f06cc5864e4cccb93780a6ab02f5fd992e90e6473",
+    "tipCards": 2,
+    "sources": [
+      {
+        "title": "경주 골굴암 마애여래좌상 사진 해설 · 한국민족문화대백과사전",
+        "url": "https://encykorea.aks.ac.kr/Media/Search?query=%EA%B3%A8%EA%B5%B4%EC%95%94",
+        "checkedAt": "2026-10-26",
+        "mediaId": "0519d9c1-c698-49fa-a011-6f1e32e77275",
+        "sha256": "86db6ccdf78e5d8437d430e9a88076f8248dc9882c11807550360c2479dd7022"
+      }
+    ],
+    "newArtwork": false,
+    "photoReviewed": "previous-review"
+  },
+  {
+    "id": "temple:범어사",
+    "name": "범어사",
+    "group": "경상·부산",
+    "image": "/images/temple-covers/temple-범어사.webp",
+    "thumbnail": "/images/temple-covers/thumb-범어사.webp",
+    "imageSha256": "ad6c351bb3ba192d38ab54c0a890458b36ad332bdcb32c8beb6c7921323d2e1d",
+    "tipCards": 2,
+    "sources": [
+      {
+        "title": "금정산 범어사 (金井山 梵魚寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0022578",
+        "checkedAt": "2026-10-26",
+        "sha256": "58ba193096ce6ebcb4953a14cc43ced039e88ba2d9368b78ca94e102f2c7e13f"
+      }
+    ],
+    "newArtwork": false,
+    "photoReviewed": "previous-review"
+  },
+  {
+    "id": "temple:봉정사",
+    "name": "봉정사",
+    "group": "경상·부산",
+    "image": "/images/temple-covers/temple-봉정사.webp",
+    "thumbnail": "/images/temple-covers/thumb-봉정사.webp",
+    "imageSha256": "77dc8de64fb17fbc3f0413bf4de52cd0e0ee5b5faaa1cfb8adc950ea4c6e5df5",
+    "tipCards": 2,
+    "sources": [
+      {
+        "title": "봉정사 (鳳停寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0024002",
+        "checkedAt": "2026-10-26",
+        "sha256": "14743111e2209f7db850ed7ff5025acfaa26ff3d3f1123a4bbd6f8a7a2ba4f9f"
+      }
+    ],
+    "newArtwork": false,
+    "photoReviewed": "previous-review"
+  },
+  {
+    "id": "temple:대전사",
+    "name": "대전사",
+    "group": "경상·부산",
+    "image": "/images/temple-covers/cnn-daejeonsa.webp",
+    "thumbnail": "/images/temple-covers/cnn-daejeonsa-small.webp",
+    "imageSha256": "f95bb739bbae55d23b99c0523a76b90fa2d41a5319a9992b4241d30ecd7e2bee",
+    "tipCards": 2,
+    "sources": [
+      {
+        "title": "청송 대전사 보광전 · 공유마당 공개 자료",
+        "url": "https://gongu.copyright.or.kr/gongu/wrt/wrt/view.do?menuNo=200018&wrtSn=901397",
+        "checkedAt": "2026-11-12",
+        "sha256": "2140a16f5733b2a4c43d0dbe239f4d30f3089e88cfbca8d4709ab44bf776c81a"
+      }
+    ],
+    "newArtwork": true,
+    "photoReviewed": false
+  },
+  {
+    "id": "temple:부석사",
+    "name": "부석사",
+    "group": "경상·부산",
+    "image": "/atlas/buseoksa/images/buseoksa-cover.webp",
+    "thumbnail": "/atlas/buseoksa/images/buseoksa-cover-small.webp",
+    "imageSha256": "7e14daade0f8f6fb28247b0def445b806ac45b140561557510c07615f2593fd8",
+    "tipCards": 2,
+    "sources": [
+      {
+        "title": "봉황산 부석사 (鳳凰山 浮石寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0024295",
+        "checkedAt": "2026-10-26",
+        "sha256": "1406da6fd1cc76163c5212a9cb8c6fb78eaf158dfbc39cfb3559dc71a7d74380"
+      }
+    ],
+    "newArtwork": false,
+    "photoReviewed": "previous-review"
+  },
+  {
+    "id": "temple:해인사",
+    "name": "해인사",
+    "group": "경상·부산",
+    "image": "/images/temple-covers/temple-해인사.webp",
+    "thumbnail": "/images/temple-covers/thumb-해인사.webp",
+    "imageSha256": "a3c48c0d24e72abd1e23f5f4f0d7e815c1dd5c07f2fcfa195428d8035ef782b4",
+    "tipCards": 2,
+    "sources": [
+      {
+        "title": "가야산 해인사 (伽倻山 海印寺)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0062704",
+        "checkedAt": "2026-10-26",
+        "sha256": "eab6bc275520b3aa6d385cc12fbf766fc1e44f31cc1f157d01d5a6bf0142c40e"
+      }
+    ],
+    "newArtwork": false,
+    "photoReviewed": "previous-review"
+  },
+  {
+    "id": "temple:보리암",
+    "name": "보리암",
+    "group": "경상·부산",
+    "image": "/images/temple-covers/reviewed-보리암.webp",
+    "thumbnail": "/images/temple-covers/reviewed-보리암-small.webp",
+    "imageSha256": "b9cf47d924d2d1dee806252b4f7ae74a622157b5bdb3bf9eea8d9effc4bc7a7a",
+    "tipCards": 2,
+    "sources": [
+      {
+        "title": "금산 보리암 (錦山 菩提庵)",
+        "url": "https://encykorea.aks.ac.kr/Article/E0023299",
+        "checkedAt": "2026-10-26",
+        "sha256": "3c24087f23274ef023c25e8282c62fdd7b8f18a1771d390b72b9e409b3a3e829"
+      }
+    ],
+    "newArtwork": false,
+    "photoReviewed": "previous-review"
+  }
+]
