@@ -23526,16 +23526,16 @@ img,picture,svg,canvas{
         <button class="btn btn-ghost" style="padding:10px 16px;" onclick="nextSong()">⏭</button>
       </div>
       <div class="sync-panel" id="lyricSyncPanel">
-        <div class="sync-slider-row">
+        <p id="lyricSyncSelected" role="status">맞출 가사 줄을 선택해 주세요.</p><div class="sync-slider-row">
           <button class="btn btn-ghost" style="padding:6px 9px;font-size:11px;" onclick="adjustLyricOffset(-0.1)">−0.1</button>
-          <input id="lyricOffsetRange" type="range" min="-8" max="8" step="0.1" value="0" oninput="setLyricOffset(this.value)">
+          <input id="lyricOffsetRange" type="range" min="-120" max="120" step="0.1" value="0" oninput="setLyricOffset(this.value)">
           <button class="btn btn-ghost" style="padding:6px 9px;font-size:11px;" onclick="adjustLyricOffset(0.1)">+0.1</button>
         </div>
         <div style="display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap;margin-top:8px;">
           <span id="lyricOffsetLabel" style="min-width:92px;font-size:11px;font-weight:800;color:var(--stamp);">싱크 0.0초</span>
           <span id="lyricSyncSaveStatus" style="font-size:10px;font-weight:800;color:var(--ink-soft);">공용 싱크 준비</span>
           <button class="btn btn-primary" style="padding:7px 10px;font-size:11px;" onclick="alignSelectedLyricToNow()">🎯 선택한 줄을 지금에 맞춤</button>
-          <button class="btn btn-ghost" style="padding:6px 9px;font-size:10.5px;" onclick="resetLyricOffset()">초기화</button>
+          <button class="btn btn-primary" type="button" onclick="flushLyricOffsets()">싱크 저장</button><button class="btn btn-ghost" style="padding:6px 9px;font-size:10.5px;" onclick="resetLyricOffset()">초기화</button>
         </div>
         <div class="map-note" style="margin-top:7px;padding:0;">가사 한 줄을 먼저 톡 누른 뒤, 실제 노래에서 그 줄이 시작되는 순간 <b>‘선택한 줄을 지금에 맞춤’</b>을 누르세요.</div>
       </div>
@@ -24665,12 +24665,6 @@ const SUB_COURSES = [
 ];
 
 const PACKS = [
-  {"key":"cnn_beautiful_temples","label":"CNN 아름다운 사찰 탐방 · 참고 37곳","route":"제공받은 CNN 관련 참고 목록 37곳을 묶었습니다. 전국에 흩어져 있으므로 아래 지역 코스로 나누어 방문하세요. 이동·개방 정보는 출발 전 현지 안내에서 확인하세요.","sourceNote":"목록 출처: 사용자 제공 참고 자료 37곳 · CNN 원문 명단과의 일치는 아직 대조하지 못했습니다.","names":["천축사","수종사","보문사","망경사","삼화사","청평사","마곡사","법주사","보탑사","개심사","수덕사","화엄사","천은사","연곡사","사성암","송광사","선암사","대흥사","운주사","쌍봉사","탑사","금산사","내장사","강천사","태안사","향일암","선운사","백양사","통도사","불국사","골굴사","범어사","봉정사","대전사","부석사","해인사","보리암"]},
-  {"key":"cnn_capital","label":"CNN 참고 사찰 · 서울·경기·인천 코스","route":"서울·경기·인천 권역의 참고 목록입니다. 한 번에 방문하기보다 실제 이동 동선에 맞춰 나누어 계획하세요.","sourceNote":"사용자 제공 CNN 관련 참고 목록 기준 · 원문 미대조.","names":["천축사","수종사","보문사"]},
-  {"key":"cnn_gangwon","label":"CNN 참고 사찰 · 강원 코스","route":"강원 권역의 참고 목록입니다. 한 번에 방문하기보다 실제 이동 동선에 맞춰 나누어 계획하세요.","sourceNote":"사용자 제공 CNN 관련 참고 목록 기준 · 원문 미대조.","names":["망경사","삼화사","청평사"]},
-  {"key":"cnn_chungcheong","label":"CNN 참고 사찰 · 충청 코스","route":"충청 권역의 참고 목록입니다. 한 번에 방문하기보다 실제 이동 동선에 맞춰 나누어 계획하세요.","sourceNote":"사용자 제공 CNN 관련 참고 목록 기준 · 원문 미대조.","names":["마곡사","법주사","보탑사","개심사","수덕사"]},
-  {"key":"cnn_jeolla","label":"CNN 참고 사찰 · 전라 코스","route":"전라 권역의 참고 목록입니다. 한 번에 방문하기보다 실제 이동 동선에 맞춰 나누어 계획하세요.","sourceNote":"사용자 제공 CNN 관련 참고 목록 기준 · 원문 미대조.","names":["화엄사","천은사","연곡사","사성암","송광사","선암사","대흥사","운주사","쌍봉사","탑사","금산사","내장사","강천사","태안사","향일암","선운사","백양사"]},
-  {"key":"cnn_gyeongsang","label":"CNN 참고 사찰 · 경상·부산 코스","route":"경상·부산 권역의 참고 목록입니다. 한 번에 방문하기보다 실제 이동 동선에 맞춰 나누어 계획하세요.","sourceNote":"사용자 제공 CNN 관련 참고 목록 기준 · 원문 미대조.","names":["통도사","불국사","골굴사","범어사","봉정사","대전사","부석사","해인사","보리암"]},
   {key:"forest", label:"고즈넉한 숲길 걷기 코스", route:"경내 관람보다 숲길 산책 자체가 목적인 코스예요. 편한 신발만 있으면 충분해요.", names: ["월정사","내소사","부석사","해인사","송광사","백양사","불영사"]},
   {key:"unesco", label:"유네스코 산사 7곳", route:"전국에 흩어져 있어 한 번에 도는 코스는 아니고, 지역별로 나눠 방문하는 걸 추천해요.", data: UNESCO_SEED},
   {key:"chongnim", label:"조계종 8대 총림", route:"역시 전국 각지 본사라 지역별 코스(경주/지리산/경남 등)와 겹쳐서 도는 게 효율적이에요.", data: CHONGNIM_SEED},
@@ -24689,7 +24683,13 @@ const PACKS = [
   {key:"jeonbuk", label:"전북 사찰 코스", route:"부안권(내소사-개암사, 차로 20분)과 김제·완주권(금산사-화암사-완주 송광사, 서로 30~40분)으로 구분", nearby:"전주 한옥마을(비빔밥·한옥스테이), 부안 채석강(퇴적암 절벽)과 함께 즐기기 좋아요.", data: JEONBUK_SEED},
   {key:"gyeongbuk", label:"경북 사찰 코스", route:"영주·안동권(부석사-봉정사, 40분), 문경권(대승사-김룡사-봉암사, 서로 20~30분), 대구권(갓바위-파계사-운문사, 40분~1시간)으로 나눠서", nearby:"안동 하회마을(유네스코 민속마을), 영주 무섬마을(외나무다리)도 근처예요.", data: GYEONGBUK_SEED},
   {key:"gyeongnam", label:"경남 사찰 코스", route:"양산·밀양권(통도사-표충사-만어사, 서로 30~40분), 부산권(범어사-해동용궁사, 40분), 남해권(보리암-다솔사, 1시간)으로 구분", nearby:"통영 동피랑마을(벽화마을), 진주성(진주 남강)과 이어 다니기 좋아요.", data: GYEONGNAM_SEED},
-  ...SUB_COURSES
+  ...SUB_COURSES,
+  {"key":"cnn_beautiful_temples","label":"아름다운 사찰 탐방 · 37곳","route":"전국의 아름다운 사찰 37곳을 만나는 순례. 가까운 지역부터 나만의 여정을 시작해 보세요.","names":["천축사","수종사","보문사","망경사","삼화사","청평사","마곡사","법주사","보탑사","개심사","수덕사","화엄사","천은사","연곡사","사성암","송광사","선암사","대흥사","운주사","쌍봉사","탑사","금산사","내장사","강천사","태안사","향일암","선운사","백양사","통도사","불국사","골굴사","범어사","봉정사","대전사","부석사","해인사","보리암"]},
+  {"key":"cnn_capital","label":"아름다운 사찰 · 서울·경기·인천 코스","route":"서울·경기·인천 권역의 아름다운 사찰을 만나는 코스입니다. 한 번에 방문하기보다 실제 이동 동선에 맞춰 나누어 계획하세요.","names":["천축사","수종사","보문사"]},
+  {"key":"cnn_gangwon","label":"아름다운 사찰 · 강원 코스","route":"강원 권역의 아름다운 사찰을 만나는 코스입니다. 한 번에 방문하기보다 실제 이동 동선에 맞춰 나누어 계획하세요.","names":["망경사","삼화사","청평사"]},
+  {"key":"cnn_chungcheong","label":"아름다운 사찰 · 충청 코스","route":"충청 권역의 아름다운 사찰을 만나는 코스입니다. 한 번에 방문하기보다 실제 이동 동선에 맞춰 나누어 계획하세요.","names":["마곡사","법주사","보탑사","개심사","수덕사"]},
+  {"key":"cnn_jeolla","label":"아름다운 사찰 · 전라 코스","route":"전라 권역의 아름다운 사찰을 만나는 코스입니다. 한 번에 방문하기보다 실제 이동 동선에 맞춰 나누어 계획하세요.","names":["화엄사","천은사","연곡사","사성암","송광사","선암사","대흥사","운주사","쌍봉사","탑사","금산사","내장사","강천사","태안사","향일암","선운사","백양사"]},
+  {"key":"cnn_gyeongsang","label":"아름다운 사찰 · 경상·부산 코스","route":"경상·부산 권역의 아름다운 사찰을 만나는 코스입니다. 한 번에 방문하기보다 실제 이동 동선에 맞춰 나누어 계획하세요.","names":["통도사","불국사","골굴사","범어사","봉정사","대전사","부석사","해인사","보리암"]}
 ];
 
 let db=null, auth=null, storage=null, localMode=false;
@@ -25368,7 +25368,7 @@ function startSharedLyricSyncListener(){
     const shared=snap.val();
     if(shared && typeof shared==='object' && !Array.isArray(shared)){
       const changed=JSON.stringify(shared)!==JSON.stringify(lyricOffsets);
-      lyricOffsets=shared;
+      lyricOffsets={...shared,...Object.fromEntries([...lyricSyncPending].map(([key,entry])=>[key,entry.value]))};
       try{ localStorage.setItem('sansaLyricOffsets_v3',JSON.stringify(lyricOffsets)); }catch(e){}
       const st=document.getElementById('lyricSyncSaveStatus');
       if(st && !isAdminUser()) st.textContent='공용 싱크 적용됨';
@@ -25929,44 +25929,42 @@ let lyricOffsets = (()=>{
 })();
 let selectedLyricSyncIdx = -1;
 function currentLyricOffset(){ return Number(lyricOffsets[SONGS[currentSongIdx]?.title] || 0); }
-let lyricSyncSaveTimer = null;
-function saveLyricOffsets(){
-  try{ localStorage.setItem('sansaLyricOffsets_v3',JSON.stringify(lyricOffsets)); }catch(e){}
-
-  if(!isAdminUser()){
-    const st=document.getElementById('lyricSyncSaveStatus');
-    if(st) st.textContent='관리자만 저장 가능';
-    return;
-  }
-  if(!db){
-    const st=document.getElementById('lyricSyncSaveStatus');
-    if(st) st.textContent='Firebase 연결 없음';
-    return;
-  }
-
-  const st=document.getElementById('lyricSyncSaveStatus');
-  if(st){
-    st.textContent='저장 중…';
-    st.style.color='var(--gold)';
-  }
-
+let lyricSyncSaveTimer = null,lyricSyncWriting=false,lyricSyncRevision=0;
+const lyricSyncPending=new Map();
+let lyricSyncStatusText='';
+function showLyricSyncStatus(text,failed=false){
+  lyricSyncStatusText=text;
+  const status=document.getElementById('lyricSyncSaveStatus');
+  if(status){status.textContent=text;status.style.color=failed?'var(--stamp)':'var(--moss)';}
+}
+async function flushLyricOffsets(){
   clearTimeout(lyricSyncSaveTimer);
-  lyricSyncSaveTimer=setTimeout(async()=>{
-    try{
-      await lyricSyncRef().set(lyricOffsets);
-      if(st){
-        st.textContent='✓ 전체 사용자에게 저장됨';
-        st.style.color='var(--moss)';
-      }
-    }catch(err){
-      console.warn('lyric sync save failed',err&&err.code,err);
-      if(st){
-        st.textContent='저장 실패 · DB 규칙 확인';
-        st.style.color='var(--stamp)';
-      }
-      showToast('가사 싱크를 공용으로 저장하지 못했어요. Realtime Database 규칙을 확인해주세요.');
-    }
-  },350);
+  if(lyricSyncWriting||!lyricSyncPending.size||!isAdminUser()||!db)return;
+  lyricSyncWriting=true;
+  const batch=new Map(lyricSyncPending);
+  showLyricSyncStatus('저장 중…');
+  let saved=false;
+  try{
+    await lyricSyncRef().update(Object.fromEntries([...batch].map(([key,entry])=>[key,entry.value])));
+    for(const [key,entry]of batch)if(lyricSyncPending.get(key)?.revision===entry.revision)lyricSyncPending.delete(key);
+    saved=true;
+    showLyricSyncStatus(lyricSyncPending.size?'새 조정값 저장 중…':'✓ 전체 사용자에게 저장됨');
+  }catch(err){
+    console.warn('lyric sync save failed',err&&err.code);
+    showLyricSyncStatus('저장하지 못했어요 · 싱크 저장을 눌러 다시 시도',true);
+  }finally{
+    lyricSyncWriting=false;
+    if(saved&&lyricSyncPending.size)flushLyricOffsets();
+  }
+}
+function saveLyricOffsets(){
+  try{localStorage.setItem('sansaLyricOffsets_v3',JSON.stringify(lyricOffsets));}catch(_){}
+  if(!isAdminUser())return;
+  const title=SONGS[currentSongIdx]?.title;if(!title)return;
+  lyricSyncPending.set(title,{value:currentLyricOffset(),revision:++lyricSyncRevision});
+  showLyricSyncStatus('조정값 저장 대기…');
+  clearTimeout(lyricSyncSaveTimer);
+  lyricSyncSaveTimer=setTimeout(flushLyricOffsets,350);
 }
 function updateLyricOffsetLabel(){
   const el = document.getElementById('lyricOffsetLabel');
@@ -25977,7 +25975,7 @@ function updateLyricOffsetLabel(){
 }
 function adjustLyricOffset(delta){
   if(!isAdminUser()) return;
-  lyricOffsets[SONGS[currentSongIdx].title] = Math.max(-8, Math.min(8, Math.round((currentLyricOffset()+delta)*10)/10));
+  lyricOffsets[SONGS[currentSongIdx].title] = Math.max(-120, Math.min(120, Math.round((currentLyricOffset()+delta)*10)/10));
   saveLyricOffsets();
   lastLyricIdx = -1;
   updateLyricOffsetLabel();
@@ -25986,13 +25984,14 @@ function adjustLyricOffset(delta){
 
 function setLyricOffset(v){
   if(!isAdminUser()) return;
-  const n=Math.max(-8,Math.min(8,Number(v)||0));
+  const n=Math.max(-120,Math.min(120,Number(v)||0));
   lyricOffsets[SONGS[currentSongIdx].title]=Math.round(n*10)/10;
   saveLyricOffsets(); lastLyricIdx=-1; updateLyricOffsetLabel(); updatePlaylistProgress();
 }
 function selectLyricForSync(i){
   if(!isAdminUser()) return;
   selectedLyricSyncIdx=i;
+  const selected=document.getElementById('lyricSyncSelected');if(selected)selected.textContent='선택한 가사: '+(SONGS[currentSongIdx]?.lyrics[i]?.text||'');
   document.querySelectorAll('#lyricsInner .lyric-line').forEach((el,idx)=>el.classList.toggle('sync-selected',idx===i));
 }
 function alignSelectedLyricToNow(){
@@ -26049,6 +26048,7 @@ function loadSong(idx, autoplay){
   const wrap = document.getElementById('lyricsInner');
   wrap.innerHTML = song.lyrics.map((l,i)=>`<div class="lyric-line" id="lyricLine${i}" onclick="selectLyricForSync(${i})" style="padding:5px 0;font-size:${l.text.startsWith('[')?'11px':'13.5px'};color:${l.text.startsWith('[')?'var(--stamp)':'var(--ink-soft)'};font-weight:${l.text.startsWith('[')?'800':'500'};transition:color .3s ease;cursor:pointer;">${escapeHtml(l.text)}</div>`).join('');
   selectedLyricSyncIdx=-1;
+  const selected=document.getElementById('lyricSyncSelected');if(selected)selected.textContent='맞출 가사 줄을 선택해 주세요.';
   lastLyricIdx = -1;
   updateLyricOffsetLabel();
   if(autoplay || wasPlaying){
@@ -26068,7 +26068,7 @@ function openPlaylistOverlay(){
   if(syncPanel) syncPanel.style.display = isAdminUser() ? '' : 'none';
   const syncStatus=document.getElementById('lyricSyncSaveStatus');
   if(syncStatus){
-    syncStatus.textContent=isAdminUser() ? '관리자 공용 싱크' : '공용 싱크 적용됨';
+    syncStatus.textContent=isAdminUser() ? (lyricSyncStatusText||'관리자 공용 싱크') : '공용 싱크 적용됨';
     syncStatus.style.color=isAdminUser() ? 'var(--stamp)' : 'var(--ink-soft)';
   }
   document.getElementById('playlistOverlay').classList.add('show');
@@ -26149,7 +26149,7 @@ function updatePlaylistProgress(){
       // 실제 스크롤해야 할 위치와 어긋나 화면 밖으로 튕기는 원인이 됐습니다.
       // getBoundingClientRect로 현재 화면 기준 위치를 직접 계산해서 가사창 내부로만 스크롤합니다.
       const lyricsWrapEl = document.getElementById('lyricsWrap');
-      if(lyricsWrapEl){
+      if(lyricsWrapEl&&!(isAdminUser()&&selectedLyricSyncIdx>=0)){
         const wrapRect = lyricsWrapEl.getBoundingClientRect();
         const curRect = cur.getBoundingClientRect();
         const offsetWithinWrap = (curRect.top - wrapRect.top) + lyricsWrapEl.scrollTop;
@@ -42404,9 +42404,9 @@ nav.site-global-nav{height:var(--global-nav-h)!important;box-sizing:border-box!i
 <script src="/scripts/personal-location.js?v=20261025-unified" defer></script>
 <script src="/scripts/mountain-covers.js?v=20261027-static" defer></script>
 <script src="/scripts/visit-tips.js?v=20261112-cnn37" defer></script>
-<script src="/scripts/temple-music.js?v=20261026-ui" defer></script>
+<script src="/scripts/temple-music.js?v=20261112-sync-room" defer></script>
 <script src="/scripts/device-photos/celebration.js?v=20261026-unified" defer></script>
-<link rel="stylesheet" href="/styles/ui-content.css?v=20261027-static">
+<link rel="stylesheet" href="/styles/ui-content.css?v=20261112-music-header">
 <link rel="stylesheet" href="./styles/dharma-hall.css?v=20261101-guided-studio">
 <script src="./scripts/practice-config.js?v=20261102-25d" defer></script>
 <script src="./scripts/sansa-core.js?v=20261102-25d" defer></script>

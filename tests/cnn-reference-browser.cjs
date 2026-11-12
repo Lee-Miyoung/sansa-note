@@ -9,7 +9,7 @@ const ref=require('../data/cnn-temple-reference.json'),adds=require('../data/cnn
   const before=await p.evaluate(()=>JSON.stringify(mockRecords['users/A/destinations']));const initialWrites=await p.evaluate(()=>[...mockWrites]);
   const state=await p.evaluate(()=>({official:SANSA_GUARDIAN_108.length,all:resolvePackData(PACKS.find(p=>p.key==='cnn_beautiful_temples')).map(p=>p.name),groups:PACKS.filter(p=>p.key.startsWith('cnn_')).map(p=>({key:p.key,count:resolvePackData(p).length})),extra:PACKS.find(p=>p.key==='cnn_beautiful_temples').names.filter(n=>!SANSA_GUARDIAN_108.includes(n))}));
   assert.equal(state.official,108);assert.deepEqual(state.all,names);assert.equal(state.groups.length,6);assert.equal(state.extra.length,9);
-  await p.evaluate(()=>{openPackOverlay();openPackDetail('cnn_beautiful_temples')});assert.equal(await p.locator('#packList .pack-detail-place').count(),37);assert((await p.locator('#packList .pack-source-note').innerText()).includes('사용자 제공'));
+  await p.evaluate(()=>{openPackOverlay();openPackDetail('cnn_beautiful_temples')});assert.equal(await p.locator('#packList .pack-detail-place').count(),37);assert.equal(await p.locator('#packList .pack-source-note').count(),0);
   await p.screenshot({path:`${out}/course-${width}.jpg`,type:'jpeg',quality:83});await p.evaluate(()=>closePackOverlay());
   for(const a of adds){
    await p.evaluate(name=>{openCatalogOverlay('temple');document.getElementById('catalogSearch').value=name;renderCatalogOverlay()},a.name);

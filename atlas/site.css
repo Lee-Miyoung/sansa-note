@@ -30,3 +30,5 @@ html body #secretAtlasOverlay.atlas-expanded>.atlas-shell{width:100%!important;m
 @media(max-width:380px){#secretAtlasOverlay .atlas-top{gap:5px;padding-inline:7px}#secretAtlasOverlay .atlas-top>span{font-size:10px}#secretAtlasOverlay .atlas-top b{display:block;font-size:13px;margin:0}#secretAtlasOverlay .atlas-reader-dock{gap:5px;padding-inline:8px}#secretAtlasOverlay .atlas-reader-dock button{min-width:90px;padding-inline:10px}}
 
 .atlas-season-label{font:600 12px/1.7 system-ui,sans-serif;color:#61755a;min-height:20px;letter-spacing:.03em}.atlas-season-progress{font-size:13px;color:#61755a}
+
+.atlas-temple-songs{flex:0 0 auto;padding:7px 14px;background:#f0f3e8;border-bottom:1px solid #dce3cf}.atlas-temple-songs a{display:inline-flex;align-items:center;min-height:44px;padding:5px 8px;color:#315e49;font:600 13px/1.6 system-ui;text-decoration:underline;text-underline-offset:3px}
