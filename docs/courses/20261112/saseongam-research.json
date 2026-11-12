@@ -1,0 +1,61 @@
+{
+  "place": "사성암",
+  "sources": [
+    {
+      "title": "한국기행_지리산_건출물_사찰 · EBS 공개 사진",
+      "url": "https://gongu.copyright.or.kr/gongu/wrt/wrt/view.do?menuNo=200018&wrtSn=13068600",
+      "creator": "한국교육방송공사",
+      "license": "CC BY 4.0",
+      "checkedAt": "2026-11-12",
+      "sha256": "5b3fe51deb3770492eeea4307135eae1f4a7439c11bb6bd7af7bb67175609e82"
+    },
+    {
+      "title": "구례 오산 사성암 일원 명승 지정예고 · 전라남도 보도자료(2014)",
+      "url": "https://gongu.copyright.or.kr/gongu/wrt/wrt/view.do?menuNo=200019&wrtSn=12945655",
+      "creator": "전라남도",
+      "license": "공공누리 제1유형",
+      "checkedAt": "2026-11-12",
+      "sha256": "79b6bb0760dccd32880264521b134814738df14931c75d61fac0476e73b73b61"
+    }
+  ],
+  "additionalPhotoReference": {
+    "title": "한국기행_지리산_건출물_사찰2",
+    "creator": "한국교육방송공사",
+    "license": "CC BY 4.0",
+    "url": "https://gongu.copyright.or.kr/gongu/wrt/wrt/view.do?menuNo=200018&wrtSn=13068601",
+    "sha256": "b1e8d9b812e44d4de80962525149e84094b8ebb1a33a35e101bca87bc0178f5e"
+  },
+  "original": "/images/temple-covers/originals/saseongam.png",
+  "artwork": {
+    "id": "temple:사성암",
+    "name": "사성암",
+    "kind": "temple",
+    "region": "전라",
+    "locality": "구례",
+    "hint": "구례 문척면 오산 사성암",
+    "src": "/images/temple-covers/completed-사성암.webp",
+    "width": 1200,
+    "height": 800,
+    "bytes": 361696,
+    "sha256": "3a02d031c56954b0a3aa62b81afcd28b009f5ce9836399c439c83c0be7959dc8",
+    "thumbnail": "/images/temple-covers/completed-사성암-small.webp",
+    "thumbnailBytes": 54166,
+    "thumbnailHash": "ff16015667d8d7b65d96c74dffd20287a3dd420db2d60863b97109dd7f167ec0",
+    "creation": "original-watercolor-from-text",
+    "generatedFromPhotos": false,
+    "review": {
+      "features": "암벽에 기댄 좁은 전각, 잇따른 회색 기와지붕, 녹청색 단청·옅은 격자문, 붉은 난간과 긴 수직 붉은 지지기둥 세 개, 우측 돌계단, 좌측 섬진강·구례 들판 조망.",
+      "basis": "공유마당의 EBS 사진과 전남도 설명을 직접 열람. 사진을 생성 도구에 업로드하지 않고 건축 특징을 텍스트로 정리해 새 수채화 제작. 원화와 앱 화면을 육안 확인. 정밀 실측 복원도는 아님.",
+      "referenceTitle": "한국기행_지리산_건출물_사찰 · EBS 공개 사진",
+      "referenceURL": "https://gongu.copyright.or.kr/gongu/wrt/wrt/view.do?menuNo=200018&wrtSn=13068600",
+      "referenceCreator": "한국교육방송공사"
+    },
+    "status": "verified",
+    "referenceStatus": "public-reference-reviewed"
+  },
+  "limitations": [
+    "교통·셔틀·입장료의 현재 운영 정보는 확인하지 않았음",
+    "사진을 직접 복제하지 않은 해석적 수채화이며 실측 복원도 아님",
+    "CNN 33곳 전체 원문 목록 대조는 네트워크 정책 차단으로 미완료"
+  ]
+}

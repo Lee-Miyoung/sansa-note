@@ -22476,8 +22476,8 @@ img,picture,svg,canvas{
 }
 </style>
 
-<script src="./scripts/place-identity.js?v=20261027-static"></script>
-<script src="./scripts/temple-covers.js?v=20261027-static"></script>
+<script src="./scripts/place-identity.js?v=20261112-extra"></script>
+<script src="./scripts/temple-covers.js?v=20261112-extra"></script>
 </head>
 <body>
 
@@ -24541,6 +24541,8 @@ function buildMasterByName(){
     {region:"충청",name:"대조사",tag:"문화유산",desc:"충청남도 부여군 임천면에 있는 사찰. 고려시대의 거대한 '부여 대조사 석조미륵보살입상'(보물)이 대표 문화유산입니다. 논산 관촉사 석조미륵보살입상과 비교하며 고려 석불의 특징을 살펴보기 좋습니다.",activity:"대조사 경내 → 석조미륵보살입상(보물) → 임천 지역의 백제 역사 유적 둘러보기",tagline:"돌에 새긴 오래된 미륵의 미소",visitorTip:"주소: 충남 부여군 임천면 성흥로197번길 112. 사찰 진입도로와 주차 가능 여부는 출발 전에 확인하세요. 석불 앞에서는 안전선과 종교시설 예절을 지켜 관람하세요.",nearbySight:"임천 성흥산성·사랑나무, 부여 궁남지와 백제문화단지. 무량사·관촉사까지 이동하는 경우 차량 순례를 권합니다.",locationHint:"부여 임천면",sourceUrl:"https://m.khs.go.kr/public/commentary/culSelectDetail.do?ccbaAsno=02170000&ccbaCpno=&ccbaCtcd=34&ccbaKdcd=12&menuId=03"},
     {region:"경상",name:"장안사(부산)",tag:"문화유산",desc:"부산광역시 기장군 장안읍 불광산 기슭에 있는 사찰. 조선 후기 건축의 특징을 간직한 기장 장안사 대웅전은 국가 보물입니다. 명부전·응진전과 계곡 주변의 숲 풍경을 함께 감상할 수 있습니다.",activity:"장안사 대웅전(보물) → 명부전·응진전 → 불광산 계곡과 숲길 산책",tagline:"기장 산자락에서 만나는 고요",visitorTip:"주소: 부산 기장군 장안읍 장안로 482. 사찰 주차장 이용 가능. 부산 관광 안내에 따르면 상시 관람·무료 입장으로 소개되지만 행사·공사 시 변경될 수 있습니다. 기장군9 마을버스 상장안 하차 후 도보 약 17분입니다.",nearbySight:"장안사계곡·불광산 숲길. 해동용궁사는 기장 해안 쪽에 있어 차량으로 이동하는 별도 방문지입니다.",locationHint:"부산 기장 장안읍",sourceUrl:"https://www.visitbusan.net/index.do?lang_cd=ko"}
   ];
+  // A curated extra destination; never changes the site's official 108 selection.
+  guardianAdditions.push({region:"전라",name:"사성암",tag:"유명",desc:"전남 구례 오산의 암벽에 자리한 암자. 절벽에 기대어 세운 전각과 섬진강·구례 들판을 내려다보는 풍경으로 알려져 있습니다.",activity:"암벽 곁 전각 살펴보기 · 섬진강과 구례 들판 조망",tagline:"오산 절벽에서 만나는 섬진강 풍경",visitorTip:"구례군 문척면 오산에 있습니다. 오르막과 계단이 있어 편한 신발을 권합니다. 진입 교통·셔틀·주차 운영은 방문 전에 구례군 관광 안내에서 확인하세요.",nearbySight:"구례읍·섬진강, 화엄사·천은사·연곡사. 곡성 태안사는 차량으로 이동하는 별도 방문지입니다.",locationHint:"구례 문척면 오산 사성암",sourceUrl:"https://gongu.copyright.or.kr/gongu/wrt/wrt/view.do?menuNo=200019&wrtSn=12945655",catalogGroup:"extra"});
   guardianAdditions.forEach(item=>{if(!m[item.name])m[item.name]=item;});
   Object.values(m).forEach(item=>{
     if(VERIFIED_FAMOUS_TEMPLES.has(item.name)) item.tag = "유명";
@@ -24636,6 +24638,7 @@ const SUB_COURSES = [
   {key:"wanju_buan", label:"완주·부안 코스", route:"화암사↔완주 송광사 20분, 부안 내소사·개암사까지 50분.", nearby:"변산반도 채석강, 곰소 젓갈시장도 근처라 함께 들르기 좋아요.", names:["화암사","완주 송광사","내소사","개암사"]},
   {key:"gochang_yeonggwang", label:"고창·영광 코스", route:"선운사↔불갑사 차로 30분, 서해안고속도로로 연결.", names:["선운사","불갑사"]},
   {key:"gurye_gokseong", label:"구례·곡성 코스", route:"화엄사↔천은사 20분, 태안사(곡성)·연곡사까지 30~40분.", nearby:"곡성 기차마을(섬진강 증기기관차), 구례 산수유마을과 이어보세요.", names:["화엄사","천은사","태안사","연곡사"]},
+  {key:"gurye_saseongam", label:"구례 사성암·지리산 코스", route:"오산 사성암 → 화엄사 → 천은사·연곡사를 여유롭게 나눠 둘러보는 구례 차량 순례입니다. 사성암에는 오르막과 계단이 있으니 진입 교통·셔틀·주차 운영과 이동 시간은 출발 전에 현지 안내에서 확인하세요.", nearby:"섬진강과 구례 들판 전망, 구례읍·산수유마을. 사성암은 108선에 포함되지 않는 기타 순례지입니다.", names:["사성암","화엄사","천은사","연곡사"]},
   {key:"haenam_gangjin", label:"해남·강진 코스", route:"대흥사↔미황사 30분, 강진 백련사·무위사까지 40분.", nearby:"땅끝마을(한반도 최남단), 강진 다산초당을 함께 묶으면 좋아요.", names:["대흥사","미황사","백련사","무위사"]},
   {key:"hwasun", label:"화순 코스", route:"운주사↔쌍봉사 차로 30분.", names:["운주사","쌍봉사"]},
   {key:"yeosu", label:"여수 코스", route:"흥국사↔향일암 차로 40분, 여수 밤바다와 묶기 좋음.", nearby:"여수 밤바다 케이블카, 낭만포차거리와 저녁 코스로 이어보세요.", names:["흥국사(여수)","향일암"]},
@@ -40107,7 +40110,7 @@ document.getElementById('todayTriviaOverlay')?.addEventListener('click',function
       list.replaceChildren();
       list.appendChild(makeHeading(temple?'🪷 선정 108 순례 사찰':'⛰ 기본 산 목록',officialCount,''));
       normal.forEach(el=>list.appendChild(el));
-      list.appendChild(makeHeading(temple?'✍️ 내가 추가한 절 · 기타 순례지':'✍️ 내가 추가한 산',extraCount,'extra'));
+      list.appendChild(makeHeading(temple?'🌿 기타 사찰 · 내가 추가한 순례지':'✍️ 내가 추가한 산',extraCount,'extra'));
       mine.forEach(el=>list.appendChild(el));
       // 감은사지는 사용자가 이전에 등록한 경우에만 '기타 순례지'에 보여준다.
       if(temple && Object.values(destinations||{}).some(d=>d?.name==='감은사지') && matches({name:'감은사지'})){
@@ -42389,7 +42392,7 @@ nav.site-global-nav{height:var(--global-nav-h)!important;box-sizing:border-box!i
 <script src="/scripts/device-photos/cards.js?v=20261026-ui" defer></script>
 <script src="/scripts/personal-location.js?v=20261025-unified" defer></script>
 <script src="/scripts/mountain-covers.js?v=20261027-static" defer></script>
-<script src="/scripts/visit-tips.js?v=20261027-static" defer></script>
+<script src="/scripts/visit-tips.js?v=20261112-extra" defer></script>
 <script src="/scripts/temple-music.js?v=20261026-ui" defer></script>
 <script src="/scripts/device-photos/celebration.js?v=20261026-unified" defer></script>
 <link rel="stylesheet" href="/styles/ui-content.css?v=20261027-static">

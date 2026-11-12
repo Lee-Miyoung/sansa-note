@@ -1686,5 +1686,13 @@
     "region": "경상",
     "locality": "",
     "hint": ""
+  },
+  {
+    "id": "temple:사성암",
+    "name": "사성암",
+    "kind": "temple",
+    "region": "전라",
+    "locality": "구례",
+    "hint": "구례 문척면 오산 사성암"
   }
 ]

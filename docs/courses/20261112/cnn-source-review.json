@@ -1,0 +1,9 @@
+{
+  "request": "CNN 선정 아름다운 사찰 코스",
+  "sourceUrl": "https://www.cnn.com/travel/article/south-korea-beautiful-temples/index.html",
+  "status": "pending-source-access",
+  "verifiedMembers": [],
+  "published": false,
+  "reason": "CNN 원문 접속이 환경 네트워크 정책의 403으로 차단됨. 기억으로 선정 목록·개수·순위를 만들어 게시하지 않음.",
+  "requestedDomains": ["www.cnn.com", "edition.cnn.com", "cnn.com", "www.gurye.go.kr"]
+}
