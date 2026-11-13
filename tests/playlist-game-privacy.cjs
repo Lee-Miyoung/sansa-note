@@ -8,7 +8,7 @@ const {fullRoute,login}=require('./unified-fixtures.cjs');
   p.on('pageerror',e=>errors.push(e.message));await fullRoute(p);await p.goto('https://sansanote.com/');await p.waitForFunction(()=>window.SansaSession);
   const welcome=p.locator('.sansa-privacy-welcome');assert(await welcome.isVisible());assert((await welcome.innerText()).includes('개인정보 보호를 위해'));
   assert.equal(await p.evaluate(()=>SansaSession.member()),false);
-  await p.locator('.fun-banner-btn.playlist').screenshot({path:'scratch/privacy-game/playlist-mobile.png'});
+  await p.locator('.fun-banner-btn.playlist:not(.temple-music-entry)').screenshot({path:'scratch/privacy-game/playlist-mobile.png'});
   for(const width of [390,1440]){await p.setViewportSize({width,height:844});assert(await p.locator('.sansa-mascot[data-pose=music]').first().evaluate(e=>{const c=getComputedStyle(e);return c.backgroundSize==='300% 400%'&&c.borderRadius==='50%'&&c.clipPath.startsWith('circle(')}));}
   await p.setViewportSize({width:390,height:844});await welcome.screenshot({path:'scratch/privacy-game/welcome-mobile.png'});
   await p.evaluate(()=>openBeatLab(true));await p.waitForTimeout(600);

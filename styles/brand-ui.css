@@ -6,9 +6,9 @@
 .overlay:not(#beatLabOverlay):not(#lightboxOverlay){--ink:#294f41;--ink-soft:#657966;--paper:#faf8f0;--paper-soft:#fffdf6;--paper-line:#d9e1d1;--moss:#55775c;--moss-dark:#315741;--stamp:#426b53;color:var(--brand-ink);background-color:#243f355e!important}
 .overlay:not(#beatLabOverlay):not(#lightboxOverlay)>.modal{background:var(--brand-paper)!important;border:1px solid var(--brand-line)!important;border-radius:22px!important;box-shadow:0 20px 60px #1f40302b!important}
 .overlay:not(#beatLabOverlay):not(#lightboxOverlay) .modal-head{background-color:#eef3e7!important;border-bottom:1px solid var(--brand-line)!important;position:relative!important}
-.overlay:not(#beatLabOverlay):not(#lightboxOverlay):not(#playlistOverlay) .modal-head h2{font-family:'Nanum Myeongjo','Noto Serif KR',serif!important;color:var(--brand-ink)!important;font-size:26px!important;line-height:1.45!important;letter-spacing:-.045em!important;white-space:normal!important;word-break:keep-all!important}
+.overlay:not(#beatLabOverlay):not(#lightboxOverlay):not(:is(#playlistOverlay,#musicRoomOverlay)) .modal-head h2{font-family:'Nanum Myeongjo','Noto Serif KR',serif!important;color:var(--brand-ink)!important;font-size:26px!important;line-height:1.45!important;letter-spacing:-.045em!important;white-space:normal!important;word-break:keep-all!important}
 .overlay:not(#beatLabOverlay):not(#lightboxOverlay) .modal-body{font-size:16px!important;line-height:1.7!important}
-.overlay:not(#beatLabOverlay):not(#lightboxOverlay) :is(.modal-head .sub,.map-note,.vdate,.catalog-copy small,.catalog-section-heading small,.nickname-editor small,.settings-feature small){font-size:15px!important;line-height:1.7!important;color:#657966!important;word-break:keep-all}
+.overlay:not(#beatLabOverlay):not(#lightboxOverlay) :is(.map-note,.vdate,.catalog-copy small,.catalog-section-heading small,.nickname-editor small,.settings-feature small){font-size:15px!important;line-height:1.7!important;color:#657966!important;word-break:keep-all}
 .overlay:not(#beatLabOverlay):not(#lightboxOverlay):not(.hall-experience-v2):not(#mindRestOverlay):not(#oracleOverlay) .modal-body :is(p,small,[style*="font-size:10"],[style*="font-size:11"],[style*="font-size:12"],[style*="font-size:13"]){font-size:15px!important;line-height:1.7!important}
 .overlay:not(#beatLabOverlay):not(#lightboxOverlay):not(.hall-experience-v2):not(#mindRestOverlay):not(#oracleOverlay) :is(.btn,.club-btn,.catalog-view-btn,.settings-login-btn,.settings-logout-btn){font-size:16px!important;line-height:1.45!important;min-height:44px!important;border-radius:12px!important}
 .overlay:not(#beatLabOverlay):not(#lightboxOverlay) .btn-primary{background:#355f49!important;color:#fffaf0!important;border-color:#355f49!important}
@@ -52,7 +52,7 @@
 .hero-experience .hip-quick-row .hq-copy small,#funBannerWrap .fun-banner-row .fb-copy .fb-sub{font-size:15px!important;line-height:1.6!important}
 @media(max-width:700px){
  .site-global-nav .site-global-nav-links>button{font-size:14px!important}
- .overlay:not(#beatLabOverlay):not(#lightboxOverlay):not(#playlistOverlay) .modal-head h2{font-size:24px!important}
+ .overlay:not(#beatLabOverlay):not(#lightboxOverlay):not(:is(#playlistOverlay,#musicRoomOverlay)) .modal-head h2{font-size:24px!important}
  #settingsOverlay .settings-feature-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important}
  #settingsOverlay .settings-feature{grid-template-columns:42px minmax(0,1fr)!important;column-gap:8px!important;padding:10px!important;min-height:108px!important}
  #settingsOverlay .settings-feature>span,#settingsOverlay .settings-feature>span img{width:42px!important;height:42px!important}
@@ -143,3 +143,5 @@ header.hero .hero-main-grid .hero-copy > p {
   }
   header.hero .hero-main-grid .hero-copy { overflow:visible!important; }
 }
+
+.overlay:not(#beatLabOverlay):not(#lightboxOverlay):not(:is(#playlistOverlay,#musicRoomOverlay)) .modal-head .sub{font-size:15px!important;line-height:1.7!important;color:#657966!important;word-break:keep-all}

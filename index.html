@@ -9822,7 +9822,7 @@ header.hero::before{
 #mantraOverlay .modal-head,
 #bowCounterOverlay .modal-head,
 #moktakOverlay .modal-head,
-#playlistOverlay .modal-head,
+:is(#playlistOverlay,#musicRoomOverlay) .modal-head,
 #amuletOverlay .modal-head{
   background:
     linear-gradient(90deg,rgba(255,252,247,.99),rgba(255,252,247,.91) 60%,rgba(255,252,247,.48)),
@@ -10347,14 +10347,14 @@ header.hero::before{
 /* Oracle / Amulet / Playlist */
 #oracleOverlay .modal-body,
 #amuletOverlay .modal-body,
-#playlistOverlay .modal-body{
+:is(#playlistOverlay,#musicRoomOverlay) .modal-body{
   background:
     linear-gradient(rgba(255,253,249,.96),rgba(255,253,249,.96)),
     url('./window-pattern-soft.png') right center/330px auto no-repeat!important;
 }
 #oracleOverlay .oracle-card,
 #amuletOverlay .amulet-card,
-#playlistOverlay .playlist-card{
+:is(#playlistOverlay,#musicRoomOverlay) .playlist-card{
   background:#fffdf9!important;
   border:1px solid #e5dbcf!important;
   border-radius:17px!important;
@@ -23553,7 +23553,7 @@ img,picture,svg,canvas{
     <div id="miniPlayerLyric" style="font-size:11px;color:#ffd76a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"></div>
   </div>
   <button onclick="togglePlaylistPlay()" id="miniPlayerBtn" style="background:none;border:none;color:#fff;font-size:20px;cursor:pointer;">⏸</button>
-  <button onclick="openPlaylistOverlay()" style="background:none;border:none;color:#fff;font-size:16px;cursor:pointer;">🔼</button>
+  <button onclick="openCurrentMusicPlayer()" aria-label="현재 음악 화면 열기" style="background:none;border:none;color:#fff;font-size:16px;cursor:pointer;">🔼</button>
   <button onclick="stopPlaylist()" style="background:none;border:none;color:#fff;font-size:16px;cursor:pointer;">✕</button>
 </div>
 <audio id="playlistAudio"></audio>
@@ -24767,6 +24767,8 @@ window.addEventListener('DOMContentLoaded', ()=>{
     auth = firebase.auth();
     db = firebase.database();
     storage = firebase.storage();
+    // Public lyric timing must not wait for a login callback or a guest-to-account switch.
+    startSharedLyricSyncListener();
 
     // 로그인 상태는 명시적으로 로컬에 유지합니다. 실패해도 앱 자체는 계속 실행합니다.
     auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL).catch(()=>{});
@@ -25232,6 +25234,10 @@ function renderFunBanner(){
         <div class="fb-music-meta"><span>▶ PLAY</span><span>♫ LOOP</span><span>DJ MODE</span></div>
       </div>
     <span class="wellness-scene scene-music" aria-hidden="true"><span class="scene-prop"></span></span><span class="sansa-mascot" data-pose="music" aria-hidden="true"></span></button>
+    <button class="fun-banner-btn playlist temple-music-entry" onclick="openSansaMusicRoom()">
+      <div class="fb-copy"><span class="music-kicker">TEMPLE STORIES · MUSIC</span><div class="fb-title">산사 음악방 <span class="music-play" aria-hidden="true">↗</span></div><div class="fb-sub">해인사 · 팔만의 바람</div><div class="fb-music-meta"><span>사찰의 이야기</span><span>♫ 노래로 만나요</span></div></div>
+      <span class="wellness-scene scene-music" aria-hidden="true"><span class="scene-prop"></span></span><span class="sansa-mascot" data-pose="music" aria-hidden="true"></span>
+    </button>
   </div>`;
 }
 
@@ -25365,8 +25371,9 @@ function normalizeSharedLyricSync(shared){
   const values={...shared};delete values.__lineTimesV1;
   const perSong=shared.__lineTimesV1;
   if(perSong&&typeof perSong==='object'&&!Array.isArray(perSong)){
-    for(const [title,lines]of Object.entries(perSong))if(lines&&typeof lines==='object'&&!Array.isArray(lines)){
-      values[title]={version:1,offset:Number.isFinite(Number(shared[title]))?Number(shared[title]):0,lines};
+    for(const [title,lines]of Object.entries(perSong))if(lines&&typeof lines==='object'){
+      const times=Object.fromEntries(Object.entries(lines).filter(([index,time])=>/^\d+$/.test(index)&&Number.isFinite(time)));
+      values[title]={version:1,offset:Number.isFinite(Number(shared[title]))?Number(shared[title]):0,lines:times};
     }
   }
   return values;
@@ -25386,7 +25393,7 @@ function startSharedLyricSyncListener(){
       if(changed){
         lastLyricIdx=-1;
         updateLyricOffsetLabel();
-        if(document.getElementById('playlistOverlay')?.classList.contains('show')) updatePlaylistProgress();
+        if(document.querySelector('#playlistOverlay.show,#musicRoomOverlay.show')) updatePlaylistProgress();
       }
     }
   },err=>{
@@ -26132,13 +26139,13 @@ function syncMiniPlayerVisibility(){
   const mini=document.getElementById('miniPlayer');
   const audio=document.getElementById('playlistAudio');
   if(!mini||!audio)return;
-  const playlistOpen=document.getElementById('playlistOverlay')?.classList.contains('show');
+  const playlistOpen=!!document.querySelector('#playlistOverlay.show,#musicRoomOverlay.show');
   const gameOpen=document.getElementById('beatLabOverlay')?.classList.contains('show');
   mini.style.display=(!audio.paused && !playlistOpen && !gameOpen)?'flex':'none';
 }
 
 function closePlaylistOverlay(){
-  document.getElementById('playlistOverlay').classList.remove('show');
+  document.querySelectorAll('#playlistOverlay,#musicRoomOverlay').forEach(node=>node.classList.remove('show'));
   syncMiniPlayerVisibility();
 }
 function stopPlaylist(){
@@ -26146,7 +26153,7 @@ function stopPlaylist(){
   audio.pause();
   audio.currentTime = 0;
   document.getElementById('miniPlayer').style.display = 'none';
-  document.getElementById('playlistOverlay').classList.remove('show');
+  document.querySelectorAll('#playlistOverlay,#musicRoomOverlay').forEach(node=>node.classList.remove('show'));
 }
 function togglePlaylistPlay(){
   const audio = document.getElementById('playlistAudio');
@@ -42427,8 +42434,8 @@ nav.site-global-nav{height:var(--global-nav-h)!important;box-sizing:border-box!i
 }
 @media(prefers-reduced-motion:reduce){.site-global-nav .site-global-nav-links>button{transition:none!important}}
 </style>
-<link rel="stylesheet" href="./styles/wellness.css?v=20261112-privacy-playlist">
-<link rel="stylesheet" href="./styles/brand-ui.css?v=20261101-completion">
+<link rel="stylesheet" href="./styles/wellness.css?v=20261113-separate-rooms">
+<link rel="stylesheet" href="./styles/brand-ui.css?v=20261113-separate-rooms">
 <link rel="stylesheet" href="./styles/game-viewport.css?v=20261017">
 <style id="sansa-home-personal-cards-only">
 #mainListArea{display:none!important}
@@ -42455,9 +42462,9 @@ nav.site-global-nav{height:var(--global-nav-h)!important;box-sizing:border-box!i
 <script src="/scripts/personal-location.js?v=20261025-unified" defer></script>
 <script src="/scripts/mountain-covers.js?v=20261027-static" defer></script>
 <script src="/scripts/visit-tips.js?v=20261112-cnn37" defer></script>
-<script src="/scripts/temple-music.js?v=20261112-unified-lyrics" defer></script>
+<script src="/scripts/temple-music.js?v=20261113-separate-rooms" defer></script>
 <script src="/scripts/device-photos/celebration.js?v=20261026-unified" defer></script>
-<link rel="stylesheet" href="/styles/ui-content.css?v=20261112-unified-lyrics">
+<link rel="stylesheet" href="/styles/ui-content.css?v=20261113-separate-rooms">
 <link rel="stylesheet" href="./styles/dharma-hall.css?v=20261101-guided-studio">
 <script src="./scripts/practice-config.js?v=20261102-25d" defer></script>
 <script src="./scripts/sansa-core.js?v=20261102-25d" defer></script>

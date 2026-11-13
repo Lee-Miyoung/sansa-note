@@ -98,16 +98,16 @@
 #breathOverlay #breathBreathBody video{opacity:.12!important}
 #mantraOverlay #mantraBeadCircle{background:radial-gradient(circle at 35% 25%,#92aa80,#3a6851)!important;box-shadow:0 8px 28px #335d4920}
 #mantraOverlay #mantraAutoPanel{background:#edf1e6!important}
-#playlistOverlay{--room-tint:#214c40}
-#playlistOverlay .modal-head{background:radial-gradient(circle at 95% 10%,#63784f,#214c40 65%)!important;min-height:142px!important}
-#playlistOverlay .modal-head h2{color:#fff5da!important}
-#playlistOverlay .modal-head .sub{color:#c5dbc4!important}
+:is(#playlistOverlay,#musicRoomOverlay){--room-tint:#214c40}
+:is(#playlistOverlay,#musicRoomOverlay) .modal-head{background:radial-gradient(circle at 95% 10%,#63784f,#214c40 65%)!important;min-height:142px!important}
+:is(#playlistOverlay,#musicRoomOverlay) .modal-head h2{color:#fff5da!important}
+:is(#playlistOverlay,#musicRoomOverlay) .modal-head .sub{color:#c5dbc4!important}
 .room-eyebrow,.music-kicker{display:block;font-size:9px;font-weight:800;letter-spacing:.15em;color:#e5cc85;margin-bottom:6px}
-#playlistOverlay .modal-head .room-companion{top:32px!important;border-radius:50%;background-color:#b7c09830!important;box-shadow:0 0 0 6px #d8de9f12,0 0 0 13px #d8de9f0a}
-#playlistOverlay #lyricsWrap{background:#edf1e7!important;border:1px solid #d6dfce;border-radius:18px!important}
-#playlistOverlay .song-sort-item .song-pick{background:#eef2e7!important;color:#365b45!important;border:1px solid #d8e0cf!important;border-radius:12px!important}
-#playlistOverlay .song-sort-item .song-pick.active{background:#315d49!important;color:#fff4d4!important}
-#playlistOverlay input[type=range]{accent-color:#54764d}
+:is(#playlistOverlay,#musicRoomOverlay) .modal-head .room-companion{top:32px!important;border-radius:50%;background-color:#b7c09830!important;box-shadow:0 0 0 6px #d8de9f12,0 0 0 13px #d8de9f0a}
+:is(#playlistOverlay,#musicRoomOverlay) #lyricsWrap{background:#edf1e7!important;border:1px solid #d6dfce;border-radius:18px!important}
+:is(#playlistOverlay,#musicRoomOverlay) .song-sort-item .song-pick{background:#eef2e7!important;color:#365b45!important;border:1px solid #d8e0cf!important;border-radius:12px!important}
+:is(#playlistOverlay,#musicRoomOverlay) .song-sort-item .song-pick.active{background:#315d49!important;color:#fff4d4!important}
+:is(#playlistOverlay,#musicRoomOverlay) input[type=range]{accent-color:#54764d}
 #funBannerWrap .fun-banner-row button.fun-banner-btn.playlist{background:radial-gradient(ellipse at 90% 10%,#526c44,#204b3e 65%)!important}
 #funBannerWrap .fun-banner-row .fun-banner-btn.playlist .fb-copy{width:100%!important;max-width:100%!important;flex:1 1 auto!important}
 .music-play{display:inline-flex;margin-left:6px;color:#ead28d}
@@ -128,7 +128,7 @@
  .wellness-room .modal-head .sub{font-size:11px!important}
  .wellness-room .modal-head .room-companion{width:54px!important;height:54px!important;left:12px!important;top:22px!important}
  .wellness-room .modal-body{padding:16px!important}
- #playlistOverlay .modal-head{min-height:124px!important}
+ :is(#playlistOverlay,#musicRoomOverlay) .modal-head{min-height:124px!important}
  #funBannerWrap .fun-banner-row button.fun-banner-btn.playlist{height:64px!important;min-height:64px!important;padding-right:64px!important;}
  #funBannerWrap .fun-banner-row button.fun-banner-btn.playlist .sansa-mascot{width:52px!important;height:52px!important;top:6px!important}
  #funBannerWrap .fun-banner-btn.playlist .music-kicker{font-size:8px;margin-bottom:4px}
@@ -175,13 +175,13 @@
 #mantraOverlay #mantraBeadCircle.wellness-milestone{box-shadow:0 0 25px #e4bf6d!important}
 #amuletOverlay .modal-head{background-color:#f5e7d1!important}
 #amuletOverlay .modal-body{background:linear-gradient(#fffbf3e6,#fffbf3ec),url('../images/brand/wellness/props/card-amulet-paper.webp') right bottom/240px auto no-repeat!important}
-#playlistOverlay .modal-head{background:radial-gradient(circle at 90% 30%,#668370,#224b42 70%)!important}
-#playlistOverlay .modal-head .room-companion{background-color:#1a352d!important;border:9px double #bba97345;box-sizing:content-box;left:12px!important;top:24px!important}
-#playlistOverlay .song-sort-list{gap:8px}
-#playlistOverlay #lyricsWrap{background:linear-gradient(#f0f4e8df,#edf2e7e6),url('../images/brand/wellness/props/card-playlist-mountain.webp') center bottom/cover!important}
-#playlistOverlay .room-companion::after{content:'';position:absolute;inset:-9px;border-radius:50%;border:2px dashed #e4d19190;pointer-events:none}
-#playlistOverlay.is-playing .room-companion::after{animation:wellness-vinyl 12s linear infinite}
-#playlistOverlay.is-playing .modal-head::after{content:'';position:absolute;bottom:0;left:0;height:3px;width:100%;background:linear-gradient(90deg,#dfbd6a,transparent,#86b4a3);animation:wellness-meter 1.2s ease-in-out infinite alternate}
+:is(#playlistOverlay,#musicRoomOverlay) .modal-head{background:radial-gradient(circle at 90% 30%,#668370,#224b42 70%)!important}
+:is(#playlistOverlay,#musicRoomOverlay) .modal-head .room-companion{background-color:#1a352d!important;border:9px double #bba97345;box-sizing:content-box;left:12px!important;top:24px!important}
+:is(#playlistOverlay,#musicRoomOverlay) .song-sort-list{gap:8px}
+:is(#playlistOverlay,#musicRoomOverlay) #lyricsWrap{background:linear-gradient(#f0f4e8df,#edf2e7e6),url('../images/brand/wellness/props/card-playlist-mountain.webp') center bottom/cover!important}
+:is(#playlistOverlay,#musicRoomOverlay) .room-companion::after{content:'';position:absolute;inset:-9px;border-radius:50%;border:2px dashed #e4d19190;pointer-events:none}
+:is(#playlistOverlay,#musicRoomOverlay).is-playing .room-companion::after{animation:wellness-vinyl 12s linear infinite}
+:is(#playlistOverlay,#musicRoomOverlay).is-playing .modal-head::after{content:'';position:absolute;bottom:0;left:0;height:3px;width:100%;background:linear-gradient(90deg,#dfbd6a,transparent,#86b4a3);animation:wellness-meter 1.2s ease-in-out infinite alternate}
 #beatLabOverlay.wellness-room .modal-head{background:linear-gradient(100deg,#e2f0e6,#e6def1,#f8e1de)!important}
 .cover-placeholder.cover-placeholder-lotus,.cover-placeholder.cover-placeholder-mountain{background:#f3f1e8 url('../images/brand/wellness/props/card-breath-mountain.webp') center/cover no-repeat!important}
 .cover-placeholder.cover-placeholder-lotus{background-image:linear-gradient(#fbf8ef60,#fbf8ef60),url('../images/brand/wellness/props/card-suggest-temple.webp')!important}
@@ -201,7 +201,7 @@
  .hero-main-grid .hero-clean-art::before{background:linear-gradient(180deg,#faf8f2eb,#faf8f2ad 46%,transparent 75%)!important}
  .hero-main-grid .hero-clean-temple{width:78%!important;right:-8%!important}
  .hero-main-grid .hero-clean-monk{left:53%!important;max-width:34%!important;width:170px!important;bottom:1.5%!important}
- #playlistOverlay .modal-head .room-companion{border-width:5px;left:7px!important;top:25px!important;width:54px!important;height:54px!important}
+ :is(#playlistOverlay,#musicRoomOverlay) .modal-head .room-companion{border-width:5px;left:7px!important;top:25px!important;width:54px!important;height:54px!important}
  .wellness-room :is(textarea,input:not([type=range])){font-size:16px!important}
 }
 @media(prefers-reduced-motion:reduce){.brand-symbol-badge img,.wellness-room *,#funBannerWrap *, .hip-quick-row *{animation:none!important;transition:none!important}.wellness-room{backdrop-filter:none}}
@@ -213,7 +213,7 @@
 #worryOverlay.wellness-cleared .modal-body{background:linear-gradient(#f4faeab0,#f5f7e8cf),url('../images/brand/wellness/props/card-comfort-lotus.webp') right bottom/230px auto no-repeat!important;animation:wellness-letter .4s ease-out}
 .wellness-room .amulet-appearance label{display:flex;align-items:center;gap:6px;font-size:12px;color:#6c634d}
 .wellness-room .amulet-appearance select{font:inherit;font-size:16px;min-height:44px;border:1px solid #d9c9aa;background:#fff9ed;border-radius:10px;color:#665033;max-width:100%}
-@media(prefers-reduced-motion:reduce){#playlistOverlay .room-companion::after{animation:none!important}}
+@media(prefers-reduced-motion:reduce){:is(#playlistOverlay,#musicRoomOverlay) .room-companion::after{animation:none!important}}
 /* Retire both legacy mountain layers, including the old mobile-only pseudo layer. */
 .hero-main-grid .hero-clean-art img.hero-clean-bg{display:none!important}
 .hero-main-grid .hero-clean-art::after{display:none!important;content:none!important;background:none!important}

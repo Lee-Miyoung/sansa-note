@@ -1,0 +1,30 @@
+const assert=require('node:assert/strict'),{chromium}=require('playwright'),{fullRoute,sdk}=require('./unified-fixtures.cjs');
+(async()=>{const browser=await chromium.launch({executablePath:'/usr/bin/chromium',args:['--no-sandbox']});try{
+ for(const [width,height]of [[320,568],[390,844],[1440,900]]){
+  const p=await browser.newPage({viewport:{width,height},serviceWorkers:'block'}),errors=[];await fullRoute(p);p.on('pageerror',e=>errors.push(e.message));await p.goto('https://sansanote.com/');await p.waitForFunction(()=>window.SansaTempleMusic);await p.evaluate(()=>SansaTempleMusic.ready);
+  assert(await p.locator('.temple-music-entry').isVisible());assert(await p.locator('.fun-banner-btn.playlist:not(.temple-music-entry)').isVisible());await p.evaluate(()=>openPlaylistOverlay());assert.equal(await p.locator('#playlistOverlay .song-pick').count(),5);assert(!(await p.locator('#playlistOverlay #songOrderList').innerText()).includes('팔만의 바람'));await p.evaluate(()=>closePlaylistOverlay());
+  await p.evaluate(()=>openSansaMusicRoom());assert(await p.locator('#musicRoomOverlay').isVisible());assert(!await p.locator('#playlistOverlay').isVisible());assert.equal(await p.locator('#musicRoomOverlay .song-pick').count(),1);assert((await p.locator('#playlistSongTitle').innerText()).includes('해인사 · 팔만의 바람'));assert.equal(await p.locator('#musicRoomOverlay [role=tab]').count(),0);assert.equal(await p.locator('#playlistAudio').count(),1);assert.equal(await p.locator('#lyricsInner').count(),1);
+  const header=await p.evaluate(()=>{const nav=document.querySelector('nav.site-global-nav').getBoundingClientRect(),head=document.querySelector('#musicRoomOverlay .modal-head').getBoundingClientRect(),logo=document.querySelector('#musicRoomOverlay .room-companion').getBoundingClientRect();return {valid:head.top>=nav.bottom&&logo.top>=head.top&&logo.bottom<=head.bottom&&head.bottom<innerHeight};});assert(header.valid);
+  await p.evaluate(()=>{const a=SansaTempleMusic.media;Object.defineProperty(a,'duration',{configurable:true,get:()=>269.4});window.lyricClock=0;Object.defineProperty(a,'currentTime',{configurable:true,get:()=>lyricClock});});
+  const shared={'팔만의 바람':0,__lineTimesV1:{'팔만의 바람':[null,1,4,8]}};
+  await p.evaluate(shared=>{mockRecords['shared/lyricSync']=shared;mockListeners.get('shared/lyricSync')({val:()=>shared});},shared);
+  assert.equal(await p.evaluate(()=>lyricStartTime(0)),null,'sparse null is not a zero timestamp');assert.equal(await p.evaluate(()=>lyricStartTime(1)),1);
+  for(const [time,line]of [[2,1],[5,2],[9,3]]){await p.evaluate(time=>{lyricClock=time;SansaTempleMusic.media.dispatchEvent(new Event('timeupdate'));},time);assert.equal(await p.evaluate(()=>lastLyricIdx),line,'anonymous timeupdate moves lyric');}
+  await p.evaluate(()=>{lyricClock=6;const changed={'팔만의 바람':0,__lineTimesV1:{'팔만의 바람':{'1':1,'2':4,'3':5.5}}};mockListeners.get('shared/lyricSync')({val:()=>changed});});assert.equal(await p.evaluate(()=>lastLyricIdx),3,'live admin edit updates visible temple room immediately');assert(!await p.locator('#lyricSyncPanel').isVisible());
+  const paused=await p.evaluate(()=>SansaTempleMusic.media.paused);await p.evaluate(()=>{closePlaylistOverlay();openCurrentMusicPlayer();});assert(await p.locator('#musicRoomOverlay').isVisible());assert.equal(await p.evaluate(()=>SansaTempleMusic.media.paused),paused);
+  if(width===390){
+    await p.evaluate(()=>{openPlaylistOverlay();sansaNavigation.flush();});await p.waitForFunction(()=>sansaNavigation.current.ids.includes('playlistOverlay'));
+    await p.evaluate(()=>{openSansaMusicRoom();sansaNavigation.flush();});await p.waitForFunction(()=>sansaNavigation.current.ids.includes('musicRoomOverlay'));
+    await p.goBack();await p.waitForSelector('#playlistOverlay.show .song-pick');assert.equal(await p.locator('#playlistOverlay .song-pick').count(),5);
+    await p.goForward();await p.waitForSelector('#musicRoomOverlay.show .song-pick');assert.equal(await p.locator('#musicRoomOverlay .song-pick').count(),1);
+  }
+  // Navigation reveals either distinct shell; the single control tree follows it.
+  await p.evaluate(()=>{document.getElementById('musicRoomOverlay').classList.remove('show');document.getElementById('playlistOverlay').classList.add('show');});await p.waitForSelector('#playlistOverlay #songOrderList');assert.equal(await p.locator('#playlistOverlay .song-pick').count(),5);
+  await p.evaluate(()=>{document.getElementById('playlistOverlay').classList.remove('show');document.getElementById('musicRoomOverlay').classList.add('show');});await p.waitForSelector('#musicRoomOverlay #songOrderList');assert.equal(await p.locator('#musicRoomOverlay .song-pick').count(),1);
+  const normal=await p.evaluate(()=>normalizeSharedLyricSync({'팔만의 바람':.5,__lineTimesV1:{'팔만의 바람':[0,null,3]}}));assert.deepEqual(normal['팔만의 바람'].lines,{'0':0,'2':3});assert.deepEqual(errors,[]);console.log('PASS',width,'separate entry/screen/list; temple identity; shared engine; logo bounds; Firebase arrays/object/null; anonymous moving lyrics; live edit; restore shell');await p.close();
+ }
+ const stalled=await browser.newPage({serviceWorkers:'block'});await fullRoute(stalled);
+ const delayed=sdk.replace('Promise.resolve().then(()=>fn(user));return()=>listeners.delete(fn)','return()=>listeners.delete(fn)').replace('window.mockRecords={};',`window.mockRecords={'shared/lyricSync':{'팔만의 바람':0,__lineTimesV1:{'팔만의 바람':[0,2,5]}}};`);
+ await stalled.route('**/*firebase-app*.js',route=>route.fulfill({contentType:'application/javascript',body:delayed}));await stalled.goto('https://sansanote.com/');
+ await stalled.waitForFunction(()=>mockListeners.has('shared/lyricSync'));assert.equal(await stalled.evaluate(()=>SansaSession.member()),false);assert.equal(await stalled.evaluate(()=>lyricOffsets['팔만의 바람'].lines[1]),2,'public timing connects even when auth never calls back');console.log('PASS public timing subscription does not depend on auth callback');await stalled.close();
+ }finally{await browser.close();}})().catch(error=>{console.error(error);process.exitCode=1});
