@@ -70,4 +70,9 @@ body.sansa-modal-open:has(:is(#playlistOverlay,#musicRoomOverlay).show) nav.site
 #playlistMusicStatus:empty{display:none}
 
 :is(#playlistOverlay,#musicRoomOverlay) #playlistSongTitle{color:#fff0d4!important;font-weight:700!important;font-size:15px!important;line-height:1.6!important}
-#funBannerWrap .temple-music-entry .fb-sub{color:#f1edda!important}
+
+.nested-temple-entry{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;margin:0 0 14px;padding:14px 16px;border:1px solid #cad8bf;border-radius:12px;background:#edf3e5;color:#355d48;text-align:left;cursor:pointer;min-height:58px}
+.nested-temple-entry strong{display:block;font:700 16px/1.5 system-ui}.nested-music-subtitle{display:block;font:400 12px/1.6 system-ui;color:#64765d}.nested-music-arrow{font-size:26px}
+.temple-music-back{display:block;margin:0 0 14px;min-height:44px}
+.nested-temple-entry[hidden],.temple-music-back[hidden]{display:none!important}
+#lyricAutoSummary{padding:0;margin:6px 0 12px}

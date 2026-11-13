@@ -9,6 +9,12 @@
   room.setAttribute('role','dialog');room.setAttribute('aria-modal','true');room.setAttribute('aria-label','산사 음악방');room.setAttribute('aria-hidden','true');document.body.append(room);
   const shells=[playlist,room],remembered={playlist:null,temple:null};
   let catalog=[],ready=false,collection='playlist';
+  const nestedEntry=document.createElement('button');nestedEntry.type='button';nestedEntry.id='nestedTempleMusicEntry';nestedEntry.className='nested-temple-entry';
+  nestedEntry.innerHTML='<span><strong>산사 음악방</strong><span class="nested-music-subtitle">해인사 · 팔만의 바람</span></span><span class="nested-music-arrow" aria-hidden="true">›</span>';
+  nestedEntry.onclick=()=>openSansaMusicRoom();
+  const parentBack=document.createElement('button');parentBack.type='button';parentBack.id='templeMusicBack';parentBack.className='btn btn-ghost temple-music-back';parentBack.textContent='← 극락왕생 플레이리스트';parentBack.hidden=true;parentBack.onclick=()=>openPlaylistOverlay();
+  body.prepend(nestedEntry,parentBack);
+
   const kindOf=song=>song?.templeId?'temple':'playlist';
   const indices=(kind=collection)=>SONGS.map((song,index)=>kindOf(song)===kind?index:-1).filter(index=>index>=0);
   const identity=song=>song?.musicId||song?.title;
@@ -32,7 +38,8 @@
   function sync(){
     const song=current(),temple=song?.templeName||song?.templeId?.replace('temple:','');
     modal.querySelector('.modal-head h2').textContent=collection==='temple'?'산사 음악방':'극락왕생 플레이리스트';
-    modal.querySelector('.room-eyebrow').textContent=collection==='temple'?'SANSANOTE · TEMPLE MUSIC':'SANSANOTE · LISTENING CLUB';
+    modal.querySelector('.room-eyebrow').textContent=collection==='temple'?'극락왕생 플레이리스트':'SANSANOTE · LISTENING CLUB';
+    nestedEntry.hidden=collection!=='playlist';parentBack.hidden=collection!=='temple';
     document.getElementById('playlistSongTitle').textContent=kindOf(song)==='temple'?temple+' · '+song.title:song?.title||'';
     document.getElementById('miniPlayerTitle').textContent=document.getElementById('playlistSongTitle').textContent;
     templeButton.hidden=collection!=='temple'||!song?.templeId;

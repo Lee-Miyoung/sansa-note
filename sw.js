@@ -2,7 +2,7 @@
 // index.html은 온라인일 때 항상 최신 버전을 먼저 가져오고,
 // 오프라인일 때만 캐시를 사용합니다.
 
-const CACHE_VERSION = 'sansanote-v39-separate-music-sync-20261113';
+const CACHE_VERSION = 'sansanote-v40-nested-music-auto-sync-20261113';
 
 // 첫 방문에는 작은 앱 셸만 준비합니다. 사진·음악·영상은 사용 시 아래 fetch
 // 핸들러가 캐시하므로 불필요한 다운로드가 첫 화면과 회선을 다투지 않습니다.
@@ -15,6 +15,7 @@ const CORE_ASSETS = [
   './',
   './scripts/startup-cloud.js?v=20261019-resilient',
   './scripts/navigation.js?v=20261101-sansa',
+  './scripts/lyric-timing.js?v=20261113-estimate',
   './scripts/game-viewport.js?v=20261017',
   './scripts/meditation-sounds.js?v=20261112-game-audio',
   './styles/game-viewport.css?v=20261017',

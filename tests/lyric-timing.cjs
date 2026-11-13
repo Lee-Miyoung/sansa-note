@@ -1,0 +1,12 @@
+const assert=require('node:assert/strict'),T=require('../scripts/lyric-timing.js');
+const known=[0,10,20,30].map((t,i)=>({t,text:'가사 '+i}));
+let result=T.estimate(known,40,{1:15},0,1);assert.equal(result.lines[1],15);assert(result.lines[0]<=result.lines[1]&&result.lines[2]>15&&result.lines[3]<40);assert(Object.values(result.lines).every(Number.isFinite));
+result=T.estimate(known,40,{1:15,3:35},0,3);assert.equal(result.lines[1],15);assert.equal(result.lines[3],35);assert.equal(result.lines[2],25);
+result=T.estimate(known,40,{0:20,1:15,2:10,3:35},0,1);assert.deepEqual(result.anchors,{1:15,3:35});assert.equal(result.lines[2],25);
+result=T.estimate(known,40,{1:-5},20,1);assert.equal(result.lines[1]+20,15);assert(Object.values(result.lines).every(time=>time+20>=0&&time+20<=40));
+const rows=require('../music/catalog.json').find(song=>song.musicId==='haeinsa-palman').lyrics;
+const base=T.baseline(rows,269.4);assert.equal(base.length,78);assert(base.every((time,i)=>i===0||time>base[i-1]));
+result=T.estimate(rows,269.4,{30:120},0,30);assert.equal(result.lines[30],120);assert.equal(Object.keys(result.lines).length,78);assert(Object.values(result.lines).every((time,i,all)=>time>=0&&time<=269.4&&(i===0||time>=all[i-1])));
+const second=T.estimate(rows,269.4,{30:120,60:220},0,60);assert.equal(second.lines[30],120);assert.equal(second.lines[60],220);assert.equal(Object.keys(second.lines).length,78);
+assert.equal(T.estimate(known,40,{1:12.345},0,1).lines[1],12.345);assert.deepEqual(T.baseline([],100),[]);assert(Object.values(T.estimate(rows,269.4,[null,8],0,1).lines).every(Number.isFinite));
+console.log('PASS one-cue full timeline; weighted untimed lyrics; two-cue interpolation; exact valid anchors; priority conflict repair; offset/bounds; sparse Firebase arrays; empty input');
